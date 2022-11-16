@@ -38,7 +38,7 @@
 /* initWithField
  * Initalises a new Criteria with the specified values.
  */
--(instancetype)initWithField:(NSString *)newField withOperator:(CriteriaOperator)newOperator withValue:(NSString *)newValue
+-(instancetype)initWithField:(NSString *)newField withOperator:(VNACriteriaOperator)newOperator withValue:(NSString *)newValue
 {
 	if ((self = [super init]) != nil)
 	{
@@ -81,20 +81,20 @@
 +(NSArray *)arrayOfOperators
 {
 	return @[
-			 @(MA_CritOper_Is),
-			 @(MA_CritOper_IsNot),
-			 @(MA_CritOper_IsAfter),
-			 @(MA_CritOper_IsBefore),
-			 @(MA_CritOper_IsOnOrAfter),
-			 @(MA_CritOper_IsOnOrBefore),
-			 @(MA_CritOper_Contains),
-			 @(MA_CritOper_NotContains),
-			 @(MA_CritOper_IsLessThan),
-			 @(MA_CritOper_IsLessThanOrEqual),
-			 @(MA_CritOper_IsGreaterThan),
-			 @(MA_CritOper_IsGreaterThanOrEqual),
-			 @(MA_CritOper_Under),
-			 @(MA_CritOper_NotUnder)
+			 @(VNACriteriaOperatorEqualTo),
+			 @(VNACriteriaOperatorNotEqualTo),
+			 @(VNACriteriaOperatorAfter),
+			 @(VNACriteriaOperatorBefore),
+			 @(VNACriteriaOperatorOnOrAfter),
+			 @(VNACriteriaOperatorOnOrBefore),
+			 @(VNACriteriaOperatorContains),
+			 @(VNACriteriaOperatorContainsNot),
+			 @(VNACriteriaOperatorLessThan),
+			 @(VNACriteriaOperatorLessThanOrEqualTo),
+			 @(VNACriteriaOperatorGreaterThan),
+			 @(VNACriteriaOperatorGreaterThanOrEqualTo),
+			 @(VNACriteriaOperatorUnder),
+			 @(VNACriteriaOperatorNotUnder)
 			 ];
 }
 
@@ -109,14 +109,14 @@
 /* setOperator
  * Sets the operator element of a criteria.
  */
--(void)setOperator:(CriteriaOperator)newOperator
+-(void)setOperator:(VNACriteriaOperator)newOperator
 {
 	// Convert deprecated under/not-under operators
 	// to is/is-not.
-	if (newOperator == MA_CritOper_Under)
-		newOperator = MA_CritOper_Is;
-	if (newOperator == MA_CritOper_NotUnder)
-		newOperator = MA_CritOper_IsNot;
+	if (newOperator == VNACriteriaOperatorUnder)
+		newOperator = VNACriteriaOperatorEqualTo;
+	if (newOperator == VNACriteriaOperatorNotUnder)
+		newOperator = VNACriteriaOperatorNotEqualTo;
 	operator = newOperator;
 }
 
@@ -139,7 +139,7 @@
 /* operator
  * Returns the operator element of a criteria
  */
--(CriteriaOperator)operator
+-(VNACriteriaOperator)operator
 {
 	return operator;
 }
@@ -210,13 +210,13 @@ static NSString *const CRITERIA_OPERATOR_TAG = @"operator";
     }
 
     criteriaTree = [[NSMutableArray alloc] init];
-    condition = MA_CritCondition_All;
+    condition = VNACriteriaConditionAll;
 
     condition = [CriteriaTree conditionFromString:[xml attributeForName:CRITERIAGROUP_CONDITION_ATTRIBUTE].stringValue];
-    if (condition == MA_CritCondition_Invalid) {
+    if (condition == VNACriteriaConditionInvalid) {
         // For backward compatibility, the absence of the condition attribute
         // assumes that we're matching ALL conditions.
-        condition = MA_CritCondition_All;
+        condition = VNACriteriaConditionAll;
     }
 
     for (NSXMLNode *groupElementChild in xml.children) {
@@ -254,31 +254,31 @@ static NSString *const CRITERIA_OPERATOR_TAG = @"operator";
  * string is invalid.
  * Note: the strings which are written to the XML file are NOT localized.
  */
-+(CriteriaCondition)conditionFromString:(NSString *)string
++(VNACriteriaCondition)conditionFromString:(NSString *)string
 {
 	if (string != nil)
 	{
 		if ([string.lowercaseString isEqualToString:CRITERIAGROUP_CONDITION_VALUE_ANY])
-			return MA_CritCondition_Any;
+			return VNACriteriaConditionAny;
 		if ([string.lowercaseString isEqualToString:CRITERIAGROUP_CONDITION_VALUE_ALL])
-			return MA_CritCondition_All;
+			return VNACriteriaConditionAll;
         if ([string.lowercaseString isEqualToString:CRITERIAGROUP_CONDITION_VALUE_NONE])
-            return MA_CritCondition_None;
+            return VNACriteriaConditionNone;
 	}
-	return MA_CritCondition_Invalid;
+	return VNACriteriaConditionInvalid;
 }
 
 /* conditionToString
  * Returns the string representation of the specified condition.
  * Note: Do NOT localise these strings. They're written to the XML file.
  */
-+(NSString *)conditionToString:(CriteriaCondition)condition
++(NSString *)conditionToString:(VNACriteriaCondition)condition
 {
-	if (condition == MA_CritCondition_Any)
+	if (condition == VNACriteriaConditionAny)
 		return CRITERIAGROUP_CONDITION_VALUE_ANY;
-	if (condition == MA_CritCondition_All)
+	if (condition == VNACriteriaConditionAll)
 		return CRITERIAGROUP_CONDITION_VALUE_ALL;
-    if (condition == MA_CritCondition_None)
+    if (condition == VNACriteriaConditionNone)
         return CRITERIAGROUP_CONDITION_VALUE_NONE;
 	return @"";
 }
@@ -286,7 +286,7 @@ static NSString *const CRITERIA_OPERATOR_TAG = @"operator";
 /* condition
  * Return the criteria condition.
  */
--(CriteriaCondition)condition
+-(VNACriteriaCondition)condition
 {
 	return condition;
 }
@@ -294,7 +294,7 @@ static NSString *const CRITERIA_OPERATOR_TAG = @"operator";
 /* setCondition
  * Sets the criteria condition.
  */
--(void)setCondition:(CriteriaCondition)newCondition
+-(void)setCondition:(VNACriteriaCondition)newCondition
 {
 	condition = newCondition;
 }

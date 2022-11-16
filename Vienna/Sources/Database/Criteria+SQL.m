@@ -36,41 +36,41 @@
     NSString * valueString = nil;
 
     switch (criteria.operator) {
-        case MA_CritOper_Is:
+        case VNACriteriaOperatorEqualTo:
             if (field.type == VNAFieldTypeString) {
                 operatorString = @"='%@'"; break;
             } else {
                 operatorString = @"=%@"; break;
             }
-        case MA_CritOper_IsNot:
+        case VNACriteriaOperatorNotEqualTo:
             if (field.type == VNAFieldTypeString) {
                 operatorString = @"<>'%@'"; break;
             } else {
                 operatorString = @"<>%@"; break;
             }
-        case MA_CritOper_IsLessThan:
+        case VNACriteriaOperatorLessThan:
             operatorString = @"<%@"; break;
-        case MA_CritOper_IsGreaterThan:
+        case VNACriteriaOperatorGreaterThan:
             operatorString = @">%@"; break;
-        case MA_CritOper_IsLessThanOrEqual:
+        case VNACriteriaOperatorLessThanOrEqualTo:
             operatorString = @"<=%@"; break;
-        case MA_CritOper_IsGreaterThanOrEqual:
+        case VNACriteriaOperatorGreaterThanOrEqualTo:
             operatorString = @">=%@"; break;
-        case MA_CritOper_Contains:
+        case VNACriteriaOperatorContains:
             operatorString = @" LIKE '%%%@%%'"; break;
-        case MA_CritOper_NotContains:
+        case VNACriteriaOperatorContainsNot:
             operatorString = @" NOT LIKE '%%%@%%'"; break;
-        case MA_CritOper_IsBefore:
+        case VNACriteriaOperatorBefore:
             operatorString = @"<%@"; break;
-        case MA_CritOper_IsAfter:
+        case VNACriteriaOperatorAfter:
             operatorString = @">%@"; break;
-        case MA_CritOper_IsOnOrBefore:
+        case VNACriteriaOperatorOnOrBefore:
             operatorString = @"<=%@"; break;
-        case MA_CritOper_IsOnOrAfter:
+        case VNACriteriaOperatorOnOrAfter:
             operatorString = @">=%@"; break;
 
-        case MA_CritOper_Under:
-        case MA_CritOper_NotUnder:
+        case VNACriteriaOperatorUnder:
+        case VNACriteriaOperatorNotUnder:
             // Handle the operatorString later. For now just make sure we're working with the
             // right field types.
             NSAssert([field type] == VNAFieldTypeFolder, @"Under operators only valid for folder field types");
@@ -115,7 +115,7 @@
                 calendarUnit = NSCalendarUnitWeekOfYear;
             }
 
-            if (criteria.operator == MA_CritOper_Is) {
+            if (criteria.operator == VNACriteriaOperatorEqualTo) {
                 NSDate *endDate = [calendar dateByAddingUnit:calendarUnit
                                                        value:1
                                                       toDate:startDate
@@ -124,7 +124,7 @@
                 [sqlString appendString:dateIs];
             }
             else {
-                if ((criteria.operator == MA_CritOper_IsAfter) || (criteria.operator == MA_CritOper_IsOnOrBefore)) {
+                if ((criteria.operator == VNACriteriaOperatorAfter) || (criteria.operator == VNACriteriaOperatorOnOrBefore)) {
                     startDate = [calendar dateByAddingUnit:NSCalendarUnitDay
                                                      value:1
                                                     toDate:startDate
@@ -145,7 +145,7 @@
                 //
                 Field * titleField = [database fieldByName:MA_Field_Subject];
                 NSString * value = [NSString stringWithFormat:operatorString, criteria.value];
-                NSString *op = criteria.operator == MA_CritOper_IsNot || criteria.operator == MA_CritOper_NotContains ? @"AND" : @"OR";
+                NSString *op = criteria.operator == VNACriteriaOperatorNotEqualTo || criteria.operator == VNACriteriaOperatorContainsNot ? @"AND" : @"OR";
                 [sqlString appendFormat:@"(%1$@%2$@ %3$@ %4$@%2$@)", field.sqlField, value, op, titleField.sqlField];
                 break;
             }
@@ -175,18 +175,18 @@
         NSString *conditionString = @"";
         if (count++ > 0) {
             switch (self.condition) {
-               case MA_CritCondition_Any:
-                    conditionString = @" OR ";
-                    break;
-                case MA_CritCondition_None:
-                    conditionString = @" AND NOT ";
-                    break;
-                case MA_CritCondition_All:
-                default:
-                    conditionString = @" AND ";
-                    break; //Unknown condition
+            case VNACriteriaConditionAny:
+                conditionString = @" OR ";
+                break;
+            case VNACriteriaConditionNone:
+                conditionString = @" AND NOT ";
+                break;
+            case VNACriteriaConditionAll:
+            default:
+                conditionString = @" AND ";
+                break; //Unknown condition
             }
-        } else if (condition == MA_CritCondition_None) {
+        } else if (condition == VNACriteriaConditionNone) {
             conditionString = @"NOT ";
         }
 

@@ -159,10 +159,10 @@ class CriteriaTests: XCTestCase {
         let criteriaTreeString = """
                                 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
                                 <criteriagroup condition="all">
-                                    <criteria field="\(subjectField.name!)"><operator>\(CriteriaOperator.MA_CritOper_Contains.rawValue)</operator><value>asdf</value></criteria>
+                                    <criteria field="\(subjectField.name!)"><operator>\(Criteria.Operator.contains.rawValue)</operator><value>asdf</value></criteria>
                                     <criteriagroup condition="any">
-                                        <criteria field="\(flaggedField.name!)"><operator>\(CriteriaOperator.MA_CritOper_Is.rawValue)</operator><value>Yes</value></criteria>
-                                        <criteria field="\(flaggedField.name!)"><operator>\(CriteriaOperator.MA_CritOper_Is.rawValue)</operator><value>No</value></criteria>
+                                        <criteria field="\(flaggedField.name!)"><operator>\(Criteria.Operator.equalTo.rawValue)</operator><value>Yes</value></criteria>
+                                        <criteria field="\(flaggedField.name!)"><operator>\(Criteria.Operator.equalTo.rawValue)</operator><value>No</value></criteria>
                                     </criteriagroup>
                                 </criteriagroup>
                                 """
@@ -184,10 +184,10 @@ class CriteriaTests: XCTestCase {
         let criteriaTreeString = """
                                 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
                                 <criteriagroup condition="all">
-                                    <criteria field="\(subjectField.name!)"><operator>\(CriteriaOperator.MA_CritOper_Contains.rawValue)</operator><value>asdf</value></criteria>
+                                    <criteria field="\(subjectField.name!)"><operator>\(Criteria.Operator.contains.rawValue)</operator><value>asdf</value></criteria>
                                     <criteriagroup condition="none">
-                                        <criteria field="\(flaggedField.name!)"><operator>\(CriteriaOperator.MA_CritOper_Is.rawValue)</operator><value>Yes</value></criteria>
-                                        <criteria field="\(flaggedField.name!)"><operator>\(CriteriaOperator.MA_CritOper_Is.rawValue)</operator><value>No</value></criteria>
+                                        <criteria field="\(flaggedField.name!)"><operator>\(Criteria.Operator.equalTo.rawValue)</operator><value>Yes</value></criteria>
+                                        <criteria field="\(flaggedField.name!)"><operator>\(Criteria.Operator.equalTo.rawValue)</operator><value>No</value></criteria>
                                     </criteriagroup>
                                 </criteriagroup>
                                 """

@@ -30,13 +30,13 @@ extension CriteriaTree {
 
         switch compound.compoundPredicateType {
         case .and:
-            self.condition = .MA_CritCondition_All
+            self.condition = .all
         case .or:
-            self.condition = .MA_CritCondition_Any
+            self.condition = .any
         case .not:
-            self.condition = .MA_CritCondition_None
+            self.condition = .none
         default:
-            self.condition = .MA_CritCondition_Invalid
+            self.condition = .invalid
         }
 
         let subPredicates: [NSPredicate]
@@ -87,11 +87,11 @@ extension CriteriaTree {
 
         let type: NSCompoundPredicate.LogicalType
         switch condition {
-        case .MA_CritCondition_Any:
+        case .any:
             type = .or
-        case .MA_CritCondition_None:
+        case .none:
             type = .not
-        case .MA_CritCondition_All, .MA_CritCondition_Invalid:
+        case .all, .invalid:
             type = .and
         @unknown default:
             fatalError("Unknown condition in CriteriaTree \(self)")
@@ -99,7 +99,7 @@ extension CriteriaTree {
 
         let subPredicates = self.criteriaTree.map { $0.predicate }
 
-        if condition != .MA_CritCondition_None {
+        if condition != .none {
             return NSCompoundPredicate(type: type, subpredicates: subPredicates)
         } else {
             // NSPredicateEditor only recognizes "none" predicate if modeled as "not(or(...))"
@@ -124,40 +124,40 @@ extension Criteria {
         self.field = comparison.leftExpression.constantValue as? String ?? comparison.leftExpression.keyPath
         self.value = comparison.rightExpression.constantValue as? String ?? comparison.rightExpression.keyPath
 
-        let criteriaOperator: CriteriaOperator
+        let criteriaOperator: Criteria.Operator
         switch field {
         case MA_Field_Folder:
             switch comparison.predicateOperatorType {
             case .notEqualTo:
-                criteriaOperator = .MA_CritOper_IsNot
+                criteriaOperator = .notEqualTo
             default:
-                criteriaOperator = .MA_CritOper_Is
+                criteriaOperator = .equalTo
             }
         case MA_Field_Subject, MA_Field_Author, MA_Field_Text:
             switch comparison.predicateOperatorType {
             case .contains:
                 if notContains {
-                    criteriaOperator = .MA_CritOper_NotContains
+                    criteriaOperator = .containsNot
                 } else {
-                    criteriaOperator = .MA_CritOper_Contains
+                    criteriaOperator = .contains
                 }
             case .notEqualTo:
-                criteriaOperator = .MA_CritOper_IsNot
+                criteriaOperator = .notEqualTo
             default:
-                criteriaOperator = .MA_CritOper_Is
+                criteriaOperator = .equalTo
             }
         case MA_Field_Date:
             switch comparison.predicateOperatorType {
             case .lessThan:
-                criteriaOperator = .MA_CritOper_IsBefore
+                criteriaOperator = .before
             case .lessThanOrEqualTo:
-                criteriaOperator = .MA_CritOper_IsOnOrBefore
+                criteriaOperator = .onOrBefore
             case .greaterThan:
-                criteriaOperator = .MA_CritOper_IsAfter
+                criteriaOperator = .after
             case .greaterThanOrEqualTo:
-                criteriaOperator = .MA_CritOper_IsOnOrAfter
+                criteriaOperator = .onOrAfter
             default:
-                criteriaOperator = .MA_CritOper_Is
+                criteriaOperator = .equalTo
             }
         case MA_Field_Read, MA_Field_Flagged, MA_Field_HasEnclosure, MA_Field_Deleted:
             switch comparison.predicateOperatorType {
@@ -165,13 +165,13 @@ extension Criteria {
                 // Not representable by predicate editor, because it would not
                 // make sense to offer "== false" and "!= true" making things
                 // ambiguous
-                criteriaOperator = .MA_CritOper_IsNot
+                criteriaOperator = .notEqualTo
             default:
-                criteriaOperator = .MA_CritOper_Is
+                criteriaOperator = .equalTo
             }
         default:
             NSLog("Unknown field \(field), will default to \"=\" operator!")
-            criteriaOperator = .MA_CritOper_Is
+            criteriaOperator = .equalTo
         }
         //TODO implement all available / valid types
 
@@ -189,40 +189,40 @@ extension Criteria {
 
         let type: NSComparisonPredicate.Operator
         switch self.operator {
-        case .MA_CritOper_Is:
+        case .equalTo:
             type = .equalTo
-        case .MA_CritOper_IsNot:
+        case .notEqualTo:
             type = .notEqualTo
-        case .MA_CritOper_IsLessThan:
+        case .lessThan:
             type = .lessThan
-        case .MA_CritOper_IsGreaterThan:
+        case .greaterThan:
             type = .greaterThan
-        case .MA_CritOper_IsLessThanOrEqual:
+        case .lessThanOrEqualTo:
             type = .lessThanOrEqualTo
-        case .MA_CritOper_IsGreaterThanOrEqual:
+        case .greaterThanOrEqualTo:
             type = .greaterThanOrEqualTo
-        case .MA_CritOper_Contains:
+        case .contains:
             type = .contains
-        case .MA_CritOper_NotContains:
+        case .containsNot:
             type = .contains // special case: negated later
-        case .MA_CritOper_IsBefore:
+        case .before:
             type = .lessThan
-        case .MA_CritOper_IsAfter:
+        case .after:
             type = .greaterThan
-        case .MA_CritOper_IsOnOrBefore:
+        case .onOrBefore:
             type = .lessThanOrEqualTo
-        case .MA_CritOper_IsOnOrAfter:
+        case .onOrAfter:
             type = .greaterThanOrEqualTo
-        case .MA_CritOper_Under:
+        case .under:
             type = .lessThan
-        case .MA_CritOper_NotUnder:
+        case .notUnder:
             type = .greaterThanOrEqualTo
         default:
             type = .equalTo
         }
 
         let comparisonPredicate: NSComparisonPredicate
-        if self.operator == .MA_CritOper_IsNot && (self.value == "No" || self.value == "Yes") {
+        if self.operator == .notEqualTo && (self.value == "No" || self.value == "Yes") {
             //use canonical "is yes / is no" representation instead of allowing ambiguous "is not yes - is no / is not no - is yes"
             let invertedRight = NSExpression(forConstantValue: self.value == "No" ? "Yes" : "No")
             comparisonPredicate = NSComparisonPredicate(leftExpression: left, rightExpression: invertedRight, modifier: .direct, type: .equalTo)
@@ -230,7 +230,7 @@ extension Criteria {
             comparisonPredicate = NSComparisonPredicate(leftExpression: left, rightExpression: right, modifier: .direct, type: type)
         }
 
-        if self.operator != .MA_CritOper_NotContains {
+        if self.operator != .containsNot {
             return comparisonPredicate
         } else {
             //representation for "not contains" in predicate differs because "not contains" is no predicate operator

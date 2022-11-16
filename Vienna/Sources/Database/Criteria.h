@@ -22,29 +22,29 @@
 
 /* Enum of valid criteria operators
  */
-typedef NS_ENUM(NSUInteger, CriteriaOperator) {
-	MA_CritOper_Is = 1,
-	MA_CritOper_IsNot,
-	MA_CritOper_IsLessThan,
-	MA_CritOper_IsGreaterThan,
-	MA_CritOper_IsLessThanOrEqual,
-	MA_CritOper_IsGreaterThanOrEqual,
-	MA_CritOper_Contains,
-	MA_CritOper_NotContains,
-	MA_CritOper_IsBefore,
-	MA_CritOper_IsAfter,
-	MA_CritOper_IsOnOrBefore,
-	MA_CritOper_IsOnOrAfter,
-	MA_CritOper_Under,
-	MA_CritOper_NotUnder
-} ;
+typedef NS_ENUM(NSUInteger, VNACriteriaOperator) {
+    VNACriteriaOperatorEqualTo = 1,
+    VNACriteriaOperatorNotEqualTo,
+    VNACriteriaOperatorLessThan,
+    VNACriteriaOperatorGreaterThan,
+    VNACriteriaOperatorLessThanOrEqualTo,
+    VNACriteriaOperatorGreaterThanOrEqualTo,
+    VNACriteriaOperatorContains,
+    VNACriteriaOperatorContainsNot,
+    VNACriteriaOperatorBefore,
+    VNACriteriaOperatorAfter,
+    VNACriteriaOperatorOnOrBefore,
+    VNACriteriaOperatorOnOrAfter,
+    VNACriteriaOperatorUnder,
+    VNACriteriaOperatorNotUnder
+} NS_SWIFT_NAME(Criteria.Operator);
 
-typedef NS_ENUM(NSUInteger, CriteriaCondition) {
-	MA_CritCondition_All = 0,
-	MA_CritCondition_Any,
-	MA_CritCondition_Invalid,
-    MA_CritCondition_None,
-};
+typedef NS_ENUM(NSUInteger, VNACriteriaCondition) {
+    VNACriteriaConditionAll = 0,
+    VNACriteriaConditionAny,
+    VNACriteriaConditionInvalid,
+    VNACriteriaConditionNone,
+} NS_SWIFT_NAME(CriteriaTree.Condition);
 
 @protocol PredicateConvertible
     @property(nonnull, readonly) NSPredicate *predicate;
@@ -58,20 +58,20 @@ typedef NS_ENUM(NSUInteger, CriteriaCondition) {
 @interface Criteria: NSObject <CriteriaElement> {
 	NSString * field;
 	NSString * value;
-	CriteriaOperator operator;
+	VNACriteriaOperator operator;
 }
 
 // Public functions
--(instancetype _Nullable)initWithField:(NSString *_Nonnull)newField withOperator:(CriteriaOperator)newOperator withValue:(NSString *_Nonnull)newValue NS_DESIGNATED_INITIALIZER;
 +(NSString *_Nonnull)localizedStringFromOperator:(CriteriaOperator)operator;
+-(instancetype _Nullable)initWithField:(NSString *_Nonnull)newField withOperator:(VNACriteriaOperator)newOperator withValue:(NSString *_Nonnull)newValue NS_DESIGNATED_INITIALIZER;
 +(NSArray *_Nonnull)arrayOfOperators;
 @property (nonatomic, copy) NSString *_Nonnull field;
 @property (nonatomic, copy) NSString *_Nonnull value;
-@property (nonatomic) CriteriaOperator operator;
+@property (nonatomic) VNACriteriaOperator operator;
 @end
 
 @interface CriteriaTree: NSObject <CriteriaElement> {
-	CriteriaCondition condition;
+	VNACriteriaCondition condition;
 	NSMutableArray<NSObject<CriteriaElement> *> * criteriaTree;
 }
 
@@ -81,7 +81,7 @@ typedef NS_ENUM(NSUInteger, CriteriaCondition) {
 @property (nonnull, nonatomic, readonly) NSEnumerator<NSObject<CriteriaElement> *> *criteriaEnumerator;
 -(void)addCriteria:(NSObject<CriteriaElement> *_Nonnull)newCriteria;
 @property (nonnull, readonly, nonatomic) NSString *string;
-@property (nonatomic) CriteriaCondition condition;
+@property (nonatomic) VNACriteriaCondition condition;
 @property (nonnull, nonatomic) NSArray<NSObject<CriteriaElement> *> *criteriaTree;
 
 @end

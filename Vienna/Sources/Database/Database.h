@@ -63,7 +63,7 @@ extern NSNotificationName const VNADatabaseDidDeleteFolderNotification;
 -(Folder *)folderFromFeedURL:(NSString *)wantedFeedURL;
 -(Folder *)folderFromRemoteId:(NSString *)wantedRemoteId;
 -(Folder *)folderFromName:(NSString *)wantedName;
--(NSString *)sqlScopeForFolder:(Folder *)folder criteriaOperator:(CriteriaOperator)op;
+-(NSString *)sqlScopeForFolder:(Folder *)folder criteriaOperator:(VNACriteriaOperator)op;
 -(NSInteger)addFolder:(NSInteger)parentId afterChild:(NSInteger)predecessorId folderName:(NSString *)name type:(NSInteger)type canAppendIndex:(BOOL)canAppendIndex;
 -(BOOL)deleteFolder:(NSInteger)folderId;
 -(BOOL)setName:(NSString *)newName forFolder:(NSInteger)folderId;
