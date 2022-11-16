@@ -62,7 +62,6 @@ typedef NS_ENUM(NSUInteger, VNACriteriaCondition) {
 }
 
 // Public functions
-+(NSString *_Nonnull)localizedStringFromOperator:(CriteriaOperator)operator;
 -(instancetype _Nullable)initWithField:(NSString *_Nonnull)newField withOperator:(VNACriteriaOperator)newOperator withValue:(NSString *_Nonnull)newValue NS_DESIGNATED_INITIALIZER;
 +(NSArray *_Nonnull)arrayOfOperators;
 @property (nonatomic, copy) NSString *_Nonnull field;

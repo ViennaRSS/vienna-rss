@@ -49,32 +49,6 @@
 	return self;
 }
 
-/* operatorString
- * Returns the localized string representation of the operator.
- */
-+(NSString *)localizedStringFromOperator:(CriteriaOperator)op
-{
-	NSString * operatorString = nil;
-	switch (op)
-	{
-		case MA_CritOper_Is:					operatorString = NSLocalizedString(@"is", @"test for a value"); break;
-		case MA_CritOper_IsNot:					operatorString = NSLocalizedString(@"is not", @"test for a value"); break;
-		case MA_CritOper_IsAfter:				operatorString = NSLocalizedString(@"is after", @"test for a date"); break;
-		case MA_CritOper_IsBefore:				operatorString = NSLocalizedString(@"is before", @"test for a date"); break;
-		case MA_CritOper_IsOnOrAfter:			operatorString = NSLocalizedString(@"is on or after", @"test for a date"); break;
-		case MA_CritOper_IsOnOrBefore:			operatorString = NSLocalizedString(@"is on or before", @"test for a date"); break;
-		case MA_CritOper_Contains:				operatorString = NSLocalizedString(@"contains",@"test for a string"); break;
-		case MA_CritOper_NotContains:			operatorString = NSLocalizedString(@"does not contain", @"test for a string"); break;
-		case MA_CritOper_Under:					operatorString = NSLocalizedString(@"under", @"test for a folder (not operational as of Vienna 3.2)"); break;
-		case MA_CritOper_NotUnder:				operatorString = NSLocalizedString(@"not under", @"test for a folder (not operational as of Vienna 3.2)"); break;
-		case MA_CritOper_IsLessThan:			operatorString = NSLocalizedString(@"is less than", @"test for a numeric value"); break;
-		case MA_CritOper_IsGreaterThan:			operatorString = NSLocalizedString(@"is greater than", @"test for a numeric value"); break;
-		case MA_CritOper_IsLessThanOrEqual:		operatorString = NSLocalizedString(@"is less than or equal to", @"test for a numeric value"); break;
-		case MA_CritOper_IsGreaterThanOrEqual:	operatorString = NSLocalizedString(@"is greater than or equal to", @"test for a numeric value"); break;
-	}
-	return operatorString;
-}
-
 /* arrayOfOperators
  * Returns an array of NSNumbers that represent all supported operators.
  */
