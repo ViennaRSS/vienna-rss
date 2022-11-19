@@ -277,10 +277,6 @@ self.converter = [[WebViewArticleConverter alloc] init];
     return (visibleRect.origin.y > 2);
 }
 
-- (void)printPage {
-	//TODO
-}
-
 - (void)reloadTab {
 	//TODO
 }

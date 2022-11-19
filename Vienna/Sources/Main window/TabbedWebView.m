@@ -474,7 +474,7 @@ static NSString * _userAgent ;
 	dict[NSPrintBottomMargin] = @36.0;
 	
 	[printInfo setVerticallyCentered:NO];
-	[printView print:self];
+	[printView print:sender];
 }
 
 /* maintainsInactiveSelection

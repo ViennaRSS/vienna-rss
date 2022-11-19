@@ -325,10 +325,8 @@ extension BrowserTab: Tab {
         webView.makeTextLarger(self)
     }
 
-    func printPage() {
-        // TODO: neither Javascript nor the native print methods work here. This is a webkit bug:
-        // rdar://problem/36557179
-        self.webView.printView(nil)
+    func printDocument(_ sender: Any?) {
+        webView.printView(sender)
     }
 
     func activateAddressBar() {

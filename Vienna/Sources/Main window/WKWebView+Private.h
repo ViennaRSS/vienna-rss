@@ -17,7 +17,8 @@
 //  limitations under the License.
 //
 
-@import Foundation;
+@import Cocoa;
+@import WebKit;
 
 @interface WKWebView (Private)
 
@@ -26,5 +27,8 @@
 
 @property (readonly, nonatomic) BOOL _supportsTextZoom;
 @property (setter=_setTextZoomFactor:, nonatomic) double _textZoomFactor;
+
+// This is implemented by WKWebView.printOperationWithPrintInfo as of macOS 11.
+- (NSPrintOperation *)_printOperationWithPrintInfo:(NSPrintInfo *)printInfo NS_DEPRECATED_MAC(10.12, 11);
 
 @end

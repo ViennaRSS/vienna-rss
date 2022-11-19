@@ -722,11 +722,6 @@
 	return canGoForward;
 }
 
-- (void)printPage {
-	[self.webPane printDocument:self];
-}
-
-
 - (void)reloadTab {
     [self handleReload:nil];
 }

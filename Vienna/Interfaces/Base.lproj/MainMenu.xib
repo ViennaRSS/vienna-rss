@@ -207,6 +207,7 @@ CA
                             <menuItem title="Page Setup…" keyEquivalent="P" id="77">
                                 <connections>
                                     <action selector="runPageLayout:" target="-1" id="87"/>
+                                    <binding destination="EBo-gz-68t" name="hidden" keyPath="values.UseNewBrowser" id="Dki-E4-XNg"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Print…" keyEquivalent="p" id="78">

@@ -236,6 +236,43 @@ class CustomWKWebView: WKWebView {
 
         _textZoomFactor -= 0.1
     }
+
+    // MARK: Printing
+
+    // WKWebView's own implementation does nothing.
+    override func printView(_ sender: Any?) {
+        guard let window else {
+            return
+        }
+
+        let printOperation: NSPrintOperation
+        if #available(macOS 11, *) {
+            printOperation = self.printOperation(with: .shared)
+        } else if responds(to: #selector(_printOperation(with:))) {
+            printOperation = _printOperation(with: .shared)
+        } else {
+            return
+        }
+
+        // The default margins are too wide. This value is similar to Safari.
+        let printInfo = printOperation.printInfo
+        let margin = 18.0
+        printInfo.topMargin = margin
+        printInfo.leftMargin = margin
+        printInfo.rightMargin = margin
+        printInfo.bottomMargin = margin
+
+        // These printing options are missing from the standard print panel.
+        let options: NSPrintPanel.Options = [.showsPaperSize, .showsOrientation, .showsScaling]
+        printOperation.printPanel.options.insert(options)
+
+        // The view's frame has to be defined, otherwise program execution is
+        // halted here. See: https://stackoverflow.com/a/69839912/6423906
+        printOperation.view?.frame = bounds
+
+        printOperation.canSpawnSeparateThread = true
+        printOperation.runModal(for: window, delegate: nil, didRun: nil, contextInfo: nil)
+    }
 }
 
 // MARK: context menu

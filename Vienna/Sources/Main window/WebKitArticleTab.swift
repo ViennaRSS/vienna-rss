@@ -69,10 +69,6 @@ class WebKitArticleTab: BrowserTab, ArticleContentView {
         hideAddressBar(true)
     }
 
-    func printDocument(_ sender: Any) {
-        // TODO
-    }
-
     // MARK: gui
 
     override func activateAddressBar() {
