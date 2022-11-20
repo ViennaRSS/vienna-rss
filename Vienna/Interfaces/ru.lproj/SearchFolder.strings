@@ -1,6 +1,3 @@
-/* Class = "NSMenuItem"; title = "all"; ObjectID = "82"; */
-"82.title" = "все";
-
 /* Class = "NSTextFieldCell"; title = "Smart folder name:"; ObjectID = "94"; */
 "94.title" = "Имя новой смарт-папки:";
 
@@ -9,13 +6,4 @@
 
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "97"; */
 "97.title" = "Отмена";
-
-/* Class = "NSTextFieldCell"; title = "Show all articles that match"; ObjectID = "98"; */
-"98.title" = "Показывать статьи, соответствующие";
-
-/* Class = "NSTextFieldCell"; title = "of the following conditions:"; ObjectID = "100"; */
-"100.title" = "из следующих условий:";
-
-/* Class = "NSMenuItem"; title = "any"; ObjectID = "j0v-xF-tpl"; */
-"j0v-xF-tpl.title" = "любое";
 

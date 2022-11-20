@@ -59,9 +59,6 @@
 /* No comment provided by engineer. */
 "Connecting to %@" = "Collegamento in corso a %@";
 
-/* test for a string */
-"contains" = "contiene";
-
 /* No comment provided by engineer. */
 "Copy Link to Clipboard" = "Copia Collegamento sugli Appunti";
 
@@ -107,9 +104,6 @@
 
 /* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "Vuoi davvero importare le iscrizioni dal file OPML specificato?";
-
-/* test for a string */
-"does not contain" = "non contiene";
 
 /* Title of a button on an alert */
 "Don’t Empty Trash" = "Non Svuotare il Cestino";
@@ -212,39 +206,6 @@
 
 /* No comment provided by engineer. */
 "Import subscriptions from OPML file?" = "Importa iscrizioni da file OPML?";
-
-/* test for a value */
-"is" = "è uguale a";
-
-/* test for a date */
-"is after" = "è precedente a";
-
-/* test for a date */
-"is before" = "è successiva a";
-
-/* test for a numeric value */
-"is greater than" = "è maggiore di";
-
-/* test for a numeric value */
-"is greater than or equal to" = "è maggiore o uguale a";
-
-/* test for a numeric value */
-"is less than" = "è minore di";
-
-/* test for a numeric value */
-"is less than or equal to" = "è minore o uguale a";
-
-/* test for a value */
-"is not" = "non è uguale a";
-
-/* test for a date */
-"is on or after" = "è uguale o precedente a";
-
-/* test for a date */
-"is on or before" = "è uguale o successiva a";
-
-/* No comment provided by engineer. */
-"Last Week" = "Settimana Scorsa";
 
 /* Data field name visible in menu/article list */
 "Link" = "Collegamento";
@@ -466,9 +427,6 @@
 "This operation cannot be undone." = "Questa operazione non può essere annullata.";
 
 /* No comment provided by engineer. */
-"Today" = "Oggi";
-
-/* No comment provided by engineer. */
 "Today's Articles" = "Articoli di Oggi";
 
 /* No comment provided by engineer. */
@@ -497,12 +455,6 @@
 
 /* No comment provided by engineer. */
 "Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified." = "Vienna stava cercando di creare la cartella '%@' ma si è verificato un errore. Controlla i permessi delle cartelle sul percorso indicato.";
-
-/* No comment provided by engineer. */
-"Yes" = "Si";
-
-/* No comment provided by engineer. */
-"Yesterday" = "Ieri";
 
 /* You are already subscribed to that feed */
 "You are already subscribed to that feed" = "Sei già iscritto a questo feed";

@@ -74,9 +74,6 @@
 /* No comment provided by engineer. */
 "Connecting to Open Reader server to retrieve %@" = "Jungiamasi prie Open Reader serverio parsiųsti %@";
 
-/* test for a string */
-"contains" = "turi";
-
 /* No comment provided by engineer. */
 "Copy Link to Clipboard" = "Kopijuoti nuorodą į iškarpinę";
 
@@ -128,9 +125,6 @@
 
 /* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "Ar tikrai norite importuoti prenumeratas iš pasirinkto OPML failo?";
-
-/* test for a string */
-"does not contain" = "neturi";
 
 /* Title of a button on an alert */
 "Don’t Empty Trash" = "Nevalyti šiukšlių";
@@ -261,39 +255,6 @@
 /* No comment provided by engineer. */
 "Improper infinitely looping URL redirect to %@" = "Klaida: nesibaigiantis peradresavimas į %@";
 
-/* test for a value */
-"is" = "yra";
-
-/* test for a date */
-"is after" = "yra po";
-
-/* test for a date */
-"is before" = "yra prieš";
-
-/* test for a numeric value */
-"is greater than" = "didesnis nei";
-
-/* test for a numeric value */
-"is greater than or equal to" = "didesnis arba lygus nei";
-
-/* test for a numeric value */
-"is less than" = "mažesnis nei";
-
-/* test for a numeric value */
-"is less than or equal to" = "mažesnis arba lygus nei";
-
-/* test for a value */
-"is not" = "nėra";
-
-/* test for a date */
-"is on or after" = "tada arba vėliau";
-
-/* test for a date */
-"is on or before" = "tada arba anksčiau";
-
-/* No comment provided by engineer. */
-"Last Week" = "Praeitą savaitę";
-
 /* Data field name visible in menu/article list */
 "Link" = "Nuoroda";
 
@@ -340,16 +301,10 @@
 "New Tab" = "Naujas skirtukas";
 
 /* No comment provided by engineer. */
-"No" = "Ne";
-
-/* No comment provided by engineer. */
 "No articles in feed" = "Prenumeratose nerasta straipsnių";
 
 /* No comment provided by engineer. */
 "No new articles available" = "Naujų straipsnių nėra";
-
-/* test for a folder (not operational as of Vienna 3.2) */
-"not under" = "ne po";
 
 /* Title of a button on an alert */
 "OK" = "Gerai";
@@ -559,16 +514,10 @@
 "This operation cannot be undone." = "Ištrinti pasirinktą žinutę";
 
 /* No comment provided by engineer. */
-"Today" = "Šiandien";
-
-/* No comment provided by engineer. */
 "Today's Articles" = "Šiandienos straipsniai";
 
 /* No comment provided by engineer. */
 "Trash" = "Šiukšliadėžė";
-
-/* test for a folder (not operational as of Vienna 3.2) */
-"under" = "po";
 
 /* No comment provided by engineer. */
 "Unread Articles" = "Neperskaityti straipsniai";
@@ -596,12 +545,6 @@
 
 /* No comment provided by engineer. */
 "Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconvenience." = "Vienna privalo atnaujinti duomenų bazes versiją į naujesnę. Tai gali užtrukti apie minutę. Atsiprašome dėl nepatogumų.";
-
-/* No comment provided by engineer. */
-"Yes" = "Taip";
-
-/* No comment provided by engineer. */
-"Yesterday" = "Vakar";
 
 /* You are already subscribed to that feed */
 "You are already subscribed to that feed" = "Užsiregistravimo turinys";

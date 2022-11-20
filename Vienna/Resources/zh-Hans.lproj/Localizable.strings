@@ -83,9 +83,6 @@
 /* No comment provided by engineer. */
 "Connecting to Open Reader server to retrieve %@" = "正在连接至 Open Reader 服务器获取 %@";
 
-/* test for a string */
-"contains" = "包含";
-
 /* No comment provided by engineer. */
 "Copy Link to Clipboard" = "将连接复制到剪贴板";
 
@@ -137,9 +134,6 @@
 
 /* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "您确定要通过 OPML 文件来导入频道么？";
-
-/* test for a string */
-"does not contain" = "不包含";
 
 /* Title of a button on an alert */
 "Don’t Empty Trash" = "不要清空废纸篓";
@@ -267,39 +261,6 @@
 /* No comment provided by engineer. */
 "Improper infinitely looping URL redirect to %@" = "错误地无限重定向至 %@";
 
-/* test for a value */
-"is" = "为";
-
-/* test for a date */
-"is after" = "迟于";
-
-/* test for a date */
-"is before" = "早于";
-
-/* test for a numeric value */
-"is greater than" = "大于";
-
-/* test for a numeric value */
-"is greater than or equal to" = "大于或等于";
-
-/* test for a numeric value */
-"is less than" = "小于";
-
-/* test for a numeric value */
-"is less than or equal to" = "小于或等于";
-
-/* test for a value */
-"is not" = "非";
-
-/* test for a date */
-"is on or after" = "迟于（含）";
-
-/* test for a date */
-"is on or before" = "早于（含）";
-
-/* No comment provided by engineer. */
-"Last Week" = "上个星期";
-
 /* Data field name visible in menu/article list */
 "Link" = "连接";
 
@@ -347,9 +308,6 @@
 
 /* No comment provided by engineer. */
 "New Tab" = "新标签";
-
-/* No comment provided by engineer. */
-"No" = "否";
 
 /* No comment provided by engineer. */
 "No new articles available" = "没有新文章";
@@ -535,9 +493,6 @@
 "This operation cannot be undone." = "这个操作无法还原";
 
 /* No comment provided by engineer. */
-"Today" = "今天";
-
-/* No comment provided by engineer. */
 "Today's Articles" = "今天的文章";
 
 /* No comment provided by engineer. */
@@ -566,12 +521,6 @@
 
 /* No comment provided by engineer. */
 "Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified." = "Vienna 在创建文件夹 \"%@\" 时发生错误。请检查指定路径上文件夹的权限";
-
-/* No comment provided by engineer. */
-"Yes" = "是";
-
-/* No comment provided by engineer. */
-"Yesterday" = "昨天";
 
 /* You are already subscribed to that feed */
 "You are already subscribed to that feed" = "您已经订阅了这个频道";

@@ -59,9 +59,6 @@
 /* No comment provided by engineer. */
 "Connecting to %@" = "%@ に接続中";
 
-/* test for a string */
-"contains" = "が次を含む：";
-
 /* No comment provided by engineer. */
 "Copy Link to Clipboard" = "リンクをクリップボードにコピー";
 
@@ -101,9 +98,6 @@
 
 /* No comment provided by engineer. */
 "Deleting folder \"%@\"…" = "フォルダ \"%@\" を削除中…";
-
-/* test for a string */
-"does not contain" = "が次を含まない：";
 
 /* Title of a button on an alert */
 "Empty" = "空にする";
@@ -165,39 +159,6 @@
 /* No comment provided by engineer. */
 "Import error" = "読み込みエラー";
 
-/* test for a value */
-"is" = "が";
-
-/* test for a date */
-"is after" = "が次以降である：";
-
-/* test for a date */
-"is before" = "が次以前である：";
-
-/* test for a numeric value */
-"is greater than" = "が次より多い：";
-
-/* test for a numeric value */
-"is greater than or equal to" = "が次と同じか多い：";
-
-/* test for a numeric value */
-"is less than" = "が次より少ない：";
-
-/* test for a numeric value */
-"is less than or equal to" = "が次と同じか少ない：";
-
-/* test for a value */
-"is not" = "が次でない：";
-
-/* test for a date */
-"is on or after" = "次またはそれ以降である：";
-
-/* test for a date */
-"is on or before" = "次またはそれ以前である";
-
-/* No comment provided by engineer. */
-"Last Week" = "先週";
-
 /* Data field name visible in menu/article list */
 "Link" = "リンク";
 
@@ -233,9 +194,6 @@
 
 /* Notification title */
 "New articles retrieved" = "新着記事";
-
-/* No comment provided by engineer. */
-"No" = "ない";
 
 /* No comment provided by engineer. */
 "No new articles available" = "新着記事はありません";
@@ -386,9 +344,6 @@
 "This operation cannot be undone." = "この操作を元に戻すことはできません。";
 
 /* No comment provided by engineer. */
-"Today" = "今日";
-
-/* No comment provided by engineer. */
 "Today's Articles" = "今日の記事";
 
 /* No comment provided by engineer. */
@@ -414,12 +369,6 @@
 
 /* No comment provided by engineer. */
 "Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified." = "Vienna は \"%@\" と言うフォルダを作成しようとしましたが、エラーが発生しました。フォルダのパーミッションを確認してください。";
-
-/* No comment provided by engineer. */
-"Yes" = "ある";
-
-/* No comment provided by engineer. */
-"Yesterday" = "昨日";
 
 /* You are already subscribed to that feed */
 "You are already subscribed to that feed" = "このフィードはすでに購読中です。";

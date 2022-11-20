@@ -59,9 +59,6 @@
 /* No comment provided by engineer. */
 "Connecting to %@" = "%@ 주소에 연결";
 
-/* test for a string */
-"contains" = "다음을 포함";
-
 /* No comment provided by engineer. */
 "Copy Link to Clipboard" = "링크 복사";
 
@@ -101,9 +98,6 @@
 
 /* No comment provided by engineer. */
 "Deleting folder \"%@\"…" = "\"%@\" 삭제 중…";
-
-/* test for a string */
-"does not contain" = "다음을 포함하지 않음";
 
 /* Title of a button on an alert */
 "Empty" = "비우기";
@@ -165,39 +159,6 @@
 /* No comment provided by engineer. */
 "Import error" = "가져오기 오류";
 
-/* test for a value */
-"is" = "다음과 같음";
-
-/* test for a date */
-"is after" = "다음 이후에";
-
-/* test for a date */
-"is before" = "다음 이전에";
-
-/* test for a numeric value */
-"is greater than" = "다음보다 크게";
-
-/* test for a numeric value */
-"is greater than or equal to" = "다음과 같거나 크게";
-
-/* test for a numeric value */
-"is less than" = "다음보다 적게";
-
-/* test for a numeric value */
-"is less than or equal to" = "다음과 같거나 적게";
-
-/* test for a value */
-"is not" = "다음과 같지 않음";
-
-/* test for a date */
-"is on or after" = "다음과 같거나 이후에";
-
-/* test for a date */
-"is on or before" = "다음과 같거나 이전에";
-
-/* No comment provided by engineer. */
-"Last Week" = "지난주";
-
 /* Data field name visible in menu/article list */
 "Link" = "링크";
 
@@ -233,9 +194,6 @@
 
 /* Notification title */
 "New articles retrieved" = "새로운 기사";
-
-/* No comment provided by engineer. */
-"No" = "아니오";
 
 /* No comment provided by engineer. */
 "No new articles available" = "가능한 새 기사를 찾을 수 없음";
@@ -392,9 +350,6 @@
 "This operation cannot be undone." = "이 명령은 취소할 수 없습니다.";
 
 /* No comment provided by engineer. */
-"Today" = "오늘";
-
-/* No comment provided by engineer. */
 "Today's Articles" = "오늘의 기사";
 
 /* No comment provided by engineer. */
@@ -420,12 +375,6 @@
 
 /* No comment provided by engineer. */
 "Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified." = "Vienna 가 \"%@\" 폴더를 생성 중에 오류가 발생했습니다. 지정한 경로에 있는 폴더의 권한을 확인하십시오.";
-
-/* No comment provided by engineer. */
-"Yes" = "예";
-
-/* No comment provided by engineer. */
-"Yesterday" = "어제";
 
 /* You are already subscribed to that feed */
 "You are already subscribed to that feed" = "이미 구독 중인 피드입니다.";

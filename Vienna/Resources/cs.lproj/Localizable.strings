@@ -68,9 +68,6 @@
 /* No comment provided by engineer. */
 "Connecting to %@" = "Připojuje se k %@";
 
-/* test for a string */
-"contains" = "obsahuje";
-
 /* No comment provided by engineer. */
 "Copy Link to Clipboard" = "Zkopírovat odkaz do schránky";
 
@@ -119,9 +116,6 @@
 
 /* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "Určitě chcete importovat odebírání z vybraného souboru OPML?";
-
-/* test for a string */
-"does not contain" = "neobsahuje";
 
 /* Title of a button on an alert */
 "Don’t Empty Trash" = "Nevysypávat";
@@ -228,39 +222,6 @@
 /* No comment provided by engineer. */
 "Import subscriptions from OPML file?" = "Importovat odebírání ze souboru OPML?";
 
-/* test for a value */
-"is" = "je";
-
-/* test for a date */
-"is after" = "je po";
-
-/* test for a date */
-"is before" = "je před";
-
-/* test for a numeric value */
-"is greater than" = "je větší než";
-
-/* test for a numeric value */
-"is greater than or equal to" = "je větší nebo stejný než";
-
-/* test for a numeric value */
-"is less than" = "je menší než";
-
-/* test for a numeric value */
-"is less than or equal to" = "je menší nebo stejný než";
-
-/* test for a value */
-"is not" = "není";
-
-/* test for a date */
-"is on or after" = "je nebo po";
-
-/* test for a date */
-"is on or before" = "je nebo před";
-
-/* No comment provided by engineer. */
-"Last Week" = "Poslední týden";
-
 /* Data field name visible in menu/article list */
 "Link" = "Odkaz";
 
@@ -302,9 +263,6 @@
 
 /* No comment provided by engineer. */
 "New Tab" = "nový panel";
-
-/* No comment provided by engineer. */
-"No" = "Ne";
 
 /* No comment provided by engineer. */
 "No new articles available" = "Žádné nové příspěvky";
@@ -493,9 +451,6 @@
 "This operation cannot be undone." = "Tuto operaci nelze odvolat.";
 
 /* No comment provided by engineer. */
-"Today" = "Dnes";
-
-/* No comment provided by engineer. */
 "Today's Articles" = "Dnešní příspěvky";
 
 /* No comment provided by engineer. */
@@ -524,12 +479,6 @@
 
 /* No comment provided by engineer. */
 "Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified." = "Program Vienna se pokusil vytvořit složku „%@“, ale vyskytla se chyba. Ověřte, zda máte oprávnění k vytvoření složky v tomto umístění.";
-
-/* No comment provided by engineer. */
-"Yes" = "Ano";
-
-/* No comment provided by engineer. */
-"Yesterday" = "Včera";
 
 /* You are already subscribed to that feed */
 "You are already subscribed to that feed" = "Tento zdroj již odebíráte.";

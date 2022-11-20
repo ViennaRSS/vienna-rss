@@ -62,9 +62,6 @@
 /* No comment provided by engineer. */
 "Connecting to %@" = "A conectar a %@";
 
-/* test for a string */
-"contains" = "contém";
-
 /* No comment provided by engineer. */
 "Copy Link to Clipboard" = "Copiar Link para a Área de Transferências";
 
@@ -107,9 +104,6 @@
 
 /* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "Deseja realmente importar as subscrições do ficheiro OPML especificado?";
-
-/* test for a string */
-"does not contain" = "não contém";
 
 /* Title of a button on an alert */
 "Don’t Empty Trash" = "Não Esvaziar Lixo";
@@ -207,39 +201,6 @@
 /* No comment provided by engineer. */
 "Import subscriptions from OPML file?" = "Importar subscrições de um ficheiro OPML?";
 
-/* test for a value */
-"is" = "é";
-
-/* test for a date */
-"is after" = "depois de";
-
-/* test for a date */
-"is before" = "antes de";
-
-/* test for a numeric value */
-"is greater than" = "maior do que";
-
-/* test for a numeric value */
-"is greater than or equal to" = "maior ou igual a";
-
-/* test for a numeric value */
-"is less than" = "menor do que";
-
-/* test for a numeric value */
-"is less than or equal to" = "menor ou igual a";
-
-/* test for a value */
-"is not" = "não é";
-
-/* test for a date */
-"is on or after" = "em ou depois de";
-
-/* test for a date */
-"is on or before" = "em ou antes de";
-
-/* No comment provided by engineer. */
-"Last Week" = "Última Semana";
-
 /* No comment provided by engineer. */
 "Mark All Read" = "Marcar Todos como Lidos";
 
@@ -275,9 +236,6 @@
 
 /* No comment provided by engineer. */
 "New Tab" = "Novo Separador";
-
-/* No comment provided by engineer. */
-"No" = "Não";
 
 /* No comment provided by engineer. */
 "No new articles available" = "Nenhum artigo novo disponível";
@@ -463,9 +421,6 @@
 "This operation cannot be undone." = "Esta operação não pode ser anulada.";
 
 /* No comment provided by engineer. */
-"Today" = "Hoje";
-
-/* No comment provided by engineer. */
 "Today's Articles" = "Artigos de Hoje";
 
 /* No comment provided by engineer. */
@@ -494,12 +449,6 @@
 
 /* No comment provided by engineer. */
 "Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified." = "o Vienna estava a tentar criar a pasta \"%@\" mas ocurreu um erro. Verifique as permissões das pastas na localização especificada.";
-
-/* No comment provided by engineer. */
-"Yes" = "Sim";
-
-/* No comment provided by engineer. */
-"Yesterday" = "Ontem";
 
 /* You are already subscribed to that feed */
 "You are already subscribed to that feed" = "Fonte já subscrita";

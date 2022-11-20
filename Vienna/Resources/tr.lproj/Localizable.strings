@@ -62,9 +62,6 @@
 /* No comment provided by engineer. */
 "Connecting to %@" = "Bağlanılıyor: %@";
 
-/* test for a string */
-"contains" = "içerir";
-
 /* No comment provided by engineer. */
 "Copy Link to Clipboard" = "Linki Panoya Kopyala";
 
@@ -107,9 +104,6 @@
 
 /* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "Abonelikleri seçili OPML dosyasından yüklemek istediğinize emin misiniz?";
-
-/* test for a string */
-"does not contain" = "içermez";
 
 /* Title of a button on an alert */
 "Don’t Empty Trash" = "Çöp kutusunu boşaltma";
@@ -213,39 +207,6 @@
 /* No comment provided by engineer. */
 "Import subscriptions from OPML file?" = "Abonelikleri OPML dosyasından yükle?";
 
-/* test for a value */
-"is" = "dir";
-
-/* test for a date */
-"is after" = "sonrasında";
-
-/* test for a date */
-"is before" = "öncesinde";
-
-/* test for a numeric value */
-"is greater than" = "daha çok";
-
-/* test for a numeric value */
-"is greater than or equal to" = "eşit veya daha çok";
-
-/* test for a numeric value */
-"is less than" = "daha az";
-
-/* test for a numeric value */
-"is less than or equal to" = "eşit veya daha az";
-
-/* test for a value */
-"is not" = "değildir";
-
-/* test for a date */
-"is on or after" = "şimdi ya da sonrasında";
-
-/* test for a date */
-"is on or before" = "şimdi ya da öncesinde";
-
-/* No comment provided by engineer. */
-"Last Week" = "Geçen Hafta";
-
 /* Data field name visible in menu/article list */
 "Link" = "Bağlantı";
 
@@ -284,9 +245,6 @@
 
 /* No comment provided by engineer. */
 "New Tab" = "Yeni Sekme";
-
-/* No comment provided by engineer. */
-"No" = "Hayır";
 
 /* No comment provided by engineer. */
 "No new articles available" = "Yeni makale yok";
@@ -472,9 +430,6 @@
 "This operation cannot be undone." = "Bu özellik geri alınamaz.";
 
 /* No comment provided by engineer. */
-"Today" = "Bugün";
-
-/* No comment provided by engineer. */
 "Today's Articles" = "Bugünün Makaleleri";
 
 /* No comment provided by engineer. */
@@ -503,12 +458,6 @@
 
 /* No comment provided by engineer. */
 "Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified." = "Vienna \"%@\" klasörünü oluşturmaya çalışırken bir hata oluştu. Klasör izinlerinizi kontrol edin.";
-
-/* No comment provided by engineer. */
-"Yes" = "Evet";
-
-/* No comment provided by engineer. */
-"Yesterday" = "Dün";
 
 /* You are already subscribed to that feed */
 "You are already subscribed to that feed" = "Bu beslemeye zaten abonesiniz";

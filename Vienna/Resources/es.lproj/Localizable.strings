@@ -95,9 +95,6 @@
 /* No comment provided by engineer. */
 "Connecting to Open Reader server to retrieve %@" = "Conectando con servidor Open Reader para recuperar %@";
 
-/* test for a string */
-"contains" = "contiene";
-
 /* No comment provided by engineer. */
 "Copy Link to Clipboard" = "Copiar enlace al portapapeles";
 
@@ -152,9 +149,6 @@
 
 /* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "¿Realmente desea importar las suscripciones del archivo OPML especificado?";
-
-/* test for a string */
-"does not contain" = "no contiene";
 
 /* Title of a button on an alert */
 "Don’t Empty Trash" = "No vaciar papelera";
@@ -291,39 +285,6 @@
 /* No comment provided by engineer. */
 "Improper infinitely looping URL redirect to %@" = "Redirigir URL infinitamente cíclica a %@";
 
-/* test for a value */
-"is" = "es";
-
-/* test for a date */
-"is after" = "es posterior a";
-
-/* test for a date */
-"is before" = "es anterior a";
-
-/* test for a numeric value */
-"is greater than" = "es mayor que";
-
-/* test for a numeric value */
-"is greater than or equal to" = "es mayor o igual que";
-
-/* test for a numeric value */
-"is less than" = "es menor que";
-
-/* test for a numeric value */
-"is less than or equal to" = "es menor o igual que";
-
-/* test for a value */
-"is not" = "no es";
-
-/* test for a date */
-"is on or after" = "es a partir de";
-
-/* test for a date */
-"is on or before" = "es anterior a o de";
-
-/* No comment provided by engineer. */
-"Last Week" = "Última semana";
-
 /* Data field name visible in menu/article list */
 "Link" = "Enlace";
 
@@ -371,9 +332,6 @@
 
 /* No comment provided by engineer. */
 "New Tab" = "Nueva pestaña";
-
-/* No comment provided by engineer. */
-"No" = "No";
 
 /* No comment provided by engineer. */
 "No articles in feed" = "No hay artículos en la fuente";
@@ -619,9 +577,6 @@
 "This operation cannot be undone." = "Esta operación no se puede deshacer.";
 
 /* No comment provided by engineer. */
-"Today" = "Hoy";
-
-/* No comment provided by engineer. */
 "Today's Articles" = "Artículos de hoy";
 
 /* No comment provided by engineer. */
@@ -662,12 +617,6 @@
 
 /* No comment provided by engineer. */
 "Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified." = "Vienna ha intentado crear la carpeta \"%@\" pero ha ocurrido un error. Compruebe los permisos de las carpetas de la ruta especificada.";
-
-/* No comment provided by engineer. */
-"Yes" = "Sí";
-
-/* No comment provided by engineer. */
-"Yesterday" = "Ayer";
 
 /* You are already subscribed to that feed */
 "You are already subscribed to that feed" = "Ya está suscrito a esta fuente";

@@ -95,9 +95,6 @@
 /* No comment provided by engineer. */
 "Connecting to Open Reader server to retrieve %@" = "Verbinden met Open Reader-server om %@ op te vragen";
 
-/* test for a string */
-"contains" = "bevat";
-
 /* No comment provided by engineer. */
 "Copy Link to Clipboard" = "Kopieer link naar klembord";
 
@@ -152,9 +149,6 @@
 
 /* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "Wil je echt abonnementen uit dit OPML-bestand importeren?";
-
-/* test for a string */
-"does not contain" = "bevat niet";
 
 /* Title of a button on an alert */
 "Don’t Empty Trash" = "Leeg prullenmand niet";
@@ -291,39 +285,6 @@
 /* No comment provided by engineer. */
 "Improper infinitely looping URL redirect to %@" = "Onjuiste oneindig doorlopende URL-doorverwijzing naar %@";
 
-/* test for a value */
-"is" = "is";
-
-/* test for a date */
-"is after" = "ligt na";
-
-/* test for a date */
-"is before" = "ligt voor";
-
-/* test for a numeric value */
-"is greater than" = "is groter dan";
-
-/* test for a numeric value */
-"is greater than or equal to" = "is groter dan of gelijk aan";
-
-/* test for a numeric value */
-"is less than" = "is kleiner dan";
-
-/* test for a numeric value */
-"is less than or equal to" = "is kleiner dan of gelijk aan";
-
-/* test for a value */
-"is not" = "is niet";
-
-/* test for a date */
-"is on or after" = "ligt op of na";
-
-/* test for a date */
-"is on or before" = "ligt op of voor";
-
-/* No comment provided by engineer. */
-"Last Week" = "Vorige week";
-
 /* Data field name visible in menu/article list */
 "Link" = "Link";
 
@@ -373,16 +334,10 @@
 "New Tab" = "Nieuwe tab";
 
 /* No comment provided by engineer. */
-"No" = "Nee";
-
-/* No comment provided by engineer. */
 "No articles in feed" = "Geen artikelen in deze feed";
 
 /* No comment provided by engineer. */
 "No new articles available" = "Geen nieuwe artikelen beschikbaar";
-
-/* test for a folder (not operational as of Vienna 3.2) */
-"not under" = "niet onder";
 
 /* Title of a button on an alert */
 "OK" = "OK";
@@ -622,16 +577,10 @@
 "This operation cannot be undone." = "Deze actie kan niet ongedaan worden gemaakt.";
 
 /* No comment provided by engineer. */
-"Today" = "Vandaag";
-
-/* No comment provided by engineer. */
 "Today's Articles" = "Artikelen van vandaag";
 
 /* No comment provided by engineer. */
 "Trash" = "Prullenmand";
-
-/* test for a folder (not operational as of Vienna 3.2) */
-"under" = "onder";
 
 /* No comment provided by engineer. */
 "Unread Articles" = "Ongelezen artikelen";
@@ -668,12 +617,6 @@
 
 /* No comment provided by engineer. */
 "Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified." = "Vienna probeerde de map \"%@\" te maken, maar er ging iets fout. Controleer de bevoegdheden van de bovenliggende mappen.";
-
-/* No comment provided by engineer. */
-"Yes" = "Ja";
-
-/* No comment provided by engineer. */
-"Yesterday" = "Gisteren";
 
 /* You are already subscribed to that feed */
 "You are already subscribed to that feed" = "Je hebt al een abonnement op deze feed";
