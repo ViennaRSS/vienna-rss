@@ -769,7 +769,7 @@ static void *ObserverContext = &ObserverContext;
 -(void)printDocument:(id)sender
 {
     if (self.useNewBrowser) {
-        [articleText printPage];
+        [articleText printDocument:sender];
     } else {
         [((TabbedWebView *)articleText) printDocument:sender];
     }
