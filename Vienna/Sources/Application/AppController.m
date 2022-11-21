@@ -571,7 +571,7 @@
         	[self.mainWindow makeKeyAndOrderFront:self];
         if (url != nil && !db.readOnly)
         {
-            [self.rssFeed newSubscription:self.mainWindow underParent:self.foldersTree.groupParentSelection initialURL:url.absoluteString];
+            [self.rssFeed newSubscription:self.mainWindow initialURL:url.absoluteString];
 		    return YES;
         }
         else
@@ -754,7 +754,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
     NSString *urlStr = [event paramDescriptorForKeyword:keyDirectObject].stringValue;
     if(urlStr)
-        [self.rssFeed newSubscription:self.mainWindow underParent:self.foldersTree.groupParentSelection initialURL:urlStr];
+        [self.rssFeed newSubscription:self.mainWindow initialURL:urlStr];
 }
 
 /* contextMenuItemsForElement
@@ -1720,7 +1720,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)handleRSSLink:(NSString *)linkPath
 {
-	[self createNewSubscription:linkPath underFolder:self.foldersTree.groupParentSelection afterChild:-1];
+    [self createSubscriptionInCurrentLocationForUrl:[NSURL URLWithString:linkPath]];
 }
 
 /* handleEditFolder
@@ -2325,13 +2325,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 }
 
 -(void)createSubscriptionInCurrentLocationForUrl:(NSURL *)url {
-    Folder * currentFolder = APP.currentFolder;
-    NSInteger currentFolderId = currentFolder.itemId;
-    NSInteger parentFolderId = currentFolder.parentId;
-    if (currentFolder.firstChildId > 0)
-    {
-        parentFolderId = currentFolderId;
-        currentFolderId = 0;
+    NSInteger currentFolderId = self.foldersTree.actualSelection;
+    NSInteger parentFolderId = self.foldersTree.groupParentSelection;
+    Folder * currentFolder = [[Database sharedManager] folderFromID:currentFolderId];
+    if (parentFolderId == VNAFolderTypeRoot && currentFolder.type != VNAFolderTypeRSS && currentFolder.type != VNAFolderTypeOpenReader) {
+        currentFolderId = -1;
     }
     SubscriptionModel *subscription = [[SubscriptionModel alloc] init];
     NSString * verifiedURLString = [subscription verifiedFeedURLFromURL:url].absoluteString;
@@ -2387,7 +2385,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)newSubscription:(id)sender
 {
-	[self.rssFeed newSubscription:self.mainWindow underParent:self.foldersTree.groupParentSelection initialURL:nil];
+	[self.rssFeed newSubscription:self.mainWindow initialURL:nil];
 }
 
 /* newSmartFolder

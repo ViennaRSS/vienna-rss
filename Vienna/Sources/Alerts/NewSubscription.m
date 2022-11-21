@@ -47,7 +47,6 @@
 		db = newDb;
 		sourcesDict = nil;
 		editFolderId = -1;
-		parentId = VNAFolderTypeRoot;
         subscriptionModel = [[SubscriptionModel alloc] init];
 	}
 	return self;
@@ -56,7 +55,7 @@
 /* newSubscription
  * Display the sheet to create a new RSS subscription.
  */
--(void)newSubscription:(NSWindow *)window underParent:(NSInteger)itemId initialURL:(NSString *)initialURL
+-(void)newSubscription:(NSWindow *)window initialURL:(NSString *)initialURL
 {
     [self loadRSSFeedBundle];
 
@@ -126,7 +125,6 @@
     [self enableSubscribeButton];
     [self setLinkTitle];
     editFolderId = -1;
-    parentId = itemId;
     [newRSSFeedWindow makeFirstResponder:feedURL];
     //restore from preferences, if it can be done ; otherwise, uncheck this option
     self.googleOptionButton = [Preferences standardPreferences].syncGoogleReader
@@ -209,7 +207,7 @@
 
     // call the controller to create the new subscription
     // or select the existing one if it already exists
-	[APPCONTROLLER createNewSubscription:rssFeedURL.absoluteString underFolder:parentId afterChild:-1];
+	[APPCONTROLLER createSubscriptionInCurrentLocationForUrl:rssFeedURL];
     
 	// Close the window
 	[newRSSFeedWindow.sheetParent endSheet:newRSSFeedWindow];
