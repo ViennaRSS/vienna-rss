@@ -197,6 +197,10 @@ static void *ObserverContext = &ObserverContext;
                    forKeyPath:MAPref_ShowEnclosureBar
                       options:NSKeyValueObservingOptionNew
                       context:ObserverContext];
+    [userDefaults addObserver:self
+                   forKeyPath:MAPref_ShowUnreadArticlesInBold
+                      options:0
+                      context:ObserverContext];
 }
 
 /* initTableView
@@ -1671,6 +1675,9 @@ static void *ObserverContext = &ObserverContext;
     [userDefaults removeObserver:self
                       forKeyPath:MAPref_ShowEnclosureBar
                          context:ObserverContext];
+    [userDefaults removeObserver:self
+                      forKeyPath:MAPref_ShowUnreadArticlesInBold
+                         context:ObserverContext];
 	[splitView2 setDelegate:nil];
 	[articleList setDelegate:nil];
 }
@@ -1698,6 +1705,13 @@ static void *ObserverContext = &ObserverContext;
             [self hideEnclosureView];
         }
         return;
+    }
+
+    if ([keyPath isEqualToString:MAPref_ShowUnreadArticlesInBold]) {
+        [self setTableViewFont];
+        if (self == self.controller.articleController.mainArticleView) {
+            [articleList reloadData];
+        }
     }
 
     //TODO

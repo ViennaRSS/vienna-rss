@@ -32,9 +32,6 @@
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Новая база данных Vienna не может быть создана в \"%@\" из-за того, что папка, возможно, находится на удаленном сервере, а текущая версия Vienna не может работать с удаленными базами данных. Пожалуйста, выберите папку на своем компьютере.";
 
 /* No comment provided by engineer. */
-"An error occurred when this feed was last refreshed" = "При последнем обновлении канала произошла ошибка";
-
-/* No comment provided by engineer. */
 "AppleScript Error in '%@' script" = "Ошибка AppleScript в скрипте '%@'";
 
 /* No comment provided by engineer. */
@@ -177,9 +174,6 @@
 /* Notification title */
 "Download failed" = "Ошибка";
 
-/* Title of a menu item */
-"Edit…" = "Правка…";
-
 /* Title of a button on an alert */
 "Empty" = "Очистить";
 
@@ -255,14 +249,8 @@
 /* No comment provided by engineer. */
 "Folders" = "Папки";
 
-/* Title of a menu item */
-"Force Refresh Selected Subscriptions From Open Reader" = "Принудительно обновить выбранные подписки из Open Reader";
-
 /* No comment provided by engineer. */
 "Forcing Refresh subscriptions…" = "Принудительное обновление подписок…";
-
-/* Title of a menu item */
-"Get Info" = "Сведения";
 
 /* No comment provided by engineer. */
 "Go forward to the next page" = "На следующую страницу";
@@ -347,9 +335,6 @@
 
 /* No comment provided by engineer. */
 "Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences. Also check your network access." = "Убедитесь, что в настройках Vienna указаны правильные имя пользователя и пароль для доступа к серверу Open Reader. Также проверьте сетевое соединение.";
-
-/* Title of a menu item */
-"Mark All Articles as Read" = "Отметить все статьи как прочитанные";
 
 /* No comment provided by engineer. */
 "Mark All Read" = "Отметить все как прочитанные";
@@ -493,9 +478,6 @@
 /* No comment provided by engineer. */
 "Refresh completed" = "Обновление завершено";
 
-/* Title of a menu item */
-"Refresh Selected Subscriptions" = "Обновить выбранные подписки";
-
 /* No comment provided by engineer. */
 "Refresh the current page" = "Обновить страницу";
 
@@ -507,9 +489,6 @@
 
 /* Title of a popup menu item */
 "Remove From List" = "Удалить из списка";
-
-/* Title of a menu item */
-"Rename…" = "Переименовать…";
 
 /* Title of a menu item */
 "Restore Article" = "Восстановить статью";

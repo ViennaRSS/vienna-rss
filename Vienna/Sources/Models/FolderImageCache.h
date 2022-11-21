@@ -14,18 +14,6 @@
     BOOL initializedFolderImagesArray;
 }
 
-// Indexes into folder image array
-typedef NS_ENUM(NSInteger, VNAFolderIconIndex) {
-    MA_FolderIcon = 0,
-    MA_SmartFolderIcon,
-    MA_RSSFolderIcon,
-    MA_RSSFeedIcon,
-    MA_TrashFolderIcon,
-    MA_SearchFolderIcon,
-    MA_GoogleReaderFolderIcon,
-    MA_Max_Icons
-};
-
 @property (class, readonly, nonatomic) FolderImageCache *defaultCache;
 
 -(void)addImage:(NSImage *)image forURL:(NSString *)baseURL;

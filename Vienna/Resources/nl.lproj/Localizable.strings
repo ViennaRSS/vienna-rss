@@ -32,9 +32,6 @@
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Een nieuwe Vienna-databank kan niet worden aangemaakt in \"%@\". De databank bevindt zich waarschijnlijk op een andere computer in het netwerk, wat door deze versie van Vienna niet wordt ondersteund. Kies een andere locatie op deze Mac.";
 
 /* No comment provided by engineer. */
-"An error occurred when this feed was last refreshed" = "De laatste keer dat deze feed is bijgewerkt, is er een fout opgetreden";
-
-/* No comment provided by engineer. */
 "AppleScript Error in '%@' script" = "AppleScript-fout in script '%@'";
 
 /* No comment provided by engineer. */
@@ -177,9 +174,6 @@
 /* Notification title */
 "Download failed" = "Download niet gelukt";
 
-/* Title of a menu item */
-"Edit…" = "Bewerk…";
-
 /* Title of a button on an alert */
 "Empty" = "Leeg";
 
@@ -255,14 +249,8 @@
 /* No comment provided by engineer. */
 "Folders" = "Mappen";
 
-/* Title of a menu item */
-"Force Refresh Selected Subscriptions From Open Reader" = "Forceer bijwerken abonnementen van Open Reader";
-
 /* No comment provided by engineer. */
 "Forcing Refresh subscriptions…" = "Abonnementen geforceerd vernieuwen…";
-
-/* Title of a menu item */
-"Get Info" = "Toon info";
 
 /* No comment provided by engineer. */
 "Go forward to the next page" = "Ga verder naar de volgende pagina";
@@ -347,9 +335,6 @@
 
 /* No comment provided by engineer. */
 "Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences. Also check your network access." = "Controleer of gebruikersnaam en wachtwoord voor de Open Reader-server juist zijn ingesteld in de instellingen. Controleer ook je netwerkverbinding.";
-
-/* Title of a menu item */
-"Mark All Articles as Read" = "Markeer alles als gelezen";
 
 /* No comment provided by engineer. */
 "Mark All Read" = "Markeer alle berichten als gelezen";
@@ -493,9 +478,6 @@
 /* No comment provided by engineer. */
 "Refresh completed" = "Bijwerken voltooid";
 
-/* Title of a menu item */
-"Refresh Selected Subscriptions" = "Werk geselecteerde abonnementen bij";
-
 /* No comment provided by engineer. */
 "Refresh the current page" = "Laad de huidige pagina opnieuw";
 
@@ -507,9 +489,6 @@
 
 /* Title of a popup menu item */
 "Remove From List" = "Verwijder uit de lijst";
-
-/* Title of a menu item */
-"Rename…" = "Wijzig naam…";
 
 /* Title of a menu item */
 "Restore Article" = "Herstel artikel";

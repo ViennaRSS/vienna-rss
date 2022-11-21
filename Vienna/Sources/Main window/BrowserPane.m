@@ -682,7 +682,7 @@
     [self setError:error];
 
     // Use a warning sign as favicon
-    iconImage.image = [NSImage imageNamed:@"folderError"];
+    iconImage.image = [NSImage imageNamed:@"exclamationmark.triangle.fill"];
 
     // Load the localized verion of the error page
     NSString * pathToErrorPage = [[NSBundle bundleForClass:[self class]] pathForResource:@"errorpage" ofType:@"html"];

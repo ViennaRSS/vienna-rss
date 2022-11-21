@@ -40,8 +40,6 @@
 @property (nonatomic) NSMutableArray * cachedGuids;
 @property (nonatomic) NSMutableDictionary * attributes;
 
-+(NSArray<NSImage *> *)_iconArray;
-
 @end
 
 // Static pointers
@@ -80,23 +78,6 @@ static NSArray * iconArray = nil;
 		self.remoteId = @"0";
 	}
 	return self;
-}
-
-/* _iconArray
- * Return the internal array of pre-defined folder images
- */
-+(NSArray<NSImage *> *)_iconArray {
-	if (iconArray == nil)
-		iconArray = @[
-					  [NSImage imageNamed:@"smallFolder"],
-					  [NSImage imageNamed:@"smartFolder"],
-					  [NSImage imageNamed:@"rssFolder"],
-					  [NSImage imageNamed:@"rssFeedNew"],
-					  [NSImage imageNamed:@"trashFolder"],
-					  [NSImage imageNamed:@"searchFolder"],
-					  [NSImage imageNamed:@"googleFeed"],
-					  ];
-	return iconArray;
 }
 
 /* unreadCount
@@ -151,39 +132,68 @@ static NSArray * iconArray = nil;
     NSImage *folderImage = nil;
     switch (self.type) {
         case VNAFolderTypeSmart:
-            folderImage = Folder._iconArray[MA_SmartFolderIcon];
-            break;
-        case VNAFolderTypeGroup:
-            folderImage = Folder._iconArray[MA_RSSFolderIcon];
-            break;
-        case VNAFolderTypeTrash:
-            folderImage = Folder._iconArray[MA_TrashFolderIcon];
-            break;
-        case VNAFolderTypeSearch:
-            folderImage = Folder._iconArray[MA_SmartFolderIcon];
-            break;
-        case VNAFolderTypeRSS: {
-            NSString *homePageSiteRoot = self.homePage.vna_host.vna_convertStringToValidPath;
-            folderImage = [[FolderImageCache defaultCache] retrieveImage:homePageSiteRoot];
-            if (folderImage == nil) {
-                folderImage = Folder._iconArray[MA_RSSFeedIcon];
+            if (@available(macOS 11, *)) {
+                folderImage = [NSImage imageWithSystemSymbolName:@"gearshape"
+                                        accessibilityDescription:nil];
+            } else {
+                folderImage = [NSImage imageNamed:@"smartFolder"];
             }
             break;
-        }
+        case VNAFolderTypeGroup:
+            if (@available(macOS 11, *)) {
+                folderImage = [NSImage imageWithSystemSymbolName:@"folder"
+                                        accessibilityDescription:nil];
+            } else {
+                folderImage = [NSImage imageNamed:@"rssFolder"];
+            }
+            break;
+        case VNAFolderTypeTrash:
+            if (@available(macOS 11, *)) {
+                folderImage = [NSImage imageWithSystemSymbolName:@"trash"
+                                        accessibilityDescription:nil];
+            } else {
+                folderImage = [NSImage imageNamed:@"trashFolder"];
+            }
+            break;
+        case VNAFolderTypeSearch:
+            if (@available(macOS 11, *)) {
+                folderImage = [NSImage imageWithSystemSymbolName:@"magnifyingglass"
+                                        accessibilityDescription:nil];
+            } else {
+                folderImage = [NSImage imageNamed:@"searchFolder"];
+            }
+            break;
+        case VNAFolderTypeRSS:
         case VNAFolderTypeOpenReader: {
             NSString *homePageSiteRoot = self.homePage.vna_host.vna_convertStringToValidPath;
-            folderImage = [[FolderImageCache defaultCache] retrieveImage:homePageSiteRoot];
-            if (folderImage == nil) {
-                folderImage = Folder._iconArray[MA_GoogleReaderFolderIcon];
+            folderImage = [FolderImageCache.defaultCache retrieveImage:homePageSiteRoot];
+            if (!folderImage) {
+                folderImage = [NSImage imageNamed:@"rssFeed"];
             }
             break;
         }
         default: // Use the generic folder icon for anything else
-            folderImage = Folder._iconArray[MA_FolderIcon];
+            if (@available(macOS 11, *)) {
+                folderImage = [NSImage imageWithSystemSymbolName:@"folder.badge.questionmark"
+                                        accessibilityDescription:nil];
+            } else {
+                folderImage = [NSImage imageNamed:@"smallFolder"];
+            }
             break;
     }
     
     return folderImage;
+}
+
+// This currently only used in SearchFolder and the only problematic image is
+// the Group folder type.
+- (NSImage *)archivableImage
+{
+    if (self.type == VNAFolderTypeGroup) {
+        return [NSImage imageNamed:@"rssFolder"];
+    } else {
+        return self.image;
+    }
 }
 
 /*!Check if an RSS or OpenReader folder
@@ -207,9 +217,11 @@ static NSArray * iconArray = nil;
  */
 -(NSImage *)standardImage {
     switch (self.type) {
-        case VNAFolderTypeRSS: return Folder._iconArray[MA_RSSFeedIcon];
-        case VNAFolderTypeOpenReader: return Folder._iconArray[MA_GoogleReaderFolderIcon];
-        default: return self.image;
+        case VNAFolderTypeRSS:
+        case VNAFolderTypeOpenReader:
+            return [NSImage imageNamed:@"rssFeed"];
+        default:
+            return self.image;
     }
 }
 

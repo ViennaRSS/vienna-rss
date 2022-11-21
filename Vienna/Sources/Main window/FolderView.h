@@ -20,29 +20,23 @@
 
 @import Cocoa;
 
-@class FolderView;
+#import "FeedListConstants.h"
+#import "FolderViewDelegate.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol FolderViewDelegate <NSOutlineViewDelegate>
+@interface FolderView : NSOutlineView <NSMenuItemValidation>
 
-- (BOOL)copyTableSelection:(NSArray *)items toPasteboard:(NSPasteboard *)pboard;
-- (BOOL)canDeleteFolderAtRow:(NSInteger)row;
-- (void)folderViewWillBecomeFirstResponder;
-- (void)folderView:(FolderView *)folderView menuWillAppear:(NSEvent *)theEvent;
+@property (nonatomic) VNAFeedListSizeMode sizeMode;
+- (CGFloat)rowHeightForSize:(VNAFeedListSizeMode)sizeMode;
 
-@end
+- (void)reloadDataWhilePreservingSelection;
+- (void)reloadDataForRowIndexWhilePreservingSelection:(NSInteger)rowIndex;
 
-@interface FolderView : NSOutlineView <NSMenuItemValidation> {
-	NSString * backupString;
-}
+// This property overrides a superclass property.
+@property (nullable, weak) id<FolderViewDelegate> delegate;
 
-@property (weak, nullable) id <FolderViewDelegate> delegate;
-
--(void)keyDown:(NSEvent *)theEvent;
--(void)prvtResizeTheFieldEditor;
-
-@property (nullable, nonatomic) NSPredicate* filterPredicate;
+@property (nullable, nonatomic) NSPredicate *filterPredicate;
 
 @end
 

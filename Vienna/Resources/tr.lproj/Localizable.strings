@@ -14,9 +14,6 @@
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Yeni bir Vienna veritabanı \"%@\" konumunda oluşturulamıyor çünkü muhtemelen o klasör ya uzaktaki bir ağa dahil, zira Vienna'nın bu versiyonu ağ üzerindeki klasörler ile çalışacak şekilde tasarlanmamıştır. Bilgisayarınız üzerinde bulunan bir klasörü seçmeyi deneyin.";
 
 /* No comment provided by engineer. */
-"An error occurred when this feed was last refreshed" = "Bu besleme en son yenilendiğinde bir hata oluştu";
-
-/* No comment provided by engineer. */
 "Are you sure you want to delete all %d selected folders? This operation cannot be undone." = "%d seçili klasörlerini silmek istediğinize emin misiniz? Bu işlem geri alınamaz.";
 
 /* No comment provided by engineer. */
@@ -132,9 +129,6 @@
 /* Notification title */
 "Download failed" = "İndirme başarısız";
 
-/* Title of a menu item */
-"Edit…" = "Düzenle…";
-
 /* Title of a button on an alert */
 "Empty" = "Boş";
 
@@ -188,9 +182,6 @@
 
 /* No comment provided by engineer. */
 "Folders" = "Klasörler";
-
-/* Title of a menu item */
-"Get Info" = "Bilgi Al";
 
 /* No comment provided by engineer. */
 "Go forward to the next page" = "Sonraki sayfaya geç";
@@ -257,9 +248,6 @@
 
 /* Data field name visible in menu/article list */
 "Link" = "Bağlantı";
-
-/* Title of a menu item */
-"Mark All Articles as Read" = "Tüm Makaleleri Okundu Olarak İşaretle";
 
 /* No comment provided by engineer. */
 "Mark All Read" = "Okunmuşları İşaretle";
@@ -376,9 +364,6 @@
 /* No comment provided by engineer. */
 "Refresh completed" = "Yenileme tamamlandı";
 
-/* Title of a menu item */
-"Refresh Selected Subscriptions" = "Seçili Abonelikleri Yenile";
-
 /* No comment provided by engineer. */
 "Refresh the current page" = "Geçerli sayfayı yenile";
 
@@ -390,9 +375,6 @@
 
 /* Title of a popup menu item */
 "Remove From List" = "Listeden Kaldır";
-
-/* Title of a menu item */
-"Rename…" = "Yeniden adlandır…";
 
 /* Title of a menu item */
 "Restore Article" = "Makaleyi Sıfırla";

@@ -27,7 +27,6 @@ NSString *const MAPref_ArticleListFont = @"ArticleListFont";
 NSString * MAPref_AutoSortFoldersTree = @"AutomaticallySortFoldersTree";
 NSString * MAPref_CheckForUpdatedArticles = @"CheckForUpdatedArticles";
 NSString * MAPref_ShowUnreadArticlesInBold = @"ShowUnreadArticlesInBold";
-NSString *const MAPref_FolderListFont = @"FolderListFont";
 NSString * MAPref_CachedFolderID = @"CachedFolderID";
 NSString * MAPref_DefaultDatabase = @"DefaultDatabase";
 NSString *const MAPref_DownloadsFolderBookmark = @"DownloadsFolderBookmark";
@@ -81,7 +80,8 @@ NSString * MAPref_UserAgentName = @"UserAgentName";
 NSString *const MAPref_Deprecated_ArticleListFont = @"MessageListFont";
 NSString *const MAPref_Deprecated_ArticleListSortOrders = @"ArticleSortDescriptors";
 NSString *const MAPref_Deprecated_DownloadItemList = @"DownloadsList";
-NSString *const MAPref_Deprecated_FolderListFont = @"FolderFont";
+NSString *const MAPref_Deprecated_FolderFont = @"FolderFont";
+NSString *const MAPref_Deprecated_FolderListFont = @"FolderListFont";
 
 NSInteger const MA_Default_BackTrackQueueSize = 20;
 NSInteger const MA_Default_RefreshThreads = 20;

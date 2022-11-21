@@ -20,9 +20,6 @@
 "A new plugin has been installed. It is now available from the menu and you can add it to the toolbar." = "Įdiegtas naujas įskiepis. Jį galima rasti meniu ir įsidėti į įrankių juostą.";
 
 /* No comment provided by engineer. */
-"An error occurred when this feed was last refreshed" = "Paskutinįkart atnaujinant šią prenumeratą įvyko klaida";
-
-/* No comment provided by engineer. */
 "AppleScript Error in '%@' script" = "AppleScript klaida skripte '%@'";
 
 /* No comment provided by engineer. */
@@ -153,9 +150,6 @@
 /* Notification title */
 "Download failed" = "Atsisiųsti nepavyko";
 
-/* Title of a menu item */
-"Edit…" = "Keisti…";
-
 /* Title of a button on an alert */
 "Empty" = "Tuščia";
 
@@ -225,14 +219,8 @@
 /* No comment provided by engineer. */
 "Folders" = "Aplankai";
 
-/* Title of a menu item */
-"Force Refresh Selected Subscriptions From Open Reader" = "Priverstinai atnaujinti pasirinktas prenumeratas iš Open Reader";
-
 /* No comment provided by engineer. */
 "Forcing Refresh subscriptions…" = "Priverstinai atnaujinamos prenumeratos…";
-
-/* Title of a menu item */
-"Get Info" = "Gauti informaciją";
 
 /* No comment provided by engineer. */
 "Go forward to the next page" = "Į kitą puslapį";
@@ -314,9 +302,6 @@
 
 /* Title of a button on an alert */
 "Locate…" = "Rasti…";
-
-/* Title of a menu item */
-"Mark All Articles as Read" = "Viską pažymėti kaip perskaityta";
 
 /* No comment provided by engineer. */
 "Mark All Read" = "Žymėti visus kaip skaitytus";
@@ -454,9 +439,6 @@
 /* No comment provided by engineer. */
 "Refresh completed" = "Prenumeratų atnaujinimas baigtas";
 
-/* Title of a menu item */
-"Refresh Selected Subscriptions" = "Atnaujinti pasirinktas prenumeratas";
-
 /* No comment provided by engineer. */
 "Refresh the current page" = "Atnaujinti šitą puslapį";
 
@@ -468,9 +450,6 @@
 
 /* Title of a popup menu item */
 "Remove From List" = "Pašalinti iš sąrašo";
-
-/* Title of a menu item */
-"Rename…" = "Pervadinti…";
 
 /* Title of a menu item */
 "Restore Article" = "Atstatyti straipsnius";

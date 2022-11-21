@@ -31,8 +31,6 @@
 	Folder * folder;
 	NSInteger nodeId;
 	BOOL canHaveChildren;
-	
-	NSProgressIndicator * progressIndicator;
 }
 
 // Accessor functions
@@ -54,9 +52,5 @@
 @property (nonatomic, readonly) NSUInteger countOfChildren;
 @property (nonatomic) BOOL canHaveChildren;
 -(NSComparisonResult)folderNameCompare:(TreeNode *)otherObject;
-
--(void)allocAndStartProgressIndicatorWithFrame:(NSRect)frame inView:(NSView *)controlView;
--(void)stopAndReleaseProgressIndicator;
-@property (nonatomic, readonly) NSProgressIndicator *progressIndicator;
 
 @end

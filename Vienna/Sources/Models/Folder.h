@@ -98,6 +98,9 @@ typedef NS_OPTIONS(NSUInteger, VNAFolderFlag) {
 @property (nonatomic, readonly) VNAFolderFlag nonPersistedFlags;
 @property (nonatomic, readonly) VNAFolderFlag flags;
 @property (nonatomic, copy) NSImage *image;
+/// Returns an image that can be archived with NSArchiver, specifically if it
+/// does not represent an SF Symbol image.
+@property (readonly, nonatomic) NSImage *archivableImage;
 @property (nonatomic, readonly) BOOL hasCachedImage;
 -(NSImage *)standardImage;
 @property (nonatomic) NSInteger childUnreadCount;

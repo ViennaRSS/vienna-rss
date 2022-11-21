@@ -32,9 +32,6 @@
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "無法在“%@”建立新的 Vienna 資料庫，原因可能是這個檔案夾位在遠端網路分享空間中，而 Vienna 無法管理遠端的資料庫。請在您的本機電腦上，選擇其他的檔案夾。";
 
 /* No comment provided by engineer. */
-"An error occurred when this feed was last refreshed" = "最後一次更新此訂閱頻道時，發生錯誤";
-
-/* No comment provided by engineer. */
 "AppleScript Error in '%@' script" = "在 %@ 腳本中發生 AppleScript 錯誤";
 
 /* No comment provided by engineer. */
@@ -177,9 +174,6 @@
 /* Notification title */
 "Download failed" = "下載失敗";
 
-/* Title of a menu item */
-"Edit…" = "編輯⋯";
-
 /* Title of a button on an alert */
 "Empty" = "清除";
 
@@ -255,14 +249,8 @@
 /* No comment provided by engineer. */
 "Folders" = "檔案夾";
 
-/* Title of a menu item */
-"Force Refresh Selected Subscriptions From Open Reader" = "從 Open Reader 中強制重新整理選擇的訂閱項目";
-
 /* No comment provided by engineer. */
 "Forcing Refresh subscriptions…" = "強制重新整理訂閱項目…";
-
-/* Title of a menu item */
-"Get Info" = "簡介";
 
 /* No comment provided by engineer. */
 "Go forward to the next page" = "前往下一頁";
@@ -347,9 +335,6 @@
 
 /* No comment provided by engineer. */
 "Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences. Also check your network access." = "請確認用以存取 Open Reqder 伺服器的帳號與密碼是否有正確地設在 Vienna 的偏好設定中。\\n亦請檢查您的網路可用性。";
-
-/* Title of a menu item */
-"Mark All Articles as Read" = "將所有文章標示為已閱讀";
 
 /* No comment provided by engineer. */
 "Mark All Read" = "所有標示為已閱讀";
@@ -493,9 +478,6 @@
 /* No comment provided by engineer. */
 "Refresh completed" = "重新整理已完成";
 
-/* Title of a menu item */
-"Refresh Selected Subscriptions" = "重新整理所選訂閱頻道";
-
 /* No comment provided by engineer. */
 "Refresh the current page" = "重新整理目前頁面";
 
@@ -507,9 +489,6 @@
 
 /* Title of a popup menu item */
 "Remove From List" = "從列表中移除";
-
-/* Title of a menu item */
-"Rename…" = "重新命名⋯";
 
 /* Title of a menu item */
 "Restore Article" = "回復文章";

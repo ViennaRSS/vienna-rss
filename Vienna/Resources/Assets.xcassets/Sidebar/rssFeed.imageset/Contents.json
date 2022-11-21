@@ -1,12 +1,12 @@
 {
   "images" : [
     {
-      "filename" : "rssFeedNew.png",
+      "filename" : "rssFeed.png",
       "idiom" : "mac",
       "scale" : "1x"
     },
     {
-      "filename" : "rssFeedNew@2x.png",
+      "filename" : "rssFeed@2x.png",
       "idiom" : "mac",
       "scale" : "2x"
     }

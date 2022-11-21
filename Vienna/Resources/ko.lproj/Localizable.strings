@@ -14,9 +14,6 @@
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "새로운 Vienna 데이터베이스를 \"%@\" 위치에 생성할 수 없습니다. 아마도 해당 폴더가 원격 네트워크 공유에 위치해 있을 것이며, 현재 버전의 Vienna 로는 원격 데이트베이스를 관리할 수 없습니다. 로컬 머신에 위치한 다른 폴더를 선택해 재시도하시기 바랍니다.";
 
 /* No comment provided by engineer. */
-"An error occurred when this feed was last refreshed" = "이전 갱신시 이 피드에서 오류가 발생했습니다.";
-
-/* No comment provided by engineer. */
 "Are you sure you want to delete all %d selected folders? This operation cannot be undone." = "정말로 선택된 %d 항목을 모두 삭제하시겠습니까? 이 명령은 취소할 수 없습니다.";
 
 /* No comment provided by engineer. */
@@ -108,9 +105,6 @@
 /* test for a string */
 "does not contain" = "다음을 포함하지 않음";
 
-/* Title of a menu item */
-"Edit…" = "편집…";
-
 /* Title of a button on an alert */
 "Empty" = "비우기";
 
@@ -152,9 +146,6 @@
 
 /* No comment provided by engineer. */
 "Folders" = "구독";
-
-/* Title of a menu item */
-"Get Info" = "정보 입수";
 
 /* No comment provided by engineer. */
 "Go forward to the next page" = "다음 페이지로 이동";
@@ -209,9 +200,6 @@
 
 /* Data field name visible in menu/article list */
 "Link" = "링크";
-
-/* Title of a menu item */
-"Mark All Articles as Read" = "모든 기사를 읽음으로 표시";
 
 /* No comment provided by engineer. */
 "Mark All Read" = "모두 읽음으로 표시";
@@ -325,9 +313,6 @@
 /* No comment provided by engineer. */
 "Refresh completed" = "갱신 완료";
 
-/* Title of a menu item */
-"Refresh Selected Subscriptions" = "선택된 구독 갱신";
-
 /* No comment provided by engineer. */
 "Refresh the current page" = "현재 페이지 갱신";
 
@@ -339,9 +324,6 @@
 
 /* Title of a popup menu item */
 "Remove From List" = "목록에서 제거";
-
-/* Title of a menu item */
-"Rename…" = "이름 변경…";
 
 /* Title of a menu item */
 "Restore Article" = "기사 복원";

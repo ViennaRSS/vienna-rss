@@ -27,7 +27,6 @@ extern NSString *const MAPref_ArticleListFont;
 extern NSString * MAPref_AutoSortFoldersTree;
 extern NSString * MAPref_CheckForUpdatedArticles;
 extern NSString * MAPref_ShowUnreadArticlesInBold;
-extern NSString *const MAPref_FolderListFont;
 extern NSString * MAPref_CachedFolderID;
 extern NSString * MAPref_DefaultDatabase;
 extern NSString *const MAPref_DownloadsFolderBookmark;
@@ -79,11 +78,14 @@ extern NSString * MAPref_UserAgentName;
 extern NSString *const MAPref_UseRelativeDates;
 extern NSString * const MAPref_ShowDetailsOnFeedCredentialsDialog;
 extern NSString * const MAPref_ShowEnclosureBar;
+extern NSString * const MAPref_FeedListSizeMode;
+extern NSString * const MAPref_ShowFeedsWithUnreadItemsInBold;
 
 // Deprecated defaults keys
 extern NSString *const MAPref_Deprecated_ArticleListFont;
 extern NSString *const MAPref_Deprecated_ArticleListSortOrders;
 extern NSString *const MAPref_Deprecated_DownloadItemList;
+extern NSString *const MAPref_Deprecated_FolderFont;
 extern NSString *const MAPref_Deprecated_FolderListFont;
 
 extern NSInteger const MA_Default_BackTrackQueueSize;

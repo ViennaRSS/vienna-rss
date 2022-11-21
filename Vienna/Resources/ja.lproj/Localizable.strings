@@ -14,9 +14,6 @@
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "フォルダがリモートネットワーク上にあるようなので、新規データベースを \"%@\" に作成できません。このバージョンの Vienna はリモートデータベースに対応していません。ローカルディスク上の他のフォルダを選択してください。";
 
 /* No comment provided by engineer. */
-"An error occurred when this feed was last refreshed" = "このフィードの前回更新時エラーが起こりました。";
-
-/* No comment provided by engineer. */
 "Are you sure you want to delete all %d selected folders? This operation cannot be undone." = "選択されている %d のフォルダをすべて削除してもよろしいですか？この操作を元に戻すことはできません。";
 
 /* No comment provided by engineer. */
@@ -108,9 +105,6 @@
 /* test for a string */
 "does not contain" = "が次を含まない：";
 
-/* Title of a menu item */
-"Edit…" = "編集…";
-
 /* Title of a button on an alert */
 "Empty" = "空にする";
 
@@ -152,9 +146,6 @@
 
 /* No comment provided by engineer. */
 "Folders" = "フォルダ";
-
-/* Title of a menu item */
-"Get Info" = "情報を見る";
 
 /* No comment provided by engineer. */
 "Go forward to the next page" = "次のページに進む";
@@ -209,9 +200,6 @@
 
 /* Data field name visible in menu/article list */
 "Link" = "リンク";
-
-/* Title of a menu item */
-"Mark All Articles as Read" = "すべての記事を既読にする";
 
 /* No comment provided by engineer. */
 "Mark All Read" = "すべてを既読にする";
@@ -322,9 +310,6 @@
 /* No comment provided by engineer. */
 "Refresh completed" = "更新が終了しました";
 
-/* Title of a menu item */
-"Refresh Selected Subscriptions" = "選択された購読を更新";
-
 /* No comment provided by engineer. */
 "Refresh the current page" = "現在のページを再読込";
 
@@ -333,9 +318,6 @@
 
 /* Title of a popup menu item */
 "Remove From List" = "リストから削除";
-
-/* Title of a menu item */
-"Rename…" = "名称変更…";
 
 /* Title of a menu item */
 "Restore Article" = "記事を復元";

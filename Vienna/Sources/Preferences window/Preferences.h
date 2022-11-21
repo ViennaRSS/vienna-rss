@@ -54,7 +54,6 @@ NS_ASSUME_NONNULL_BEGIN
 	CGFloat textSizeMultiplier;
 	NSString * defaultDatabase;
 	NSString * feedSourcesFolder;
-	NSFont * folderFont;
 	NSFont * articleFont;
 	NSArray * articleSortDescriptors;
 	SearchMethod * searchMethod;
@@ -134,10 +133,6 @@ extern NSString * const kMA_Notify_UseJavaScriptChange;
 @property (nonatomic, copy) NSString *displayStyle;
 -(void)setDisplayStyle:(NSString *)newStyle withNotification:(BOOL)flag;
 @property (nonatomic) CGFloat textSizeMultiplier;
-
-// Folder list font
-@property (nonatomic, copy) NSString *folderListFont;
-@property (nonatomic) NSInteger folderListFontSize;
 
 // Article list font
 @property (nonatomic, copy) NSString *articleListFont;

@@ -23,9 +23,6 @@
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "无法在 \"%@\" 创建新的 Vienna 数据库。可能是因为此文件夹处于远端共享网络上，当前版本的 Vienna 不支持远端共享网络上的数据库。请选择一个在您本地机器上的文件夹。";
 
 /* No comment provided by engineer. */
-"An error occurred when this feed was last refreshed" = "上次更新这个频道时发生了一个错误";
-
-/* No comment provided by engineer. */
 "AppleScript Error in '%@' script" = "苹果脚本在 '%@' 发生错误";
 
 /* No comment provided by engineer. */
@@ -162,9 +159,6 @@
 /* Notification title */
 "Download failed" = "下载失败";
 
-/* Title of a menu item */
-"Edit…" = "编辑…";
-
 /* Title of a button on an alert */
 "Empty" = "清空";
 
@@ -231,14 +225,8 @@
 /* No comment provided by engineer. */
 "Folders" = "文件夹";
 
-/* Title of a menu item */
-"Force Refresh Selected Subscriptions From Open Reader" = "从 Open Reader 中强制刷新选中的订阅项";
-
 /* No comment provided by engineer. */
 "Forcing Refresh subscriptions…" = "强制刷新订阅中...";
-
-/* Title of a menu item */
-"Get Info" = "获取信息";
 
 /* No comment provided by engineer. */
 "Go forward to the next page" = "去到下一个页面";
@@ -323,9 +311,6 @@
 
 /* No comment provided by engineer. */
 "Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences. Also check your network access." = "请确保登入 Open Reader 服务器的用户名和密码已在 Vienna 首选项中正确设置。\\n另请确保网络连通。";
-
-/* Title of a menu item */
-"Mark All Articles as Read" = "标记所有文章为已读";
 
 /* No comment provided by engineer. */
 "Mark All Read" = "标记所有文章为已读";
@@ -442,9 +427,6 @@
 /* No comment provided by engineer. */
 "Refresh completed" = "更新完成";
 
-/* Title of a menu item */
-"Refresh Selected Subscriptions" = "更新所选的频道";
-
 /* No comment provided by engineer. */
 "Refresh the current page" = "刷新当前页面";
 
@@ -453,9 +435,6 @@
 
 /* Title of a popup menu item */
 "Remove From List" = "从列表中移除";
-
-/* Title of a menu item */
-"Rename…" = "重命名…";
 
 /* Title of a menu item */
 "Restore Article" = "复原文章";
