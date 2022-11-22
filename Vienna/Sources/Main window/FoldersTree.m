@@ -820,7 +820,10 @@ static void *ObserverContext = &ObserverContext;
         }
 
 		[self.outlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:(NSUInteger)rowIndex] byExtendingSelection:NO];
-		[self.outlineView editColumn:[self.outlineView columnWithIdentifier:@"folderColumns"] row:rowIndex withEvent:nil select:YES];
+		NSInteger columnIndex = [self.outlineView columnWithIdentifier:@"folderColumns"];
+        VNAFeedListCellView * cellView = [self.outlineView viewAtColumn:columnIndex row:rowIndex makeIfNecessary:NO];
+        cellView.textField.editable = YES;
+		[self.outlineView editColumn:columnIndex row:rowIndex withEvent:nil select:YES];
 	}
 }
 
@@ -1535,6 +1538,7 @@ static void *ObserverContext = &ObserverContext;
     NSText *fieldEditor = obj.userInfo[@"NSFieldEditor"];
     NSString *newValue = [fieldEditor.string copy];
     NSTextField *textField = (NSTextField *)obj.object;
+    textField.editable = NO;
     NSInteger rowIndex = [self.outlineView rowForView:textField];
     TreeNode *node = [self.outlineView itemAtRow:rowIndex];
     Folder *folder = node.folder;
