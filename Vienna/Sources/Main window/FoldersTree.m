@@ -792,7 +792,7 @@ static void *ObserverContext = &ObserverContext;
 	if (node == self.rootNode)
 		[self.outlineView reloadData];
     else {
-        [self.outlineView reloadItem:node reloadChildren:YES];
+        [self.outlineView reloadItem:node reloadChildren:flag];
     }
 }
 
