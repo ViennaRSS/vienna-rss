@@ -92,9 +92,9 @@ extension CriteriaTree {
         case .none:
             type = .not
         case .all, .invalid:
-            type = .and
+            fallthrough
         @unknown default:
-            fatalError("Unknown condition in CriteriaTree \(self)")
+            type = .and
         }
 
         let subPredicates = self.criteriaTree.map { $0.predicate }

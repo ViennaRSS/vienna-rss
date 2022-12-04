@@ -33,7 +33,6 @@
 @property (weak) IBOutlet NSScrollView *predicateView;
 @property (weak) IBOutlet NSPredicateEditor *predicateEditor;
 
--(void)prepareFolderTemplate;
 -(void)initSearchSheet:(NSString *)folderName;
 -(void)displaySearchSheet:(NSWindow *)window;
 -(void)addDefaultCriteria;
@@ -114,31 +113,76 @@
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleTextDidChange:) name:NSControlTextDidChangeNotification object:smartFolderName];
 	}
 
-	// Initialise the folder control with a list of all folders
-	// in the database.
-    [self prepareFolderTemplate];
+    [self prepareTemplates];
 
-    [self prepareNotContainsTemplate];
-	
+
 	// Init the folder name field and disable the Save button if it is blank
 	smartFolderName.stringValue = folderName;
 	saveButton.enabled = !folderName.vna_isBlank;
 }
 
--(void)prepareFolderTemplate {
-    NSArray<NSExpression *> *folders = [self fillFolderValueField:VNAFolderTypeRoot atIndent:0];
+-(void)prepareTemplates {
 
-    NSPredicateEditorRowTemplate *folderTemplate = [[NSPredicateEditorRowTemplate alloc] initWithLeftExpressions:@[[NSExpression expressionForConstantValue:@"Folder"]] rightExpressions:folders modifier:NSDirectPredicateModifier operators:@[@(NSEqualToPredicateOperatorType), @(NSNotEqualToPredicateOperatorType)] options:0];
+    NSMutableArray<NSPredicateEditorRowTemplate *> *rowTemplates = [NSMutableArray array];
 
-    _predicateEditor.rowTemplates = [_predicateEditor.rowTemplates arrayByAddingObject:folderTemplate];
-}
+    NSArray *compoundTypes = @[
+        @(NSAndPredicateType),
+        @(NSOrPredicateType),
+        @(NSNotPredicateType)
+    ];
+    NSPredicateEditorRowTemplate *compoundTemplate = [[NSPredicateEditorRowTemplate alloc] initWithCompoundTypes:compoundTypes];
+    [rowTemplates addObject:compoundTemplate];
 
--(void)prepareNotContainsTemplate {
+    //not contains
     NSArray *doesNotContainLeftExpressions = @[
         [NSExpression expressionForConstantValue: MA_Field_Text],
         [NSExpression expressionForConstantValue: MA_Field_Subject],
         [NSExpression expressionForConstantValue: MA_Field_Author]];
-    _predicateEditor.rowTemplates = [_predicateEditor.rowTemplates arrayByAddingObject:[[VNANotContainsPredicateEditorRowTemplate alloc] initWithLeftExpressions:doesNotContainLeftExpressions]];
+    [rowTemplates addObject:[[VNANotContainsPredicateEditorRowTemplate alloc] initWithLeftExpressions:doesNotContainLeftExpressions]];
+
+    //folder is / is not
+    NSArray<NSExpression *> *folders = [self fillFolderValueField:VNAFolderTypeRoot atIndent:0];
+
+    NSPredicateEditorRowTemplate *folderTemplate = [[NSPredicateEditorRowTemplate alloc] initWithLeftExpressions:@[[NSExpression expressionForConstantValue:@"Folder"]] rightExpressions:folders modifier:NSDirectPredicateModifier operators:@[@(NSEqualToPredicateOperatorType), @(NSNotEqualToPredicateOperatorType)] options:0];
+
+    [rowTemplates addObject:folderTemplate];
+
+    //read / flagged / deleted = YES / NO
+    NSArray<NSExpression *> *booleanLeftExpressions = @[
+        [NSExpression expressionForConstantValue:@"Read"],
+        [NSExpression expressionForConstantValue:@"Flagged"],
+        [NSExpression expressionForConstantValue:@"Deleted"],
+        [NSExpression expressionForConstantValue:@"HasEnclosure"]
+    ];
+    NSArray<NSExpression *> *booleanRightExpressions = @[
+        [NSExpression expressionForConstantValue:@"Yes"],
+        [NSExpression expressionForConstantValue:@"No"]
+    ];
+    NSPredicateEditorRowTemplate *booleanTemplate = [[NSPredicateEditorRowTemplate alloc] initWithLeftExpressions:booleanLeftExpressions rightExpressions:booleanRightExpressions modifier:NSDirectPredicateModifier operators:@[@(NSEqualToPredicateOperatorType)] options:0];
+
+    [rowTemplates addObject:booleanTemplate];
+
+    //date = / > / >= / < / <= today / yesterday / last week
+    NSArray<NSExpression *> *dateRightExpressions = @[
+        [NSExpression expressionForConstantValue:@"today"],
+        [NSExpression expressionForConstantValue:@"yesterday"],
+        [NSExpression expressionForConstantValue:@"last week"]
+    ];
+    NSPredicateEditorRowTemplate *dateTemplate = [[NSPredicateEditorRowTemplate alloc] initWithLeftExpressions:@[[NSExpression expressionForConstantValue:@"Date"]] rightExpressions:dateRightExpressions modifier:NSDirectPredicateModifier operators:@[@(NSEqualToPredicateOperatorType), @(NSLessThanPredicateOperatorType), @(NSLessThanOrEqualToPredicateOperatorType), @(NSGreaterThanPredicateOperatorType), @(NSGreaterThanOrEqualToPredicateOperatorType)] options:0];
+
+    [rowTemplates addObject:dateTemplate];
+
+    //subject / author / text contains / = / != <text>
+    NSArray<NSExpression *> *textLeftExpressions = @[
+        [NSExpression expressionForConstantValue:@"Subject"],
+        [NSExpression expressionForConstantValue:@"Author"],
+        [NSExpression expressionForConstantValue:@"Text"]
+    ];
+    NSPredicateEditorRowTemplate *textTemplate = [[NSPredicateEditorRowTemplate alloc] initWithLeftExpressions:textLeftExpressions rightExpressionAttributeType:NSStringAttributeType modifier:NSDirectPredicateModifier operators:@[@(NSEqualToPredicateOperatorType), @(NSNotEqualToPredicateOperatorType),  @(NSContainsPredicateOperatorType)] options:0];
+
+    [rowTemplates addObject:textTemplate];
+
+    self.predicateEditor.rowTemplates = rowTemplates;
 }
 
 /* fillFolderValueField
