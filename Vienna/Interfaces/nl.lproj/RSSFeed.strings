@@ -23,7 +23,7 @@
 "112.title" = "Annuleer";
 
 /* Class = "NSTextFieldCell"; title = "Edit subscription"; ObjectID = "114"; */
-"114.title" = "Bewerk abonnement";
+"114.title" = "Wijzig abonnement";
 
 /* Class = "NSButtonCell"; title = "Subscribe in Open Reader"; ObjectID = "116"; */
 "116.title" = "Abonneer in Open Reader";

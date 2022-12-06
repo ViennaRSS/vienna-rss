@@ -7,7 +7,7 @@
 /* Appended to application name in Open With menu */
 "%@ (default)" = "%@ (預設)";
 
-/* No comment provided by engineer. */
+/* Title of the Get Info panel. The variable is the name of the feed. */
 "%@ Info" = "%@ 簡介";
 
 /* Progress in bytes, e.g. 1 KB of 1 MB */

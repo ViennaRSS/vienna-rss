@@ -7,8 +7,8 @@
 /* Appended to application name in Open With menu */
 "%@ (default)" = "%@ (Standard)";
 
-/* No comment provided by engineer. */
-"%@ Info" = "%@ Info";
+/* Title of the Get Info panel. The variable is the name of the feed. */
+"%@ Info" = "Infos zu: %@";
 
 /* Progress in bytes, e.g. 1 KB of 1 MB */
 "%@ of %@" = "%1$@ von %2$@";
@@ -29,19 +29,19 @@
 "A new plugin has been installed. It is now available from the menu and you can add it to the toolbar." = "Ein neues Plug-In wurde installiert. Du kannst es im Menü aufrufen und zur Werkzeugleiste hinzufügen.";
 
 /* No comment provided by engineer. */
-"A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Eine neue Vienna0Datenbank konnte in '%@' nicht erstellt werden, weil der Ordner möglicherweise auf einem Netzwerklaufwerk liegt. Diese Version von Vienna kann nicht mit derartigen Datenbanken genutzt werden. Bitte wähle einen anderen Ordner auf deinem Mac aus.";
+"A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Eine neue Vienna-Datenbank konnte in „%@“ nicht erstellt werden, weil der Ordner möglicherweise auf einem Netzwerklaufwerk liegt. Diese Version von Vienna kann nicht mit derartigen Datenbanken genutzt werden. Bitte wähle einen anderen Ordner auf deinem Mac aus.";
 
 /* No comment provided by engineer. */
-"AppleScript Error in '%@' script" = "AppleScript-Fehler in Skript '%@'";
+"AppleScript Error in '%@' script" = "AppleScript-Fehler im Skript „%@“";
 
 /* No comment provided by engineer. */
 "Are you sure you want to delete all %d selected folders? This operation cannot be undone." = "Möchtest du alle %d ausgewählten Ordner wirklich löschen? Dieser Befehl kann nicht rückgängig gemacht werden.";
 
 /* No comment provided by engineer. */
-"Are you sure you want to delete group folder \"%@\" and all sub folders? This operation cannot be undone." = "Möchtest du den Ordner '%@' mit allen Unterordnern wirklich löschen? Dieser Befehl kann nicht rückgängig gemacht werden.";
+"Are you sure you want to delete group folder \"%@\" and all sub folders? This operation cannot be undone." = "Möchtest du den Ordner „%@“ mit allen Unterordnern wirklich löschen? Dieser Befehl kann nicht rückgängig gemacht werden.";
 
 /* No comment provided by engineer. */
-"Are you sure you want to delete smart folder \"%@\"? This will not delete the actual articles matched by the search." = "Möchtest du den intelligenten Ordner '%@' wirklich löschen? Dieser Befehl wird nicht die aktuell in dem Ordner gezeigten Artikel löschen.";
+"Are you sure you want to delete smart folder \"%@\"? This will not delete the actual articles matched by the search." = "Möchtest du den intelligenten Ordner „%@“ wirklich löschen? Dieser Befehl wird nicht die aktuell in dem Ordner gezeigten Artikel löschen.";
 
 /* No comment provided by engineer. */
 "Are you sure you want to delete the messages in the Trash folder permanently?" = "Möchtest du die Artikel im Papierkorb wirklich dauerhaft löschen?";
@@ -50,7 +50,7 @@
 "Are you sure you want to permanently delete the selected articles?" = "Möchtest du die ausgewählten Artikel wirklich dauerhaft löschen?";
 
 /* No comment provided by engineer. */
-"Are you sure you want to unsubscribe from \"%@\"? This operation will delete all cached articles." = "Möchtest du das Abonnement von '%@' wirklich aufheben? Dieser Befehl wird alle zwischengespeicherten Artikel löschen.";
+"Are you sure you want to unsubscribe from \"%@\"? This operation will delete all cached articles." = "Möchtest du das Abonnement von „%@“ wirklich aufheben? Dieser Befehl wird alle zwischengespeicherten Artikel löschen.";
 
 /* No comment provided by engineer. */
 "Articles" = "Artikel";
@@ -142,7 +142,7 @@
 "Deleted" = "Gelöscht";
 
 /* No comment provided by engineer. */
-"Deleting folder \"%@\"…" = "Lösche Ordner '%@' …";
+"Deleting folder \"%@\"…" = "Ordner „%@“ löschen …";
 
 /* No comment provided by engineer. */
 "Descending" = "Absteigend";
@@ -193,7 +193,7 @@
 "Error" = "Fehler";
 
 /* No comment provided by engineer. */
-"Error loading script '%@'" = "Fehler beim Laden des Skripts: %@";
+"Error loading script '%@'" = "Fehler beim Laden des Skripts „%@“";
 
 /* No comment provided by engineer. */
 "Error parsing XML data in feed" = "Fehler beim Parsen der XML-Daten des Feeds";
@@ -328,7 +328,7 @@
 "Link" = "Link";
 
 /* No comment provided by engineer. */
-"Loading" = "Lade …";
+"Loading" = "Laden …";
 
 /* Title of a button on an alert */
 "Locate…" = "Auswählen …";
@@ -568,7 +568,7 @@
 "Sorry but Vienna was unable to open the database" = "Vienna war es nicht möglich die Datenbank zu öffnen";
 
 /* No comment provided by engineer. */
-"Sorry, but Vienna was unable to create the database folder" = "Beim Versuch den Datenbankordner zu erstellen ist ein Fehler aufgetreten.";
+"Sorry, but Vienna was unable to create the database folder" = "Beim Versuch den Datenbankordner zu erstellen ist ein Fehler aufgetreten";
 
 /* Data field name visible in menu/article list/smart folder definition */
 "Subject" = "Betreff";
@@ -583,7 +583,7 @@
 "Text" = "Text";
 
 /* No comment provided by engineer. */
-"The \"%@\" folder cannot be created." = "Der Ordner \"%@\" konnte nicht erstellt werden.";
+"The \"%@\" folder cannot be created." = "Der Ordner „%@“ konnte nicht erstellt werden.";
 
 /* No comment provided by engineer. */
 "The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna." = "Deine existierende Datenbankdatei (%@) wird von dieser Vienna-Version nicht unterstützt. Lösche oder benennen diese Datei um und starte Vienna erneut.";
@@ -601,13 +601,13 @@
 "The specified export output file could not be created. Check that it is not locked and no other application is using it." = "Die angegebene Exportdatei konnte nicht erstellt werden. Überprüfe ob die Datei schreibgeschützt ist oder von einer anderen Anwendung benutzt wird.";
 
 /* No comment provided by engineer. */
-"The style \"%@\" has been installed to your Styles folder and added to the Style menu." = "Der Stil '%@' wurde im Stilordner installiert und zum Stilmenü hinzugefügt.";
+"The style \"%@\" has been installed to your Styles folder and added to the Style menu." = "Der Stil „%@“ wurde im Stilordner installiert und zum Stilmenü hinzugefügt.";
 
 /* Title of an alert */
-"The style %@ appears to be missing or corrupted" = "Der Stil %@ scheint defekt zu sein";
+"The style %@ appears to be missing or corrupted" = "Der Stil „%@“ scheint defekt zu sein";
 
 /* No comment provided by engineer. */
-"The subscription for \"%@\" requires a user name and password for access." = "Der Zugriff auf den Feed %@ benötigt das Einloggen am Server.";
+"The subscription for \"%@\" requires a user name and password for access." = "Der Zugriff auf den Feed „%@“ benötigt das Einloggen am Server.";
 
 /* Message text of an alert */
 "There are deleted articles in the trash. Would you like to empty the trash before quitting?" = "Es befinden sich gelöschte Artikel im Papierkorb. Möchtest du den Papierkorb vor dem Beenden entleeren?";
@@ -640,7 +640,7 @@
 "Unsubscribe from Feed" = "Abonnement entfernen";
 
 /* No comment provided by engineer. */
-"Unsubscribing from an Open Reader RSS feed will also remove your locally cached articles." = "Lösche den Open Reader RSS-Feed";
+"Unsubscribing from an Open Reader RSS feed will also remove your locally cached articles." = "Lokal zwischengespeicherte Artikel dieses Open-Reader-Feeds werden gelöscht, wenn du den Feed löschst.";
 
 /* Title of a button on an alert */
 "Upgrade Database" = "Datenbank aktualisieren";
@@ -649,13 +649,13 @@
 "URL" = "URL";
 
 /* No comment provided by engineer. */
-"Vienna cannot open the file \"%@\" because it moved since you downloaded it." = "Vienna konnte die Datei \"%@\" nicht öffnen, da sie seit dem Download verschoben wurde.";
+"Vienna cannot open the file \"%@\" because it moved since you downloaded it." = "Vienna konnte die Datei „%@“ nicht öffnen, da sie seit dem Download verschoben wurde.";
 
 /* No comment provided by engineer. */
 "Vienna cannot open the file." = "Vienna konnte die Datei nicht öffnen.";
 
 /* No comment provided by engineer. */
-"Vienna cannot show the file \"%@\" because it moved since you downloaded it." = "Vienna konnte die Datei \"%@\" nicht im Finder anzeigen, da sie seit dem Download verschoben wurde.";
+"Vienna cannot show the file \"%@\" because it moved since you downloaded it." = "Vienna konnte die Datei „%@“ nicht im Finder anzeigen, da sie seit dem Download verschoben wurde.";
 
 /* No comment provided by engineer. */
 "Vienna cannot show the file." = "Vienna konnte die Datei nicht im Finder anzeigen.";
@@ -667,7 +667,7 @@
 "Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconvenience." = "Vienna muss seine Datenbank auf den neuesten Stand bringen. Dieser Vorgang kann eine Weile dauern. Wir entschuldigen uns für die Wartezeit.";
 
 /* No comment provided by engineer. */
-"Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified." = "Beim Versuch den Ordner '%@' zu erstellen ist ein Fehler aufgetreten. Bitte überprüfe die Dateizugriffsrechte des angegebenen Pfades.";
+"Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified." = "Beim Versuch den Ordner „%@“ zu erstellen ist ein Fehler aufgetreten. Bitte überprüfe die Dateizugriffsrechte des angegebenen Pfades.";
 
 /* No comment provided by engineer. */
 "Yes" = "Ja";

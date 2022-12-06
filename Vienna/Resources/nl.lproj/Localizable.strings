@@ -7,8 +7,8 @@
 /* Appended to application name in Open With menu */
 "%@ (default)" = "%@ (standaard)";
 
-/* No comment provided by engineer. */
-"%@ Info" = "%@ Info";
+/* Title of the Get Info panel. The variable is the name of the feed. */
+"%@ Info" = "Info: %@";
 
 /* Progress in bytes, e.g. 1 KB of 1 MB */
 "%@ of %@" = "%1$@ van %2$@";
@@ -38,10 +38,10 @@
 "Are you sure you want to delete all %d selected folders? This operation cannot be undone." = "Weet je zeker dat je deze %d groepen wilt verwijderen? Je kunt dit niet ongedaan maken.";
 
 /* No comment provided by engineer. */
-"Are you sure you want to delete group folder \"%@\" and all sub folders? This operation cannot be undone." = "Weet je zeker dat je de groep \"%@\" en alle subgroepen wilt verwijderen? Je kunt dit niet ongedaan maken.";
+"Are you sure you want to delete group folder \"%@\" and all sub folders? This operation cannot be undone." = "Weet je zeker dat je de groep '%@' en alle subgroepen wilt verwijderen? Je kunt dit niet ongedaan maken.";
 
 /* No comment provided by engineer. */
-"Are you sure you want to delete smart folder \"%@\"? This will not delete the actual articles matched by the search." = "Weet je zeker dat je de slimme map \"%@\" wilt verwijderen? De originele artikelen worden niet verwijderd.";
+"Are you sure you want to delete smart folder \"%@\"? This will not delete the actual articles matched by the search." = "Weet je zeker dat je de slimme map '%@' wilt verwijderen? De originele artikelen worden niet verwijderd.";
 
 /* No comment provided by engineer. */
 "Are you sure you want to delete the messages in the Trash folder permanently?" = "Weet je zeker dat je de artikelen in de prullenmand definitief wilt verwijderen?";
@@ -50,7 +50,7 @@
 "Are you sure you want to permanently delete the selected articles?" = "Weet je zeker dat je de geselecteerde berichten wilt verwijderen?";
 
 /* No comment provided by engineer. */
-"Are you sure you want to unsubscribe from \"%@\"? This operation will delete all cached articles." = "Weet je zeker dat je het abonnement \"%@\" wilt opzeggen? Alle opgeslagen artikelen worden verwijderd.";
+"Are you sure you want to unsubscribe from \"%@\"? This operation will delete all cached articles." = "Weet je zeker dat je het abonnement '%@' wilt opzeggen? Alle opgeslagen artikelen worden verwijderd.";
 
 /* No comment provided by engineer. */
 "Articles" = "Artikelen";
@@ -84,7 +84,7 @@
 "Cannot rename folder" = "Kan de mapnaam niet wijzigen";
 
 /* No comment provided by engineer. */
-"Clear Recent Searches" = "Wis zoekgeschiedenis";
+"Clear Recent Searches" = "Wis recente zoekacties";
 
 /* No comment provided by engineer. */
 "Click the Open button to open this file." = "Klik de Open knop om dit bestand te openen.";
@@ -115,19 +115,19 @@
 
 /* Title of a button on an alert
    Title of a menu item */
-"Delete" = "Wis";
+"Delete" = "Verwijder";
 
 /* Title of a menu item */
-"Delete Article" = "Wis artikel";
+"Delete Article" = "Verwijder artikel";
 
 /* No comment provided by engineer. */
-"Delete group folder" = "Wis groep";
+"Delete group folder" = "Verwijder groep";
 
 /* No comment provided by engineer. */
 "Delete multiple folders" = "Verwijder meerdere groepen";
 
 /* No comment provided by engineer. */
-"Delete Open Reader RSS feed" = "Wis Open Reader RSS feed";
+"Delete Open Reader RSS feed" = "Verwijder RSS-feed van Open Reader";
 
 /* No comment provided by engineer. */
 "Delete smart folder" = "Verwijder slimme map";
@@ -136,13 +136,13 @@
 "Delete subscription" = "Zeg abonnement op";
 
 /* Title of a menu item */
-"Delete…" = "Wis…";
+"Delete…" = "Verwijder…";
 
 /* Data field name visible in smart folder definition */
 "Deleted" = "Verwijderd";
 
 /* No comment provided by engineer. */
-"Deleting folder \"%@\"…" = "Groep \"%@\" verwijderen…";
+"Deleting folder \"%@\"…" = "Groep '%@' verwijderen…";
 
 /* No comment provided by engineer. */
 "Descending" = "Aflopend";
@@ -214,7 +214,7 @@
 "External Browser" = "Externe browser";
 
 /* No comment provided by engineer. */
-"Feed URL updated to %@" = "De URL van deze feed is veranderd in %@";
+"Feed URL updated to %@" = "De URL van deze feed is gewijzigd in %@";
 
 /* No comment provided by engineer. */
 "Fetching Open Reader Subscriptions…" = "Open Reader-abonnementen ophalen…";
@@ -610,7 +610,7 @@
 "The subscription for \"%@\" requires a user name and password for access." = "Voor toegang tot het abonnement op \"%@\" heb je een gebruikersnaam en wachtwoord nodig.";
 
 /* Message text of an alert */
-"There are deleted articles in the trash. Would you like to empty the trash before quitting?" = "Er zijn gewiste artikelen in de prullenmand. Wil je de prullenmand nu legen?";
+"There are deleted articles in the trash. Would you like to empty the trash before quitting?" = "Er zijn verwijderde artikelen in de prullenmand. Wil je de prullenmand nu legen?";
 
 /* No comment provided by engineer. */
 "This article contains an enclosed file." = "Dit artikel bevat een bijlage.";

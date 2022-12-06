@@ -37,6 +37,9 @@
 /* Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "676-5a-TdF"; */
 "676-5a-TdF.title" = "Vai alla Pagina Iniziale dell'Iscrizione";
 
+/* Class = "NSMenuItem"; title = "Unread or Flagged"; ObjectID = "771-UJ-rsF"; */
+"771-UJ-rsF.title" = "Non letto o contrassegnato";
+
 /* Class = "NSSearchField"; ibShadowedToolTip = "Filter displayed articles by matching text"; ObjectID = "1304"; */
 "1304.ibShadowedToolTip" = "Filtra gli articoli visualizzati per corrispondenza nel testo";
 
@@ -94,6 +97,9 @@
 /* Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "Hs0-hu-A2g"; */
 "Hs0-hu-A2g.title" = "Aggiorna Iscrizioni Selezionate";
 
+/* Class = "NSMenuItem"; title = "Force Refresh Selected Subscriptions From Open Reader"; ObjectID = "iqm-sr-F8U"; */
+"iqm-sr-F8U.title" = "Forza l'aggiornamento degli abbonamenti selezionati da Open Reader";
+
 /* Class = "NSMenuItem"; title = "All Articles"; ObjectID = "JT2-Q7-gRj"; */
 "JT2-Q7-gRj.title" = "Tutti gli Articoli";
 
@@ -105,6 +111,9 @@
 
 /* Class = "NSMenuItem"; title = "More Styles…"; ObjectID = "MaO-r1-tcm"; */
 "MaO-r1-tcm.title" = "Altri Stili…";
+
+/* Class = "NSMenuItem"; title = "Unread or Flagged"; ObjectID = "mbZ-oU-TDn"; */
+"mbZ-oU-TDn.title" = "Non letto o contrassegnato";
 
 /* Class = "NSMenuItem"; title = "Get Info"; ObjectID = "MMp-XG-ASM"; */
 "MMp-XG-ASM.title" = "Ottieni Info";
@@ -150,6 +159,9 @@
 
 /* Class = "NSToolbarItem"; toolTip = "Additional actions for the selected folder"; ObjectID = "TSQ-UW-4gU"; */
 "TSQ-UW-4gU.toolTip" = "Operazioni aggiuntive per la cartella selezionata";
+
+/* Class = "NSMenuItem"; title = "Unread or Flagged"; ObjectID = "ty7-ph-peE"; */
+"ty7-ph-peE.title" = "Non letto o contrassegnato";
 
 /* Class = "NSMenuItem"; title = "Edit…"; ObjectID = "vOQ-xo-w8E"; */
 "vOQ-xo-w8E.title" = "Modifica…";

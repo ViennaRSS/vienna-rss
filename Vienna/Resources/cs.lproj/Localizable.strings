@@ -4,7 +4,7 @@
 /* No comment provided by engineer. */
 "(Untitled Feed)" = "(zdroj beze jména)";
 
-/* No comment provided by engineer. */
+/* Title of the Get Info panel. The variable is the name of the feed. */
 "%@ Info" = "%@ - informace";
 
 /* Progress in bytes, e.g. 1 KB of 1 MB */

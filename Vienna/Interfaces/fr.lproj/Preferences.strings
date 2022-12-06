@@ -19,6 +19,9 @@
 /* Class = "NSMenuItem"; title = "Manually"; ObjectID = "7Za-ay-jlt"; */
 "7Za-ay-jlt.title" = "Manuellement";
 
+/* Class = "NSButtonCell"; title = "Display feeds with unread articles with bold font"; ObjectID = "86e-38-zCh"; */
+"86e-38-zCh.title" = "Afficher les flux avec les articles non lus en caractères gras";
+
 /* Class = "NSTextFieldCell"; title = "Mark current article read:"; ObjectID = "adB-qE-xKg"; */
 "adB-qE-xKg.title" = "Marquer l'article courant comme lu :";
 
@@ -151,6 +154,9 @@
 /* Class = "NSMenuItem"; title = "After two days"; ObjectID = "sJE-bd-4mK"; */
 "sJE-bd-4mK.title" = "Après deux jours";
 
+/* Class = "NSTextFieldCell"; title = "Feed list font size:"; ObjectID = "Sxj-Uk-jhk"; */
+"Sxj-Uk-jhk.title" = "Taille de police de la liste des flux :";
+
 /* Class = "NSViewController"; title = "General"; ObjectID = "T2z-OK-VtO"; */
 "T2z-OK-VtO.title" = "Général";
 
@@ -165,6 +171,9 @@
 
 /* Class = "NSButton"; ibShadowedToolTip = "Visit the website"; ObjectID = "V12-Ua-skO"; */
 "V12-Ua-skO.ibShadowedToolTip" = "Visiter le site web";
+
+/* Class = "NSButtonCell"; title = "Display unread articles with bold font"; ObjectID = "VQH-xk-s5g"; */
+"VQH-xk-s5g.title" = "Afficher les articles non lus en caractères gras";
 
 /* Class = "NSViewController"; title = "Updates"; ObjectID = "wyk-W1-xMh"; */
 "wyk-W1-xMh.title" = "Mises à jour";

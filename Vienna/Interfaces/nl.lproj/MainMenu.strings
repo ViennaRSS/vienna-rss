@@ -101,7 +101,7 @@
 "163.title" = "Wijzig";
 
 /* Class = "NSMenuItem"; title = "Delete"; ObjectID = "164"; */
-"164.title" = "Wis";
+"164.title" = "Verwijder";
 
 /* Class = "NSMenuItem"; title = "Find Next"; ObjectID = "167"; */
 "167.title" = "Zoek volgende";
@@ -287,13 +287,13 @@
 "1178.title" = "Map";
 
 /* Class = "NSMenuItem"; title = "Edit…"; ObjectID = "1180"; */
-"1180.title" = "Bewerk…";
+"1180.title" = "Wijzig…";
 
 /* Class = "NSMenuItem"; title = "Rename…"; ObjectID = "1181"; */
 "1181.title" = "Wijzig naam…";
 
 /* Class = "NSMenuItem"; title = "Delete…"; ObjectID = "1184"; */
-"1184.title" = "Wis…";
+"1184.title" = "Verwijder…";
 
 /* Class = "NSMenuItem"; title = "Skip Folder"; ObjectID = "1186"; */
 "1186.title" = "Sla map over";
@@ -311,7 +311,7 @@
 "1195.title" = "Markeer alle abonnementen als gelezen";
 
 /* Class = "NSMenuItem"; title = "Delete Article"; ObjectID = "1198"; */
-"1198.title" = "Wis artikel";
+"1198.title" = "Verwijder artikel";
 
 /* Class = "NSMenuItem"; title = "Open New Tab"; ObjectID = "1214"; */
 "1214.title" = "Open nieuwe tab";
