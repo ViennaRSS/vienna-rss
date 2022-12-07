@@ -116,13 +116,12 @@ extension Criteria {
     }
 
     convenience init?(predicate: NSPredicate, notContains: Bool) {
-        self.init()
         guard let comparison = predicate as? NSComparisonPredicate else {
             return nil
         }
 
-        self.field = comparison.leftExpression.constantValue as? String ?? comparison.leftExpression.keyPath
-        self.value = comparison.rightExpression.constantValue as? String ?? comparison.rightExpression.keyPath
+        let field = comparison.leftExpression.constantValue as? String ?? comparison.leftExpression.keyPath
+        let value = comparison.rightExpression.constantValue as? String ?? comparison.rightExpression.keyPath
 
         let criteriaOperator: Criteria.Operator
         switch field {
@@ -175,7 +174,7 @@ extension Criteria {
         }
         //TODO implement all available / valid types
 
-        self.operator = criteriaOperator
+        self.init(field: field, operatorType: criteriaOperator, value: value)
     }
 
     var predicate: NSPredicate {
@@ -188,7 +187,7 @@ extension Criteria {
         let right = NSExpression(forConstantValue: self.value)
 
         let type: NSComparisonPredicate.Operator
-        switch self.operator {
+        switch self.operatorType {
         case .equalTo:
             type = .equalTo
         case .notEqualTo:
@@ -222,7 +221,7 @@ extension Criteria {
         }
 
         let comparisonPredicate: NSComparisonPredicate
-        if self.operator == .notEqualTo && (self.value == "No" || self.value == "Yes") {
+        if self.operatorType == .notEqualTo && (self.value == "No" || self.value == "Yes") {
             //use canonical "is yes / is no" representation instead of allowing ambiguous "is not yes - is no / is not no - is yes"
             let invertedRight = NSExpression(forConstantValue: self.value == "No" ? "Yes" : "No")
             comparisonPredicate = NSComparisonPredicate(leftExpression: left, rightExpression: invertedRight, modifier: .direct, type: .equalTo)
@@ -230,7 +229,7 @@ extension Criteria {
             comparisonPredicate = NSComparisonPredicate(leftExpression: left, rightExpression: right, modifier: .direct, type: type)
         }
 
-        if self.operator != .containsNot {
+        if self.operatorType != .containsNot {
             return comparisonPredicate
         } else {
             //representation for "not contains" in predicate differs because "not contains" is no predicate operator

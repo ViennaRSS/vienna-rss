@@ -55,19 +55,23 @@ typedef NS_ENUM(NSUInteger, VNACriteriaCondition) {
 
 @end
 
-@interface Criteria: NSObject <CriteriaElement> {
-	NSString * field;
-	NSString * value;
-	VNACriteriaOperator operator;
-}
+NS_ASSUME_NONNULL_BEGIN
 
-// Public functions
--(instancetype _Nullable)initWithField:(NSString *_Nonnull)newField withOperator:(VNACriteriaOperator)newOperator withValue:(NSString *_Nonnull)newValue NS_DESIGNATED_INITIALIZER;
-+(NSArray *_Nonnull)arrayOfOperators;
-@property (nonatomic, copy) NSString *_Nonnull field;
-@property (nonatomic, copy) NSString *_Nonnull value;
-@property (nonatomic) VNACriteriaOperator operator;
+@interface Criteria: NSObject <CriteriaElement>
+
+- (instancetype)initWithField:(NSString *)field
+                 operatorType:(VNACriteriaOperator)operatorType
+                        value:(NSString *)value NS_DESIGNATED_INITIALIZER;
+
+- (instancetype)init NS_UNAVAILABLE;
+
+@property (copy, nonatomic) NSString *field;
+@property (nonatomic) VNACriteriaOperator operatorType;
+@property (copy, nonatomic) NSString *value;
+
 @end
+
+NS_ASSUME_NONNULL_END
 
 @interface CriteriaTree: NSObject <CriteriaElement> {
 	VNACriteriaCondition condition;

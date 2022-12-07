@@ -27,103 +27,37 @@
 @implementation Criteria
 #pragma clang diagnostic pop
 
-/* init
- * Initialise an empty Criteria.
- */
--(instancetype)init
+// MARK: Initialization
+
+- (instancetype)initWithField:(NSString *)field
+                 operatorType:(VNACriteriaOperator)operatorType
+                        value:(NSString *)value
 {
-	return [self initWithField:@"" withOperator:0 withValue:@""];
+    self = [super init];
+    if (self) {
+        _field = [field copy];
+        _value = [value copy];
+        // Use the setter here for input validation.
+        self.operatorType = operatorType;
+    }
+    return self;
 }
 
-/* initWithField
- * Initalises a new Criteria with the specified values.
- */
--(instancetype)initWithField:(NSString *)newField withOperator:(VNACriteriaOperator)newOperator withValue:(NSString *)newValue
-{
-	if ((self = [super init]) != nil)
-	{
-		self.field = newField;
-		self.operator = newOperator;
-		self.value = newValue;
-	}
-	return self;
-}
+// MARK: Accessors
 
-/* arrayOfOperators
- * Returns an array of NSNumbers that represent all supported operators.
- */
-+(NSArray *)arrayOfOperators
+- (void)setOperatorType:(VNACriteriaOperator)operatorType
 {
-	return @[
-			 @(VNACriteriaOperatorEqualTo),
-			 @(VNACriteriaOperatorNotEqualTo),
-			 @(VNACriteriaOperatorAfter),
-			 @(VNACriteriaOperatorBefore),
-			 @(VNACriteriaOperatorOnOrAfter),
-			 @(VNACriteriaOperatorOnOrBefore),
-			 @(VNACriteriaOperatorContains),
-			 @(VNACriteriaOperatorContainsNot),
-			 @(VNACriteriaOperatorLessThan),
-			 @(VNACriteriaOperatorLessThanOrEqualTo),
-			 @(VNACriteriaOperatorGreaterThan),
-			 @(VNACriteriaOperatorGreaterThanOrEqualTo),
-			 @(VNACriteriaOperatorUnder),
-			 @(VNACriteriaOperatorNotUnder)
-			 ];
-}
-
-/* setField
- * Sets the field element of a criteria.
- */
--(void)setField:(NSString *)newField
-{
-	field = [newField copy];
-}
-
-/* setOperator
- * Sets the operator element of a criteria.
- */
--(void)setOperator:(VNACriteriaOperator)newOperator
-{
-	// Convert deprecated under/not-under operators
-	// to is/is-not.
-	if (newOperator == VNACriteriaOperatorUnder)
-		newOperator = VNACriteriaOperatorEqualTo;
-	if (newOperator == VNACriteriaOperatorNotUnder)
-		newOperator = VNACriteriaOperatorNotEqualTo;
-	operator = newOperator;
-}
-
-/* setValue
- * Sets the value element of a criteria.
- */
--(void)setValue:(NSString *)newValue
-{
-	value = [newValue copy];
-}
-
-/* field
- * Returns the field element of a criteria.
- */
--(NSString *)field
-{
-	return field;
-}
-
-/* operator
- * Returns the operator element of a criteria
- */
--(VNACriteriaOperator)operator
-{
-	return operator;
-}
-
-/* value
- * Returns the value element of a criteria.
- */
--(NSString *)value
-{
-	return value;
+    // Convert deprecated under/not-under operators to is/is-not.
+    switch (operatorType) {
+    case VNACriteriaOperatorUnder:
+        _operatorType = VNACriteriaOperatorEqualTo;
+        break;
+    case VNACriteriaOperatorNotUnder:
+        _operatorType = VNACriteriaOperatorNotEqualTo;
+        break;
+    default:
+        _operatorType = operatorType;
+    }
 }
 
 @end
@@ -210,10 +144,9 @@ static NSString *const CRITERIA_OPERATOR_TAG = @"operator";
             NSString *operator = [criteriaElementXml elementsForName:CRITERIA_OPERATOR_TAG].firstObject.stringValue;
             NSString *value = [criteriaElementXml elementsForName:CRITERIA_VALUE_TAG].firstObject.stringValue;
 
-            Criteria *newCriteria = [[Criteria alloc]
-                                     initWithField:fieldname
-                                     withOperator:operator.integerValue
-                                     withValue:value];
+            Criteria *newCriteria = [[Criteria alloc] initWithField:fieldname
+                                                       operatorType:operator.integerValue
+                                                              value:value];
             [self addCriteria:newCriteria];
         } else {
             continue; //TODO maybe log something or throw error
@@ -307,7 +240,7 @@ static NSString *const CRITERIA_OPERATOR_TAG = @"operator";
             NSXMLElement *operatorElement = [[NSXMLElement alloc]
                                              initWithName:CRITERIA_OPERATOR_TAG
                                              stringValue:[NSString stringWithFormat:
-                                                          @"%lu", (unsigned long)criteria.operator]];
+                                                          @"%lu", (unsigned long)criteria.operatorType]];
             NSXMLElement *valueElement = [[NSXMLElement alloc]
                                           initWithName:CRITERIA_VALUE_TAG
                                           stringValue:criteria.value];

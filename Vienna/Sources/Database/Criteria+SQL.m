@@ -35,7 +35,7 @@
     NSString * operatorString = nil;
     NSString * valueString = nil;
 
-    switch (criteria.operator) {
+    switch (criteria.operatorType) {
         case VNACriteriaOperatorEqualTo:
             if (field.type == VNAFieldTypeString) {
                 operatorString = @"='%@'"; break;
@@ -89,7 +89,7 @@
             break;
         case VNAFieldTypeFolder: {
             Folder * folder = [database folderFromName:criteria.value];
-            NSString *scopeString = [database sqlScopeForFolder:folder criteriaOperator:criteria.operator];
+            NSString *scopeString = [database sqlScopeForFolder:folder criteriaOperator:criteria.operatorType];
             [sqlString appendString:scopeString];
             break;
         }
@@ -115,7 +115,7 @@
                 calendarUnit = NSCalendarUnitWeekOfYear;
             }
 
-            if (criteria.operator == VNACriteriaOperatorEqualTo) {
+            if (criteria.operatorType == VNACriteriaOperatorEqualTo) {
                 NSDate *endDate = [calendar dateByAddingUnit:calendarUnit
                                                        value:1
                                                       toDate:startDate
@@ -124,7 +124,7 @@
                 [sqlString appendString:dateIs];
             }
             else {
-                if ((criteria.operator == VNACriteriaOperatorAfter) || (criteria.operator == VNACriteriaOperatorOnOrBefore)) {
+                if ((criteria.operatorType == VNACriteriaOperatorAfter) || (criteria.operatorType == VNACriteriaOperatorOnOrBefore)) {
                     startDate = [calendar dateByAddingUnit:NSCalendarUnitDay
                                                      value:1
                                                     toDate:startDate
@@ -145,7 +145,7 @@
                 //
                 Field * titleField = [database fieldByName:MA_Field_Subject];
                 NSString * value = [NSString stringWithFormat:operatorString, criteria.value];
-                NSString *op = criteria.operator == VNACriteriaOperatorNotEqualTo || criteria.operator == VNACriteriaOperatorContainsNot ? @"AND" : @"OR";
+                NSString *op = criteria.operatorType == VNACriteriaOperatorNotEqualTo || criteria.operatorType == VNACriteriaOperatorContainsNot ? @"AND" : @"OR";
                 [sqlString appendFormat:@"(%1$@%2$@ %3$@ %4$@%2$@)", field.sqlField, value, op, titleField.sqlField];
                 break;
             }

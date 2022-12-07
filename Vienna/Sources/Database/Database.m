@@ -211,15 +211,15 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	}
     
     // Create a criteria to find all marked articles
-    Criteria * markedCriteria = [[Criteria alloc] initWithField:MA_Field_Flagged withOperator:VNACriteriaOperatorEqualTo withValue:@"Yes"];
+    Criteria * markedCriteria = [[Criteria alloc] initWithField:MA_Field_Flagged operatorType:VNACriteriaOperatorEqualTo value:@"Yes"];
     [self createInitialSmartFolder:NSLocalizedString(@"Marked Articles", nil) withCriteria:markedCriteria];
     
     // Create a criteria to show all unread articles
-    Criteria * unreadCriteria = [[Criteria alloc] initWithField:MA_Field_Read withOperator:VNACriteriaOperatorEqualTo withValue:@"No"];
+    Criteria * unreadCriteria = [[Criteria alloc] initWithField:MA_Field_Read operatorType:VNACriteriaOperatorEqualTo value:@"No"];
     [self createInitialSmartFolder:NSLocalizedString(@"Unread Articles", nil) withCriteria:unreadCriteria];
     
     // Create a criteria to show all articles received today
-    Criteria * todayCriteria = [[Criteria alloc] initWithField:MA_Field_Date withOperator:VNACriteriaOperatorEqualTo withValue:@"today"];
+    Criteria * todayCriteria = [[Criteria alloc] initWithField:MA_Field_Date operatorType:VNACriteriaOperatorEqualTo value:@"today"];
     [self createInitialSmartFolder:NSLocalizedString(@"Today's Articles", nil) withCriteria:todayCriteria];
     
 	[self.databaseQueue inDatabase:^(FMDatabase *db) {
@@ -2146,8 +2146,8 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	if (folder.type == VNAFolderTypeSearch) {
         CriteriaTree *tree = [CriteriaTree new];
         Criteria *clause = [[Criteria alloc] initWithField:MA_Field_Text
-                                              withOperator:VNACriteriaOperatorContains
-                                                 withValue:self.searchString];
+                                              operatorType:VNACriteriaOperatorContains
+                                                     value:self.searchString];
         [tree addCriteria:clause];
         return tree;
     }
@@ -2155,7 +2155,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	if (folder.type == VNAFolderTypeTrash)
 	{
 		CriteriaTree * tree = [[CriteriaTree alloc] init];
-		Criteria * clause = [[Criteria alloc] initWithField:MA_Field_Deleted withOperator:VNACriteriaOperatorEqualTo withValue:@"Yes"];
+		Criteria * clause = [[Criteria alloc] initWithField:MA_Field_Deleted operatorType:VNACriteriaOperatorEqualTo value:@"Yes"];
 		[tree addCriteria:clause];
 		return tree;
 	}
@@ -2167,7 +2167,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	}
 
 	CriteriaTree * tree = [[CriteriaTree alloc] init];
-	Criteria * clause = [[Criteria alloc] initWithField:MA_Field_Folder withOperator:VNACriteriaOperatorUnder withValue:folder.name];
+	Criteria * clause = [[Criteria alloc] initWithField:MA_Field_Folder operatorType:VNACriteriaOperatorUnder value:folder.name];
 	[tree addCriteria:clause];
 	return tree;
 }
