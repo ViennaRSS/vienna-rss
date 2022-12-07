@@ -19,110 +19,97 @@
 //
 
 #import "SearchFolder.h"
-#import "StringExtensions.h"
+
 #import "AppController.h"
-#import "HelperFunctions.h"
-#import "Article.h"
-#import "Folder.h"
-#import "Criteria.h"
-#import "Field.h"
 #import "Database.h"
+#import "Folder.h"
+#import "StringExtensions.h"
 #import "Vienna-Swift.h"
 
-@interface SmartFolder ()
-@property (weak) IBOutlet NSScrollView *predicateView;
-@property (weak) IBOutlet NSPredicateEditor *predicateEditor;
+static NSNibName const VNASearchFolderNibName = @"SearchFolder";
 
--(void)initSearchSheet:(NSString *)folderName;
--(void)displaySearchSheet:(NSWindow *)window;
--(void)addDefaultCriteria;
+@interface SmartFolder () <NSTextFieldDelegate>
+
+@property (weak) IBOutlet NSTextField *folderNameTextField;
+@property (weak) IBOutlet NSPredicateEditor *predicateEditor;
+@property (weak) IBOutlet NSButton *saveButton;
+
+@property Database *database;
+@property NSInteger smartFolderId;
+@property NSInteger parentId;
 
 @end
 
 @implementation SmartFolder
 
-/* initWithDatabase
- * Just init the search criteria class.
- */
--(instancetype)initWithDatabase:(Database *)newDb
+// MARK: Initialization
+
+- (instancetype)initWithDatabase:(Database *)database
 {
-	if ((self = [super init]) != nil)
-	{
-		totalCriteria = 0;
-		smartFolderId = -1;
-		db = newDb;
-		onScreen = NO;
-		parentId = VNAFolderTypeRoot;
-		arrayOfViews = [[NSMutableArray alloc] init];
-	}
-	return self;
+    self = [super init];
+    if (self) {
+        _smartFolderId = -1;
+        _database = database;
+        _parentId = VNAFolderTypeRoot;
+    }
+    return self;
 }
 
-/* newCriteria
- * Initialises the smart folder panel with a single default criteria to get
- * started.
- */
--(void)newCriteria:(NSWindow *)window underParent:(NSInteger)itemId
+// MARK: Presenting the editor
+
+- (void)newCriteria:(NSWindow *)window underParent:(NSInteger)itemId
 {
     [self initSearchSheet:@""];
-    smartFolderId = -1;
-    parentId = itemId;
-    [smartFolderName setEnabled:YES];
+    self.smartFolderId = -1;
+    self.parentId = itemId;
+    self.folderNameTextField.enabled = YES;
 
-    // Add a default criteria.
-	[self addDefaultCriteria];
-	[self displaySearchSheet:window];
+    /// Add a new default criteria row. For this we use the static defaultField
+    /// declared at the start of this source and the default operator for that
+    /// field, and an empty value.
+    NSPredicate *defaultPredicate = [NSPredicate predicateWithFormat:@"'Subject' CONTAINS %@", @""];
+    NSPredicate *compoundPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[defaultPredicate]];
+    self.predicateEditor.objectValue = compoundPredicate;
+
+    [window beginSheet:self.window completionHandler:nil];
 }
 
-/* loadCriteria
- * Loads the criteria for the specified folder,
- * then display the search sheet.
- */
--(void)loadCriteria:(NSWindow *)window folderId:(NSInteger)folderId
+- (void)loadCriteria:(NSWindow *)window folderId:(NSInteger)folderId
 {
-	Folder * folder = [db folderFromID:folderId];
-	if (folder != nil)
-	{
-		[self initSearchSheet:folder.name];
-		smartFolderId = folderId;
-		[smartFolderName setEnabled:YES];
+    Folder *folder = [self.database folderFromID:folderId];
+    if (folder) {
+        [self initSearchSheet:folder.name];
+        self.smartFolderId = folderId;
+        self.folderNameTextField.enabled = YES;
 
-		// Load the criteria into the fields.
-		CriteriaTree * criteriaTree = [db searchStringForSmartFolder:folderId];
+        // Load the criteria into the fields.
+        CriteriaTree *criteriaTree = [self.database searchStringForSmartFolder:folderId];
 
-        [[self predicateEditor] setObjectValue:[criteriaTree predicate]];
+        self.predicateEditor.objectValue = criteriaTree.predicate;
 
-		// We defer sizing the window until all the criteria are
-		// added and displayed, otherwise it looks crap.
-		[self displaySearchSheet:window];
-	}
+        [window beginSheet:self.window completionHandler:nil];
+    }
 }
 
-/* initSearchSheet
- */
--(void)initSearchSheet:(NSString *)folderName
+- (void)initSearchSheet:(NSString *)folderName
 {
-	// Initialize UI
-	if (!searchWindow)
-	{
-		NSArray * objects;
-		[[NSBundle bundleForClass:[self class]] loadNibNamed:@"SearchFolder" owner:self topLevelObjects:&objects];
-		self.topObjects = objects;
-
-		// Register our notifications
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleTextDidChange:) name:NSControlTextDidChangeNotification object:smartFolderName];
-	}
+    if (!self.window) {
+        NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+        [bundle loadNibNamed:VNASearchFolderNibName
+                       owner:self
+             topLevelObjects:nil];
+        self.folderNameTextField.delegate = self;
+    }
 
     [self prepareTemplates];
 
-
-	// Init the folder name field and disable the Save button if it is blank
-	smartFolderName.stringValue = folderName;
-	saveButton.enabled = !folderName.vna_isBlank;
+    // Init the folder name field and disable the Save button if it is blank
+    self.folderNameTextField.stringValue = folderName;
+    self.saveButton.enabled = !folderName.vna_isBlank;
 }
 
--(void)prepareTemplates {
-
+- (void)prepareTemplates
+{
     NSMutableArray<NSPredicateEditorRowTemplate *> *rowTemplates = [NSMutableArray array];
 
     NSArray *compoundTypes = @[
@@ -133,21 +120,26 @@
     NSPredicateEditorRowTemplate *compoundTemplate = [[NSPredicateEditorRowTemplate alloc] initWithCompoundTypes:compoundTypes];
     [rowTemplates addObject:compoundTemplate];
 
-    //not contains
+    // not contains
     NSArray *doesNotContainLeftExpressions = @[
         [NSExpression expressionForConstantValue: MA_Field_Text],
         [NSExpression expressionForConstantValue: MA_Field_Subject],
         [NSExpression expressionForConstantValue: MA_Field_Author]];
     [rowTemplates addObject:[[VNANotContainsPredicateEditorRowTemplate alloc] initWithLeftExpressions:doesNotContainLeftExpressions]];
 
-    //folder is / is not
+    // folder is / is not
     NSArray<NSExpression *> *folders = [self fillFolderValueField:VNAFolderTypeRoot atIndent:0];
 
-    NSPredicateEditorRowTemplate *folderTemplate = [[NSPredicateEditorRowTemplate alloc] initWithLeftExpressions:@[[NSExpression expressionForConstantValue:@"Folder"]] rightExpressions:folders modifier:NSDirectPredicateModifier operators:@[@(NSEqualToPredicateOperatorType), @(NSNotEqualToPredicateOperatorType)] options:0];
+    NSPredicateEditorRowTemplate *folderTemplate = [[NSPredicateEditorRowTemplate alloc]
+        initWithLeftExpressions:@[[NSExpression expressionForConstantValue:@"Folder"]]
+               rightExpressions:folders
+                       modifier:NSDirectPredicateModifier
+                      operators:@[@(NSEqualToPredicateOperatorType), @(NSNotEqualToPredicateOperatorType)]
+                        options:0];
 
     [rowTemplates addObject:folderTemplate];
 
-    //read / flagged / deleted = YES / NO
+    // read / flagged / deleted = YES / NO
     NSArray<NSExpression *> *booleanLeftExpressions = @[
         [NSExpression expressionForConstantValue:@"Read"],
         [NSExpression expressionForConstantValue:@"Flagged"],
@@ -158,129 +150,122 @@
         [NSExpression expressionForConstantValue:@"Yes"],
         [NSExpression expressionForConstantValue:@"No"]
     ];
-    NSPredicateEditorRowTemplate *booleanTemplate = [[NSPredicateEditorRowTemplate alloc] initWithLeftExpressions:booleanLeftExpressions rightExpressions:booleanRightExpressions modifier:NSDirectPredicateModifier operators:@[@(NSEqualToPredicateOperatorType)] options:0];
+    NSPredicateEditorRowTemplate *booleanTemplate =
+        [[NSPredicateEditorRowTemplate alloc] initWithLeftExpressions:booleanLeftExpressions
+                                                     rightExpressions:booleanRightExpressions
+                                                             modifier:NSDirectPredicateModifier
+                                                            operators:@[@(NSEqualToPredicateOperatorType)]
+                                                              options:0];
 
     [rowTemplates addObject:booleanTemplate];
 
-    //date = / > / >= / < / <= today / yesterday / last week
+    // date = / > / >= / < / <= today / yesterday / last week
     NSArray<NSExpression *> *dateRightExpressions = @[
         [NSExpression expressionForConstantValue:@"today"],
         [NSExpression expressionForConstantValue:@"yesterday"],
         [NSExpression expressionForConstantValue:@"last week"]
     ];
-    NSPredicateEditorRowTemplate *dateTemplate = [[NSPredicateEditorRowTemplate alloc] initWithLeftExpressions:@[[NSExpression expressionForConstantValue:@"Date"]] rightExpressions:dateRightExpressions modifier:NSDirectPredicateModifier operators:@[@(NSEqualToPredicateOperatorType), @(NSLessThanPredicateOperatorType), @(NSLessThanOrEqualToPredicateOperatorType), @(NSGreaterThanPredicateOperatorType), @(NSGreaterThanOrEqualToPredicateOperatorType)] options:0];
+    NSPredicateEditorRowTemplate *dateTemplate = [[NSPredicateEditorRowTemplate alloc]
+        initWithLeftExpressions:@[[NSExpression expressionForConstantValue:@"Date"]]
+               rightExpressions:dateRightExpressions
+                       modifier:NSDirectPredicateModifier
+                      operators:@[
+                          @(NSEqualToPredicateOperatorType),
+                          @(NSLessThanPredicateOperatorType),
+                          @(NSLessThanOrEqualToPredicateOperatorType),
+                          @(NSGreaterThanPredicateOperatorType),
+                          @(NSGreaterThanOrEqualToPredicateOperatorType)
+                      ]
+                        options:0];
 
     [rowTemplates addObject:dateTemplate];
 
-    //subject / author / text contains / = / != <text>
+    // subject / author / text contains / = / != <text>
     NSArray<NSExpression *> *textLeftExpressions = @[
         [NSExpression expressionForConstantValue:@"Subject"],
         [NSExpression expressionForConstantValue:@"Author"],
         [NSExpression expressionForConstantValue:@"Text"]
     ];
-    NSPredicateEditorRowTemplate *textTemplate = [[NSPredicateEditorRowTemplate alloc] initWithLeftExpressions:textLeftExpressions rightExpressionAttributeType:NSStringAttributeType modifier:NSDirectPredicateModifier operators:@[@(NSEqualToPredicateOperatorType), @(NSNotEqualToPredicateOperatorType),  @(NSContainsPredicateOperatorType)] options:0];
+    NSPredicateEditorRowTemplate *textTemplate = [[NSPredicateEditorRowTemplate alloc]
+             initWithLeftExpressions:textLeftExpressions
+        rightExpressionAttributeType:NSStringAttributeType
+                            modifier:NSDirectPredicateModifier
+                           operators:@[
+                               @(NSEqualToPredicateOperatorType),
+                               @(NSNotEqualToPredicateOperatorType),
+                               @(NSContainsPredicateOperatorType)
+                           ]
+                             options:0];
 
     [rowTemplates addObject:textTemplate];
 
     self.predicateEditor.rowTemplates = rowTemplates;
 }
 
-/* fillFolderValueField
- * Fill the folder value field popup menu with a list of all RSS and group
- * folders in the database under the specified folder ID. The indentation value
- * is used to indent the items in the menu when they are part of a group. I've used
- * an increment of 2 which looks clearer than 1 in the UI.
- */
--(NSArray<NSExpression *> *)fillFolderValueField:(NSInteger)fromId atIndent:(NSInteger)indentation
+/// Fill the folder value field popup menu with a list of all RSS and group
+/// folders in the database under the specified folder ID. The indentation value
+/// is used to indent the items in the menu when they are part of a group. I've
+/// used an increment of 2 which looks clearer than 1 in the UI.
+- (NSArray<NSExpression *> *)fillFolderValueField:(NSInteger)fromId
+                                         atIndent:(NSInteger)indentation
 {
-    NSMutableArray<NSExpression *> *folderExpressions = [NSMutableArray array];
-	for (Folder * folder in [[db arrayOfFolders:fromId] sortedArrayUsingSelector:@selector(folderNameCompare:)])
-	{
-		if (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader || folder.type == VNAFolderTypeGroup)
-        {
-            NSString *indentSpaces = [@"" stringByPaddingToLength:indentation * 2 withString:@" " startingAtIndex:0];
-            [folderExpressions addObject:[NSExpression expressionForConstantValue:[indentSpaces stringByAppendingString:folder.name]]];
+    NSMutableArray<NSExpression *> *expressions = [NSMutableArray array];
+    NSArray *folders = [self.database arrayOfFolders:fromId];
+    NSArray *sortedFolders = [folders sortedArrayUsingSelector:@selector(folderNameCompare:)];
+    for (Folder *folder in sortedFolders) {
+        if (folder.type == VNAFolderTypeRSS ||
+            folder.type == VNAFolderTypeOpenReader ||
+            folder.type == VNAFolderTypeGroup) {
+            NSString *indentSpaces = [@"" stringByPaddingToLength:indentation * 2
+                                                       withString:@" "
+                                                  startingAtIndex:0];
+            NSString *constantValue = [indentSpaces stringByAppendingString:folder.name];
+            [expressions addObject:[NSExpression expressionForConstantValue:constantValue]];
             if (folder.type == VNAFolderTypeGroup) {
-                [folderExpressions addObjectsFromArray:[self fillFolderValueField:folder.itemId atIndent:indentation + 1]];
+                [expressions addObjectsFromArray:[self fillFolderValueField:folder.itemId
+                                                                   atIndent:indentation + 1]];
             }
-		}
-	}
-    return folderExpressions;
+        }
+    }
+    return expressions;
 }
 
-/* displaySearchSheet
- * Display the search sheet.
- */
--(void)displaySearchSheet:(NSWindow *)window
+// MARK: Responder actions
+
+- (IBAction)doCancel:(id)sender
 {
-	// Begin the sheet
-	onScreen = YES;
-	[window beginSheet:searchWindow completionHandler:nil];
-	// Remember the initial size of the dialog sheet
-	// before addition of any criteria that would
-	// cause it to be resized. We need to know this
-	// to shrink it back to its default size.
-	searchWindowFrame = [NSWindow contentRectForFrameRect:searchWindow.frame styleMask:searchWindow.styleMask];
+    [self.window.sheetParent endSheet:self.window];
+    [self.window orderOut:self];
 }
 
-/* addDefaultCriteria
- * Add a new default criteria row. For this we use the static defaultField declared at
- * the start of this source and the default operator for that field, and an empty value.
- */
--(void)addDefaultCriteria
+- (IBAction)doSave:(id)sender
 {
-    NSPredicate *defaultPredicate = [NSPredicate predicateWithFormat:@"'Subject' CONTAINS %@", @""];
-    NSPredicate *compoundPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[defaultPredicate]];
+    NSString *folderName = self.folderNameTextField.stringValue;
+    CriteriaTree *criteriaTree = [[CriteriaTree alloc] initWithPredicate:self.predicateEditor.objectValue];
 
-    [[self predicateEditor] setObjectValue:compoundPredicate];
-}
-
-/* doSave
- * Create a CriteriaTree from the criteria rows and save this to the
- * database.
- */
--(IBAction)doSave:(id)sender
-{
-    NSString *folderName = smartFolderName.stringValue;
-    CriteriaTree *criteriaTree = [[CriteriaTree alloc] initWithPredicate:[self.predicateEditor objectValue]];
-
-    if (smartFolderId == -1) {
-        AppController * controller = APPCONTROLLER;
-        smartFolderId = [[Database sharedManager] addSmartFolder:folderName underParent:parentId withQuery:criteriaTree];
-        [controller selectFolder:smartFolderId];
+    if (self.smartFolderId == -1) {
+        AppController *controller = APPCONTROLLER;
+        self.smartFolderId = [Database.sharedManager addSmartFolder:folderName
+                                                        underParent:self.parentId
+                                                          withQuery:criteriaTree];
+        [controller selectFolder:self.smartFolderId];
     } else {
-        [[Database sharedManager] updateSearchFolder:smartFolderId withFolder:folderName withQuery:criteriaTree];
+        [Database.sharedManager updateSearchFolder:self.smartFolderId
+                                        withFolder:folderName
+                                         withQuery:criteriaTree];
     }
 
-    [searchWindow.sheetParent endSheet:searchWindow];
-	[searchWindow orderOut:self];
-	onScreen = NO;
+    [self.window.sheetParent endSheet:self.window];
+    [self.window orderOut:self];
 }
 
-/* doCancel
- */
--(IBAction)doCancel:(id)sender
+// MARK: - NSTextFieldDelegate
+
+- (void)controlTextDidChange:(NSNotification *)obj
 {
-	[searchWindow.sheetParent endSheet:searchWindow];
-	[searchWindow orderOut:self];
-	onScreen = NO;
+    NSTextField *textField = obj.object;
+    NSString *folderName = textField.stringValue;
+    self.saveButton.enabled = !folderName.vna_isBlank;
 }
 
-/* handleTextDidChange [delegate]
- * This function is called when the contents of the input field is changed.
- * We disable the Save button if the input field is empty or enable it otherwise.
- */
--(void)handleTextDidChange:(NSNotification *)aNotification
-{
-	NSString * folderName = smartFolderName.stringValue;
-	saveButton.enabled = !folderName.vna_isBlank;
-}
-
-/* dealloc
- * Clean up and release resources.
- */
--(void)dealloc
-{
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-}
 @end

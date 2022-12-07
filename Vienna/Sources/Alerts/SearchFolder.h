@@ -22,43 +22,17 @@
 
 @class Database;
 
-@interface SmartFolder : NSWindowController {
-	IBOutlet NSWindow * searchWindow;
-	IBOutlet NSTextField * smartFolderName;
-	IBOutlet NSButton * saveButton;
-	IBOutlet NSButton * cancelButton;
-	IBOutlet NSView * searchCriteriaSuperview;
-	IBOutlet NSView * searchCriteriaView;
-	IBOutlet NSButton * addCriteriaButton;
-	IBOutlet NSButton * removeCriteriaButton;
-	IBOutlet NSPopUpButton * fieldNamePopup;
-	IBOutlet NSPopUpButton * operatorPopup;
-	IBOutlet NSPopUpButton * criteriaConditionPopup;
-	IBOutlet NSTextField * valueField;
-	IBOutlet NSPopUpButton * dateValueField;
-	IBOutlet NSTextField * numberValueField;
-	IBOutlet NSPopUpButton * flagValueField;
-	IBOutlet NSPopUpButton * folderValueField;
-	NSMutableDictionary * nameToFieldMap;
-	NSMutableArray * arrayOfViews;
-	Database * db;
-	NSRect searchWindowFrame;
-	NSInteger smartFolderId;
-	NSInteger totalCriteria;
-	NSInteger parentId;
-	BOOL onScreen;
-}
+@interface SmartFolder : NSWindowController
 
-@property NSArray * topObjects;
+- (instancetype)initWithDatabase:(Database *)database;
 
-// Action routines
--(IBAction)doSave:(id)sender;
--(IBAction)doCancel:(id)sender;
+/// Initialises the smart folder panel with a single default criteria to get
+/// started.
+- (void)newCriteria:(NSWindow *)window underParent:(NSInteger)itemId;
 
-// Public functions
--(void)newCriteria:(NSWindow *)window underParent:(NSInteger)itemId;
--(void)loadCriteria:(NSWindow *)window folderId:(NSInteger)folderId;
+/// Loads the criteria for the specified folder, then displays the search sheet.
+- (void)loadCriteria:(NSWindow *)window folderId:(NSInteger)folderId;
 
-// General functions
--(instancetype)initWithDatabase:(Database *)newDb /*NS_DESIGNATED_INITIALIZER*/;
+- (IBAction)doCancel:(id)sender;
+
 @end
