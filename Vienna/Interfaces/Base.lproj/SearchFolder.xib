@@ -63,7 +63,7 @@
                             <rect key="frame" x="1" y="1" width="616" height="388"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <predicateEditor verticalHuggingPriority="750" nestingMode="compound" rowHeight="32" id="cr7-ge-FCd">
+                                <predicateEditor verticalHuggingPriority="750" nestingMode="compound" formattingStringsFilename="Predicates" rowHeight="32" id="cr7-ge-FCd">
                                     <rect key="frame" x="0.0" y="0.0" width="616" height="388"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <rowTemplates/>

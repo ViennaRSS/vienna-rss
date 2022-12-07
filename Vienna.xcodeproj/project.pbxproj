@@ -195,6 +195,7 @@
 		F67E7828285DDAB200D1CECE /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67E7827285DDAB100D1CECE /* Toolbar.swift */; };
 		F6832F631F10C4C9007920D4 /* ExportAccessoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6832F651F10C4C9007920D4 /* ExportAccessoryViewController.xib */; };
 		F6832F681F10F5DA007920D4 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6832F661F10F5DA007920D4 /* MainWindowController.xib */; };
+		F685D24C292460210097C0D3 /* Predicates.strings in Resources */ = {isa = PBXBuildFile; fileRef = F685D24A292460210097C0D3 /* Predicates.strings */; };
 		F68792872700A678009B7BB5 /* SecurityScopedBookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68792862700A678009B7BB5 /* SecurityScopedBookmark.swift */; };
 		F68FE3A6270F6DC700C89D16 /* UnarchiverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68FE3A5270F6DC700C89D16 /* UnarchiverTests.swift */; settings = {COMPILER_FLAGS = "-Wno-deprecated-declarations"; }; };
 		F69140E41E71B94200D51BFF /* AppController+Notifications.m in Sources */ = {isa = PBXBuildFile; fileRef = F69140E31E71B94200D51BFF /* AppController+Notifications.m */; };
@@ -715,6 +716,7 @@
 		F68176D4209EFD35004AA256 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = es; path = es.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		F6832F641F10C4C9007920D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ExportAccessoryViewController.xib; sourceTree = "<group>"; };
 		F6832F671F10F5DA007920D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainWindowController.xib; sourceTree = "<group>"; };
+		F685D24B292460210097C0D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Predicates.strings; sourceTree = "<group>"; };
 		F68792862700A678009B7BB5 /* SecurityScopedBookmark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecurityScopedBookmark.swift; sourceTree = "<group>"; };
 		F6879288270117AF009B7BB5 /* WKWebViewConfiguration+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WKWebViewConfiguration+Private.h"; sourceTree = "<group>"; };
 		F6893969209EFD9C007D36C0 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = it; path = it.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
@@ -955,6 +957,7 @@
 		F6D7527C276BCE4700B0A710 /* en-AU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-AU"; path = "en-AU.lproj/Preferences.strings"; sourceTree = "<group>"; };
 		F6D7527D276BCE4700B0A710 /* en-AU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-AU"; path = "en-AU.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		F6D7527E276BCE4700B0A710 /* en-AU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-AU"; path = "en-AU.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		F6DA45532940CC9E00D746F8 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Predicates.strings; sourceTree = "<group>"; };
 		F6DAD20A1E75892C00FE2645 /* Vienna-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Vienna-Bridging-Header.h"; sourceTree = "<group>"; };
 		F6DCBC31276BCE4A00D9C3BF /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/FeedCredentials.strings"; sourceTree = "<group>"; };
 		F6DCBC32276BCE4A00D9C3BF /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/InfoWindow.strings"; sourceTree = "<group>"; };
@@ -1246,6 +1249,7 @@
 				F69AE79C1F2215D600342640 /* InfoPlist.strings */,
 				F62580A81E286A8B0035E43C /* Localizable.strings */,
 				F6FEE7AF209E500800BCAEC6 /* Localizable.stringsdict */,
+				F685D24A292460210097C0D3 /* Predicates.strings */,
 			);
 			name = Strings;
 			sourceTree = "<group>";
@@ -1832,6 +1836,7 @@
 				2F7B91EB2198351A00E56F00 /* WebViewBrowser.xib in Resources */,
 				AACAEA3E0954E71100ACD502 /* DemoFeeds.plist in Resources */,
 				F65D6D711E74619E00A30974 /* Credits.rtf in Resources */,
+				F685D24C292460210097C0D3 /* Predicates.strings in Resources */,
 				F69AE79A1F2215D600342640 /* InfoPlist.strings in Resources */,
 				F6A7DE4F1E471A7F0017BE5E /* Vienna.help in Resources */,
 				F62580E11E286CDE0035E43C /* errorpage.html in Resources */,
@@ -2462,6 +2467,15 @@
 				F6DCBC34276BCE4A00D9C3BF /* en-GB */,
 			);
 			name = MainWindowController.xib;
+			sourceTree = "<group>";
+		};
+		F685D24A292460210097C0D3 /* Predicates.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F685D24B292460210097C0D3 /* Base */,
+				F6DA45532940CC9E00D746F8 /* de */,
+			);
+			name = Predicates.strings;
 			sourceTree = "<group>";
 		};
 		F69AE79C1F2215D600342640 /* InfoPlist.strings */ = {
