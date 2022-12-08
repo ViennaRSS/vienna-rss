@@ -323,7 +323,7 @@ extension TabbedBrowserViewController: CustomWKUIDelegate {
     func contextMenuItemsFor(purpose: WKWebViewContextMenuContext, existingMenuItems: [NSMenuItem]) -> [NSMenuItem] {
         var menuItems = existingMenuItems
         switch purpose {
-        case .page(url: _):
+        case .page:
             break
         case .link(let url):
             addLinkMenuCustomizations(&menuItems, url)
