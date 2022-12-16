@@ -7,7 +7,7 @@
 /* Appended to application name in Open With menu */
 "%@ (default)" = "%@ (par défaut)";
 
-/* No comment provided by engineer. */
+/* Title of the Get Info panel. The variable is the name of the feed. */
 "%@ Info" = "Infos sur %@";
 
 /* Progress in bytes, e.g. 1 KB of 1 MB */

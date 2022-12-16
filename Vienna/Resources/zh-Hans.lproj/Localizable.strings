@@ -4,7 +4,7 @@
 /* No comment provided by engineer. */
 "(Untitled Feed)" = "(无标题的频道)";
 
-/* No comment provided by engineer. */
+/* Title of the Get Info panel. The variable is the name of the feed. */
 "%@ Info" = "%@ 信息";
 
 /* Number of bytes received, e.g. 1 MB received */

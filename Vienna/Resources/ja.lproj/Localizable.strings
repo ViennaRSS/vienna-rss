@@ -4,7 +4,7 @@
 /* No comment provided by engineer. */
 "(Untitled Feed)" = "(無名フィード)";
 
-/* No comment provided by engineer. */
+/* Title of the Get Info panel. The variable is the name of the feed. */
 "%@ Info" = "%@ 情報";
 
 /* No comment provided by engineer. */

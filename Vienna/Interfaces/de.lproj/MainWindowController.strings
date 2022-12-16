@@ -35,7 +35,7 @@
 "10h-xf-C6T.paletteLabel" = "Link senden";
 
 /* Class = "NSToolbarItem"; toolTip = "Email a link to the current article or website"; ObjectID = "10h-xf-C6T"; */
-"10h-xf-C6T.toolTip" = "Einen Link zum momentanen Artikel oder der momentanen Website versenden …";
+"10h-xf-C6T.toolTip" = "Link zum ausgewählten Artikel oder zur aktuellen Website per E‑Mail versenden";
 
 /* Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "676-5a-TdF"; */
 "676-5a-TdF.title" = "Öffne Webseite des Abonnements";

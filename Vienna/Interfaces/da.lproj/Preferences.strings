@@ -19,6 +19,9 @@
 /* Class = "NSMenuItem"; title = "Manually"; ObjectID = "7Za-ay-jlt"; */
 "7Za-ay-jlt.title" = "Manuelt";
 
+/* Class = "NSButtonCell"; title = "Display feeds with unread articles with bold font"; ObjectID = "86e-38-zCh"; */
+"86e-38-zCh.title" = "Vis feeds med ulæste artikler i fed skrifttype";
+
 /* Class = "NSTextFieldCell"; title = "Mark current article read:"; ObjectID = "adB-qE-xKg"; */
 "adB-qE-xKg.title" = "Marker nuværende artikel læst:";
 
@@ -44,7 +47,7 @@
 "DDY-fS-V5T.title" = "Test ny browser";
 
 /* Class = "NSButtonCell"; title = "Show website icons in the feed list"; ObjectID = "dkm-xW-4If"; */
-"dkm-xW-4If.title" = "Vis mappeikoner i mappeliste";
+"dkm-xW-4If.title" = "Vis hjemmesideikoner i feed-listen";
 
 /* Class = "NSMenuItem"; title = "After two weeks"; ObjectID = "Dw9-en-4Zu"; */
 "Dw9-en-4Zu.title" = "Efter to uger";
@@ -159,6 +162,9 @@
 
 /* Class = "NSButton"; ibShadowedToolTip = "Visit the website"; ObjectID = "V12-Ua-skO"; */
 "V12-Ua-skO.ibShadowedToolTip" = "Besøg hjemmesiden";
+
+/* Class = "NSButtonCell"; title = "Display unread articles with bold font"; ObjectID = "VQH-xk-s5g"; */
+"VQH-xk-s5g.title" = "Ved ulæste artikler i fed skrifttype";
 
 /* Class = "NSViewController"; title = "Updates"; ObjectID = "wyk-W1-xMh"; */
 "wyk-W1-xMh.title" = "Opdateringer";

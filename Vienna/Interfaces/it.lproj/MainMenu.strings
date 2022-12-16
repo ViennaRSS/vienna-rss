@@ -379,11 +379,17 @@
 /* Class = "NSMenuItem"; title = "Mark All Subscriptions as Read"; ObjectID = "ecl-HO-Kpi"; */
 "ecl-HO-Kpi.title" = "Segnala Tutte le Iscrizioni come Lette";
 
+/* Class = "NSMenuItem"; title = "Substitutions"; ObjectID = "eVb-Qt-XJb"; */
+"eVb-Qt-XJb.title" = "Sostituzioni";
+
 /* Class = "NSMenu"; title = "Spelling"; ObjectID = "fad-Nj-OFI"; */
 "fad-Nj-OFI.title" = "Ortografia";
 
 /* Class = "NSMenu"; title = "Speech"; ObjectID = "G6k-0L-moc"; */
 "G6k-0L-moc.title" = "Voce";
+
+/* Class = "NSMenuItem"; title = "Transformations"; ObjectID = "joR-kW-sIU"; */
+"joR-kW-sIU.title" = "Trasformazioni";
 
 /* Class = "NSMenuItem"; title = "Speech"; ObjectID = "JXn-SB-3t2"; */
 "JXn-SB-3t2.title" = "Voce";

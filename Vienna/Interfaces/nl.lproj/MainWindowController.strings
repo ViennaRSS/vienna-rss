@@ -8,7 +8,7 @@
 "4c1-NR-ofo.paletteLabel" = "Leeg prullenmand";
 
 /* Class = "NSToolbarItem"; toolTip = "Delete all articles in the trash"; ObjectID = "4c1-NR-ofo"; */
-"4c1-NR-ofo.toolTip" = "Wis alle artikelen in de prullenmand";
+"4c1-NR-ofo.toolTip" = "Verwijder alle artikelen in de prullenmand";
 
 /* Class = "NSMenuItem"; title = "Last Refresh"; ObjectID = "5RA-iE-L8a"; */
 "5RA-iE-L8a.title" = "Laatste vernieuwing";
@@ -179,13 +179,13 @@
 "pZm-V9-RVd.title" = "Vandaag";
 
 /* Class = "NSMenuItem"; title = "Mark All Articles as Read"; ObjectID = "Qj9-p3-QXB"; */
-"Qj9-p3-QXB.title" = "Markeer alles als gelezen";
+"Qj9-p3-QXB.title" = "Markeer alle artikelen als gelezen";
 
 /* Class = "NSMenuItem"; title = "New Folder…"; ObjectID = "RaH-Yu-Ija"; */
 "RaH-Yu-Ija.title" = "Nieuwe map…";
 
 /* Class = "NSMenuItem"; title = "Delete…"; ObjectID = "Rdq-QU-3hM"; */
-"Rdq-QU-3hM.title" = "Wis…";
+"Rdq-QU-3hM.title" = "Verwijder…";
 
 /* Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "sDP-Ni-g3a"; */
 "sDP-Ni-g3a.title" = "Ongelezen artikelen";
@@ -203,7 +203,7 @@
 "SoG-b2-O1S.toolTip" = "Sla map over";
 
 /* Class = "NSMenuItem"; title = "Edit…"; ObjectID = "tHY-Fr-Ili"; */
-"tHY-Fr-Ili.title" = "Bewerk…";
+"tHY-Fr-Ili.title" = "Wijzig…";
 
 /* Class = "NSToolbarItem"; label = "Action"; ObjectID = "TSQ-UW-4gU"; */
 "TSQ-UW-4gU.label" = "Actie";
@@ -218,7 +218,7 @@
 "ty7-ph-peE.title" = "Ongelezen of gemarkeerd";
 
 /* Class = "NSMenuItem"; title = "Edit…"; ObjectID = "vOQ-xo-w8E"; */
-"vOQ-xo-w8E.title" = "Bewerk…";
+"vOQ-xo-w8E.title" = "Wijzig…";
 
 /* Class = "NSMenuItem"; title = "Flagged"; ObjectID = "vqZ-zm-Blb"; */
 "vqZ-zm-Blb.title" = "Gemarkeerd";
@@ -272,7 +272,7 @@
 "zPC-lc-x1k.title" = "Werk geselecteerde abonnementen bij";
 
 /* Class = "NSMenuItem"; title = "Delete…"; ObjectID = "Zsz-uP-pM7"; */
-"Zsz-uP-pM7.title" = "Wis…";
+"Zsz-uP-pM7.title" = "Verwijder…";
 
 /* Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "Zu1-zW-uo2"; */
 "Zu1-zW-uo2.title" = "Ga naar startpagina van abonnement";

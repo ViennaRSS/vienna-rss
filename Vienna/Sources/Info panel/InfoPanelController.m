@@ -91,7 +91,7 @@
 	Folder * folder = [[Database sharedManager] folderFromID:self.infoFolderId];
 	
 	// Set the window caption
-	NSString * caption = [NSString stringWithFormat:NSLocalizedString(@"%@ Info", nil), folder.name];
+	NSString * caption = [NSString stringWithFormat:NSLocalizedString(@"%@ Info", @"Title of the Get Info panel. The variable is the name of the feed."), folder.name];
 	self.window.title = caption;
 
 	// Set the header details

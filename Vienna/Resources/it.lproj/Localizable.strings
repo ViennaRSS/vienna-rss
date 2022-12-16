@@ -192,6 +192,9 @@
 /* Title of a menu item */
 "Hide Status Bar" = "Nascondi Barra di Stato";
 
+/* Title of a menu item */
+"Hide Toolbar" = "Nascondi barra degli strumenti";
+
 /* No comment provided by engineer. */
 "HTTP code %d reported from server" = "codice HTTP %d riportato dal server";
 
