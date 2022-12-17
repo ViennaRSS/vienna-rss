@@ -1,5 +1,5 @@
 //
-//  VNANotContainsPredicateEditorRowTemplate.swift
+//  DoesNotContainPredicateEditorRowTemplate.swift
 //  Vienna
 //
 //  Copyright 2022 Tassilo Karge
@@ -26,7 +26,8 @@
  At this point, the user sees the predicate that was saved.  If the user then makes some changes to the views of the templates, this causes NSPredicateEditor to recompute its predicate by asking each of the templates to return the predicate represented by the new view values, passing in the subpredicates represented by the sub-rows (an empty array if there are none, or nil if they aren't supported by that predicate type):
  predicate(withSubpredicates:)
  */
-class VNANotContainsPredicateEditorRowTemplate: NSPredicateEditorRowTemplate {
+@objc(VNADoesNotContainPredicateEditorRowTemplate)
+class DoesNotContainPredicateEditorRowTemplate: NSPredicateEditorRowTemplate {
 
     override init() {
         super.init()

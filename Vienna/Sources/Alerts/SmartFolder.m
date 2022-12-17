@@ -1,5 +1,5 @@
 //
-//  SearchFolder.m
+//  SmartFolder.m
 //  Vienna
 //
 //  Created by Steve on Sun Apr 18 2004.
@@ -18,7 +18,7 @@
 //  limitations under the License.
 //
 
-#import "SearchFolder.h"
+#import "SmartFolder.h"
 
 #import "AppController.h"
 #import "Database.h"
@@ -26,7 +26,7 @@
 #import "StringExtensions.h"
 #import "Vienna-Swift.h"
 
-static NSNibName const VNASearchFolderNibName = @"SearchFolder";
+static NSNibName const VNASmartFolderNibName = @"SearchFolder";
 
 @interface SmartFolder () <NSTextFieldDelegate>
 
@@ -95,7 +95,7 @@ static NSNibName const VNASearchFolderNibName = @"SearchFolder";
 {
     if (!self.window) {
         NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-        [bundle loadNibNamed:VNASearchFolderNibName
+        [bundle loadNibNamed:VNASmartFolderNibName
                        owner:self
              topLevelObjects:nil];
         self.folderNameTextField.delegate = self;

@@ -63,7 +63,7 @@
 		2F2280352271B041005D1023 /* ArticleContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2280342271B041005D1023 /* ArticleContentView.swift */; };
 		2F2280382271B18A005D1023 /* ArticleStyleLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2280372271B18A005D1023 /* ArticleStyleLoader.swift */; };
 		2F33DB2D292445D200A9716A /* Criteria+SQL.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F33DB2C292445D200A9716A /* Criteria+SQL.m */; };
-		2F33DB3229244ADB00A9716A /* VNANotContainsPredicateEditorRowTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F33DB3129244ADB00A9716A /* VNANotContainsPredicateEditorRowTemplate.swift */; };
+		2F33DB3229244ADB00A9716A /* DoesNotContainPredicateEditorRowTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F33DB3129244ADB00A9716A /* DoesNotContainPredicateEditorRowTemplate.swift */; };
 		2F437B3C25CF336400AD1B57 /* SubscriptionModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F437B3A25CF336400AD1B57 /* SubscriptionModelTests.swift */; };
 		2F437B3D25CF336400AD1B57 /* URL+URIEquivalence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F437B3B25CF336400AD1B57 /* URL+URIEquivalence.swift */; };
 		2F437B6325CF423A00AD1B57 /* ExportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F437B6225CF423A00AD1B57 /* ExportTests.swift */; };
@@ -129,7 +129,7 @@
 		435028AD165DE9E00018EDB7 /* PluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350287A165DE9DF0018EDB7 /* PluginManager.m */; };
 		435028AE165DE9E00018EDB7 /* ProgressTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350287C165DE9DF0018EDB7 /* ProgressTextCell.m */; };
 		435028AF165DE9E00018EDB7 /* RefreshManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350287E165DE9DF0018EDB7 /* RefreshManager.m */; };
-		435028B0165DE9E00018EDB7 /* SearchFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502880165DE9DF0018EDB7 /* SearchFolder.m */; };
+		435028B0165DE9E00018EDB7 /* SmartFolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502880165DE9DF0018EDB7 /* SmartFolder.m */; };
 		435028B1165DE9E00018EDB7 /* SearchMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502882165DE9DF0018EDB7 /* SearchMethod.m */; };
 		435028B2165DE9E00018EDB7 /* SearchPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502884165DE9DF0018EDB7 /* SearchPanel.m */; };
 		435028B3165DE9E00018EDB7 /* EnclosureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502886165DE9DF0018EDB7 /* EnclosureView.m */; };
@@ -303,7 +303,7 @@
 		2F2280372271B18A005D1023 /* ArticleStyleLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleStyleLoader.swift; sourceTree = "<group>"; };
 		2F33DB2B292445D200A9716A /* Criteria+SQL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Criteria+SQL.h"; sourceTree = "<group>"; };
 		2F33DB2C292445D200A9716A /* Criteria+SQL.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Criteria+SQL.m"; sourceTree = "<group>"; };
-		2F33DB3129244ADB00A9716A /* VNANotContainsPredicateEditorRowTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VNANotContainsPredicateEditorRowTemplate.swift; sourceTree = "<group>"; };
+		2F33DB3129244ADB00A9716A /* DoesNotContainPredicateEditorRowTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoesNotContainPredicateEditorRowTemplate.swift; sourceTree = "<group>"; };
 		2F437B3A25CF336400AD1B57 /* SubscriptionModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionModelTests.swift; sourceTree = "<group>"; };
 		2F437B3B25CF336400AD1B57 /* URL+URIEquivalence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+URIEquivalence.swift"; sourceTree = "<group>"; };
 		2F437B6225CF423A00AD1B57 /* ExportTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExportTests.swift; sourceTree = "<group>"; };
@@ -410,8 +410,8 @@
 		4350287C165DE9DF0018EDB7 /* ProgressTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressTextCell.m; sourceTree = "<group>"; };
 		4350287D165DE9DF0018EDB7 /* RefreshManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshManager.h; sourceTree = "<group>"; };
 		4350287E165DE9DF0018EDB7 /* RefreshManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshManager.m; sourceTree = "<group>"; };
-		4350287F165DE9DF0018EDB7 /* SearchFolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchFolder.h; sourceTree = "<group>"; };
-		43502880165DE9DF0018EDB7 /* SearchFolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchFolder.m; sourceTree = "<group>"; };
+		4350287F165DE9DF0018EDB7 /* SmartFolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartFolder.h; sourceTree = "<group>"; };
+		43502880165DE9DF0018EDB7 /* SmartFolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmartFolder.m; sourceTree = "<group>"; };
 		43502881165DE9DF0018EDB7 /* SearchMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchMethod.h; sourceTree = "<group>"; };
 		43502882165DE9DF0018EDB7 /* SearchMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchMethod.m; sourceTree = "<group>"; };
 		43502883165DE9DF0018EDB7 /* SearchPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchPanel.h; sourceTree = "<group>"; };
@@ -1276,6 +1276,16 @@
 			path = SharedSupport;
 			sourceTree = "<group>";
 		};
+		F65F2306294DE2F900605F06 /* Smart folder */ = {
+			isa = PBXGroup;
+			children = (
+				4350287F165DE9DF0018EDB7 /* SmartFolder.h */,
+				43502880165DE9DF0018EDB7 /* SmartFolder.m */,
+				2F33DB3129244ADB00A9716A /* DoesNotContainPredicateEditorRowTemplate.swift */,
+			);
+			name = "Smart folder";
+			sourceTree = "<group>";
+		};
 		F6A7DDCB1E470E980017BE5E /* Vienna Help */ = {
 			isa = PBXGroup;
 			children = (
@@ -1525,9 +1535,7 @@
 				43502876165DE9DF0018EDB7 /* NewGroupFolder.m */,
 				43502877165DE9DF0018EDB7 /* NewSubscription.h */,
 				43502878165DE9DF0018EDB7 /* NewSubscription.m */,
-				4350287F165DE9DF0018EDB7 /* SearchFolder.h */,
-				43502880165DE9DF0018EDB7 /* SearchFolder.m */,
-				2F33DB3129244ADB00A9716A /* VNANotContainsPredicateEditorRowTemplate.swift */,
+				F65F2306294DE2F900605F06 /* Smart folder */,
 				43502883165DE9DF0018EDB7 /* SearchPanel.h */,
 				43502884165DE9DF0018EDB7 /* SearchPanel.m */,
 			);
@@ -2119,7 +2127,7 @@
 				435028AA165DE9E00018EDB7 /* MessageListView.m in Sources */,
 				435028AB165DE9E00018EDB7 /* NewGroupFolder.m in Sources */,
 				F6A4E8481F040D58001C9191 /* PlugInToolbarItemButton.swift in Sources */,
-				2F33DB3229244ADB00A9716A /* VNANotContainsPredicateEditorRowTemplate.swift in Sources */,
+				2F33DB3229244ADB00A9716A /* DoesNotContainPredicateEditorRowTemplate.swift in Sources */,
 				F672876824A2D2170043432F /* UpdatePreferencesViewController.m in Sources */,
 				2FC4A1BF25852C0E005FF227 /* ArticleConverter.swift in Sources */,
 				435028AC165DE9E00018EDB7 /* NewSubscription.m in Sources */,
@@ -2130,7 +2138,7 @@
 				793C95331C42A0DD00984D4E /* FoldersFilterable.m in Sources */,
 				3AB95743258DBC5A00C54E83 /* Browser.swift in Sources */,
 				435028AF165DE9E00018EDB7 /* RefreshManager.m in Sources */,
-				435028B0165DE9E00018EDB7 /* SearchFolder.m in Sources */,
+				435028B0165DE9E00018EDB7 /* SmartFolder.m in Sources */,
 				435028B1165DE9E00018EDB7 /* SearchMethod.m in Sources */,
 				F6B355DB256025D3008CA1ED /* PreferenceTabViewItem.swift in Sources */,
 				435028B2165DE9E00018EDB7 /* SearchPanel.m in Sources */,

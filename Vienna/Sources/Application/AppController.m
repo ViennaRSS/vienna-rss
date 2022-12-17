@@ -28,7 +28,7 @@
 #import "Export.h"
 #import "RefreshManager.h"
 #import "StringExtensions.h"
-#import "SearchFolder.h"
+#import "SmartFolder.h"
 #import "NewSubscription.h"
 #import "NewGroupFolder.h"
 #import "ViennaApp.h"

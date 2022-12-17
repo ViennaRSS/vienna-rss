@@ -1,5 +1,5 @@
 //
-//  SearchFolder.h
+//  SmartFolder.h
 //  Vienna
 //
 //  Created by Steve on Sun Apr 18 2004.
