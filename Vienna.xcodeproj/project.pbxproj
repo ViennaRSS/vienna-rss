@@ -190,6 +190,7 @@
 		F648C2B81E7F3BEA00CE4043 /* DirectoryMonitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F648C2B71E7F3BEA00CE4043 /* DirectoryMonitorTests.swift */; };
 		F64C2CCC1E83825D00ED4E04 /* DateFormatterExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = F64C2CCB1E83825D00ED4E04 /* DateFormatterExtension.m */; };
 		F65D6D711E74619E00A30974 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4398241E1666B3DB00FFE219 /* Credits.rtf */; };
+		F65F2314294E4B5200605F06 /* SeparatorPredicateEditorRowTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65F2313294E4B5200605F06 /* SeparatorPredicateEditorRowTemplate.swift */; };
 		F672876824A2D2170043432F /* UpdatePreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F672876724A2D2170043432F /* UpdatePreferencesViewController.m */; };
 		F67E7828285DDAB200D1CECE /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67E7827285DDAB100D1CECE /* Toolbar.swift */; };
 		F6832F631F10C4C9007920D4 /* ExportAccessoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6832F651F10C4C9007920D4 /* ExportAccessoryViewController.xib */; };
@@ -706,6 +707,7 @@
 		F650AFD7209EFDE900D26D13 /* lt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = lt; path = lt.lproj/ActivityViewer.strings; sourceTree = "<group>"; };
 		F650AFD8209EFDE900D26D13 /* lt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = lt; path = lt.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		F658FD8D209EFE5100896413 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ru; path = ru.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		F65F2313294E4B5200605F06 /* SeparatorPredicateEditorRowTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeparatorPredicateEditorRowTemplate.swift; sourceTree = "<group>"; };
 		F664A9A2209EFEBF003B0F7D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
 		F672876624A2D20A0043432F /* UpdatePreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdatePreferencesViewController.h; sourceTree = "<group>"; };
 		F672876724A2D2170043432F /* UpdatePreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdatePreferencesViewController.m; sourceTree = "<group>"; };
@@ -1283,6 +1285,7 @@
 				4350287F165DE9DF0018EDB7 /* SmartFolder.h */,
 				43502880165DE9DF0018EDB7 /* SmartFolder.m */,
 				2F33DB3129244ADB00A9716A /* DoesNotContainPredicateEditorRowTemplate.swift */,
+				F65F2313294E4B5200605F06 /* SeparatorPredicateEditorRowTemplate.swift */,
 				F6B76B43284B492E009961AD /* NSPredicateEditor+Private.h */,
 			);
 			name = "Smart folder";
@@ -2052,6 +2055,7 @@
 				3A60E60B2114AD740004D81D /* URLRequestExtensions.m in Sources */,
 				AA26F4F00604927300FE7994 /* BackTrackArray.m in Sources */,
 				AAF3B14306095E7B0025CC7F /* StringExtensions.m in Sources */,
+				F65F2314294E4B5200605F06 /* SeparatorPredicateEditorRowTemplate.swift in Sources */,
 				2F88B2A62545BB450067EEA6 /* ArticleConverter.m in Sources */,
 				AA36CD7C06100692001E33A4 /* Field.m in Sources */,
 				AA8C72F60641DE1F00649BA2 /* Criteria.m in Sources */,
