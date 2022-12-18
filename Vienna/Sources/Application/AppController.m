@@ -3063,6 +3063,10 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         [self.foldersTree setSearch:searchString];
     } else if ([sender isKindOfClass:[SearchMethod class]]) {
         [self.foldersTree setSearch:self.toolbarSearchField.stringValue];
+    } else if ([sender isKindOfClass:[NSButton class]]) {
+        // Send an empty string to cancel the search.
+        [self.foldersTree setSearch:[NSString string]];
+        self.mainWindowController.toolbarSearchField.stringValue = @"";
     }
 }
 

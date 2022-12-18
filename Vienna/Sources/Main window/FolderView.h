@@ -32,6 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)reloadDataWhilePreservingSelection;
 - (void)reloadDataForRowIndexWhilePreservingSelection:(NSInteger)rowIndex;
+- (void)showResetButton:(BOOL)enabled;
 
 // This property overrides a superclass property.
 @property (nullable, weak) id<FolderViewDelegate> delegate;
