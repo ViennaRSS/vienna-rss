@@ -40,30 +40,4 @@ extension NSPopUpButton {
 		self.menu?.addItem(newItem)
 	}
 
-	/// Add an item to the popup button menu with the specified tag and represented object
-	@objc
-	func addItem(withTitle title: String, tag: Int, representedObject object: Any) {
-		let newItem = NSMenuItem(title: title, action: nil, keyEquivalent: "")
-		newItem.tag = tag
-		newItem.representedObject = object
-		self.menu?.addItem(newItem)
-	}
-
-	/// Add an item to the popup button menu with the specified represented object.
-	@objc
-	func addItem(withTitle title: String, representedObject object: Any) {
-		let newItem = NSMenuItem(title: title, action: nil, keyEquivalent: "")
-		newItem.representedObject = object
-		self.menu?.addItem(newItem)
-	}
-
-	/// Inserts the specified menu item into the popup menu at the given index and assigns it
-	/// an initial tag value.
-	@objc
-	func insertItem(withTitle title: String, tag: Int, atIndex index: Int) {
-		let newItem = NSMenuItem(title: title, action: nil, keyEquivalent: "")
-		newItem.tag = tag
-		self.menu?.insertItem(newItem, at: index)
-	}
-
 }
