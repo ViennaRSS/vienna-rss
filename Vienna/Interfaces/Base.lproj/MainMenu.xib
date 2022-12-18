@@ -799,8 +799,21 @@ CA
                                     <action selector="downloadEnclosure:" target="-1" id="zH0-xU-GTv"/>
                                 </connections>
                             </menuItem>
-                            <menuItem isSeparatorItem="YES" id="1204">
-                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            <menuItem isSeparatorItem="YES" id="1204"/>
+                            <menuItem title="Share…" id="SSr-Ho-wep">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="invokeSharingServicePicker:" target="-1" id="Whd-sT-AWC"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Add to Safari Reading List" id="VQe-zs-ODh" customClass="VNASharingServiceMenuItem">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="name" value="safariReadingList"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="performSharingService:" target="-1" id="K6t-xO-qc5"/>
+                                </connections>
                             </menuItem>
                             <menuItem title="Send Link by Email" keyEquivalent="s" id="1073">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
