@@ -179,6 +179,17 @@
 		</class>
 	</suite>
 	<suite name="Vienna Suite" code="Vnna" description="Classes and commands for Vienna">
+		<enumeration name="feed list size mode" code="flsm">
+			<enumerator name="small" code="tiny">
+				<cocoa integer-value="1"/>
+			</enumerator>
+			<enumerator name="medium" code="smal">
+				<cocoa integer-value="2"/>
+			</enumerator>
+			<enumerator name="large" code="medi">
+				<cocoa integer-value="3"/>
+			</enumerator>
+		</enumeration>
 		<class name="application" plural="applications" code="capp" inherits="application" description="Vienna top level scripting object">
 			<cocoa class="ViennaApp"/>
 			<property type="text" name="application version" code="apVE" access="r" description="The build number for the Vienna application bundle" hidden="yes">
@@ -230,6 +241,9 @@
 			<!-- This property is obsolete -->
 			<property type="integer" name="folder list font size" code="flFS" description="The size of the font used in the folder list pane" hidden="yes">
 				<cocoa key="folderListFontSize"/>
+			</property>
+			<property type="feed list size mode" name="feed list font size" code="flSM" description="The size of the font used in the feed list (sidebar)">
+				<cocoa key="feedListSizeMode"/>
 			</property>
 			<property type="real" name="mark read interval" code="mrIN" description="The interval after an article is displayed before it is marked read">
 				<cocoa key="markReadInterval"/>

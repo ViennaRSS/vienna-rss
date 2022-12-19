@@ -1133,7 +1133,7 @@ static void *ObserverContext = &ObserverContext;
         self.outlineView.sizeMode = size;
         break;
     default:
-        self.outlineView.sizeMode = VNAFeedListSizeModeTiny;
+        self.outlineView.sizeMode = VNAFeedListSizeModeDefault;
     }
 
     self.outlineView.rowHeight = [self.outlineView rowHeightForSize:size];
