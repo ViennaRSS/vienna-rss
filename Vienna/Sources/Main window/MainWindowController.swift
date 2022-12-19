@@ -230,6 +230,11 @@ final class MainWindowController: NSWindowController {
     }
 
     @IBAction private func performSharingService(_ sender: Any) {
+        if (sender as? SharingServiceMenuItem)?.name == "emailLink" {
+            let sharingService = NSSharingService(named: .composeEmail)
+            sharingService?.perform(withItems: shareableItems)
+        }
+
         if (sender as? SharingServiceMenuItem)?.name == "safariReadingList" {
             let sharingService = NSSharingService(named: .addToSafariReadingList)
             sharingService?.perform(withItems: shareableItems)

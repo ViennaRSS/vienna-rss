@@ -346,19 +346,6 @@
                             <action selector="refreshAllSubscriptions:" target="-1" id="SRS-ST-tVf"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="006BC31E-0D67-4BDB-95C0-FA6220913D81" explicitItemIdentifier="MailLink" label="Send Link" paletteLabel="Send Link" toolTip="Email a link to the current article or website" image="MailTemplate" sizingBehavior="auto" id="10h-xf-C6T" customClass="VNAButtonToolbarItem">
-                        <button key="view" verticalHuggingPriority="750" id="EJA-2q-HQu">
-                            <rect key="frame" x="15" y="14" width="29" height="23"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="MailTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8Cf-Qg-5OD">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                        </button>
-                        <connections>
-                            <action selector="mailLinkToArticlePage:" target="-1" id="1ff-ox-Afg"/>
-                        </connections>
-                    </toolbarItem>
                     <toolbarItem implicitItemIdentifier="A9627EDC-4246-4CE6-B9A2-B1C43C372E58" explicitItemIdentifier="DeleteArticle" label="Delete" paletteLabel="Delete" toolTip="Delete the current article" image="DeleteTemplate" sizingBehavior="auto" id="Y22-Ul-q6w" customClass="VNAButtonToolbarItem">
                         <button key="view" verticalHuggingPriority="750" id="mYu-BR-T3p">
                             <rect key="frame" x="6" y="14" width="30" height="23"/>
@@ -1170,7 +1157,6 @@
         <image name="EmptyTrashTemplate" width="19" height="14"/>
         <image name="FunnelFilterTemplate" width="35" height="35"/>
         <image name="GetInfoTemplate" width="28" height="28"/>
-        <image name="MailTemplate" width="17" height="12"/>
         <image name="MarkReadTemplate" width="19" height="14"/>
         <image name="NSActionTemplate" width="20" height="20"/>
         <image name="NSShareTemplate" width="19" height="22"/>
