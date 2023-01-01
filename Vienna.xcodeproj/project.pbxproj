@@ -216,6 +216,9 @@
 		F6A7DE4A1E4717970017BE5E /* shared in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DE491E4717970017BE5E /* shared */; };
 		F6A7DE4F1E471A7F0017BE5E /* Vienna.help in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DDCA1E470E980017BE5E /* Vienna.help */; };
 		F6AC41AC25A4FAF6007DED7B /* FeedDiscovererTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AC41AB25A4FAF6007DED7B /* FeedDiscovererTests.swift */; };
+		F6B059E02961D0A100F6E31B /* JSONFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B059DF2961D0A000F6E31B /* JSONFeed.swift */; };
+		F6B059E22961D0A800F6E31B /* JSONFeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B059E12961D0A800F6E31B /* JSONFeedItem.swift */; };
+		F6B059E42961D0DD00F6E31B /* JSONFeedParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B059E32961D0DD00F6E31B /* JSONFeedParser.swift */; };
 		F6B355DB256025D3008CA1ED /* PreferenceTabViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B355DA256025D3008CA1ED /* PreferenceTabViewItem.swift */; };
 		F6B3561525616313008CA1ED /* DownloadItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B3561425616313008CA1ED /* DownloadItem.m */; };
 		F6B7BC3624A2A9A40051D76F /* FMDB in Frameworks */ = {isa = PBXBuildFile; productRef = F6B7BC3524A2A9A40051D76F /* FMDB */; };
@@ -879,6 +882,9 @@
 		F6A7DEAE1E471E460017BE5E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hans"; path = "zh-Hans.lproj/advanced.html"; sourceTree = "<group>"; };
 		F6AAE39D209EFED80039CC04 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
 		F6AC41AB25A4FAF6007DED7B /* FeedDiscovererTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDiscovererTests.swift; sourceTree = "<group>"; };
+		F6B059DF2961D0A000F6E31B /* JSONFeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONFeed.swift; sourceTree = "<group>"; };
+		F6B059E12961D0A800F6E31B /* JSONFeedItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONFeedItem.swift; sourceTree = "<group>"; };
+		F6B059E32961D0DD00F6E31B /* JSONFeedParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONFeedParser.swift; sourceTree = "<group>"; };
 		F6B1233E1E474D2A00973699 /* IndexHelpbook.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = IndexHelpbook.sh; sourceTree = "<group>"; };
 		F6B355DA256025D3008CA1ED /* PreferenceTabViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceTabViewItem.swift; sourceTree = "<group>"; };
 		F6B3561325616302008CA1ED /* DownloadItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadItem.h; sourceTree = "<group>"; };
@@ -1247,6 +1253,16 @@
 			path = Scripts;
 			sourceTree = "<group>";
 		};
+		F6256C122960D037003131AA /* JSON Feed */ = {
+			isa = PBXGroup;
+			children = (
+				F6B059E32961D0DD00F6E31B /* JSONFeedParser.swift */,
+				F6B059DF2961D0A000F6E31B /* JSONFeed.swift */,
+				F6B059E12961D0A800F6E31B /* JSONFeedItem.swift */,
+			);
+			name = "JSON Feed";
+			sourceTree = "<group>";
+		};
 		F63739FB1F1CFEDC00ED3B09 /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
@@ -1453,15 +1469,20 @@
 			path = Files;
 			sourceTree = "<group>";
 		};
-		F6C9DA74271BBA4800FC3027 /* Feed types */ = {
+		F6C9DA74271BBA4800FC3027 /* XML-based feeds */ = {
 			isa = PBXGroup;
 			children = (
+				AA3281A3084161EB00A7AD5A /* XMLFeedParser.h */,
+				AA3281A4084161EB00A7AD5A /* XMLFeedParser.m */,
+				F6898208281DD62B0010F4C5 /* XMLFeed.h */,
+				F6898209281DD62B0010F4C5 /* XMLFeed.m */,
+				B8B9D6D223685C7400EAE65C /* XMLFeedItem.swift */,
 				F6C9DA71271BB55000FC3027 /* AtomFeed.h */,
 				F6C9DA72271BB55000FC3027 /* AtomFeed.m */,
 				F6C9DA6E271BB3BB00FC3027 /* RSSFeed.h */,
 				F6C9DA6F271BB3BB00FC3027 /* RSSFeed.m */,
 			);
-			name = "Feed types";
+			name = "XML-based feeds";
 			sourceTree = "<group>";
 		};
 		F6D7FED61F1CDD88004F095A /* Vienna */ = {
@@ -1629,14 +1650,10 @@
 		F6D7FEE01F1CE147004F095A /* Parsing */ = {
 			isa = PBXGroup;
 			children = (
-				AA3281A3084161EB00A7AD5A /* XMLFeedParser.h */,
-				AA3281A4084161EB00A7AD5A /* XMLFeedParser.m */,
 				F6898213281EE7650010F4C5 /* Feed.h */,
 				F63503F32960846D006F1F76 /* FeedItem.h */,
-				F6898208281DD62B0010F4C5 /* XMLFeed.h */,
-				F6898209281DD62B0010F4C5 /* XMLFeed.m */,
-				B8B9D6D223685C7400EAE65C /* XMLFeedItem.swift */,
-				F6C9DA74271BBA4800FC3027 /* Feed types */,
+				F6256C122960D037003131AA /* JSON Feed */,
+				F6C9DA74271BBA4800FC3027 /* XML-based feeds */,
 				F615824223834D6500D2BD41 /* FeedDiscoverer.swift */,
 			);
 			path = Parsing;
@@ -2153,6 +2170,7 @@
 				2F88B2A62545BB450067EEA6 /* ArticleConverter.m in Sources */,
 				AA36CD7C06100692001E33A4 /* Field.m in Sources */,
 				AA8C72F60641DE1F00649BA2 /* Criteria.m in Sources */,
+				F6B059E22961D0A800F6E31B /* JSONFeedItem.swift in Sources */,
 				F6C9DA70271BB3BB00FC3027 /* RSSFeed.m in Sources */,
 				0349813E1A206FD900014F29 /* GeneralPreferencesViewController.m in Sources */,
 				2F88B2AD2545BCA90067EEA6 /* WebViewArticleConverter.swift in Sources */,
@@ -2172,6 +2190,7 @@
 				2F125EE024D066ED00868E11 /* AsyncHelper.swift in Sources */,
 				AA71168F09BEB17300E3EA8A /* AddressBarCell.m in Sources */,
 				0379E2381A2082E600D58BFE /* AppearancePreferencesViewController.m in Sources */,
+				F6B059E02961D0A100F6E31B /* JSONFeed.swift in Sources */,
 				F63833D81EF842EA00E07213 /* MainWindowController.swift in Sources */,
 				F41CA694218F56140072F734 /* NSWorkspace+OpenWithMenu.m in Sources */,
 				2FF61D3024F2ED1500A7E2B5 /* BrowserTab+Interface.swift in Sources */,
@@ -2201,6 +2220,7 @@
 				4350289B165DE9E00018EDB7 /* ArticleView.m in Sources */,
 				4350289C165DE9E00018EDB7 /* BrowserPane.m in Sources */,
 				F61CEA661F039E57009C878E /* ButtonToolbarItem.swift in Sources */,
+				F6B059E42961D0DD00F6E31B /* JSONFeedParser.swift in Sources */,
 				F68792872700A678009B7BB5 /* SecurityScopedBookmark.swift in Sources */,
 				4350289D165DE9E00018EDB7 /* BrowserPaneTemplate.m in Sources */,
 				F6094E331F10107800677D3B /* ExportAccessoryViewController.swift in Sources */,

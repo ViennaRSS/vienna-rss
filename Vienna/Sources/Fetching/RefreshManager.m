@@ -512,7 +512,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         }
         [myRequest vna_setUserInfo:@{ @"folder": folder, @"log": aItem, @"type": @(MA_Refresh_Feed) }];
         [myRequest addValue:
-         @"application/rss+xml,application/rdf+xml,application/atom+xml,text/xml,application/xml,application/xhtml+xml;q=0.9,text/html;q=0.8,*/*;q=0.5"
+         @"application/rss+xml,application/rdf+xml,application/atom+xml,text/xml,application/xml,application/xhtml+xml,application/feed+json,application/json;q=0.9,text/html;q=0.8,*/*;q=0.5"
                       forHTTPHeaderField:@"Accept"];
         // if authentication infos are present, try basic authentication first
         if (![folder.username isEqualToString:@""]) {
@@ -623,6 +623,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
                      @"log": connectorItem,
                      @"url": url,
                      @"data": receivedData,
+                     @"mimeType": response.MIMEType,
                      @"lastModifiedString": lastModifiedString,
                  }];
             }
@@ -690,13 +691,26 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
             [receivedData writeToFile:feedSourcePath options:NSAtomicWrite error:NULL];
         }
 
-        VNAXMLFeedParser *parser = [[VNAXMLFeedParser alloc] init];
-        VNAXMLFeed *newFeed = [parser feedWithXMLData:receivedData error:nil];
+        id<VNAFeed> newFeed;
+        NSError *error;
+        NSString *mimeType = parameters[@"mimeType"];
+        if ([mimeType containsString:@"application/feed+json"] ||
+            [mimeType containsString:@"application/json"]) {
+            VNAJSONFeedParser *parser = [[VNAJSONFeedParser alloc] init];
+            newFeed = [parser feedWithJSONData:receivedData error:&error];
+        } else {
+            VNAXMLFeedParser *parser = [[VNAXMLFeedParser alloc] init];
+            newFeed = [parser feedWithXMLData:receivedData error:&error];
+        }
         if (!newFeed) {
+            NSString *errorDebugDescription = error.userInfo[NSDebugDescriptionErrorKey];
+            if (errorDebugDescription) {
+                os_log_error(VNA_LOG, "%@", errorDebugDescription);
+            }
             // Mark the feed as failed
             [self setFolderErrorFlag:folder flag:YES];
             dispatch_async(dispatch_get_main_queue(), ^{
-                [connectorItem setStatus:NSLocalizedString(@"Error parsing XML data in feed", nil)];
+                [connectorItem setStatus:NSLocalizedString(@"Error parsing data in feed", nil)];
             });
             return;
         }
@@ -742,7 +756,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 
         // Parse off items.
 
-        for (VNAXMLFeedItem * newsItem in newFeed.items) {
+        for (id<VNAFeedItem> newsItem in newFeed.items) {
             NSDate * articleDate = newsItem.modifiedDate;
 
             NSString * articleGuid = newsItem.guid;
