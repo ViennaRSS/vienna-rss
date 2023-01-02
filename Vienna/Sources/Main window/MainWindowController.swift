@@ -216,25 +216,30 @@ extension MainWindowController: NSWindowDelegate {
 
     func windowDidBecomeMain(_ notification: Notification) {
         statusLabel.textColor = .windowFrameTextColor
+    }
+
+    func windowDidResignMain(_ notification: Notification) {
+        statusLabel.textColor = .disabledControlTextColor
+    }
+
+    func windowDidChangeOcclusionState(_ notification: Notification) {
+        guard let window, window.occlusionState.contains(.visible) else {
+            observationTokens.removeAll()
+            return
+        }
 
         observationTokens = [
-            OpenReader.shared.observe(\.statusMessage, options: .new) { [weak self] manager, change in
+            OpenReader.shared.observe(\.statusMessage, options: [.initial, .new]) { [weak self] manager, change in
                 if change.newValue is String {
                     self?.statusLabel.stringValue = manager.statusMessage
                 }
             },
-            RefreshManager.shared.observe(\.statusMessage, options: .new) { [weak self] manager, change in
+            RefreshManager.shared.observe(\.statusMessage, options: [.initial, .new]) { [weak self] manager, change in
                 if change.newValue is String {
                     self?.statusLabel.stringValue = manager.statusMessage
                 }
             }
         ]
-    }
-
-    func windowDidResignMain(_ notification: Notification) {
-        statusLabel.textColor = .disabledControlTextColor
-
-        observationTokens.removeAll()
     }
 
 }
