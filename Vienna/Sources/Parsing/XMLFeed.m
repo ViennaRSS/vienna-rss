@@ -66,8 +66,12 @@ static NSDateFormatter *dateFormatterArray[kNumberOfDateFormatters];
 
 // MARK: Initialization
 
-+ (void)load
++ (void)initialize
 {
+    if (self != [VNAXMLFeed class]) {
+        return;
+    }
+
     // Initializes the date formatters
     NSLocale *locale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
     NSTimeZone *timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
