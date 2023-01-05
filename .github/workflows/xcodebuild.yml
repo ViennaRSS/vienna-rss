@@ -1,6 +1,13 @@
 name: Build and test
 
-on: pull_request
+on:
+  pull_request:
+    paths:
+      - Vienna*/**
+      - External/**
+      - Scripts/**
+      - Makefile
+      - .github/workflows/*
 
 jobs:
   test:
@@ -13,7 +20,7 @@ jobs:
 
     steps:
     - name: Set up Git repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         fetch-depth: 0
     - name: Build Xcode project
