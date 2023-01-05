@@ -11,25 +11,25 @@
 "A folder with that name already exists" = "Já existe uma pasta com esse nome";
 
 /* No comment provided by engineer. */
-"A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Uma nova base de dados do Vienna não pode ser criada em \"%@\" porque provavelmente a pasta está localizada num disco de rede e esta versão do Vienna não consegue manipular bases de dados remotas. Por favor escolha uma máquina que esteja localizada no seu computador.";
+"A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Uma nova base de dados do Vienna não pôde ser criada em \"%@\" porque provavelmente a pasta está localizada num disco de rede e esta versão do Vienna não consegue manipular bases de dados remotas. Por favor escolha uma máquina que esteja localizada no seu computador.";
 
 /* No comment provided by engineer. */
-"Are you sure you want to delete all %d selected folders? This operation cannot be undone." = "Tem a certeza que deseja apagar todas as %d pastas seleccionadas? Esta operação não pode ser anulada.";
+"Are you sure you want to delete all %d selected folders? This operation cannot be undone." = "Tem a certeza de que deseja apagar todas as %d pastas seleccionadas? Esta operação não pode ser anulada.";
 
 /* No comment provided by engineer. */
-"Are you sure you want to delete group folder \"%@\" and all sub folders? This operation cannot be undone." = "Tem a certeza que deseja apagar a pasta de grupo \"%@\" e todas as sub-pastas? Esta operação não pode ser anulada.";
+"Are you sure you want to delete group folder \"%@\" and all sub folders? This operation cannot be undone." = "Tem a certeza de que deseja apagar a pasta de grupo \"%@\" e todas as sub-pastas? Esta operação não pode ser anulada.";
 
 /* No comment provided by engineer. */
-"Are you sure you want to delete smart folder \"%@\"? This will not delete the actual articles matched by the search." = "tem a certeza que deseja apagar a pasta inteligente \"%@\"? Isto não vai apagar os artigos actualmente associados à procura.";
+"Are you sure you want to delete smart folder \"%@\"? This will not delete the actual articles matched by the search." = "Tem a certeza de que deseja apagar a pasta inteligente \"%@\"? Isto não vai apagar os artigos actualmente associados à procura.";
 
 /* No comment provided by engineer. */
-"Are you sure you want to delete the messages in the Trash folder permanently?" = "Tem a certeza que deseja apagar as pastas que estão no lixo permanentemente?";
+"Are you sure you want to delete the messages in the Trash folder permanently?" = "Tem a certeza de que deseja apagar as pastas que estão no lixo permanentemente?";
 
 /* No comment provided by engineer. */
-"Are you sure you want to permanently delete the selected articles?" = "Tem a certeza que deseja apagar permanentemente os estilos seleccionados?";
+"Are you sure you want to permanently delete the selected articles?" = "Tem a certeza de que deseja apagar permanentemente os estilos seleccionados?";
 
 /* No comment provided by engineer. */
-"Are you sure you want to unsubscribe from \"%@\"? This operation will delete all cached articles." = "Tem a certeza que deseja anular a subcrição de \"%@\"? Esta operação vai apagar todos os artigos em cache.";
+"Are you sure you want to unsubscribe from \"%@\"? This operation will delete all cached articles." = "Tem a certeza de que deseja anular a subcrição de \"%@\"? Esta operação vai apagar todos os artigos em cache.";
 
 /* No comment provided by engineer. */
 "Articles" = "Artigos";
@@ -66,10 +66,10 @@
 "contains" = "contém";
 
 /* No comment provided by engineer. */
-"Copy Link to Clipboard" = "Copiar Link para a Área de Transferências";
+"Copy Link to Clipboard" = "Copiar ligação para a Área de Transferências";
 
 /* No comment provided by engineer. */
-"Copy Page Link to Clipboard" = "Copiar Link da Página para a Área de Transferência";
+"Copy Page Link to Clipboard" = "Copiar Ligação da Página para a Área de Transferência";
 
 /* No comment provided by engineer. */
 "Database Upgrade" = "Base de Dados Actualizada";
@@ -88,7 +88,7 @@
 "Delete group folder" = "Apagar pasta de grupo";
 
 /* No comment provided by engineer. */
-"Delete multiple folders" = "Apagar múltiplas pastas";
+"Delete multiple folders" = "Apagar várias pastas";
 
 /* No comment provided by engineer. */
 "Delete smart folder" = "Apagar pasta inteligente";
@@ -115,7 +115,7 @@
 "Don’t Empty Trash" = "Não Esvaziar Lixo";
 
 /* Notification title */
-"Download completed" = "Download completo";
+"Download completed" = "Descarga concluída";
 
 /* Title of a menu item */
 "Download Enclosure" = "Descarregar Anexo";
@@ -124,7 +124,7 @@
 "Download Enclosures" = "Descarregar Anexos";
 
 /* Notification title */
-"Download failed" = "Download falhou";
+"Download failed" = "Descarga falhou";
 
 /* Title of a button on an alert */
 "Empty" = "Vazio";
@@ -145,13 +145,13 @@
 "Error" = "Erro";
 
 /* No comment provided by engineer. */
-"Error parsing XML data in feed" = "Error no parsing de dados XML da fonte";
+"Error parsing XML data in feed" = "Erro na análise de dados XML da fonte";
 
 /* No comment provided by engineer. */
-"Export Completed" = "Exportação Completada";
+"Export Completed" = "Exportação Concluída";
 
 /* No comment provided by engineer. */
-"External Browser" = "Browser Externo";
+"External Browser" = "Navegador Externo";
 
 /* No comment provided by engineer. */
 "Feed URL updated to %@" = "URL da fonte actualizado para %@";
@@ -160,7 +160,7 @@
 "File %@ downloaded" = "Ficheiro %@ descarregado";
 
 /* Notification body */
-"File %@ failed to download" = "Download do ficheiro %@ falhou";
+"File %@ failed to download" = "Descarga do ficheiro %@ falhou";
 
 /* No comment provided by engineer. */
 "Filter in %@" = "Pesquisar em %@";
@@ -193,13 +193,13 @@
 "HTTP code %d reported from server" = "Código HTTP %d devolvido pelo servidor";
 
 /* Message text of an alert */
-"If you quit Vienna now, all downloads will stop." = "Se encerrar o Vienna agora, todos os downloads serão parados.";
+"If you quit Vienna now, all downloads will stop." = "Se encerrar o Vienna agora, todas as descargas serão interrompidas.";
 
 /* Title of a button on an alert */
 "Import" = "Importar";
 
 /* No comment provided by engineer. */
-"Import Completed" = "Importação Completada";
+"Import Completed" = "Importação Concluída";
 
 /* No comment provided by engineer. */
 "Import error" = "Erro ao Importar";
@@ -283,7 +283,7 @@
 "No new articles available" = "Nenhum artigo novo disponível";
 
 /* Message text of an alert */
-"One or more downloads are in progress" = "Um ou mais downloads estão em progresso";
+"One or more downloads are in progress" = "Uma ou mais descargas estão em progresso";
 
 /* Title of a popup menu item */
 "Open" = "Abrir";
@@ -295,7 +295,7 @@
 "Open Article Page in %@" = "Abrir Página do Artigo em %@";
 
 /* Title of a menu item */
-"Open Article Page in External Browser" = "Abrir página do Artigo no Browser Externo";
+"Open Article Page in External Browser" = "Abrir página do Artigo no Navegador Externo";
 
 /* No comment provided by engineer. */
 "Open Frame" = "Abrir Frame";
@@ -307,10 +307,10 @@
 "Open Image in New Tab" = "Abrir Imagem num Novo Separador";
 
 /* No comment provided by engineer. */
-"Open Link in %@" = "Abri Link em %@";
+"Open Link in %@" = "Abrir Ligação em %@";
 
 /* No comment provided by engineer. */
-"Open Link in New Tab" = "Abrir Link num Novo Separador";
+"Open Link in New Tab" = "Abrir Ligação num Novo Separador";
 
 /* No comment provided by engineer. */
 "Open Page in %@" = "Abrir Página em %@";
@@ -325,7 +325,7 @@
 "Open Subscription Home Page in %@" = "Abrir Página de Subscrição em %@";
 
 /* Title of a menu item */
-"Open Subscription Home Page in External Browser" = "Abrir Página da Subscrição no Browser Externo";
+"Open Subscription Home Page in External Browser" = "Abrir Página da Subscrição no Navegador Externo";
 
 /* No comment provided by engineer. */
 "Other" = "Outro";
@@ -350,7 +350,7 @@
 "Refresh All Subscriptions" = "Actualizar Todas as Subscrições";
 
 /* No comment provided by engineer. */
-"Refresh completed" = "Actualização Completada";
+"Refresh completed" = "Actualização Concluída";
 
 /* No comment provided by engineer. */
 "Refresh the current page" = "Actualizar a página actual";
@@ -374,7 +374,7 @@
 "Retrieving articles" = "A Receber Artigos";
 
 /* No comment provided by engineer. */
-"Retrieving folder image" = "Recebendo imagem da pasta";
+"Retrieving folder image" = "A receber imagem da pasta";
 
 /* No comment provided by engineer. */
 "Return to the previous page" = "Voltar para a página anterior";
@@ -394,10 +394,10 @@
 "Select…" = "Seleccionar…";
 
 /* No comment provided by engineer. */
-"Send Link" = "Enviar Link";
+"Send Link" = "Enviar Ligação";
 
 /* No comment provided by engineer. */
-"Send Links" = "Enviar Links";
+"Send Links" = "Enviar Ligações";
 
 /* No comment provided by engineer. */
 "Show Filter Bar" = "Mostrar Barra de Filtragem";
