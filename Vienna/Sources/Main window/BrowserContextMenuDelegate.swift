@@ -21,7 +21,6 @@ import Cocoa
 
 protocol BrowserContextMenuDelegate: AnyObject {
     func contextMenuItemsFor(purpose: WKWebViewContextMenuContext, existingMenuItems: [NSMenuItem]) -> [NSMenuItem]
-    func contextMenuItemAction(menuItem: NSMenuItem)
 }
 
 enum WKWebViewContextMenuContext {

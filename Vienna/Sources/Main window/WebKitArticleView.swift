@@ -171,11 +171,6 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView, WKNavigationDelega
         }
     }
 
-    @objc
-    func contextMenuItemAction(menuItem: NSMenuItem) {
-        contextMenuCustomizer.contextMenuItemAction(menuItem: menuItem)
-    }
-
     deinit {
         deleteHtmlFile()
     }

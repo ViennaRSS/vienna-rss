@@ -378,7 +378,4 @@ extension MainWindowController: BrowserContextMenuDelegate {
     func contextMenuItemsFor(purpose: WKWebViewContextMenuContext, existingMenuItems: [NSMenuItem]) -> [NSMenuItem] {
         return contextMenuDelegate.contextMenuItemsFor(purpose: purpose, existingMenuItems: existingMenuItems)
     }
-    func contextMenuItemAction(menuItem: NSMenuItem) {
-        contextMenuDelegate.contextMenuItemAction(menuItem: menuItem)
-    }
 }
