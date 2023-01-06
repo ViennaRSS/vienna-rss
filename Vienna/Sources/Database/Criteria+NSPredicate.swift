@@ -241,19 +241,28 @@ extension Criteria {
         }
 
         let comparisonPredicate: NSComparisonPredicate
-        if self.operatorType == .notEqualTo && (self.value == "No" || self.value == "Yes") {
-            //use canonical "is yes / is no" representation instead of allowing ambiguous "is not yes - is no / is not no - is yes"
+
+        //TODO constants for fixed criteria values also for Criteria+SQL,
+        // e.g. YES, NO, yesterday, today, last week, ...
+
+        if self.field == MA_Field_Date && self.operatorType == .after && self.value == "yesterday" {
+            // Use canonical "is today" instead of "is after yesterday"
+            comparisonPredicate = NSComparisonPredicate(leftExpression: left, rightExpression: NSExpression(forConstantValue: "today"), modifier: .direct, type: .equalTo)
+        } else if self.operatorType == .notEqualTo && (self.value == "No" || self.value == "Yes") {
+            // Use canonical "is yes / is no" representation instead of allowing
+            // ambiguous "is not yes - is no / is not no - is yes"
             let invertedRight = NSExpression(forConstantValue: self.value == "No" ? "Yes" : "No")
             comparisonPredicate = NSComparisonPredicate(leftExpression: left, rightExpression: invertedRight, modifier: .direct, type: .equalTo)
         } else {
             comparisonPredicate = NSComparisonPredicate(leftExpression: left, rightExpression: right, modifier: .direct, type: type)
         }
 
-        if self.operatorType != .containsNot {
-            return comparisonPredicate
-        } else {
-            //representation for "not contains" in predicate differs because "not contains" is no predicate operator
+        if self.operatorType == .containsNot {
+            // Representation for "not contains" in predicate differs because
+            // "not contains" is no predicate operator
             return NSCompoundPredicate(notPredicateWithSubpredicate: comparisonPredicate)
+        } else {
+            return comparisonPredicate
         }
     }
 }
