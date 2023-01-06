@@ -123,13 +123,18 @@ extension Criteria {
         let field = comparison.leftExpression.constantValue as? String ?? comparison.leftExpression.keyPath
         let value = comparison.rightExpression.constantValue as? String ?? comparison.rightExpression.keyPath
 
+        var fallback = false
+
         let criteriaOperator: Criteria.Operator
         switch field {
         case MA_Field_Folder:
             switch comparison.predicateOperatorType {
             case .notEqualTo:
                 criteriaOperator = .notEqualTo
+            case .equalTo:
+                criteriaOperator = .equalTo
             default:
+                fallback = true
                 criteriaOperator = .equalTo
             }
         case MA_Field_Subject, MA_Field_Author, MA_Field_Text:
@@ -142,7 +147,10 @@ extension Criteria {
                 }
             case .notEqualTo:
                 criteriaOperator = .notEqualTo
+            case .equalTo:
+                criteriaOperator = .equalTo
             default:
+                fallback = true
                 criteriaOperator = .equalTo
             }
         case MA_Field_Date:
@@ -155,7 +163,12 @@ extension Criteria {
                 criteriaOperator = .after
             case .greaterThanOrEqualTo:
                 criteriaOperator = .onOrAfter
+            case .notEqualTo:
+                criteriaOperator = .notEqualTo
+            case .equalTo:
+                criteriaOperator = .equalTo
             default:
+                fallback = true
                 criteriaOperator = .equalTo
             }
         case MA_Field_Read, MA_Field_Flagged, MA_Field_HasEnclosure, MA_Field_Deleted:
@@ -165,14 +178,21 @@ extension Criteria {
                 // make sense to offer "== false" and "!= true" making things
                 // ambiguous
                 criteriaOperator = .notEqualTo
+            case .equalTo:
+                criteriaOperator = .equalTo
             default:
+                fallback = true
                 criteriaOperator = .equalTo
             }
         default:
-            NSLog("Unknown field \(field), will default to \"=\" operator!")
+            NSLog("Unknown field \(field)")
+            fallback = comparison.predicateOperatorType != .equalTo
             criteriaOperator = .equalTo
         }
-        //TODO implement all available / valid types
+
+        if fallback {
+            NSLog("Predicate for \(field) has unsuitable operator \(comparison.predicateOperatorType), will default to \(criteriaOperator)")
+        }
 
         self.init(field: field, operatorType: criteriaOperator, value: value)
     }
