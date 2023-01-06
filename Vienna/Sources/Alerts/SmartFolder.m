@@ -151,23 +151,57 @@ static NSNibName const VNASmartFolderNibName = @"SearchFolder";
 
     [rowTemplates addObject:[VNASeparatorPredicateEditorRowTemplate new]];
 
-    // date = / > / >= / < / <= today / yesterday / last week
-    NSArray<NSExpression *> *dateRightExpressions = @[
-        [NSExpression expressionForConstantValue:@"today"],
-        [NSExpression expressionForConstantValue:@"yesterday"],
-        [NSExpression expressionForConstantValue:@"last week"]
+    // date = / < / <= today / yesterday / lastWeek
+    NSArray<NSExpression *> *todayRightExpressions = @[
+        [NSExpression expressionForConstantValue:@"today"]
     ];
-    NSPredicateEditorRowTemplate *dateTemplate = [[NSPredicateEditorRowTemplate alloc]
-                                                  initWithLeftExpressions:@[[NSExpression expressionForConstantValue:@"Date"]]
-                                                  rightExpressions:dateRightExpressions
-                                                  modifier:NSDirectPredicateModifier
-                                                  operators:@[
+    NSArray *todayOperators = @[
         @(NSEqualToPredicateOperatorType),
         @(NSLessThanPredicateOperatorType),
         @(NSLessThanOrEqualToPredicateOperatorType),
-        @(NSGreaterThanPredicateOperatorType),
+    ];
+    NSPredicateEditorRowTemplate *todayTemplate = [[NSPredicateEditorRowTemplate alloc]
+                                                  initWithLeftExpressions:@[[NSExpression expressionForConstantValue:@"Date"]]
+                                                  rightExpressions:todayRightExpressions
+                                                  modifier:NSDirectPredicateModifier
+                                                  operators:todayOperators
+                                                  options:0];
+    [rowTemplates addObject:todayTemplate];
+
+    // date = / >= / < / <= yesterday
+    NSArray<NSExpression *> *yesterdayRightExpressions = @[
+        [NSExpression expressionForConstantValue:@"yesterday"]
+    ];
+    NSArray *yesterdayOperators = @[
+        @(NSEqualToPredicateOperatorType),
+        @(NSLessThanPredicateOperatorType),
+        @(NSLessThanOrEqualToPredicateOperatorType),
         @(NSGreaterThanOrEqualToPredicateOperatorType)
-    ]
+    ];
+    NSPredicateEditorRowTemplate *yesterdayTemplate = [[NSPredicateEditorRowTemplate alloc]
+                                                  initWithLeftExpressions:@[[NSExpression expressionForConstantValue:@"Date"]]
+                                                  rightExpressions:yesterdayRightExpressions
+                                                  modifier:NSDirectPredicateModifier
+                                                  operators:yesterdayOperators
+                                                  options:0];
+    [rowTemplates addObject:yesterdayTemplate];
+
+    // date = / > / >= / < / <= last week
+    NSArray<NSExpression *> *weekRightExpressions = @[
+        [NSExpression expressionForConstantValue:@"last week"]
+    ];
+    NSArray *weekOperators = @[
+        @(NSEqualToPredicateOperatorType),
+        @(NSGreaterThanPredicateOperatorType),
+        @(NSGreaterThanOrEqualToPredicateOperatorType),
+        @(NSLessThanPredicateOperatorType),
+        @(NSLessThanOrEqualToPredicateOperatorType)
+    ];
+    NSPredicateEditorRowTemplate *dateTemplate = [[NSPredicateEditorRowTemplate alloc]
+                                                  initWithLeftExpressions:@[[NSExpression expressionForConstantValue:@"Date"]]
+                                                  rightExpressions:weekRightExpressions
+                                                  modifier:NSDirectPredicateModifier
+                                                  operators:weekOperators
                                                   options:0];
     [rowTemplates addObject:dateTemplate];
 
