@@ -79,8 +79,6 @@ class TabbedBrowserViewController: NSViewController, RSSSource {
         }
     }
 
-    weak var contextMenuDelegate: BrowserContextMenuDelegate?
-
     override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
@@ -319,6 +317,8 @@ extension TabbedBrowserViewController: MMTabBarViewDelegate {
 extension TabbedBrowserViewController: CustomWKUIDelegate {
     // TODO: implement functionality for alerts and maybe peek actions
 
+    private static var contextMenuCustomizer: BrowserContextMenuDelegate = WebKitContextMenuCustomizer()
+
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
         let newTab = self.createNewTab(navigationAction.request, config: configuration, inBackground: false, insertAt: getIndexAfterSelected())
         if let webView = webView as? CustomWKWebView {
@@ -342,8 +342,7 @@ extension TabbedBrowserViewController: CustomWKUIDelegate {
         case .text:
             break
         }
-        return self.contextMenuDelegate?
-            .contextMenuItemsFor(purpose: purpose, existingMenuItems: menuItems) ?? menuItems
+        return TabbedBrowserViewController.contextMenuCustomizer.contextMenuItemsFor(purpose: purpose, existingMenuItems: menuItems)
     }
 
     private func addLinkMenuCustomizations(_ menuItems: inout [NSMenuItem], _ url: (URL)) {

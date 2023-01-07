@@ -52,8 +52,6 @@ final class MainWindowController: NSWindowController {
 
         (self.browser as? RSSSource)?.rssSubscriber = self
 
-        (self.browser as? TabbedBrowserViewController)?.contextMenuDelegate = self
-
         statusBarState(disclosed: Preferences.standard.showStatusBar, animate: false)
 
         splitView.addSubview(browser.view)
@@ -367,15 +365,5 @@ extension MainWindowController: RSSSubscriber {
         // TODO : if there are multiple feeds, we should put up an UI inviting the user to pick one, as also mentioned in SubscriptionModel.m verifiedFeedURLFromURL method
         // TODO : allow user to select a folder instead of assuming current location (see #1163)
         NSApp.appController.createSubscriptionInCurrentLocation(for: urls[0])
-    }
-}
-
-// MARK: - Browser context menu
-
-private var contextMenuDelegate: BrowserContextMenuDelegate = WebKitContextMenuCustomizer()
-
-extension MainWindowController: BrowserContextMenuDelegate {
-    func contextMenuItemsFor(purpose: WKWebViewContextMenuContext, existingMenuItems: [NSMenuItem]) -> [NSMenuItem] {
-        return contextMenuDelegate.contextMenuItemsFor(purpose: purpose, existingMenuItems: existingMenuItems)
     }
 }
