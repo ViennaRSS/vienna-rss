@@ -340,10 +340,10 @@ extension CustomWKWebView {
 
     override func willOpenMenu(_ menu: NSMenu, with event: NSEvent) {
 
+        super.willOpenMenu(menu, with: event)
         if contextMenuProvider != nil {
             customize(contextMenu: menu)
         }
-        super.willOpenMenu(menu, with: event)
     }
 
     private func customize(contextMenu menu: NSMenu) {
