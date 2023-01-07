@@ -1127,6 +1127,18 @@
 			name = WebKitArticleContent;
 			sourceTree = "<group>";
 		};
+		2F88FF3F2969A61C0076B99E /* Criteria */ = {
+			isa = PBXGroup;
+			children = (
+				AA8C72F30641DE1F00649BA2 /* Criteria.h */,
+				AA8C72F40641DE1F00649BA2 /* Criteria.m */,
+				2F33DB2B292445D200A9716A /* Criteria+SQL.h */,
+				2F33DB2C292445D200A9716A /* Criteria+SQL.m */,
+				2FEA5828291FD511008C42D3 /* Criteria+NSPredicate.swift */,
+			);
+			path = Criteria;
+			sourceTree = "<group>";
+		};
 		2FA946DF2517E3E5006134C5 /* CustomWebKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -1460,6 +1472,7 @@
 				F6D7FEDE1F1CE135004F095A /* Alerts */,
 				F6D7FEDF1F1CE13F004F095A /* Fetching */,
 				F6D7FEE01F1CE147004F095A /* Parsing */,
+				2F88FF3F2969A61C0076B99E /* Criteria */,
 				F6D7FEE11F1CE14E004F095A /* Database */,
 				F6D7FEE21F1CE15B004F095A /* Models */,
 				F6D7FEE31F1CE162004F095A /* Plug-ins */,
@@ -1611,11 +1624,6 @@
 			children = (
 				AA7AB45708CA742A000D34F9 /* ArticleRef.h */,
 				435026E5165DD8BE0018EDB7 /* ArticleRef.m */,
-				AA8C72F30641DE1F00649BA2 /* Criteria.h */,
-				AA8C72F40641DE1F00649BA2 /* Criteria.m */,
-				2F33DB2B292445D200A9716A /* Criteria+SQL.h */,
-				2F33DB2C292445D200A9716A /* Criteria+SQL.m */,
-				2FEA5828291FD511008C42D3 /* Criteria+NSPredicate.swift */,
 				AA26F4C90604927300FE7994 /* Database.h */,
 				AA26F4D50604927300FE7994 /* Database.m */,
 				03A131B11AA54EAC0037471F /* Database+Migration.h */,
