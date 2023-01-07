@@ -203,61 +203,86 @@ extension Criteria {
 
     private func buildPredicate() -> NSPredicate {
 
-        let left = NSExpression(forConstantValue: self.field)
-        let right = NSExpression(forConstantValue: self.value)
+        let field = self.field
+        let value = self.value
+        let operatorType = self.operatorType
 
-        let type: NSComparisonPredicate.Operator
-        switch self.operatorType {
-        case .equalTo:
-            type = .equalTo
-        case .notEqualTo:
-            type = .notEqualTo
-        case .lessThan:
-            type = .lessThan
-        case .greaterThan:
-            type = .greaterThan
-        case .lessThanOrEqualTo:
-            type = .lessThanOrEqualTo
-        case .greaterThanOrEqualTo:
-            type = .greaterThanOrEqualTo
-        case .contains:
-            type = .contains
-        case .containsNot:
-            type = .contains // special case: negated later
-        case .before:
-            type = .lessThan
-        case .after:
-            type = .greaterThan
-        case .onOrBefore:
-            type = .lessThanOrEqualTo
-        case .onOrAfter:
-            type = .greaterThanOrEqualTo
-        case .under:
-            type = .lessThan
-        case .notUnder:
-            type = .greaterThanOrEqualTo
-        default:
-            type = .equalTo
+        if field == MA_Field_Date, let unit = DateUnit.allCases.first(where: { value.hasSuffix($0.rawValue) }) {
+            let countString = value
+                .replacingOccurrences(of: unit.rawValue, with: "")
+                .trimmingCharacters(in: CharacterSet.whitespaces)
+            guard let count = UInt(countString) else {
+                fatalError("malformed criteria value \(value)")
+            }
+            let dateOperator = convertOperatorTypeForComparisonPredicate(operatorType)
+            return DatePredicateWithUnit<Article>(field: MA_Field_Date, comparisonOperator: dateOperator, count: count, unit: unit) { (article: Article, field: String, comparisonOperator, count, unit) in
+                true //TODO write an actual evaluation for the predicate that could be executed in code
+            }
+        } else {
+            return buildComparisonPredicate(field, value, operatorType)
         }
+    }
+
+    func convertOperatorTypeForComparisonPredicate(_ operatorType: Criteria.Operator) -> NSComparisonPredicate.Operator {
+        switch operatorType {
+        case .equalTo:
+            return .equalTo
+        case .notEqualTo:
+            return .notEqualTo
+        case .lessThan:
+            return .lessThan
+        case .greaterThan:
+            return .greaterThan
+        case .lessThanOrEqualTo:
+            return .lessThanOrEqualTo
+        case .greaterThanOrEqualTo:
+            return .greaterThanOrEqualTo
+        case .contains:
+            return .contains
+        case .containsNot:
+            return .contains // special case: negated later
+        case .before:
+            return .lessThan
+        case .after:
+            return .greaterThan
+        case .onOrBefore:
+            return .lessThanOrEqualTo
+        case .onOrAfter:
+            return .greaterThanOrEqualTo
+        case .under:
+            return .lessThan
+        case .notUnder:
+            return .greaterThanOrEqualTo
+        default:
+            NSLog("No proper predicate conversion found for \(operatorType), defaulting to \(NSComparisonPredicate.Operator.equalTo)")
+            return .equalTo
+        }
+    }
+
+    private func buildComparisonPredicate(_ field: String, _ value: String, _ operatorType: Criteria.Operator) -> NSPredicate {
+        let left = NSExpression(forConstantValue: field)
+        let right = NSExpression(forConstantValue: value)
+
+        let type: NSComparisonPredicate.Operator = convertOperatorTypeForComparisonPredicate(operatorType)
 
         let comparisonPredicate: NSComparisonPredicate
 
         //TODO constants for fixed criteria values also for Criteria+SQL,
         // e.g. YES, NO, yesterday, today, last week, ...
 
-        if self.field == MA_Field_Date && self.operatorType == .after && self.value == "yesterday" {
+        if field == MA_Field_Date && operatorType == .after && value == "yesterday" {
             // Use canonical "is today" instead of "is after yesterday"
             comparisonPredicate = NSComparisonPredicate(leftExpression: left, rightExpression: NSExpression(forConstantValue: "today"), modifier: .direct, type: .equalTo)
-        } else if self.operatorType == .notEqualTo && (self.value == "No" || self.value == "Yes") {
+        } else if operatorType == .notEqualTo && (value == "No" || value == "Yes") {
             // Use canonical "is yes / is no" representation instead of allowing
             // ambiguous "is not yes - is no / is not no - is yes"
-            let invertedRight = NSExpression(forConstantValue: self.value == "No" ? "Yes" : "No")
+            let invertedRight = NSExpression(forConstantValue: value == "No" ? "Yes" : "No")
             comparisonPredicate = NSComparisonPredicate(leftExpression: left, rightExpression: invertedRight, modifier: .direct, type: .equalTo)
         } else {
             comparisonPredicate = NSComparisonPredicate(leftExpression: left, rightExpression: right, modifier: .direct, type: type)
         }
 
-        if self.operatorType == .containsNot {
+        if operatorType == .containsNot {
             // Representation for "not contains" in predicate differs because
             // "not contains" is no predicate operator
             return NSCompoundPredicate(notPredicateWithSubpredicate: comparisonPredicate)

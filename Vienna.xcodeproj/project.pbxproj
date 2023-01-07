@@ -72,6 +72,8 @@
 		2F82DCB725CEFC2800F00EE8 /* URL+Blank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F82DCB625CEFC2800F00EE8 /* URL+Blank.swift */; };
 		2F88B2A62545BB450067EEA6 /* ArticleConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F88B2A52545BB450067EEA6 /* ArticleConverter.m */; };
 		2F88B2AD2545BCA90067EEA6 /* WebViewArticleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F88B2AC2545BCA90067EEA6 /* WebViewArticleConverter.swift */; };
+		2F88FF412969B2A40076B99E /* DatePredicateWithUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F88FF402969B2A40076B99E /* DatePredicateWithUnit.swift */; };
+		2F88FF432969FC530076B99E /* DateWithUnitPredicateEditorRowTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F88FF422969FC530076B99E /* DateWithUnitPredicateEditorRowTemplate.swift */; };
 		2FA946C52517D8D8006134C5 /* CustomWKUIDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA946C42517D8D8006134C5 /* CustomWKUIDelegate.swift */; };
 		2FC4A190257CF775005FF227 /* WebKitArticleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4A18F257CF775005FF227 /* WebKitArticleConverter.swift */; };
 		2FC4A1BF25852C0E005FF227 /* ArticleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4A1BE25852C0E005FF227 /* ArticleConverter.swift */; };
@@ -331,6 +333,8 @@
 		2F88B2A52545BB450067EEA6 /* ArticleConverter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArticleConverter.m; sourceTree = "<group>"; };
 		2F88B2AC2545BCA90067EEA6 /* WebViewArticleConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewArticleConverter.swift; sourceTree = "<group>"; };
 		2F88B2C22545DAB40067EEA6 /* ArticleViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ArticleViewDelegate.h; sourceTree = "<group>"; };
+		2F88FF402969B2A40076B99E /* DatePredicateWithUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePredicateWithUnit.swift; sourceTree = "<group>"; };
+		2F88FF422969FC530076B99E /* DateWithUnitPredicateEditorRowTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateWithUnitPredicateEditorRowTemplate.swift; sourceTree = "<group>"; };
 		2F9355BA294625930064C522 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		2FA946C42517D8D8006134C5 /* CustomWKUIDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomWKUIDelegate.swift; sourceTree = "<group>"; };
 		2FC4A17A25797A3D005FF227 /* WKPreferences+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WKPreferences+Private.h"; sourceTree = "<group>"; };
@@ -1149,6 +1153,7 @@
 				2F33DB2B292445D200A9716A /* Criteria+SQL.h */,
 				2F33DB2C292445D200A9716A /* Criteria+SQL.m */,
 				2FEA5828291FD511008C42D3 /* Criteria+NSPredicate.swift */,
+				2F88FF402969B2A40076B99E /* DatePredicateWithUnit.swift */,
 			);
 			path = Criteria;
 			sourceTree = "<group>";
@@ -1354,6 +1359,7 @@
 				4350287F165DE9DF0018EDB7 /* SmartFolder.h */,
 				43502880165DE9DF0018EDB7 /* SmartFolder.m */,
 				2F33DB3129244ADB00A9716A /* DoesNotContainPredicateEditorRowTemplate.swift */,
+				2F88FF422969FC530076B99E /* DateWithUnitPredicateEditorRowTemplate.swift */,
 				F65F2313294E4B5200605F06 /* SeparatorPredicateEditorRowTemplate.swift */,
 				F6B76B43284B492E009961AD /* NSPredicateEditor+Private.h */,
 			);
@@ -2205,6 +2211,7 @@
 				2F82DCB725CEFC2800F00EE8 /* URL+Blank.swift in Sources */,
 				F633157626ED73CB008A3673 /* URLFormatter.swift in Sources */,
 				43502895165DE9E00018EDB7 /* ActivityLog.m in Sources */,
+				2F88FF412969B2A40076B99E /* DatePredicateWithUnit.swift in Sources */,
 				43502896165DE9E00018EDB7 /* ActivityPanelController.m in Sources */,
 				0378753125E34743009AB1C9 /* FeedListCellView.m in Sources */,
 				2FE44CAD25B7995400554E82 /* NSApplication+AppController.swift in Sources */,
@@ -2252,6 +2259,7 @@
 				F672876824A2D2170043432F /* UpdatePreferencesViewController.m in Sources */,
 				2FC4A1BF25852C0E005FF227 /* ArticleConverter.swift in Sources */,
 				435028AC165DE9E00018EDB7 /* NewSubscription.m in Sources */,
+				2F88FF432969FC530076B99E /* DateWithUnitPredicateEditorRowTemplate.swift in Sources */,
 				F6EB26031E58D37100570B22 /* DirectoryMonitor.swift in Sources */,
 				435028AD165DE9E00018EDB7 /* PluginManager.m in Sources */,
 				B81B536425565CD700C65459 /* Constants.swift in Sources */,
