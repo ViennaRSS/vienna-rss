@@ -20,6 +20,8 @@
 import Foundation
 
 enum DateUnit: String, CaseIterable {
+    case minutes
+    case hours
     case days
     case weeks
     case months
