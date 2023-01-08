@@ -22,3 +22,4 @@
 #import "Criteria.h"
 #import "Criteria+SQL.h"
 #import "DownloadManager.h"
+#import "Database.h"

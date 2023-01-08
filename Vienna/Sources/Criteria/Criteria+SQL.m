@@ -22,7 +22,6 @@
 #import "Field.h"
 #import "Article.h"
 
-
 @implementation CriteriaTree (SQL)
 
 -(NSString *)stringForCriteria:(Criteria *)criteria database:(Database *)database {
@@ -170,7 +169,7 @@
     NSMutableString * sqlString = [NSMutableString string];
     NSInteger count = 0;
 
-    for (NSObject<CriteriaElement> *criteria in self.criteriaEnumerator)
+    for (NSObject<CriteriaElement> *criteria in self.criteriaTree)
     {
         NSString *conditionString = @"";
         if (count++ > 0) {
@@ -186,7 +185,7 @@
                 conditionString = @" AND ";
                 break; //Unknown condition
             }
-        } else if (condition == VNACriteriaConditionNone) {
+        } else if (self.condition == VNACriteriaConditionNone) {
             conditionString = @"NOT ";
         }
 

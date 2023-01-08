@@ -20,9 +20,14 @@
 import Foundation
 
 @objc
-extension CriteriaTree {
+protocol PredicateConvertible {
+    var predicate: NSPredicate { get }
+}
 
-    public convenience init?(predicate: NSPredicate) {
+extension CriteriaTree: PredicateConvertible {
+
+    @objc
+    convenience init?(predicate: NSPredicate) {
         self.init()
         guard let compound = predicate as? NSCompoundPredicate else {
             return nil
@@ -53,7 +58,7 @@ extension CriteriaTree {
         }
 
         for subPredicate in subPredicates {
-            let criteriaElement: (NSObjectProtocol & CriteriaElement)?
+            let criteriaElement: CriteriaElement?
 
             if let subCompound = subPredicate as? NSCompoundPredicate {
                 // Look ahead to detect "not contains" predicate
@@ -79,7 +84,7 @@ extension CriteriaTree {
         }
     }
 
-    var predicate: NSPredicate {
+    @objc var predicate: NSPredicate {
         return buildPredicate()
     }
 
@@ -108,13 +113,13 @@ extension CriteriaTree {
     }
 }
 
-@objc
-extension Criteria {
+extension Criteria: PredicateConvertible {
 
-    public convenience init?(predicate: NSPredicate) {
+    convenience init?(predicate: NSPredicate) {
         self.init(predicate: predicate, notContains: false)
     }
 
+    @objc
     convenience init?(predicate: NSPredicate, notContains: Bool) {
         guard let comparison = predicate as? NSComparisonPredicate else {
             return nil
@@ -125,7 +130,7 @@ extension Criteria {
 
         var fallback = false
 
-        let criteriaOperator: Criteria.Operator
+        let criteriaOperator: CriteriaOperator
         switch field {
         case MA_Field_Folder:
             switch comparison.predicateOperatorType {
@@ -197,7 +202,7 @@ extension Criteria {
         self.init(field: field, operatorType: criteriaOperator, value: value)
     }
 
-    var predicate: NSPredicate {
+    @objc var predicate: NSPredicate {
         return buildPredicate()
     }
 
@@ -223,7 +228,7 @@ extension Criteria {
         }
     }
 
-    func convertOperatorTypeForComparisonPredicate(_ operatorType: Criteria.Operator) -> NSComparisonPredicate.Operator {
+    func convertOperatorTypeForComparisonPredicate(_ operatorType: CriteriaOperator) -> NSComparisonPredicate.Operator {
         switch operatorType {
         case .equalTo:
             return .equalTo
@@ -259,7 +264,7 @@ extension Criteria {
         }
     }
 
-    private func buildComparisonPredicate(_ field: String, _ value: String, _ operatorType: Criteria.Operator) -> NSPredicate {
+    private func buildComparisonPredicate(_ field: String, _ value: String, _ operatorType: CriteriaOperator) -> NSPredicate {
         let left = NSExpression(forConstantValue: field)
         let right = NSExpression(forConstantValue: value)
 

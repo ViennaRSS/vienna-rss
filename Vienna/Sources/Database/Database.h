@@ -20,11 +20,12 @@
 
 @import Foundation;
 @import FMDB;
-#import "Criteria.h"
 
 @class Folder;
 @class Field;
 @class Article;
+@class CriteriaTree;
+typedef NS_ENUM(NSInteger, VNACriteriaOperator);
 
 @interface Database : NSObject
 

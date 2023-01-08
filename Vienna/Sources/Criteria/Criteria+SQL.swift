@@ -1,8 +1,8 @@
 //
-//  Criteria+SQL.h
+//  Criteria+SQL.swift
 //  Vienna
 //
-//  Copyright 2022 Tassilo Karge
+//  Copyright 2023 Tassilo Karge
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -17,16 +17,16 @@
 //  limitations under the License.
 //
 
-#import <Foundation/Foundation.h>
-#import "Database.h"
-#import "Vienna-Swift.h" //ATTENTION this only works if not included in bridging header! Workaround for that is to redeclare the functions in swift
+import Foundation
 
-NS_ASSUME_NONNULL_BEGIN
+protocol SQLConversion {
+    func toSQL(database: Database)
+}
 
-@interface CriteriaTree (SQL)
-
--(NSString *)toSQLForDatabase:(Database *)database;
-
-@end
-
-NS_ASSUME_NONNULL_END
+extension CriteriaTree: SQLConversion {
+    @nonobjc
+    func toSQL(database: Database) {
+        //workaround to call objc-method toSqlForDatabase
+        self.perform(Selector(("toSqlForDatabase:")), with: database)
+    }
+}

@@ -31,7 +31,6 @@
 #import "Article.h"
 #import "Folder.h"
 #import "Field.h"
-#import "Criteria.h"
 #import "Criteria+SQL.h"
 #import "Vienna-Swift.h"
 
@@ -418,7 +417,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	if ([self createFolderOnDatabase:folderName underParent:VNAFolderTypeRoot withType:VNAFolderTypeSmart] >= 0)
 	{
 		CriteriaTree * criteriaTree = [[CriteriaTree alloc] init];
-		[criteriaTree addCriteria:criteria];
+        criteriaTree.criteriaTree = [criteriaTree.criteriaTree arrayByAddingObject:criteria];
 		
 		__weak NSString * preparedCriteriaString = criteriaTree.string;
         [self.databaseQueue inDatabase:^(FMDatabase *db) {
@@ -2148,7 +2147,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
         Criteria *clause = [[Criteria alloc] initWithField:MA_Field_Text
                                               operatorType:VNACriteriaOperatorContains
                                                      value:self.searchString];
-        [tree addCriteria:clause];
+        tree.criteriaTree = [tree.criteriaTree arrayByAddingObject:clause];
         return tree;
     }
 	
@@ -2156,7 +2155,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	{
 		CriteriaTree * tree = [[CriteriaTree alloc] init];
 		Criteria * clause = [[Criteria alloc] initWithField:MA_Field_Deleted operatorType:VNACriteriaOperatorEqualTo value:@"Yes"];
-		[tree addCriteria:clause];
+		tree.criteriaTree = [tree.criteriaTree arrayByAddingObject:clause];
 		return tree;
 	}
 
@@ -2168,7 +2167,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 
 	CriteriaTree * tree = [[CriteriaTree alloc] init];
 	Criteria * clause = [[Criteria alloc] initWithField:MA_Field_Folder operatorType:VNACriteriaOperatorUnder value:folder.name];
-	[tree addCriteria:clause];
+    tree.criteriaTree = [tree.criteriaTree arrayByAddingObject:clause];
 	return tree;
 }
 

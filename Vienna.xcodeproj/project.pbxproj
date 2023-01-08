@@ -63,6 +63,9 @@
 		2F2280382271B18A005D1023 /* ArticleStyleLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2280372271B18A005D1023 /* ArticleStyleLoader.swift */; };
 		2F33DB2D292445D200A9716A /* Criteria+SQL.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F33DB2C292445D200A9716A /* Criteria+SQL.m */; };
 		2F33DB3229244ADB00A9716A /* DoesNotContainPredicateEditorRowTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F33DB3129244ADB00A9716A /* DoesNotContainPredicateEditorRowTemplate.swift */; };
+		2F3EC7E7296B138700C5F403 /* Criteria.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3EC7E6296B138700C5F403 /* Criteria.swift */; };
+		2F3EC7E9296B2E9F00C5F403 /* Criteria+SQL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3EC7E8296B2E9F00C5F403 /* Criteria+SQL.swift */; };
+		2F3EC7EB296B6D6C00C5F403 /* Criteria+XML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3EC7EA296B6D6C00C5F403 /* Criteria+XML.swift */; };
 		2F437B3C25CF336400AD1B57 /* SubscriptionModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F437B3A25CF336400AD1B57 /* SubscriptionModelTests.swift */; };
 		2F437B3D25CF336400AD1B57 /* URL+URIEquivalence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F437B3B25CF336400AD1B57 /* URL+URIEquivalence.swift */; };
 		2F437B6325CF423A00AD1B57 /* ExportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F437B6225CF423A00AD1B57 /* ExportTests.swift */; };
@@ -152,7 +155,6 @@
 		AA60238108C298FB002CFD06 /* HelperFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = AA60237F08C298FB002CFD06 /* HelperFunctions.m */; };
 		AA67F353089728AD008BBC37 /* Styles in Copy Shared Support Files */ = {isa = PBXBuildFile; fileRef = AA67F32E089727FB008BBC37 /* Styles */; };
 		AA71168F09BEB17300E3EA8A /* AddressBarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA71168E09BEB17300E3EA8A /* AddressBarCell.m */; };
-		AA8C72F60641DE1F00649BA2 /* Criteria.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8C72F40641DE1F00649BA2 /* Criteria.m */; };
 		AA9FE2EE08BC133600A9E977 /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9FE2EC08BC133600A9E977 /* Preferences.m */; };
 		AAA305FF0682A25200E4A6DC /* TableViewExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA305FD0682A25200E4A6DC /* TableViewExtensions.m */; };
 		AACAEA3E0954E71100ACD502 /* DemoFeeds.plist in Resources */ = {isa = PBXBuildFile; fileRef = AACAEA3D0954E71100ACD502 /* DemoFeeds.plist */; };
@@ -321,6 +323,9 @@
 		2F33DB2B292445D200A9716A /* Criteria+SQL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Criteria+SQL.h"; sourceTree = "<group>"; };
 		2F33DB2C292445D200A9716A /* Criteria+SQL.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Criteria+SQL.m"; sourceTree = "<group>"; };
 		2F33DB3129244ADB00A9716A /* DoesNotContainPredicateEditorRowTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoesNotContainPredicateEditorRowTemplate.swift; sourceTree = "<group>"; };
+		2F3EC7E6296B138700C5F403 /* Criteria.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Criteria.swift; sourceTree = "<group>"; };
+		2F3EC7E8296B2E9F00C5F403 /* Criteria+SQL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Criteria+SQL.swift"; sourceTree = "<group>"; };
+		2F3EC7EA296B6D6C00C5F403 /* Criteria+XML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Criteria+XML.swift"; sourceTree = "<group>"; };
 		2F437B3A25CF336400AD1B57 /* SubscriptionModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionModelTests.swift; sourceTree = "<group>"; };
 		2F437B3B25CF336400AD1B57 /* URL+URIEquivalence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+URIEquivalence.swift"; sourceTree = "<group>"; };
 		2F437B6225CF423A00AD1B57 /* ExportTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExportTests.swift; sourceTree = "<group>"; };
@@ -480,8 +485,6 @@
 		AA71168709BEB14A00E3EA8A /* ImageAndTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageAndTextCell.h; sourceTree = "<group>"; };
 		AA71168E09BEB17300E3EA8A /* AddressBarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressBarCell.m; sourceTree = "<group>"; };
 		AA7AB45708CA742A000D34F9 /* ArticleRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleRef.h; sourceTree = "<group>"; };
-		AA8C72F30641DE1F00649BA2 /* Criteria.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Criteria.h; sourceTree = "<group>"; };
-		AA8C72F40641DE1F00649BA2 /* Criteria.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Criteria.m; sourceTree = "<group>"; };
 		AA9FE2EB08BC133600A9E977 /* Preferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Preferences.h; sourceTree = "<group>"; };
 		AA9FE2EC08BC133600A9E977 /* Preferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Preferences.m; sourceTree = "<group>"; };
 		AAA305FC0682A25200E4A6DC /* TableViewExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewExtensions.h; sourceTree = "<group>"; };
@@ -1148,12 +1151,13 @@
 		2F88FF3F2969A61C0076B99E /* Criteria */ = {
 			isa = PBXGroup;
 			children = (
-				AA8C72F30641DE1F00649BA2 /* Criteria.h */,
-				AA8C72F40641DE1F00649BA2 /* Criteria.m */,
 				2F33DB2B292445D200A9716A /* Criteria+SQL.h */,
 				2F33DB2C292445D200A9716A /* Criteria+SQL.m */,
-				2FEA5828291FD511008C42D3 /* Criteria+NSPredicate.swift */,
 				2F88FF402969B2A40076B99E /* DatePredicateWithUnit.swift */,
+				2F3EC7E6296B138700C5F403 /* Criteria.swift */,
+				2F3EC7E8296B2E9F00C5F403 /* Criteria+SQL.swift */,
+				2F3EC7EA296B6D6C00C5F403 /* Criteria+XML.swift */,
+				2FEA5828291FD511008C42D3 /* Criteria+NSPredicate.swift */,
 			);
 			path = Criteria;
 			sourceTree = "<group>";
@@ -2175,7 +2179,6 @@
 				F65F2314294E4B5200605F06 /* SeparatorPredicateEditorRowTemplate.swift in Sources */,
 				2F88B2A62545BB450067EEA6 /* ArticleConverter.m in Sources */,
 				AA36CD7C06100692001E33A4 /* Field.m in Sources */,
-				AA8C72F60641DE1F00649BA2 /* Criteria.m in Sources */,
 				F6B059E22961D0A800F6E31B /* JSONFeedItem.swift in Sources */,
 				F6C9DA70271BB3BB00FC3027 /* RSSFeed.m in Sources */,
 				0349813E1A206FD900014F29 /* GeneralPreferencesViewController.m in Sources */,
@@ -2247,6 +2250,7 @@
 				B856F8E125782F8100E91AC7 /* AppController+Sparkle.swift in Sources */,
 				435028A3165DE9E00018EDB7 /* Export.m in Sources */,
 				435028A4165DE9E00018EDB7 /* FeedCredentials.m in Sources */,
+				2F3EC7E7296B138700C5F403 /* Criteria.swift in Sources */,
 				435028A6165DE9E00018EDB7 /* FoldersTree.m in Sources */,
 				435028A7165DE9E00018EDB7 /* FolderView.m in Sources */,
 				B8B9D6D323685C7400EAE65C /* XMLFeedItem.swift in Sources */,
@@ -2258,6 +2262,7 @@
 				2F33DB3229244ADB00A9716A /* DoesNotContainPredicateEditorRowTemplate.swift in Sources */,
 				F672876824A2D2170043432F /* UpdatePreferencesViewController.m in Sources */,
 				2FC4A1BF25852C0E005FF227 /* ArticleConverter.swift in Sources */,
+				2F3EC7EB296B6D6C00C5F403 /* Criteria+XML.swift in Sources */,
 				435028AC165DE9E00018EDB7 /* NewSubscription.m in Sources */,
 				2F88FF432969FC530076B99E /* DateWithUnitPredicateEditorRowTemplate.swift in Sources */,
 				F6EB26031E58D37100570B22 /* DirectoryMonitor.swift in Sources */,
@@ -2282,6 +2287,7 @@
 				2FA946C52517D8D8006134C5 /* CustomWKUIDelegate.swift in Sources */,
 				435028B7165DE9E00018EDB7 /* UnifiedDisplayView.m in Sources */,
 				435028B8165DE9E00018EDB7 /* URLHandlerCommand.m in Sources */,
+				2F3EC7E9296B2E9F00C5F403 /* Criteria+SQL.swift in Sources */,
 				2FF61D2E24F2E71500A7E2B5 /* BrowserTab+RSSSource.swift in Sources */,
 				3A171C00210B551B00B80FBB /* TRVSURLSessionOperation.m in Sources */,
 				F6373A231F1D53B500ED3B09 /* MainWindow.swift in Sources */,

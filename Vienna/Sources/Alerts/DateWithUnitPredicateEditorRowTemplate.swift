@@ -1,5 +1,5 @@
 //
-//  DoesNotContainPredicateEditorRowTemplate.swift
+//  DateWithUnitPredicateEditorRowTemplate.swift
 //  Vienna
 //
 //  Copyright 2022 Tassilo Karge
