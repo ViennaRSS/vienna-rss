@@ -65,9 +65,6 @@
 /* No comment provided by engineer. */
 "Connecting to %@" = "conectando a %@";
 
-/* test for a string */
-"contains" = "contém";
-
 /* No comment provided by engineer. */
 "Copy Link to Clipboard" = "Copiar Link para o Clipboard";
 
@@ -119,9 +116,6 @@
 
 /* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "Você realmente deseja importar as assinaturas do arquivo OPML especificado?";
-
-/* test for a string */
-"does not contain" = "não contém";
 
 /* Title of a button on an alert */
 "Don’t Empty Trash" = "Não Esvaziar Lixeira";
@@ -222,39 +216,6 @@
 /* No comment provided by engineer. */
 "Import subscriptions from OPML file?" = "Importar assinaturas de um arquivo OPML?";
 
-/* test for a value */
-"is" = "é";
-
-/* test for a date */
-"is after" = "depois de";
-
-/* test for a date */
-"is before" = "antes de";
-
-/* test for a numeric value */
-"is greater than" = "é maior que";
-
-/* test for a numeric value */
-"is greater than or equal to" = "é maior ou igual a";
-
-/* test for a numeric value */
-"is less than" = "é menor que";
-
-/* test for a numeric value */
-"is less than or equal to" = "é menoor ou igual a";
-
-/* test for a value */
-"is not" = "não é";
-
-/* test for a date */
-"is on or after" = "é em ou depois";
-
-/* test for a date */
-"is on or before" = "é em ou antes";
-
-/* No comment provided by engineer. */
-"Last Week" = "Última Semana";
-
 /* No comment provided by engineer. */
 "Mark All Read" = "Marcar Todas como Lidas";
 
@@ -290,9 +251,6 @@
 
 /* No comment provided by engineer. */
 "New Tab" = "Nova Aba";
-
-/* No comment provided by engineer. */
-"No" = "Não";
 
 /* No comment provided by engineer. */
 "No new articles available" = "Nenhum artigo novo disponível";
@@ -487,9 +445,6 @@
 "This operation cannot be undone." = "Esta operação não pode ser desfeita.";
 
 /* No comment provided by engineer. */
-"Today" = "Hoje";
-
-/* No comment provided by engineer. */
 "Today's Articles" = "Artigos de Hoje";
 
 /* No comment provided by engineer. */
@@ -524,12 +479,6 @@
 
 /* No comment provided by engineer. */
 "Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconvenience." = "O Vienna precisa atualizar seu banco de dados para a última versão.  Isto pode demorar um minuto ou dois.  Pedimos desculpas pelo inconveniente.";
-
-/* No comment provided by engineer. */
-"Yes" = "Sim";
-
-/* No comment provided by engineer. */
-"Yesterday" = "Ontem";
 
 /* You are already subscribed to that feed */
 "You are already subscribed to that feed" = "você já assinou estas notícias";

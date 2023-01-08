@@ -20,10 +20,10 @@
 
 @import Foundation;
 @import FMDB;
+#import "Criteria.h"
 
 @class Folder;
 @class Field;
-@class CriteriaTree;
 @class Article;
 
 @interface Database : NSObject
@@ -63,6 +63,7 @@ extern NSNotificationName const VNADatabaseDidDeleteFolderNotification;
 -(Folder *)folderFromFeedURL:(NSString *)wantedFeedURL;
 -(Folder *)folderFromRemoteId:(NSString *)wantedRemoteId;
 -(Folder *)folderFromName:(NSString *)wantedName;
+-(NSString *)sqlScopeForFolder:(Folder *)folder criteriaOperator:(VNACriteriaOperator)op;
 -(NSInteger)addFolder:(NSInteger)parentId afterChild:(NSInteger)predecessorId folderName:(NSString *)name type:(NSInteger)type canAppendIndex:(BOOL)canAppendIndex;
 -(BOOL)deleteFolder:(NSInteger)folderId;
 -(BOOL)setName:(NSString *)newName forFolder:(NSInteger)folderId;
@@ -98,7 +99,6 @@ extern NSNotificationName const VNADatabaseDidDeleteFolderNotification;
 -(NSInteger)addSmartFolder:(NSString *)folderName underParent:(NSInteger)parentId withQuery:(CriteriaTree *)criteriaTree;
 -(void)updateSearchFolder:(NSInteger)folderId withFolder:(NSString *)folderName withQuery:(CriteriaTree *)criteriaTree;
 -(CriteriaTree *)searchStringForSmartFolder:(NSInteger)folderId;
--(NSString *)criteriaToSQL:(CriteriaTree *)criteriaTree;
 
 // Article functions
 -(BOOL)addArticle:(Article *)article toFolder:(NSInteger)folderID;

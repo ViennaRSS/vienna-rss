@@ -59,9 +59,6 @@
 /* No comment provided by engineer. */
 "Connecting to %@" = "%@ -ra konektatzen";
 
-/* test for a string */
-"contains" = "dauka";
-
 /* No comment provided by engineer. */
 "Copy Link to Clipboard" = "Esteka Paper-zorroan Kopiatu";
 
@@ -107,9 +104,6 @@
 
 /* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "OPML fitxategitik harpidetzak inportatu nahi al dituzu?";
-
-/* test for a string */
-"does not contain" = "ez dauka";
 
 /* Title of a button on an alert */
 "Don’t Empty Trash" = "Ez hustu zakarrontzia";
@@ -186,39 +180,6 @@
 /* No comment provided by engineer. */
 "Import subscriptions from OPML file?" = "OPML fitxategitik harpidetzak inportatu?";
 
-/* test for a value */
-"is" = "da";
-
-/* test for a date */
-"is after" = "geroago da";
-
-/* test for a date */
-"is before" = "lehenago da";
-
-/* test for a numeric value */
-"is greater than" = "haundiago da";
-
-/* test for a numeric value */
-"is greater than or equal to" = "haundiago edo berdina da";
-
-/* test for a numeric value */
-"is less than" = "gutxiago da";
-
-/* test for a numeric value */
-"is less than or equal to" = "gutxiago edo berdina da";
-
-/* test for a value */
-"is not" = "ez da";
-
-/* test for a date */
-"is on or after" = "dago edo ondoren";
-
-/* test for a date */
-"is on or before" = "dago edo lehenago";
-
-/* No comment provided by engineer. */
-"Last Week" = "Joan Zen Astean";
-
 /* Data field name visible in menu/article list */
 "Link" = "Esteka";
 
@@ -257,9 +218,6 @@
 
 /* No comment provided by engineer. */
 "New Tab" = "Fitxa Berria";
-
-/* No comment provided by engineer. */
-"No" = "Ez";
 
 /* No comment provided by engineer. */
 "No new articles available" = "Ez daude artikulu berririk";
@@ -425,9 +383,6 @@
 "This operation cannot be undone." = "Ekintza hau ezingo da desegin.";
 
 /* No comment provided by engineer. */
-"Today" = "Gaur";
-
-/* No comment provided by engineer. */
 "Today's Articles" = "Gaurko Artikuluak";
 
 /* No comment provided by engineer. */
@@ -453,12 +408,6 @@
 
 /* No comment provided by engineer. */
 "Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified." = "Vienna-k \"%@\" direktorioa sortzen saiatu da baina errore bat gertatu da. Begiratu direktorioa sortu nahi duzun tokiaren baimenak.";
-
-/* No comment provided by engineer. */
-"Yes" = "Bai";
-
-/* No comment provided by engineer. */
-"Yesterday" = "Atzo";
 
 /* You are already subscribed to that feed */
 "You are already subscribed to that feed" = "Jario horretara harpidetuta zaude iadanik";

@@ -95,9 +95,6 @@
 /* No comment provided by engineer. */
 "Connecting to Open Reader server to retrieve %@" = "正在連線至 Open Reader 伺服器以取得 %@";
 
-/* test for a string */
-"contains" = "包含";
-
 /* No comment provided by engineer. */
 "Copy Link to Clipboard" = "將連結拷貝到剪貼板";
 
@@ -152,9 +149,6 @@
 
 /* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "您是否確定要從指定的 OPML 檔案輸入訂閱頻道？";
-
-/* test for a string */
-"does not contain" = "不包含";
 
 /* Title of a button on an alert */
 "Don’t Empty Trash" = "不要清空垃圾桶";
@@ -291,39 +285,6 @@
 /* No comment provided by engineer. */
 "Improper infinitely looping URL redirect to %@" = "不正確的網址導向至 %@";
 
-/* test for a value */
-"is" = "等於";
-
-/* test for a date */
-"is after" = "晚於";
-
-/* test for a date */
-"is before" = "早於";
-
-/* test for a numeric value */
-"is greater than" = "大於";
-
-/* test for a numeric value */
-"is greater than or equal to" = "大於或等於";
-
-/* test for a numeric value */
-"is less than" = "小於";
-
-/* test for a numeric value */
-"is less than or equal to" = "小於或等於";
-
-/* test for a value */
-"is not" = "不等於";
-
-/* test for a date */
-"is on or after" = "等於或晚於";
-
-/* test for a date */
-"is on or before" = "等於或早於";
-
-/* No comment provided by engineer. */
-"Last Week" = "上週";
-
 /* Data field name visible in menu/article list */
 "Link" = "連結";
 
@@ -373,16 +334,10 @@
 "New Tab" = "新分頁";
 
 /* No comment provided by engineer. */
-"No" = "否";
-
-/* No comment provided by engineer. */
 "No articles in feed" = "訂閱項目並無文章";
 
 /* No comment provided by engineer. */
 "No new articles available" = "沒有新文章";
-
-/* test for a folder (not operational as of Vienna 3.2) */
-"not under" = "不在裡面";
 
 /* Title of a button on an alert */
 "OK" = "好";
@@ -622,16 +577,10 @@
 "This operation cannot be undone." = "此項操作無法還原。";
 
 /* No comment provided by engineer. */
-"Today" = "今天";
-
-/* No comment provided by engineer. */
 "Today's Articles" = "今天的文章";
 
 /* No comment provided by engineer. */
 "Trash" = "垃圾桶";
-
-/* test for a folder (not operational as of Vienna 3.2) */
-"under" = "在裡面";
 
 /* No comment provided by engineer. */
 "Unread Articles" = "未讀文章";
@@ -668,12 +617,6 @@
 
 /* No comment provided by engineer. */
 "Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified." = "Vienna 嘗試建立“%@”檔案夾時發生錯誤。請檢查您所指定之路徑的檔案夾權限。";
-
-/* No comment provided by engineer. */
-"Yes" = "是";
-
-/* No comment provided by engineer. */
-"Yesterday" = "昨天";
 
 /* You are already subscribed to that feed */
 "You are already subscribed to that feed" = "您已經訂閱了該頻道";

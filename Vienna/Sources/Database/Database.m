@@ -32,6 +32,7 @@
 #import "Folder.h"
 #import "Field.h"
 #import "Criteria.h"
+#import "Criteria+SQL.h"
 #import "Vienna-Swift.h"
 
 typedef NS_ENUM(NSInteger, VNAQueryScope) {
@@ -210,15 +211,15 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	}
     
     // Create a criteria to find all marked articles
-    Criteria * markedCriteria = [[Criteria alloc] initWithField:MA_Field_Flagged withOperator:MA_CritOper_Is withValue:@"Yes"];
+    Criteria * markedCriteria = [[Criteria alloc] initWithField:MA_Field_Flagged operatorType:VNACriteriaOperatorEqualTo value:@"Yes"];
     [self createInitialSmartFolder:NSLocalizedString(@"Marked Articles", nil) withCriteria:markedCriteria];
     
     // Create a criteria to show all unread articles
-    Criteria * unreadCriteria = [[Criteria alloc] initWithField:MA_Field_Read withOperator:MA_CritOper_Is withValue:@"No"];
+    Criteria * unreadCriteria = [[Criteria alloc] initWithField:MA_Field_Read operatorType:VNACriteriaOperatorEqualTo value:@"No"];
     [self createInitialSmartFolder:NSLocalizedString(@"Unread Articles", nil) withCriteria:unreadCriteria];
     
     // Create a criteria to show all articles received today
-    Criteria * todayCriteria = [[Criteria alloc] initWithField:MA_Field_Date withOperator:MA_CritOper_Is withValue:@"today"];
+    Criteria * todayCriteria = [[Criteria alloc] initWithField:MA_Field_Date operatorType:VNACriteriaOperatorEqualTo value:@"today"];
     [self createInitialSmartFolder:NSLocalizedString(@"Today's Articles", nil) withCriteria:todayCriteria];
     
 	[self.databaseQueue inDatabase:^(FMDatabase *db) {
@@ -1430,6 +1431,23 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	return folder;
 }
 
+-(NSString *)sqlScopeForFolder:(Folder *)folder criteriaOperator:(VNACriteriaOperator)op {
+    NSInteger scopeFlags = 0;
+    switch (op) {
+        case VNACriteriaOperatorUnder:
+            scopeFlags = VNAQueryScopeSubFolders|VNAQueryScopeInclusive; break;
+        case VNACriteriaOperatorNotUnder:
+            scopeFlags = VNAQueryScopeSubFolders; break;
+        case VNACriteriaOperatorEqualTo:
+            scopeFlags = VNAQueryScopeInclusive; break;
+        case VNACriteriaOperatorNotEqualTo:
+            scopeFlags = 0; break;
+        default:
+            NSAssert(false, @"Invalid operator for folder field type");
+    }
+    return [self sqlScopeForFolder:folder flags:scopeFlags];
+}
+
 
 /*!
  *  folderFromFeedURL
@@ -2116,151 +2134,6 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	return sqlString;
 }
 
-/* criteriaToSQL
- * Converts a criteria tree to it's SQL representative.
- */
--(NSString *)criteriaToSQL:(CriteriaTree *)criteriaTree
-{
-	NSMutableString * sqlString = [[NSMutableString alloc] init];
-	NSInteger count = 0;
-
-	for (Criteria * criteria in criteriaTree.criteriaEnumerator)
-	{
-		Field * field = [self fieldByName:criteria.field];
-		NSAssert1(field != nil, @"Criteria field %@ does not have an associated database field", [criteria field]);
-
-		NSString * operatorString = nil;
-		NSString * valueString = nil;
-		
-		switch (criteria.operator)
-		{
-			case MA_CritOper_Is:					operatorString = @"=%@"; break;
-			case MA_CritOper_IsNot:					operatorString = @"<>%@"; break;
-			case MA_CritOper_IsLessThan:			operatorString = @"<%@"; break;
-			case MA_CritOper_IsGreaterThan:			operatorString = @">%@"; break;
-			case MA_CritOper_IsLessThanOrEqual:		operatorString = @"<=%@"; break;
-			case MA_CritOper_IsGreaterThanOrEqual:  operatorString = @">=%@"; break;
-			case MA_CritOper_Contains:				operatorString = @" LIKE '%%%@%%'"; break;
-			case MA_CritOper_NotContains:			operatorString = @" NOT LIKE '%%%@%%'"; break;
-			case MA_CritOper_IsBefore:				operatorString = @"<%@"; break;
-			case MA_CritOper_IsAfter:				operatorString = @">%@"; break;
-			case MA_CritOper_IsOnOrBefore:			operatorString = @"<=%@"; break;
-			case MA_CritOper_IsOnOrAfter:			operatorString = @">=%@"; break;
-				
-			case MA_CritOper_Under:
-			case MA_CritOper_NotUnder:
-				// Handle the operatorString later. For now just make sure we're working with the
-				// right field types.
-				NSAssert([field type] == VNAFieldTypeFolder, @"Under operators only valid for folder field types");
-				break;
-		}
-
-		// Unknown operator - skip this clause
-		if (operatorString == nil)
-			continue;
-		
-		if (count++ > 0)
-			[sqlString appendString:criteriaTree.condition == MA_CritCondition_All ? @" AND " : @" OR "];
-		
-		switch (field.type)
-		{
-			case VNAFieldTypeFlag:
-				valueString = [criteria.value isEqualToString:@"Yes"] ? @"1" : @"0";
-				break;
-				
-			case VNAFieldTypeFolder: {
-				Folder * folder = [self folderFromName:criteria.value];
-				NSInteger scopeFlags = 0;
-
-				switch (criteria.operator)
-				{
-					case MA_CritOper_Under:		scopeFlags = VNAQueryScopeSubFolders|VNAQueryScopeInclusive; break;
-					case MA_CritOper_NotUnder:	scopeFlags = VNAQueryScopeSubFolders; break;
-					case MA_CritOper_Is:		scopeFlags = VNAQueryScopeInclusive; break;
-					case MA_CritOper_IsNot:		scopeFlags = 0; break;
-					default:					NSAssert(false, @"Invalid operator for folder field type");
-				}
-				[sqlString appendString:[self sqlScopeForFolder:folder flags:scopeFlags]];
-				break;
-				}
-				
-			case VNAFieldTypeDate: {
-                NSCalendar *calendar = NSCalendar.currentCalendar;
-                NSDate *startDate = [calendar startOfDayForDate:[NSDate date]];
-                NSString * criteriaValue = criteria.value.lowercaseString;
-                NSCalendarUnit calendarUnit = NSCalendarUnitDay;
-
-                // "yesterday" is a short hand way of specifying the previous day.
-                if ([criteriaValue isEqualToString:@"yesterday"])
-                {
-                    startDate = [calendar dateByAddingUnit:NSCalendarUnitDay
-                                                     value:-1
-                                                    toDate:startDate
-                                                   options:0];
-                }
-                // "last week" is a short hand way of specifying a range from 7 days ago to today.
-                else if ([criteriaValue isEqualToString:@"last week"])
-                {
-                    startDate = [calendar dateByAddingUnit:NSCalendarUnitWeekOfYear
-                                                     value:-1
-                                                    toDate:startDate
-                                                   options:0];
-                    calendarUnit = NSCalendarUnitWeekOfYear;
-                }
-
-                if (criteria.operator == MA_CritOper_Is)
-                {
-                    NSDate *endDate = [calendar dateByAddingUnit:calendarUnit
-                                                           value:1
-                                                          toDate:startDate
-                                                         options:0];
-                    operatorString = [NSString stringWithFormat:@">=%f AND %@<%f", startDate.timeIntervalSince1970, field.sqlField, endDate.timeIntervalSince1970];
-					valueString = @"";
-				}
-				else
-				{
-                    if ((criteria.operator == MA_CritOper_IsAfter) || (criteria.operator == MA_CritOper_IsOnOrBefore)) {
-                        startDate = [calendar dateByAddingUnit:NSCalendarUnitDay
-                                                         value:1
-                                                        toDate:startDate
-                                                       options:0];
-                    }
-
-					valueString = [NSString stringWithFormat:@"%f", startDate.timeIntervalSince1970];
-				}
-				break;
-				}
-
-			case VNAFieldTypeString:
-				if (field.tag == ArticleFieldIDText)
-				{
-					// Special case for searching the text field. We always include the title field in the
-					// search so the resulting SQL statement becomes:
-					//
-					//   (text op value or title op value)
-					//
-					// where op is the appropriate operator.
-					//
-					Field * titleField = [self fieldByName:MA_Field_Subject];
-					NSString * value = [NSString stringWithFormat:operatorString, criteria.value];
-					[sqlString appendFormat:@"(%@%@ OR %@%@)", field.sqlField, value, titleField.sqlField, value];
-					break;
-				}
-					
-			case VNAFieldTypeInteger:
-				valueString = [NSString stringWithFormat:@"%@", criteria.value];
-				break;
-		}
-		
-		if (valueString != nil)
-		{
-			[sqlString appendString:field.sqlField];
-			[sqlString appendFormat:operatorString, valueString];
-		}
-	}
-	return sqlString;
-}
-
 /* criteriaForFolder
  * Returns the CriteriaTree that will return the folder contents.
  */
@@ -2273,8 +2146,8 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	if (folder.type == VNAFolderTypeSearch) {
         CriteriaTree *tree = [CriteriaTree new];
         Criteria *clause = [[Criteria alloc] initWithField:MA_Field_Text
-                                              withOperator:MA_CritOper_Contains
-                                                 withValue:self.searchString];
+                                              operatorType:VNACriteriaOperatorContains
+                                                     value:self.searchString];
         [tree addCriteria:clause];
         return tree;
     }
@@ -2282,7 +2155,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	if (folder.type == VNAFolderTypeTrash)
 	{
 		CriteriaTree * tree = [[CriteriaTree alloc] init];
-		Criteria * clause = [[Criteria alloc] initWithField:MA_Field_Deleted withOperator:MA_CritOper_Is withValue:@"Yes"];
+		Criteria * clause = [[Criteria alloc] initWithField:MA_Field_Deleted operatorType:VNACriteriaOperatorEqualTo value:@"Yes"];
 		[tree addCriteria:clause];
 		return tree;
 	}
@@ -2294,7 +2167,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	}
 
 	CriteriaTree * tree = [[CriteriaTree alloc] init];
-	Criteria * clause = [[Criteria alloc] initWithField:MA_Field_Folder withOperator:MA_CritOper_Under withValue:folder.name];
+	Criteria * clause = [[Criteria alloc] initWithField:MA_Field_Folder operatorType:VNACriteriaOperatorUnder value:folder.name];
 	[tree addCriteria:clause];
 	return tree;
 }
@@ -2352,7 +2225,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 			return nil;
         }
 		CriteriaTree * tree = [self criteriaForFolder:folderId];
-		queryString = [NSString stringWithFormat:@"%@ WHERE (%@)", queryString, [self criteriaToSQL:tree]];
+        queryString = [NSString stringWithFormat:@"%@ WHERE (%@)", queryString, [tree toSQLForDatabase:self]];
 	}
 
 	// prepare filter if needed
@@ -2737,3 +2610,4 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	[self close];
 }
 @end
+

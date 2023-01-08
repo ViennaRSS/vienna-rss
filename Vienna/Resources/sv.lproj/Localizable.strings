@@ -80,9 +80,6 @@
 /* No comment provided by engineer. */
 "Connecting to %@" = "Ansluter till %@";
 
-/* test for a string */
-"contains" = "innehåller";
-
 /* No comment provided by engineer. */
 "Copy Link to Clipboard" = "Kopiera länk";
 
@@ -137,9 +134,6 @@
 
 /* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "Vill du verkligen importera premnumerationerna från valda OPML fil?";
-
-/* test for a string */
-"does not contain" = "innehåller inte";
 
 /* Title of a button on an alert */
 "Don’t Empty Trash" = "Töm inte papperskorgen";
@@ -264,39 +258,6 @@
 /* No comment provided by engineer. */
 "Import subscriptions from OPML file?" = "Importera prenumerataioner från OPML fil?";
 
-/* test for a value */
-"is" = "är";
-
-/* test for a date */
-"is after" = "är efter";
-
-/* test for a date */
-"is before" = "är före";
-
-/* test for a numeric value */
-"is greater than" = "är större än";
-
-/* test for a numeric value */
-"is greater than or equal to" = "är större eller lika med";
-
-/* test for a numeric value */
-"is less than" = "är mindre än";
-
-/* test for a numeric value */
-"is less than or equal to" = "är mindre eller lika med";
-
-/* test for a value */
-"is not" = "är inte";
-
-/* test for a date */
-"is on or after" = "är på eller efter";
-
-/* test for a date */
-"is on or before" = "är på ellef före";
-
-/* No comment provided by engineer. */
-"Last Week" = "Förra veckan";
-
 /* Data field name visible in menu/article list */
 "Link" = "Länk";
 
@@ -341,9 +302,6 @@
 
 /* No comment provided by engineer. */
 "New Tab" = "Ny flik";
-
-/* No comment provided by engineer. */
-"No" = "Nej";
 
 /* No comment provided by engineer. */
 "No articles in feed" = "Inga artiklar i flöde";
@@ -559,9 +517,6 @@
 "This operation cannot be undone." = "Det här valet går ej att ångra.";
 
 /* No comment provided by engineer. */
-"Today" = "Idag";
-
-/* No comment provided by engineer. */
 "Today's Articles" = "Dagens artiklar";
 
 /* No comment provided by engineer. */
@@ -596,12 +551,6 @@
 
 /* No comment provided by engineer. */
 "Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified." = "Vienna försöker skapa mappen '%@' men ett fel uppstod. Kontrollera skrivrättigheter på specificerad sökväg.";
-
-/* No comment provided by engineer. */
-"Yes" = "Ja";
-
-/* No comment provided by engineer. */
-"Yesterday" = "Igår";
 
 /* You are already subscribed to that feed */
 "You are already subscribed to that feed" = "Du prenumererar redan på den strömmen";

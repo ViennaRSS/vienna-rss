@@ -95,9 +95,6 @@
 /* No comment provided by engineer. */
 "Connecting to Open Reader server to retrieve %@" = "Соединение с сервером Open Reader для получения %@";
 
-/* test for a string */
-"contains" = "содержит";
-
 /* No comment provided by engineer. */
 "Copy Link to Clipboard" = "Копировать ссылку в буфер обмена";
 
@@ -152,9 +149,6 @@
 
 /* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "Действительно импортировать подписки из указанного файла OPML?";
-
-/* test for a string */
-"does not contain" = "не содержит";
 
 /* Title of a button on an alert */
 "Don’t Empty Trash" = "Не очищать";
@@ -291,39 +285,6 @@
 /* No comment provided by engineer. */
 "Improper infinitely looping URL redirect to %@" = "Бесконечное перенаправление URL по адресу %@";
 
-/* test for a value */
-"is" = "содержится";
-
-/* test for a date */
-"is after" = "после";
-
-/* test for a date */
-"is before" = "до";
-
-/* test for a numeric value */
-"is greater than" = "более чем";
-
-/* test for a numeric value */
-"is greater than or equal to" = "больше или равно";
-
-/* test for a numeric value */
-"is less than" = "менее чем";
-
-/* test for a numeric value */
-"is less than or equal to" = "меньше или равно";
-
-/* test for a value */
-"is not" = "не содержится";
-
-/* test for a date */
-"is on or after" = "сейчас и позднее";
-
-/* test for a date */
-"is on or before" = "сейчас и ранее";
-
-/* No comment provided by engineer. */
-"Last Week" = "На прошлой неделе";
-
 /* Data field name visible in menu/article list */
 "Link" = "Ссылка";
 
@@ -373,16 +334,10 @@
 "New Tab" = "Новая вкладка";
 
 /* No comment provided by engineer. */
-"No" = "Нет";
-
-/* No comment provided by engineer. */
 "No articles in feed" = "В ленте нет статей";
 
 /* No comment provided by engineer. */
 "No new articles available" = "Нет новых статей";
-
-/* test for a folder (not operational as of Vienna 3.2) */
-"not under" = "не под";
 
 /* Title of a button on an alert */
 "OK" = "ОК";
@@ -622,16 +577,10 @@
 "This operation cannot be undone." = "Это действие не может быть отменено.";
 
 /* No comment provided by engineer. */
-"Today" = "Сегодня";
-
-/* No comment provided by engineer. */
 "Today's Articles" = "Сегодняшние статьи";
 
 /* No comment provided by engineer. */
 "Trash" = "Корзина";
-
-/* test for a folder (not operational as of Vienna 3.2) */
-"under" = "под";
 
 /* No comment provided by engineer. */
 "Unread Articles" = "Непрочитанные статьи";
@@ -668,12 +617,6 @@
 
 /* No comment provided by engineer. */
 "Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified." = "Vienna попыталась создать папку \"%@\", но произошла ошибка. Проверьте разрешения для папок в указанном пути.";
-
-/* No comment provided by engineer. */
-"Yes" = "Да";
-
-/* No comment provided by engineer. */
-"Yesterday" = "Вчера";
 
 /* You are already subscribed to that feed */
 "You are already subscribed to that feed" = "Вы уже подписаны на данный канал";

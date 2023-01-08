@@ -1,0 +1,10 @@
+
+"%[All,Any,None]@ of the following are true" = "Artikel erfüllt %1$[alle,beliebige,keine]@ der folgenden Bedingungen";
+
+"%[Deleted,Flagged,HasEnclosure,Read]@ is %[No,Yes]@" = "%1$[Ist gelöscht,Ist markiert,Hat Anhang,Ist gelesen]@ %2$[Nein,Ja]@";
+
+"%[Author,Folder,Subject,Text]@ %[is,is not]@ %@" = "%1$[Autor,Ordner,Betreff,Inhalt]@ %2$[ist,ist nicht]@ %3$@";
+
+"%[Author,Subject,Text]@ %[contains,does not contain]@ %@" = "%1$[Autor,Betreff,Inhalt]@ %2$[enthält,enthält nicht]@ %3$@";
+
+"%[Date]@ %[is,is greater than,is greater than or equal to,is less than,is less than or equal to]@ %[last week,today,yesterday]@" = "%1$[Datum]@ %2$[ist,ist nach,ist nach oder ist,ist vor,ist vor oder ist]@ %3$[letzte Woche,heute,gestern]@";

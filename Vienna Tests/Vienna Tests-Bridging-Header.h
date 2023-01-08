@@ -3,7 +3,6 @@
 //
 #import "Vienna-Bridging-Header.h"
 
-#import "Criteria.h"
 #import "Database.h"
 #import "DownloadItem.h"
 #import "Export.h"

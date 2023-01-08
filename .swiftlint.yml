@@ -7,6 +7,7 @@ included:
 # Rules
 
 disabled_rules:
+  - cyclomatic_complexity
   - file_length
   - function_body_length
   - line_length
@@ -66,8 +67,6 @@ opt_in_rules:
   - unavailable_function
   - unneeded_parentheses_in_closure_argument
   - untyped_error_in_catch
-  - unused_import
-  - unused_declaration
   - vertical_parameter_alignment_on_call
   - yoda_condition
 

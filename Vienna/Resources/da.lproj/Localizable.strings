@@ -95,9 +95,6 @@
 /* No comment provided by engineer. */
 "Connecting to Open Reader server to retrieve %@" = "Forbinder til Open Reader serveren for at hente %@";
 
-/* test for a string */
-"contains" = "indeholdet";
-
 /* No comment provided by engineer. */
 "Copy Link to Clipboard" = "Kopier henvisning til skuffe";
 
@@ -152,9 +149,6 @@
 
 /* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "Vil du virkelig importere abonnementerne fra det specificerede OPML-arkiv?";
-
-/* test for a string */
-"does not contain" = "inderholder ikke";
 
 /* Title of a button on an alert */
 "Don’t Empty Trash" = "Tøm ikke Papirkurven";
@@ -291,39 +285,6 @@
 /* No comment provided by engineer. */
 "Improper infinitely looping URL redirect to %@" = "Ugyldig uendeligt loopende henvisning som omdirigerer til %@";
 
-/* test for a value */
-"is" = "er";
-
-/* test for a date */
-"is after" = "er efter";
-
-/* test for a date */
-"is before" = "er før";
-
-/* test for a numeric value */
-"is greater than" = "er større end";
-
-/* test for a numeric value */
-"is greater than or equal to" = "er større eller lig";
-
-/* test for a numeric value */
-"is less than" = "er mindre end";
-
-/* test for a numeric value */
-"is less than or equal to" = "er mindre eller lig";
-
-/* test for a value */
-"is not" = "er ikke";
-
-/* test for a date */
-"is on or after" = "er på eller efer";
-
-/* test for a date */
-"is on or before" = "er på eller før";
-
-/* No comment provided by engineer. */
-"Last Week" = "Sidste uge";
-
 /* Data field name visible in menu/article list */
 "Link" = "Henvisning";
 
@@ -373,16 +334,10 @@
 "New Tab" = "Ny fane";
 
 /* No comment provided by engineer. */
-"No" = "Nej";
-
-/* No comment provided by engineer. */
 "No articles in feed" = "Ingen artikler i feedet";
 
 /* No comment provided by engineer. */
 "No new articles available" = "Ingen nye artikler tilgængelige";
-
-/* test for a folder (not operational as of Vienna 3.2) */
-"not under" = "ikke under";
 
 /* Title of a button on an alert */
 "OK" = "OK";
@@ -622,16 +577,10 @@
 "This operation cannot be undone." = "Denne handling kan ikke fortrydes.";
 
 /* No comment provided by engineer. */
-"Today" = "I dag";
-
-/* No comment provided by engineer. */
 "Today's Articles" = "Dagens artikler";
 
 /* No comment provided by engineer. */
 "Trash" = "Papirkurv";
-
-/* test for a folder (not operational as of Vienna 3.2) */
-"under" = "under";
 
 /* No comment provided by engineer. */
 "Unread Articles" = "Ulæste artikler";
@@ -668,12 +617,6 @@
 
 /* No comment provided by engineer. */
 "Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified." = "Vienna prøvede at lave mappen \"%@\" men en fejl opstod. Tjek rettighederne på mapperne i den specificerede sti.";
-
-/* No comment provided by engineer. */
-"Yes" = "Ja";
-
-/* No comment provided by engineer. */
-"Yesterday" = "Igår";
 
 /* You are already subscribed to that feed */
 "You are already subscribed to that feed" = "Du har allerede abonneret på det feed";

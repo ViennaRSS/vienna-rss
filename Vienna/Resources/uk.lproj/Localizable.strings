@@ -74,9 +74,6 @@
 /* No comment provided by engineer. */
 "Connecting to %@" = "З'єднуюся з %@";
 
-/* test for a string */
-"contains" = "містить";
-
 /* No comment provided by engineer. */
 "Copy Link to Clipboard" = "Копіювати посилання у буфер";
 
@@ -128,9 +125,6 @@
 
 /* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "Ви дійсно хочете імпортувати підписки з вказаного OPML-файлу?";
-
-/* test for a string */
-"does not contain" = "не містить";
 
 /* Title of a button on an alert */
 "Don’t Empty Trash" = "Не спорожняти смітник";
@@ -240,39 +234,6 @@
 /* No comment provided by engineer. */
 "Import subscriptions from OPML file?" = "Імпортувати підписки з OPML-файлу?";
 
-/* test for a value */
-"is" = "є";
-
-/* test for a date */
-"is after" = "після";
-
-/* test for a date */
-"is before" = "перед";
-
-/* test for a numeric value */
-"is greater than" = "більше ніж";
-
-/* test for a numeric value */
-"is greater than or equal to" = "більше ніж, або рівне";
-
-/* test for a numeric value */
-"is less than" = "менше ніж";
-
-/* test for a numeric value */
-"is less than or equal to" = "менше ніж, або рівне";
-
-/* test for a value */
-"is not" = "не є";
-
-/* test for a date */
-"is on or after" = "є на або після";
-
-/* test for a date */
-"is on or before" = "є на або перед";
-
-/* No comment provided by engineer. */
-"Last Week" = "Останнього тижня";
-
 /* Data field name visible in menu/article list */
 "Link" = "Посилання";
 
@@ -311,9 +272,6 @@
 
 /* No comment provided by engineer. */
 "New Tab" = "Нова вкладка";
-
-/* No comment provided by engineer. */
-"No" = "Ні";
 
 /* No comment provided by engineer. */
 "No articles in feed" = "Стрічка не містить статей";
@@ -502,9 +460,6 @@
 "This operation cannot be undone." = "Цю операцію неможливо відмінити.";
 
 /* No comment provided by engineer. */
-"Today" = "Сьогодні";
-
-/* No comment provided by engineer. */
 "Today's Articles" = "Сьогоднішні статті";
 
 /* No comment provided by engineer. */
@@ -533,12 +488,6 @@
 
 /* No comment provided by engineer. */
 "Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified." = "Через помилку, Vienna не змогла створити папку \"%@\". Перевірте права доступу за вказаним шляхом.";
-
-/* No comment provided by engineer. */
-"Yes" = "Так";
-
-/* No comment provided by engineer. */
-"Yesterday" = "Вчора";
 
 /* You are already subscribed to that feed */
 "You are already subscribed to that feed" = "Ви вже підписані до даної стрічки";

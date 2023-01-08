@@ -95,9 +95,6 @@
 /* No comment provided by engineer. */
 "Connecting to Open Reader server to retrieve %@" = "Verbindung mit Open Reader Server wird hergestellt um %@ zur erhalten";
 
-/* test for a string */
-"contains" = "beinhaltet";
-
 /* No comment provided by engineer. */
 "Copy Link to Clipboard" = "Link kopieren";
 
@@ -152,9 +149,6 @@
 
 /* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "Möchtest du die Abonnements aus der angegebenen Datei wirklich importieren?";
-
-/* test for a string */
-"does not contain" = "beinhaltet nicht";
 
 /* Title of a button on an alert */
 "Don’t Empty Trash" = "Papierkorb nicht entleeren";
@@ -291,39 +285,6 @@
 /* No comment provided by engineer. */
 "Improper infinitely looping URL redirect to %@" = "Ungültige unendliche Schleifen-URL-Umleitung nach %@";
 
-/* test for a value */
-"is" = "ist";
-
-/* test for a date */
-"is after" = "ist nach";
-
-/* test for a date */
-"is before" = "ist vor";
-
-/* test for a numeric value */
-"is greater than" = "ist größer als";
-
-/* test for a numeric value */
-"is greater than or equal to" = "ist größer als oder gleich";
-
-/* test for a numeric value */
-"is less than" = "ist kleiner als";
-
-/* test for a numeric value */
-"is less than or equal to" = "ist kleiner als oder gleich";
-
-/* test for a value */
-"is not" = "ist nicht";
-
-/* test for a date */
-"is on or after" = "ist an oder nach";
-
-/* test for a date */
-"is on or before" = "ist an oder vor";
-
-/* No comment provided by engineer. */
-"Last Week" = "letzte Woche";
-
 /* Data field name visible in menu/article list */
 "Link" = "Link";
 
@@ -373,16 +334,10 @@
 "New Tab" = "Ohne Titel";
 
 /* No comment provided by engineer. */
-"No" = "Nein";
-
-/* No comment provided by engineer. */
 "No articles in feed" = "Keine Einträge in diesem Feed";
 
 /* No comment provided by engineer. */
 "No new articles available" = "Keine neuen Artikel verfügbar";
-
-/* test for a folder (not operational as of Vienna 3.2) */
-"not under" = "nicht unter";
 
 /* Title of a button on an alert */
 "OK" = "OK";
@@ -622,16 +577,10 @@
 "This operation cannot be undone." = "Dieser Befehl kann nicht wieder rückgängig gemacht werden.";
 
 /* No comment provided by engineer. */
-"Today" = "Heute";
-
-/* No comment provided by engineer. */
 "Today's Articles" = "Artikel von heute";
 
 /* No comment provided by engineer. */
 "Trash" = "Papierkorb";
-
-/* test for a folder (not operational as of Vienna 3.2) */
-"under" = "unter";
 
 /* No comment provided by engineer. */
 "Unread Articles" = "Ungelesene Einträge";
@@ -668,12 +617,6 @@
 
 /* No comment provided by engineer. */
 "Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified." = "Beim Versuch den Ordner „%@“ zu erstellen ist ein Fehler aufgetreten. Bitte überprüfe die Dateizugriffsrechte des angegebenen Pfades.";
-
-/* No comment provided by engineer. */
-"Yes" = "Ja";
-
-/* No comment provided by engineer. */
-"Yesterday" = "Gestern";
 
 /* You are already subscribed to that feed */
 "You are already subscribed to that feed" = "Du hast dieses Abonnement bereits abonniert";
