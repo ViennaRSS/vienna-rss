@@ -81,7 +81,7 @@ extension CriteriaTree {
                 subCriteriaElement = subCriteriaTree
             } else {
                 guard let subCriterion = Criteria(xml: child) else {
-                    NSLog("CriteriaTree cannot be initialized from \(child)")
+                    NSLog("Criteria cannot be initialized from \(child)")
                     return nil
                 }
                 subCriteriaElement = subCriterion
@@ -127,8 +127,9 @@ extension Criteria {
         }
         guard let field = xml.attribute(forName: Criteria.fieldAttribute)?.stringValue,
               let operatorString = xml.elements(forName: Criteria.operatorTag).first?.stringValue,
-              let operatorType = CriteriaOperator(rawValue: operatorString),
-              let value = xml.elements(forName: Criteria.operatorTag).first?.stringValue else {
+              let operatorInt = Int(operatorString),
+              let operatorType = CriteriaOperator(rawValue: operatorInt),
+              let value = xml.elements(forName: Criteria.valueTag).first?.stringValue else {
             NSLog("Cannot initialize criteria from \(xml)")
             return nil
         }
