@@ -17,6 +17,7 @@
 //  limitations under the License.
 //
 
+@testable import Vienna
 import XCTest
 
 class CriteriaTests: XCTestCase {
@@ -48,9 +49,9 @@ class CriteriaTests: XCTestCase {
 
         let testCriteriaTree = genericConversionChecks(criteriaTreeString)
 
-        XCTAssertTrue(testCriteriaTree.criteriaEnumerator.allObjects.first is Criteria, "Pass")
+        XCTAssertTrue(testCriteriaTree.criteriaTree.first is Criteria, "Pass")
 
-        let sqlString = testCriteriaTree.toSQL(for: database)
+        let sqlString = testCriteriaTree.toSQL(database: database)
 
         XCTAssertEqual("\(flaggedField.sqlField!)=1", sqlString, "Sql correct")
     }
@@ -73,10 +74,10 @@ class CriteriaTests: XCTestCase {
 
         let testCriteriaTree = genericConversionChecks(criteriaTreeString)
 
-        let allCriteria = testCriteriaTree.criteriaEnumerator.allObjects
+        let allCriteria = testCriteriaTree.criteriaTree
         XCTAssertGreaterThan(allCriteria.count, 1, "Pass")
 
-        let sqlString = testCriteriaTree.toSQL(for: database)
+        let sqlString = testCriteriaTree.toSQL(database: database)
 
         XCTAssert(sqlString.contains("\(flaggedField.sqlField!)=1"), "Sql contains flagged criterion")
     }
@@ -104,11 +105,11 @@ class CriteriaTests: XCTestCase {
             fatalError("cannot happen")
         }
 
-        let sqlString = testCriteriaTree.toSQL(for: database)
+        let sqlString = testCriteriaTree.toSQL(database: database)
 
         XCTAssertEqual(sqlString, "\(flaggedField.sqlField!)=1 AND \(flaggedField.sqlField!)=0 AND \(flaggedField.sqlField!)<>1 AND \(flaggedField.sqlField!)<>0", "Sql correct")
 
-        let sqlStringAfterPredicateConversion = CriteriaTree(predicate: testCriteriaTree.predicate)?.toSQL(for: database)
+        let sqlStringAfterPredicateConversion = CriteriaTree(predicate: testCriteriaTree.predicate)?.toSQL(database: database)
 
         XCTAssertEqual(sqlStringAfterPredicateConversion, "\(flaggedField.sqlField!)=1 AND \(flaggedField.sqlField!)=0 AND \(flaggedField.sqlField!)=0 AND \(flaggedField.sqlField!)=1", "Canonicalization successful")
     }
@@ -159,17 +160,17 @@ class CriteriaTests: XCTestCase {
         let criteriaTreeString = """
                                 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
                                 <criteriagroup condition="all">
-                                    <criteria field="\(subjectField.name!)"><operator>\(Criteria.Operator.contains.rawValue)</operator><value>asdf</value></criteria>
+                                    <criteria field="\(subjectField.name!)"><operator>\(CriteriaOperator.contains.rawValue)</operator><value>asdf</value></criteria>
                                     <criteriagroup condition="any">
-                                        <criteria field="\(flaggedField.name!)"><operator>\(Criteria.Operator.equalTo.rawValue)</operator><value>Yes</value></criteria>
-                                        <criteria field="\(flaggedField.name!)"><operator>\(Criteria.Operator.equalTo.rawValue)</operator><value>No</value></criteria>
+                                        <criteria field="\(flaggedField.name!)"><operator>\(CriteriaOperator.equalTo.rawValue)</operator><value>Yes</value></criteria>
+                                        <criteria field="\(flaggedField.name!)"><operator>\(CriteriaOperator.equalTo.rawValue)</operator><value>No</value></criteria>
                                     </criteriagroup>
                                 </criteriagroup>
                                 """
 
         let testCriteriaTree = genericConversionChecks(criteriaTreeString)
 
-        XCTAssertEqual(testCriteriaTree.toSQL(for: database), "\(subjectField.sqlField!) LIKE '%asdf%' AND ( \(flaggedField.sqlField!)=1 OR \(flaggedField.sqlField!)=0 )")
+        XCTAssertEqual(testCriteriaTree.toSQL(database: database), "\(subjectField.sqlField!) LIKE '%asdf%' AND ( \(flaggedField.sqlField!)=1 OR \(flaggedField.sqlField!)=0 )")
     }
 
     func testNestedNotCriteriaSQLConversion() {
@@ -184,17 +185,17 @@ class CriteriaTests: XCTestCase {
         let criteriaTreeString = """
                                 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
                                 <criteriagroup condition="all">
-                                    <criteria field="\(subjectField.name!)"><operator>\(Criteria.Operator.contains.rawValue)</operator><value>asdf</value></criteria>
+                                    <criteria field="\(subjectField.name!)"><operator>\(CriteriaOperator.contains.rawValue)</operator><value>asdf</value></criteria>
                                     <criteriagroup condition="none">
-                                        <criteria field="\(flaggedField.name!)"><operator>\(Criteria.Operator.equalTo.rawValue)</operator><value>Yes</value></criteria>
-                                        <criteria field="\(flaggedField.name!)"><operator>\(Criteria.Operator.equalTo.rawValue)</operator><value>No</value></criteria>
+                                        <criteria field="\(flaggedField.name!)"><operator>\(CriteriaOperator.equalTo.rawValue)</operator><value>Yes</value></criteria>
+                                        <criteria field="\(flaggedField.name!)"><operator>\(CriteriaOperator.equalTo.rawValue)</operator><value>No</value></criteria>
                                     </criteriagroup>
                                 </criteriagroup>
                                 """
 
         let testCriteriaTree = genericConversionChecks(criteriaTreeString)
 
-        XCTAssertEqual(testCriteriaTree.toSQL(for: database), "\(subjectField.sqlField!) LIKE '%asdf%' AND ( NOT \(flaggedField.sqlField!)=1 AND NOT \(flaggedField.sqlField!)=0 )")
+        XCTAssertEqual(testCriteriaTree.toSQL(database: database), "\(subjectField.sqlField!) LIKE '%asdf%' AND ( NOT \(flaggedField.sqlField!)=1 AND NOT \(flaggedField.sqlField!)=0 )")
     }
 
     func testAllCriteriaConditions() {
@@ -257,7 +258,7 @@ class CriteriaTests: XCTestCase {
         let treeStringUnformatted: String = criteriaTreeString.replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: "  ", with: "")
         XCTAssertEqual(treeStringUnformatted, testCriteriaTree.string, "XML reproducible")
 
-        XCTAssertNotNil(testCriteriaTree.toSQL(for: getDatabase()))
+        XCTAssertNotNil(testCriteriaTree.toSQL(database: getDatabase()))
 
         XCTAssertEqual(CriteriaTree(predicate: testCriteriaTree.predicate)!.string, treeStringUnformatted, "Still same xml after converting to predicate and back")
 
