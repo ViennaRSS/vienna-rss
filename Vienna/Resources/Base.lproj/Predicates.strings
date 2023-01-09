@@ -31,4 +31,4 @@ group of strings.
 
 "%[All,Any,None]@ of the following are true" = "Article matches %1$[all,any,none]@ of the following conditions";
 
-"%[Date]@ %[less than ago,more than ago]@ %[days,months,weeks,years]@ %@" = "%1$[Date]@ is %2$[less than,more than]@ %4$@ %3$[days,months,weeks,years]@ ago";
+"%[Date]@ %[less than ago,more than ago]@ %[minutes,hours,days,months,weeks,years]@ %@" = "%1$[Date]@ is %2$[less than,more than]@ %4$@ %3$[minutes,hours,days,months,weeks,years]@ ago";
