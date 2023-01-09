@@ -20,7 +20,7 @@
 import Foundation
 
 @objc(VNACriteriaCondition)
-enum CriteriaCondition: Int {
+enum CriteriaCondition: Int, CustomStringConvertible {
     case all = 0
     case any
     case invalid
@@ -44,6 +44,16 @@ enum CriteriaCondition: Int {
 
     var intValue: Int {
         rawValue
+    }
+
+    //workaround as long as this enum needs to be exposed to Objective-C and cannot have a string as raw value
+    var description: String {
+        switch self {
+        case .any: return "any"
+        case .all: return "all"
+        case .none: return "none"
+        case .invalid: return "invalid"
+        }
     }
 }
 
