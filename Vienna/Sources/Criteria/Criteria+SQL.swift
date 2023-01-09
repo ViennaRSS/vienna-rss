@@ -20,13 +20,15 @@
 import Foundation
 
 protocol SQLConversion {
-    func toSQL(database: Database)
+    func toSQL(database: Database) -> String
 }
 
 extension CriteriaTree: SQLConversion {
     @nonobjc
-    func toSQL(database: Database) {
+    func toSQL(database: Database) -> String {
         //workaround to call objc-method toSqlForDatabase
-        self.perform(Selector(("toSqlForDatabase:")), with: database)
+        let toSqlSelector = Selector(("toSQLForDatabase:"))
+        let value = self.perform(toSqlSelector, with: database)
+        return value?.takeUnretainedValue() as? String ?? ""
     }
 }
