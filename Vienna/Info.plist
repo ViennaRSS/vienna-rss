@@ -129,7 +129,7 @@
 	<key>NSAppleScriptEnabled</key>
 	<string>YES</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>© 2004–2021 The Vienna RSS Project</string>
+	<string>© 2004–2023 The Vienna RSS Project</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
