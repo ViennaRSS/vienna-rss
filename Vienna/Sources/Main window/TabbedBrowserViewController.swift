@@ -349,6 +349,8 @@ extension TabbedBrowserViewController: CustomWKUIDelegate {
             _ = self.createNewTab(url, inBackground: false, load: true, insertAt: getIndexAfterSelected())
         case NSUserInterfaceItemIdentifier.WKMenuItemOpenLinkInSystemBrowser:
             NSApp.appController.openURL(inDefaultBrowser: url)
+        case NSUserInterfaceItemIdentifier.WKMenuItemDownloadImage, NSUserInterfaceItemIdentifier.WKMenuItemDownloadMedia, NSUserInterfaceItemIdentifier.WKMenuItemDownloadLinkedFile:
+            DownloadManager.shared.downloadFile(fromURL: url.absoluteString)
         default:
             break
         }

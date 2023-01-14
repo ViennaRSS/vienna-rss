@@ -21,3 +21,4 @@
 #import "WKWebViewConfiguration+Private.h"
 #import "Criteria.h"
 #import "Criteria+SQL.h"
+#import "DownloadManager.h"

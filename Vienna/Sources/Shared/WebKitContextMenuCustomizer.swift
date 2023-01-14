@@ -27,8 +27,11 @@ class WebKitContextMenuCustomizer: BrowserContextMenuDelegate {
         switch purpose {
         case .link(let url):
             addLinkMenuCustomizations(&menuItems, url)
-        case .pictureLink(image: _, link: let link):
-            addLinkMenuCustomizations(&menuItems, link)
+        case .picture(let mediaLink):
+            addMediaMenuCustomizations(&menuItems, mediaLink)
+        case let .pictureLink(mediaLink, url):
+            addLinkMenuCustomizations(&menuItems, url)
+            addMediaMenuCustomizations(&menuItems, mediaLink)
         default:
             break
         }
@@ -64,7 +67,24 @@ class WebKitContextMenuCustomizer: BrowserContextMenuDelegate {
                 openInDefaultBrowserItem.identifier = .WKMenuItemOpenLinkInSystemBrowser
                 openInDefaultBrowserItem.representedObject = url
                 menuItems.insert(openInDefaultBrowserItem, at: menuItems.index(after: index + 1))
+            }
 
+            if id == .WKMenuItemDownloadLinkedFile {
+                menuItems[index].target = nil
+                menuItems[index].action = #selector(processMenuItem(_:))
+                menuItems[index].representedObject = url
+            }
+        }
+    }
+
+    func addMediaMenuCustomizations(_ menuItems: inout [NSMenuItem], _ url: (URL)) {
+        for index in (0...(menuItems.count - 1)).reversed() {
+            if let id = menuItems[index].identifier {
+                if id == .WKMenuItemDownloadImage || id == .WKMenuItemDownloadMedia {
+                    menuItems[index].target = nil
+                    menuItems[index].action = #selector(processMenuItem(_:))
+                    menuItems[index].representedObject = url
+                }
             }
         }
     }
