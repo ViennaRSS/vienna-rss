@@ -8,6 +8,11 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.8.5
+-----
+- Fix "Previous Tab / Next Tab" menu commands to cycle between open tabs 
+
+
 3.8.4
 -----
 - Add ability to hide/show the enclosure bar (through the View menu)
