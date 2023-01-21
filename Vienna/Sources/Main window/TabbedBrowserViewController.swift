@@ -212,11 +212,19 @@ extension TabbedBrowserViewController: Browser {
     }
 
     func showPreviousTab() {
-        self.tabView?.selectPreviousTabViewItem(nil)
+        if self.tabView?.selectedTabViewItem == primaryTab {
+            self.tabView?.selectLastTabViewItem(nil)
+        } else {
+            self.tabView?.selectPreviousTabViewItem(nil)
+        }
     }
 
     func showNextTab() {
-        self.tabView?.selectNextTabViewItem(nil)
+        if getIndexAfterSelected() == browserTabCount {
+            self.tabView?.selectFirstTabViewItem(nil)
+        } else {
+            self.tabView?.selectNextTabViewItem(nil)
+        }
     }
 
     func closeActiveTab() {
