@@ -274,7 +274,7 @@ extension MainWindowController: NSToolbarDelegate {
             item.menuFormRepresentation = NSMenuItem(title: item.label, action: item.action, keyEquivalent: "")
 
             toolbarSearchField?.sendsWholeSearchString = true
-            toolbarSearchField?.sendsSearchStringImmediately = false
+            toolbarSearchField?.cell?.sendsActionOnEndEditing = false
 
             return item
         }
