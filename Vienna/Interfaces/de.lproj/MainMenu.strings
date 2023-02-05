@@ -182,7 +182,7 @@
 "789.title" = "Als ungelesen markieren";
 
 /* Class = "NSMenuItem"; title = "Mark Flagged"; ObjectID = "790"; */
-"790.title" = "Als markiert markieren";
+"790.title" = "Markieren";
 
 /* Class = "NSMenuItem"; title = "New Group Folder…"; ObjectID = "806"; */
 "806.title" = "Neuer Ordner …";
@@ -365,7 +365,7 @@
 "1428.title" = "Aktualisiere die Abonnements von Open Reader";
 
 /* Class = "NSMenuItem"; title = "Reindex Database"; ObjectID = "1458"; */
-"1458.title" = "Indiziere Datenbank";
+"1458.title" = "Datenbank neu indexieren";
 
 /* Class = "NSMenuItem"; title = "Text Replacement"; ObjectID = "bd7-qY-ofB"; */
 "bd7-qY-ofB.title" = "Textersetzung";

@@ -29,7 +29,7 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>%d new unread article retrieved</string>
+			<string>%d nuevo artículo no leído recuperado</string>
 			<key>other</key>
 			<string>%d nuevos artículos no leídos recuperados</string>
 		</dict>

@@ -19,6 +19,9 @@
 /* Class = "NSMenuItem"; title = "Manually"; ObjectID = "7Za-ay-jlt"; */
 "7Za-ay-jlt.title" = "Manualmente";
 
+/* Class = "NSButtonCell"; title = "Display feeds with unread articles with bold font"; ObjectID = "86e-38-zCh"; */
+"86e-38-zCh.title" = "Mostrar fuentes con artículos no leídos con fuente en negrita";
+
 /* Class = "NSTextFieldCell"; title = "Mark current article read:"; ObjectID = "adB-qE-xKg"; */
 "adB-qE-xKg.title" = "Marcar artículo actual como leído:";
 
@@ -39,6 +42,9 @@
 
 /* Class = "NSButtonCell"; title = "Select…"; ObjectID = "cbn-xq-UFr"; */
 "cbn-xq-UFr.title" = "Seleccionar…";
+
+/* Class = "NSMenuItem"; title = "Medium"; ObjectID = "ClO-ha-l48"; */
+"ClO-ha-l48.title" = "Mediano";
 
 /* Class = "NSButtonCell"; title = "Preview new browser"; ObjectID = "DDY-fS-V5T"; */
 "DDY-fS-V5T.title" = "Vista previa de nuevo navegador";
@@ -82,6 +88,9 @@
 /* Class = "NSButtonCell"; title = "Check for newer versions of Vienna on start up"; ObjectID = "haP-20-AwJ"; */
 "haP-20-AwJ.title" = "Buscar nuevas versiones de Vienna al inicio";
 
+/* Class = "NSMenuItem"; title = "Small"; ObjectID = "hd4-wx-xuK"; */
+"hd4-wx-xuK.title" = "Pequeño";
+
 /* Class = "NSTextFieldCell"; title = "Erase deleted articles:"; ObjectID = "HH2-sh-rEx"; */
 "HH2-sh-rEx.title" = "Borrar artículos eliminados:";
 
@@ -92,7 +101,7 @@
 "iHl-tr-paa.ibShadowedToolTip" = "Seleccione un servidor compatible con la API Open Reader";
 
 /* Class = "NSTextFieldCell"; title = "Article list font:"; ObjectID = "ITA-U9-lhX"; */
-"ITA-U9-lhX.title" = "Lista de artículos:";
+"ITA-U9-lhX.title" = "Fuente de lista de artículos:";
 
 /* Class = "NSButtonCell"; title = "Bounce the application icon"; ObjectID = "jfH-Hq-gRk"; */
 "jfH-Hq-gRk.title" = "Animar icono de la aplicación";
@@ -145,6 +154,9 @@
 /* Class = "NSMenuItem"; title = "After two days"; ObjectID = "sJE-bd-4mK"; */
 "sJE-bd-4mK.title" = "Después de dos días";
 
+/* Class = "NSTextFieldCell"; title = "Feed list font size:"; ObjectID = "Sxj-Uk-jhk"; */
+"Sxj-Uk-jhk.title" = "Tamaño de texto de la lista de fuentes:";
+
 /* Class = "NSViewController"; title = "General"; ObjectID = "T2z-OK-VtO"; */
 "T2z-OK-VtO.title" = "General";
 
@@ -160,11 +172,17 @@
 /* Class = "NSButton"; ibShadowedToolTip = "Visit the website"; ObjectID = "V12-Ua-skO"; */
 "V12-Ua-skO.ibShadowedToolTip" = "Visitar página web";
 
+/* Class = "NSButtonCell"; title = "Display unread articles with bold font"; ObjectID = "VQH-xk-s5g"; */
+"VQH-xk-s5g.title" = "Mostrar artículos no leídos con fuente en negrita";
+
 /* Class = "NSViewController"; title = "Updates"; ObjectID = "wyk-W1-xMh"; */
 "wyk-W1-xMh.title" = "Actualizaciones";
 
 /* Class = "NSMenuItem"; title = "After one week"; ObjectID = "xfd-Vp-kJy"; */
 "xfd-Vp-kJy.title" = "Después de una semana";
+
+/* Class = "NSMenuItem"; title = "Large"; ObjectID = "xIg-ej-t3j"; */
+"xIg-ej-t3j.title" = "Grande";
 
 /* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "YG6-9k-gKH"; */
 "YG6-9k-gKH.title" = "URL:";
