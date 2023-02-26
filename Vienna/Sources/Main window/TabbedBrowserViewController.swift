@@ -345,7 +345,7 @@ extension TabbedBrowserViewController: CustomWKUIDelegate {
         switch menuItem.identifier {
         case NSUserInterfaceItemIdentifier.WKMenuItemOpenLinkInBackground:
             _ = self.createNewTab(url, inBackground: true, load: true, insertAt: getIndexAfterSelected())
-        case NSUserInterfaceItemIdentifier.WKMenuItemOpenLinkInNewWindow:
+        case NSUserInterfaceItemIdentifier.WKMenuItemOpenLinkInNewWindow, NSUserInterfaceItemIdentifier.WKMenuItemOpenImageInNewWindow, NSUserInterfaceItemIdentifier.WKMenuItemOpenMediaInNewWindow:
             _ = self.createNewTab(url, inBackground: false, load: true, insertAt: getIndexAfterSelected())
         case NSUserInterfaceItemIdentifier.WKMenuItemOpenLinkInSystemBrowser:
             NSApp.appController.openURL(inDefaultBrowser: url)

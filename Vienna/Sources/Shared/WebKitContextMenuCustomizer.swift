@@ -80,7 +80,7 @@ class WebKitContextMenuCustomizer: BrowserContextMenuDelegate {
     func addMediaMenuCustomizations(_ menuItems: inout [NSMenuItem], _ url: (URL)) {
         for index in (0...(menuItems.count - 1)).reversed() {
             if let id = menuItems[index].identifier {
-                if id == .WKMenuItemDownloadImage || id == .WKMenuItemDownloadMedia {
+                if id == .WKMenuItemDownloadImage || id == .WKMenuItemDownloadMedia || id == .WKMenuItemOpenImageInNewWindow || id == .WKMenuItemOpenMediaInNewWindow {
                     menuItems[index].target = nil
                     menuItems[index].action = #selector(processMenuItem(_:))
                     menuItems[index].representedObject = url
