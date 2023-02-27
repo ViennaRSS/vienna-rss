@@ -342,6 +342,15 @@ extension BrowserTab: Tab {
 
 extension BrowserTab: WKNavigationDelegate {
 
+    func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
+        if navigationResponse.canShowMIMEType {
+            decisionHandler(.allow)
+        } else {
+            decisionHandler(.cancel)
+            DownloadManager.shared.downloadFile(fromURL: url?.absoluteString)
+        }
+    }
+
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation?) {
         handleNavigationStart()
         if let webView = webView as? CustomWKWebView {
