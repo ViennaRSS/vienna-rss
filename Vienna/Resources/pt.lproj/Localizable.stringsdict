@@ -13,9 +13,9 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>%d new article retrieved</string>
+			<string>%d novo artigo obtido</string>
 			<key>other</key>
-			<string>%d novos artigos recebidos</string>
+			<string>%d novos artigos obtidos</string>
 		</dict>
 	</dict>
 	<key>%d new unread articles retrieved</key>
@@ -29,9 +29,9 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>%d new unread article retrieved</string>
+			<string>%d novo artigo por ler obtido</string>
 			<key>other</key>
-			<string>%d novos artigos recebidos</string>
+			<string>%d novos artigos por ler obtidos</string>
 		</dict>
 	</dict>
 	<key>%d subscriptions successfully exported</key>
@@ -45,9 +45,9 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>%d subscription successfully exported</string>
+			<string>%d assinatura exportada correctamente</string>
 			<key>other</key>
-			<string>%d subscrições exportadas com sucesso</string>
+			<string>%d assinaturas exportadas correctamente</string>
 		</dict>
 	</dict>
 	<key>%d subscriptions successfully imported</key>
@@ -61,9 +61,9 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>%d subscription successfully imported</string>
+			<string>%d assinatura importada correctamente</string>
 			<key>other</key>
-			<string>%d subscrições importadas com sucesso</string>
+			<string>%d assinaturas importadas correctamente</string>
 		</dict>
 	</dict>
 	<key>%d unread articles</key>
@@ -77,9 +77,9 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>%d unread article</string>
+			<string>%d artigo por ler</string>
 			<key>other</key>
-			<string>%d artigos não lidos</string>
+			<string>%d artigos por ler</string>
 		</dict>
 	</dict>
 	<key>%u articles</key>
@@ -93,7 +93,7 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>u</string>
 			<key>one</key>
-			<string>%u article</string>
+			<string>%u artigo</string>
 			<key>other</key>
 			<string>%u artigos</string>
 		</dict>
@@ -109,7 +109,7 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>u</string>
 			<key>one</key>
-			<string>%u não lidos</string>
+			<string>%u por ler</string>
 			<key>other</key>
 			<string>%u não lidos</string>
 		</dict>

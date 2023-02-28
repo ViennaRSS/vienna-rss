@@ -13,7 +13,7 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>%d new article retrieved</string>
+			<string>%d nuovo articolo ricevuto</string>
 			<key>other</key>
 			<string>%d nuovi articoli ricevuti</string>
 		</dict>
@@ -29,7 +29,7 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>%d new unread article retrieved</string>
+			<string>Ricevuto %d nuovo articolo da leggere</string>
 			<key>other</key>
 			<string>%d nuovi articoli non letti ricevuti</string>
 		</dict>
@@ -45,7 +45,7 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>%d subscription successfully exported</string>
+			<string>%d iscrizione esportata correttamente</string>
 			<key>other</key>
 			<string>%d iscrizioni esportate correttamente</string>
 		</dict>
@@ -61,7 +61,7 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>%d subscription successfully imported</string>
+			<string>%d iscrizione importata correttamente</string>
 			<key>other</key>
 			<string>%d iscrizioni importate correttamente</string>
 		</dict>
@@ -77,7 +77,7 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>d</string>
 			<key>one</key>
-			<string>%d unread article</string>
+			<string>%d articolo non letto</string>
 			<key>other</key>
 			<string>%d articoli non letti</string>
 		</dict>
@@ -93,7 +93,7 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>u</string>
 			<key>one</key>
-			<string>%u article</string>
+			<string>%u articolo</string>
 			<key>other</key>
 			<string>%u articoli</string>
 		</dict>

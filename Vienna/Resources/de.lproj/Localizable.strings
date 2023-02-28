@@ -304,13 +304,13 @@
 "Mark All Subscriptions as Read" = "Alle Abonnements als gelesen markieren";
 
 /* Title of a menu item */
-"Mark Flagged" = "Als markiert markieren";
+"Mark Flagged" = "Markieren";
 
 /* Title of a menu item */
 "Mark Read" = "Als gelesen markieren";
 
 /* No comment provided by engineer. */
-"Mark Unflagged" = "Als unmarkiert markieren";
+"Mark Unflagged" = "Markierung entfernen";
 
 /* Title of a menu item */
 "Mark Unread" = "Als ungelesen markieren";

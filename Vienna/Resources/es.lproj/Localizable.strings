@@ -178,7 +178,7 @@
 "Enclosure" = "Archivo adjunto";
 
 /* Data field name (URL) visible in menu/article list */
-"Enclosure URL" = "URL del adjunto";
+"Enclosure URL" = "URL de adjunto";
 
 /* No comment provided by engineer. */
 "Enter the URL here" = "Introduzca la URL aquí";

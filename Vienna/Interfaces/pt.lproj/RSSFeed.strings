@@ -2,16 +2,19 @@
 "102.title" = "Cancelar";
 
 /* Class = "NSButtonCell"; title = "Subscribe"; ObjectID = "103"; */
-"103.title" = "Subscrever";
+"103.title" = "Assinar";
 
 /* Class = "NSTextFieldCell"; title = "Source:"; ObjectID = "104"; */
 "104.title" = "Origem:";
 
 /* Class = "NSTextFieldCell"; title = "Create a new subscription"; ObjectID = "106"; */
-"106.title" = "Criar uma nova subscrição";
+"106.title" = "Criar uma nova assinatura";
 
 /* Class = "NSTextFieldCell"; title = "Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source."; ObjectID = "107"; */
-"107.title" = "Introduza o link para a nova fonte em baixo. Ou escolha na lista de Origens e intriduza um atalho para a fontes disponibilizadas pela origem.";
+"107.title" = "Insira abaixo uma ligação para um fluxo novo. Ou então seleccione da lista de fontes um atalho para o fluxo providenciado por essa fonte.";
+
+/* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "110"; */
+"110.title" = "URL:";
 
 /* Class = "NSButtonCell"; title = "Save"; ObjectID = "111"; */
 "111.title" = "Guardar";
@@ -20,5 +23,8 @@
 "112.title" = "Cancelar";
 
 /* Class = "NSTextFieldCell"; title = "Edit subscription"; ObjectID = "114"; */
-"114.title" = "Editar subscrição";
+"114.title" = "Editar assinatura";
+
+/* Class = "NSButtonCell"; title = "Subscribe in Open Reader"; ObjectID = "116"; */
+"116.title" = "Assinar no Open Reader";
 

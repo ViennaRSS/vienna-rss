@@ -1,5 +1,5 @@
 /* Class = "NSTextFieldCell"; title = "Last Refreshed:"; ObjectID = "105"; */
-"105.title" = "Última Actualização:";
+"105.title" = "Última actualização:";
 
 /* Class = "NSButtonCell"; title = "Validate"; ObjectID = "109"; */
 "109.title" = "Validar";
@@ -8,7 +8,7 @@
 "111.title" = "Nome de utilizador:";
 
 /* Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "112"; */
-"112.title" = "Palavra-Passe:";
+"112.title" = "Senha:";
 
 /* Class = "NSButtonCell"; title = "Update Authentication"; ObjectID = "115"; */
 "115.title" = "Actualizar autenticação";
@@ -17,10 +17,13 @@
 "117.title" = "Tamanho:";
 
 /* Class = "NSTextFieldCell"; title = "Unread:"; ObjectID = "118"; */
-"118.title" = "Não lidos:";
+"118.title" = "Por ler:";
 
 /* Class = "NSButtonCell"; title = "Subscribed"; ObjectID = "121"; */
-"121.title" = "Subscrito";
+"121.title" = "Assinado";
+
+/* Class = "NSButtonCell"; title = "Load Full HTML Articles"; ObjectID = "126"; */
+"126.title" = "Carregar por inteiro os artigos HTML";
 
 /* Class = "NSTextFieldCell"; title = "Description"; ObjectID = "E84-Uo-ybg"; */
 "E84-Uo-ybg.title" = "Descrição";
@@ -32,5 +35,8 @@
 "U0N-RF-bUt.title" = "Autenticação";
 
 /* Class = "NSTextFieldCell"; title = "Feed URL"; ObjectID = "xPF-M9-oZG"; */
-"xPF-M9-oZG.title" = "URL da fonte";
+"xPF-M9-oZG.title" = "URL do fluxo";
+
+/* Class = "NSButtonCell"; title = "Open Cached File…"; ObjectID = "xTj-hY-aTU"; */
+"xTj-hY-aTU.title" = "Abrir ficheiro em cache…";
 
