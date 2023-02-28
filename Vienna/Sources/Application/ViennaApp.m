@@ -33,10 +33,12 @@
 #import "Article.h"
 #import "Database.h"
 #import "StringExtensions.h"
+#import "FeedListConstants.h"
 #import "Vienna-Swift.h"
 
 @interface ViennaApp ()
 
+@property (nonatomic) VNAFeedListSizeMode feedListSizeMode;
 @property (readonly, nonatomic) BOOL readingPaneOnRight;
 
 // MARK: Obsolete
@@ -382,6 +384,35 @@
 -(void)setArticleListFontSize:(NSInteger)newFontSize		{ [Preferences standardPreferences].articleListFontSize = newFontSize; }
 -(void)setStatusBarVisible:(BOOL)flag				{ [Preferences standardPreferences].showStatusBar = flag; }
 -(void)setFilterBarVisible:(BOOL)flag				{ [Preferences standardPreferences].showFilterBar = flag; }
+
+
+- (VNAFeedListSizeMode)feedListSizeMode
+{
+    NSUserDefaults *defaults = NSUserDefaults.standardUserDefaults;
+    NSInteger sizeMode = [defaults integerForKey:MAPref_FeedListSizeMode];
+    switch (sizeMode) {
+    case VNAFeedListSizeModeTiny:
+    case VNAFeedListSizeModeSmall:
+    case VNAFeedListSizeModeMedium:
+        return sizeMode;
+    default:
+        return VNAFeedListSizeModeDefault;
+    }
+}
+
+- (void)setFeedListSizeMode:(VNAFeedListSizeMode)feedListSizeMode
+{
+    switch (feedListSizeMode) {
+    case VNAFeedListSizeModeTiny:
+    case VNAFeedListSizeModeSmall:
+    case VNAFeedListSizeModeMedium:
+        break;
+    default:
+        return;
+    }
+    NSUserDefaults *defaults = NSUserDefaults.standardUserDefaults;
+    [defaults setInteger:feedListSizeMode forKey:MAPref_FeedListSizeMode];
+}
 
 // MARK: Obsolete accessors
 // The following accessors are defined for compatibility with scripting.

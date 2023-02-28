@@ -22,7 +22,8 @@
 typedef NS_ENUM(NSInteger, VNAFeedListSizeMode) {
     VNAFeedListSizeModeTiny = 1,
     VNAFeedListSizeModeSmall = 2,
-    VNAFeedListSizeModeMedium = 3
+    VNAFeedListSizeModeMedium = 3,
+    VNAFeedListSizeModeDefault = VNAFeedListSizeModeSmall
 };
 
 typedef CGFloat VNAFeedListRowHeight NS_TYPED_ENUM;
