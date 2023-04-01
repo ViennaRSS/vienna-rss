@@ -970,11 +970,13 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     NSDictionary *unreadDict;
     NSError *jsonError;
     unreadDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonError];
+    NSMutableArray *remoteUnreadFeeds = [NSMutableArray array];
     for (NSDictionary *feed in unreadDict[@"unreadcounts"]) {
         NSString *feedID = feed[@"id"];
         if ([feedID hasPrefix:@"feed/"]) {
             Folder *folder = [[Database sharedManager] folderFromRemoteId:feedID];
             if (folder) {
+                [remoteUnreadFeeds addObject:feedID];
                 NSInteger remoteCount = ((NSString *)feed[@"count"]).intValue;
                 NSInteger localCount = folder.unreadCount;
                 NSInteger remoteTimestamp = ((NSString *)feed[@"newestItemTimestampUsec"]).longLongValue / 1000000; // convert in truncated seconds
@@ -990,6 +992,14 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                     [folder clearNonPersistedFlag:VNAFolderFlagSyncedOK];
                 }
             }
+        }
+    }
+
+    NSArray *localFolders = [Database sharedManager].arrayOfAllFolders;
+    for (Folder *folder in localFolders) {
+        // folders which are locally marked as having unread articles, while they are remotely all read
+        if (folder.isOpenReaderFolder && folder.unreadCount > 0 && ![remoteUnreadFeeds containsObject:folder.remoteId]) {
+            [folder clearNonPersistedFlag:VNAFolderFlagSyncedOK];
         }
     }
 } // unreadCountDone
