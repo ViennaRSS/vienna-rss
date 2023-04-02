@@ -43,7 +43,6 @@
 -(NSString *)expandTagsOfArticle:(Article *)theArticle intoTemplate:(NSString *)theString withConditional:(BOOL)cond
 {
     NSMutableString * newString = [NSMutableString stringWithString:SafeString(theString)];
-    BOOL hasOneTag = NO;
     NSUInteger tagStartIndex = 0;
 
     while ((tagStartIndex = [newString vna_indexOfCharacterInString:'$' afterIndex:tagStartIndex]) != NSNotFound)
@@ -73,7 +72,6 @@
         else
         {
             [newString replaceCharactersInRange:NSMakeRange(tagStartIndex, tagLength) withString:replacementString];
-            hasOneTag = YES;
 
             if (!replacementString.vna_isBlank)
                 cond = NO;
@@ -81,7 +79,7 @@
             tagStartIndex += replacementString.length;
         }
     }
-    return (cond && hasOneTag) ? @"" : newString;
+    return cond ? @"" : newString;
 }
 
 /* articleTextFromArray
