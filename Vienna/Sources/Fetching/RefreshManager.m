@@ -25,7 +25,6 @@
 #import "FeedCredentials.h"
 #import "ActivityItem.h"
 #import "ActivityLog.h"
-#import "RichXMLParser.h"
 #import "StringExtensions.h"
 #import "Preferences.h"
 #import "Constants.h"
@@ -37,6 +36,8 @@
 #import "TRVSURLSessionOperation.h"
 #import "URLRequestExtensions.h"
 #import "Vienna-Swift.h"
+#import "XMLFeed.h"
+#import "XMLFeedParser.h"
 
 typedef NS_ENUM (NSInteger, Redirect301Status) {
     HTTP301Unknown = 0,
@@ -511,7 +512,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         }
         [myRequest vna_setUserInfo:@{ @"folder": folder, @"log": aItem, @"type": @(MA_Refresh_Feed) }];
         [myRequest addValue:
-         @"application/rss+xml,application/rdf+xml,application/atom+xml,text/xml,application/xml,application/xhtml+xml;q=0.9,text/html;q=0.8,*/*;q=0.5"
+         @"application/rss+xml,application/rdf+xml,application/atom+xml,text/xml,application/xml,application/xhtml+xml,application/feed+json,application/json;q=0.9,text/html;q=0.8,*/*;q=0.5"
                       forHTTPHeaderField:@"Accept"];
         // if authentication infos are present, try basic authentication first
         if (![folder.username isEqualToString:@""]) {
@@ -622,6 +623,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
                      @"log": connectorItem,
                      @"url": url,
                      @"data": receivedData,
+                     @"mimeType": response.MIMEType,
                      @"lastModifiedString": lastModifiedString,
                  }];
             }
@@ -670,7 +672,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 
     // Empty data feed is OK if we got HTTP 200
     __block NSUInteger newArticlesFromFeed = 0;
-    RichXMLParser *newFeed = [[RichXMLParser alloc] init];
     if (receivedData.length > 0) {
         Preferences *standardPreferences = [Preferences standardPreferences];
         if (standardPreferences.shouldSaveFeedSource) {
@@ -690,13 +691,26 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
             [receivedData writeToFile:feedSourcePath options:NSAtomicWrite error:NULL];
         }
 
-        // Create a new rich XML parser instance that will take care of
-        // parsing the XML data we just got.
-        if (newFeed == nil || ![newFeed parseRichXML:receivedData]) {
+        id<VNAFeed> newFeed;
+        NSError *error;
+        NSString *mimeType = parameters[@"mimeType"];
+        if ([mimeType containsString:@"application/feed+json"] ||
+            [mimeType containsString:@"application/json"]) {
+            VNAJSONFeedParser *parser = [[VNAJSONFeedParser alloc] init];
+            newFeed = [parser feedWithJSONData:receivedData error:&error];
+        } else {
+            VNAXMLFeedParser *parser = [[VNAXMLFeedParser alloc] init];
+            newFeed = [parser feedWithXMLData:receivedData error:&error];
+        }
+        if (!newFeed) {
+            NSString *errorDebugDescription = error.userInfo[NSDebugDescriptionErrorKey];
+            if (errorDebugDescription) {
+                os_log_error(VNA_LOG, "%@", errorDebugDescription);
+            }
             // Mark the feed as failed
             [self setFolderErrorFlag:folder flag:YES];
             dispatch_async(dispatch_get_main_queue(), ^{
-                [connectorItem setStatus:NSLocalizedString(@"Error parsing XML data in feed", nil)];
+                [connectorItem setStatus:NSLocalizedString(@"Error parsing data in feed", nil)];
             });
             return;
         }
@@ -719,8 +733,8 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 
         // Extract the latest title and description
         NSString * feedTitle = newFeed.title;
-        NSString * feedDescription = newFeed.description;
-        NSString * feedLink = newFeed.link;
+        NSString * feedDescription = newFeed.feedDescription;
+        NSString * feedLink = newFeed.homePageURL;
 
         // Synthesize feed link if it is missing
         if (feedLink == nil || feedLink.vna_isBlank) {
@@ -735,15 +749,15 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         NSMutableArray *articleArray = [NSMutableArray array];
         NSMutableArray *articleGuidArray = [NSMutableArray array];
 
-        NSDate *itemAlternativeDate = newFeed.lastModified;
+        NSDate *itemAlternativeDate = newFeed.modifiedDate;
         if (itemAlternativeDate == nil) {
             itemAlternativeDate = [NSDate date];
         }
 
         // Parse off items.
 
-        for (FeedItem * newsItem in newFeed.items) {
-            NSDate * articleDate = newsItem.date;
+        for (id<VNAFeedItem> newsItem in newFeed.items) {
+            NSDate * articleDate = newsItem.modifiedDate;
 
             NSString * articleGuid = newsItem.guid;
 
@@ -755,7 +769,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
             // title. The solution is to use the link and title and build a GUID from those.
             // We add the folderId at the beginning to ensure that items in different feeds do not share a guid.
             if ([articleGuid isEqualToString:@""]) {
-                articleGuid = [NSString stringWithFormat:@"%ld-%@-%@", (long)folderId, newsItem.link, newsItem.title];
+                articleGuid = [NSString stringWithFormat:@"%ld-%@-%@", (long)folderId, newsItem.url, newsItem.title];
             }
             // This is a horrible hack for horrible feeds that contain more than one item with the same guid.
             // Bad feeds! I'm talking to you, kerbalstuff.com
@@ -770,7 +784,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
                     firstFoundArticle.guid = firstFoundArticleNewGuid;
                     articleGuidArray[articleIndex] = firstFoundArticleNewGuid;
                     // then hack the guid for the item being processed
-                    articleGuid = [NSString stringWithFormat:@"%ld-%@-%@", (long)folderId, newsItem.link, newsItem.title];
+                    articleGuid = [NSString stringWithFormat:@"%ld-%@-%@", (long)folderId, newsItem.url, newsItem.title];
                 } else {
                     // first, hack the initial article (which is probably the first loaded / most recent one)
                     NSString * firstFoundArticleNewGuid =
@@ -782,7 +796,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
                     // then hack the guid for the item being processed
                     articleGuid =
                         [NSString stringWithFormat:@"%ld-%@-%@-%@", (long)folderId,
-                         [NSString stringWithFormat:@"%1.3f", articleDate.timeIntervalSince1970], newsItem.link, newsItem.title];
+                         [NSString stringWithFormat:@"%1.3f", articleDate.timeIntervalSince1970], newsItem.url, newsItem.title];
                 }
             }
             [articleGuidArray addObject:articleGuid];
@@ -797,10 +811,19 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 
             Article * article = [[Article alloc] initWithGuid:articleGuid];
             article.folderId = folderId;
-            article.author = newsItem.author;
-            article.body = newsItem.feedItemDescription;
-            article.title = newsItem.title;
-            NSString * articleLink = newsItem.link;
+            article.author = newsItem.authors;
+            article.body = newsItem.content;
+            if (!newsItem.title || newsItem.title.vna_isBlank) {
+                NSString *newTitle = newsItem.content.vna_titleTextFromHTML.vna_stringByUnescapingExtendedCharacters;
+                if (newTitle.vna_isBlank) {
+                    article.title = NSLocalizedString(@"(No title)", @"Fallback for feed items without a title");
+                } else {
+                    article.title = newTitle;
+                }
+            } else {
+                article.title = newsItem.title;
+            }
+            NSString * articleLink = newsItem.url;
             if (![articleLink hasPrefix:@"http:"] && ![articleLink hasPrefix:@"https:"]) {
                 articleLink = [NSURL URLWithString:articleLink relativeToURL:url].absoluteString;
             }

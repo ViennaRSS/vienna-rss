@@ -1,8 +1,8 @@
 //
-//  FeedItem.swift
+//  XMLFeedItem.swift
 //  Vienna
 //
-//  Copyright 2019
+//  Copyright 2019, 2021-2022
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -19,14 +19,15 @@
 
 import Foundation
 
-final class FeedItem: NSObject {
+@objc(VNAXMLFeedItem)
+class XMLFeedItem: NSObject, FeedItem {
 
-    @objc var title = ""
-    @objc var feedItemDescription = ""
-    @objc var author = ""
     @objc var guid = ""
-    @objc var date: Date?
-    @objc var link = ""
-    @objc var enclosure = ""
+    @objc var title: String?
+    @objc var authors: String?
+    @objc var content = ""
+    @objc var modifiedDate: Date?
+    @objc var url: String?
+    @objc var enclosure: String?
 
 }
