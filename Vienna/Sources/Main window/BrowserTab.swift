@@ -347,7 +347,8 @@ extension BrowserTab: WKNavigationDelegate {
             decisionHandler(.allow)
         } else {
             decisionHandler(.cancel)
-            DownloadManager.shared.downloadFile(fromURL: url?.absoluteString)
+            let filename = navigationResponse.response.suggestedFilename;
+            DownloadManager.shared.downloadFile(fromURL: url?.absoluteString, withFilename: filename)
         }
     }
 
