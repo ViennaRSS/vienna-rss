@@ -48,8 +48,10 @@ class CustomWKWebView: WKWebView {
         let prefs = configuration.preferences
         prefs.javaScriptCanOpenWindowsAutomatically = true
 
-        if prefs.responds(to: #selector(setter: WKPreferences._fullScreenEnabled)) {
-            prefs._fullScreenEnabled = true
+        if #available(macOS 12.3, *) {
+            prefs.isElementFullscreenEnabled = true
+        } else if prefs.responds(to: #selector(setter: WKPreferences._isFullScreenEnabled)) {
+            prefs._isFullScreenEnabled = true
         }
 
         #if DEBUG
@@ -97,6 +99,9 @@ class CustomWKWebView: WKWebView {
         self.allowsMagnification = true
         self.allowsBackForwardNavigationGestures = true
         self.allowsLinkPreview = true
+        if #available(macOS 13.3, *) {
+            isInspectable = true
+        }
     }
 
     @available(*, unavailable)
