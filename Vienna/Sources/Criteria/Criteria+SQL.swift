@@ -38,9 +38,7 @@ extension CriteriaTree: SQLConversion {
         case .none:
             noneConditionPrefix = "NOT "
             sqlOperator = "AND NOT"
-        case .invalid:
-            fallthrough
-        case .all:
+        case .invalid, .all:
             noneConditionPrefix = ""
             sqlOperator = "AND"
         }
