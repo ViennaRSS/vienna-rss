@@ -28,20 +28,18 @@ enum DateUnit: String, CaseIterable {
     case years
 }
 
-class DatePredicateWithUnit<T>: NSPredicate {
+class DatePredicateWithUnit: NSPredicate {
 
     var field: String
     var comparisonOperator: NSComparisonPredicate.Operator
     var count: UInt
     var unit: DateUnit
-    var evaluation: (T, String, NSComparisonPredicate.Operator, UInt, DateUnit) -> Bool
 
-    init(field: String, comparisonOperator: NSComparisonPredicate.Operator, count: UInt, unit: DateUnit, evaluation: @escaping (T, String, NSComparisonPredicate.Operator, UInt, DateUnit) -> Bool) {
+    init(field: String, comparisonOperator: NSComparisonPredicate.Operator, count: UInt, unit: DateUnit) {
         self.field = field
         self.comparisonOperator = comparisonOperator
         self.count = count
         self.unit = unit
-        self.evaluation = evaluation
         super.init()
     }
 
@@ -51,9 +49,11 @@ class DatePredicateWithUnit<T>: NSPredicate {
     }
 
     override func evaluate(with object: Any?) -> Bool {
-        guard let evaluateOn = object as? T else {
-            return false //cannot evaluate on objects not of type T
+        guard object is Article else {
+            return false //cannot evaluate on objects not of type Article
         }
-        return evaluation(evaluateOn, field, comparisonOperator, count, unit)
+        return false //TODO: write proper evaluation
     }
+
+    override var predicateFormat: String { "" } //TODO: write proper format string
 }

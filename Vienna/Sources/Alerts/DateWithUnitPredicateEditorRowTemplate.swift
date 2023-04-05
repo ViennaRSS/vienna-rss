@@ -70,7 +70,7 @@ class DateWithUnitPredicateEditorRowTemplate: NSPredicateEditorRowTemplate {
     }
 
     override func match(for predicate: NSPredicate) -> Double {
-        if let predicate = predicate as? DatePredicateWithUnit<Any>,
+        if let predicate = predicate as? DatePredicateWithUnit,
            menuItemForOperator.keys.contains(predicate.comparisonOperator) {
             return Double.greatestFiniteMagnitude
         } else {
@@ -80,20 +80,23 @@ class DateWithUnitPredicateEditorRowTemplate: NSPredicateEditorRowTemplate {
 
     override func setPredicate(_ predicate: NSPredicate) {
 
-        guard let datePredicate = predicate as? DatePredicateWithUnit<Any>,
-              let fieldButton = templateViews[0] as? NSPopUpButton,
-              let operatorButton = templateViews[2] as? NSPopUpButton,
-              let numberInputField = templateViews[3] as? NSTextField
-        else {
+        guard let datePredicate = predicate as? DatePredicateWithUnit else {
             fatalError("This predicate editor template must only match dateWithUnit predicates, see match(for:) method")
         }
         guard let operatorMenuItem = menuItemForOperator[datePredicate.comparisonOperator] else {
             fatalError("This predicate editor template must only match predicates with suitable operators, see match(for:) method and menuItemForOperator dictionary")
         }
+        guard let fieldButton = templateViews[0] as? NSPopUpButton,
+              let operatorButton = templateViews[1] as? NSPopUpButton,
+              let unitButton = templateViews[2] as? NSPopUpButton,
+              let numberInputField = templateViews[3] as? NSTextField
+        else {
+            return
+        }
 
         fieldButton.selectItem(withTitle: datePredicate.field)
-        operatorButton.select(operatorMenuItem)
-        numberInputField.stringValue = "\(datePredicate.count)"
+        operatorButton.selectItem(withTitle: operatorMenuItem.title)
+        numberInputField.intValue = Int32(datePredicate.count)
         unitButton.selectItem(withTitle: datePredicate.unit.rawValue)
     }
 
@@ -102,6 +105,19 @@ class DateWithUnitPredicateEditorRowTemplate: NSPredicateEditorRowTemplate {
     }
 
     override func predicate(withSubpredicates subpredicates: [NSPredicate]?) -> NSPredicate {
-        return NSPredicate(value: true) //TODO return proper predicate
+        guard let fieldButton = templateViews[0] as? NSPopUpButton,
+              let operatorButton = templateViews[1] as? NSPopUpButton,
+              let unitButton = templateViews[2] as? NSPopUpButton,
+              let numberInputField = templateViews[3] as? NSTextField,
+              let dateUnitString = unitButton.selectedItem?.title,
+              let comparisonOperator = menuItemForOperator.first(where: { _, value in
+                  operatorButton.selectedItem?.title == value.title
+              })?.key,
+              let dateUnit = DateUnit(rawValue: dateUnitString),
+              let field = fieldButton.selectedItem?.title
+        else {
+            return NSPredicate(value: false)
+        }
+        return DatePredicateWithUnit(field: field, comparisonOperator: comparisonOperator, count: UInt(numberInputField.intValue), unit: dateUnit)
     }
 }

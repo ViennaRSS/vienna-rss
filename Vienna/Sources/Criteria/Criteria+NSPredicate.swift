@@ -220,9 +220,7 @@ extension Criteria: PredicateConvertible {
                 fatalError("malformed criteria value \(value)")
             }
             let dateOperator = convertOperatorTypeForComparisonPredicate(operatorType)
-            return DatePredicateWithUnit<Article>(field: MA_Field_Date, comparisonOperator: dateOperator, count: count, unit: unit) { (article: Article, field: String, comparisonOperator, count, unit) in
-                true //TODO write an actual evaluation for the predicate that could be executed in code
-            }
+            return DatePredicateWithUnit(field: MA_Field_Date, comparisonOperator: dateOperator, count: count, unit: unit)
         } else {
             return buildComparisonPredicate(field, value, operatorType)
         }
