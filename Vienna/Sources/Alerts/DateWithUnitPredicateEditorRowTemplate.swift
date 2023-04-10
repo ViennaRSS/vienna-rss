@@ -37,9 +37,9 @@ class DateWithUnitPredicateEditorRowTemplate: NSPredicateEditorRowTemplate {
         return unitButton
     }()
 
-    let menuItemForOperator: [NSComparisonPredicate.Operator: NSMenuItem] = [
-        .lessThan: NSMenuItem(title: "less than ago", action: nil, keyEquivalent: ""),
-        .greaterThan: NSMenuItem(title: "more than ago", action: nil, keyEquivalent: "")
+    let menuItemForOperator: [CriteriaOperator: NSMenuItem] = [
+        .onOrAfter: NSMenuItem(title: "less than ago", action: nil, keyEquivalent: ""),
+        .before: NSMenuItem(title: "more than ago", action: nil, keyEquivalent: "")
     ]
 
     override init() {
@@ -116,8 +116,10 @@ class DateWithUnitPredicateEditorRowTemplate: NSPredicateEditorRowTemplate {
               let dateUnit = DateUnit(rawValue: dateUnitString),
               let field = fieldButton.selectedItem?.title
         else {
+            NSLog("Date predicate could not be constructed, returning 'false' predicate")
             return NSPredicate(value: false)
         }
-        return DatePredicateWithUnit(field: field, comparisonOperator: comparisonOperator, count: UInt(numberInputField.intValue), unit: dateUnit)
+        let count = UInt(numberInputField.intValue)
+        return DatePredicateWithUnit(field: field, comparisonOperator: comparisonOperator, count: count, unit: dateUnit)
     }
 }

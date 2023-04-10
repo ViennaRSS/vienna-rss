@@ -31,11 +31,11 @@ enum DateUnit: String, CaseIterable {
 class DatePredicateWithUnit: NSPredicate {
 
     var field: String
-    var comparisonOperator: NSComparisonPredicate.Operator
+    var comparisonOperator: CriteriaOperator
     var count: UInt
     var unit: DateUnit
 
-    init(field: String, comparisonOperator: NSComparisonPredicate.Operator, count: UInt, unit: DateUnit) {
+    init(field: String, comparisonOperator: CriteriaOperator, count: UInt, unit: DateUnit) {
         self.field = field
         self.comparisonOperator = comparisonOperator
         self.count = count

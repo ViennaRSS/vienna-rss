@@ -72,6 +72,8 @@ extension CriteriaTree: PredicateConvertible {
                 }
             } else if let basicPredicate = subPredicate as? NSComparisonPredicate {
                 criteriaElement = Criteria(predicate: basicPredicate)
+            } else if let datePredicate = subPredicate as? DatePredicateWithUnit {
+                criteriaElement = Criteria(predicate: datePredicate)
             } else {
                 criteriaElement = nil
             }
@@ -116,24 +118,46 @@ extension CriteriaTree: PredicateConvertible {
 extension Criteria: PredicateConvertible {
 
     convenience init?(predicate: NSPredicate) {
-        self.init(predicate: predicate, notContains: false)
+        if let datePredicate = predicate as? DatePredicateWithUnit {
+            self.init(predicate: datePredicate)
+        } else {
+            self.init(predicate: predicate, notContains: false)
+        }
     }
 
     @objc
     convenience init?(predicate: NSPredicate, notContains: Bool) {
-        guard let comparison = predicate as? NSComparisonPredicate else {
+
+        if let comparison = predicate as? NSComparisonPredicate {
+            self.init(predicate: comparison, notContains: notContains)
+        } else if let datePredicate = predicate as? DatePredicateWithUnit {
+            self.init(predicate: datePredicate)
+        } else {
             return nil
         }
+    }
 
-        let field = comparison.leftExpression.constantValue as? String ?? comparison.leftExpression.keyPath
-        let value = comparison.rightExpression.constantValue as? String ?? comparison.rightExpression.keyPath
+    convenience init?(predicate: DatePredicateWithUnit) {
+        let field = predicate.field
+        let value = "\(predicate.count) \(predicate.unit.rawValue)"
+        let operatorType = predicate.comparisonOperator
+        self.init(field: field, operatorType: operatorType, value: value)
+    }
+
+    convenience init?(predicate: NSComparisonPredicate, notContains: Bool) {
+        let field: String
+        let value: String
+        let operatorType: NSComparisonPredicate.Operator
+        field = predicate.leftExpression.constantValue as? String ?? predicate.leftExpression.keyPath
+        value = predicate.rightExpression.constantValue as? String ?? predicate.rightExpression.keyPath
+        operatorType = predicate.predicateOperatorType
 
         var fallback = false
 
         let criteriaOperator: CriteriaOperator
         switch field {
         case MA_Field_Folder:
-            switch comparison.predicateOperatorType {
+            switch predicate.predicateOperatorType {
             case .notEqualTo:
                 criteriaOperator = .notEqualTo
             case .equalTo:
@@ -143,7 +167,7 @@ extension Criteria: PredicateConvertible {
                 criteriaOperator = .equalTo
             }
         case MA_Field_Subject, MA_Field_Author, MA_Field_Text:
-            switch comparison.predicateOperatorType {
+            switch predicate.predicateOperatorType {
             case .contains:
                 if notContains {
                     criteriaOperator = .containsNot
@@ -159,7 +183,7 @@ extension Criteria: PredicateConvertible {
                 criteriaOperator = .equalTo
             }
         case MA_Field_Date:
-            switch comparison.predicateOperatorType {
+            switch predicate.predicateOperatorType {
             case .lessThan:
                 criteriaOperator = .before
             case .lessThanOrEqualTo:
@@ -177,7 +201,7 @@ extension Criteria: PredicateConvertible {
                 criteriaOperator = .equalTo
             }
         case MA_Field_Read, MA_Field_Flagged, MA_Field_HasEnclosure, MA_Field_Deleted:
-            switch comparison.predicateOperatorType {
+            switch predicate.predicateOperatorType {
             case .notEqualTo:
                 // Not representable by predicate editor, because it would not
                 // make sense to offer "== false" and "!= true" making things
@@ -191,12 +215,12 @@ extension Criteria: PredicateConvertible {
             }
         default:
             NSLog("Unknown field \(field)")
-            fallback = comparison.predicateOperatorType != .equalTo
+            fallback = predicate.predicateOperatorType != .equalTo
             criteriaOperator = .equalTo
         }
 
         if fallback {
-            NSLog("Predicate for \(field) has unsuitable operator \(comparison.predicateOperatorType), will default to \(criteriaOperator)")
+            NSLog("Predicate for \(field) has unsuitable operator \(predicate.predicateOperatorType), will default to \(criteriaOperator)")
         }
 
         self.init(field: field, operatorType: criteriaOperator, value: value)
@@ -219,8 +243,7 @@ extension Criteria: PredicateConvertible {
             guard let count = UInt(countString) else {
                 fatalError("malformed criteria value \(value)")
             }
-            let dateOperator = convertOperatorTypeForComparisonPredicate(operatorType)
-            return DatePredicateWithUnit(field: MA_Field_Date, comparisonOperator: dateOperator, count: count, unit: unit)
+            return DatePredicateWithUnit(field: MA_Field_Date, comparisonOperator: operatorType, count: count, unit: unit)
         } else {
             return buildComparisonPredicate(field, value, operatorType)
         }
