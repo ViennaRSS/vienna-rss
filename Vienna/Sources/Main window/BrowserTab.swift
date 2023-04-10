@@ -26,7 +26,7 @@ class BrowserTab: NSViewController {
 
     // MARK: Properties
 
-    unowned var webView: CustomWKWebView
+    var webView: CustomWKWebView
 
     @IBOutlet private(set) weak var addressBarContainer: NSView!
     @IBOutlet private(set) weak var addressField: NSTextField!
@@ -76,14 +76,13 @@ class BrowserTab: NSViewController {
     private var urlObservation: NSKeyValueObservation?
     private var statusBarObservation: NSKeyValueObservation?
 
-    private var statusBar: OverlayStatusBar?
+    private(set) var statusBar: OverlayStatusBar?
 
     // MARK: object lifecycle
 
     init(_ request: URLRequest? = nil, config: WKWebViewConfiguration = WKWebViewConfiguration()) {
 
-        let webView = CustomWKWebView(configuration: config)
-        self.webView = webView
+        self.webView = CustomWKWebView(configuration: config)
 
         if #available(macOS 10.14, *) {
             super.init(nibName: "BrowserTab", bundle: nil)
@@ -171,6 +170,8 @@ class BrowserTab: NSViewController {
         }
 
         self.viewDidLoadRss()
+
+        self.viewDidLoadHoverLinkUI()
 
         updateWebViewInsets()
 
@@ -302,17 +303,8 @@ extension BrowserTab: Tab {
 
     func closeTab() {
         stopLoadingTab()
-        // free webView by force stopping JavaScript, resetting delegates
-        // and removing any references between webView and self
-        self.webView.evaluateJavaScript("window.location.replace('about:blank');") { _, _ in
-            DispatchQueue.main.async {
-                self.webView.navigationDelegate = nil
-                self.webView.uiDelegate = nil
-                self.webView.hoverListener = nil
-                self.webView.contextMenuListener = nil
-                self.webView.contextMenuProvider = nil
-            }
-        }
+        // free webView by force stopping JavaScript
+        self.webView.evaluateJavaScript("window.location.replace('about:blank');")
     }
 
     @objc
@@ -352,17 +344,13 @@ extension BrowserTab: WKNavigationDelegate {
             decisionHandler(.allow)
         } else {
             decisionHandler(.cancel)
-            let filename = navigationResponse.response.suggestedFilename;
+            let filename = navigationResponse.response.suggestedFilename
             DownloadManager.shared.downloadFile(fromURL: url?.absoluteString, withFilename: filename)
         }
     }
 
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation?) {
         handleNavigationStart()
-        if let webView = webView as? CustomWKWebView {
-            webView.hoverListener = self
-            self.statusBar?.label = ""
-        }
     }
 
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation?, withError error: Error) {
@@ -395,22 +383,5 @@ extension BrowserTab: WKNavigationDelegate {
 
     func registerNavigationEndHandler(_ navigationEndHandler: @escaping (_ success: Bool) -> Void) {
         self.navigationEndHandler.append(navigationEndHandler)
-    }
-}
-
-// MARK: Javascript messages handler
-
-extension BrowserTab: WKScriptMessageHandler {
-
-    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        if self.statusBar != nil {
-            if message.name == CustomWKWebView.mouseDidEnterName {
-                if let link = message.body as? String {
-                    self.statusBar?.label = link
-                }
-            } else if message.name == CustomWKWebView.mouseDidExitName {
-                self.statusBar?.label = ""
-            }
-        }
     }
 }
