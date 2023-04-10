@@ -229,6 +229,7 @@ class CriteriaTests: XCTestCase {
             <criteria field="Text"><operator>2</operator><value>NichtTestText</value></criteria>
             <criteria field="Text"><operator>7</operator><value>BeinhaltetTestText</value></criteria>
             <criteria field="Text"><operator>8</operator><value>BeinhaltetNichtTestText</value></criteria>
+            <criteria field="Date"><operator>1</operator><value>5 hours</value></criteria>
         </criteriagroup>
         """
 

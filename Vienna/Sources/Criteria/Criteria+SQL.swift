@@ -108,7 +108,7 @@ extension Criteria: SQLConversion {
                       fatalError("Malformed date predicate value: \(value)")
                 }
 
-                startDate = Calendar.current.date(byAdding: unit.calendarComponent, value: -amount, to: startOfToday)
+                startDate = Calendar.current.date(byAdding: unit.calendarComponent, value: -amount, to: Date())
             } else {
                 fatalError("Unknown value \(value) for date field")
             }
