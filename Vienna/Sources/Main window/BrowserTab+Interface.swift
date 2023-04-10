@@ -166,3 +166,23 @@ extension BrowserTab: NSTextFieldDelegate {
     // TODO: things like address suggestion etc
     // TODO: restore url string when user presses escape in textfield, make webview first responder
 }
+
+// MARK: hover link ui
+
+extension BrowserTab: CustomWKHoverUIDelegate {
+
+    func viewDidLoadHoverLinkUI() {
+        registerNavigationStartHandler { [weak self] in
+            //TODO is it really necessary to do this on every navigation start instead of only once after webview initialization?
+            self?.webView.hoverUiDelegate = self
+            self?.statusBar?.label = ""
+        }
+    }
+
+    func hovered(link: String?) {
+        guard let statusBar = statusBar else {
+            return
+        }
+        statusBar.label = link
+    }
+}

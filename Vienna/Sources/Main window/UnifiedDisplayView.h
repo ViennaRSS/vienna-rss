@@ -25,7 +25,7 @@
 @class AppController;
 @class ExtendedTableView;
 
-@interface UnifiedDisplayView : NSView <BaseView, ArticleBaseView, NSMenuItemValidation, MessageListViewDelegate, NSTableViewDataSource, WKScriptMessageHandler>
+@interface UnifiedDisplayView : NSView <BaseView, ArticleBaseView, NSMenuItemValidation, MessageListViewDelegate, NSTableViewDataSource>
 {
     IBOutlet ExtendedTableView *articleList;
 

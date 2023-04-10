@@ -76,7 +76,7 @@ class BrowserTab: NSViewController {
     private var urlObservation: NSKeyValueObservation?
     private var statusBarObservation: NSKeyValueObservation?
 
-    private var statusBar: OverlayStatusBar?
+    private(set) var statusBar: OverlayStatusBar?
 
     // MARK: object lifecycle
 
@@ -170,6 +170,8 @@ class BrowserTab: NSViewController {
         }
 
         self.viewDidLoadRss()
+
+        self.viewDidLoadHoverLinkUI()
 
         updateWebViewInsets()
 
@@ -301,13 +303,8 @@ extension BrowserTab: Tab {
 
     func closeTab() {
         stopLoadingTab()
-        // free webView by force stopping JavaScript and resetting delegates
-        self.webView.evaluateJavaScript("window.location.replace('about:blank');") { _, _ in
-            DispatchQueue.main.async {
-                self.webView.navigationDelegate = nil
-                self.webView.uiDelegate = nil
-            }
-        }
+        // free webView by force stopping JavaScript
+        self.webView.evaluateJavaScript("window.location.replace('about:blank');")
     }
 
     @objc
@@ -346,10 +343,6 @@ extension BrowserTab: WKNavigationDelegate {
 
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation?) {
         handleNavigationStart()
-        if let webView = webView as? CustomWKWebView {
-            webView.hoverListener = self
-            self.statusBar?.label = ""
-        }
     }
 
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation?, withError error: Error) {
@@ -382,22 +375,5 @@ extension BrowserTab: WKNavigationDelegate {
 
     func registerNavigationEndHandler(_ navigationEndHandler: @escaping (_ success: Bool) -> Void) {
         self.navigationEndHandler.append(navigationEndHandler)
-    }
-}
-
-// MARK: Javascript messages handler
-
-extension BrowserTab: WKScriptMessageHandler {
-
-    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        if self.statusBar != nil {
-            if message.name == CustomWKWebView.mouseDidEnterName {
-                if let link = message.body as? String {
-                    self.statusBar?.label = link
-                }
-            } else if message.name == CustomWKWebView.mouseDidExitName {
-                self.statusBar?.label = ""
-            }
-        }
     }
 }
