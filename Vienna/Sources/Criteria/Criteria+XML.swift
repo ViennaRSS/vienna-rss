@@ -19,43 +19,47 @@
 
 import Foundation
 
-extension CriteriaTree {
+class CriteriaXmlConverter {
 
-    static let groupTag = "criteriagroup"
-    static let conditionAttribute = "condition"
-
-    static let criteriaTag = "criteria"
-
-    @objc var string: String {
-        let xml: XMLElement = traverse { element, subresult in
-            let treeElement = XMLElement(name: CriteriaTree.groupTag)
-            treeElement.setAttributesWith([CriteriaTree.conditionAttribute: "\(element.condition)"])
-            for subElement in subresult {
-                treeElement.addChild(subElement)
-            }
-            return treeElement
-        } criteriaConversion: { element in
-            let criteriaElement = XMLElement(name: Criteria.criteriaTag)
-            criteriaElement.setAttributesWith([Criteria.fieldAttribute: element.field])
-
-            let operatorElement = XMLElement(name: Criteria.operatorTag, stringValue: "\(element.operatorType.intValue)")
-            criteriaElement.addChild(operatorElement)
-
-            let valueElement = XMLElement(name: Criteria.valueTag, stringValue: element.value)
-            criteriaElement.addChild(valueElement)
-
-            return criteriaElement
+    @objc
+    static func toXml(_ criteriaElement: CriteriaElement) -> XMLElement {
+        guard let criteriaElement = criteriaElement as? Traversable else {
+            fatalError("All CriteriaElement subtypes must be Traversable!")
         }
-
-        let criteriaDocument = XMLDocument(rootElement: xml)
-        criteriaDocument.isStandalone = true
-        criteriaDocument.characterEncoding = "UTF-8"
-        criteriaDocument.version = "1.0"
-
-        return criteriaDocument.xmlString
+        return toXml(criteriaElement)
     }
 
-    convenience init?(xml: XMLElement?) {
+    static func toXml(_ criteriaElement: Traversable) -> XMLElement {
+        return criteriaElement.traverse { element, subresult in
+            let criteriaTreeXml = XMLElement(name: CriteriaTree.groupTag)
+            criteriaTreeXml.setAttributesWith([CriteriaTree.conditionAttribute: "\(element.condition)"])
+            for subElement in subresult {
+                criteriaTreeXml.addChild(subElement)
+            }
+            return criteriaTreeXml
+        } criteriaConversion: { element in
+            let criteriaXml = XMLElement(name: Criteria.criteriaTag)
+            criteriaXml.setAttributesWith([Criteria.fieldAttribute: element.field])
+
+            let operatorElement = XMLElement(name: Criteria.operatorTag, stringValue: "\(element.operatorType.intValue)")
+            criteriaXml.addChild(operatorElement)
+
+            let valueElement = XMLElement(name: Criteria.valueTag, stringValue: element.value)
+            criteriaXml.addChild(valueElement)
+
+            return criteriaXml
+        }
+    }
+
+    @objc
+    static func from(xml: XMLElement?) -> CriteriaElement? {
+        guard let (subtree, condition) = subtreeAndConditionFrom(xml: xml) else {
+            return nil
+        }
+        return CriteriaTree(subtree: subtree, condition: condition)
+    }
+
+    static func subtreeAndConditionFrom(xml: XMLElement?) -> (subtree: [Traversable], condition: CriteriaCondition)? {
         guard let xml = xml else {
             NSLog("CriteriaTree cannot be initialized from nil xml")
             return nil
@@ -65,7 +69,7 @@ extension CriteriaTree {
         // assumes that we're matching ALL conditions.
         let conditionString = xml.attribute(forName: CriteriaTree.conditionAttribute)?.stringValue ?? ""
 
-        var subtree: [any CriteriaElement] = []
+        var subtree: [Traversable] = []
         for child in xml.children ?? [] {
             guard let child = child as? XMLElement,
                   child.name == CriteriaTree.groupTag || child.name == CriteriaTree.criteriaTag else {
@@ -86,13 +90,39 @@ extension CriteriaTree {
                 }
                 subCriteriaElement = subCriterion
             }
-            subtree.append(subCriteriaElement)
+            guard let subtreeElement = subCriteriaElement as? Traversable else {
+                fatalError("All CriteriaElement subtypes must be Traversable!")
+            }
+            subtree.append(subtreeElement)
         }
+        let condition = CriteriaCondition(rawValue: conditionString) ?? .all
+        return (subtree: subtree, condition: condition)
+    }
+}
 
-        self.init()
+extension CriteriaTree {
 
-        self.condition = CriteriaCondition(rawValue: conditionString) ?? .all
-        criteriaTree = subtree
+    static let groupTag = "criteriagroup"
+    static let conditionAttribute = "condition"
+
+    static let criteriaTag = "criteria"
+
+    @objc var string: String {
+        let xml: XMLElement = CriteriaXmlConverter.toXml(self)
+
+        let criteriaDocument = XMLDocument(rootElement: xml)
+        criteriaDocument.isStandalone = true
+        criteriaDocument.characterEncoding = "UTF-8"
+        criteriaDocument.version = "1.0"
+
+        return criteriaDocument.xmlString
+    }
+
+    convenience init?(xml: XMLElement?) {
+        guard let (subtree, condition) = CriteriaXmlConverter.subtreeAndConditionFrom(xml: xml) else {
+            return nil
+        }
+        self.init(subtree: subtree, condition: condition)
     }
 
     @objc

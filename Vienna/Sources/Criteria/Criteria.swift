@@ -19,42 +19,11 @@
 
 import Foundation
 
-@objc(VNACriteriaCondition)
-enum CriteriaCondition: Int, CustomStringConvertible {
-    case all = 0
+enum CriteriaCondition: String {
+    case all
     case any
     case invalid
     case none
-
-    //workaround as long as this enum needs to be exposed to Objective-C and cannot have a string as raw value
-    init?(rawValue: String) {
-        let condition: CriteriaCondition
-        switch rawValue {
-        case "\(CriteriaCondition.any)":
-            condition = .any
-        case "\(CriteriaCondition.all)":
-            condition = .all
-        case "\(CriteriaCondition.none)":
-            condition = .none
-        default:
-            return nil
-        }
-        self.init(rawValue: condition.rawValue)
-    }
-
-    var intValue: Int {
-        rawValue
-    }
-
-    //workaround as long as this enum needs to be exposed to Objective-C and cannot have a string as raw value
-    var description: String {
-        switch self {
-        case .any: return "any"
-        case .all: return "all"
-        case .none: return "none"
-        case .invalid: return "invalid"
-        }
-    }
 }
 
 @objc(VNACriteriaOperator)
@@ -128,8 +97,6 @@ protocol Traversable: CriteriaElement {
 
 @objc
 class CriteriaTree: NSObject, Traversable {
-
-    @objc var condition: CriteriaCondition = .all
     //workaround while this variable is needed for objc (Traversable cannot be exposed)
     @objc var criteriaTree: [CriteriaElement] {
         get {
@@ -139,10 +106,18 @@ class CriteriaTree: NSObject, Traversable {
             self.traversableTree = newValue as? [Traversable] ?? []
         }
     }
-    var traversableTree: [Traversable] = []
 
-    override init() {
-        //nothing to initialize, all vars have defaults
+    var condition: CriteriaCondition
+
+    var traversableTree: [Traversable]
+
+    override convenience init() {
+        self.init(subtree: [], condition: .all)
+    }
+
+    init(subtree: [Traversable], condition: CriteriaCondition) {
+        traversableTree = subtree
+        self.condition = condition
     }
 
     func traverse<ResultType>(treeConversion: (_ element: CriteriaTree, _ subresult: [ResultType]) -> ResultType, criteriaConversion: (_ element: Criteria) -> ResultType) -> ResultType {
