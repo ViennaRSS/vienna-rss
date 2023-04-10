@@ -236,6 +236,20 @@ class CriteriaTests: XCTestCase {
         genericConversionChecks(criteriaTreeString)
     }
 
+    func testMalformedDateWithUnitCriteria() {
+        let criteriaTreeString = """
+        <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+        <criteriagroup condition="all">
+            <criteria field="Date"><operator>1</operator><value>5 hours</value></criteria>
+        </criteriagroup>
+        """
+
+        let criteriaTree = genericConversionChecks(criteriaTreeString)
+        let dateCriteria = criteriaTree.criteriaTree[0]
+        let datePredicate = dateCriteria.predicate
+        XCTAssertTrue(datePredicate is DatePredicateWithUnit)
+    }
+
     func testNegation() {
         let testCriteriaString = """
         <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
