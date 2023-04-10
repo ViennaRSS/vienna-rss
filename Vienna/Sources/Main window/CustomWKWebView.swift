@@ -46,7 +46,7 @@ class CustomWKWebView: WKWebView {
         getTextSelection()
     }
 
-    private var useJavaScriptObservation: NSKeyValueObservation?
+    private unowned var useJavaScriptObservation: NSKeyValueObservation?
 
     override init(frame: CGRect = .zero, configuration: WKWebViewConfiguration = WKWebViewConfiguration()) {
 

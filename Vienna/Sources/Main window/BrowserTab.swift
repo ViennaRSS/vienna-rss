@@ -26,7 +26,7 @@ class BrowserTab: NSViewController {
 
     // MARK: Properties
 
-    var webView: CustomWKWebView
+    unowned var webView: CustomWKWebView
 
     @IBOutlet private(set) weak var addressBarContainer: NSView!
     @IBOutlet private(set) weak var addressField: NSTextField!
@@ -82,7 +82,8 @@ class BrowserTab: NSViewController {
 
     init(_ request: URLRequest? = nil, config: WKWebViewConfiguration = WKWebViewConfiguration()) {
 
-        self.webView = CustomWKWebView(configuration: config)
+        let webView = CustomWKWebView(configuration: config)
+        self.webView = webView
 
         if #available(macOS 10.14, *) {
             super.init(nibName: "BrowserTab", bundle: nil)
@@ -301,11 +302,15 @@ extension BrowserTab: Tab {
 
     func closeTab() {
         stopLoadingTab()
-        // free webView by force stopping JavaScript and resetting delegates
+        // free webView by force stopping JavaScript, resetting delegates
+        // and removing any references between webView and self
         self.webView.evaluateJavaScript("window.location.replace('about:blank');") { _, _ in
             DispatchQueue.main.async {
                 self.webView.navigationDelegate = nil
                 self.webView.uiDelegate = nil
+                self.webView.hoverListener = nil
+                self.webView.contextMenuListener = nil
+                self.webView.contextMenuProvider = nil
             }
         }
     }
