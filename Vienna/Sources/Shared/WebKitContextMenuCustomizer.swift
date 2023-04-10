@@ -25,55 +25,74 @@ class WebKitContextMenuCustomizer: BrowserContextMenuDelegate {
 
         var menuItems = existingMenuItems
         switch purpose {
-        case .page:
-            break
         case .link(let url):
             addLinkMenuCustomizations(&menuItems, url)
-        case .picture:
-            break
-        case .pictureLink(image: _, link: let link):
-            addLinkMenuCustomizations(&menuItems, link)
-        case .text:
+        case .picture(let mediaLink):
+            addMediaMenuCustomizations(&menuItems, mediaLink)
+        case let .pictureLink(mediaLink, url):
+            addLinkMenuCustomizations(&menuItems, url)
+            addMediaMenuCustomizations(&menuItems, mediaLink)
+        default:
             break
         }
         return menuItems
     }
 
     func addLinkMenuCustomizations(_ menuItems: inout [NSMenuItem], _ url: (URL)) {
-        guard var index = menuItems.firstIndex(where: { $0.identifier == .WKMenuItemOpenLinkInNewWindow }) else {
-            return
-        }
+        for index in (0...(menuItems.count - 1)).reversed() {
+            let id = menuItems[index].identifier
+            if id == .WKMenuItemOpenLinkInNewWindow {
+                // replace "Open Link in New Window" with open link in New Tab
+                menuItems[index].title = NSLocalizedString("Open Link in New Tab", comment: "")
+                menuItems[index].target = nil
+                menuItems[index].representedObject = url
+                menuItems[index].action = #selector(processMenuItem(_:))
 
-        if let openInBackgroundIndex = menuItems.firstIndex(where: { $0.identifier == NSUserInterfaceItemIdentifier.WKMenuItemOpenLinkInBackground }) {
-            // Swap open link in new tab and open link in background items if
-            // necessary/
-            let openInBackground = Preferences.standard.openLinksInBackground
-            if openInBackground && index < openInBackgroundIndex
-                || !openInBackground && openInBackgroundIndex < index {
-                menuItems.swapAt(index, openInBackgroundIndex)
+                // add some menu items
+                let openInBackgroundTitle = NSLocalizedString("Open Link in Background", comment: "")
+                let openInBackgroundItem = NSMenuItem(title: openInBackgroundTitle, action: #selector(processMenuItem(_:)), keyEquivalent: "")
+                openInBackgroundItem.identifier = .WKMenuItemOpenLinkInBackground
+                openInBackgroundItem.representedObject = url
+                let openInBackground = Preferences.standard.openLinksInBackground
+                if openInBackground {
+                    menuItems.insert(openInBackgroundItem, at: index)
+                } else {
+                    menuItems.insert(openInBackgroundItem, at: menuItems.index(after: index))
+                }
+
+                let defaultBrowser = getDefaultBrowser() ?? NSLocalizedString("External Browser", comment: "")
+                let openInExternalBrowserTitle = String(format: NSLocalizedString("Open Link in %@", comment: ""), defaultBrowser)
+                let openInDefaultBrowserItem = NSMenuItem(title: openInExternalBrowserTitle,
+                                                          action: #selector(processMenuItem(_:)), keyEquivalent: "")
+                openInDefaultBrowserItem.identifier = .WKMenuItemOpenLinkInSystemBrowser
+                openInDefaultBrowserItem.representedObject = url
+                menuItems.insert(openInDefaultBrowserItem, at: menuItems.index(after: index + 1))
             }
-            index = max(index, openInBackgroundIndex)
-        }
 
-        let defaultBrowser = getDefaultBrowser() ?? NSLocalizedString("External Browser", comment: "")
-        let openInExternalBrowserTitle = String(format: NSLocalizedString("Open Link in %@", comment: ""), defaultBrowser)
-        let openInDefaultBrowserItem = NSMenuItem(title: openInExternalBrowserTitle,
-                                                  action: #selector(contextMenuItemAction(menuItem:)), keyEquivalent: "")
-        openInDefaultBrowserItem.identifier = .WKMenuItemOpenLinkInSystemBrowser
-        openInDefaultBrowserItem.representedObject = url
-        menuItems.insert(openInDefaultBrowserItem, at: menuItems.index(after: index + 1))
+            if id == .WKMenuItemDownloadLinkedFile {
+                menuItems[index].target = nil
+                menuItems[index].action = #selector(processMenuItem(_:))
+                menuItems[index].representedObject = url
+            }
+        }
+    }
+
+    func addMediaMenuCustomizations(_ menuItems: inout [NSMenuItem], _ url: (URL)) {
+        for index in (0...(menuItems.count - 1)).reversed() {
+            if let id = menuItems[index].identifier {
+                if id == .WKMenuItemDownloadImage || id == .WKMenuItemDownloadMedia || id == .WKMenuItemOpenImageInNewWindow || id == .WKMenuItemOpenMediaInNewWindow {
+                    menuItems[index].target = nil
+                    menuItems[index].action = #selector(processMenuItem(_:))
+                    menuItems[index].representedObject = url
+                }
+            }
+        }
     }
 
     @objc
-    func contextMenuItemAction(menuItem: NSMenuItem) {
-        if menuItem.identifier == .WKMenuItemOpenLinkInSystemBrowser {
-            openLinkInDefaultBrowser(menuItem: menuItem)
-        }
+    func processMenuItem(_ menuItem: NSMenuItem) {
+    // placeholder : this is never called
+    // as we are not part of the responder chain
     }
 
-    func openLinkInDefaultBrowser(menuItem: NSMenuItem) {
-        if let url = menuItem.representedObject as? URL {
-            NSApp.appController.openURL(inDefaultBrowser: url)
-        }
-    }
 }

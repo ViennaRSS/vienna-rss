@@ -299,26 +299,20 @@ extension CustomWKWebView {
 
     static let contextMenuScriptSource = """
     document.addEventListener('contextmenu', function(e) {
-        //TODO: this works only starting with webkit version used in Safari 12
-        var elements = document.elementsFromPoint(e.clientX, e.clientY);
-        var link;
-        var img;
-        for(var element in elements) { //search first link and first image
-            var htmlElement = elements[element];
-            var tagName = htmlElement.tagName;
-            if (tagName === 'A' && link == undefined) {
-                link = htmlElement;
-                var url = new URL(link.getAttribute('href'), document.baseURI).href;
-                window.webkit.messageHandlers.\(clickListenerName).postMessage('link: ' + url);
-            } else if (tagName === 'IMG' && img == undefined) {
-                img = htmlElement;
-                var url = new URL(img.getAttribute('src'), document.baseURI).href;
-                window.webkit.messageHandlers.\(clickListenerName).postMessage('img: ' + url);
-            }
-            var userselection = window.getSelection();
-            if (userselection.rangeCount > 0) {
-                window.webkit.messageHandlers.\(clickListenerName).postMessage('text: ' + userselection.getRangeAt(0).toString())
-            }
+        var htmlElement = document.elementFromPoint(e.clientX, e.clientY);
+        var link = htmlElement.closest("a");
+         if (link) {
+            var url = new URL(link.getAttribute('href'), document.baseURI).href;
+            window.webkit.messageHandlers.\(clickListenerName).postMessage('link: ' + url);
+        }
+        var img = htmlElement.closest("img");
+        if (img) {
+            var url = new URL(img.getAttribute('src'), document.baseURI).href;
+            window.webkit.messageHandlers.\(clickListenerName).postMessage('img: ' + url);
+        }
+        var userselection = window.getSelection();
+        if (userselection.rangeCount > 0) {
+            window.webkit.messageHandlers.\(clickListenerName).postMessage('text: ' + userselection.getRangeAt(0).toString())
         }
     })
     """
@@ -340,10 +334,10 @@ extension CustomWKWebView {
 
     override func willOpenMenu(_ menu: NSMenu, with event: NSEvent) {
 
+        super.willOpenMenu(menu, with: event)
         if contextMenuProvider != nil {
             customize(contextMenu: menu)
         }
-        super.willOpenMenu(menu, with: event)
     }
 
     private func customize(contextMenu menu: NSMenu) {

@@ -115,15 +115,11 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView, WKNavigationDelega
     func contextMenuItemsFor(purpose: WKWebViewContextMenuContext, existingMenuItems: [NSMenuItem]) -> [NSMenuItem] {
         var menuItems = existingMenuItems
         switch purpose {
-        case .page:
-            break
         case .link(let url):
             addLinkMenuCustomizations(&menuItems, url)
-        case .picture:
-            break
         case .pictureLink(image: _, link: let link):
             addLinkMenuCustomizations(&menuItems, link)
-        case .text:
+        default:
             break
         }
         return contextMenuCustomizer.contextMenuItemsFor(purpose: purpose, existingMenuItems: menuItems)
@@ -135,45 +131,25 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView, WKNavigationDelega
             menuItems.remove(at: index)
         }
 
-        if let index = menuItems.firstIndex(where: { $0.identifier == .WKMenuItemOpenLinkInNewWindow }) {
-
-            menuItems[index].title = NSLocalizedString("Open Link in New Tab", comment: "")
-            menuItems[index].target = nil
-            menuItems[index].representedObject = url
-            menuItems[index].action = #selector(openLinkInNewTab(menuItem:))
-
-            let openInBackgroundTitle = NSLocalizedString("Open Link in Background", comment: "")
-            let openInBackgroundItem = NSMenuItem(title: openInBackgroundTitle, action: #selector(openLinkInBackground(menuItem:)), keyEquivalent: "")
-            openInBackgroundItem.identifier = .WKMenuItemOpenLinkInBackground
-            openInBackgroundItem.representedObject = url
-            menuItems.insert(openInBackgroundItem, at: menuItems.index(after: index))
-        }
     }
 
     @objc
-    func openLinkInNewTab(menuItem: NSMenuItem) {
-        if let url = menuItem.representedObject as? URL {
-            _ = NSApp.appController.browser.createNewTab(url, inBackground: false, load: true)
+    func processMenuItem(_ menuItem: NSMenuItem) {
+        guard let url = menuItem.representedObject as? URL else {
+            return
         }
-    }
-
-    @objc
-    func openLinkInBackground(menuItem: NSMenuItem) {
-        if let url = menuItem.representedObject as? URL {
+        switch menuItem.identifier {
+        case NSUserInterfaceItemIdentifier.WKMenuItemOpenLinkInBackground:
             _ = NSApp.appController.browser.createNewTab(url, inBackground: true, load: true)
-        }
-    }
-
-    @objc
-    func openLinkInDefaultBrowser(menuItem: NSMenuItem) {
-        if let url = menuItem.representedObject as? URL {
+        case NSUserInterfaceItemIdentifier.WKMenuItemOpenLinkInNewWindow, NSUserInterfaceItemIdentifier.WKMenuItemOpenImageInNewWindow, NSUserInterfaceItemIdentifier.WKMenuItemOpenMediaInNewWindow:
+            _ = NSApp.appController.browser.createNewTab(url, inBackground: false, load: true)
+        case NSUserInterfaceItemIdentifier.WKMenuItemOpenLinkInSystemBrowser:
             NSApp.appController.openURL(inDefaultBrowser: url)
+        case NSUserInterfaceItemIdentifier.WKMenuItemDownloadImage, NSUserInterfaceItemIdentifier.WKMenuItemDownloadMedia, NSUserInterfaceItemIdentifier.WKMenuItemDownloadLinkedFile:
+            DownloadManager.shared.downloadFile(fromURL: url.absoluteString)
+        default:
+            break
         }
-    }
-
-    @objc
-    func contextMenuItemAction(menuItem: NSMenuItem) {
-        contextMenuCustomizer.contextMenuItemAction(menuItem: menuItem)
     }
 
     deinit {

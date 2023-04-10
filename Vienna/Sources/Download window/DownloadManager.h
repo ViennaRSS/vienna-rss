@@ -37,5 +37,6 @@
 - (void)cancelItem:(DownloadItem *)item;
 - (void)removeItem:(DownloadItem *)item;
 - (void)downloadFileFromURL:(NSString *)url;
+- (void)downloadFileFromURL:(NSString *)url withFilename:(NSString *)filename;
 
 @end
