@@ -26,6 +26,23 @@ enum DateUnit: String, CaseIterable {
     case weeks
     case months
     case years
+
+    var calendarComponent: Calendar.Component {
+        switch self {
+        case .minutes:
+            return .minute
+        case .hours:
+            return .hour
+        case .days:
+            return .day
+        case .weeks:
+            return .weekOfYear
+        case .months:
+            return .month
+        case .years:
+            return .year
+        }
+    }
 }
 
 class DatePredicateWithUnit: NSPredicate {

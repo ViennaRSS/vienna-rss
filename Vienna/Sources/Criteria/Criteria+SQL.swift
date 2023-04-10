@@ -96,7 +96,22 @@ extension Criteria: SQLConversion {
         } else if value == "last week" {
             startDate = Calendar.current.date(byAdding: .weekOfYear, value: -1, to: startOfToday)
         } else {
-            fatalError("Unknown value \(value) for date field")
+            //check for the pattern for date with unit criteria
+            let datePatternRegex = try? NSRegularExpression(pattern: "^([0-9]+) (.+)$")
+            let datePatternMatch = datePatternRegex?.firstMatch(in: value, range: NSRange(location: 0, length: value.utf16.count))
+            if let datePatternMatch = datePatternMatch {
+                guard let valueRange = Range(datePatternMatch.range(at: 1), in: value),
+                      let amount = Int(value[valueRange]),
+                      let unitRange = Range(datePatternMatch.range(at: 2), in: value),
+                      let unit = DateUnit(rawValue: String(value[unitRange]))
+                else {
+                      fatalError("Malformed date predicate value: \(value)")
+                }
+
+                startDate = Calendar.current.date(byAdding: unit.calendarComponent, value: -amount, to: startOfToday)
+            } else {
+                fatalError("Unknown value \(value) for date field")
+            }
         }
 
         let startOfDayToEndOfDay = DateComponents(calendar: Calendar.current, day: 1, second: -1)
