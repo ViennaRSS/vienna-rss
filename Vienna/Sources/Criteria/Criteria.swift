@@ -43,7 +43,7 @@ enum CriteriaOperator: Int {
     case under
     case notUnder
 
-    //workaround as long as this enum needs to be exposed to Objective-C and cannot have a string as raw value
+    // Workaround as long as this enum needs to be exposed to Objective-C and cannot have a string as raw value
     init?(rawValue: String) {
         let criteriaOperator: CriteriaOperator
         switch rawValue {
@@ -90,14 +90,14 @@ enum CriteriaOperator: Int {
 protocol CriteriaElement: PredicateConvertible {
 }
 
-//workaround while this variable is needed for objc, due to generics in traverse function
+// Workaround while this variable is needed for objc, due to generics in traverse function
 protocol Traversable: CriteriaElement {
     func traverse<ResultType>(treeConversion: (_ element: CriteriaTree, _ subresult: [ResultType]) -> ResultType, criteriaConversion: (_ element: Criteria) -> ResultType) -> ResultType
 }
 
 @objc
 class CriteriaTree: NSObject, Traversable {
-    //workaround while this variable is needed for objc (Traversable cannot be exposed)
+    // Workaround while this variable is needed for objc (Traversable cannot be exposed)
     @objc var criteriaTree: [CriteriaElement] {
         get {
             traversableTree

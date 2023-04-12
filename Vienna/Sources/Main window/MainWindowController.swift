@@ -154,8 +154,7 @@ final class MainWindowController: NSWindowController {
 
     // MARK: Actions
 
-    // swiftlint:disable private_action
-    @IBAction func changeFiltering(_ sender: NSMenuItem) { // TODO: This should be handled by ArticleController
+    @IBAction private func changeFiltering(_ sender: NSMenuItem) { // TODO: This should be handled by ArticleController
         Preferences.standard.filterMode = sender.tag
         if sender.tag == Filter.all.rawValue {
             currentFilter = ""
@@ -164,8 +163,7 @@ final class MainWindowController: NSWindowController {
         }
     }
 
-    // swiftlint:disable private_action
-    @IBAction func toggleStatusBar(_ sender: AnyObject) {
+    @IBAction private func toggleStatusBar(_ sender: AnyObject) {
         statusBarState(disclosed: !statusBar.isDisclosed)
     }
 

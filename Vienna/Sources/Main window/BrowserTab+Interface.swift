@@ -173,7 +173,7 @@ extension BrowserTab: CustomWKHoverUIDelegate {
 
     func viewDidLoadHoverLinkUI() {
         registerNavigationStartHandler { [weak self] in
-            //TODO is it really necessary to do this on every navigation start instead of only once after webview initialization?
+            // TODO: Is it really necessary to do this on every navigation start instead of only once after webview initialization?
             self?.webView.hoverUiDelegate = self
             self?.statusBar?.label = ""
         }

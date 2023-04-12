@@ -67,10 +67,10 @@ class DatePredicateWithUnit: NSPredicate {
 
     override func evaluate(with object: Any?) -> Bool {
         guard object is Article else {
-            return false //cannot evaluate on objects not of type Article
+            return false // Cannot evaluate on objects not of type Article
         }
-        return false //TODO: write proper evaluation
+        return false // TODO: write proper evaluation
     }
 
-    override var predicateFormat: String { "" } //TODO: write proper format string
+    override var predicateFormat: String { "" } // TODO: write proper format string
 }
