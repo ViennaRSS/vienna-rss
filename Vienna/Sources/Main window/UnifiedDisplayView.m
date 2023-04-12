@@ -42,7 +42,7 @@
 #define YPOS_IN_CELL	2.0
 #define PROGRESS_INDICATOR_DIMENSION 16
 
-@interface UnifiedDisplayView ()
+@interface UnifiedDisplayView () <CustomWKHoverUIDelegate>
 
 @property (nonatomic) OverlayStatusBar *statusBar;
 
@@ -766,7 +766,7 @@
     if ([articleContentView isKindOfClass:WebKitArticleView.class])
     {
         view = (WebKitArticleView *)articleContentView;
-        ((CustomWKWebView *)view).hoverListener = self;
+        ((CustomWKWebView *)view).hoverUiDelegate = self;
     } else {
         view = ((ArticleView *) articleContentView);
     }
@@ -1015,15 +1015,10 @@
     }
 }
 
-// MARK: WKScriptMessageHandler
+// MARK: CustomWKHoverUIDelegate
 
-- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message
-{
-    if ([message.name isEqualToString:CustomWKWebView.mouseDidEnterName]) {
-        NSString * link = (NSString *)message.body;
-        self.statusBar.label = link;
-    } else if ([message.name isEqualToString:CustomWKWebView.mouseDidExitName]) {
-        self.statusBar.label = nil;
-    }
+-(void)hoveredWithLink:(NSString *)link {
+    self.statusBar.label = link;
 }
+
 @end

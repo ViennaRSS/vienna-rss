@@ -24,15 +24,9 @@ class CustomWKWebView: WKWebView {
         }
     }
 
-    @objc weak var hoverListener: WKScriptMessageHandler? {
+    @objc weak var hoverUiDelegate: CustomWKHoverUIDelegate? {
         didSet {
-            let contentController = self.configuration.userContentController
-            contentController.removeScriptMessageHandler(forName: CustomWKWebView.mouseDidEnterName)
-            contentController.removeScriptMessageHandler(forName: CustomWKWebView.mouseDidExitName)
-            if let hoverListener = hoverListener {
-                contentController.add(hoverListener, name: CustomWKWebView.mouseDidEnterName)
-                contentController.add(hoverListener, name: CustomWKWebView.mouseDidExitName)
-            }
+            resetHoverUiListener()
         }
     }
 
@@ -118,6 +112,18 @@ class CustomWKWebView: WKWebView {
         self.contextMenuListener = contextMenuListener
         contentController.add(contextMenuListener, name: CustomWKWebView.clickListenerName)
         contentController.add(CustomWKWebViewErrorListener(), name: CustomWKWebView.jsErrorListenerName)
+        resetHoverUiListener()
+    }
+
+    func resetHoverUiListener() {
+        let contentController = self.configuration.userContentController
+        contentController.removeScriptMessageHandler(forName: CustomWKWebView.mouseDidEnterName)
+        contentController.removeScriptMessageHandler(forName: CustomWKWebView.mouseDidExitName)
+        if let hoverUiDelegate = hoverUiDelegate {
+            let hoverListener = CustomWKWebViewHoverListener(hoverDelegate: hoverUiDelegate)
+            contentController.add(hoverListener, name: CustomWKWebView.mouseDidEnterName)
+            contentController.add(hoverListener, name: CustomWKWebView.mouseDidExitName)
+        }
     }
 
     func search(_ text: String = "", upward: Bool = false) {
@@ -372,6 +378,28 @@ extension CustomWKWebView {
         contextMenuListener.lastRightClickedLink = nil
         contextMenuListener.lastRightClickedImgSrc = nil
         contextMenuListener.lastSelectedText = nil
+    }
+}
+
+class CustomWKWebViewHoverListener: NSObject, WKScriptMessageHandler {
+
+    weak var hoverDelegate: CustomWKHoverUIDelegate?
+
+    init(hoverDelegate: CustomWKHoverUIDelegate) {
+        self.hoverDelegate = hoverDelegate
+    }
+
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        guard let hoverDelegate = hoverDelegate else {
+            return
+        }
+        if message.name == CustomWKWebView.mouseDidEnterName {
+            if let link = message.body as? String {
+                hoverDelegate.hovered(link: link)
+            }
+        } else if message.name == CustomWKWebView.mouseDidExitName {
+            hoverDelegate.hovered(link: nil)
+        }
     }
 }
 

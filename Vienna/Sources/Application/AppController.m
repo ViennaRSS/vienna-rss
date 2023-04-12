@@ -1634,7 +1634,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)updateCloseCommands
 {
-	if (self.browser.browserTabCount == 0 || !self.mainWindow.keyWindow)
+	if (self.browser.browserTabCount <= 1 || !self.mainWindow.keyWindow)
 	{
 		closeTabItem.keyEquivalent = @"";
 		closeAllTabsItem.keyEquivalent = @"";
@@ -3627,7 +3627,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 	else if (theAction == @selector(previousTab:))
 	{
-		return isMainWindowVisible && self.browser.browserTabCount > 0;
+		return isMainWindowVisible && self.browser.browserTabCount > 1;
 	}
 	else if (theAction == @selector(nextTab:))
 	{
