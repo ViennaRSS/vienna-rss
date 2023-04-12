@@ -30,3 +30,5 @@ group of strings.
 "%[Date]@ %[is,is greater than,is greater than or equal to,is less than,is less than or equal to]@ %[last week,today,yesterday]@" = "%1$[Date]@ %2$[is,is after,is after or is,is before,is before or is]@ %3$[last week,today,yesterday]@";
 
 "%[All,Any,None]@ of the following are true" = "Article matches %1$[all,any,none]@ of the following conditions";
+
+"%[Date]@ %[less than ago,more than ago]@ %[minutes,hours,days,months,weeks,years]@ %@" = "%1$[Date]@ is %2$[less than,more than]@ %4$@ %3$[minutes,hours,days,months,weeks,years]@ ago";

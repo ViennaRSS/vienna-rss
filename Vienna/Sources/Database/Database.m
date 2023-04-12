@@ -31,14 +31,7 @@
 #import "Article.h"
 #import "Folder.h"
 #import "Field.h"
-#import "Criteria.h"
-#import "Criteria+SQL.h"
 #import "Vienna-Swift.h"
-
-typedef NS_ENUM(NSInteger, VNAQueryScope) {
-    VNAQueryScopeInclusive = 1,
-    VNAQueryScopeSubFolders = 2
-};
 
 #define VNA_LOG os_log_create("--", "Database")
 
@@ -57,7 +50,6 @@ typedef NS_ENUM(NSInteger, VNAQueryScope) {
 - (NSString *)relocateLockedDatabase:(NSString *)path;
 - (CriteriaTree *)criteriaForFolder:(NSInteger)folderId;
 - (NSArray *)arrayOfSubFolders:(Folder *)folder;
-- (NSString *)sqlScopeForFolder:(Folder *)folder flags:(NSInteger)scopeFlags;
 - (void)createInitialSmartFolder:(NSString *)folderName withCriteria:(Criteria *)criteria;
 - (NSInteger)createFolderOnDatabase:(NSString *)name underParent:(NSInteger)parentId withType:(NSInteger)type;
 + (NSString *)databasePath;
@@ -198,6 +190,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 
 /*!
  *  sets up an inital Vienna database at the given path
+ *   TODO: put this into some Swift file to free VNACriteriaOperator enum from Objective-C legacy
  *
  *  @return True on succes
  */
@@ -418,7 +411,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	if ([self createFolderOnDatabase:folderName underParent:VNAFolderTypeRoot withType:VNAFolderTypeSmart] >= 0)
 	{
 		CriteriaTree * criteriaTree = [[CriteriaTree alloc] init];
-		[criteriaTree addCriteria:criteria];
+        criteriaTree.criteriaTree = [criteriaTree.criteriaTree arrayByAddingObject:criteria];
 		
 		__weak NSString * preparedCriteriaString = criteriaTree.string;
         [self.databaseQueue inDatabase:^(FMDatabase *db) {
@@ -1431,23 +1424,6 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	return folder;
 }
 
--(NSString *)sqlScopeForFolder:(Folder *)folder criteriaOperator:(VNACriteriaOperator)op {
-    NSInteger scopeFlags = 0;
-    switch (op) {
-        case VNACriteriaOperatorUnder:
-            scopeFlags = VNAQueryScopeSubFolders|VNAQueryScopeInclusive; break;
-        case VNACriteriaOperatorNotUnder:
-            scopeFlags = VNAQueryScopeSubFolders; break;
-        case VNACriteriaOperatorEqualTo:
-            scopeFlags = VNAQueryScopeInclusive; break;
-        case VNACriteriaOperatorNotEqualTo:
-            scopeFlags = 0; break;
-        default:
-            NSAssert(false, @"Invalid operator for folder field type");
-    }
-    return [self sqlScopeForFolder:folder flags:scopeFlags];
-}
-
 
 /*!
  *  folderFromFeedURL
@@ -2083,9 +2059,8 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
  * Create a SQL 'where' clause that scopes to either the individual folder or the folder and
  * all sub-folders.
  */
--(NSString *)sqlScopeForFolder:(Folder *)folder flags:(NSInteger)scopeFlags
+-(NSString *)sqlScopeForFolder:(Folder *)folder flags:(VNAQueryScope)scopeFlags field:(NSString *)field
 {
-	Field * field = [self fieldByName:MA_Field_Folder];
 	NSString * operatorString = (scopeFlags & VNAQueryScopeInclusive) ? @"=" : @"<>";
 	NSString * conditionString = (scopeFlags & VNAQueryScopeInclusive) ? @" or " : @" and ";
 	BOOL subScope = (scopeFlags & VNAQueryScopeSubFolders) ? YES : NO; // Avoid problems casting into BOOL.
@@ -2107,7 +2082,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 
 	// Straightforward folder is <something>
     if (!subScope) {
-		return [NSString stringWithFormat:@"%@%@%ld", field.sqlField, operatorString, (long)folderId];
+		return [NSString stringWithFormat:@"%@%@%ld", field, operatorString, (long)folderId];
     }
 	// For under/not-under operators, we're creating a SQL statement of the format
 	// (folder_id = <value1> || folder_id = <value2>...). It is possible to try and simplify
@@ -2127,7 +2102,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 		Folder * folder = childFolders[index];
 		if (index > 0)
 			[sqlString appendString:conditionString];
-		[sqlString appendFormat:@"%@%@%ld", field.sqlField, operatorString, (long)folder.itemId];
+		[sqlString appendFormat:@"%@%@%ld", field, operatorString, (long)folder.itemId];
 	}
 	if (count > 1)
 		[sqlString appendString:@")"];
@@ -2136,6 +2111,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 
 /* criteriaForFolder
  * Returns the CriteriaTree that will return the folder contents.
+ * TODO: put this in Criteria+SQL.swift or some other swift file to free VNACriteriaOperator enum from Objective-C legacy
  */
 -(CriteriaTree *)criteriaForFolder:(NSInteger)folderId
 {
@@ -2148,7 +2124,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
         Criteria *clause = [[Criteria alloc] initWithField:MA_Field_Text
                                               operatorType:VNACriteriaOperatorContains
                                                      value:self.searchString];
-        [tree addCriteria:clause];
+        tree.criteriaTree = [tree.criteriaTree arrayByAddingObject:clause];
         return tree;
     }
 	
@@ -2156,7 +2132,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	{
 		CriteriaTree * tree = [[CriteriaTree alloc] init];
 		Criteria * clause = [[Criteria alloc] initWithField:MA_Field_Deleted operatorType:VNACriteriaOperatorEqualTo value:@"Yes"];
-		[tree addCriteria:clause];
+		tree.criteriaTree = [tree.criteriaTree arrayByAddingObject:clause];
 		return tree;
 	}
 
@@ -2168,7 +2144,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 
 	CriteriaTree * tree = [[CriteriaTree alloc] init];
 	Criteria * clause = [[Criteria alloc] initWithField:MA_Field_Folder operatorType:VNACriteriaOperatorUnder value:folder.name];
-	[tree addCriteria:clause];
+    tree.criteriaTree = [tree.criteriaTree arrayByAddingObject:clause];
 	return tree;
 }
 

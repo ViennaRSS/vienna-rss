@@ -8,3 +8,5 @@
 "%[Author,Subject,Text]@ %[contains,does not contain]@ %@" = "%1$[Autor,Betreff,Inhalt]@ %2$[enthält,enthält nicht]@ %3$@";
 
 "%[Date]@ %[is,is greater than,is greater than or equal to,is less than,is less than or equal to]@ %[last week,today,yesterday]@" = "%1$[Datum]@ %2$[ist,ist nach,ist nach oder ist,ist vor,ist vor oder ist]@ %3$[letzte Woche,heute,gestern]@";
+
+"%[Date]@ %[less than ago,more than ago]@ %[minutes,hours,days,months,weeks,years]@ %@" = "%1$[Datum]@ %2$[vor weniger als,vor mehr als]@ %4$@ %3$[Minute(n),Stunde(n),Tag(en),Monat(en),Woche(n),Jahr(en)]@";

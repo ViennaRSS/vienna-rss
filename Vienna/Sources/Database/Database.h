@@ -20,11 +20,16 @@
 
 @import Foundation;
 @import FMDB;
-#import "Criteria.h"
 
 @class Folder;
 @class Field;
 @class Article;
+@class CriteriaTree;
+
+typedef NS_OPTIONS(NSInteger, VNAQueryScope) {
+    VNAQueryScopeInclusive = 1,
+    VNAQueryScopeSubFolders = 2
+} NS_SWIFT_NAME(QueryScope);
 
 @interface Database : NSObject
 
@@ -63,7 +68,7 @@ extern NSNotificationName const VNADatabaseDidDeleteFolderNotification;
 -(Folder *)folderFromFeedURL:(NSString *)wantedFeedURL;
 -(Folder *)folderFromRemoteId:(NSString *)wantedRemoteId;
 -(Folder *)folderFromName:(NSString *)wantedName;
--(NSString *)sqlScopeForFolder:(Folder *)folder criteriaOperator:(VNACriteriaOperator)op;
+-(NSString *)sqlScopeForFolder:(Folder *)folder flags:(VNAQueryScope)scopeFlags field:(NSString *)field;
 -(NSInteger)addFolder:(NSInteger)parentId afterChild:(NSInteger)predecessorId folderName:(NSString *)name type:(NSInteger)type canAppendIndex:(BOOL)canAppendIndex;
 -(BOOL)deleteFolder:(NSInteger)folderId;
 -(BOOL)setName:(NSString *)newName forFolder:(NSInteger)folderId;
