@@ -411,7 +411,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	if ([self createFolderOnDatabase:folderName underParent:VNAFolderTypeRoot withType:VNAFolderTypeSmart] >= 0)
 	{
 		CriteriaTree * criteriaTree = [[CriteriaTree alloc] init];
-        criteriaTree.criteriaTree = [criteriaTree.criteriaTree arrayByAddingObject:criteria];
+        criteriaTree.criteriaTree = [criteriaTree.criteriaTree arrayByAddingObject:(id<CriteriaElement>)criteria];
 		
 		__weak NSString * preparedCriteriaString = criteriaTree.string;
         [self.databaseQueue inDatabase:^(FMDatabase *db) {
@@ -2124,7 +2124,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
         Criteria *clause = [[Criteria alloc] initWithField:MA_Field_Text
                                               operatorType:VNACriteriaOperatorContains
                                                      value:self.searchString];
-        tree.criteriaTree = [tree.criteriaTree arrayByAddingObject:clause];
+        tree.criteriaTree = [tree.criteriaTree arrayByAddingObject:(id<CriteriaElement>)clause];
         return tree;
     }
 	
@@ -2132,7 +2132,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	{
 		CriteriaTree * tree = [[CriteriaTree alloc] init];
 		Criteria * clause = [[Criteria alloc] initWithField:MA_Field_Deleted operatorType:VNACriteriaOperatorEqualTo value:@"Yes"];
-		tree.criteriaTree = [tree.criteriaTree arrayByAddingObject:clause];
+		tree.criteriaTree = [tree.criteriaTree arrayByAddingObject:(id<CriteriaElement>)clause];
 		return tree;
 	}
 
@@ -2144,7 +2144,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 
 	CriteriaTree * tree = [[CriteriaTree alloc] init];
 	Criteria * clause = [[Criteria alloc] initWithField:MA_Field_Folder operatorType:VNACriteriaOperatorUnder value:folder.name];
-    tree.criteriaTree = [tree.criteriaTree arrayByAddingObject:clause];
+    tree.criteriaTree = [tree.criteriaTree arrayByAddingObject:(id<CriteriaElement>)clause];
 	return tree;
 }
 

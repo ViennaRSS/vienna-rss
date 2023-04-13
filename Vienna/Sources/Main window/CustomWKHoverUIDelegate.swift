@@ -19,8 +19,9 @@
 
 import Foundation
 
-//TODO: to me it looks like this protocol should be part of the CustomWKUIDelegate, but the unified display view does not declare conformance to that protocol. Probably that is a design flaw in how the unified display view integrates the browser.
-@objc protocol CustomWKHoverUIDelegate {
+// TODO: to me it looks like this protocol should be part of the CustomWKUIDelegate, but the unified display view does not declare conformance to that protocol. Probably that is a design flaw in how the unified display view integrates the browser.
+@objc
+protocol CustomWKHoverUIDelegate {
     @objc
     func hovered(link: String?)
 }

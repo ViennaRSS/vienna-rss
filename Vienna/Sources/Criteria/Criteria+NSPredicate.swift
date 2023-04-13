@@ -145,13 +145,8 @@ extension Criteria: PredicateConvertible {
     }
 
     convenience init?(predicate: NSComparisonPredicate, notContains: Bool) {
-        let field: String
-        let value: String
-        let operatorType: NSComparisonPredicate.Operator
-        field = predicate.leftExpression.constantValue as? String ?? predicate.leftExpression.keyPath
-        value = predicate.rightExpression.constantValue as? String ?? predicate.rightExpression.keyPath
-        operatorType = predicate.predicateOperatorType
-
+        let field = predicate.leftExpression.constantValue as? String ?? predicate.leftExpression.keyPath
+        let value = predicate.rightExpression.constantValue as? String ?? predicate.rightExpression.keyPath
         var fallback = false
 
         let criteriaOperator: CriteriaOperator
@@ -293,7 +288,7 @@ extension Criteria: PredicateConvertible {
 
         let comparisonPredicate: NSComparisonPredicate
 
-        //TODO constants for fixed criteria values also for Criteria+SQL,
+        // TODO: constants for fixed criteria values also for Criteria+SQL,
         // e.g. YES, NO, yesterday, today, last week, ...
 
         if field == MA_Field_Date && operatorType == .after && value == "yesterday" {

@@ -75,7 +75,7 @@ extension Criteria: SQLConversion {
         case .string:
             if databaseField.name == MA_Field_Text {
                 // Special case for searching the text field: We always include the title field in the search
-                //TODO decide how to migrate this now that we allow nested criteria
+                // TODO: decide how to migrate this now that we allow nested criteria
                 return "(\(stringSqlString(sqlFieldName: sqlFieldName)) OR \(Criteria(field: MA_Field_Subject, operatorType: operatorType, value: value).toSQL(database: database)))"
             } else {
                 return stringSqlString(sqlFieldName: sqlFieldName)
@@ -96,7 +96,7 @@ extension Criteria: SQLConversion {
         } else if value == "last week" {
             startDate = Calendar.current.date(byAdding: .weekOfYear, value: -1, to: startOfToday)
         } else {
-            //check for the pattern for date with unit criteria
+            // Check for the pattern for date with unit criteria
             let datePatternRegex = try? NSRegularExpression(pattern: "^([0-9]+) (.+)$")
             let datePatternMatch = datePatternRegex?.firstMatch(in: value, range: NSRange(location: 0, length: value.utf16.count))
             if let datePatternMatch = datePatternMatch {
