@@ -210,11 +210,7 @@
  */
 -(NSInteger)browserTabCount
 {
-    if (self.primaryTab) {
-        return self.tabBarControl.numberOfTabViewItems - 1;
-    } else {
-        return self.tabBarControl.numberOfTabViewItems;
-    }
+    return self.tabBarControl.numberOfTabViewItems;
 }
 
 /* showPreviousTab
