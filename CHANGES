@@ -8,10 +8,16 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.8.6
+-----
+- Fix Command-W behavior according to tab count: closes window when only main tab is present
+- Fix memory leak when closing tab with the new browser
+- Fix toolbar search field to only start search when the user presses the enter key
+- Fix status text in window's status bar
+
 3.8.5
 -----
-- Fix "Previous Tab / Next Tab" menu commands to cycle between open tabs 
-
+- Fix "Previous Tab / Next Tab" menu commands to cycle between open tabs
 
 3.8.4
 -----
