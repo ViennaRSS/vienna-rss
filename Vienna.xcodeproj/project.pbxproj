@@ -1848,9 +1848,10 @@
 		2A37F4A9FDCFA73011CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				CLASSPREFIX = VNA;
 				LastSwiftUpdateCheck = 1410;
-				LastUpgradeCheck = 1420;
+				LastUpgradeCheck = 1430;
 				ORGANIZATIONNAME = "Vienna project";
 				TargetAttributes = {
 					035B703419E0E4AE00197334 = {
