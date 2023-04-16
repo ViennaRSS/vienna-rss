@@ -8,6 +8,10 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.8.7
+-----
+- Fix a long standing problem where OpenReader feeds read with another client would not be immediately synced in Vienna
+
 3.8.6
 -----
 - Fix Command-W behavior according to tab count: closes window when only main tab is present
