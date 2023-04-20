@@ -340,7 +340,7 @@ extension MainWindowController: NSToolbarDelegate {
     }
 
     func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
-        if itemIdentifier == NSToolbarItem.Identifier("SearchItem") {
+        if itemIdentifier == .search {
             let item: NSToolbarItem
             if #available(macOS 11, *) {
                 item = NSSearchToolbarItem(itemIdentifier: itemIdentifier)
@@ -403,23 +403,23 @@ extension MainWindowController: NSToolbarDelegate {
     }
 
     func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-        var identifiers = [
-            NSToolbarItem.Identifier("Subscribe"),
-            NSToolbarItem.Identifier("PreviousButton"),
-            NSToolbarItem.Identifier("NextButton"),
-            NSToolbarItem.Identifier("SkipFolder"),
-            NSToolbarItem.Identifier("MarkAllItemsAsRead"),
-            NSToolbarItem.Identifier("Refresh"),
-            NSToolbarItem.Identifier("Filter"),
-            NSToolbarItem.Identifier("Share"),
-            NSToolbarItem.Identifier("MailLink"),
-            NSToolbarItem.Identifier("SafariReadingList"),
-            NSToolbarItem.Identifier("DeleteArticle"),
-            NSToolbarItem.Identifier("EmptyTrash"),
-            NSToolbarItem.Identifier("GetInfo"),
-            NSToolbarItem.Identifier("Action"),
-            NSToolbarItem.Identifier("Styles"),
-            NSToolbarItem.Identifier("SearchItem")
+        var identifiers: [NSToolbarItem.Identifier] = [
+            .subscribe,
+            .previous,
+            .next,
+            .skip,
+            .markAllAsRead,
+            .refresh,
+            .filter,
+            .share,
+            .email,
+            .safariReadingList,
+            .delete,
+            .emptyTrash,
+            .getInfo,
+            .action,
+            .styles,
+            .search
         ]
 
         let pluginIdentifiers = pluginManager?.toolbarItems ?? []
@@ -433,13 +433,13 @@ extension MainWindowController: NSToolbarDelegate {
     }
 
     func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-        var identifiers = [
-            NSToolbarItem.Identifier("Subscribe"),
-            NSToolbarItem.Identifier("SkipFolder"),
-            NSToolbarItem.Identifier("Action"),
-            NSToolbarItem.Identifier("Refresh"),
-            NSToolbarItem.Identifier("Filter"),
-            NSToolbarItem.Identifier("Share")
+        var identifiers: [NSToolbarItem.Identifier] = [
+            .subscribe,
+            .skip,
+            .action,
+            .refresh,
+            .filter,
+            .share
         ]
 
         let pluginIdentifiers = pluginManager?.defaultToolbarItems() as? [String] ?? []
@@ -447,7 +447,7 @@ extension MainWindowController: NSToolbarDelegate {
             identifiers.append(NSToolbarItem.Identifier(identifier))
         }
 
-        identifiers += [.flexibleSpace, NSToolbarItem.Identifier("SearchItem")]
+        identifiers += [.flexibleSpace, .search]
 
         return identifiers
     }
@@ -458,12 +458,14 @@ extension MainWindowController: NSToolbarDelegate {
 
 extension MainWindowController: NSMenuDelegate {
 
-    // This method is presently only called for the style menu.
     func menuNeedsUpdate(_ menu: NSMenu) {
+        guard menu.identifier == .stylesMenu else {
+            return
+        }
+
         for menuItem in menu.items where menuItem.action == #selector(AppController.doSelectStyle(_:)) {
             menu.removeItem(menuItem)
         }
-
         if let styles = (Array(ArticleStyleLoader.reloadStylesMap().allKeys) as? [String])?.sorted() {
             var index = 0
             while index < styles.count {
@@ -519,4 +521,33 @@ extension MainWindowController: RSSSubscriber {
         // TODO : allow user to select a folder instead of assuming current location (see #1163)
         NSApp.appController.createSubscriptionInCurrentLocation(for: urls[0])
     }
+}
+
+// MARK: - Constants
+
+private extension NSToolbarItem.Identifier {
+
+    static let action = NSToolbarItem.Identifier("Action")
+    static let delete = NSToolbarItem.Identifier("DeleteArticle")
+    static let email = NSToolbarItem.Identifier("MailLink")
+    static let emptyTrash = NSToolbarItem.Identifier("EmptyTrash")
+    static let filter = NSToolbarItem.Identifier("Filter")
+    static let getInfo = NSToolbarItem.Identifier("GetInfo")
+    static let markAllAsRead = NSToolbarItem.Identifier("MarkAllItemsAsRead")
+    static let next = NSToolbarItem.Identifier("NextButton")
+    static let previous = NSToolbarItem.Identifier("PreviousButton")
+    static let refresh = NSToolbarItem.Identifier("Refresh")
+    static let safariReadingList = NSToolbarItem.Identifier("SafariReadingList")
+    static let search = NSToolbarItem.Identifier("SearchItem")
+    static let share = NSToolbarItem.Identifier("Share")
+    static let skip = NSToolbarItem.Identifier("SkipFolder")
+    static let styles = NSToolbarItem.Identifier("Styles")
+    static let subscribe = NSToolbarItem.Identifier("Subscribe")
+
+}
+
+private extension NSUserInterfaceItemIdentifier {
+
+    static let stylesMenu = NSUserInterfaceItemIdentifier("StylesMenu")
+
 }
