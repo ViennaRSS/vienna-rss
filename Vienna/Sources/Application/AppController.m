@@ -3067,6 +3067,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         [self.foldersTree setSearch:[NSString string]];
         self.mainWindowController.toolbarSearchField.stringValue = @"";
     }
+    [self.mainWindow makeFirstResponder:self.foldersTree.mainView];
 }
 
 /* searchUsingToolbarTextField
@@ -3131,6 +3132,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         } else {
 			[self.articleController reloadArrayOfArticles];
         }
+        [self.browser switchToPrimaryTab];
 	}
 }
 
