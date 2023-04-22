@@ -353,9 +353,9 @@ extension MainWindowController: NSToolbarDelegate {
                 toolbarSearchField = item.view as? NSSearchField
             }
 
-            item.label = NSLocalizedString("Search Articles", comment: "Toolbar item label")
-            item.paletteLabel = NSLocalizedString("Search Articles", comment: "Toolbar item palette label")
-            item.toolTip = NSLocalizedString("Search Articles", comment: "Toolbar item tooltip")
+            item.label = NSLocalizedString("Search", comment: "Toolbar item label")
+            item.paletteLabel = NSLocalizedString("Search", comment: "Toolbar item palette label")
+            item.toolTip = NSLocalizedString("Search", comment: "Toolbar item tooltip")
 
             item.action = #selector(AppController.searchUsingToolbarTextField(_:))
             item.menuFormRepresentation = NSMenuItem(title: item.label, action: item.action, keyEquivalent: "")

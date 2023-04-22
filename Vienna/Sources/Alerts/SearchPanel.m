@@ -38,7 +38,7 @@
 		self.topObjects = objects;
 		((NSSearchFieldCell *)searchField.cell).searchMenuTemplate = APPCONTROLLER.searchFieldMenu;
 	}
-	[searchLabel setStringValue:NSLocalizedString(@"Search all articles or the current web page", nil)];
+	[searchLabel setStringValue:NSLocalizedString(@"Search", @"Search panel title")];
     [window beginSheet:searchPanelWindow completionHandler:nil];
 }
 
