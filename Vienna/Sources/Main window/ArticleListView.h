@@ -19,7 +19,6 @@
 //
 
 @import Cocoa;
-@import WebKit;
 
 #import "BaseView.h"
 #import "ArticleBaseView.h"
@@ -65,7 +64,6 @@
 -(void)updateVisibleColumns;
 -(void)saveTableSettings;
 -(void)loadArticleLink:(NSString *) articleLink;
-- (void)webViewLoadFinished:(NSNotification *)notification;
 @property (readonly, nonatomic) NSURL *url;
 
 @end

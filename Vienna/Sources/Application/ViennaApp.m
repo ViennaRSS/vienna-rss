@@ -26,7 +26,6 @@
 #import "Export.h"
 #import "RefreshManager.h"
 #import "Constants.h"
-#import "BrowserPane.h"
 #import "ArticleListView.h"
 #import "UnifiedDisplayView.h"
 #import "Folder.h"

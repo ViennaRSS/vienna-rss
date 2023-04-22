@@ -9,7 +9,6 @@
 
 #import "AppController.h"
 #import "ArticleController.h"
-#import "ArticleView.h"
 #import "Preferences.h"
 #import "Vienna-Swift.h"
 
@@ -35,10 +34,6 @@
 		controller = APPCONTROLLER;
         [self initializeWebKitArticleView:frameRect];
 
-        if ([(NSObject *)articleView isKindOfClass:ArticleView.class]) {
-            [(ArticleView *)articleView setOpenLinksInNewBrowser:YES];
-        }
-
 		[self setInProgress:NO];
 		progressIndicator = nil;
 	}
@@ -49,21 +44,6 @@
 	WebKitArticleView * myArticleView = [[WebKitArticleView alloc] initWithFrame:frameRect];
     myArticleView.navigationDelegate = (id<WKNavigationDelegate>)self;
     articleView = myArticleView;
-}
-
--(void)initializeWebViewArticleView:(NSRect)frameRect {
-	ArticleView *webViewArticleView = [[ArticleView alloc] initWithFrame:frameRect];
-	articleView = webViewArticleView;
-	//TODO: do not get the primary tab from browser, but retrieve the articles tab directly
-	// Make the list view the frame load and UI delegate for the web view
-	webViewArticleView.UIDelegate = (NSView<WebUIDelegate> *)controller.browser.primaryTab.view;
-	webViewArticleView.frameLoadDelegate = (NSView<WebFrameLoadDelegate> *) controller.browser.primaryTab.view;
-	// Notify the list view when the article view has finished loading
-	SEL loadFinishedSelector = NSSelectorFromString(@"webViewLoadFinished:");
-	[[NSNotificationCenter defaultCenter] addObserver:controller.browser.primaryTab.view selector:loadFinishedSelector name:WebViewProgressFinishedNotification object:articleView];
-	[webViewArticleView.mainFrame.frameView setAllowsScrolling:NO];
-
-	[webViewArticleView setMaintainsBackForwardList:NO];
 }
 
 -(void)dealloc

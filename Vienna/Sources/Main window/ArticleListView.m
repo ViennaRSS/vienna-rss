@@ -27,11 +27,9 @@
 #import "AppController.h"
 #import "ArticleController.h"
 #import "MessageListView.h"
-#import "ArticleView.h"
 #import "StringExtensions.h"
 #import "HelperFunctions.h"
 #import "Field.h"
-#import "BrowserPane.h"
 #import "ProgressTextCell.h"
 #import "Article.h"
 #import "Folder.h"
@@ -630,11 +628,6 @@ static void *ObserverContext = &ObserverContext;
 -(NSView *)mainView
 {
 	return articleList;
-}
-
-// invoked after a WebViewProgressFinishedNotification notification
--(void)webViewLoadFinished:(NSNotification *)notification
-{
 }
 
 /* canDeleteMessageAtRow

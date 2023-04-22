@@ -22,12 +22,10 @@
 #import "ArticleController.h"
 #import "AppController.h"
 #import "ArticleCellView.h"
-#import "ArticleView.h"
 #import "Preferences.h"
 #import "Constants.h"
 #import "StringExtensions.h"
 #import "HelperFunctions.h"
-#import "BrowserPane.h"
 #import "Article.h"
 #import "Folder.h"
 #import "TableViewExtensions.h"
@@ -268,98 +266,6 @@
 
 	// Return the default menu items.
     return defaultMenuItems;
-}
-
-#pragma mark -
-#pragma mark WebFrameLoadDelegate
-
-/* didFailLoadWithError
- * Invoked when a location request for frame has failed to load.
- */
--(void)webView:(WebView *)sender didFailLoadWithError:(NSError *)error forFrame:(WebFrame *)webFrame
-{
-	// Not really errors. Load is cancelled or a plugin is grabbing the URL and will handle it by itself.
-	if (!([error.domain isEqualToString:WebKitErrorDomain] && (error.code == NSURLErrorCancelled || error.code == WebKitErrorPlugInWillHandleLoad)))
-	{
-		id obj = sender.superview;
-		if ([obj isKindOfClass:[ArticleCellView class]])
-		{
-			ArticleCellView * cell = (ArticleCellView *)obj;
-			[cell setInProgress:NO];
-			NSUInteger row= cell.articleRow;
-			NSArray * allArticles = self.controller.articleController.allArticles;
-			if (row < (NSInteger)allArticles.count)
-			{
-				[articleList reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:row] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
-			}
-		}
-		else
-			// TODO : what should we do ?
-			NSLog(@"Webview error %@ associated to object of class %@", error, [obj class]);
-	}
-}
-
-- (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)webFrame
-{
-    id obj = sender.superview;
-    if ([obj isKindOfClass:[ArticleCellView class]]) {
-        ArticleCellView *cell = (ArticleCellView *)obj;
-        [cell setInProgress:NO];
-    }
-}
-
-#pragma mark -
-#pragma mark webView progress notifications
-
-/* webViewLoadFinished
- * Invoked when a web view load has finished
- * (called via a WebViewProgressFinishedNotification notification)
- */
-- (void)webViewLoadFinished:(NSNotification *)notification
-{
-    id obj = notification.object;
-    if([obj isKindOfClass:[ArticleView class]])
-    {
-		ArticleView * sender = (ArticleView *)obj;
-		id objView = sender.superview;
-		if ([objView isKindOfClass:[ArticleCellView class]])
-		{
-			ArticleCellView * cell = (ArticleCellView *)objView;
-			NSUInteger row= [articleList rowForView:objView];
-			if (row == cell.articleRow && row < self.controller.articleController.allArticles.count
-			  && cell.folderId == [self.controller.articleController.allArticles[row] folderId])
-			{	//relevant cell
-                NSString* offsetHeight;
-                CGFloat fittingHeight;
-
-                [sender forceJavascript];
-                offsetHeight = [sender stringByEvaluatingJavaScriptFromString:@"document.documentElement.offsetHeight"];
-                [sender useUserPrefsForJavascript];
-                fittingHeight = offsetHeight.doubleValue;
-                //get the rect of the current webview frame
-                NSRect webViewRect = sender.frame;
-                //calculate the new frame
-                NSRect newWebViewRect = NSMakeRect(0,
-                                           0,
-                                           NSWidth(webViewRect),
-                                           fittingHeight);
-                //set the new frame to the webview
-                sender.frame = newWebViewRect;
-                cell.fittingHeight = fittingHeight;
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_CellResize" object:cell];
-            }
-            else {	//non relevant cell
-                [cell setInProgress:NO];
-                if (row < self.controller.articleController.allArticles.count)
-                {
-                    [articleList reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:row] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
-                }
-            }
-		} else {
-			// not an ArticleCellView anymore
-			// ???
-		}
-	}
 }
 
 #pragma mark -
@@ -763,13 +669,8 @@
 	cellView.listView = articleList;
 	NSObject<ArticleContentView> *articleContentView = cellView.articleView;
     NSView *view;
-    if ([articleContentView isKindOfClass:WebKitArticleView.class])
-    {
-        view = (WebKitArticleView *)articleContentView;
-        ((CustomWKWebView *)view).hoverUiDelegate = self;
-    } else {
-        view = ((ArticleView *) articleContentView);
-    }
+    view = (WebKitArticleView *)articleContentView;
+    ((CustomWKWebView *)view).hoverUiDelegate = self;
 	[view removeFromSuperviewWithoutNeedingDisplay];
 	view.frame = cellView.frame;
 	[cellView addSubview:view];

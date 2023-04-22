@@ -22,7 +22,6 @@
 
 #import "AppController.h"
 #import "Article.h"
-#import "BrowserPane.h"
 #import "HelperFunctions.h"
 #import "NSFileManager+Paths.h"
 #import "Preferences.h"
