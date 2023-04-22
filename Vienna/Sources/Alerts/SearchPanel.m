@@ -39,6 +39,7 @@
 		((NSSearchFieldCell *)searchField.cell).searchMenuTemplate = APPCONTROLLER.searchFieldMenu;
 	}
 	[searchLabel setStringValue:NSLocalizedString(@"Search", @"Search panel title")];
+	searchField.stringValue = APPCONTROLLER.searchString ? APPCONTROLLER.searchString : @"";
     [window beginSheet:searchPanelWindow completionHandler:nil];
 }
 

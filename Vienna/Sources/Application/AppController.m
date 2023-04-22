@@ -2126,9 +2126,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	switch (action)
 	{
 		case NSFindPanelActionSetFindString:
-			self.toolbarSearchField.stringValue = APP.currentTextSelection;
-			[searchPanel setSearchString:APP.currentTextSelection];
-            [self setFocusToSearchField:self];
+			self.searchString = APP.currentTextSelection;
 			break;
 			
 		case NSFindPanelActionShowFindPanel:
