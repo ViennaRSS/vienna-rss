@@ -19,7 +19,6 @@
 //
 
 @import Cocoa;
-@import WebKit;
 
 @protocol BaseView
 @required
@@ -34,6 +33,5 @@
 	-(IBAction)handleGoBack:(id)sender;
 	@property (nonatomic, readonly) BOOL canGoForward;
 	@property (nonatomic, readonly) BOOL canGoBack;
-	@property (nonatomic, readonly) WebView *webView;
 @end
 

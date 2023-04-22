@@ -46,12 +46,6 @@
     articleView = myArticleView;
 }
 
--(void)dealloc
-{
-    //TODO: do not get the primary tab from browser, but retrieve the articles tab directly
-	[[NSNotificationCenter defaultCenter] removeObserver:controller.browser.primaryTab.view name:WebViewProgressFinishedNotification object:articleView];
-}
-
 #pragma mark -
 #pragma mark Drawing
 

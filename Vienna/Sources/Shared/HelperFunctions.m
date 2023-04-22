@@ -117,7 +117,7 @@ NSURL *_Nullable urlFromUserString(NSString *_Nonnull urlString)
         urlComponents.percentEncodedPath = path;
         url = urlComponents.URL;
     } else {
-        // Use WebKit to clean up user-entered URLs that might contain umlauts,
+        // Clean up user-entered URLs that might contain umlauts,
         // diacritics and other IDNA related stuff in the domain, or whatever
         // may hide in filenames and arguments.
         NSPasteboard *pasteboard = [NSPasteboard pasteboardWithUniqueName];
@@ -125,7 +125,7 @@ NSURL *_Nullable urlFromUserString(NSString *_Nonnull urlString)
         @try {
             if ([pasteboard setString:urlString
                               forType:NSPasteboardTypeString]) {
-                url = [WebView URLFromPasteboard:pasteboard];
+                url = [NSURL URLFromPasteboard:pasteboard];
             }
         } @catch (NSException *exception) {
             NSLog(@"Failed to convert URL for string %@", urlString);
