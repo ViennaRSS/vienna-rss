@@ -3061,7 +3061,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         NSString *searchString = ((NSSearchField *)sender).stringValue;
         [self.foldersTree setSearch:searchString];
     } else if ([sender isKindOfClass:[SearchMethod class]]) {
-        [self.foldersTree setSearch:self.toolbarSearchField.stringValue];
+        [self.foldersTree setSearch:self.searchString];
     } else if ([sender isKindOfClass:[NSButton class]]) {
         // Send an empty string to cancel the search.
         [self.foldersTree setSearch:[NSString string]];
@@ -3093,7 +3093,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)performAllArticlesSearch
 {
-	[self searchArticlesWithString:self.toolbarSearchField.stringValue];
+	[self searchArticlesWithString:self.searchString];
 }
 
 /* performAllArticlesSearch
@@ -3111,7 +3111,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
 	id<Tab> activeBrowserTab = self.browser.activeTab;
 	if (activeBrowserTab) {
-		[self setFocusToSearchField:self];
         [activeBrowserTab searchFor:self.searchString
                              action:NSFindPanelActionSetFindString];
 	}
