@@ -42,7 +42,6 @@ NS_ASSUME_NONNULL_BEGIN
 	BOOL hasPrefs;
 	BOOL showFolderImages;
 	BOOL useJavaScript;
-    BOOL useNewBrowser;
 	BOOL showAppInStatusBar;
 	BOOL showStatusBar;
 	BOOL showFilterBar;
@@ -168,10 +167,6 @@ extern NSString * const kMA_Notify_UseJavaScriptChange;
 
 // User Agent Name
 @property (nonatomic) NSString *userAgentName;
-
-#pragma mark Browser choice
-
-@property (nonatomic) BOOL useNewBrowser;
 
 #pragma mark Open Reader syncing
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="VBW-RM-gbf">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="VBW-RM-gbf">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -242,11 +242,11 @@
             <objects>
                 <viewController title="Advanced" id="NjZ-bv-EoA" customClass="AdvancedPreferencesViewController" sceneMemberID="viewController">
                     <view key="view" id="8J7-Mc-HHy">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="317"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="235"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="vvG-VT-CVp">
-                                <rect key="frame" x="18" y="265" width="444" height="32"/>
+                                <rect key="frame" x="18" y="183" width="444" height="32"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="4Qn-qF-kSp">
                                     <font key="font" metaFont="system"/>
                                     <string key="title">The settings here should not need to be changed for the normal use of Vienna. Refer to the Help file for details of each setting.</string>
@@ -254,18 +254,8 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HJu-JH-e1a">
-                                <rect key="frame" x="18" y="228" width="442" height="18"/>
-                                <buttonCell key="cell" type="check" title="Preview new browser" bezelStyle="regularSquare" imagePosition="left" inset="2" id="DDY-fS-V5T">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                    <connections>
-                                        <action selector="changeUseNewBrowser:" target="NjZ-bv-EoA" id="QoQ-kG-5UB"/>
-                                    </connections>
-                                </buttonCell>
-                            </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1u1-uu-U0M">
-                                <rect key="frame" x="18" y="160" width="442" height="18"/>
+                                <rect key="frame" x="18" y="146" width="442" height="18"/>
                                 <buttonCell key="cell" type="check" title="Enable JavaScript in the internal browser" bezelStyle="regularSquare" imagePosition="left" inset="2" id="MnV-8D-Qyq">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -275,7 +265,7 @@
                                 </connections>
                             </button>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="QZV-Nb-fvA">
-                                <rect key="frame" x="38" y="143" width="424" height="14"/>
+                                <rect key="frame" x="38" y="143" width="424" height="0.0"/>
                                 <textFieldCell key="cell" controlSize="small" title="You may have to relaunch Vienna after changing this setting for it to take effect." id="fgw-cI-bAr">
                                     <font key="font" metaFont="smallSystem"/>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -400,16 +390,6 @@
                                     <action selector="showAdvancedHelp:" target="NjZ-bv-EoA" id="yjF-Sz-geR"/>
                                 </connections>
                             </button>
-                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="BGf-AD-UAd">
-                                <rect key="frame" x="38" y="197" width="424" height="28"/>
-                                <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" id="Fv8-Xx-YR0">
-                                    <font key="font" metaFont="smallSystem"/>
-                                    <string key="title">Vienna has a new browser built on top of WebKit. It is faster and more secure.
-After changing this setting, restart Vienna to test it. Feedback is very welcome!</string>
-                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="VMW-g6-f00" firstAttribute="leading" secondItem="8J7-Mc-HHy" secondAttribute="leading" constant="20" symbolic="YES" id="0wk-35-bnm"/>
@@ -417,17 +397,13 @@ After changing this setting, restart Vienna to test it. Feedback is very welcome
                             <constraint firstItem="vvG-VT-CVp" firstAttribute="top" secondItem="8J7-Mc-HHy" secondAttribute="top" constant="20" symbolic="YES" id="5gp-qM-zw6"/>
                             <constraint firstItem="pfv-Xq-7Aq" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8J7-Mc-HHy" secondAttribute="leading" constant="20" symbolic="YES" id="86k-vd-NJl"/>
                             <constraint firstItem="GDE-ah-5QX" firstAttribute="top" secondItem="8eb-2O-wjd" secondAttribute="bottom" constant="4" id="Epf-N1-ked"/>
-                            <constraint firstItem="HJu-JH-e1a" firstAttribute="top" secondItem="vvG-VT-CVp" secondAttribute="bottom" constant="20" id="Fy2-6p-uH5"/>
-                            <constraint firstAttribute="trailing" secondItem="HJu-JH-e1a" secondAttribute="trailing" constant="20" symbolic="YES" id="JjT-sm-cXF"/>
                             <constraint firstItem="QZV-Nb-fvA" firstAttribute="leading" secondItem="1u1-uu-U0M" secondAttribute="leading" constant="20" id="Kes-D1-Euq"/>
-                            <constraint firstItem="BGf-AD-UAd" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8J7-Mc-HHy" secondAttribute="leading" constant="20" symbolic="YES" id="LZP-qO-2uX"/>
-                            <constraint firstItem="BGf-AD-UAd" firstAttribute="leading" secondItem="HJu-JH-e1a" secondAttribute="leading" constant="20" id="Lbi-Iw-heF"/>
                             <constraint firstItem="QZV-Nb-fvA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8J7-Mc-HHy" secondAttribute="leading" constant="20" symbolic="YES" id="Mio-pG-UVv"/>
+                            <constraint firstItem="1u1-uu-U0M" firstAttribute="top" secondItem="vvG-VT-CVp" secondAttribute="bottom" constant="20" id="Nb3-NB-Ryk"/>
                             <constraint firstItem="vvG-VT-CVp" firstAttribute="leading" secondItem="8J7-Mc-HHy" secondAttribute="leading" constant="20" symbolic="YES" id="NlN-UY-n3b"/>
                             <constraint firstAttribute="trailing" secondItem="1u1-uu-U0M" secondAttribute="trailing" constant="20" symbolic="YES" id="PBF-4N-WSt"/>
                             <constraint firstItem="8eb-2O-wjd" firstAttribute="top" secondItem="QZV-Nb-fvA" secondAttribute="bottom" constant="20" id="QwZ-0u-pfM"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="8eb-2O-wjd" secondAttribute="trailing" constant="20" symbolic="YES" id="Rtg-SH-5JK"/>
-                            <constraint firstItem="HJu-JH-e1a" firstAttribute="leading" secondItem="8J7-Mc-HHy" secondAttribute="leading" constant="20" symbolic="YES" id="U52-Om-beq"/>
                             <constraint firstItem="pfv-Xq-7Aq" firstAttribute="top" secondItem="37K-gU-v9y" secondAttribute="bottom" constant="12" symbolic="YES" id="Wya-pc-Cgb"/>
                             <constraint firstItem="8eb-2O-wjd" firstAttribute="top" secondItem="1u1-uu-U0M" secondAttribute="bottom" priority="750" constant="20" id="beK-Zh-WaT"/>
                             <constraint firstItem="37K-gU-v9y" firstAttribute="leading" secondItem="GDE-ah-5QX" secondAttribute="leading" id="c3X-0q-2dl"/>
@@ -438,12 +414,9 @@ After changing this setting, restart Vienna to test it. Feedback is very welcome
                             <constraint firstItem="37K-gU-v9y" firstAttribute="trailing" secondItem="GDE-ah-5QX" secondAttribute="trailing" id="ggE-Ik-kJd"/>
                             <constraint firstItem="QZV-Nb-fvA" firstAttribute="top" secondItem="1u1-uu-U0M" secondAttribute="bottom" constant="4" id="ght-wc-p0P"/>
                             <constraint firstItem="8eb-2O-wjd" firstAttribute="top" relation="greaterThanOrEqual" secondItem="1u1-uu-U0M" secondAttribute="bottom" constant="20" id="gke-S7-GZ1"/>
-                            <constraint firstAttribute="trailing" secondItem="BGf-AD-UAd" secondAttribute="trailing" constant="20" symbolic="YES" id="khx-C3-8Dc"/>
                             <constraint firstAttribute="trailing" secondItem="GDE-ah-5QX" secondAttribute="trailing" constant="20" symbolic="YES" id="lT0-TT-aR5"/>
                             <constraint firstItem="37K-gU-v9y" firstAttribute="top" secondItem="GDE-ah-5QX" secondAttribute="bottom" constant="4" id="mt1-a8-Zmf"/>
                             <constraint firstItem="1u1-uu-U0M" firstAttribute="leading" secondItem="8J7-Mc-HHy" secondAttribute="leading" constant="20" symbolic="YES" id="p1Z-8J-PDc"/>
-                            <constraint firstItem="1u1-uu-U0M" firstAttribute="top" secondItem="BGf-AD-UAd" secondAttribute="bottom" constant="20" id="qaV-wu-Khx"/>
-                            <constraint firstItem="BGf-AD-UAd" firstAttribute="top" secondItem="HJu-JH-e1a" secondAttribute="bottom" constant="4" id="tNk-IT-HgU"/>
                             <constraint firstAttribute="trailing" secondItem="vvG-VT-CVp" secondAttribute="trailing" constant="20" symbolic="YES" id="vtd-DY-6PJ"/>
                             <constraint firstItem="VMW-g6-f00" firstAttribute="firstBaseline" secondItem="8eb-2O-wjd" secondAttribute="firstBaseline" id="w5o-QA-RVB"/>
                         </constraints>
@@ -451,7 +424,6 @@ After changing this setting, restart Vienna to test it. Feedback is very welcome
                     <connections>
                         <outlet property="concurrentDownloads" destination="8eb-2O-wjd" id="pIP-FA-KAN"/>
                         <outlet property="javaScriptNoticeTextField" destination="QZV-Nb-fvA" id="7BA-gp-SqN"/>
-                        <outlet property="previewNewBrowserButton" destination="HJu-JH-e1a" id="yCg-55-dum"/>
                         <outlet property="useJavaScriptButton" destination="1u1-uu-U0M" id="D4j-kD-89C"/>
                     </connections>
                 </viewController>
@@ -586,7 +558,7 @@ After changing this setting, restart Vienna to test it. Feedback is very welcome
                                 </connections>
                             </button>
                             <comboBox horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MkS-Vx-yr4">
-                                <rect key="frame" x="271" y="14" width="51" height="25"/>
+                                <rect key="frame" x="270" y="16" width="52" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="width" priority="250" constant="48" id="S9r-3r-P2F"/>
                                 </constraints>

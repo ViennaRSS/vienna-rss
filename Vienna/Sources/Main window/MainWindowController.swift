@@ -36,9 +36,7 @@ final class MainWindowController: NSWindowController {
     @IBOutlet private(set) weak var placeholderDetailView: NSView!
 
     @objc private(set) lazy var browser: (Browser & NSViewController) = {
-        var controller = Preferences.standard.useNewBrowser
-            ? TabbedBrowserViewController() as (Browser & NSViewController)
-            : WebViewBrowser()
+        var controller = TabbedBrowserViewController() as (Browser & NSViewController)
         return controller
     }()
 
