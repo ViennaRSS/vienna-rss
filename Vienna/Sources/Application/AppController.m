@@ -3019,6 +3019,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(void)setSearchString:(NSString *)newSearchString
 {
 	searchString = [newSearchString copy];
+	self.toolbarSearchField.stringValue = searchString;
 }
 
 /* searchString
