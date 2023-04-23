@@ -203,7 +203,7 @@
 		F685D24C292460210097C0D3 /* Predicates.strings in Resources */ = {isa = PBXBuildFile; fileRef = F685D24A292460210097C0D3 /* Predicates.strings */; };
 		F68792872700A678009B7BB5 /* SecurityScopedBookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68792862700A678009B7BB5 /* SecurityScopedBookmark.swift */; };
 		F689820A281DD62B0010F4C5 /* XMLFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = F6898209281DD62B0010F4C5 /* XMLFeed.m */; };
-		F68FE3A6270F6DC700C89D16 /* UnarchiverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68FE3A5270F6DC700C89D16 /* UnarchiverTests.swift */; settings = {COMPILER_FLAGS = "-Wno-deprecated-declarations"; }; };
+		F68FE3A6270F6DC700C89D16 /* UnarchiverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68FE3A5270F6DC700C89D16 /* UnarchiverTests.swift */; settings = {COMPILER_FLAGS = "-Wno-deprecated-type -Wno-deprecated-declarations"; }; };
 		F69140E41E71B94200D51BFF /* AppController+Notifications.m in Sources */ = {isa = PBXBuildFile; fileRef = F69140E31E71B94200D51BFF /* AppController+Notifications.m */; };
 		F692559A2572A32900D387D8 /* MMTabBarView in Frameworks */ = {isa = PBXBuildFile; productRef = F69255992572A32900D387D8 /* MMTabBarView */; };
 		F696D23E2561F9FC003DF0C0 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = F696D23D2561F9FC003DF0C0 /* Sparkle */; };
