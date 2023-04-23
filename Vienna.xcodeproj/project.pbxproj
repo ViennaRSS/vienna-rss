@@ -186,6 +186,7 @@
 		F62581591E29BEB90035E43C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F625815B1E29BEB90035E43C /* MainMenu.xib */; };
 		F626F5F424A76B9100D3AAD8 /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F626F5F624A76B9100D3AAD8 /* Preferences.storyboard */; };
 		F628DFE31ED2698A00FACFD3 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F628DFE21ED2698A00FACFD3 /* FilterView.swift */; };
+		F62E324E284E0CAF0046EA1F /* SharingServiceToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62E324D284E0CAF0046EA1F /* SharingServiceToolbarItem.swift */; };
 		F633157626ED73CB008A3673 /* URLFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F633157526ED73CB008A3673 /* URLFormatter.swift */; };
 		F633157826EE3D06008A3673 /* URLFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F633157726EE3D06008A3673 /* URLFormatterTests.swift */; };
 		F6373A231F1D53B500ED3B09 /* MainWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6373A221F1D53B500ED3B09 /* MainWindow.swift */; };
@@ -236,6 +237,7 @@
 		F6D572B41E26AA9900CDA909 /* InfoWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572B61E26AA9900CDA909 /* InfoWindow.xib */; };
 		F6D572B71E26AAA100CDA909 /* RSSFeed.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572B91E26AAA100CDA909 /* RSSFeed.xib */; };
 		F6D572BA1E26AAA900CDA909 /* SearchFolder.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572BC1E26AAA900CDA909 /* SearchFolder.xib */; };
+		F6DDB5B12950C87E004E0E87 /* SharingServiceMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DDB5B02950C87E004E0E87 /* SharingServiceMenuItem.swift */; };
 		F6EB26031E58D37100570B22 /* DirectoryMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EB26021E58D37100570B22 /* DirectoryMonitor.swift */; };
 		F6F12AFD25ABDDE3005B2DCE /* NSFileManager+Paths.m in Sources */ = {isa = PBXBuildFile; fileRef = F6F12AFC25ABDDE3005B2DCE /* NSFileManager+Paths.m */; };
 		F6FEE7AD209E500800BCAEC6 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = F6FEE7AF209E500800BCAEC6 /* Localizable.stringsdict */; };
@@ -686,6 +688,7 @@
 		F626F61E24A76BDE00D3AAD8 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Preferences.strings; sourceTree = "<group>"; };
 		F628DFE21ED2698A00FACFD3 /* FilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		F62CE1C0209EFD1B008F1D19 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = de; path = de.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		F62E324D284E0CAF0046EA1F /* SharingServiceToolbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingServiceToolbarItem.swift; sourceTree = "<group>"; };
 		F633157526ED73CB008A3673 /* URLFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = URLFormatter.swift; sourceTree = "<group>"; };
 		F633157726EE3D06008A3673 /* URLFormatterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = URLFormatterTests.swift; sourceTree = "<group>"; };
 		F63503F32960846D006F1F76 /* FeedItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeedItem.h; sourceTree = "<group>"; };
@@ -998,6 +1001,7 @@
 		F6DCBC35276BCE4A00D9C3BF /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Preferences.strings"; sourceTree = "<group>"; };
 		F6DCBC36276BCE4A00D9C3BF /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		F6DCBC37276BCE4A00D9C3BF /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		F6DDB5B02950C87E004E0E87 /* SharingServiceMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingServiceMenuItem.swift; sourceTree = "<group>"; };
 		F6DFB033209EFE8500262069 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = tr; path = tr.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		F6E771C3209EFD00002EC659 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = da; path = da.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		F6EB26021E58D37100570B22 /* DirectoryMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryMonitor.swift; sourceTree = "<group>"; };
@@ -1399,6 +1403,7 @@
 				F6D282611F1A87A900FF865E /* PopUpButtonToolbarItem.swift */,
 				F61CEA671F03F277009C878E /* PlugInToolbarItem.swift */,
 				F6A4E8471F040D58001C9191 /* PlugInToolbarItemButton.swift */,
+				F62E324D284E0CAF0046EA1F /* SharingServiceToolbarItem.swift */,
 			);
 			name = Toolbar;
 			sourceTree = "<group>";
@@ -1558,6 +1563,7 @@
 				F6A7EA5A1F1CE63500BD4450 /* Article list */,
 				2FDF6FC4218A267D002F77E9 /* Browser */,
 				F69964F61F13029500FC8493 /* OverlayStatusBar.swift */,
+				F6DDB5B02950C87E004E0E87 /* SharingServiceMenuItem.swift */,
 			);
 			path = "Main window";
 			sourceTree = "<group>";
@@ -2204,6 +2210,7 @@
 				F41CA694218F56140072F734 /* NSWorkspace+OpenWithMenu.m in Sources */,
 				2FF61D3024F2ED1500A7E2B5 /* BrowserTab+Interface.swift in Sources */,
 				2F779111253B17C5004ED4EF /* BrowserContextMenuDelegate.swift in Sources */,
+				F6DDB5B12950C87E004E0E87 /* SharingServiceMenuItem.swift in Sources */,
 				664F87C713C62DFE00E266DE /* OpenReader.m in Sources */,
 				F6D282621F1A87A900FF865E /* PopUpButtonToolbarItem.swift in Sources */,
 				435026E6165DD8BE0018EDB7 /* ArticleRef.m in Sources */,
@@ -2251,6 +2258,7 @@
 				435028A3165DE9E00018EDB7 /* Export.m in Sources */,
 				435028A4165DE9E00018EDB7 /* FeedCredentials.m in Sources */,
 				2F3EC7E7296B138700C5F403 /* Criteria.swift in Sources */,
+				F62E324E284E0CAF0046EA1F /* SharingServiceToolbarItem.swift in Sources */,
 				435028A6165DE9E00018EDB7 /* FoldersTree.m in Sources */,
 				435028A7165DE9E00018EDB7 /* FolderView.m in Sources */,
 				B8B9D6D323685C7400EAE65C /* XMLFeedItem.swift in Sources */,

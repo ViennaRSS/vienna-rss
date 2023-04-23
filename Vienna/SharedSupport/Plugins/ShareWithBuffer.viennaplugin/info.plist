@@ -5,7 +5,7 @@
 	<key>Name</key>
 	<string>ShareWithBuffer</string>
 	<key>Default</key>
-	<true/>
+	<false/>
 	<key>Type</key>
 	<string>Link</string>
 	<key>URL</key>

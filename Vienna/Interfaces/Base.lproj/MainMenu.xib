@@ -799,13 +799,29 @@ CA
                                     <action selector="downloadEnclosure:" target="-1" id="zH0-xU-GTv"/>
                                 </connections>
                             </menuItem>
-                            <menuItem isSeparatorItem="YES" id="1204">
-                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
-                            </menuItem>
-                            <menuItem title="Send Link by Email" keyEquivalent="s" id="1073">
-                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                            <menuItem isSeparatorItem="YES" id="1204"/>
+                            <menuItem title="Share…" id="SSr-Ho-wep">
+                                <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="mailLinkToArticlePage:" target="-1" id="WpR-9O-7tX"/>
+                                    <action selector="invokeSharingServicePicker:" target="-1" id="Whd-sT-AWC"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Add to Safari Reading List" id="VQe-zs-ODh" customClass="VNASharingServiceMenuItem">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="name" value="safariReadingList"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="performSharingService:" target="-1" id="K6t-xO-qc5"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Email Link" keyEquivalent="s" id="1073" customClass="VNASharingServiceMenuItem">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="name" value="emailLink"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="performSharingService:" target="-1" id="ZNo-wV-gEu"/>
                                 </connections>
                             </menuItem>
                         </items>

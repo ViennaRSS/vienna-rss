@@ -3184,60 +3184,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	[[RefreshManager sharedManager] cancelAll];
 }
 
-
-/* mailLinkToArticlePage
- * Prompts the default email application to send a link to the currently selected article(s). 
- * Builds a string that contains a well-formed link according to the "mailto:"-scheme (RFC2368).
- */
--(IBAction)mailLinkToArticlePage:(id)sender
-{
-	NSMutableString *mailtoLink = nil;
-	NSString * mailtoLineBreak = @"%0D%0A"; // necessary linebreak characters according to RFC
-	NSString * title;
-	NSString * link;
-	Article * currentArticle;
-	NSCharacterSet *charSet = NSCharacterSet.URLQueryAllowedCharacterSet;
-
-    // If the active tab is a web view, mail the URL
-    id<Tab> activeBrowserTab = self.browser.activeTab;
-    if (activeBrowserTab) {
-        NSURL *url = activeBrowserTab.tabUrl;
-        if (url != nil) {
-			title = [activeBrowserTab.title stringByAddingPercentEncodingWithAllowedCharacters:charSet];
-			link = [url.absoluteString stringByAddingPercentEncodingWithAllowedCharacters:charSet];
-			mailtoLink = [NSMutableString stringWithFormat:@"mailto:?subject=%@&body=%@", title, link];
-		}
-	}
-	else
-	{
-		// ... otherwise, iterate over the currently selected articles.
-		NSArray * articleArray = self.articleController.markedArticleRange;
-		if (articleArray.count > 0) 
-		{
-			if (articleArray.count == 1)
-			{
-				currentArticle = articleArray[0];
-				title = [currentArticle.title stringByAddingPercentEncodingWithAllowedCharacters:charSet];
-				link = [currentArticle.link stringByAddingPercentEncodingWithAllowedCharacters:charSet];
-				mailtoLink = [NSMutableString stringWithFormat: @"mailto:?subject=%@&body=%@", title, link];
-			}
-			else
-			{
-				mailtoLink = [NSMutableString stringWithFormat:@"mailto:?subject=&body="];
-				for (currentArticle in articleArray)
-				{
-					title = [currentArticle.title stringByAddingPercentEncodingWithAllowedCharacters:charSet];
-					link = [currentArticle.link stringByAddingPercentEncodingWithAllowedCharacters:charSet];
-					[mailtoLink appendFormat: @"%@%@%@%@%@", title, mailtoLineBreak, link, mailtoLineBreak, mailtoLineBreak];
-				}
-			}
-		}
-	}
-	
-	if (mailtoLink != nil)
-		[self openURLInDefaultBrowser:[NSURL URLWithString: mailtoLink]];
-}
-
 #pragma mark Blogging
 
 /* blogWithExternalEditor
@@ -3395,17 +3341,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	{
         *validateFlag = isMainWindowVisible && isAnyArticleView && self.articleController.canGoBack;
         return YES;
-	}
-	if (theAction == @selector(mailLinkToArticlePage:))
-	{
-		id<Tab> activeBrowserTab = self.browser.activeTab;
-		Article * thisArticle = self.selectedArticle;
-        //TODO: if a browser tab is open, the URL can also be a non-article URL.
-		if (activeBrowserTab)
-			*validateFlag = (activeBrowserTab.tabUrl != nil);
-		else
-			*validateFlag = (thisArticle != nil && isMainWindowVisible);
-		return NO; // Give the menu handler a chance too.
 	}
 	if (theAction == @selector(deleteMessage:)) {
 		Folder * folder = [db folderFromID:self.foldersTree.actualSelection];
@@ -3698,15 +3633,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	{
 		Article * thisArticle = self.selectedArticle;
 		return (thisArticle != nil && !db.readOnly && isMainWindowVisible);
-	}
-	else if (theAction == @selector(mailLinkToArticlePage:))
-	{
-        if (self.articleController.markedArticleRange.count > 1) {
-			[menuItem setTitle:NSLocalizedString(@"Send Links", nil)];
-        } else {
-			[menuItem setTitle:NSLocalizedString(@"Send Link", nil)];
-        }
-		return flag;
 	}
 	else if (theAction == @selector(downloadEnclosure:))
 	{

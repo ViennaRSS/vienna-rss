@@ -167,6 +167,84 @@ final class MainWindowController: NSWindowController {
         statusBarState(disclosed: !statusBar.isDisclosed)
     }
 
+    // MARK: Sharing services
+
+    private var hasShareableItems: Bool {
+        if let activeTab = self.browser.activeTab {
+            return activeTab.tabUrl != nil
+        } else {
+            return self.articleListView?.selectedArticle != nil
+        }
+    }
+
+    private var shareableItems: [NSPasteboardWriting] {
+        var items = [URL]()
+        if let activeTab = browser.activeTab, let url = activeTab.tabUrl {
+            items.append(url)
+        } else {
+            if let articles = articleListView?.markedArticleRange as? [Article] {
+                let links = articles.compactMap { $0.link }
+                let urls = links.compactMap { URL(string: $0) }
+                items = urls
+            }
+        }
+        return items as [NSURL]
+    }
+
+    private func toolbarItem(
+        forSharingService service: NSSharingService,
+        identifier: NSToolbarItem.Identifier
+    ) -> NSToolbarItem {
+        let item = SharingServiceToolbarItem(itemIdentifier: identifier, sharingService: service)
+        if #available(macOS 10.15, *) {
+            item.isBordered = true
+        }
+        item.action = #selector(performSharingService(_:))
+        return item
+    }
+
+    @IBAction private func invokeSharingServicePicker(_ sender: Any) {
+        // The sender is either the menu item in the main menu or the menu-item
+        // representation of the toolbar item in text-only mode.
+        if sender is NSMenuItem, let window, let contentView = window.contentView {
+            let picker = NSSharingServicePicker(items: shareableItems)
+            picker.delegate = self
+            // The menu item does not have a view to which the picker could be
+            // attached. The window's content view is used instead. The picker
+            // should attach to the top middle point of the content view.
+            let layoutRect = window.contentLayoutRect
+            // Subtract 1 point from the coordinates and make the rect 1 point in
+            // size, so that it fits within the coordinates of the view.
+            let xCoordinate = layoutRect.midX - 1
+            let yCoordinate = layoutRect.maxY - 1
+            let topEdgeRect = NSRect(x: xCoordinate, y: yCoordinate, width: 1, height: 1)
+            picker.show(relativeTo: topEdgeRect, of: contentView, preferredEdge: .minY)
+        }
+
+        // The sender is a button if the user clicked on the toolbar item.
+        if let button = sender as? NSButton {
+            let picker = NSSharingServicePicker(items: shareableItems)
+            picker.delegate = self
+            picker.show(relativeTo: .zero, of: button, preferredEdge: .minY)
+        }
+    }
+
+    @IBAction private func performSharingService(_ sender: Any) {
+        if (sender as? SharingServiceMenuItem)?.name == "emailLink" {
+            let sharingService = NSSharingService(named: .composeEmail)
+            sharingService?.perform(withItems: shareableItems)
+        }
+
+        if (sender as? SharingServiceMenuItem)?.name == "safariReadingList" {
+            let sharingService = NSSharingService(named: .addToSafariReadingList)
+            sharingService?.perform(withItems: shareableItems)
+        }
+
+        if let sharingService = (sender as? SharingServiceToolbarItem)?.service {
+            sharingService.perform(withItems: shareableItems)
+        }
+    }
+
     // MARK: Observation
 
     private var observationTokens: [NSKeyValueObservation] = []
@@ -190,18 +268,31 @@ extension MainWindowController: NSMenuItemValidation {
         case #selector(changeFiltering(_:)):
             menuItem.state = menuItem.tag == Preferences.standard.filterMode ? .on : .off
             return browser.activeTab == nil
+        case #selector(performSharingService(_:)), #selector(invokeSharingServicePicker(_:)):
+            return hasShareableItems
         case #selector(toggleStatusBar(_:)):
             if statusBar.isDisclosed {
                 menuItem.title = NSLocalizedString("Hide Status Bar", comment: "Title of a menu item")
             } else {
                 menuItem.title = NSLocalizedString("Show Status Bar", comment: "Title of a menu item")
             }
+            return true
         default:
             return responds(to: menuItem.action)
         }
+    }
 
-        // At this point, assume that the menu item is enabled.
-        return true
+}
+
+extension MainWindowController: NSToolbarItemValidation {
+
+    func validateToolbarItem(_ item: NSToolbarItem) -> Bool {
+        switch item.action {
+        case #selector(invokeSharingServicePicker(_:)), #selector(performSharingService(_:)):
+            return hasShareableItems
+        default:
+            return responds(to: item.action)
+        }
     }
 
 }
@@ -249,7 +340,7 @@ extension MainWindowController: NSToolbarDelegate {
     }
 
     func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
-        if itemIdentifier == NSToolbarItem.Identifier("SearchItem") {
+        if itemIdentifier == .search {
             let item: NSToolbarItem
             if #available(macOS 11, *) {
                 item = NSSearchToolbarItem(itemIdentifier: itemIdentifier)
@@ -275,25 +366,60 @@ extension MainWindowController: NSToolbarDelegate {
             return item
         }
 
+        if itemIdentifier == .email {
+            guard let service = NSSharingService(named: .composeEmail) else {
+                return nil
+            }
+            let item = toolbarItem(forSharingService: service, identifier: .email)
+            item.label = NSLocalizedString("Email Link", comment: "Toolbar item label")
+            item.paletteLabel = NSLocalizedString("Email Link", comment: "Toolbar item palette label")
+            item.toolTip = NSLocalizedString(
+                "Email a link to the current article or website",
+                comment: "Toolbar item tooltip")
+            if #available(macOS 11, *) {
+                item.image = NSImage(systemSymbolName: "envelope", accessibilityDescription: nil)
+            } else {
+                item.image = NSImage(named: "MailTemplate")
+            }
+            return item
+        }
+
+        if itemIdentifier == .safariReadingList {
+            guard let service = NSSharingService(named: .addToSafariReadingList) else {
+                return nil
+            }
+            let item = toolbarItem(forSharingService: service, identifier: .safariReadingList)
+            item.label = NSLocalizedString("Safari Reading List", comment: "Toolbar item label")
+            item.paletteLabel = NSLocalizedString("Add to Safari Reading List", comment: "Toolbar item palette label")
+            if #available(macOS 11, *) {
+                item.image = NSImage(systemSymbolName: "eyeglasses", accessibilityDescription: nil)
+            } else {
+                item.image = service.image
+            }
+            return item
+        }
+
         return pluginManager?.toolbarItem(forIdentifier: itemIdentifier.rawValue)
     }
 
     func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-        var identifiers = [
-            NSToolbarItem.Identifier("Subscribe"),
-            NSToolbarItem.Identifier("PreviousButton"),
-            NSToolbarItem.Identifier("NextButton"),
-            NSToolbarItem.Identifier("SkipFolder"),
-            NSToolbarItem.Identifier("MarkAllItemsAsRead"),
-            NSToolbarItem.Identifier("Refresh"),
-            NSToolbarItem.Identifier("Filter"),
-            NSToolbarItem.Identifier("MailLink"),
-            NSToolbarItem.Identifier("DeleteArticle"),
-            NSToolbarItem.Identifier("EmptyTrash"),
-            NSToolbarItem.Identifier("GetInfo"),
-            NSToolbarItem.Identifier("Action"),
-            NSToolbarItem.Identifier("Styles"),
-            NSToolbarItem.Identifier("SearchItem")
+        var identifiers: [NSToolbarItem.Identifier] = [
+            .subscribe,
+            .previous,
+            .next,
+            .skip,
+            .markAllAsRead,
+            .refresh,
+            .filter,
+            .share,
+            .email,
+            .safariReadingList,
+            .delete,
+            .emptyTrash,
+            .getInfo,
+            .action,
+            .styles,
+            .search
         ]
 
         let pluginIdentifiers = pluginManager?.toolbarItems ?? []
@@ -307,12 +433,13 @@ extension MainWindowController: NSToolbarDelegate {
     }
 
     func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
-        var identifiers = [
-            NSToolbarItem.Identifier("Subscribe"),
-            NSToolbarItem.Identifier("SkipFolder"),
-            NSToolbarItem.Identifier("Action"),
-            NSToolbarItem.Identifier("Refresh"),
-            NSToolbarItem.Identifier("Filter")
+        var identifiers: [NSToolbarItem.Identifier] = [
+            .subscribe,
+            .skip,
+            .action,
+            .refresh,
+            .filter,
+            .share
         ]
 
         let pluginIdentifiers = pluginManager?.defaultToolbarItems() as? [String] ?? []
@@ -320,7 +447,7 @@ extension MainWindowController: NSToolbarDelegate {
             identifiers.append(NSToolbarItem.Identifier(identifier))
         }
 
-        identifiers += [.flexibleSpace, NSToolbarItem.Identifier("SearchItem")]
+        identifiers += [.flexibleSpace, .search]
 
         return identifiers
     }
@@ -331,12 +458,14 @@ extension MainWindowController: NSToolbarDelegate {
 
 extension MainWindowController: NSMenuDelegate {
 
-    // This method is presently only called for the style menu.
     func menuNeedsUpdate(_ menu: NSMenu) {
+        guard menu.identifier == .stylesMenu else {
+            return
+        }
+
         for menuItem in menu.items where menuItem.action == #selector(AppController.doSelectStyle(_:)) {
             menu.removeItem(menuItem)
         }
-
         if let styles = (Array(ArticleStyleLoader.reloadStylesMap().allKeys) as? [String])?.sorted() {
             var index = 0
             while index < styles.count {
@@ -348,6 +477,34 @@ extension MainWindowController: NSMenuDelegate {
             }
         }
     }
+
+}
+
+// MARK: - NSSharingServiceDelegate
+
+extension MainWindowController: NSSharingServiceDelegate {
+
+    func sharingService(
+        _ sharingService: NSSharingService,
+        sourceWindowForShareItems items: [Any],
+        sharingContentScope: UnsafeMutablePointer<NSSharingService.SharingContentScope>
+    ) -> NSWindow? {
+        return window
+    }
+
+}
+
+// MARK: - NSSharingServicePickerDelegate
+
+extension MainWindowController: NSSharingServicePickerDelegate {
+
+    func sharingServicePicker(
+        _ sharingServicePicker: NSSharingServicePicker,
+        delegateFor sharingService: NSSharingService
+    ) -> NSSharingServiceDelegate? {
+        return self
+    }
+
 }
 
 // MARK: - Rss subscriber
@@ -364,4 +521,33 @@ extension MainWindowController: RSSSubscriber {
         // TODO : allow user to select a folder instead of assuming current location (see #1163)
         NSApp.appController.createSubscriptionInCurrentLocation(for: urls[0])
     }
+}
+
+// MARK: - Constants
+
+private extension NSToolbarItem.Identifier {
+
+    static let action = NSToolbarItem.Identifier("Action")
+    static let delete = NSToolbarItem.Identifier("DeleteArticle")
+    static let email = NSToolbarItem.Identifier("MailLink")
+    static let emptyTrash = NSToolbarItem.Identifier("EmptyTrash")
+    static let filter = NSToolbarItem.Identifier("Filter")
+    static let getInfo = NSToolbarItem.Identifier("GetInfo")
+    static let markAllAsRead = NSToolbarItem.Identifier("MarkAllItemsAsRead")
+    static let next = NSToolbarItem.Identifier("NextButton")
+    static let previous = NSToolbarItem.Identifier("PreviousButton")
+    static let refresh = NSToolbarItem.Identifier("Refresh")
+    static let safariReadingList = NSToolbarItem.Identifier("SafariReadingList")
+    static let search = NSToolbarItem.Identifier("SearchItem")
+    static let share = NSToolbarItem.Identifier("Share")
+    static let skip = NSToolbarItem.Identifier("SkipFolder")
+    static let styles = NSToolbarItem.Identifier("Styles")
+    static let subscribe = NSToolbarItem.Identifier("Subscribe")
+
+}
+
+private extension NSUserInterfaceItemIdentifier {
+
+    static let stylesMenu = NSUserInterfaceItemIdentifier("StylesMenu")
+
 }

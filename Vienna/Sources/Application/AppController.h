@@ -127,7 +127,6 @@
 -(IBAction)skipFolder:(id)sender;
 -(IBAction)showDownloadsWindow:(id)sender;
 -(IBAction)conditionalShowDownloadsWindow:(id)sender;
--(IBAction)mailLinkToArticlePage:(id)sender;
 -(IBAction)openWebLocation:(id)sender;
 -(IBAction)getInfo:(id)sender;
 -(IBAction)unsubscribeFeed:(id)sender;
