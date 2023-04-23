@@ -1,4 +1,4 @@
-/* No comment provided by engineer. */
+/* Fallback for feed items without a title */
 "(No title)" = "(Без заголовку)";
 
 /* No comment provided by engineer. */
@@ -144,6 +144,9 @@
 /* Notification title */
 "Download failed" = "Помилка завантаження";
 
+/* Toolbar item tooltip */
+"Email a link to the current article or website" = "Відправити посилання на поточну статтю електронною поштою";
+
 /* Title of a button on an alert */
 "Empty" = "Спорожнити";
 
@@ -164,9 +167,6 @@
 
 /* No comment provided by engineer. */
 "Error loading script '%@'" = "Помилка завантаження сценарію «%@»";
-
-/* No comment provided by engineer. */
-"Error parsing XML data in feed" = "Помилка при обробці XML-даних у стрічці";
 
 /* No comment provided by engineer. */
 "Error: Feed not found!" = "Помилка: стрічку не знайдено!";
@@ -392,12 +392,6 @@
 
 /* Title of a popup menu item */
 "Select…" = "Виділити…";
-
-/* No comment provided by engineer. */
-"Send Link" = "Надіслати посилання";
-
-/* No comment provided by engineer. */
-"Send Links" = "Надіслати посилання";
 
 /* No comment provided by engineer. */
 "Show Filter Bar" = "Показати стрічку фільтру";

@@ -25,15 +25,6 @@
 /* Class = "NSMenuItem"; title = "Force Refresh Selected Subscriptions From Open Reader"; ObjectID = "9os-ks-jzh"; */
 "9os-ks-jzh.title" = "从 Open Reader 中强制刷新选中的订阅项";
 
-/* Class = "NSToolbarItem"; label = "Send Link"; ObjectID = "10h-xf-C6T"; */
-"10h-xf-C6T.label" = "发送连接";
-
-/* Class = "NSToolbarItem"; paletteLabel = "Send Link"; ObjectID = "10h-xf-C6T"; */
-"10h-xf-C6T.paletteLabel" = "发送连接";
-
-/* Class = "NSToolbarItem"; toolTip = "Email a link to the current article or website"; ObjectID = "10h-xf-C6T"; */
-"10h-xf-C6T.toolTip" = "发送一个附带当前文章或网站的电子邮件";
-
 /* Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "676-5a-TdF"; */
 "676-5a-TdF.title" = "打开频道主页";
 

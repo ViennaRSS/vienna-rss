@@ -1,4 +1,4 @@
-/* No comment provided by engineer. */
+/* Fallback for feed items without a title */
 "(No title)" = "(제목 없음)";
 
 /* No comment provided by engineer. */
@@ -110,9 +110,6 @@
 
 /* Already subscribed title */
 "Error" = "오류";
-
-/* No comment provided by engineer. */
-"Error parsing XML data in feed" = "해당 피드의 XML 데이터 읽는 중 오류 발생";
 
 /* No comment provided by engineer. */
 "Export Completed" = "내보내기 완료";
@@ -297,12 +294,6 @@
 
 /* Title of a popup menu item */
 "Select…" = "선택…";
-
-/* No comment provided by engineer. */
-"Send Link" = "링크 보내기";
-
-/* No comment provided by engineer. */
-"Send Links" = "링크 보내기";
 
 /* Title of a popup menu item */
 "Show in Finder" = "파인더에서 보기";

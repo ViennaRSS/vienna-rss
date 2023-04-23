@@ -1,4 +1,4 @@
-/* No comment provided by engineer. */
+/* Fallback for feed items without a title */
 "(No title)" = "(Sen título)";
 
 /* No comment provided by engineer. */
@@ -150,6 +150,9 @@
 /* Notification title */
 "Download failed" = "Erro ao descargar";
 
+/* Toolbar item tooltip */
+"Email a link to the current article or website" = "Enviar ligazón ao artigo ou páxina web actual";
+
 /* Title of a button on an alert */
 "Empty" = "Baleirar";
 
@@ -170,9 +173,6 @@
 
 /* No comment provided by engineer. */
 "Error loading script '%@'" = "Erro ao cargar o script '%@'";
-
-/* No comment provided by engineer. */
-"Error parsing XML data in feed" = "Erro ao analizar os datos XML da fonte";
 
 /* No comment provided by engineer. */
 "Error retrieving RSS feed:" = "Erro recuperando subscrición";
@@ -449,12 +449,6 @@
 
 /* Title of a popup menu item */
 "Select…" = "Seleccionar…";
-
-/* No comment provided by engineer. */
-"Send Link" = "Enviar ligazón";
-
-/* No comment provided by engineer. */
-"Send Links" = "Enviar ligazóns";
 
 /* No comment provided by engineer. */
 "Show Filter Bar" = "Amosar barra de filtros";

@@ -1,4 +1,4 @@
-/* No comment provided by engineer. */
+/* Fallback for feed items without a title */
 "(No title)" = "(Geen onderwerp)";
 
 /* No comment provided by engineer. */
@@ -30,6 +30,9 @@
 
 /* No comment provided by engineer. */
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Een nieuwe Vienna-databank kan niet worden aangemaakt in \"%@\". De databank bevindt zich waarschijnlijk op een andere computer in het netwerk, wat door deze versie van Vienna niet wordt ondersteund. Kies een andere locatie op deze Mac.";
+
+/* Toolbar item palette label */
+"Add to Safari Reading List" = "Voeg toe aan Safari-leeslijst";
 
 /* No comment provided by engineer. */
 "AppleScript Error in '%@' script" = "AppleScript-fout in script '%@'";
@@ -168,6 +171,13 @@
 /* Notification title */
 "Download failed" = "Download niet gelukt";
 
+/* Toolbar item tooltip */
+"Email a link to the current article or website" = "Email een link naar huidig artikel of website";
+
+/* Toolbar item label
+   Toolbar item palette label */
+"Email Link" = "E-mail link";
+
 /* Title of a button on an alert */
 "Empty" = "Leeg";
 
@@ -190,7 +200,7 @@
 "Error loading script '%@'" = "Fout bij het laden van het script '%@'";
 
 /* No comment provided by engineer. */
-"Error parsing XML data in feed" = "Fout tijdens het verwerken van de XML van deze feed";
+"Error parsing data in feed" = "Fout tijdens het parsen van deze feed";
 
 /* No comment provided by engineer. */
 "Error retrieving RSS feed:" = "Fout bij het ophalen van RSS-feed:";
@@ -469,6 +479,9 @@
 /* A formatted URL string with the javascript: URL scheme. */
 "Run script “%@”" = "Voer script '%@' uit";
 
+/* Toolbar item label */
+"Safari Reading List" = "Safari-leeslijst";
+
 /* Placeholder title of a search field */
 "Search all articles" = "Zoek naar artikelen";
 
@@ -497,12 +510,6 @@
 
 /* A formatted URL string with the mailto: URL scheme. */
 "Send email to %@ with subject “%@”" = "Stuur e-mail naar %1$@ met als onderwerp '%2$@'";
-
-/* No comment provided by engineer. */
-"Send Link" = "Verstuur link";
-
-/* No comment provided by engineer. */
-"Send Links" = "Verstuur links";
 
 /* No comment provided by engineer. */
 "Show Filter Bar" = "Toon filterbalk";

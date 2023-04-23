@@ -1,4 +1,4 @@
-/* No comment provided by engineer. */
+/* Fallback for feed items without a title */
 "(No title)" = "(Sem título)";
 
 /* No comment provided by engineer. */
@@ -168,6 +168,9 @@
 /* Notification title */
 "Download failed" = "Descarga falhou";
 
+/* Toolbar item tooltip */
+"Email a link to the current article or website" = "Enviar ligação deste artigo ou página por correio";
+
 /* Title of a button on an alert */
 "Empty" = "Esvaziar";
 
@@ -188,9 +191,6 @@
 
 /* No comment provided by engineer. */
 "Error loading script '%@'" = "Erro ao ler o script %@";
-
-/* No comment provided by engineer. */
-"Error parsing XML data in feed" = "Erro na análise de dados XML da fonte";
 
 /* No comment provided by engineer. */
 "Error retrieving RSS feed:" = "Erro ao obter o fluxo de RSS:";
@@ -497,12 +497,6 @@
 
 /* A formatted URL string with the mailto: URL scheme. */
 "Send email to %@ with subject “%@”" = "Enviar correio electrónico para %1$@ com o assunto “%2$@”";
-
-/* No comment provided by engineer. */
-"Send Link" = "Enviar hiperligação";
-
-/* No comment provided by engineer. */
-"Send Links" = "Enviar hiperligações";
 
 /* No comment provided by engineer. */
 "Show Filter Bar" = "Mostrar a barra de filtragem";

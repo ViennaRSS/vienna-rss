@@ -238,7 +238,7 @@
 /* Class = "NSMenuItem"; title = "Open Article Page in External Browser"; ObjectID = "1067"; */
 "1067.title" = "Öffne Artikelseite im externen Browser";
 
-/* Class = "NSMenuItem"; title = "Send Link by Email"; ObjectID = "1073"; */
+/* Class = "NSMenuItem"; title = "Email Link"; ObjectID = "1073"; */
 "1073.title" = "Link per E-Mail senden";
 
 /* Class = "NSMenuItem"; title = "Bigger Text"; ObjectID = "1084"; */
@@ -441,6 +441,9 @@
 
 /* Class = "NSMenuItem"; title = "Smart Dashes"; ObjectID = "RtQ-eP-bfk"; */
 "RtQ-eP-bfk.title" = "Intelligente Bindestriche";
+
+/* Class = "NSMenuItem"; title = "Share…"; ObjectID = "SSr-Ho-wep"; */
+"SSr-Ho-wep.title" = "Teilen …";
 
 /* Class = "NSMenuItem"; title = "All Articles"; ObjectID = "t1E-6n-jtA"; */
 "t1E-6n-jtA.title" = "Alle Artikel";

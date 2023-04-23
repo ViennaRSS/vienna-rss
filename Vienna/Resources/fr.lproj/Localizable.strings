@@ -1,4 +1,4 @@
-/* No comment provided by engineer. */
+/* Fallback for feed items without a title */
 "(No title)" = "(pas de sujet)";
 
 /* No comment provided by engineer. */
@@ -30,6 +30,9 @@
 
 /* No comment provided by engineer. */
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Une nouvelle base de données Vienna ne peut être créée dans '%@' car ce dossier est probablement situé sur un réseau partagé, et cette version de Vienna ne gère pas les bases de données distantes. S'il vous plait, choisissez un dossier présent localement sur votre machine.";
+
+/* Toolbar item palette label */
+"Add to Safari Reading List" = "Ajouter à la liste de lecture de Safari";
 
 /* No comment provided by engineer. */
 "AppleScript Error in '%@' script" = "Erreur AppleScript dans le script \"%@\"";
@@ -168,6 +171,13 @@
 /* Notification title */
 "Download failed" = "Téléchargement non réussi";
 
+/* Toolbar item tooltip */
+"Email a link to the current article or website" = "Envoyer par e-mail le lien de l'article ou site actuel";
+
+/* Toolbar item label
+   Toolbar item palette label */
+"Email Link" = "Envoyer le lien";
+
 /* Title of a button on an alert */
 "Empty" = "Vider";
 
@@ -190,7 +200,7 @@
 "Error loading script '%@'" = "Erreur de chargement du script \"%@\"";
 
 /* No comment provided by engineer. */
-"Error parsing XML data in feed" = "Erreur de traitement des données XML dans le flux";
+"Error parsing data in feed" = "Erreur de traitement des données dans le flux";
 
 /* No comment provided by engineer. */
 "Error retrieving RSS feed:" = "Erreur de récupération du flux RSS :";
@@ -469,6 +479,9 @@
 /* A formatted URL string with the javascript: URL scheme. */
 "Run script “%@”" = "Lancer le script « %@ »";
 
+/* Toolbar item label */
+"Safari Reading List" = "Liste de lecture de Safari";
+
 /* Placeholder title of a search field */
 "Search all articles" = "Chercher dans les articles";
 
@@ -497,12 +510,6 @@
 
 /* A formatted URL string with the mailto: URL scheme. */
 "Send email to %@ with subject “%@”" = "Envoyer à %1$@ un e-mail dont l’objet est « %2$@ »";
-
-/* No comment provided by engineer. */
-"Send Link" = "Envoyer le lien";
-
-/* No comment provided by engineer. */
-"Send Links" = "Envoyer les liens";
 
 /* No comment provided by engineer. */
 "Show Filter Bar" = "Afficher la barre de filtre";

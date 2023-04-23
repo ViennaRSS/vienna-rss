@@ -28,15 +28,6 @@
 /* Class = "NSMenuItem"; title = "Force Refresh Selected Subscriptions From Open Reader"; ObjectID = "9os-ks-jzh"; */
 "9os-ks-jzh.title" = "Erzwinge das Aktualisieren der ausgewählten Abonnements von Open Reader";
 
-/* Class = "NSToolbarItem"; label = "Send Link"; ObjectID = "10h-xf-C6T"; */
-"10h-xf-C6T.label" = "Link senden";
-
-/* Class = "NSToolbarItem"; paletteLabel = "Send Link"; ObjectID = "10h-xf-C6T"; */
-"10h-xf-C6T.paletteLabel" = "Link senden";
-
-/* Class = "NSToolbarItem"; toolTip = "Email a link to the current article or website"; ObjectID = "10h-xf-C6T"; */
-"10h-xf-C6T.toolTip" = "Link zum ausgewählten Artikel oder zur aktuellen Website per E‑Mail versenden";
-
 /* Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "676-5a-TdF"; */
 "676-5a-TdF.title" = "Öffne Webseite des Abonnements";
 
@@ -258,6 +249,12 @@
 
 /* Class = "NSMenuItem"; title = "Last 48 Hours"; ObjectID = "yvh-qU-EAm"; */
 "yvh-qU-EAm.title" = "Letzten 48 Stunden";
+
+/* Class = "NSToolbarItem"; label = "Share"; ObjectID = "YVR-Ym-Do7"; */
+"YVR-Ym-Do7.label" = "Teilen";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Share"; ObjectID = "YVR-Ym-Do7"; */
+"YVR-Ym-Do7.paletteLabel" = "Teilen";
 
 /* Class = "NSImageView"; ibShadowedToolTip = "An error occurred when this feed was last refreshed"; ObjectID = "Zar-1U-8CD"; */
 "Zar-1U-8CD.ibShadowedToolTip" = "Bei der letzten Aktualisierung dieses Abonnements ist ein Fehler aufgetreten";

@@ -1,4 +1,4 @@
-/* No comment provided by engineer. */
+/* Fallback for feed items without a title */
 "(No title)" = "(无标题)";
 
 /* No comment provided by engineer. */
@@ -153,6 +153,9 @@
 /* Notification title */
 "Download failed" = "下载失败";
 
+/* Toolbar item tooltip */
+"Email a link to the current article or website" = "发送一个附带当前文章或网站的电子邮件";
+
 /* Title of a button on an alert */
 "Empty" = "清空";
 
@@ -173,9 +176,6 @@
 
 /* No comment provided by engineer. */
 "Error loading script '%@'" = "装入脚本 %@ 时出错";
-
-/* No comment provided by engineer. */
-"Error parsing XML data in feed" = "解析条目中 XML 数据时出现错误";
 
 /* No comment provided by engineer. */
 "Error retrieving RSS feed:" = "获取 RSS 图标错误：";
@@ -422,12 +422,6 @@
 
 /* Title of a popup menu item */
 "Select…" = "选择…";
-
-/* No comment provided by engineer. */
-"Send Link" = "发送连接";
-
-/* No comment provided by engineer. */
-"Send Links" = "发送多个连接";
 
 /* No comment provided by engineer. */
 "Show Filter Bar" = "显示过滤栏";

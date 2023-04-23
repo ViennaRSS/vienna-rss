@@ -1,0 +1,8 @@
+"%[Author,Folder,Subject,Text]@ %[is,is not]@ %@" = "%1$[Auteur,Feed of map,Onderwerp,Inhoud]@ %2$[is,is niet]@ %3$@";
+"%[Deleted,Flagged,HasEnclosure,Read]@ is %[No,Yes]@" = "%1$[Is verwijderd,Is gemarkeerd,Bevat bijlage,Is gelezen]@ %2$[Nee,Ja]@";
+"%[Author,Subject,Text]@ %[contains,does not contain]@ %@" = "%1$[Auteur,Onderwerp,Inhoud]@ %2$[bevat,bevat niet]@ %3$@";
+"%[Date]@ %[less than ago,more than ago]@ %[days,hours,minutes,months,weeks,years]@ %@" = "%1$[Datum]@ %2$[is in de afgelopen,is niet in de afgelopen]@ %4$@ %3$[dagen,uur,minuten,maanden,weken,jaar]@";
+"%[Date]@ %[is,is greater than or equal to,is less than,is less than or equal to]@ %[yesterday]@" = "%1$[Datum]@ %2$[is na,is na of is,is voor,is voor of is]@ %3$[gisteren]@";
+"%[Date]@ %[is,is less than,is less than or equal to]@ %[today]@" = "%1$[Datum]@ %2$[is na,is voor,is voor of is]@ %3$[vandaag]@";
+"%[Date]@ %[is,is greater than,is greater than or equal to,is less than,is less than or equal to]@ %[last week]@" = "%1$[Datum]@ %2$[is,is na,is na of is,is voor,is voor of is]@ %3$[vorige week]@";
+"%[All,Any,None]@ of the following are true" = "Artikel voldoet aan %1$[alle,een of meer,geen]@ van de volgende voorwaarden";
