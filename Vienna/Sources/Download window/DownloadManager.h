@@ -19,11 +19,10 @@
 //
 
 @import Cocoa;
-@import WebKit;
 
 @class DownloadItem;
 
-@interface DownloadManager : NSObject <NSURLSessionDownloadDelegate, WebDownloadDelegate>
+@interface DownloadManager : NSObject <NSURLSessionDownloadDelegate>
 
 @property (class, readonly, nonatomic) DownloadManager *sharedInstance NS_SWIFT_NAME(shared);
 
