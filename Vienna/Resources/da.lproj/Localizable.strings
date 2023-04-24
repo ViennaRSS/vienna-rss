@@ -483,6 +483,9 @@
 /* Placeholder title of a search field */
 "Search current web page" = "Søg nuværende hjemmeside";
 
+/* Placeholder title of a search field */
+"Search for folders" = "Søg efter mapper";
+
 /* No comment provided by engineer. */
 "Search Results" = "Søg i resultater";
 

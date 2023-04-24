@@ -1083,6 +1083,7 @@ static void *ObserverContext = &ObserverContext;
 
     if (tf.length == 0) {
         self.outlineView.filterPredicate = nil;
+        [self.outlineView showResetButton:NO];
         return;
     }
 
@@ -1093,6 +1094,7 @@ static void *ObserverContext = &ObserverContext;
         return;
     }
 
+    [self.outlineView showResetButton:YES];
     self.outlineView.filterPredicate = predicate;
 }
 

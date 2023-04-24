@@ -417,6 +417,9 @@
    Toolbar item tooltip */
 "Search Articles" = "搜索文章";
 
+/* Placeholder title of a search field */
+"Search for folders" = "搜索文件夹";
+
 /* No comment provided by engineer. */
 "Search Results" = "搜索结果";
 

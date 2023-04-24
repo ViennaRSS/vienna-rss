@@ -112,9 +112,6 @@
 /* Class = "NSMenuItem"; title = "Rename…"; ObjectID = "l14-tu-w7l"; */
 "l14-tu-w7l.title" = "重命名…";
 
-/* Class = "NSSearchFieldCell"; placeholderString = "Search for folders"; ObjectID = "lhy-4c-asJ"; */
-"lhy-4c-asJ.placeholderString" = "搜索文件夹";
-
 /* Class = "NSMenuItem"; title = "Rename…"; ObjectID = "lxY-yo-Hjh"; */
 "lxY-yo-Hjh.title" = "重命名…";
 

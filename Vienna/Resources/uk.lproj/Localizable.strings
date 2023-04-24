@@ -387,6 +387,9 @@
    Toolbar item tooltip */
 "Search Articles" = "Шукати статті";
 
+/* Placeholder title of a search field */
+"Search for folders" = "Знайти теки";
+
 /* No comment provided by engineer. */
 "Search Results" = "Результати пошуку";
 

@@ -441,6 +441,9 @@
 /* Placeholder title of a search field */
 "Search current web page" = "Ieškoti šiame puslapyje";
 
+/* Placeholder title of a search field */
+"Search for folders" = "Ieškoti aplankų";
+
 /* No comment provided by engineer. */
 "Search Results" = "Paieškos rezultatai";
 

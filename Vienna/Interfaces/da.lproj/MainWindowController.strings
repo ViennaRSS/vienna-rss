@@ -145,9 +145,6 @@
 /* Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "lDl-nn-yvL"; */
 "lDl-nn-yvL.title" = "Ulæste artikler";
 
-/* Class = "NSSearchFieldCell"; placeholderString = "Search for folders"; ObjectID = "lhy-4c-asJ"; */
-"lhy-4c-asJ.placeholderString" = "Søg efter mapper";
-
 /* Class = "NSMenuItem"; title = "Rename…"; ObjectID = "lxY-yo-Hjh"; */
 "lxY-yo-Hjh.title" = "Omdøb…";
 

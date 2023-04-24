@@ -325,7 +325,6 @@
 	// The menu title doesn't appear anywhere so we don't localise it. The titles of each
 	// item is localised though.	
 	((NSSearchFieldCell *)self.toolbarSearchField.cell).searchMenuTemplate = self.searchFieldMenu;
-	((NSSearchFieldCell *)self.filterSearchField.cell).searchMenuTemplate = self.searchFieldMenu;
 	
 	// Set the placeholder string for the global search field
 	SearchMethod * currentSearchMethod = [Preferences standardPreferences].searchMethod;
@@ -630,9 +629,14 @@
 
 	[cellMenu addItem: [NSMenuItem separatorItem]];
 
+    NSArray *builtInSearchMethods = @[
+        SearchMethod.allArticlesSearchMethod,
+        SearchMethod.currentWebPageSearchMethod,
+        SearchMethod.searchForFoldersMethod
+    ];
+
 	// Add all built-in search methods to the menu. 
-	for (searchMethod in [SearchMethod builtInSearchMethods])
-	{
+	for (searchMethod in builtInSearchMethods) {
 		friendlyName = searchMethod.displayName;
 		item = [[NSMenuItem alloc] initWithTitle:friendlyName
                                           action:@selector(setSearchMethod:)
@@ -643,7 +647,11 @@
 		if ( [friendlyName isEqualToString:[Preferences standardPreferences].searchMethod.displayName] )
 			item.state = NSControlStateValueOn;
 		
-		[cellMenu addItem:item];
+        if ([searchMethod isEqualTo:SearchMethod.searchForFoldersMethod]) {
+            [cellMenu addItem:[NSMenuItem separatorItem]];
+        }
+
+        [cellMenu addItem:item];
 	}
 	
 	// Add all available plugged-in search methods to the menu.
@@ -2118,9 +2126,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	switch (action)
 	{
 		case NSFindPanelActionSetFindString:
-			self.toolbarSearchField.stringValue = APP.currentTextSelection;
-			[searchPanel setSearchString:APP.currentTextSelection];
-            [self setFocusToSearchField:self];
+			self.searchString = APP.currentTextSelection;
 			break;
 			
 		case NSFindPanelActionShowFindPanel:
@@ -3011,6 +3017,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(void)setSearchString:(NSString *)newSearchString
 {
 	searchString = [newSearchString copy];
+	self.toolbarSearchField.stringValue = searchString;
 }
 
 /* searchString
@@ -3047,10 +3054,19 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     [articleListView performFindPanelAction:NSFindPanelActionNext];
 }
 
-- (IBAction)searchUsingTreeFilter:(NSSearchField* )field
+- (IBAction)searchUsingTreeFilter:(id)sender
 {
-    NSString* f = field.stringValue;
-    [self.foldersTree setSearch:f];
+    if ([sender isKindOfClass:[NSSearchField class]]) {
+        NSString *searchString = ((NSSearchField *)sender).stringValue;
+        [self.foldersTree setSearch:searchString];
+    } else if ([sender isKindOfClass:[SearchMethod class]]) {
+        [self.foldersTree setSearch:self.searchString];
+    } else if ([sender isKindOfClass:[NSButton class]]) {
+        // Send an empty string to cancel the search.
+        [self.foldersTree setSearch:[NSString string]];
+        self.mainWindowController.toolbarSearchField.stringValue = @"";
+    }
+    [self.mainWindow makeFirstResponder:self.foldersTree.mainView];
 }
 
 /* searchUsingToolbarTextField
@@ -3077,7 +3093,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)performAllArticlesSearch
 {
-	[self searchArticlesWithString:self.toolbarSearchField.stringValue];
+	[self searchArticlesWithString:self.searchString];
 }
 
 /* performAllArticlesSearch
@@ -3095,7 +3111,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
 	id<Tab> activeBrowserTab = self.browser.activeTab;
 	if (activeBrowserTab) {
-		[self setFocusToSearchField:self];
         [activeBrowserTab searchFor:self.searchString
                              action:NSFindPanelActionSetFindString];
 	}
@@ -3116,6 +3131,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         } else {
 			[self.articleController reloadArrayOfArticles];
         }
+        [self.browser switchToPrimaryTab];
 	}
 }
 

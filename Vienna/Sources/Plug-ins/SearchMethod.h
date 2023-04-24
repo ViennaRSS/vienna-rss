@@ -27,15 +27,14 @@
 /// At the moment, however, we only ever do a normal web search.
 - (instancetype)initWithDictionary:(NSDictionary *)dict;
 
-/// Class method that returns the standard SearchMethod "Search all Articles".
-+ (SearchMethod *)allArticlesSearchMethod;
+/// The standard SearchMethod "Search all Articles".
+@property (class, readonly, nonatomic) SearchMethod *allArticlesSearchMethod;
 
-/// Class method that Returns a SearchMethod that only works when the active
-/// view is a web pane.
-+ (SearchMethod *)currentWebPageSearchMethod;
+/// SearchMethod that only works when the active view is a web pane.
+@property (class, readonly, nonatomic) SearchMethod *currentWebPageSearchMethod;
 
-/// Class method that returns all built-in SearchMethods.
-+ (NSArray *)builtInSearchMethods;
+/// The standard SearchMethod "Search For Folders".
+@property (class, readonly, nonatomic) SearchMethod *searchForFoldersMethod;
 
 @property (copy, nonatomic) NSString *displayName;
 @property (copy, nonatomic) NSString *queryString;

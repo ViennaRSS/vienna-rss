@@ -429,6 +429,9 @@
    Toolbar item tooltip */
 "Search Articles" = "Sök i artiklar";
 
+/* Placeholder title of a search field */
+"Search for folders" = "Sök efter mappar";
+
 /* No comment provided by engineer. */
 "Search Results" = "Sökresultat";
 

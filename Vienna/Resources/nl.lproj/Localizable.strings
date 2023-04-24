@@ -483,6 +483,9 @@
 /* Placeholder title of a search field */
 "Search current web page" = "Doorzoek huidige webpagina";
 
+/* Placeholder title of a search field */
+"Search for folders" = "Zoek naar mappen";
+
 /* No comment provided by engineer. */
 "Search Results" = "Zoekresultaten";
 

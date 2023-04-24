@@ -1411,7 +1411,6 @@
 		F6A7EA581F1CE60100BD4450 /* Folder list */ = {
 			isa = PBXGroup;
 			children = (
-				F628DFE21ED2698A00FACFD3 /* FilterView.swift */,
 				4350286B165DE9DF0018EDB7 /* FoldersTree.h */,
 				4350286C165DE9DF0018EDB7 /* FoldersTree.m */,
 				793C95311C42A0DD00984D4E /* FoldersFilterable.h */,
@@ -1449,6 +1448,7 @@
 				4350287C165DE9DF0018EDB7 /* ProgressTextCell.m */,
 				4350288D165DE9DF0018EDB7 /* UnifiedDisplayView.h */,
 				4350288E165DE9DF0018EDB7 /* UnifiedDisplayView.m */,
+				F628DFE21ED2698A00FACFD3 /* FilterView.swift */,
 			);
 			name = "Article list";
 			sourceTree = "<group>";

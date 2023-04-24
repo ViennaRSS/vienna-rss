@@ -144,7 +144,7 @@
 -(IBAction)keepFoldersArranged:(id)sender;
 -(IBAction)exportSubscriptions:(id)sender;
 -(IBAction)importSubscriptions:(id)sender;
-
+- (IBAction)searchUsingTreeFilter:(id)sender;
 
 // Public functions
 -(NSArray *)contextMenuItemsForElement:(NSDictionary *)element defaultMenuItems:(NSArray *)defaultMenuItems;

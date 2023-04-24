@@ -22,6 +22,7 @@
 #import "BrowserPane.h"
 #import "AppController.h"
 #import "Vienna-Swift.h"
+#import "SearchMethod.h"
 
 @implementation SearchPanel
 
@@ -37,7 +38,8 @@
 		self.topObjects = objects;
 		((NSSearchFieldCell *)searchField.cell).searchMenuTemplate = APPCONTROLLER.searchFieldMenu;
 	}
-	[searchLabel setStringValue:NSLocalizedString(@"Search all articles or the current web page", nil)];
+	[searchLabel setStringValue:NSLocalizedString(@"Search", @"Search panel title")];
+	searchField.stringValue = APPCONTROLLER.searchString ? APPCONTROLLER.searchString : @"";
     [window beginSheet:searchPanelWindow completionHandler:nil];
 }
 
@@ -50,23 +52,17 @@
 }
 
 /* searchStringChanged
- * This function is called when the user hits the Enter or Cancel key in the search
- * field. (Cancel blanks the searchField string value so searchArticlesWithString ends
- * up doing nothing.)
+ * This function is called when the user hits the Enter or Cancel key in the search field.
+ * (Cancel blanks the searchField string value so search ends up doing nothing.)
  */
 -(IBAction)searchStringChanged:(id)sender
 {
 	APPCONTROLLER.searchString = searchField.stringValue;
-
-    id<Tab> activeBrowserTab = APPCONTROLLER.browser.activeTab;
-    if (activeBrowserTab) {
-        [activeBrowserTab searchFor:APPCONTROLLER.searchString
-                             action:NSFindPanelActionSetFindString];
-        [APPCONTROLLER setFocusToSearchField:self];
-    } else {
-        [APPCONTROLLER searchArticlesWithString:searchField.stringValue];
-    }
-
+    SearchMethod * currentSearchMethod = [Preferences standardPreferences].searchMethod;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+    [APPCONTROLLER performSelector:currentSearchMethod.handler withObject:currentSearchMethod];
+#pragma clang diagnostic pop
 	[searchPanelWindow.sheetParent endSheet:searchPanelWindow];
 	[searchPanelWindow orderOut:self];
 }

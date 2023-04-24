@@ -483,6 +483,9 @@
 /* Placeholder title of a search field */
 "Search current web page" = "Webseite durchsuchen";
 
+/* Placeholder title of a search field */
+"Search for folders" = "Suche nach Ordnern";
+
 /* No comment provided by engineer. */
 "Search Results" = "Suchergebnisse";
 

@@ -145,9 +145,6 @@
 /* Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "lDl-nn-yvL"; */
 "lDl-nn-yvL.title" = "Непрочитанные статьи";
 
-/* Class = "NSSearchFieldCell"; placeholderString = "Search for folders"; ObjectID = "lhy-4c-asJ"; */
-"lhy-4c-asJ.placeholderString" = "Поиск по подпискам";
-
 /* Class = "NSMenuItem"; title = "Rename…"; ObjectID = "lxY-yo-Hjh"; */
 "lxY-yo-Hjh.title" = "Переименовать…";
 
