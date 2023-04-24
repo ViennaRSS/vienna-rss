@@ -10,6 +10,9 @@
 /* Class = "NSToolbarItem"; toolTip = "Delete all articles in the trash"; ObjectID = "4c1-NR-ofo"; */
 "4c1-NR-ofo.toolTip" = "Elimina tutti gli articoli nel cestino";
 
+/* Class = "NSMenuItem"; title = "Last Refresh"; ObjectID = "5RA-iE-L8a"; */
+"5RA-iE-L8a.title" = "Ultimo aggiornamento";
+
 /* Class = "NSToolbarItem"; label = "Get Info"; ObjectID = "7iy-IN-8oG"; */
 "7iy-IN-8oG.label" = "Ottieni Info";
 
@@ -24,15 +27,6 @@
 
 /* Class = "NSMenuItem"; title = "Force Refresh Selected Subscriptions From Open Reader"; ObjectID = "9os-ks-jzh"; */
 "9os-ks-jzh.title" = "Forza l'aggiornamento degli abbonamenti selezionati da Open Reader";
-
-/* Class = "NSToolbarItem"; label = "Send Link"; ObjectID = "10h-xf-C6T"; */
-"10h-xf-C6T.label" = "Invia Collegamento";
-
-/* Class = "NSToolbarItem"; paletteLabel = "Send Link"; ObjectID = "10h-xf-C6T"; */
-"10h-xf-C6T.paletteLabel" = "Invia Collegamento";
-
-/* Class = "NSToolbarItem"; toolTip = "Email a link to the current article or website"; ObjectID = "10h-xf-C6T"; */
-"10h-xf-C6T.toolTip" = "Invia via e-mail un collegamento all'articolo o sito web selezionato";
 
 /* Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "676-5a-TdF"; */
 "676-5a-TdF.title" = "Vai alla Pagina Iniziale dell'Iscrizione";
@@ -78,6 +72,9 @@
 
 /* Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "dId-uc-qfG"; */
 "dId-uc-qfG.title" = "Articoli non letti";
+
+/* Class = "NSMenuItem"; title = "All Articles"; ObjectID = "FDh-ie-FnZ"; */
+"FDh-ie-FnZ.title" = "Tutti gli articoli";
 
 /* Class = "NSToolbarItem"; label = "Next Unread"; ObjectID = "fpY-CJ-hKU"; */
 "fpY-CJ-hKU.label" = "Prossimo Non Letto";
@@ -159,6 +156,9 @@
 
 /* Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "sDP-Ni-g3a"; */
 "sDP-Ni-g3a.title" = "Articoli Non Letti";
+
+/* Class = "NSMenuItem"; title = "Today"; ObjectID = "Sne-Nd-bEA"; */
+"Sne-Nd-bEA.title" = "Oggi";
 
 /* Class = "NSToolbarItem"; label = "Skip Folder"; ObjectID = "SoG-b2-O1S"; */
 "SoG-b2-O1S.label" = "Ignora Cartella";

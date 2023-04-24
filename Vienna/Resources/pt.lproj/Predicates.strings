@@ -1,0 +1,9 @@
+"%[Date]@ %[is less than,is less than or equal to]@ %[today]@" = "%1$[Date]@ %2$[é anterior a,é anterior ou igual a]@ %3$[today]@";
+"%[Date]@ %[is greater than,is greater than or equal to,is less than,is less than or equal to]@ %[last week]@" = "%1$[Date]@ %2$[é posterior a,é posterior ou igual a,é anterior a,é anterior ou igual a]@ %3$[last week]@";
+"%[Date]@ %[is]@ %[last week,today,yesterday]@" = "%1$[Date]@ %2$[é igual a]@ %3$[semana passada,hoje,ontem]@";
+"%[Date]@ %[is greater than or equal to,is less than,is less than or equal to]@ %[yesterday]@" = "%1$[Date]@ %2$[é posterior ou igual a,é anterior a,é anterior ou igual a]@ %3$[yesterday]@";
+"%[Author,Folder,Subject,Text]@ %[is,is not]@ %@" = "%1$[Author,Pasta,Assunto,Conteúdo]@ %2$[é,não é]@ %3$@";
+"%[Author,Subject,Text]@ %[contains,does not contain]@ %@" = "%1$[Author,Assunto,Conteúdo]@ %2$[contém,não contém]@ %3$@";
+"%[Deleted,Flagged,HasEnclosure,Read]@ is %[No,Yes]@" = "%1$[Está apagado,Está assinalado,Tem invólucro,Lido]@ %2$[Não,Sim]@";
+"%[All]@ of the following are true" = "Artigo corresponde a %1$[todas]@ as seguintes condições";
+"%[Any,None]@ of the following are true" = "Artigo corresponde a %1$[quaisquer,nenhuma]@ das seguintes condições";

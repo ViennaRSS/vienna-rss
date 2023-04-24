@@ -1,4 +1,4 @@
-/* No comment provided by engineer. */
+/* Fallback for feed items without a title */
 "(No title)" = "(Titulurik ez)";
 
 /* No comment provided by engineer. */
@@ -125,9 +125,6 @@
 
 /* Already subscribed title */
 "Error" = "Errorea";
-
-/* No comment provided by engineer. */
-"Error parsing XML data in feed" = "Jarioaren XML data aztertzen errorea agertu da";
 
 /* No comment provided by engineer. */
 "Export Completed" = "Esportazioa Bukatuta";
@@ -321,12 +318,6 @@
 
 /* Title of a popup menu item */
 "Select…" = "Aukeratu…";
-
-/* No comment provided by engineer. */
-"Send Link" = "Bidali Esteka";
-
-/* No comment provided by engineer. */
-"Send Links" = "Bidali Estekak";
 
 /* Title of a popup menu item */
 "Show in Finder" = "Finder-en erakutsi";

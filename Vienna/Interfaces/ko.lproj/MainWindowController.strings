@@ -16,12 +16,6 @@
 /* Class = "NSMenuItem"; title = "Flagged"; ObjectID = "8LJ-RZ-pfu"; */
 "8LJ-RZ-pfu.title" = "깃발 표시";
 
-/* Class = "NSToolbarItem"; label = "Send Link"; ObjectID = "10h-xf-C6T"; */
-"10h-xf-C6T.label" = "링크 보내기";
-
-/* Class = "NSToolbarItem"; paletteLabel = "Send Link"; ObjectID = "10h-xf-C6T"; */
-"10h-xf-C6T.paletteLabel" = "링크 보내기";
-
 /* Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "676-5a-TdF"; */
 "676-5a-TdF.title" = "구독 홈페이지 열기";
 

@@ -1,4 +1,4 @@
-/* No comment provided by engineer. */
+/* Fallback for feed items without a title */
 "(No title)" = "(Nessun oggetto)";
 
 /* No comment provided by engineer. */
@@ -123,6 +123,9 @@
 /* Notification title */
 "Download failed" = "Scaricamento fallito";
 
+/* Toolbar item tooltip */
+"Email a link to the current article or website" = "Invia via e-mail un collegamento all'articolo o sito web selezionato";
+
 /* Title of a button on an alert */
 "Empty" = "Vuota";
 
@@ -137,9 +140,6 @@
 
 /* Already subscribed title */
 "Error" = "Errore";
-
-/* No comment provided by engineer. */
-"Error parsing XML data in feed" = "Errore di interpretazione dati XML nel feed";
 
 /* No comment provided by engineer. */
 "Export Completed" = "Esportazione Completata";
@@ -356,12 +356,6 @@
 
 /* Title of a popup menu item */
 "Select…" = "Seleziona…";
-
-/* No comment provided by engineer. */
-"Send Link" = "Invia Collegamento";
-
-/* No comment provided by engineer. */
-"Send Links" = "Invia Collegamenti";
 
 /* No comment provided by engineer. */
 "Show Filter Bar" = "Mostra Barra Filtro";

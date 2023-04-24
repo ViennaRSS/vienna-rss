@@ -1,4 +1,4 @@
-/* No comment provided by engineer. */
+/* Fallback for feed items without a title */
 "(No title)" = "без имени";
 
 /* No comment provided by engineer. */
@@ -188,9 +188,6 @@
 
 /* No comment provided by engineer. */
 "Error loading script '%@'" = "Ошибка загрузки скрипта '%@'";
-
-/* No comment provided by engineer. */
-"Error parsing XML data in feed" = "Ошибка парсинга XML данных канала";
 
 /* No comment provided by engineer. */
 "Error retrieving RSS feed:" = "Ошибка запроса RSS-ленты:";
@@ -500,12 +497,6 @@
 
 /* A formatted URL string with the mailto: URL scheme. */
 "Send email to %@ with subject “%@”" = "Отправить письмо на %1$@ с заголовком \"%2$@\"";
-
-/* No comment provided by engineer. */
-"Send Link" = "Отправить ссылку";
-
-/* No comment provided by engineer. */
-"Send Links" = "Отправить ссылки";
 
 /* No comment provided by engineer. */
 "Show Filter Bar" = "Показать панель фильтра";

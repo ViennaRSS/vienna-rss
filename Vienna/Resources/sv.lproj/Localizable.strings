@@ -1,4 +1,4 @@
-/* No comment provided by engineer. */
+/* Fallback for feed items without a title */
 "(No title)" = "(Inget ämne)";
 
 /* No comment provided by engineer. */
@@ -153,6 +153,13 @@
 /* Notification title */
 "Download failed" = "Nedladdning misslyckades";
 
+/* Toolbar item tooltip */
+"Email a link to the current article or website" = "Maila länken till nuvarande artikel eller hemsida";
+
+/* Toolbar item label
+   Toolbar item palette label */
+"Email Link" = "Mejla länk";
+
 /* Title of a button on an alert */
 "Empty" = "Töm";
 
@@ -173,9 +180,6 @@
 
 /* No comment provided by engineer. */
 "Error loading script '%@'" = "Fel vid inläsning av ”%@”-skriptet";
-
-/* No comment provided by engineer. */
-"Error parsing XML data in feed" = "Fel vid avläsning av XML-data i strömmen";
 
 /* No comment provided by engineer. */
 "Error retrieving RSS feed:" = "Fel vid mottagning av RSS-flöde:";
@@ -446,12 +450,6 @@
 
 /* A formatted URL string with the mailto: URL scheme. */
 "Send email to %@ with subject “%@”" = "Skicka mejl till %1$@ med ämnet ”%2$@”";
-
-/* No comment provided by engineer. */
-"Send Link" = "Skicka länk";
-
-/* No comment provided by engineer. */
-"Send Links" = "Skicka länkar";
 
 /* No comment provided by engineer. */
 "Show Filter Bar" = "Visa filterfältet";

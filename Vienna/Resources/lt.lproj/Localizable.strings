@@ -1,4 +1,4 @@
-/* No comment provided by engineer. */
+/* Fallback for feed items without a title */
 "(No title)" = "(be pavadinimo)";
 
 /* No comment provided by engineer. */
@@ -144,6 +144,9 @@
 /* Notification title */
 "Download failed" = "Atsisiųsti nepavyko";
 
+/* Toolbar item tooltip */
+"Email a link to the current article or website" = "El. paštu siųsti šio straipsnio ar svetainės nuorodą";
+
 /* Title of a button on an alert */
 "Empty" = "Tuščia";
 
@@ -164,9 +167,6 @@
 
 /* No comment provided by engineer. */
 "Error loading script '%@'" = "Klaida kraunant skriptą '%@'";
-
-/* No comment provided by engineer. */
-"Error parsing XML data in feed" = "Klaida skaitant XML duomenis iš prenumeratos";
 
 /* No comment provided by engineer. */
 "Error retrieving RSS feed:" = "Klaida bandant parsisųsti RSS prenumeratą:";
@@ -449,12 +449,6 @@
 
 /* Title of a popup menu item */
 "Select…" = "Pasirinkti…";
-
-/* No comment provided by engineer. */
-"Send Link" = "Siųsti nuorodą";
-
-/* No comment provided by engineer. */
-"Send Links" = "Siųsti nuorodas";
 
 /* No comment provided by engineer. */
 "Show Filter Bar" = "Rodyti filtro meniu juostą";

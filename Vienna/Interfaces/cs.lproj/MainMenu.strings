@@ -235,7 +235,7 @@
 /* Class = "NSMenuItem"; title = "Open Article Page in External Browser"; ObjectID = "1067"; */
 "1067.title" = "Otevřít stránku příspěvku v externím prohlížeči";
 
-/* Class = "NSMenuItem"; title = "Send Link by Email"; ObjectID = "1073"; */
+/* Class = "NSMenuItem"; title = "Email Link"; ObjectID = "1073"; */
 "1073.title" = "Poslat odkaz e-mailem";
 
 /* Class = "NSMenuItem"; title = "Bigger Text"; ObjectID = "1084"; */

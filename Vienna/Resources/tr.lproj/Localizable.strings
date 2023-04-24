@@ -1,4 +1,4 @@
-/* No comment provided by engineer. */
+/* Fallback for feed items without a title */
 "(No title)" = "(Başlık Yok)";
 
 /* No comment provided by engineer. */
@@ -123,6 +123,9 @@
 /* Notification title */
 "Download failed" = "İndirme başarısız";
 
+/* Toolbar item tooltip */
+"Email a link to the current article or website" = "Geçerli makaleye ya da websitesine bağlantı gönder";
+
 /* Title of a button on an alert */
 "Empty" = "Boş";
 
@@ -140,9 +143,6 @@
 
 /* Already subscribed title */
 "Error" = "Hata";
-
-/* No comment provided by engineer. */
-"Error parsing XML data in feed" = "Beslemedeki XML verisi aktarımında hata";
 
 /* No comment provided by engineer. */
 "Export Completed" = "Dışa çıkarma tamamlandı";
@@ -362,12 +362,6 @@
 
 /* Title of a popup menu item */
 "Select…" = "Seç…";
-
-/* No comment provided by engineer. */
-"Send Link" = "Bağlantıyı Gönder";
-
-/* No comment provided by engineer. */
-"Send Links" = "Bağlantıları Gönder";
 
 /* No comment provided by engineer. */
 "Show Filter Bar" = "Filtre Çubuğunu Göster";

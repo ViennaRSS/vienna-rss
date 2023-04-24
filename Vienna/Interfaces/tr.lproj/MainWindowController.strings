@@ -22,15 +22,6 @@
 /* Class = "NSMenuItem"; title = "Flagged"; ObjectID = "8LJ-RZ-pfu"; */
 "8LJ-RZ-pfu.title" = "Önemli";
 
-/* Class = "NSToolbarItem"; label = "Send Link"; ObjectID = "10h-xf-C6T"; */
-"10h-xf-C6T.label" = "Bağlantıyı Gönder";
-
-/* Class = "NSToolbarItem"; paletteLabel = "Send Link"; ObjectID = "10h-xf-C6T"; */
-"10h-xf-C6T.paletteLabel" = "Bağlantıyı Gönder";
-
-/* Class = "NSToolbarItem"; toolTip = "Email a link to the current article or website"; ObjectID = "10h-xf-C6T"; */
-"10h-xf-C6T.toolTip" = "Geçerli makaleye ya da websitesine bağlantı gönder";
-
 /* Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "676-5a-TdF"; */
 "676-5a-TdF.title" = "Aboneliğin Giriş Sayfasını Aç";
 

@@ -1,4 +1,4 @@
-/* No comment provided by engineer. */
+/* Fallback for feed items without a title */
 "(No title)" = "(není titul)";
 
 /* No comment provided by engineer. */
@@ -135,6 +135,9 @@
 /* Notification title */
 "Download failed" = "Kopírování selhalo";
 
+/* Toolbar item tooltip */
+"Email a link to the current article or website" = "Odešle e-mail s odkazem na stávající příspěvek nebo webové sídlo";
+
 /* Title of a button on an alert */
 "Empty" = "Smazat";
 
@@ -152,9 +155,6 @@
 
 /* Already subscribed title */
 "Error" = "Chyba";
-
-/* No comment provided by engineer. */
-"Error parsing XML data in feed" = "Chyba při zpracování dat XML ze zdroje";
 
 /* No comment provided by engineer. */
 "Export Completed" = "Export dokončen";
@@ -383,12 +383,6 @@
 
 /* Title of a popup menu item */
 "Select…" = "Vybrat…";
-
-/* No comment provided by engineer. */
-"Send Link" = "Odeslat odkaz";
-
-/* No comment provided by engineer. */
-"Send Links" = "Odeslat odkazy";
 
 /* No comment provided by engineer. */
 "Show Filter Bar" = "Zobrazit řádek filtru";

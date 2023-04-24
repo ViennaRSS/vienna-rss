@@ -28,15 +28,6 @@
 /* Class = "NSMenuItem"; title = "Force Refresh Selected Subscriptions From Open Reader"; ObjectID = "9os-ks-jzh"; */
 "9os-ks-jzh.title" = "Gennemtving opdatering af valgte abonnementer fra Open Reader";
 
-/* Class = "NSToolbarItem"; label = "Send Link"; ObjectID = "10h-xf-C6T"; */
-"10h-xf-C6T.label" = "Send henvisning";
-
-/* Class = "NSToolbarItem"; paletteLabel = "Send Link"; ObjectID = "10h-xf-C6T"; */
-"10h-xf-C6T.paletteLabel" = "Send henvisning";
-
-/* Class = "NSToolbarItem"; toolTip = "Email a link to the current article or website"; ObjectID = "10h-xf-C6T"; */
-"10h-xf-C6T.toolTip" = "Email en henvisning til den nuværende artikel eller hjemmeside";
-
 /* Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "676-5a-TdF"; */
 "676-5a-TdF.title" = "Åben abonnement-hjemmeside";
 

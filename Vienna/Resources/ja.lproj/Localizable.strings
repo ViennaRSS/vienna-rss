@@ -1,4 +1,4 @@
-/* No comment provided by engineer. */
+/* Fallback for feed items without a title */
 "(No title)" = "(No subject)";
 
 /* No comment provided by engineer. */
@@ -110,9 +110,6 @@
 
 /* Already subscribed title */
 "Error" = "エラー";
-
-/* No comment provided by engineer. */
-"Error parsing XML data in feed" = "フィードの XML データ解析にエラーがあります。";
 
 /* No comment provided by engineer. */
 "Export Completed" = "書き出し終了";
@@ -291,12 +288,6 @@
 
 /* Title of a popup menu item */
 "Select…" = "選択…";
-
-/* No comment provided by engineer. */
-"Send Link" = "リンクを送信";
-
-/* No comment provided by engineer. */
-"Send Links" = "リンクを送信";
 
 /* Title of a popup menu item */
 "Show in Finder" = "Finder に表示";

@@ -1,4 +1,4 @@
-/* No comment provided by engineer. */
+/* Fallback for feed items without a title */
 "(No title)" = "(無主旨)";
 
 /* No comment provided by engineer. */
@@ -168,6 +168,9 @@
 /* Notification title */
 "Download failed" = "下載失敗";
 
+/* Toolbar item tooltip */
+"Email a link to the current article or website" = "寄送目前文章或網站的連結";
+
 /* Title of a button on an alert */
 "Empty" = "清除";
 
@@ -188,9 +191,6 @@
 
 /* No comment provided by engineer. */
 "Error loading script '%@'" = "載入 script 時發生錯誤 %@";
-
-/* No comment provided by engineer. */
-"Error parsing XML data in feed" = "在剖析訂閱頻道的 XML 資料時發生錯誤";
 
 /* No comment provided by engineer. */
 "Error retrieving RSS feed:" = "取得 RSS 內容發生錯誤：";
@@ -500,12 +500,6 @@
 
 /* A formatted URL string with the mailto: URL scheme. */
 "Send email to %@ with subject “%@”" = "傳送電子郵件給 %1$@​，標題為 \"%2$@\"";
-
-/* No comment provided by engineer. */
-"Send Link" = "寄送連結";
-
-/* No comment provided by engineer. */
-"Send Links" = "寄送連結";
 
 /* No comment provided by engineer. */
 "Show Filter Bar" = "顯示過濾列";
