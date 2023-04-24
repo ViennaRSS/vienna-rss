@@ -117,7 +117,7 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView, WKNavigationDelega
         switch purpose {
         case .link(let url):
             addLinkMenuCustomizations(&menuItems, url)
-        case .pictureLink(image: _, link: let link):
+        case .mediaLink(media: _, link: let link):
             addLinkMenuCustomizations(&menuItems, link)
         default:
             break

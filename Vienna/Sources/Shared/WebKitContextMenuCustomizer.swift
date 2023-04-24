@@ -27,11 +27,11 @@ class WebKitContextMenuCustomizer: BrowserContextMenuDelegate {
         switch purpose {
         case .link(let url):
             addLinkMenuCustomizations(&menuItems, url)
-        case .picture(let mediaLink):
-            addMediaMenuCustomizations(&menuItems, mediaLink)
-        case let .pictureLink(mediaLink, url):
+        case .media(let media):
+            addMediaMenuCustomizations(&menuItems, media)
+        case let .mediaLink(media, url):
             addLinkMenuCustomizations(&menuItems, url)
-            addMediaMenuCustomizations(&menuItems, mediaLink)
+            addMediaMenuCustomizations(&menuItems, media)
         default:
             break
         }
