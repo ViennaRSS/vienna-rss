@@ -305,18 +305,25 @@ extension CustomWKWebView {
     document.addEventListener('contextmenu', function(e) {
         var htmlElement = document.elementFromPoint(e.clientX, e.clientY);
         var link = htmlElement.closest("a");
-         if (link) {
+        if (link) {
             var url = new URL(link.getAttribute('href'), document.baseURI).href;
             window.webkit.messageHandlers.\(clickListenerName).postMessage('link: ' + url);
         }
-        var img = htmlElement.closest("img");
-        if (img) {
-            var url = new URL(img.getAttribute('src'), document.baseURI).href;
-            window.webkit.messageHandlers.\(clickListenerName).postMessage('img: ' + url);
-        }
-        var userselection = window.getSelection();
-        if (userselection.rangeCount > 0) {
-            window.webkit.messageHandlers.\(clickListenerName).postMessage('text: ' + userselection.getRangeAt(0).toString())
+        var mediasource = htmlElement.currentSrc;
+        if (mediasource) {
+            var url = new URL(mediasource, document.baseURI).href;
+            window.webkit.messageHandlers.\(clickListenerName).postMessage('media: ' + url);
+        } else {
+            var img = htmlElement.closest("img");
+            if (img) {
+                var url = new URL(img.getAttribute('src'), document.baseURI).href;
+                window.webkit.messageHandlers.\(clickListenerName).postMessage('media: ' + url);
+            } else {
+                var userselection = window.getSelection();
+                if (userselection.rangeCount > 0) {
+                    window.webkit.messageHandlers.\(clickListenerName).postMessage('text: ' + userselection.getRangeAt(0).toString())
+                }
+            }
         }
     })
     """
@@ -352,20 +359,20 @@ extension CustomWKWebView {
         }
 
         let clickedOnLink = menu.items.contains { $0.identifier == .WKMenuItemOpenLinkInNewWindow }
-        let clickedOnImage = menu.items.contains { $0.identifier == .WKMenuItemOpenMediaInNewWindow || $0.identifier == .WKMenuItemOpenImageInNewWindow }
-        let clickedOnText = menu.items.contains { $0.identifier == .WKMenuItemCopy }
+        let clickedOnMedia = menu.items.contains { $0.identifier == .WKMenuItemOpenMediaInNewWindow || $0.identifier == .WKMenuItemOpenImageInNewWindow }
+        let clickedOnCopyableItem = menu.items.contains { $0.identifier == .WKMenuItemCopy }
 
         let context: WKWebViewContextMenuContext
 
-        if clickedOnLink && clickedOnImage {
-            context = .pictureLink(
-                image: contextMenuListener.lastRightClickedImgSrc ?? URL.blank,
+        if clickedOnLink && clickedOnMedia {
+            context = .mediaLink(
+                media: contextMenuListener.lastRightClickedMediaSrc ?? URL.blank,
                 link: contextMenuListener.lastRightClickedLink ?? URL.blank)
         } else if clickedOnLink {
             context = .link(contextMenuListener.lastRightClickedLink ?? URL.blank)
-        } else if clickedOnImage {
-            context = .picture(contextMenuListener.lastRightClickedImgSrc ?? URL.blank)
-        } else if clickedOnText {
+        } else if clickedOnMedia {
+            context = .media(contextMenuListener.lastRightClickedMediaSrc ?? URL.blank)
+        } else if clickedOnCopyableItem {
             context = .text(contextMenuListener.lastSelectedText ?? "")
         } else {
             context = .page(url: self.url ?? URL.blank)
@@ -374,7 +381,7 @@ extension CustomWKWebView {
         menu.items = contextMenuProvider.contextMenuItemsFor(purpose: context, existingMenuItems: menu.items)
 
         contextMenuListener.lastRightClickedLink = nil
-        contextMenuListener.lastRightClickedImgSrc = nil
+        contextMenuListener.lastRightClickedMediaSrc = nil
         contextMenuListener.lastSelectedText = nil
     }
 }
@@ -404,15 +411,15 @@ class CustomWKWebViewHoverListener: NSObject, WKScriptMessageHandler {
 class CustomWKWebViewContextMenuListener: NSObject, WKScriptMessageHandler {
 
     var lastRightClickedLink: URL?
-    var lastRightClickedImgSrc: URL?
+    var lastRightClickedMediaSrc: URL?
     var lastSelectedText: String?
 
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if let urlString = message.body as? String {
             if urlString.starts(with: "link: "), let url = URL(string: urlString.replacingOccurrences(of: "link: ", with: "", options: .anchored)) {
                 self.lastRightClickedLink = url
-            } else if urlString.starts(with: "img: "), let url = URL(string: urlString.replacingOccurrences(of: "img: ", with: "", options: .anchored)) {
-                self.lastRightClickedImgSrc = url
+            } else if urlString.starts(with: "media: "), let url = URL(string: urlString.replacingOccurrences(of: "media: ", with: "", options: .anchored)) {
+                self.lastRightClickedMediaSrc = url
             } else if urlString.starts(with: "text: ") {
                 lastSelectedText = urlString.replacingOccurrences(of: "text: ", with: "", options: .anchored)
             }
