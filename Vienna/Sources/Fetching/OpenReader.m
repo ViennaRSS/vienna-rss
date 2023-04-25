@@ -160,19 +160,17 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
         return;
     }
 
-    if (self.openReaderStatus == fullyAuthenticated || self.openReaderStatus == waitingTToken || self.openReaderStatus == missingTToken) {
-        [clientRequest addValue:[NSString stringWithFormat:@"GoogleLogin auth=%@",
-                                 self.clientAuthToken] forHTTPHeaderField:@"Authorization"];
-        return;     //we are already connected
-    } else if ((self.openReaderStatus == waitingClientToken) && clientAuthOperation != nil && !clientAuthOperation.isFinished) {
-        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
-        [clientRequest addValue:[NSString stringWithFormat:@"GoogleLogin auth=%@",
-                                 self.clientAuthToken] forHTTPHeaderField:@"Authorization"];
-        return;
-    } else {
-        // start first authentication
-        self.openReaderStatus = waitingClientToken;
-
+    switch (self.openReaderStatus) {
+    case fullyAuthenticated:
+    case waitingTToken:
+    case missingTToken:
+        break;
+    case waitingClientToken:
+        if (!clientAuthOperation.isFinished && sema != nil) {
+            dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+        }
+        break;
+    case notAuthenticated:
         [self configureForSpecificHost];
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:LoginBaseURL, openReaderScheme, openReaderHost]];
         NSMutableURLRequest *myRequest = [NSMutableURLRequest requestWithURL:url];
@@ -184,10 +182,9 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
         password = [VNAKeychain getGenericPasswordFromKeychain:username serviceName:@"Vienna sync"];
         [myRequest vna_setPostValue:username forKey:@"Email"];
         [myRequest vna_setPostValue:password forKey:@"Passwd"];
-
         // semaphore with count equal to zero for synchronizing completion of work
         sema = dispatch_semaphore_create(0);
-
+        // prepare authentication operation
         clientAuthOperation = [NSBlockOperation blockOperationWithBlock:^(void) {
             NSURLSessionDataTask * task = [[NSURLSession sharedSession] dataTaskWithRequest:myRequest
                 completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -215,33 +212,31 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 								break;
 							}
 						}
-
-						if (self.openReaderStatus == missingTToken && (self.clientAuthTimer == nil || !self.clientAuthTimer.valid)) {
-							//new request every 6 days
-							self.clientAuthTimer = [NSTimer scheduledTimerWithTimeInterval:6 * 24 * 3600
-																					target:self
-																				  selector:@selector(resetAuthentication)
-																				  userInfo:nil
-																				   repeats:YES];
-						}
-                    }  // if statusCode 200
-
+                        if (self.clientAuthTimer == nil || !self.clientAuthTimer.valid) {
+                            // new request every 6 days
+                            self.clientAuthTimer = [NSTimer scheduledTimerWithTimeInterval:6 * 24 * 3600
+                                                                                    target:self
+                                                                                  selector:@selector(resetAuthentication)
+                                                                                  userInfo:nil
+                                                                                   repeats:YES];
+                        }
+                    } // end error and statusCode tests
                     // Signal that we are done
                     dispatch_semaphore_signal(sema);
-
             }];
             task.priority = NSURLSessionTaskPriorityHigh;
             [task resume];
-
-        }];
-
+        }]; // end NSBlockOperation definition
+        self.openReaderStatus = waitingClientToken;
         self.statusMessage = NSLocalizedString(@"Authenticating on Open Reader", nil);
         clientAuthOperation.queuePriority = NSOperationQueuePriorityHigh;
         [clientAuthOperation start];
         // Now we wait until the task response block will send a signal
         dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
-        [clientRequest addValue:[NSString stringWithFormat:@"GoogleLogin auth=%@", self.clientAuthToken] forHTTPHeaderField:@"Authorization"];
+        break;
     }
+
+    [clientRequest addValue:[NSString stringWithFormat:@"GoogleLogin auth=%@", self.clientAuthToken] forHTTPHeaderField:@"Authorization"];
 } // addClientTokenToRequest
 
 /* configures oneself regarding host, username and password
