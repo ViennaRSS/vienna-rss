@@ -1,5 +1,5 @@
 //
-//  WKPreferences_Private.h
+//  WKPreferences+Private.h
 //  Vienna
 //
 //  Copyright 2020 Tassilo Karge
@@ -25,6 +25,9 @@
 @property (setter=_setDeveloperExtrasEnabled:, nonatomic) BOOL _developerExtrasEnabled;
 #endif
 
-@property (setter=_setFullScreenEnabled:, nonatomic) BOOL _fullScreenEnabled;
+// This is implemented by WKPreferences.elementFullscreenEnabled as of
+// macOS 12.3.
+@property (setter=_setFullScreenEnabled:, nonatomic) BOOL _fullScreenEnabled
+    NS_SWIFT_NAME(_isFullScreenEnabled) NS_DEPRECATED_MAC(10.12, 12.3);
 
 @end

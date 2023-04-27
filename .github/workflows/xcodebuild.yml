@@ -13,9 +13,11 @@ jobs:
   test:
     strategy:
       matrix:
-        os: [macos-12]
+        os: [macos-13]
     name: Test on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_14.3.app/Contents/Developer
     timeout-minutes: 15
 
     steps:
