@@ -18,6 +18,7 @@
 // 
 
 #import "HelperFunctions.h"
+@import WebKit;
 
 // Determines whether the system-wide script menu is present. This is usually
 // not enabled by default and must be enabled in Script Editor's preferences.
@@ -117,20 +118,24 @@ NSURL *_Nullable urlFromUserString(NSString *_Nonnull urlString)
         urlComponents.percentEncodedPath = path;
         url = urlComponents.URL;
     } else {
-        // Clean up user-entered URLs that might contain umlauts,
-        // diacritics and other IDNA related stuff in the domain, or whatever
-        // may hide in filenames and arguments.
-        NSPasteboard *pasteboard = [NSPasteboard pasteboardWithUniqueName];
-        [pasteboard declareTypes:@[NSPasteboardTypeString] owner:nil];
-        @try {
-            if ([pasteboard setString:urlString
-                              forType:NSPasteboardTypeString]) {
-                url = [NSURL URLFromPasteboard:pasteboard];
+        if (@available(macOS 13, *)) {
+            url = nil;
+        } else {
+            // On macOS < 13, NSURLComponents is less capable. When it fails, we
+            // use WebKit to clean up user-entered URLs that might contain umlauts,
+            // diacritics and other IDNA related stuff in the domain, or whatever
+            // may hide in filenames and arguments.
+            NSPasteboard *pasteboard = [NSPasteboard pasteboardWithUniqueName];
+            [pasteboard declareTypes:@[NSPasteboardTypeString] owner:nil];
+            @try {
+                if ([pasteboard setString:urlString forType:NSPasteboardTypeString]) {
+                    url = [WebView URLFromPasteboard:pasteboard];
+                }
+            } @catch (NSException *exception) {
+                NSLog(@"Failed to convert URL for string %@", urlString);
             }
-        } @catch (NSException *exception) {
-            NSLog(@"Failed to convert URL for string %@", urlString);
+            [pasteboard releaseGlobally];
         }
-        [pasteboard releaseGlobally];
     }
     return url;
 }
