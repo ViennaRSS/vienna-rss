@@ -97,10 +97,11 @@
 	// Set the header details
 	self.folderName.stringValue = folder.name;
 	self.folderImage.image = folder.image; 
-	if ([folder.lastUpdate isEqualToDate:[NSDate distantPast]])
+	if ([folder.lastUpdate isEqualToDate:[NSDate distantPast]]) {
 		[self.lastRefreshDate setStringValue:NSLocalizedString(@"Never", nil)];
-	else
-        self.lastRefreshDate.stringValue = [NSDateFormatter vna_relativeDateStringFromDate:folder.lastUpdate];
+	} else {
+		self.lastRefreshDate.stringValue = [NSDateFormatter vna_relativeDateStringFromDate:folder.lastUpdate];
+	}
 
 	// Fill out the panels
 	self.urlField.stringValue = folder.feedURL;
@@ -139,8 +140,7 @@
 {
     if (self.isSubscribed.state == NSControlStateValueOn) {
         [[Database sharedManager] clearFlag:VNAFolderFlagUnsubscribed forFolder:self.infoFolderId];
-    }
-    else {
+    } else {
 		[[Database sharedManager] setFlag:VNAFolderFlagUnsubscribed forFolder:self.infoFolderId];
     }
 }
@@ -152,8 +152,7 @@
 {
     if (self.loadFullHTML.state == NSControlStateValueOn) {
         [[Database sharedManager] setFlag:VNAFolderFlagLoadFullHTML forFolder:self.infoFolderId];
-    }
-    else {
+    } else {
 		[[Database sharedManager] clearFlag:VNAFolderFlagLoadFullHTML forFolder:self.infoFolderId];
     }
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_LoadFullHTMLChange"

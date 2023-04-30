@@ -114,8 +114,7 @@
  */
 -(instancetype)init
 {
-	if ((self = [super init]) != nil)
-	{
+	if ((self = [super init]) != nil) {
 		scriptPathMappings = [[NSMutableDictionary alloc] init];
 		lastCountOfUnread = 0;
 		appStatusItem = nil;
@@ -160,8 +159,7 @@
 -(void)doSafeInitialisation
 {
 	static BOOL doneSafeInit = NO;
-	if (!doneSafeInit)
-	{
+	if (!doneSafeInit) {
 		[self.foldersTree initialiseFoldersTree];
 
 		Preferences * prefs = [Preferences standardPreferences];
@@ -171,14 +169,16 @@
 		// Select the folder and article from the last session
 		NSInteger previousFolderId = [prefs integerForKey:MAPref_CachedFolderID];
 		NSString * previousArticleGuid = [prefs stringForKey:MAPref_CachedArticleGUID];
-		if (previousArticleGuid.vna_isBlank)
+		if (previousArticleGuid.vna_isBlank) {
 			previousArticleGuid = nil;
+		}
 		[self.articleController selectFolderAndArticle:previousFolderId guid:previousArticleGuid];
 
 		[self.mainWindow makeFirstResponder:(previousArticleGuid != nil) ? ((NSView<BaseView> *)self.browser.primaryTab.view).mainView : self.foldersTree.mainView];
 
-		if (prefs.refreshOnStartup)
+		if (prefs.refreshOnStartup) {
 			[self refreshAllSubscriptions:self];
+		}
 
 		doneSafeInit = YES;
 		
@@ -189,8 +189,9 @@
 #pragma mark Accessor Methods
 
 - (NewSubscription *)rssFeed {
-    if (!_rssFeed)
+    if (!_rssFeed) {
         _rssFeed = [[NewSubscription alloc] initWithDatabase:db];
+    }
     return _rssFeed;
 }
 
@@ -219,8 +220,9 @@
 {
 	static NSLayoutManager * theManager = nil;
 	
-	if (theManager == nil)
+	if (theManager == nil) {
 		theManager = [[NSLayoutManager alloc] init];
+	}
 	return theManager;
 }
 
@@ -273,8 +275,7 @@
     [nc addObserver:self selector:@selector(handleGoogleAuthFailed:) name:@"MA_Notify_GoogleAuthFailed" object:nil];
 
 	// Initialize the database
-	if ((db = [Database sharedManager]) == nil)
-	{
+	if ((db = [Database sharedManager]) == nil) {
 		[NSApp terminate:nil];
 		return;
 	}
@@ -306,14 +307,12 @@
 	// Set alternate in main menu for opening pages, and check for correct title of menu item
 	// This is a hack, because Interface Builder refuses to set alternates with only the shift key as modifier.
 	NSMenuItem * alternateItem = menuItemWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
-	if (alternateItem != nil)
-	{
+	if (alternateItem != nil) {
         alternateItem.keyEquivalentModifierMask = NSEventModifierFlagOption;
 		[alternateItem setAlternate:YES];
 	}
 	alternateItem = menuItemWithAction(@selector(viewArticlePagesInAlternateBrowser:));
-	if (alternateItem != nil)
-	{
+	if (alternateItem != nil) {
         alternateItem.keyEquivalentModifierMask = NSEventModifierFlagOption;
 		[alternateItem setAlternate:YES];
 	}
@@ -329,8 +328,9 @@
     self.toolbarSearchField.placeholderString = currentSearchMethod.displayName;
 	
 	// Add Scripts menu if we have any scripts
-	if (!hasOSScriptsMenu())
+	if (!hasOSScriptsMenu()) {
 		[self initScriptsMenu];
+	}
 
 	// Add the app to the status bar if needed.
 	[self showAppInStatusBar];
@@ -342,8 +342,9 @@
     [self scheduleBackgroundRefresh];
 
 	// Register to be notified when the scripts folder changes.
-	if (!hasOSScriptsMenu())
+	if (!hasOSScriptsMenu()) {
 		[self installScriptsFolderWatcher];
+	}
 	
 	// Fix up the Close commands
 	[self updateCloseCommands];
@@ -446,9 +447,8 @@
                 if (alertResponse == NSAlertFirstButtonReturn) {
                     [preferences setInteger:VNAEmptyTrashWithoutWarning
                                      forKey:MAPref_EmptyTrashNotification];
-                }
                 // The user pressed the "Don’t Empty Trash" button
-                else if (alertResponse == NSAlertSecondButtonReturn) {
+                } else if (alertResponse == NSAlertSecondButtonReturn) {
                     [preferences setInteger:VNAEmptyTrashNone
                                      forKey:MAPref_EmptyTrashNotification];
                 }
@@ -476,8 +476,7 @@
 {
     [self unregisterEventHandlers];
     
-	if (didCompleteInitialisation)
-	{
+	if (didCompleteInitialisation) {
 		// Close the activity window explicitly to force it to
 		// save its split bar position to the preferences.
 		NSWindow *activityPanel = self.activityPanelController.window;
@@ -510,43 +509,37 @@
 -(BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename
 {
 	Preferences * prefs = [Preferences standardPreferences];
-	if ([filename.pathExtension isEqualToString:@"viennastyle"])
-	{
+	if ([filename.pathExtension isEqualToString:@"viennastyle"]) {
 		NSString * styleName = filename.lastPathComponent.stringByDeletingPathExtension;
-		if (![self installFilename:filename toPath:ArticleStyleLoader.stylesDirectoryURL.path])
+		if (![self installFilename:filename toPath:ArticleStyleLoader.stylesDirectoryURL.path]) {
 			prefs.displayStyle = styleName;
-		else
-		{
+		} else {
             [self populateStyleMenu];
 			prefs.displayStyle = styleName;
             runOKAlertPanel(NSLocalizedString(@"Vienna has installed a new style", nil), NSLocalizedString(@"The style \"%@\" has been installed to your Styles folder and added to the Style menu.", nil), styleName);
 		}
 		return YES;
 	}
-	if ([filename.pathExtension isEqualToString:@"viennaplugin"])
-	{
+	if ([filename.pathExtension isEqualToString:@"viennaplugin"]) {
 		NSString * path = PluginManager.plugInsDirectoryURL.path;
-		if ([self installFilename:filename toPath:path])
-		{
+		if ([self installFilename:filename toPath:path]) {
 			runOKAlertPanel(NSLocalizedString(@"Plugin installed", nil), NSLocalizedString(@"A new plugin has been installed. It is now available from the menu and you can add it to the toolbar.", nil));			
 			NSString * fullPath = [path stringByAppendingPathComponent:filename.lastPathComponent];
             [self.pluginManager loadPlugin:fullPath];
 		}
 		return YES;
 	}
-	if ([filename.pathExtension isEqualToString:@"scpt"])
-	{
+	if ([filename.pathExtension isEqualToString:@"scpt"]) {
 		NSFileManager *fileManager = NSFileManager.defaultManager;
 		NSURL *scriptsURL = fileManager.vna_applicationScriptsDirectory;
-		if ([self installFilename:filename toPath:scriptsURL.path])
-		{
-			if (!hasOSScriptsMenu())
+		if ([self installFilename:filename toPath:scriptsURL.path]) {
+			if (!hasOSScriptsMenu()) {
 				[self initScriptsMenu];
+			}
 		}
 		return YES;
 	}
-	if ([filename.pathExtension isEqualToString:@"opml"])
-	{
+	if ([filename.pathExtension isEqualToString:@"opml"]) {
         NSAlert *alert = [NSAlert new];
         alert.messageText = NSLocalizedString(@"Import subscriptions from OPML file?", nil);
         alert.informativeText = NSLocalizedString(@"Do you really want to import the subscriptions from the specified OPML file?", nil);
@@ -561,18 +554,17 @@
             return NO;
         }
 	}
-    if ([filename.pathExtension isEqualToString:@"webloc"])
-    {
+    if ([filename.pathExtension isEqualToString:@"webloc"]) {
         NSURL* url = [NSURL URLFromInetloc:filename];
-        if (!self.mainWindow.visible)
-        	[self.mainWindow makeKeyAndOrderFront:self];
-        if (url != nil && !db.readOnly)
-        {
+        if (!self.mainWindow.visible) {
+            [self.mainWindow makeKeyAndOrderFront:self];
+        }
+        if (url != nil && !db.readOnly) {
             [self.rssFeed newSubscription:self.mainWindow initialURL:url.absoluteString];
 		    return YES;
+        } else {
+            return NO;
         }
-        else
-        	return NO;
     }
 	return NO;
 }
@@ -590,10 +582,8 @@
 	NSFileManager * fileManager = [NSFileManager defaultManager];
 	BOOL isDir = NO;
 	
-	if (![fileManager fileExistsAtPath:path isDirectory:&isDir])
-	{
-		if (![fileManager createDirectoryAtPath:path withIntermediateDirectories:YES attributes:NULL error:NULL])
-		{
+	if (![fileManager fileExistsAtPath:path isDirectory:&isDir]) {
+		if (![fileManager createDirectoryAtPath:path withIntermediateDirectories:YES attributes:NULL error:NULL]) {
 			runOKAlertPanel(NSLocalizedString(@"Cannot create folder", nil), NSLocalizedString(@"The \"%@\" folder cannot be created.", nil), path);
 			return NO;
 		}
@@ -642,8 +632,9 @@
 		item.representedObject = searchMethod;
 		
 		// Is this the currently set search method? If yes, mark it as such.
-		if ( [friendlyName isEqualToString:[Preferences standardPreferences].searchMethod.displayName] )
+		if ( [friendlyName isEqualToString:[Preferences standardPreferences].searchMethod.displayName] ) {
 			item.state = NSControlStateValueOn;
+		}
 		
         if ([searchMethod isEqualTo:SearchMethod.searchForFoldersMethod]) {
             [cellMenu addItem:[NSMenuItem separatorItem]];
@@ -654,19 +645,19 @@
 	
 	// Add all available plugged-in search methods to the menu.
 	NSMutableArray * searchMethods = [NSMutableArray arrayWithArray:self.pluginManager.searchMethods];
-	if (searchMethods.count > 0)
-	{	
+	if (searchMethods.count > 0) {
 		[cellMenu addItem: [NSMenuItem separatorItem]];
 		
-		for (searchMethod in searchMethods)
-		{
-			if (!searchMethod.displayName) 
+		for (searchMethod in searchMethods) {
+			if (!searchMethod.displayName) { 
 				continue;
+			}
 			item = [[NSMenuItem alloc] initWithTitle:searchMethod.displayName action:@selector(setSearchMethod:) keyEquivalent:@""];
 			item.representedObject = searchMethod;
 			// Is this the currently set search method? If yes, mark it as such.
-			if ( [searchMethod.displayName isEqualToString: [Preferences standardPreferences].searchMethod.displayName] )
+			if ( [searchMethod.displayName isEqualToString: [Preferences standardPreferences].searchMethod.displayName] ) {
 				item.state = NSControlStateValueOn;
+			}
 			[cellMenu addItem:item];
 		}
 	} 
@@ -728,14 +719,14 @@
 
 	[self.browser setPrimaryTab:primaryTab];
 	self.foldersTree.mainView.nextKeyView = ((NSView<BaseView> *)self.browser.primaryTab.view).mainView;
-    if (self.selectedArticle == nil)
+    if (self.selectedArticle == nil) {
         [self.mainWindow makeFirstResponder:self.foldersTree.mainView];
-    else
+    } else {
         [self.mainWindow makeFirstResponder:((NSView<BaseView> *)self.browser.primaryTab.view).mainView];
+    }
 
 	BOOL isFilterBarVisible = self.isFilterBarVisible;
-	switch (newLayout)
-	{
+	switch (newLayout) {
 		case VNALayoutReport:
 		case VNALayoutCondensed:
 			self.filterDisclosureView = self.mainWindowController.filterDisclosureView;
@@ -759,8 +750,9 @@
 withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
     NSString *urlStr = [event paramDescriptorForKeyword:keyDirectObject].stringValue;
-    if(urlStr)
+    if (urlStr) {
         [self.rssFeed newSubscription:self.mainWindow initialURL:urlStr];
+    }
 }
 
 /** openURLsInDefaultBrowser
@@ -832,8 +824,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	id<Tab> activeBrowserTab = self.browser.activeTab;
 
     [self showMainWindow:self];
-	if (!activeBrowserTab)
-	{
+	if (!activeBrowserTab) {
 		(void)[self.browser createNewTab:nil inBackground:NO load:NO];
     } else {
         [self.browser.activeTab activateAddressBar];
@@ -847,8 +838,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(void)openURLFromString:(NSString *)urlString inPreferredBrowser:(BOOL)openInPreferredBrowserFlag
 {
 	NSURL * theURL = [NSURL URLWithString:urlString];
-	if (theURL == nil)
-	{
+	if (theURL == nil) {
 		theURL = cleanedUpUrlFromString(urlString);
 	}
 	[self openURL:theURL inPreferredBrowser:openInPreferredBrowserFlag];
@@ -862,10 +852,10 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
 	Preferences * prefs = [Preferences standardPreferences];
 	BOOL openURLInVienna = prefs.openLinksInVienna;
-	if (!openInPreferredBrowserFlag)
+	if (!openInPreferredBrowserFlag) {
 		openURLInVienna = (!openURLInVienna);
-	if (openURLInVienna)
-	{
+	}
+	if (openURLInVienna) {
 		BOOL openInBackground = prefs.openLinksInBackground;
         if ([NSEvent modifierFlags] & NSEventModifierFlagShift) {
             openInBackground = !openInBackground;
@@ -874,9 +864,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         for (NSURL * url in urls) {
 			(void)[self.browser createNewTab:url inBackground:openInBackground load:true];
         }
-	}
-	else
+	} else {
 		[self openURLsInDefaultBrowser:urls];
+	}
 }
 
 /* openURL
@@ -885,8 +875,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)openURL:(NSURL *)url inPreferredBrowser:(BOOL)openInPreferredBrowserFlag
 {
-	if (url == nil)
-	{
+	if (url == nil) {
 		NSLog(@"Called openURL:inPreferredBrowser: with nil url.");
 		return;
 	}
@@ -898,10 +887,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)downloadEnclosure:(id)sender
 {
-	for (Article * currentArticle in self.articleController.markedArticleRange)
-	{
-		if (currentArticle.hasEnclosure)
-		{
+	for (Article * currentArticle in self.articleController.markedArticleRange) {
+		if (currentArticle.hasEnclosure) {
 			[[DownloadManager sharedInstance] downloadFileFromURL:currentArticle.enclosure];
 		}
 	}
@@ -959,8 +946,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         panel.allowedFileTypes = @[@"opml"];
     }
     [panel beginSheetModalForWindow:self.mainWindow completionHandler:^(NSInteger returnCode) {
-        if (returnCode == NSModalResponseOK)
-        {
+        if (returnCode == NSModalResponseOK) {
             [panel orderOut:self];
             
             NSInteger countExported = [Export exportToFile:panel.URL.path
@@ -968,15 +954,12 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
                                                  selection:accessoryController.mode == ExportModeSelectedFeeds
                                                 withGroups:accessoryController.preserveFolders];
             
-            if (countExported < 0)
-            {
+            if (countExported < 0) {
                 NSAlert *alert = [NSAlert new];
                 alert.messageText = NSLocalizedString(@"Cannot create export output file", nil);
                 alert.informativeText = NSLocalizedString(@"The specified export output file could not be created. Check that it is not locked and no other application is using it.", nil);
                 [alert beginSheetModalForWindow:self.mainWindow completionHandler:nil];
-            }
-            else
-            {
+            } else {
                 // Announce how many we successfully imported
                 NSAlert *alert = [NSAlert new];
                 alert.alertStyle = NSAlertStyleInformational;
@@ -998,8 +981,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     [panel beginSheetModalForWindow:self.mainWindow
                   completionHandler: ^(NSInteger returnCode) {
                       
-                      if (returnCode == NSModalResponseOK)
-                      {
+                      if (returnCode == NSModalResponseOK) {
                           [panel orderOut:self];
                           [Import importFromFile:panel.URL.path];
                       }
@@ -1018,17 +1000,13 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	
 	NSURL * scriptURL = [NSURL fileURLWithPath:scriptName];
 	NSAppleScript * appleScript = [[NSAppleScript alloc] initWithContentsOfURL:scriptURL error:&errorDictionary];
-	if (appleScript == nil)
-	{
+	if (appleScript == nil) {
 		NSString * baseScriptName = scriptName.lastPathComponent.stringByDeletingPathExtension;
 		runOKAlertPanel([NSString stringWithFormat:NSLocalizedString(@"Error loading script '%@'", nil), baseScriptName],
 						[errorDictionary valueForKey:NSAppleScriptErrorMessage]);
-	}
-	else
-	{
+	} else {
 		NSAppleEventDescriptor * resultEvent = [appleScript executeAndReturnError:&errorDictionary];
-		if (resultEvent == nil)
-		{
+		if (resultEvent == nil) {
 			NSString * baseScriptName = scriptName.lastPathComponent.stringByDeletingPathExtension;
 			runOKAlertPanel([NSString stringWithFormat:NSLocalizedString(@"AppleScript Error in '%@' script", nil), baseScriptName],
 							[errorDictionary valueForKey:NSAppleScriptErrorMessage]);
@@ -1102,8 +1080,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)setFilterBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate
 {
-	if (isVisible && !self.filterBarVisible)
-	{
+	if (isVisible && !self.filterBarVisible) {
         [self.filterDisclosureView disclose:doAnimate];
 
 		// Hook up the Tab ordering so Tab from the search field goes to the
@@ -1116,8 +1093,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			[self.mainWindow makeFirstResponder:self.filterSearchField];
         }
 	}
-	if (!isVisible && self.filterBarVisible)
-	{
+	if (!isVisible && self.filterBarVisible) {
         [self.filterDisclosureView collapse:doAnimate];
 
 		// Fix up the tab ordering
@@ -1125,14 +1101,14 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		
 		// Clear the filter, otherwise we end up with no way remove it!
 		self.filterString = @"";
-		if (doAnimate)
-		{
+		if (doAnimate) {
 			[self searchUsingFilterField:self];
 			
 			// If the focus was originally on the filter bar then we should
 			// move it to the message list
-			if (self.mainWindow.firstResponder == self.mainWindow)
+			if (self.mainWindow.firstResponder == self.mainWindow) {
 				[self.mainWindow makeFirstResponder:((NSView<BaseView> *)self.browser.primaryTab.view).mainView];
+			}
 		}
 	}
 }
@@ -1145,8 +1121,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	NSMenu * sortSubmenu = [NSMenu new];
 	
 	// Add the fields which are sortable to the menu.
-	for (Field * field in [db arrayOfFields])
-	{
+	for (Field * field in [db arrayOfFields]) {
 		// Filter out columns we don't sort on. Later we should have an attribute in the
 		// field object itself based on which columns we can sort on.
 		if (field.tag != ArticleFieldIDParent &&
@@ -1188,8 +1163,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
 	NSMenu * columnsSubMenu = [NSMenu new];
 	
-	for (Field * field in [db arrayOfFields])
-	{
+	for (Field * field in [db arrayOfFields]) {
 		// Filter out columns we don't view in the article list. Later we should have an attribute in the
 		// field object based on which columns are visible in the tableview.
 		if (field.tag != ArticleFieldIDText && 
@@ -1280,8 +1254,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         NSMenu *scriptsMenu = [[NSMenu alloc] initWithTitle:@""];
 
 		NSInteger index;
-		for (index = 0; index < count; ++index)
-		{
+		for (index = 0; index < count; ++index) {
 			NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:sortedMenuItems[index]
 															   action:@selector(doSelectScript:)
 														keyEquivalent:@""];
@@ -1299,8 +1272,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		
 		// If this is the first call to initScriptsMenu, create the scripts menu. Otherwise we just
 		// update the one we have.
-		if (scriptsMenuItem != nil)
-		{
+		if (scriptsMenuItem != nil) {
 			[NSApp.mainMenu removeItem:scriptsMenuItem];
 		}
 
@@ -1460,15 +1432,12 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)updateCloseCommands
 {
-	if (self.browser.browserTabCount <= 1 || !self.mainWindow.keyWindow)
-	{
+	if (self.browser.browserTabCount <= 1 || !self.mainWindow.keyWindow) {
 		closeTabItem.keyEquivalent = @"";
 		closeAllTabsItem.keyEquivalent = @"";
 		closeWindowItem.keyEquivalent = @"w";
         closeWindowItem.keyEquivalentModifierMask = NSEventModifierFlagCommand;
-	}
-	else
-	{
+	} else {
 		closeTabItem.keyEquivalent = @"w";
         closeTabItem.keyEquivalentModifierMask = NSEventModifierFlagCommand;
 		closeAllTabsItem.keyEquivalent = @"w";
@@ -1484,8 +1453,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(void)showAppInStatusBar
 {
 	Preferences * prefs = [Preferences standardPreferences];
-	if (prefs.showAppInStatusBar && appStatusItem == nil)
-	{
+	if (prefs.showAppInStatusBar && appStatusItem == nil) {
 		appStatusItem = [NSStatusBar.systemStatusBar statusItemWithLength:NSVariableStatusItemLength];
         [self setAppStatusBarIcon];
 		
@@ -1505,9 +1473,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
                                  action:@selector(terminate:)
                           keyEquivalent:@""];
 		appStatusItem.menu = statusBarMenu;
-	}
-	else if (!prefs.showAppInStatusBar && appStatusItem != nil)
-	{
+	} else if (!prefs.showAppInStatusBar && appStatusItem != nil) {
 		[NSStatusBar.systemStatusBar removeStatusItem:appStatusItem];
 		appStatusItem = nil;
 	}
@@ -1519,18 +1485,14 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)setAppStatusBarIcon
 {
-	if (appStatusItem != nil)
-	{
-		if (lastCountOfUnread == 0)
-		{
+	if (appStatusItem != nil) {
+		if (lastCountOfUnread == 0) {
             NSImage *statusBarImage = [NSImage imageNamed:@"statusBarIcon"];
             statusBarImage.template = YES;
             appStatusItem.button.image = statusBarImage;
             appStatusItem.button.title = @"";
             appStatusItem.button.imagePosition = NSImageOnly;
-		}
-		else
-		{
+		} else {
             NSImage *statusBarImage = [NSImage imageNamed:@"statusBarIconUnread"];
             statusBarImage.template = YES;
             appStatusItem.button.image = statusBarImage;
@@ -1573,12 +1535,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)doEditFolder:(Folder *)folder
 {
-	if (folder.type == VNAFolderTypeRSS)
-	{
+	if (folder.type == VNAFolderTypeRSS) {
 		[self.rssFeed editSubscription:self.mainWindow folderId:folder.itemId];
-	}
-	else if (folder.type == VNAFolderTypeSmart)
-	{
+	} else if (folder.type == VNAFolderTypeSmart) {
         if (!smartFolder) {
 			smartFolder = [[SmartFolder alloc] initWithDatabase:db];
         }
@@ -1739,8 +1698,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
 	NSMenuItem * menuItem = (NSMenuItem *)sender;
 	NSString * scriptPath = [scriptPathMappings valueForKey:menuItem.title];
-	if (scriptPath != nil)
+	if (scriptPath != nil) {
 		[self runAppleScript:scriptPath];
+	}
 }
 
 /* doSelectStyle
@@ -1758,16 +1718,14 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(void)handleTabChange:(NSNotification *)nc
 {
 	id<Tab> activeBrowserTab = self.browser.activeTab;
-	if (activeBrowserTab == nil)
-	{
+	if (activeBrowserTab == nil) {
 		//we are in the article view
-		if (self.selectedArticle == nil)
+		if (self.selectedArticle == nil) {
 			[self.mainWindow makeFirstResponder:self.foldersTree.mainView];
-		else
+		} else {
 			[self.mainWindow makeFirstResponder:((NSView<BaseView> *)self.browser.primaryTab.view).mainView];
-	}
-	else
-	{
+		}
+	} else {
 		[activeBrowserTab activateWebView];
 	}
 	[self updateStatusBarFilterButtonVisibility];
@@ -1788,8 +1746,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(void)handleFolderNameChange:(NSNotification *)nc
 {
 	NSInteger folderId = ((NSNumber *)nc.object).integerValue;
-	if (folderId == self.articleController.currentFolderId)
+	if (folderId == self.articleController.currentFolderId) {
 		[self updateSearchPlaceholderAndSearchMethod];
+	}
 }
 
 /* handleRefreshStatusChange
@@ -1797,8 +1756,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)handleRefreshStatusChange:(NSNotification *)nc
 {
-	if (self.connecting)
-	{
+	if (self.connecting) {
 		// Save the date/time of this refresh so we do the right thing when
 		// we apply the filter.
 		[[Preferences standardPreferences] setObject:[NSDate date] forKey:MAPref_LastRefreshDate];
@@ -1807,9 +1765,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		NSToolbarItem *item = [self toolbarItemWithIdentifier:@"Refresh"];
 		item.action = @selector(cancelAllRefreshesToolbar:);
         item.image = [NSImage imageNamed:@"CancelTemplate"];
-	}
-	else
-	{
+	} else {
 		// Run the auto-expire now
 		Preferences * prefs = [Preferences standardPreferences];
 		[db purgeArticlesOlderThanTag:prefs.autoExpireDuration];
@@ -1823,8 +1779,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		
 		// Bounce the dock icon for 1 second if the bounce method has been selected.
 		NSInteger newUnread = [RefreshManager sharedManager].countOfNewArticles + [OpenReader sharedManager].countOfNewArticles;
-		if (newUnread > 0 && ((prefs.newArticlesNotification & VNANewArticlesNotificationBounce) != 0))
+		if (newUnread > 0 && ((prefs.newArticlesNotification & VNANewArticlesNotificationBounce) != 0)) {
 			[NSApp requestUserAttention:NSInformationalRequest];
+		}
 
         // User notification
         if (newUnread > 0) {
@@ -1870,20 +1827,16 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	NSArray * articleArray = self.articleController.markedArticleRange;
 	Article * currentArticle;
 	
-	if (articleArray.count > 0) 
-	{
+	if (articleArray.count > 0) {
 		
         NSMutableArray * articlesWithLinks = [NSMutableArray arrayWithCapacity:articleArray.count];
         NSMutableArray * urls = [NSMutableArray arrayWithCapacity:articleArray.count];
 		
-		for (currentArticle in articleArray)
-		{
-			if (currentArticle && !currentArticle.link.vna_isBlank)
-            {
+		for (currentArticle in articleArray) {
+			if (currentArticle && !currentArticle.link.vna_isBlank) {
                 [articlesWithLinks addObject:currentArticle];
                 NSURL * theURL = [NSURL URLWithString:currentArticle.link];
-                if (theURL == nil)
-                {
+                if (theURL == nil) {
 					theURL = cleanedUpUrlFromString(currentArticle.link);
                 }
                 [urls addObject:theURL];
@@ -1941,8 +1894,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(IBAction)localPerformFindPanelAction:(id)sender
 {
     NSInteger action = [sender tag];
-	switch (action)
-	{
+	switch (action) {
 		case NSFindPanelActionSetFindString:
 			self.searchString = APP.currentTextSelection;
 			break;
@@ -1966,21 +1918,17 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags
 {
-    if (keyChar >= '0' && keyChar <= '9' && (flags & NSEventModifierFlagControl))
-	{
+    if (keyChar >= '0' && keyChar <= '9' && (flags & NSEventModifierFlagControl)) {
 		NSInteger layoutStyle = VNALayoutReport + (keyChar - '0');
 		[self setLayout:layoutStyle withRefresh:YES];
 		return YES;
 	}
-	switch (keyChar)
-	{
+	switch (keyChar) {
 		case NSLeftArrowFunctionKey:
-            if (flags & (NSEventModifierFlagCommand | NSEventModifierFlagOption))
+            if (flags & (NSEventModifierFlagCommand | NSEventModifierFlagOption)) {
 				return NO;
-			else
-			{
-				if (self.mainWindow.firstResponder == ((NSView<BaseView> *)self.browser.primaryTab.view).mainView)
-				{
+			} else {
+				if (self.mainWindow.firstResponder == ((NSView<BaseView> *)self.browser.primaryTab.view).mainView) {
 					[self.mainWindow makeFirstResponder:self.foldersTree.mainView];
 					return YES;
 				}
@@ -1988,15 +1936,12 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			return NO;
 			
 		case NSRightArrowFunctionKey:
-            if (flags & (NSEventModifierFlagCommand | NSEventModifierFlagOption))
+            if (flags & (NSEventModifierFlagCommand | NSEventModifierFlagOption)) {
 				return NO;
-			else
-			{
-				if (self.mainWindow.firstResponder == self.foldersTree.mainView)
-				{
+			} else {
+				if (self.mainWindow.firstResponder == self.foldersTree.mainView) {
 					[self.browser switchToPrimaryTab];
-					if (self.selectedArticle == nil)
-					{
+					if (self.selectedArticle == nil) {
 						[self.articleController ensureSelectedArticle];
 					}
 					[self.mainWindow makeFirstResponder:(self.selectedArticle != nil) ? ((NSView<BaseView> *)self.browser.primaryTab.view).mainView : self.foldersTree.mainView];
@@ -2007,13 +1952,10 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			
 		case NSDeleteFunctionKey:
 		case NSDeleteCharacter:
-			if (self.mainWindow.firstResponder == self.foldersTree.mainView)
-			{
+			if (self.mainWindow.firstResponder == self.foldersTree.mainView) {
 				[self deleteFolder:self];
 				return YES;
-			}
-			else if (self.mainWindow.firstResponder == (self.articleController.mainArticleView).mainView)
-			{
+			} else if (self.mainWindow.firstResponder == (self.articleController.mainArticleView).mainView) {
 				[self deleteMessage:self];
 				return YES;
 			}
@@ -2026,10 +1968,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			
 		case 'f':
 		case 'F':
-			if (!self.filterBarVisible)
+			if (!self.filterBarVisible) {
 				[self setPersistedFilterBarState:YES withAnimation:YES];
-			else
+			} else {
 				[self.mainWindow makeFirstResponder:self.filterSearchField];
+			}
 			return YES;
 			
 		case '>':
@@ -2080,20 +2023,19 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			
 		case NSEnterCharacter:
 		case NSCarriageReturnCharacter:
-			if (self.mainWindow.firstResponder == self.foldersTree.mainView)
-			{
-                if (flags & NSEventModifierFlagOption)
+			if (self.mainWindow.firstResponder == self.foldersTree.mainView) {
+                if (flags & NSEventModifierFlagOption) {
 					[self viewSourceHomePageInAlternateBrowser:self];
-				else
+				} else {
 					[self viewSourceHomePage:self];
+				}
 				return YES;
-			}
-			else
-			{
-                if (flags & NSEventModifierFlagOption)
+			} else {
+                if (flags & NSEventModifierFlagOption) {
 					[self viewArticlePagesInAlternateBrowser:self];
-				else
+				} else {
 					[self viewArticlePages:self];
+				}
 				return YES;
 			}
 			return NO;
@@ -2122,10 +2064,10 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(NSToolbarItem *)toolbarItemWithIdentifier:(NSString *)theIdentifier
 {
-	for (NSToolbarItem * theItem in self.mainWindow.toolbar.visibleItems)
-	{
-		if ([theItem.itemIdentifier isEqualToString:theIdentifier])
+	for (NSToolbarItem * theItem in self.mainWindow.toolbar.visibleItems) {
+		if ([theItem.itemIdentifier isEqualToString:theIdentifier]) {
 			return theItem;
+		}
 	}
 	return nil;
 }
@@ -2166,37 +2108,32 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(void)createNewSubscription:(NSString *)urlString underFolder:(NSInteger)parentId afterChild:(NSInteger)predecessorId
 {
 	// Replace feed:// with http:// if necessary
-	if ([urlString hasPrefix:@"feed://"])
+	if ([urlString hasPrefix:@"feed://"]) {
 		urlString = [NSString stringWithFormat:@"http://%@", [urlString substringFromIndex:7]];
+	}
 
 	urlString = cleanedUpUrlFromString(urlString).absoluteString;
 	
 	// If the folder already exists, just select it.
 	Folder * folder = [db folderFromFeedURL:urlString];
-	if (folder != nil)
-	{
+	if (folder != nil) {
 		[self.browser switchToPrimaryTab];
 		[self.foldersTree selectFolder:folder.itemId];
 		return;
 	}
 	
 	// Create the new folder.
-	if ([Preferences standardPreferences].syncGoogleReader && [Preferences standardPreferences].prefersGoogleNewSubscription)
-	{	//creates in OpenReader
+	if ([Preferences standardPreferences].syncGoogleReader && [Preferences standardPreferences].prefersGoogleNewSubscription) {	//creates in OpenReader
 		NSString * folderName = [db folderFromID:parentId].name;
 		[[OpenReader sharedManager] subscribeToFeed:urlString withLabel:folderName];
-	}
-	else
-	{ //creates locally
+	} else { //creates locally
 		NSInteger folderId = [db addRSSFolder:[Database untitledFeedFolderName]
                                   underParent:parentId
                                    afterChild:predecessorId
                               subscriptionURL:urlString];
 
-		if (folderId != -1)
-		{
-            if (isAccessible(urlString) || [urlString hasPrefix:@"file"])
-            {
+		if (folderId != -1) {
+            if (isAccessible(urlString) || [urlString hasPrefix:@"file"]) {
                 Folder * folder = [db folderFromID:folderId];
                 [[RefreshManager sharedManager] refreshSubscriptions:@[folder] ignoringSubscriptionStatus:NO];
             }
@@ -2217,8 +2154,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)newSmartFolder:(id)sender
 {
-	if (!smartFolder)
+	if (!smartFolder) {
 		smartFolder = [[SmartFolder alloc] initWithDatabase:db];
+	}
 	[smartFolder newCriteria:self.mainWindow underParent:self.foldersTree.groupParentSelection];
 }
 
@@ -2227,8 +2165,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)newGroupFolder:(id)sender
 {
-	if (!groupFolder)
+	if (!groupFolder) {
 		groupFolder = [[NewGroupFolder alloc] init];
+	}
 	[groupFolder newGroupFolder:self.mainWindow underParent:self.foldersTree.groupParentSelection];
 }
 
@@ -2238,8 +2177,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(IBAction)restoreMessage:(id)sender
 {
 	Folder * folder = [db folderFromID:self.articleController.currentFolderId];
-	if (folder.type == VNAFolderTypeTrash && self.selectedArticle != nil && !db.readOnly)
-	{
+	if (folder.type == VNAFolderTypeTrash && self.selectedArticle != nil && !db.readOnly) {
 		NSArray * articleArray = self.articleController.markedArticleRange;
 		[self.articleController markDeletedByArray:articleArray deleteFlag:NO];
 		[self clearUndoStack];
@@ -2252,8 +2190,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)deleteMessage:(id)sender
 {
-	if (self.selectedArticle != nil && !db.readOnly)
-	{
+	if (self.selectedArticle != nil && !db.readOnly) {
 		Folder * folder = [db folderFromID:self.articleController.currentFolderId];
 		if (folder.type != VNAFolderTypeTrash) {
 			NSArray * articleArray = self.articleController.markedArticleRange;
@@ -2284,8 +2221,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)showDownloadsWindow:(id)sender
 {
-	if (downloadWindow == nil)
+	if (downloadWindow == nil) {
 		downloadWindow = [[DownloadWindow alloc] init];
+	}
 	[downloadWindow.window makeKeyAndOrderFront:sender];
 }
 
@@ -2294,10 +2232,12 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)conditionalShowDownloadsWindow:(id)sender
 {
-	if (downloadWindow == nil)
+	if (downloadWindow == nil) {
 		downloadWindow = [[DownloadWindow alloc] init];
-	if (!downloadWindow.window.visible)
+	}
+	if (!downloadWindow.window.visible) {
 		[downloadWindow.window makeKeyAndOrderFront:sender];
+	}
 }
 
 /* viewFirstUnread
@@ -2306,13 +2246,10 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(IBAction)viewFirstUnread:(id)sender
 {
 	[self.browser switchToPrimaryTab];
-	if (db.countOfUnread > 0)
-	{
+	if (db.countOfUnread > 0) {
 		[self.mainWindow makeFirstResponder:((NSView<BaseView> *)self.browser.primaryTab.view).mainView];
 		[self.articleController displayFirstUnread];
-	}
-	else
-	{
+	} else {
 		[self.mainWindow makeFirstResponder:(self.selectedArticle != nil) ? ((NSView<BaseView> *)self.browser.primaryTab.view).mainView : self.foldersTree.mainView];
 	}
 }
@@ -2323,13 +2260,10 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(IBAction)viewNextUnread:(id)sender
 {
 	[self.browser switchToPrimaryTab];
-	if (db.countOfUnread > 0)
-	{
+	if (db.countOfUnread > 0) {
 		[self.mainWindow makeFirstResponder:((NSView<BaseView> *)self.browser.primaryTab.view).mainView];
 		[self.articleController displayNextUnread];
-	}
-	else
-	{
+	} else {
 		[self.mainWindow makeFirstResponder:(self.selectedArticle != nil) ? ((NSView<BaseView> *)self.browser.primaryTab.view).mainView : self.foldersTree.mainView];
 	}
 }
@@ -2349,11 +2283,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)skipFolder:(id)sender
 {
-	if (!db.readOnly)
-	{
+	if (!db.readOnly) {
 		[self.articleController markAllFoldersReadByArray:self.foldersTree.selectedFolders];
-		if (db.countOfUnread > 0)
-		{
+		if (db.countOfUnread > 0) {
 			[self.articleController displayNextFolderWithUnread];
 		}
 	}
@@ -2376,8 +2308,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)markAllSubscriptionsRead:(id)sender
 {
-	if (!db.readOnly)
-	{
+	if (!db.readOnly) {
 		[self.articleController markAllFoldersReadByArray:[self.foldersTree folders:0]];
 	}
 }
@@ -2388,8 +2319,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(IBAction)markReadToggle:(id)sender
 {
 	Article * theArticle = self.selectedArticle;
-	if (theArticle != nil && !db.readOnly)
-	{
+	if (theArticle != nil && !db.readOnly) {
 		NSArray * articleArray = self.articleController.markedArticleRange;
 		[self.articleController markReadByArray:articleArray readFlag:!theArticle.read];
 	}
@@ -2401,8 +2331,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(IBAction)markRead:(id)sender
 {
 	Article * theArticle = self.selectedArticle;
-	if (theArticle != nil && !db.readOnly)
-	{
+	if (theArticle != nil && !db.readOnly) {
 		NSArray * articleArray = self.articleController.markedArticleRange;
 		[self.articleController markReadByArray:articleArray readFlag:YES];
 	}
@@ -2414,8 +2343,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(IBAction)markUnread:(id)sender
 {
 	Article * theArticle = self.selectedArticle;
-	if (theArticle != nil && !db.readOnly)
-	{
+	if (theArticle != nil && !db.readOnly) {
 		NSArray * articleArray = self.articleController.markedArticleRange;
 		[self.articleController markReadByArray:articleArray readFlag:NO];
 	}
@@ -2427,8 +2355,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(IBAction)markFlagged:(id)sender
 {
 	Article * theArticle = self.selectedArticle;
-	if (theArticle != nil && !db.readOnly)
-	{
+	if (theArticle != nil && !db.readOnly) {
 		NSArray * articleArray = self.articleController.markedArticleRange;
 		[self.articleController markFlaggedByArray:articleArray flagged:!theArticle.flagged];
 	}
@@ -2457,45 +2384,34 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	NSString * alertTitle = nil;
 	BOOL needPrompt = YES;
 	
-	if (count == 1)
-	{
+	if (count == 1) {
 		Folder * folder = selectedFolders[0];
-		if (folder.type == VNAFolderTypeSmart)
-		{
+		if (folder.type == VNAFolderTypeSmart) {
 			alertBody = [NSString stringWithFormat:NSLocalizedString(@"Are you sure you want to delete smart folder \"%@\"? This will not delete the actual articles matched by the search.", nil), folder.name];
 			alertTitle = NSLocalizedString(@"Delete smart folder", nil);
-		}
-		else if (folder.type == VNAFolderTypeSearch)
+		} else if (folder.type == VNAFolderTypeSearch) {
 			needPrompt = NO;
-		else if (folder.type == VNAFolderTypeRSS)
-		{
+		} else if (folder.type == VNAFolderTypeRSS) {
 			alertBody = [NSString stringWithFormat:NSLocalizedString(@"Are you sure you want to unsubscribe from \"%@\"? This operation will delete all cached articles.", nil), folder.name];
 			alertTitle = NSLocalizedString(@"Delete subscription", nil);
-		}
-		else if (folder.type == VNAFolderTypeOpenReader)
-		{
+		} else if (folder.type == VNAFolderTypeOpenReader) {
 			alertBody = [NSString stringWithFormat:NSLocalizedString(@"Unsubscribing from an Open Reader RSS feed will also remove your locally cached articles.", nil), folder.name];
 			alertTitle = NSLocalizedString(@"Delete Open Reader RSS feed", nil);
-		}
-		else if (folder.type == VNAFolderTypeGroup)
-		{
+		} else if (folder.type == VNAFolderTypeGroup) {
 			alertBody = [NSString stringWithFormat:NSLocalizedString(@"Are you sure you want to delete group folder \"%@\" and all sub folders? This operation cannot be undone.", nil), folder.name];
 			alertTitle = NSLocalizedString(@"Delete group folder", nil);
-		}
-		else if (folder.type == VNAFolderTypeTrash)
+		} else if (folder.type == VNAFolderTypeTrash) {
 			return;
-		else
+		} else {
 			NSAssert1(false, @"Unhandled folder type in deleteFolder: %@", [folder name]);
-	}
-	else
-	{
+		}
+	} else {
 		alertBody = [NSString stringWithFormat:NSLocalizedString(@"Are you sure you want to delete all %d selected folders? This operation cannot be undone.", nil), (unsigned int)count];
 		alertTitle = NSLocalizedString(@"Delete multiple folders", nil);
 	}
 	
 	// Get confirmation first
-	if (needPrompt)
-	{
+	if (needPrompt) {
         NSAlert *alert = [NSAlert new];
         alert.messageText = alertTitle;
         alert.informativeText = alertBody;
@@ -2503,31 +2419,32 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Title of a button on an alert")];
         NSModalResponse alertResponse = [alert runModal];
 
-		if (alertResponse == NSAlertSecondButtonReturn)
+		if (alertResponse == NSAlertSecondButtonReturn) {
 			return;
+		}
 	}
 	
 
-	if (smartFolder != nil)
+	if (smartFolder != nil) {
 		[smartFolder doCancel:nil];
-	if ([(NSControl *)self.foldersTree.mainView abortEditing])
+	}
+	if ([(NSControl *)self.foldersTree.mainView abortEditing]) {
 		[self.mainWindow makeFirstResponder:self.foldersTree.mainView];
+	}
 	
 	
 	// Clear undo stack for this action
 	[self clearUndoStack];
 	
 	// Prompt for each folder for now
-	for (index = 0; index < count; ++index)
-	{
+	for (index = 0; index < count; ++index) {
 		Folder * folder = selectedFolders[index];
 		
 		// This little hack is so if we're deleting the folder currently being displayed
 		// and there's more than one folder being deleted, we delete the folder currently
 		// being displayed last so that the MA_Notify_FolderDeleted handlers that only
 		// refresh the display if the current folder is being deleted only trips once.
-		if (folder.itemId == self.articleController.currentFolderId && index < count - 1)
-		{
+		if (folder.itemId == self.articleController.currentFolderId && index < count - 1) {
 			[selectedFolders insertObject:folder atIndex:count];
 			++count;
 			continue;
@@ -2576,8 +2493,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	NSInteger count = selectedFolders.count;
 	NSInteger index;
 	
-	for (index = 0; index < count; ++index)
-	{
+	for (index = 0; index < count; ++index) {
 		Folder * folder = selectedFolders[index];
         
         if (folder.isUnsubscribed) {
@@ -2601,18 +2517,14 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	NSInteger count = selectedFolders.count;
 	NSInteger index;
 	
-	for (index = 0; index < count; ++index)
-	{
+	for (index = 0; index < count; ++index) {
 		Folder * folder = selectedFolders[index];
 		NSInteger folderID = folder.itemId;
 		
-		if (loadFullHTMLPages)
-		{
+		if (loadFullHTMLPages) {
 			[folder setFlag:VNAFolderFlagLoadFullHTML];
             [[Database sharedManager] setFlag:VNAFolderFlagLoadFullHTML forFolder:folderID];
-		}
-		else
-		{
+		} else {
 			[folder clearFlag:VNAFolderFlagLoadFullHTML];
             [[Database sharedManager] clearFlag:VNAFolderFlagLoadFullHTML forFolder:folderID];
 		}
@@ -2643,8 +2555,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
 	Article * thisArticle = self.selectedArticle;
 	Folder * folder = (thisArticle) ? [db folderFromID:thisArticle.folderId] : [db folderFromID:self.foldersTree.actualSelection];
-	if (thisArticle || folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader)
+	if (thisArticle || folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader) {
 		[self openURLFromString:folder.homePage inPreferredBrowser:YES];
+	}
 }
 
 /* viewSourceHomePageInAlternateBrowser
@@ -2654,8 +2567,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
 	Article * thisArticle = self.selectedArticle;
 	Folder * folder = (thisArticle) ? [db folderFromID:thisArticle.folderId] : [db folderFromID:self.foldersTree.actualSelection];
-	if (thisArticle || folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader)
+	if (thisArticle || folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader) {
 		[self openURLFromString:folder.homePage inPreferredBrowser:NO];
+	}
 }
 
 - (IBAction)openHomePage:(id)sender
@@ -2732,22 +2646,22 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
 	Preferences * prefs = [Preferences standardPreferences];
 	NSString * alternateLocation;
-	if (prefs.openLinksInVienna)
-	{
+	if (prefs.openLinksInVienna) {
 		alternateLocation = getDefaultBrowser();
-		if (alternateLocation == nil)
+		if (alternateLocation == nil) {
 			alternateLocation = NSLocalizedString(@"External Browser", nil);
-	}
-	else
+		}
+	} else {
 		alternateLocation = NSRunningApplication.currentApplication.localizedName;
+	}
 	NSMenuItem * item = menuItemWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
-	if (item != nil)
-	{
+	if (item != nil) {
 		item.title = [NSString stringWithFormat:NSLocalizedString(@"Open Subscription Home Page in %@", nil), alternateLocation];
 	}
 	item = menuItemWithAction(@selector(viewArticlePagesInAlternateBrowser:));
-	if (item != nil)
+	if (item != nil) {
 		item.title = [NSString stringWithFormat:NSLocalizedString(@"Open Article Page in %@", nil), alternateLocation];
+	}
 }
 
 /* updateStatusBarFilterButtonVisibility
@@ -2757,11 +2671,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(void)updateStatusBarFilterButtonVisibility
 {
     id<Tab> activeBrowserTab = self.browser.activeTab;
-	if (activeBrowserTab)
-	{
+	if (activeBrowserTab) {
 		[self setFilterBarState:NO withAnimation:NO];
-	}
-	else {
+	} else {
 		[self setFilterBarState:[Preferences standardPreferences].showFilterBar withAnimation:NO];
 	}
 }
@@ -2776,27 +2688,20 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	Preferences * prefs = [Preferences standardPreferences];
 	
 	// START of rather verbose implementation of switching between "Search all articles" and "Search current web page".
-	if (activeBrowserTab)
-	{
+	if (activeBrowserTab) {
 		// If the current view is a browser view and "Search all articles" is the current SearchMethod, switch to "Search current webpage"
-		if ([prefs.searchMethod.displayName isEqualToString:[SearchMethod allArticlesSearchMethod].displayName])
-		{
-			for (NSMenuItem * menuItem in ((NSSearchFieldCell *)self.toolbarSearchField.cell).searchMenuTemplate.itemArray)
-			{
+		if ([prefs.searchMethod.displayName isEqualToString:[SearchMethod allArticlesSearchMethod].displayName]) {
+			for (NSMenuItem * menuItem in ((NSSearchFieldCell *)self.toolbarSearchField.cell).searchMenuTemplate.itemArray) {
 				if ([[menuItem.representedObject displayName] isEqualToString:[SearchMethod currentWebPageSearchMethod].displayName]) {
                     self.toolbarSearchField.placeholderString = [SearchMethod currentWebPageSearchMethod].displayName;
 					[Preferences standardPreferences].searchMethod = menuItem.representedObject;
 				}
 			}
 		}
-	}
-	else 
-	{
+	} else {
 		// If the current view is anything else "Search current webpage" is active, switch to "Search all articles".
-		if ([prefs.searchMethod.displayName isEqualToString:[SearchMethod currentWebPageSearchMethod].displayName])
-		{
-			for (NSMenuItem * menuItem in ((NSSearchFieldCell *)self.toolbarSearchField.cell).searchMenuTemplate.itemArray)
-			{
+		if ([prefs.searchMethod.displayName isEqualToString:[SearchMethod currentWebPageSearchMethod].displayName]) {
+			for (NSMenuItem * menuItem in ((NSSearchFieldCell *)self.toolbarSearchField.cell).searchMenuTemplate.itemArray) {
 				if ([[menuItem.representedObject displayName] isEqualToString:[SearchMethod allArticlesSearchMethod].displayName]) {
                     self.toolbarSearchField.placeholderString = [SearchMethod allArticlesSearchMethod].displayName;
 					[Preferences standardPreferences].searchMethod = menuItem.representedObject;
@@ -2818,12 +2723,12 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)setFocusToSearchField:(id)sender
 {
-	if (self.mainWindow.toolbar.visible && [self toolbarItemWithIdentifier:@"SearchItem"] && self.mainWindow.toolbar.displayMode != NSToolbarDisplayModeLabelOnly)
+	if (self.mainWindow.toolbar.visible && [self toolbarItemWithIdentifier:@"SearchItem"] && self.mainWindow.toolbar.displayMode != NSToolbarDisplayModeLabelOnly) {
 		[self.mainWindow makeFirstResponder:self.toolbarSearchField];
-	else
-	{
-		if (!searchPanel)
+	} else {
+		if (!searchPanel) {
 			searchPanel = [[SearchPanel alloc] init];
+		}
 		[searchPanel runSearchPanel:self.mainWindow];
 	}
 }
@@ -2893,8 +2798,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(IBAction)searchUsingToolbarTextField:(id)sender
 {
     if ([sender isKindOfClass:[NSMenuItem class]]) {
-        if (!searchPanel)
+        if (!searchPanel) {
             searchPanel = [[SearchPanel alloc] init];
+        }
         [searchPanel runSearchPanel:self.mainWindow];
     } else {
         self.searchString = self.toolbarSearchField.stringValue;
@@ -2941,8 +2847,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)searchArticlesWithString:(NSString *)theSearchString
 {
-	if (!theSearchString.vna_isBlank)
-	{
+	if (!theSearchString.vna_isBlank) {
         db.searchString = theSearchString;
         if (self.foldersTree.actualSelection != db.searchFolderId) {
 			[self.foldersTree selectFolder:db.searchFolderId];
@@ -3100,8 +3005,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	
 	// Send our Apple Event.
 	OSStatus err = AESendMessage(event.aeDesc, NULL, kAENoReply | kAEDontReconnect | kAENeverInteract | kAEDontRecord, kAEDefaultTimeout);
-	if (err != noErr) 
+	if (err != noErr) { 
 		NSLog(@"Error sending Apple Event: %li", (long)err );
+	}
 }
 
 #pragma mark Toolbar And Menu Bar Validation
@@ -3119,29 +3025,24 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	
 	*validateFlag = NO;
     
-	if (theAction == @selector(refreshAllSubscriptions:) || theAction == @selector(cancelAllRefreshesToolbar:))
-	{
+	if (theAction == @selector(refreshAllSubscriptions:) || theAction == @selector(cancelAllRefreshesToolbar:)) {
 		*validateFlag = !db.readOnly;
 		return YES;
 	}
 
-	if (theAction == @selector(newSubscription:))
-	{
+	if (theAction == @selector(newSubscription:)) {
 		*validateFlag = !db.readOnly && isMainWindowVisible;
 		return YES;
 	}
-	if (theAction == @selector(newSmartFolder:))
-	{
+	if (theAction == @selector(newSmartFolder:)) {
 		*validateFlag = !db.readOnly && isMainWindowVisible;
 		return YES;
 	}
-	if (theAction == @selector(skipFolder:))
-	{
+	if (theAction == @selector(skipFolder:)) {
 		*validateFlag = !db.readOnly && isAnyArticleView && isMainWindowVisible && db.countOfUnread > 0;
 		return YES;
 	}
-	if (theAction == @selector(getInfo:))
-	{
+	if (theAction == @selector(getInfo:)) {
 		Folder * folder = [db folderFromID:self.foldersTree.actualSelection];
 		*validateFlag = (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader) && isMainWindowVisible;
 		return YES;
@@ -3151,18 +3052,15 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		*validateFlag = folder.type == VNAFolderTypeOpenReader;
 		return YES;
 	}
-	if (theAction == @selector(viewArticlesTab:))
-	{
+	if (theAction == @selector(viewArticlesTab:)) {
 		*validateFlag = !isAnyArticleView;
 		return YES;
 	}
-	if (theAction == @selector(viewNextUnread:))
-	{
+	if (theAction == @selector(viewNextUnread:)) {
 		*validateFlag = db.countOfUnread > 0;
 		return YES;
 	}
-    if (theAction == @selector(markAllRead:))
-    {
+    if (theAction == @selector(markAllRead:)) {
         Folder *folder = [db folderFromID:self.foldersTree.actualSelection];
         if (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader) {
             *validateFlag = folder && folder.unreadCount > 0 && !db.readOnly && isMainWindowVisible;
@@ -3171,8 +3069,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         }
         return YES;
     }
-	if (theAction == @selector(goBack:))
-	{
+	if (theAction == @selector(goBack:)) {
         *validateFlag = isMainWindowVisible && isAnyArticleView && self.articleController.canGoBack;
         return YES;
 	}
@@ -3182,13 +3079,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	    		&& isMainWindowVisible && folder.type != VNAFolderTypeOpenReader;
 		return YES;
 	}
-	if (theAction == @selector(emptyTrash:))
-	{
+	if (theAction == @selector(emptyTrash:)) {
 		*validateFlag = !db.readOnly;
 		return YES;
 	}
-	if (theAction == @selector(searchUsingToolbarTextField:))
-	{
+	if (theAction == @selector(searchUsingToolbarTextField:)) {
 		*validateFlag = isMainWindowVisible;
 	}
 	return NO;
@@ -3200,8 +3095,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(BOOL)validateToolbarItem:(NSToolbarItem *)toolbarItem
 {
 	BOOL flag;
-	if (toolbarItem.action == @selector(showHideFilterBar:))
-	{
+	if (toolbarItem.action == @selector(showHideFilterBar:)) {
 		return self.mainWindow.visible && self.browser.activeTab == nil;
 	}
 	[self validateCommonToolbarAndMenuItems:toolbarItem.action validateFlag:&flag];
@@ -3220,65 +3114,44 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	BOOL isArticleView = self.browser.activeTab == nil;
 	BOOL flag;
 	
-	if ([self validateCommonToolbarAndMenuItems:theAction validateFlag:&flag])
-	{
+	if ([self validateCommonToolbarAndMenuItems:theAction validateFlag:&flag]) {
 		return flag;
 	}
-	if (theAction == @selector(printDocument:))
-	{
-		if (!isMainWindowVisible)
+	if (theAction == @selector(printDocument:)) {
+		if (!isMainWindowVisible) {
 			return NO;
-		if (isAnyArticleView)
-		{
-			return self.selectedArticle != nil;
 		}
-		else
-		{
+		if (isAnyArticleView) {
+			return self.selectedArticle != nil;
+		} else {
 			return !self.browser.activeTab.isLoading;
 		}
-	}
-	else if (theAction == @selector(goForward:))
-	{
+	} else if (theAction == @selector(goForward:)) {
         return isMainWindowVisible && isAnyArticleView && self.articleController.canGoForward;
-	}
-	else if (theAction == @selector(newGroupFolder:))
-	{
+	} else if (theAction == @selector(newGroupFolder:)) {
 		return !db.readOnly && isMainWindowVisible;
-	}
-	else if (theAction == @selector(showHideFilterBar:))
-	{
-		if ([Preferences standardPreferences].showFilterBar)
+	} else if (theAction == @selector(showHideFilterBar:)) {
+		if ([Preferences standardPreferences].showFilterBar) {
 			[menuItem setTitle:NSLocalizedString(@"Hide Filter Bar", nil)];
-		else
+		} else {
 			[menuItem setTitle:NSLocalizedString(@"Show Filter Bar", nil)];
+		}
 		return isMainWindowVisible && isAnyArticleView;
-	}
-	else if (theAction == @selector(makeTextStandardSize:))
-	{
+	} else if (theAction == @selector(makeTextStandardSize:)) {
         return self.browser.activeTab != nil;
-	}
-	else if (theAction == @selector(makeTextLarger:))
-	{
+	} else if (theAction == @selector(makeTextLarger:)) {
         return self.browser.activeTab != nil;
-	}
-	else if (theAction == @selector(makeTextSmaller:))
-	{
+	} else if (theAction == @selector(makeTextSmaller:)) {
         return self.browser.activeTab != nil;
-	}
-	else if (theAction == @selector(doViewColumn:))
-	{
+	} else if (theAction == @selector(doViewColumn:)) {
 		Field * field = menuItem.representedObject;
 		menuItem.state = field.visible ? NSControlStateValueOn : NSControlStateValueOff;
 		return isMainWindowVisible && isArticleView;
-	}
-	else if (theAction == @selector(doSelectStyle:))
-	{
+	} else if (theAction == @selector(doSelectStyle:)) {
 		NSString * styleName = menuItem.title;
 		menuItem.state = [styleName isEqualToString:[Preferences standardPreferences].displayStyle] ? NSControlStateValueOn : NSControlStateValueOff;
 		return isMainWindowVisible && isAnyArticleView;
-	}
-	else if (theAction == @selector(doSortColumn:))
-	{
+	} else if (theAction == @selector(doSortColumn:)) {
 		Field * field = menuItem.representedObject;
         if ([field.name isEqualToString:self.articleController.sortColumnIdentifier]) {
 			menuItem.state = NSControlStateValueOn;
@@ -3286,9 +3159,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			menuItem.state = NSControlStateValueOff;
         }
 		return isMainWindowVisible && isAnyArticleView;
-	}
-	else if (theAction == @selector(doSortDirection:))
-	{
+	} else if (theAction == @selector(doSortDirection:)) {
 		NSNumber * ascendingNumber = menuItem.representedObject;
 		BOOL ascending = ascendingNumber.integerValue;
         if (ascending == self.articleController.sortIsAscending) {
@@ -3297,193 +3168,134 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			menuItem.state = NSControlStateValueOff;
         }
 		return isMainWindowVisible && isAnyArticleView;
-	}
-	else if (theAction == @selector(unsubscribeFeed:))
-	{
+	} else if (theAction == @selector(unsubscribeFeed:)) {
 		Folder * folder = [db folderFromID:self.foldersTree.actualSelection];
-		if (folder)
-		{
-			if (folder.isUnsubscribed)
+		if (folder) {
+			if (folder.isUnsubscribed) {
 				[menuItem setTitle:NSLocalizedString(@"Resubscribe to Feed", nil)];
-			else
+			} else {
 				[menuItem setTitle:NSLocalizedString(@"Unsubscribe from Feed", nil)];
+			}
 		}
 		return folder && (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader) && !db.readOnly && isMainWindowVisible;
-	}
-	else if (theAction == @selector(useCurrentStyleForArticles:))
-	{
+	} else if (theAction == @selector(useCurrentStyleForArticles:)) {
 		Folder * folder = [db folderFromID:self.foldersTree.actualSelection];
-		if (folder && (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader) && !folder.loadsFullHTML)
+		if (folder && (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader) && !folder.loadsFullHTML) {
 			menuItem.state = NSControlStateValueOn;
-		else
+		} else {
 			menuItem.state = NSControlStateValueOff;
+		}
 		return folder && (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader) && !db.readOnly && isMainWindowVisible;
-	}
-	else if (theAction == @selector(useWebPageForArticles:))
-	{
+	} else if (theAction == @selector(useWebPageForArticles:)) {
 		Folder * folder = [db folderFromID:self.foldersTree.actualSelection];
-		if (folder && (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader) && folder.loadsFullHTML)
+		if (folder && (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader) && folder.loadsFullHTML) {
 			menuItem.state = NSControlStateValueOn;
-		else
+		} else {
 			menuItem.state = NSControlStateValueOff;
+		}
 		return folder && (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader) && !db.readOnly && isMainWindowVisible;
-	}
-	else if (theAction == @selector(deleteFolder:))
-	{
+	} else if (theAction == @selector(deleteFolder:)) {
 		Folder * folder = [db folderFromID:self.foldersTree.actualSelection];
-		if (folder.type == VNAFolderTypeSearch)
+		if (folder.type == VNAFolderTypeSearch) {
 			[menuItem setTitle:NSLocalizedString(@"Delete", @"Title of a menu item")];
-		else
+		} else {
 			[menuItem setTitle:NSLocalizedString(@"Delete…", @"Title of a menu item")];
+		}
 		return folder && folder.type != VNAFolderTypeTrash && !db.readOnly && isMainWindowVisible;
-	}
-	else if (theAction == @selector(refreshSelectedSubscriptions:))
-	{
+	} else if (theAction == @selector(refreshSelectedSubscriptions:)) {
 		Folder * folder = [db folderFromID:self.foldersTree.actualSelection];
 		return folder && (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeGroup || folder.type == VNAFolderTypeOpenReader) && !db.readOnly;
-	}
-	else if (theAction == @selector(refreshAllFolderIcons:))
-	{
+	} else if (theAction == @selector(refreshAllFolderIcons:)) {
 		return !self.connecting && !db.readOnly;
-	}
-	else if (theAction == @selector(renameFolder:))
-	{
+	} else if (theAction == @selector(renameFolder:)) {
 		Folder * folder = [db folderFromID:self.foldersTree.actualSelection];
 		return folder && !db.readOnly && isMainWindowVisible;
-	}
-	else if (theAction == @selector(markAllSubscriptionsRead:))
-	{
+	} else if (theAction == @selector(markAllSubscriptionsRead:)) {
 		return !db.readOnly && isMainWindowVisible && db.countOfUnread > 0;
-	}
-	else if (theAction == @selector(importSubscriptions:))
-	{
+	} else if (theAction == @selector(importSubscriptions:)) {
 		return !db.readOnly && isMainWindowVisible;
-	}
-	else if (theAction == @selector(cancelAllRefreshes:))
-	{
+	} else if (theAction == @selector(cancelAllRefreshes:)) {
 		return !db.readOnly && self.connecting;
-	}
-	else if ((theAction == @selector(viewSourceHomePage:)) || (theAction == @selector(viewSourceHomePageInAlternateBrowser:)))
-	{
+	} else if ((theAction == @selector(viewSourceHomePage:)) || (theAction == @selector(viewSourceHomePageInAlternateBrowser:))) {
 		Article * thisArticle = self.selectedArticle;
 		Folder * folder = (thisArticle) ? [db folderFromID:thisArticle.folderId] : [db folderFromID:self.foldersTree.actualSelection];
 		return folder && (thisArticle || folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader) && (folder.homePage && !folder.homePage.vna_isBlank && isMainWindowVisible);
-	}
-	else if ((theAction == @selector(viewArticlePages:)) || (theAction == @selector(viewArticlePagesInAlternateBrowser:)))
-	{
+	} else if ((theAction == @selector(viewArticlePages:)) || (theAction == @selector(viewArticlePagesInAlternateBrowser:))) {
 		Article * thisArticle = self.selectedArticle;
-		if (thisArticle != nil)
+		if (thisArticle != nil) {
 			return (thisArticle.link && !thisArticle.link.vna_isBlank && isMainWindowVisible);
+		}
 		return NO;
-	}
-	else if (theAction == @selector(exportSubscriptions:))
-	{
+	} else if (theAction == @selector(exportSubscriptions:)) {
 		return isMainWindowVisible;
-	}
-	else if (theAction == @selector(reindexDatabase:))
-	{
+	} else if (theAction == @selector(reindexDatabase:)) {
 		return !self.connecting && !db.readOnly && isMainWindowVisible;
-	}
-	else if (theAction == @selector(editFolder:))
-	{
+	} else if (theAction == @selector(editFolder:)) {
 		Folder * folder = [db folderFromID:self.foldersTree.actualSelection];
 		return folder && (folder.type == VNAFolderTypeSmart || folder.type == VNAFolderTypeRSS) && !db.readOnly && isMainWindowVisible;
-	}
-	else if (theAction == @selector(restoreMessage:))
-	{
+	} else if (theAction == @selector(restoreMessage:)) {
 		Folder * folder = [db folderFromID:self.foldersTree.actualSelection];
 		return folder.type == VNAFolderTypeTrash && self.selectedArticle != nil && !db.readOnly && isMainWindowVisible;
-	}
-	else if (theAction == @selector(previousTab:))
-	{
+	} else if (theAction == @selector(previousTab:)) {
 		return isMainWindowVisible && self.browser.browserTabCount > 1;
-	}
-	else if (theAction == @selector(nextTab:))
-	{
+	} else if (theAction == @selector(nextTab:)) {
 		return isMainWindowVisible && self.browser.browserTabCount > 1;
-	}
-	else if (theAction == @selector(closeActiveTab:))
-	{
+	} else if (theAction == @selector(closeActiveTab:)) {
 		return isMainWindowVisible && !isArticleView;
-	}
-	else if (theAction == @selector(closeAllTabs:))
-	{
+	} else if (theAction == @selector(closeAllTabs:)) {
 		return isMainWindowVisible && self.browser.browserTabCount > 1;
-	}
-	else if (theAction == @selector(reloadPage:))
-	{
+	} else if (theAction == @selector(reloadPage:)) {
 		return self.browser.activeTab.isLoading;
-	}
-	else if (theAction == @selector(stopReloadingPage:))
-	{
+	} else if (theAction == @selector(stopReloadingPage:)) {
 		return self.browser.activeTab.isLoading;
-	}
-	else if (theAction == @selector(keepFoldersArranged:))
-	{
+	} else if (theAction == @selector(keepFoldersArranged:)) {
 		Preferences * prefs = [Preferences standardPreferences];
 		menuItem.state = (prefs.self.foldersTreeSortMethod == menuItem.tag) ? NSControlStateValueOn : NSControlStateValueOff;
 		return isMainWindowVisible;
-	}
-	else if (theAction == @selector(setFocusToSearchField:))
-	{
+	} else if (theAction == @selector(setFocusToSearchField:)) {
 		return isMainWindowVisible;
-	}
-	else if (theAction == @selector(reportLayout:))
-	{
+	} else if (theAction == @selector(reportLayout:)) {
 		Preferences * prefs = [Preferences standardPreferences];
 		menuItem.state = (prefs.layout == VNALayoutReport) ? NSControlStateValueOn : NSControlStateValueOff;
 		return isMainWindowVisible;
-	}
-	else if (theAction == @selector(condensedLayout:))
-	{
+	} else if (theAction == @selector(condensedLayout:)) {
 		Preferences * prefs = [Preferences standardPreferences];
 		menuItem.state = (prefs.layout == VNALayoutCondensed) ? NSControlStateValueOn : NSControlStateValueOff;
 		return isMainWindowVisible;
-	}
-	else if (theAction == @selector(unifiedLayout:))
-	{
+	} else if (theAction == @selector(unifiedLayout:)) {
 		Preferences * prefs = [Preferences standardPreferences];
 		menuItem.state = (prefs.layout == VNALayoutUnified) ? NSControlStateValueOn : NSControlStateValueOff;
 		return isMainWindowVisible;
-	}
-	else if (theAction == @selector(markFlagged:))
-	{
+	} else if (theAction == @selector(markFlagged:)) {
 		Article * thisArticle = self.selectedArticle;
-		if (thisArticle != nil)
-		{
-			if (thisArticle.flagged)
+		if (thisArticle != nil) {
+			if (thisArticle.flagged) {
 				[menuItem setTitle:NSLocalizedString(@"Mark Unflagged", nil)];
-			else
+			} else {
 				[menuItem setTitle:NSLocalizedString(@"Mark Flagged", nil)];
+			}
 		}
 		return (thisArticle != nil && !db.readOnly && isMainWindowVisible);
-	}
-	else if (theAction == @selector(markRead:))
-	{
+	} else if (theAction == @selector(markRead:)) {
 		Article * thisArticle = self.selectedArticle;
 		return (thisArticle != nil && !db.readOnly && isMainWindowVisible);
-	}
-	else if (theAction == @selector(markUnread:))
-	{
+	} else if (theAction == @selector(markUnread:)) {
 		Article * thisArticle = self.selectedArticle;
 		return (thisArticle != nil && !db.readOnly && isMainWindowVisible);
-	}
-	else if (theAction == @selector(downloadEnclosure:))
-	{
+	} else if (theAction == @selector(downloadEnclosure:)) {
         if (self.articleController.markedArticleRange.count > 1) {
 			[menuItem setTitle:NSLocalizedString(@"Download Enclosures", @"Title of a menu item")];
         } else {
 			[menuItem setTitle:NSLocalizedString(@"Download Enclosure", @"Title of a menu item")];
         }
 		return (self.selectedArticle.hasEnclosure && isMainWindowVisible);
-	}
-	else if (theAction == @selector(setSearchMethod:))
-	{
+	} else if (theAction == @selector(setSearchMethod:)) {
 		Preferences * prefs = [Preferences standardPreferences];
-		if ([prefs.searchMethod.displayName isEqualToString:[menuItem.representedObject displayName]])
+		if ([prefs.searchMethod.displayName isEqualToString:[menuItem.representedObject displayName]]) {
 			menuItem.state = NSControlStateValueOn;
-		else 
+		} else { 
 			menuItem.state = NSControlStateValueOff;
+		}
 		return YES;
 	} else if (theAction == @selector(openVienna:)) {
         return self.mainWindow.isKeyWindow == false;

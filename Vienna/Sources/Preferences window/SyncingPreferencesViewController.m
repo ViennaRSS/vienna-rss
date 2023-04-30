@@ -69,14 +69,14 @@ static NSString *syncingUser;
     }
     serverURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@", syncScheme, serverAndPath]];
     NSString * thePassword = [VNAKeychain getGenericPasswordFromKeychain:syncingUser serviceName:@"Vienna sync"];
-    if (!thePassword)
+    if (!thePassword) {
         thePassword=@"";
+    }
     username.stringValue = syncingUser;
     openReaderHost.stringValue = serverAndPath;
     password.stringValue = thePassword;
     
-    if(!prefs.syncGoogleReader)
-    {
+    if (!prefs.syncGoogleReader) {
         [openReaderSource setEnabled:NO];
         [openReaderHost setEnabled:NO];
         [username setEnabled:NO];
@@ -88,38 +88,32 @@ static NSString *syncingUser;
     // is a dictionary with display names which act as keys, host names and a help text
     // regarding credentials to enter. This allows us to support additional service
     // providers without having to write new code.
-    if (!sourcesDict)
-    {
+    if (!sourcesDict) {
         NSBundle *thisBundle = [NSBundle bundleForClass:[self class]];
         NSString * pathToPList = [thisBundle pathForResource:@"KnownSyncServers" ofType:@"plist"];
-        if (pathToPList != nil)
-        {
+        if (pathToPList != nil) {
             sourcesDict = [NSDictionary dictionaryWithContentsOfFile:pathToPList];
             [openReaderSource removeAllItems];
-            if (sourcesDict)
-            {
+            if (sourcesDict) {
                 [openReaderSource setEnabled:YES];
                 BOOL match = NO;
-                for (NSString * key in sourcesDict)
-                {
+                for (NSString * key in sourcesDict) {
                     [openReaderSource addItemWithTitle:key];
                     NSDictionary * itemDict = [sourcesDict valueForKey:key];
-                    if ([serverAndPath isEqualToString:[itemDict valueForKey:@"Address"]])
-                    {
+                    if ([serverAndPath isEqualToString:[itemDict valueForKey:@"Address"]]) {
                         [openReaderSource selectItemWithTitle:key];
                         [self changeSource:nil];
                         match = YES;
                     }
                 }
-                if (!match)
-                {
+                if (!match) {
                     [openReaderSource selectItemWithTitle:NSLocalizedString(@"Other", nil)];
                     openReaderHost.stringValue = serverURL.absoluteString;
                 }
             }
-        }
-        else
+        } else {
             [openReaderSource setEnabled:NO];
+        }
     }
     
 }
@@ -134,8 +128,7 @@ static NSString *syncingUser;
     prefs.syncScheme = syncScheme;
     prefs.syncServer = serverAndPath;
     prefs.syncingUser = syncingUser;
-    if(syncButton.state == NSControlStateValueOn && _credentialsChanged)
-    {
+    if (syncButton.state == NSControlStateValueOn && _credentialsChanged) {
         [[OpenReader sharedManager] resetAuthentication];
         [[OpenReader sharedManager] loadSubscriptions];
     }
@@ -155,8 +148,7 @@ static NSString *syncingUser;
         [username setEnabled:YES];
         [password setEnabled:YES];
         _credentialsChanged = YES;
-    }
-    else {
+    } else {
         [openReaderSource setEnabled:NO];
         [openReaderHost setEnabled:NO];
         [username setEnabled:NO];
@@ -171,15 +163,18 @@ static NSString *syncingUser;
     NSString * key = readerItem.title;
     NSDictionary * itemDict = [sourcesDict valueForKey:key];
     NSString* hostName = [itemDict valueForKey:@"Address"];
-    if (!hostName)
+    if (!hostName) {
         hostName=@"";
+    }
     NSString* hint = [itemDict valueForKey:@"Hint"];
-    if (!hint)
+    if (!hint) {
         hint=@"";
+    }
     openReaderHost.stringValue = hostName;
     credentialsInfoText.stringValue = hint;
-    if (sender != nil)	//user action
+    if (sender != nil) {	//user action
         [self handleServerTextDidChange:nil];
+    }
 }
 
 - (IBAction)visitWebsite:(id)sender
@@ -209,12 +204,10 @@ static NSString *syncingUser;
         serverAndPath = theString;
     }
     serverURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@", syncScheme, serverAndPath]];
-    if ( !((openReaderHost.stringValue).vna_isBlank || (username.stringValue).vna_isBlank) )
-    {
+    if ( !((openReaderHost.stringValue).vna_isBlank || (username.stringValue).vna_isBlank) ) {
         // can we get password via keychain ?
         NSString * thePass = [VNAKeychain getWebPasswordFromKeychain:username.stringValue url:[NSString stringWithFormat:@"%@://%@", syncScheme, serverURL.host]];
-        if (!thePass.vna_isBlank)
-        {
+        if (!thePass.vna_isBlank) {
             password.stringValue = thePass;
             [VNAKeychain setGenericPasswordInKeychain:thePass username:username.stringValue service:@"Vienna sync"];
         }
@@ -231,12 +224,10 @@ static NSString *syncingUser;
     _credentialsChanged = YES;
     Preferences *prefs = [Preferences standardPreferences];
     [VNAKeychain deleteGenericPasswordInKeychain:prefs.syncingUser service:@"Vienna sync"];
-    if ( !((openReaderHost.stringValue).vna_isBlank || (username.stringValue).vna_isBlank) )
-    {
+    if ( !((openReaderHost.stringValue).vna_isBlank || (username.stringValue).vna_isBlank) ) {
         // can we get password via keychain ?
         NSString * thePass = [VNAKeychain getWebPasswordFromKeychain:username.stringValue url:[NSString stringWithFormat:@"%@://%@", syncScheme, serverURL.host]];
-        if (!thePass.vna_isBlank)
-        {
+        if (!thePass.vna_isBlank) {
             password.stringValue = thePass;
             [VNAKeychain setGenericPasswordInKeychain:password.stringValue username:username.stringValue service:@"Vienna sync"];
         }
@@ -257,8 +248,7 @@ static NSString *syncingUser;
 
 -(void)handleGoogleAuthFailed:(NSNotification *)nc
 {    
-    if (self.view.window.visible)
-    {
+    if (self.view.window.visible) {
         NSAlert *alert = [NSAlert new];
         alert.messageText = NSLocalizedString(@"Open Reader Authentication Failed",nil);
         if (![nc.object isEqualToString:@""]) {

@@ -155,21 +155,20 @@
     // Next, add the list of all registered link handlers under the /Applications folder
     // except for the registered application.
     CFArrayRef cfArrayOfApps = LSCopyApplicationURLsForURL((__bridge CFURLRef)testURL, kLSRolesAll);
-    if (cfArrayOfApps != nil)
-    {
+    if (cfArrayOfApps != nil) {
         CFIndex count = CFArrayGetCount(cfArrayOfApps);
         NSInteger index;
         
-        for (index = 0; index < count; ++index)
-        {
+        for (index = 0; index < count; ++index) {
             NSURL * appURL = (NSURL *)CFArrayGetValueAtIndex(cfArrayOfApps, index);
-            if (appURL.fileURL && [appURL.path hasPrefix:@"/Applications/"])
-            {
+            if (appURL.fileURL && [appURL.path hasPrefix:@"/Applications/"]) {
                 NSString * appName = [[NSFileManager defaultManager] displayNameAtPath:appURL.path];
-                if ([appName isEqualToString:ourAppName])
+                if ([appName isEqualToString:ourAppName]) {
                     onTheList = YES;
-                if (appName != nil && ![appName isEqualToString:regAppName])
+                }
+                if (appName != nil && ![appName isEqualToString:regAppName]) {
                     [linksHandler addItemWithTitle:appName image:[[NSWorkspace sharedWorkspace] iconForFile:appURL.path]];
+                }
                 
                 [appToPathMap setValue:appURL forKey:appName];
             }
@@ -179,8 +178,7 @@
     
     // Were we on the list? If not, add ourselves
     // complete with our icon.
-    if (!onTheList)
-    {
+    if (!onTheList) {
         [linksHandler addItemWithTitle:ourAppName image:[[NSWorkspace sharedWorkspace] iconForFile:appBundle.bundlePath]];
         
         NSURL * fileURL = [[NSURL alloc] initFileURLWithPath:appBundle.bundlePath];
@@ -202,8 +200,9 @@
 -(IBAction)changeExpireDuration:(id)sender
 {
     NSMenuItem * selectedItem = expireDuration.selectedItem;
-    if (selectedItem != nil)
+    if (selectedItem != nil) {
         [Preferences standardPreferences].autoExpireDuration = selectedItem.tag;
+    }
 }
 
 /* changeOpenLinksInBackground
@@ -304,10 +303,8 @@
 -(IBAction)selectDefaultLinksHandler:(id)sender
 {
     NSMenuItem * selectedItem = linksHandler.selectedItem;
-    if (selectedItem != nil)
-    {
-        if (selectedItem.tag == -1)
-        {
+    if (selectedItem != nil) {
+        if (selectedItem.tag == -1) {
             [self handleLinkSelector:self];
             return;
         }
@@ -336,8 +333,9 @@
         [panel orderOut:self];
         [prefPaneWindow makeKeyAndOrderFront:self];
         
-        if (returnCode == NSModalResponseOK)
+        if (returnCode == NSModalResponseOK) {
             [self setDefaultApplicationForFeedScheme:panel.URL];
+        }
         [self refreshLinkHandler];
     }];
 }
@@ -389,12 +387,9 @@
 {
     Preferences * prefs = [Preferences standardPreferences];
     NSInteger currentNotificationValue = prefs.newArticlesNotification;
-    if ([sender state] == NSControlStateValueOn)
-    {
+    if ([sender state] == NSControlStateValueOn) {
         prefs.newArticlesNotification = currentNotificationValue | VNANewArticlesNotificationBounce;
-    }
-    else
-    {
+    } else {
         prefs.newArticlesNotification = currentNotificationValue & ~VNANewArticlesNotificationBounce;
     }
 }

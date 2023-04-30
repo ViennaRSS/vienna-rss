@@ -54,8 +54,7 @@
  */
 -(instancetype)init
 {
-	if ((self = [super init]) != nil)
-	{
+	if ((self = [super init]) != nil) {
 		controllerList = [[NSMutableDictionary alloc] initWithCapacity:10];
 		
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
@@ -85,8 +84,7 @@
 	InfoPanelController * infoWindow;
 	
 	infoWindow = controllerList[folderNumber];
-	if (infoWindow != nil)
-	{
+	if (infoWindow != nil) {
 		[infoWindow close];
 		[controllerList removeObjectForKey:folderNumber];
 	}
@@ -103,8 +101,9 @@
 	InfoPanelController * infoWindow;
 	
 	infoWindow = controllerList[folderNumber];
-	if (infoWindow != nil)
+	if (infoWindow != nil) {
 		[infoWindow updateFolder];
+	}
 }
 
 /**
@@ -119,8 +118,7 @@
 	InfoPanelController * infoWindow;
 
 	infoWindow = controllerList[folderNumber];
-	if (infoWindow == nil)
-	{
+	if (infoWindow == nil) {
 		infoWindow = [[InfoPanelController alloc] initWithFolder:folderId];
         block(infoWindow);
 		controllerList[folderNumber] = infoWindow;

@@ -35,8 +35,7 @@
  */
 -(void)setDelegate:(id)delegate
 {
-    if (delegate != self.delegate)
-	{
+    if (delegate != self.delegate) {
         super.delegate = delegate;
 		delegateImplementsShouldDisplayToolTips = ((delegate && [delegate respondsToSelector:@selector(tableViewShouldDisplayCellToolTips:)]) ? YES : NO);
 		delegateImplementsToolTip = ((delegate && [delegate respondsToSelector:@selector(tableView:toolTipForTableColumn:row:)]) ? YES : NO);
@@ -59,8 +58,7 @@
 -(void)resetCursorRects
 {
 	[self removeAllToolTips];
-    if (delegateImplementsShouldDisplayToolTips && [(id)self.delegate tableViewShouldDisplayCellToolTips:self])
-	{
+    if (delegateImplementsShouldDisplayToolTips && [(id)self.delegate tableViewShouldDisplayCellToolTips:self]) {
 		NSRect visibleRect = self.visibleRect;
 		NSIndexSet *columnIndexes = [self columnIndexesInRect:visibleRect];
 		NSRange rowRange = [self rowsInRect:visibleRect];
@@ -68,10 +66,8 @@
 		NSInteger col, row;
 		
 		col = columnIndexes.firstIndex;
-		while (col != NSNotFound)
-		{
-			for (row = rowRange.location; row < rowRange.location + rowRange.length; row++)
-			{
+		while (col != NSNotFound) {
+			for (row = rowRange.location; row < rowRange.location + rowRange.length; row++) {
 				frameOfCell = [self frameOfCellAtColumn:col row:row];
 				[self addToolTipRect:frameOfCell owner:self userData:NULL];
 			}
@@ -96,8 +92,9 @@
  */
 -(NSMenu *)menuForEvent:(NSEvent *)theEvent
 {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(tableView:menuWillAppear:)])
+    if (self.delegate && [self.delegate respondsToSelector:@selector(tableView:menuWillAppear:)]) {
         [(id)self.delegate tableView:self menuWillAppear:theEvent];
+    }
 	return self.selectedRow >= 0 ? self.menu : nil;
 }
 

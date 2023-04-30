@@ -42,8 +42,7 @@
  */
 -(instancetype)initWithDatabase:(Database *)newDb
 {
-	if ((self = [super init]) != nil)
-	{
+	if ((self = [super init]) != nil) {
 		db = newDb;
 		sourcesDict = nil;
 		editFolderId = -1;
@@ -140,8 +139,7 @@
 	[self loadRSSFeedBundle];
 
 	Folder * folder = [db folderFromID:folderId];
-	if (folder != nil)
-	{
+	if (folder != nil) {
 		editFeedURL.stringValue = folder.feedURL;
 		[self enableSaveButton];
 		editFolderId = folderId;
@@ -156,8 +154,7 @@
  */
 -(void)loadRSSFeedBundle
 {
-	if (!editRSSFeedWindow || !newRSSFeedWindow)
-	{
+	if (!editRSSFeedWindow || !newRSSFeedWindow) {
 		NSArray * objects;
 		[[NSBundle bundleForClass:[self class]] loadNibNamed:@"RSSFeed" owner:self topLevelObjects:&objects];
 		self.topObjects = objects;
@@ -174,19 +171,18 @@
 	NSURL * rssFeedURL;
 	NSString * feedURLString = (feedURL.stringValue).vna_trimmed;
 	// Replace feed:// with http:// if necessary
-	if ([feedURLString hasPrefix:@"feed://"])
+	if ([feedURLString hasPrefix:@"feed://"]) {
 		feedURLString = [NSString stringWithFormat:@"http://%@", [feedURLString substringFromIndex:7]];
+	}
 
 	// Format the URL based on the selected feed source.
-	if (sourcesDict != nil)
-	{
+	if (sourcesDict != nil) {
 		NSString * selectedSource = (NSString *)feedSource.selectedItem.representedObject;
 		NSDictionary * feedSourceType = [sourcesDict valueForKey:selectedSource];
 		NSString * linkTemplate = [feedSourceType valueForKey:@"LinkTemplate"];
         if ([selectedSource.lowercaseString isEqualToString:@"local file"]) {
             rssFeedURL = [NSURL fileURLWithPath:feedURLString.stringByExpandingTildeInPath];
-        }
-        else if (linkTemplate.length > 0) {
+        } else if (linkTemplate.length > 0) {
             rssFeedURL = [NSURL URLWithString:[NSString stringWithFormat:linkTemplate, feedURLString]];
         }
 	}
@@ -197,8 +193,7 @@
 	NSAssert(rssFeedURL != nil, @"No valid URL verified to attempt subscription !");
 
  	// Check if we have already subscribed to this feed by seeing if a folder exists in the db
-	if ([db folderFromFeedURL:rssFeedURL.absoluteString] != nil)
-	{
+	if ([db folderFromFeedURL:rssFeedURL.absoluteString] != nil) {
         NSAlert *alert = [NSAlert new];
         alert.messageText = NSLocalizedString(@"Error", @"Already subscribed title");
         alert.informativeText = NSLocalizedString(@"You are already subscribed to that feed", @"You are already subscribed to that feed");
@@ -294,17 +289,16 @@
 	NSMenuItem * feedSourceItem = feedSource.selectedItem;
 	NSString * linkTitleString = nil;
 	BOOL showButton = NO;
-	if (feedSourceItem != nil)
-	{
+	if (feedSourceItem != nil) {
 		NSDictionary * itemDict = [sourcesDict valueForKey:feedSourceItem.title];
-		if (itemDict != nil)
-		{
+		if (itemDict != nil) {
 			linkTitleString = [itemDict valueForKey:@"LinkName"];
 			showButton = [itemDict valueForKey:@"SiteHomePage"] != nil;
 		}
 	}
-	if (linkTitleString == nil)
+	if (linkTitleString == nil) {
 		linkTitleString = @"Link";
+	}
 	linkTitle.stringValue = [NSString stringWithFormat:@"%@:", linkTitleString];
 	siteHomePageButton.hidden = !showButton;
 }
@@ -314,11 +308,9 @@
 -(void)doShowSiteHomePage:(id)sender
 {
 	NSMenuItem * feedSourceItem = feedSource.selectedItem;
-	if (feedSourceItem != nil)
-	{
+	if (feedSourceItem != nil) {
 		NSDictionary * itemDict = [sourcesDict valueForKey:feedSourceItem.title];
-		if (itemDict != nil)
-		{
+		if (itemDict != nil) {
 			NSString * siteHomePageURL = [itemDict valueForKey:@"SiteHomePage"];
 			NSURL * url = [[NSURL alloc] initWithString:siteHomePageURL];
 			[[NSWorkspace sharedWorkspace] openURL:url];

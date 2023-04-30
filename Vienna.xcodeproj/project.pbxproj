@@ -92,7 +92,7 @@
 		37C650801816EBAD3C0D9DBF /* NSURL+CaminoExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C65C3C01B0F8EE0C0E5A52 /* NSURL+CaminoExtensions.m */; };
 		3A0F2A55258FBB8B0036397F /* TabbedBrowserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FDF6FBD218A266A002F77E9 /* TabbedBrowserViewController.xib */; };
 		3A0F2A9E258FCB780036397F /* BrowserTab.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FDF6FBE218A266A002F77E9 /* BrowserTab.xib */; };
-		3A171C00210B551B00B80FBB /* TRVSURLSessionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A171BF1210B551B00B80FBB /* TRVSURLSessionOperation.m */; settings = {COMPILER_FLAGS = "-Wno-completion-handler -Wno-idiomatic-parentheses"; }; };
+		3A171C00210B551B00B80FBB /* TRVSURLSessionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A171BF1210B551B00B80FBB /* TRVSURLSessionOperation.m */; settings = {COMPILER_FLAGS = "-Wno-completion-handler -Wno-idiomatic-parentheses -Xclang -analyzer-tidy-checker=-readability-braces-around-statements"; }; };
 		3A4DBEC71733C207006DD2AB /* ArticleCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4DBEC61733C206006DD2AB /* ArticleCellView.m */; };
 		3A500122259A63CB00AA6AAD /* ArticleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4A1BE25852C0E005FF227 /* ArticleConverter.swift */; };
 		3A500129259A640D00AA6AAD /* ArticleStyleLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2280372271B18A005D1023 /* ArticleStyleLoader.swift */; };
@@ -133,7 +133,7 @@
 		435028B7165DE9E00018EDB7 /* UnifiedDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350288E165DE9DF0018EDB7 /* UnifiedDisplayView.m */; };
 		435028B8165DE9E00018EDB7 /* URLHandlerCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502890165DE9DF0018EDB7 /* URLHandlerCommand.m */; };
 		435028B9165DE9E00018EDB7 /* ViennaApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502892165DE9DF0018EDB7 /* ViennaApp.m */; };
-		43BA97FE1664804E00B95F35 /* DSClickableURLTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E09F2C111192B7003B530A /* DSClickableURLTextField.m */; };
+		43BA97FE1664804E00B95F35 /* DSClickableURLTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E09F2C111192B7003B530A /* DSClickableURLTextField.m */; settings = {COMPILER_FLAGS = "-Xclang -analyzer-tidy-checker=-readability-braces-around-statements"; }; };
 		4D36B44B1D37F91E009736C1 /* VNAArticleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D36B44A1D37F91E009736C1 /* VNAArticleTests.m */; };
 		664F87C713C62DFE00E266DE /* OpenReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 664F87C613C62DFE00E266DE /* OpenReader.m */; };
 		793C95331C42A0DD00984D4E /* FoldersFilterable.m in Sources */ = {isa = PBXBuildFile; fileRef = 793C95321C42A0DD00984D4E /* FoldersFilterable.m */; };
@@ -3136,6 +3136,8 @@
 					"-Wunreachable-code-break",
 					"-Wunreachable-code-return",
 					"-Wunused-macros",
+					"-Xclang",
+					"-analyzer-tidy-checker=readability-braces-around-statements,readability-misleading-indentation",
 				);
 			};
 			name = Development;
@@ -3174,6 +3176,8 @@
 					"-Wunreachable-code-break",
 					"-Wunreachable-code-return",
 					"-Wunused-macros",
+					"-Xclang",
+					"-analyzer-tidy-checker=readability-braces-around-statements,readability-misleading-indentation",
 				);
 			};
 			name = Deployment;

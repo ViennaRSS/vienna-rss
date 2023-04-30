@@ -53,8 +53,7 @@ static NSArray * iconArray = nil;
  */
 -(instancetype)initWithId:(NSInteger)newId parentId:(NSInteger)newIdParent name:(NSString *)newName type:(VNAFolderType)newType
 {
-	if ((self = [super init]) != nil)
-	{
+	if ((self = [super init]) != nil) {
 		_itemId = newId;
 		_parentId = newIdParent;
 		_firstChildId = 0;
@@ -221,8 +220,7 @@ static NSArray * iconArray = nil;
 -(void)setImage:(NSImage *)image
 {
     NSImage *iconImage = [image copy];
-	if (self.feedURL != nil && iconImage != nil)
-	{
+	if (self.feedURL != nil && iconImage != nil) {
 		NSString * homePageSiteRoot;
 		homePageSiteRoot = self.homePage.vna_host.vna_convertStringToValidPath;
 		[[FolderImageCache defaultCache] addImage:iconImage forURL:homePageSiteRoot];
@@ -266,10 +264,10 @@ static NSArray * iconArray = nil;
  */
 -(NSString *)password
 {
-	if (!self.hasPassword)
-	{
-		if (self.username != nil && self.feedURL != nil)
+	if (!self.hasPassword) {
+		if (self.username != nil && self.feedURL != nil) {
 			[self.attributes setValue:[VNAKeychain getPasswordFromKeychain:self.username url:self.feedURL] forKey:@"Password"];
+		}
 		self.hasPassword = YES;
 	}
 	return [self.attributes valueForKey:@"Password"];
@@ -281,8 +279,9 @@ static NSArray * iconArray = nil;
 -(void)setPassword:(NSString *)password
 {
 	NSString *newPassword = [password copy];
-	if (self.username != nil && self.feedURL != nil)
+	if (self.username != nil && self.feedURL != nil) {
 		[VNAKeychain setPasswordInKeychain:newPassword username:self.username url:self.feedURL];
+	}
 	[self.attributes setValue:newPassword forKey:@"Password"];
 	self.hasPassword = YES;
 }
@@ -447,8 +446,7 @@ static NSArray * iconArray = nil;
  */
 -(NSUInteger)indexOfArticle:(Article *)article
 {
-    @synchronized(self)
-    {
+    @synchronized(self) {
         [self ensureCache];
         return [self.cachedGuids indexOfObject:article.guid];
     }
@@ -458,8 +456,7 @@ static NSArray * iconArray = nil;
  */
 -(Article *)articleFromGuid:(NSString *)guid
 {
-    @synchronized(self)
-    {
+    @synchronized(self) {
         [self ensureCache];
 	    return [self.cachedArticles objectForKey:guid];
 	}
@@ -474,8 +471,7 @@ static NSArray * iconArray = nil;
  */
 -(BOOL)createArticle:(Article *)article guidHistory:(NSArray *)guidHistory
 {
-@synchronized(self)
-  {
+@synchronized(self) {
     // Prime the article cache
     [self ensureCache];
 
@@ -487,62 +483,47 @@ static NSArray * iconArray = nil;
     // We're going to ignore here the problem of feeds re-using guids, which is very naughty! Bad feed!
     Article * existingArticle = [self.cachedArticles objectForKey:articleGuid];
 
-    if (existingArticle == nil)
-    {
-        if ([guidHistory containsObject:articleGuid])
+    if (existingArticle == nil) {
+        if ([guidHistory containsObject:articleGuid]) {
             return NO; // Article has been deleted and removed from database, so ignore
-        else
-        {
+        } else {
             // add the article as new
             BOOL success = [[Database sharedManager] addArticle:article toFolder:self.itemId];
-            if(success)
-            {
+            if (success) {
                 article.status = ArticleStatusNew;
                 // add to the cache
                 NSString * guid = article.guid;
 	            [self.cachedArticles setObject:article forKey:[NSString stringWithString:guid]];
 	            [self.cachedGuids addObject:guid];
-                if(!article.read)
+                if(!article.read) {
                     adjustment = 1;
-            }
-            else
+                }
+            } else {
                 return NO;
+            }
         }
-    }
-    else if (existingArticle.deleted)
-    {
+    } else if (existingArticle.deleted) {
         return NO;
-    }
-    else if (![[Preferences standardPreferences] boolForKey:MAPref_CheckForUpdatedArticles])
-    {
+    } else if (![[Preferences standardPreferences] boolForKey:MAPref_CheckForUpdatedArticles]) {
         return NO;
-    }
-    else
-    {
+    } else {
         BOOL success = [[Database sharedManager] updateArticle:existingArticle ofFolder:self.itemId withArticle:article];
-        if (success)
-        {
+        if (success) {
             // Update folder unread count if necessary
-            if (existingArticle.read)
-            {
+            if (existingArticle.read) {
                 adjustment = 1;
                 article.status = ArticleStatusNew;
                 [existingArticle markRead:NO];
-            }
-            else
-            {
+            } else {
                 article.status = ArticleStatusUpdated;
             }
-        }
-        else
-        {
+        } else {
             return NO;
         }
     }
 
     // Fix unread count on parent folders and Database manager
-    if (adjustment != 0)
-    {
+    if (adjustment != 0) {
 		[[Database sharedManager] setFolderUnreadCount:self adjustment:adjustment];
     }
     return YES;
@@ -572,8 +553,7 @@ static NSArray * iconArray = nil;
  */
 -(void)clearCache
 {
-    @synchronized(self)
-    {
+    @synchronized(self) {
 		[self.cachedArticles removeAllObjects];
 		[self.cachedGuids removeAllObjects];
 		self.isCached = NO;
@@ -586,8 +566,7 @@ static NSArray * iconArray = nil;
  */
 -(void)removeArticleFromCache:(NSString *)guid
 {
-    @synchronized(self)
-    {
+    @synchronized(self) {
         NSAssert(self.isCached, @"Folder's cache of articles should be initialized before removeArticleFromCache can be used");
         [self.cachedArticles removeObjectForKey:guid];
         [self.cachedGuids removeObject:guid];
@@ -599,14 +578,12 @@ static NSArray * iconArray = nil;
  */
 -(void)restoreArticleToCache:(Article *)article
 {
-    @synchronized(self)
-    {
+    @synchronized(self) {
         NSString * guid = article.guid;
         [self.cachedArticles setObject:article forKey:[NSString stringWithString:guid]];
         [self.cachedGuids addObject:guid];
         // note if article has incomplete data
-        if (article.createdDate == nil)
-        {
+        if (article.createdDate == nil) {
             self.containsBodies = NO;
         }
     }
@@ -628,11 +605,9 @@ static NSArray * iconArray = nil;
  */
  -(void)ensureCache
  {
-    if (!self.isCached)
-    {
+    if (!self.isCached) {
         NSArray * myArray = [[Database sharedManager] minimalCacheForFolder:self.itemId];
-        for (Article * myArticle in myArray)
-        {
+        for (Article * myArticle in myArray) {
             NSString * guid = myArticle.guid;
             [self.cachedArticles setObject:myArticle forKey:[NSString stringWithString:guid]];
             [self.cachedGuids addObject:guid];
@@ -656,22 +631,20 @@ static NSArray * iconArray = nil;
  */
 -(void)markArticlesInCacheRead
 {
-@synchronized(self)
-  {
+@synchronized(self) {
     NSInteger count = unreadCount;
     // Note the use of reverseObjectEnumerator
     // since the unread articles are likely to be clustered
     // with the most recent articles at the end of the array
     // so it makes the code slightly faster.
-    for (id obj in self.cachedGuids.reverseObjectEnumerator.allObjects)
-    {
+    for (id obj in self.cachedGuids.reverseObjectEnumerator.allObjects) {
         Article * article = [self.cachedArticles objectForKey:(NSString *)obj];
-        if (!article.read)
-        {
+        if (!article.read) {
             [article markRead:YES];
             count--;
-            if (count == 0)
+            if (count == 0) {
                 break;
+            }
         }
     }
   } // synchronized
@@ -682,27 +655,24 @@ static NSArray * iconArray = nil;
  */
 -(NSArray *)arrayOfUnreadArticlesRefs
 {
-@synchronized(self)
-  {
-    if (self.isCached)
-    {
+@synchronized(self) {
+    if (self.isCached) {
         NSInteger count = unreadCount;
         NSMutableArray * result = [NSMutableArray arrayWithCapacity:unreadCount];
-        for (id obj in self.cachedGuids.reverseObjectEnumerator.allObjects)
-        {
+        for (id obj in self.cachedGuids.reverseObjectEnumerator.allObjects) {
             Article * article = [self.cachedArticles objectForKey:(NSString *)obj];
-            if (!article.read)
-            {
+            if (!article.read) {
                 [result addObject:[ArticleReference makeReference:article]];
                 count--;
-                if (count == 0)
+                if (count == 0) {
                     break;
+                }
             }
         }
         return [result copy];
-    }
-    else
+    } else {
         return [[Database sharedManager] arrayOfUnreadArticlesRefs:self.itemId];
+    }
   } // synchronized
 }
 
@@ -711,8 +681,7 @@ static NSArray * iconArray = nil;
  */
 -(NSArray<Article *> *)articlesWithFilter:(NSString *)filterString
 {
-	if ([filterString isEqualToString:@""])
-	{
+	if ([filterString isEqualToString:@""]) {
 		if (self.type == VNAFolderTypeGroup) {
 			NSMutableArray * articles = [NSMutableArray array];
 			NSArray * subFolders = [[Database sharedManager] arrayOfFolders:self.itemId];
@@ -722,18 +691,15 @@ static NSArray * iconArray = nil;
 			return [articles copy];
 		}
 		@synchronized(self) {
-            if (self.isCached && self.containsBodies)
-            {
+            if (self.isCached && self.containsBodies) {
                 self.cachedArticles.evictsObjectsWithDiscardedContent = NO;
                 NSMutableArray * articles = [NSMutableArray arrayWithCapacity:self.cachedGuids.count];
-                for (id object in self.cachedGuids)
-                {
+                for (id object in self.cachedGuids) {
                     Article * theArticle = [self.cachedArticles objectForKey:object];
                     if (theArticle != nil) {
                         [articles addObject:theArticle];
-                    }
-                    else
-                    {   // some problem
+                    } else {
+                        // some problem
                         NSLog(@"Bug retrieving from cache in folder %li : after %lu insertions of %lu, guid %@",(long)self.itemId, (unsigned long)articles.count,(unsigned long)self.cachedGuids.count,object);
                         self.isCached = NO;
                         self.containsBodies = NO;
@@ -742,9 +708,7 @@ static NSArray * iconArray = nil;
                 }
                 self.cachedArticles.evictsObjectsWithDiscardedContent = YES;
                 return [articles copy];
-            }
-            else
-            {
+            } else {
                 NSArray * articles = [[Database sharedManager] arrayOfArticles:self.itemId filterString:filterString];
                 // Only feeds folders can be cached, as they are the only ones to guarantee
                 // bijection : one article <-> one guid
@@ -753,8 +717,7 @@ static NSArray * iconArray = nil;
                     self.containsBodies = NO;
                     [self.cachedArticles removeAllObjects];
                     [self.cachedGuids removeAllObjects];
-                    for (id object in articles)
-                    {
+                    for (id object in articles) {
                         NSString * guid = ((Article *)object).guid;
                         [self.cachedArticles setObject:object forKey:[NSString stringWithString:guid]];
                         [self.cachedGuids addObject:guid];
@@ -765,8 +728,7 @@ static NSArray * iconArray = nil;
                 return articles;
             }
         } // synchronized
-	}
-    else {
+	} else {
 	    return [[Database sharedManager] arrayOfArticles:self.itemId filterString:filterString];
     }
 }
@@ -784,8 +746,12 @@ static NSArray * iconArray = nil;
  */
 -(NSComparisonResult)folderIDCompare:(Folder *)otherObject
 {
-	if (self.itemId > otherObject.itemId) return NSOrderedAscending;
-	if (self.itemId < otherObject.itemId) return NSOrderedDescending;
+	if (self.itemId > otherObject.itemId) {
+		return NSOrderedAscending;
+	}
+	if (self.itemId < otherObject.itemId) {
+		return NSOrderedDescending;
+	}
 	return NSOrderedSame;
 }
 
@@ -809,8 +775,7 @@ static NSArray * iconArray = nil;
 {
 	NSArray * folders = APPCONTROLLER.folders;
 	NSUInteger index = [folders indexOfObjectIdenticalTo:self];
-	if (index != NSNotFound)
-	{
+	if (index != NSNotFound) {
 		NSScriptObjectSpecifier *containerRef = APPCONTROLLER.objectSpecifier;
 		return [[NSIndexSpecifier allocWithZone:nil] initWithContainerClassDescription:(NSScriptClassDescription *)NSApp.classDescription containerSpecifier:containerRef key:@"folders" index:index];
 	}
@@ -828,12 +793,10 @@ static NSArray * iconArray = nil;
 #pragma mark NSCacheDelegate
 -(void)cache:(NSCache *)cache willEvictObject:(id)obj
 {
-    @synchronized(self)
-    {
+    @synchronized(self) {
         Article * theArticle = ((Article *)obj);
         NSString * guid = theArticle.guid;
-        if (self.isCached && !theArticle.isDeleted)
-        {
+        if (self.isCached && !theArticle.isDeleted) {
             self.isCached = NO;
             self.containsBodies = NO;
         }

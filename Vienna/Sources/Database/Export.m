@@ -39,28 +39,22 @@
                    inFoldersTree:(FoldersTree *)foldersTree withGroups:(BOOL)groupFlag
 {
 	NSInteger countExported = 0;
-	for (Folder * folder in feedArray)
-	{
+	for (Folder * folder in feedArray) {
 		NSMutableDictionary * itemDict = [[NSMutableDictionary alloc] init];
 		NSString * name = folder.name;
-		if (folder.type == VNAFolderTypeGroup)
-		{
+		if (folder.type == VNAFolderTypeGroup) {
 			NSArray * subFolders = [foldersTree children:folder.itemId];
 			
             if (!groupFlag) {
 				countExported += [Export exportSubscriptionGroup:parentElement fromArray:subFolders inFoldersTree:foldersTree withGroups:groupFlag];
-            }
-			else
-			{
+            } else {
 				itemDict[@"text"] = SafeString(name);
                 NSXMLElement *outlineElement = [NSXMLElement elementWithName:@"outline"];
                 [outlineElement setAttributesWithDictionary:itemDict];
                 [parentElement addChild:outlineElement];
 				countExported += [Export exportSubscriptionGroup:outlineElement fromArray:subFolders inFoldersTree:foldersTree withGroups:groupFlag];
 			}
-		}
-		else if (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader)
-		{
+		} else if (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader) {
 			NSString * link = folder.homePage;
 			NSString * description = folder.feedDescription;
 			NSString * url = folder.feedURL;
@@ -90,8 +84,7 @@
     	// Now write the complete XML to the file
     
 	NSString * fqFilename = exportFileName.stringByExpandingTildeInPath;
-	if (![[NSFileManager defaultManager] createFileAtPath:fqFilename contents:nil attributes:nil])
-	{
+	if (![[NSFileManager defaultManager] createFileAtPath:fqFilename contents:nil attributes:nil]) {
 		return -1; // Indicate an error condition (impossible number of exports)
 	}
 
@@ -111,16 +104,16 @@
 {
     NSInteger countExported = 0;
     NSArray * folders;
-	if (selectionFlag)
-	    folders = foldersTree.selectedFolders;
-	else
-	    folders = [foldersTree children:0];
+	if (selectionFlag) {
+		folders = foldersTree.selectedFolders;
+	} else {
+		folders = [foldersTree children:0];
+	}
     NSXMLDocument *opmlDocument = [Export opmlDocumentFromFolders:folders inFoldersTree:foldersTree withGroups:groupFlag exportCount:&countExported];
     	// Now write the complete XML to the file
     
 	NSString * fqFilename = exportFileName.stringByExpandingTildeInPath;
-	if (![[NSFileManager defaultManager] createFileAtPath:fqFilename contents:nil attributes:nil])
-	{
+	if (![[NSFileManager defaultManager] createFileAtPath:fqFilename contents:nil attributes:nil]) {
 		return -1; // Indicate an error condition (impossible number of exports)
 	}
 

@@ -38,8 +38,7 @@ static NSString * const VNAPlugInsDirectoryName = @"Plugins";
  */
 -(instancetype)init
 {
-	if ((self = [super init]) != nil)
-	{
+	if ((self = [super init]) != nil) {
 		allPlugins = nil;
 	}
 	return self;
@@ -65,10 +64,11 @@ static NSString * const VNAPlugInsDirectoryName = @"Plugins";
 	NSString * pluginName;
 	NSString * path;
 
-	if (allPlugins == nil)
+	if (allPlugins == nil) {
 		allPlugins = [[NSMutableDictionary alloc] init];
-	else
+	} else {
 		[allPlugins removeAllObjects];
+	}
 	
 	pluginPaths = [[NSMutableDictionary alloc] init];
 	
@@ -78,8 +78,7 @@ static NSString * const VNAPlugInsDirectoryName = @"Plugins";
 	path = PluginManager.plugInsDirectoryURL.path;
 	loadMapFromPath(path, pluginPaths, YES, nil);
 
-	for (pluginName in pluginPaths)
-	{
+	for (pluginName in pluginPaths) {
 		NSString * pluginPath = pluginPaths[pluginName];
 		[self loadPlugin:pluginPath];
 	}
@@ -97,10 +96,9 @@ static NSString * const VNAPlugInsDirectoryName = @"Plugins";
 	
 	// If the info.plist is missing or corrupted, warn but then just move on and the user
 	// will have to figure it out.
-	if (pluginInfo == nil)
+	if (pluginInfo == nil) {
 		NSLog(@"Missing or corrupt info.plist in %@", pluginPath);
-	else
-	{
+	} else {
 		// We need to save the path to the plugin in the plugin object for later access to other
 		// resources in the plugin folder.
 		pluginInfo[@"Path"] = pluginPath;
@@ -120,8 +118,7 @@ static NSString * const VNAPlugInsDirectoryName = @"Plugins";
     for (NSDictionary *onePlugin in allPlugins.allValues) {
         // If it's a blog editor plugin, don't show it in the menu
         // if the app in question is not present on the system.
-        if ([onePlugin[@"Type"] isEqualToString:@"BlogEditor"])
-        {
+        if ([onePlugin[@"Type"] isEqualToString:@"BlogEditor"]) {
             NSString * bundleIdentifier = onePlugin[@"BundleIdentifier"];
 
             if (![NSWorkspace.sharedWorkspace URLForApplicationWithBundleIdentifier:bundleIdentifier]) {
@@ -131,8 +128,9 @@ static NSString * const VNAPlugInsDirectoryName = @"Plugins";
 
         NSString * pluginName = onePlugin[@"Name"];
         NSString * menuPath = onePlugin[@"MenuPath"];
-        if (menuPath == nil)
+        if (menuPath == nil) {
             continue;
+        }
 
         // Parse off the shortcut key, if there is one. The format is a series of
         // control key specifiers: Cmd, Shift, Alt or Ctrl - specified in any
@@ -143,25 +141,23 @@ static NSString * const VNAPlugInsDirectoryName = @"Plugins";
         NSUInteger keyMod = 0;
         NSString * keyChar = @"";
 
-        if (menuKey != nil)
-        {
+        if (menuKey != nil) {
             NSArray * keyArray = [menuKey componentsSeparatedByString:@"+"];
             NSString * oneKey;
 
-            for (oneKey in keyArray)
-            {
-                if ([oneKey isEqualToString:@"Cmd"])
+            for (oneKey in keyArray) {
+                if ([oneKey isEqualToString:@"Cmd"]) {
                     keyMod |= NSEventModifierFlagCommand;
-                else if ([oneKey isEqualToString:@"Shift"])
+                } else if ([oneKey isEqualToString:@"Shift"]) {
                     keyMod |= NSEventModifierFlagShift;
-                else if ([oneKey isEqualToString:@"Alt"])
+                } else if ([oneKey isEqualToString:@"Alt"]) {
                     keyMod |= NSEventModifierFlagOption;
-                else if ([oneKey isEqualToString:@"Ctrl"])
+                } else if ([oneKey isEqualToString:@"Ctrl"]) {
                     keyMod |= NSEventModifierFlagControl;
-                else
-                {
-                    if (!keyChar.vna_isBlank)
+                } else {
+                    if (!keyChar.vna_isBlank) {
                         NSLog(@"Warning: malformed MenuKey found in info.plist for plugin %@", pluginName);
+                    }
                     keyChar = oneKey;
                 }
             }
@@ -192,10 +188,8 @@ static NSString * const VNAPlugInsDirectoryName = @"Plugins";
 -(NSArray *)searchMethods
 {
 	NSMutableArray * searchMethods = [NSMutableArray arrayWithCapacity:allPlugins.count];
-	for (NSDictionary * plugin in allPlugins.allValues)
-	{
-		if ([[plugin valueForKey:@"Type"] isEqualToString:@"SearchEngine"])
-		{
+	for (NSDictionary * plugin in allPlugins.allValues) {
+		if ([[plugin valueForKey:@"Type"] isEqualToString:@"SearchEngine"]) {
 			SearchMethod * method = [[SearchMethod alloc] initWithDictionary:plugin];
 			[searchMethods addObject:method];
 		}
@@ -211,12 +205,12 @@ static NSString * const VNAPlugInsDirectoryName = @"Plugins";
 	NSMutableArray * toolbarKeys = [NSMutableArray arrayWithCapacity:allPlugins.count];
 	NSString * pluginName;
 	NSString * pluginType;	
-	for (pluginName in allPlugins)
-	{
+	for (pluginName in allPlugins) {
 		NSDictionary * onePlugin = allPlugins[pluginName];
 		pluginType = onePlugin[@"Type"];
-		if (![pluginType isEqualToString:@"SearchEngine"])
+		if (![pluginType isEqualToString:@"SearchEngine"]) {
 			[toolbarKeys addObject:pluginName];
+		}
 	}
 	return [toolbarKeys copy];
 }
@@ -229,11 +223,11 @@ static NSString * const VNAPlugInsDirectoryName = @"Plugins";
 	NSMutableArray * newArray = [NSMutableArray arrayWithCapacity:allPlugins.count];
 	NSString * pluginName;
 
-	for (pluginName in allPlugins)
-	{
+	for (pluginName in allPlugins) {
 		NSDictionary * onePlugin = allPlugins[pluginName];
-		if ([onePlugin[@"Default"] integerValue])
+		if ([onePlugin[@"Default"] integerValue]) {
 			[newArray addObject:pluginName];
+		}
 	}
 	return [newArray copy];
 }
@@ -250,10 +244,12 @@ static NSString * const VNAPlugInsDirectoryName = @"Plugins";
 		NSString * tooltip = pluginItem[@"Tooltip"];
         NSString *imagePath = [NSString stringWithFormat:@"%@/%@.tiff", pluginItem[@"Path"], pluginItem[@"ButtonImage"]];
 
-		if (friendlyName == nil)
+		if (friendlyName == nil) {
 			friendlyName = itemIdentifier;
-		if (tooltip == nil)
+		}
+		if (tooltip == nil) {
 			tooltip = friendlyName;
+		}
 		
         item.label = friendlyName;
         item.paletteLabel = item.label;
@@ -276,9 +272,9 @@ static NSString * const VNAPlugInsDirectoryName = @"Plugins";
 {
     id<Tab> activeBrowserTab = APPCONTROLLER.browser.activeTab;
 
-    if (activeBrowserTab)
+    if (activeBrowserTab) {
         return ((activeBrowserTab.tabUrl != nil) && NSApp.active);
-    else {
+    } else {
         Article * thisArticle = APPCONTROLLER.selectedArticle;
         return (thisArticle != nil && NSApp.active);
     }
@@ -291,9 +287,9 @@ static NSString * const VNAPlugInsDirectoryName = @"Plugins";
 {
     id<Tab> activeBrowserTab = APPCONTROLLER.browser.activeTab;
 
-    if (activeBrowserTab)
+    if (activeBrowserTab) {
         return ((activeBrowserTab.tabUrl != nil) && NSApp.active);
-    else {
+    } else {
         Article * thisArticle = APPCONTROLLER.selectedArticle;
         return (thisArticle != nil && NSApp.active);
     }
@@ -314,65 +310,53 @@ static NSString * const VNAPlugInsDirectoryName = @"Plugins";
 		pluginItem = menuItem.representedObject;
 	}
 	
-	if (pluginItem != nil)
-	{
+	if (pluginItem != nil) {
 		// This is a link plugin. There should be a URL field which we invoke and possibly
 		// placeholders to be filled from the current article or website.
 
 		NSString * itemType = pluginItem[@"Type"];
-		if ([itemType isEqualToString:@"Link"])
-		{
+		if ([itemType isEqualToString:@"Link"]) {
 			NSMutableString * urlString  = [NSMutableString stringWithString:pluginItem[@"URL"]];
-			if (urlString == nil)
+			if (urlString == nil) {
 				return;
+			}
 
             id<Tab> activeBrowserTab = APPCONTROLLER.browser.activeTab;
 
 			// ...and do the following in case the user is currently looking at a website.
-			if (activeBrowserTab)
-			{	
+			if (activeBrowserTab) {
 				[urlString vna_replaceString:@"$ArticleTitle$" withString:activeBrowserTab.title];
 				[urlString vna_replaceString:@"$ArticleLink$" withString:[NSString vna_stringByCleaningURLString:activeBrowserTab.tabUrl.absoluteString]];
-			}
-			
 			// In case the user is currently looking at an article:
-			else
-			{
+			} else {
 				// We can only work on one article, so ignore selection range.
 				Article * currentMessage = APPCONTROLLER.selectedArticle;
 				[urlString vna_replaceString:@"$ArticleTitle$" withString: currentMessage.title];
                 [urlString vna_replaceString:@"$ArticleLink$" withString:[NSString vna_stringByCleaningURLString:currentMessage.link]];
 			}
 						
-			if (urlString != nil)
-			{
+			if (urlString != nil) {
 				NSURL * urlToLoad = cleanedUpUrlFromString(urlString);				
-				if (urlToLoad != nil)
+				if (urlToLoad != nil) {
 					(void)[APPCONTROLLER.browser createNewTab:urlToLoad inBackground:NO load:true];
-			}
-			else
-			{
+				}
+			} else {
 				// TODO: Implement real error-handling. Don't know how to go about it, yet.
 				NSBeep();
 				NSLog(@"Creation of the sharing URL failed!");
 			}
-		}
-		
-		else if ([itemType isEqualToString:@"Script"])
-		{
+		} else if ([itemType isEqualToString:@"Script"]) {
 			// This is a script plugin. There should be a Script field which specifies the
 			// filename of the script file in the same folder.
 			NSString * pluginPath = pluginItem[@"Path"];
 			NSString * scriptFile = [pluginPath stringByAppendingPathComponent:pluginItem[@"Script"]];
-			if (scriptFile == nil)
+			if (scriptFile == nil) {
 				return;
+			}
 
 			// Just run the script
 			[APPCONTROLLER runAppleScript:scriptFile];
-		}
-
-		else if ([itemType isEqualToString:@"BlogEditor"])
-		{
+		} else if ([itemType isEqualToString:@"BlogEditor"]) {
 			// This is a blog-editor plugin. Simply send the info to the application.
 			[APPCONTROLLER blogWithExternalEditor:pluginItem[@"BundleIdentifier"]];
 		}
