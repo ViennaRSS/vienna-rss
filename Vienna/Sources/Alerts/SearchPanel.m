@@ -19,7 +19,6 @@
 //
 
 #import "SearchPanel.h"
-#import "BrowserPane.h"
 #import "AppController.h"
 #import "Vienna-Swift.h"
 #import "SearchMethod.h"

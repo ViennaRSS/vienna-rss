@@ -187,12 +187,8 @@ CA
                                     <action selector="exportSubscriptions:" target="-1" id="phN-Qb-tH6"/>
                                 </connections>
                             </menuItem>
-                            <menuItem isSeparatorItem="YES" id="1004"/>
-                            <menuItem title="Page Setup…" keyEquivalent="P" id="77">
-                                <connections>
-                                    <action selector="runPageLayout:" target="-1" id="87"/>
-                                    <binding destination="EBo-gz-68t" name="hidden" keyPath="values.UseNewBrowser" id="Dki-E4-XNg"/>
-                                </connections>
+                            <menuItem isSeparatorItem="YES" id="1004">
+                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
                             <menuItem title="Print…" keyEquivalent="p" id="78">
                                 <connections>

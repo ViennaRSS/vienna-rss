@@ -19,7 +19,6 @@
 //
 
 @import Foundation;
-@import WebKit;
 
 #define SafeString(s) s ? s : @""
 

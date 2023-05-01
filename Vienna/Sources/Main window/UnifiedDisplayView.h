@@ -39,6 +39,5 @@
 
 // Public functions
 -(void)saveTableSettings;
-- (void)webViewLoadFinished:(NSNotification *)notification;
 
 @end

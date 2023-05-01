@@ -27,11 +27,9 @@
 #import "AppController.h"
 #import "ArticleController.h"
 #import "MessageListView.h"
-#import "ArticleView.h"
 #import "StringExtensions.h"
 #import "HelperFunctions.h"
 #import "Field.h"
-#import "BrowserPane.h"
 #import "ProgressTextCell.h"
 #import "Article.h"
 #import "Folder.h"
@@ -67,7 +65,6 @@ static void *ObserverContext = &ObserverContext;
 @property NSView *articleTextView;
 @property (strong) NSLayoutConstraint *textViewWidthConstraint;
 @property (nonatomic) BOOL imbricatedSplitViewResizes; // used to avoid warnings about missing invalidation for a view's changing state
-@property (nonatomic) BOOL useNewBrowser;
 // MARK: ArticleView delegate
 @property (readwrite, getter=isCurrentPageFullHTML, nonatomic) BOOL currentPageFullHTML;
 
@@ -118,20 +115,9 @@ static void *ObserverContext = &ObserverContext;
  */
 -(void)initialiseArticleView
 {
-    self.useNewBrowser = Preferences.standardPreferences.useNewBrowser;
-    if (self.useNewBrowser) {
-        WebKitArticleTab *articleTextController = [[WebKitArticleTab alloc] init];
-        articleText = articleTextController;
-        self.articleTextView = articleTextController.view;
-    } else {
-        ArticleView *articleView = [[ArticleView alloc] init];
-        articleText = articleView;
-        self.articleTextView = articleView;
-        // Make us the frame load and UI delegate for the web view
-        [articleView setOpenLinksInNewBrowser:YES];
-        [articleView setMaintainsBackForwardList:NO];
-        [articleView.backForwardList setPageCacheSize:0];
-    }
+    WebKitArticleTab *articleTextController = [[WebKitArticleTab alloc] init];
+    articleText = articleTextController;
+    self.articleTextView = articleTextController.view;
 
     [self.contentStackView addView:self.articleTextView inGravity:NSStackViewGravityTop];
 
@@ -178,7 +164,7 @@ static void *ObserverContext = &ObserverContext;
     self.textViewWidthConstraint.priority = NSLayoutPriorityRequired;
     self.articleTextView.translatesAutoresizingMaskIntoConstraints = NO;
     // for some reason, this constraint is necessary for new browser with vertical layout, but it is counterproductive with other configurations
-    self.textViewWidthConstraint.active = self.useNewBrowser && splitView2.vertical;
+    self.textViewWidthConstraint.active = splitView2.vertical;
 
 	// Initialise the article list view
 	[self initTableView];
@@ -644,11 +630,6 @@ static void *ObserverContext = &ObserverContext;
 	return articleList;
 }
 
-// invoked after a WebViewProgressFinishedNotification notification
--(void)webViewLoadFinished:(NSNotification *)notification
-{
-}
-
 /* canDeleteMessageAtRow
  * Returns YES if the message at the specified row can be deleted, otherwise NO.
  */
@@ -772,11 +753,7 @@ static void *ObserverContext = &ObserverContext;
  */
 -(void)printDocument:(id)sender
 {
-    if (self.useNewBrowser) {
-        [articleText printDocument:sender];
-    } else {
-        [((TabbedWebView *)articleText) printDocument:sender];
-    }
+    [articleText printDocument:sender];
 }
 
 /* handleArticleListFontChange
@@ -825,7 +802,7 @@ static void *ObserverContext = &ObserverContext;
 	splitView2.vertical = (newLayout == VNALayoutCondensed);
 	splitView2.dividerStyle = (splitView2.vertical ? NSSplitViewDividerStyleThin : NSSplitViewDividerStylePaneSplitter);
 	splitView2.autosaveName = (newLayout == VNALayoutCondensed ? @"Vienna3SplitView2CondensedLayout" : @"Vienna3SplitView2ReportLayout");
-	self.textViewWidthConstraint.active = self.useNewBrowser && splitView2.vertical;
+	self.textViewWidthConstraint.active = splitView2.vertical;
 	[splitView2 display];
 	isChangingOrientation = NO;
 }
@@ -1765,7 +1742,7 @@ static void *ObserverContext = &ObserverContext;
     NSDictionary * info = notification.userInfo;
     NSInteger userResizeKey = ((NSNumber *)info[@"NSSplitViewUserResizeKey"]).integerValue;
     if (userResizeKey == 1) {
-        if (self.imbricatedSplitViewResizes && self.useNewBrowser) {
+        if (self.imbricatedSplitViewResizes) {
             // remove again any other constraint affecting articleTextView's horizontal axis,
             // and let autoresizing do the job
             for (NSLayoutConstraint *c in [self.articleTextView constraintsAffectingLayoutForOrientation:NSLayoutConstraintOrientationHorizontal]) {
@@ -1776,7 +1753,7 @@ static void *ObserverContext = &ObserverContext;
             self.articleTextView.translatesAutoresizingMaskIntoConstraints = YES;
         } else {
             self.articleTextView.translatesAutoresizingMaskIntoConstraints = NO;
-            self.textViewWidthConstraint.active = self.useNewBrowser; // constraint only needed by new browser
+            self.textViewWidthConstraint.active = YES;
         }
         self.imbricatedSplitViewResizes = NO;
     }

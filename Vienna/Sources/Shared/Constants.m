@@ -47,7 +47,6 @@ NSString * MAPref_AutoExpireDuration = @"AutoExpireFrequency";
 NSString *const MAPref_DownloadItemList = @"DownloadItemsList";
 NSString * MAPref_ShowFolderImages = @"ShowFolderImages";
 NSString * MAPref_UseJavaScript = @"UseJavaScript";
-NSString * MAPref_UseNewBrowser = @"UseNewBrowser";
 NSString * MAPref_CachedArticleGUID = @"CachedArticleGUID";
 NSString *const MAPref_ArticleListSortOrders = @"ArticleListSortOrders";
 NSString * MAPref_FilterMode = @"FilterMode";

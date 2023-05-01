@@ -19,7 +19,6 @@
 
 @import Cocoa;
 @import SystemConfiguration;
-@import WebKit;
 
 #define kLeftArrow  0x7B
 #define kRightArrow 0x7C

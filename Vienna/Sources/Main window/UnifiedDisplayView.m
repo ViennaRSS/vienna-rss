@@ -22,12 +22,10 @@
 #import "ArticleController.h"
 #import "AppController.h"
 #import "ArticleCellView.h"
-#import "ArticleView.h"
 #import "Preferences.h"
 #import "Constants.h"
 #import "StringExtensions.h"
 #import "HelperFunctions.h"
-#import "BrowserPane.h"
 #import "Article.h"
 #import "Folder.h"
 #import "TableViewExtensions.h"
@@ -178,188 +176,6 @@
     }
     [articleList noteHeightOfRowsWithIndexesChanged:[NSIndexSet indexSetWithIndex:row]];
     [cell setInProgress:NO];
-}
-
-#pragma mark -
-#pragma mark WebUIDelegate
-
-/* createWebViewWithRequest
- * Called when the browser wants to create a new window. The request is opened in a new tab.
- */
--(WebView *)webView:(WebView *)sender createWebViewWithRequest:(NSURLRequest *)request
-{
-	[self.controller openURL:request.URL inPreferredBrowser:YES];
-	// Change this to handle modifier key?
-	// Is this covered by the webView policy?
-	[NSApp.mainWindow makeFirstResponder:self];
-	return nil;
-}
-
-/* runJavaScriptAlertPanelWithMessage
- * Called when the browser wants to display a JavaScript alert panel containing the specified message.
- */
-- (void)webView:(WebView *)sender runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WebFrame *)frame {
-    NSAlert *alert = [NSAlert new];
-    alert.alertStyle = NSAlertStyleInformational;
-    alert.messageText = NSLocalizedString(@"JavaScript", @"");
-    alert.informativeText = message;
-    [alert runModal];
-}
-
-/* runJavaScriptConfirmPanelWithMessage
- * Called when the browser wants to display a JavaScript confirmation panel with the specified message.
- */
-- (BOOL)webView:(WebView *)sender runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WebFrame *)frame {
-    NSAlert *alert = [NSAlert new];
-    alert.alertStyle = NSAlertStyleInformational;
-    alert.messageText = NSLocalizedString(@"JavaScript", @"");
-    alert.informativeText = message;
-    [alert addButtonWithTitle:NSLocalizedString(@"OK", @"Title of a button on an alert")];
-    [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Title of a button on an alert")];
-    NSModalResponse alertResponse = [alert runModal];
-
-	return alertResponse == NSAlertFirstButtonReturn;
-}
-
-/* mouseDidMoveOverElement
- * Called from the webview when the user positions the mouse over an element. If it's a link
- * then echo the URL to the status bar like Safari does.
- */
-- (void)webView:(WebView *)sender mouseDidMoveOverElement:(NSDictionary *)elementInformation
-  modifierFlags:(NSUInteger)modifierFlags {
-    if (self.statusBar) {
-        NSURL *url = [elementInformation valueForKey:@"WebElementLinkURL"];
-        self.statusBar.label = url.absoluteString;
-    }
-}
-
-/* contextMenuItemsForElement
- * Creates a new context menu for our article's web view.
- */
--(NSArray *)webView:(WebView *)sender contextMenuItemsForElement:(NSDictionary *)element defaultMenuItems:(NSArray *)defaultMenuItems
-{
-	// If this is an URL link, do the link-specific items.
-	NSURL * urlLink = [element valueForKey:WebElementLinkURLKey];
-	if (urlLink != nil)
-		return [self.controller contextMenuItemsForElement:element defaultMenuItems:defaultMenuItems];
-
-	NSMutableArray * newDefaultMenu = [[NSMutableArray alloc] init];
-	NSInteger count = defaultMenuItems.count;
-	NSInteger index;
-
-	// Copy over everything but the reload menu item, which we can't handle if
-	// this is not a full HTML page since we don't have an URL.
-	for (index = 0; index < count; index++)
-	{
-		NSMenuItem * menuItem = defaultMenuItems[index];
-		if (menuItem.tag != WebMenuItemTagReload)
-			[newDefaultMenu addObject:menuItem];
-	}
-
-	// If we still have some useful menu items (other than Webkit's Web Inspector)
-	// then use them for the new default menu
-	if (newDefaultMenu.count > 0 && ![newDefaultMenu[0] isSeparatorItem])
-		defaultMenuItems = [newDefaultMenu copy];
-	// otherwise set the default items to nil as we may have removed all the items.
-	else
-	{
-		defaultMenuItems = nil;
-	}
-
-	// Return the default menu items.
-    return defaultMenuItems;
-}
-
-#pragma mark -
-#pragma mark WebFrameLoadDelegate
-
-/* didFailLoadWithError
- * Invoked when a location request for frame has failed to load.
- */
--(void)webView:(WebView *)sender didFailLoadWithError:(NSError *)error forFrame:(WebFrame *)webFrame
-{
-	// Not really errors. Load is cancelled or a plugin is grabbing the URL and will handle it by itself.
-	if (!([error.domain isEqualToString:WebKitErrorDomain] && (error.code == NSURLErrorCancelled || error.code == WebKitErrorPlugInWillHandleLoad)))
-	{
-		id obj = sender.superview;
-		if ([obj isKindOfClass:[ArticleCellView class]])
-		{
-			ArticleCellView * cell = (ArticleCellView *)obj;
-			[cell setInProgress:NO];
-			NSUInteger row= cell.articleRow;
-			NSArray * allArticles = self.controller.articleController.allArticles;
-			if (row < (NSInteger)allArticles.count)
-			{
-				[articleList reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:row] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
-			}
-		}
-		else
-			// TODO : what should we do ?
-			NSLog(@"Webview error %@ associated to object of class %@", error, [obj class]);
-	}
-}
-
-- (void)webView:(WebView *)sender didFinishLoadForFrame:(WebFrame *)webFrame
-{
-    id obj = sender.superview;
-    if ([obj isKindOfClass:[ArticleCellView class]]) {
-        ArticleCellView *cell = (ArticleCellView *)obj;
-        [cell setInProgress:NO];
-    }
-}
-
-#pragma mark -
-#pragma mark webView progress notifications
-
-/* webViewLoadFinished
- * Invoked when a web view load has finished
- * (called via a WebViewProgressFinishedNotification notification)
- */
-- (void)webViewLoadFinished:(NSNotification *)notification
-{
-    id obj = notification.object;
-    if([obj isKindOfClass:[ArticleView class]])
-    {
-		ArticleView * sender = (ArticleView *)obj;
-		id objView = sender.superview;
-		if ([objView isKindOfClass:[ArticleCellView class]])
-		{
-			ArticleCellView * cell = (ArticleCellView *)objView;
-			NSUInteger row= [articleList rowForView:objView];
-			if (row == cell.articleRow && row < self.controller.articleController.allArticles.count
-			  && cell.folderId == [self.controller.articleController.allArticles[row] folderId])
-			{	//relevant cell
-                NSString* offsetHeight;
-                CGFloat fittingHeight;
-
-                [sender forceJavascript];
-                offsetHeight = [sender stringByEvaluatingJavaScriptFromString:@"document.documentElement.offsetHeight"];
-                [sender useUserPrefsForJavascript];
-                fittingHeight = offsetHeight.doubleValue;
-                //get the rect of the current webview frame
-                NSRect webViewRect = sender.frame;
-                //calculate the new frame
-                NSRect newWebViewRect = NSMakeRect(0,
-                                           0,
-                                           NSWidth(webViewRect),
-                                           fittingHeight);
-                //set the new frame to the webview
-                sender.frame = newWebViewRect;
-                cell.fittingHeight = fittingHeight;
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_CellResize" object:cell];
-            }
-            else {	//non relevant cell
-                [cell setInProgress:NO];
-                if (row < self.controller.articleController.allArticles.count)
-                {
-                    [articleList reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:row] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
-                }
-            }
-		} else {
-			// not an ArticleCellView anymore
-			// ???
-		}
-	}
 }
 
 #pragma mark -
@@ -763,13 +579,8 @@
 	cellView.listView = articleList;
 	NSObject<ArticleContentView> *articleContentView = cellView.articleView;
     NSView *view;
-    if ([articleContentView isKindOfClass:WebKitArticleView.class])
-    {
-        view = (WebKitArticleView *)articleContentView;
-        ((CustomWKWebView *)view).hoverUiDelegate = self;
-    } else {
-        view = ((ArticleView *) articleContentView);
-    }
+    view = (WebKitArticleView *)articleContentView;
+    ((CustomWKWebView *)view).hoverUiDelegate = self;
 	[view removeFromSuperviewWithoutNeedingDisplay];
 	view.frame = cellView.frame;
 	[cellView addSubview:view];

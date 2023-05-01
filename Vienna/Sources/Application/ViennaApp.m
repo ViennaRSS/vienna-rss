@@ -26,7 +26,6 @@
 #import "Export.h"
 #import "RefreshManager.h"
 #import "Constants.h"
-#import "BrowserPane.h"
 #import "ArticleListView.h"
 #import "UnifiedDisplayView.h"
 #import "Folder.h"
@@ -270,32 +269,8 @@
 
     if (activeBrowserTab) {
         return activeBrowserTab.textSelection;
-    } else {
-        //TODO: find a way with less casts to get access to the selected string in ArticleListView and UnifiedDisplayView
-        NSView<BaseView> * theView = ((NSView<BaseView> *)((AppController*)self.delegate).browser.primaryTab.view);
-        WebView *webPane;
-
-        if ([theView isKindOfClass:[ArticleListView class]]) {
-            webPane = (WebView *)((ArticleListView *)theView).webView;
-        }
-
-        if ([theView isKindOfClass:[UnifiedDisplayView class]]) {
-            if ([((UnifiedDisplayView *)theView).webView isKindOfClass:WebView.class]) {
-                webPane = (WebView *)((UnifiedDisplayView *)theView).webView;
-            }
-            //TODO: we do not necessarily get a webview here. Rely on tab protocol in the future
-        }
-
-        if (webPane != nil)
-        {
-            NSView * docView = webPane.mainFrame.frameView.documentView;
-
-            if ([docView conformsToProtocol:@protocol(WebDocumentText)])
-                return [(id<WebDocumentText>)docView selectedString];
-        }
     }
-
-	return @"";
+    return @"";
 }
 
 -(NSString *)documentHTMLSource

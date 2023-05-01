@@ -31,7 +31,7 @@ static NSString * const Body =
 @interface VNAArticleTests : XCTestCase
 
 @property (nonatomic, strong) Article *article;
-@property (nonatomic, strong) WebViewArticleConverter *articleConverter;
+@property (nonatomic, strong) WebKitArticleConverter *articleConverter;
 
 @end
 
@@ -42,7 +42,7 @@ static NSString * const Body =
     [super setUp];
 
     self.article = [[Article alloc] initWithGuid:GUID];
-    self.articleConverter = [[WebViewArticleConverter alloc] init];
+    self.articleConverter = [[WebKitArticleConverter alloc] init];
 }
 
 - (void)testAccessInstanceVariablesDirectly

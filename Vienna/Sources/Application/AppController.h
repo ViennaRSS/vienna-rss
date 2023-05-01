@@ -20,7 +20,6 @@
 
 @import Cocoa;
 @import Sparkle;
-@import WebKit;
 
 #define APPCONTROLLER ((AppController *)[NSApp delegate])
 #define APP ((ViennaApp *)NSApp)
@@ -29,7 +28,6 @@
 @class SmartFolder;
 @class NewSubscription;
 @class NewGroupFolder;
-@class WebPreferences;
 @class SearchPanel;
 @class DisclosureView;
 @class PluginManager;
@@ -101,8 +99,6 @@
 -(IBAction)openHomePage:(id)sender;
 -(IBAction)viewArticlePages:(id)sender;
 -(IBAction)viewArticlePagesInAlternateBrowser:(id)sender;
--(IBAction)openWebElementInNewTab:(id)sender;
--(IBAction)openWebElementInDefaultBrowser:(id)sender;
 -(IBAction)doSelectScript:(id)sender;
 -(IBAction)doSelectStyle:(id)sender;
 -(IBAction)doOpenScriptsFolder:(id)sender;
@@ -147,7 +143,6 @@
 - (IBAction)searchUsingTreeFilter:(id)sender;
 
 // Public functions
--(NSArray *)contextMenuItemsForElement:(NSDictionary *)element defaultMenuItems:(NSArray *)defaultMenuItems;
 -(void)showUnreadCountOnApplicationIconAndWindowTitle;
 -(void)openURLFromString:(NSString *)urlString inPreferredBrowser:(BOOL)openInPreferredBrowserFlag;
 -(void)openURL:(NSURL *)url inPreferredBrowser:(BOOL)openInPreferredBrowserFlag;
