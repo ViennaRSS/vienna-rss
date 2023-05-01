@@ -15,8 +15,6 @@
 #define PROGRESS_INDICATOR_LEFT_MARGIN	8
 #define PROGRESS_INDICATOR_DIMENSION_REGULAR 24
 
-#define WebKitErrorPlugInWillHandleLoad    204
-
 @implementation ArticleCellView
 
 @synthesize listView = _listView;
@@ -149,25 +147,27 @@
     }
 }
 
+// TODO: Not sure this currently gets triggered.
+//       Kept as a precautionary measure.
 - (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error
 {
-    // Not really errors. Load is cancelled or a plugin is grabbing the URL and will handle it by itself.
-    if (!([error.domain isEqualToString:WebKitErrorDomain] &&
-          (error.code == NSURLErrorCancelled || error.code == WebKitErrorPlugInWillHandleLoad)))
-    {
-        if ([webView isEqualTo:((WebKitArticleView *)self.articleView)]) {
-            [self setInProgress:NO];
-            NSUInteger row = self.articleRow;
-            NSArray *allArticles = self->controller.articleController.allArticles;
-            if (row < (NSInteger)allArticles.count) {
-                [self.listView reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:row] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
-            }
-            WebKitArticleView *articleView = (WebKitArticleView *)(self.articleView);
-            [articleView deleteHtmlFile];
-        } else {
-            // TODO : what should we do ?
-            NSLog(@"Webview error %@ associated to webViews %@ and %@", error, ((WebKitArticleView *)self.articleView), webView);
+    // Cancellation is not really an error.
+    if (error.code == NSURLErrorCancelled) {
+        return;
+    }
+
+    if ([webView isEqualTo:((WebKitArticleView *)self.articleView)]) {
+        [self setInProgress:NO];
+        NSUInteger row = self.articleRow;
+        NSArray *allArticles = self->controller.articleController.allArticles;
+        if (row < (NSInteger)allArticles.count) {
+            [self.listView reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:row] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
         }
+        WebKitArticleView *articleView = (WebKitArticleView *)(self.articleView);
+        [articleView deleteHtmlFile];
+    } else {
+        // TODO : what should we do ?
+        NSLog(@"Webview error %@ associated to webViews %@ and %@", error, ((WebKitArticleView *)self.articleView), webView);
     }
 }
 
