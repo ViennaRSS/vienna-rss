@@ -36,10 +36,10 @@ tar -a -cf "${TGZ_FILENAME}" --exclude '.DS_Store' Vienna.app
 rm -rf Vienna.app
 
 # Output the sparkle change log
-SPARKLE_BIN="${SOURCE_ROOT}/DerivedData/Vienna/SourcePackages/artifacts/Sparkle/bin"
+SPARKLE_BIN=$(find "${SDK_STAT_CACHE_DIR}" -regex "${SDK_STAT_CACHE_DIR}/${PROJECT}-.*/SourcePackages/artifacts/sparkle/Sparkle/bin")
 
 if [ ! -d "$SPARKLE_BIN" ]; then
-	printf 'Unable to locate Sparkle binaries in the binary Swift Package. ' 1>&2
+	printf 'Unable to locate Sparkle binaries in DerivedData. ' 1>&2
 	printf 'Resolve the Swift Packages in Xcode first.\n' 1>&2
 	exit 1
 fi
@@ -66,7 +66,7 @@ export PATH="$SPARKLE_BIN/old_dsa_scripts:$PATH"
 
 DSA_SIGNATURE="sparkle:dsaSignature=\"$(sign_update "$TGZ_FILENAME" "$PRIVATE_KEY_PATH")\""
 
-pubDate="$(LC_TIME=en_US TZ=GMT date -jf '%FT%TZ' "${VCS_DATE}" '+%a, %d %b %G %T %z')"
+pubDate="$(LC_ALL=en_US.UTF8 TZ=GMT date -jf '%FT%TZ' "${VCS_DATE}" '+%a, %d %b %G %T %z')"
 
 cat > "${VIENNA_CHANGELOG}" << EOF
 <?xml version="1.0" encoding="UTF-8" ?>
