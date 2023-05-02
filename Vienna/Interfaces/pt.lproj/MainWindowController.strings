@@ -136,9 +136,6 @@
 /* Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "lDl-nn-yvL"; */
 "lDl-nn-yvL.title" = "Artigos por ler";
 
-/* Class = "NSSearchFieldCell"; placeholderString = "Search for folders"; ObjectID = "lhy-4c-asJ"; */
-"lhy-4c-asJ.placeholderString" = "Procurar por pastas";
-
 /* Class = "NSMenuItem"; title = "Rename…"; ObjectID = "lxY-yo-Hjh"; */
 "lxY-yo-Hjh.title" = "Mudar o nome…";
 
@@ -171,6 +168,9 @@
 
 /* Class = "NSMenuItem"; title = "Mark All Articles as Read"; ObjectID = "Qj9-p3-QXB"; */
 "Qj9-p3-QXB.title" = "Marcar todos os artigos como lidos";
+
+/* Class = "NSButtonCell"; title = "Show All Feeds"; ObjectID = "Qqb-bF-tIg"; */
+"Qqb-bF-tIg.title" = "Mostrar todos os fluxos";
 
 /* Class = "NSMenuItem"; title = "New Folder…"; ObjectID = "RaH-Yu-Ija"; */
 "RaH-Yu-Ija.title" = "Nova pasta…";

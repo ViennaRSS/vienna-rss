@@ -66,12 +66,6 @@
 "Connecting to %@" = "conectando a %@";
 
 /* No comment provided by engineer. */
-"Copy Link to Clipboard" = "Copiar Link para o Clipboard";
-
-/* No comment provided by engineer. */
-"Copy Page Link to Clipboard" = "Copiar Link da Página para a Área de Transferência";
-
-/* No comment provided by engineer. */
 "Database Upgrade" = "Atualização de Banco de Dados";
 
 /* Data field name visible in menu/article list/smart folder definition */
@@ -150,9 +144,6 @@
 /* Data field name (URL) visible in menu/article list */
 "Enclosure URL" = "URL do Anexo";
 
-/* No comment provided by engineer. */
-"Enter the URL here" = "Entre com a URL aqui";
-
 /* Already subscribed title */
 "Error" = "Erro";
 
@@ -185,9 +176,6 @@
 
 /* No comment provided by engineer. */
 "Folder image retrieved from %@" = "Imagem de pasta recebida de %@";
-
-/* No comment provided by engineer. */
-"Go forward to the next page" = "Avançara para a próxima página";
 
 /* Pseudo field name visible in article list */
 "Headlines" = "Manchetes";
@@ -271,22 +259,10 @@
 "Open Article Page in External Browser" = "Abrir Página do Artigo no Navegador Externo";
 
 /* No comment provided by engineer. */
-"Open Frame" = "Abrir Moldura";
-
-/* No comment provided by engineer. */
-"Open Image in %@" = "Abrir Imagem em %@";
-
-/* No comment provided by engineer. */
-"Open Image in New Tab" = "Abrir Imagem em Nova Aba";
-
-/* No comment provided by engineer. */
 "Open Link in %@" = "Abrir Link em %@";
 
 /* No comment provided by engineer. */
 "Open Link in New Tab" = "Abrir Link em Nova Aba";
-
-/* No comment provided by engineer. */
-"Open Page in %@" = "Abrir Página em %@";
 
 /* No comment provided by engineer. */
 "Open Scripts Folder" = "Abrir pasta de Scripts";
@@ -326,9 +302,6 @@
 "Refresh completed" = "Atualização completada";
 
 /* No comment provided by engineer. */
-"Refresh the current page" = "Atualizar a página atual";
-
-/* No comment provided by engineer. */
 "Refreshing folder images…" = "Atualizando imagens de pastas…";
 
 /* No comment provided by engineer. */
@@ -349,19 +322,8 @@
 /* No comment provided by engineer. */
 "Retrieving folder image" = "Recebendo imagem de pasta";
 
-/* No comment provided by engineer. */
-"Return to the previous page" = "Retornar para a página anterior";
-
 /* Placeholder title of a search field */
 "Search all articles" = "Pesquisar todos os artigos";
-
-/* No comment provided by engineer. */
-"Search all articles or the current web page" = "Pesquisar em todos os artigos ou na página web atual";
-
-/* Toolbar item label
-   Toolbar item palette label
-   Toolbar item tooltip */
-"Search Articles" = "Pesquisar Artigos";
 
 /* Placeholder title of a search field */
 "Search current web page" = "Pesquisar na página web atual";
@@ -392,9 +354,6 @@
 
 /* Data field name visible in menu/article list/smart folder definition */
 "Subject" = "Assunto";
-
-/* No comment provided by engineer. */
-"Subscribe to the feed for this page" = "Assinar notícias desta página";
 
 /* Pseudo field name visible in menu/article list */
 "Summary" = "Resumo";

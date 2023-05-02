@@ -60,12 +60,6 @@
 "Connecting to %@" = "%@ -ra konektatzen";
 
 /* No comment provided by engineer. */
-"Copy Link to Clipboard" = "Esteka Paper-zorroan Kopiatu";
-
-/* No comment provided by engineer. */
-"Copy Page Link to Clipboard" = "Orriaren esteka Paper-zorroan Kopiatu";
-
-/* No comment provided by engineer. */
 "Database Upgrade" = "Datu basea eguneratuta";
 
 /* Data field name visible in menu/article list/smart folder definition */
@@ -120,9 +114,6 @@
 /* Data field name (URL) visible in menu/article list */
 "Enclosure URL" = "URL esparrua";
 
-/* No comment provided by engineer. */
-"Enter the URL here" = "Sartu URL helbidea hemen";
-
 /* Already subscribed title */
 "Error" = "Errorea";
 
@@ -152,9 +143,6 @@
 
 /* No comment provided by engineer. */
 "Folders" = "Direktorioak";
-
-/* No comment provided by engineer. */
-"Go forward to the next page" = "Joan hurrengo orrira";
 
 /* Pseudo field name visible in article list */
 "Headlines" = "Tituluak";
@@ -219,9 +207,6 @@
 /* No comment provided by engineer. */
 "No new articles available" = "Ez daude artikulu berririk";
 
-/* Title of a button on an alert */
-"OK" = "ADOS";
-
 /* Message text of an alert */
 "One or more downloads are in progress" = "Gauza bat edota gehiago deskargatzen ari dira";
 
@@ -238,22 +223,10 @@
 "Open Article Page in External Browser" = "Ireki Artikuluaren Orria Kanpo Nabegatzailean";
 
 /* No comment provided by engineer. */
-"Open Frame" = "Ireki Trama";
-
-/* No comment provided by engineer. */
-"Open Image in %@" = "Ireki irudia %@ -(e)n";
-
-/* No comment provided by engineer. */
-"Open Image in New Tab" = "Irudia fitxa berri batean ireki";
-
-/* No comment provided by engineer. */
 "Open Link in %@" = "Ireki esteka %@-(e)n";
 
 /* No comment provided by engineer. */
 "Open Link in New Tab" = "Esteka fitxa berri batean ireki";
-
-/* No comment provided by engineer. */
-"Open Page in %@" = "Ireki orria %@-(e)n";
 
 /* No comment provided by engineer. */
 "Open Scripts Folder" = "Ireki Scripts Direktorioa";
@@ -293,9 +266,6 @@
 "Refresh completed" = "Eguneratzea eginda";
 
 /* No comment provided by engineer. */
-"Refresh the current page" = "Eguneratu orri hau";
-
-/* No comment provided by engineer. */
 "Refreshing folder images…" = "Direktorioen irudiak eguneratzen…";
 
 /* No comment provided by engineer. */
@@ -312,9 +282,6 @@
 
 /* No comment provided by engineer. */
 "Retrieving folder image" = "Direktorioaren irudia jasotzen";
-
-/* No comment provided by engineer. */
-"Return to the previous page" = "Bueltatu aurreneko orrira";
 
 /* Title of a popup menu item */
 "Select…" = "Aukeratu…";
@@ -333,9 +300,6 @@
 
 /* Data field name visible in menu/article list/smart folder definition */
 "Subject" = "Gaia";
-
-/* No comment provided by engineer. */
-"Subscribe to the feed for this page" = "Harpidetu orri honen jariora";
 
 /* Pseudo field name visible in menu/article list */
 "Summary" = "Laburpena";

@@ -40,9 +40,6 @@
 /* Class = "NSButtonCell"; title = "Select…"; ObjectID = "cbn-xq-UFr"; */
 "cbn-xq-UFr.title" = "Выбрать…";
 
-/* Class = "NSButtonCell"; title = "Preview new browser"; ObjectID = "DDY-fS-V5T"; */
-"DDY-fS-V5T.title" = "Просмотр нового браузера";
-
 /* Class = "NSButtonCell"; title = "Show website icons in the feed list"; ObjectID = "dkm-xW-4If"; */
 "dkm-xW-4If.title" = "Показывать изображения папок в списке папок";
 
@@ -60,9 +57,6 @@
 
 /* Class = "NSButtonCell"; title = "Open links in external browser"; ObjectID = "flH-2D-s6O"; */
 "flH-2D-s6O.title" = "Открывать ссылки во внешнем браузере";
-
-/* Class = "NSTextFieldCell"; title = "Vienna has a new browser built on top of WebKit. It is faster and more secure.\nAfter changing this setting, restart Vienna to test it. Feedback is very welcome!"; ObjectID = "Fv8-Xx-YR0"; */
-"Fv8-Xx-YR0.title" = "В Vienna появился новый браузер построенный на WebKit. Он быстрее и безопаснее.\nПосле изменения данной настройки перезапустите Vienna, чтобы протестировать его. Мы будем рады вашим отзывам!";
 
 /* Class = "NSTextFieldCell"; title = "The higher the number, the quicker your subscriptions will be downloaded."; ObjectID = "g3K-qh-M6y"; */
 "g3K-qh-M6y.title" = "Чем выше номер, тем быстрее ваши подписки будут скачаны.";

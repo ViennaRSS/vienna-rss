@@ -74,12 +74,6 @@
 /* No comment provided by engineer. */
 "Connecting to Open Reader server to retrieve %@" = "Jungiamasi prie Open Reader serverio parsiųsti %@";
 
-/* No comment provided by engineer. */
-"Copy Link to Clipboard" = "Kopijuoti nuorodą į iškarpinę";
-
-/* No comment provided by engineer. */
-"Copy Page Link to Clipboard" = "Kopijuoti nuorodą į iškarpinę";
-
 /* Copy URL */
 "Copy URL" = "Kopijuoti adresą";
 
@@ -159,9 +153,6 @@
 /* Data field name (URL) visible in menu/article list */
 "Enclosure URL" = "Įtalpintas turinys";
 
-/* No comment provided by engineer. */
-"Enter the URL here" = "Įveskite nuorodą";
-
 /* Already subscribed title */
 "Error" = "Klaida";
 
@@ -215,9 +206,6 @@
 
 /* No comment provided by engineer. */
 "Forcing Refresh subscriptions…" = "Priverstinai atnaujinamos prenumeratos…";
-
-/* No comment provided by engineer. */
-"Go forward to the next page" = "Į kitą puslapį";
 
 /* No comment provided by engineer. */
 "Got HTTP status 304 - No news from last check" = "HTTP statusas 304 - Nuo paskutinio patikrinimo neatsirado naujienų";
@@ -306,9 +294,6 @@
 /* No comment provided by engineer. */
 "No new articles available" = "Naujų straipsnių nėra";
 
-/* Title of a button on an alert */
-"OK" = "Gerai";
-
 /* Message text of an alert */
 "One or more downloads are in progress" = "Vykstantys parsisiuntimai";
 
@@ -325,22 +310,10 @@
 "Open Article Page in External Browser" = "Straipsnio svetainę atidaryti išorinėje naršyklėje";
 
 /* No comment provided by engineer. */
-"Open Frame" = "Atidaryti puslapio komponentą";
-
-/* No comment provided by engineer. */
-"Open Image in %@" = "Atidaryti piešinuką su %@";
-
-/* No comment provided by engineer. */
-"Open Image in New Tab" = "Atidaryti piešinuką naujame skirtuke";
-
-/* No comment provided by engineer. */
 "Open Link in %@" = "Atidaryti nuorodą su %@";
 
 /* No comment provided by engineer. */
 "Open Link in New Tab" = "Atidaryti nuorodą naujame skirtuke";
-
-/* No comment provided by engineer. */
-"Open Page in %@" = "Atidaryti puslapį su %@";
 
 /* No comment provided by engineer. */
 "Open Reader Authentication Failed" = "Open Reader autentikacija nepavyko";
@@ -395,9 +368,6 @@
 "Refresh completed" = "Prenumeratų atnaujinimas baigtas";
 
 /* No comment provided by engineer. */
-"Refresh the current page" = "Atnaujinti šitą puslapį";
-
-/* No comment provided by engineer. */
 "Refreshing folder images…" = "Atnaujinami aplankų paveikslėlius…";
 
 /* No comment provided by engineer. */
@@ -422,21 +392,10 @@
 "Retrieving folder image for Open Reader Feed" = "Open Reader Feed aplankų paveikslėliai parsiunčiami";
 
 /* No comment provided by engineer. */
-"Return to the previous page" = "Atgal į ankstesnį puslapį";
-
-/* No comment provided by engineer. */
 "RSS Icon not found!" = "RSS prenumeratos paveikslėlis nerastas!";
 
 /* Placeholder title of a search field */
 "Search all articles" = "Ieškoti visuose straipsniuose";
-
-/* No comment provided by engineer. */
-"Search all articles or the current web page" = "Ieškoti visuose straipsniuose arba šiame puslapyje";
-
-/* Toolbar item label
-   Toolbar item palette label
-   Toolbar item tooltip */
-"Search Articles" = "Ieškoti straipsnių";
 
 /* Placeholder title of a search field */
 "Search current web page" = "Ieškoti šiame puslapyje";
@@ -473,9 +432,6 @@
 
 /* Data field name visible in menu/article list/smart folder definition */
 "Subject" = "Tema";
-
-/* No comment provided by engineer. */
-"Subscribe to the feed for this page" = "Prenumeruotį šį puslapį";
 
 /* Pseudo field name visible in menu/article list */
 "Summary" = "Santrauka";

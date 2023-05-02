@@ -81,12 +81,6 @@
 "Connecting to Open Reader server to retrieve %@" = "Conectando có servidor Open Reader para recuperar %@";
 
 /* No comment provided by engineer. */
-"Copy Link to Clipboard" = "Copiar ligazón ao portapapeis";
-
-/* No comment provided by engineer. */
-"Copy Page Link to Clipboard" = "Copiar ligazón da páxina ao portapapeis";
-
-/* No comment provided by engineer. */
 "Database Upgrade" = "Actualización da base de datos";
 
 /* Data field name visible in menu/article list/smart folder definition */
@@ -165,9 +159,6 @@
 /* Data field name (URL) visible in menu/article list */
 "Enclosure URL" = "URL do adxunto";
 
-/* No comment provided by engineer. */
-"Enter the URL here" = "Introduza a URL aquí";
-
 /* Already subscribed title */
 "Error" = "Erro";
 
@@ -221,9 +212,6 @@
 
 /* No comment provided by engineer. */
 "Forcing Refresh subscriptions…" = "A forzar a actualización de subscricións…";
-
-/* No comment provided by engineer. */
-"Go forward to the next page" = "Avanzar á páxina seguinte";
 
 /* No comment provided by engineer. */
 "Got HTTP status 304 - No news from last check" = "Recibido estado HTTP 304 - Non hai novas dende a última procura";
@@ -312,9 +300,6 @@
 /* No comment provided by engineer. */
 "No new articles available" = "Non hai novos artigos dispoñibles";
 
-/* Title of a button on an alert */
-"OK" = "Aceptar";
-
 /* Message text of an alert */
 "One or more downloads are in progress" = "Unha ou máis descargas en curso";
 
@@ -331,22 +316,10 @@
 "Open Article Page in External Browser" = "Abrir páxina do artigo nun navegador externo";
 
 /* No comment provided by engineer. */
-"Open Frame" = "Abrir marco";
-
-/* No comment provided by engineer. */
-"Open Image in %@" = "Abrir imaxe en %@";
-
-/* No comment provided by engineer. */
-"Open Image in New Tab" = "Abrir imaxe nunha nova lapela";
-
-/* No comment provided by engineer. */
 "Open Link in %@" = "Abrir ligazón en %@";
 
 /* No comment provided by engineer. */
 "Open Link in New Tab" = "Abrir ligazón nunha nova lapela";
-
-/* No comment provided by engineer. */
-"Open Page in %@" = "Abrir páxina en %@";
 
 /* No comment provided by engineer. */
 "Open Reader Authentication Failed" = "Erro ao autenticar en Open Reader";
@@ -398,9 +371,6 @@
 "Refresh completed" = "Actualización completada";
 
 /* No comment provided by engineer. */
-"Refresh the current page" = "Actualizar a páxina actual";
-
-/* No comment provided by engineer. */
 "Refreshing folder images…" = "Actualizando as iconas dos cartafoles…";
 
 /* No comment provided by engineer. */
@@ -425,21 +395,10 @@
 "Retrieving folder image for Open Reader Feed" = "Recuperando a icona do cartafol para a fonte de Open Reader";
 
 /* No comment provided by engineer. */
-"Return to the previous page" = "Volver á páxina anterior";
-
-/* No comment provided by engineer. */
 "RSS Icon not found!" = "Icona da subscrición non atopada!";
 
 /* Placeholder title of a search field */
 "Search all articles" = "Procurar todos os artigos";
-
-/* No comment provided by engineer. */
-"Search all articles or the current web page" = "Procurar en todos os artigos ou na páxina web actual";
-
-/* Toolbar item label
-   Toolbar item palette label
-   Toolbar item tooltip */
-"Search Articles" = "Procurar artigos";
 
 /* Placeholder title of a search field */
 "Search current web page" = "Procurar na páxina web actual";
@@ -470,9 +429,6 @@
 
 /* Data field name visible in menu/article list/smart folder definition */
 "Subject" = "Asunto";
-
-/* No comment provided by engineer. */
-"Subscribe to the feed for this page" = "Subscribirse á fonte desta páxina";
 
 /* Pseudo field name visible in menu/article list */
 "Summary" = "Resumo";

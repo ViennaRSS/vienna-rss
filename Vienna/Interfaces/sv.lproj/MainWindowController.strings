@@ -160,6 +160,9 @@
 /* Class = "NSMenuItem"; title = "Mark All Articles as Read"; ObjectID = "Qj9-p3-QXB"; */
 "Qj9-p3-QXB.title" = "Markera alla artiklar som lästa";
 
+/* Class = "NSButtonCell"; title = "Show All Feeds"; ObjectID = "Qqb-bF-tIg"; */
+"Qqb-bF-tIg.title" = "Visa alla flöden";
+
 /* Class = "NSMenuItem"; title = "New Folder…"; ObjectID = "RaH-Yu-Ija"; */
 "RaH-Yu-Ija.title" = "Ny mapp…";
 

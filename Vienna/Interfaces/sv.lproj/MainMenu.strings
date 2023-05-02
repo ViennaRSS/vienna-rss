@@ -28,9 +28,6 @@
 /* Class = "NSMenuItem"; title = "About Vienna"; ObjectID = "58"; */
 "58.title" = "Om Vienna";
 
-/* Class = "NSMenuItem"; title = "Page Setup…"; ObjectID = "77"; */
-"77.title" = "Utskriftsformat…";
-
 /* Class = "NSMenuItem"; title = "Print…"; ObjectID = "78"; */
 "78.title" = "Skriv ut…";
 
@@ -328,9 +325,6 @@
 /* Class = "NSMenuItem"; title = "Show Filter Bar"; ObjectID = "1325"; */
 "1325.title" = "Visa filterfältet";
 
-/* Class = "NSMenuItem"; title = "Search Articles"; ObjectID = "1327"; */
-"1327.title" = "Sök i artiklar";
-
 /* Class = "NSMenuItem"; title = "Order By"; ObjectID = "1336"; */
 "1336.title" = "Sortera efter";
 
@@ -447,6 +441,9 @@
 
 /* Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "v3R-CV-0b9"; */
 "v3R-CV-0b9.title" = "Gör till stora bokstäver";
+
+/* Class = "NSMenuItem"; title = "Add to Safari Reading List"; ObjectID = "VQe-zs-ODh"; */
+"VQe-zs-ODh.title" = "Lägg till i Safari-läslistan";
 
 /* Class = "NSMenuItem"; title = "Smart Links"; ObjectID = "w4Q-ne-FPI"; */
 "w4Q-ne-FPI.title" = "Smarta länkar";

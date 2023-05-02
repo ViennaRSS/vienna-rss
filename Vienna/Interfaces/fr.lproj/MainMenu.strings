@@ -31,9 +31,6 @@
 /* Class = "NSMenuItem"; title = "About Vienna"; ObjectID = "58"; */
 "58.title" = "À propos de Vienna";
 
-/* Class = "NSMenuItem"; title = "Page Setup…"; ObjectID = "77"; */
-"77.title" = "Mise en page…";
-
 /* Class = "NSMenuItem"; title = "Print…"; ObjectID = "78"; */
 "78.title" = "Imprimer…";
 
@@ -331,9 +328,6 @@
 /* Class = "NSMenuItem"; title = "Show Filter Bar"; ObjectID = "1325"; */
 "1325.title" = "Afficher la barre de filtre";
 
-/* Class = "NSMenuItem"; title = "Search Articles"; ObjectID = "1327"; */
-"1327.title" = "Rechercher des articles";
-
 /* Class = "NSMenuItem"; title = "Order By"; ObjectID = "1336"; */
 "1336.title" = "Ordre de tri";
 
@@ -362,7 +356,7 @@
 "1425.title" = "Forcer mise à jour des abonnements sélectionnés à partir de Open Reader";
 
 /* Class = "NSMenuItem"; title = "Update Subscriptions From Open Reader"; ObjectID = "1428"; */
-"1428.title" = "Mettre à jour les abonnements à partir de Open Reader";
+"1428.title" = "Mettre à jour la liste d'abonnements à partir d'Open Reader";
 
 /* Class = "NSMenuItem"; title = "Reindex Database"; ObjectID = "1458"; */
 "1458.title" = "Réindexer la base de données";

@@ -28,9 +28,6 @@
 /* Class = "NSMenuItem"; title = "About Vienna"; ObjectID = "58"; */
 "58.title" = "关于 Vienna";
 
-/* Class = "NSMenuItem"; title = "Page Setup…"; ObjectID = "77"; */
-"77.title" = "页面设置…";
-
 /* Class = "NSMenuItem"; title = "Print…"; ObjectID = "78"; */
 "78.title" = "打印…";
 
@@ -327,9 +324,6 @@
 
 /* Class = "NSMenuItem"; title = "Show Filter Bar"; ObjectID = "1325"; */
 "1325.title" = "显示过滤栏";
-
-/* Class = "NSMenuItem"; title = "Search Articles"; ObjectID = "1327"; */
-"1327.title" = "搜索文章";
 
 /* Class = "NSMenuItem"; title = "Order By"; ObjectID = "1336"; */
 "1336.title" = "排序";
