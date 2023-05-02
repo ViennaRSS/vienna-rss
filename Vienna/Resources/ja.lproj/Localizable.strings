@@ -60,12 +60,6 @@
 "Connecting to %@" = "%@ に接続中";
 
 /* No comment provided by engineer. */
-"Copy Link to Clipboard" = "リンクをクリップボードにコピー";
-
-/* No comment provided by engineer. */
-"Copy Page Link to Clipboard" = "リンクタグをコピー";
-
-/* No comment provided by engineer. */
 "Database Upgrade" = "データベースアップグレード";
 
 /* Data field name visible in menu/article list/smart folder definition */
@@ -105,9 +99,6 @@
 /* Title of a button on an alert */
 "Empty Trash" = "ゴミ箱を空にする";
 
-/* No comment provided by engineer. */
-"Enter the URL here" = "URL をここに入力";
-
 /* Already subscribed title */
 "Error" = "エラー";
 
@@ -137,9 +128,6 @@
 
 /* No comment provided by engineer. */
 "Folders" = "フォルダ";
-
-/* No comment provided by engineer. */
-"Go forward to the next page" = "次のページに進む";
 
 /* Pseudo field name visible in article list */
 "Headlines" = "ヘッドライン";
@@ -211,22 +199,10 @@
 "Open Article Page in External Browser" = "ブラウザで記事を開く";
 
 /* No comment provided by engineer. */
-"Open Frame" = "フレームを開く";
-
-/* No comment provided by engineer. */
-"Open Image in %@" = "画像 %@ を開く";
-
-/* No comment provided by engineer. */
-"Open Image in New Tab" = "イメージを新規タブで開く";
-
-/* No comment provided by engineer. */
 "Open Link in %@" = "%@ でリンクを開く";
 
 /* No comment provided by engineer. */
 "Open Link in New Tab" = "リンクを新規タブで開く";
-
-/* No comment provided by engineer. */
-"Open Page in %@" = "%@ でページを開く";
 
 /* No comment provided by engineer. */
 "Open Scripts Folder" = "スクリプトフォルダを開く";
@@ -266,9 +242,6 @@
 "Refresh completed" = "更新が終了しました";
 
 /* No comment provided by engineer. */
-"Refresh the current page" = "現在のページを再読込";
-
-/* No comment provided by engineer. */
 "Refreshing subscriptions…" = "購読を更新…";
 
 /* Title of a popup menu item */
@@ -282,9 +255,6 @@
 
 /* No comment provided by engineer. */
 "Retrieving folder image" = "フォルダイメージを取得中";
-
-/* No comment provided by engineer. */
-"Return to the previous page" = "前のページに戻る";
 
 /* Title of a popup menu item */
 "Select…" = "選択…";

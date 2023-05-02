@@ -26,10 +26,10 @@
 "8LJ-RZ-pfu.title" = "Signalés";
 
 /* Class = "NSMenuItem"; title = "Force Refresh Selected Subscriptions From Open Reader"; ObjectID = "9os-ks-jzh"; */
-"9os-ks-jzh.title" = "Forcer mise à jour des abonnements sélectionnés à partir de Open Reader";
+"9os-ks-jzh.title" = "Forcer la mise à jour des abonnements sélectionnés à partir d'Open Reader";
 
 /* Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "676-5a-TdF"; */
-"676-5a-TdF.title" = "Afficher Page source de l'abonnement";
+"676-5a-TdF.title" = "Afficher la page source de l'abonnement";
 
 /* Class = "NSMenuItem"; title = "Unread or Flagged"; ObjectID = "771-UJ-rsF"; */
 "771-UJ-rsF.title" = "Non lus ou signalés";
@@ -125,7 +125,7 @@
 "I8N-Dr-P6W.paletteLabel" = "Filtrer";
 
 /* Class = "NSMenuItem"; title = "Force Refresh Selected Subscriptions From Open Reader"; ObjectID = "iqm-sr-F8U"; */
-"iqm-sr-F8U.title" = "Forcer mise à jour des abonnements sélectionnés à partir de Open Reader";
+"iqm-sr-F8U.title" = "Forcer la mise à jour des abonnements sélectionnés à partir d'Open Reader";
 
 /* Class = "NSMenuItem"; title = "All Articles"; ObjectID = "JT2-Q7-gRj"; */
 "JT2-Q7-gRj.title" = "Tous les articles";
@@ -146,7 +146,7 @@
 "mbZ-oU-TDn.title" = "Non lus ou signalés";
 
 /* Class = "NSMenuItem"; title = "Get Info"; ObjectID = "MMp-XG-ASM"; */
-"MMp-XG-ASM.title" = "Obtenir les infos";
+"MMp-XG-ASM.title" = "Obtenir les données du flux";
 
 /* Class = "NSToolbarItem"; label = "Refresh"; ObjectID = "Nmd-zx-Dys"; */
 "Nmd-zx-Dys.label" = "Rafraîchir";
@@ -168,6 +168,9 @@
 
 /* Class = "NSMenuItem"; title = "Mark All Articles as Read"; ObjectID = "Qj9-p3-QXB"; */
 "Qj9-p3-QXB.title" = "Marquer dossier comme lu";
+
+/* Class = "NSButtonCell"; title = "Show All Feeds"; ObjectID = "Qqb-bF-tIg"; */
+"Qqb-bF-tIg.title" = "Afficher tous les flux";
 
 /* Class = "NSMenuItem"; title = "New Folder…"; ObjectID = "RaH-Yu-Ija"; */
 "RaH-Yu-Ija.title" = "Nouveau dossier…";
@@ -191,7 +194,7 @@
 "SoG-b2-O1S.toolTip" = "Marquer dossier lu, ouvrir suivant";
 
 /* Class = "NSMenuItem"; title = "Edit…"; ObjectID = "tHY-Fr-Ili"; */
-"tHY-Fr-Ili.title" = "Éditer…";
+"tHY-Fr-Ili.title" = "Modifier…";
 
 /* Class = "NSToolbarItem"; label = "Action"; ObjectID = "TSQ-UW-4gU"; */
 "TSQ-UW-4gU.label" = "Action";

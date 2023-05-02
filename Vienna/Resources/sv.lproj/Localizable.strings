@@ -25,6 +25,9 @@
 /* No comment provided by engineer. */
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "En ny Vienna-databas kan ej skapas i '%@' för att mappen förmodligen finns på en nätverksdelning och den här versionen av Vienna stöder inte detta. Var vänlig och välj en mapp som finns på din lokala hårddisk.";
 
+/* Toolbar item palette label */
+"Add to Safari Reading List" = "Lägg till i Safari-läslistan";
+
 /* No comment provided by engineer. */
 "AppleScript Error in '%@' script" = "AppleScript-fel i ”%@”-skriptet";
 
@@ -79,12 +82,6 @@
 
 /* No comment provided by engineer. */
 "Connecting to %@" = "Ansluter till %@";
-
-/* No comment provided by engineer. */
-"Copy Link to Clipboard" = "Kopiera länk";
-
-/* No comment provided by engineer. */
-"Copy Page Link to Clipboard" = "Kopiera sidlänk till urklipp";
 
 /* Copy URL */
 "Copy URL" = "Kopiera URL";
@@ -172,9 +169,6 @@
 /* Data field name (URL) visible in menu/article list */
 "Enclosure URL" = "Bilagans URL";
 
-/* No comment provided by engineer. */
-"Enter the URL here" = "Ange URLen här";
-
 /* Already subscribed title */
 "Error" = "Fel";
 
@@ -228,9 +222,6 @@
 
 /* No comment provided by engineer. */
 "Folders" = "Mappar";
-
-/* No comment provided by engineer. */
-"Go forward to the next page" = "Gå till nästa sida";
 
 /* Pseudo field name visible in article list */
 "Headlines" = "Rubriker";
@@ -313,9 +304,6 @@
 /* No comment provided by engineer. */
 "No new articles available" = "Inga nya artiklar tillgängliga";
 
-/* Title of a button on an alert */
-"OK" = "OK";
-
 /* Message text of an alert */
 "One or more downloads are in progress" = "En eller flera nedladdningar pågår";
 
@@ -332,22 +320,10 @@
 "Open Article Page in External Browser" = "Öppna artikelsida i extern webbläsare";
 
 /* No comment provided by engineer. */
-"Open Frame" = "Öppna ram";
-
-/* No comment provided by engineer. */
-"Open Image in %@" = "Öppna bild i %@";
-
-/* No comment provided by engineer. */
-"Open Image in New Tab" = "Öppna bild i ny tabb";
-
-/* No comment provided by engineer. */
 "Open Link in %@" = "Öppna länk i %@";
 
 /* No comment provided by engineer. */
 "Open Link in New Tab" = "Öppna länk i ny tabb";
-
-/* No comment provided by engineer. */
-"Open Page in %@" = "Öppna sida i %@";
 
 /* No comment provided by engineer. */
 "Open Scripts Folder" = "Öppna skriptmappen";
@@ -399,9 +375,6 @@
 "Refresh completed" = "Uppdatering klar";
 
 /* No comment provided by engineer. */
-"Refresh the current page" = "Ladda om nuvarande sida";
-
-/* No comment provided by engineer. */
 "Refreshing subscriptions…" = "Uppdaterar prenumerationer…";
 
 /* Title of a popup menu item */
@@ -419,19 +392,20 @@
 /* No comment provided by engineer. */
 "Retrieving folder image" = "Mottager mappbild";
 
-/* No comment provided by engineer. */
-"Return to the previous page" = "Återgå till föregående sida";
-
 /* A formatted URL string with the javascript: URL scheme. */
 "Run script “%@”" = "Kör skriptet ”%@”";
 
-/* Placeholder title of a search field */
-"Search all articles" = "Sök genom alla artiklar";
+/* Toolbar item label */
+"Safari Reading List" = "Safari-läslista";
 
-/* Toolbar item label
+/* Search panel title
+   Toolbar item label
    Toolbar item palette label
    Toolbar item tooltip */
-"Search Articles" = "Sök i artiklar";
+"Search" = "Sök";
+
+/* Placeholder title of a search field */
+"Search all articles" = "Sök genom alla artiklar";
 
 /* Placeholder title of a search field */
 "Search for folders" = "Sök efter mappar";
@@ -474,9 +448,6 @@
 
 /* Data field name visible in menu/article list/smart folder definition */
 "Subject" = "Ämne";
-
-/* No comment provided by engineer. */
-"Subscribe to the feed for this page" = "Prenumerera på artiklar från denna sida";
 
 /* Pseudo field name visible in menu/article list */
 "Summary" = "Sammanfattning";

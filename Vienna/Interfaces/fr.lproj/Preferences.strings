@@ -20,7 +20,7 @@
 "7Za-ay-jlt.title" = "Manuellement";
 
 /* Class = "NSButtonCell"; title = "Display feeds with unread articles with bold font"; ObjectID = "86e-38-zCh"; */
-"86e-38-zCh.title" = "Afficher les flux avec les articles non lus en caractères gras";
+"86e-38-zCh.title" = "Afficher en gras les flux ayant des articles non lus";
 
 /* Class = "NSTextFieldCell"; title = "Mark current article read:"; ObjectID = "adB-qE-xKg"; */
 "adB-qE-xKg.title" = "Marquer l'article courant comme lu :";
@@ -46,9 +46,6 @@
 /* Class = "NSMenuItem"; title = "Medium"; ObjectID = "ClO-ha-l48"; */
 "ClO-ha-l48.title" = "Moyenne";
 
-/* Class = "NSButtonCell"; title = "Preview new browser"; ObjectID = "DDY-fS-V5T"; */
-"DDY-fS-V5T.title" = "Aperçu du nouveau navigateur web";
-
 /* Class = "NSButtonCell"; title = "Show website icons in the feed list"; ObjectID = "dkm-xW-4If"; */
 "dkm-xW-4If.title" = "Afficher les icônes de flux dans la liste des dossiers";
 
@@ -66,9 +63,6 @@
 
 /* Class = "NSButtonCell"; title = "Open links in external browser"; ObjectID = "flH-2D-s6O"; */
 "flH-2D-s6O.title" = "Ouvrir les liens dans un autre navigateur";
-
-/* Class = "NSTextFieldCell"; title = "Vienna has a new browser built on top of WebKit. It is faster and more secure.\nAfter changing this setting, restart Vienna to test it. Feedback is very welcome!"; ObjectID = "Fv8-Xx-YR0"; */
-"Fv8-Xx-YR0.title" = "Vienna a un nouveau navigateur web s'appuyant sur WebKit. Il est plus rapide et plus sécurisé. Pour l'essayer, redémarrez Vienna après avoir activé ce réglage. Vos commentaires seront très appréciés !";
 
 /* Class = "NSTextFieldCell"; title = "The higher the number, the quicker your subscriptions will be downloaded."; ObjectID = "g3K-qh-M6y"; */
 "g3K-qh-M6y.title" = "Plus le nombre est élevé, plus vos abonnements seront rapidement mis à jour.";
@@ -173,7 +167,7 @@
 "V12-Ua-skO.ibShadowedToolTip" = "Visiter le site web";
 
 /* Class = "NSButtonCell"; title = "Display unread articles with bold font"; ObjectID = "VQH-xk-s5g"; */
-"VQH-xk-s5g.title" = "Afficher les articles non lus en caractères gras";
+"VQH-xk-s5g.title" = "Afficher en gras les articles non lus";
 
 /* Class = "NSViewController"; title = "Updates"; ObjectID = "wyk-W1-xMh"; */
 "wyk-W1-xMh.title" = "Mises à jour";

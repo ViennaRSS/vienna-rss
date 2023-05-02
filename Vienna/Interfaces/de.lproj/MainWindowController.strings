@@ -169,6 +169,9 @@
 /* Class = "NSMenuItem"; title = "Mark All Articles as Read"; ObjectID = "Qj9-p3-QXB"; */
 "Qj9-p3-QXB.title" = "Alle Artikel als gelesen markieren";
 
+/* Class = "NSButtonCell"; title = "Show All Feeds"; ObjectID = "Qqb-bF-tIg"; */
+"Qqb-bF-tIg.title" = "Alle Feeds anzeigen";
+
 /* Class = "NSMenuItem"; title = "New Folder…"; ObjectID = "RaH-Yu-Ija"; */
 "RaH-Yu-Ija.title" = "Neuer Ordner …";
 

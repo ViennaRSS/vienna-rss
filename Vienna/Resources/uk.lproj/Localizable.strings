@@ -74,12 +74,6 @@
 /* No comment provided by engineer. */
 "Connecting to %@" = "З'єднуюся з %@";
 
-/* No comment provided by engineer. */
-"Copy Link to Clipboard" = "Копіювати посилання у буфер";
-
-/* No comment provided by engineer. */
-"Copy Page Link to Clipboard" = "Копіювати посилання на сторінку у буфер";
-
 /* Copy URL */
 "Copy URL" = "Скопіювати адресу";
 
@@ -159,9 +153,6 @@
 /* Data field name (URL) visible in menu/article list */
 "Enclosure URL" = "URL додатку";
 
-/* No comment provided by engineer. */
-"Enter the URL here" = "Тут введіть URL";
-
 /* Already subscribed title */
 "Error" = "Помилка";
 
@@ -203,9 +194,6 @@
 
 /* No comment provided by engineer. */
 "Folders" = "Папки";
-
-/* No comment provided by engineer. */
-"Go forward to the next page" = "Перейти вперед до наступної сторінки";
 
 /* Pseudo field name visible in article list */
 "Headlines" = "Заголовки";
@@ -279,9 +267,6 @@
 /* No comment provided by engineer. */
 "No new articles available" = "Немає нових статей";
 
-/* Title of a button on an alert */
-"OK" = "Добре";
-
 /* Message text of an alert */
 "One or more downloads are in progress" = "Одне або більше завантажень ще не завершені";
 
@@ -298,22 +283,10 @@
 "Open Article Page in External Browser" = "Відкрити сторінку статті у зовнішньому браузері";
 
 /* No comment provided by engineer. */
-"Open Frame" = "Відкрити фрейм";
-
-/* No comment provided by engineer. */
-"Open Image in %@" = "Відкрити зображення у %@";
-
-/* No comment provided by engineer. */
-"Open Image in New Tab" = "Відкрити зображення у новій вкладці";
-
-/* No comment provided by engineer. */
 "Open Link in %@" = "Відкрити посилання у %@";
 
 /* No comment provided by engineer. */
 "Open Link in New Tab" = "Відкрити посилання у новій вкладці";
-
-/* No comment provided by engineer. */
-"Open Page in %@" = "Відкрити сторінку у %@";
 
 /* No comment provided by engineer. */
 "Open Scripts Folder" = "Відкрити папку сценаріїв";
@@ -353,9 +326,6 @@
 "Refresh completed" = "Оновлення завершено";
 
 /* No comment provided by engineer. */
-"Refresh the current page" = "Оновити поточну сторінку";
-
-/* No comment provided by engineer. */
 "Refreshing folder images…" = "Оновити зображення у папці…";
 
 /* No comment provided by engineer. */
@@ -376,16 +346,8 @@
 /* No comment provided by engineer. */
 "Retrieving folder image" = "Отримую зображення папки";
 
-/* No comment provided by engineer. */
-"Return to the previous page" = "Повернутися до попередньої сторінки";
-
 /* Placeholder title of a search field */
 "Search all articles" = "Пошук по всіх статтях";
-
-/* Toolbar item label
-   Toolbar item palette label
-   Toolbar item tooltip */
-"Search Articles" = "Шукати статті";
 
 /* Placeholder title of a search field */
 "Search for folders" = "Знайти теки";
@@ -413,9 +375,6 @@
 
 /* Data field name visible in menu/article list/smart folder definition */
 "Subject" = "Тема";
-
-/* No comment provided by engineer. */
-"Subscribe to the feed for this page" = "Підписатися на стрічку новин цієї сторінки";
 
 /* Pseudo field name visible in menu/article list */
 "Summary" = "Підсумок";

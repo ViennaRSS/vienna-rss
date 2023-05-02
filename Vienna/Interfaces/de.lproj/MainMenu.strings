@@ -31,9 +31,6 @@
 /* Class = "NSMenuItem"; title = "About Vienna"; ObjectID = "58"; */
 "58.title" = "Über Vienna";
 
-/* Class = "NSMenuItem"; title = "Page Setup…"; ObjectID = "77"; */
-"77.title" = "Papierformat …";
-
 /* Class = "NSMenuItem"; title = "Print…"; ObjectID = "78"; */
 "78.title" = "Drucken …";
 
@@ -331,9 +328,6 @@
 /* Class = "NSMenuItem"; title = "Show Filter Bar"; ObjectID = "1325"; */
 "1325.title" = "Filterleiste einblenden";
 
-/* Class = "NSMenuItem"; title = "Search Articles"; ObjectID = "1327"; */
-"1327.title" = "Artikel durchsuchen";
-
 /* Class = "NSMenuItem"; title = "Order By"; ObjectID = "1336"; */
 "1336.title" = "Sortiermodus";
 
@@ -459,6 +453,9 @@
 
 /* Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "v3R-CV-0b9"; */
 "v3R-CV-0b9.title" = "Großschreiben";
+
+/* Class = "NSMenuItem"; title = "Add to Safari Reading List"; ObjectID = "VQe-zs-ODh"; */
+"VQe-zs-ODh.title" = "Zur Safari-Leseliste hinzufügen";
 
 /* Class = "NSMenuItem"; title = "Smart Links"; ObjectID = "w4Q-ne-FPI"; */
 "w4Q-ne-FPI.title" = "Intelligente Links";

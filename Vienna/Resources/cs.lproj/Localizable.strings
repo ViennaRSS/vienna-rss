@@ -69,12 +69,6 @@
 "Connecting to %@" = "Připojuje se k %@";
 
 /* No comment provided by engineer. */
-"Copy Link to Clipboard" = "Zkopírovat odkaz do schránky";
-
-/* No comment provided by engineer. */
-"Copy Page Link to Clipboard" = "Zkopírovat odkaz na stránku do schránky";
-
-/* No comment provided by engineer. */
 "Database Upgrade" = "Aktualizovat databázi";
 
 /* Data field name visible in menu/article list/smart folder definition */
@@ -150,9 +144,6 @@
 /* Data field name (URL) visible in menu/article list */
 "Enclosure URL" = "URL přílohy";
 
-/* No comment provided by engineer. */
-"Enter the URL here" = "Sem zadejte URL";
-
 /* Already subscribed title */
 "Error" = "Chyba";
 
@@ -188,9 +179,6 @@
 
 /* No comment provided by engineer. */
 "Folders" = "Složky";
-
-/* No comment provided by engineer. */
-"Go forward to the next page" = "Otevřít následující stránku";
 
 /* Pseudo field name visible in article list */
 "Headlines" = "Záhlaví";
@@ -267,9 +255,6 @@
 /* No comment provided by engineer. */
 "No new articles available" = "Žádné nové příspěvky";
 
-/* Title of a button on an alert */
-"OK" = "Budiž";
-
 /* Message text of an alert */
 "One or more downloads are in progress" = "Probíhá jedno nebo více kopírování";
 
@@ -286,22 +271,10 @@
 "Open Article Page in External Browser" = "Otevřít stránku příspěvku v externím prohlížeči";
 
 /* No comment provided by engineer. */
-"Open Frame" = "Otevřít rámeček";
-
-/* No comment provided by engineer. */
-"Open Image in %@" = "Otevřít obrázek v programu %@";
-
-/* No comment provided by engineer. */
-"Open Image in New Tab" = "Otevřít obrázek v novém panelu";
-
-/* No comment provided by engineer. */
 "Open Link in %@" = "Otevřít odkaz v programu %@";
 
 /* No comment provided by engineer. */
 "Open Link in New Tab" = "Otevřít odkaz v novém panelu";
-
-/* No comment provided by engineer. */
-"Open Page in %@" = "Otevřít stránku v programu %@";
 
 /* No comment provided by engineer. */
 "Open Scripts Folder" = "Otevřít složku skriptů";
@@ -344,9 +317,6 @@
 "Refresh completed" = "Obnovení dokončeno";
 
 /* No comment provided by engineer. */
-"Refresh the current page" = "Obnovit stávající stránku";
-
-/* No comment provided by engineer. */
 "Refreshing folder images…" = "Obnovují se ikony složek…";
 
 /* No comment provided by engineer. */
@@ -367,16 +337,8 @@
 /* No comment provided by engineer. */
 "Retrieving folder image" = "Přijímají se obrázky složek";
 
-/* No comment provided by engineer. */
-"Return to the previous page" = "Zpět na předchozí stránku";
-
 /* Placeholder title of a search field */
 "Search all articles" = "Hledat ve všech příspěvcích";
-
-/* Toolbar item label
-   Toolbar item palette label
-   Toolbar item tooltip */
-"Search Articles" = "Hledat v příspěvcích";
 
 /* No comment provided by engineer. */
 "Search Results" = "Výsledky hledání";
@@ -404,9 +366,6 @@
 
 /* Data field name visible in menu/article list/smart folder definition */
 "Subject" = "Předmět";
-
-/* No comment provided by engineer. */
-"Subscribe to the feed for this page" = "Odebírat kanál novinek z této stránky";
 
 /* Pseudo field name visible in menu/article list */
 "Summary" = "Souhrn";

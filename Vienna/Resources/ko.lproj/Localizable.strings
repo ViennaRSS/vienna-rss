@@ -60,12 +60,6 @@
 "Connecting to %@" = "%@ 주소에 연결";
 
 /* No comment provided by engineer. */
-"Copy Link to Clipboard" = "링크 복사";
-
-/* No comment provided by engineer. */
-"Copy Page Link to Clipboard" = "페이지 링크 복사";
-
-/* No comment provided by engineer. */
 "Database Upgrade" = "데이터베이스 업그레이드";
 
 /* Data field name visible in menu/article list/smart folder definition */
@@ -105,9 +99,6 @@
 /* Title of a button on an alert */
 "Empty Trash" = "휴지통 비우기";
 
-/* No comment provided by engineer. */
-"Enter the URL here" = "여기에 URL 입력";
-
 /* Already subscribed title */
 "Error" = "오류";
 
@@ -137,9 +128,6 @@
 
 /* No comment provided by engineer. */
 "Folders" = "구독";
-
-/* No comment provided by engineer. */
-"Go forward to the next page" = "다음 페이지로 이동";
 
 /* Pseudo field name visible in article list */
 "Headlines" = "헤드라인";
@@ -195,9 +183,6 @@
 /* No comment provided by engineer. */
 "No new articles available" = "가능한 새 기사를 찾을 수 없음";
 
-/* Title of a button on an alert */
-"OK" = "확인";
-
 /* Message text of an alert */
 "One or more downloads are in progress" = "하나 이상의 다운로드가 진행 중입니다.";
 
@@ -214,22 +199,10 @@
 "Open Article Page in External Browser" = "외부 브라우져에서 기사 페이지 열기";
 
 /* No comment provided by engineer. */
-"Open Frame" = "프레임 열기";
-
-/* No comment provided by engineer. */
-"Open Image in %@" = "기본 브라우져에서 이미지 열기";
-
-/* No comment provided by engineer. */
-"Open Image in New Tab" = "새로운 탭에서 이미지 열기";
-
-/* No comment provided by engineer. */
 "Open Link in %@" = "기본 브라우져에서 링크 열기";
 
 /* No comment provided by engineer. */
 "Open Link in New Tab" = "새로운 탭에서 링크 열기";
-
-/* No comment provided by engineer. */
-"Open Page in %@" = "기본 브라우져에서 페이지 열기";
 
 /* No comment provided by engineer. */
 "Open Scripts Folder" = "스크립트 폴더 열기";
@@ -269,9 +242,6 @@
 "Refresh completed" = "갱신 완료";
 
 /* No comment provided by engineer. */
-"Refresh the current page" = "현재 페이지 갱신";
-
-/* No comment provided by engineer. */
 "Refreshing folder images…" = "구독 이미지 갱신 중…";
 
 /* No comment provided by engineer. */
@@ -288,9 +258,6 @@
 
 /* No comment provided by engineer. */
 "Retrieving folder image" = "구독 이미지 추가 중";
-
-/* No comment provided by engineer. */
-"Return to the previous page" = "이전 페이지로 이동";
 
 /* Title of a popup menu item */
 "Select…" = "선택…";

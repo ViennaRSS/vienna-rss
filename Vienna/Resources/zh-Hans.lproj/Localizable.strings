@@ -84,12 +84,6 @@
 "Connecting to Open Reader server to retrieve %@" = "正在连接至 Open Reader 服务器获取 %@";
 
 /* No comment provided by engineer. */
-"Copy Link to Clipboard" = "将连接复制到剪贴板";
-
-/* No comment provided by engineer. */
-"Copy Page Link to Clipboard" = "复制页面连接到粘贴板";
-
-/* No comment provided by engineer. */
 "Database Upgrade" = "数据库升级";
 
 /* Data field name visible in menu/article list/smart folder definition */
@@ -168,9 +162,6 @@
 /* Data field name (URL) visible in menu/article list */
 "Enclosure URL" = "附带文件的 URL";
 
-/* No comment provided by engineer. */
-"Enter the URL here" = "请在这里输入 URL 地址";
-
 /* Already subscribed title */
 "Error" = "错误";
 
@@ -221,9 +212,6 @@
 
 /* No comment provided by engineer. */
 "Forcing Refresh subscriptions…" = "强制刷新订阅中...";
-
-/* No comment provided by engineer. */
-"Go forward to the next page" = "去到下一个页面";
 
 /* No comment provided by engineer. */
 "Got HTTP status 304 - No news from last check" = "返回 HTTP 304 状态 - 上次检查并无新内容";
@@ -312,9 +300,6 @@
 /* No comment provided by engineer. */
 "No new articles available" = "没有新文章";
 
-/* Title of a button on an alert */
-"OK" = "是的";
-
 /* Message text of an alert */
 "One or more downloads are in progress" = "下载进行中";
 
@@ -331,22 +316,10 @@
 "Open Article Page in External Browser" = "在浏览器中打开文章页面";
 
 /* No comment provided by engineer. */
-"Open Frame" = "打开框架";
-
-/* No comment provided by engineer. */
-"Open Image in %@" = "在 %@ 中显示图像";
-
-/* No comment provided by engineer. */
-"Open Image in New Tab" = "在新标签中显示图片";
-
-/* No comment provided by engineer. */
 "Open Link in %@" = "在 %@ 中打开连接";
 
 /* No comment provided by engineer. */
 "Open Link in New Tab" = "在新标签中打开连接";
-
-/* No comment provided by engineer. */
-"Open Page in %@" = "在 %@ 中打开页面";
 
 /* No comment provided by engineer. */
 "Open Scripts Folder" = "打开脚本文件夹";
@@ -386,9 +359,6 @@
 "Refresh completed" = "更新完成";
 
 /* No comment provided by engineer. */
-"Refresh the current page" = "刷新当前页面";
-
-/* No comment provided by engineer. */
 "Refreshing subscriptions…" = "正在更新订阅…";
 
 /* Title of a popup menu item */
@@ -406,16 +376,8 @@
 /* No comment provided by engineer. */
 "Retrieving folder image" = "正在接收文件夹图片";
 
-/* No comment provided by engineer. */
-"Return to the previous page" = "回到前一个页面";
-
 /* Placeholder title of a search field */
 "Search all articles" = "搜索所有文章";
-
-/* Toolbar item label
-   Toolbar item palette label
-   Toolbar item tooltip */
-"Search Articles" = "搜索文章";
 
 /* Placeholder title of a search field */
 "Search for folders" = "搜索文件夹";
@@ -446,9 +408,6 @@
 
 /* Data field name visible in menu/article list/smart folder definition */
 "Subject" = "主题";
-
-/* No comment provided by engineer. */
-"Subscribe to the feed for this page" = "订阅这个页面上的频道";
 
 /* Pseudo field name visible in menu/article list */
 "Summary" = "总结";

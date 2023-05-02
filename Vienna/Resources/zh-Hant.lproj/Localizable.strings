@@ -95,12 +95,6 @@
 /* No comment provided by engineer. */
 "Connecting to Open Reader server to retrieve %@" = "正在連線至 Open Reader 伺服器以取得 %@";
 
-/* No comment provided by engineer. */
-"Copy Link to Clipboard" = "將連結拷貝到剪貼板";
-
-/* No comment provided by engineer. */
-"Copy Page Link to Clipboard" = "將頁面連結拷貝到剪貼板";
-
 /* Copy URL */
 "Copy URL" = "複製網址";
 
@@ -183,9 +177,6 @@
 /* Data field name (URL) visible in menu/article list */
 "Enclosure URL" = "隨附項目 URL";
 
-/* No comment provided by engineer. */
-"Enter the URL here" = "在此輸入 URL";
-
 /* Already subscribed title */
 "Error" = "錯誤";
 
@@ -245,9 +236,6 @@
 
 /* No comment provided by engineer. */
 "Forcing Refresh subscriptions…" = "強制重新整理訂閱項目…";
-
-/* No comment provided by engineer. */
-"Go forward to the next page" = "前往下一頁";
 
 /* No comment provided by engineer. */
 "Got HTTP status 304 - No news from last check" = "回應 HTTP 403 狀態 - 上次檢查並無新的內容";
@@ -339,9 +327,6 @@
 /* No comment provided by engineer. */
 "No new articles available" = "沒有新文章";
 
-/* Title of a button on an alert */
-"OK" = "好";
-
 /* Message text of an alert */
 "One or more downloads are in progress" = "Vienna 目前正在下載一或多個項目";
 
@@ -358,15 +343,6 @@
 "Open Article Page in External Browser" = "在外部瀏覽器中打開文章頁面";
 
 /* No comment provided by engineer. */
-"Open Frame" = "打開框架頁";
-
-/* No comment provided by engineer. */
-"Open Image in %@" = "在 %@ 中打開影像";
-
-/* No comment provided by engineer. */
-"Open Image in New Tab" = "在新標籤頁中打開影像";
-
-/* No comment provided by engineer. */
 "Open Link in %@" = "在 %@ 中打開連結";
 
 /* No comment provided by engineer. */
@@ -374,9 +350,6 @@
 
 /* No comment provided by engineer. */
 "Open Link in New Tab" = "在新標籤頁中打開連結";
-
-/* No comment provided by engineer. */
-"Open Page in %@" = "在 %@ 中打開頁面";
 
 /* No comment provided by engineer. */
 "Open Reader Authentication Failed" = "Open Reader 認證失敗";
@@ -434,9 +407,6 @@
 "Refresh completed" = "重新整理已完成";
 
 /* No comment provided by engineer. */
-"Refresh the current page" = "重新整理目前頁面";
-
-/* No comment provided by engineer. */
 "Refreshing folder images…" = "重新整理檔案夾影像⋯";
 
 /* No comment provided by engineer. */
@@ -461,9 +431,6 @@
 "Retrieving folder image for Open Reader Feed" = "正在接收 Open Reader 的資料夾圖檔";
 
 /* No comment provided by engineer. */
-"Return to the previous page" = "返回上一頁";
-
-/* No comment provided by engineer. */
 "RSS Icon not found!" = "找不到圖示。";
 
 /* A formatted URL string with the javascript: URL scheme. */
@@ -471,14 +438,6 @@
 
 /* Placeholder title of a search field */
 "Search all articles" = "搜尋所有文章";
-
-/* No comment provided by engineer. */
-"Search all articles or the current web page" = "查詢當前網頁的所有文章";
-
-/* Toolbar item label
-   Toolbar item palette label
-   Toolbar item tooltip */
-"Search Articles" = "搜尋文章";
 
 /* Placeholder title of a search field */
 "Search current web page" = "查詢當前網頁";
@@ -524,9 +483,6 @@
 
 /* Data field name visible in menu/article list/smart folder definition */
 "Subject" = "標題";
-
-/* No comment provided by engineer. */
-"Subscribe to the feed for this page" = "訂閱此頁面的 feed";
 
 /* Pseudo field name visible in menu/article list */
 "Summary" = "摘要";

@@ -63,12 +63,6 @@
 "Connecting to %@" = "Bağlanılıyor: %@";
 
 /* No comment provided by engineer. */
-"Copy Link to Clipboard" = "Linki Panoya Kopyala";
-
-/* No comment provided by engineer. */
-"Copy Page Link to Clipboard" = "Sayfa Adresini Panoya Kopyala";
-
-/* No comment provided by engineer. */
 "Database Upgrade" = "Veritabanı Güncellemesi";
 
 /* Data field name visible in menu/article list/smart folder definition */
@@ -138,9 +132,6 @@
 /* Data field name (URL) visible in menu/article list */
 "Enclosure URL" = "Ek URL";
 
-/* No comment provided by engineer. */
-"Enter the URL here" = "URL'yi buraya giriniz";
-
 /* Already subscribed title */
 "Error" = "Hata";
 
@@ -176,9 +167,6 @@
 
 /* No comment provided by engineer. */
 "Folders" = "Klasörler";
-
-/* No comment provided by engineer. */
-"Go forward to the next page" = "Sonraki sayfaya geç";
 
 /* Pseudo field name visible in article list */
 "Headlines" = "Başlıklar";
@@ -249,9 +237,6 @@
 /* No comment provided by engineer. */
 "No new articles available" = "Yeni makale yok";
 
-/* Title of a button on an alert */
-"OK" = "Tamam";
-
 /* Message text of an alert */
 "One or more downloads are in progress" = "Bir ya da daha fazla dosya indiriliyor";
 
@@ -268,22 +253,10 @@
 "Open Article Page in External Browser" = "Makale Sayfasını Harici Tarayıcıda Aç";
 
 /* No comment provided by engineer. */
-"Open Frame" = "Çerçeveyi Aç";
-
-/* No comment provided by engineer. */
-"Open Image in %@" = "İmajı Şunda Aç: %@";
-
-/* No comment provided by engineer. */
-"Open Image in New Tab" = "İmajı Yeni Sekmede Aç";
-
-/* No comment provided by engineer. */
 "Open Link in %@" = "Bağlantıyı Şurada Aç %@";
 
 /* No comment provided by engineer. */
 "Open Link in New Tab" = "Bağlantıyı Yeni Sekmede Aç";
-
-/* No comment provided by engineer. */
-"Open Page in %@" = "Sayfayı Şurada Aç %@";
 
 /* No comment provided by engineer. */
 "Open Scripts Folder" = "Scriptler klasörünü aç";
@@ -323,9 +296,6 @@
 "Refresh completed" = "Yenileme tamamlandı";
 
 /* No comment provided by engineer. */
-"Refresh the current page" = "Geçerli sayfayı yenile";
-
-/* No comment provided by engineer. */
 "Refreshing folder images…" = "Klasör imajları yenileniyor…";
 
 /* No comment provided by engineer. */
@@ -346,16 +316,8 @@
 /* No comment provided by engineer. */
 "Retrieving folder image" = "Klasör imajı alınıyor";
 
-/* No comment provided by engineer. */
-"Return to the previous page" = "Önceki sayfaya geri dön";
-
 /* Placeholder title of a search field */
 "Search all articles" = "Tüm makalelerde ara";
-
-/* Toolbar item label
-   Toolbar item palette label
-   Toolbar item tooltip */
-"Search Articles" = "Makalelerde Ara";
 
 /* No comment provided by engineer. */
 "Search Results" = "Arama Sonuçları";
@@ -380,9 +342,6 @@
 
 /* Data field name visible in menu/article list/smart folder definition */
 "Subject" = "Konu";
-
-/* No comment provided by engineer. */
-"Subscribe to the feed for this page" = "Bu sayfa için beslemeye abone ol";
 
 /* Pseudo field name visible in menu/article list */
 "Summary" = "Özet";
