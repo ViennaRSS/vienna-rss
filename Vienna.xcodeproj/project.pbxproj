@@ -862,7 +862,6 @@
 		F6B3561425616313008CA1ED /* DownloadItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadItem.m; sourceTree = "<group>"; };
 		F6B76B43284B492E009961AD /* NSPredicateEditor+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "NSPredicateEditor+Private.h"; sourceTree = "<group>"; };
 		F6C3F9BA209EFD4E009936CC /* eu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = eu; path = eu.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
-		F6C5C4BC29E9D1B8005E9C58 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Predicates.strings; sourceTree = "<group>"; };
 		F6C9DA6E271BB3BB00FC3027 /* RSSFeed.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSSFeed.h; sourceTree = "<group>"; };
 		F6C9DA6F271BB3BB00FC3027 /* RSSFeed.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSSFeed.m; sourceTree = "<group>"; };
 		F6C9DA71271BB55000FC3027 /* AtomFeed.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AtomFeed.h; sourceTree = "<group>"; };
@@ -870,7 +869,6 @@
 		F6CB562F209EFDB5002EE27B /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ja; path = ja.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		F6CE47111E7E3DBD0045EAD7 /* ActivityItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityItem.h; sourceTree = "<group>"; };
 		F6CE47121E7E3DCB0045EAD7 /* ActivityItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityItem.m; sourceTree = "<group>"; };
-		F6CFF9BF29E9D1CF00E47DC2 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Predicates.strings; sourceTree = "<group>"; };
 		F6D0089B1EF95C9D008F2D3B /* InfoPanelManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoPanelManager.m; sourceTree = "<group>"; };
 		F6D0089D1EF95CAC008F2D3B /* InfoPanelManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoPanelManager.h; sourceTree = "<group>"; };
 		F6D282611F1A87A900FF865E /* PopUpButtonToolbarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PopUpButtonToolbarItem.swift; sourceTree = "<group>"; };
@@ -2497,10 +2495,8 @@
 			children = (
 				F685D24B292460210097C0D3 /* Base */,
 				F6DA45532940CC9E00D746F8 /* de */,
-				F6C5C4BC29E9D1B8005E9C58 /* es */,
 				F66A7E542A019006002F5D5E /* fr */,
 				F698E6FF29E9D1CA00D49475 /* nl */,
-				F6CFF9BF29E9D1CF00E47DC2 /* pt */,
 			);
 			name = Predicates.strings;
 			sourceTree = "<group>";
