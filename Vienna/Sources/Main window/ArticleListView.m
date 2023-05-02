@@ -36,8 +36,6 @@
 #import "Database.h"
 #import "Vienna-Swift.h"
 
-#define PROGRESS_INDICATOR_DIMENSION 8
-
 // Shared defaults key
 NSString * const MAPref_ShowEnclosureBar = @"ShowEnclosureBar";
 
@@ -97,7 +95,6 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 
     NSURL *currentURL;
     BOOL isLoadingHTMLArticle;
-    NSProgressIndicator *progressIndicator;
 }
 
 /* initWithFrame
@@ -937,15 +934,6 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
     }
 }
 
-/* viewLink
- * There's no view link address for article views. If we eventually implement a local
- * scheme such as vienna:<feedurl>/<guid> then we could use that as a link address.
- */
--(NSString *)viewLink
-{
-	return nil;
-}
-
 /* performFindPanelAction
  * Implement the search action.
  */
@@ -995,32 +983,6 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
     [self scrollToArticle:currentSelectedArticle.guid];
 
 	blockSelectionHandler = NO;
-}
-
-/* startLoadIndicator
- * add the indicator of articles' data being loaded
- */
--(void)startLoadIndicator
-{
-	if (progressIndicator == nil) {
-		NSRect progressIndicatorFrame;
-		progressIndicatorFrame.size = NSMakeSize(articleList.visibleRect.size.width, PROGRESS_INDICATOR_DIMENSION);
-		progressIndicatorFrame.origin = articleList.visibleRect.origin;
-		progressIndicator = [[NSProgressIndicator alloc] initWithFrame:progressIndicatorFrame];
-		progressIndicator.displayedWhenStopped = NO;
-		[articleList addSubview:progressIndicator];
-	}
-	[progressIndicator startAnimation:self];
-}
-
-/* stopLoadIndicator
- * remove the indicator of articles loading
- */
--(void)stopLoadIndicator
-{
-	[progressIndicator stopAnimation:self];
-	[progressIndicator removeFromSuperviewWithoutNeedingDisplay];
-	progressIndicator = nil;
 }
 
 /* refreshImmediatelyArticleAtCurrentRow
