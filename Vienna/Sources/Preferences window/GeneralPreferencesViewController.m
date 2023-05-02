@@ -202,7 +202,13 @@
     // Add a Select command so the user can manually pick a registered
     // application.
     [linksHandler.menu addItem:[NSMenuItem separatorItem]];
-    [linksHandler addItemWithTitle:NSLocalizedString(@"Select…", nil) tag:-1];
+    NSString *selectTitle = NSLocalizedString(@"Select…",
+                                              @"Title of a menu item");
+    NSMenuItem *selectMenuItem = [[NSMenuItem alloc] initWithTitle:selectTitle
+                                                            action:nil
+                                                     keyEquivalent:@""];
+    selectMenuItem.tag = -1;
+    [linksHandler.menu addItem:selectMenuItem];
     
     // Select the registered item
     [linksHandler selectItemAtIndex:0];
