@@ -42,8 +42,8 @@
 #import "ActivityItem.h"
 #import "Article.h"
 
-static NSString *LoginBaseURL = @"%@://%@/accounts/ClientLogin?accountType=GOOGLE&service=reader";
-static NSString *ClientName = @"ViennaRSS";
+static NSString * const LoginBaseURL = @"%@://%@/accounts/ClientLogin?accountType=GOOGLE&service=reader";
+static NSString * const ClientName = @"ViennaRSS";
 static NSString *latestAlertDescription = @"";
 
 // host specific variables

@@ -20,13 +20,13 @@
 
 #import "Field.h"
 
-static NSString *const VNACodingKeyDisplayName = @"displayName";
-static NSString *const VNACodingKeyName = @"name";
-static NSString *const VNACodingKeySQLField = @"sqlField";
-static NSString *const VNACodingKeyTag = @"tag";
-static NSString *const VNACodingKeyType = @"type";
-static NSString *const VNACodingKeyVisible = @"visible";
-static NSString *const VNACodingKeyWidth = @"width";
+static NSString * const VNACodingKeyDisplayName = @"displayName";
+static NSString * const VNACodingKeyName = @"name";
+static NSString * const VNACodingKeySQLField = @"sqlField";
+static NSString * const VNACodingKeyTag = @"tag";
+static NSString * const VNACodingKeyType = @"type";
+static NSString * const VNACodingKeyVisible = @"visible";
+static NSString * const VNACodingKeyWidth = @"width";
 
 @implementation Field
 

@@ -22,8 +22,8 @@
 
 @import UniformTypeIdentifiers;
 
-static NSString *const VNACodingKeyFilename = @"filename";
-static NSString *const VNACodingKeySize = @"size";
+static NSString * const VNACodingKeyFilename = @"filename";
+static NSString * const VNACodingKeySize = @"size";
 
 @interface DownloadItem ()
 

@@ -21,26 +21,30 @@
 
 @import Foundation;
 
-extern NSString * _Nonnull MA_Field_GUID;
-extern NSString * _Nullable MA_Field_Subject;
-extern NSString * _Nullable MA_Field_Author;
-extern NSString * _Nullable MA_Field_Link;
-extern NSString * _Nullable MA_Field_Date;
-extern NSString * _Nullable MA_Field_Read;
-extern NSString * _Nullable MA_Field_Flagged;
-extern NSString * _Nullable MA_Field_Comments;
-extern NSString * _Nullable MA_Field_Deleted;
-extern NSString * _Nullable MA_Field_Text;
-extern NSString * _Nullable MA_Field_Folder;
-extern NSString * _Nullable MA_Field_Parent;
-extern NSString * _Nullable MA_Field_Headlines;
-extern NSString * _Nullable MA_Field_Summary;
-extern NSString * _Nullable MA_Field_CreatedDate;
-extern NSString * _Nullable MA_Field_Enclosure;
-extern NSString * _Nullable MA_Field_EnclosureDownloaded;
-extern NSString * _Nullable MA_Field_HasEnclosure;
-
 @class Folder;
+
+NS_ASSUME_NONNULL_BEGIN
+
+extern NSString * const MA_Field_GUID;
+extern NSString * const MA_Field_Subject;
+extern NSString * const MA_Field_Author;
+extern NSString * const MA_Field_Link;
+extern NSString * const MA_Field_Date;
+extern NSString * const MA_Field_Read;
+extern NSString * const MA_Field_Flagged;
+extern NSString * const MA_Field_Comments;
+extern NSString * const MA_Field_Deleted;
+extern NSString * const MA_Field_Text;
+extern NSString * const MA_Field_Folder;
+extern NSString * const MA_Field_Parent;
+extern NSString * const MA_Field_Headlines;
+extern NSString * const MA_Field_Summary;
+extern NSString * const MA_Field_CreatedDate;
+extern NSString * const MA_Field_Enclosure;
+extern NSString * const MA_Field_EnclosureDownloaded;
+extern NSString * const MA_Field_HasEnclosure;
+
+NS_ASSUME_NONNULL_END
 
 // Article field IDs
 typedef NS_ENUM(NSInteger, ArticleFieldID) {
