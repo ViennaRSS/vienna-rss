@@ -39,6 +39,8 @@
 
 #define VNA_LOG os_log_create("--", "ArticleController")
 
+static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserverContext;
+
 @interface ArticleController ()
 
 -(NSArray *)applyFilter:(NSArray *)unfilteredArray;
@@ -131,7 +133,7 @@
         [NSUserDefaults.standardUserDefaults addObserver:self
                                               forKeyPath:MAPref_FilterMode
                                                  options:0
-                                                 context:nil];
+                                                 context:VNAArticleControllerObserverContext];
 
         queue = dispatch_queue_create("uk.co.opencommunity.vienna2.displayRefresh", DISPATCH_QUEUE_SERIAL);
         requireSelectArticleAfterReload = NO;
@@ -1146,7 +1148,16 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object
                         change:(NSDictionary<NSKeyValueChangeKey,id> *)change
-                       context:(void *)context {
+                       context:(void *)context
+{
+    if (context != VNAArticleControllerObserverContext) {
+        [super observeValueForKeyPath:keyPath
+                             ofObject:object
+                               change:change
+                              context:context];
+        return;
+    }
+
     if ([keyPath isEqualToString:MAPref_FilterMode]) {
         // Update the list of articles when the user changes the filter.
         @synchronized(mainArticleView) {
@@ -1158,7 +1169,8 @@
 - (void)dealloc {
     [NSNotificationCenter.defaultCenter removeObserver:self];
     [NSUserDefaults.standardUserDefaults removeObserver:self
-                                             forKeyPath:MAPref_FilterMode];
+                                             forKeyPath:MAPref_FilterMode
+                                                context:VNAArticleControllerObserverContext];
 }
 
 @end
