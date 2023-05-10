@@ -75,13 +75,6 @@ NSString * const MAPref_SyncingAppKey = @"SyncingAppKey";
 NSString * const MAPref_AlwaysAcceptBetas = @"AlwayAcceptBetas";
 NSString * const MAPref_UserAgentName = @"UserAgentName";
 
-// Deprecated defaults keys
-NSString * const MAPref_Deprecated_ArticleListFont = @"MessageListFont";
-NSString * const MAPref_Deprecated_ArticleListSortOrders = @"ArticleSortDescriptors";
-NSString * const MAPref_Deprecated_DownloadItemList = @"DownloadsList";
-NSString * const MAPref_Deprecated_FolderFont = @"FolderFont";
-NSString * const MAPref_Deprecated_FolderListFont = @"FolderListFont";
-
 NSInteger const MA_Default_BackTrackQueueSize = 20;
 NSInteger const MA_Default_RefreshThreads = 20;
 NSInteger const MA_Default_MinimumFontSize = 9;

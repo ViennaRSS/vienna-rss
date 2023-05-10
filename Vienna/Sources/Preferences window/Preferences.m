@@ -240,8 +240,15 @@ static Preferences * _standardPreferences = nil;
 
 - (void)migrateEncodedPreferences
 {
-    if ([userPrefs objectForKey:MAPref_Deprecated_ArticleListSortOrders]) {
-        NSData *archive = [self objectForKey:MAPref_Deprecated_ArticleListSortOrders];
+    // Deprecated defaults keys. These were used in older versions of Vienna.
+    NSString * const articleSortDescriptorsKey = @"ArticleSortDescriptors";
+    NSString * const downloadsListKey = @"DownloadsList";
+    NSString * const messageListFontKey = @"MessageListFont";
+    NSString * const folderFontKey = @"FolderFont";
+    NSString * const folderListFontKey = @"FolderListFont";
+
+    if ([userPrefs objectForKey:articleSortDescriptorsKey]) {
+        NSData *archive = [self objectForKey:articleSortDescriptorsKey];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
         NSMutableArray *sortDescriptors = [[NSUnarchiver unarchiveObjectWithData:archive] mutableCopy];
@@ -260,12 +267,12 @@ static Preferences * _standardPreferences = nil;
         NSData *keyedArchive = [NSKeyedArchiver vna_archivedDataWithRootObject:[sortDescriptors copy]
                                                          requiringSecureCoding:YES];
         [self setObject:keyedArchive forKey:MAPref_ArticleListSortOrders];
-        [userPrefs removeObjectForKey:MAPref_Deprecated_ArticleListSortOrders];
+        [userPrefs removeObjectForKey:articleSortDescriptorsKey];
     }
 
-    if ([userPrefs objectForKey:MAPref_Deprecated_DownloadItemList]) {
+    if ([userPrefs objectForKey:downloadsListKey]) {
         // Download items were stored as an array of non-keyed archives.
-        NSArray *array = [self objectForKey:MAPref_Deprecated_DownloadItemList];
+        NSArray *array = [self objectForKey:downloadsListKey];
         NSMutableArray *downloadItems = [NSMutableArray array];
 
         for (NSData *archive in array) {
@@ -284,11 +291,11 @@ static Preferences * _standardPreferences = nil;
         NSData *keyedArchive = [NSKeyedArchiver vna_archivedDataWithRootObject:downloadItems
                                                          requiringSecureCoding:YES];
         [self setObject:keyedArchive forKey:MAPref_DownloadItemList];
-        [userPrefs removeObjectForKey:MAPref_Deprecated_DownloadItemList];
+        [userPrefs removeObjectForKey:downloadsListKey];
     }
 
-    if ([userPrefs objectForKey:MAPref_Deprecated_ArticleListFont]) {
-        NSData *archive = [self objectForKey:MAPref_Deprecated_ArticleListFont];
+    if ([userPrefs objectForKey:messageListFontKey]) {
+        NSData *archive = [self objectForKey:messageListFontKey];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
         NSFont *font = [NSUnarchiver unarchiveObjectWithData:archive];
@@ -296,11 +303,11 @@ static Preferences * _standardPreferences = nil;
         NSData *keyedArchive = [NSKeyedArchiver vna_archivedDataWithRootObject:font
                                                          requiringSecureCoding:YES];
         [self setObject:keyedArchive forKey:MAPref_ArticleListFont];
-        [userPrefs removeObjectForKey:MAPref_Deprecated_ArticleListFont];
+        [userPrefs removeObjectForKey:messageListFontKey];
     }
 
-    if ([userPrefs objectForKey:MAPref_Deprecated_FolderFont]) {
-        NSData *archive = [self objectForKey:MAPref_Deprecated_FolderFont];
+    if ([userPrefs objectForKey:folderFontKey]) {
+        NSData *archive = [self objectForKey:folderFontKey];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
         NSFont *font = [NSUnarchiver unarchiveObjectWithData:archive];
@@ -309,11 +316,11 @@ static Preferences * _standardPreferences = nil;
             [userPrefs setInteger:VNAFeedListSizeModeTiny
                            forKey:MAPref_FeedListSizeMode];
         }
-        [userPrefs removeObjectForKey:MAPref_Deprecated_FolderFont];
+        [userPrefs removeObjectForKey:folderFontKey];
     }
 
-    if ([userPrefs objectForKey:MAPref_Deprecated_FolderListFont]) {
-        NSData *archive = [self objectForKey:MAPref_Deprecated_FolderListFont];
+    if ([userPrefs objectForKey:folderListFontKey]) {
+        NSData *archive = [self objectForKey:folderListFontKey];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
         NSFont *font = [NSKeyedUnarchiver vna_unarchivedObjectOfClass:[NSFont class]
@@ -323,7 +330,7 @@ static Preferences * _standardPreferences = nil;
             [userPrefs setInteger:VNAFeedListSizeModeTiny
                            forKey:MAPref_FeedListSizeMode];
         }
-        [userPrefs removeObjectForKey:MAPref_Deprecated_FolderListFont];
+        [userPrefs removeObjectForKey:folderListFontKey];
     }
 }
 

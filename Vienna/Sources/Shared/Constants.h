@@ -80,13 +80,6 @@ extern NSString * const MAPref_ShowEnclosureBar;
 extern NSString * const MAPref_FeedListSizeMode;
 extern NSString * const MAPref_ShowFeedsWithUnreadItemsInBold;
 
-// Deprecated defaults keys
-extern NSString * const MAPref_Deprecated_ArticleListFont;
-extern NSString * const MAPref_Deprecated_ArticleListSortOrders;
-extern NSString * const MAPref_Deprecated_DownloadItemList;
-extern NSString * const MAPref_Deprecated_FolderFont;
-extern NSString * const MAPref_Deprecated_FolderListFont;
-
 extern NSInteger const MA_Default_BackTrackQueueSize;
 extern NSInteger const MA_Default_RefreshThreads;
 extern float const MA_Default_Read_Interval;
