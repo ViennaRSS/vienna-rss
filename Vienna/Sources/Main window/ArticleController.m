@@ -126,8 +126,8 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 		
 		// Register for notifications
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-		[nc addObserver:self selector:@selector(handleArticleListContentChange:) name:@"MA_Notify_ArticleListContentChange" object:nil];
-        [nc addObserver:self selector:@selector(handleArticleListStateChange:) name:@"MA_Notify_ArticleListStateChange" object:nil];
+		[nc addObserver:self selector:@selector(handleArticleListContentChange:) name:MA_Notify_ArticleListContentChange object:nil];
+        [nc addObserver:self selector:@selector(handleArticleListStateChange:) name:MA_Notify_ArticleListStateChange object:nil];
 
         [NSUserDefaults.standardUserDefaults addObserver:self
                                               forKeyPath:MAPref_FilterMode
@@ -168,7 +168,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 		[self selectFolderAndArticle:currentFolderId guid:currentSelectedArticle.guid];
 		[self ensureSelectedArticle];
 	}
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleViewChange" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_ArticleViewChange object:nil];
 }
 
 /* currentFolderId
@@ -495,7 +495,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
         [[Preferences standardPreferences] boolForKey:MAPref_CheckForUpdatedArticles]
         && currentArticle.revised && !currentArticle.read)
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleViewChange" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_ArticleViewChange object:nil];
     }
 } // reloadArrayOfArticles
 
@@ -795,7 +795,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 				[[Database sharedManager] markArticleRead:folderId guid:theArticle.guid isRead:readFlag];
 				[theArticle markRead:readFlag];
 				if (folderId != lastFolderId && lastFolderId != -1) {
-					[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated"
+					[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_FoldersUpdated
 																		object:@(lastFolderId)];
 				}
 				lastFolderId = folderId;
@@ -803,7 +803,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 		}
 	}
 	if (lastFolderId != -1) {
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated"
+		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_FoldersUpdated
 															object:@(lastFolderId)];
 	}
 }
@@ -827,14 +827,14 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 		} else {
 			[db markArticleRead:folderId guid:articleRef.guid isRead:readFlag];
 			if (folderId != lastFolderId && lastFolderId != -1) {
-				[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated"
+				[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_FoldersUpdated
 																	object:@(lastFolderId)];
 			}
 			lastFolderId = folderId;
 		}
 	}
 	if (lastFolderId != -1) {
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated"
+		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_FoldersUpdated
 															object:@(lastFolderId)];
 	}
 }
@@ -936,7 +936,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
         } else {
 			[dbManager markArticleRead:folderId guid:theGuid isRead:readFlag];
 			if (folderId != lastFolderId && lastFolderId != -1) {
-				[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated"
+				[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_FoldersUpdated
 																	object:@(lastFolderId)];
 			}
 			lastFolderId = folderId;
@@ -948,7 +948,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 	}
 	
 	if (lastFolderId != -1) {
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated"
+		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_FoldersUpdated
 															object:@(lastFolderId)];
 	}
 	if (lastFolderId != -1 && [dbManager folderFromID:currentFolderId].type != VNAFolderTypeRSS

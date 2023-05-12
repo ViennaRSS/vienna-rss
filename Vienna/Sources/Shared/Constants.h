@@ -23,6 +23,43 @@
 extern NSString * const MA_DefaultUserAgentString;
 extern NSString * const MA_BrowserUserAgentString;
 
+extern NSNotificationName const MA_Notify_ArticleListContentChange;
+extern NSNotificationName const MA_Notify_ArticleListFontChange;
+extern NSNotificationName const MA_Notify_ArticleListStateChange;
+extern NSNotificationName const MA_Notify_ArticleViewChange;
+extern NSNotificationName const MA_Notify_ArticleViewEnded NS_SWIFT_NAME(articleViewEnded);
+extern NSNotificationName const MA_Notify_AutoSortFoldersTreeChange;
+extern NSNotificationName const MA_Notify_CancelAuthenticationForFolder;
+extern NSNotificationName const MA_Notify_CellResize;
+extern NSNotificationName const MA_Notify_CheckFrequencyChange;
+extern NSNotificationName const MA_Notify_CowncurrentDownloadsChange;
+extern NSNotificationName const MA_Notify_DownloadCompleted;
+extern NSNotificationName const MA_Notify_DownloadsListChange;
+extern NSNotificationName const MA_Notify_EditFolder;
+extern NSNotificationName const MA_Notify_FilterBarChanged;
+extern NSNotificationName const MA_Notify_FolderAdded;
+extern NSNotificationName const MA_Notify_FolderDescriptionChanged; // Unused
+extern NSNotificationName const MA_Notify_FolderHomePageChanged; // Unused
+extern NSNotificationName const MA_Notify_FolderNameChanged;
+extern NSNotificationName const MA_Notify_FolderSelectionChange;
+extern NSNotificationName const MA_Notify_FoldersUpdated;
+extern NSNotificationName const MA_Notify_GoogleAuthFailed;
+extern NSNotificationName const MA_Notify_GoogleReaderNewSubscriptionChange; // Unused
+extern NSNotificationName const MA_Notify_GotAuthenticationForFolder;
+extern NSNotificationName const MA_Notify_LoadFullHTMLChange;
+extern NSNotificationName const MA_Notify_MinimumFontSizeChange;
+extern NSNotificationName const MA_Notify_OpenReaderFolderChange;
+extern NSNotificationName const MA_Notify_PreferenceChange;
+extern NSNotificationName const MA_Notify_ReadingPaneChange;
+extern NSNotificationName const MA_Notify_RefreshStatus;
+extern NSNotificationName const MA_Notify_ShowAppInStatusBarChanged;
+extern NSNotificationName const MA_Notify_ShowFolderImages;
+extern NSNotificationName const MA_Notify_StyleChange NS_SWIFT_NAME(styleChanged);
+extern NSNotificationName const MA_Notify_SyncGoogleReaderChange; // Unused
+extern NSNotificationName const MA_Notify_TabChanged NS_SWIFT_NAME(tabChanged);
+extern NSNotificationName const MA_Notify_TabCountChanged NS_SWIFT_NAME(tabCountChanged);
+extern NSNotificationName const MA_Notify_UseJavaScriptChange; // Unused
+
 extern NSString * const MAPref_ArticleListFont;
 extern NSString * const MAPref_AutoSortFoldersTree;
 extern NSString * const MAPref_CheckForUpdatedArticles;

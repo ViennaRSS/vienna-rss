@@ -104,11 +104,11 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         _urlSession = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:[NSOperationQueue mainQueue]];
 
         NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-        [nc addObserver:self selector:@selector(handleGotAuthenticationForFolder:) name:@"MA_Notify_GotAuthenticationForFolder" object:nil];
-        [nc addObserver:self selector:@selector(handleCancelAuthenticationForFolder:) name:@"MA_Notify_CancelAuthenticationForFolder"
+        [nc addObserver:self selector:@selector(handleGotAuthenticationForFolder:) name:MA_Notify_GotAuthenticationForFolder object:nil];
+        [nc addObserver:self selector:@selector(handleCancelAuthenticationForFolder:) name:MA_Notify_CancelAuthenticationForFolder
             object:nil];
         [nc addObserver:self selector:@selector(handleWillDeleteFolder:) name:VNADatabaseWillDeleteFolderNotification object:nil];
-        [nc addObserver:self selector:@selector(handleChangeConcurrentDownloads:) name:@"MA_Notify_CowncurrentDownloadsChange" object:nil];
+        [nc addObserver:self selector:@selector(handleChangeConcurrentDownloads:) name:MA_Notify_CowncurrentDownloadsChange object:nil];
         // be notified on system wake up after sleep
         [[NSWorkspace sharedWorkspace].notificationCenter addObserver:self selector:@selector(handleDidWake:)
             name:@"NSWorkspaceDidWakeNotification" object:nil];
@@ -363,7 +363,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     } else {
         [folder clearNonPersistedFlag:VNAFolderFlagError];
     }
-    [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(folder.itemId)];
+    [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:MA_Notify_FoldersUpdated object:@(folder.itemId)];
 }
 
 /* setFolderUpdatingFlag
@@ -377,7 +377,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     } else {
         [folder clearNonPersistedFlag:VNAFolderFlagUpdating];
     }
-    [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(folder.itemId)];
+    [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:MA_Notify_FoldersUpdated object:@(folder.itemId)];
 }
 
 /* pumpFolderIconRefresh
@@ -417,7 +417,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
                         folder.image = iconImage;
 
                         // Broadcast a notification since the folder image has now changed
-                        [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated"
+                        [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:MA_Notify_FoldersUpdated
                                                                                                 object:@(folder.itemId)];
 
                         // Log additional details about this.
@@ -536,7 +536,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         hasStarted = YES;
         countOfNewArticles = 0;
         [[OpenReader sharedManager] resetCountOfNewArticles];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_RefreshStatus object:nil];
     }
 } // refreshFeed
 
@@ -902,7 +902,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         dispatch_async(dispatch_get_main_queue(), ^{
             connectorItem.status = logText;
         });
-        [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListContentChange" object:@(folder.
+        [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:MA_Notify_ArticleListContentChange object:@(folder.
                                                                                                                                   itemId)];
     }
 
@@ -1207,8 +1207,8 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 {
     if (hasStarted && networkQueue.operationCount == 0) {
         NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-        [nc postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
-        [nc postNotificationName:@"MA_Notify_ArticleListContentChange" object:nil];
+        [nc postNotificationName:MA_Notify_RefreshStatus object:nil];
+        [nc postNotificationName:MA_Notify_ArticleListContentChange object:nil];
         statusMessageDuringRefresh = NSLocalizedString(@"Refresh completed", nil);
         hasStarted = NO;
         os_log_info(VNA_LOG, "Finished refreshing");

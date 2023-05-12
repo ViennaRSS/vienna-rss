@@ -21,6 +21,7 @@
 #import "DownloadWindow.h"
 
 #import "AppController+Notifications.h"
+#import "Constants.h"
 #import "DownloadItem.h"
 #import "DownloadManager.h"
 #import "HelperFunctions.h"
@@ -53,7 +54,7 @@
 
 	// Register to get notified when the download manager's list changes
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-	[nc addObserver:self selector:@selector(handleDownloadsChange:) name:@"MA_Notify_DownloadsListChange" object:nil];
+	[nc addObserver:self selector:@selector(handleDownloadsChange:) name:MA_Notify_DownloadsListChange object:nil];
 
 	// Set the cell for each row
 	ImageAndTextCell * imageAndTextCell;

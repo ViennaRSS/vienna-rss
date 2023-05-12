@@ -41,11 +41,6 @@ static NSString * const MA_DefaultStyleName = @"Default";
 static NSString * const MA_Database_Name = @"messages.db";
 static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
 
-// NSNotificationCenter string constants
-NSString * const kMA_Notify_MinimumFontSizeChange = @"MA_Notify_MinimumFontSizeChange";
-NSString * const kMA_Notify_UseJavaScriptChange = @"MA_Notify_UseJavaScriptChange";
-
-
 // The default preferences object.
 static Preferences * _standardPreferences = nil;
 
@@ -469,7 +464,7 @@ static Preferences * _standardPreferences = nil;
 	if (useJavaScript != flag) {
 		useJavaScript = flag;
 		[self setBool:flag forKey:MAPref_UseJavaScript];
-		[[NSNotificationCenter defaultCenter] postNotificationName:kMA_Notify_UseJavaScriptChange
+		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_UseJavaScriptChange
                                                             object:nil];
 	}
 }
@@ -482,7 +477,7 @@ static Preferences * _standardPreferences = nil;
 	if (downloads != concurrentDownloads) {
 		concurrentDownloads = downloads;
 		[self setInteger:downloads forKey:MAPref_ConcurrentDownloads];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_CowncurrentDownloadsChange" object:nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_CowncurrentDownloadsChange object:nil];
 
 	}
 }
@@ -504,7 +499,7 @@ static Preferences * _standardPreferences = nil;
 	if (newSize != minimumFontSize) {
 		minimumFontSize = newSize;
 		[self setInteger:minimumFontSize forKey:MAPref_MinimumFontSize];
-		[[NSNotificationCenter defaultCenter] postNotificationName:kMA_Notify_MinimumFontSizeChange
+		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_MinimumFontSizeChange
                                                             object:nil];
 	}
 }
@@ -517,7 +512,7 @@ static Preferences * _standardPreferences = nil;
 	if (enableMinimumFontSize != flag) {
 		enableMinimumFontSize = flag;
 		[self setBool:flag forKey:MAPref_UseMinimumFontSize];
-		[[NSNotificationCenter defaultCenter] postNotificationName:kMA_Notify_MinimumFontSizeChange
+		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_MinimumFontSizeChange
                                                             object:nil];
 	}
 }
@@ -538,7 +533,7 @@ static Preferences * _standardPreferences = nil;
 	if (showFolderImages != flag) {
 		showFolderImages = flag;
 		[self setBool:flag forKey:MAPref_ShowFolderImages];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ShowFolderImages" object:nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_ShowFolderImages object:nil];
 	}
 }
 
@@ -580,7 +575,7 @@ static Preferences * _standardPreferences = nil;
 	if (layout != newLayout) {
 		layout = newLayout;
 		[self setInteger:newLayout forKey:MAPref_Layout];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ReadingPaneChange" object:nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_ReadingPaneChange object:nil];
 	}
 }
 
@@ -621,7 +616,7 @@ static Preferences * _standardPreferences = nil;
 	if (refreshFrequency != newFrequency) {
 		refreshFrequency = newFrequency;
 		[self setInteger:newFrequency forKey:MAPref_CheckFrequency];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_CheckFrequencyChange" object:nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_CheckFrequencyChange object:nil];
 	}
 }
 
@@ -641,7 +636,7 @@ static Preferences * _standardPreferences = nil;
 	if (flag != refreshOnStartup) {
 		refreshOnStartup = flag;
 		[self setBool:flag forKey:MAPref_CheckForNewArticlesOnStartup];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferenceChange" object:nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_PreferenceChange object:nil];
 	}
 }
 
@@ -661,7 +656,7 @@ static Preferences * _standardPreferences = nil;
 	if (flag != alwaysAcceptBetas) {
 		alwaysAcceptBetas = flag;
 		[self setBool:flag forKey:MAPref_AlwaysAcceptBetas];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferenceChange" object:nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_PreferenceChange object:nil];
 	}
 }
 
@@ -683,7 +678,7 @@ static Preferences * _standardPreferences = nil;
 	if (newInterval != markReadInterval) {
 		markReadInterval = newInterval;
 		[self setObject:@((float)newInterval) forKey:MAPref_MarkReadInterval];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferenceChange" object:nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_PreferenceChange object:nil];
 	}
 }
 
@@ -724,7 +719,7 @@ static Preferences * _standardPreferences = nil;
 	if (openLinksInVienna != flag) {
 		openLinksInVienna = flag;
 		[self setBool:flag forKey:MAPref_OpenLinksInVienna];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferenceChange" object:nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_PreferenceChange object:nil];
 	}
 }
 
@@ -745,7 +740,7 @@ static Preferences * _standardPreferences = nil;
 	if (openLinksInBackground != flag) {
 		openLinksInBackground = flag;
 		[self setBool:flag forKey:MAPref_OpenLinksInBackground];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferenceChange" object:nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_PreferenceChange object:nil];
 	}
 }
 
@@ -766,7 +761,7 @@ static Preferences * _standardPreferences = nil;
 	if (markUpdatedAsNew != flag) {
 		markUpdatedAsNew = flag;
 		[self setBool:flag forKey:MAPref_CheckForUpdatedArticles];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferenceChange" object:nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_PreferenceChange object:nil];
 	}
 }
 
@@ -795,7 +790,7 @@ static Preferences * _standardPreferences = nil;
 		displayStyle = newStyleName;
 		[self setString:displayStyle forKey:MAPref_ActiveStyleName];
 		if (flag) {
-			[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_StyleChange" object:nil];
+			[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_StyleChange object:nil];
 		}
 	}
 }
@@ -816,7 +811,7 @@ static Preferences * _standardPreferences = nil;
 	if (newValue != textSizeMultiplier) {
 		textSizeMultiplier = newValue;
 		[self setObject:@(newValue) forKey:MAPref_ActiveTextSizeMultiplier];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_StyleChange" object:nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_StyleChange object:nil];
 	}
 }
 
@@ -845,7 +840,7 @@ static Preferences * _standardPreferences = nil;
     NSData *archive = [NSKeyedArchiver vna_archivedDataWithRootObject:articleFont
                                                 requiringSecureCoding:YES];
     [self setObject:archive forKey:MAPref_ArticleListFont];
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleListFontChange" object:articleFont];
+	[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_ArticleListFontChange object:articleFont];
 }
 
 /* setArticleListFontSize
@@ -857,7 +852,7 @@ static Preferences * _standardPreferences = nil;
     NSData *archive = [NSKeyedArchiver vna_archivedDataWithRootObject:articleFont
                                                 requiringSecureCoding:YES];
     [self setObject:archive forKey:MAPref_ArticleListFont];
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleListFontChange" object:articleFont];
+	[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_ArticleListFontChange object:articleFont];
 }
 
 /* articleSortDescriptors
@@ -890,7 +885,7 @@ static Preferences * _standardPreferences = nil;
         NSData *archive = [NSKeyedArchiver vna_archivedDataWithRootObject:articleSortDescriptors
                                                     requiringSecureCoding:YES];
         [self setObject:archive forKey:MAPref_ArticleListSortOrders];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferenceChange" object:nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_PreferenceChange object:nil];
 	}
 }
 
@@ -910,7 +905,7 @@ static Preferences * _standardPreferences = nil;
 	if (foldersTreeSortMethod != newMethod) {
 		foldersTreeSortMethod = newMethod;
 		[self setInteger:newMethod forKey:MAPref_AutoSortFoldersTree];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_AutoSortFoldersTreeChange" object:nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_AutoSortFoldersTreeChange object:nil];
 	}
 }
 
@@ -930,7 +925,7 @@ static Preferences * _standardPreferences = nil;
 	if (newMethod != newArticlesNotification) {
 		newArticlesNotification = newMethod;
 		[self setInteger:newArticlesNotification forKey:MAPref_NewArticlesNotification];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferenceChange" object:nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_PreferenceChange object:nil];
 	}
 }
 
@@ -950,7 +945,7 @@ static Preferences * _standardPreferences = nil;
 	if (showAppInStatusBar != show) {
 		showAppInStatusBar = show;
 		[self setBool:showAppInStatusBar forKey:MAPref_ShowAppInStatusBar];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ShowAppInStatusBarChanged" object:nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_ShowAppInStatusBarChanged object:nil];
 	}
 }
 
@@ -989,7 +984,7 @@ static Preferences * _standardPreferences = nil;
 	if (showFilterBar != show) {
 		showFilterBar = show;
 		[self setBool:showFilterBar forKey:MAPref_ShowFilterBar];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FilterBarChanged" object:nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_FilterBarChanged object:nil];
 	}
 }
 
@@ -1020,7 +1015,7 @@ static Preferences * _standardPreferences = nil;
 			[self createFeedSourcesFolderIfNecessary];
 		}
 		[self setBool:shouldSaveFeedSource forKey:MAPref_ShouldSaveFeedSource];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_PreferenceChange" object:nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_PreferenceChange object:nil];
 	}
 }
 
@@ -1051,7 +1046,7 @@ static Preferences * _standardPreferences = nil;
     if (syncGoogleReader != flag) {
 		syncGoogleReader = flag;
 		[self setBool:syncGoogleReader forKey:MAPref_SyncGoogleReader];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_SyncGoogleReaderChange" object:nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_SyncGoogleReaderChange object:nil];
 	}
 }
 
@@ -1068,7 +1063,7 @@ static Preferences * _standardPreferences = nil;
 	if (prefersGoogleNewSubscription != flag) {
 		prefersGoogleNewSubscription = flag;
 		[self setBool:prefersGoogleNewSubscription forKey:MAPref_GoogleNewSubscription];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_GoogleReaderNewSubscriptionChange" object:nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_GoogleReaderNewSubscriptionChange object:nil];
 	}
 }
 
@@ -1085,7 +1080,7 @@ static Preferences * _standardPreferences = nil;
 	if (![syncServer isEqualToString:newServer]) {
 		syncServer = [newServer copy];
 		[self setString:syncServer forKey:MAPref_SyncServer];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_SyncGoogleReaderChange" object:nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_SyncGoogleReaderChange object:nil];
 	}
 }
 
@@ -1102,7 +1097,7 @@ static Preferences * _standardPreferences = nil;
     if (![syncScheme isEqualToString:newScheme]) {
         syncScheme = [newScheme copy];
         [self setString:syncScheme forKey:MAPref_SyncScheme];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_SyncGoogleReaderChange" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_SyncGoogleReaderChange object:nil];
     }
 }
 
@@ -1119,7 +1114,7 @@ static Preferences * _standardPreferences = nil;
 	if (![syncingUser isEqualToString:newUser]) {
 		syncingUser = [newUser copy];
 		[self setString:syncingUser forKey:MAPref_SyncingUser];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_SyncGoogleReaderChange" object:nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_SyncGoogleReaderChange object:nil];
 	}
 }
 

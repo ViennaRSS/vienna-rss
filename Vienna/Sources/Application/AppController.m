@@ -261,20 +261,20 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 	
 	// Register a bunch of notifications
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-	[nc addObserver:self selector:@selector(handleFolderSelection:) name:@"MA_Notify_FolderSelectionChange" object:nil];
-	[nc addObserver:self selector:@selector(handleCheckFrequencyChange:) name:@"MA_Notify_CheckFrequencyChange" object:nil];
-	[nc addObserver:self selector:@selector(handleEditFolder:) name:@"MA_Notify_EditFolder" object:nil];
-	[nc addObserver:self selector:@selector(handleRefreshStatusChange:) name:@"MA_Notify_RefreshStatus" object:nil];
-	[nc addObserver:self selector:@selector(handleTabChange:) name:@"MA_Notify_TabChanged" object:nil];
-	[nc addObserver:self selector:@selector(handleTabCountChange:) name:@"MA_Notify_TabCountChanged" object:nil];
-	[nc addObserver:self selector:@selector(handleFolderNameChange:) name:@"MA_Notify_FolderNameChanged" object:nil];
+	[nc addObserver:self selector:@selector(handleFolderSelection:) name:MA_Notify_FolderSelectionChange object:nil];
+	[nc addObserver:self selector:@selector(handleCheckFrequencyChange:) name:MA_Notify_CheckFrequencyChange object:nil];
+	[nc addObserver:self selector:@selector(handleEditFolder:) name:MA_Notify_EditFolder object:nil];
+	[nc addObserver:self selector:@selector(handleRefreshStatusChange:) name:MA_Notify_RefreshStatus object:nil];
+	[nc addObserver:self selector:@selector(handleTabChange:) name:MA_Notify_TabChanged object:nil];
+	[nc addObserver:self selector:@selector(handleTabCountChange:) name:MA_Notify_TabCountChanged object:nil];
+	[nc addObserver:self selector:@selector(handleFolderNameChange:) name:MA_Notify_FolderNameChanged object:nil];
 	[nc addObserver:self selector:@selector(handleDidBecomeKeyWindow:) name:NSWindowDidBecomeKeyNotification object:nil];
-	[nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_PreferenceChange" object:nil];
-	[nc addObserver:self selector:@selector(handleShowAppInStatusBar:) name:@"MA_Notify_ShowAppInStatusBarChanged" object:nil];
-	[nc addObserver:self selector:@selector(handleShowFilterBar:) name:@"MA_Notify_FilterBarChanged" object:nil];
-	[nc addObserver:self selector:@selector(handleUpdateUnreadCount:) name:@"MA_Notify_FoldersUpdated" object:nil];
+	[nc addObserver:self selector:@selector(handleReloadPreferences:) name:MA_Notify_PreferenceChange object:nil];
+	[nc addObserver:self selector:@selector(handleShowAppInStatusBar:) name:MA_Notify_ShowAppInStatusBarChanged object:nil];
+	[nc addObserver:self selector:@selector(handleShowFilterBar:) name:MA_Notify_FilterBarChanged object:nil];
+	[nc addObserver:self selector:@selector(handleUpdateUnreadCount:) name:MA_Notify_FoldersUpdated object:nil];
 	//Open Reader Notifications
-    [nc addObserver:self selector:@selector(handleGoogleAuthFailed:) name:@"MA_Notify_GoogleAuthFailed" object:nil];
+    [nc addObserver:self selector:@selector(handleGoogleAuthFailed:) name:MA_Notify_GoogleAuthFailed object:nil];
 
 	// Initialize the database
 	if ((db = [Database sharedManager]) == nil) {
@@ -2539,7 +2539,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			[folder clearFlag:VNAFolderFlagLoadFullHTML];
             [[Database sharedManager] clearFlag:VNAFolderFlagLoadFullHTML forFolder:folderID];
 		}
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_LoadFullHTMLChange" object:@(folderID)];
+		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_LoadFullHTMLChange object:@(folderID)];
 	}
 }
 

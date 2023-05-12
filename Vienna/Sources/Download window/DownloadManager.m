@@ -250,7 +250,7 @@
 // Send a notification that the specified download item has changed.
 - (void)notifyDownloadItemChange:(DownloadItem *)item {
     NSNotificationCenter *nc = NSNotificationCenter.defaultCenter;
-    [nc postNotificationName:@"MA_Notify_DownloadsListChange" object:item];
+    [nc postNotificationName:MA_Notify_DownloadsListChange object:item];
 }
 
 // Delivers a user notification for the given download item.
@@ -274,7 +274,7 @@
         notification.userInfo = @{UserNotificationContextKey: UserNotificationContextFileDownloadCompleted,
                                   UserNotificationFilePathKey: fileName};
 
-        [NSNotificationCenter.defaultCenter postNotificationName:@"MA_Notify_DownloadCompleted" object:fileName];
+        [NSNotificationCenter.defaultCenter postNotificationName:MA_Notify_DownloadCompleted object:fileName];
     } else if (item.state == DownloadStateFailed) {
         notification.title = NSLocalizedString(@"Download failed", @"Notification title");
         notification.informativeText = [NSString stringWithFormat:NSLocalizedString(@"File %@ failed to download", @"Notification body"), fileName];

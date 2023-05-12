@@ -19,6 +19,8 @@
 //
 
 #import "AppearancePreferencesViewController.h"
+
+#import "Constants.h"
 #import "Preferences.h"
 
 // List of minimum font sizes. I picked the ones that matched the same option in
@@ -37,9 +39,9 @@ static NSInteger const availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24
 
 - (void)viewDidLoad {
     NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_ArticleListFontChange" object:nil];
-    [nc addObserver:self selector:@selector(handleReloadPreferences:) name:kMA_Notify_MinimumFontSizeChange object:nil];
-    [nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_PreferenceChange" object:nil];
+    [nc addObserver:self selector:@selector(handleReloadPreferences:) name:MA_Notify_ArticleListFontChange object:nil];
+    [nc addObserver:self selector:@selector(handleReloadPreferences:) name:MA_Notify_MinimumFontSizeChange object:nil];
+    [nc addObserver:self selector:@selector(handleReloadPreferences:) name:MA_Notify_PreferenceChange object:nil];
 }
 
 - (void)viewWillAppear {

@@ -62,10 +62,6 @@ NS_ASSUME_NONNULL_BEGIN
 	NSString * syncingUser;
 }
 
-// String constants for NSNotificationCenter
-extern NSString * const kMA_Notify_MinimumFontSizeChange;
-extern NSString * const kMA_Notify_UseJavaScriptChange;
-
 @property (class, readonly, nonatomic) Preferences *standardPreferences;
 
 // Accessor functions
