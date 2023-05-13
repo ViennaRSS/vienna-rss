@@ -113,13 +113,10 @@ NSString * const MAPref_AlwaysAcceptBetas = @"AlwayAcceptBetas";
 NSString * const MAPref_UserAgentName = @"UserAgentName";
 
 NSInteger const MA_Default_BackTrackQueueSize = 20;
-NSInteger const MA_Default_RefreshThreads = 20;
 NSInteger const MA_Default_MinimumFontSize = 9;
 float const MA_Default_Read_Interval = 0.5;
 NSInteger const MA_Default_AutoExpireDuration = 0;
 NSInteger const MA_Default_Check_Frequency = 10800;
-CGFloat const MA_Default_Main_Window_Min_Width = 700.0;
-CGFloat const MA_Default_Main_Window_Min_Height = 350.0;
 NSInteger const MA_Default_ConcurrentDownloads = 10;
 
 // Constants for External Weblog Editor Interface according to http://ranchero.com/netnewswire/developers/externalinterface.php

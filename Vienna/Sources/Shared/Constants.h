@@ -118,13 +118,10 @@ extern NSString * const MAPref_FeedListSizeMode;
 extern NSString * const MAPref_ShowFeedsWithUnreadItemsInBold;
 
 extern NSInteger const MA_Default_BackTrackQueueSize;
-extern NSInteger const MA_Default_RefreshThreads;
 extern float const MA_Default_Read_Interval;
 extern NSInteger const MA_Default_MinimumFontSize;
 extern NSInteger const MA_Default_AutoExpireDuration;
 extern NSInteger const MA_Default_Check_Frequency;
-extern CGFloat const MA_Default_Main_Window_Min_Width;
-extern CGFloat const MA_Default_Main_Window_Min_Height;
 extern NSInteger const MA_Default_ConcurrentDownloads;
 
 extern NSPasteboardType const VNAPasteboardTypeRSSItem;
