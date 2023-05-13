@@ -21,7 +21,11 @@
 #import "BackTrackArray.h"
 #import "ArticleRef.h"
 
-@implementation BackTrackArray
+@implementation BackTrackArray {
+    NSMutableArray *array;
+    NSUInteger maxItems;
+    NSInteger queueIndex;
+}
 
 /* initWithMaximum
  * Initialises a new BackTrackArray with the specified maximum number of

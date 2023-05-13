@@ -41,7 +41,21 @@
 
 @end
 
-@implementation GeneralPreferencesViewController
+@implementation GeneralPreferencesViewController {
+    IBOutlet NSPopUpButton *checkFrequency;
+    IBOutlet NSPopUpButton *linksHandler;
+    IBOutlet NSPopUpButton *expireDuration;
+    IBOutlet NSButton *checkOnStartUp;
+    IBOutlet NSButton *openLinksInBackground;
+    IBOutlet NSButton *openLinksInExternalBrowser;
+    IBOutlet NSButton *showAppInMenuBar;
+    IBOutlet NSPopUpButton *downloadFolder;
+    IBOutlet NSButtonCell *newArticlesNotificationBounceButton;
+    IBOutlet NSButtonCell *markReadAfterNext;
+    IBOutlet NSButtonCell *markReadAfterDelay;
+    IBOutlet NSButton *markUpdatedAsNew;
+    NSMutableDictionary *appToPathMap;
+}
 
 - (void)viewDidLoad {
     NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];

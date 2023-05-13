@@ -25,43 +25,20 @@
 #define APP ((ViennaApp *)NSApp)
 
 @class FoldersTree;
-@class SmartFolder;
 @class NewSubscription;
-@class NewGroupFolder;
-@class SearchPanel;
 @class DisclosureView;
 @class PluginManager;
 @class SearchMethod;
 @class Database;
 @class ArticleController;
-@class DownloadWindow;
 @class Article;
 @class UnifiedDisplayView;
 @class ArticleListView;
 @protocol Browser;
 
-@interface AppController : NSObject <NSApplicationDelegate>
-{
-	IBOutlet NSMenuItem * closeTabItem;
-	IBOutlet NSMenuItem * closeAllTabsItem;
-	IBOutlet NSMenuItem * closeWindowItem;
-	IBOutlet NSMenuItem * sortByMenu;
-	IBOutlet NSMenuItem * columnsMenu;
-
-	DownloadWindow * downloadWindow;
-	SmartFolder * smartFolder;
-	NewGroupFolder * groupFolder;
-	SearchPanel * searchPanel;
-	
-	Database * db;
-	NSMutableDictionary * scriptPathMappings;
-	NSStatusItem * appStatusItem;
-	NSInteger lastCountOfUnread;
-	NSMenuItem * scriptsMenuItem;
-	BOOL didCompleteInitialisation;
-	NSString * searchString;
-    
-    NewSubscription * _rssFeed;
+@interface AppController : NSObject <NSApplicationDelegate> {
+#pragma clang diagnostic ignored "-Wobjc-interface-ivars"
+    Database *db;
 }
 
 @property (nonatomic) IBOutlet SPUStandardUpdaterController *sparkleController;

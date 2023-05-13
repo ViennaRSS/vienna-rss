@@ -74,17 +74,7 @@ typedef NS_ENUM(NSInteger, ArticleStatus) {
     ArticleStatusUpdated
 };
 
-@interface Article : NSObject {
-    NSMutableDictionary * articleData;
-    NSMutableArray * commentsArray;
-    BOOL readFlag;
-    BOOL revisedFlag;
-    BOOL markedFlag;
-    BOOL deletedFlag;
-    BOOL enclosureDownloadedFlag;
-    BOOL hasEnclosureFlag;
-    NSInteger status;
-}
+@interface Article : NSObject
 
 // Accessor functions
 -(instancetype _Nonnull)initWithGuid:(NSString * _Nonnull)theGuid /*NS_DESIGNATED_INITIALIZER*/;

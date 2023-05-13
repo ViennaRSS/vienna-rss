@@ -8,18 +8,10 @@
 @import Cocoa;
 @import WebKit;
 
-@class AppController;
 @class ArticleConverter;
 @protocol ArticleContentView;
 
 @interface ArticleCellView : NSTableCellView <WKNavigationDelegate>
-{
-	AppController * controller;
-	BOOL inProgress;
-	NSInteger folderId;
-	NSUInteger articleRow;
-	NSTableView *__weak _listView;
-}
 
 @property (readonly) NSObject<ArticleContentView> *articleView;
 @property (readonly) ArticleConverter * articleConverter;

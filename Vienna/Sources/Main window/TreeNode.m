@@ -24,7 +24,13 @@
 #import "Folder.h"
 #import "Vienna-Swift.h"
 
-@implementation TreeNode
+@implementation TreeNode {
+    TreeNode *parentNode;
+    NSMutableArray *children;
+    Folder *folder;
+    NSInteger nodeId;
+    BOOL canHaveChildren;
+}
 
 /* init
  * Initialises a treenode.

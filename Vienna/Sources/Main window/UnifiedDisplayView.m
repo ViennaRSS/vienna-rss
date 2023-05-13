@@ -55,7 +55,14 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
 
 @end
 
-@implementation UnifiedDisplayView
+@implementation UnifiedDisplayView {
+    IBOutlet ExtendedTableView *articleList;
+
+    NSTimer *markReadTimer;
+
+    NSMutableArray *rowHeightArray;
+    NSProgressIndicator *progressIndicator;
+}
 
 #pragma mark -
 #pragma mark Init/Dealloc

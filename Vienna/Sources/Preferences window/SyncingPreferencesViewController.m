@@ -30,7 +30,16 @@
 
 @end
 
-@implementation SyncingPreferencesViewController
+@implementation SyncingPreferencesViewController {
+    IBOutlet NSPopUpButton *openReaderSource; // List of known service providers
+    NSDictionary *sourcesDict;
+    IBOutlet NSTextField *credentialsInfoText;
+    IBOutlet NSTextField *openReaderHost;
+    IBOutlet NSTextField *username;
+    IBOutlet NSSecureTextField *password;
+    IBOutlet NSButton *__weak syncButton;
+}
+
 static BOOL _credentialsChanged;
 
 static NSString *syncScheme;

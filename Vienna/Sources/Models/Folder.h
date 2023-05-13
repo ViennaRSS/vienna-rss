@@ -68,12 +68,7 @@ typedef NS_OPTIONS(NSUInteger, VNAFolderFlag) {
     VNAFolderFlagBuggySync       = 1 << 7
 };
 
-@interface Folder : NSObject <NSCacheDelegate> {
-	NSInteger unreadCount;
-	NSInteger childUnreadCount;
-    VNAFolderFlag nonPersistedFlags;
-    VNAFolderFlag flags;
-}
+@interface Folder : NSObject <NSCacheDelegate>
 
 // Initialisation functions
 -(instancetype)initWithId:(NSInteger)itemId parentId:(NSInteger)parentId name:(NSString *)name type:(VNAFolderType)type /*NS_DESIGNATED_INITIALIZER*/;

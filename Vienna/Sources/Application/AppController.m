@@ -107,7 +107,28 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 
 @end
 
-@implementation AppController
+@implementation AppController {
+    IBOutlet NSMenuItem *closeTabItem;
+    IBOutlet NSMenuItem *closeAllTabsItem;
+    IBOutlet NSMenuItem *closeWindowItem;
+    IBOutlet NSMenuItem *sortByMenu;
+    IBOutlet NSMenuItem *columnsMenu;
+
+    DownloadWindow *downloadWindow;
+    SmartFolder *smartFolder;
+    NewGroupFolder *groupFolder;
+    SearchPanel *searchPanel;
+
+    //    Database * db;
+    NSMutableDictionary *scriptPathMappings;
+    NSStatusItem *appStatusItem;
+    NSInteger lastCountOfUnread;
+    NSMenuItem *scriptsMenuItem;
+    BOOL didCompleteInitialisation;
+    NSString *searchString;
+
+    NewSubscription *_rssFeed;
+}
 
 @synthesize rssFeed = _rssFeed;
 

@@ -73,7 +73,13 @@
 #import "DSClickableURLTextField.h"
 
 
-@implementation DSClickableURLTextField
+@implementation DSClickableURLTextField {
+	NSTextStorage *URLStorage;
+	NSLayoutManager *URLManager;
+	NSTextContainer *URLContainer;
+	NSURL			*clickedURL;
+	BOOL			canCopyURLs;
+}
 
 /* Set the text field to be non-editable and
 	non-selectable. */

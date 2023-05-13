@@ -35,7 +35,24 @@
 
 @end
 
-@implementation NewSubscription
+@implementation NewSubscription {
+    IBOutlet NSTextField *linkTitle;
+    IBOutlet NSTextField *feedURL;
+    IBOutlet NSTextField *editFeedURL;
+    IBOutlet NSPopUpButton *feedSource;
+    IBOutlet NSButton *subscribeButton;
+    IBOutlet NSButton *saveButton;
+    IBOutlet NSButton *editCancelButton;
+    IBOutlet NSButton *subscribeCancelButton;
+    IBOutlet NSWindow *newRSSFeedWindow;
+    IBOutlet NSWindow *editRSSFeedWindow;
+    IBOutlet NSButton *siteHomePageButton;
+    BOOL googleOptionButton;
+    NSDictionary *sourcesDict;
+    Database *db;
+    NSInteger editFolderId;
+    SubscriptionModel *subscriptionModel;
+}
 
 /* initWithDatabase
  * Just init the RSS feed class.

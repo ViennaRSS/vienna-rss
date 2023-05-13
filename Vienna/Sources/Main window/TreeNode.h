@@ -24,14 +24,7 @@
 
 #define PROGRESS_INDICATOR_DIMENSION	16
 
-
-@interface TreeNode : NSObject {
-	TreeNode * parentNode;
-	NSMutableArray * children;
-	Folder * folder;
-	NSInteger nodeId;
-	BOOL canHaveChildren;
-}
+@interface TreeNode : NSObject
 
 // Accessor functions
 -(instancetype)init:(TreeNode *)parentNode atIndex:(NSInteger)insertIndex folder:(Folder *)folder canHaveChildren:(BOOL)childflag /*NS_DESIGNATED_INITIALIZER*/;

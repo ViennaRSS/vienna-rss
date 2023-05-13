@@ -29,7 +29,13 @@
 #import "TableViewExtensions.h"
 #import "NSWorkspace+OpenWithMenu.h"
 
-@implementation DownloadWindow
+@implementation DownloadWindow {
+    IBOutlet NSWindow *downloadWindow;
+    IBOutlet ExtendedTableView *table;
+    IBOutlet NSButton *clearButton;
+    NSInteger lastCount;
+    NSMenu *openWithMenu;
+}
 
 /* init
  * Just init the download window.

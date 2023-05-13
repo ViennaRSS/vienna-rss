@@ -53,7 +53,43 @@ static Preferences * _standardPreferences = nil;
 
 @end
 
-@implementation Preferences
+@implementation Preferences {
+    NSUserDefaults *userPrefs;
+    float markReadInterval;
+    NSInteger minimumFontSize;
+    NSInteger refreshFrequency;
+    NSInteger autoExpireDuration;
+    NSInteger filterMode;
+    NSInteger layout;
+    NSInteger newArticlesNotification;
+    NSInteger foldersTreeSortMethod;
+    BOOL refreshOnStartup;
+    BOOL alwaysAcceptBetas;
+    BOOL enableMinimumFontSize;
+    BOOL openLinksInVienna;
+    BOOL openLinksInBackground;
+    BOOL hasPrefs;
+    BOOL showFolderImages;
+    BOOL useJavaScript;
+    BOOL showAppInStatusBar;
+    BOOL showStatusBar;
+    BOOL showFilterBar;
+    BOOL shouldSaveFeedSource;
+    BOOL syncGoogleReader;
+    BOOL prefersGoogleNewSubscription;
+    BOOL markUpdatedAsNew;
+    NSString *displayStyle;
+    CGFloat textSizeMultiplier;
+    NSString *defaultDatabase;
+    NSString *feedSourcesFolder;
+    NSFont *articleFont;
+    NSArray *articleSortDescriptors;
+    SearchMethod *searchMethod;
+    NSUInteger concurrentDownloads;
+    NSString *syncServer;
+    NSString *syncScheme;
+    NSString *syncingUser;
+}
 
 /* standardPreferences
  * Return the single set of Vienna wide preferences object.

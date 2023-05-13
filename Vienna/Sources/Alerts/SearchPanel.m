@@ -23,7 +23,11 @@
 #import "Vienna-Swift.h"
 #import "SearchMethod.h"
 
-@implementation SearchPanel
+@implementation SearchPanel {
+    IBOutlet NSWindow *searchPanelWindow;
+    IBOutlet NSSearchField *searchField;
+    IBOutlet NSTextField *searchLabel;
+}
 
 /* runSearchPanel
  * Show the search panel.

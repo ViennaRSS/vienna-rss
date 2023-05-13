@@ -20,8 +20,11 @@
 
 static FolderImageCache * _folderImageCache = nil;
 
-@implementation FolderImageCache
-
+@implementation FolderImageCache {
+    NSString *imagesCacheFolder;
+    NSMutableDictionary *folderImagesArray;
+    BOOL initializedFolderImagesArray;
+}
 
 /* defaultCache
  * Returns a pointer to the default cache. There is just one default cache

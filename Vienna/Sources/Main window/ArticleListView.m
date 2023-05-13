@@ -70,7 +70,34 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 
 @end
 
-@implementation ArticleListView
+@implementation ArticleListView {
+    IBOutlet MessageListView *articleList;
+    NSObject<ArticleContentView, Tab> *articleText;
+    IBOutlet NSSplitView *splitView2;
+
+    NSInteger tableLayout;
+    BOOL isAppInitialising;
+    BOOL isChangingOrientation;
+    BOOL isInTableInit;
+    BOOL blockSelectionHandler;
+
+    NSTimer *markReadTimer;
+    NSFont *articleListFont;
+    NSFont *articleListUnreadFont;
+    NSMutableDictionary *reportCellDict;
+    NSMutableDictionary *unreadReportCellDict;
+    NSMutableDictionary *selectionDict;
+    NSMutableDictionary *topLineDict;
+    NSMutableDictionary *linkLineDict;
+    NSMutableDictionary *middleLineDict;
+    NSMutableDictionary *bottomLineDict;
+    NSMutableDictionary *unreadTopLineDict;
+    NSMutableDictionary *unreadTopLineSelectionDict;
+
+    NSURL *currentURL;
+    BOOL isLoadingHTMLArticle;
+    NSProgressIndicator *progressIndicator;
+}
 
 /* initWithFrame
  * Initialise our view.

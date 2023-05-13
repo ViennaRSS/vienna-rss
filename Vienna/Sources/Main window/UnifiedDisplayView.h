@@ -23,17 +23,8 @@
 #import "MessageListView.h"
 
 @class AppController;
-@class ExtendedTableView;
 
 @interface UnifiedDisplayView : NSView <BaseView, ArticleBaseView, NSMenuItemValidation, MessageListViewDelegate, NSTableViewDataSource>
-{
-    IBOutlet ExtendedTableView *articleList;
-
-	NSTimer * markReadTimer;
-
-	NSMutableArray * rowHeightArray;
-	NSProgressIndicator * progressIndicator;
-}
 
 @property (weak, nonatomic) AppController *controller;
 

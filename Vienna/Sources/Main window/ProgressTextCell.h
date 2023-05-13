@@ -26,15 +26,7 @@
  * This class is used to draw a progress indicator next to the text for a text cell. If you set
  * the inProgress flag to true then it will draw the progress indicator.
  */
-@interface ProgressTextCell : VNAVerticallyCenteredTextFieldCell {
-	@private
-
-	BOOL inProgress;
-	NSInteger progressRow;
-	NSInteger currentRow;
-	
-	NSProgressIndicator * progressIndicator;
-}
+@interface ProgressTextCell : VNAVerticallyCenteredTextFieldCell
 
 // Accessor functions
 -(void)setInProgress:(BOOL)newInProgress forRow:(NSInteger)row;

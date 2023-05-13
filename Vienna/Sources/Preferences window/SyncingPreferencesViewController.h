@@ -20,15 +20,7 @@
 
 @import Cocoa;
 
-@interface SyncingPreferencesViewController : NSViewController <NSTextFieldDelegate> {
-    IBOutlet NSPopUpButton * openReaderSource; //List of known service providers
-    NSDictionary * sourcesDict;
-    IBOutlet NSTextField * credentialsInfoText;
-    IBOutlet NSTextField * openReaderHost;
-    IBOutlet NSTextField * username;
-    IBOutlet NSSecureTextField * password;
-    IBOutlet NSButton *__weak syncButton;
-}
+@interface SyncingPreferencesViewController : NSViewController <NSTextFieldDelegate>
 
 @property (weak) IBOutlet NSButton *syncButton;
 

@@ -25,7 +25,9 @@
 #import "Database.h"
 #import "InfoPanelController.h"
 
-@implementation InfoPanelManager
+@implementation InfoPanelManager {
+    NSMutableDictionary *controllerList;
+}
 
 /* infoWindowManager
  * Returns the shared instance of the InfoWindowManager

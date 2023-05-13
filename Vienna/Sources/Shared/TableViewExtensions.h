@@ -20,10 +20,7 @@
 
 @import Cocoa;
 
-@interface ExtendedTableView : NSTableView {
-	BOOL delegateImplementsShouldDisplayToolTips;
-	BOOL delegateImplementsToolTip;
-}
+@interface ExtendedTableView : NSTableView
 
 -(void)setHeaderImage:(NSString *)identifier image:(NSImage *)image;
 

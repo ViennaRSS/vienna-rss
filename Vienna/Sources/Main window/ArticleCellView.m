@@ -16,7 +16,13 @@
 #define PROGRESS_INDICATOR_LEFT_MARGIN	8
 #define PROGRESS_INDICATOR_DIMENSION_REGULAR 24
 
-@implementation ArticleCellView
+@implementation ArticleCellView {
+    AppController *controller;
+    BOOL inProgress;
+    NSInteger folderId;
+    NSUInteger articleRow;
+    NSTableView *__weak _listView;
+}
 
 @synthesize listView = _listView;
 @synthesize articleView;

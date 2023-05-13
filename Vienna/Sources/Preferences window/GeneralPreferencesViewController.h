@@ -20,21 +20,7 @@
 
 @import Cocoa;
 
-@interface GeneralPreferencesViewController : NSViewController <NSOpenSavePanelDelegate> {
-    IBOutlet NSPopUpButton * checkFrequency;
-    IBOutlet NSPopUpButton * linksHandler;
-    IBOutlet NSPopUpButton * expireDuration;
-    IBOutlet NSButton * checkOnStartUp;
-    IBOutlet NSButton * openLinksInBackground;
-    IBOutlet NSButton * openLinksInExternalBrowser;
-    IBOutlet NSButton * showAppInMenuBar;
-    IBOutlet NSPopUpButton * downloadFolder;
-    IBOutlet NSButtonCell * newArticlesNotificationBounceButton;
-    IBOutlet NSButtonCell * markReadAfterNext;
-    IBOutlet NSButtonCell * markReadAfterDelay;
-    IBOutlet NSButton * markUpdatedAsNew;
-    NSMutableDictionary * appToPathMap;
-}
+@interface GeneralPreferencesViewController : NSViewController <NSOpenSavePanelDelegate>
 
 // Action functions
 -(IBAction)changeCheckFrequency:(id)sender;

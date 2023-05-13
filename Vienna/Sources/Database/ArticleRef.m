@@ -22,7 +22,10 @@
 
 #import "Article.h"
 
-@implementation ArticleReference
+@implementation ArticleReference {
+    NSString *guid;
+    NSInteger folderId;
+}
 
 /* initWithReference
  */

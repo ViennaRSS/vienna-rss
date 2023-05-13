@@ -25,7 +25,19 @@
 /* All of this stuff taken from public stuff published
  * by Apple.
  */
-@implementation ImageAndTextCell
+@implementation ImageAndTextCell {
+    NSImage *image;
+    NSImage *auxiliaryImage;
+    NSColor *countBackgroundColour;
+    NSColor *countBackgroundColourGradientEnd;
+    NSShadow *countLabelShadow;
+    NSInteger offset;
+    NSInteger count;
+    BOOL hasCount;
+    BOOL inProgress;
+
+    TreeNode *item;
+}
 
 @synthesize image = image;
 
