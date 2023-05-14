@@ -28,7 +28,6 @@
 #import "HelperFunctions.h"
 #import "Article.h"
 #import "Folder.h"
-#import "TableViewExtensions.h"
 #import "Database.h"
 #import "Vienna-Swift.h"
 

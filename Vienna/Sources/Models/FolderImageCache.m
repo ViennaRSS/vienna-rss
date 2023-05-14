@@ -9,7 +9,6 @@
 #import "FolderImageCache.h"
 
 #import "NSFileManager+Paths.h"
-#import "Preferences.h"
 #import "StringExtensions.h"
 
 @interface FolderImageCache ()

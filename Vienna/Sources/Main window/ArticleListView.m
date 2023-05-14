@@ -25,7 +25,6 @@
 #import "Constants.h"
 #import "DateFormatterExtension.h"
 #import "ArticleController.h"
-#import "MessageListView.h"
 #import "StringExtensions.h"
 #import "HelperFunctions.h"
 #import "Field.h"

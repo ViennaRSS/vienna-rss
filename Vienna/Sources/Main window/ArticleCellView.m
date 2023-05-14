@@ -10,7 +10,6 @@
 #import "AppController.h"
 #import "ArticleController.h"
 #import "Constants.h"
-#import "Preferences.h"
 #import "Vienna-Swift.h"
 
 #define PROGRESS_INDICATOR_LEFT_MARGIN	8

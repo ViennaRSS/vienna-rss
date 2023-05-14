@@ -24,7 +24,6 @@
 #import "Article.h"
 #import "HelperFunctions.h"
 #import "NSFileManager+Paths.h"
-#import "Preferences.h"
 #import "SearchMethod.h"
 #import "StringExtensions.h"
 #import "Vienna-Swift.h"

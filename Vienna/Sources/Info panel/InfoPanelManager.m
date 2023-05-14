@@ -20,7 +20,6 @@
 
 #import "InfoPanelManager.h"
 
-#import "AppController.h"
 #import "Constants.h"
 #import "Database.h"
 #import "InfoPanelController.h"
