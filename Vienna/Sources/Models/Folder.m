@@ -42,9 +42,6 @@
 
 @end
 
-// Static pointers
-static NSArray * iconArray = nil;
-
 @implementation Folder {
     NSInteger unreadCount;
     NSInteger childUnreadCount;

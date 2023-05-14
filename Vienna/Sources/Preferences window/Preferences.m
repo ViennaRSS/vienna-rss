@@ -41,9 +41,6 @@ static NSString * const MA_DefaultStyleName = @"Default";
 static NSString * const MA_Database_Name = @"messages.db";
 static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
 
-// The default preferences object.
-static Preferences * _standardPreferences = nil;
-
 // Private methods
 @interface Preferences ()
 
@@ -94,12 +91,14 @@ static Preferences * _standardPreferences = nil;
 /* standardPreferences
  * Return the single set of Vienna wide preferences object.
  */
-+(Preferences *)standardPreferences
++ (Preferences *)standardPreferences
 {
-	if (_standardPreferences == nil) {
-		_standardPreferences = [[Preferences alloc] init];
-	}
-	return _standardPreferences;
+    static Preferences *standardPreferences;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        standardPreferences = [Preferences new];
+    });
+    return standardPreferences;
 }
 
 /* init

@@ -184,9 +184,6 @@
 }
 @end
 
-// Used for mapping entities to their representations
-static NSMutableDictionary * entityMap = nil;
-
 @implementation NSString (StringExtensions)
 
 /* hexValue
@@ -428,6 +425,7 @@ static NSMutableDictionary * entityMap = nil;
  */
 +(NSString *)vna_mapEntityToString:(NSString *)entityString
 {
+	static NSMutableDictionary *entityMap;
 	if (entityMap == nil) {
 		entityMap = [@{
 					   @"lt":		@"<",
