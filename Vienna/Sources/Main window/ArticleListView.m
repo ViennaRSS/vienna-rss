@@ -24,7 +24,6 @@
 #import "Preferences.h"
 #import "Constants.h"
 #import "DateFormatterExtension.h"
-#import "AppController.h"
 #import "ArticleController.h"
 #import "MessageListView.h"
 #import "StringExtensions.h"
@@ -65,6 +64,8 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 @property NSView *articleTextView;
 @property (strong) NSLayoutConstraint *textViewWidthConstraint;
 @property (nonatomic) BOOL imbricatedSplitViewResizes; // used to avoid warnings about missing invalidation for a view's changing state
+@property (nonatomic) NSLayoutManager *layoutManager;
+
 // MARK: ArticleView delegate
 @property (readwrite, getter=isCurrentPageFullHTML, nonatomic) BOOL currentPageFullHTML;
 
@@ -114,6 +115,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 		isLoadingHTMLArticle = NO;
 		currentURL = nil;
 		self.imbricatedSplitViewResizes = NO;
+        _layoutManager = [NSLayoutManager new];
     }
     return self;
 }
@@ -572,7 +574,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 -(void)updateArticleListRowHeight
 {
 	Database * db = [Database sharedManager];
-	CGFloat height = [APPCONTROLLER.layoutManager defaultLineHeightForFont:articleListFont];
+	CGFloat height = [self.layoutManager defaultLineHeightForFont:articleListFont];
 	NSInteger numberOfRowsInCell;
 
 	if (tableLayout == VNALayoutReport) {

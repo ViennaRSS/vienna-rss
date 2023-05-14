@@ -236,19 +236,6 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
     }
 }
 
-/* layoutManager
- * Return a cached instance of NSLayoutManager for calculating the font height.
- */
--(NSLayoutManager *)layoutManager
-{
-	static NSLayoutManager * theManager = nil;
-	
-	if (theManager == nil) {
-		theManager = [[NSLayoutManager alloc] init];
-	}
-	return theManager;
-}
-
 #pragma mark Application Delegate
 
 /* applicationDidFinishLaunching
