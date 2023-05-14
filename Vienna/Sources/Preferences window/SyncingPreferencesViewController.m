@@ -38,14 +38,12 @@
     IBOutlet NSTextField *username;
     IBOutlet NSSecureTextField *password;
     IBOutlet NSButton *__weak syncButton;
+    BOOL _credentialsChanged;
+    NSString *syncScheme;
+    NSString *serverAndPath;
+    NSURL *serverURL;
+    NSString *syncingUser;
 }
-
-static BOOL _credentialsChanged;
-
-static NSString *syncScheme;
-static NSString *serverAndPath;
-static NSURL *serverURL;
-static NSString *syncingUser;
 
 @synthesize syncButton;
 
