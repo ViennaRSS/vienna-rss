@@ -2,7 +2,7 @@
 //  DirectoryMonitor.swift
 //  Vienna
 //
-//  Copyright 2017-2018
+//  Copyright 2017-2018, 2020-2021, 2023
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -18,10 +18,12 @@
 //
 
 import CoreServices
+import Dispatch
 import Foundation
 import os.log
 
-final class DirectoryMonitor: NSObject {
+@objc(VNADirectoryMonitor)
+class DirectoryMonitor: NSObject {
 
     // MARK: Initialization
 
@@ -57,7 +59,7 @@ final class DirectoryMonitor: NSObject {
     // instance. Recasting this will make the event handler accessible.
     private var callback: FSEventStreamCallback = { _, info, eventCount, paths, flags, _ -> Void in
         guard let info = info else {
-            os_log("No pointer to the event handler", log: .discoverer, type: .fault)
+            os_log("No pointer to the event handler", log: .monitor, type: .fault)
             return
         }
 
@@ -67,31 +69,31 @@ final class DirectoryMonitor: NSObject {
                 let flag = flags[index]
 
                 if flag & UInt32(kFSEventStreamEventFlagRootChanged) != 0 {
-                    os_log("Root path %@ changed", log: .discoverer, type: .debug, path)
+                    os_log("Root path %@ changed", log: .monitor, type: .debug, path)
                 }
 
                 if flag & UInt32(kFSEventStreamEventFlagItemCreated) != 0 {
-                    os_log("%@ added", log: .discoverer, type: .debug, path)
+                    os_log("%@ added", log: .monitor, type: .debug, path)
                 }
 
                 if flag & UInt32(kFSEventStreamEventFlagItemRenamed) != 0 {
-                    os_log("%@ renamed or moved", log: .discoverer, type: .debug, path)
+                    os_log("%@ renamed or moved", log: .monitor, type: .debug, path)
                 }
 
                 if flag & UInt32(kFSEventStreamEventFlagItemRemoved) != 0 {
-                    os_log("%@ removed", log: .discoverer, type: .debug, path)
+                    os_log("%@ removed", log: .monitor, type: .debug, path)
                 }
 
                 if flag & UInt32(kFSEventStreamEventFlagRootChanged) == 0,
                    flag & UInt32(kFSEventStreamEventFlagItemCreated) == 0,
                    flag & UInt32(kFSEventStreamEventFlagItemRenamed) == 0,
                    flag & UInt32(kFSEventStreamEventFlagItemRemoved) == 0 {
-                    os_log("Unhandled file-system event: %d", log: .discoverer, type: .debug, flag)
+                    os_log("Unhandled file-system event: %d", log: .monitor, type: .debug, flag)
                 }
             }
         }
 
-        os_log("Calling the event handler", log: .discoverer, type: .debug)
+        os_log("Calling the event handler", log: .monitor, type: .debug)
 
         let monitor = Unmanaged<DirectoryMonitor>.fromOpaque(info).takeUnretainedValue()
         monitor.eventHandler?()
@@ -100,10 +102,12 @@ final class DirectoryMonitor: NSObject {
     /// Starts or resumes the monitor, invoking the event-handler block if the
     /// directory contents change.
     ///
-    /// - Parameter eventHandler: The handler to call when an event occurs.
+    /// - Parameters:
+    ///   - eventHandler: The handler to call when an event occurs.
+    ///   - dispatchQueue: The queue on which the handler will be called.
     /// - Throws: An error of type `DirectoryMonitorError`.
     @objc
-    func start(eventHandler: @escaping EventHandler) throws {
+    func start(eventHandler: @escaping EventHandler, dispatchQueue: DispatchQueue = .main) throws {
         if stream != nil {
             stop()
         }
@@ -125,14 +129,17 @@ final class DirectoryMonitor: NSObject {
         // The directory monitor will listen to events that happen in both
         // directions of each directory's hierarchy and will coalesce events
         // that happen within 2 seconds of each other.
-        let paths = directories.map { $0.path as CFString } as CFArray
+        let allocator = kCFAllocatorDefault
+        let pathsToWatch = directories.map { $0.path as CFString } as CFArray
+        let sinceNow = FSEventStreamEventId(kFSEventStreamEventIdSinceNow)
+        let latency = 2.0 // in seconds
         let flags = UInt32(kFSEventStreamCreateFlagFileEvents | kFSEventStreamCreateFlagWatchRoot | kFSEventStreamCreateFlagUseCFTypes)
-        guard let stream = FSEventStreamCreate(kCFAllocatorDefault,
+        guard let stream = FSEventStreamCreate(allocator,
                                                callback,
                                                &context,
-                                               paths,
-                                               FSEventStreamEventId(kFSEventStreamEventIdSinceNow),
-                                               2,
+                                               pathsToWatch,
+                                               sinceNow,
+                                               latency,
                                                flags) else {
             throw DirectoryMonitorError.streamCouldNotBeCreated
         }
@@ -142,9 +149,7 @@ final class DirectoryMonitor: NSObject {
         // FSEvents has a two-pronged approach: schedule a stream (and
         // record the changes) and start sending events. This granualarity
         // is not desirable for the directory monitor, so they are combined.
-        FSEventStreamScheduleWithRunLoop(stream,
-                                         RunLoop.current.getCFRunLoop(),
-                                         CFRunLoopMode.defaultMode.rawValue)
+        FSEventStreamSetDispatchQueue(stream, dispatchQueue)
         if !FSEventStreamStart(stream) {
             // This closure is executed if start() fails. Accordingly, the
             // stream must be unscheduled.
@@ -157,7 +162,7 @@ final class DirectoryMonitor: NSObject {
     /// Stops the monitor, preventing any further invocation of the event-
     /// handler block.
     func stop() {
-        // Unschedule the stream from its run loop and remove the (only)
+        // Unschedule the stream from its dispatch queue and remove the (only)
         // reference count before unsetting the pointer.
         if let stream = stream {
             FSEventStreamStop(stream)
@@ -188,9 +193,9 @@ enum DirectoryMonitorError: LocalizedError {
     }
 }
 
-// MARK: - Public extensions
+// MARK: - Private extensions
 
-extension OSLog {
+private extension OSLog {
 
     static let monitor = OSLog(subsystem: "--", category: "DirectoryMonitor")
 
