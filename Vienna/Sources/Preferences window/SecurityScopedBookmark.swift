@@ -2,7 +2,7 @@
 //  SecurityScopedBookmark.swift
 //  Vienna
 //
-//  Copyright 2017-2019, 2021 Eitot
+//  Copyright 2017-2019, 2021, 2023 Eitot
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -23,11 +23,11 @@ import os.log
 /// Creates a security-scoped bookmark to access files outside of the sandbox in
 /// response to user selection via `NSOpenPanel`.
 ///
-/// A bookmark is created either with `init(url:)`, which will also resolve the
-/// bookmark into a URL, or `bookmark(_:)`. To resolve a URL from bookmark data,
-/// use `init(bookmarkData:)`.
+/// A bookmark is created either with `init(fileURL:)`, which will also resolve
+/// the bookmark into a URL, or `bookmarkData(from:)`. To resolve a URL from
+/// bookmark data, use `init(bookmarkData:bookmarkDataIsStale:)`.
 @objc(VNASecurityScopedBookmark)
-final class SecurityScopedBookmark: NSObject {
+class SecurityScopedBookmark: NSObject {
 
     // MARK: Initialization
 
@@ -35,65 +35,64 @@ final class SecurityScopedBookmark: NSObject {
     @objc let resolvedURL: URL
 
     /// The data of the scoped bookmark.
-    @objc let bookmarkData: Data
-
-    private var accessed: Bool
-
-    /// Creates a security-scoped bookmark from the given URL.
-    ///
-    /// - Parameter url: The URL to create a bookmark for.
-    /// - Note: Fails when the stored bookmark cannot be created with the given
-    ///     URL or the bookmark cannot be resolved into a URL.
-    @objc
-    init(url: URL) throws {
-        bookmarkData = try SecurityScopedBookmark.bookmark(url)
-        resolvedURL = try SecurityScopedBookmark.resolve(bookmarkData)
-
-        // It is undocumented whether the return value indicates an error.
-        accessed = resolvedURL.startAccessingSecurityScopedResource()
-        if !accessed {
-            os_log("Access request for resolved URL returned false", log: .bookmark, type: .fault)
-        }
-    }
+    let bookmarkData: Data
 
     /// Creates a security-scoped bookmark from the given data.
     ///
-    /// - Parameter data: The bookmark data that was previously created.
+    /// - Parameters:
+    ///   - data: The bookmark data that was previously created.
+    ///   - bookmarkDataIsStale: Indicates that the bookmark data should be
+    ///       refreshed, e.g. with `bookmarkData(from:)`.
     /// - Note: Fails when the stored bookmark cannot be created with the given
     ///     data or the bookmark cannot be resolved into a URL.
     @objc
-    init(bookmarkData data: Data) throws {
+    init(bookmarkData data: Data, bookmarkDataIsStale: UnsafeMutablePointer<Bool>?) throws {
         bookmarkData = data
-        resolvedURL = try SecurityScopedBookmark.resolve(bookmarkData)
+        var isStale = false
+        resolvedURL = try SecurityScopedBookmark.resolveBookmarkData(bookmarkData,
+                                                                     bookmarkDataIsStale: &isStale)
+        bookmarkDataIsStale?.pointee = isStale
 
-        // It is undocumented whether the return value indicates an error.
-        accessed = resolvedURL.startAccessingSecurityScopedResource()
-        if !accessed {
-            os_log("Access request for resolved URL returned false", log: .bookmark, type: .fault)
+        // If `startAccessingSecurityScopedResource()` returns `true` then that
+        // call must be balanced out by `stopAccessingSecurityScopedResource()`.
+        // This is implemented in `deinit`. Therefore, if `false` is returned,
+        // the initialization should fail.
+        guard resolvedURL.startAccessingSecurityScopedResource() else {
+            os_log("Unable to start accessing bookmarked URL", log: .bookmark, type: .error)
+            throw SecurityScopedBookmarkError.bookmarkNotAccessed
         }
     }
 
+    /// Creates a security-scoped bookmark from the given file URL.
+    ///
+    /// - Parameter fileURL: The URL for which to create a bookmark.
+    /// - Note: Fails when the stored bookmark cannot be created with the given
+    ///     URL or the bookmark cannot be resolved into a URL.
+    convenience init(fileURL url: URL) throws {
+        let bookmarkData = try SecurityScopedBookmark.bookmarkData(from: url)
+        // `bookmarkDataIsStale` should not return `true`, as the data is fresh.
+        try self.init(bookmarkData: bookmarkData, bookmarkDataIsStale: nil)
+    }
+
     deinit {
-        if accessed {
-            resolvedURL.stopAccessingSecurityScopedResource()
-        }
+        resolvedURL.stopAccessingSecurityScopedResource()
     }
 
     // MARK: Creating and resolving bookmarks
 
     /// Creates bookmark data from the given URL.
     ///
-    /// - Parameter url: The URL to create a bookmark for.
+    /// - Parameter fileURL: The URL for which to create a bookmark.
     /// - Returns: An object containing the bookmark data.
     /// - Note: Fails when the bookmark cannot be created with the given URL or
     ///     the bookmark cannot be resolved into a URL.
-    @objc
-    static func bookmark(_ url: URL) throws -> Data {
-        let data: Data
+    @objc(bookmarkDataFromFileURL:error:)
+    static func bookmarkData(from fileURL: URL) throws -> Data {
         do {
-            data = try url.bookmarkData(options: .withSecurityScope,
-                                        includingResourceValuesForKeys: nil,
-                                        relativeTo: nil)
+            let data = try fileURL.bookmarkData(options: .withSecurityScope,
+                                                includingResourceValuesForKeys: nil,
+                                                relativeTo: nil)
+            return data
         } catch let error as CocoaError where error.code == .fileReadUnknown {
             let desc = error.userInfo[NSDebugDescriptionErrorKey] as? String ?? "unknown"
             os_log("Unable to create bookmark. Reason: %@", log: .bookmark, type: .fault, desc)
@@ -102,18 +101,15 @@ final class SecurityScopedBookmark: NSObject {
             os_log("Unable to create bookmark with unhandled error", log: .bookmark, type: .fault)
             throw error
         }
-
-        return data
     }
 
-    private static func resolve(_ data: Data) throws -> URL {
-        var isStale = false
-        let url: URL
+    private static func resolveBookmarkData(_ bookmarkData: Data, bookmarkDataIsStale isStale: inout Bool) throws -> URL {
         do {
-            url = try URL(resolvingBookmarkData: data,
-                          options: .withSecurityScope,
-                          relativeTo: nil,
-                          bookmarkDataIsStale: &isStale)
+            let url = try URL(resolvingBookmarkData: bookmarkData,
+                              options: .withSecurityScope,
+                              relativeTo: nil,
+                              bookmarkDataIsStale: &isStale)
+            return url
         } catch let error as CocoaError where error.code == .fileReadUnknown {
             let desc = error.userInfo[NSDebugDescriptionErrorKey] as? String ?? "unknown"
             os_log("Unable to resolve bookmark. Reason: %@", log: .bookmark, type: .fault, desc)
@@ -122,20 +118,19 @@ final class SecurityScopedBookmark: NSObject {
             os_log("Unable to resolve bookmark with unhandled error", log: .bookmark, type: .fault)
             throw error
         }
+    }
 
-        // The isStale value is undocumented.
-        if isStale {
-            os_log("Resolved URL returned stale data from bookmark data", log: .bookmark, type: .fault)
-        }
+    // MARK: Error handling
 
-        return url
+    enum SecurityScopedBookmarkError: Int, Error {
+        case bookmarkNotAccessed
     }
 
 }
 
-// MARK: - Public extensions
+// MARK: - Private extensions
 
-extension OSLog {
+private extension OSLog {
 
     static let bookmark = OSLog(subsystem: "--", category: "SecurityScopedBookmark")
 
