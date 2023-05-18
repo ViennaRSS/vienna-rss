@@ -477,7 +477,7 @@ static Preferences * _standardPreferences = nil;
 	if (downloads != concurrentDownloads) {
 		concurrentDownloads = downloads;
 		[self setInteger:downloads forKey:MAPref_ConcurrentDownloads];
-		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_CowncurrentDownloadsChange object:nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_ConcurrentDownloadsChange object:nil];
 
 	}
 }

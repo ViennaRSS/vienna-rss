@@ -108,7 +108,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         [nc addObserver:self selector:@selector(handleCancelAuthenticationForFolder:) name:MA_Notify_CancelAuthenticationForFolder
             object:nil];
         [nc addObserver:self selector:@selector(handleWillDeleteFolder:) name:VNADatabaseWillDeleteFolderNotification object:nil];
-        [nc addObserver:self selector:@selector(handleChangeConcurrentDownloads:) name:MA_Notify_CowncurrentDownloadsChange object:nil];
+        [nc addObserver:self selector:@selector(handleChangeConcurrentDownloads:) name:MA_Notify_ConcurrentDownloadsChange object:nil];
         // be notified on system wake up after sleep
         [[NSWorkspace sharedWorkspace].notificationCenter addObserver:self selector:@selector(handleDidWake:)
             name:@"NSWorkspaceDidWakeNotification" object:nil];

@@ -32,7 +32,7 @@ extern NSNotificationName const MA_Notify_AutoSortFoldersTreeChange;
 extern NSNotificationName const MA_Notify_CancelAuthenticationForFolder;
 extern NSNotificationName const MA_Notify_CellResize;
 extern NSNotificationName const MA_Notify_CheckFrequencyChange;
-extern NSNotificationName const MA_Notify_CowncurrentDownloadsChange;
+extern NSNotificationName const MA_Notify_ConcurrentDownloadsChange;
 extern NSNotificationName const MA_Notify_DownloadCompleted;
 extern NSNotificationName const MA_Notify_DownloadsListChange;
 extern NSNotificationName const MA_Notify_EditFolder;
