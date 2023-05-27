@@ -42,7 +42,7 @@
 // Shared defaults key
 NSString * const MAPref_ShowEnclosureBar = @"ShowEnclosureBar";
 
-static void *ObserverContext = &ObserverContext;
+static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverContext;
 
 @interface ArticleListView ()
 
@@ -181,11 +181,11 @@ static void *ObserverContext = &ObserverContext;
     [userDefaults addObserver:self
                    forKeyPath:MAPref_ShowEnclosureBar
                       options:NSKeyValueObservingOptionNew
-                      context:ObserverContext];
+                      context:VNAArticleListViewObserverContext];
     [userDefaults addObserver:self
                    forKeyPath:MAPref_ShowUnreadArticlesInBold
                       options:0
-                      context:ObserverContext];
+                      context:VNAArticleListViewObserverContext];
 }
 
 /* initTableView
@@ -1587,10 +1587,10 @@ static void *ObserverContext = &ObserverContext;
     NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
     [userDefaults removeObserver:self
                       forKeyPath:MAPref_ShowEnclosureBar
-                         context:ObserverContext];
+                         context:VNAArticleListViewObserverContext];
     [userDefaults removeObserver:self
                       forKeyPath:MAPref_ShowUnreadArticlesInBold
-                         context:ObserverContext];
+                         context:VNAArticleListViewObserverContext];
 	[splitView2 setDelegate:nil];
 	[articleList setDelegate:nil];
 }
@@ -1602,7 +1602,7 @@ static void *ObserverContext = &ObserverContext;
                         change:(NSDictionary<NSKeyValueChangeKey,id> *)change
                        context:(void *)context
 {
-    if (context != ObserverContext) {
+    if (context != VNAArticleListViewObserverContext) {
         [super observeValueForKeyPath:keyPath
                              ofObject:object
                                change:change

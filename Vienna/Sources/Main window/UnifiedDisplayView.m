@@ -40,6 +40,8 @@
 #define YPOS_IN_CELL	2.0
 #define PROGRESS_INDICATOR_DIMENSION 16
 
+static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserverContext;
+
 @interface UnifiedDisplayView () <CustomWKHoverUIDelegate>
 
 @property (nonatomic) OverlayStatusBar *statusBar;
@@ -143,7 +145,7 @@
     [NSUserDefaults.standardUserDefaults addObserver:self
                                           forKeyPath:MAPref_ShowStatusBar
                                              options:NSKeyValueObservingOptionInitial
-                                             context:nil];
+                                             context:VNAUnifiedDisplayViewObserverContext];
 }
 
 /* dealloc
@@ -152,7 +154,8 @@
 -(void)dealloc
 {
     [NSUserDefaults.standardUserDefaults removeObserver:self
-                                             forKeyPath:MAPref_ShowStatusBar];
+                                             forKeyPath:MAPref_ShowStatusBar
+                                                context:VNAUnifiedDisplayViewObserverContext];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[articleList setDataSource:nil];
 	[articleList setDelegate:nil];
@@ -787,7 +790,16 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object
                         change:(NSDictionary<NSKeyValueChangeKey,id> *)change
-                       context:(void *)context {
+                       context:(void *)context
+{
+    if (context != VNAUnifiedDisplayViewObserverContext) {
+        [super observeValueForKeyPath:keyPath
+                             ofObject:object
+                               change:change
+                              context:context];
+        return;
+    }
+
     if ([keyPath isEqualToString:MAPref_ShowStatusBar]) {
         BOOL isStatusBarShown = [Preferences standardPreferences].showStatusBar;
         if (isStatusBarShown && !self.statusBar) {

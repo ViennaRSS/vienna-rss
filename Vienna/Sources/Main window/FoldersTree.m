@@ -37,7 +37,7 @@
 NSString * const MAPref_FeedListSizeMode = @"FeedListSizeMode";
 NSString * const MAPref_ShowFeedsWithUnreadItemsInBold = @"ShowFeedsWithUnreadItemsInBold";
 
-static void *ObserverContext = &ObserverContext;
+static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 
 @interface FoldersTree ()
 
@@ -122,11 +122,11 @@ static void *ObserverContext = &ObserverContext;
     [userDefaults addObserver:self
                    forKeyPath:MAPref_FeedListSizeMode
                       options:0
-                      context:ObserverContext];
+                      context:VNAFoldersTreeObserverContext];
     [userDefaults addObserver:self
                    forKeyPath:MAPref_ShowFeedsWithUnreadItemsInBold
                       options:0
-                      context:ObserverContext];
+                      context:VNAFoldersTreeObserverContext];
 }
 
 - (void)dealloc
@@ -136,10 +136,10 @@ static void *ObserverContext = &ObserverContext;
     NSUserDefaults *userDefaults;
     [userDefaults removeObserver:self
                       forKeyPath:MAPref_FeedListSizeMode
-                         context:ObserverContext];
+                         context:VNAFoldersTreeObserverContext];
     [userDefaults removeObserver:self
                       forKeyPath:MAPref_ShowFeedsWithUnreadItemsInBold
-                         context:ObserverContext];
+                         context:VNAFoldersTreeObserverContext];
 }
 
 -(void)handleOpenReaderFolderChange:(NSNotification *)nc
@@ -1061,7 +1061,7 @@ static void *ObserverContext = &ObserverContext;
                         change:(NSDictionary<NSKeyValueChangeKey,id> *)change
                        context:(void *)context
 {
-    if (context != ObserverContext) {
+    if (context != VNAFoldersTreeObserverContext) {
         [super observeValueForKeyPath:keyPath
                              ofObject:object
                                change:change

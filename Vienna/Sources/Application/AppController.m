@@ -61,6 +61,8 @@
 
 #define VNA_LOG os_log_create("--", "AppController")
 
+static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
+
 @interface AppController () <InfoPanelControllerDelegate, ActivityPanelControllerDelegate, NSMenuItemValidation, NSToolbarItemValidation>
 
 -(void)installScriptsFolderWatcher;
@@ -296,7 +298,7 @@
     [self.pluginManager addObserver:self
                          forKeyPath:NSStringFromSelector(@selector(numberOfPlugins))
                             options:0
-                            context:nil];
+                            context:VNAAppControllerObserverContext];
 
 	// Load the styles into the main menu.
     [self populateStyleMenu];
@@ -1197,7 +1199,16 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object
                         change:(NSDictionary<NSKeyValueChangeKey,id> *)change
-                       context:(void *)context {
+                       context:(void *)context
+{
+    if (context != VNAAppControllerObserverContext) {
+        [super observeValueForKeyPath:keyPath
+                             ofObject:object
+                               change:change
+                              context:context];
+        return;
+    }
+
     if ([keyPath isEqualToString:NSStringFromSelector(@selector(numberOfPlugins))]) {
         NSMenu *menu = ((ViennaApp *)NSApp).articleMenu;
 
@@ -3383,7 +3394,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(void)dealloc
 {
     [self.pluginManager removeObserver:self
-                            forKeyPath:NSStringFromSelector(@selector(numberOfPlugins))];
+                            forKeyPath:NSStringFromSelector(@selector(numberOfPlugins))
+                               context:VNAAppControllerObserverContext];
 
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
