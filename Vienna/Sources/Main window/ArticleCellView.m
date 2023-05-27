@@ -27,8 +27,7 @@
 
 -(instancetype)initWithFrame:(NSRect)frameRect
 {
-	if((self = [super initWithFrame:frameRect]))
-	{
+	if ((self = [super initWithFrame:frameRect])) {
 		controller = APPCONTROLLER;
         [self initializeWebKitArticleView:frameRect];
 
@@ -52,8 +51,7 @@
 	[super drawRect:dirtyRect];
 	if([self.listView.selectedRowIndexes containsIndex:articleRow]) {
 		[[NSColor selectedControlColor] set];
-	}
-	else {
+	} else {
 		[[NSColor controlColor] set];
     }
 
@@ -62,10 +60,8 @@
 	[roundedRect fill];
 
 	//Progress indicator
-	if (self.inProgress)
-	{
-		if (!progressIndicator)
-		{
+	if (self.inProgress) {
+		if (!progressIndicator) {
 			// Allocate and initialize the spinning progress indicator.
 			NSRect progressRect = NSMakeRect(PROGRESS_INDICATOR_LEFT_MARGIN, NSHeight(self.bounds) - PROGRESS_INDICATOR_DIMENSION_REGULAR,
 												PROGRESS_INDICATOR_DIMENSION_REGULAR, PROGRESS_INDICATOR_DIMENSION_REGULAR);
@@ -77,14 +73,13 @@
 
 		// Add the progress indicator as a subview of the cell if
 		// it is not already one.
-		if (progressIndicator.superview != self)
+		if (progressIndicator.superview != self) {
 			[self addSubview:progressIndicator];
+		}
 
 		// Start the animation.
 		[progressIndicator startAnimation:self];
-	}
-	else
-	{
+	} else {
 		// Stop the animation and remove from the superview.
 		[progressIndicator stopAnimation:self];
 		[progressIndicator.superview setNeedsDisplayInRect:progressIndicator.frame];

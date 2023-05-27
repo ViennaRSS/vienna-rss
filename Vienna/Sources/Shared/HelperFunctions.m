@@ -71,12 +71,12 @@ NSMenuItem * menuItemWithAction(SEL theSelector)
 	NSInteger count = arrayOfMenus.count;
 	NSInteger index;
 
-	for (index = 0; index < count; ++index)
-	{
+	for (index = 0; index < count; ++index) {
 		NSMenu * subMenu = [arrayOfMenus[index] submenu];
 		NSInteger itemIndex = [subMenu indexOfItemWithTarget:NSApp.delegate andAction:theSelector];
-		if (itemIndex >= 0)
+		if (itemIndex >= 0) {
 			return [subMenu itemAtIndex:itemIndex];
+		}
 	}
 	return nil;
 }
@@ -149,20 +149,19 @@ void loadMapFromPath(NSString * path, NSMutableDictionary * pathMappings, BOOL f
 {
 	NSFileManager * fileManager = [NSFileManager defaultManager];
 	NSArray * arrayOfFiles = [fileManager contentsOfDirectoryAtPath:path error:nil];
-	if (arrayOfFiles != nil)
-	{
-		if (validExtensions)
+	if (arrayOfFiles != nil) {
+		if (validExtensions) {
 			arrayOfFiles = [arrayOfFiles pathsMatchingExtensions:validExtensions];
+		}
 		
-		for (NSString * fileName in arrayOfFiles)
-		{
+		for (NSString * fileName in arrayOfFiles) {
 			NSString * fullPath = [path stringByAppendingPathComponent:fileName];
 			BOOL isDirectory;
 			
-			if ([fileManager fileExistsAtPath:fullPath isDirectory:&isDirectory] && (isDirectory == foldersOnly))
-			{
-				if ([fileName isEqualToString:@".DS_Store"])
+			if ([fileManager fileExistsAtPath:fullPath isDirectory:&isDirectory] && (isDirectory == foldersOnly)) {
+				if ([fileName isEqualToString:@".DS_Store"]) {
 					continue;
+				}
 
 				[pathMappings setValue:fullPath forKey:fileName.stringByDeletingPathExtension];
 			}
@@ -182,17 +181,17 @@ BOOL isAccessible(NSString * urlString)
 	NSURL * url = [NSURL URLWithString:urlString];
 
 	target = SCNetworkReachabilityCreateWithName(NULL, url.host.UTF8String);
-    if (target!= nil)
-    {
+    if (target!= nil) {
         ok = SCNetworkReachabilityGetFlags(target, &flags);
         CFRelease(target);
 
-        if (!ok)
+        if (!ok) {
             return NO;
+        }
         return (flags & kSCNetworkReachabilityFlagsReachable) && !(flags & kSCNetworkReachabilityFlagsConnectionRequired);
-    }
-    else
+    } else {
         return NO;
+    }
 }
 
 void runOKAlertPanelPlain(NSString * titleString, NSString * bodyText) {

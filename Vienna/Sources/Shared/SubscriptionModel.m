@@ -39,8 +39,7 @@
     
     // OK. Now we're at the point where can't be reasonably sure that
     // the URL points to a feed. Time to look at the content.
-    if (rssFeedURL.scheme == nil)
-    {
+    if (rssFeedURL.scheme == nil) {
         rssFeedURL = [NSURL URLWithString:[@"http://" stringByAppendingString:rssFeedURL.absoluteString]];
     }
 

@@ -89,8 +89,9 @@ static void *ObserverContext = &ObserverContext;
 {
     if (theEvent.characters.length == 1) {
         unichar keyChar = [theEvent.characters characterAtIndex:0];
-        if ([APPCONTROLLER handleKeyDown:keyChar withFlags:theEvent.modifierFlags])
+        if ([APPCONTROLLER handleKeyDown:keyChar withFlags:theEvent.modifierFlags]) {
             return;
+        }
     }
     [super keyDown:theEvent];
 }

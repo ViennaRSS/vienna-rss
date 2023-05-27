@@ -71,8 +71,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(instancetype)initWithGuid:(NSString *)theGuid
 {
-    if ((self = [self init]) != nil)
-    {
+    if ((self = [self init]) != nil) {
         self.guid = theGuid;
     }
     return self;
@@ -128,10 +127,11 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
 -(void)setEnclosure:(NSString *)enclosure
 {
     NSString *newEnclosure = [enclosure copy];
-    if (newEnclosure)
+    if (newEnclosure) {
         articleData[MA_Field_Enclosure] = newEnclosure;
-    else
+    } else {
         [articleData removeObjectForKey:MA_Field_Enclosure];
+    }
 }
 
 /* markEnclosureDownloaded
@@ -189,36 +189,22 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(id)valueForKeyPath:(NSString *)keyPath
 {
-    if ([keyPath hasPrefix:@"articleData."])
-    {
+    if ([keyPath hasPrefix:@"articleData."]) {
         NSString * key = [keyPath substringFromIndex:(@"articleData.").length];
-        if ([key isEqualToString:MA_Field_Date])
-        {
+        if ([key isEqualToString:MA_Field_Date]) {
             return self.date;
-        }
-        else if ([key isEqualToString:MA_Field_Author])
-        {
+        } else if ([key isEqualToString:MA_Field_Author]) {
             return self.author;
-        }
-        else if ([key isEqualToString:MA_Field_Subject])
-        {
+        } else if ([key isEqualToString:MA_Field_Subject]) {
             return self.title;
-        }
-        else if ([key isEqualToString:MA_Field_Link])
-        {
+        } else if ([key isEqualToString:MA_Field_Link]) {
             return self.link;
-        }
-        else if ([key isEqualToString:MA_Field_Summary])
-        {
+        } else if ([key isEqualToString:MA_Field_Summary]) {
             return self.summary;
-        }
-        else
-        {
+        } else {
             return [super valueForKeyPath:keyPath];
         }
-    }
-    else
-    {
+    } else {
         return [super valueForKeyPath:keyPath];
     }
 }
@@ -242,11 +228,11 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
 -(NSString *)summary
 {
     NSString * summary = articleData[MA_Field_Summary];
-    if (summary == nil)
-    {
+    if (summary == nil) {
         summary = [articleData[MA_Field_Text] vna_summaryTextFromHTML];
-        if (summary == nil)
+        if (summary == nil) {
             summary = @"";
+        }
         articleData[MA_Field_Summary] = summary;
     }
     return summary;
@@ -306,8 +292,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
 {
     Folder * folder = [[Database sharedManager] folderFromID:self.folderId];
     NSUInteger index = [folder indexOfArticle:self];
-    if (index != NSNotFound)
-    {
+    if (index != NSNotFound) {
         NSScriptObjectSpecifier * containerRef = folder.objectSpecifier;
         return [[NSIndexSpecifier allocWithZone:nil] initWithContainerClassDescription:(NSScriptClassDescription *)[Folder classDescription]
                                                                              containerSpecifier:containerRef

@@ -12,8 +12,9 @@
 
 - (instancetype)initWithDataSource:(id <NSOutlineViewDataSource>)dataSource {
     self = [super init];
-    if (!self)
+    if (!self) {
         return nil;
+    }
 
     _dataSource = dataSource;
     return self;
@@ -93,8 +94,9 @@
 }
 
 - (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item {
-    if (_filterPredicate == nil)
+    if (_filterPredicate == nil) {
         return [_dataSource outlineView:outlineView numberOfChildrenOfItem:item];
+    }
 
     if (item == nil) {
         item = _root;
@@ -111,8 +113,9 @@
 }
 
 - (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item {
-    if (_filterPredicate == nil)
+    if (_filterPredicate == nil) {
         return [_dataSource outlineView:outlineView child:index ofItem:item];
+    }
 
     if (item == nil) {
         item = _root;
@@ -129,8 +132,9 @@
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item {
-    if (_filterPredicate == nil)
+    if (_filterPredicate == nil) {
         return [_dataSource outlineView:outlineView isItemExpandable:item];
+    }
 
     dispatch_group_wait(_loadGroup, DISPATCH_TIME_FOREVER);
 
@@ -163,8 +167,7 @@
                     [array removeObject:item];
                     dispatch_group_leave(parentGroup);
                 });
-            }
-            else {
+            } else {
                 dispatch_group_leave(parentGroup);
             }
 
@@ -184,8 +187,7 @@
                     dispatch_async(self->_queueMap, ^{
                         [childArray addObject:child];
                     });
-                }
-                else {
+                } else {
                     [childArray addObject:child];
                 }
 
@@ -197,15 +199,13 @@
                            generation:generation
                             predicate:predicate
                           parentGroup:childGroup];
-            }
-            else {
+            } else {
                 if ([predicate evaluateWithObject:child]) {
                     if (hasSpinned) {
                         dispatch_async(self->_queueMap, ^{
                             [childArray addObject:child];
                         });
-                    }
-                    else {
+                    } else {
                         [childArray addObject:child];
                     }
                 }
@@ -217,9 +217,9 @@
                 if (![predicate evaluateWithObject:item]) {
                     [array removeObject:item];
                 }
-            }
-            else
+            } else {
                 [table setObject:childArray forKey:item? item: self->_root];
+            }
 
             dispatch_group_leave(parentGroup);
         });
@@ -227,8 +227,9 @@
 }
 
 - (void)reloadData:(NSOutlineView*)outlineView {
-    if (_filterPredicate == nil)
+    if (_filterPredicate == nil) {
         return;
+    }
 
     _generation++;
 
@@ -275,12 +276,14 @@
 
 - (NSDictionary*)vna_scrollState {
     NSClipView* clipView = (NSClipView*)self.superview;
-    if (![clipView isKindOfClass:[NSClipView class]])
+    if (![clipView isKindOfClass:[NSClipView class]]) {
         return @{};
+    };
 
     NSScrollView* scrollView = (NSScrollView*)clipView.superview;
-    if (![scrollView isKindOfClass:[NSScrollView class]])
+    if (![scrollView isKindOfClass:[NSScrollView class]]) {
         return @{};
+    };
 
     return @{
              @"VisibleRect": [NSValue valueWithRect:scrollView.documentVisibleRect]
@@ -289,8 +292,9 @@
 
 - (void)vna_setScrollState:(NSDictionary*)state {
     NSValue* rectValue = state[@"VisibleRect"];
-    if (!rectValue)
+    if (!rectValue) {
         return;
+    }
 
     [self scrollPoint:rectValue.rectValue.origin];
 }
@@ -313,8 +317,9 @@
 
     for (id wanted in newSelection) {
         NSInteger index = [self rowForItem:wanted];
-        if (index < 0)
+        if (index < 0) {
             continue;
+        }
 
         [indexes addIndex:index];
     }

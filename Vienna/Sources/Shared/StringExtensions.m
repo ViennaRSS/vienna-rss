@@ -40,8 +40,9 @@
 -(void)vna_fixupRelativeImgTags:(NSString *)baseURL
 {
 	baseURL = [NSString vna_stringByCleaningURLString:baseURL];
-	if (baseURL == nil)
+	if (baseURL == nil) {
 		return;
+	}
 	NSURL * imgBaseURL = [NSURL URLWithString:baseURL];
 	
 	NSUInteger textLength = self.length;
@@ -49,29 +50,24 @@
 	
 	srchRange.location = 0;
 	srchRange.length = textLength;
-    while ((void)((srchRange = [self rangeOfString:@"<img" options:NSLiteralSearch range:srchRange])), srchRange.location != NSNotFound)
-    {
+    while ((void)((srchRange = [self rangeOfString:@"<img" options:NSLiteralSearch range:srchRange])), srchRange.location != NSNotFound) {
         srchRange.length = textLength - srchRange.location;
         NSRange srcRange = [self rangeOfString:@"src=\"" options:NSLiteralSearch range:srchRange];
-        if (srcRange.location != NSNotFound)
-        {
+        if (srcRange.location != NSNotFound) {
             // Find the src parameter range.
             NSUInteger index = srcRange.location + srcRange.length;
             srcRange.location += srcRange.length;
             srcRange.length = 0;
-            while (index < textLength && [self characterAtIndex:index] != '"')
-            {
+            while (index < textLength && [self characterAtIndex:index] != '"') {
                 ++index;
                 ++srcRange.length;
             }
             
             // Now extract the source parameter
             NSString * srcPath = [self substringWithRange:srcRange];
-            if (![srcPath hasPrefix:@"http:"] && ![srcPath hasPrefix:@"https:"] && ![srcPath hasPrefix:@"data:"])
-            {
+            if (![srcPath hasPrefix:@"http:"] && ![srcPath hasPrefix:@"https:"] && ![srcPath hasPrefix:@"data:"]) {
                 NSURL * imgURL = [NSURL URLWithString:srcPath relativeToURL:imgBaseURL];
-                if (imgURL != nil)
-                {
+                if (imgURL != nil) {
                     srcPath = imgURL.absoluteString;
                     [self replaceCharactersInRange:srcRange withString:srcPath];
                     textLength = self.length;
@@ -80,9 +76,9 @@
             
             // Start searching again from beyond the URL
             srchRange.location = srcRange.location + srcPath.length;
-        }
-        else
+        } else {
             ++srchRange.location;
+        }
         srchRange.length = textLength - srchRange.location;
     }
 }
@@ -94,8 +90,9 @@
 -(void)vna_fixupRelativeAnchorTags:(NSString *)baseURL
 {
 	baseURL = [NSString vna_stringByCleaningURLString:baseURL];
-	if (baseURL == nil)
+	if (baseURL == nil) {
 		return;
+	}
 	NSURL * anchorBaseURL = [NSURL URLWithString:baseURL];
 
 	NSUInteger textLength = self.length;
@@ -103,29 +100,24 @@
 
 	srchRange.location = 0;
 	srchRange.length = textLength;
-    while ((void)((srchRange = [self rangeOfString:@"<a " options:NSLiteralSearch range:srchRange])), srchRange.location != NSNotFound)
-	{
+    while ((void)((srchRange = [self rangeOfString:@"<a " options:NSLiteralSearch range:srchRange])), srchRange.location != NSNotFound) {
 		srchRange.length = textLength - srchRange.location;
 		NSRange srcRange = [self rangeOfString:@"href=\"" options:NSLiteralSearch range:srchRange];
-		if (srcRange.location != NSNotFound)
-		{
+		if (srcRange.location != NSNotFound) {
 			// Find the src parameter range.
 			NSUInteger index = srcRange.location + srcRange.length;
 			srcRange.location += srcRange.length;
 			srcRange.length = 0;
-			while (index < textLength && [self characterAtIndex:index] != '"')
-			{
+			while (index < textLength && [self characterAtIndex:index] != '"') {
 				++index;
 				++srcRange.length;
 			}
 
 			// Now extract the source parameter
 			NSString * srcPath = [self substringWithRange:srcRange];
-			if (![srcPath hasPrefix:@"http:"] && ![srcPath hasPrefix:@"https:"] && ![srcPath hasPrefix:@"#"])
-			{
+			if (![srcPath hasPrefix:@"http:"] && ![srcPath hasPrefix:@"https:"] && ![srcPath hasPrefix:@"#"]) {
                 NSURL * anchorURL = [NSURL URLWithString:srcPath relativeToURL:anchorBaseURL];
-                if (anchorURL != nil)
-                {
+                if (anchorURL != nil) {
                     srcPath = anchorURL.absoluteString;
                     [self replaceCharactersInRange:srcRange withString:srcPath];
                     textLength = self.length;
@@ -134,9 +126,9 @@
 
 			// Start searching again from beyond the URL
 			srchRange.location = srcRange.location + srcPath.length;
-		}
-		else
+		} else {
 			++srchRange.location;
+		}
 		srchRange.length = textLength - srchRange.location;
 	}
 }
@@ -148,8 +140,9 @@
 -(void)vna_fixupRelativeIframeTags:(NSString *)baseURL
 {
 	baseURL = [NSString vna_stringByCleaningURLString:baseURL];
-	if (baseURL == nil)
+	if (baseURL == nil) {
 		return;
+	}
 	NSURL * imgBaseURL = [NSURL URLWithString:baseURL];
 
 	NSUInteger textLength = self.length;
@@ -157,29 +150,24 @@
 
 	srchRange.location = 0;
 	srchRange.length = textLength;
-    while ((void)((srchRange = [self rangeOfString:@"<iframe" options:NSLiteralSearch range:srchRange])), srchRange.location != NSNotFound)
-	{
+    while ((void)((srchRange = [self rangeOfString:@"<iframe" options:NSLiteralSearch range:srchRange])), srchRange.location != NSNotFound) {
 		srchRange.length = textLength - srchRange.location;
 		NSRange srcRange = [self rangeOfString:@"src=\"" options:NSLiteralSearch range:srchRange];
-		if (srcRange.location != NSNotFound)
-		{
+		if (srcRange.location != NSNotFound) {
 			// Find the src parameter range.
 			NSUInteger index = srcRange.location + srcRange.length;
 			srcRange.location += srcRange.length;
 			srcRange.length = 0;
-			while (index < textLength && [self characterAtIndex:index] != '"')
-			{
+			while (index < textLength && [self characterAtIndex:index] != '"') {
 				++index;
 				++srcRange.length;
 			}
 
 			// Now extract the source parameter
 			NSString * srcPath = [self substringWithRange:srcRange];
-			if (![srcPath hasPrefix:@"http:"] && ![srcPath hasPrefix:@"https:"])
-			{
+			if (![srcPath hasPrefix:@"http:"] && ![srcPath hasPrefix:@"https:"]) {
                 NSURL * iframeURL = [NSURL URLWithString:srcPath relativeToURL:imgBaseURL];
-                if (iframeURL != nil)
-                {
+                if (iframeURL != nil) {
                     srcPath = iframeURL.absoluteString;
                     [self replaceCharactersInRange:srcRange withString:srcPath];
                     textLength = self.length;
@@ -188,9 +176,9 @@
 
 			// Start searching again from beyond the URL
 			srchRange.location = srcRange.location + srcPath.length;
-		}
-		else
+		} else {
 			++srchRange.location;
+		}
 		srchRange.length = textLength - srchRange.location;
 	}
 }
@@ -210,17 +198,17 @@ static NSMutableDictionary * entityMap = nil;
 	NSInteger intValue = 0;
 	NSInteger index = 0;
 
-	while (index < count)
-	{
+	while (index < count) {
 		unichar ch = [self characterAtIndex:index];
-		if (ch >= '0' && ch <= '9')
+		if (ch >= '0' && ch <= '9') {
 			intValue = (intValue * 16) + (ch - '0');
-		else if (ch >= 'A' && ch <= 'F')
+		} else if (ch >= 'A' && ch <= 'F') {
 			intValue = (intValue * 16) + (ch - 'A' + 10);
-		else if (ch >= 'a' && ch <= 'f')
+		} else if (ch >= 'a' && ch <= 'f') {
 			intValue = (intValue * 16) + (ch - 'a' + 10);
-		else
+		} else {
 			break;
+		}
 		++index;
 	}
 	return intValue;
@@ -334,17 +322,15 @@ static NSMutableDictionary * entityMap = nil;
 	NSInteger length = string.length;
 	NSInteger index = 0;
 	
-	while (index < length)
-	{
+	while (index < length) {
 		unichar ch = [string characterAtIndex:index];
-		if (ch == '\r' || ch == '\n' || ch == '\t')
-		{
-			if (!isInWhitespace)
+		if (ch == '\r' || ch == '\n' || ch == '\t') {
+			if (!isInWhitespace) {
 				[string replaceCharactersInRange:NSMakeRange(index, 1) withString:@" "];
+			}
 			ch = ' ';
 		}
-		if (ch == ' ' && isInWhitespace)
-		{
+		if (ch == ' ' && isInWhitespace) {
 			[string deleteCharactersInRange:NSMakeRange(index, 1)];
 			--index;
 			--length;
@@ -367,22 +353,15 @@ static NSMutableDictionary * entityMap = nil;
 	
 	NSUInteger indexOfChr = 0;
 	NSUInteger length = self.length;
-	while (indexOfChr < length)
-	{
+	while (indexOfChr < length) {
 		unichar ch = [self characterAtIndex:indexOfChr];
-		if (ch == '\r' || ch == '\n')
-		{
-			if (hasNonEmptyChars)
-			{
+		if (ch == '\r' || ch == '\n') {
+			if (hasNonEmptyChars) {
 				break;
 			}
-		}
-		else
-		{
-			if (ch != ' ' && ch != '\t')
-			{
-				if (!hasNonEmptyChars)
-				{
+		} else {
+			if (ch != ' ' && ch != '\t') {
+				if (!hasNonEmptyChars) {
 					hasNonEmptyChars = YES;
 					indexOfFirstChr = indexOfChr;
 				}
@@ -404,13 +383,11 @@ static NSMutableDictionary * entityMap = nil;
 	NSInteger length = escapedString.length;
 	NSInteger index = 0;
 
-	while (index < length)
-	{
+	while (index < length) {
 		unichar ch = [escapedString characterAtIndex:index];
-		if (ch <= 127)
+		if (ch <= 127) {
 			++index;
-		else
-		{
+		} else {
 			NSString * escapedCharacter = [NSString stringWithFormat:@"&#%d;", ch];
 			[escapedString replaceCharactersInRange:NSMakeRange(index, 1) withString:escapedCharacter];
 			index += escapedCharacter.length;
@@ -431,11 +408,9 @@ static NSMutableDictionary * entityMap = nil;
 	NSUInteger entityEnd;
 	
 	entityStart = [processedString vna_indexOfCharacterInString:'&' afterIndex:0];
-	while (entityStart != NSNotFound)
-	{
+	while (entityStart != NSNotFound) {
 		entityEnd = [processedString vna_indexOfCharacterInString:';' afterIndex:entityStart + 1];
-		if (entityEnd != NSNotFound)
-		{
+		if (entityEnd != NSNotFound) {
 			NSRange entityRange = NSMakeRange(entityStart, (entityEnd - entityStart) + 1);
 			NSRange innerEntityRange = NSMakeRange(entityRange.location + 1, entityRange.length - 2);
 			NSString * entityString = [processedString substringWithRange:innerEntityRange];
@@ -453,8 +428,7 @@ static NSMutableDictionary * entityMap = nil;
  */
 +(NSString *)vna_mapEntityToString:(NSString *)entityString
 {
-	if (entityMap == nil)
-	{
+	if (entityMap == nil) {
 		entityMap = [@{
 					   @"lt":		@"<",
 					   @"gt":		@">",
@@ -567,13 +541,13 @@ static NSMutableDictionary * entityMap = nil;
 	}
 	
 	// Parse off numeric codes of the format #xxx
-	if (entityString.length > 1 && [entityString characterAtIndex:0] == '#')
-	{
+	if (entityString.length > 1 && [entityString characterAtIndex:0] == '#') {
 		NSInteger intValue;
-		if ([entityString characterAtIndex:1] == 'x')
+		if ([entityString characterAtIndex:1] == 'x') {
 			intValue = [entityString substringFromIndex:2].vna_hexValue;
-		else
+		} else {
 			intValue = [entityString substringFromIndex:1].integerValue;
+		}
 		return [NSString stringWithFormat:@"%C", (unsigned short)MAX(intValue, ' ')];
 	}
 	
@@ -590,12 +564,13 @@ static NSMutableDictionary * entityMap = nil;
 	NSUInteger length = self.length;
 	NSUInteger index;
 
-	if (startIndex < length - 1)
-		for (index = startIndex; index < length; ++index)
-		{
-			if ([self characterAtIndex:index] == ch)
+	if (startIndex < length - 1) {
+		for (index = startIndex; index < length; ++index) {
+			if ([self characterAtIndex:index] == ch) {
 				return index;
+			}
 		}
+	}
 	return NSNotFound;
 }
 

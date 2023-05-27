@@ -68,35 +68,29 @@
 	NSMutableArray * newArgArray = [NSMutableArray array];
 	BOOL hasError = NO;
 
-	if ([argObject isKindOfClass:[Folder class]])
+	if ([argObject isKindOfClass:[Folder class]]) {
 		[newArgArray addObject:argObject];
-
-	else if ([argObject isKindOfClass:[NSArray class]])
-	{
+	} else if ([argObject isKindOfClass:[NSArray class]]) {
 		NSArray * argArray = (NSArray *)argObject;
 		NSInteger index;
 
-		for (index = 0; index < argArray.count; ++index)
-		{
+		for (index = 0; index < argArray.count; ++index) {
 			id argItem = argArray[index];
-			if ([argItem isKindOfClass:[Folder class]])
-			{
+			if ([argItem isKindOfClass:[Folder class]]) {
 				[newArgArray addObject:argItem];
 				continue;
 			}
-			if ([argItem isKindOfClass:[NSScriptObjectSpecifier class]])
-			{
+			if ([argItem isKindOfClass:[NSScriptObjectSpecifier class]]) {
 				id evaluatedItem = [argItem objectsByEvaluatingSpecifier];
-				if ([evaluatedItem isKindOfClass:[Folder class]])
-				{
+				if ([evaluatedItem isKindOfClass:[Folder class]]) {
 					[newArgArray addObject:evaluatedItem];
 					continue;
 				}
-				if ([evaluatedItem isKindOfClass:[NSArray class]])
-				{
+				if ([evaluatedItem isKindOfClass:[NSArray class]]) {
 					NSArray * newArray = [self evaluatedArrayOfFolders:evaluatedItem withCommand:cmd];
-					if (newArray == nil)
+					if (newArray == nil) {
 						return nil;
+					}
 
 					[newArgArray addObjectsFromArray:newArray];
 					continue;
@@ -106,8 +100,9 @@
 			break;
 		}
 	}
-	if (!hasError)
+	if (!hasError) {
 		return [newArgArray copy];
+	}
 
 	// At least one of the arguments didn't evaluate to a Folder object
 	cmd.scriptErrorNumber = errASIllegalFormalParameter;
@@ -122,8 +117,9 @@
 {
 	NSDictionary * args = cmd.evaluatedArguments;
 	NSArray * argArray = [self evaluatedArrayOfFolders:args[@"Folder"] withCommand:cmd];
-	if (argArray != nil)
+	if (argArray != nil) {
 		[[RefreshManager sharedManager] refreshSubscriptions:argArray ignoringSubscriptionStatus:YES];
+	}
 
 	return nil;
 }
@@ -135,8 +131,9 @@
 {
 	NSDictionary * args = cmd.evaluatedArguments;
 	NSArray * argArray = [self evaluatedArrayOfFolders:args[@"Folder"] withCommand:cmd];
-	if (argArray != nil)
+	if (argArray != nil) {
 		[(AppController*)self.delegate markSelectedFoldersRead:argArray];
+	}
 
 	return nil;
 }
@@ -190,8 +187,9 @@
 	NSArray * argArray = argObject ? [self evaluatedArrayOfFolders:argObject withCommand:cmd] : [[Database sharedManager] arrayOfFolders:VNAFolderTypeRoot];
 
 	NSInteger countExported = 0;
-	if (argArray != nil)
+	if (argArray != nil) {
 		countExported = [Export exportToFile:args[@"FileName"] from:argArray inFoldersTree:((AppController*)self.delegate).foldersTree withGroups:YES];
+	}
 	return @(countExported);
 }
 
@@ -277,8 +275,7 @@
 {
 	id<Tab> activeBrowserTab = ((AppController*)self.delegate).browser.activeTab;
 
-	if (activeBrowserTab != nil)
-	{
+	if (activeBrowserTab != nil) {
         return activeBrowserTab.html;
 	}
 	return @"";
@@ -289,8 +286,7 @@
     id<Tab> activeBrowserTab = ((AppController*)self.delegate).browser.activeTab;
 	if (activeBrowserTab) {
 		return activeBrowserTab.tabUrl.absoluteString;
-	}
-    else {
+	} else {
 		return @"";
     }
 }

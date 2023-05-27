@@ -38,8 +38,7 @@
  */
 -(instancetype)init
 {
-	if ((self = [super init]) != nil)
-	{
+	if ((self = [super init]) != nil) {
 		inProgress = NO;
 		progressRow = NO_ROW;
 		currentRow = NO_ROW;
@@ -68,8 +67,9 @@
 -(void)setInProgress:(BOOL)newInProgress forRow:(NSInteger)row
 {
 	inProgress = newInProgress;
-	if (inProgress)
+	if (inProgress) {
 		progressRow = row;
+	}
 	currentRow = row;
 }
 
@@ -80,14 +80,11 @@
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView
 {
 	// If this row is the current progress row.
-	if (currentRow == progressRow)
-	{
+	if (currentRow == progressRow) {
 		// If the cell has a progress indicator, ensure it's framed properly
 		// and then reduce cellFrame to keep from overlapping it.
-		if (inProgress)
-		{
-			if (!progressIndicator)
-			{
+		if (inProgress) {
+			if (!progressIndicator) {
 				// Compute the progress indicator frame on the right side of the cell frame
 				NSRect progressIndicatorFrame;
 				NSInteger cellHeight = cellFrame.size.height;
@@ -104,9 +101,7 @@
 				progressIndicator.usesThreadedAnimation = YES;
 				[controlView addSubview:progressIndicator];
 			}
-		}
-		else
-		{
+		} else {
 			// Stop the animation and remove from the superview.
 			[progressIndicator stopAnimation:self];
 			[progressIndicator.superview setNeedsDisplayInRect:progressIndicator.frame];

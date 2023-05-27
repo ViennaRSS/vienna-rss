@@ -155,8 +155,7 @@ static void *ObserverContext = &ObserverContext;
 -(void)reloadDatabase:(NSArray *)stateArray
 {
 	[self.rootNode removeChildren];
-	if (![self loadTree:[[Database sharedManager] arrayOfFolders:VNAFolderTypeRoot] rootNode:self.rootNode])
-	{
+	if (![self loadTree:[[Database sharedManager] arrayOfFolders:VNAFolderTypeRoot] rootNode:self.rootNode]) {
 		[[Preferences standardPreferences] setFoldersTreeSortMethod:VNAFolderSortByName];
 		[self.rootNode removeChildren];
 		[self loadTree:[[Database sharedManager] arrayOfFolders:VNAFolderTypeRoot] rootNode:self.rootNode];
@@ -183,14 +182,12 @@ static void *ObserverContext = &ObserverContext;
 	NSInteger count = self.outlineView.numberOfRows;
 	NSInteger index;
 
-	for (index = 0; index < count; ++index)
-	{
+	for (index = 0; index < count; ++index) {
 		TreeNode * node = (TreeNode *)[self.outlineView itemAtRow:index];
 		BOOL isItemExpanded = [self.outlineView isItemExpanded:node];
 		BOOL isItemSelected = [self.outlineView isRowSelected:index];
 
-		if (isItemExpanded || isItemSelected)
-		{
+		if (isItemExpanded || isItemSelected) {
 			NSDictionary * newDict = [NSMutableDictionary dictionary];
 			[newDict setValue:@(node.nodeId) forKey:@"NodeID"];
 			[newDict setValue:@(isItemExpanded) forKey:@"ExpandedState"];
@@ -207,21 +204,18 @@ static void *ObserverContext = &ObserverContext;
  */
 -(void)unarchiveState:(NSArray *)stateArray
 {
-	for (NSDictionary * dict in stateArray)
-	{
+	for (NSDictionary * dict in stateArray) {
 		NSInteger folderId = [[dict valueForKey:@"NodeID"] integerValue];
 		TreeNode * node = [self.rootNode nodeFromID:folderId];
-		if (node != nil)
-		{
+		if (node != nil) {
 			BOOL doExpandItem = [[dict valueForKey:@"ExpandedState"] boolValue];
 			BOOL doSelectItem = [[dict valueForKey:@"SelectedState"] boolValue];
-			if ([self.outlineView isExpandable:node] && doExpandItem)
+			if ([self.outlineView isExpandable:node] && doExpandItem) {
 				[self.outlineView expandItem:node];
-			if (doSelectItem)
-			{
+			}
+			if (doSelectItem) {
 				NSInteger row = [self.outlineView rowForItem:node];
-				if (row >= 0)
-				{
+				if (row >= 0) {
 					NSIndexSet * indexes = [NSIndexSet indexSetWithIndex:(NSUInteger)row];
 					[self.outlineView selectRowIndexes:indexes byExtendingSelection:YES];
 				}
@@ -237,31 +231,26 @@ static void *ObserverContext = &ObserverContext;
 -(BOOL)loadTree:(NSArray *)listOfFolders rootNode:(TreeNode *)node
 {
 	Folder * folder;
-	if ([Preferences standardPreferences].foldersTreeSortMethod != VNAFolderSortManual)
-	{
-		for (folder in listOfFolders)
-		{
+	if ([Preferences standardPreferences].foldersTreeSortMethod != VNAFolderSortManual) {
+		for (folder in listOfFolders) {
 			NSInteger itemId = folder.itemId;
 			NSArray * listOfSubFolders = [[[Database sharedManager] arrayOfFolders:itemId] sortedArrayUsingSelector:@selector(folderNameCompare:)];
 			NSInteger count = listOfSubFolders.count;
 			TreeNode * subNode;
 
 			subNode = [[TreeNode alloc] init:node atIndex:-1 folder:folder canHaveChildren:(count > 0)];
-			if (count)
+			if (count) {
 				[self loadTree:listOfSubFolders rootNode:subNode];
+			}
 
 		}
-	}
-	else
-	{
+	} else {
 		NSArray * listOfFolderIds = [listOfFolders valueForKey:@"itemId"];
 		NSUInteger index = 0;
 		NSInteger nextChildId = (node == self.rootNode) ? [Database sharedManager].firstFolderId : node.folder.firstChildId;
-		while (nextChildId > 0)
-		{
+		while (nextChildId > 0) {
 			NSUInteger  listIndex = [listOfFolderIds indexOfObject:@(nextChildId)];
-			if (listIndex == NSNotFound)
-			{
+			if (listIndex == NSNotFound) {
 				NSLog(@"Cannot find child with id %ld for folder with id %ld", (long)nextChildId, (long)node.nodeId);
 				return NO;
 			}
@@ -271,18 +260,15 @@ static void *ObserverContext = &ObserverContext;
 			TreeNode * subNode;
 			
 			subNode = [[TreeNode alloc] init:node atIndex:index folder:folder canHaveChildren:(count > 0)];
-			if (count)
-			{
-				if (![self loadTree:listOfSubFolders rootNode:subNode])
-				{
+			if (count) {
+				if (![self loadTree:listOfSubFolders rootNode:subNode]) {
 					return NO;
 				}
 			}
 			nextChildId = folder.nextSiblingId;
 			++index;
 		}
-		if (index < listOfFolders.count)
-		{
+		if (index < listOfFolders.count) {
 			NSLog(@"Missing children for folder with id %ld, %ld", (long)nextChildId, (long)node.nodeId);
 			return NO;
 		}
@@ -308,8 +294,7 @@ static void *ObserverContext = &ObserverContext;
 		[array addObject:node.folder];
     }
 	node = node.firstChild;
-	while (node != nil)
-	{
+	while (node != nil) {
 		[array addObjectsFromArray:[self folders:node.nodeId]];
 		node = node.nextSibling;
 	}
@@ -325,13 +310,13 @@ static void *ObserverContext = &ObserverContext;
 	NSMutableArray * array = [NSMutableArray array];
 	TreeNode * node;
 
-	if (!folderId)
+	if (!folderId) {
 		node = self.rootNode;
-	else
+	} else {
 		node = [self.rootNode nodeFromID:folderId];
+	}
 	node = node.firstChild;
-	while (node != nil)
-	{
+	while (node != nil) {
 		[array addObject:node.folder];
 		node = node.nextSibling;
 	}
@@ -345,16 +330,15 @@ static void *ObserverContext = &ObserverContext;
 -(void)updateAlternateMenuTitle
 {
 	NSMenuItem * mainMenuItem = menuItemWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
-	if (mainMenuItem == nil)
+	if (mainMenuItem == nil) {
 		return;
+	}
 	NSString * menuTitle = mainMenuItem.title;
 	NSInteger index;
 	NSMenu * folderMenu = self.outlineView.menu;
-	if (folderMenu != nil)
-	{
+	if (folderMenu != nil) {
 		index = [folderMenu indexOfItemWithTarget:nil andAction:@selector(viewSourceHomePageInAlternateBrowser:)];
-		if (index >= 0)
-		{
+		if (index >= 0) {
 			NSMenuItem * contextualItem = [folderMenu itemAtIndex:index];
 			contextualItem.title = menuTitle;
 		}
@@ -368,13 +352,10 @@ static void *ObserverContext = &ObserverContext;
 -(void)updateFolder:(NSInteger)folderId recurseToParents:(BOOL)recurseToParents
 {
 	TreeNode * node = [self.rootNode nodeFromID:folderId];
-	if (node != nil)
-	{
+	if (node != nil) {
 		[self.outlineView reloadItem:node];
-		if (recurseToParents)
-		{
-			while (node.parentNode != self.rootNode)
-			{
+		if (recurseToParents) {
+			while (node.parentNode != self.rootNode) {
 				node = node.parentNode;
 				[self.outlineView reloadItem:node];
 			}
@@ -387,11 +368,9 @@ static void *ObserverContext = &ObserverContext;
  */
 -(BOOL)canDeleteFolderAtRow:(NSInteger)row
 {
-	if (row >= 0)
-	{
+	if (row >= 0) {
 		TreeNode * node = [self.outlineView itemAtRow:row];
-		if (node != nil)
-		{
+		if (node != nil) {
 			Folder * folder = [[Database sharedManager] folderFromID:node.nodeId];
 			return folder && folder.type != VNAFolderTypeSearch && folder.type != VNAFolderTypeTrash && ![Database sharedManager].readOnly && self.outlineView.window.visible;
 		}
@@ -406,14 +385,14 @@ static void *ObserverContext = &ObserverContext;
 -(BOOL)selectFolder:(NSInteger)folderId
 {
 	TreeNode * node = [self.rootNode nodeFromID:folderId];
-	if (!node)
+	if (!node) {
 		return NO;
+	}
 
 	// Walk up to our parent
 	[self expandToParent:node];
 	NSInteger rowIndex = [self.outlineView rowForItem:node];
-	if (rowIndex >= 0)
-	{
+	if (rowIndex >= 0) {
 		self.blockSelectionHandler = YES;
 		[self.outlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:(NSUInteger)rowIndex] byExtendingSelection:NO];
 		[self.outlineView scrollRowToVisible:rowIndex];
@@ -431,8 +410,7 @@ static void *ObserverContext = &ObserverContext;
  */
 -(void)expandToParent:(TreeNode *)node
 {
-	if (node.parentNode)
-	{
+	if (node.parentNode) {
 		[self expandToParent:node.parentNode];
 		[self.outlineView expandItem:node.parentNode];
 	}
@@ -446,33 +424,35 @@ static void *ObserverContext = &ObserverContext;
 {
     // keep track of parent (or grandparent) of starting node
     TreeNode * parentOfStartingNode = startingNode;
-    while (parentOfStartingNode != nil && parentOfStartingNode.parentNode != self.rootNode)
-    {
+    while (parentOfStartingNode != nil && parentOfStartingNode.parentNode != self.rootNode) {
         parentOfStartingNode = parentOfStartingNode.parentNode;
     }
 	TreeNode * node = startingNode;
 
-	while (node != nil)
-	{
+	while (node != nil) {
 		TreeNode * nextNode = nil;
 		TreeNode * parentNode = node.parentNode;
-		if ((node.folder.childUnreadCount > 0) && [self.outlineView isItemExpanded:node])
+		if ((node.folder.childUnreadCount > 0) && [self.outlineView isItemExpanded:node]) {
 			nextNode = node.firstChild;
-		if (nextNode == nil)
+		}
+		if (nextNode == nil) {
 			nextNode = node.nextSibling;
-		while (nextNode == nil && parentNode != nil)
-		{
+		}
+		while (nextNode == nil && parentNode != nil) {
 			nextNode = parentNode.nextSibling;
 			parentNode = parentNode.parentNode;
 		}
-		if (nextNode == nil)
+		if (nextNode == nil) {
 			nextNode = self.rootNode.firstChild;
+		}
 
-		if ((nextNode.folder.childUnreadCount) && ![self.outlineView isItemExpanded:nextNode])
+		if ((nextNode.folder.childUnreadCount) && ![self.outlineView isItemExpanded:nextNode]) {
 			return nextNode.nodeId;
+		}
 		
-		if (nextNode.folder.unreadCount)
+		if (nextNode.folder.unreadCount) {
 			return nextNode.nodeId;
+		}
 
 		// If we've gone full circle and not found
 		// anything, we're out of unread articles
@@ -607,20 +587,16 @@ static void *ObserverContext = &ObserverContext;
     Database *dbManager = [Database sharedManager];
 	
 	NSInteger count = node.countOfChildren;
-	if (count > 0)
-	{
-		
+	if (count > 0) {
         [dbManager setFirstChild:[node childByIndex:0].nodeId forFolder:folderId];
 		[self setManualSortOrderForNode:[node childByIndex:0]];
 		NSInteger index;
-		for (index = 1; index < count; ++index)
-		{
+		for (index = 1; index < count; ++index) {
 			[dbManager setNextSibling:[node childByIndex:index].nodeId forFolder:[node childByIndex:index - 1].nodeId];
 			[self setManualSortOrderForNode:[node childByIndex:index]];
 		}
 		[dbManager setNextSibling:0 forFolder:[node childByIndex:index - 1].nodeId];
-	}
-    else {
+	} else {
 		[dbManager setFirstChild:0 forFolder:folderId];
     }
 }
@@ -632,8 +608,7 @@ static void *ObserverContext = &ObserverContext;
 {
 	NSInteger selectedFolderId = self.actualSelection;
 	
-	if ([Preferences standardPreferences].foldersTreeSortMethod == VNAFolderSortManual)
-	{
+	if ([Preferences standardPreferences].foldersTreeSortMethod == VNAFolderSortManual) {
         [self setManualSortOrderForNode:self.rootNode];
 	}
 	
@@ -660,14 +635,12 @@ static void *ObserverContext = &ObserverContext;
 {
     TreeNode * node = [self.outlineView itemAtRow:self.outlineView.selectedRow];
 
-	if (node.folder.type == VNAFolderTypeRSS || node.folder.type == VNAFolderTypeOpenReader)
-	{
+	if (node.folder.type == VNAFolderTypeRSS || node.folder.type == VNAFolderTypeOpenReader) {
 		NSString * urlString = node.folder.homePage;
         if (urlString && !urlString.vna_isBlank) {
 			[APPCONTROLLER openURLFromString:urlString inPreferredBrowser:YES];
         }
-	}
-	else if (node.folder.type == VNAFolderTypeSmart) {
+	} else if (node.folder.type == VNAFolderTypeSmart) {
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_EditFolder" object:node];
 	}
 }
@@ -685,13 +658,13 @@ static void *ObserverContext = &ObserverContext;
 	TreeNode * nextNode;
 
 	// First find the next node we'll select
-	if (thisNode.nextSibling != nil)
+	if (thisNode.nextSibling != nil) {
 		nextNode = thisNode.nextSibling;
-	else
-	{
+	} else {
 		nextNode = thisNode.parentNode;
-		if (nextNode.countOfChildren > 1)
+		if (nextNode.countOfChildren > 1) {
 			nextNode = [nextNode childByIndex:nextNode.countOfChildren - 2];
+		}
 	}
 
 	// Ask our parent to delete us
@@ -702,8 +675,7 @@ static void *ObserverContext = &ObserverContext;
 	// Send the selection notification ourselves because if we're deleting at the end of
 	// the folder list, the selection won't actually change and outlineViewSelectionDidChange
 	// won't get tripped.
-	if (currentFolderId == folderId)
-	{
+	if (currentFolderId == folderId) {
 		self.blockSelectionHandler = YES;
 		[self selectFolder:nextNode.nodeId];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderSelectionChange" object:nextNode];
@@ -723,15 +695,14 @@ static void *ObserverContext = &ObserverContext;
 
 	BOOL moveSelection = (folderId == self.actualSelection);
 
-	if ([Preferences standardPreferences].foldersTreeSortMethod == VNAFolderSortByName)
+	if ([Preferences standardPreferences].foldersTreeSortMethod == VNAFolderSortByName) {
 		[parentNode sortChildren:VNAFolderSortByName];
+	}
 
 	[self reloadFolderItem:parentNode reloadChildren:YES];
-	if (moveSelection)
-	{
+	if (moveSelection) {
 		NSInteger row = [self.outlineView rowForItem:node];
-		if (row >= 0)
-		{
+		if (row >= 0) {
 			self.blockSelectionHandler = YES;
 			NSIndexSet * indexes = [NSIndexSet indexSetWithIndex:(NSUInteger)row];
 			[self.outlineView selectRowIndexes:indexes byExtendingSelection:NO];
@@ -748,10 +719,11 @@ static void *ObserverContext = &ObserverContext;
 -(void)handleFolderUpdate:(NSNotification *)nc
 {
 	NSInteger folderId = ((NSNumber *)nc.object).integerValue;
-	if (folderId == 0)
+	if (folderId == 0) {
 		[self reloadFolderItem:self.rootNode reloadChildren:YES];
-	else
+	} else {
 		[self updateFolder:folderId recurseToParents:YES];
+	}
 }
 
 /* handleFolderAdded
@@ -764,18 +736,18 @@ static void *ObserverContext = &ObserverContext;
 
 	NSInteger parentId = newFolder.parentId;
 	TreeNode * node = (parentId == VNAFolderTypeRoot) ? self.rootNode : [self.rootNode nodeFromID:parentId];
-	if (!node.canHaveChildren)
+	if (!node.canHaveChildren) {
 		[node setCanHaveChildren:YES];
+	}
 	
 	NSInteger childIndex = -1;
-	if ([Preferences standardPreferences].foldersTreeSortMethod == VNAFolderSortManual)
-	{
+	if ([Preferences standardPreferences].foldersTreeSortMethod == VNAFolderSortManual) {
 		NSInteger nextSiblingId = newFolder.nextSiblingId;
-		if (nextSiblingId > 0)
-		{
+		if (nextSiblingId > 0) {
 			TreeNode * nextSibling = [node nodeFromID:nextSiblingId];
-			if (nextSibling != nil)
+			if (nextSibling != nil) {
 				childIndex = [node indexOfChild:nextSibling];
+			}
 		}
 	}
 	
@@ -789,9 +761,9 @@ static void *ObserverContext = &ObserverContext;
  */
 -(void)reloadFolderItem:(id)node reloadChildren:(BOOL)flag
 {
-	if (node == self.rootNode)
-		[self.outlineView reloadData];
-    else {
+    if (node == self.rootNode) {
+        [self.outlineView reloadData];
+    } else {
         [self.outlineView reloadItem:node reloadChildren:flag];
     }
 }
@@ -812,8 +784,7 @@ static void *ObserverContext = &ObserverContext;
 	TreeNode * node = [self.rootNode nodeFromID:folderId];
 	NSInteger rowIndex = [self.outlineView rowForItem:node];
 		
-	if (rowIndex != -1)
-	{
+	if (rowIndex != -1) {
         if (self.fieldEditor && self.fieldEditor.delegate) {
             NSTextField *textField = (NSTextField *)self.fieldEditor.delegate;
             [textField abortEditing];
@@ -856,8 +827,7 @@ static void *ObserverContext = &ObserverContext;
 
 	// Create an array of NSNumber objects containing the selected folder IDs.
 	NSInteger countOfItems = 0;
-	for (index = 0; index < count; ++index)
-	{
+	for (index = 0; index < count; ++index) {
 		TreeNode * node = items[index];
 		Folder * folder = node.folder;
 
@@ -885,10 +855,8 @@ static void *ObserverContext = &ObserverContext;
 			[stringDragData appendFormat:@"%@\n", feedURL];
 			
 			NSURL * safariURL = [NSURL URLWithString:feedURL];
-			if (safariURL != nil && !safariURL.fileURL)
-			{
-				if (![@"feed" isEqualToString:safariURL.scheme])
-				{
+			if (safariURL != nil && !safariURL.fileURL) {
+				if (![@"feed" isEqualToString:safariURL.scheme]) {
 					feedURL = [NSString stringWithFormat:@"feed:%@", safariURL.resourceSpecifier];
 				}
 				[arrayOfURLs addObject:feedURL];
@@ -934,8 +902,7 @@ static void *ObserverContext = &ObserverContext;
 	Database * dbManager = [Database sharedManager];
 	BOOL autoSort = [Preferences standardPreferences].foldersTreeSortMethod != VNAFolderSortManual;
 
-	while (index < count)
-	{
+	while (index < count) {
 		NSInteger folderId = [array[index++] integerValue];
 		NSInteger newParentId = [array[index++] integerValue];
 		NSInteger newPredecessorId = [array[index++] integerValue];
@@ -948,12 +915,12 @@ static void *ObserverContext = &ObserverContext;
 		NSInteger oldPredecessorId = (oldChildIndex > 0) ? [oldParent childByIndex:(oldChildIndex - 1)].nodeId : 0;
 		TreeNode * newParent = [self.rootNode nodeFromID:newParentId];
 		TreeNode * newPredecessor = [newParent nodeFromID:newPredecessorId];
-		if ((newPredecessor == nil) || (newPredecessor == newParent))
+		if ((newPredecessor == nil) || (newPredecessor == newParent)) {
 			newPredecessorId = 0;
+		}
 		NSInteger newChildIndex = (newPredecessorId > 0) ? ([newParent indexOfChild:newPredecessor] + 1) : 0;
         
-		if (newParentId == oldParentId)
-		{
+		if (newParentId == oldParentId) {
 			// With automatic sorting, moving under the same parent is impossible.
             if (autoSort) {
 				continue;
@@ -967,15 +934,12 @@ static void *ObserverContext = &ObserverContext;
                 --newChildIndex;
             }
 				
-		}
-		else
-		{
-			if (!newParent.canHaveChildren)
+		} else {
+			if (!newParent.canHaveChildren) {
 				[newParent setCanHaveChildren:YES];
-			if ([dbManager setParent:newParentId forFolder:folderId])
-			{
-				if (sync && folder.type == VNAFolderTypeOpenReader)
-				{
+			}
+			if ([dbManager setParent:newParentId forFolder:folderId]) {
+				if (sync && folder.type == VNAFolderTypeOpenReader) {
 					OpenReader * myReader = [OpenReader sharedManager];
 					// remove old label
 					NSString * folderName = [dbManager folderFromID:oldParentId].name;
@@ -986,22 +950,20 @@ static void *ObserverContext = &ObserverContext;
 					    [myReader setFolderLabel:folderName forFeed:folder.remoteId set:TRUE];
 					}
 				}
-			}
-			else
+			} else {
 				continue;
+			}
 		}
 		
-		if (!autoSort)
-		{
-			if (oldPredecessorId > 0)
-			{
-				if (![dbManager setNextSibling:folder.nextSiblingId forFolder:oldPredecessorId])
+		if (!autoSort) {
+			if (oldPredecessorId > 0) {
+				if (![dbManager setNextSibling:folder.nextSiblingId forFolder:oldPredecessorId]) {
 					continue;
-			}
-			else
-			{
-				if (![dbManager setFirstChild:folder.nextSiblingId forFolder:oldParentId])
+				}
+			} else {
+				if (![dbManager setFirstChild:folder.nextSiblingId forFolder:oldParentId]) {
 					continue;
+				}
 			}
 		}
 		
@@ -1013,29 +975,25 @@ static void *ObserverContext = &ObserverContext;
 		[undoArray insertObject:@(oldParentId) atIndex:1u];
 		[undoArray insertObject:@(oldPredecessorId) atIndex:2u];
 		
-		if (!autoSort)
-		{
-			if (newPredecessorId > 0)
-			{
+		if (!autoSort) {
+			if (newPredecessorId > 0) {
 				if (![dbManager setNextSibling:[dbManager folderFromID:newPredecessorId].nextSiblingId
                                      forFolder:folderId]) {
 					continue;
                 }
 				[dbManager setNextSibling:folderId forFolder:newPredecessorId];
-			}
-			else
-			{
+			} else {
 				NSInteger oldFirstChildId = (newParent == self.rootNode) ? dbManager.firstFolderId : newParent.folder.firstChildId;
-				if (![dbManager setNextSibling:oldFirstChildId forFolder:folderId])
+				if (![dbManager setNextSibling:oldFirstChildId forFolder:folderId]) {
 					continue;
+				}
 				[dbManager setFirstChild:folderId forFolder:newParentId];
 			}
 		}
 	}
 	
 	// If undo array is empty, then nothing has been moved.
-	if (undoArray.count == 0u)
-	{
+	if (undoArray.count == 0u) {
 		return NO;
 	}
 	
@@ -1048,14 +1006,13 @@ static void *ObserverContext = &ObserverContext;
 	[self.outlineView reloadData];
 
 	// If any parent was a collapsed group, expand it now
-	for (index = 0; index < count; index += 2)
-	{
+	for (index = 0; index < count; index += 2) {
 		NSInteger newParentId = [array[++index] integerValue];
-		if (newParentId != VNAFolderTypeRoot)
-		{
+		if (newParentId != VNAFolderTypeRoot) {
 			TreeNode * parentNode = [self.rootNode nodeFromID:newParentId];
-			if (![self.outlineView isItemExpanded:parentNode] && [self.outlineView isExpandable:parentNode])
+			if (![self.outlineView isItemExpanded:parentNode] && [self.outlineView isExpandable:parentNode]) {
 				[self.outlineView expandItem:parentNode];
+			}
 		}
 	}
 	
@@ -1063,8 +1020,7 @@ static void *ObserverContext = &ObserverContext;
 	// refresh so that rowForItem returns the new positions.
 	NSMutableIndexSet * selIndexSet = [[NSMutableIndexSet alloc] init];
 	NSInteger selRowIndex = 9999;
-	for (index = 0; index < count; index += 2)
-	{
+	for (index = 0; index < count; index += 2) {
 		NSInteger folderId = [array[index++] integerValue];
 		NSInteger rowIndex = [self.outlineView rowForItem:[self.rootNode nodeFromID:folderId]];
 		selRowIndex = MIN(selRowIndex, rowIndex);
@@ -1154,8 +1110,9 @@ static void *ObserverContext = &ObserverContext;
 -(BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item
 {
     TreeNode * node = (TreeNode *)item;
-    if (node == nil)
+    if (node == nil) {
         node = self.rootNode;
+    }
     return node.canHaveChildren && node.countOfChildren > 0;
 }
 
@@ -1518,8 +1475,7 @@ static void *ObserverContext = &ObserverContext;
  */
 -(void)outlineViewSelectionDidChange:(NSNotification *)notification
 {
-    if (!self.blockSelectionHandler)
-    {
+    if (!self.blockSelectionHandler) {
         TreeNode * node = [self.outlineView itemAtRow:self.outlineView.selectedRow];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderSelectionChange" object:node];
     }

@@ -39,8 +39,7 @@
 
 	[scanner scanUpToString:@":" intoString:&urlPrefix];
 	[scanner scanString:@":" intoString:nil];
-	if (urlPrefix && [urlPrefix isEqualToString:@"feed"])
-	{
+	if (urlPrefix && [urlPrefix isEqualToString:@"feed"]) {
 		NSString * feedScheme = nil;
 
 		// Throw away the next few bits if they exist
@@ -53,10 +52,12 @@
 		NSString * linkPath = nil;
 
 		[scanner scanUpToString:@"" intoString:&linkPath];
-		if (linkPath == nil)
+		if (linkPath == nil) {
 			return nil;
-		if (feedScheme == nil)
+		}
+		if (feedScheme == nil) {
 			feedScheme = @"http:";
+		}
 		linkPath = [NSString stringWithFormat:@"%@//%@", feedScheme, linkPath];
 
 		// Allow the run loop to run first, because this may be called at launch,

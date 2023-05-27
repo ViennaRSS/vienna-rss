@@ -40,8 +40,7 @@
  */
 -(instancetype)initWithFrame:(NSRect)frameRect
 {
-	if ((self = [super initWithFrame:frameRect]) != nil)
-	{
+	if ((self = [super initWithFrame:frameRect]) != nil) {
 		enclosureURLString = nil;
 
 		// Register to be notified when a download completes.
@@ -65,8 +64,9 @@
  */
 -(void)handleDownloadCompleted:(NSNotification *)notification
 {
-	if (enclosureURLString != nil)
+	if (enclosureURLString != nil) {
 		[self setEnclosureFile:enclosureURLString];
+	}
 }
 
 /* setEnclosureFile
@@ -81,23 +81,19 @@
     enclosureURLString = enclosureUrl.absoluteString;
 
 	NSString * basename = enclosureUrl.lastPathComponent;
-	if (basename==nil)
-	{
+	if (basename==nil) {
 		return;
 	}
 
 	// Find the file's likely location in Finder and see if it is already there.
 	// We'll set the options in the pane based on whether the file is there or not.
 	NSString * destPath = [DownloadManager fullDownloadPath:basename];
-	if (![DownloadManager isFileDownloaded:destPath])
-	{
+	if (![DownloadManager isFileDownloaded:destPath]) {
 		[downloadButton setTitle:NSLocalizedString(@"Download", nil)];
 		[downloadButton sizeToFit];
 		downloadButton.action = @selector(downloadFile:);
 		[filenameLabel setStringValue:NSLocalizedString(@"This article contains an enclosed file.", nil)];
-	}
-	else
-	{
+	} else {
 		NSString * appPath = [[NSWorkspace sharedWorkspace] vna_defaultHandlerApplicationForFile:destPath];
         NSString *displayName = [[[NSFileManager defaultManager] displayNameAtPath:appPath] stringByDeletingPathExtension];
         [downloadButton setTitle:[NSString stringWithFormat:NSLocalizedString(@"Open with %@", "Name the application which should open a file"), displayName]];

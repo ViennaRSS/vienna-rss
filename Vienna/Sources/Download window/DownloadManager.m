@@ -233,8 +233,9 @@
 
         if ([firstFile compare:secondFile
                        options:NSCaseInsensitiveSearch] == NSOrderedSame) {
-            if (item.state != DownloadStateCompleted)
+            if (item.state != DownloadStateCompleted) {
                 return NO;
+            }
 
             // File completed download but possibly moved or deleted after
             // download so check the file system.

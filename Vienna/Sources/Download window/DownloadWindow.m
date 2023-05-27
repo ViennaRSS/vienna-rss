@@ -35,8 +35,7 @@
  */
 -(instancetype)init
 {
-	if ((self = [super initWithWindowNibName:@"Downloads"]) != nil)
-	{
+	if ((self = [super initWithWindowNibName:@"Downloads"]) != nil) {
 		lastCount = 0;
 	}
 	return self;
@@ -100,12 +99,10 @@
 {
 	
 	// Dynamically generate Open With submenu for item
-	if (menu == openWithMenu)
-	{
+	if (menu == openWithMenu) {
 		NSArray * list = [DownloadManager sharedInstance].downloadsList;
 		NSInteger index = table.selectedRow;
-		if (index != -1)
-		{
+		if (index != -1) {
 			DownloadItem * item = list[index];
 			[[NSWorkspace sharedWorkspace] vna_openWithMenuForFile:item.filename target:nil action:nil menu:menu];
 		}
@@ -120,8 +117,7 @@
 		BOOL completed = [notification.userInfo[UserNotificationContextKey] isEqualToString:UserNotificationContextFileDownloadCompleted];
 		BOOL failed = [notification.userInfo[UserNotificationContextKey] isEqualToString:UserNotificationContextFileDownloadFailed];
 
-		if (completed || failed)
-		{
+		if (completed || failed) {
 			[center removeDeliveredNotification: notification];
 		}
 	}];
@@ -143,8 +139,7 @@
 {
 	NSArray * list = [DownloadManager sharedInstance].downloadsList;
 	NSInteger index = table.selectedRow;
-	if (index != -1)
-	{
+	if (index != -1) {
 		DownloadItem * item = list[index];
 		if (item) {
             NSURL *url = [NSURL fileURLWithPath:item.filename];
@@ -164,16 +159,13 @@
 {
 	NSArray * list = [DownloadManager sharedInstance].downloadsList;
 	NSInteger index = table.selectedRow;
-	if (index != -1)
-	{
+	if (index != -1) {
 		DownloadItem * item = list[index];
-		if (item && [[NSFileManager defaultManager] fileExistsAtPath:item.filename])
-		{
-			if ([[NSWorkspace sharedWorkspace] selectFile:item.filename inFileViewerRootedAtPath:@""] == NO)
+		if (item && [[NSFileManager defaultManager] fileExistsAtPath:item.filename]) {
+			if ([[NSWorkspace sharedWorkspace] selectFile:item.filename inFileViewerRootedAtPath:@""] == NO) {
 				runOKAlertSheet(NSLocalizedString(@"Vienna cannot show the file.", nil), NSLocalizedString(@"Vienna cannot show the file \"%@\" because it moved since you downloaded it.", nil), item.filename.lastPathComponent);
-		}
-		else
-		{
+			}
+		} else {
 			NSBeep();
 		}
 	}
@@ -186,8 +178,7 @@
 {
 	NSArray * list = [DownloadManager sharedInstance].downloadsList;
 	NSInteger index = table.selectedRow;
-	if (index != -1)
-	{
+	if (index != -1) {
 		DownloadItem * item = list[index];
 		[[DownloadManager sharedInstance] removeItem:item];
 		[table reloadData];
@@ -201,8 +192,7 @@
 {
 	NSArray * list = [DownloadManager sharedInstance].downloadsList;
 	NSInteger index = table.selectedRow;
-	if (index != -1)
-	{
+	if (index != -1) {
 		DownloadItem * item = list[index];
 		[[DownloadManager sharedInstance] cancelItem:item];
 		[table reloadData];
@@ -227,11 +217,11 @@
 -(void)tableView:(ExtendedTableView *)tableView menuWillAppear:(NSEvent *)theEvent
 {
 	NSInteger row = [table rowAtPoint:[table convertPoint:theEvent.locationInWindow fromView:nil]];
-	if (row >= 0)
-	{
+	if (row >= 0) {
 		// Select the row under the cursor if it isn't already selected
-		if (table.numberOfSelectedRows <= 1)
+		if (table.numberOfSelectedRows <= 1) {
 			[table selectRowIndexes:[NSIndexSet indexSetWithIndex:(NSUInteger)row] byExtendingSelection:NO];
+		}
 	}
 }
 
@@ -240,13 +230,13 @@
  */
 -(void)tableView:(NSTableView *)aTableView willDisplayCell:(id)aCell forTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex
 {
-	if ([aCell isKindOfClass:[ImageAndTextCell class]])
-	{
+	if ([aCell isKindOfClass:[ImageAndTextCell class]]) {
 		NSArray * list = [DownloadManager sharedInstance].downloadsList;
 		DownloadItem * item = list[rowIndex];
 
-		if (item.image != nil)
+		if (item.image != nil) {
 			[aCell setImage:item.image];
+		}
 		[aCell setTextColor:(rowIndex == aTableView.selectedRow) ? [NSColor whiteColor] : [NSColor controlTextColor]];
 	}
 }
@@ -263,8 +253,9 @@
 	// TODO: return item when we have a cell that can parse it. Until then, construct our own data.
 	NSString * rawfilename = item.filename.lastPathComponent;
     NSString * filename = [rawfilename stringByRemovingPercentEncoding];
-	if (filename == nil)
+	if (filename == nil) {
 		filename = @"";
+	}
 
 	// Different layout depending on the state
 	NSString * objectString = filename;
@@ -287,13 +278,10 @@
 			// Size gathered so far at bottom
 			NSString * progressString = @"";
 
-			if (item.expectedSize == -1)
-			{
+			if (item.expectedSize == -1) {
                 progressString = [NSByteCountFormatter stringFromByteCount:item.size
                                                                 countStyle:NSByteCountFormatterCountStyleFile];
-			}
-			else
-			{
+			} else {
                 NSString *bytesSoFar = [NSByteCountFormatter stringFromByteCount:item.size
                                                                       countStyle:NSByteCountFormatterCountStyleFile];
                 NSString *expectedBytes = [NSByteCountFormatter stringFromByteCount:item.expectedSize
@@ -318,19 +306,15 @@
 	DownloadItem * item = (DownloadItem *)notification.object;
 	NSArray * list = [DownloadManager sharedInstance].downloadsList;
 	NSUInteger  rowIndex = [list indexOfObject:item];
-	if (list.count != lastCount)
-	{
+	if (list.count != lastCount) {
 		[table reloadData];
-		if (rowIndex != NSNotFound)
-		{
+		if (rowIndex != NSNotFound) {
 			NSIndexSet * indexes = [NSIndexSet indexSetWithIndex:rowIndex];
 			[table selectRowIndexes:indexes byExtendingSelection:NO];
 			[table scrollRowToVisible:rowIndex];
 		}
 		lastCount = list.count;
-	}
-	else
-	{
+	} else {
 		[table reloadData];
 	}
 }

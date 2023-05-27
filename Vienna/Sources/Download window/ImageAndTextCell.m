@@ -34,8 +34,7 @@
  */
 -(instancetype)init
 {
-	if ((self = [super init]) != nil)
-	{
+	if ((self = [super init]) != nil) {
 		image = nil;
 		auxiliaryImage = nil;
 		offset = 0;
@@ -122,15 +121,12 @@
 
     NSColor *newColourRGB = [newColour colorUsingColorSpace:[NSColorSpace deviceRGBColorSpace]];
     
-    if (newColourRGB)
-    {
+    if (newColourRGB) {
         countBackgroundColourGradientEnd = [NSColor colorWithHue:newColourRGB.hueComponent
                                                       saturation:newColourRGB.saturationComponent - 0.07
                                                       brightness:newColourRGB.brightnessComponent + 0.07
                                                            alpha:newColourRGB.alphaComponent];
-    }
-    else
-    {
+    } else {
         countBackgroundColourGradientEnd = countBackgroundColour.copy;
     }
 }
@@ -156,8 +152,7 @@
  */
 -(void)drawCellImage:(NSRect *)cellFrame inView:(NSView *)controlView
 {
-	if (image != nil)
-	{
+	if (image != nil) {
 		NSSize imageSize;
 		NSRect imageFrame;
 		
@@ -180,12 +175,12 @@
 {
 	// If the cell has an image, draw the image and then reduce
 	// cellFrame to move the text to the right of the image.
-	if (image != nil)
+	if (image != nil) {
 		[self drawCellImage:&cellFrame inView:controlView];
+	}
 
 	// If we have an error image, it appears on the right hand side.
-	if (auxiliaryImage)
-	{
+	if (auxiliaryImage) {
 		NSSize imageSize;
 		NSRect imageFrame;
 		
@@ -201,8 +196,7 @@
 	
 	// If the cell has a count button, draw the count
 	// button on the right of the cell.
-	if (hasCount)
-	{
+	if (hasCount) {
 		NSString * number = [NSString stringWithFormat:@"%li", (long)count];
 
 		// Use the current font point size as a guide for the count font size
@@ -241,8 +235,9 @@
         // Push new graphics state so we can draw using a shadow if needed
         [NSGraphicsContext saveGraphicsState];
         {
-            if (countLabelShadow)
+            if (countLabelShadow) {
                 [countLabelShadow set];
+            }
             
             // Draw the count in the rounded rectangle we just created.
             NSPoint point = NSMakePoint(NSMidX(countFrame) - numSize.width / 2.0f,  NSMidY(countFrame) - numSize.height / 2.0f );

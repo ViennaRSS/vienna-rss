@@ -30,8 +30,7 @@
  */
 -(void)runSearchPanel:(NSWindow *)window
 {
-	if (!searchPanelWindow)
-	{
+	if (!searchPanelWindow) {
 		NSArray * objects;
 		[[NSBundle bundleForClass:[self class]] loadNibNamed:@"SearchPanel" owner:self topLevelObjects:&objects];
 		self.topObjects = objects;

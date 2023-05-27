@@ -78,8 +78,7 @@ static void *ObserverContext = &ObserverContext;
 -(instancetype)initWithFrame:(NSRect)frame
 {
     self= [super initWithFrame:frame];
-    if (self)
-	{
+    if (self) {
         isChangingOrientation = NO;
 		isInTableInit = NO;
 		blockSelectionHandler = NO;
@@ -206,17 +205,18 @@ static void *ObserverContext = &ObserverContext;
 	Field * field;
 	NSUInteger  index;
 	
-	for (index = 0; index < dataArray.count;)
-	{
+	for (index = 0; index < dataArray.count;) {
 		NSString * name;
 		NSInteger width = 100;
 		BOOL visible = NO;
 		
 		name = dataArray[index++];
-		if (index < dataArray.count)
+		if (index < dataArray.count) {
 			visible = [dataArray[index++] integerValue] == YES;
-		if (index < dataArray.count)
+		}
+		if (index < dataArray.count) {
 			width = [dataArray[index++] integerValue];
+		}
 		
 		field = [db fieldByName:name];
 		field.visible = visible;
@@ -295,25 +295,20 @@ static void *ObserverContext = &ObserverContext;
 	NSInteger column = articleList.clickedColumn;
 	NSArray * allArticles = self.controller.articleController.allArticles;
 	
-	if (row >= 0 && row < (NSInteger)allArticles.count)
-	{
+	if (row >= 0 && row < (NSInteger)allArticles.count) {
 		NSArray * columns = articleList.tableColumns;
-		if (column >= 0 && column < (NSInteger)columns.count)
-		{
+		if (column >= 0 && column < (NSInteger)columns.count) {
 			Article * theArticle = allArticles[row];
 			NSString * columnName = ((NSTableColumn *)columns[column]).identifier;
-			if ([columnName isEqualToString:MA_Field_Read])
-			{
+			if ([columnName isEqualToString:MA_Field_Read]) {
 				[self.controller.articleController markReadByArray:@[theArticle] readFlag:!theArticle.read];
 				return;
 			}
-			if ([columnName isEqualToString:MA_Field_Flagged])
-			{
+			if ([columnName isEqualToString:MA_Field_Flagged]) {
 				[self.controller.articleController markFlaggedByArray:@[theArticle] flagged:!theArticle.flagged];
 				return;
 			}
-			if ([columnName isEqualToString:MA_Field_HasEnclosure])
-			{
+			if ([columnName isEqualToString:MA_Field_HasEnclosure]) {
 				// TODO: Do interesting stuff with the enclosure here.
 			}
 			
@@ -328,8 +323,7 @@ static void *ObserverContext = &ObserverContext;
 -(IBAction)doubleClickRow:(id)sender
 {
 	NSInteger clickedRow = articleList.clickedRow;
-	if (clickedRow != -1)
-	{
+	if (clickedRow != -1) {
 		Article * theArticle = self.controller.articleController.allArticles[clickedRow];
 		[self.controller openURLFromString:theArticle.link inPreferredBrowser:YES];
 	}
@@ -367,8 +361,7 @@ static void *ObserverContext = &ObserverContext;
 	[self updateArticleListRowHeight];
 	
 	// Create the new columns
-	for (index = 0; index < count; ++index)
-	{
+	for (index = 0; index < count; ++index) {
 		Field * field = fields[index];
 		NSString * identifier = field.name;
 		NSInteger tag = field.tag;
@@ -376,15 +369,16 @@ static void *ObserverContext = &ObserverContext;
 		
 		// Handle which fields can be visible in the condensed (vertical) layout
 		// versus the report (horizontal) layout
-		if (tableLayout == VNALayoutReport)
+		if (tableLayout == VNALayoutReport) {
 			showField = field.visible && tag != ArticleFieldIDHeadlines && tag != ArticleFieldIDComments;
-		else
-		{
+		} else {
 			showField = NO;
-			if (tag == ArticleFieldIDRead || tag == ArticleFieldIDFlagged || tag == ArticleFieldIDHasEnclosure)
+			if (tag == ArticleFieldIDRead || tag == ArticleFieldIDFlagged || tag == ArticleFieldIDHasEnclosure) {
 				showField = field.visible;
-			if (tag == ArticleFieldIDHeadlines)
+			}
+			if (tag == ArticleFieldIDHeadlines) {
 				showField = YES;
+			}
 		}
 
 		// Set column hidden or shown
@@ -393,8 +387,7 @@ static void *ObserverContext = &ObserverContext;
 
 		// Add to the end only those columns which should be visible
 		// and aren't created yet
-		if (showField && [articleList columnWithIdentifier:identifier]==-1)
-		{
+		if (showField && [articleList columnWithIdentifier:identifier]==-1) {
 			NSTableColumn * column = [[NSTableColumn alloc] initWithIdentifier:identifier];
 			
 			// Replace the normal text field cell with a progress text cell so we can
@@ -402,20 +395,19 @@ static void *ObserverContext = &ObserverContext;
 			// in willDisplayCell:forTableColumn:row: where it sets the inProgress flag.
 			// We need to use a different column for condensed layout vs. table layout.
 			BOOL isProgressColumn = NO;
-			if (tableLayout == VNALayoutReport && [column.identifier isEqualToString:MA_Field_Subject])
+			if (tableLayout == VNALayoutReport && [column.identifier isEqualToString:MA_Field_Subject]) {
 				isProgressColumn = YES;
-			if (tableLayout == VNALayoutCondensed && [column.identifier isEqualToString:MA_Field_Headlines])
+			}
+			if (tableLayout == VNALayoutCondensed && [column.identifier isEqualToString:MA_Field_Headlines]) {
 				isProgressColumn = YES;
+			}
 			
-			if (isProgressColumn)
-			{
+			if (isProgressColumn) {
 				ProgressTextCell * progressCell;
 				
 				progressCell = [[ProgressTextCell alloc] init];
 				column.dataCell = progressCell;
-			}
-			else
-			{
+			} else {
 				VNAVerticallyCenteredTextFieldCell * cell;
 
 				cell = [[VNAVerticallyCenteredTextFieldCell alloc] init];
@@ -438,8 +430,7 @@ static void *ObserverContext = &ObserverContext;
 		}
 
 		// Set column size for visible columns
-		if (showField)
-		{
+		if (showField) {
 			NSTableColumn *column = [articleList tableColumnWithIdentifier:identifier];
 			column.width = field.width;
 		}
@@ -481,10 +472,11 @@ static void *ObserverContext = &ObserverContext;
 	// Put the selection back
 	[articleList selectRowIndexes:selArray byExtendingSelection:NO];
 	
-	if (tableLayout == VNALayoutReport)
+	if (tableLayout == VNALayoutReport) {
 		articleList.autosaveName = @"Vienna3ReportLayoutColumns";
-	else
+	} else {
 		articleList.autosaveName = @"Vienna3CondensedLayoutColumns";
+	}
 	[articleList setAutosaveTableColumns:YES];
 
 	// Done
@@ -508,8 +500,7 @@ static void *ObserverContext = &ObserverContext;
 	
 	// Create the new columns
 	
-	for (Field * field in  [[Database sharedManager] arrayOfFields])
-	{
+	for (Field * field in  [[Database sharedManager] arrayOfFields]) {
 		[dataArray addObject:field.name];
 		[dataArray addObject:@(field.visible)];
 		[dataArray addObject:@(field.width)];
@@ -557,21 +548,25 @@ static void *ObserverContext = &ObserverContext;
 	CGFloat height = [APPCONTROLLER.layoutManager defaultLineHeightForFont:articleListFont];
 	NSInteger numberOfRowsInCell;
 
-	if (tableLayout == VNALayoutReport)
+	if (tableLayout == VNALayoutReport) {
 		numberOfRowsInCell = 1;
-	else
-	{
+	} else {
 		numberOfRowsInCell = 0;
-		if ([db fieldByName:MA_Field_Subject].visible)
+		if ([db fieldByName:MA_Field_Subject].visible) {
 			++numberOfRowsInCell;
-		if ([db fieldByName:MA_Field_Folder].visible || [db fieldByName:MA_Field_Date].visible || [db fieldByName:MA_Field_Author].visible)
+		}
+		if ([db fieldByName:MA_Field_Folder].visible || [db fieldByName:MA_Field_Date].visible || [db fieldByName:MA_Field_Author].visible) {
 			++numberOfRowsInCell;
-		if ([db fieldByName:MA_Field_Link].visible)
+		}
+		if ([db fieldByName:MA_Field_Link].visible) {
 			++numberOfRowsInCell;
-		if ([db fieldByName:MA_Field_Summary].visible)
+		}
+		if ([db fieldByName:MA_Field_Summary].visible) {
 			++numberOfRowsInCell;
-		if (numberOfRowsInCell == 0)
+		}
+		if (numberOfRowsInCell == 0) {
 			++numberOfRowsInCell;
+		}
 	}
 	articleList.rowHeight = (height + 2.0f) * (CGFloat)numberOfRowsInCell;
 }
@@ -583,16 +578,12 @@ static void *ObserverContext = &ObserverContext;
 {
 	NSString * sortColumnIdentifier = self.controller.articleController.sortColumnIdentifier;
 	
-	for (NSTableColumn * column in articleList.tableColumns)
-	{
-		if ([column.identifier isEqualToString:sortColumnIdentifier])
-		{
+	for (NSTableColumn * column in articleList.tableColumns) {
+		if ([column.identifier isEqualToString:sortColumnIdentifier]) {
 			NSString * imageName = ([[Preferences standardPreferences].articleSortDescriptors[0] ascending]) ? @"NSAscendingSortIndicator" : @"NSDescendingSortIndicator";
 			articleList.highlightedTableColumn = column;
 			[articleList setIndicatorImage:[NSImage imageNamed:imageName] inTableColumn:column];
-		}
-		else
-		{
+		} else {
 			// Remove any existing image in the column header.
 			[articleList setIndicatorImage:nil inTableColumn:column];
 		}
@@ -604,13 +595,10 @@ static void *ObserverContext = &ObserverContext;
  */
 -(void)scrollToArticle:(NSString *)guid
 {
-	if (guid != nil)
-	{
+	if (guid != nil) {
 		NSInteger rowIndex = 0;
-		for (Article * thisArticle in self.controller.articleController.allArticles)
-		{
-			if ([thisArticle.guid isEqualToString:guid])
-			{
+		for (Article * thisArticle in self.controller.articleController.allArticles) {
+			if ([thisArticle.guid isEqualToString:guid]) {
 				[self makeRowSelectedAndVisible:rowIndex];
 				return;
 			}
@@ -762,8 +750,7 @@ static void *ObserverContext = &ObserverContext;
 -(void)handleArticleListFontChange:(NSNotification *)note
 {
 	[self setTableViewFont];
-	if (self == self.controller.articleController.mainArticleView)
-	{
+	if (self == self.controller.articleController.mainArticleView) {
 		[articleList reloadData];
 	}
 }
@@ -773,8 +760,9 @@ static void *ObserverContext = &ObserverContext;
  */
 -(void)handleLoadFullHTMLChange:(NSNotification *)note
 {
-	if (self == self.controller.articleController.mainArticleView)
+	if (self == self.controller.articleController.mainArticleView) {
 		[self refreshArticlePane];
+	}
 }
 
 /* handleReadingPaneChange
@@ -782,8 +770,7 @@ static void *ObserverContext = &ObserverContext;
  */
 -(void)handleReadingPaneChange:(NSNotificationCenter *)nc
 {
-	if (self == self.controller.articleController.mainArticleView)
-	{
+	if (self == self.controller.articleController.mainArticleView) {
 		[self setOrientation:[Preferences standardPreferences].layout];
 		[self updateVisibleColumns];
 		[articleList reloadData];
@@ -813,12 +800,9 @@ static void *ObserverContext = &ObserverContext;
  */
 -(void)makeRowSelectedAndVisible:(NSInteger)rowIndex
 {
-	if (self.controller.articleController.allArticles.count == 0u)
-	{
+	if (self.controller.articleController.allArticles.count == 0u) {
 		[articleList deselectAll:self];
-	}
-    else if (rowIndex != articleList.selectedRow)
-	{
+	} else if (rowIndex != articleList.selectedRow) {
 		[articleList selectRowIndexes:[NSIndexSet indexSetWithIndex:rowIndex] byExtendingSelection:NO];
 
 		// make sure our current selection is visible
@@ -828,8 +812,9 @@ static void *ObserverContext = &ObserverContext;
 		NSInteger lastRow = articleList.numberOfRows - 1;
 		NSInteger visibleRow = rowIndex + (pageSize / 2);
 
-		if (visibleRow > lastRow)
+		if (visibleRow > lastRow) {
 			visibleRow = lastRow;
+		}
 		[articleList scrollRowToVisible:visibleRow];
 	}
 }
@@ -849,17 +834,16 @@ static void *ObserverContext = &ObserverContext;
  */
 -(BOOL)viewNextUnreadInCurrentFolder:(NSInteger)currentRow
 {
-	if (currentRow < 0)
+	if (currentRow < 0) {
 		currentRow = 0;
+	}
 	
 	NSArray * allArticles = self.controller.articleController.allArticles;
 	NSInteger totalRows = allArticles.count;
 	Article * theArticle;
-	while (currentRow < totalRows)
-	{
+	while (currentRow < totalRows) {
 		theArticle = allArticles[currentRow];
-		if (!theArticle.read)
-		{
+		if (!theArticle.read) {
 			[self makeRowSelectedAndVisible:currentRow];
 			return YES;
 		}
@@ -895,11 +879,11 @@ static void *ObserverContext = &ObserverContext;
 -(BOOL)selectFirstUnreadInFolder
 {
 	BOOL result = [self viewNextUnreadInCurrentFolder:-1];
-	if (!result)
-	{
+	if (!result) {
 		NSInteger count = self.controller.articleController.allArticles.count;
-		if (count > 0)
+		if (count > 0) {
 			[self makeRowSelectedAndVisible:0];
+		}
 	}
 	return result;
 }
@@ -941,11 +925,9 @@ static void *ObserverContext = &ObserverContext;
 	[self.controller.articleController reloadArrayOfArticles];
 	
 	// This action is send continuously by the filter field, so make sure not the mark read while searching
-    if (articleList.selectedRow < 0 && self.controller.articleController.allArticles.count > 0 )
-	{
+    if (articleList.selectedRow < 0 && self.controller.articleController.allArticles.count > 0 ) {
 		BOOL shouldSelectArticle = YES;
-		if ([Preferences standardPreferences].markReadInterval > 0.0f)
-		{
+		if ([Preferences standardPreferences].markReadInterval > 0.0f) {
 			Article * article = self.controller.articleController.allArticles[0u];
             if (!article.read) {
 				shouldSelectArticle = NO;
@@ -968,8 +950,7 @@ static void *ObserverContext = &ObserverContext;
 
     Article * currentSelectedArticle = self.selectedArticle;
 
-    switch (refreshFlag)
-    {
+    switch (refreshFlag) {
         case VNARefreshRedrawList:
             break;
         case VNARefreshReapplyFilter:
@@ -992,8 +973,7 @@ static void *ObserverContext = &ObserverContext;
  */
 -(void)startLoadIndicator
 {
-	if (progressIndicator == nil)
-	{
+	if (progressIndicator == nil) {
 		NSRect progressIndicatorFrame;
 		progressIndicatorFrame.size = NSMakeSize(articleList.visibleRect.size.width, PROGRESS_INDICATOR_DIMENSION);
 		progressIndicatorFrame.origin = articleList.visibleRect.origin;
@@ -1022,15 +1002,15 @@ static void *ObserverContext = &ObserverContext;
 	[self refreshArticlePane];
 	
 	Article * theArticle = self.selectedArticle;
-	if (theArticle != nil && !theArticle.read)
-	{
+	if (theArticle != nil && !theArticle.read) {
 		CGFloat interval = [Preferences standardPreferences].markReadInterval;
-		if (interval > 0 && !isAppInitialising)
+		if (interval > 0 && !isAppInitialising) {
 			markReadTimer = [NSTimer scheduledTimerWithTimeInterval:(double)interval
 															 target:self
 														   selector:@selector(markCurrentRead:)
 														   userInfo:nil
 															repeats:NO];
+		}
 	}
 }
 
@@ -1040,13 +1020,10 @@ static void *ObserverContext = &ObserverContext;
 -(void)refreshArticleAtCurrentRow
 {
 	Article * article = self.selectedArticle;
-	if (article == nil)
-	{
+	if (article == nil) {
 		[articleText setArticles:@[]];
 		[self hideEnclosureView];
-	}
-	else
-	{
+	} else {
 		[self refreshImmediatelyArticleAtCurrentRow];
 		
 		// Add this to the backtrack list
@@ -1060,8 +1037,9 @@ static void *ObserverContext = &ObserverContext;
  */
 -(void)handleRefreshArticle:(NSNotification *)nc
 {
-	if (self == self.controller.articleController.mainArticleView && !isAppInitialising)
+	if (self == self.controller.articleController.mainArticleView && !isAppInitialising) {
 		[self refreshArticlePane];
+	}
 }
 
 /* handleArticleViewEnded
@@ -1081,8 +1059,7 @@ static void *ObserverContext = &ObserverContext;
 -(void)clearCurrentURL
 {
 	// If we already have an URL release it.
-	if (currentURL)
-	{
+	if (currentURL) {
 		currentURL = nil;
 	}
 }
@@ -1118,10 +1095,11 @@ static void *ObserverContext = &ObserverContext;
  */
 -(NSURL *)url
 {
-	if (self.isCurrentPageFullHTML)
+	if (self.isCurrentPageFullHTML) {
 		return currentURL;
-	else 
+	} else { 
 		return nil;
+	}
 }
 
 /* refreshArticlePane
@@ -1131,8 +1109,7 @@ static void *ObserverContext = &ObserverContext;
 {
 	NSArray * msgArray = self.markedArticleRange;
 	
-	if (msgArray.count == 0)
-	{
+	if (msgArray.count == 0) {
 		// Clear the current URL.
 		[self clearCurrentURL];
 
@@ -1141,13 +1118,10 @@ static void *ObserverContext = &ObserverContext;
 		
 		// Clear out the page.
 		[articleText setArticles:@[]];
-	}
-	else
-	{
+	} else {
 		Article * firstArticle = msgArray[0];
 		Folder * folder = [[Database sharedManager] folderFromID:firstArticle.folderId];
-		if (folder.loadsFullHTML && msgArray.count == 1)
-		{
+		if (folder.loadsFullHTML && msgArray.count == 1) {
 			if (!self.currentPageFullHTML) {
 			    // Clear out the text so the user knows something happened in response to the
 			    // click on the article.
@@ -1163,9 +1137,7 @@ static void *ObserverContext = &ObserverContext;
 			// queued up into the event loop, otherwise the WebView class won't draw the
 			// clearing of the HTML before this new link gets loaded.
 			[self performSelector: @selector(loadArticleLink:) withObject:firstArticle.link afterDelay:0.0];
-		}
-		else
-		{
+		} else {
 			// Clear the current URL.
 			[self clearCurrentURL];
 
@@ -1184,15 +1156,13 @@ static void *ObserverContext = &ObserverContext;
 	
 	// Show the enclosure view if just one article is selected and it has an
 	// enclosure.
-	if (msgArray.count != 1)
+	if (msgArray.count != 1) {
 		[self hideEnclosureView];
-	else
-	{
+	} else {
 		Article * oneArticle = msgArray[0];
-		if (!oneArticle.hasEnclosure)
+		if (!oneArticle.hasEnclosure) {
 			[self hideEnclosureView];
-		else
-		{
+		} else {
 			[self showEnclosureView];
 			[self.enclosureView setEnclosureFile:oneArticle.enclosure];
 		}
@@ -1205,8 +1175,7 @@ static void *ObserverContext = &ObserverContext;
 -(void)markCurrentRead:(NSTimer *)aTimer
 {
 	Article * theArticle = self.selectedArticle;
-	if (theArticle != nil && !theArticle.read && ![Database sharedManager].readOnly)
-	{
+	if (theArticle != nil && !theArticle.read && ![Database sharedManager].readOnly) {
 		[self.controller.articleController markReadByArray:@[theArticle] readFlag:YES];
 	}
 }
@@ -1230,12 +1199,12 @@ static void *ObserverContext = &ObserverContext;
 	NSArray * allArticles = self.controller.articleController.allArticles;
 	Article * theArticle;
 	
-	if(rowIndex < 0 || rowIndex >= allArticles.count)
-	    return nil;
+	if(rowIndex < 0 || rowIndex >= allArticles.count) {
+		return nil;
+	}
 	theArticle = allArticles[rowIndex];
 	NSString * identifier = aTableColumn.identifier;
-	if ([identifier isEqualToString:MA_Field_Read])
-	{
+	if ([identifier isEqualToString:MA_Field_Read]) {
         if (!theArticle.read) {
             if (@available(macOS 11, *)) {
                 NSImage *image = nil;
@@ -1261,8 +1230,7 @@ static void *ObserverContext = &ObserverContext;
         }
         return nil;
 	}
-	if ([identifier isEqualToString:MA_Field_Flagged])
-	{
+	if ([identifier isEqualToString:MA_Field_Flagged]) {
         if (theArticle.flagged) {
             if (@available(macOS 11, *)) {
                 NSImage *image = [NSImage imageWithSystemSymbolName:@"flag.fill"
@@ -1276,8 +1244,7 @@ static void *ObserverContext = &ObserverContext;
         }
         return nil;
 	}
-	if ([identifier isEqualToString:MA_Field_Comments])
-	{
+	if ([identifier isEqualToString:MA_Field_Comments]) {
         if (theArticle.hasComments) {
             if (@available(macOS 11, *)) {
                 NSImage *image = [NSImage imageWithSystemSymbolName:@"ellipsis.bubble.fill"
@@ -1290,8 +1257,7 @@ static void *ObserverContext = &ObserverContext;
         return nil;
 	}
 	
-	if ([identifier isEqualToString:MA_Field_HasEnclosure])
-	{
+	if ([identifier isEqualToString:MA_Field_HasEnclosure]) {
         if (theArticle.hasEnclosure) {
             if (@available(macOS 11, *)) {
                 NSImage *image = [NSImage imageWithSystemSymbolName:@"paperclip"
@@ -1305,19 +1271,18 @@ static void *ObserverContext = &ObserverContext;
 	}
 	
 	NSMutableAttributedString * theAttributedString;
-	if ([identifier isEqualToString:MA_Field_Headlines])
-	{
+	if ([identifier isEqualToString:MA_Field_Headlines]) {
 		theAttributedString = [[NSMutableAttributedString alloc] initWithString:@""];
 		BOOL isSelectedRow = [aTableView isRowSelected:rowIndex] && (NSApp.mainWindow.firstResponder == aTableView);
 
-		if ([db fieldByName:MA_Field_Subject].visible)
-		{
+		if ([db fieldByName:MA_Field_Subject].visible) {
 			NSDictionary * topLineDictPtr;
 
-			if (theArticle.read)
+			if (theArticle.read) {
 				topLineDictPtr = (isSelectedRow ? selectionDict : topLineDict);
-			else
+			} else {
 				topLineDictPtr = (isSelectedRow ? unreadTopLineSelectionDict : unreadTopLineDict);
+			}
 			NSString * topString = [NSString stringWithFormat:@"%@", theArticle.title];
 			NSMutableAttributedString * topAttributedString = [[NSMutableAttributedString alloc] initWithString:topString attributes:topLineDictPtr];
 			[topAttributedString fixFontAttributeInRange:NSMakeRange(0u, topAttributedString.length)];
@@ -1325,8 +1290,7 @@ static void *ObserverContext = &ObserverContext;
 		}
 
 		// Add the summary line that appears below the title.
-		if ([db fieldByName:MA_Field_Summary].visible)
-		{
+		if ([db fieldByName:MA_Field_Summary].visible) {
 			NSString * summaryString = theArticle.summary;
 			NSInteger maxSummaryLength = MIN([summaryString length], 150);
 			NSString * middleString = [NSString stringWithFormat:@"\n%@", [summaryString substringToIndex:maxSummaryLength]];
@@ -1337,16 +1301,13 @@ static void *ObserverContext = &ObserverContext;
 		}
 		
 		// Add the link line that appears below the summary and title.
-		if ([db fieldByName:MA_Field_Link].visible)
-		{
+		if ([db fieldByName:MA_Field_Link].visible) {
 			NSString * articleLink = theArticle.link;
-			if (articleLink != nil)
-			{
+			if (articleLink != nil) {
 				NSString * linkString = [NSString stringWithFormat:@"\n%@", articleLink];
 				NSMutableDictionary * linkLineDictPtr = (isSelectedRow ? selectionDict : linkLineDict);
 				NSURL * articleURL = [NSURL URLWithString:articleLink];
-				if (articleURL != nil)
-				{
+				if (articleURL != nil) {
 					linkLineDictPtr = [linkLineDictPtr mutableCopy];
 					linkLineDictPtr[NSLinkAttributeName] = articleURL;
 				}
@@ -1361,24 +1322,23 @@ static void *ObserverContext = &ObserverContext;
 		NSMutableString * summaryString = [NSMutableString stringWithString:@""];
 		NSString * delimiter = @"";
 
-		if ([db fieldByName:MA_Field_Folder].visible)
-		{
+		if ([db fieldByName:MA_Field_Folder].visible) {
 			Folder * folder = [db folderFromID:theArticle.folderId];
 			[summaryString appendFormat:@"%@", folder.name];
 			delimiter = @" - ";
 		}
-		if ([db fieldByName:MA_Field_Date].visible)
-		{
+		if ([db fieldByName:MA_Field_Date].visible) {
 			[summaryString appendFormat:@"%@%@", delimiter, [NSDateFormatter vna_relativeDateStringFromDate:theArticle.date]];
 			delimiter = @" - ";
 		}
-		if ([db fieldByName:MA_Field_Author].visible)
-		{
-			if (!theArticle.author.vna_isBlank)
+		if ([db fieldByName:MA_Field_Author].visible) {
+			if (!theArticle.author.vna_isBlank) {
 				[summaryString appendFormat:@"%@%@", delimiter, theArticle.author];
+			}
 		}
-		if (![summaryString isEqualToString:@""])
+		if (![summaryString isEqualToString:@""]) {
 			summaryString = [NSMutableString stringWithFormat:@"\n%@", summaryString];
+		}
 
 		NSMutableAttributedString * summaryAttributedString = [[NSMutableAttributedString alloc] initWithString:summaryString attributes:bottomLineDictPtr];
 		[summaryAttributedString fixFontAttributeInRange:NSMakeRange(0u, summaryAttributedString.length)];
@@ -1387,37 +1347,22 @@ static void *ObserverContext = &ObserverContext;
 	}
 	
 	NSString * cellString;
-	if ([identifier isEqualToString:MA_Field_Date])
-	{
+	if ([identifier isEqualToString:MA_Field_Date]) {
         cellString = [NSDateFormatter vna_relativeDateStringFromDate:theArticle.date];
-	}
-	else if ([identifier isEqualToString:MA_Field_Folder])
-	{
+	} else if ([identifier isEqualToString:MA_Field_Folder]) {
 		Folder * folder = [db folderFromID:theArticle.folderId];
 		cellString = folder.name;
-	}
-	else if ([identifier isEqualToString:MA_Field_Author])
-	{
+	} else if ([identifier isEqualToString:MA_Field_Author]) {
 		cellString = theArticle.author;
-	}
-	else if ([identifier isEqualToString:MA_Field_Link])
-	{
+	} else if ([identifier isEqualToString:MA_Field_Link]) {
 		cellString = theArticle.link;
-	}
-	else if ([identifier isEqualToString:MA_Field_Subject])
-	{
+	} else if ([identifier isEqualToString:MA_Field_Subject]) {
 		cellString = theArticle.title;
-	}
-	else if ([identifier isEqualToString:MA_Field_Summary])
-	{
+	} else if ([identifier isEqualToString:MA_Field_Summary]) {
 		cellString = theArticle.summary;
-	}
-	else if ([identifier isEqualToString:MA_Field_Enclosure])
-	{
+	} else if ([identifier isEqualToString:MA_Field_Enclosure]) {
 		cellString = theArticle.enclosure;
-	}
-	else
-	{
+	} else {
 		cellString = @"";
 		[NSException raise:@"ArticleListView unknown table column identifier exception" format:@"Unknown table column identifier: %@", identifier];
 	}
@@ -1434,11 +1379,9 @@ static void *ObserverContext = &ObserverContext;
 -(void)tableView:(ExtendedTableView *)tableView menuWillAppear:(NSEvent *)theEvent
 {
 	NSInteger row = [articleList rowAtPoint:[articleList convertPoint:theEvent.locationInWindow fromView:nil]];
-	if (row >= 0)
-	{
+	if (row >= 0) {
 		// Select the row under the cursor if it isn't already selected
-		if (articleList.numberOfSelectedRows <= 1)
-		{
+		if (articleList.numberOfSelectedRows <= 1) {
 			blockSelectionHandler = YES; // to prevent expansion tooltip from overlapping the menu
 			if (row != articleList.selectedRow) {
 				[articleList selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
@@ -1458,8 +1401,7 @@ static void *ObserverContext = &ObserverContext;
 	[markReadTimer invalidate];
 	markReadTimer = nil;
 
-	if (!blockSelectionHandler)
-	{
+	if (!blockSelectionHandler) {
 		[self refreshArticleAtCurrentRow];
 	}
 }
@@ -1489,14 +1431,12 @@ static void *ObserverContext = &ObserverContext;
  */
 -(void)tableViewColumnDidResize:(NSNotification *)notification
 {
-	if (!isInTableInit && !isAppInitialising && !isChangingOrientation)
-	{
+	if (!isInTableInit && !isAppInitialising && !isChangingOrientation) {
 		NSTableColumn * tableColumn = notification.userInfo[@"NSTableColumn"];
 		Field * field = [[Database sharedManager] fieldByName:tableColumn.identifier];
 		NSInteger oldWidth = [notification.userInfo[@"NSOldWidth"] integerValue];
 		
-		if (oldWidth != tableColumn.width)
-		{
+		if (oldWidth != tableColumn.width) {
 			field.width = tableColumn.width;
 			[self saveTableSettings];
 		}
@@ -1522,24 +1462,24 @@ static void *ObserverContext = &ObserverContext;
 	BOOL isProgressColumn = NO;
 
 	// We need to use a different column for condensed layout vs. table layout.
-	if (tableLayout == VNALayoutReport && [columnIdentifer isEqualToString:MA_Field_Subject])
+	if (tableLayout == VNALayoutReport && [columnIdentifer isEqualToString:MA_Field_Subject]) {
 		isProgressColumn = YES;
-	else if (tableLayout == VNALayoutCondensed && [columnIdentifer isEqualToString:MA_Field_Headlines])
+	} else if (tableLayout == VNALayoutCondensed && [columnIdentifer isEqualToString:MA_Field_Headlines]) {
 		isProgressColumn = YES;
+	}
 	
-	if (isProgressColumn)
-	{
+	if (isProgressColumn) {
 		ProgressTextCell * realCell = (ProgressTextCell *)cell;
 		
 		// Set the in-progress flag as appropriate so the progress indicator gets
 		// displayed and removed as needed.
-		if ([realCell respondsToSelector:@selector(setInProgress:forRow:)])
-		{
-            if (rowIndex == tv.selectedRow && isLoadingHTMLArticle)
+		if ([realCell respondsToSelector:@selector(setInProgress:forRow:)]) {
+			if (rowIndex == tv.selectedRow && isLoadingHTMLArticle) {
 				[realCell setInProgress:YES forRow:rowIndex];
-			else
+			} else {
 				[realCell setInProgress:NO forRow:rowIndex];
-        }
+			}
+		}
 	}
 }
 
@@ -1571,8 +1511,7 @@ static void *ObserverContext = &ObserverContext;
 	
 	// Get all the articles that are being dragged
 	NSUInteger msgIndex = rowIndexes.firstIndex;
-	while (msgIndex != NSNotFound)
-	{
+	while (msgIndex != NSNotFound) {
 		Article * thisArticle = self.controller.articleController.allArticles[msgIndex];
 		Folder * folder = [db folderFromID:thisArticle.folderId];
 		NSString * msgText = thisArticle.body;
@@ -1597,8 +1536,7 @@ static void *ObserverContext = &ObserverContext;
 		// Add HTML version too.
 		[fullHTMLText appendFormat:@"<a href=\"%@\">%@</a><br />%@<br /><br />", msgLink, msgTitle, msgText];
 		
-		if (count == 1)
-		{
+		if (count == 1) {
 			[pboard setString:msgLink forType:VNAPasteboardTypeURL];
 			[pboard setString:msgTitle forType:VNAPasteboardTypeURLName];
 			
@@ -1627,14 +1565,12 @@ static void *ObserverContext = &ObserverContext;
 -(NSArray *)markedArticleRange
 {
 	NSMutableArray * articleArray = nil;
-	if (articleList.numberOfSelectedRows > 0)
-	{
+	if (articleList.numberOfSelectedRows > 0) {
 		NSIndexSet * rowIndexes = articleList.selectedRowIndexes;
 		NSUInteger  rowIndex = rowIndexes.firstIndex;
 
 		articleArray = [NSMutableArray arrayWithCapacity:rowIndexes.count];
-		while (rowIndex != NSNotFound)
-		{
+		while (rowIndex != NSNotFound) {
 			[articleArray addObject:self.controller.articleController.allArticles[rowIndex]];
 			rowIndex = [rowIndexes indexGreaterThanIndex:rowIndex];
 		}
