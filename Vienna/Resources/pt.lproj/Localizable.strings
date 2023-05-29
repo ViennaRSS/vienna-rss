@@ -31,6 +31,9 @@
 /* No comment provided by engineer. */
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Uma nova base de dados do Vienna não pôde ser criada em \"%@\" porque provavelmente a pasta está localizada num disco de rede e esta versão do Vienna não consegue manipular bases de dados remotas. Por favor escolha uma máquina que esteja localizada no seu computador.";
 
+/* Toolbar item palette label */
+"Add to Safari Reading List" = "Adicionar à lista de leitura do Safari";
+
 /* No comment provided by engineer. */
 "AppleScript Error in '%@' script" = "Erro AppleScript no %@";
 
@@ -164,6 +167,10 @@
 
 /* Toolbar item tooltip */
 "Email a link to the current article or website" = "Enviar ligação deste artigo ou página por correio";
+
+/* Toolbar item label
+   Toolbar item palette label */
+"Email Link" = "Enviar ligação por correio electrónico";
 
 /* Title of a button on an alert */
 "Empty" = "Esvaziar";
@@ -436,11 +443,23 @@
 /* A formatted URL string with the javascript: URL scheme. */
 "Run script “%@”" = "Executar o script %@";
 
+/* Toolbar item label */
+"Safari Reading List" = "Lista de leitura do Safari";
+
+/* Search panel title
+   Toolbar item label
+   Toolbar item palette label
+   Toolbar item tooltip */
+"Search" = "Procurar";
+
 /* Placeholder title of a search field */
 "Search all articles" = "Procurar todos os artigos";
 
 /* Placeholder title of a search field */
 "Search current web page" = "Procurar na presente página da Teia";
+
+/* Placeholder title of a search field */
+"Search for folders" = "Procurar por pastas";
 
 /* No comment provided by engineer. */
 "Search Results" = "Procurar resultados";
