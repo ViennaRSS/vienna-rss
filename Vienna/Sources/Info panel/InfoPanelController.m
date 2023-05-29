@@ -20,6 +20,7 @@
 
 #import "InfoPanelController.h"
 
+#import "Constants.h"
 #import "Database.h"
 #import "DateFormatterExtension.h"
 #import "Folder.h"
@@ -155,7 +156,7 @@
     } else {
 		[[Database sharedManager] clearFlag:VNAFolderFlagLoadFullHTML forFolder:self.infoFolderId];
     }
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_LoadFullHTMLChange"
+	[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_LoadFullHTMLChange
                                                         object:@(self.infoFolderId)];
 }
 

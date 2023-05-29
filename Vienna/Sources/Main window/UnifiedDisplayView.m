@@ -80,8 +80,8 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
 {
 	// Register for notification
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-	[nc addObserver:self selector:@selector(handleReadingPaneChange:) name:@"MA_Notify_ReadingPaneChange" object:nil];
-	[nc addObserver:self selector:@selector(handleCellDidResize:) name:@"MA_Notify_CellResize" object:nil];
+	[nc addObserver:self selector:@selector(handleReadingPaneChange:) name:MA_Notify_ReadingPaneChange object:nil];
+	[nc addObserver:self selector:@selector(handleCellDidResize:) name:MA_Notify_CellResize object:nil];
 
     [self initTableView];
 }

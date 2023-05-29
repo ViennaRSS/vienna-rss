@@ -32,7 +32,7 @@
 
 - (void)viewDidLoad {
     NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_PreferenceChange" object:nil];
+    [nc addObserver:self selector:@selector(handleReloadPreferences:) name:MA_Notify_PreferenceChange object:nil];
 }
 
 - (void)viewWillAppear {

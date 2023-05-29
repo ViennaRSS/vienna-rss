@@ -98,11 +98,11 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 {
 	// Register for notification
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-	[nc addObserver:self selector:@selector(handleArticleListFontChange:) name:@"MA_Notify_ArticleListFontChange" object:nil];
-	[nc addObserver:self selector:@selector(handleReadingPaneChange:) name:@"MA_Notify_ReadingPaneChange" object:nil];
-	[nc addObserver:self selector:@selector(handleLoadFullHTMLChange:) name:@"MA_Notify_LoadFullHTMLChange" object:nil];
-	[nc addObserver:self selector:@selector(handleRefreshArticle:) name:@"MA_Notify_ArticleViewChange" object:nil];
-	[nc addObserver:self selector:@selector(handleArticleViewEnded:) name:@"MA_Notify_ArticleViewEnded" object:nil];
+	[nc addObserver:self selector:@selector(handleArticleListFontChange:) name:MA_Notify_ArticleListFontChange object:nil];
+	[nc addObserver:self selector:@selector(handleReadingPaneChange:) name:MA_Notify_ReadingPaneChange object:nil];
+	[nc addObserver:self selector:@selector(handleLoadFullHTMLChange:) name:MA_Notify_LoadFullHTMLChange object:nil];
+	[nc addObserver:self selector:@selector(handleRefreshArticle:) name:MA_Notify_ArticleViewChange object:nil];
+	[nc addObserver:self selector:@selector(handleArticleViewEnded:) name:MA_Notify_ArticleViewEnded object:nil];
 
     [self initialiseArticleView];
 }

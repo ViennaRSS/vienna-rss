@@ -111,13 +111,13 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 
 	// Register for notifications
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-	[nc addObserver:self selector:@selector(handleFolderUpdate:) name:@"MA_Notify_FoldersUpdated" object:nil];
-	[nc addObserver:self selector:@selector(handleFolderNameChange:) name:@"MA_Notify_FolderNameChanged" object:nil];
-	[nc addObserver:self selector:@selector(handleFolderAdded:) name:@"MA_Notify_FolderAdded" object:nil];
+	[nc addObserver:self selector:@selector(handleFolderUpdate:) name:MA_Notify_FoldersUpdated object:nil];
+	[nc addObserver:self selector:@selector(handleFolderNameChange:) name:MA_Notify_FolderNameChanged object:nil];
+	[nc addObserver:self selector:@selector(handleFolderAdded:) name:MA_Notify_FolderAdded object:nil];
 	[nc addObserver:self selector:@selector(handleFolderDeleted:) name:VNADatabaseDidDeleteFolderNotification object:nil];
-	[nc addObserver:self selector:@selector(handleShowFolderImagesChange:) name:@"MA_Notify_ShowFolderImages" object:nil];
-	[nc addObserver:self selector:@selector(handleAutoSortFoldersTreeChange:) name:@"MA_Notify_AutoSortFoldersTreeChange" object:nil];
-    [nc addObserver:self selector:@selector(handleOpenReaderFolderChange:) name:@"MA_Notify_OpenReaderFolderChange" object:nil];
+	[nc addObserver:self selector:@selector(handleShowFolderImagesChange:) name:MA_Notify_ShowFolderImages object:nil];
+	[nc addObserver:self selector:@selector(handleAutoSortFoldersTreeChange:) name:MA_Notify_AutoSortFoldersTreeChange object:nil];
+    [nc addObserver:self selector:@selector(handleOpenReaderFolderChange:) name:MA_Notify_OpenReaderFolderChange object:nil];
 
     [userDefaults addObserver:self
                    forKeyPath:MAPref_FeedListSizeMode
@@ -397,7 +397,7 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 		[self.outlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:(NSUInteger)rowIndex] byExtendingSelection:NO];
 		[self.outlineView scrollRowToVisible:rowIndex];
 		
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderSelectionChange" object:node];
+		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_FolderSelectionChange object:node];
 		self.blockSelectionHandler = NO;
 		return YES;
 	}
@@ -641,7 +641,7 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 			[APPCONTROLLER openURLFromString:urlString inPreferredBrowser:YES];
         }
 	} else if (node.folder.type == VNAFolderTypeSmart) {
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_EditFolder" object:node];
+		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_EditFolder object:node];
 	}
 }
 
@@ -678,7 +678,7 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 	if (currentFolderId == folderId) {
 		self.blockSelectionHandler = YES;
 		[self selectFolder:nextNode.nodeId];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderSelectionChange" object:nextNode];
+		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_FolderSelectionChange object:nextNode];
 		self.blockSelectionHandler = NO;
 	}
 }
@@ -1477,7 +1477,7 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 {
     if (!self.blockSelectionHandler) {
         TreeNode * node = [self.outlineView itemAtRow:self.outlineView.selectedRow];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderSelectionChange" object:node];
+        [[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_FolderSelectionChange object:node];
     }
 }
 

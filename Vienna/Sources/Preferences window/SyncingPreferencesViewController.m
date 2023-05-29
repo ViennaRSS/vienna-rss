@@ -18,11 +18,13 @@
 //  limitations under the License.
 //
 
+#import "SyncingPreferencesViewController.h"
+
+#import "Constants.h"
 #import "OpenReader.h"
 #import "Keychain.h"
 #import "Preferences.h"
 #import "StringExtensions.h"
-#import "SyncingPreferencesViewController.h"
 
 @interface SyncingPreferencesViewController ()
 
@@ -41,7 +43,7 @@ static NSString *syncingUser;
 - (void)viewWillAppear {
     // Set up to be notified
     NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver:self selector:@selector(handleGoogleAuthFailed:) name:@"MA_Notify_GoogleAuthFailed" object:nil];
+    [nc addObserver:self selector:@selector(handleGoogleAuthFailed:) name:MA_Notify_GoogleAuthFailed object:nil];
     [nc addObserver:self selector:@selector(handleServerTextDidChange:) name:NSControlTextDidChangeNotification object:openReaderHost];
     [nc addObserver:self selector:@selector(handleUserTextDidChange:) name:NSControlTextDidChangeNotification object:username];
     [nc addObserver:self selector:@selector(handlePasswordTextDidChange:) name:NSControlTextDidChangeNotification object:password];

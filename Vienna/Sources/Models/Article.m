@@ -27,24 +27,24 @@
 #import "Folder.h"
 
 // The names here are internal field names, not for localisation.
-NSString * MA_Field_GUID = @"GUID";
-NSString * MA_Field_Subject = @"Subject";
-NSString * MA_Field_Author = @"Author";
-NSString * MA_Field_Link = @"Link";
-NSString * MA_Field_Date = @"Date";
-NSString * MA_Field_Comments = @"Comments";
-NSString * MA_Field_Read = @"Read";
-NSString * MA_Field_Flagged = @"Flagged";
-NSString * MA_Field_Deleted = @"Deleted";
-NSString * MA_Field_Text = @"Text";
-NSString * MA_Field_Folder = @"Folder";
-NSString * MA_Field_Parent = @"Parent";
-NSString * MA_Field_Headlines = @"Headlines";
-NSString * MA_Field_Summary = @"Summary";
-NSString * MA_Field_CreatedDate = @"CreatedDate";
-NSString * MA_Field_Enclosure = @"Enclosure";
-NSString * MA_Field_EnclosureDownloaded = @"EnclosureDownloaded";
-NSString * MA_Field_HasEnclosure = @"HasEnclosure";
+NSString * const MA_Field_GUID = @"GUID";
+NSString * const MA_Field_Subject = @"Subject";
+NSString * const MA_Field_Author = @"Author";
+NSString * const MA_Field_Link = @"Link";
+NSString * const MA_Field_Date = @"Date";
+NSString * const MA_Field_Comments = @"Comments";
+NSString * const MA_Field_Read = @"Read";
+NSString * const MA_Field_Flagged = @"Flagged";
+NSString * const MA_Field_Deleted = @"Deleted";
+NSString * const MA_Field_Text = @"Text";
+NSString * const MA_Field_Folder = @"Folder";
+NSString * const MA_Field_Parent = @"Parent";
+NSString * const MA_Field_Headlines = @"Headlines";
+NSString * const MA_Field_Summary = @"Summary";
+NSString * const MA_Field_CreatedDate = @"CreatedDate";
+NSString * const MA_Field_Enclosure = @"Enclosure";
+NSString * const MA_Field_EnclosureDownloaded = @"EnclosureDownloaded";
+NSString * const MA_Field_HasEnclosure = @"HasEnclosure";
 
 @implementation Article
 

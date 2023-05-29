@@ -22,6 +22,7 @@
 
 @import UniformTypeIdentifiers;
 
+#import "Constants.h"
 #import "DownloadManager.h"
 #import "DSClickableURLTextField.h"
 #import "NSWorkspace+OpenWithMenu.h"
@@ -45,7 +46,7 @@
 
 		// Register to be notified when a download completes.
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-		[nc addObserver:self selector:@selector(handleDownloadCompleted:) name:@"MA_Notify_DownloadCompleted" object:nil];
+		[nc addObserver:self selector:@selector(handleDownloadCompleted:) name:MA_Notify_DownloadCompleted object:nil];
 	}
 	return self;
 }

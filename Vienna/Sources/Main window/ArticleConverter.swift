@@ -25,7 +25,7 @@ extension ArticleConverter {
     func setup() {
         // Update the article content style when the active display style has
         // changed.
-        NotificationCenter.default.addObserver(self, selector: #selector(self.initForCurrentStyle), name: NSNotification.Name("MA_Notify_StyleChange"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.initForCurrentStyle), name: .styleChanged, object: nil)
 
         self.initForCurrentStyle()
     }

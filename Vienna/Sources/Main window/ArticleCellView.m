@@ -9,6 +9,7 @@
 
 #import "AppController.h"
 #import "ArticleController.h"
+#import "Constants.h"
 #import "Preferences.h"
 #import "Vienna-Swift.h"
 
@@ -184,7 +185,7 @@
                           //set the new frame to the webview
                           webView.frame = newWebViewRect;
                           self.fittingHeight = fittingHeight;
-                          [[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_CellResize" object:self];
+                          [[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_CellResize object:self];
                           WebKitArticleView *articleView = (WebKitArticleView *)(self.articleView);
                           [articleView deleteHtmlFile];
                       }];
