@@ -1136,7 +1136,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		// field object itself based on which columns we can sort on.
 		if (field.tag != ArticleFieldIDParent &&
 			field.tag != ArticleFieldIDGUID &&
-			field.tag != ArticleFieldIDComments &&
 			field.tag != ArticleFieldIDDeleted &&
 			field.tag != ArticleFieldIDHeadlines &&
 			field.tag != ArticleFieldIDSummary &&
@@ -1178,7 +1177,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		// field object based on which columns are visible in the tableview.
 		if (field.tag != ArticleFieldIDText && 
 			field.tag != ArticleFieldIDGUID &&
-			field.tag != ArticleFieldIDComments &&
 			field.tag != ArticleFieldIDDeleted &&
 			field.tag != ArticleFieldIDParent &&
 			field.tag != ArticleFieldIDHeadlines &&

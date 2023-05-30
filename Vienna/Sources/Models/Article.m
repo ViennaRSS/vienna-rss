@@ -32,7 +32,6 @@ NSString * const MA_Field_Subject = @"Subject";
 NSString * const MA_Field_Author = @"Author";
 NSString * const MA_Field_Link = @"Link";
 NSString * const MA_Field_Date = @"Date";
-NSString * const MA_Field_Comments = @"Comments";
 NSString * const MA_Field_Read = @"Read";
 NSString * const MA_Field_Flagged = @"Flagged";
 NSString * const MA_Field_Deleted = @"Deleted";
@@ -48,7 +47,6 @@ NSString * const MA_Field_HasEnclosure = @"HasEnclosure";
 
 @implementation Article {
     NSMutableDictionary *articleData;
-    NSMutableArray *commentsArray;
     BOOL readFlag;
     BOOL revisedFlag;
     BOOL markedFlag;
@@ -63,7 +61,6 @@ NSString * const MA_Field_HasEnclosure = @"HasEnclosure";
     self = [super init];
     if (self) {
         articleData = [[NSMutableDictionary alloc] init];
-        commentsArray = [[NSMutableArray alloc] init];
         readFlag = NO;
         revisedFlag = NO;
         markedFlag = NO;
@@ -225,7 +222,6 @@ NSString * const MA_Field_HasEnclosure = @"HasEnclosure";
 -(BOOL)isRevised				{ return revisedFlag; }
 -(BOOL)isFlagged				{ return markedFlag; }
 -(BOOL)isDeleted				{ return deletedFlag; }
--(BOOL)hasComments				{ return commentsArray.count > 0; }
 -(BOOL)hasEnclosure				{ return hasEnclosureFlag; }
 -(BOOL)enclosureDownloaded		{ return enclosureDownloadedFlag; }
 -(NSInteger)status				{ return status; }

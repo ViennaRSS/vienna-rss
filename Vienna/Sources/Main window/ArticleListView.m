@@ -310,9 +310,8 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 
 /* singleClickRow
  * Handle a single click action. If the click was in the read or flagged column then
- * treat it as an action to mark the article read/unread or flagged/unflagged. Later
- * trap the comments column and expand/collapse. If the click lands on the enclosure
- * colum, download the associated enclosure.
+ * treat it as an action to mark the article read/unread or flagged/unflagged. If
+ * the click lands on the enclosure colum, download the associated enclosure.
  */
 -(IBAction)singleClickRow:(id)sender
 {
@@ -395,7 +394,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 		// Handle which fields can be visible in the condensed (vertical) layout
 		// versus the report (horizontal) layout
 		if (tableLayout == VNALayoutReport) {
-			showField = field.visible && tag != ArticleFieldIDHeadlines && tag != ArticleFieldIDComments;
+			showField = field.visible && tag != ArticleFieldIDHeadlines;
 		} else {
 			showField = NO;
 			if (tag == ArticleFieldIDRead || tag == ArticleFieldIDFlagged || tag == ArticleFieldIDHasEnclosure) {
@@ -439,7 +438,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 				column.dataCell = cell;
 			}
 
-			BOOL isResizable = (tag != ArticleFieldIDRead && tag != ArticleFieldIDFlagged && tag != ArticleFieldIDComments && tag != ArticleFieldIDHasEnclosure);
+			BOOL isResizable = (tag != ArticleFieldIDRead && tag != ArticleFieldIDFlagged && tag != ArticleFieldIDHasEnclosure);
 			column.resizingMask = (isResizable ? NSTableColumnUserResizingMask : NSTableColumnNoResizing);
 			// the headline column is auto-resizable
 			column.resizingMask = column.resizingMask | ([column.identifier isEqualToString:MA_Field_Headlines] ? NSTableColumnAutoresizingMask : 0);
@@ -1234,19 +1233,6 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
         }
         return nil;
 	}
-	if ([identifier isEqualToString:MA_Field_Comments]) {
-        if (theArticle.hasComments) {
-            if (@available(macOS 11, *)) {
-                NSImage *image = [NSImage imageWithSystemSymbolName:@"ellipsis.bubble.fill"
-                                           accessibilityDescription:nil];
-                return image;
-            } else {
-                return [NSImage imageNamed:@"comments"];
-            }
-        }
-        return nil;
-	}
-	
 	if ([identifier isEqualToString:MA_Field_HasEnclosure]) {
         if (theArticle.hasEnclosure) {
             if (@available(macOS 11, *)) {
