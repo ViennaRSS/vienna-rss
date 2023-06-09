@@ -45,18 +45,6 @@
 
 static NSString * const LoginBaseURL = @"%@://%@/accounts/ClientLogin?accountType=GOOGLE&service=reader";
 static NSString * const ClientName = @"ViennaRSS";
-static NSString *latestAlertDescription = @"";
-
-// host specific variables
-static NSString *openReaderHost;
-static NSString *openReaderScheme;
-static NSString *username;
-static NSString *password;
-static NSString *APIBaseURL;
-static BOOL hostSendsHexaItemId;
-static BOOL hostRequiresSParameter;
-static BOOL hostRequiresHexaForFeedId;
-static BOOL hostRequiresInoreaderHeaders;
 
 typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     notAuthenticated = 0,
@@ -81,7 +69,20 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 
 @end
 
-@implementation OpenReader
+@implementation OpenReader {
+    NSString *latestAlertDescription;
+
+    // host specific variables
+    NSString *openReaderHost;
+    NSString *openReaderScheme;
+    NSString *username;
+    NSString *password;
+    NSString *APIBaseURL;
+    BOOL hostSendsHexaItemId;
+    BOOL hostRequiresSParameter;
+    BOOL hostRequiresHexaForFeedId;
+    BOOL hostRequiresInoreaderHeaders;
+}
 
 # pragma mark initialization
 
@@ -92,6 +93,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
         // Initialization code here.
         _openReaderStatus = notAuthenticated;
         _countOfNewArticles = 0;
+        latestAlertDescription = @"";
         openReaderHost = nil;
         username = nil;
         password = nil;
@@ -192,18 +194,18 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                     self.openReaderStatus = notAuthenticated;
 					if (error) {
 						NSString * alertDescription = error.localizedDescription;
-						if (![alertDescription isEqualToString:latestAlertDescription]) {
+						if (![alertDescription isEqualToString:self->latestAlertDescription]) {
 						    [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:MA_Notify_GoogleAuthFailed object:alertDescription];
-						    latestAlertDescription = alertDescription;
+						    self->latestAlertDescription = alertDescription;
 						}
 					} else if (((NSHTTPURLResponse *)response).statusCode != 200) {
 						NSString * alertDescription = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-						if (![alertDescription isEqualToString:latestAlertDescription]) {
+						if (![alertDescription isEqualToString:self->latestAlertDescription]) {
 						    [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:MA_Notify_GoogleAuthFailed object:alertDescription];
-						    latestAlertDescription = alertDescription;
+						    self->latestAlertDescription = alertDescription;
 						}
  					} else {         // statusCode 200
-						latestAlertDescription = @"";
+						self->latestAlertDescription = @"";
 						NSString *response = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 						NSArray *components = [response componentsSeparatedByString:@"\n"];
 						for (NSString * item in components) {
@@ -691,6 +693,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 // callback
 -(void)readRequestDone:(NSMutableURLRequest *)request response:(NSURLResponse *)response data:(NSData *)data
 {
+    typeof(self) __weak weakSelf = self;
     dispatch_async(self.asyncQueue, ^() {
         Folder *refreshedFolder = ((NSDictionary *)[request vna_userInfo])[@"folder"];
         ActivityItem *aItem = ((NSDictionary *)[request vna_userInfo])[@"log"];
@@ -704,7 +707,8 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                 NSMutableArray *guidArray = [NSMutableArray arrayWithCapacity:itemRefsArray.count];
                 for (NSDictionary *itemRef in itemRefsArray) {
                     NSString *guid;
-                    if (hostSendsHexaItemId) {
+                    typeof(self) strongSelf = weakSelf;
+                    if (strongSelf && strongSelf->hostSendsHexaItemId) {
                         guid = [NSString stringWithFormat:@"tag:google.com,2005:reader/item/%@", itemRef[@"id"]];
                     } else {
                         // as described in http://code.google.com/p/google-reader-api/wiki/ItemId
@@ -757,6 +761,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 // callback
 -(void)starredRequestDone:(NSMutableURLRequest *)request response:(NSURLResponse *)response data:(NSData *)data
 {
+    typeof(self) __weak weakSelf = self;
     dispatch_async(self.asyncQueue, ^() {
         Folder *refreshedFolder = ((NSDictionary *)[request vna_userInfo])[@"folder"];
         ActivityItem *aItem = ((NSDictionary *)[request vna_userInfo])[@"log"];
@@ -770,7 +775,8 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                 NSMutableArray *guidArray = [NSMutableArray arrayWithCapacity:itemRefsArray.count];
                 for (NSDictionary *itemRef in itemRefsArray) {
                     NSString *guid;
-                    if (hostSendsHexaItemId) {
+                    typeof(self) strongSelf = weakSelf;
+                    if (strongSelf && strongSelf->hostSendsHexaItemId) {
                         guid = [NSString stringWithFormat:@"tag:google.com,2005:reader/item/%@", itemRef[@"id"]];
                     } else {
                         // as described in http://code.google.com/p/google-reader-api/wiki/ItemId

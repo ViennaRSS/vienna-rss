@@ -27,7 +27,10 @@
 
 @end
 
-@implementation AdvancedPreferencesViewController
+@implementation AdvancedPreferencesViewController {
+    IBOutlet NSButton *useJavaScriptButton;
+    IBOutlet NSPopUpButton *concurrentDownloads;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

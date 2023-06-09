@@ -20,13 +20,7 @@
 
 @import Cocoa;
 
-@interface AppearancePreferencesViewController : NSViewController {
-    IBOutlet NSTextField * articleFontSample;
-    IBOutlet NSButton * articleFontSelectButton;
-    IBOutlet NSComboBox * minimumFontSizes;
-    IBOutlet NSButton * enableMinimumFontSize;
-    IBOutlet NSButton * showFolderImagesButton;
-}
+@interface AppearancePreferencesViewController : NSViewController
 
 // Action functions
 -(IBAction)selectArticleFont:(id)sender;

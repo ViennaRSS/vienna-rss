@@ -35,7 +35,13 @@ static NSInteger const availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24
 
 @end
 
-@implementation AppearancePreferencesViewController
+@implementation AppearancePreferencesViewController {
+    IBOutlet NSTextField *articleFontSample;
+    IBOutlet NSButton *articleFontSelectButton;
+    IBOutlet NSComboBox *minimumFontSizes;
+    IBOutlet NSButton *enableMinimumFontSize;
+    IBOutlet NSButton *showFolderImagesButton;
+}
 
 - (void)viewDidLoad {
     NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];

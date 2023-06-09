@@ -31,7 +31,13 @@
  * handle the indicator for us like we do in our ImageAndTextCell class
  * used for the folder/feed view.
  */
-@implementation ProgressTextCell
+@implementation ProgressTextCell {
+    BOOL inProgress;
+    NSInteger progressRow;
+    NSInteger currentRow;
+
+    NSProgressIndicator *progressIndicator;
+}
 
 /* init
  * Initialise a default instance of our cell.

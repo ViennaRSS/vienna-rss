@@ -69,7 +69,15 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 
 @end
 
-@implementation RefreshManager
+@implementation RefreshManager {
+    NSUInteger countOfNewArticles;
+    NSMutableArray *authQueue;
+    FeedCredentials *credentialsController;
+    BOOL hasStarted;
+    NSString *statusMessageDuringRefresh;
+    NSOperationQueue *networkQueue;
+    dispatch_queue_t _queue;
+}
 
 +(void)initialize
 {

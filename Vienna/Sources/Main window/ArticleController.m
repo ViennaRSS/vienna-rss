@@ -50,7 +50,23 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 
 @end
 
-@implementation ArticleController
+@implementation ArticleController {
+    NSView<ArticleBaseView, BaseView> *mainArticleView;
+    NSArray *currentArrayOfArticles;
+    NSArray *folderArrayOfArticles;
+    NSInteger currentFolderId;
+    NSDictionary *articleSortSpecifiers;
+    NSString *sortColumnIdentifier;
+    BackTrackArray *backtrackArray;
+    BOOL isBacktracking;
+    BOOL shouldPreserveSelectedArticle;
+    Article *articleToPreserve;
+    NSString *guidOfArticleToSelect;
+    BOOL firstUnreadArticleRequired;
+    dispatch_queue_t queue;
+    BOOL requireSelectArticleAfterReload;
+}
+
 @synthesize mainArticleView, currentArrayOfArticles, folderArrayOfArticles, articleSortSpecifiers, backtrackArray;
 
 /* init

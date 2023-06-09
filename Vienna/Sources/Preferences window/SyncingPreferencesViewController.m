@@ -30,13 +30,20 @@
 
 @end
 
-@implementation SyncingPreferencesViewController
-static BOOL _credentialsChanged;
-
-static NSString *syncScheme;
-static NSString *serverAndPath;
-static NSURL *serverURL;
-static NSString *syncingUser;
+@implementation SyncingPreferencesViewController {
+    IBOutlet NSPopUpButton *openReaderSource; // List of known service providers
+    NSDictionary *sourcesDict;
+    IBOutlet NSTextField *credentialsInfoText;
+    IBOutlet NSTextField *openReaderHost;
+    IBOutlet NSTextField *username;
+    IBOutlet NSSecureTextField *password;
+    IBOutlet NSButton *__weak syncButton;
+    BOOL _credentialsChanged;
+    NSString *syncScheme;
+    NSString *serverAndPath;
+    NSURL *serverURL;
+    NSString *syncingUser;
+}
 
 @synthesize syncButton;
 

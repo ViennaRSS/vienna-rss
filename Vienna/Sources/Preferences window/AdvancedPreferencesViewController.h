@@ -20,10 +20,7 @@
 
 @import Cocoa;
 
-@interface AdvancedPreferencesViewController : NSViewController {
-    IBOutlet NSButton * useJavaScriptButton;
-    IBOutlet NSPopUpButton * concurrentDownloads;
-}
+@interface AdvancedPreferencesViewController : NSViewController
 
 // Action functions
 -(IBAction)changeUseJavaScript:(id)sender;

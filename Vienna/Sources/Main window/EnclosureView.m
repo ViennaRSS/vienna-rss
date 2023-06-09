@@ -34,7 +34,13 @@
 
 @end
 
-@implementation EnclosureView
+@implementation EnclosureView {
+    IBOutlet NSImageView *fileImage;
+    IBOutlet NSTextField *filenameLabel;
+    IBOutlet DSClickableURLTextField *filenameField;
+    IBOutlet NSButton *downloadButton;
+    NSString *enclosureURLString;
+}
 
 /* initWithFrame
  * Initialise the standard enclosure view.

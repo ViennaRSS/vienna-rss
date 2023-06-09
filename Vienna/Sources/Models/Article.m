@@ -46,7 +46,17 @@ NSString * const MA_Field_Enclosure = @"Enclosure";
 NSString * const MA_Field_EnclosureDownloaded = @"EnclosureDownloaded";
 NSString * const MA_Field_HasEnclosure = @"HasEnclosure";
 
-@implementation Article
+@implementation Article {
+    NSMutableDictionary *articleData;
+    NSMutableArray *commentsArray;
+    BOOL readFlag;
+    BOOL revisedFlag;
+    BOOL markedFlag;
+    BOOL deletedFlag;
+    BOOL enclosureDownloadedFlag;
+    BOOL hasEnclosureFlag;
+    NSInteger status;
+}
 
 - (instancetype)init
 {

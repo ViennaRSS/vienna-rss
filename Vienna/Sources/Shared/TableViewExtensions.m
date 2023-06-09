@@ -20,7 +20,10 @@
 
 #import "TableViewExtensions.h"
 
-@implementation ExtendedTableView
+@implementation ExtendedTableView {
+    BOOL delegateImplementsShouldDisplayToolTips;
+    BOOL delegateImplementsToolTip;
+}
 
 /* setDelegate
  * Override the setDelegate for NSTableView so that we record whether or not the

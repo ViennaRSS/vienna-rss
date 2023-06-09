@@ -42,11 +42,12 @@
 
 @end
 
-// Static pointers
-static NSArray * iconArray = nil;
-
-
-@implementation Folder
+@implementation Folder {
+    NSInteger unreadCount;
+    NSInteger childUnreadCount;
+    VNAFolderFlag nonPersistedFlags;
+    VNAFolderFlag flags;
+}
 
 /* initWithId
  * Initialise a new folder object instance.

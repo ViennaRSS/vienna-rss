@@ -20,16 +20,7 @@
 
 @import Cocoa;
 
-@class DSClickableURLTextField;
-
 @interface EnclosureView : NSView
-{
-	IBOutlet NSImageView * fileImage;
-	IBOutlet NSTextField * filenameLabel;
-	IBOutlet DSClickableURLTextField * filenameField;
-	IBOutlet NSButton * downloadButton;
-	NSString * enclosureURLString;
-}
 
 // Public functions
 -(IBAction)downloadFile:(id)sender;

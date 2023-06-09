@@ -17,22 +17,24 @@
 
 @end
 
-
-static FolderImageCache * _folderImageCache = nil;
-
-@implementation FolderImageCache
-
+@implementation FolderImageCache {
+    NSString *imagesCacheFolder;
+    NSMutableDictionary *folderImagesArray;
+    BOOL initializedFolderImagesArray;
+}
 
 /* defaultCache
  * Returns a pointer to the default cache. There is just one default cache
  * and we instantiate it if it doesn't exist.
  */
-+(FolderImageCache *)defaultCache
++ (FolderImageCache *)defaultCache
 {
-    if (_folderImageCache == nil) {
-        _folderImageCache = [[FolderImageCache alloc] init];
-    }
-    return _folderImageCache;
+    static FolderImageCache *folderImageCache;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        folderImageCache = [FolderImageCache new];
+    });
+    return folderImageCache;
 }
 
 /* init

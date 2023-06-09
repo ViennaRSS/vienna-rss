@@ -8,11 +8,7 @@
 
 @import Cocoa;
 
-@interface FolderImageCache : NSObject {
-    NSString * imagesCacheFolder;
-    NSMutableDictionary * folderImagesArray;
-    BOOL initializedFolderImagesArray;
-}
+@interface FolderImageCache : NSObject
 
 @property (class, readonly, nonatomic) FolderImageCache *defaultCache;
 

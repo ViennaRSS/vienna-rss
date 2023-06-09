@@ -25,40 +25,7 @@
 #import "ArticleViewDelegate.h"
 #import "MessageListView.h"
 
-@class AppController;
-@class ArticleView;
-@protocol ArticleContentView;
-@protocol Tab;
-
-@interface ArticleListView : NSView<BaseView, ArticleBaseView, ArticleViewDelegate, MessageListViewDelegate, NSTableViewDataSource, NSSplitViewDelegate>
-{
-	IBOutlet MessageListView * articleList;
-	NSObject<ArticleContentView, Tab> *articleText;
-	IBOutlet NSSplitView * splitView2;
-
-	NSInteger tableLayout;
-	BOOL isAppInitialising;
-	BOOL isChangingOrientation;
-	BOOL isInTableInit;
-	BOOL blockSelectionHandler;
-
-	NSTimer * markReadTimer;
-	NSFont * articleListFont;
-	NSFont * articleListUnreadFont;
-	NSMutableDictionary * reportCellDict;
-	NSMutableDictionary * unreadReportCellDict;
-	NSMutableDictionary * selectionDict;
-	NSMutableDictionary * topLineDict;
-	NSMutableDictionary * linkLineDict;
-	NSMutableDictionary * middleLineDict;
-	NSMutableDictionary * bottomLineDict;
-	NSMutableDictionary * unreadTopLineDict;
-	NSMutableDictionary * unreadTopLineSelectionDict;
-
-	NSURL *	currentURL;
-	BOOL isLoadingHTMLArticle;
-	NSProgressIndicator * progressIndicator;
-}
+@interface ArticleListView : NSView <BaseView, ArticleBaseView, ArticleViewDelegate, MessageListViewDelegate, NSTableViewDataSource, NSSplitViewDelegate>
 
 // Public functions
 -(void)updateVisibleColumns;

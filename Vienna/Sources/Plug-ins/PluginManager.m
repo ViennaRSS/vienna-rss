@@ -31,7 +31,9 @@
 
 static NSString * const VNAPlugInsDirectoryName = @"Plugins";
 
-@implementation PluginManager
+@implementation PluginManager {
+    NSMutableDictionary *allPlugins;
+}
 
 /* init
  * Initialises the plugin manager.

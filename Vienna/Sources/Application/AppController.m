@@ -107,7 +107,28 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 
 @end
 
-@implementation AppController
+@implementation AppController {
+    IBOutlet NSMenuItem *closeTabItem;
+    IBOutlet NSMenuItem *closeAllTabsItem;
+    IBOutlet NSMenuItem *closeWindowItem;
+    IBOutlet NSMenuItem *sortByMenu;
+    IBOutlet NSMenuItem *columnsMenu;
+
+    DownloadWindow *downloadWindow;
+    SmartFolder *smartFolder;
+    NewGroupFolder *groupFolder;
+    SearchPanel *searchPanel;
+
+    //    Database * db;
+    NSMutableDictionary *scriptPathMappings;
+    NSStatusItem *appStatusItem;
+    NSInteger lastCountOfUnread;
+    NSMenuItem *scriptsMenuItem;
+    BOOL didCompleteInitialisation;
+    NSString *searchString;
+
+    NewSubscription *_rssFeed;
+}
 
 @synthesize rssFeed = _rssFeed;
 
@@ -213,19 +234,6 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
     if (error) {
         os_log_error(VNA_LOG, "Failed to watch scripts directory. Reason: %{public}@", error.localizedDescription);
     }
-}
-
-/* layoutManager
- * Return a cached instance of NSLayoutManager for calculating the font height.
- */
--(NSLayoutManager *)layoutManager
-{
-	static NSLayoutManager * theManager = nil;
-	
-	if (theManager == nil) {
-		theManager = [[NSLayoutManager alloc] init];
-	}
-	return theManager;
 }
 
 #pragma mark Application Delegate

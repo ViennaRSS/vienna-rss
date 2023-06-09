@@ -24,20 +24,7 @@
 
 @class TreeNode;
 
-@interface ImageAndTextCell : VNAVerticallyCenteredTextFieldCell {
-	@private
-	NSImage	* image;
-	NSImage * auxiliaryImage;
-	NSColor * countBackgroundColour;
-    NSColor * countBackgroundColourGradientEnd;
-    NSShadow * countLabelShadow;
-	NSInteger offset;
-	NSInteger count;
-	BOOL hasCount;
-	BOOL inProgress;
-	
-	TreeNode * item;
-}
+@interface ImageAndTextCell : VNAVerticallyCenteredTextFieldCell
 
 // Accessor functions
 -(void)setCount:(NSInteger)newCount;

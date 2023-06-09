@@ -30,7 +30,13 @@
 
 @end
 
-@implementation NewGroupFolder
+@implementation NewGroupFolder {
+    IBOutlet NSWindow *newGroupFolderWindow;
+    IBOutlet NSTextField *folderName;
+    IBOutlet NSButton *saveButton;
+    IBOutlet NSButton *cancelButton;
+    NSInteger parentId;
+}
 
 /* newGroupFolder
  * Display the sheet to create a new group folder.

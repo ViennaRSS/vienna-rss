@@ -41,9 +41,6 @@ static NSString * const MA_DefaultStyleName = @"Default";
 static NSString * const MA_Database_Name = @"messages.db";
 static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
 
-// The default preferences object.
-static Preferences * _standardPreferences = nil;
-
 // Private methods
 @interface Preferences ()
 
@@ -53,17 +50,55 @@ static Preferences * _standardPreferences = nil;
 
 @end
 
-@implementation Preferences
+@implementation Preferences {
+    NSUserDefaults *userPrefs;
+    float markReadInterval;
+    NSInteger minimumFontSize;
+    NSInteger refreshFrequency;
+    NSInteger autoExpireDuration;
+    NSInteger filterMode;
+    NSInteger layout;
+    NSInteger newArticlesNotification;
+    NSInteger foldersTreeSortMethod;
+    BOOL refreshOnStartup;
+    BOOL alwaysAcceptBetas;
+    BOOL enableMinimumFontSize;
+    BOOL openLinksInVienna;
+    BOOL openLinksInBackground;
+    BOOL hasPrefs;
+    BOOL showFolderImages;
+    BOOL useJavaScript;
+    BOOL showAppInStatusBar;
+    BOOL showStatusBar;
+    BOOL showFilterBar;
+    BOOL shouldSaveFeedSource;
+    BOOL syncGoogleReader;
+    BOOL prefersGoogleNewSubscription;
+    BOOL markUpdatedAsNew;
+    NSString *displayStyle;
+    CGFloat textSizeMultiplier;
+    NSString *defaultDatabase;
+    NSString *feedSourcesFolder;
+    NSFont *articleFont;
+    NSArray *articleSortDescriptors;
+    SearchMethod *searchMethod;
+    NSUInteger concurrentDownloads;
+    NSString *syncServer;
+    NSString *syncScheme;
+    NSString *syncingUser;
+}
 
 /* standardPreferences
  * Return the single set of Vienna wide preferences object.
  */
-+(Preferences *)standardPreferences
++ (Preferences *)standardPreferences
 {
-	if (_standardPreferences == nil) {
-		_standardPreferences = [[Preferences alloc] init];
-	}
-	return _standardPreferences;
+    static Preferences *standardPreferences;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        standardPreferences = [Preferences new];
+    });
+    return standardPreferences;
 }
 
 /* init

@@ -20,11 +20,7 @@
 
 @import Foundation;
 
-@interface BackTrackArray : NSObject {
-	NSMutableArray * array;
-	NSUInteger  maxItems;
-	NSInteger queueIndex;
-}
+@interface BackTrackArray : NSObject
 
 // Accessor functions
 -(instancetype)initWithMaximum:(NSUInteger)theMax /*NS_DESIGNATED_INITIALIZER*/;

@@ -38,22 +38,6 @@
  * controller.
  */
 @interface ArticleController : NSViewController
-{
-	NSView<ArticleBaseView, BaseView> * mainArticleView;
-	NSArray * currentArrayOfArticles;
-	NSArray * folderArrayOfArticles;
-	NSInteger currentFolderId;
-	NSDictionary * articleSortSpecifiers;
-	NSString * sortColumnIdentifier;
-	BackTrackArray * backtrackArray;
-	BOOL isBacktracking;
-	BOOL shouldPreserveSelectedArticle;
-	Article * articleToPreserve;
-	NSString * guidOfArticleToSelect;
-	BOOL firstUnreadArticleRequired;
-	dispatch_queue_t queue;
-	BOOL requireSelectArticleAfterReload;
-}
 
 @property (nonatomic) FoldersTree * foldersTree;
 @property (nonatomic) ArticleListView *articleListView;
