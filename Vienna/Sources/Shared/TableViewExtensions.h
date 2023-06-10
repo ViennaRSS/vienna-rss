@@ -25,11 +25,9 @@ NS_ASSUME_NONNULL_BEGIN
 @class ExtendedTableView;
 
 @protocol ExtendedTableViewDelegate <NSTableViewDelegate>
-@optional
-	// Note : toolTip here should not be interpreted as expansion tooltip
-	-(BOOL)tableViewShouldDisplayCellToolTips:(ExtendedTableView *)tableView;
-	-(NSString *)tableView:(ExtendedTableView *)tableView toolTipForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)rowIndex;
-	-(void)tableView:(ExtendedTableView *)tableView menuWillAppear:(NSEvent *)theEvent;
+
+- (void)tableView:(ExtendedTableView *)tableView menuWillAppear:(NSEvent *)event;
+
 @end
 
 @interface ExtendedTableView : NSTableView

@@ -20,32 +20,9 @@
 
 #import "TableViewExtensions.h"
 
-@implementation ExtendedTableView {
-    BOOL delegateImplementsShouldDisplayToolTips;
-    BOOL delegateImplementsToolTip;
-}
+@implementation ExtendedTableView
 
 @dynamic delegate;
-
-/* setDelegate
- * Override the setDelegate for NSTableView so that we record whether or not the
- * delegate supports tooltips:
- *
- * toolTipForTableColumn should be implemented by the delegate to return the tooltip string for a
- * specified row of the table.
- *
- * tableViewShouldDisplayCellToolTips should be implemented by the delegate to indicate whether or
- * not tooltips should be shown. This is provided separately from toolTipForTableColumn to allow the
- * delegate to selectively turn tooltips on or off based on user preferences.
- */
--(void)setDelegate:(id)delegate
-{
-    if (delegate != self.delegate) {
-        super.delegate = delegate;
-		delegateImplementsShouldDisplayToolTips = ((delegate && [delegate respondsToSelector:@selector(tableViewShouldDisplayCellToolTips:)]) ? YES : NO);
-		delegateImplementsToolTip = ((delegate && [delegate respondsToSelector:@selector(tableView:toolTipForTableColumn:row:)]) ? YES : NO);
-	}
-}
 
 /* reloadData
  * Override the reloadData for NSTableView to reset the tooltip cursor
@@ -63,33 +40,6 @@
 -(void)resetCursorRects
 {
 	[self removeAllToolTips];
-    if (delegateImplementsShouldDisplayToolTips && [(id)self.delegate tableViewShouldDisplayCellToolTips:self]) {
-		NSRect visibleRect = self.visibleRect;
-		NSIndexSet *columnIndexes = [self columnIndexesInRect:visibleRect];
-		NSRange rowRange = [self rowsInRect:visibleRect];
-		NSRect frameOfCell;
-		NSInteger col, row;
-		
-		col = columnIndexes.firstIndex;
-		while (col != NSNotFound) {
-			for (row = rowRange.location; row < rowRange.location + rowRange.length; row++) {
-				frameOfCell = [self frameOfCellAtColumn:col row:row];
-				[self addToolTipRect:frameOfCell owner:self userData:NULL];
-			}
-			col = [columnIndexes indexGreaterThanIndex:col];
-		}
-	}
-}
-
-/* stringForToolTip
- * Request the delegate to retrieve the string to be displayed in the tooltip.
- */
--(NSString *)view:(NSView *)view stringForToolTip:(NSToolTipTag)tag point:(NSPoint)point userData:(void *)matrix
-{
-	NSInteger rowIndex = [self rowAtPoint:point];
-	NSInteger columnIndex = [self columnAtPoint:point];
-	NSTableColumn *tableColumn = (columnIndex != -1) ? self.tableColumns[columnIndex] : nil;
-    return (columnIndex != -1) ? [(id)self.delegate tableView:self toolTipForTableColumn:tableColumn row:rowIndex] : @"";
 }
 
 /* menuForEvent
