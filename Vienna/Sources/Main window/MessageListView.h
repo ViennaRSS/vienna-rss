@@ -24,7 +24,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol MessageListViewDelegate <NSTableViewDelegate>
+@protocol MessageListViewDelegate <ExtendedTableViewDelegate>
 
 - (BOOL)canDeleteMessageAtRow:(NSInteger)row;
 
@@ -38,7 +38,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MessageListView : ExtendedTableView <NSMenuItemValidation>
 
-@property (weak, nullable) id <MessageListViewDelegate> delegate;
+// This property overrides a superclass property.
+@property (weak, nullable) id<MessageListViewDelegate> delegate;
 
 - (void)setTableColumnHeaderImage:(NSImage *)image
           forColumnWithIdentifier:(NSUserInterfaceItemIdentifier)identifier;

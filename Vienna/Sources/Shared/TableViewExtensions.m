@@ -25,6 +25,8 @@
     BOOL delegateImplementsToolTip;
 }
 
+@dynamic delegate;
+
 /* setDelegate
  * Override the setDelegate for NSTableView so that we record whether or not the
  * delegate supports tooltips:
