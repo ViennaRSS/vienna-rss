@@ -24,24 +24,6 @@
 
 @dynamic delegate;
 
-/* reloadData
- * Override the reloadData for NSTableView to reset the tooltip cursor
- * rectangles.
- */
--(void)reloadData
-{
-	[super reloadData];
-	[self resetCursorRects];
-}
-
-/* resetCursorRects
- * Compute the tooltip cursor rectangles based on the height and position of the tableview rows.
- */
--(void)resetCursorRects
-{
-	[self removeAllToolTips];
-}
-
 /* menuForEvent
  * Handle menu by moving the selection.
  */
