@@ -40,6 +40,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak, nullable) id <MessageListViewDelegate> delegate;
 
+- (void)setTableColumnHeaderImage:(NSImage *)image
+          forColumnWithIdentifier:(NSUserInterfaceItemIdentifier)identifier;
+
 - (void)keyDown:(NSEvent *)theEvent;
 
 @end

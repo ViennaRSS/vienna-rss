@@ -22,8 +22,6 @@
 
 @interface ExtendedTableView : NSTableView
 
--(void)setHeaderImage:(NSString *)identifier image:(NSImage *)image;
-
 @end
 
 // extend protocol NSTableViewDelegate with optional methods

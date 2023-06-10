@@ -480,19 +480,19 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
                                        accessibilityDescription:nil];
         enclImage = [enclImage imageWithSymbolConfiguration:config];
 
-        [articleList setHeaderImage:MA_Field_Read
-                              image:readImage];
-        [articleList setHeaderImage:MA_Field_Flagged
-                              image:flagImage];
-        [articleList setHeaderImage:MA_Field_HasEnclosure
-                              image:enclImage];
+        [articleList setTableColumnHeaderImage:readImage
+                       forColumnWithIdentifier:MA_Field_Read];
+        [articleList setTableColumnHeaderImage:flagImage
+                       forColumnWithIdentifier:MA_Field_Flagged];
+        [articleList setTableColumnHeaderImage:enclImage
+                       forColumnWithIdentifier:MA_Field_HasEnclosure];
     } else {
-        [articleList setHeaderImage:MA_Field_Read
-                              image:[NSImage imageNamed:@"unread_header"]];
-        [articleList setHeaderImage:MA_Field_Flagged
-                              image:[NSImage imageNamed:@"flagged_header"]];
-        [articleList setHeaderImage:MA_Field_HasEnclosure
-                              image:[NSImage imageNamed:@"enclosure_header"]];
+        [articleList setTableColumnHeaderImage:[NSImage imageNamed:@"unread_header"]
+                       forColumnWithIdentifier:MA_Field_Read];
+        [articleList setTableColumnHeaderImage:[NSImage imageNamed:@"flagged_header"]
+                       forColumnWithIdentifier:MA_Field_Flagged];
+        [articleList setTableColumnHeaderImage:[NSImage imageNamed:@"enclosure_header"]
+                       forColumnWithIdentifier:MA_Field_HasEnclosure];
     }
 
 	// Initialise the sort direction

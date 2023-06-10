@@ -101,17 +101,4 @@
 	return self.selectedRow >= 0 ? self.menu : nil;
 }
 
-/* setHeaderImage
- * Set the image in the header for a column
- */
--(void)setHeaderImage:(NSString *)identifier image:(NSImage *)image
-{
-	NSTableColumn * tableColumn = [self tableColumnWithIdentifier:identifier];
-	NSTableHeaderCell * headerCell = tableColumn.headerCell;
-    headerCell.image = image;
-	
-	NSImageCell * imageCell = [[NSImageCell alloc] init];
-	tableColumn.dataCell = imageCell;
-}
-@end  
-
+@end
