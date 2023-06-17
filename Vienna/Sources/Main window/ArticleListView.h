@@ -25,7 +25,7 @@
 #import "ArticleViewDelegate.h"
 #import "MessageListView.h"
 
-@interface ArticleListView : NSView <BaseView, ArticleBaseView, ArticleViewDelegate, MessageListViewDelegate, NSTableViewDataSource, NSSplitViewDelegate>
+@interface ArticleListView : NSView <BaseView, ArticleBaseView, ArticleViewDelegate, MessageListViewDelegate, NSTableViewDataSource, ExtendedTableViewDelegate, NSSplitViewDelegate>
 
 // Public functions
 -(void)updateVisibleColumns;

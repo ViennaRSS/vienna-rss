@@ -20,19 +20,21 @@
 
 @import Cocoa;
 
+NS_ASSUME_NONNULL_BEGIN
+
+@class ExtendedTableView;
+
+@protocol ExtendedTableViewDelegate <NSTableViewDelegate>
+
+- (void)tableView:(ExtendedTableView *)tableView menuWillAppear:(NSEvent *)event;
+
+@end
+
 @interface ExtendedTableView : NSTableView
 
--(void)setHeaderImage:(NSString *)identifier image:(NSImage *)image;
+// This property overrides a superclass property.
+@property (weak, nullable) id<ExtendedTableViewDelegate> delegate;
 
 @end
 
-// extend protocol NSTableViewDelegate with optional methods
-@protocol ExtendedTableViewDelegate <NSTableViewDelegate>
-@optional
-	// Note : toolTip here should not be interpreted as expansion tooltip
-	-(BOOL)tableViewShouldDisplayCellToolTips:(ExtendedTableView *)tableView;
-	-(NSString *)tableView:(ExtendedTableView *)tableView toolTipForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)rowIndex;
-	-(void)tableView:(ExtendedTableView *)tableView menuWillAppear:(NSEvent *)theEvent;
-@end
-
-
+NS_ASSUME_NONNULL_END

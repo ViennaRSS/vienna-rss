@@ -24,7 +24,7 @@
 
 @class AppController;
 
-@interface UnifiedDisplayView : NSView <BaseView, ArticleBaseView, NSMenuItemValidation, MessageListViewDelegate, NSTableViewDataSource>
+@interface UnifiedDisplayView : NSView <BaseView, ArticleBaseView, NSMenuItemValidation, MessageListViewDelegate, NSTableViewDataSource, ExtendedTableViewDelegate>
 
 @property (weak, nonatomic) AppController *controller;
 

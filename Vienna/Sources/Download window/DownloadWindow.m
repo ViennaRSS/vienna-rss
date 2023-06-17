@@ -26,7 +26,6 @@
 #import "DownloadManager.h"
 #import "HelperFunctions.h"
 #import "ImageAndTextCell.h"
-#import "TableViewExtensions.h"
 #import "NSWorkspace+OpenWithMenu.h"
 
 @implementation DownloadWindow {

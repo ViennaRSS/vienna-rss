@@ -25,6 +25,17 @@
 
 @dynamic delegate;
 
+- (void)setTableColumnHeaderImage:(NSImage *)image
+          forColumnWithIdentifier:(NSUserInterfaceItemIdentifier)identifier
+{
+    NSTableColumn *tableColumn = [self tableColumnWithIdentifier:identifier];
+    NSTableHeaderCell *headerCell = tableColumn.headerCell;
+    headerCell.image = image;
+
+    NSImageCell *imageCell = [[NSImageCell alloc] init];
+    tableColumn.dataCell = imageCell;
+}
+
 /* keyDown
  * Here is where we handle special keys when the article list view
  * has the focus so we can do custom things.
