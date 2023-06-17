@@ -198,11 +198,24 @@
     NSData *data = [userDefaults dataForKey:MAPref_DownloadsFolderBookmark];
 
     if (data) {
-        NSError *error = nil;
-        VNASecurityScopedBookmark *bookmark = [[VNASecurityScopedBookmark alloc] initWithBookmarkData:data
-                                                                                                error:&error];
+        BOOL bookmarkDataIsStale = NO;
+        NSError *bookmarkInitError;
+        VNASecurityScopedBookmark *bookmark =
+            [[VNASecurityScopedBookmark alloc] initWithBookmarkData:data
+                                                bookmarkDataIsStale:&bookmarkDataIsStale
+                                                              error:&bookmarkInitError];
+        if (!bookmarkInitError) {
+            if (bookmarkDataIsStale) {
+                NSError *bookmarkResolveError;
+                NSData *bookmarkData =
+                    [VNASecurityScopedBookmark bookmarkDataFromFileURL:bookmark.resolvedURL
+                                                                 error:&bookmarkResolveError];
+                if (!bookmarkResolveError) {
+                    [userDefaults setObject:bookmarkData
+                                     forKey:MAPref_DownloadsFolderBookmark];
+                }
+            }
 
-        if (!error) {
             downloadFolderURL = bookmark.resolvedURL;
         }
     }

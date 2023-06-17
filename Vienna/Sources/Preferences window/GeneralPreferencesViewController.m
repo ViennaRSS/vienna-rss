@@ -103,10 +103,24 @@
     NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
     NSData *data = [userDefaults dataForKey:MAPref_DownloadsFolderBookmark];
     if (data) {
-        NSError *error = nil;
-        VNASecurityScopedBookmark *bookmark = [[VNASecurityScopedBookmark alloc] initWithBookmarkData:data
-                                                                                                error:&error];
-        if (!error) {
+        BOOL bookmarkDataIsStale = NO;
+        NSError *bookmarkInitError;
+        VNASecurityScopedBookmark *bookmark =
+            [[VNASecurityScopedBookmark alloc] initWithBookmarkData:data
+                                                bookmarkDataIsStale:&bookmarkDataIsStale
+                                                              error:&bookmarkInitError];
+        if (!bookmarkInitError) {
+            if (bookmarkDataIsStale) {
+                NSError *bookmarkResolveError;
+                NSData *bookmarkData =
+                    [VNASecurityScopedBookmark bookmarkDataFromFileURL:bookmark.resolvedURL
+                                                                 error:&bookmarkResolveError];
+                if (!bookmarkResolveError) {
+                    [userDefaults setObject:bookmarkData
+                                     forKey:MAPref_DownloadsFolderBookmark];
+                }
+            }
+
             [self updateDownloadsPopUp:bookmark.resolvedURL.path];
         }
     }
@@ -279,8 +293,8 @@
                       completionHandler:^(NSInteger returnCode) {
         if (returnCode == NSModalResponseOK) {
             NSError *error = nil;
-            NSData *data = [VNASecurityScopedBookmark bookmark:openPanel.URL
-                                                         error:&error];
+            NSData *data = [VNASecurityScopedBookmark bookmarkDataFromFileURL:openPanel.URL
+                                                                        error:&error];
             if (!error) {
                 NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
                 [userDefaults setObject:data forKey:MAPref_DownloadsFolderBookmark];
