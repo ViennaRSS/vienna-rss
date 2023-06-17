@@ -93,7 +93,7 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 @property (nonatomic, getter=isFilterBarVisible, readonly) BOOL filterBarVisible;
 -(IBAction)cancelAllRefreshesToolbar:(id)sender;
 
-@property (nonatomic) NSBackgroundActivityScheduler *scheduler;
+@property (nonatomic) VNADispatchTimer *refreshTimer;
 
 @property (nonatomic) MainWindowController *mainWindowController;
 @property (weak, nonatomic) NSWindow *mainWindow;
@@ -199,9 +199,13 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 
 		[self.mainWindow makeFirstResponder:(previousArticleGuid != nil) ? ((NSView<BaseView> *)self.browser.primaryTab.view).mainView : self.foldersTree.mainView];
 
-		if (prefs.refreshOnStartup) {
-			[self refreshAllSubscriptions:self];
-		}
+        // 300s (5m) is the minimum refresh frequency.
+        if (prefs.refreshFrequency >= 300) {
+            [self scheduleRefreshWithFrequency:prefs.refreshFrequency
+                            refreshImmediately:prefs.refreshOnStartup];
+        } else if (prefs.refreshOnStartup) {
+            [self refreshAllSubscriptions];
+        }
 
 		doneSafeInit = YES;
 		
@@ -349,9 +353,6 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 
     // Notification Center delegate
     NSUserNotificationCenter.defaultUserNotificationCenter.delegate = self;
-
-    // Schedule the background refresh
-    [self scheduleBackgroundRefresh];
 
 	// Register to be notified when the scripts folder changes.
 	if (!hasOSScriptsMenu()) {
@@ -1626,40 +1627,15 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	[self showAppInStatusBar];
 }
 
-- (void)handleCheckFrequencyChange:(NSNotification *)nc {
-    if (self.scheduler) {
-        [self.scheduler invalidate];
-        self.scheduler = nil;
+- (void)handleCheckFrequencyChange:(NSNotification *)notification
+{
+    NSInteger frequency = Preferences.standardPreferences.refreshFrequency;
+    if (frequency >= 300) {
+        [self scheduleRefreshWithFrequency:frequency refreshImmediately:NO];
+    } else {
+        // The user disabled the automatic refresh.
+        self.refreshTimer = nil;
     }
-    [self scheduleBackgroundRefresh];
-}
-
-- (void)scheduleBackgroundRefresh {
-    NSInteger interval = [Preferences standardPreferences].refreshFrequency;
-
-    // NSBackgroundActivityScheduler requires an interval value >= 1. A value
-    // less than that raises an unhandled exception.
-    if (interval < 1) {
-        return;
-    }
-
-    self.scheduler = [[NSBackgroundActivityScheduler alloc] initWithIdentifier:@"com.vienna-rss.Vienna"];
-    self.scheduler.interval = interval;
-    self.scheduler.repeats = YES;
-    self.scheduler.qualityOfService = NSQualityOfServiceUtility;
-
-    typeof(self) __weak weakSelf = self;
-    [self.scheduler scheduleWithBlock:^(NSBackgroundActivityCompletionHandler completionHandler) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if ([RefreshManager sharedManager].isConnecting) {
-                completionHandler(NSBackgroundActivityResultDeferred);
-                return;
-            }
-
-            [weakSelf refreshAllSubscriptions:weakSelf];
-            completionHandler(NSBackgroundActivityResultFinished);
-        });
-    }];
 }
 
 /* doViewColumn
@@ -2879,6 +2855,39 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 
 #pragma mark Refresh Subscriptions
 
+// This method is run as a result of -applicationDidFinishLaunching: or by way
+// of -handleCheckFrequencyChange: after the user changed the refresh frequency.
+- (void)scheduleRefreshWithFrequency:(NSInteger)frequency
+                  refreshImmediately:(BOOL)refreshImmediately
+{
+    NSTimeInterval interval = (NSTimeInterval)frequency;
+    if (self.refreshTimer) {
+        [self.refreshTimer rescheduleWithInterval:interval
+                                  fireImmediately:refreshImmediately];
+    } else {
+        self.refreshTimer =
+            [[VNADispatchTimer alloc] initWithInterval:interval
+                                       fireImmediately:refreshImmediately
+                                         dispatchQueue:dispatch_get_main_queue()
+                                          eventHandler:^{
+                [self refreshAllSubscriptions];
+            }];
+    }
+}
+
+- (void)refreshAllSubscriptions
+{
+    if (self.connecting) {
+        return;
+    }
+
+    if (Preferences.standardPreferences.syncGoogleReader) {
+        [OpenReader.sharedManager loadSubscriptions];
+    }
+    [RefreshManager.sharedManager refreshSubscriptions:[self.foldersTree folders:0]
+                            ignoringSubscriptionStatus:NO];
+}
+
 /* refreshAllFolderIcons
  * Get new favicons from all subscriptions.
  */
@@ -2895,14 +2904,10 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)refreshAllSubscriptions:(id)sender
 {
-    if (!self.connecting) {
-        if ([Preferences standardPreferences].syncGoogleReader){
-            [[OpenReader sharedManager] loadSubscriptions];
-        }
-
-        // Kick off the refresh
-        [[RefreshManager sharedManager] refreshSubscriptions:[self.foldersTree folders:0]
-          ignoringSubscriptionStatus:NO];
+    if (self.refreshTimer) {
+        [self.refreshTimer fire];
+    } else {
+        [self refreshAllSubscriptions];
     }
 }
 

@@ -189,6 +189,7 @@
 		F685D24C292460210097C0D3 /* Predicates.strings in Resources */ = {isa = PBXBuildFile; fileRef = F685D24A292460210097C0D3 /* Predicates.strings */; };
 		F68792872700A678009B7BB5 /* SecurityScopedBookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68792862700A678009B7BB5 /* SecurityScopedBookmark.swift */; };
 		F689820A281DD62B0010F4C5 /* XMLFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = F6898209281DD62B0010F4C5 /* XMLFeed.m */; };
+		F68DEBF82A35091600421FAB /* DispatchTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68DEBF72A35091600421FAB /* DispatchTimer.swift */; };
 		F68FE3A6270F6DC700C89D16 /* UnarchiverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68FE3A5270F6DC700C89D16 /* UnarchiverTests.swift */; settings = {COMPILER_FLAGS = "-Wno-deprecated-type -Wno-deprecated-declarations"; }; };
 		F69140E41E71B94200D51BFF /* AppController+Notifications.m in Sources */ = {isa = PBXBuildFile; fileRef = F69140E31E71B94200D51BFF /* AppController+Notifications.m */; };
 		F692559A2572A32900D387D8 /* MMTabBarView in Frameworks */ = {isa = PBXBuildFile; productRef = F69255992572A32900D387D8 /* MMTabBarView */; };
@@ -709,6 +710,7 @@
 		F6898208281DD62B0010F4C5 /* XMLFeed.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XMLFeed.h; sourceTree = "<group>"; };
 		F6898209281DD62B0010F4C5 /* XMLFeed.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XMLFeed.m; sourceTree = "<group>"; };
 		F6898213281EE7650010F4C5 /* Feed.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Feed.h; sourceTree = "<group>"; };
+		F68DEBF72A35091600421FAB /* DispatchTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchTimer.swift; sourceTree = "<group>"; };
 		F68F724A1E2A0937007FADA5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/MainMenu.strings; sourceTree = "<group>"; };
 		F68FE3A5270F6DC700C89D16 /* UnarchiverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnarchiverTests.swift; sourceTree = "<group>"; };
 		F69140E21E71B94200D51BFF /* AppController+Notifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppController+Notifications.h"; sourceTree = "<group>"; };
@@ -1463,6 +1465,7 @@
 				F69140E21E71B94200D51BFF /* AppController+Notifications.h */,
 				F69140E31E71B94200D51BFF /* AppController+Notifications.m */,
 				B856F8E025782F8100E91AC7 /* AppController+Sparkle.swift */,
+				F68DEBF72A35091600421FAB /* DispatchTimer.swift */,
 				4350288F165DE9DF0018EDB7 /* URLHandlerCommand.h */,
 				43502890165DE9DF0018EDB7 /* URLHandlerCommand.m */,
 				43502891165DE9DF0018EDB7 /* ViennaApp.h */,
@@ -2097,6 +2100,7 @@
 				2F88B2A62545BB450067EEA6 /* ArticleConverter.m in Sources */,
 				AA36CD7C06100692001E33A4 /* Field.m in Sources */,
 				F6B059E22961D0A800F6E31B /* JSONFeedItem.swift in Sources */,
+				F68DEBF82A35091600421FAB /* DispatchTimer.swift in Sources */,
 				F6C9DA70271BB3BB00FC3027 /* RSSFeed.m in Sources */,
 				0349813E1A206FD900014F29 /* GeneralPreferencesViewController.m in Sources */,
 				2F5AC4202198E1AA00A7EDDE /* TitleChangingTabViewItem.swift in Sources */,
