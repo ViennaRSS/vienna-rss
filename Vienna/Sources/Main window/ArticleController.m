@@ -95,10 +95,6 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 										  @"key": @"isFlagged",
 										  @"selector": NSStringFromSelector(@selector(compare:))
 										  },
-								  MA_Field_Comments: @{
-										  @"key": @"hasComments",
-										  @"selector": NSStringFromSelector(@selector(compare:))
-										  },
 								  MA_Field_Date: @{
 										  @"key": [@"articleData." stringByAppendingString:MA_Field_Date],
 										  @"selector": NSStringFromSelector(@selector(compare:))

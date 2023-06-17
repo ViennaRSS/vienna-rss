@@ -32,12 +32,4 @@ extension NSPopUpButton {
 		self.menu?.addItem(newItem)
 	}
 
-	/// Add an item to the popup button menu with the specified tag.
-	@objc
-	func addItem(withTitle title: String, tag: Int) {
-		let newItem = NSMenuItem(title: title, action: nil, keyEquivalent: "")
-		newItem.tag = tag
-		self.menu?.addItem(newItem)
-	}
-
 }

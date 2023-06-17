@@ -34,6 +34,4 @@
 	@property (readonly, nonatomic) NSArray *markedArticleRange;
 	-(void)saveTableSettings;
 	-(void)ensureSelectedArticle;
-	-(void)startLoadIndicator;
-	-(void)stopLoadIndicator;
 @end

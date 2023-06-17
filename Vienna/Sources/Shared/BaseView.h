@@ -23,7 +23,6 @@
 @protocol BaseView
 @required
 	-(void)performFindPanelAction:(NSInteger)tag;
-	@property (readonly, nonatomic) NSString *viewLink;
 	@property (nonatomic, readonly) NSView *mainView;
 	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags;
 @optional

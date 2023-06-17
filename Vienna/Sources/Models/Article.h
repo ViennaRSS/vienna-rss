@@ -32,7 +32,6 @@ extern NSString * const MA_Field_Link;
 extern NSString * const MA_Field_Date;
 extern NSString * const MA_Field_Read;
 extern NSString * const MA_Field_Flagged;
-extern NSString * const MA_Field_Comments;
 extern NSString * const MA_Field_Deleted;
 extern NSString * const MA_Field_Text;
 extern NSString * const MA_Field_Folder;
@@ -58,12 +57,12 @@ typedef NS_ENUM(NSInteger, ArticleFieldID) {
     ArticleFieldIDText,
     ArticleFieldIDFolder,
     ArticleFieldIDLink,
-    ArticleFieldIDComments,
-    ArticleFieldIDHeadlines,
+    /* 410 was previously used */
+    ArticleFieldIDHeadlines = 411,
     ArticleFieldIDDeleted,
     ArticleFieldIDSummary,
-    ArticleFieldIDCreatedDate, // Not in use?
-    ArticleFieldIDEnclosure,
+    /* 414 was previously used */
+    ArticleFieldIDEnclosure = 415,
     ArticleFieldIDEnclosureDownloaded,
     ArticleFieldIDHasEnclosure
 };
@@ -94,7 +93,6 @@ typedef NS_ENUM(NSInteger, ArticleStatus) {
 @property (nonatomic, getter=isRevised, readonly) BOOL revised;
 @property (nonatomic, getter=isFlagged, readonly) BOOL flagged;
 @property (nonatomic, getter=isDeleted, readonly) BOOL deleted;
-@property (nonatomic, readonly) BOOL hasComments;
 @property (nonatomic) BOOL hasEnclosure;
 @property (nonatomic, readonly) BOOL enclosureDownloaded;
 @property (nonatomic) NSInteger status;

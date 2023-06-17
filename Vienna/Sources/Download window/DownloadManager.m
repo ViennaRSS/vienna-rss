@@ -20,7 +20,6 @@
 
 #import "DownloadManager.h"
 
-#import "AppController.h"
 #import "AppController+Notifications.h"
 #import "Constants.h"
 #import "DownloadItem.h"

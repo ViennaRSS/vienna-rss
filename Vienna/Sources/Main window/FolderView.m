@@ -25,7 +25,6 @@
 #import "AppController.h"
 #import "FeedListCellView.h"
 #import "FoldersFilterable.h"
-#import "TreeNode.h"
 
 #define VNA_LOG os_log_create("--", "FolderView")
 

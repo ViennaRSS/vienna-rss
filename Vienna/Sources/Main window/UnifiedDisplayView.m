@@ -28,7 +28,6 @@
 #import "HelperFunctions.h"
 #import "Article.h"
 #import "Folder.h"
-#import "TableViewExtensions.h"
 #import "Database.h"
 #import "Vienna-Swift.h"
 
@@ -38,7 +37,6 @@
 #define DEFAULT_CELL_HEIGHT	300.0
 #define XPOS_IN_CELL	6.0
 #define YPOS_IN_CELL	2.0
-#define PROGRESS_INDICATOR_DIMENSION 16
 
 static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserverContext;
 
@@ -61,7 +59,6 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
     NSTimer *markReadTimer;
 
     NSMutableArray *rowHeightArray;
-    NSProgressIndicator *progressIndicator;
 }
 
 #pragma mark -
@@ -439,15 +436,6 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
     }
 }
 
-/* viewLink
- * There's no view link address for article views. If we eventually implement a local
- * scheme such as vienna:<feedurl>/<guid> then we could use that as a link address.
- */
--(NSString *)viewLink
-{
-	return nil;
-}
-
 /* refreshFolder
  * Refreshes the current folder by applying the current sort or thread
  * logic and redrawing the article list. The selected article is preserved
@@ -471,32 +459,6 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
 
 	[articleList reloadData];
     [self scrollToArticle:currentSelectedArticle.guid];
-}
-
-/* startLoadIndicator
- * add the indicator of articles' data being loaded
- */
--(void)startLoadIndicator
-{
-	if (progressIndicator == nil) {
-		NSRect progressIndicatorFrame;
-		progressIndicatorFrame.size = NSMakeSize(articleList.visibleRect.size.width, PROGRESS_INDICATOR_DIMENSION);
-		progressIndicatorFrame.origin = articleList.visibleRect.origin;
-		progressIndicator = [[NSProgressIndicator alloc] initWithFrame:progressIndicatorFrame];
-		progressIndicator.displayedWhenStopped = NO;
-		[articleList addSubview:progressIndicator];
-	}
-	[progressIndicator startAnimation:self];
-}
-
-/* stopLoadIndicator
- * remove the indicator of articles loading
- */
--(void)stopLoadIndicator
-{
-	[progressIndicator stopAnimation:self];
-	[progressIndicator removeFromSuperviewWithoutNeedingDisplay];
-	progressIndicator = nil;
 }
 
 /* markCurrentRead

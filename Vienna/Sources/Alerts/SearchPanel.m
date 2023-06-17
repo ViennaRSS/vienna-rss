@@ -20,7 +20,7 @@
 
 #import "SearchPanel.h"
 #import "AppController.h"
-#import "Vienna-Swift.h"
+#import "Preferences.h"
 #import "SearchMethod.h"
 
 @implementation SearchPanel {

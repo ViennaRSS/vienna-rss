@@ -20,7 +20,6 @@
 
 #import "TreeNode.h"
 #import "Preferences.h"
-#import "Constants.h"
 #import "Folder.h"
 #import "Vienna-Swift.h"
 
