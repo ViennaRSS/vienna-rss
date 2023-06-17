@@ -98,7 +98,7 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 @property (nonatomic) MainWindowController *mainWindowController;
 @property (weak, nonatomic) NSWindow *mainWindow;
 @property (nonatomic) ActivityPanelController *activityPanelController;
-@property (nonatomic) DirectoryMonitor *directoryMonitor;
+@property (nonatomic) VNADirectoryMonitor *directoryMonitor;
 @property (nonatomic) NSWindowController *preferencesWindowController;
 @property (weak, nonatomic) FolderView *outlineView;
 @property (weak, nonatomic) DisclosureView *filterDisclosureView;
@@ -224,13 +224,15 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
  */
 - (void)installScriptsFolderWatcher {
     NSURL *path = NSFileManager.defaultManager.vna_applicationScriptsDirectory;
-    self.directoryMonitor = [[DirectoryMonitor alloc] initWithDirectories:@[path]];
-
-    NSError *error = nil;
+    self.directoryMonitor = [[VNADirectoryMonitor alloc] initWithDirectories:@[path]];
     typeof(self) __weak weakSelf = self;
-    [self.directoryMonitor startAndReturnError:&error eventHandler:^{
+    void (^handler)(void) = ^{
         [weakSelf initScriptsMenu];
-    }];
+    };
+    NSError *error;
+    [self.directoryMonitor startWithEventHandler:handler
+                                   dispatchQueue:dispatch_get_main_queue()
+                                           error:&error];
     if (error) {
         os_log_error(VNA_LOG, "Failed to watch scripts directory. Reason: %{public}@", error.localizedDescription);
     }
