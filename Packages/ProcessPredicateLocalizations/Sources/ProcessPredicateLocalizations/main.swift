@@ -240,5 +240,6 @@ case .compare:
         if !notInFirst.isEmpty {
             print("Keys from second file not in first file:\n\(notInFirst.map { "\t\($0)" }.joined(separator: "\n"))")
         }
+        exit(EXIT_FAILURE)
     }
 }
