@@ -119,7 +119,6 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
     NewGroupFolder *groupFolder;
     SearchPanel *searchPanel;
 
-    //    Database * db;
     NSMutableDictionary *scriptPathMappings;
     NSStatusItem *appStatusItem;
     NSInteger lastCountOfUnread;
