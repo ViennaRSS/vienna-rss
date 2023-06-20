@@ -71,7 +71,7 @@
 	* June 26, 2022
 		Changes by Eitot:
 			• Removed obsolete APIs.
-	* Mai 13, 2023
+	* May 13, 2023
 		Changes by Eitot:
 			• Moved ivar declarations from interface to implementation
 */
