@@ -127,7 +127,6 @@ extern NSInteger const MA_Default_ConcurrentDownloads;
 extern NSPasteboardType const VNAPasteboardTypeRSSItem;
 extern NSPasteboardType const VNAPasteboardTypeFolderList;
 extern NSPasteboardType const VNAPasteboardTypeRSSSource;
-extern NSPasteboardType const VNAPasteboardTypeURL;
 extern NSPasteboardType const VNAPasteboardTypeURLName;
 extern NSPasteboardType const VNAPasteboardTypeWebURLsWithTitles;
 

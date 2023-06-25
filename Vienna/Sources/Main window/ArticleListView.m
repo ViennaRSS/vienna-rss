@@ -1478,7 +1478,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 	[pboard declareTypes:@[VNAPasteboardTypeRSSItem, VNAPasteboardTypeWebURLsWithTitles, NSPasteboardTypeString, NSPasteboardTypeHTML]
                    owner:self];
     if (count == 1) {
-        [pboard addTypes:@[VNAPasteboardTypeURL, VNAPasteboardTypeURLName, NSPasteboardTypeURL]
+        [pboard addTypes:@[NSPasteboardTypeURL, VNAPasteboardTypeURLName]
                    owner:self];
     }
 
@@ -1513,7 +1513,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 		[fullHTMLText appendFormat:@"<a href=\"%@\">%@</a><br />%@<br /><br />", msgLink, msgTitle, msgText];
 		
 		if (count == 1) {
-			[pboard setString:msgLink forType:VNAPasteboardTypeURL];
+            [pboard setString:msgLink forType:NSPasteboardTypeURL];
 			[pboard setString:msgTitle forType:VNAPasteboardTypeURLName];
 			
 			// Write the link to the pastboard.
