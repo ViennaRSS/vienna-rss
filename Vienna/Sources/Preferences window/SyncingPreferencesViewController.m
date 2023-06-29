@@ -117,6 +117,7 @@
                 }
                 if (!match) {
                     [openReaderSource selectItemWithTitle:NSLocalizedString(@"Other", nil)];
+                    [self changeSource:nil];
                     openReaderHost.stringValue = serverURL.absoluteString;
                 }
             }
