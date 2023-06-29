@@ -1,39 +1,63 @@
+/* custom properties */
+:root {
+    --background-color: #fafafa;
+    --text-color: #000;
+    --link: #3366CC;
+    --greyed: #C0C0C0;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-color: #000;
+        --text-color: #d7d7d7;
+        --link: #1d79cd;
+        --greyed: #303030;
+    }
+}
+
+body {
+    background-color: var(--background-color);
+}
+
 a {
-	color: #3366CC;
+	color: var(--link);
 	text-decoration: none;
 }
 .title {
 	font-family: "Lucida Grande", Arial, Helvetica, sans-serif;
 	font-weight: 700;
 	font-size: 18pt;
-	color: #000000;
+	color: var(--text-color);
 }
 .header {
 	font-family: "Lucida Grande", Arial, Helvetica, sans-serif;
 	font-weight: 700;
 	font-size: 12pt;
-	color: #000000;
+	color: var(--text-color);
 }
 li {
 	font-family: "Lucida Grande", Arial, Helvetica, sans-serif;
 	font-weight: 100;
 	font-size: 9pt;
-	color: #000000;
+	color: var(--text-color);
 }
 h2 {
 	font-family: "Lucida Grande", Arial, Helvetica, sans-serif;
 	font-weight: 400;
 	font-size: 10pt;
-	color: #000000;
+	color: var(--text-color);
 }
 p {
 	font-family: "Lucida Grande", Arial, Helvetica, sans-serif;
 	font-weight: 100;
 	font-size: 9pt;
-	color: #000000;
+	color: var(--text-color);
 }
 tr {
 	font-family: "Lucida Grande", Arial, Helvetica, sans-serif;
 	font-size: 9pt;
-	color: #000000;
+	color: var(--text-color);
+}
+.greyed {
+    background-color: var(--greyed);
 }
