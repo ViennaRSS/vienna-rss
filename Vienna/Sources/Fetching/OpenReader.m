@@ -211,7 +211,12 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 						for (NSString * item in components) {
 							if([item hasPrefix:@"Auth="]) {
 								self.clientAuthToken = [item substringFromIndex:5];
-								self.openReaderStatus = missingTToken;
+                                if ([self.clientAuthToken isEqualToString:@"(null)"] || [self.clientAuthToken isEqualToString:@""]) {
+                                    [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:MA_Notify_GoogleAuthFailed object:@""];
+                                    self->latestAlertDescription = @"";
+								} else {
+								    self.openReaderStatus = missingTToken;								
+								}
 								break;
 							}
 						}
@@ -299,14 +304,18 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                     self.openReaderStatus = missingTToken;
                 } else {
                     self.tToken = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                    self.openReaderStatus = fullyAuthenticated;
-                    if (self.tTokenTimer == nil || !self.tTokenTimer.valid) {
-                        //tokens expire after 30 minutes : renew them every 25 minutes
-                        self.tTokenTimer = [NSTimer scheduledTimerWithTimeInterval:25 * 60
-                                                                            target:self
-                                                                          selector:@selector(renewTToken)
-                                                                          userInfo:nil
-                                                                           repeats:YES];
+                    if ([self.tToken isEqualToString:@"(null)"] || [self.tToken isEqualToString:@""]) {
+                        self.openReaderStatus = missingTToken;
+                    } else {
+                        self.openReaderStatus = fullyAuthenticated;
+                        if (self.tTokenTimer == nil || !self.tTokenTimer.valid) {
+                            //tokens expire after 30 minutes : renew them every 25 minutes
+                            self.tTokenTimer = [NSTimer scheduledTimerWithTimeInterval:25 * 60
+                                                                                target:self
+                                                                              selector:@selector(renewTToken)
+                                                                              userInfo:nil
+                                                                               repeats:YES];
+                        }
                     }
                 }
                 // Signal that we are done with the synchronous task
