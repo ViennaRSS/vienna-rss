@@ -72,7 +72,7 @@
 	<key>CFBundleHelpBookFolder</key>
 	<string>Vienna.help</string>
 	<key>CFBundleHelpBookName</key>
-	<string>Vienna Help</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER).help</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
