@@ -142,8 +142,6 @@
 	<true/>
 	<key>SUEnableInstallerLauncherService</key>
 	<false/>
-	<key>SUPublicDSAKeyFile</key>
-	<string>SparkleDSAPublicKey.pem</string>
 	<key>SUPublicEDKey</key>
 	<string>nPwwT+poO5Kmi1NZkE5OveKB8lvQVY20N22E8jgxLCg=</string>
 	<key>UTExportedTypeDeclarations</key>
