@@ -279,19 +279,42 @@
  */
 -(IBAction)changeDownloadFolder:(id)sender
 {
+    NSFileManager *fileManager = NSFileManager.defaultManager;
+    [self chooseDirectoryWithRootDirectory:fileManager.vna_downloadsDirectory];
+}
+
+- (void)chooseDirectoryWithRootDirectory:(NSURL *)rootDirectoryURL
+{
     NSOpenPanel *openPanel = [NSOpenPanel openPanel];
-    openPanel.delegate = self;
     openPanel.canChooseFiles = NO;
     openPanel.canChooseDirectories = YES;
     openPanel.canCreateDirectories = YES;
     openPanel.allowsMultipleSelection = NO;
     openPanel.prompt = NSLocalizedString(@"Select",
                                          @"Label of a button on an open panel");
-
-    openPanel.directoryURL = NSFileManager.defaultManager.vna_downloadsDirectory;
+    openPanel.directoryURL = rootDirectoryURL;
     [openPanel beginSheetModalForWindow:self.view.window
-                      completionHandler:^(NSInteger returnCode) {
-        if (returnCode == NSModalResponseOK) {
+                      completionHandler:^(NSModalResponse result) {
+        if (result == NSModalResponseOK && openPanel.URL) {
+            NSFileManager *fileManager = NSFileManager.defaultManager;
+            if (![fileManager isWritableFileAtPath:openPanel.URL.path]) {
+                NSString *str =
+                    NSLocalizedString(@"This folder cannot be chosen because "
+                                       "you don’t have permission.",
+                                      @"Message text of a modal alert");
+                NSDictionary *userInfoDict = @{NSLocalizedDescriptionKey: str};
+                NSError *error =
+                    [NSError errorWithDomain:NSCocoaErrorDomain
+                                        code:NSFileWriteNoPermissionError
+                                    userInfo:userInfoDict];
+                [self presentError:error
+                    modalForWindow:self.view.window
+                          delegate:self
+                didPresentSelector:@selector(didPresentErrorWithRecovery:contextInfo:)
+                       contextInfo:(__bridge_retained void *)openPanel.URL];
+                return;
+            }
+
             NSError *error = nil;
             NSData *data = [VNASecurityScopedBookmark bookmarkDataFromFileURL:openPanel.URL
                                                                         error:&error];
@@ -300,10 +323,22 @@
                 [userDefaults setObject:data forKey:MAPref_DownloadsFolderBookmark];
                 [self updateDownloadsPopUp:openPanel.URL.path];
             }
-        } else if (returnCode == NSModalResponseCancel) {
+        } else {
             [self->downloadFolder selectItemAtIndex:0];
         }
     }];
+}
+
+// Do not change this method signature without consulting the documentation of
+// `-presentError:modalForWindow:delegate:didPresentSelector:contextInfo:`. If
+// the signature does not match, the contextInfo parameter might not work.
+- (void)didPresentErrorWithRecovery:(BOOL)didRecover
+                        contextInfo:(nullable void *)contextInfo
+{
+    NSURL *previousDirectoryURL = (__bridge_transfer NSURL *)contextInfo;
+    if ([previousDirectoryURL isKindOfClass:[NSURL class]]) {
+        [self chooseDirectoryWithRootDirectory:previousDirectoryURL];
+    }
 }
 
 /* updateDownloadsPopUp
@@ -443,30 +478,6 @@
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-// MARK: - NSOpenSavePanelDelegate
-
-- (BOOL)panel:(id)sender shouldEnableURL:(NSURL *)url {
-    NSFileManager *fileManager = NSFileManager.defaultManager;
-    return [fileManager isWritableFileAtPath:url.path];
-}
-
-- (BOOL)panel:(id)sender validateURL:(NSURL *)url error:(NSError **)outError {
-    NSFileManager *fileManager = NSFileManager.defaultManager;
-    BOOL isWritable = [fileManager isWritableFileAtPath:url.path];
-    if (!isWritable) {
-        NSString *str = NSLocalizedString(@"This folder cannot be chosen "
-                                          "because you don’t have permission.",
-                                          @"Message text of a modal alert");
-        NSDictionary *userInfoDict = @{NSLocalizedDescriptionKey: str};
-        if (outError) {
-            *outError = [NSError errorWithDomain:NSCocoaErrorDomain
-                                            code:NSFileWriteNoPermissionError
-                                        userInfo:userInfoDict];
-        }
-    }
-    return isWritable;
 }
 
 @end
