@@ -5,9 +5,7 @@ Instructions for building and uploading Vienna binaries to Github and Sourceforg
 ### Build settings
 In Xcode->File->Project settings…, you should have :
 
-- Build System : New Build System
-- Derived Data : Project-relative Location
-	- DerivedData
+- Derived Data : Default Location
 - Advanced… : Build Location : Custom : Relative to Workspace
 	- Products : Build/Products
 	- Intermediates : Build/Intermediates.noindex
@@ -23,9 +21,6 @@ should be exactly the name of your certificate as it is stored in Keychain.
 
 `PRIVATE_EDDSA_KEY_PATH`  
 should be the location of the private EdDSA (ed25519) key used by Sparkle 2, which for obvious security reasons should not be located in the source directory !
-
-`PRIVATE_KEY_PATH`  
-should be the location of the (legacy) private DSA key used by Sparkle, which for obvious security reasons should not be located in the source directory !
 
 If you want to go further in automation of package building, you will have to define three additional environment variables in the `CS-ID.xcconfig` file. These ones are used to automate the use of the `notarytool` command line tool as described in [this page of Apple's documentation](https://developer.apple.com/documentation/xcode/notarizing_macos_software_before_distribution/customizing_the_notarization_workflow).
 
@@ -43,7 +38,6 @@ For instance, the content of my `Scripts/Resources/CS-ID.xcconfig` file looks li
 
     CODE_SIGN_IDENTITY = Developer ID Application: Barijaona Ramaholimihaso
     PRIVATE_EDDSA_KEY_PATH = $(SRCROOT)/../secrets/vienna_private_eddsa_key.pem
-    PRIVATE_KEY_PATH = $(SRCROOT)/../secrets/vienna_private_key.pem
     APP_STORE_ID = barijaona@mac.com
     KEYCHAIN_PROFILE = AC_PASSWORD
     TEAM_ID = KUU2LM7U9K
@@ -86,7 +80,7 @@ There are two distinct ways to get the different files needed to publish an upda
 - Select the latest archive, click the "Distribute App" button,
 - Select "Developer ID" as method of distribution,
 - Accept the values proposed in the following prompts,
-- Wait for the upload to finish, then a mail notification from Apple informing you that the software was successfully notarized,
+- Wait for the upload to finish, then the message informing you that the software was successfully notarized,
 - Close the organizer, select scheme "Deployment" at the top of Xcode's main window,
 - Run the Deployment scheme,
 - The Uploads window should open in the Finder after a while.
