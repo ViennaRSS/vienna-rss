@@ -175,15 +175,23 @@ final class MainWindowController: NSWindowController {
         }
     }
 
+    var shareableItemsSubject = String()
+
     private var shareableItems: [NSPasteboardWriting] {
         var items = [URL]()
         if let activeTab = browser.activeTab, let url = activeTab.tabUrl {
             items.append(url)
+            shareableItemsSubject = activeTab.title ?? NSLocalizedString("URL", comment: "URL")
         } else {
             if let articles = articleListView?.markedArticleRange as? [Article] {
                 let links = articles.compactMap { $0.link }
                 let urls = links.compactMap { URL(string: $0) }
                 items = urls
+                if articles.count == 1 {
+                    shareableItemsSubject = articles[0].title ?? ""
+                } else {
+                    shareableItemsSubject = String(format: NSLocalizedString("%u articles", comment: ""), articles.count)
+                }
             }
         }
         return items as [NSURL]
@@ -229,16 +237,21 @@ final class MainWindowController: NSWindowController {
 
     @IBAction private func performSharingService(_ sender: Any) {
         if (sender as? SharingServiceMenuItem)?.name == "emailLink" {
-            let sharingService = NSSharingService(named: .composeEmail)
-            sharingService?.perform(withItems: shareableItems)
+            if let sharingService = NSSharingService(named: .composeEmail) {
+                sharingService.delegate = self
+                sharingService.perform(withItems: shareableItems)
+            }
         }
 
         if (sender as? SharingServiceMenuItem)?.name == "safariReadingList" {
-            let sharingService = NSSharingService(named: .addToSafariReadingList)
-            sharingService?.perform(withItems: shareableItems)
+            if let sharingService = NSSharingService(named: .addToSafariReadingList) {
+                sharingService.delegate = self
+                sharingService.perform(withItems: shareableItems)
+            }
         }
 
         if let sharingService = (sender as? SharingServiceToolbarItem)?.service {
+            sharingService.delegate = self
             sharingService.perform(withItems: shareableItems)
         }
     }
@@ -490,6 +503,12 @@ extension MainWindowController: NSSharingServiceDelegate {
         return window
     }
 
+    func sharingService(
+        _ sharingService: NSSharingService,
+        willShareItems items: [Any]
+    ) {
+        sharingService.subject = shareableItemsSubject
+    }
 }
 
 // MARK: - NSSharingServicePickerDelegate
