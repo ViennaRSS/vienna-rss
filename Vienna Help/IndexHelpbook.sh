@@ -11,7 +11,7 @@ for lang in ${lprojList}; do
   
 	echo "Indexing help book for ${lang} ..."
 	case "${lang}" in
-		ja|ko|zh_CN|zh_TW)
+		ja|ko|zh-Hans|zh-Hant)
 			MIN_TERM="1"
 		;;
 		*)
@@ -19,11 +19,19 @@ for lang in ${lprojList}; do
 	esac
 	case "${lang}" in
 		en|de|es|fr|sv|hu|it)
-			/usr/bin/hiutil -C -avv -m "${MIN_TERM}" -s "${lang}" -f "${helpDir}/Vienna.helpindex" "${helpDir}"
+			STOP_WORDS="--stopwords ${lang}"
 		;;
 		*)
-			/usr/bin/hiutil -C -avv -m "${MIN_TERM}" -f "${helpDir}/Vienna.helpindex" "${helpDir}"
+			STOP_WORDS=""
 	esac
+    pushd "${helpDir}"
+    # Spotlight help format required for macOS Mojave (10.14) or later
+    /usr/bin/hiutil --create --anchors --index-format corespotlight --min-term-length="${MIN_TERM}" ${STOP_WORDS} --file "${PRODUCT_NAME}.cshelpindex" -vv .
+    # Latent Symantic Mapping (LSM) help format for versions prior to Mojave
+    /usr/bin/hiutil --create --anchors --index-format lsm --min-term-length="${MIN_TERM}" ${STOP_WORDS} --file "${PRODUCT_NAME}.helpindex" -vv .
+    # control
+    /usr/bin/hiutil -T --index-format corespotlight --file "${PRODUCT_NAME}.cshelpindex" -v
+    popd
 done
 
 exit 0
