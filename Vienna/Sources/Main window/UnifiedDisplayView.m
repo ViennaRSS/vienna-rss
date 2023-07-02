@@ -604,7 +604,8 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
     }
 
 	// Open the HTML string
-	[fullHTMLText appendString:@"<html><body>"];
+	[fullHTMLText appendString:@"<html style=\"font-family:sans-serif;\">"
+                                "<head><meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\"></head><body>"];
 
 	// Get all the articles that are being dragged
 	NSUInteger msgIndex = rowIndexes.firstIndex;
@@ -628,10 +629,11 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
 		[arrayOfArticles addObject:articleDict];
 
 		// Plain text
-		[fullPlainText appendFormat:@"%@\n%@\n\n", msgTitle, msgText];
+        [fullPlainText appendFormat:@"%@\n%@\n\n", msgTitle, thisArticle.summary];
 
 		// Add HTML version too.
-		[fullHTMLText appendFormat:@"<a href=\"%@\">%@</a><br />%@<br /><br />", msgLink, msgTitle, msgText];
+		[fullHTMLText appendFormat:@"<div class=\"info\"><a href=\"%@\">%@</a><div>"
+                                    "<div class=\"articleBodyStyle\">%@</div><br>", msgLink, msgTitle, msgText];
 
 		if (count == 1) {
 			[pboard setString:msgLink forType:NSPasteboardTypeURL];
