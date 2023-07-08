@@ -98,8 +98,6 @@
 		3A500129259A640D00AA6AAD /* ArticleStyleLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2280372271B18A005D1023 /* ArticleStyleLoader.swift */; };
 		3A50014E259AA2BE00AA6AAD /* WebKitArticleConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC4A18F257CF775005FF227 /* WebKitArticleConverter.swift */; };
 		3A60E60B2114AD740004D81D /* URLRequestExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A60E60A2114AD740004D81D /* URLRequestExtensions.m */; };
-		3A78208729FF534100570771 /* ArchivalChecks.sh in Resources */ = {isa = PBXBuildFile; fileRef = 3A78208629FF534100570771 /* ArchivalChecks.sh */; };
-		3A78208929FF536400570771 /* PostArchive.sh in Resources */ = {isa = PBXBuildFile; fileRef = 3A78208829FF536400570771 /* PostArchive.sh */; };
 		3A7BD0DD1989AC7700E9444B /* VNAVerticallyCenteredTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7BD0DC1989AC7700E9444B /* VNAVerticallyCenteredTextFieldCell.m */; };
 		3A8D9AE325A9DA4B0016F30F /* ArticleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D9AE225A9DA4B0016F30F /* ArticleTests.swift */; };
 		3AB95743258DBC5A00C54E83 /* Browser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDF6FC5218A26B0002F77E9 /* Browser.swift */; };
@@ -1879,13 +1877,11 @@
 				F6D572B41E26AA9900CDA909 /* InfoWindow.xib in Resources */,
 				F6832F681F10F5DA007920D4 /* MainWindowController.xib in Resources */,
 				3A0F2A55258FBB8B0036397F /* TabbedBrowserViewController.xib in Resources */,
-				3A78208729FF534100570771 /* ArchivalChecks.sh in Resources */,
 				3A0F2A9E258FCB780036397F /* BrowserTab.xib in Resources */,
 				F6D572BA1E26AAA900CDA909 /* SearchFolder.xib in Resources */,
 				F626F5F424A76B9100D3AAD8 /* Preferences.storyboard in Resources */,
 				F6209C5A23D3FFA700D5537D /* Vienna.sdef in Resources */,
 				F62580E71E286CEC0035E43C /* RSSSources.plist in Resources */,
-				3A78208929FF536400570771 /* PostArchive.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
