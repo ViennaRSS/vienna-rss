@@ -21,7 +21,7 @@
 	<key>HPDBookAccessPath</key>
 	<string>Vienna.html</string>
 	<key>HPDBookIconPath</key>
-	<string>shared/images/Vienna-Logo.jpg</string>
+	<string>shared/images/Vienna-Logo.png</string>
 	<key>HPDBookIndexPath</key>
 	<string>Vienna.helpindex</string>
 	<key>HPDBookCSIndexPath</key>
