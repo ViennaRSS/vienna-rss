@@ -112,6 +112,27 @@ static NSNibName const VNASmartFolderNibName = @"SearchFolder";
     self.saveButton.enabled = !folderName.vna_isBlank;
 }
 
+// When changing any NSPredicateEditorRowTemplate instances, remember to also
+// generate localzable strings (using `-logFormattingStrings`) and update the
+// Predicates.strings files.
+//
+// The source strings are based on SQL column names, NSPredicate operators,
+// scalar values and constant values as well as text. These source strings
+// should match all possible NSPredicateEditorRowTemplate combinations, so that
+// each one can be localized to display differently in the UI.
+//
+// NSPredicateEditor dynamically creates the UI based on the localized strings.
+// Localized strings must include the same number of arguments as their source
+// strings, but the arguments can be rearranged, with the exception of the first
+// argument. Any text within square brackets is displayed as a (pop-up) button
+// title or a menu-item title; text outside of the square brackets is displayed
+// as a label instead. You can combine strings by including mutiple variants in
+// the square brackets.
+//
+// NSPredicateEditor will create a row of UI components for each string, but
+// will merge arguments where possible into pop-up buttons or menus to avoid
+// duplicate entries. The format should therefore be as consistent as possible
+// across each group of strings.
 - (void)prepareTemplates
 {
     NSMutableArray<NSPredicateEditorRowTemplate *> *rowTemplates = [NSMutableArray array];
