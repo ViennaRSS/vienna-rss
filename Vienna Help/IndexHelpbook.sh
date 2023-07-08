@@ -11,7 +11,7 @@ for lang in ${lprojList}; do
   
 	echo "Indexing help book for ${lang} ..."
 	case "${lang}" in
-		ja|ko|zh_CN|zh_TW)
+		ja|ko|zh-Hans|zh-Hant)
 			MIN_TERM="1"
 		;;
 		*)
