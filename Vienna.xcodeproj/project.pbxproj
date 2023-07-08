@@ -3162,7 +3162,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.vienna-rss.Vienna.help";
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.opencommunity.vienna2.help;
 				PRODUCT_NAME = Vienna;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
@@ -3210,7 +3210,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Vienna Help/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.vienna-rss.Vienna.help";
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.opencommunity.vienna2.help;
 				PRODUCT_NAME = Vienna;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
