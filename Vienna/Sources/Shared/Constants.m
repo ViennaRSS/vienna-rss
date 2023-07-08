@@ -140,6 +140,5 @@ AEKeyword const DataItemSourceFeedURL = 'furl';
 NSPasteboardType const VNAPasteboardTypeFolderList = @"ViennaFolderType";
 NSPasteboardType const VNAPasteboardTypeRSSSource = @"CorePasteboardFlavorType 0x52535373";
 NSPasteboardType const VNAPasteboardTypeRSSItem = @"CorePasteboardFlavorType 0x52535369";
-NSPasteboardType const VNAPasteboardTypeURL = @"CorePasteboardFlavorType 0x75726C20";
-NSPasteboardType const VNAPasteboardTypeURLName = @"CorePasteboardFlavorType 0x75726C6E";
+NSPasteboardType const VNAPasteboardTypeURLName = @"public.url-name";
 NSPasteboardType const VNAPasteboardTypeWebURLsWithTitles = @"WebURLsWithTitlesPboardType";
