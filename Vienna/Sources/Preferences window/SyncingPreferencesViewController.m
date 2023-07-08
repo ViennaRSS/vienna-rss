@@ -210,8 +210,7 @@ static NSString *syncingUser;
         serverAndPath = theString;
     }
     serverURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@", syncScheme, serverAndPath]];
-    if ( !((openReaderHost.stringValue).vna_isBlank || (username.stringValue).vna_isBlank) )
-    {
+    if (!openReaderHost.stringValue.vna_isBlank && !username.stringValue.vna_isBlank && password.stringValue.vna_isBlank) {
         // can we get password via keychain ?
         NSString * thePass = [VNAKeychain getWebPasswordFromKeychain:username.stringValue url:[NSString stringWithFormat:@"%@://%@", syncScheme, serverURL.host]];
         if (!thePass.vna_isBlank)
@@ -232,8 +231,7 @@ static NSString *syncingUser;
     _credentialsChanged = YES;
     Preferences *prefs = [Preferences standardPreferences];
     [VNAKeychain deleteGenericPasswordInKeychain:prefs.syncingUser service:@"Vienna sync"];
-    if ( !((openReaderHost.stringValue).vna_isBlank || (username.stringValue).vna_isBlank) )
-    {
+    if (!openReaderHost.stringValue.vna_isBlank && !username.stringValue.vna_isBlank && password.stringValue.vna_isBlank) {
         // can we get password via keychain ?
         NSString * thePass = [VNAKeychain getWebPasswordFromKeychain:username.stringValue url:[NSString stringWithFormat:@"%@://%@", syncScheme, serverURL.host]];
         if (!thePass.vna_isBlank)
