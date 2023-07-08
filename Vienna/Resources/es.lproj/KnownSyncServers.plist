@@ -35,7 +35,7 @@
 		<key>Address</key>
 		<string></string>
 		<key>Hint</key>
-		<string>Introduzca la dirección del servidor y sus credenciales para este servidor</string>
+		<string>Introduzca la dirección del servidor (URL API) y sus credenciales. En el caso de los servidores FreshRSS, la URL de la API suele terminar en "/api/greader.php", y la contraseña de la API se define en la sección "Perfil" del sitio web.</string>
 	</dict>
 </dict>
 </plist>

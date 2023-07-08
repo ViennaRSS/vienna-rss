@@ -35,7 +35,7 @@
 		<key>Address</key>
 		<string></string>
 		<key>Hint</key>
-		<string>Indtast serverens adresse og dine loginoplysninger for denne server</string>
+		<string>Indtast serverens adresse og dine loginoplysninger. For FreshRSS-servere slutter API-URL'en typisk med "/api/greader.php", og API-adgangskoden er defineret i afsnittet "Profil" på hjemmesiden.</string>
 	</dict>
 </dict>
 </plist>
