@@ -8,6 +8,13 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.8.8
+-----
+- Fix access to list of keyboard shortcuts in helpbook on macOS Ventura
+- Adapt helpbook pages to dark mode
+- Improve information on OpenReader
+- Revert Sparkle to version 2.2.2 as a precaution
+
 3.8.7
 -----
 - Fix a long standing problem where OpenReader feeds read with another client would not be immediately synced in Vienna
