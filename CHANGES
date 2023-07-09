@@ -8,6 +8,44 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.9.0 Beta 1
+------------
+### ! Requires macOS 10.13 or higher !
+- New editor for smart folders: criterias can now be imbricated, allowing more complex and refined selections
+- Add initial JSON Feed support
+- Implement Apple's standard interface for sharing articles or pages; Vienna's traditional plugins do not appear in default toolbar, but are still fully supported and can be added or removed as preferred. 
+- Unified search: a single search field can be used for searching within articles, current webpage, folders list or the web.
+- Complete transition to WkWebView based browser; reimplement printing and download, improve contextual menus; fix Web Inspector (macOS >= 13.3)
+- Use view-based cells for tree view of folders and feeds; font is no longer selectable, but user can choose between three cell sizes
+- Fix compliance with refresh frequency set by user
+- Fix disappearance of tooltips on refresh
+- Code cleanup and modernization; built with macOS 13.3 SDK
+- Update Sparkle to version 2.4.2, MMTabBarView to v/1.5.0
+
+Known issue: due to some changes in preferences file format, you may have to reset sorting of folders and articles to your liking.
+
+3.8.8
+-----
+- Fix access to list of keyboard shortcuts in helpbook on macOS Ventura
+- Adapt helpbook pages to dark mode
+- Improve information on OpenReader
+- Revert Sparkle to version 2.2.2 as a precaution
+
+3.8.7
+-----
+- Fix a long standing problem where OpenReader feeds read with another client would not be immediately synced in Vienna
+
+3.8.6
+-----
+- Fix Command-W behavior according to tab count: closes window when only main tab is present
+- Fix memory leak when closing tab with the new browser
+- Fix toolbar search field to only start search when the user presses the enter key
+- Fix status text in window's status bar
+
+3.8.5
+-----
+- Fix "Previous Tab / Next Tab" menu commands to cycle between open tabs
+
 3.8.4
 -----
 - Add ability to hide/show the enclosure bar (through the View menu)

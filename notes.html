@@ -108,23 +108,32 @@ sup {
 
 <h1 id="toc_0">Version Notes</h1>
 
-<h2 id="toc_1">3.8.4</h2>
+<h2 id="toc_1">3.9.0 Beta 1</h2>
+
+<h3 id="toc_2">! Requires macOS 10.13 or higher !</h3>
 
 <ul>
-<li>Add ability to hide/show the enclosure bar (through the View menu)</li>
-<li>Various OpenReader related improvements:
+<li>New editor for smart folders: criterias can now be imbricated, allowing more complex and refined selections</li>
+<li>Add initial JSON Feed support</li>
+<li>Implement Apple&#39;s standard interface for sharing articles or pages; Vienna&#39;s traditional plugins do not appear in default toolbar, but are still fully supported and can be added or removed as preferred. </li>
+<li>Unified search: a single search field can be used for searching within articles, current webpage, folders list or the web.</li>
+<li>Complete transition to WkWebView based browser; reimplement printing and download, improve contextual menus; fix Web Inspector (macOS &gt;= 13.3)</li>
+<li>Use view-based cells for tree view of folders and feeds; font is no longer selectable, but user can choose between three cell sizes</li>
+<li>Fix compliance with refresh frequency set by user</li>
+<li>Fix disappearance of tooltips on refresh</li>
+<li>Code cleanup and modernization; built with macOS 13.3 SDK</li>
+<li>Update Sparkle to version 2.4.2, MMTabBarView to v/1.5.0</li>
+</ul>
+
+<p><strong>Known issue:</strong> due to some changes in preferences file format, you may have to reset sorting of folders and articles to your liking.</p>
+
+<h2 id="toc_3">3.8.8</h2>
 
 <ul>
-<li>Better URL handling in Preferences / Settings window</li>
-<li>Allow access over http or https (useful FreshRSS servers used in internal LAN)</li>
-<li>When refreshing all folders, prevent same error dialog from popping repeatedly</li>
-<li>Fix status discrepancies (especially persisting error icons)</li>
-</ul></li>
-<li>Fix width of left hand pane not being kept after application relaunch (on macOS Ventura)</li>
-<li>Modify details in Preferences / Settings window to better conform to the Human Interface Guidelines</li>
-<li>Modernize code : use newer APIs when available, prepare to sandboxing</li>
-<li>Update Sparkle to version 2.3.0</li>
-<li>Optimized for macOS Ventura : built with macOS 13 SDK (still compatible with macOS 10.12 and above)</li>
+<li>Fix access to list of keyboard shortcuts in helpbook on macOS Ventura</li>
+<li>Adapt helpbook pages to dark mode</li>
+<li>Improve information on OpenReader</li>
+<li>Revert Sparkle to version 2.2.2 as a precaution</li>
 </ul>
 
 
