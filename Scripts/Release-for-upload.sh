@@ -76,14 +76,14 @@ cat > "${VIENNA_CHANGELOG}" << EOF
 			<sparkle:releaseNotesLink>https://www.vienna-rss.com/sparkle-files/noteson${N_VCS_TAG}.html</sparkle:releaseNotesLink>
 		</item>
 		<item>
-			<title>Vienna 3.8.7 :15608906:</title>
-			<pubDate>Sun, 16 Apr 2023 11:30:01 +0000</pubDate>
-			<link>https://github.com/ViennaRSS/vienna-rss/releases/tag/v%2F3.8.7</link>
-			<sparkle:version>8038</sparkle:version>
-			<sparkle:shortVersionString>3.8.7 :15608906:</sparkle:shortVersionString>
+			<title>Vienna 3.8.8 :de36b0c7:</title>
+			<pubDate>Sun, 09 Jul 2023 16:33:59 +0000</pubDate>
+			<link>https://github.com/ViennaRSS/vienna-rss/releases/tag/v%2F3.8.8</link>
+			<sparkle:version>8052</sparkle:version>
+			<sparkle:shortVersionString>3.8.8 :de36b0c7:</sparkle:shortVersionString>
 			<sparkle:minimumSystemVersion>10.12.0</sparkle:minimumSystemVersion>
-			<enclosure url="https://downloads.sourceforge.net/project/vienna-rss/v_3.8.7/Vienna3.8.7.tgz" sparkle:edSignature="xxnCIr1urtVhNbkhWxsG9QF32sV9T1yaJBaOenimNrBoevnSyUE8xTiYd63vdKuJ7kIjKRmuI0aHfUzGNnQPCA==" length="12745279" sparkle:dsaSignature="MC4CFQDDrTMFD+sgjYdIxwvhm3kVtP7ycQIVAI3s970AOW9x/jAqJQGXn5/CuhP2" type="application/octet-stream" />
-			<sparkle:releaseNotesLink>https://www.vienna-rss.com/sparkle-files/noteson3.8.7.html</sparkle:releaseNotesLink>
+			<enclosure url="https://downloads.sourceforge.net/project/vienna-rss/v_3.8.8/Vienna3.8.8.tgz" sparkle:edSignature="FtnUx6IQRQeu8ngmI7WGXyy+Xr6XeFkPLW6V3PjYoPjNaS/yGWqGbWN/okl1bjTOdBph++lr1G2iaYm8Kr55DA==" length="13059409" sparkle:dsaSignature="MC4CFQCvuFjsi/J1Sww++hm8v3VuxoieQwIVAJr0U3qeZd8e1TGAEJf14YK5ooqo" type="application/octet-stream" />
+			<sparkle:releaseNotesLink>https://www.vienna-rss.com/sparkle-files/noteson3.8.8.html</sparkle:releaseNotesLink>
 		</item>
 		<item>
 			<title>Vienna 3.7.5 :e811b5c2:</title>
