@@ -36,7 +36,7 @@ tar -a -cf "${TGZ_FILENAME}" --exclude '.DS_Store' Vienna.app
 rm -rf Vienna.app
 
 # Output the sparkle change log
-SPARKLE_BIN=$(find "${SDK_STAT_CACHE_DIR}" -regex "${SDK_STAT_CACHE_DIR}/${PROJECT}-.*/SourcePackages/artifacts/sparkle/Sparkle/bin")
+SPARKLE_BIN=$(find "${HOME}/Library/Developer/Xcode/DerivedData" -regex "${HOME}/Library/Developer/Xcode/DerivedData/${PROJECT}-.*/SourcePackages/artifacts/sparkle/Sparkle/bin")
 
 if [ ! -d "$SPARKLE_BIN" ]; then
 	printf 'Unable to locate Sparkle binaries in DerivedData. ' 1>&2
