@@ -27,6 +27,7 @@
 #import "DSClickableURLTextField.h"
 #import "NSWorkspace+OpenWithMenu.h"
 #import "HelperFunctions.h"
+#import "GeneratedAssetSymbols.h"
 
 @interface EnclosureView ()
 
@@ -149,7 +150,7 @@
  * Paint the enclosure background.
  */
 - (void)drawRect:(NSRect)rect {
-    [[NSColor colorNamed:@"AttachmentView"] setFill];
+    [[NSColor colorNamed:ACColorNameAttachmentViewBackground] setFill];
     NSRectFill(self.bounds);
 }
 

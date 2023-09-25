@@ -58,6 +58,7 @@
 #import "FolderView.h"
 #import "SubscriptionModel.h"
 #import "Vienna-Swift.h"
+#import "GeneratedAssetSymbols.h"
 
 #define VNA_LOG os_log_create("--", "AppController")
 
@@ -1512,13 +1513,13 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
 	if (appStatusItem != nil) {
 		if (lastCountOfUnread == 0) {
-            NSImage *statusBarImage = [NSImage imageNamed:@"statusBarIcon"];
+            NSImage *statusBarImage = [NSImage imageNamed:ACImageNameStatusBarIcon];
             statusBarImage.template = YES;
             appStatusItem.button.image = statusBarImage;
             appStatusItem.button.title = @"";
             appStatusItem.button.imagePosition = NSImageOnly;
 		} else {
-            NSImage *statusBarImage = [NSImage imageNamed:@"statusBarIconUnread"];
+            NSImage *statusBarImage = [NSImage imageNamed:ACImageNameStatusBarIconUnread];
             statusBarImage.template = YES;
             appStatusItem.button.image = statusBarImage;
 			appStatusItem.button.title = [NSString stringWithFormat:@"%ld", (long)lastCountOfUnread];
@@ -1764,7 +1765,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		// Toggle the refresh button
 		NSToolbarItem *item = [self toolbarItemWithIdentifier:@"Refresh"];
 		item.action = @selector(cancelAllRefreshesToolbar:);
-        item.image = [NSImage imageNamed:@"CancelTemplate"];
+        item.image = [NSImage imageNamed:ACImageNameCancelTemplate];
 	} else {
 		// Run the auto-expire now
 		Preferences * prefs = [Preferences standardPreferences];
@@ -1773,7 +1774,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		// Toggle the refresh button
 		NSToolbarItem *item = [self toolbarItemWithIdentifier:@"Refresh"];
 		item.action = @selector(refreshAllSubscriptions:);
-        item.image = [NSImage imageNamed:@"SyncTemplate"];
+        item.image = [NSImage imageNamed:ACImageNameSyncTemplate];
 
 		[self showUnreadCountOnApplicationIconAndWindowTitle];
 		

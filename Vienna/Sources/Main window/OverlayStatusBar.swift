@@ -44,7 +44,7 @@ final class OverlayStatusBar: NSView {
     private var addressField: NSTextField = {
         let addressField = NSTextField(labelWithString: "")
         addressField.font = .systemFont(ofSize: 12, weight: .medium)
-        addressField.textColor = .overlayStatusBarPrimaryLabelColor
+        addressField.textColor = NSColor(resource: .overlayStatusBarPrimaryText)
         addressField.lineBreakMode = .byTruncatingMiddle
         addressField.allowsDefaultTighteningForTruncation = true
 
@@ -185,15 +185,15 @@ final class OverlayStatusBar: NSView {
         urlFormatter.defaultAttributes = [
             .font: NSFont.systemFont(ofSize: 12, weight: .medium),
             .paragraphStyle: paragraphStyle,
-            .foregroundColor: NSColor.overlayStatusBarPrimaryLabelColor
+            .foregroundColor: NSColor(resource: .overlayStatusBarPrimaryText)
         ]
         urlFormatter.primaryAttributes = [
             .font: NSFont.systemFont(ofSize: 12, weight: .medium),
-            .foregroundColor: NSColor.overlayStatusBarPrimaryLabelColor
+            .foregroundColor: NSColor(resource: .overlayStatusBarPrimaryText)
         ]
         urlFormatter.secondaryAttributes = [
             .font: NSFont.systemFont(ofSize: 12, weight: .regular),
-            .foregroundColor: NSColor.overlayStatusBarSecondaryLabelColor
+            .foregroundColor: NSColor(resource: .overlayStatusBarSecondaryText)
         ]
 
         return urlFormatter
@@ -341,18 +341,6 @@ final class OverlayStatusBar: NSView {
             // appropriate for the superview size (which may change).
             widthConstraint = nil
         }
-    }
-
-}
-
-private extension NSColor {
-
-    class var overlayStatusBarPrimaryLabelColor: NSColor {
-        return NSColor(named: "OverlayStatusBarPrimaryTextColor")!
-    }
-
-    class var overlayStatusBarSecondaryLabelColor: NSColor {
-        return NSColor(named: "OverlayStatusBarSecondaryTextColor")!
     }
 
 }

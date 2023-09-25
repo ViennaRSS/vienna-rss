@@ -390,7 +390,7 @@ extension MainWindowController: NSToolbarDelegate {
             if #available(macOS 11, *) {
                 item.image = NSImage(systemSymbolName: "envelope", accessibilityDescription: nil)
             } else {
-                item.image = NSImage(named: "MailTemplate")
+                item.image = NSImage(resource: .mailTemplate)
             }
             return item
         }
