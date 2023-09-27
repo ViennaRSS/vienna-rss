@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="19162" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="22154" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19162"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22154"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -37,31 +37,31 @@
                             <subviews>
                                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0rn-z0-yA2">
                                     <rect key="frame" x="0.0" y="-2" width="20.5" height="24.5"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="20" id="HLA-5B-V5x"/>
-                                    </constraints>
                                     <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="NSGoBackTemplate" imagePosition="only" alignment="center" inset="2" id="j5n-Oc-Vrp">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="systemBold" size="12"/>
                                     </buttonCell>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="20" id="HLA-5B-V5x"/>
+                                    </constraints>
                                     <connections>
                                         <action selector="back:" target="-2" id="qNx-fN-S3N"/>
                                     </connections>
                                 </button>
                                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aeH-Zd-eUj">
-                                    <rect key="frame" x="23" y="-2" width="20" height="24.5"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="20" id="Qpb-UX-zNR"/>
-                                    </constraints>
+                                    <rect key="frame" x="23" y="-2" width="20.5" height="24.5"/>
                                     <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="NSGoForwardTemplate" imagePosition="only" alignment="center" inset="2" id="0sn-QN-I23">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                         <font key="font" metaFont="systemBold" size="12"/>
                                     </buttonCell>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="20" id="Qpb-UX-zNR"/>
+                                    </constraints>
                                     <connections>
                                         <action selector="forward:" target="-2" id="w7v-U4-Rfp"/>
                                     </connections>
                                 </button>
-                                <textField horizontalHuggingPriority="200" verticalHuggingPriority="750" horizontalCompressionResistancePriority="700" translatesAutoresizingMaskIntoConstraints="NO" id="hfe-el-NfG">
+                                <textField focusRingType="none" horizontalHuggingPriority="200" verticalHuggingPriority="750" horizontalCompressionResistancePriority="700" translatesAutoresizingMaskIntoConstraints="NO" id="hfe-el-NfG">
                                     <rect key="frame" x="46" y="0.0" width="715" height="20"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="20" id="cth-7a-7OT"/>
@@ -75,20 +75,20 @@
                                         <action selector="loadPageFromAddressBar:" target="-2" id="kJy-ZN-1TI"/>
                                     </connections>
                                 </textField>
-                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DXZ-Cm-yVX">
+                                <button clipsToBounds="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DXZ-Cm-yVX">
                                     <rect key="frame" x="764" y="0.0" width="39" height="19"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="39" id="0NG-eP-ikc"/>
-                                    </constraints>
                                     <buttonCell key="cell" type="recessed" title="RSS" bezelStyle="recessed" alignment="center" state="on" borderStyle="border" imageScaling="axesIndependently" inset="2" id="R1b-bS-RKk">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                         <font key="font" metaFont="systemBold" size="12"/>
                                     </buttonCell>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="39" id="0NG-eP-ikc"/>
+                                    </constraints>
                                     <connections>
                                         <action selector="subscribe:" target="-2" id="4re-XI-zfu"/>
                                     </connections>
                                 </button>
-                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="HRc-ZN-msF">
+                                <customView clipsToBounds="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HRc-ZN-msF">
                                     <rect key="frame" x="806" y="0.0" width="30" height="20"/>
                                     <subviews>
                                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oDE-XG-Zic">
@@ -107,7 +107,7 @@
                                         <constraint firstAttribute="width" constant="30" id="d6o-Yg-btU"/>
                                     </constraints>
                                 </customView>
-                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="5Tw-qL-uau">
+                                <customView clipsToBounds="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Tw-qL-uau">
                                     <rect key="frame" x="839" y="0.0" width="30" height="20"/>
                                     <subviews>
                                         <button verticalHuggingPriority="751" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u6u-kW-eOW">
@@ -178,9 +178,9 @@
         </designable>
     </designables>
     <resources>
-        <image name="NSGoBackTemplate" width="10" height="14"/>
-        <image name="NSGoForwardTemplate" width="10" height="14"/>
-        <image name="NSRefreshTemplate" width="14" height="16"/>
-        <image name="NSStopProgressTemplate" width="14" height="13"/>
+        <image name="NSGoBackTemplate" width="12" height="17"/>
+        <image name="NSGoForwardTemplate" width="12" height="17"/>
+        <image name="NSRefreshTemplate" width="18" height="21"/>
+        <image name="NSStopProgressTemplate" width="17" height="16"/>
     </resources>
 </document>
