@@ -21,16 +21,6 @@ import XCTest
 
 class ExportTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        try super.tearDownWithError()
-    }
-
     /// Test helper method to return an array of folders for export
     func foldersArray() -> [Any] {
         guard let database = Database.shared else {
