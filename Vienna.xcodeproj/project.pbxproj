@@ -2966,14 +2966,14 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				WARNING_CFLAGS = (
-					"-Wcustom-atomic-properties",
 					"-Wextra-semi",
+					"-Wcustom-atomic-properties",
 					"-Wgnu-conditional-omitted-operand",
 					"-Widiomatic-parentheses",
+					"-Wmethod-signatures",
 					"-Wmissing-method-return-type",
 					"-Wmissing-variable-declarations",
-					"-Wunreachable-code-break",
-					"-Wunreachable-code-return",
+					"-Woverriding-method-mismatch",
 					"-Wunused-macros",
 					"-Xclang",
 					"-analyzer-tidy-checker=readability-braces-around-statements,readability-misleading-indentation",
@@ -3006,14 +3006,14 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Vienna/Sources/Vienna-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				WARNING_CFLAGS = (
-					"-Wcustom-atomic-properties",
 					"-Wextra-semi",
+					"-Wcustom-atomic-properties",
 					"-Wgnu-conditional-omitted-operand",
 					"-Widiomatic-parentheses",
+					"-Wmethod-signatures",
 					"-Wmissing-method-return-type",
 					"-Wmissing-variable-declarations",
-					"-Wunreachable-code-break",
-					"-Wunreachable-code-return",
+					"-Woverriding-method-mismatch",
 					"-Wunused-macros",
 					"-Xclang",
 					"-analyzer-tidy-checker=readability-braces-around-statements,readability-misleading-indentation",
@@ -3058,7 +3058,7 @@
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES_AGGRESSIVE;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
@@ -3073,6 +3073,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
@@ -3118,7 +3119,7 @@
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES_AGGRESSIVE;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
@@ -3132,6 +3133,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.13;

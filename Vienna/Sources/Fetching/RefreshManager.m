@@ -1156,7 +1156,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
  * Add the specified connection to the connections queue
  * that we manage.
  */
--(NSOperation *)addConnection:(NSMutableURLRequest *)urlRequest completionHandler:(void (^)(NSData *data, NSURLResponse *response,
+-(NSOperation *)addConnection:(NSURLRequest *)urlRequest completionHandler:(void (^)(NSData *data, NSURLResponse *response,
                                                                                             NSError *error))completionHandler
 {
     TRVSURLSessionOperation *op =

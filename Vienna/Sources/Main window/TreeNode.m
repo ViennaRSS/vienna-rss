@@ -316,7 +316,7 @@
  */
 -(NSString *)description
 {
-	return [NSString stringWithFormat:@"%@ (Parent=%p, # of children=%ld)",
+	return [NSString stringWithFormat:@"%@ (Parent=%@, # of children=%ld)",
             folder.name, parentNode, (unsigned long)children.count];
 }
 

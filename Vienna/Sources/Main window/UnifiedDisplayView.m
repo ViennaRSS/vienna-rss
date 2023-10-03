@@ -45,8 +45,8 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
 @property (nonatomic) OverlayStatusBar *statusBar;
 
 -(void)initTableView;
--(void)handleReadingPaneChange:(NSNotificationCenter *)nc;
--(void)handleCellDidResize:(NSNotificationCenter *)nc;
+-(void)handleReadingPaneChange:(NSNotification *)notification;
+-(void)handleCellDidResize:(NSNotification *)notification;
 -(BOOL)viewNextUnreadInCurrentFolder:(NSInteger)currentRow;
 -(void)markCurrentRead:(NSTimer *)aTimer;
 -(void)makeRowSelectedAndVisible:(NSInteger)rowIndex;
@@ -166,9 +166,9 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
 	[rowHeightArray removeAllObjects];
 }
 
-- (void)handleCellDidResize:(NSNotification *)nc
+- (void)handleCellDidResize:(NSNotification *)notification
 {
-    ArticleCellView * cell = nc.object;
+    ArticleCellView * cell = notification.object;
     NSUInteger row = cell.articleRow;
     CGFloat fittingHeight = cell.fittingHeight;
     if (row < rowHeightArray.count) {
@@ -184,8 +184,7 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
     [cell setInProgress:NO];
 }
 
-#pragma mark -
-#pragma ArticleBaseView delegate
+#pragma mark - ArticleBaseView delegate
 
 /* ensureSelectedArticle
  * Ensure that there is a selected article and that it is visible.
@@ -332,7 +331,7 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
 /* handleReadingPaneChange
  * Respond to the change to the reading pane orientation.
  */
--(void)handleReadingPaneChange:(NSNotificationCenter *)nc
+-(void)handleReadingPaneChange:(NSNotification *)notification
 {
 	if (self == self.controller.articleController.mainArticleView) {
 		[articleList reloadData];
