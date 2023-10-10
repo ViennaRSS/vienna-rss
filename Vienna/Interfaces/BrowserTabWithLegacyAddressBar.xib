@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="22154" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22154"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -51,7 +51,7 @@
                                         <action selector="forward:" target="-2" id="w7v-U4-Rfp"/>
                                     </connections>
                                 </button>
-                                <textField horizontalHuggingPriority="200" verticalHuggingPriority="750" horizontalCompressionResistancePriority="700" translatesAutoresizingMaskIntoConstraints="NO" id="hfe-el-NfG">
+                                <textField focusRingType="none" horizontalHuggingPriority="200" verticalHuggingPriority="750" horizontalCompressionResistancePriority="700" translatesAutoresizingMaskIntoConstraints="NO" id="hfe-el-NfG">
                                     <rect key="frame" x="56" y="0.0" width="686" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="21" id="76y-gh-8oJ"/>
@@ -65,37 +65,34 @@
                                         <action selector="loadPageFromAddressBar:" target="-2" id="kJy-ZN-1TI"/>
                                     </connections>
                                 </textField>
-                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="m2a-jT-Jm2">
+                                <button clipsToBounds="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="m2a-jT-Jm2">
                                     <rect key="frame" x="742" y="0.0" width="29" height="21"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="29" id="yiE-mL-DVV"/>
-                                    </constraints>
                                     <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="CancelTemplate" imagePosition="only" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="iWi-GA-9Xl">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="system"/>
                                     </buttonCell>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="29" id="yiE-mL-DVV"/>
+                                    </constraints>
                                     <connections>
                                         <action selector="cancel:" target="-2" id="co1-yJ-HHt"/>
                                     </connections>
                                 </button>
-                                <button verticalHuggingPriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="u6u-kW-eOW">
+                                <button clipsToBounds="YES" verticalHuggingPriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="u6u-kW-eOW">
                                     <rect key="frame" x="771" y="0.0" width="29" height="21"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="29" id="u7N-Cm-8cB"/>
-                                    </constraints>
                                     <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="browserRefreshButton" imagePosition="only" alignment="center" inset="2" id="RBR-fu-w5E">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                         <font key="font" metaFont="systemBold" size="12"/>
                                     </buttonCell>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="29" id="u7N-Cm-8cB"/>
+                                    </constraints>
                                     <connections>
                                         <action selector="reload:" target="-2" id="fgH-tf-FM6"/>
                                     </connections>
                                 </button>
-                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KeR-ow-lja">
-                                    <rect key="frame" x="800" y="-1" width="40" height="22"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="40" id="PoN-9V-QZr"/>
-                                    </constraints>
+                                <button clipsToBounds="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KeR-ow-lja">
+                                    <rect key="frame" x="800" y="0.0" width="40" height="21"/>
                                     <buttonCell key="cell" type="inline" bezelStyle="inline" image="browserRSSButton" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" inset="2" id="6e4-Mb-AuA">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="smallSystemBold"/>
@@ -103,6 +100,9 @@
                                             <action selector="subscribe:" target="-2" id="XdL-4d-wEL"/>
                                         </connections>
                                     </buttonCell>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="40" id="PoN-9V-QZr"/>
+                                    </constraints>
                                 </button>
                             </subviews>
                             <constraints>
@@ -147,7 +147,7 @@
         </customView>
     </objects>
     <resources>
-        <image name="CancelTemplate" width="12" height="12"/>
+        <image name="CancelTemplate" width="19" height="12"/>
         <image name="browserNextButton" width="27" height="21"/>
         <image name="browserPreviousButton" width="29" height="21"/>
         <image name="browserRSSButton" width="31" height="21"/>

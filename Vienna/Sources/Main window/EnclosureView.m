@@ -150,7 +150,7 @@
  */
 - (void)drawRect:(NSRect)rect {
     [[NSColor colorNamed:@"AttachmentView"] setFill];
-	NSRectFill(rect);
+    NSRectFill(self.bounds);
 }
 
 /* dealloc
