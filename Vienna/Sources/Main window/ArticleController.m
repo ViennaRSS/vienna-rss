@@ -880,9 +880,9 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 	}
 	
 	// Smart and Search folders are not included in folderArray when you mark all subscriptions read,
-	// so we need to mark articles read if they're the current folder.
+	// so we need to mark articles read if they're the current folder or might be inside it.
 	Folder * currentFolder = [[Database sharedManager] folderFromID:currentFolderId];
-	if (currentFolder != nil && ![folderArray containsObject:currentFolder]) {
+	if (currentFolder != nil && (currentFolder.type == VNAFolderTypeGroup || ![folderArray containsObject:currentFolder])) {
 		for (Article * theArticle in folderArrayOfArticles)
 			[theArticle markRead:YES];
 	}
@@ -910,12 +910,11 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 			[refArray addObjectsFromArray:articleArray];
 			[[OpenReader sharedManager] markAllReadInFolder:folder];
 		} else {
-			// For smart folders, we only mark all read the current folder to
-			// simplify things.
-			if (folderId == currentFolderId) {
-				[refArray addObjectsFromArray:currentArrayOfArticles];
-				[self innerMarkReadByArray:currentArrayOfArticles readFlag:YES];
-			}
+		    // For smart folders, we only mark read articles which should be visible with current filters
+            NSString *filterString = APPCONTROLLER.filterString;
+            NSArray * articleArray = [self applyFilter:[folder articlesWithFilter:filterString]];
+            [refArray addObjectsFromArray:articleArray];
+            [self innerMarkReadByArray:articleArray readFlag:YES];
 		}
 	}
 	return [refArray copy];
