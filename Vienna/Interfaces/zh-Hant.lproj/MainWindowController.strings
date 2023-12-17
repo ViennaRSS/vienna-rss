@@ -169,6 +169,9 @@
 /* Class = "NSMenuItem"; title = "Mark All Articles as Read"; ObjectID = "Qj9-p3-QXB"; */
 "Qj9-p3-QXB.title" = "將所有文章標示為已閱讀";
 
+/* Class = "NSButtonCell"; title = "Show All Feeds"; ObjectID = "Qqb-bF-tIg"; */
+"Qqb-bF-tIg.title" = "顯示所有源料";
+
 /* Class = "NSMenuItem"; title = "New Folder…"; ObjectID = "RaH-Yu-Ija"; */
 "RaH-Yu-Ija.title" = "新資料夾…";
 
@@ -246,6 +249,12 @@
 
 /* Class = "NSMenuItem"; title = "Last 48 Hours"; ObjectID = "yvh-qU-EAm"; */
 "yvh-qU-EAm.title" = "過去 48 小時";
+
+/* Class = "NSToolbarItem"; label = "Share"; ObjectID = "YVR-Ym-Do7"; */
+"YVR-Ym-Do7.label" = "分享";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Share"; ObjectID = "YVR-Ym-Do7"; */
+"YVR-Ym-Do7.paletteLabel" = "分享";
 
 /* Class = "NSImageView"; ibShadowedToolTip = "An error occurred when this feed was last refreshed"; ObjectID = "Zar-1U-8CD"; */
 "Zar-1U-8CD.ibShadowedToolTip" = "最後一次更新此訂閱頻道時，發生錯誤";

@@ -256,7 +256,8 @@
 /* No comment provided by engineer. */
 "Retrieving folder image" = "フォルダイメージを取得中";
 
-/* Title of a popup menu item */
+/* Title of a menu item
+   Title of a popup menu item */
 "Select…" = "選択…";
 
 /* Title of a popup menu item */

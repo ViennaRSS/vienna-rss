@@ -343,7 +343,8 @@
 /* No comment provided by engineer. */
 "Search Results" = "Výsledky hledání";
 
-/* Title of a popup menu item */
+/* Title of a menu item
+   Title of a popup menu item */
 "Select…" = "Vybrat…";
 
 /* No comment provided by engineer. */

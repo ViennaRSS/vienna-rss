@@ -460,7 +460,8 @@
 /* Label of a button on an open panel */
 "Select" = "Vælg";
 
-/* Title of a popup menu item */
+/* Title of a menu item
+   Title of a popup menu item */
 "Select…" = "Vælg…";
 
 /* A formatted URL string with the mailto: URL scheme. */

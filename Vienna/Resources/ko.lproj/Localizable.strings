@@ -259,7 +259,8 @@
 /* No comment provided by engineer. */
 "Retrieving folder image" = "구독 이미지 추가 중";
 
-/* Title of a popup menu item */
+/* Title of a menu item
+   Title of a popup menu item */
 "Select…" = "선택…";
 
 /* Title of a popup menu item */

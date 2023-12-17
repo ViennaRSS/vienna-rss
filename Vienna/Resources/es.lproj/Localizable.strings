@@ -451,7 +451,8 @@
 /* Label of a button on an open panel */
 "Select" = "Seleccionar";
 
-/* Title of a popup menu item */
+/* Title of a menu item
+   Title of a popup menu item */
 "Select…" = "Seleccionar…";
 
 /* A formatted URL string with the mailto: URL scheme. */
