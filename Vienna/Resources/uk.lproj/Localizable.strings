@@ -355,7 +355,8 @@
 /* No comment provided by engineer. */
 "Search Results" = "Результати пошуку";
 
-/* Title of a popup menu item */
+/* Title of a menu item
+   Title of a popup menu item */
 "Select…" = "Виділити…";
 
 /* No comment provided by engineer. */

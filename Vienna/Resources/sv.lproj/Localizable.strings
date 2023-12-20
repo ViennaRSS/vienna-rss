@@ -416,7 +416,8 @@
 /* Label of a button on an open panel */
 "Select" = "Välj";
 
-/* Title of a popup menu item */
+/* Title of a menu item
+   Title of a popup menu item */
 "Select…" = "Markera…";
 
 /* A formatted URL string with the mailto: URL scheme. */

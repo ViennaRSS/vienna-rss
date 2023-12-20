@@ -436,6 +436,9 @@
 /* Class = "NSMenuItem"; title = "Smart Dashes"; ObjectID = "RtQ-eP-bfk"; */
 "RtQ-eP-bfk.title" = "Smarte bindestreger";
 
+/* Class = "NSMenuItem"; title = "Share…"; ObjectID = "SSr-Ho-wep"; */
+"SSr-Ho-wep.title" = "Del…";
+
 /* Class = "NSMenuItem"; title = "All Articles"; ObjectID = "t1E-6n-jtA"; */
 "t1E-6n-jtA.title" = "Alle artikler";
 
@@ -450,6 +453,9 @@
 
 /* Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "v3R-CV-0b9"; */
 "v3R-CV-0b9.title" = "Stort bogstav";
+
+/* Class = "NSMenuItem"; title = "Add to Safari Reading List"; ObjectID = "VQe-zs-ODh"; */
+"VQe-zs-ODh.title" = "Føj til læselisten";
 
 /* Class = "NSMenuItem"; title = "Smart Links"; ObjectID = "w4Q-ne-FPI"; */
 "w4Q-ne-FPI.title" = "Smarte henvisninger";

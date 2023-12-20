@@ -470,7 +470,8 @@
 /* Label of a button on an open panel */
 "Select" = "Selecteer";
 
-/* Title of a popup menu item */
+/* Title of a menu item
+   Title of a popup menu item */
 "Select…" = "Selecteer…";
 
 /* A formatted URL string with the mailto: URL scheme. */

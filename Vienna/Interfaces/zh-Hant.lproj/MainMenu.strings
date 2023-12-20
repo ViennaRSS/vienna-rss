@@ -7,6 +7,9 @@
 /* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5"; */
 "5.title" = "將此程式所有視窗移至最前";
 
+/* Class = "NSMenuItem"; title = "Show Enclosure Bar"; ObjectID = "5V8-N1-SQd"; */
+"5V8-N1-SQd.title" = "顯示附檔工具列";
+
 /* Class = "NSMenuItem"; title = "Refresh All Subscriptions"; ObjectID = "6yn-y8-lF1"; */
 "6yn-y8-lF1.title" = "重新整理所有訂閱頻道";
 
@@ -403,6 +406,9 @@
 /* Class = "NSMenuItem"; title = "Smart Quotes"; ObjectID = "kCi-pf-mkc"; */
 "kCi-pf-mkc.title" = "智慧引號";
 
+/* Class = "NSMenuItem"; title = "Hide Enclosure Bar"; ObjectID = "Ke1-zq-KLc"; */
+"Ke1-zq-KLc.title" = "隱藏附檔工具列";
+
 /* Class = "NSMenuItem"; title = "Spelling and Grammar"; ObjectID = "l8F-tb-7E0"; */
 "l8F-tb-7E0.title" = "拼字與文法";
 
@@ -430,6 +436,9 @@
 /* Class = "NSMenuItem"; title = "Smart Dashes"; ObjectID = "RtQ-eP-bfk"; */
 "RtQ-eP-bfk.title" = "智慧型劃線";
 
+/* Class = "NSMenuItem"; title = "Share…"; ObjectID = "SSr-Ho-wep"; */
+"SSr-Ho-wep.title" = "分享...";
+
 /* Class = "NSMenuItem"; title = "All Articles"; ObjectID = "t1E-6n-jtA"; */
 "t1E-6n-jtA.title" = "所有文章";
 
@@ -444,6 +453,9 @@
 
 /* Class = "NSMenuItem"; title = "Capitalize"; ObjectID = "v3R-CV-0b9"; */
 "v3R-CV-0b9.title" = "保持大寫";
+
+/* Class = "NSMenuItem"; title = "Add to Safari Reading List"; ObjectID = "VQe-zs-ODh"; */
+"VQe-zs-ODh.title" = "增加到 Safari 閱讀清單中";
 
 /* Class = "NSMenuItem"; title = "Smart Links"; ObjectID = "w4Q-ne-FPI"; */
 "w4Q-ne-FPI.title" = "智慧型連結";

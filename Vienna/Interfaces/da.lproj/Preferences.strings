@@ -43,6 +43,9 @@
 /* Class = "NSButtonCell"; title = "Select…"; ObjectID = "cbn-xq-UFr"; */
 "cbn-xq-UFr.title" = "Vælg…";
 
+/* Class = "NSMenuItem"; title = "Medium"; ObjectID = "ClO-ha-l48"; */
+"ClO-ha-l48.title" = "Medium";
+
 /* Class = "NSButtonCell"; title = "Show website icons in the feed list"; ObjectID = "dkm-xW-4If"; */
 "dkm-xW-4If.title" = "Vis hjemmesideikoner i feed-listen";
 
@@ -78,6 +81,9 @@
 
 /* Class = "NSButtonCell"; title = "Check for newer versions of Vienna on start up"; ObjectID = "haP-20-AwJ"; */
 "haP-20-AwJ.title" = "Tjek for nyere versioner af Vienna ved opstart";
+
+/* Class = "NSMenuItem"; title = "Small"; ObjectID = "hd4-wx-xuK"; */
+"hd4-wx-xuK.title" = "Lille";
 
 /* Class = "NSTextFieldCell"; title = "Erase deleted articles:"; ObjectID = "HH2-sh-rEx"; */
 "HH2-sh-rEx.title" = "Fjern slettede artikler:";
@@ -142,6 +148,9 @@
 /* Class = "NSMenuItem"; title = "After two days"; ObjectID = "sJE-bd-4mK"; */
 "sJE-bd-4mK.title" = "Efter to dage";
 
+/* Class = "NSTextFieldCell"; title = "Feed list font size:"; ObjectID = "Sxj-Uk-jhk"; */
+"Sxj-Uk-jhk.title" = "Feed-liste skriftstørrelse:";
+
 /* Class = "NSViewController"; title = "General"; ObjectID = "T2z-OK-VtO"; */
 "T2z-OK-VtO.title" = "Generelt";
 
@@ -165,6 +174,9 @@
 
 /* Class = "NSMenuItem"; title = "After one week"; ObjectID = "xfd-Vp-kJy"; */
 "xfd-Vp-kJy.title" = "Efter én uge";
+
+/* Class = "NSMenuItem"; title = "Large"; ObjectID = "xIg-ej-t3j"; */
+"xIg-ej-t3j.title" = "Stor";
 
 /* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "YG6-9k-gKH"; */
 "YG6-9k-gKH.title" = "Henvisning:";

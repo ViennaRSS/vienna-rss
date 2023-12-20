@@ -1,8 +1,0 @@
-"%[Author,Subject,Text]@ %[contains,does not contain]@ %@" = "%1$[Autor,Asunto,Contenido]@ %2$[contiene,no contiene]@ %3$@";
-"%[Deleted,Flagged,HasEnclosure,Read]@ is %[No,Yes]@" = "%1$[Está eliminado,Está destacado,Tiene archivo adjunto,Está leído]@ %2$[No,Sí]@";
-"%[Author,Folder,Subject,Text]@ %[is,is not]@ %@" = "%1$[Autor,Carpeta,Asunto,Contenido]@ %2$[es,no es]@ %3$@";
-"%[Date]@ %[is,is less than,is less than or equal to]@ %[today]@" = "%1$[Fecha]@ %2$[es,es anterior a,es anterior a o es]@ %3$[hoy]@";
-"%[Date]@ %[is,is greater than or equal to,is less than,is less than or equal to]@ %[yesterday]@" = "%1$[Fecha]@ %2$[es,es posterior a o es,es anterior a,es anterior a o es]@ %3$[ayer]@";
-"%[Date]@ %[is,is greater than,is greater than or equal to,is less than,is less than or equal to]@ %[last week]@" = "%1$[Fecha]@ %2$[es,es posterior a,es posterior a o es,es anterior a,es anterior a o es]@ %3$[última semana]@";
-"%[All]@ of the following are true" = "Artículo cumple %1$[todas]@ las siguientes condiciones";
-"%[Any,None]@ of the following are true" = "Artículo cumple con %1$[alguna,ninguna]@ de las siguientes condiciones";

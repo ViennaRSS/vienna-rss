@@ -31,6 +31,9 @@
 /* No comment provided by engineer. */
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "無法在“%@”建立新的 Vienna 資料庫，原因可能是這個檔案夾位在遠端網路分享空間中，而 Vienna 無法管理遠端的資料庫。請在您的本機電腦上，選擇其他的檔案夾。";
 
+/* Toolbar item palette label */
+"Add to Safari Reading List" = "增加到 Safari 閱讀清單中";
+
 /* No comment provided by engineer. */
 "AppleScript Error in '%@' script" = "在 %@ 腳本中發生 AppleScript 錯誤";
 
@@ -165,6 +168,10 @@
 /* Toolbar item tooltip */
 "Email a link to the current article or website" = "寄送目前文章或網站的連結";
 
+/* Toolbar item label
+   Toolbar item palette label */
+"Email Link" = "郵件連結";
+
 /* Title of a button on an alert */
 "Empty" = "清除";
 
@@ -182,6 +189,9 @@
 
 /* No comment provided by engineer. */
 "Error loading script '%@'" = "載入 script 時發生錯誤 %@";
+
+/* No comment provided by engineer. */
+"Error parsing data in feed" = "於解析源料內容時發生錯誤";
 
 /* No comment provided by engineer. */
 "Error retrieving RSS feed:" = "取得 RSS 內容發生錯誤：";
@@ -436,6 +446,15 @@
 /* A formatted URL string with the javascript: URL scheme. */
 "Run script “%@”" = "執行腳本 \"%@\"";
 
+/* Toolbar item label */
+"Safari Reading List" = "Safari 閱讀清單";
+
+/* Search panel title
+   Toolbar item label
+   Toolbar item palette label
+   Toolbar item tooltip */
+"Search" = "搜尋";
+
 /* Placeholder title of a search field */
 "Search all articles" = "搜尋所有文章";
 
@@ -451,7 +470,8 @@
 /* Label of a button on an open panel */
 "Select" = "選擇";
 
-/* Title of a popup menu item */
+/* Title of a menu item
+   Title of a popup menu item */
 "Select…" = "選取⋯";
 
 /* A formatted URL string with the mailto: URL scheme. */
