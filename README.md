@@ -1,6 +1,6 @@
 ![Vienna](https://vienna-rss.sourceforge.io/img/vienna_logo.png)
 
-![Build status](https://github.com/ViennaRSS/vienna-rss/workflows/Vienna/badge.svg)
+[![Build status](https://github.com/ViennaRSS/vienna-rss/actions/workflows/xcodebuild.yml/badge.svg)](https://github.com/ViennaRSS/vienna-rss/actions/workflows/xcodebuild.yml)
 [![Localization status](https://d322cqt584bo4o.cloudfront.net/vienna-rss/localized.svg)](https://crowdin.com/project/vienna-rss "Crowdin")
 
 [Vienna](https://www.vienna-rss.com) is an RSS/Atom reader for macOS.
@@ -12,13 +12,13 @@ Additionally or alternatively, you can also sync with a server supporting the [O
 Compatibility
 -------------
 
-Version 3.9 of Vienna will require a minimum of macOS 10.13 (High Sierra).
+Version 3.9 of Vienna will require a minimum of macOS 10.13 (High Sierra).
 
-Vienna 3.8.x require a minimum of macOS 10.12 (Sierra).
-Vienna 3.6.x and 3.7.x require a minimum of OS X 10.11 (El Capitan).  
-Vienna 3.2.x to 3.5.x require a minimum of OS X 10.9 (Mavericks).  
-Vienna 3.1.x requires a minimum of OS X 10.8 (Mountain Lion).  
-Vienna 3.0.x requires a minimum of OS X 10.6 (Snow Leopard).
+Vienna 3.8.x requires a minimum of macOS 10.12 (Sierra).  
+Vienna 3.6.x and 3.7.x require a minimum of OS X 10.11 (El Capitan).  
+Vienna 3.2.x to 3.5.x require a minimum of OS X 10.9 (Mavericks).  
+Vienna 3.1.x requires a minimum of OS X 10.8 (Mountain Lion).  
+Vienna 3.0.x requires a minimum of OS X 10.6 (Snow Leopard).
 
 
 Installing
@@ -29,7 +29,7 @@ Alternatively, you can download releases from [Sourceforge](https://sourceforge.
 
 **Homebrew**
 
-Vienna is also available as a Cask for [Homebrew Cask](https://github.com/phinze/homebrew-cask).
+Vienna is also available as a Cask for [Homebrew Cask](https://github.com/Homebrew/homebrew-cask).
 ```bash
 brew install --cask vienna
 ```
@@ -37,7 +37,7 @@ brew install --cask vienna
 Getting support
 ---------------
 
-If the in-application help files and the [FAQs](https://www.vienna-rss.com/faq.html) don’t answer your questions, head over to our [Support forum](https://forums.cocoaforge.com/viewforum.php?f=18) which is hosted by Cocoaforge.
+If the in-application help files and the [FAQ](https://www.vienna-rss.com/faq) don’t answer your questions, head over to our [Discussions page](https://github.com/ViennaRSS/vienna-rss/discussions) on GitHub or our [support forum](https://forums.cocoaforge.com/viewforum.php?f=18) which is hosted by Cocoaforge.
 
 Reporting an issue
 ------------------
@@ -57,7 +57,7 @@ Please check [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ### Localizing ###
 
-We need help keeping Vienna translations up to date into different languages. You can contribute localizations at [Crowdin](https://crowdin.com/project/vienna-rss). Registration is required, but the account is free. If you want to contribute for a language that is not yet listed, then contact us. Do not localize the project's \*.strings files directly. Localizable \*.plist files have to be localized directly.
+We need help keeping Vienna translations up to date into different languages. You can contribute localizations at [Crowdin](https://crowdin.com/project/vienna-rss). Registration is required, but the account is free. Contact us if you want to contribute for a language that is not yet listed. Do not localize the project's files directly.
 
 ### Writing custom styles
 
