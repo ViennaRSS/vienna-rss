@@ -129,7 +129,10 @@ NSURL *_Nullable urlFromUserString(NSString *_Nonnull urlString)
             [pasteboard declareTypes:@[NSPasteboardTypeString] owner:nil];
             @try {
                 if ([pasteboard setString:urlString forType:NSPasteboardTypeString]) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
                     url = [WebView URLFromPasteboard:pasteboard];
+#pragma clang diagnostic pop
                 }
             } @catch (NSException *exception) {
                 NSLog(@"Failed to convert URL for string %@", urlString);
