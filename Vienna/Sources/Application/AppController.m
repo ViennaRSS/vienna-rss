@@ -2002,6 +2002,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		case 'y':
 		case 'Y':
 			[self viewArticlesTab:self];
+			return YES;
 			
 		case 'u':
 		case 'U':
