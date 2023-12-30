@@ -3269,7 +3269,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	} else if (theAction == @selector(closeAllTabs:)) {
 		return isMainWindowVisible && self.browser.browserTabCount > 1;
 	} else if (theAction == @selector(reloadPage:)) {
-		return self.browser.activeTab.isLoading;
+		return !isAnyArticleView;
 	} else if (theAction == @selector(stopReloadingPage:)) {
 		return self.browser.activeTab.isLoading;
 	} else if (theAction == @selector(keepFoldersArranged:)) {
