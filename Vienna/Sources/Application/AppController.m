@@ -3364,15 +3364,10 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 }
 
 /**
- Toggle the visibility of the activity panel; show when hidden and close when
- visible.
+ * Show the activity window
  */
-- (IBAction)toggleActivityViewer:(id)sender {
-    if (!self.activityPanelController.window.visible) {
-        [self.activityPanelController showWindow:self];
-    } else {
-        [self.activityPanelController.window performClose:self];
-    }
+- (IBAction)showActivityWindow:(id)sender {
+    [self.activityPanelController showWindow:self];
 }
 
 /**

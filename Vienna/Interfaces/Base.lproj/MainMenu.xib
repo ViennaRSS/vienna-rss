@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="22505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22505"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ViennaApp">
@@ -804,7 +804,7 @@ CA
                             <menuItem isSeparatorItem="YES" id="1077"/>
                             <menuItem title="Activity Window" keyEquivalent="0" id="402">
                                 <connections>
-                                    <action selector="toggleActivityViewer:" target="-1" id="Q19-do-Grz"/>
+                                    <action selector="showActivityWindow:" target="233" id="yBV-uf-mcx"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Main Window" keyEquivalent="1" id="940">
