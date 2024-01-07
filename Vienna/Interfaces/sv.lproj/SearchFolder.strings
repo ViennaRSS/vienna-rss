@@ -7,3 +7,6 @@
 /* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "97"; */
 "97.title" = "Avbryt";
 
+/* Class = "NSTextFieldCell"; title = "Hold down the Option key to add nested rules."; ObjectID = "caT-eg-dXm"; */
+"caT-eg-dXm.title" = "Håll ned alternativtangenten för att lägga till kapslade regler.";
+

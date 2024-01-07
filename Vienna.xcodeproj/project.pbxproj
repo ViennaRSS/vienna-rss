@@ -513,6 +513,7 @@
 		F61CEA671F03F277009C878E /* PlugInToolbarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PlugInToolbarItem.swift; sourceTree = "<group>"; };
 		F6209C5923D3FFA700D5537D /* Vienna.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; lineEnding = 0; path = Vienna.sdef; sourceTree = "<group>"; usesTabs = 1; };
 		F62116A9209EFE9F00FAC2C2 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = uk; path = uk.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		F6232EF72B4B402F00D01D2A /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Predicates.strings; sourceTree = "<group>"; };
 		F6257FF61E28485F0035E43C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Downloads.xib; sourceTree = "<group>"; };
 		F6257FF91E2848680035E43C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Downloads.strings; sourceTree = "<group>"; };
 		F6257FFB1E2848910035E43C /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/Downloads.strings; sourceTree = "<group>"; };
@@ -2455,6 +2456,7 @@
 				F6DA45532940CC9E00D746F8 /* de */,
 				F66A7E542A019006002F5D5E /* fr */,
 				F698E6FF29E9D1CA00D49475 /* nl */,
+				F6232EF72B4B402F00D01D2A /* sv */,
 			);
 			name = Predicates.strings;
 			sourceTree = "<group>";
