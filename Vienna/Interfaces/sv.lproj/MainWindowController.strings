@@ -25,6 +25,9 @@
 /* Class = "NSMenuItem"; title = "Flagged"; ObjectID = "8LJ-RZ-pfu"; */
 "8LJ-RZ-pfu.title" = "Flaggad";
 
+/* Class = "NSMenuItem"; title = "Force Refresh Selected Subscriptions From Open Reader"; ObjectID = "9os-ks-jzh"; */
+"9os-ks-jzh.title" = "Tvinga uppdatering för valda prenumerationer från Open Reader";
+
 /* Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "676-5a-TdF"; */
 "676-5a-TdF.title" = "Källsida i webbläsare";
 
@@ -45,6 +48,9 @@
 
 /* Class = "NSTextFieldCell"; title = "Filter by:"; ObjectID = "1377"; */
 "1377.title" = "Filtrera på:";
+
+/* Class = "NSSearchField"; ibShadowedToolTip = "Filter displayed articles by matching text"; ObjectID = "a7v-eM-oW1"; */
+"a7v-eM-oW1.ibShadowedToolTip" = "Filtrera visade artiklar med följande text";
 
 /* Class = "NSToolbarItem"; label = "Style"; ObjectID = "azL-oz-mJL"; */
 "azL-oz-mJL.label" = "Stil";
@@ -117,6 +123,9 @@
 
 /* Class = "NSToolbarItem"; paletteLabel = "Filter"; ObjectID = "I8N-Dr-P6W"; */
 "I8N-Dr-P6W.paletteLabel" = "Filter";
+
+/* Class = "NSMenuItem"; title = "Force Refresh Selected Subscriptions From Open Reader"; ObjectID = "iqm-sr-F8U"; */
+"iqm-sr-F8U.title" = "Tvinga uppdatering för valda prenumerationer från Open Reader";
 
 /* Class = "NSMenuItem"; title = "All Articles"; ObjectID = "JT2-Q7-gRj"; */
 "JT2-Q7-gRj.title" = "Alla artiklar";

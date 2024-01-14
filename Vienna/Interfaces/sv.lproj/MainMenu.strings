@@ -7,6 +7,9 @@
 /* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5"; */
 "5.title" = "Lägg alla överst";
 
+/* Class = "NSMenuItem"; title = "Show Enclosure Bar"; ObjectID = "5V8-N1-SQd"; */
+"5V8-N1-SQd.title" = "Visa rad för bilagor";
+
 /* Class = "NSMenuItem"; title = "Refresh All Subscriptions"; ObjectID = "6yn-y8-lF1"; */
 "6yn-y8-lF1.title" = "Uppdatera alla prenumerationer";
 
@@ -349,6 +352,12 @@
 /* Class = "NSMenuItem"; title = "Use Web Page for Articles"; ObjectID = "1415"; */
 "1415.title" = "Använd webbsida för artiklar";
 
+/* Class = "NSMenuItem"; title = "Force Refresh Selected Subscriptions From Open Reader"; ObjectID = "1425"; */
+"1425.title" = "Tvinga uppdatering för valda prenumerationer från Open Reader";
+
+/* Class = "NSMenuItem"; title = "Update Subscriptions From Open Reader"; ObjectID = "1428"; */
+"1428.title" = "Uppdatera prenumerationer från Open Reader";
+
 /* Class = "NSMenuItem"; title = "Reindex Database"; ObjectID = "1458"; */
 "1458.title" = "Omindexera databas";
 
@@ -396,6 +405,9 @@
 
 /* Class = "NSMenuItem"; title = "Smart Quotes"; ObjectID = "kCi-pf-mkc"; */
 "kCi-pf-mkc.title" = "Smarta citationstecken";
+
+/* Class = "NSMenuItem"; title = "Hide Enclosure Bar"; ObjectID = "Ke1-zq-KLc"; */
+"Ke1-zq-KLc.title" = "Göm rad för bilagor";
 
 /* Class = "NSMenuItem"; title = "Spelling and Grammar"; ObjectID = "l8F-tb-7E0"; */
 "l8F-tb-7E0.title" = "Stavning och grammatik";

@@ -7,6 +7,9 @@
 /* Class = "NSButtonCell"; title = "Mark updated articles as new"; ObjectID = "4vm-80-j33"; */
 "4vm-80-j33.title" = "Märk uppdaterade artiklar som nya";
 
+/* Class = "NSTextFieldCell"; title = "However, high numbers also render your computer less responsive while refreshing feeds."; ObjectID = "5EA-1i-TuA"; */
+"5EA-1i-TuA.title" = "Men höga siffror gör också din dator långsammare samtidigt som flöden uppdateras.";
+
 /* Class = "NSMenuItem"; title = "Every 6 hours"; ObjectID = "6GF-Pk-gI9"; */
 "6GF-Pk-gI9.title" = "Var 6:e timme";
 
@@ -55,8 +58,17 @@
 /* Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "FFP-H1-weF"; */
 "FFP-H1-weF.title" = "Visa i menyraden";
 
+/* Class = "NSTextFieldCell"; title = "You may have to relaunch Vienna after changing this setting for it to take effect."; ObjectID = "fgw-cI-bAr"; */
+"fgw-cI-bAr.title" = "Du kan behöva starta om Vienna efter ändring av denna inställning för att den ska få effekt.";
+
 /* Class = "NSButtonCell"; title = "Open links in external browser"; ObjectID = "flH-2D-s6O"; */
 "flH-2D-s6O.title" = "Öppna länkar i extern webbläsare";
+
+/* Class = "NSTextFieldCell"; title = "The higher the number, the quicker your subscriptions will be downloaded."; ObjectID = "g3K-qh-M6y"; */
+"g3K-qh-M6y.title" = "Ju högre nummer, desto snabbare nedladdning av dina prenumerationer.";
+
+/* Class = "NSTextField"; ibShadowedToolTip = "Address of a server supporting the Open Reader API"; ObjectID = "gKc-l8-p9m"; */
+"gKc-l8-p9m.ibShadowedToolTip" = "Adress till en server som stöder Open Reader API";
 
 /* Class = "NSMenuItem"; title = "Ask when Vienna quits"; ObjectID = "gnv-f7-Z4Z"; Note = "Erase deleted articles: Ask when Vienna quits"; */
 "gnv-f7-Z4Z.title" = "Fråga när Vienna avslutas";
@@ -78,6 +90,9 @@
 
 /* Class = "NSTextFieldCell"; title = "When new unread articles are retrieved:"; ObjectID = "iCs-T5-L1c"; */
 "iCs-T5-L1c.title" = "När nya olästa artiklar är mottagna:";
+
+/* Class = "NSPopUpButton"; ibShadowedToolTip = "Select a server supporting the Open Reader API"; ObjectID = "iHl-tr-paa"; */
+"iHl-tr-paa.ibShadowedToolTip" = "Välj en server som stöder Open Reader API";
 
 /* Class = "NSTextFieldCell"; title = "Article list font:"; ObjectID = "ITA-U9-lhX"; */
 "ITA-U9-lhX.title" = "Artikellista:";
