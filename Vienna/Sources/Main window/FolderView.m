@@ -93,7 +93,7 @@ VNAFeedListRowHeight const VNAFeedListRowHeightMedium = 28.0;
     [super keyDown:theEvent];
 }
 
-- (void)setDataSource:(id)aSource
+- (void)setDataSource:(id<NSOutlineViewDataSource>)aSource
 {
     _directDataSource = aSource;
     _filterDataSource = [[FoldersFilterableDataSourceImpl alloc] initWithDataSource:aSource];

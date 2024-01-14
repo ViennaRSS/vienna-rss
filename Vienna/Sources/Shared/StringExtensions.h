@@ -20,7 +20,7 @@
 
 @import Foundation;
 
-#define SafeString(s) s ? s : @""
+#define SafeString(s) s ? (s) : @""
 
 NS_ASSUME_NONNULL_BEGIN
 

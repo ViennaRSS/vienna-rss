@@ -49,7 +49,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 -(BOOL)copyTableSelection:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard;
 -(void)setTableViewFont;
 -(void)showSortDirection;
--(void)handleReadingPaneChange:(NSNotificationCenter *)nc;
+-(void)handleReadingPaneChange:(NSNotification *)notification;
 -(BOOL)viewNextUnreadInCurrentFolder:(NSInteger)currentRow;
 -(void)markCurrentRead:(NSTimer *)aTimer;
 -(void)refreshImmediatelyArticleAtCurrentRow;
@@ -792,7 +792,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 /* handleReadingPaneChange
  * Respond to the change to the reading pane orientation.
  */
--(void)handleReadingPaneChange:(NSNotificationCenter *)nc
+-(void)handleReadingPaneChange:(NSNotification *)notification
 {
 	if (self == self.controller.articleController.mainArticleView) {
 		[self setOrientation:[Preferences standardPreferences].layout];
