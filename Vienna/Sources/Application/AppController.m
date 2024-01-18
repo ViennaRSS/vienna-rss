@@ -2002,6 +2002,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		case 'y':
 		case 'Y':
 			[self viewArticlesTab:self];
+			return YES;
 			
 		case 'u':
 		case 'U':
@@ -3268,7 +3269,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	} else if (theAction == @selector(closeAllTabs:)) {
 		return isMainWindowVisible && self.browser.browserTabCount > 1;
 	} else if (theAction == @selector(reloadPage:)) {
-		return self.browser.activeTab.isLoading;
+		return !isAnyArticleView;
 	} else if (theAction == @selector(stopReloadingPage:)) {
 		return self.browser.activeTab.isLoading;
 	} else if (theAction == @selector(keepFoldersArranged:)) {
@@ -3363,15 +3364,10 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 }
 
 /**
- Toggle the visibility of the activity panel; show when hidden and close when
- visible.
+ * Show the activity window
  */
-- (IBAction)toggleActivityViewer:(id)sender {
-    if (!self.activityPanelController.window.visible) {
-        [self.activityPanelController showWindow:self];
-    } else {
-        [self.activityPanelController.window performClose:self];
-    }
+- (IBAction)showActivityWindow:(id)sender {
+    [self.activityPanelController showWindow:self];
 }
 
 /**

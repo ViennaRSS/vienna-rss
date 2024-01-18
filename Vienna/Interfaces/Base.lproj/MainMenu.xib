@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="22505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22505"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ViennaApp">
@@ -427,29 +427,6 @@ CA
                                     </items>
                                 </menu>
                             </menuItem>
-                            <menuItem isSeparatorItem="YES" id="390"/>
-                            <menuItem title="Article List" keyEquivalent="y" id="Rs9-r3-soc">
-                                <connections>
-                                    <action selector="viewArticlesTab:" target="-1" id="p4V-jV-gaL"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Next Unread" keyEquivalent="u" id="344">
-                                <connections>
-                                    <action selector="viewNextUnread:" target="-1" id="zjw-pE-qp9"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem isSeparatorItem="YES" id="1026"/>
-                            <menuItem title="Stop Reloading Page" keyEquivalent="." id="1027">
-                                <connections>
-                                    <action selector="stopReloadingPage:" target="-1" id="8co-E2-z9R"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Reload Page" keyEquivalent="r" id="1025">
-                                <modifierMask key="keyEquivalentModifierMask" option="YES"/>
-                                <connections>
-                                    <action selector="reloadPage:" target="-1" id="2Pe-tj-QfU"/>
-                                </connections>
-                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="498"/>
                             <menuItem title="Layout" id="1108">
                                 <menu key="submenu" title="Layout" id="1109">
@@ -533,37 +510,7 @@ CA
                                     </items>
                                 </menu>
                             </menuItem>
-                            <menuItem isSeparatorItem="YES" id="1088"/>
-                            <menuItem title="Actual Size" keyEquivalent="0" id="OiG-oc-aVj">
-                                <attributedString key="userComments">
-                                    <fragment content="This string is also used in Safari"/>
-                                </attributedString>
-                                <connections>
-                                    <action selector="makeTextStandardSize:" target="-1" id="waF-l7-Sgn"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Bigger Text" keyEquivalent="+" id="1084">
-                                <connections>
-                                    <action selector="makeTextLarger:" target="-1" id="1141"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Smaller Text" keyEquivalent="-" id="1085">
-                                <connections>
-                                    <action selector="makeTextSmaller:" target="-1" id="1142"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem isSeparatorItem="YES" id="829"/>
-                            <menuItem title="Back" keyEquivalent="[" id="422">
-                                <connections>
-                                    <action selector="goBack:" target="-1" id="boc-Iz-ltd"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Forward" keyEquivalent="]" id="423">
-                                <connections>
-                                    <action selector="goForward:" target="-1" id="W9b-gw-hWo"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem isSeparatorItem="YES" id="1256"/>
+                            <menuItem isSeparatorItem="YES" id="1261"/>
                             <menuItem title="Hide Toolbar" id="1258">
                                 <connections>
                                     <action selector="toggleToolbarShown:" target="-1" id="1262"/>
@@ -610,6 +557,48 @@ CA
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="XJ7-to-sLq"/>
+                            <menuItem title="Stop Reloading Page" keyEquivalent="." id="1027">
+                                <connections>
+                                    <action selector="stopReloadingPage:" target="-1" id="8co-E2-z9R"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Reload Page" keyEquivalent="r" id="1025">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES"/>
+                                <connections>
+                                    <action selector="reloadPage:" target="-1" id="2Pe-tj-QfU"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="1088"/>
+                            <menuItem title="Actual Size" keyEquivalent="0" id="OiG-oc-aVj">
+                                <attributedString key="userComments">
+                                    <fragment content="This string is also used in Safari"/>
+                                </attributedString>
+                                <connections>
+                                    <action selector="makeTextStandardSize:" target="-1" id="waF-l7-Sgn"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Bigger Text" keyEquivalent="+" id="1084">
+                                <connections>
+                                    <action selector="makeTextLarger:" target="-1" id="1141"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Smaller Text" keyEquivalent="-" id="1085">
+                                <connections>
+                                    <action selector="makeTextSmaller:" target="-1" id="1142"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="829"/>
+                            <menuItem title="Back" keyEquivalent="[" id="422">
+                                <connections>
+                                    <action selector="goBack:" target="-1" id="boc-Iz-ltd"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Forward" keyEquivalent="]" id="423">
+                                <connections>
+                                    <action selector="goForward:" target="-1" id="W9b-gw-hWo"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="1256"/>
                             <menuItem title="Enter Full Screen" keyEquivalent="f" id="ZCa-7v-54l">
                                 <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                                 <connections>
@@ -702,6 +691,11 @@ CA
                                     <action selector="markFlagged:" target="-1" id="XQZ-kF-iNW"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Next Unread" keyEquivalent="u" id="344">
+                                <connections>
+                                    <action selector="viewNextUnread:" target="-1" id="zjw-pE-qp9"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Mark Read" keyEquivalent="U" id="pKl-6f-Hlc">
                                 <connections>
                                     <action selector="markRead:" target="-1" id="hcC-jq-vKm"/>
@@ -789,6 +783,11 @@ CA
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="92"/>
+                            <menuItem title="Article List" keyEquivalent="y" id="Rs9-r3-soc">
+                                <connections>
+                                    <action selector="viewArticlesTab:" target="-1" id="p4V-jV-gaL"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Previous Tab" keyEquivalent="" id="1008">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
@@ -804,7 +803,7 @@ CA
                             <menuItem isSeparatorItem="YES" id="1077"/>
                             <menuItem title="Activity Window" keyEquivalent="0" id="402">
                                 <connections>
-                                    <action selector="toggleActivityViewer:" target="-1" id="Q19-do-Grz"/>
+                                    <action selector="showActivityWindow:" target="233" id="yBV-uf-mcx"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Main Window" keyEquivalent="1" id="940">
