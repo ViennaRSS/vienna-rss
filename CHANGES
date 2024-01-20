@@ -8,6 +8,17 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.9.0
+-----
+- Rearrange some menu items in a more logical way
+- Have auxiliary windows (Downloads, Activity Window, Info) stay on Vienna's main space
+- Fix "mark all read" for folders containing multiple smart folders
+- Fix behavior of some menu commands (Command-Y, Reload Page)
+- Update documentation and default feeds to refer to Github discussions instead of the now defunct Cocoaforge forums
+- Update localizations
+- Update FMDB to version 2.7.8, Sparkle to 2.5.2, MMTabBarView to v/1.5.2
+- Build with Xcode 15.2 (macOS 14.2 SDK)
+
 3.9.0 Beta 1
 ------------
 ### ! Requires macOS 10.13 or higher !
