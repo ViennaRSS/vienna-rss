@@ -3331,7 +3331,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ViennaRSS/MMTabBarView";
 			requirement = {
-				branch = v/1.5.0;
+				branch = v/1.5.2;
 				kind = branch;
 			};
 		};
@@ -3340,7 +3340,7 @@
 			repositoryURL = "https://github.com/sparkle-project/Sparkle";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.4.2;
+				minimumVersion = 2.5.2;
 			};
 		};
 		F6B7BC3424A2A9A40051D76F /* XCRemoteSwiftPackageReference "fmdb" */ = {
@@ -3348,7 +3348,7 @@
 			repositoryURL = "https://github.com/ccgus/fmdb";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.7.7;
+				minimumVersion = 2.7.8;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
