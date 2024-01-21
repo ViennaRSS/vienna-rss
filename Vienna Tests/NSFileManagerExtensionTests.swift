@@ -26,11 +26,14 @@ class NSFileManagerExtensionTests: XCTestCase {
 
     func testApplicationScriptsPath() throws {
         let result = FileManager.default.applicationScriptsDirectory
-        let fullPath = "\(homePath)/Library/Scripts/Applications/Vienna"
+        let userDirectory = try FileManager.default.url(for: .userDirectory, in: .localDomainMask, appropriateFor: nil, create: false)
+            .appendingPathComponent(NSUserName(), isDirectory: true)
+        let bundleID = try XCTUnwrap(bundleID)
+        let fullPath = "\(userDirectory.path)/Library/Application Scripts/\(bundleID)"
         XCTAssertEqual(result.path, fullPath)
     }
 
-    func testApplicationSupportPath() throws {
+    func testApplicationSupportPath() {
         let result = FileManager.default.applicationSupportDirectory
         let fullPath = "\(homePath)/Library/Application Support/Vienna"
         XCTAssertEqual(result.path, fullPath)
@@ -43,7 +46,7 @@ class NSFileManagerExtensionTests: XCTestCase {
         XCTAssertEqual(result.path, fullPath)
     }
 
-    func testDownloadsPath() throws {
+    func testDownloadsPath() {
         let result = FileManager.default.downloadsDirectory
         let fullPath = "\(homePath)/Downloads"
         XCTAssertEqual(result.path, fullPath)
