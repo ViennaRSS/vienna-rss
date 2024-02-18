@@ -905,8 +905,6 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 -(void)markAllReadByReferencesArray:(NSArray *)refArray readFlag:(BOOL)readFlag
 {
 	Database * dbManager = [Database sharedManager];
-	__block NSInteger lastFolderId = -1;
-	__block BOOL needRefilter = NO;
 	
 	// Set up to undo or redo this action
 	NSUndoManager * undoManager = NSApp.mainWindow.undoManager;
@@ -925,19 +923,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 			}
         } else {
 			[dbManager markArticleRead:folderId guid:theGuid isRead:readFlag];
-			lastFolderId = folderId;
 		}
-
-		if (folderId == currentFolderId) {
-			needRefilter = YES;
-		}
-	}
-	
-	if (lastFolderId != -1 && [dbManager folderFromID:currentFolderId].type != VNAFolderTypeRSS
-		&& [dbManager folderFromID:currentFolderId].type != VNAFolderTypeOpenReader) {
-		[self reloadArrayOfArticles];
-	} else if (needRefilter) {
-		[mainArticleView refreshFolder:VNARefreshReapplyFilter];
 	}
 }
 
