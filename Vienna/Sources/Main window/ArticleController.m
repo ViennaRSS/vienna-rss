@@ -796,8 +796,6 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
  */
 -(void)innerMarkReadByArray:(NSArray *)articleArray readFlag:(BOOL)readFlag
 {
-	NSInteger lastFolderId = -1;
-	
 	for (Article * theArticle in articleArray) {
 		NSInteger folderId = theArticle.folderId;
 		if (theArticle.read != readFlag) {
@@ -806,17 +804,8 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 			} else {
 				[[Database sharedManager] markArticleRead:folderId guid:theArticle.guid isRead:readFlag];
 				[theArticle markRead:readFlag];
-				if (folderId != lastFolderId && lastFolderId != -1) {
-					[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_FoldersUpdated
-																		object:@(lastFolderId)];
-				}
-				lastFolderId = folderId;
 			}
 		}
-	}
-	if (lastFolderId != -1) {
-		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_FoldersUpdated
-															object:@(lastFolderId)];
 	}
 }
 
@@ -826,7 +815,6 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 -(void)innerMarkReadByRefsArray:(NSArray *)articleArray readFlag:(BOOL)readFlag
 {
 	Database * db = [Database sharedManager];
-	NSInteger lastFolderId = -1;
 
 	for (ArticleReference * articleRef in articleArray) {
 		NSInteger folderId = articleRef.folderId;
@@ -838,16 +826,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 			}
 		} else {
 			[db markArticleRead:folderId guid:articleRef.guid isRead:readFlag];
-			if (folderId != lastFolderId && lastFolderId != -1) {
-				[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_FoldersUpdated
-																	object:@(lastFolderId)];
-			}
-			lastFolderId = folderId;
 		}
-	}
-	if (lastFolderId != -1) {
-		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_FoldersUpdated
-															object:@(lastFolderId)];
 	}
 }
 
@@ -946,10 +925,6 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 			}
         } else {
 			[dbManager markArticleRead:folderId guid:theGuid isRead:readFlag];
-			if (folderId != lastFolderId && lastFolderId != -1) {
-				[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_FoldersUpdated
-																	object:@(lastFolderId)];
-			}
 			lastFolderId = folderId;
 		}
 
@@ -958,10 +933,6 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 		}
 	}
 	
-	if (lastFolderId != -1) {
-		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_FoldersUpdated
-															object:@(lastFolderId)];
-	}
 	if (lastFolderId != -1 && [dbManager folderFromID:currentFolderId].type != VNAFolderTypeRSS
 		&& [dbManager folderFromID:currentFolderId].type != VNAFolderTypeOpenReader) {
 		[self reloadArrayOfArticles];

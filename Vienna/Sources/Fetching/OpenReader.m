@@ -762,8 +762,6 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             [refreshedFolder clearNonPersistedFlag:VNAFolderFlagUpdating];
             [refreshedFolder setNonPersistedFlag:VNAFolderFlagError];
         }
-        [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:MA_Notify_FoldersUpdated
-                                                                                object:@(refreshedFolder.itemId)];
     });     //block for dispatch_async
 } // readRequestDone
 
@@ -819,6 +817,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             [refreshedFolder clearNonPersistedFlag:VNAFolderFlagUpdating];
             [refreshedFolder setNonPersistedFlag:VNAFolderFlagError];
         }
+        // mark end of feed refresh
         [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:MA_Notify_FoldersUpdated
                                                                                 object:@(refreshedFolder.itemId)];
     });     //block for dispatch_async
@@ -1148,7 +1147,6 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
         [[Database sharedManager] markArticleRead:article.folderId guid:article.guid isRead:readFlag];
         [article markRead:readFlag];
         NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-        [nc vna_postNotificationOnMainThreadWithName:MA_Notify_FoldersUpdated object:@(article.folderId)];
         [nc vna_postNotificationOnMainThreadWithName:MA_Notify_ArticleListStateChange object:@(article.folderId)];
     }
 }
