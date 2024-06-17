@@ -59,12 +59,10 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
     NSString *sortColumnIdentifier;
     BackTrackArray *backtrackArray;
     BOOL isBacktracking;
-    BOOL shouldPreserveSelectedArticle;
     Article *articleToPreserve;
     NSString *guidOfArticleToSelect;
     BOOL firstUnreadArticleRequired;
     dispatch_queue_t queue;
-    BOOL requireSelectArticleAfterReload;
 }
 
 @synthesize mainArticleView, currentArrayOfArticles, folderArrayOfArticles, articleSortSpecifiers, backtrackArray;
@@ -147,7 +145,6 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
                                                  context:VNAArticleControllerObserverContext];
 
         queue = dispatch_queue_create("uk.co.opencommunity.vienna2.displayRefresh", DISPATCH_QUEUE_SERIAL);
-        requireSelectArticleAfterReload = NO;
     }
     return self;
 }
@@ -431,13 +428,10 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 -(void)displayFolder:(NSInteger)newFolderId
 {
 	if (currentFolderId != newFolderId && newFolderId != 0) {
-		// Clear all of the articles in the current folder.
-		// This will reset the scroller position and deselect all.
+		// Deselect all in current folder.
 		// Otherwise, the new folder might attempt to preserve selection.
 		// This can happen with smart folders, which have the same articles as other folders.
-		self.currentArrayOfArticles = @[];
-		self.folderArrayOfArticles = @[];
-		[mainArticleView refreshFolder:VNARefreshRedrawList];
+		[mainArticleView scrollToArticle:nil];
 
 		currentFolderId = newFolderId;
 		[self reloadArrayOfArticles];
@@ -477,11 +471,13 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
     });
     Article *article = self.selectedArticle;
 
-    if (self->shouldPreserveSelectedArticle) {
+    // Make sure selectedArticle hasn't changed since reload started.
+    if (articleToPreserve != nil && articleToPreserve != article) {
         if (article != nil && !article.deleted) {
-            self->articleToPreserve = article;
+            articleToPreserve = article;
+        } else {
+            articleToPreserve = nil;
         }
-        self->shouldPreserveSelectedArticle = NO;
     }
 
     [self->mainArticleView refreshFolder:VNARefreshReapplyFilter];
@@ -492,11 +488,6 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
     } else if (self->firstUnreadArticleRequired) {
         [self->mainArticleView selectFirstUnreadInFolder];
         self->firstUnreadArticleRequired = NO;
-    }
-
-    if (self->requireSelectArticleAfterReload) {
-        [self ensureSelectedArticle];
-        self->requireSelectArticleAfterReload = NO;
     }
 
     // To avoid upsetting the current displayed article after a refresh,
@@ -1008,11 +999,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 	// the article you're current reading can disappear.
 	// For example, if you're reading in the Unread Articles smart folder.
 	// So make sure we keep this article around.
-    if ([Preferences standardPreferences].refreshFrequency > 0
-        && [Preferences standardPreferences].markReadInterval > 0.0)
-	{
-		shouldPreserveSelectedArticle = YES;
-	}
+	articleToPreserve = self.selectedArticle;
     [self reloadArrayOfArticles];
 }
 

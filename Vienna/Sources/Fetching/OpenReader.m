@@ -794,8 +794,6 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                     [guidArray addObject:guid];
                     [[refreshedFolder articleFromGuid:guid] markFlagged:YES];
                 }
-                [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:MA_Notify_ArticleListContentChange object:@(
-                     refreshedFolder.itemId)];
 
                 [[Database sharedManager] markStarredArticlesFromFolder:refreshedFolder guidArray:guidArray];
 

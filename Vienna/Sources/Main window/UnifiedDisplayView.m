@@ -212,6 +212,8 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
 			}
 			++rowIndex;
 		}
+	} else {
+		[articleList scrollRowToVisible:0];
 	}
 
 	[articleList deselectAll:self];

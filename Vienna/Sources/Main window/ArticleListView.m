@@ -628,6 +628,8 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 			}
 			++rowIndex;
 		}
+	} else {
+		[articleList scrollRowToVisible:0];
 	}
 
 	[articleList deselectAll:self];
