@@ -852,9 +852,13 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 	// Smart and Search folders are not included in folderArray when you mark all subscriptions read,
 	// so we need to mark articles read if they're the current folder or might be inside it.
 	Folder * currentFolder = [[Database sharedManager] folderFromID:currentFolderId];
-	if (currentFolder != nil && (currentFolder.type == VNAFolderTypeGroup || ![folderArray containsObject:currentFolder])) {
-		for (Article * theArticle in folderArrayOfArticles)
+	if (currentFolder != nil &&
+		(currentFolder.type == VNAFolderTypeSmart || currentFolder.type == VNAFolderTypeGroup ||
+		 ![folderArray containsObject:currentFolder]))
+	{
+		for (Article *theArticle in folderArrayOfArticles) {
 			[theArticle markRead:YES];
+		}
 	}
 	
 	[mainArticleView refreshFolder:VNARefreshRedrawList];
