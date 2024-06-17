@@ -496,7 +496,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
     Article *currentArticle = self.selectedArticle;
     if (currentArticle == article &&
         [[Preferences standardPreferences] boolForKey:MAPref_CheckForUpdatedArticles]
-        && currentArticle.revised && !currentArticle.read)
+        && currentArticle.revised)
     {
         [[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_ArticleViewChange object:nil];
     }
