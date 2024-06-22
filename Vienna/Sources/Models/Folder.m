@@ -687,13 +687,13 @@
 			NSMutableArray * articles = [NSMutableArray array];
 			NSArray * subFolders = [[Database sharedManager] arrayOfFolders:self.itemId];
 			for (Folder * folder in subFolders) {
-                [articles addObjectsFromArray:[folder articlesWithFilter:filterString]];
+                [articles addObjectsFromArray:[folder articlesWithFilter:@""]];
 			}
 			return [articles copy];
 		}
 		@synchronized(self) {
             if (self.isCached && self.containsBodies) {
-                self.cachedArticles.evictsObjectsWithDiscardedContent = NO;
+                // attempt to retrieve from cache
                 NSMutableArray * articles = [NSMutableArray arrayWithCapacity:self.cachedGuids.count];
                 for (id object in self.cachedGuids) {
                     Article * theArticle = [self.cachedArticles objectForKey:object];
@@ -702,36 +702,43 @@
                     } else {
                         // some problem
                         NSLog(@"Bug retrieving from cache in folder %li : after %lu insertions of %lu, guid %@",(long)self.itemId, (unsigned long)articles.count,(unsigned long)self.cachedGuids.count,object);
-                        self.isCached = NO;
-                        self.containsBodies = NO;
-                        break;
+                        return [self getCompleteArticles];
                     }
                 }
-                self.cachedArticles.evictsObjectsWithDiscardedContent = YES;
                 return [articles copy];
             } else {
-                NSArray * articles = [[Database sharedManager] arrayOfArticles:self.itemId filterString:filterString];
-                // Only feeds folders can be cached, as they are the only ones to guarantee
-                // bijection : one article <-> one guid
-                if (self.type == VNAFolderTypeRSS || self.type == VNAFolderTypeOpenReader) {
-                    self.isCached = NO;
-                    self.containsBodies = NO;
-                    [self.cachedArticles removeAllObjects];
-                    [self.cachedGuids removeAllObjects];
-                    for (id object in articles) {
-                        NSString * guid = ((Article *)object).guid;
-                        [self.cachedArticles setObject:object forKey:[NSString stringWithString:guid]];
-                        [self.cachedGuids addObject:guid];
-                    }
-                    self.isCached = YES;
-                    self.containsBodies = YES;
-                }
-                return articles;
-            }
+                return [self getCompleteArticles];
+           }
         } // synchronized
 	} else {
 	    return [[Database sharedManager] arrayOfArticles:self.itemId filterString:filterString];
     }
+}
+
+/* getCompleteArticles
+ * get complete information for all articles
+ * and store it in cache if appropriate
+ * returns articles
+ */
+-(NSArray<Article *> *)getCompleteArticles
+{
+    NSArray * articles = [[Database sharedManager] arrayOfArticles:self.itemId filterString:@""];
+    self.isCached = NO;
+    self.containsBodies = NO;
+    // Only feeds folders can be cached, as they are the only ones to guarantee
+    // bijection : one article <-> one guid
+    if (self.type == VNAFolderTypeRSS || self.type == VNAFolderTypeOpenReader) {
+        [self.cachedArticles removeAllObjects];
+        [self.cachedGuids removeAllObjects];
+        for (id object in articles) {
+            NSString * guid = ((Article *)object).guid;
+            [self.cachedArticles setObject:object forKey:[NSString stringWithString:guid]];
+            [self.cachedGuids addObject:guid];
+        }
+        self.isCached = YES;
+        self.containsBodies = YES;
+    }
+    return articles;
 }
 
 /* folderNameCompare
