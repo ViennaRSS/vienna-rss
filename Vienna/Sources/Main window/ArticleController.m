@@ -59,12 +59,10 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
     NSString *sortColumnIdentifier;
     BackTrackArray *backtrackArray;
     BOOL isBacktracking;
-    BOOL shouldPreserveSelectedArticle;
     Article *articleToPreserve;
     NSString *guidOfArticleToSelect;
     BOOL firstUnreadArticleRequired;
     dispatch_queue_t queue;
-    BOOL requireSelectArticleAfterReload;
 }
 
 @synthesize mainArticleView, currentArrayOfArticles, folderArrayOfArticles, articleSortSpecifiers, backtrackArray;
@@ -147,7 +145,6 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
                                                  context:VNAArticleControllerObserverContext];
 
         queue = dispatch_queue_create("uk.co.opencommunity.vienna2.displayRefresh", DISPATCH_QUEUE_SERIAL);
-        requireSelectArticleAfterReload = NO;
     }
     return self;
 }
@@ -431,13 +428,10 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 -(void)displayFolder:(NSInteger)newFolderId
 {
 	if (currentFolderId != newFolderId && newFolderId != 0) {
-		// Clear all of the articles in the current folder.
-		// This will reset the scroller position and deselect all.
+		// Deselect all in current folder.
 		// Otherwise, the new folder might attempt to preserve selection.
 		// This can happen with smart folders, which have the same articles as other folders.
-		self.currentArrayOfArticles = @[];
-		self.folderArrayOfArticles = @[];
-		[mainArticleView refreshFolder:VNARefreshRedrawList];
+		[mainArticleView scrollToArticle:nil];
 
 		currentFolderId = newFolderId;
 		[self reloadArrayOfArticles];
@@ -477,11 +471,13 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
     });
     Article *article = self.selectedArticle;
 
-    if (self->shouldPreserveSelectedArticle) {
+    // Make sure selectedArticle hasn't changed since reload started.
+    if (articleToPreserve != nil && articleToPreserve != article) {
         if (article != nil && !article.deleted) {
-            self->articleToPreserve = article;
+            articleToPreserve = article;
+        } else {
+            articleToPreserve = nil;
         }
-        self->shouldPreserveSelectedArticle = NO;
     }
 
     [self->mainArticleView refreshFolder:VNARefreshReapplyFilter];
@@ -494,18 +490,13 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
         self->firstUnreadArticleRequired = NO;
     }
 
-    if (self->requireSelectArticleAfterReload) {
-        [self ensureSelectedArticle];
-        self->requireSelectArticleAfterReload = NO;
-    }
-
     // To avoid upsetting the current displayed article after a refresh,
     // we check to see if the selected article is the same
     // and if it has been updated
     Article *currentArticle = self.selectedArticle;
     if (currentArticle == article &&
         [[Preferences standardPreferences] boolForKey:MAPref_CheckForUpdatedArticles]
-        && currentArticle.revised && !currentArticle.read)
+        && currentArticle.revised)
     {
         [[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_ArticleViewChange object:nil];
     }
@@ -796,8 +787,6 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
  */
 -(void)innerMarkReadByArray:(NSArray *)articleArray readFlag:(BOOL)readFlag
 {
-	NSInteger lastFolderId = -1;
-	
 	for (Article * theArticle in articleArray) {
 		NSInteger folderId = theArticle.folderId;
 		if (theArticle.read != readFlag) {
@@ -806,17 +795,8 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 			} else {
 				[[Database sharedManager] markArticleRead:folderId guid:theArticle.guid isRead:readFlag];
 				[theArticle markRead:readFlag];
-				if (folderId != lastFolderId && lastFolderId != -1) {
-					[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_FoldersUpdated
-																		object:@(lastFolderId)];
-				}
-				lastFolderId = folderId;
 			}
 		}
-	}
-	if (lastFolderId != -1) {
-		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_FoldersUpdated
-															object:@(lastFolderId)];
 	}
 }
 
@@ -826,7 +806,6 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 -(void)innerMarkReadByRefsArray:(NSArray *)articleArray readFlag:(BOOL)readFlag
 {
 	Database * db = [Database sharedManager];
-	NSInteger lastFolderId = -1;
 
 	for (ArticleReference * articleRef in articleArray) {
 		NSInteger folderId = articleRef.folderId;
@@ -838,16 +817,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 			}
 		} else {
 			[db markArticleRead:folderId guid:articleRef.guid isRead:readFlag];
-			if (folderId != lastFolderId && lastFolderId != -1) {
-				[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_FoldersUpdated
-																	object:@(lastFolderId)];
-			}
-			lastFolderId = folderId;
 		}
-	}
-	if (lastFolderId != -1) {
-		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_FoldersUpdated
-															object:@(lastFolderId)];
 	}
 }
 
@@ -882,9 +852,13 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 	// Smart and Search folders are not included in folderArray when you mark all subscriptions read,
 	// so we need to mark articles read if they're the current folder or might be inside it.
 	Folder * currentFolder = [[Database sharedManager] folderFromID:currentFolderId];
-	if (currentFolder != nil && (currentFolder.type == VNAFolderTypeGroup || ![folderArray containsObject:currentFolder])) {
-		for (Article * theArticle in folderArrayOfArticles)
+	if (currentFolder != nil &&
+		(currentFolder.type == VNAFolderTypeSmart || currentFolder.type == VNAFolderTypeGroup ||
+		 ![folderArray containsObject:currentFolder]))
+	{
+		for (Article *theArticle in folderArrayOfArticles) {
 			[theArticle markRead:YES];
+		}
 	}
 	
 	[mainArticleView refreshFolder:VNARefreshRedrawList];
@@ -926,8 +900,6 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 -(void)markAllReadByReferencesArray:(NSArray *)refArray readFlag:(BOOL)readFlag
 {
 	Database * dbManager = [Database sharedManager];
-	__block NSInteger lastFolderId = -1;
-	__block BOOL needRefilter = NO;
 	
 	// Set up to undo or redo this action
 	NSUndoManager * undoManager = NSApp.mainWindow.undoManager;
@@ -946,27 +918,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 			}
         } else {
 			[dbManager markArticleRead:folderId guid:theGuid isRead:readFlag];
-			if (folderId != lastFolderId && lastFolderId != -1) {
-				[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_FoldersUpdated
-																	object:@(lastFolderId)];
-			}
-			lastFolderId = folderId;
 		}
-
-		if (folderId == currentFolderId) {
-			needRefilter = YES;
-		}
-	}
-	
-	if (lastFolderId != -1) {
-		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_FoldersUpdated
-															object:@(lastFolderId)];
-	}
-	if (lastFolderId != -1 && [dbManager folderFromID:currentFolderId].type != VNAFolderTypeRSS
-		&& [dbManager folderFromID:currentFolderId].type != VNAFolderTypeOpenReader) {
-		[self reloadArrayOfArticles];
-	} else if (needRefilter) {
-		[mainArticleView refreshFolder:VNARefreshReapplyFilter];
 	}
 }
 
@@ -1051,11 +1003,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 	// the article you're current reading can disappear.
 	// For example, if you're reading in the Unread Articles smart folder.
 	// So make sure we keep this article around.
-    if ([Preferences standardPreferences].refreshFrequency > 0
-        && [Preferences standardPreferences].markReadInterval > 0.0)
-	{
-		shouldPreserveSelectedArticle = YES;
-	}
+	articleToPreserve = self.selectedArticle;
     [self reloadArrayOfArticles];
 }
 
