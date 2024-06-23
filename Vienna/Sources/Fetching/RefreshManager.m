@@ -105,7 +105,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         NSString * userAgent = [NSString stringWithFormat:MA_DefaultUserAgentString, name, [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"], osVersion];
         NSURLSessionConfiguration * config = [NSURLSessionConfiguration defaultSessionConfiguration];
         config.timeoutIntervalForResource = 300;
-        config.URLCache = nil;
         config.HTTPAdditionalHeaders = @{@"User-Agent": userAgent};
         config.HTTPMaximumConnectionsPerHost = 6;
         config.HTTPShouldUsePipelining = YES;
