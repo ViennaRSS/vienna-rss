@@ -65,7 +65,7 @@ class JSONFeedItem: NSObject, FeedItem, Decodable {
         case attachments
     }
 
-    required init(from decoder: Decoder) throws {
+    required init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
         guid = try container.decode(String.self, forKey: .id)

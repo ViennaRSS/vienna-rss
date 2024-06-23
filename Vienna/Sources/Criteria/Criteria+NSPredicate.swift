@@ -58,7 +58,7 @@ extension CriteriaTree: PredicateConvertible {
         }
 
         for subPredicate in subPredicates {
-            let criteriaElement: CriteriaElement?
+            let criteriaElement: (any CriteriaElement)?
 
             if let subCompound = subPredicate as? NSCompoundPredicate {
                 // Look ahead to detect "not contains" predicate

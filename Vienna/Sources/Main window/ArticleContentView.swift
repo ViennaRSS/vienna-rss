@@ -10,7 +10,7 @@ import Cocoa
 @objc
 protocol ArticleContentView {
 
-    var listView: ArticleViewDelegate? { get set }
+    var listView: (any ArticleViewDelegate)? { get set }
     var articles: [Article] { get set }
 
     @objc(keyDown:)

@@ -22,7 +22,7 @@ import WebKit
 
 class WebKitArticleView: CustomWKWebView, ArticleContentView, WKNavigationDelegate, CustomWKUIDelegate {
 
-    var listView: ArticleViewDelegate?
+    var listView: (any ArticleViewDelegate)?
 
     var articles: [Article] = [] {
         didSet {
@@ -43,7 +43,7 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView, WKNavigationDelega
 
     let converter = WebKitArticleConverter()
 
-    let contextMenuCustomizer: BrowserContextMenuDelegate = WebKitContextMenuCustomizer()
+    let contextMenuCustomizer: any BrowserContextMenuDelegate = WebKitContextMenuCustomizer()
 
     @objc
     init(frame: NSRect) {

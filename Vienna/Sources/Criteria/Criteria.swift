@@ -98,24 +98,24 @@ protocol Traversable: CriteriaElement {
 @objc
 class CriteriaTree: NSObject, Traversable {
     // Workaround while this variable is needed for objc (Traversable cannot be exposed)
-    @objc var criteriaTree: [CriteriaElement] {
+    @objc var criteriaTree: [any CriteriaElement] {
         get {
             traversableTree
         }
         set {
-            self.traversableTree = newValue as? [Traversable] ?? []
+            self.traversableTree = newValue as? [any Traversable] ?? []
         }
     }
 
     var condition: CriteriaCondition
 
-    var traversableTree: [Traversable]
+    var traversableTree: [any Traversable]
 
     override convenience init() {
         self.init(subtree: [], condition: .all)
     }
 
-    init(subtree: [Traversable], condition: CriteriaCondition) {
+    init(subtree: [any Traversable], condition: CriteriaCondition) {
         traversableTree = subtree
         self.condition = condition
     }

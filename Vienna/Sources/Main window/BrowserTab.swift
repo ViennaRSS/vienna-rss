@@ -62,7 +62,7 @@ class BrowserTab: NSViewController {
     var navigationEndHandler: [(_ success: Bool) -> Void] = []
 
     /// backing storage only, access via rssSubscriber property
-    weak var rssDelegate: RSSSubscriber?
+    weak var rssDelegate: (any RSSSubscriber)?
     /// backing storage only, access via rssUrl property
     var rssFeedUrls: [URL] = []
 
@@ -353,12 +353,12 @@ extension BrowserTab: WKNavigationDelegate {
         handleNavigationStart()
     }
 
-    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation?, withError error: Error) {
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation?, withError error: any Error) {
         // TODO: provisional navigation fail seems to translate to error in resolving URL or similar. Treat different from normal navigation fail
         handleNavigationEnd(success: false)
     }
 
-    func webView(_ webView: WKWebView, didFail navigation: WKNavigation?, withError error: Error) {
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation?, withError error: any Error) {
         // TODO: show failure to load as page or symbol
         handleNavigationEnd(success: false)
     }

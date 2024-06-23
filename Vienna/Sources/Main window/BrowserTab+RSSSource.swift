@@ -36,7 +36,7 @@ extension BrowserTab: RSSSource {
         }
     }
 
-    var rssSubscriber: RSSSubscriber? {
+    var rssSubscriber: (any RSSSubscriber)? {
         get {
             self.rssDelegate
         }
