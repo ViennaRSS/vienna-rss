@@ -55,9 +55,9 @@ class DirectoryMonitor: NSObject {
     // The eventHandler will be kept in memory until stop() is called.
     private var eventHandler: EventHandler?
 
-    // The callback will pass along the raw pointer to the direcory monitor
+    // The callback will pass along the raw pointer to the directory monitor
     // instance. Recasting this will make the event handler accessible.
-    private var callback: FSEventStreamCallback = { _, info, eventCount, paths, flags, _ -> Void in
+    private var callback: FSEventStreamCallback = { _, info, eventCount, paths, flags, _ in
         guard let info = info else {
             os_log("No pointer to the event handler", log: .monitor, type: .fault)
             return
