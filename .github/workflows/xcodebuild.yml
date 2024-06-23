@@ -13,7 +13,7 @@ jobs:
   test:
     strategy:
       matrix:
-        os: [macos-13]
+        os: [macos-13, macos-14]
     name: Test on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     env:
@@ -22,7 +22,7 @@ jobs:
 
     steps:
     - name: Set up Git repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         fetch-depth: 0
     - name: Build Xcode project
