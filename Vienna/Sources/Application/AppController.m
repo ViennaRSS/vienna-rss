@@ -1303,7 +1303,13 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		}
 
         scriptsMenuItem = [[NSMenuItem alloc] initWithTitle:@"" action:NULL keyEquivalent:@""];
-        scriptsMenuItem.image = [NSImage imageNamed:@"NSScriptTemplate"];
+        if (@available(macOS 11, *)) {
+            scriptsMenuItem.image = [NSImage imageWithSystemSymbolName:@"applescript.fill"
+                                              accessibilityDescription:nil];
+        } else {
+            // This image is available in AppKit, but not as a constant.
+            scriptsMenuItem.image = [NSImage imageNamed:@"NSScriptTemplate"];
+        }
 
 		NSInteger helpMenuIndex = NSApp.mainMenu.numberOfItems - 1;
 		[NSApp.mainMenu insertItem:scriptsMenuItem atIndex:helpMenuIndex];

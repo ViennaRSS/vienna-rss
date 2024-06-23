@@ -605,7 +605,9 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 	
 	for (NSTableColumn * column in articleList.tableColumns) {
 		if ([column.identifier isEqualToString:sortColumnIdentifier]) {
-			NSString * imageName = ([[Preferences standardPreferences].articleSortDescriptors[0] ascending]) ? @"NSAscendingSortIndicator" : @"NSDescendingSortIndicator";
+			// These NSImage names are available in AppKit, but not as constants.
+			// https://developer.apple.com/library/archive/releasenotes/AppKit/RN-AppKitOlderNotes/
+			NSImageName imageName = ([Preferences.standardPreferences.articleSortDescriptors[0] ascending]) ? @"NSAscendingSortIndicator" : @"NSDescendingSortIndicator";
 			articleList.highlightedTableColumn = column;
 			[articleList setIndicatorImage:[NSImage imageNamed:imageName] inTableColumn:column];
 		} else {
