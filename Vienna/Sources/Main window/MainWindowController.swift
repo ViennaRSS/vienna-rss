@@ -262,7 +262,7 @@ final class MainWindowController: NSWindowController {
 
     // MARK: Window restoration
 
-    override class var restorableStateKeyPaths: [String] {
+    override static var restorableStateKeyPaths: [String] {
         var keyPaths = super.restorableStateKeyPaths
         keyPaths += ["unreadCount", "currentFilter"]
         return keyPaths
