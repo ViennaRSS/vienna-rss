@@ -1949,7 +1949,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			if (self.mainWindow.firstResponder == self.foldersTree.mainView) {
 				[self deleteFolder:self];
 				return YES;
-			} else if (self.mainWindow.firstResponder == (self.articleController.mainArticleView).mainView) {
+			} else if (self.browser.activeTab == nil) { // make sure we are in the articles tab
 				[self deleteMessage:self];
 				return YES;
 			}
