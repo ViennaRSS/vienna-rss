@@ -35,8 +35,8 @@ final class MainWindowController: NSWindowController {
     @objc private(set) var toolbarSearchField: NSSearchField?
     @IBOutlet private(set) weak var placeholderDetailView: NSView!
 
-    @objc private(set) lazy var browser: (Browser & NSViewController) = {
-        var controller = TabbedBrowserViewController() as (Browser & NSViewController)
+    @objc private(set) lazy var browser: (any Browser & NSViewController) = {
+        var controller = TabbedBrowserViewController() as (any Browser & NSViewController)
         return controller
     }()
 
@@ -48,7 +48,7 @@ final class MainWindowController: NSWindowController {
         // cf. https://stackoverflow.com/q/16587058
         splitView.autosaveName = "VNASplitView"
 
-        (self.browser as? RSSSource)?.rssSubscriber = self
+        (self.browser as? any RSSSource)?.rssSubscriber = self
 
         statusBarState(disclosed: Preferences.standard.showStatusBar, animate: false)
 
@@ -177,7 +177,7 @@ final class MainWindowController: NSWindowController {
 
     var shareableItemsSubject = String()
 
-    private var shareableItems: [NSPasteboardWriting] {
+    private var shareableItems: [any NSPasteboardWriting] {
         var items = [URL]()
         if let activeTab = browser.activeTab, let url = activeTab.tabUrl {
             items.append(url)
@@ -518,7 +518,7 @@ extension MainWindowController: NSSharingServicePickerDelegate {
     func sharingServicePicker(
         _ sharingServicePicker: NSSharingServicePicker,
         delegateFor sharingService: NSSharingService
-    ) -> NSSharingServiceDelegate? {
+    ) -> (any NSSharingServiceDelegate)? {
         return self
     }
 

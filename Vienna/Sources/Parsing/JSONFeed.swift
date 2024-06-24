@@ -35,7 +35,7 @@ class JSONFeed: NSObject, Feed, Decodable {
     var modifiedDate: Date?
 
     // The `items` key is required (but the array may be empty).
-    var items: [FeedItem]
+    var items: [any FeedItem]
 
     // MARK: Decodable
 
@@ -52,7 +52,7 @@ class JSONFeed: NSObject, Feed, Decodable {
         case author
     }
 
-    required init(from decoder: Decoder) throws {
+    required init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
         title = try container.decode(String.self, forKey: .title)

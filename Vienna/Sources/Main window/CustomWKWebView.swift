@@ -18,13 +18,13 @@ class CustomWKWebView: WKWebView {
     // store weakly here because contentController retains listener
     weak var contextMenuListener: CustomWKWebViewContextMenuListener?
 
-    weak var contextMenuProvider: CustomWKUIDelegate? {
+    weak var contextMenuProvider: (any CustomWKUIDelegate)? {
         didSet {
             self.uiDelegate = contextMenuProvider
         }
     }
 
-    @objc weak var hoverUiDelegate: CustomWKHoverUIDelegate? {
+    @objc weak var hoverUiDelegate: (any CustomWKHoverUIDelegate)? {
         didSet {
             resetHoverUiListener()
         }
@@ -393,9 +393,9 @@ extension CustomWKWebView {
 
 class CustomWKWebViewHoverListener: NSObject, WKScriptMessageHandler {
 
-    weak var hoverDelegate: CustomWKHoverUIDelegate?
+    weak var hoverDelegate: (any CustomWKHoverUIDelegate)?
 
-    init(hoverDelegate: CustomWKHoverUIDelegate) {
+    init(hoverDelegate: any CustomWKHoverUIDelegate) {
         self.hoverDelegate = hoverDelegate
     }
 

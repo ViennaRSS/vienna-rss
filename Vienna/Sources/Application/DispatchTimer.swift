@@ -24,7 +24,7 @@ import os.log
 @objc(VNADispatchTimer)
 class DispatchTimer: NSObject {
 
-    private var dispatchSource: DispatchSourceTimer
+    private var dispatchSource: any DispatchSourceTimer
 
     private(set) var interval: TimeInterval
 

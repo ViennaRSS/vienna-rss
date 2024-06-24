@@ -63,18 +63,18 @@ class TabbedBrowserViewController: NSViewController, RSSSource {
 
     var restoredTabs = false
 
-    var activeTab: Tab? {
-        tabView?.selectedTabViewItem?.viewController as? Tab
+    var activeTab: (any Tab)? {
+        tabView?.selectedTabViewItem?.viewController as? any Tab
     }
 
     var browserTabCount: Int {
         tabView?.numberOfTabViewItems ?? 0
     }
 
-    weak var rssSubscriber: RSSSubscriber? {
+    weak var rssSubscriber: (any RSSSubscriber)? {
         didSet {
             for source in tabView?.tabViewItems ?? [] {
-                (source as? RSSSource)?.rssSubscriber = self.rssSubscriber
+                (source as? any RSSSource)?.rssSubscriber = self.rssSubscriber
             }
         }
     }
@@ -152,21 +152,21 @@ class TabbedBrowserViewController: NSViewController, RSSSource {
 }
 
 extension TabbedBrowserViewController: Browser {
-    func createNewTab(_ url: URL?, inBackground: Bool, load: Bool) -> Tab {
+    func createNewTab(_ url: URL?, inBackground: Bool, load: Bool) -> any Tab {
         createNewTab(url, inBackground: inBackground, load: load, insertAt: nil)
     }
 
-    func createNewTab(_ request: URLRequest, config: WKWebViewConfiguration, inBackground: Bool, insertAt index: Int? = nil) -> Tab {
+    func createNewTab(_ request: URLRequest, config: WKWebViewConfiguration, inBackground: Bool, insertAt index: Int? = nil) -> any Tab {
         let newTab = BrowserTab(request, config: config)
         return initNewTab(newTab, request.url, false, inBackground, insertAt: index)
     }
 
-    func createNewTab(_ url: URL? = nil, inBackground: Bool = false, load: Bool = false, insertAt index: Int? = nil) -> Tab {
+    func createNewTab(_ url: URL? = nil, inBackground: Bool = false, load: Bool = false, insertAt index: Int? = nil) -> any Tab {
         let newTab = BrowserTab()
         return initNewTab(newTab, url, load, inBackground, insertAt: index)
     }
 
-    private func initNewTab(_ newTab: BrowserTab, _ url: URL?, _ load: Bool, _ inBackground: Bool, insertAt index: Int? = nil) -> Tab {
+    private func initNewTab(_ newTab: BrowserTab, _ url: URL?, _ load: Bool, _ inBackground: Bool, insertAt index: Int? = nil) -> any Tab {
         newTab.rssSubscriber = self.rssSubscriber
 
         let newTabViewItem = TitleChangingTabViewItem(viewController: newTab)
@@ -258,7 +258,7 @@ extension TabbedBrowserViewController: MMTabBarViewDelegate {
     }
 
     func tabView(_ aTabView: NSTabView, willClose tabViewItem: NSTabViewItem) {
-        guard let tab = tabViewItem.viewController as? Tab else {
+        guard let tab = tabViewItem.viewController as? any Tab else {
             return
         }
         tab.closeTab()
@@ -288,7 +288,7 @@ extension TabbedBrowserViewController: MMTabBarViewDelegate {
         tabViewItem != primaryTab
     }
 
-    func tabView(_ aTabView: NSTabView, validateDrop sender: NSDraggingInfo, proposedItem tabViewItem: NSTabViewItem, proposedIndex: UInt, in tabBarView: MMTabBarView) -> NSDragOperation {
+    func tabView(_ aTabView: NSTabView, validateDrop sender: any NSDraggingInfo, proposedItem tabViewItem: NSTabViewItem, proposedIndex: UInt, in tabBarView: MMTabBarView) -> NSDragOperation {
         proposedIndex != 0 ? [.every] : []
     }
 
@@ -321,7 +321,7 @@ extension TabbedBrowserViewController: MMTabBarViewDelegate {
 extension TabbedBrowserViewController: CustomWKUIDelegate {
     // TODO: implement functionality for alerts and maybe peek actions
 
-    private static var contextMenuCustomizer: BrowserContextMenuDelegate = WebKitContextMenuCustomizer()
+    private static var contextMenuCustomizer: any BrowserContextMenuDelegate = WebKitContextMenuCustomizer()
 
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
         let newTab = self.createNewTab(navigationAction.request, config: configuration, inBackground: false, insertAt: getIndexAfterSelected())

@@ -35,7 +35,7 @@ class WebKitArticleTab: BrowserTab, ArticleContentView {
         }
     }
 
-    var listView: ArticleViewDelegate?
+    var listView: (any ArticleViewDelegate)?
 
     var articles: [Article] {
         get {
@@ -119,7 +119,7 @@ class WebKitArticleTab: BrowserTab, ArticleContentView {
         NotificationCenter.default.post(name: .articleViewEnded, object: self)
     }
 
-    override func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+    override func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: any Error) {
         super.webView(webView, didFailProvisionalNavigation: navigation, withError: error)
         NotificationCenter.default.post(name: .articleViewEnded, object: self)
     }
