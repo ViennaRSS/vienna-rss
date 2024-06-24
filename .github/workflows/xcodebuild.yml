@@ -13,11 +13,14 @@ jobs:
   test:
     strategy:
       matrix:
-        os: [macos-13, macos-14]
+        include:
+          - os: macos-13
+            xcode: /Applications/Xcode_15.2.app/Contents/Developer
+          - os: macos-14
     name: Test on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     env:
-      DEVELOPER_DIR: /Applications/Xcode_14.3.app/Contents/Developer
+      DEVELOPER_DIR: ${{ matrix.xcode }}
     timeout-minutes: 15
 
     steps:
@@ -26,6 +29,10 @@ jobs:
       with:
         fetch-depth: 0
     - name: Build Xcode project
-      run: xcodebuild build-for-testing -project Vienna.xcodeproj -scheme Vienna -configuration Development | xcpretty && exit ${PIPESTATUS[0]}
+      run: |
+        xcodebuild -version
+        xcodebuild build-for-testing -project Vienna.xcodeproj -scheme Vienna -configuration Development | xcpretty && exit ${PIPESTATUS[0]}
     - name: Test Xcode project
-      run: xcodebuild test -project Vienna.xcodeproj -scheme Vienna -configuration Development | xcpretty && exit ${PIPESTATUS[0]}
+      run: |
+        xcodebuild -version
+        xcodebuild test -project Vienna.xcodeproj -scheme Vienna -configuration Development | xcpretty && exit ${PIPESTATUS[0]}

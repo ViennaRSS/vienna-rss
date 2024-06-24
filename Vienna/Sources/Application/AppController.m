@@ -909,10 +909,16 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 /* openVienna
  * Calls into showMainWindow but activates the app first.
  */
--(IBAction)openVienna:(id)sender
+- (IBAction)openVienna:(id)sender
 {
-	[NSApp activateIgnoringOtherApps:YES];
-	[self showMainWindow:sender];
+    if (@available(macOS 14, *)) {
+        [NSApp activate];
+    } else {
+        [NSApp activateIgnoringOtherApps:YES];
+    }
+    if (NSApp.isActive) {
+        [self showMainWindow:sender];
+    }
 }
 
 /* showMainWindow
