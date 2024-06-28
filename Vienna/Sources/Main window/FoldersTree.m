@@ -154,14 +154,22 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
  */
 -(void)reloadDatabase:(NSArray *)stateArray
 {
-	[self.rootNode removeChildren];
-	if (![self loadTree:[[Database sharedManager] arrayOfFolders:VNAFolderTypeRoot] rootNode:self.rootNode]) {
-		[[Preferences standardPreferences] setFoldersTreeSortMethod:VNAFolderSortByName];
-		[self.rootNode removeChildren];
-		[self loadTree:[[Database sharedManager] arrayOfFolders:VNAFolderTypeRoot] rootNode:self.rootNode];
-	}
-	[self.outlineView reloadData];
-	[self unarchiveState:stateArray];
+    [self.rootNode removeChildren];
+    if (![self loadTree:[[Database sharedManager] arrayOfFolders:VNAFolderTypeRoot] rootNode:self.rootNode]) {
+        // recover from problems by putting missing folders under root node
+        NSArray *allFolders = [[Database sharedManager] arrayOfAllFolders];  // all RSS and group folders
+        NSArray *installedFolders = [self folders:0];  // RSS folders already present
+        for (Folder *folder in allFolders) {
+            if ((folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader)
+                && ![installedFolders containsObject:folder])
+            {
+                TreeNode *subNode;
+                subNode = [[TreeNode alloc] init:self.rootNode atIndex:-1 folder:folder canHaveChildren:NO];
+            }
+        }
+    }
+    [self.outlineView reloadData];
+    [self unarchiveState:stateArray];
 }
 
 /* saveFolderSettings
