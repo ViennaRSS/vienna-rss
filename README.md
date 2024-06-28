@@ -1,4 +1,4 @@
-![Vienna](https://vienna-rss.sourceforge.io/img/vienna_logo.png)
+![Vienna](https://www.vienna-rss.com/images/vienna_logo.png)
 
 [![Build status](https://github.com/ViennaRSS/vienna-rss/actions/workflows/xcodebuild.yml/badge.svg)](https://github.com/ViennaRSS/vienna-rss/actions/workflows/xcodebuild.yml)
 [![Localization status](https://d322cqt584bo4o.cloudfront.net/vienna-rss/localized.svg)](https://crowdin.com/project/vienna-rss "Crowdin")
