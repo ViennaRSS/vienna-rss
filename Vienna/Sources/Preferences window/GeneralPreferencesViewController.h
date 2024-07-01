@@ -20,7 +20,7 @@
 
 @import Cocoa;
 
-@interface GeneralPreferencesViewController : NSViewController <NSOpenSavePanelDelegate>
+@interface GeneralPreferencesViewController : NSViewController
 
 // Action functions
 -(IBAction)changeCheckFrequency:(id)sender;

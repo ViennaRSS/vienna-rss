@@ -23,17 +23,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSFileManager (Paths)
 
-/// The scripts directory for the current user (Library/Application Scripts or
-/// Library/Scripts/Applications depending on whether sandboxing is enabled).
+/// The scripts directory for Vienna for the current user
+/// (Library/Application Scripts/<bundle ID>).
 @property (readonly, nonatomic) NSURL *vna_applicationScriptsDirectory
     NS_SWIFT_NAME(applicationScriptsDirectory);
 
-/// The application support directory for the current user (Library/Application
-/// Support).
+/// The application support directory for Vienna for the current user
+/// (Library/Application Support/Vienna).
 @property (readonly, nonatomic) NSURL *vna_applicationSupportDirectory
     NS_SWIFT_NAME(applicationSupportDirectory);
 
-/// The caches directory for the current user (Library/Caches).
+/// The caches directory for the current user (Library/Caches/<bundle ID>).
 @property (readonly, nonatomic) NSURL *vna_cachesDirectory
     NS_SWIFT_NAME(cachesDirectory);
 

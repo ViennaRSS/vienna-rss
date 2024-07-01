@@ -322,10 +322,19 @@
     didFinishDownloadingToURL:(NSURL *)location {
     dispatch_sync(dispatch_get_main_queue(), ^{
         DownloadItem *item = [self itemForSessionTask:downloadTask];
-        [NSFileManager.defaultManager moveItemAtURL:location
-                                              toURL:item.fileURL
-                                              error:nil];
-        item.state = DownloadStateCompleted;
+        NSError *error = nil;
+        BOOL success = [NSFileManager.defaultManager moveItemAtURL:location
+                                                             toURL:item.fileURL
+                                                             error:&error];
+        if (success) {
+            item.state = DownloadStateCompleted;
+        } else {
+            item.state = DownloadStateFailed;
+            if (error.code == NSFileWriteNoPermissionError) {
+                // TODO: Implement error reporting
+                NSLog(@"%@", error.localizedDescription);
+            }
+        }
         [self deliverNotificationForDownloadItem:item];
     });
 }

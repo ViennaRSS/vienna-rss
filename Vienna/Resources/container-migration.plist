@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>MigrateScriptsForApplication</key>
+	<string>Vienna</string>
+	<key>Move</key>
+	<array>
+		<array>
+			<string>${Caches}/${BundleId}/WebKit</string>
+			<string>${Caches}/WebKit</string>
+		</array>
+		<string>${Caches}/${BundleId}</string>
+		<array>
+			<string>${ApplicationSupport}/Vienna/Sources</string>
+			<string>${Caches}/${BundleId}/Sources</string>
+		</array>
+		<string>${ApplicationSupport}/Vienna</string>
+		<string>${Library}/HTTPStorages/${BundleId}</string>
+		<array>
+			<string>${Library}/HTTPStorages/${BundleId}.binarycookies</string>
+			<string>${Library}/Cookies/Cookies.binarycookies</string>
+		</array>
+		<array>
+			<string>${Library}/Cookies/${BundleId}.binarycookies</string>
+			<string>${Library}/Cookies/Cookies.binarycookies</string>
+		</array>
+		<string>${Library}/Saved Application State/${BundleId}.savedState</string>
+		<array>
+			<string>${Library}/WebKit/${BundleId}</string>
+			<string>${Library}/WebKit</string>
+		</array>
+		<array>
+			<string>${Library}/WebKit/Databases/___IndexedDB/${BundleId}</string>
+			<string>${Library}/WebKit/Databases/___IndexedDB</string>
+		</array>
+	</array>
+</dict>
+</plist>
