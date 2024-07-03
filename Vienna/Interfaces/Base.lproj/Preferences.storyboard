@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="VBW-RM-gbf">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="VBW-RM-gbf">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23504"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -123,13 +123,13 @@
                             </textField>
                             <button toolTip="Visit the website" translatesAutoresizingMaskIntoConstraints="NO" id="V12-Ua-skO">
                                 <rect key="frame" x="321" y="111" width="21" height="27"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="V12-Ua-skO" secondAttribute="height" multiplier="1:1" id="jGj-dm-w5k"/>
-                                </constraints>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSFollowLinkFreestandingTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="rDG-xq-tAW">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="V12-Ua-skO" secondAttribute="height" multiplier="1:1" id="jGj-dm-w5k"/>
+                                </constraints>
                                 <connections>
                                     <action selector="visitWebsite:" target="Lfh-L2-KcO" id="xUa-S4-OvO"/>
                                 </connections>
@@ -563,11 +563,11 @@
             <objects>
                 <viewController title="General" id="T2z-OK-VtO" customClass="GeneralPreferencesViewController" sceneMemberID="viewController">
                     <view key="view" id="6Zn-BI-L2K">
-                        <rect key="frame" x="0.0" y="0.0" width="458" height="472"/>
+                        <rect key="frame" x="0.0" y="0.0" width="458" height="508"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rmx-sO-e7b">
-                                <rect key="frame" x="18" y="435" width="143" height="16"/>
+                                <rect key="frame" x="18" y="471" width="143" height="16"/>
                                 <textFieldCell key="cell" title="Check for new articles:" id="Oqg-6W-NAL">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -575,7 +575,7 @@
                                 </textFieldCell>
                             </textField>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Hd9-hf-LFo">
-                                <rect key="frame" x="164" y="428" width="145" height="25"/>
+                                <rect key="frame" x="164" y="464" width="145" height="25"/>
                                 <popUpButtonCell key="cell" type="push" title="Manually" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="7Za-ay-jlt" id="ohB-Gl-p3X">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
@@ -613,7 +613,7 @@
                                 </connections>
                             </popUpButton>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rjk-vu-JNM">
-                                <rect key="frame" x="36" y="407" width="231" height="18"/>
+                                <rect key="frame" x="36" y="443" width="231" height="18"/>
                                 <buttonCell key="cell" type="check" title="Check for new articles on start up" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Ljf-Qd-6Ho">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -623,7 +623,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YHk-qo-gYO">
-                                <rect key="frame" x="36" y="385" width="204" height="18"/>
+                                <rect key="frame" x="36" y="421" width="204" height="18"/>
                                 <buttonCell key="cell" type="check" title="Mark updated articles as new" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="4vm-80-j33">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -633,7 +633,7 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4Wi-RB-PIn">
-                                <rect key="frame" x="18" y="350" width="245" height="16"/>
+                                <rect key="frame" x="18" y="386" width="245" height="16"/>
                                 <textFieldCell key="cell" title="When new unread articles are retrieved:" id="iCs-T5-L1c">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -644,13 +644,31 @@
                                 </connections>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0oy-fx-aoF">
-                                <rect key="frame" x="36" y="325" width="194" height="18"/>
+                                <rect key="frame" x="36" y="361" width="194" height="18"/>
                                 <buttonCell key="cell" type="check" title="Bounce the application icon" bezelStyle="regularSquare" imagePosition="left" inset="2" id="jfH-Hq-gRk">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="changeNewArticlesNotificationBounce:" target="T2z-OK-VtO" id="eBU-lH-GTp"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iUw-Zm-YYQ">
+                                <rect key="frame" x="18" y="326" width="85" height="16"/>
+                                <textFieldCell key="cell" title="Notifications:" id="MKr-uG-HFL">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sbt-Ol-AcA">
+                                <rect key="frame" x="102" y="316" width="168" height="32"/>
+                                <buttonCell key="cell" type="push" title="Notification Settings…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Ptg-JZ-D7m">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="openNotificationSettings:" target="T2z-OK-VtO" id="AcN-eB-Kny"/>
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fZd-pw-BJu">
@@ -871,16 +889,20 @@
                             <constraint firstItem="waH-jq-hvj" firstAttribute="top" secondItem="qF5-CX-w0a" secondAttribute="bottom" constant="20" id="0A9-MI-j9A"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Py0-wt-kSJ" secondAttribute="trailing" constant="20" symbolic="YES" id="0Kj-Ur-S4Z"/>
                             <constraint firstItem="rjk-vu-JNM" firstAttribute="leading" secondItem="rmx-sO-e7b" secondAttribute="leading" constant="18" id="0lh-hn-Sdb"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="sbt-Ol-AcA" secondAttribute="trailing" constant="20" symbolic="YES" id="0si-qM-XnH"/>
                             <constraint firstItem="0oy-fx-aoF" firstAttribute="top" secondItem="4Wi-RB-PIn" secondAttribute="bottom" constant="8" id="16R-rY-DRq"/>
                             <constraint firstAttribute="bottom" secondItem="I7s-YO-KpK" secondAttribute="bottom" constant="20" symbolic="YES" id="2kt-DT-5Px"/>
-                            <constraint firstItem="fZd-pw-BJu" firstAttribute="top" secondItem="0oy-fx-aoF" secondAttribute="bottom" constant="20" id="2mu-ZD-ulx"/>
+                            <constraint firstItem="iUw-Zm-YYQ" firstAttribute="top" secondItem="0oy-fx-aoF" secondAttribute="bottom" constant="20" id="2mu-ZD-ulx"/>
                             <constraint firstItem="YHk-qo-gYO" firstAttribute="leading" secondItem="rmx-sO-e7b" secondAttribute="leading" constant="18" id="3jY-KI-0aI"/>
+                            <constraint firstItem="fZd-pw-BJu" firstAttribute="top" secondItem="iUw-Zm-YYQ" secondAttribute="bottom" constant="20" id="50C-Uf-Gzl"/>
                             <constraint firstItem="Py0-wt-kSJ" firstAttribute="leading" secondItem="6Zn-BI-L2K" secondAttribute="leading" constant="20" symbolic="YES" id="732-5g-8v8"/>
                             <constraint firstItem="qF5-CX-w0a" firstAttribute="top" secondItem="mgd-Xn-r0g" secondAttribute="bottom" constant="6" symbolic="YES" id="7By-Vr-xGR"/>
                             <constraint firstItem="mgd-Xn-r0g" firstAttribute="leading" secondItem="fZd-pw-BJu" secondAttribute="leading" constant="16" id="BSd-V9-lTT"/>
                             <constraint firstItem="rmx-sO-e7b" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Zn-BI-L2K" secondAttribute="leading" constant="20" symbolic="YES" id="C50-29-AKF"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="qF5-CX-w0a" secondAttribute="trailing" constant="20" symbolic="YES" id="CJy-5I-1vC"/>
+                            <constraint firstItem="iUw-Zm-YYQ" firstAttribute="firstBaseline" secondItem="sbt-Ol-AcA" secondAttribute="firstBaseline" id="F0n-k0-c1O"/>
                             <constraint firstItem="7gv-LJ-Ouu" firstAttribute="leading" secondItem="6Zn-BI-L2K" secondAttribute="leading" constant="20" symbolic="YES" id="G6H-id-JSw"/>
+                            <constraint firstItem="sbt-Ol-AcA" firstAttribute="leading" secondItem="iUw-Zm-YYQ" secondAttribute="trailing" constant="8" symbolic="YES" id="HrT-iR-6F5"/>
                             <constraint firstItem="Py0-wt-kSJ" firstAttribute="top" secondItem="7gv-LJ-Ouu" secondAttribute="bottom" constant="6" symbolic="YES" id="IPP-4I-zJv"/>
                             <constraint firstItem="rjk-vu-JNM" firstAttribute="top" secondItem="Hd9-hf-LFo" secondAttribute="bottom" constant="8" symbolic="YES" id="KHz-0N-z9O"/>
                             <constraint firstItem="mgd-Xn-r0g" firstAttribute="top" secondItem="fZd-pw-BJu" secondAttribute="bottom" constant="8" symbolic="YES" id="Mqa-LV-RxF"/>
@@ -903,6 +925,7 @@
                             <constraint firstItem="fZd-pw-BJu" firstAttribute="leading" secondItem="6Zn-BI-L2K" secondAttribute="leading" constant="20" symbolic="YES" id="twi-ks-uZK"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="mgd-Xn-r0g" secondAttribute="trailing" constant="20" symbolic="YES" id="wDU-d3-3wm"/>
                             <constraint firstItem="4Wi-RB-PIn" firstAttribute="top" secondItem="YHk-qo-gYO" secondAttribute="bottom" constant="20" id="wQ6-J4-vmL"/>
+                            <constraint firstItem="iUw-Zm-YYQ" firstAttribute="leading" secondItem="6Zn-BI-L2K" secondAttribute="leading" constant="20" symbolic="YES" id="xDD-iS-eFM"/>
                             <constraint firstItem="7gv-LJ-Ouu" firstAttribute="top" secondItem="waH-jq-hvj" secondAttribute="bottom" constant="20" id="y4h-0U-fEB"/>
                             <constraint firstItem="waH-jq-hvj" firstAttribute="leading" secondItem="6Zn-BI-L2K" secondAttribute="leading" constant="20" symbolic="YES" id="yBg-SN-hms"/>
                             <constraint firstItem="Hd9-hf-LFo" firstAttribute="top" secondItem="6Zn-BI-L2K" secondAttribute="top" constant="20" symbolic="YES" id="yhD-LY-FW9"/>
@@ -985,7 +1008,7 @@
         <image name="arrow.trianglehead.2.counterclockwise" catalog="system" width="15" height="18"/>
         <image name="gearshape" catalog="system" width="16" height="16"/>
         <image name="paintbrush" catalog="system" width="17" height="18"/>
-        <image name="square.and.arrow.down" catalog="system" width="15" height="16"/>
+        <image name="square.and.arrow.down" catalog="system" width="15" height="17"/>
         <image name="wrench.and.screwdriver" catalog="system" width="19" height="18"/>
     </resources>
 </document>
