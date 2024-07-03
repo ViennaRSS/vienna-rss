@@ -99,7 +99,6 @@
 -(IBAction)restoreMessage:(id)sender;
 -(IBAction)skipFolder:(id)sender;
 -(IBAction)showDownloadsWindow:(id)sender;
--(IBAction)conditionalShowDownloadsWindow:(id)sender;
 -(IBAction)openWebLocation:(id)sender;
 -(IBAction)getInfo:(id)sender;
 -(IBAction)unsubscribeFeed:(id)sender;

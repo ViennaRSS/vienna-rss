@@ -31,6 +31,5 @@
 -(void)updateVisibleColumns;
 -(void)saveTableSettings;
 -(void)loadArticleLink:(NSString *) articleLink;
-@property (readonly, nonatomic) NSURL *url;
 
 @end
