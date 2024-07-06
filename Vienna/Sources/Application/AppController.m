@@ -2228,19 +2228,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	[downloadWindow.window makeKeyAndOrderFront:sender];
 }
 
-/* conditionalShowDownloadsWindow
- * Make the Downloads window visible only if it hasn't been shown.
- */
--(IBAction)conditionalShowDownloadsWindow:(id)sender
-{
-	if (downloadWindow == nil) {
-		downloadWindow = [[DownloadWindow alloc] init];
-	}
-	if (!downloadWindow.window.visible) {
-		[downloadWindow.window makeKeyAndOrderFront:sender];
-	}
-}
-
 /* viewFirstUnread
  * Moves the selection to the first unread article.
  */

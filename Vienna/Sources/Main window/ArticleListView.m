@@ -92,7 +92,6 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
     NSMutableDictionary *unreadTopLineDict;
     NSMutableDictionary *unreadTopLineSelectionDict;
 
-    NSURL *currentURL;
     BOOL isLoadingHTMLArticle;
 }
 
@@ -109,7 +108,6 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 		markReadTimer = nil;
 		_currentPageFullHTML = NO;
 		isLoadingHTMLArticle = NO;
-		currentURL = nil;
 		self.imbricatedSplitViewResizes = NO;
         _layoutManager = [NSLayoutManager new];
     }
@@ -1044,17 +1042,6 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
     }
 }
 
-/* clearCurrentURL
- * Clears the current URL.
- */
--(void)clearCurrentURL
-{
-	// If we already have an URL release it.
-	if (currentURL) {
-		currentURL = nil;
-	}
-}
-
 /* loadArticleLink
  * Loads the specified link into the article text view. NOTE: This is done
  * via this selector method so that this is called via the event queue in
@@ -1070,27 +1057,9 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 	// Load the actual link.
 	articleText.tabUrl = cleanedUpUrlFromString(articleLink);
     [articleText loadTab];
-	
-	// Clear the current URL.
-	[self clearCurrentURL];
-	
-	// Remember the new URL.
-	currentURL = [[NSURL alloc] initWithString:articleLink];
 
 	// We need to redraw the article list so the progress indicator is shown.
     articleList.needsDisplay = YES;
-}
-
-/* url
- * Return the URL of current article.
- */
--(NSURL *)url
-{
-	if (self.isCurrentPageFullHTML) {
-		return currentURL;
-	} else { 
-		return nil;
-	}
 }
 
 /* refreshArticlePane
@@ -1101,9 +1070,6 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 	NSArray * msgArray = self.markedArticleRange;
 	
 	if (msgArray.count == 0) {
-		// Clear the current URL.
-		[self clearCurrentURL];
-
 		// We are not a FULL HTML page.
 		self.currentPageFullHTML = NO;
 		
@@ -1129,9 +1095,6 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 			// clearing of the HTML before this new link gets loaded.
 			[self performSelector: @selector(loadArticleLink:) withObject:firstArticle.link afterDelay:0.0];
 		} else {
-			// Clear the current URL.
-			[self clearCurrentURL];
-
 			// Remember we do NOT have a full HTML page so we can setup the context menus
 			// appropriately.
 			self.currentPageFullHTML = NO;
