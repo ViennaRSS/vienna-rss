@@ -34,6 +34,7 @@
 #import "EnclosureView.h"
 #import "Database.h"
 #import "Vienna-Swift.h"
+#import "GeneratedAssetSymbols.h"
 
 // Shared defaults key
 NSString * const MAPref_ShowEnclosureBar = @"ShowEnclosureBar";
@@ -480,11 +481,11 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
         [articleList setTableColumnHeaderImage:enclImage
                        forColumnWithIdentifier:MA_Field_HasEnclosure];
     } else {
-        [articleList setTableColumnHeaderImage:[NSImage imageNamed:@"unread_header"]
+        [articleList setTableColumnHeaderImage:[NSImage imageNamed:ACImageNameUnreadHeader]
                        forColumnWithIdentifier:MA_Field_Read];
-        [articleList setTableColumnHeaderImage:[NSImage imageNamed:@"flagged_header"]
+        [articleList setTableColumnHeaderImage:[NSImage imageNamed:ACImageNameFlaggedHeader]
                        forColumnWithIdentifier:MA_Field_Flagged];
-        [articleList setTableColumnHeaderImage:[NSImage imageNamed:@"enclosure_header"]
+        [articleList setTableColumnHeaderImage:[NSImage imageNamed:ACImageNameEnclosureHeader]
                        forColumnWithIdentifier:MA_Field_HasEnclosure];
     }
 
@@ -602,7 +603,9 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 	
 	for (NSTableColumn * column in articleList.tableColumns) {
 		if ([column.identifier isEqualToString:sortColumnIdentifier]) {
-			NSString * imageName = ([[Preferences standardPreferences].articleSortDescriptors[0] ascending]) ? @"NSAscendingSortIndicator" : @"NSDescendingSortIndicator";
+			// These NSImage names are available in AppKit, but not as constants.
+			// https://developer.apple.com/library/archive/releasenotes/AppKit/RN-AppKitOlderNotes/
+			NSImageName imageName = ([Preferences.standardPreferences.articleSortDescriptors[0] ascending]) ? @"NSAscendingSortIndicator" : @"NSDescendingSortIndicator";
 			articleList.highlightedTableColumn = column;
 			[articleList setIndicatorImage:[NSImage imageNamed:imageName] inTableColumn:column];
 		} else {
@@ -1176,9 +1179,9 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
                 return image;
             } else {
                 if (theArticle.revised) {
-                    return [NSImage imageNamed:@"revised"];
+                    return [NSImage imageNamed:ACImageNameRevised];
                 } else {
-                    return [NSImage imageNamed:@"unread"];
+                    return [NSImage imageNamed:ACImageNameUnread];
                 }
             }
         }
@@ -1193,7 +1196,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
                 image.template = NO;
                 return image;
             } else {
-                return [NSImage imageNamed:@"flagged"];
+                return [NSImage imageNamed:ACImageNameFlagged];
             }
         }
         return nil;
@@ -1205,7 +1208,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
                                            accessibilityDescription:nil];
                 return image;
             } else {
-                return [NSImage imageNamed:@"enclosure"];
+                return [NSImage imageNamed:ACImageNameEnclosure];
             }
         }
         return nil;

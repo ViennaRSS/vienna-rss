@@ -36,12 +36,12 @@ class PreferenceTabViewItem: NSTabViewItem {
         }
 
         switch identifier as? String {
-        case .some("general"):
-            image = NSImage(named: "NSPreferencesGeneral")
-        case .some("updates"):
-            image = NSImage(named: "NSNetwork")
-        case .some("advanced"):
-            image = NSImage(named: "NSAdvanced")
+        case "general":
+            image = NSImage(named: NSImage.preferencesGeneralName)
+        case "updates":
+            image = NSImage(named: NSImage.networkName)
+        case "advanced":
+            image = NSImage(named: NSImage.advancedName)
         default:
             return
         }

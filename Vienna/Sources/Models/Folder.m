@@ -29,6 +29,7 @@
 #import "ArticleRef.h"
 #import "Database.h"
 #import "Article.h"
+#import "GeneratedAssetSymbols.h"
 
 @interface Folder ()
 
@@ -136,7 +137,7 @@
                 folderImage = [NSImage imageWithSystemSymbolName:@"gearshape"
                                         accessibilityDescription:nil];
             } else {
-                folderImage = [NSImage imageNamed:@"smartFolder"];
+                folderImage = [NSImage imageNamed:ACImageNameSmartFolder];
             }
             break;
         case VNAFolderTypeGroup:
@@ -144,7 +145,7 @@
                 folderImage = [NSImage imageWithSystemSymbolName:@"folder"
                                         accessibilityDescription:nil];
             } else {
-                folderImage = [NSImage imageNamed:@"rssFolder"];
+                folderImage = [NSImage imageNamed:ACImageNameRSSFolder];
             }
             break;
         case VNAFolderTypeTrash:
@@ -152,7 +153,7 @@
                 folderImage = [NSImage imageWithSystemSymbolName:@"trash"
                                         accessibilityDescription:nil];
             } else {
-                folderImage = [NSImage imageNamed:@"trashFolder"];
+                folderImage = [NSImage imageNamed:ACImageNameTrashFolder];
             }
             break;
         case VNAFolderTypeSearch:
@@ -160,7 +161,7 @@
                 folderImage = [NSImage imageWithSystemSymbolName:@"magnifyingglass"
                                         accessibilityDescription:nil];
             } else {
-                folderImage = [NSImage imageNamed:@"searchFolder"];
+                folderImage = [NSImage imageNamed:ACImageNameSearchFolder];
             }
             break;
         case VNAFolderTypeRSS:
@@ -168,7 +169,7 @@
             NSString *homePageSiteRoot = self.homePage.vna_host.vna_convertStringToValidPath;
             folderImage = [FolderImageCache.defaultCache retrieveImage:homePageSiteRoot];
             if (!folderImage) {
-                folderImage = [NSImage imageNamed:@"rssFeed"];
+                folderImage = [NSImage imageNamed:ACImageNameRSSFeed];
             }
             break;
         }
@@ -177,7 +178,7 @@
                 folderImage = [NSImage imageWithSystemSymbolName:@"folder.badge.questionmark"
                                         accessibilityDescription:nil];
             } else {
-                folderImage = [NSImage imageNamed:@"smallFolder"];
+                folderImage = [NSImage imageNamed:ACImageNameSmallFolder];
             }
             break;
     }
@@ -208,7 +209,7 @@
     switch (self.type) {
         case VNAFolderTypeRSS:
         case VNAFolderTypeOpenReader:
-            return [NSImage imageNamed:@"rssFeed"];
+            return [NSImage imageNamed:ACImageNameRSSFeed];
         default:
             return self.image;
     }
