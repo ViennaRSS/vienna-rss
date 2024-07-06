@@ -146,7 +146,7 @@
 "mbZ-oU-TDn.title" = "Non lus ou signalés";
 
 /* Class = "NSMenuItem"; title = "Get Info"; ObjectID = "MMp-XG-ASM"; */
-"MMp-XG-ASM.title" = "Obtenir les données du flux";
+"MMp-XG-ASM.title" = "Afficher les données du flux";
 
 /* Class = "NSToolbarItem"; label = "Refresh"; ObjectID = "Nmd-zx-Dys"; */
 "Nmd-zx-Dys.label" = "Rafraîchir";
