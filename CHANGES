@@ -8,6 +8,25 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.9.1
+-----
+- Prevent Vienna from unexpectedly switching to alphabetical sorting of folders and feeds
+- Prevent feed refreshes from causing unexpected changes of articles selection and interruptions of user's reading experience
+- Fix and standardize the visual feedback for articles being marked as read (especially when the selection is a smart folder)
+- Fix use of delete key to delete the current article when the focus is on the article view
+- Fix use of up/down keys to navigate to previous/next article when the focus is on the article view
+- Fix some issues with cache of folder's articles
+- Fix URL cache management
+- Fix small parts of French and Dutch translations
+- Add credit to Ricardo Pinho for Portuguese translation
+- Build with Xcode 15.4 (macoOS 14.5 SDK)
+- Fix Xcode and SwiftLint warnings; prepare to Swift 6
+- Use generated asset symbols for designating images and colours
+- Update MMTabBarView to v/1.5.3
+- Remove unused code
+- Improve build process
+- Update GitHub Action for macOS 14
+
 3.9.0
 -----
 - Rearrange some menu items in a more logical way

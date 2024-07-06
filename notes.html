@@ -1,157 +1,21 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
-
-<style type="text/css">
-*{margin:0;padding:0;}
-body {
-	font:13.34px helvetica,arial,freesans,clean,sans-serif;
-	color:black;
-	line-height:1.4em;
-	background-color: #F8F8F8;
-	padding: 0.7em;
-}
-p {
-	margin:1em 0;
-	line-height:1.5em;
-}
-table {
-	font-size:inherit;
-	font:100%;
-	margin:1em;
-}
-table th{border-bottom:1px solid #bbb;padding:.2em 1em;}
-table td{border-bottom:1px solid #ddd;padding:.2em 1em;}
-input[type=text],input[type=password],input[type=image],textarea{font:99% helvetica,arial,freesans,sans-serif;}
-select,option{padding:0 .25em;}
-optgroup{margin-top:.5em;}
-pre,code{font:12px Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;}
-pre {
-	margin:1em 0;
-	font-size:12px;
-	background-color:#eee;
-	border:1px solid #ddd;
-	padding:5px;
-	line-height:1.5em;
-	color:#444;
-	overflow:auto;
-	-webkit-box-shadow:rgba(0,0,0,0.07) 0 1px 2px inset;
-	-webkit-border-radius:3px;
-	-moz-border-radius:3px;border-radius:3px;
-}
-pre code {
-	padding:0;
-	font-size:12px;
-	background-color:#eee;
-	border:none;
-}
-code {
-	font-size:12px;
-	background-color:#f8f8ff;
-	color:#444;
-	padding:0 .2em;
-	border:1px solid #dedede;
-}
-img{border:0;max-width:100%;}
-abbr{border-bottom:none;}
-a{color:#4183c4;text-decoration:none;}
-a:hover{text-decoration:underline;}
-a code,a:link code,a:visited code{color:#4183c4;}
-h2,h3{margin:1em 0;}
-h1,h2,h3,h4,h5,h6{border:0;}
-h1{font-size:170%;border-top:4px solid #aaa;padding-top:.5em;margin-top:1.5em;}
-h1:first-child{margin-top:0;padding-top:.25em;border-top:none;}
-h2{font-size:150%;margin-top:1.5em;border-top:4px solid #e0e0e0;padding-top:.5em;}
-h3{margin-top:1em;}
-hr{border:1px solid #ddd;}
-ul{margin:1em 0 1em 2em;}
-ol{margin:1em 0 1em 2em;}
-ul li,ol li{margin-top:.5em;margin-bottom:.5em;}
-ul ul,ul ol,ol ol,ol ul{margin-top:0;margin-bottom:0;}
-blockquote{margin:1em 0;border-left:5px solid #ddd;padding-left:.6em;color:#555;}
-dt{font-weight:bold;margin-left:1em;}
-dd{margin-left:2em;margin-bottom:1em;}
-sup {
-    font-size: 0.83em;
-    vertical-align: super;
-    line-height: 0;
-}
-* {
-	-webkit-print-color-adjust: exact;
-}
-@media screen and (min-width: 914px) {
-    body {
-        width: 854px;
-        margin:0 auto;
-    }
-}
-@media print {
-	table, pre {
-		page-break-inside: avoid;
-	}
-	pre {
-		word-wrap: break-word;
-	}
-}
-</style>
-
-
-</head>
-
-<body>
-
-<h1 id="toc_0">Version Notes</h1>
-
-<h2 id="toc_1">Vienna 3.9.0</h2>
-
-<h3 id="toc_2">! Vienna 3.9 requires macOS 10.13 or higher !</h3>
-
-<h3 id="toc_3">Changes since version 3.8.8</h3>
-
+<!DOCTYPE html><head><meta charset="utf-8"/></head><h1>Version Notes</h1>
+<h2>Vienna 3.9.1</h2>
+<p>This version is recommended  to all Vienna users, as it fixes problems reported by users having switched from legacy browser (available in previous versions of Vienna) to Vienna 3.9.0 (which completed the switch to WKWebView).</p>
 <ul>
-<li>New editor for smart folders: criterias can now be imbricated, allowing more complex and refined selections</li>
-<li>Add initial JSON Feed support</li>
-<li>Implement Apple&#39;s standard interface for sharing articles or pages; Vienna&#39;s traditional plugins do not appear in default toolbar, but are still fully supported and can be added or removed as preferred. </li>
-<li>Unified search: a single search field can be used for searching within articles, current webpage, folders list or the web.</li>
-<li>Complete transition to WkWebView based browser; reimplement printing and download, improve contextual menus; fix Web Inspector (macOS &gt;= 13.3)</li>
-<li>Use view-based cells for tree view of folders and feeds; font is no longer selectable, but user can choose between three cell sizes</li>
-<li>Rearrange some menu items in a more logical way</li>
-<li>Update documentation and default feeds to refer to Github discussions instead of the now defunct Cocoaforge forums</li>
-<li>Update localizations</li>
-<li>Have auxiliary windows (Downloads, Activity Window, Info) stay on Vienna&#39;s main space</li>
-<li>Fix compliance with refresh frequency set by user</li>
-<li>Fix &quot;mark all read&quot; for folders containing multiple smart folders</li>
-<li>Fix disappearance of tooltips on refresh</li>
-<li>Fix behavior of some menu commands (Command-Y, &quot;Reload Page&quot;)</li>
-<li>Code cleanup and modernization</li>
-<li>Update FMDB to version 2.7.8, Sparkle to 2.5.2, MMTabBarView to v/1.5.2</li>
-<li>Build with Xcode 15.2 (macOS 14.2 SDK)</li>
+<li>Prevent Vienna from unexpectedly switching to alphabetical sorting of folders and feeds</li>
+<li>Prevent feed refreshes from causing unexpected changes of articles selection and interruptions of user’s reading experience</li>
+<li>Fix and standardize the visual feedback for articles being marked as read (especially when the selection is a smart folder)</li>
+<li>Fix use of delete key to delete the current article when the focus is on the article view</li>
+<li>Fix use of up/down keys to navigate to previous/next article when the focus is on the article view</li>
+<li>Fix some issues with cache of folder’s articles</li>
+<li>Fix URL cache management</li>
+<li>Fix small parts of French and Dutch translations</li>
+<li>Add credit to Ricardo Pinho for Portuguese translation</li>
+<li>Build with Xcode 15.4 (macoOS 14.5 SDK)</li>
+<li>Fix Xcode and SwiftLint warnings; prepare to Swift 6</li>
+<li>Use generated asset symbols for designating images and colours</li>
+<li>Update MMTabBarView to v/1.5.3</li>
+<li>Remove unused code</li>
+<li>Improve build process</li>
+<li>Update GitHub Action for macOS 14</li>
 </ul>
-
-<p><strong>Known issue:</strong> due to some changes in preferences file format, you may have to reset sorting of folders and articles to your liking.</p>
-
-<h3 id="toc_4">Changes since version 3.9.0 Beta 1</h3>
-
-<ul>
-<li>Rearrange some menu items in a more logical way</li>
-<li>Update documentation and default feeds to refer to Github discussions instead of the now defunct Cocoaforge forums</li>
-<li>Update localizations</li>
-<li>Have auxiliary windows (Downloads, Activity Window, Info) stay on Vienna&#39;s main space</li>
-<li>Fix &quot;mark all read&quot; for folders containing multiple smart folders</li>
-<li>Fix behavior of some menu commands (Command-Y, &quot;Reload Page)</li>
-<li>Update FMDB to version 2.7.8, Sparkle to 2.5.2, MMTabBarView to v/1.5.2</li>
-<li>Build with Xcode 15.2 (macOS 14.2 SDK)</li>
-</ul>
-
-
-
-
-</body>
-
-</html>
