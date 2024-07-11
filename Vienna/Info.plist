@@ -114,7 +114,7 @@
 	<key>CFBundleVersion</key>
 	<string>VCS_NUM</string>
 	<key>LSApplicationCategoryType</key>
-	<string>public.app-category.utilities</string>
+	<string>public.app-category.news</string>
 	<key>LSFileQuarantineEnabled</key>
 	<true/>
 	<key>LSMinimumSystemVersion</key>
