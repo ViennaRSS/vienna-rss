@@ -942,9 +942,6 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
             }
 				
 		} else {
-			if (!newParent.canHaveChildren) {
-				[newParent setCanHaveChildren:YES];
-			}
 			if ([dbManager setParent:newParentId forFolder:folderId]) {
 				if (sync && folder.type == VNAFolderTypeOpenReader) {
 					OpenReader * myReader = [OpenReader sharedManager];
@@ -960,6 +957,9 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 			} else {
 				continue;
 			}
+			if (!newParent.canHaveChildren) {
+				[newParent setCanHaveChildren:YES];
+			}
 		}
 		
 		if (!autoSort) {
@@ -973,14 +973,6 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 				}
 			}
 		}
-		
-		[oldParent removeChild:node andChildren:NO];
-		[newParent addChild:node atIndex:newChildIndex];
-		
-		// Put at beginning of undoArray in order to undo moves in reverse order.
-		[undoArray insertObject:@(folderId) atIndex:0u];
-		[undoArray insertObject:@(oldParentId) atIndex:1u];
-		[undoArray insertObject:@(oldPredecessorId) atIndex:2u];
 		
 		if (!autoSort) {
 			if (newPredecessorId > 0) {
@@ -997,6 +989,14 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 				[dbManager setFirstChild:folderId forFolder:newParentId];
 			}
 		}
+
+		[oldParent removeChild:node andChildren:NO];
+		[newParent addChild:node atIndex:newChildIndex];
+
+		// Put at beginning of undoArray in order to undo moves in reverse order.
+		[undoArray insertObject:@(folderId) atIndex:0u];
+		[undoArray insertObject:@(oldParentId) atIndex:1u];
+		[undoArray insertObject:@(oldPredecessorId) atIndex:2u];
 	}
 	
 	// If undo array is empty, then nothing has been moved.
