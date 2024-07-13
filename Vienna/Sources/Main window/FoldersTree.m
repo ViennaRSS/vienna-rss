@@ -972,9 +972,6 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 					continue;
 				}
 			}
-		}
-		
-		if (!autoSort) {
 			if (newPredecessorId > 0) {
 				if (![dbManager setNextSibling:[dbManager folderFromID:newPredecessorId].nextSiblingId
                                      forFolder:folderId]) {
