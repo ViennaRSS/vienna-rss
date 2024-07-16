@@ -1633,11 +1633,11 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
                 }
             }
             self.articleTextView.translatesAutoresizingMaskIntoConstraints = YES;
+            self.imbricatedSplitViewResizes = NO;
         } else {
             self.articleTextView.translatesAutoresizingMaskIntoConstraints = NO;
             self.textViewWidthConstraint.active = YES;
         }
-        self.imbricatedSplitViewResizes = NO;
     }
 }
 
