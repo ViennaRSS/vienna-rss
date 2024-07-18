@@ -97,6 +97,10 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 										  @"key": [@"articleData." stringByAppendingString:MA_Field_Date],
 										  @"selector": NSStringFromSelector(@selector(compare:))
 										  },
+								  MA_Field_CreatedDate: @{
+										  @"key": [@"articleData." stringByAppendingString:MA_Field_CreatedDate],
+										  @"selector": NSStringFromSelector(@selector(compare:))
+										  },
 								  MA_Field_Author: @{
 										  @"key": [@"articleData." stringByAppendingString:MA_Field_Author],
 										  @"selector": NSStringFromSelector(@selector(caseInsensitiveCompare:))
@@ -288,7 +292,10 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 		NSUInteger index = [[descriptors valueForKey:@"key"] indexOfObject:[specifier valueForKey:@"key"]];
 
 		if (index == NSNotFound) {
-			sortDescriptor = [[NSSortDescriptor alloc] initWithKey:[specifier valueForKey:@"key"] ascending:YES selector:NSSelectorFromString([specifier valueForKey:@"selector"])];
+			// Date should be sorted in descending order.
+			// TODO: Add a key to articleSortSpecifiers for a default sort order
+			BOOL ascending = [columnName isEqualToString:MA_Field_CreatedDate] ? NO : YES;
+			sortDescriptor = [[NSSortDescriptor alloc] initWithKey:[specifier valueForKey:@"key"] ascending:ascending selector:NSSelectorFromString([specifier valueForKey:@"selector"])];
 		} else {
 			sortDescriptor = descriptors[index];
 			[descriptors removeObjectAtIndex:index];
