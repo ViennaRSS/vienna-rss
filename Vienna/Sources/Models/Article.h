@@ -61,8 +61,8 @@ typedef NS_ENUM(NSInteger, ArticleFieldID) {
     ArticleFieldIDHeadlines = 411,
     ArticleFieldIDDeleted,
     ArticleFieldIDSummary,
-    /* 414 was previously used */
-    ArticleFieldIDEnclosure = 415,
+    ArticleFieldIDCreatedDate,
+    ArticleFieldIDEnclosure,
     ArticleFieldIDEnclosureDownloaded,
     ArticleFieldIDHasEnclosure
 };
