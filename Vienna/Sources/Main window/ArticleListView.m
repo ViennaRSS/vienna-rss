@@ -1309,6 +1309,8 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 	NSString * cellString;
 	if ([identifier isEqualToString:MA_Field_Date]) {
         cellString = [NSDateFormatter vna_relativeDateStringFromDate:theArticle.date];
+	} else if ([identifier isEqualToString:MA_Field_CreatedDate]) {
+		cellString = [NSDateFormatter vna_relativeDateStringFromDate:theArticle.createdDate];
 	} else if ([identifier isEqualToString:MA_Field_Folder]) {
 		Folder * folder = [db folderFromID:theArticle.folderId];
 		cellString = folder.name;

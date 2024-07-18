@@ -336,6 +336,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
     [self addField:MA_Field_Subject type:VNAFieldTypeString tag:ArticleFieldIDSubject sqlField:@"title" visible:YES width:472];
     [self addField:MA_Field_Folder type:VNAFieldTypeFolder tag:ArticleFieldIDFolder sqlField:@"folder_id" visible:NO width:130];
     [self addField:MA_Field_Date type:VNAFieldTypeDate tag:ArticleFieldIDDate sqlField:@"date" visible:YES width:152];
+    [self addField:MA_Field_CreatedDate type:VNAFieldTypeDate tag:ArticleFieldIDCreatedDate sqlField:@"createddate" visible:NO width:152];
     [self addField:MA_Field_Parent type:VNAFieldTypeInteger tag:ArticleFieldIDParent sqlField:@"parent_id" visible:NO width:72];
     [self addField:MA_Field_Author type:VNAFieldTypeString tag:ArticleFieldIDAuthor sqlField:@"sender" visible:YES width:138];
     [self addField:MA_Field_Link type:VNAFieldTypeString tag:ArticleFieldIDLink sqlField:@"link" visible:NO width:138];
@@ -354,6 +355,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	[self fieldByName:MA_Field_Subject].displayName = NSLocalizedString(@"Subject", @"Data field name visible in menu/article list/smart folder definition");
 	[self fieldByName:MA_Field_Folder].displayName = NSLocalizedString(@"Folder", @"Data field name visible in menu/article list/smart folder definition");
 	[self fieldByName:MA_Field_Date].displayName = NSLocalizedString(@"Date", @"Data field name visible in menu/article list/smart folder definition");
+	[self fieldByName:MA_Field_CreatedDate].displayName = NSLocalizedString(@"Date Added", @"Data field name visible in menu/article list/smart folder definition");
 	[self fieldByName:MA_Field_Author].displayName = NSLocalizedString(@"Author", @"Data field name visible in menu/article list/smart folder definition");
 	[self fieldByName:MA_Field_Text].displayName = NSLocalizedString(@"Text", @"Data field name visible in smart folder definition");
 	[self fieldByName:MA_Field_Summary].displayName = NSLocalizedString(@"Summary", @"Pseudo field name visible in menu/article list");

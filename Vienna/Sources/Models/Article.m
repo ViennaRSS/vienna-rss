@@ -200,6 +200,8 @@ NSString * const MA_Field_HasEnclosure = @"HasEnclosure";
         NSString * key = [keyPath substringFromIndex:(@"articleData.").length];
         if ([key isEqualToString:MA_Field_Date]) {
             return self.date;
+        } else if ([key isEqualToString:MA_Field_CreatedDate]) {
+            return self.createdDate;
         } else if ([key isEqualToString:MA_Field_Author]) {
             return self.author;
         } else if ([key isEqualToString:MA_Field_Subject]) {
