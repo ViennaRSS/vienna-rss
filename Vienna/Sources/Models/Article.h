@@ -45,27 +45,26 @@ extern NSString * const MA_Field_HasEnclosure;
 
 NS_ASSUME_NONNULL_END
 
-// Article field IDs
-typedef NS_ENUM(NSInteger, ArticleFieldID) {
-    ArticleFieldIDGUID = 400,
-    ArticleFieldIDSubject,
-    ArticleFieldIDAuthor,
-    ArticleFieldIDDate,
-    ArticleFieldIDParent,
-    ArticleFieldIDRead,
-    ArticleFieldIDFlagged,
-    ArticleFieldIDText,
-    ArticleFieldIDFolder,
-    ArticleFieldIDLink,
+typedef NS_ENUM(NSInteger, VNAArticleFieldTag) {
+    VNAArticleFieldTagGUID = 400,
+    VNAArticleFieldTagSubject,
+    VNAArticleFieldTagAuthor,
+    VNAArticleFieldTagDate,
+    VNAArticleFieldTagParent,
+    VNAArticleFieldTagRead,
+    VNAArticleFieldTagFlagged,
+    VNAArticleFieldTagText,
+    VNAArticleFieldTagFolder,
+    VNAArticleFieldTagLink,
     /* 410 was previously used */
-    ArticleFieldIDHeadlines = 411,
-    ArticleFieldIDDeleted,
-    ArticleFieldIDSummary,
-    ArticleFieldIDCreatedDate,
-    ArticleFieldIDEnclosure,
-    ArticleFieldIDEnclosureDownloaded,
-    ArticleFieldIDHasEnclosure
-};
+    VNAArticleFieldTagHeadlines = 411,
+    VNAArticleFieldTagDeleted,
+    VNAArticleFieldTagSummary,
+    VNAArticleFieldTagCreatedDate,
+    VNAArticleFieldTagEnclosure,
+    VNAArticleFieldTagEnclosureDownloaded,
+    VNAArticleFieldTagHasEnclosure
+} NS_SWIFT_NAME(Article.FieldTag);
 
 typedef NS_ENUM(NSInteger, ArticleStatus) {
     ArticleStatusEmpty = 0,
