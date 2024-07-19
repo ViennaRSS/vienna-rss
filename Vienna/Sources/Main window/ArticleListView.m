@@ -593,7 +593,12 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 -(void)showSortDirection
 {
 	NSString * sortColumnIdentifier = self.controller.articleController.sortColumnIdentifier;
-	
+
+    // FIXME: Sort out the order of initialization
+    if (!sortColumnIdentifier) {
+        sortColumnIdentifier = [Preferences.standardPreferences stringForKey:MAPref_SortColumn];
+    }
+
 	for (NSTableColumn * column in articleList.tableColumns) {
 		if ([column.identifier isEqualToString:sortColumnIdentifier]) {
 			// These NSImage names are available in AppKit, but not as constants.
@@ -990,6 +995,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
             break;
         case VNARefreshSortAndRedraw:
             [self.controller.articleController sortArticles];
+            [self showSortDirection];
             break;
     }
 
