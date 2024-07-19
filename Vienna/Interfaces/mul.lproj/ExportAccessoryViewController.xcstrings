@@ -83,13 +83,13 @@
             "value" : "Exporteer alle abonnementen"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Exportar todas as assinaturas"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Exportar todas as assinaturas"
@@ -215,16 +215,16 @@
             "value" : "Behoud groeperingen in exportbestand"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Manter as pastas no ficheiro exportado"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Preservar pastas de grupo no arquivo exportado"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manter as pastas no ficheiro exportado"
           }
         },
         "ru" : {
@@ -347,16 +347,16 @@
             "value" : "Exporteer geselecteerde abonnementen"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Exportar as assinaturas seleccionadas"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Exportar assinaturas selecionadas"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exportar as assinaturas seleccionadas"
           }
         },
         "ru" : {

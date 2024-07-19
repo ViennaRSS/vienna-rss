@@ -83,16 +83,16 @@
             "value" : "Laatste keer vernieuwd:"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Última actualização:"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Última atualização:"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Última actualização:"
           }
         },
         "ru" : {
@@ -215,13 +215,13 @@
             "value" : "Valideer"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Validar"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Validar"
@@ -359,16 +359,16 @@
             "value" : "Gebruikersnaam:"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nome de utilizador:"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Usuário:"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nome de utilizador:"
           }
         },
         "ru" : {
@@ -491,13 +491,13 @@
             "value" : "Wachtwoord:"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Senha:"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Senha:"
@@ -623,16 +623,16 @@
             "value" : "Werk authenticatie bij"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Actualizar autenticação"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Atualizar Autenticação"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actualizar autenticação"
           }
         },
         "ru" : {
@@ -755,13 +755,13 @@
             "value" : "Grootte:"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tamanho:"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tamanho:"
@@ -887,16 +887,16 @@
             "value" : "Ongelezen:"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Por ler:"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Não lido:"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Por ler:"
           }
         },
         "ru" : {
@@ -1019,13 +1019,13 @@
             "value" : "Geabonneerd"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Assinado"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Assinado"
@@ -1139,16 +1139,16 @@
             "value" : "Gebruik webpagina voor artikelen"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Carregar por inteiro os artigos HTML"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Use Web Page for Articles"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carregar por inteiro os artigos HTML"
           }
         },
         "ru" : {
@@ -1265,13 +1265,13 @@
             "value" : "Omschrijving"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Descrição"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Descrição"
@@ -1397,13 +1397,13 @@
             "value" : "Algemeen"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Geral"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Geral"
@@ -1523,13 +1523,13 @@
             "value" : "Authenticatie"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Autenticação"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Autenticação"
@@ -1655,16 +1655,16 @@
             "value" : "Feed-URL"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "URL do fluxo"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "URL das notícias"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "URL do fluxo"
           }
         },
         "ru" : {
@@ -1757,7 +1757,7 @@
             "value" : "Open cachebestand…"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Abrir ficheiro em cache…"

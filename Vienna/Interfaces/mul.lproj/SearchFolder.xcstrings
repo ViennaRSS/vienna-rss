@@ -77,13 +77,13 @@
             "value" : "Naam voor slimme map:"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nome da pasta inteligente:"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nome da pasta inteligente:"
@@ -209,16 +209,16 @@
             "value" : "Bewaar"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Guardar"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Salvar"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardar"
           }
         },
         "ru" : {
@@ -341,13 +341,13 @@
             "value" : "Annuleer"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cancelar"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cancelar"
@@ -431,7 +431,7 @@
             "value" : "Houd de Option-toets ingedrukt om geneste voorwaarden toe te voegen."
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mantenha a tecla Opção premida para adicionar regras encaixadas."

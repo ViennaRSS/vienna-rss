@@ -83,13 +83,13 @@
             "value" : "Vandaag"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hoje"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hoje"
@@ -227,16 +227,16 @@
             "value" : "Leeg prullenmand"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Esvaziar o lixo"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Esvaziar Lixeira"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esvaziar o lixo"
           }
         },
         "ru" : {
@@ -371,16 +371,16 @@
             "value" : "Leeg prullenmand"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Esvaziar o lixo"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Esvaziar Lixeira"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esvaziar o lixo"
           }
         },
         "ru" : {
@@ -497,16 +497,16 @@
             "value" : "Verwijder alle artikelen in de prullenmand"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Apagor todos os artigos que estão no lixo"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Apagar todos os artigos na lixeira"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apagor todos os artigos que estão no lixo"
           }
         },
         "ru" : {
@@ -593,7 +593,7 @@
             "value" : "Laatste vernieuwing"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Última actualização"
@@ -701,16 +701,16 @@
             "value" : "Toon info"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Obter informação"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Obter Informações"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obter informação"
           }
         },
         "ru" : {
@@ -833,16 +833,16 @@
             "value" : "Toon info"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Obter Informação"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Obter Informações"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obter Informação"
           }
         },
         "ru" : {
@@ -947,16 +947,16 @@
             "value" : "Toon informatie over geselecteerde abonnement"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ver informações sobre a assinatura seleccionada"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ver informação sobre a assinatura selecionada"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ver informações sobre a assinatura seleccionada"
           }
         },
         "ru" : {
@@ -1079,16 +1079,16 @@
             "value" : "Gemarkeerd"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Assinalados"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Marcados"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Assinalados"
           }
         },
         "ru" : {
@@ -1187,16 +1187,16 @@
             "value" : "Forceer bijwerken abonnementen van Open Reader"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Forçar uma actualização das assinaturas seleccionadas no Open Reader"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Forçar Atualização das Assinaturas Selecionadas do Open Reader"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Forçar uma actualização das assinaturas seleccionadas no Open Reader"
           }
         },
         "ru" : {
@@ -1319,16 +1319,16 @@
             "value" : "Ga naar startpagina van abonnement"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Abrir página na Teia da assinatura"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Abrir Página da Assinatura"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir página na Teia da assinatura"
           }
         },
         "ru" : {
@@ -1415,7 +1415,7 @@
             "value" : "Ongelezen of gemarkeerd"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Por ler ou assinalados"
@@ -1505,16 +1505,16 @@
             "value" : "Filter getoonde artikelen op tekst"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Filtrar os artigos a exibir por correspondência de texto"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Filtrar artigos mostrados por texto igual"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtrar os artigos a exibir por correspondência de texto"
           }
         },
         "ru" : {
@@ -1631,13 +1631,13 @@
             "value" : "Filter artikelen"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Filtrar artigos"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Filtrar artigos"
@@ -1745,13 +1745,13 @@
             "value" : "Sluit de filterbalk"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fechar a barra de filtragem"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fechar a barra de filtragem"
@@ -1859,13 +1859,13 @@
             "value" : "Sluit de filterbalk"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fechar a barra de filtragem"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fechar a barra de filtragem"
@@ -1991,13 +1991,13 @@
             "value" : "Filter op:"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Filtrar por:"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Filtrar por:"
@@ -2075,7 +2075,7 @@
             "value" : "Filter getoonde artikelen op tekst"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Filtrar os artigos a exibir por correspondência de texto"
@@ -2183,13 +2183,13 @@
             "value" : "Stijl"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Estilo"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Estilo"
@@ -2315,13 +2315,13 @@
             "value" : "Stijl"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Estilo"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Estilo"
@@ -2429,13 +2429,13 @@
             "value" : "Toon lijst van beschikbare stijlen"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mostrar lista de estilos disponíveis"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mostrar lista de estilos disponíveis"
@@ -2525,7 +2525,7 @@
             "value" : "Laatste vernieuwing"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Última actualização"
@@ -2591,7 +2591,7 @@
             "value" : "Gemarkeerd"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Assinalado"
@@ -2663,7 +2663,7 @@
             "value" : "Alle artikelen"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Todos os artigos"
@@ -2759,13 +2759,13 @@
             "value" : "Voeg toe"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Adicionar"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Adicionar"
@@ -2873,13 +2873,13 @@
             "value" : "Voeg toe"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Adicionar"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Adicionar"
@@ -2963,7 +2963,7 @@
             "value" : "Abonneer op een feed of voeg een map of slimme map toe."
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Assinar um fluxo ou criar uma pasta ou pasta inteligente."
@@ -3041,7 +3041,7 @@
             "value" : "Ongelezen artikelen"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Artigos por ler"
@@ -3113,7 +3113,7 @@
             "value" : "Alle artikelen"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Todos os artigos"
@@ -3221,16 +3221,16 @@
             "value" : "Volgende ongelezen"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Seguinte por ler"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Próximo Não Lido"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seguinte por ler"
           }
         },
         "ru" : {
@@ -3353,16 +3353,16 @@
             "value" : "Volgende ongelezen"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Seguinte por ler"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Próximo Não Lido"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seguinte por ler"
           }
         },
         "ru" : {
@@ -3485,16 +3485,16 @@
             "value" : "Volgende ongelezen"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Seguinte por ler"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Próximo Não Lido"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seguinte por ler"
           }
         },
         "ru" : {
@@ -3617,16 +3617,16 @@
             "value" : "Open abonnement-pagina in externe browser"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Abrir página da assinatura num navegador externo"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Abrir Página da Assinatura no Navegador Externo"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir página da assinatura num navegador externo"
           }
         },
         "ru" : {
@@ -3749,16 +3749,16 @@
             "value" : "Vorige"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Retroceder"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Atrás"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retroceder"
           }
         },
         "ru" : {
@@ -3881,16 +3881,16 @@
             "value" : "Vorige"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Retroceder"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Atrás"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retroceder"
           }
         },
         "ru" : {
@@ -4013,16 +4013,16 @@
             "value" : "Vorige"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Retroceder"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Atrás"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retroceder"
           }
         },
         "ru" : {
@@ -4115,7 +4115,7 @@
             "value" : "Alle gelezen"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Todos os lidos"
@@ -4199,7 +4199,7 @@
             "value" : "Markeer alle artikelen als gelezen"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Marcar tudo como lido"
@@ -4289,7 +4289,7 @@
             "value" : "Markeer alle artikelen als gelezen"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Marcar tudo como lido"
@@ -4409,16 +4409,16 @@
             "value" : "Werk geselecteerde abonnementen bij"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Actualizar assinaturas seleccionadas"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Atualizar Assinaturas Selecionadas"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actualizar assinaturas seleccionadas"
           }
         },
         "ru" : {
@@ -4499,7 +4499,7 @@
             "value" : "Filter"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Filtro"
@@ -4565,7 +4565,7 @@
             "value" : "Filter"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Filtro"
@@ -4649,16 +4649,16 @@
             "value" : "Forceer bijwerken abonnementen van Open Reader"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Forçar uma actualização das assinaturas seleccionadas no Open Reader"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Forçar Atualização das Assinaturas Selecionadas do Open Reader"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Forçar uma actualização das assinaturas seleccionadas no Open Reader"
           }
         },
         "ru" : {
@@ -4769,16 +4769,16 @@
             "value" : "Alle artikelen"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Todos os artigos"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Todos os Artigos"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Todos os artigos"
           }
         },
         "ru" : {
@@ -4901,16 +4901,16 @@
             "value" : "Wijzig naam…"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mudar o nome…"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Renomear…"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mudar o nome…"
           }
         },
         "ru" : {
@@ -4997,7 +4997,7 @@
             "value" : "Ongelezen artikelen"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Artigos por ler"
@@ -5105,16 +5105,16 @@
             "value" : "Wijzig naam…"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mudar o nome…"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Renomear…"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mudar o nome…"
           }
         },
         "ru" : {
@@ -5237,16 +5237,16 @@
             "value" : "Meer stijlen…"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mais estilos…"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mais Estilos…"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mais estilos…"
           }
         },
         "ru" : {
@@ -5333,7 +5333,7 @@
             "value" : "Ongelezen of gemarkeerd"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Por ler ou assinalados"
@@ -5441,16 +5441,16 @@
             "value" : "Toon info"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Obter informação"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Obter Informações"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obter informação"
           }
         },
         "ru" : {
@@ -5555,16 +5555,16 @@
             "value" : "Vernieuw"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Actualizar"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Atualizar"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actualizar"
           }
         },
         "ru" : {
@@ -5669,16 +5669,16 @@
             "value" : "Vernieuw"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Actualizar"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Atualizar"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actualizar"
           }
         },
         "ru" : {
@@ -5801,16 +5801,16 @@
             "value" : "Werk alle abonnementen bij"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Actualizar todas as suas assinaturas"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Atualizar todas as suas assinaturas"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actualizar todas as suas assinaturas"
           }
         },
         "ru" : {
@@ -5933,16 +5933,16 @@
             "value" : "Nieuwe slimme map…"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nova pasta inteligente…"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nova Pasta Inteligente…"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nova pasta inteligente…"
           }
         },
         "ru" : {
@@ -6065,16 +6065,16 @@
             "value" : "Nieuw abonnement…"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nova assinatura…"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nova Assinatura…"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nova assinatura…"
           }
         },
         "ru" : {
@@ -6161,7 +6161,7 @@
             "value" : "Vandaag"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hoje"
@@ -6269,16 +6269,16 @@
             "value" : "Markeer alle artikelen als gelezen"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Marcar todos os artigos como lidos"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Marcar Todos os Artigos como Lidos"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marcar todos os artigos como lidos"
           }
         },
         "ru" : {
@@ -6359,7 +6359,7 @@
             "value" : "Toon alle feeds"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mostrar todos os fluxos"
@@ -6443,13 +6443,13 @@
             "value" : "Nieuwe map…"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nova pasta…"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nova pasta…"
@@ -6575,13 +6575,13 @@
             "value" : "Verwijder…"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Apagar…"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Apagar…"
@@ -6725,16 +6725,16 @@
             "value" : "Ongelezen artikelen"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Artigos por ler"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Artigos Não Lidos"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Artigos por ler"
           }
         },
         "ru" : {
@@ -6821,7 +6821,7 @@
             "value" : "Vandaag"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hoje"
@@ -6929,16 +6929,16 @@
             "value" : "Sla map over"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Avançar pasta"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pular Pasta"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avançar pasta"
           }
         },
         "ru" : {
@@ -7061,16 +7061,16 @@
             "value" : "Sla map over"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Avançar pasta"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pular Pasta"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avançar pasta"
           }
         },
         "ru" : {
@@ -7193,16 +7193,16 @@
             "value" : "Sla map over"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Avançar pasta"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pular Pasta"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avançar pasta"
           }
         },
         "ru" : {
@@ -7325,13 +7325,13 @@
             "value" : "Wijzig…"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Editar…"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Editar…"
@@ -7433,16 +7433,16 @@
             "value" : "Actie"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Acção"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ação"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acção"
           }
         },
         "ru" : {
@@ -7541,16 +7541,16 @@
             "value" : "Actie"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Acção"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ação"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acção"
           }
         },
         "ru" : {
@@ -7673,16 +7673,16 @@
             "value" : "Meer acties voor de geselecteerde map"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Acções adicionais para a pasta seleccionada"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ações adicionais para a pasta selecionada"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acções adicionais para a pasta seleccionada"
           }
         },
         "ru" : {
@@ -7781,16 +7781,16 @@
             "value" : "Ongelezen of gemarkeerd"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Por ler ou assinalados"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Não lidos ou marcados"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Por ler ou assinalados"
           }
         },
         "ru" : {
@@ -7907,13 +7907,13 @@
             "value" : "Wijzig…"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Editar…"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Editar…"
@@ -7997,7 +7997,7 @@
             "value" : "Gemarkeerd"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Assinalado"
@@ -8063,7 +8063,7 @@
             "value" : "Filter op:"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Filtrar por:"
@@ -8135,7 +8135,7 @@
             "value" : "Toon filterbalk"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mostrar barra de filtro"
@@ -8243,16 +8243,16 @@
             "value" : "Markeer alles als gelezen"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Marcar todos os artigos como lidos"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Marcar Todos os Artigos como Lidos"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marcar todos os artigos como lidos"
           }
         },
         "ru" : {
@@ -8375,16 +8375,16 @@
             "value" : "Laatste vernieuwing"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Última actualização"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Última atualização"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Última actualização"
           }
         },
         "ru" : {
@@ -8495,13 +8495,13 @@
             "value" : "Afgelopen 48 uur"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Últimas 48 horas"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Últimas 48 horas"
@@ -8627,16 +8627,16 @@
             "value" : "Toon info"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Obter informação"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Obter Informações"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obter informação"
           }
         },
         "ru" : {
@@ -8729,7 +8729,7 @@
             "value" : "Verwijder"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Apagar"
@@ -8807,7 +8807,7 @@
             "value" : "Verwijder"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Apagar"
@@ -8879,7 +8879,7 @@
             "value" : "Huidig artikel verwijderen"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Apagar este artigo"
@@ -8951,7 +8951,7 @@
             "value" : "Filter artikelen"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Filtrar artigos"
@@ -9023,7 +9023,7 @@
             "value" : "Afgelopen 48 uur"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Últimas 48 horas"
@@ -9095,7 +9095,7 @@
             "value" : "Afgelopen 48 uur"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Últimas 48 horas"
@@ -9155,7 +9155,7 @@
             "value" : "Deel"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Compartilhar"
@@ -9209,7 +9209,7 @@
             "value" : "Deel"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Compartilhar"
@@ -9311,16 +9311,16 @@
             "value" : "De laatste keer dat deze feed is bijgewerkt, is er een fout opgetreden"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ocorreu um erro da última vez que esta fonte foi actualizada"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Um erro ocorreu quando estas notícias foram atualizadas"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ocorreu um erro da última vez que esta fonte foi actualizada"
           }
         },
         "ru" : {
@@ -9401,7 +9401,7 @@
             "value" : "Sluit de filterbalk"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fechar a barra de filtro"
@@ -9467,7 +9467,7 @@
             "value" : "Sluit de filterbalk"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fechar a barra de filtro"
@@ -9575,16 +9575,16 @@
             "value" : "Werk geselecteerde abonnementen bij"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Actualizar as assinaturas seleccionadas"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Atualizar Assinaturas Selecionadas"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actualizar as assinaturas seleccionadas"
           }
         },
         "ru" : {
@@ -9707,13 +9707,13 @@
             "value" : "Verwijder…"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Apagar…"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Apagar…"
@@ -9833,16 +9833,16 @@
             "value" : "Ga naar startpagina van abonnement"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Abrir página na Teia da assinatura"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Abrir Página da Assinatura"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir página na Teia da assinatura"
           }
         },
         "ru" : {
@@ -9965,16 +9965,16 @@
             "value" : "Open abonnement-pagina in externe browser"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Abrir página da assinatura num navegador externo"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Abrir Página da Assinatura no Navegador Externo"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir página da assinatura num navegador externo"
           }
         },
         "ru" : {

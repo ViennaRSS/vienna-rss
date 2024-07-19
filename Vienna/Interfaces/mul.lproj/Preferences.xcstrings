@@ -77,16 +77,16 @@
             "value" : "Weergave van artikelen en webpagina's:"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Quando visualizar artigos ou páginas na teia:"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ao visualizar artigos ou páginas da web:"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quando visualizar artigos ou páginas na teia:"
           }
         },
         "ru" : {
@@ -203,16 +203,16 @@
             "value" : "Deze instellingen hoeven niet veranderd te worden voor normaal gebruik van Vienna. Kijk in de Help voor informatie over de instellingen."
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Estas definições não devem ser alteradas para um uso normal do Vienna. Consulte o ficheiro de Ajuda para esclarecimentos sobre cada uma."
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Estes ajustes não devem ser alterados para o uso normal do Vienna. Veja o arquivo de Ajuda para detalhes de cada ajuste."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estas definições não devem ser alteradas para um uso normal do Vienna. Consulte o ficheiro de Ajuda para esclarecimentos sobre cada uma."
           }
         },
         "ru" : {
@@ -305,7 +305,7 @@
             "value" : "Markeer bijgewerkte artikelen als nieuw"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Assinalar os artigos actualizados como novos"
@@ -395,7 +395,7 @@
             "value" : "Echter, hogere waarden kunnen er ook voor zorgen dat je Mac trager reageert tijdens het downloaden van abonnementen."
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Contudo, um número elevado pode tornar o seu computador mais lento enquanto os fluxos são actualizados."
@@ -515,13 +515,13 @@
             "value" : "Elke 6 uur"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "A cada 6 horas"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "A cada 6 horas"
@@ -617,7 +617,7 @@
             "value" : "Gelijktijdige downloads:"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Descargas em simultâneo:"
@@ -737,13 +737,13 @@
             "value" : "Handmatig"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Manualmente"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Manualmente"
@@ -827,7 +827,7 @@
             "value" : "Geef feeds met ongelezen artikelen in vet lettertype weer"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Apresentar a negrito os fluxos com artigos por ler"
@@ -905,16 +905,16 @@
             "value" : "Markeer huidige artikel als gelezen:"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Marcar artigo actual como lido:"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Marcar artigo atual como lido:"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marcar artigo actual como lido:"
           }
         },
         "ru" : {
@@ -1037,16 +1037,16 @@
             "value" : "Handmatig"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Manualmente"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nunca"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manualmente"
           }
         },
         "ru" : {
@@ -1163,13 +1163,13 @@
             "value" : "Elk half uur"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "A cada 30 minutos"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "A cada 30 minutos"
@@ -1295,16 +1295,16 @@
             "value" : "Verplaats artikelen naar prullenmand:"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mover artigos para o lixo:"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mover artigos para o Lixo:"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mover artigos para o lixo:"
           }
         },
         "ru" : {
@@ -1421,16 +1421,16 @@
             "value" : "Gebruikersnaam:"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Identificar-se:"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nome:"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Identificar-se:"
           }
         },
         "ru" : {
@@ -1559,16 +1559,16 @@
             "value" : "Na één dag"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Decorrido um dia"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Após um Dia"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Decorrido um dia"
           }
         },
         "ru" : {
@@ -1691,16 +1691,16 @@
             "value" : "Kies…"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Seleccionar…"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Selecionar…"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seleccionar…"
           }
         },
         "ru" : {
@@ -1781,7 +1781,7 @@
             "value" : "Normaal"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Médio"
@@ -1877,16 +1877,16 @@
             "value" : "Toon symbolen van websites in de feedlijst"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mostrar imagens das pastas na lista de fluxos"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mostrar imagens de pastas na lista de pastas"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar imagens das pastas na lista de fluxos"
           }
         },
         "ru" : {
@@ -2003,16 +2003,16 @@
             "value" : "Na twee weken"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Após duas semanas"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Após 2 Semanas"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Após duas semanas"
           }
         },
         "ru" : {
@@ -2129,16 +2129,16 @@
             "value" : "Open links op de achtergrond"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Abrir ligações novas em plano de fundo"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Abrir novos links no fundo"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir ligações novas em plano de fundo"
           }
         },
         "ru" : {
@@ -2243,13 +2243,13 @@
             "value" : "Toon in menubalk"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mostrar na barra de menu"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mostrar na barra de menu"
@@ -2333,7 +2333,7 @@
             "value" : "Mogelijk moet je Vienna opnieuw starten voordat een wijziging van deze instelling van kracht wordt."
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Poderá ter de reiniciar o Vienna para que a alteração desta definição surta efeito."
@@ -2435,16 +2435,16 @@
             "value" : "Open links in externe browser"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Abrir ligações num navegador externo"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Abrir links em um navegador externo"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir ligações num navegador externo"
           }
         },
         "ru" : {
@@ -2537,7 +2537,7 @@
             "value" : "Hoe hoger de waarde, des te sneller worden je abonnementen gedownload."
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Quanto maior o número, mais rapidamente as suas assinaturas serão descarregadas."
@@ -2621,7 +2621,7 @@
             "value" : "Adres van een server met Open Reader-ondersteuning"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Endereço dum servidor compatível com Open Reader"
@@ -2693,7 +2693,7 @@
             "value" : "Vraag bij stoppen van Vienna"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Perguntar antes de sair do Vienna"
@@ -2795,13 +2795,13 @@
             "value" : "Elke 3 uur"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "A cada 3 horas"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "A cada 3 horas"
@@ -2927,13 +2927,13 @@
             "value" : "Handmatig"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nunca"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nunca"
@@ -3041,16 +3041,16 @@
             "value" : "Zoek naar nieuwere versie bij het starten"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Procurar por novas versões do Vienna ao iniciar"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Verificar novas versões do Vienna ao iniciar"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Procurar por novas versões do Vienna ao iniciar"
           }
         },
         "ru" : {
@@ -3131,7 +3131,7 @@
             "value" : "Klein"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pequeno"
@@ -3197,7 +3197,7 @@
             "value" : "Wis verwijderde artikelen:"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Purgar os artigos apagados:"
@@ -3299,16 +3299,16 @@
             "value" : "Wanneer nieuwe ongelezen artikelen zijn opgehaald:"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Quando forem recebidos novos artigos:"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Quando novos artigos são recebidos:"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quando forem recebidos novos artigos:"
           }
         },
         "ru" : {
@@ -3401,7 +3401,7 @@
             "value" : "Kies een server met Open Reader-ondersteuning"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Seleccione um servidor compatível com o Open Reader"
@@ -3521,16 +3521,16 @@
             "value" : "Lettertype voor artikellijst:"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tipo de letra da lista de artigos:"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fonte da lista de artigos:"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tipo de letra da lista de artigos:"
           }
         },
         "ru" : {
@@ -3659,13 +3659,13 @@
             "value" : "Beweeg appsymbool in het Dock"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Animar o ícone do programa"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Animar o ícone do programa"
@@ -3785,16 +3785,16 @@
             "value" : "Gebruik nooit lettergrootte kleiner dan"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nunca usar tipos de letra mais pequenas do que"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nunca usar fontes menores que"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nunca usar tipos de letra mais pequenas do que"
           }
         },
         "ru" : {
@@ -3917,16 +3917,16 @@
             "value" : "Na \"Volgende ongelezen\"-commando"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Após comando \"Seguinte por ler\""
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Após o comando \"Próxima não lida\""
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Após comando \"Seguinte por ler\""
           }
         },
         "ru" : {
@@ -4043,13 +4043,13 @@
             "value" : "Elk uur"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "A cada hora"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "A cada hora"
@@ -4151,16 +4151,16 @@
             "value" : "Synchroniseren"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sincronização"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sincronizando"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sincronização"
           }
         },
         "ru" : {
@@ -4241,16 +4241,16 @@
             "value" : "Zoek naar nieuwe artikelen bij het starten"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Procurar por novos artigos ao iniciar"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Verificar novos artigos ao iniciar"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Procurar por novos artigos ao iniciar"
           }
         },
         "ru" : {
@@ -4367,16 +4367,16 @@
             "value" : "Na een korte vertraging"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Após uma pequena espera"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Após pequeno atraso"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Após uma pequena espera"
           }
         },
         "ru" : {
@@ -4493,16 +4493,16 @@
             "value" : "Activeer JavaScript in interne browser"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Activar JavaScript no navegador interno"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Habilitar JavaScript no browser interno"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activar JavaScript no navegador interno"
           }
         },
         "ru" : {
@@ -4625,13 +4625,13 @@
             "value" : "Geavanceerd"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Avançado"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Avançado"
@@ -4751,13 +4751,13 @@
             "value" : "Andere…"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Outro…"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Outro…"
@@ -4883,13 +4883,13 @@
             "value" : "Wachtwoord:"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Senha:"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Senha:"
@@ -5009,16 +5009,16 @@
             "value" : "Na één maand"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Decorrido um mês"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Após um Mês"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Decorrido um mês"
           }
         },
         "ru" : {
@@ -5135,13 +5135,13 @@
             "value" : "Zoek naar nieuwe artikelen:"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Verificar novos artigos:"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Verificar novos artigos:"
@@ -5243,7 +5243,7 @@
             "value" : "Server:"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Servidor:"
@@ -5357,13 +5357,13 @@
             "value" : "Elke 2 uur"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "A cada 2 horas"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "A cada 2 horas"
@@ -5483,13 +5483,13 @@
             "value" : "Elke 5 minuten"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "A cada 5 minutos"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "A cada 5 minutos"
@@ -5603,16 +5603,16 @@
             "value" : "Na twee dagen"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Decorridos dois dias"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Após 2 Dias"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Decorridos dois dias"
           }
         },
         "ru" : {
@@ -5693,7 +5693,7 @@
             "value" : "Lettergrootte feedlijst:"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tamanho da letra dos fluxos:"
@@ -5795,13 +5795,13 @@
             "value" : "Algemeen"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Geral"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Geral"
@@ -5927,13 +5927,13 @@
             "value" : "Weergave"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aparência"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aparência"
@@ -6029,7 +6029,7 @@
             "value" : "Zoek naar bèta-updates"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Procurar pelas versões experimentais mais recentes"
@@ -6113,7 +6113,7 @@
             "value" : "Synchroniseer met een Open Reader-server"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sincronizar com um servidor Open Reader"
@@ -6197,7 +6197,7 @@
             "value" : "Bezoek website"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Visitar a página na Teia"
@@ -6275,7 +6275,7 @@
             "value" : "Geef ongelezen artikelen in vet lettertype weer"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Apresentar a negrito os artigos por ler"
@@ -6353,7 +6353,7 @@
             "value" : "Updates"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Actualizações"
@@ -6449,16 +6449,16 @@
             "value" : "Na één week"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Decorrida uma semana"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Após uma Semana"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Decorrida uma semana"
           }
         },
         "ru" : {
@@ -6539,7 +6539,7 @@
             "value" : "Groot"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Grande"
@@ -6629,7 +6629,7 @@
             "value" : "URL:"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "URL:"
@@ -6743,13 +6743,13 @@
             "value" : "Elk kwartier"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "A cada 15 minutos"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "A cada 15 minutos"
@@ -6863,13 +6863,13 @@
             "value" : "Standaard RSS-lezer:"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Leitor RSS padrão:"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Leitor RSS padrão:"
@@ -6989,16 +6989,16 @@
             "value" : "Bewaar downloads in:"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Guardar ficheiros descarregados em:"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Salvar arquivos descarregados em:"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardar ficheiros descarregados em:"
           }
         },
         "ru" : {
@@ -7079,7 +7079,7 @@
             "value" : "Bij stoppen van Vienna"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Quando o Vienna encerrar"

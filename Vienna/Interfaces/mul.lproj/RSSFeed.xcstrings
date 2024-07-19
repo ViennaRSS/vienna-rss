@@ -83,13 +83,13 @@
             "value" : "Annuleer"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cancelar"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cancelar"
@@ -215,13 +215,13 @@
             "value" : "Abonneer"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Assinar"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Assinar"
@@ -341,13 +341,13 @@
             "value" : "Bron:"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Origem:"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Origem:"
@@ -473,16 +473,16 @@
             "value" : "Neem een nieuw abonnement"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Criar uma nova assinatura"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Criar nova assinatura"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Criar uma nova assinatura"
           }
         },
         "ru" : {
@@ -599,16 +599,16 @@
             "value" : "Geef hieronder de link voor het abonnement op, of kies een door de uitgever aangegeven link op uit het menu hieronder."
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Insira abaixo uma ligação para um fluxo novo. Ou então seleccione da lista de fontes um atalho para o fluxo providenciado por essa fonte."
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Entre o link das notícias abaixo. Ou escolha da lista de de Origens para entrar com um atalho para as notícias fornecidas pela origem."
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Insira abaixo uma ligação para um fluxo novo. Ou então seleccione da lista de fontes um atalho para o fluxo providenciado por essa fonte."
           }
         },
         "ru" : {
@@ -707,7 +707,7 @@
             "value" : "URL:"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "URL:"
@@ -827,16 +827,16 @@
             "value" : "Bewaar"
           }
         },
-        "pt" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Guardar"
-          }
-        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Salvar"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardar"
           }
         },
         "ru" : {
@@ -959,13 +959,13 @@
             "value" : "Annuleer"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cancelar"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cancelar"
@@ -1079,13 +1079,13 @@
             "value" : "Wijzig abonnement"
           }
         },
-        "pt" : {
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Editar assinatura"
           }
         },
-        "pt-BR" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Editar assinatura"
@@ -1175,7 +1175,7 @@
             "value" : "Abonneer in Open Reader"
           }
         },
-        "pt" : {
+        "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Assinar no Open Reader"
