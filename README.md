@@ -12,7 +12,7 @@ Additionally or alternatively, you can also sync with a server supporting the [O
 Compatibility
 -------------
 
-Version 3.9.x of Vienna requires a minimum of macOS 10.13 (High Sierra).
+Version 3.9.x requires a minimum of macOS 10.13 (High Sierra).  
 Vienna 3.8.x requires a minimum of macOS 10.12 (Sierra).  
 Vienna 3.6.x and 3.7.x require a minimum of OS X 10.11 (El Capitan).  
 Vienna 3.2.x to 3.5.x require a minimum of OS X 10.9 (Mavericks).  
@@ -36,14 +36,14 @@ brew install --cask vienna
 Getting support
 ---------------
 
-If the in-application help files and the [FAQ](https://www.vienna-rss.com/faq) don’t answer your questions, head over to our [Discussions page](https://github.com/ViennaRSS/vienna-rss/discussions) on GitHub or our [support forum](https://forums.cocoaforge.com/viewforum.php?f=18) which is hosted by Cocoaforge.
+If the in-application help files and the [FAQ](https://www.vienna-rss.com/faq) don’t answer your questions, head over to our [Discussions page](https://github.com/ViennaRSS/vienna-rss/discussions) on GitHub.
 
 Reporting an issue
 ------------------
 
-If after reading the forum and asking your questions there, you are convinced that there is a problem in Vienna's code or an important feature is missing, you may open an [issue](https://github.com/ViennaRSS/vienna-rss/issues?direction=desc&sort=created&state=open) on Github.
+If after reading the Discussions page or asking your questions there, you are convinced that there is a problem in Vienna's code or an important feature is missing, you may open an [issue](https://github.com/ViennaRSS/vienna-rss/issues?direction=desc&sort=created&state=open) on Github.
 
-Be concise, but as precise as possible to allow other people reproducing the issue. To keep things short, you can provide a link to a relevant thread or message on the Cocoaforge forum.
+Be concise, but as precise as possible to allow other people reproducing the issue. To keep things short, you can provide a link to a relevant discussion.
 
 Contributing
 ------------
