@@ -1,9 +1,0 @@
-/* Class = "NSButtonCell"; title = "Export all subscriptions"; ObjectID = "6rj-zb-zOa"; */
-"6rj-zb-zOa.title" = "Exportar todas as assinaturas";
-
-/* Class = "NSButtonCell"; title = "Preserve group folders in exported file"; ObjectID = "IYg-Pm-bcI"; */
-"IYg-Pm-bcI.title" = "Manter as pastas no ficheiro exportado";
-
-/* Class = "NSButtonCell"; title = "Export selected subscriptions"; ObjectID = "KgE-bb-aJn"; */
-"KgE-bb-aJn.title" = "Exportar as assinaturas seleccionadas";
-

@@ -1,9 +1,0 @@
-/* Class = "NSTextFieldCell"; title = "Smart folder name:"; ObjectID = "94"; */
-"94.title" = "Назва вибірки:";
-
-/* Class = "NSButtonCell"; title = "Save"; ObjectID = "96"; */
-"96.title" = "Зберегти";
-
-/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "97"; */
-"97.title" = "Скасувати";
-

@@ -1,9 +1,0 @@
-/* Class = "NSButtonCell"; title = "Export all subscriptions"; ObjectID = "6rj-zb-zOa"; */
-"6rj-zb-zOa.title" = "すべての購読を書き出す";
-
-/* Class = "NSButtonCell"; title = "Preserve group folders in exported file"; ObjectID = "IYg-Pm-bcI"; */
-"IYg-Pm-bcI.title" = "グループフォルダをファイルに書き出す";
-
-/* Class = "NSButtonCell"; title = "Export selected subscriptions"; ObjectID = "KgE-bb-aJn"; */
-"KgE-bb-aJn.title" = "選択中の購読を書き出す";
-

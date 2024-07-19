@@ -1,9 +1,0 @@
-/* Class = "NSWindow"; title = "Activity"; ObjectID = "8"; */
-"8.title" = "Activiteiten";
-
-/* Class = "NSTableColumn"; headerCell.title = "Source"; ObjectID = "18"; */
-"18.headerCell.title" = "Bron";
-
-/* Class = "NSTableColumn"; headerCell.title = "Status"; ObjectID = "19"; */
-"19.headerCell.title" = "Status";
-

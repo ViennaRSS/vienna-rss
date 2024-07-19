@@ -1,9 +1,0 @@
-/* Class = "NSTextFieldCell"; title = "Smart folder name:"; ObjectID = "94"; */
-"94.title" = "Išmaniojo aplanko pavadinimas:";
-
-/* Class = "NSButtonCell"; title = "Save"; ObjectID = "96"; */
-"96.title" = "Užsaugoti";
-
-/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "97"; */
-"97.title" = "Atšaukti";
-
