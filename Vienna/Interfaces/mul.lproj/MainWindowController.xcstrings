@@ -551,6 +551,12 @@
       "comment" : "Class = \"NSMenuItem\"; title = \"Last Refresh\"; ObjectID = \"5RA-iE-L8a\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Naposledy obnovené"
+          }
+        },
         "da" : {
           "stringUnit" : {
             "state" : "translated",
@@ -575,10 +581,22 @@
             "value" : "Última actualización"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Azken Eguneratzea"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dernière actualisation"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Última actualización"
           }
         },
         "it" : {
@@ -587,10 +605,34 @@
             "value" : "Ultimo aggiornamento"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "最後の更新"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "최종 갱신"
+          }
+        },
+        "lt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paskutinis atnaujinimas"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Laatste vernieuwing"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Última atualização"
           }
         },
         "pt-PT" : {
@@ -609,6 +651,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Senaste uppdatering"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Son Yenileme"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Останнє оновлення"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "上一次更新"
           }
         },
         "zh-Hant" : {
@@ -1403,16 +1463,34 @@
             "value" : "Non lus ou signalés"
           }
         },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non lido ou destacado"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Non letto o contrassegnato"
           }
         },
+        "lt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neperskaityti arba pažymėti"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ongelezen of gemarkeerd"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não lidos ou marcados"
           }
         },
         "pt-PT" : {
@@ -1431,6 +1509,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Oläst eller flaggat"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Непрочитані або помічені"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未读或已加旗标"
           }
         },
         "zh-Hant" : {
@@ -2039,6 +2129,12 @@
       "comment" : "Class = \"NSSearchField\"; ibShadowedToolTip = \"Filter displayed articles by matching text\"; ObjectID = \"a7v-eM-oW1\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zobrazí pouze příspěvky odpovídající hledanému textu"
+          }
+        },
         "da" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2069,10 +2165,34 @@
             "value" : "Filtrer en affichant les articles contenant ce texte"
           }
         },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtrar artigos amosados segundo o texto correspondiente"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtra gli articoli visualizzati per corrispondenza nel testo"
+          }
+        },
+        "lt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtruoti rodomus straipsnius pagal tekstą"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Filter getoonde artikelen op tekst"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtrar artigos mostrados por texto igual"
           }
         },
         "pt-PT" : {
@@ -2091,6 +2211,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Filtrera visade artiklar med följande text"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Görünen makaleleri uyumlu metinle filtrele"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Фільтрувати статті за вмістом тексту"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "过滤显示符合条件的文章"
           }
         },
         "zh-Hant" : {
@@ -2483,6 +2621,12 @@
       "comment" : "Class = \"NSMenuItem\"; title = \"Last Refresh\"; ObjectID = \"bhs-vZ-HCm\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Naposledy obnovené"
+          }
+        },
         "da" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2507,10 +2651,22 @@
             "value" : "Última actualización"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Azken Eguneratzea"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dernière actualisation"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Última actualización"
           }
         },
         "it" : {
@@ -2519,10 +2675,34 @@
             "value" : "Ultimo aggiornamento"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "最後の更新"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "최종 갱신"
+          }
+        },
+        "lt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paskutinis atnaujinimas"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Laatste vernieuwing"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Última atualização"
           }
         },
         "pt-PT" : {
@@ -2543,6 +2723,24 @@
             "value" : "Senaste uppdatering"
           }
         },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Son Yenileme"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Останнє оновлення"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "上一次更新"
+          }
+        },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2555,6 +2753,12 @@
       "comment" : "Class = \"NSMenuItem\"; title = \"Flagged\"; ObjectID = \"ci8-W6-ewN\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Praporek"
+          }
+        },
         "da" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2579,16 +2783,58 @@
             "value" : "Destacado"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adierazlea"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Signalés"
           }
         },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Destacado"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Con Contrassegno"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "フラグ"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "깃발 표시"
+          }
+        },
+        "lt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pažymėta"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gemarkeerd"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marcados"
           }
         },
         "pt-PT" : {
@@ -2609,6 +2855,24 @@
             "value" : "Flaggat"
           }
         },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Önemli"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "З прапорцем"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "标记精华"
+          }
+        },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2621,6 +2885,12 @@
       "comment" : "Class = \"NSMenuItem\"; title = \"All Articles\"; ObjectID = \"cJi-Kc-4fg\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Všechny příspěvky"
+          }
+        },
         "da" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2645,10 +2915,22 @@
             "value" : "Todos los artículos"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Artikulu Guztiak"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tous les articles"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Todos os artigos"
           }
         },
         "it" : {
@@ -2657,10 +2939,34 @@
             "value" : "Tutti gli articoli"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "すべての記事"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "모든 기사"
+          }
+        },
+        "lt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visi straipsniai"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Alle artikelen"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Todos os Artigos"
           }
         },
         "pt-PT" : {
@@ -2679,6 +2985,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Alla artiklar"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tüm Makaleler"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Всі статті"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "所有文章"
           }
         },
         "zh-Hant" : {
@@ -2999,6 +3323,12 @@
       "comment" : "Class = \"NSMenuItem\"; title = \"Unread Articles\"; ObjectID = \"dId-uc-qfG\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nečtené příspěvky"
+          }
+        },
         "da" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3023,10 +3353,22 @@
             "value" : "Artículos no leídos"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Irakurri Gabeko Artikuluak"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Articles non lus"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Artigos non lidos"
           }
         },
         "it" : {
@@ -3035,10 +3377,34 @@
             "value" : "Articoli non letti"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未読の記事"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "읽지 않은 기사"
+          }
+        },
+        "lt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neperskaityti straipsniai"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ongelezen artikelen"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Artigos Não Lidos"
           }
         },
         "pt-PT" : {
@@ -3059,6 +3425,24 @@
             "value" : "Olästa artiklar"
           }
         },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Okunmamış Makaleler"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Непрочитані статті"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未读文章"
+          }
+        },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3071,6 +3455,12 @@
       "comment" : "Class = \"NSMenuItem\"; title = \"All Articles\"; ObjectID = \"FDh-ie-FnZ\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Všechny příspěvky"
+          }
+        },
         "da" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3095,10 +3485,22 @@
             "value" : "Todos los artículos"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Artikulu Guztiak"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tous les articles"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Todos os artigos"
           }
         },
         "it" : {
@@ -3107,10 +3509,34 @@
             "value" : "Tutti gli articoli"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "すべての記事"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "모든 기사"
+          }
+        },
+        "lt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visi straipsniai"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Alle artikelen"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Todos os Artigos"
           }
         },
         "pt-PT" : {
@@ -3129,6 +3555,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Alla artiklar"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tüm Makaleler"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Всі статті"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "所有文章"
           }
         },
         "zh-Hant" : {
@@ -4955,6 +5399,12 @@
       "comment" : "Class = \"NSMenuItem\"; title = \"Unread Articles\"; ObjectID = \"lDl-nn-yvL\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nečtené příspěvky"
+          }
+        },
         "da" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4979,10 +5429,22 @@
             "value" : "Artículos no leídos"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Irakurri Gabeko Artikuluak"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Articles non lus"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Artigos non lidos"
           }
         },
         "it" : {
@@ -4991,10 +5453,34 @@
             "value" : "Articoli non letti"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未読の記事"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "읽지 않은 기사"
+          }
+        },
+        "lt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neperskaityti straipsniai"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ongelezen artikelen"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Artigos Não Lidos"
           }
         },
         "pt-PT" : {
@@ -5013,6 +5499,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Olästa artiklar"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Okunmamış Makaleler"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Непрочитані статті"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未读文章"
           }
         },
         "zh-Hant" : {
@@ -5321,16 +5825,34 @@
             "value" : "Non lus ou signalés"
           }
         },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non lido ou destacado"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Non letto o contrassegnato"
           }
         },
+        "lt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Neperskaityti arba pažymėti"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ongelezen of gemarkeerd"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não lidos ou marcados"
           }
         },
         "pt-PT" : {
@@ -5349,6 +5871,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Oläst eller flaggat"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Непрочитані або помічені"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未读或已加旗标"
           }
         },
         "zh-Hant" : {
@@ -6119,6 +6653,12 @@
       "comment" : "Class = \"NSMenuItem\"; title = \"Today\"; ObjectID = \"pZm-V9-RVd\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dnes"
+          }
+        },
         "da" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6143,10 +6683,22 @@
             "value" : "Hoy"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gaur"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aujourd'hui"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hoxe"
           }
         },
         "it" : {
@@ -6155,10 +6707,34 @@
             "value" : "Oggi"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "今日"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "오늘"
+          }
+        },
+        "lt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Šiandien"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vandaag"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hoje"
           }
         },
         "pt-PT" : {
@@ -6177,6 +6753,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Idag"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bugün"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сьогодні"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "今天"
           }
         },
         "zh-Hant" : {
@@ -6779,6 +7373,12 @@
       "comment" : "Class = \"NSMenuItem\"; title = \"Today\"; ObjectID = \"Sne-Nd-bEA\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dnes"
+          }
+        },
         "da" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6803,10 +7403,22 @@
             "value" : "Hoy"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gaur"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aujourd'hui"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hoxe"
           }
         },
         "it" : {
@@ -6815,10 +7427,34 @@
             "value" : "Oggi"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "今日"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "오늘"
+          }
+        },
+        "lt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Šiandien"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vandaag"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hoje"
           }
         },
         "pt-PT" : {
@@ -6837,6 +7473,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Idag"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bugün"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сьогодні"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "今天"
           }
         },
         "zh-Hant" : {
@@ -7961,6 +8615,12 @@
       "comment" : "Class = \"NSMenuItem\"; title = \"Flagged\"; ObjectID = \"vqZ-zm-Blb\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Praporek"
+          }
+        },
         "da" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7985,16 +8645,58 @@
             "value" : "Destacado"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adierazlea"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Signalés"
           }
         },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Destacado"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Con Contrassegno"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "フラグ"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "깃발 표시"
+          }
+        },
+        "lt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pažymėta"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gemarkeerd"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marcados"
           }
         },
         "pt-PT" : {
@@ -8015,6 +8717,24 @@
             "value" : "Flaggat"
           }
         },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Önemli"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "З прапорцем"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "标记精华"
+          }
+        },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8027,6 +8747,12 @@
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Filter by:\"; ObjectID = \"VXV-Rv-wn5\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtrovat:"
+          }
+        },
         "da" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8051,16 +8777,58 @@
             "value" : "Filtrar por:"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Honekin Filtratu:"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Filtré par :"
           }
         },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtrar por:"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtra per:"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "フィルター:"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "필터:"
+          }
+        },
+        "lt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtruoti pagal:"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Filter op:"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtrar por:"
           }
         },
         "pt-PT" : {
@@ -8081,6 +8849,18 @@
             "value" : "Filtrera efter:"
           }
         },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Фільтр:"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "过滤条件:"
+          }
+        },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8093,6 +8873,12 @@
       "comment" : "Class = \"NSMenuItem\"; title = \"Show Filter Bar\"; ObjectID = \"Wy3-T4-9eO\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zobrazit řádek filtru"
+          }
+        },
         "da" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8123,16 +8909,34 @@
             "value" : "Afficher la barre de filtre"
           }
         },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Amosar barra de filtros"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mostra la barra dei filtri"
           }
         },
+        "lt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rodyti filtro meniu juostą"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Toon filterbalk"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar Barra de Filtragem"
           }
         },
         "pt-PT" : {
@@ -8151,6 +8955,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Visa filterfältet"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtre Çubuğunu Göster"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Показати стрічку фільтру"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "显示过滤栏"
           }
         },
         "zh-Hant" : {
@@ -8711,10 +9533,22 @@
             "value" : "Eliminar"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ezabatu"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Supprimer"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminar"
           }
         },
         "it" : {
@@ -8723,10 +9557,34 @@
             "value" : "Elimina"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "削除"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "삭제"
+          }
+        },
+        "lt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ištrinti"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Verwijder"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apagar"
           }
         },
         "pt-PT" : {
@@ -8745,6 +9603,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Radera"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sil"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Видалити"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "删除"
           }
         },
         "zh-Hant" : {
@@ -8789,10 +9665,22 @@
             "value" : "Eliminar"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ezabatu"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Supprimer"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminar"
           }
         },
         "it" : {
@@ -8801,10 +9689,34 @@
             "value" : "Elimina"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "削除"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "삭제"
+          }
+        },
+        "lt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ištrinti"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Verwijder"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apagar"
           }
         },
         "pt-PT" : {
@@ -8823,6 +9735,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Radera"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sil"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Видалити"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "删除"
           }
         },
         "zh-Hant" : {
@@ -8909,6 +9839,12 @@
       "comment" : "Class = \"NSPopUpButton\"; ibShadowedToolTip = \"Filter articles\"; ObjectID = \"Ymd-v7-5ML\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtruje příspěvky"
+          }
+        },
         "da" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8933,10 +9869,22 @@
             "value" : "Filtrar artículos"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtratu artikuluak"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Filtrer les articles"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtrar artigos"
           }
         },
         "it" : {
@@ -8945,10 +9893,28 @@
             "value" : "Filtra articoli"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "記事をフィルター"
+          }
+        },
+        "lt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtruoti straipsnius"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Filter artikelen"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtrar artigos"
           }
         },
         "pt-PT" : {
@@ -8969,6 +9935,24 @@
             "value" : "Filtrera artiklar"
           }
         },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Makaleleri filtrele"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Фільтрувати статті"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "过滤文章"
+          }
+        },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8981,6 +9965,12 @@
       "comment" : "Class = \"NSMenuItem\"; title = \"Last 48 Hours\"; ObjectID = \"yqJ-tO-HNW\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Posledních 48 hodin"
+          }
+        },
         "da" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9005,10 +9995,22 @@
             "value" : "Últimas 48 horas"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Azken 48 orduak"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dernières 48 heures"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Últimas 48 horas"
           }
         },
         "it" : {
@@ -9017,10 +10019,22 @@
             "value" : "Ultime 48 ore"
           }
         },
+        "lt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paskutines 48 valandas"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Afgelopen 48 uur"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Últimas 48 horas"
           }
         },
         "pt-PT" : {
@@ -9039,6 +10053,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Senaste 48 timmarna"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Son 48 saat"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Останні 48 годин"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "最近 48 小时"
           }
         },
         "zh-Hant" : {
@@ -9053,6 +10085,12 @@
       "comment" : "Class = \"NSMenuItem\"; title = \"Last 48 Hours\"; ObjectID = \"yvh-qU-EAm\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Posledních 48 hodin"
+          }
+        },
         "da" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9077,10 +10115,22 @@
             "value" : "Últimas 48 horas"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Azken 48 orduak"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dernières 48 heures"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Últimas 48 horas"
           }
         },
         "it" : {
@@ -9089,10 +10139,22 @@
             "value" : "Ultime 48 ore"
           }
         },
+        "lt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paskutines 48 valandas"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Afgelopen 48 uur"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Últimas 48 horas"
           }
         },
         "pt-PT" : {
@@ -9111,6 +10173,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Senaste 48 timmarna"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Son 48 saat"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Останні 48 годин"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "最近 48 小时"
           }
         },
         "zh-Hant" : {
@@ -9365,6 +10445,12 @@
       "comment" : "Class = \"NSButton\"; ibExternalAccessibilityDescription = \"Close the filter bar\"; ObjectID = \"ZBo-PU-Lx7\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zavře řádek filtru"
+          }
+        },
         "da" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9395,10 +10481,34 @@
             "value" : "Masquer la barre de filtre"
           }
         },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pechar barra de filtros"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chiudi la barra del filtro"
+          }
+        },
+        "lt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uždaryti filtro juostą"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sluit de filterbalk"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fechar a barra de filtragem"
           }
         },
         "pt-PT" : {
@@ -9417,6 +10527,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Stäng filterfältet"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtre çubuğunu kapat"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сховати стрічку фільтру"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "关闭过滤栏"
           }
         },
         "zh-Hant" : {
@@ -9431,6 +10559,12 @@
       "comment" : "Class = \"NSButton\"; ibShadowedToolTip = \"Close the filter bar\"; ObjectID = \"ZBo-PU-Lx7\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zavře řádek filtru"
+          }
+        },
         "da" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9461,10 +10595,34 @@
             "value" : "Masquer la barre de filtre"
           }
         },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pechar barra de filtros"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chiudi la barra del filtro"
+          }
+        },
+        "lt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uždaryti filtro juostą"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sluit de filterbalk"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fechar a barra de filtragem"
           }
         },
         "pt-PT" : {
@@ -9483,6 +10641,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Stäng filterfältet"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtre çubuğunu kapat"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сховати стрічку фільтру"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "关闭过滤栏"
           }
         },
         "zh-Hant" : {

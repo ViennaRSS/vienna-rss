@@ -8513,6 +8513,12 @@
     "Email Link" : {
       "comment" : "Toolbar item label\n   Toolbar item palette label",
       "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Poslat odkaz e-mailem"
+          }
+        },
         "da" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8525,10 +8531,28 @@
             "value" : "Link mailen"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviar enlace por correo electrónico"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Envoyer le lien"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invia link via email"
+          }
+        },
+        "lt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Siųsti nuorodą el. paštu"
           }
         },
         "nl" : {
@@ -8543,10 +8567,28 @@
             "value" : "Enviar ligação por correio electrónico"
           }
         },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отправить ссылку электронной почтой"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mejla länk"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Надіслати посилання на ел. пошту"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通过邮件方式发送"
           }
         },
         "zh-Hant" : {
@@ -11601,6 +11643,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Göm verktygsfältet"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Приховати панель інструментів"
           }
         },
         "zh-Hans" : {

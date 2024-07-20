@@ -15557,6 +15557,12 @@
             "value" : "Oläst eller flaggat"
           }
         },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Непрочитані або помічені"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
