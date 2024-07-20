@@ -95,7 +95,13 @@
 	[downloadMenu addItemWithTitle:NSLocalizedString(@"Remove From List", @"Title of a popup menu item") action:@selector(removeFromList:) keyEquivalent:@""];
     
 	// Cancel
-	[downloadMenu addItemWithTitle:NSLocalizedString(@"Cancel", @"Title of a popup menu item") action:@selector(cancelDownload:) keyEquivalent:@""];
+	[downloadMenu addItemWithTitle:NSLocalizedStringWithDefaultValue(@"cancel.menuItem",
+																	 nil,
+																	 NSBundle.mainBundle,
+																	 @"Cancel",
+																	 @"Title of a menu item")
+							action:@selector(cancelDownload:)
+					 keyEquivalent:@""];
 
 	[downloadMenu setDelegate:self];
 	table.menu = downloadMenu;

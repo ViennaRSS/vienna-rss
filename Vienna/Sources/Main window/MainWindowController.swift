@@ -364,9 +364,18 @@ extension MainWindowController: NSToolbarDelegate {
                 toolbarSearchField = item.view as? NSSearchField
             }
 
-            item.label = NSLocalizedString("Search", comment: "Toolbar item label")
-            item.paletteLabel = NSLocalizedString("Search", comment: "Toolbar item palette label")
-            item.toolTip = NSLocalizedString("Search", comment: "Toolbar item tooltip")
+            item.label = NSLocalizedString(
+                "search.toolbarItem.label",
+                value: "Search",
+                comment: "Toolbar item label")
+            item.paletteLabel = NSLocalizedString(
+                "search.toolbarItem.paletteLabel",
+                value: "Search",
+                comment: "Toolbar item palette label")
+            item.toolTip = NSLocalizedString(
+                "search.toolbarItem.toolTip",
+                value: "Search",
+                comment: "Toolbar item tooltip")
 
             item.action = #selector(AppController.searchUsingToolbarTextField(_:))
             item.menuFormRepresentation = NSMenuItem(title: item.label, action: item.action, keyEquivalent: "")
@@ -382,8 +391,14 @@ extension MainWindowController: NSToolbarDelegate {
                 return nil
             }
             let item = toolbarItem(forSharingService: service, identifier: .email)
-            item.label = NSLocalizedString("Email Link", comment: "Toolbar item label")
-            item.paletteLabel = NSLocalizedString("Email Link", comment: "Toolbar item palette label")
+            item.label = NSLocalizedString(
+                "emailLink.toolbarItem.label",
+                value: "Email Link",
+                comment: "Toolbar item label")
+            item.paletteLabel = NSLocalizedString(
+                "emailLink.toolbarItem.paletteLabel",
+                value: "Email Link",
+                comment: "Toolbar item palette label")
             item.toolTip = NSLocalizedString(
                 "Email a link to the current article or website",
                 comment: "Toolbar item tooltip")

@@ -402,7 +402,11 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
         alert.messageText = NSLocalizedString(@"One or more downloads are in progress", @"Message text of an alert");
         alert.informativeText = NSLocalizedString(@"If you quit Vienna now, all downloads will stop.", @"Message text of an alert");
         [alert addButtonWithTitle:NSLocalizedString(@"Quit", @"Title of a button on an alert")];
-        [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Title of a button on an alert")];
+        [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"cancel.button",
+                                                                    nil,
+                                                                    NSBundle.mainBundle,
+                                                                    @"Cancel",
+                                                                    @"Title of a button on an alert")];
         NSModalResponse alertResponse = [alert runModal];
 
         if (alertResponse == NSAlertSecondButtonReturn) {
@@ -557,7 +561,11 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
         alert.messageText = NSLocalizedString(@"Import subscriptions from OPML file?", nil);
         alert.informativeText = NSLocalizedString(@"Do you really want to import the subscriptions from the specified OPML file?", nil);
         [alert addButtonWithTitle:NSLocalizedString(@"Import", @"Title of a button on an alert")];
-        [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Title of a button on an alert")];
+        [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"cancel.button",
+                                                                    nil,
+                                                                    NSBundle.mainBundle,
+                                                                    @"Cancel",
+                                                                    @"Title of a button on an alert")];
         NSModalResponse alertResponse = [alert runModal];
 
         if (alertResponse == NSAlertFirstButtonReturn) {
@@ -1395,7 +1403,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     alert.messageText = NSLocalizedString(@"Are you sure you want to delete the messages in the Trash folder permanently?", nil);
     alert.informativeText = NSLocalizedString(@"You cannot undo this action", nil);
     [alert addButtonWithTitle:NSLocalizedString(@"Empty", @"Title of a button on an alert")];
-    [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Title of a button on an alert")];
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"cancel.button",
+                                                                nil,
+                                                                NSBundle.mainBundle,
+                                                                @"Cancel",
+                                                                @"Title of a button on an alert")];
     [alert beginSheetModalForWindow:self.mainWindow completionHandler:^(NSModalResponse returnCode) {
         if (returnCode == NSAlertFirstButtonReturn) {
             [self clearUndoStack];
@@ -1501,7 +1513,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 								 action:@selector(markAllSubscriptionsRead:)
 						  keyEquivalent:@""];
         [statusBarMenu addItem:[NSMenuItem separatorItem]];
-        [statusBarMenu addItemWithTitle:NSLocalizedString(@"Quit Vienna", @"Title of a menu item")
+        [statusBarMenu addItemWithTitle:NSLocalizedStringWithDefaultValue(@"quitVienna.menuItem",
+                                                                          nil,
+                                                                          NSBundle.mainBundle,
+                                                                          @"Quit Vienna",
+                                                                          @"Title of a menu item")
                                  action:@selector(terminate:)
                           keyEquivalent:@""];
 		appStatusItem.menu = statusBarMenu;
@@ -2203,8 +2219,16 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
             NSAlert *alert = [NSAlert new];
             alert.messageText = NSLocalizedString(@"Are you sure you want to permanently delete the selected articles?", nil);
             alert.informativeText = NSLocalizedString(@"This operation cannot be undone.", nil);
-            [alert addButtonWithTitle:NSLocalizedString(@"Delete", @"Title of a button on an alert")];
-            [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Title of a button on an alert")];
+            [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"delete.button",
+                                                                        nil,
+                                                                        NSBundle.mainBundle,
+                                                                        @"Delete",
+                                                                        @"Title of a button on an alert")];
+            [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"cancel.button",
+                                                                        nil,
+                                                                        NSBundle.mainBundle,
+                                                                        @"Cancel",
+                                                                        @"Title of a button on an alert")];
             [alert beginSheetModalForWindow:self.mainWindow completionHandler:^(NSModalResponse returnCode) {
                 if (returnCode == NSAlertFirstButtonReturn) {
                     NSArray *articleArray = self.articleController.markedArticleRange;
@@ -2406,8 +2430,16 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         NSAlert *alert = [NSAlert new];
         alert.messageText = alertTitle;
         alert.informativeText = alertBody;
-        [alert addButtonWithTitle:NSLocalizedString(@"Delete", @"Title of a button on an alert")];
-        [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Title of a button on an alert")];
+        [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"delete.button",
+                                                                    nil,
+                                                                    NSBundle.mainBundle,
+                                                                    @"Delete",
+                                                                    @"Title of a button on an alert")];
+        [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"cancel.button",
+                                                                    nil,
+                                                                    NSBundle.mainBundle,
+                                                                    @"Cancel",
+                                                                    @"Title of a button on an alert")];
         NSModalResponse alertResponse = [alert runModal];
 
 		if (alertResponse == NSAlertSecondButtonReturn) {
@@ -3217,7 +3249,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	} else if (theAction == @selector(deleteFolder:)) {
 		Folder * folder = [db folderFromID:self.foldersTree.actualSelection];
 		if (folder.type == VNAFolderTypeSearch) {
-			[menuItem setTitle:NSLocalizedString(@"Delete", @"Title of a menu item")];
+			menuItem.title = NSLocalizedStringWithDefaultValue(@"delete.menuItem",
+															   nil,
+															   NSBundle.mainBundle,
+															   @"Delete",
+															   @"Title of a menu item");
 		} else {
 			[menuItem setTitle:NSLocalizedString(@"Delete…", @"Title of a menu item")];
 		}

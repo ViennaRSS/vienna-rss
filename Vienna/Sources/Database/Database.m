@@ -137,7 +137,11 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
                  @"Vienna may not work as expected if the database is corrupted. We recommend you quit Vienna and either restore the database (%@) from a backup or attempt a sqlite3 recovery.",
                  @"Informative text of an alert"),
              self.databaseQueue.path.lastPathComponent];
-        [alert addButtonWithTitle:NSLocalizedString(@"Quit Vienna", @"Button to quit Vienna after a database check")];
+        [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"quitVienna.button",
+                                                                    nil,
+                                                                    NSBundle.mainBundle,
+                                                                    @"Quit Vienna",
+                                                                    @"Button to quit Vienna after a database check")];
         [alert addButtonWithTitle:NSLocalizedString(@"Continue Anyway",
                                                     @"Button to continue running Vienna despite an unsuccessful check")];
         NSInteger modalReturn = [alert runModal];
@@ -160,7 +164,11 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
         [alert setMessageText:NSLocalizedString(@"Database Upgrade", nil)];
         [alert setInformativeText:NSLocalizedString(@"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconvenience.", nil)];
         [alert addButtonWithTitle:NSLocalizedString(@"Upgrade Database", @"Title of a button on an alert")];
-        [alert addButtonWithTitle:NSLocalizedString(@"Quit Vienna", @"Button to quit Vienna after a database check")];
+        [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"quitVienna.button",
+                                                                    nil,
+                                                                    NSBundle.mainBundle,
+                                                                    @"Quit Vienna",
+                                                                    @"Button to quit Vienna after a database check")];
         NSInteger modalReturn = [alert runModal];
         if (modalReturn == NSAlertSecondButtonReturn) {
             return NO;
@@ -376,7 +384,11 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
     alert.messageText = NSLocalizedString(@"Cannot create the Vienna database", nil);
     alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine.", nil), path];
     [alert addButtonWithTitle:NSLocalizedString(@"Locate…", @"Title of a button on an alert")];
-    [alert addButtonWithTitle:NSLocalizedString(@"Cancel", @"Title of a button on an alert")];
+    [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"cancel.button",
+                                                                nil,
+                                                                NSBundle.mainBundle,
+                                                                @"Cancel",
+                                                                @"Title of a button on an alert")];
     NSModalResponse alertResponse = [alert runModal];
 
     // When the cancel button is pressed.
