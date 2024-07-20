@@ -19,8 +19,14 @@
 /* No comment provided by engineer. */
 "%@ unread" = "%@ olästa";
 
+/* Title in popup submenu */
+"<None>" = "<Ingen>";
+
 /* No comment provided by engineer. */
 "A folder with that name already exists" = "En mapp med det namnet finns redan";
+
+/* No comment provided by engineer. */
+"A new plugin has been installed. It is now available from the menu and you can add it to the toolbar." = "En ny insticksmodul har installerats. Den är nu tillgänglig från menyn och du kan lägga till den till verktygsraden.";
 
 /* No comment provided by engineer. */
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "En ny Vienna-databas kan ej skapas i '%@' för att mappen förmodligen finns på en nätverksdelning och den här versionen av Vienna stöder inte detta. Var vänlig och välj en mapp som finns på din lokala hårddisk.";
@@ -55,6 +61,9 @@
 /* No comment provided by engineer. */
 "Ascending" = "Stigande";
 
+/* No comment provided by engineer. */
+"Authenticating on Open Reader" = "Autentisering på Open Reader";
+
 /* Data field name visible in menu/article list/smart folder definition */
 "Author" = "Författare";
 
@@ -64,6 +73,9 @@
 
 /* No comment provided by engineer. */
 "Cannot create export output file" = "Kan inte skapa exportfil";
+
+/* No comment provided by engineer. */
+"Cannot create folder" = "Kan inte skapa mapp";
 
 /* No comment provided by engineer. */
 "Cannot create the Vienna database" = "Kan ej skapa Viennas databas";
@@ -82,6 +94,9 @@
 
 /* No comment provided by engineer. */
 "Connecting to %@" = "Ansluter till %@";
+
+/* No comment provided by engineer. */
+"Connecting to Open Reader server to retrieve %@" = "Ansluter till Open Reader server för att hämta %@";
 
 /* Copy URL */
 "Copy URL" = "Kopiera URL";
@@ -176,7 +191,13 @@
 "Error loading script '%@'" = "Fel vid inläsning av ”%@”-skriptet";
 
 /* No comment provided by engineer. */
+"Error parsing data in feed" = "Det gick inte att analysera data i flödet";
+
+/* No comment provided by engineer. */
 "Error retrieving RSS feed:" = "Fel vid mottagning av RSS-flöde:";
+
+/* No comment provided by engineer. */
+"Error retrieving RSS Icon:" = "Kunde inte hämta RSS ikon:";
 
 /* No comment provided by engineer. */
 "Error: Feed not found!" = "Fel: Flöde hittades inte!";
@@ -223,6 +244,12 @@
 /* No comment provided by engineer. */
 "Folders" = "Mappar";
 
+/* No comment provided by engineer. */
+"Forcing Refresh subscriptions…" = "Tvingar uppdatering av prenumerationer…";
+
+/* No comment provided by engineer. */
+"Got HTTP status 304 - No news from last check" = "Fick HTTP status 304 - Inga nyheter från senaste kontroll";
+
 /* Pseudo field name visible in article list */
 "Headlines" = "Rubriker";
 
@@ -253,6 +280,9 @@
 /* No comment provided by engineer. */
 "Import subscriptions from OPML file?" = "Importera prenumerataioner från OPML fil?";
 
+/* No comment provided by engineer. */
+"Improper infinitely looping URL redirect to %@" = "Felaktig URL-omdirigering med oändlig loop till %@";
+
 /* Data field name visible in menu/article list */
 "Link" = "Länk";
 
@@ -261,6 +291,9 @@
 
 /* Title of a button on an alert */
 "Locate…" = "Leta upp…";
+
+/* No comment provided by engineer. */
+"Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences. Also check your network access." = "Se till att användarnamnet och lösenordet som behövs för att komma åt Open Reader-servern är korrekt inställda i Vienna's inställningar. Kontrollera även din nätverksåtkomst.";
 
 /* No comment provided by engineer. */
 "Mark All Read" = "Markera alla som lästa";
@@ -323,7 +356,13 @@
 "Open Link in %@" = "Öppna länk i %@";
 
 /* No comment provided by engineer. */
+"Open Link in Background" = "Öppna länk i bakgrunden";
+
+/* No comment provided by engineer. */
 "Open Link in New Tab" = "Öppna länk i ny tabb";
+
+/* No comment provided by engineer. */
+"Open Reader Authentication Failed" = "Open Reader autentisering misslyckades";
 
 /* No comment provided by engineer. */
 "Open Scripts Folder" = "Öppna skriptmappen";
@@ -368,11 +407,17 @@
 /* No comment provided by engineer. */
 "Recents" = "Senaste";
 
+/* No comment provided by engineer. */
+"Redirection attempt treated as temporary for safety concern" = "Omdirigeringsförsök behandlas som tillfälligt av säkerhetsskäl";
+
 /* Title of a menu item */
 "Refresh All Subscriptions" = "Uppdatera alla prenumerationer";
 
 /* No comment provided by engineer. */
 "Refresh completed" = "Uppdatering klar";
+
+/* No comment provided by engineer. */
+"Refreshing folder images…" = "Laddar om mappbilder…";
 
 /* No comment provided by engineer. */
 "Refreshing subscriptions…" = "Uppdaterar prenumerationer…";
@@ -392,6 +437,12 @@
 /* No comment provided by engineer. */
 "Retrieving folder image" = "Mottager mappbild";
 
+/* No comment provided by engineer. */
+"Retrieving folder image for Open Reader Feed" = "Hämtar mappbild för Open Reader Feed";
+
+/* No comment provided by engineer. */
+"RSS Icon not found!" = "RSS ikon hittades inte!";
+
 /* A formatted URL string with the javascript: URL scheme. */
 "Run script “%@”" = "Kör skriptet ”%@”";
 
@@ -406,6 +457,9 @@
 
 /* Placeholder title of a search field */
 "Search all articles" = "Sök genom alla artiklar";
+
+/* Placeholder title of a search field */
+"Search current web page" = "Sök på nuvarande webbsida";
 
 /* Placeholder title of a search field */
 "Search for folders" = "Sök efter mappar";
@@ -457,6 +511,9 @@
 "Text" = "Text";
 
 /* No comment provided by engineer. */
+"The \"%@\" folder cannot be created." = "Mappen \"%@\" kan inte skapas.";
+
+/* No comment provided by engineer. */
 "The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna." = "Din nuvarande %@ stöds inte av den här versionen av Vienna. Radera eller byt namn på filen och starta om Vienna.";
 
 /* No comment provided by engineer. */
@@ -486,6 +543,9 @@
 /* No comment provided by engineer. */
 "This article contains an enclosed file." = "Den här artikeln innehåller en bilaga.";
 
+/* Message text of a modal alert */
+"This folder cannot be chosen because you don’t have permission." = "Denna mapp kan inte väljas då du inte har behörighet.";
+
 /* No comment provided by engineer. */
 "This operation cannot be undone." = "Det här valet går ej att ångra.";
 
@@ -500,6 +560,9 @@
 
 /* No comment provided by engineer. */
 "Unsubscribe from Feed" = "Sluta prenumerera på artiklar från sida";
+
+/* No comment provided by engineer. */
+"Unsubscribing from an Open Reader RSS feed will also remove your locally cached articles." = "Om du avbryter prenumerationen på ett Open Reader RSS-flöde kommer även dina lokalt cachade artiklar att tas bort.";
 
 /* Title of a button on an alert */
 "Upgrade Database" = "Uppgradera databas";
@@ -521,6 +584,9 @@
 
 /* No comment provided by engineer. */
 "Vienna has installed a new style" = "Vienna har installerat en ny stil";
+
+/* No comment provided by engineer. */
+"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconvenience." = "Vienna måste uppgradera sin databas till den senaste versionen. Detta kan ta någon minut eller så. Vi ber om ursäkt för besväret.";
 
 /* No comment provided by engineer. */
 "Vienna was trying to create the folder \"%@\" but an error occurred. Check the permissions on the folders on the path specified." = "Vienna försöker skapa mappen '%@' men ett fel uppstod. Kontrollera skrivrättigheter på specificerad sökväg.";
