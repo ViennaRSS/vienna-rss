@@ -1,8 +1,8 @@
 "%[All,Any,None]@ of the following are true" = "Article matches %1$[all,any,none]@ of the following conditions";
-"%[Author,Subject,Text]@ %[contains,does not contain]@ %@" = "%1$[Author,Subject,Content]@ %2$[contains,does not contain]@ %3$@";
-"%[Deleted,Flagged,HasEnclosure,Read]@ is %[No,Yes]@" = "%1$[Is deleted,Is flagged,Has enclosure,Is read]@ %2$[No,Yes]@";
 "%[Author,Folder,Subject,Text]@ %[is,is not]@ %@" = "%1$[Author,Folder,Subject,Content]@ %2$[is,is not]@ %3$@";
+"%[Author,Subject,Text]@ %[contains,does not contain]@ %@" = "%1$[Author,Subject,Content]@ %2$[contains,does not contain]@ %3$@";
 "%[Date]@ %[is,is greater than or equal to,is less than,is less than or equal to]@ %[yesterday]@" = "%1$[Date]@ %2$[is,is after or is,is before,is before or is]@ %3$[yesterday]@";
-"%[Date]@ %[less than ago,more than ago]@ %[days,hours,minutes,months,weeks,years]@ %@" = "%1$[Date]@ %2$[is in the last,is not in the last]@ %4$@ %3$[days,hours,minutes,months,weeks,years]@";
 "%[Date]@ %[is,is greater than,is greater than or equal to,is less than,is less than or equal to]@ %[last week]@" = "%1$[Date]@ %2$[is,is after,is after or is,is before,is before or is]@ %3$[last week]@";
 "%[Date]@ %[is,is less than,is less than or equal to]@ %[today]@" = "%1$[Date]@ %2$[is,is before,is before or is]@ %3$[today]@";
+"%[Date]@ %[less than ago,more than ago]@ %[days,hours,minutes,months,weeks,years]@ %@" = "%1$[Date]@ %2$[is in the last,is not in the last]@ %4$@ %3$[days,hours,minutes,months,weeks,years]@";
+"%[Deleted,Flagged,HasEnclosure,Read]@ is %[No,Yes]@" = "%1$[Is deleted,Is flagged,Has enclosure,Is read]@ %2$[No,Yes]@";

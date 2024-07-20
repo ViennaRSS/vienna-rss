@@ -210,7 +210,7 @@ func render(_ combinedTranslations: [Int : [TranslationWithOptions]]) throws -> 
             combinedTranslationStrings.append("\"\(combined.original)\" = \"\(combined.translation)\";")
         }
     }
-    return combinedTranslationStrings
+    return combinedTranslationStrings.sorted()
 }
 
 let groupedByNumOptions = try parseAndExpand(fileName: stringsFileName)
