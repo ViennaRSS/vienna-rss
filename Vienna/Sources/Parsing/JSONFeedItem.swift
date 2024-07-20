@@ -39,9 +39,13 @@ class JSONFeedItem: NSObject, FeedItem, Decodable {
     // are mutually exclusive. At least one key must be present.
     var content: String
 
-    // JSON Feed has `date_published` and `date_modified` keys, neither is
-    // required. If present, they should be date strings in RFC 3339 format.
-    var modifiedDate: Date?
+    // JSON Feed has the `date_published` key, which is not required. If
+    // present, it should be a date string in RFC 3339 format.
+    var publicationDate: Date?
+
+    // JSON Feed has the `date_modified` key, which is not required. If present,
+    // it should be a date string in RFC 3339 format.
+    var modificationDate: Date?
 
     // The `url` key is optional. The `id` key might be a URL too, so it could
     // be a fallback.
@@ -59,8 +63,8 @@ class JSONFeedItem: NSObject, FeedItem, Decodable {
         case author
         case contentHTML = "content_html"
         case contentText = "content_text"
-        case modifiedDate = "date_modified"
-        case publishedDate = "date_published"
+        case publicationDate = "date_published"
+        case modificationDate = "date_modified"
         case url
         case attachments
     }
@@ -103,7 +107,8 @@ class JSONFeedItem: NSObject, FeedItem, Decodable {
             content = try container.decode(String.self, forKey: .contentText)
         }
 
-        modifiedDate = try container.decodeIfPresent(Date.self, forKey: .modifiedDate)
+        publicationDate = try container.decodeIfPresent(Date.self, forKey: .publicationDate)
+        modificationDate = try container.decodeIfPresent(Date.self, forKey: .modificationDate)
 
         do {
             url = try container.decode(URL.self, forKey: .url).absoluteString

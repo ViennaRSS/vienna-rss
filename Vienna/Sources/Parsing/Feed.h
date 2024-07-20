@@ -29,7 +29,7 @@ NS_SWIFT_NAME(Feed)
 @property (copy, nonatomic) NSString *title;
 @property (nullable, copy, nonatomic) NSString *feedDescription;
 @property (nullable, copy, nonatomic) NSString *homePageURL;
-@property (nullable, nonatomic) NSDate *modifiedDate;
+@property (nullable, nonatomic) NSDate *modificationDate;
 @property (copy, nonatomic) NSArray<id<VNAFeedItem>> *items;
 
 @end
