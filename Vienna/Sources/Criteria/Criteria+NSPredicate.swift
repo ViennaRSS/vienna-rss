@@ -177,7 +177,7 @@ extension Criteria: PredicateConvertible {
                 fallback = true
                 criteriaOperator = .equalTo
             }
-        case MA_Field_Date:
+        case MA_Field_LastUpdate:
             switch predicate.predicateOperatorType {
             case .lessThan:
                 criteriaOperator = .before
@@ -231,14 +231,14 @@ extension Criteria: PredicateConvertible {
         let value = self.value
         let operatorType = self.operatorType
 
-        if field == MA_Field_Date, let unit = DateUnit.allCases.first(where: { value.hasSuffix($0.rawValue) }) {
+        if field == MA_Field_LastUpdate, let unit = DateUnit.allCases.first(where: { value.hasSuffix($0.rawValue) }) {
             let countString = value
                 .replacingOccurrences(of: unit.rawValue, with: "")
                 .trimmingCharacters(in: CharacterSet.whitespaces)
             guard let count = UInt(countString) else {
                 fatalError("malformed criteria value \(value)")
             }
-            return DatePredicateWithUnit(field: MA_Field_Date, comparisonOperator: operatorType, count: count, unit: unit)
+            return DatePredicateWithUnit(field: MA_Field_LastUpdate, comparisonOperator: operatorType, count: count, unit: unit)
         } else {
             return buildComparisonPredicate(field, value, operatorType)
         }
@@ -291,7 +291,7 @@ extension Criteria: PredicateConvertible {
         // TODO: constants for fixed criteria values also for Criteria+SQL,
         // e.g. YES, NO, yesterday, today, last week, ...
 
-        if field == MA_Field_Date && operatorType == .after && value == "yesterday" {
+        if field == MA_Field_LastUpdate && operatorType == .after && value == "yesterday" {
             // Use canonical "is today" instead of "is after yesterday"
             comparisonPredicate = NSComparisonPredicate(leftExpression: left, rightExpression: NSExpression(forConstantValue: "today"), modifier: .direct, type: .equalTo)
         } else if operatorType == .notEqualTo && (value == "No" || value == "Yes") {

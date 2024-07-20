@@ -76,7 +76,7 @@ typedef NS_OPTIONS(NSUInteger, VNAFolderFlag) {
 @property (nonatomic, copy) NSString *feedDescription;
 @property (nonatomic, copy) NSString *homePage;
 @property (nonatomic, copy) NSString *feedURL;
-@property (nonatomic, copy) NSDate *lastUpdate;
+@property (nonatomic) NSDate *lastUpdate;
 @property (nonatomic, copy) NSString *lastUpdateString;
 @property (nonatomic, copy) NSString *username;
 @property (nonatomic, copy) NSString *password;

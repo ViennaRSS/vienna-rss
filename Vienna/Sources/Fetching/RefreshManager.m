@@ -755,7 +755,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         NSMutableArray *articleArray = [NSMutableArray array];
         NSMutableArray *articleGuidArray = [NSMutableArray array];
 
-        NSDate *itemAlternativeDate = newFeed.modifiedDate;
+        NSDate *itemAlternativeDate = newFeed.modificationDate;
         if (itemAlternativeDate == nil) {
             itemAlternativeDate = [NSDate date];
         }
@@ -763,7 +763,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         // Parse off items.
 
         for (id<VNAFeedItem> newsItem in newFeed.items) {
-            NSDate * articleDate = newsItem.modifiedDate;
+            NSDate * articleDate = newsItem.modificationDate;
 
             NSString * articleGuid = newsItem.guid;
 
@@ -795,7 +795,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
                     // first, hack the initial article (which is probably the first loaded / most recent one)
                     NSString * firstFoundArticleNewGuid =
                         [NSString stringWithFormat:@"%ld-%@-%@-%@", (long)folderId,
-                         [NSString stringWithFormat:@"%1.3f", firstFoundArticle.date.timeIntervalSince1970], firstFoundArticle.link,
+                         [NSString stringWithFormat:@"%1.3f", firstFoundArticle.lastUpdate.timeIntervalSince1970], firstFoundArticle.link,
                          firstFoundArticle.title];
                     firstFoundArticle.guid = firstFoundArticleNewGuid;
                     articleGuidArray[articleIndex] = firstFoundArticleNewGuid;
@@ -837,7 +837,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
                 articleLink = feedLink;
             }
             article.link = articleLink;
-            article.date = articleDate;
+            article.lastUpdate = articleDate;
             NSString * enclosureLink = newsItem.enclosure;
             if ([enclosureLink isNotEqualTo:@""] && ![enclosureLink hasPrefix:@"http:"] && ![enclosureLink hasPrefix:@"https:"]) {
                 enclosureLink = [NSURL URLWithString:enclosureLink relativeToURL:url].absoluteString;

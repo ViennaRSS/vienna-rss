@@ -26,7 +26,8 @@ class XMLFeedItem: NSObject, FeedItem {
     @objc var title: String?
     @objc var authors: String?
     @objc var content = ""
-    @objc var modifiedDate: Date?
+    @objc var publicationDate: Date?
+    @objc var modificationDate: Date?
     @objc var url: String?
     @objc var enclosure: String?
 

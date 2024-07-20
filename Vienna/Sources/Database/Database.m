@@ -241,7 +241,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
     [self createInitialSmartFolder:NSLocalizedString(@"Unread Articles", nil) withCriteria:unreadCriteria];
     
     // Create a criteria to show all articles received today
-    Criteria * todayCriteria = [[Criteria alloc] initWithField:MA_Field_Date operatorType:VNACriteriaOperatorEqualTo value:@"today"];
+    Criteria * todayCriteria = [[Criteria alloc] initWithField:MA_Field_LastUpdate operatorType:VNACriteriaOperatorEqualTo value:@"today"];
     [self createInitialSmartFolder:NSLocalizedString(@"Today's Articles", nil) withCriteria:todayCriteria];
     
 	[self.databaseQueue inDatabase:^(FMDatabase *db) {
@@ -335,8 +335,8 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
     [self addField:MA_Field_GUID type:VNAFieldTypeInteger tag:VNAArticleFieldTagGUID sqlField:@"message_id" visible:NO width:72];
     [self addField:MA_Field_Subject type:VNAFieldTypeString tag:VNAArticleFieldTagSubject sqlField:@"title" visible:YES width:472];
     [self addField:MA_Field_Folder type:VNAFieldTypeFolder tag:VNAArticleFieldTagFolder sqlField:@"folder_id" visible:NO width:130];
-    [self addField:MA_Field_Date type:VNAFieldTypeDate tag:VNAArticleFieldTagDate sqlField:@"date" visible:YES width:152];
-    [self addField:MA_Field_CreatedDate type:VNAFieldTypeDate tag:VNAArticleFieldTagCreatedDate sqlField:@"createddate" visible:NO width:152];
+    [self addField:MA_Field_LastUpdate type:VNAFieldTypeDate tag:VNAArticleFieldTagLastUpdate sqlField:@"date" visible:YES width:152];
+    [self addField:MA_Field_PublicationDate type:VNAFieldTypeDate tag:VNAArticleFieldTagPublicationDate sqlField:@"createddate" visible:NO width:152];
     [self addField:MA_Field_Parent type:VNAFieldTypeInteger tag:VNAArticleFieldTagParent sqlField:@"parent_id" visible:NO width:72];
     [self addField:MA_Field_Author type:VNAFieldTypeString tag:VNAArticleFieldTagAuthor sqlField:@"sender" visible:YES width:138];
     [self addField:MA_Field_Link type:VNAFieldTypeString tag:VNAArticleFieldTagLink sqlField:@"link" visible:NO width:138];
@@ -354,8 +354,8 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	[self fieldByName:MA_Field_Deleted].displayName = NSLocalizedString(@"Deleted", @"Data field name visible in smart folder definition");
 	[self fieldByName:MA_Field_Subject].displayName = NSLocalizedString(@"Subject", @"Data field name visible in menu/article list/smart folder definition");
 	[self fieldByName:MA_Field_Folder].displayName = NSLocalizedString(@"Folder", @"Data field name visible in menu/article list/smart folder definition");
-	[self fieldByName:MA_Field_Date].displayName = NSLocalizedString(@"Date", @"Data field name visible in menu/article list/smart folder definition");
-	[self fieldByName:MA_Field_CreatedDate].displayName = NSLocalizedString(@"Date Added", @"Data field name visible in menu/article list/smart folder definition");
+	[self fieldByName:MA_Field_LastUpdate].displayName = NSLocalizedString(@"Last Update", @"Data field name visible in menu/article list/smart folder definition");
+	[self fieldByName:MA_Field_PublicationDate].displayName = NSLocalizedString(@"Date Published", @"Data field name visible in menu/article list/smart folder definition");
 	[self fieldByName:MA_Field_Author].displayName = NSLocalizedString(@"Author", @"Data field name visible in menu/article list/smart folder definition");
 	[self fieldByName:MA_Field_Text].displayName = NSLocalizedString(@"Text", @"Data field name visible in smart folder definition");
 	[self fieldByName:MA_Field_Summary].displayName = NSLocalizedString(@"Summary", @"Pseudo field name visible in menu/article list");
@@ -1508,7 +1508,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
     // Extract the article data from the dictionary.
     NSString * articleBody = article.body;
     NSString * articleTitle = article.title;
-    NSDate * articleDate = article.date;
+    NSDate * lastUpdate = article.lastUpdate;
     NSString * articleLink = article.link.vna_trimmed;
     NSString * userName = article.author.vna_trimmed;
     NSString * articleEnclosure = article.enclosure.vna_trimmed;
@@ -1520,12 +1520,12 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
     BOOL deleted_flag = article.deleted;
     BOOL hasenclosure_flag = article.hasEnclosure;
 
-    // We always set the created date ourselves
-    article.createdDate = [NSDate date];
+    // We set the publication date ourselves if it is not contained in the feed, and only once when the article is created
+    article.publicationDate = article.publicationDate == nil ? [NSDate date] : article.publicationDate;
 
     // Set some defaults
-    if (articleDate == nil) {
-        articleDate = [NSDate date];
+    if (lastUpdate == nil) {
+        lastUpdate = [NSDate date];
     }
     if (userName == nil) {
         userName = @"";
@@ -1537,9 +1537,10 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
     }
 
     // Dates are stored as time intervals
-    NSTimeInterval interval = articleDate.timeIntervalSince1970;
-    NSTimeInterval createdInterval = article.createdDate.timeIntervalSince1970;
-    
+    NSTimeInterval lastUpdateIntervalSince1970 = lastUpdate.timeIntervalSince1970;
+    NSTimeInterval publicationIntervalSince1970 = 
+        (article.publicationDate == nil ? [NSDate date] : article.publicationDate).timeIntervalSince1970;
+
     __block BOOL success;
     [queue inTransaction:^(FMDatabase *db,  BOOL *rollback) {
         success = [db executeUpdate:@"INSERT INTO messages (message_id, parent_id, folder_id, sender, link, date, createddate, read_flag, marked_flag, deleted_flag, title, text, revised_flag, enclosure, hasenclosure_flag) "
@@ -1549,8 +1550,8 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
          @(folderID),
          userName,
          articleLink,
-         @(interval),
-         @(createdInterval),
+         @(lastUpdateIntervalSince1970),
+         @(publicationIntervalSince1970),
          @(read_flag),
          @(marked_flag),
          @(deleted_flag),
@@ -1593,7 +1594,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
     // Extract the data from the new state of article
     NSString * articleBody = article.body;
     NSString * articleTitle = article.title;
-    NSDate * articleDate = article.date;
+    NSDate * lastUpdate = article.lastUpdate;
     NSString * articleLink = article.link.vna_trimmed;
     NSString * userName = article.author.vna_trimmed;
     NSString * articleGuid = article.guid;
@@ -1601,8 +1602,8 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
     BOOL revised_flag = article.revised;
 
     // Set some defaults
-    if (articleDate == nil) {
-        articleDate = existingArticle.date;
+    if (lastUpdate == nil) {
+        lastUpdate = existingArticle.lastUpdate;
     }
     if (userName == nil) {
         userName = @"";
@@ -1614,7 +1615,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
     }
 
     // Dates are stored as time intervals
-    NSTimeInterval interval = articleDate.timeIntervalSince1970;
+    NSTimeInterval lastUpdateIntervalSince1970 = lastUpdate.timeIntervalSince1970;
 
     // The article is revised if either the title or the body has changed.
 
@@ -1653,7 +1654,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
              @(parentId),
              userName,
              articleLink,
-             @(interval),
+             @(lastUpdateIntervalSince1970),
              articleTitle,
              articleBody,
              @(revised_flag),
@@ -2228,8 +2229,8 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 			article.title = [results stringForColumnIndex:6];
 			article.author = [results stringForColumnIndex:7];
 			article.link = [results stringForColumnIndex:8];
-			article.createdDate = [NSDate dateWithTimeIntervalSince1970:[results stringForColumnIndex:9].doubleValue];
-			article.date = [NSDate dateWithTimeIntervalSince1970:[results stringForColumnIndex:10].doubleValue];
+			article.publicationDate = [NSDate dateWithTimeIntervalSince1970:[results stringForColumnIndex:9].doubleValue];
+			article.lastUpdate = [NSDate dateWithTimeIntervalSince1970:[results stringForColumnIndex:10].doubleValue];
 			NSString * text = [results stringForColumnIndex:11];
 			article.body = text;
 			[article markRevised:[results intForColumnIndex:12]];

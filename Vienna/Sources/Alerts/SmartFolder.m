@@ -173,7 +173,7 @@ static NSNibName const VNASmartFolderNibName = @"SearchFolder";
     [rowTemplates addObject:[VNASeparatorPredicateEditorRowTemplate new]];
 
     // date < / > days / weeks / months / years old
-    NSPredicateEditorRowTemplate *dateCompareTemplate = [[VNADateWithUnitPredicateEditorRowTemplate alloc] initWithLeftExpressions:@[[NSExpression expressionForConstantValue:MA_Field_Date]]];
+    NSPredicateEditorRowTemplate *dateCompareTemplate = [[VNADateWithUnitPredicateEditorRowTemplate alloc] initWithLeftExpressions:@[[NSExpression expressionForConstantValue:MA_Field_LastUpdate]]];
     [rowTemplates addObject:dateCompareTemplate];
 
     // date = / < / <= today / yesterday / lastWeek

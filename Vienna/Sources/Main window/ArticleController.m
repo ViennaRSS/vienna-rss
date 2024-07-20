@@ -93,12 +93,12 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 										  @"key": @"isFlagged",
 										  @"selector": NSStringFromSelector(@selector(compare:))
 										  },
-								  MA_Field_Date: @{
-										  @"key": [@"articleData." stringByAppendingString:MA_Field_Date],
+								  MA_Field_LastUpdate: @{
+										  @"key": [@"articleData." stringByAppendingString:MA_Field_LastUpdate],
 										  @"selector": NSStringFromSelector(@selector(compare:))
 										  },
-								  MA_Field_CreatedDate: @{
-										  @"key": [@"articleData." stringByAppendingString:MA_Field_CreatedDate],
+								  MA_Field_PublicationDate: @{
+										  @"key": [@"articleData." stringByAppendingString:MA_Field_PublicationDate],
 										  @"selector": NSStringFromSelector(@selector(compare:))
 										  },
 								  MA_Field_Author: @{
@@ -294,7 +294,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 		if (index == NSNotFound) {
 			// Date should be sorted in descending order.
 			// TODO: Add a key to articleSortSpecifiers for a default sort order
-			BOOL ascending = [columnName isEqualToString:MA_Field_CreatedDate] ? NO : YES;
+			BOOL ascending = [columnName isEqualToString:MA_Field_PublicationDate] ? NO : YES;
 			sortDescriptor = [[NSSortDescriptor alloc] initWithKey:[specifier valueForKey:@"key"] ascending:ascending selector:NSSelectorFromString([specifier valueForKey:@"selector"])];
 		} else {
 			sortDescriptor = descriptors[index];
@@ -1021,19 +1021,19 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
         case VNAFilterUnread:
             return !article.read;
         case VNAFilterLastRefresh: {
-            NSDate *date = article.createdDate;
+            NSDate *date = article.publicationDate;
             Preferences *prefs = [Preferences standardPreferences];
             NSComparisonResult result = [date compare:[prefs objectForKey:MAPref_LastRefreshDate]];
             return result != NSOrderedAscending;
         }
         case VNAFilterToday:
-            return [NSCalendar.currentCalendar isDateInToday:article.date];
+            return [NSCalendar.currentCalendar isDateInToday:article.lastUpdate];
         case VNAFilterTime48h: {
             NSDate *twoDaysAgo = [NSCalendar.currentCalendar dateByAddingUnit:NSCalendarUnitDay
                                                                         value:-2
                                                                        toDate:[NSDate date]
                                                                       options:0];
-            return [article.date compare:twoDaysAgo] != NSOrderedAscending;
+            return [article.lastUpdate compare:twoDaysAgo] != NSOrderedAscending;
         }
         case VNAFilterFlagged:
             return article.flagged;

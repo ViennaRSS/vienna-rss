@@ -29,7 +29,7 @@ extern NSString * const MA_Field_GUID;
 extern NSString * const MA_Field_Subject;
 extern NSString * const MA_Field_Author;
 extern NSString * const MA_Field_Link;
-extern NSString * const MA_Field_Date;
+extern NSString * const MA_Field_LastUpdate;
 extern NSString * const MA_Field_Read;
 extern NSString * const MA_Field_Flagged;
 extern NSString * const MA_Field_Deleted;
@@ -38,7 +38,7 @@ extern NSString * const MA_Field_Folder;
 extern NSString * const MA_Field_Parent;
 extern NSString * const MA_Field_Headlines;
 extern NSString * const MA_Field_Summary;
-extern NSString * const MA_Field_CreatedDate;
+extern NSString * const MA_Field_PublicationDate;
 extern NSString * const MA_Field_Enclosure;
 extern NSString * const MA_Field_EnclosureDownloaded;
 extern NSString * const MA_Field_HasEnclosure;
@@ -49,7 +49,7 @@ typedef NS_ENUM(NSInteger, VNAArticleFieldTag) {
     VNAArticleFieldTagGUID = 400,
     VNAArticleFieldTagSubject,
     VNAArticleFieldTagAuthor,
-    VNAArticleFieldTagDate,
+    VNAArticleFieldTagLastUpdate,
     VNAArticleFieldTagParent,
     VNAArticleFieldTagRead,
     VNAArticleFieldTagFlagged,
@@ -60,7 +60,7 @@ typedef NS_ENUM(NSInteger, VNAArticleFieldTag) {
     VNAArticleFieldTagHeadlines = 411,
     VNAArticleFieldTagDeleted,
     VNAArticleFieldTagSummary,
-    VNAArticleFieldTagCreatedDate,
+    VNAArticleFieldTagPublicationDate,
     VNAArticleFieldTagEnclosure,
     VNAArticleFieldTagEnclosureDownloaded,
     VNAArticleFieldTagHasEnclosure
@@ -84,8 +84,8 @@ typedef NS_ENUM(NSInteger, ArticleStatus) {
 @property (nullable, nonatomic, copy) NSString *link;
 @property (readonly, nullable, nonatomic) NSString *summary;
 @property (nullable, nonatomic, copy) NSString *enclosure;
-@property (nullable, nonatomic, copy) NSDate *date;
-@property (nullable, nonatomic, copy) NSDate *createdDate;
+@property (nullable, nonatomic) NSDate *lastUpdate;
+@property (nullable, nonatomic) NSDate *publicationDate;
 @property (nullable, nonatomic, readonly) Folder *containingFolder;
 @property (nonatomic) NSInteger folderId;
 @property (nonatomic, getter=isRead, readonly) BOOL read;

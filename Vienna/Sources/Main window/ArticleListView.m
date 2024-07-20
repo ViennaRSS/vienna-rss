@@ -571,7 +571,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 		if ([db fieldByName:MA_Field_Subject].visible) {
 			++numberOfRowsInCell;
 		}
-		if ([db fieldByName:MA_Field_Folder].visible || [db fieldByName:MA_Field_Date].visible || [db fieldByName:MA_Field_Author].visible) {
+		if ([db fieldByName:MA_Field_Folder].visible || [db fieldByName:MA_Field_LastUpdate].visible || [db fieldByName:MA_Field_Author].visible) {
 			++numberOfRowsInCell;
 		}
 		if ([db fieldByName:MA_Field_Link].visible) {
@@ -1293,8 +1293,8 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 			[summaryString appendFormat:@"%@", folder.name];
 			delimiter = @" - ";
 		}
-		if ([db fieldByName:MA_Field_Date].visible) {
-			[summaryString appendFormat:@"%@%@", delimiter, [NSDateFormatter vna_relativeDateStringFromDate:theArticle.date]];
+		if ([db fieldByName:MA_Field_LastUpdate].visible) {
+			[summaryString appendFormat:@"%@%@", delimiter, [NSDateFormatter vna_relativeDateStringFromDate:theArticle.lastUpdate]];
 			delimiter = @" - ";
 		}
 		if ([db fieldByName:MA_Field_Author].visible) {
@@ -1313,10 +1313,10 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 	}
 	
 	NSString * cellString;
-	if ([identifier isEqualToString:MA_Field_Date]) {
-        cellString = [NSDateFormatter vna_relativeDateStringFromDate:theArticle.date];
-	} else if ([identifier isEqualToString:MA_Field_CreatedDate]) {
-		cellString = [NSDateFormatter vna_relativeDateStringFromDate:theArticle.createdDate];
+	if ([identifier isEqualToString:MA_Field_LastUpdate]) {
+        cellString = [NSDateFormatter vna_relativeDateStringFromDate:theArticle.lastUpdate];
+	} else if ([identifier isEqualToString:MA_Field_PublicationDate]) {
+		cellString = [NSDateFormatter vna_relativeDateStringFromDate:theArticle.publicationDate];
 	} else if ([identifier isEqualToString:MA_Field_Folder]) {
 		Folder * folder = [db folderFromID:theArticle.folderId];
 		cellString = folder.name;

@@ -137,7 +137,8 @@
             (isRSSElement && [channelItemTag isEqualToString:@"pubDate"]) ||
             ([element.prefix isEqualToString:self.dcPrefix] && [channelItemTag isEqualToString:@"date"])) {
             NSString *dateString = element.stringValue;
-            self.modifiedDate = [self dateWithXMLString:dateString];
+            //publication date will be set to the current date in a later step, so we don´t set it here
+            self.modificationDate = [self dateWithXMLString:dateString];
             success = YES;
             continue;
         }
@@ -260,7 +261,7 @@
                 // Parse item date
                 if ((isRSSElement && [articleItemTag isEqualToString:@"pubDate"]) || ([itemChildElement.prefix isEqualToString:self.dcPrefix] && [articleItemTag isEqualToString:@"date"])) {
                     NSString *dateString = itemChildElement.stringValue;
-                    newFeedItem.modifiedDate = [self dateWithXMLString:dateString];
+                    newFeedItem.modificationDate = [self dateWithXMLString:dateString];
                     continue;
                 }
 
