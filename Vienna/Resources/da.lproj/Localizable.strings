@@ -31,6 +31,9 @@
 /* No comment provided by engineer. */
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "En ny Vienna database kan ikke laves i \"%@\" fordi mappen sandsynligvis ligger på en netværksdelt enhed og denne version af Vienna kan ikke håndtere databaser som ikke ligger lokalt. Vælg venligst en alternativ mappe som ligger på din lokale maskine.";
 
+/* Toolbar item palette label */
+"Add to Safari Reading List" = "Føj til læselisten";
+
 /* No comment provided by engineer. */
 "AppleScript Error in '%@' script" = "AppleScript-fejl i '%@' skriptet";
 
@@ -164,6 +167,10 @@
 
 /* Toolbar item tooltip */
 "Email a link to the current article or website" = "Email en henvisning til den nuværende artikel eller hjemmeside";
+
+/* Toolbar item label
+Toolbar item palette label */
+"Email Link" = "Send henvisning via email";
 
 /* Title of a button on an alert */
 "Empty" = "Tom";
@@ -438,6 +445,9 @@
 
 /* A formatted URL string with the javascript: URL scheme. */
 "Run script “%@”" = "Kør skriptet \"%@\"";
+
+/* Toolbar item label */
+"Safari Reading List" = "Safari læseliste";
 
 /* Search panel title
    Toolbar item label
