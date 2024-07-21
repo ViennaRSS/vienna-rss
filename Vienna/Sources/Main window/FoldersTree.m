@@ -157,7 +157,8 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
     [self.rootNode removeChildren];
     if (![self loadTree:[[Database sharedManager] arrayOfFolders:VNAFolderTypeRoot] rootNode:self.rootNode]) {
         // recover from problems by putting missing folders under root node
-        NSArray *allFolders = [[Database sharedManager] arrayOfAllFolders];  // all RSS and group folders
+        NSArray *allFolders = [[[Database sharedManager] arrayOfAllFolders]
+                               sortedArrayUsingSelector:@selector(folderNameCompare:)]; // all RSS and group folders
         NSArray *installedFolders = [self folders:0];  // RSS folders already present
         for (Folder *folder in allFolders) {
             if ((folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader)
