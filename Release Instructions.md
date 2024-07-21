@@ -128,4 +128,4 @@ There are two distinct ways to get the different files needed to publish an upda
 brew bump-cask-pr vienna --version=3.3.0
 ````
 
-Finally, consider posting an announcement of the new release on the CocoaForge Vienna forum at <http://forums.cocoaforge.com/viewforum.php?f=18> and/or <http://vienna-rss.com>.
+Finally, consider posting an announcement of the new release on <https://www.vienna-rss.com>.
