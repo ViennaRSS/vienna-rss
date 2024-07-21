@@ -630,7 +630,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
                      @"log": connectorItem,
                      @"url": url,
                      @"data": receivedData,
-                     @"mimeType": response.MIMEType,
+                     @"mimeType": SafeString(response.MIMEType),
                      @"lastModifiedString": lastModifiedString,
                  }];
             }
