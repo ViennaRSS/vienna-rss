@@ -1,9 +1,0 @@
-/* Class = "NSTextFieldCell"; title = "Smart folder name:"; ObjectID = "94"; */
-"94.title" = "Nome da pasta inteligente:";
-
-/* Class = "NSButtonCell"; title = "Save"; ObjectID = "96"; */
-"96.title" = "Salvar";
-
-/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "97"; */
-"97.title" = "Cancelar";
-

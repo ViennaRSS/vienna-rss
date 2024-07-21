@@ -1,9 +1,9 @@
-"%[Date]@ %[is,is greater than or equal to,is less than,is less than or equal to]@ %[yesterday]@" = "%1$[Datum]@ %2$[är,är efter eller,är före,är före eller]@ %3$[igår]@";
-"%[Date]@ %[less than ago,more than ago]@ %[days,hours,minutes,months,weeks,years]@ %@" = "%1$[Datum]@ %2$[är de senaste,är inte de senaste]@ %4$@ %3$[dagarna,timmarna,minuterna,månaderna,veckorna,åren]@";
-"%[Date]@ %[is,is less than,is less than or equal to]@ %[today]@" = "%1$[Datum]@ %2$[är,är före,är före eller]@ %3$[idag]@";
-"%[Date]@ %[is,is greater than,is greater than or equal to,is less than,is less than or equal to]@ %[last week]@" = "%1$[Datum]@ %2$[är,är efter,är efter eller,är före,är före eller]@ %3$[förra veckan]@";
+"%[All]@ of the following are true" = "Artikel matchar %1$[alla]@ följande villkor";
+"%[Any,None]@ of the following are true" = "Artikeln matchar %1$[någon,ingen]@ av följande villkor";
 "%[Author,Folder,Subject,Text]@ %[is,is not]@ %@" = "%1$[Författare,Mapp,Ämne,Innehåll]@ %2$[är,är inte]@ %3$@";
 "%[Author,Subject,Text]@ %[contains,does not contain]@ %@" = "%1$[Författare,Ämne,Innehåll]@ %2$[innehåller,innehåller inte]@ %3$@";
+"%[Date]@ %[is,is greater than or equal to,is less than,is less than or equal to]@ %[yesterday]@" = "%1$[Datum]@ %2$[är,är efter eller,är före,är före eller]@ %3$[igår]@";
+"%[Date]@ %[is,is greater than,is greater than or equal to,is less than,is less than or equal to]@ %[last week]@" = "%1$[Datum]@ %2$[är,är efter,är efter eller,är före,är före eller]@ %3$[förra veckan]@";
+"%[Date]@ %[is,is less than,is less than or equal to]@ %[today]@" = "%1$[Datum]@ %2$[är,är före,är före eller]@ %3$[idag]@";
+"%[Date]@ %[less than ago,more than ago]@ %[days,hours,minutes,months,weeks,years]@ %@" = "%1$[Datum]@ %2$[är de senaste,är inte de senaste]@ %4$@ %3$[dagarna,timmarna,minuterna,månaderna,veckorna,åren]@";
 "%[Deleted,Flagged,HasEnclosure,Read]@ is %[No,Yes]@" = "%1$[Är raderad,Är flaggad,Har bilaga,Är läst]@ %2$[Nej,Ja]@";
-"%[Any,None]@ of the following are true" = "Artikeln matchar %1$[någon,ingen]@ av följande villkor";
-"%[All]@ of the following are true" = "Artikel matchar %1$[alla]@ följande villkor";
