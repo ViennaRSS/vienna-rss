@@ -5912,6 +5912,9 @@
         }
       }
     },
+    "Continue Anyway" : {
+      "comment" : "Button to continue running Vienna despite an unsuccessful check"
+    },
     "Copy URL" : {
       "comment" : "Copy URL",
       "localizations" : {
@@ -16521,7 +16524,7 @@
       }
     },
     "Quit Vienna" : {
-      "comment" : "Title of a button on an alert\nTitle of a menu item",
+      "comment" : "Button to quit Vienna after a database check\nTitle of a menu item",
       "localizations" : {
         "cs" : {
           "stringUnit" : {
@@ -23078,6 +23081,9 @@
         }
       }
     },
+    "Vienna may not work as expected if the database is corrupted. We recommend you quit Vienna and either restore the database (%@) from a backup or attempt a sqlite3 recovery." : {
+      "comment" : "Informative text of an alert"
+    },
     "Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconvenience." : {
       "localizations" : {
         "da" : {
@@ -23277,6 +23283,9 @@
           }
         }
       }
+    },
+    "Vienna's database seems to be corrupted. Would you like to quit Vienna or continue anyway?" : {
+      "comment" : "Title of an alert"
     },
     "You are already subscribed to that feed" : {
       "comment" : "You are already subscribed to that feed",
