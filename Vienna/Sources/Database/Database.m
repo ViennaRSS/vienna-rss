@@ -123,6 +123,31 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
  *  @return YES if the database is at the correct version and good to go
  */
 - (BOOL)initialiseDatabase {
+    __block BOOL success;
+    [self.databaseQueue inDatabase:^(FMDatabase *db) {
+                            success = [db executeStatements:@"PRAGMA quick_check;"];
+    }];
+    if (!success) {
+        NSAlert * alert = [NSAlert new];
+        alert.alertStyle = NSAlertStyleCritical;
+        alert.messageText = NSLocalizedString(@"Vienna's database seems to be corrupted. Would you like to quit Vienna or continue anyway?",
+                                              @"Title of an alert");
+        alert.informativeText =
+            [NSString stringWithFormat:NSLocalizedString(
+                 @"Vienna may not work as expected if the database is corrupted. We recommend you quit Vienna and either restore the database (%@) from a backup or attempt a sqlite3 recovery.",
+                 @"Informative text of an alert"),
+             self.databaseQueue.path.lastPathComponent];
+        [alert addButtonWithTitle:NSLocalizedString(@"Quit Vienna", @"Button to quit Vienna after a database check")];
+        [alert addButtonWithTitle:NSLocalizedString(@"Continue Anyway",
+                                                    @"Button to continue running Vienna despite an unsuccessful check")];
+        NSInteger modalReturn = [alert runModal];
+        if (modalReturn == NSAlertFirstButtonReturn) {
+            return NO;
+        } else {
+            [self backupDatabase];
+        }
+    }
+
     NSInteger databaseVersion = self.databaseVersion;
     os_log_debug(VNA_LOG, "Database version: %ld", databaseVersion);
     
@@ -135,28 +160,13 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
         [alert setMessageText:NSLocalizedString(@"Database Upgrade", nil)];
         [alert setInformativeText:NSLocalizedString(@"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconvenience.", nil)];
         [alert addButtonWithTitle:NSLocalizedString(@"Upgrade Database", @"Title of a button on an alert")];
-        [alert addButtonWithTitle:NSLocalizedString(@"Quit Vienna", @"Title of a button on an alert")];
+        [alert addButtonWithTitle:NSLocalizedString(@"Quit Vienna", @"Button to quit Vienna after a database check")];
         NSInteger modalReturn = [alert runModal];
         if (modalReturn == NSAlertSecondButtonReturn) {
             return NO;
         }
 
-        // Back up the database before any upgrade.
-        NSFileManager *fileManager = NSFileManager.defaultManager;
-        NSString *databaseBackupPath = [[Database databasePath] stringByAppendingPathExtension:@"bak"];
-        NSError *error = nil;
-        if ([fileManager fileExistsAtPath:databaseBackupPath]) {
-            [fileManager removeItemAtPath:databaseBackupPath
-                                    error:&error];
-        }
-        [fileManager copyItemAtPath:[Database databasePath]
-                             toPath:databaseBackupPath
-                              error:&error];
-
-        // Log the error if the backup creation failed, but continue regardless.
-        if (error) {
-            NSLog(@"Database backup could not created: %@", error.localizedDescription);
-        }
+        [self backupDatabase];
 
         [self.databaseQueue inDatabase:^(FMDatabase *db) {
             // Migrate the database to the newest version
@@ -186,6 +196,26 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
     
     return NO;
 }
+
+-(void)backupDatabase {
+    // Back up the database (before any upgrade or if an anomaly has been detected).
+    NSFileManager *fileManager = NSFileManager.defaultManager;
+    NSString *databaseBackupPath = [[Database databasePath] stringByAppendingPathExtension:@"bak"];
+    NSError *error = nil;
+    if ([fileManager fileExistsAtPath:databaseBackupPath]) {
+        [fileManager removeItemAtPath:databaseBackupPath
+                                error:&error];
+    }
+    [fileManager copyItemAtPath:[Database databasePath]
+                         toPath:databaseBackupPath
+                          error:&error];
+
+    // Log the error if the backup creation failed, but continue regardless.
+    if (error) {
+        NSLog(@"Database backup could not created: %@", error.localizedDescription);
+    }
+}
+
 
 /*!
  *  sets up an inital Vienna database at the given path
