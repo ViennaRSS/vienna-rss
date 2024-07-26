@@ -318,8 +318,7 @@
     
     downloadPathItem.title = [[NSFileManager defaultManager] displayNameAtPath:downloadFolderPath];
     downloadPathItem.image = pathImage;
-    downloadPathItem.state = NSControlStateValueOff;
-    
+
     [downloadFolder selectItemAtIndex:0];
 }
 
