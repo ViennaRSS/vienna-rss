@@ -367,6 +367,7 @@
     } else {
         panel.allowedFileTypes = @[NSFileTypeForHFSTypeCode('APPL')];
     }
+    panel.prompt = NSLocalizedString(@"Select", @"Label of a button on an open panel");
     [panel beginSheetModalForWindow:prefPaneWindow completionHandler:^(NSInteger returnCode) {
         [panel orderOut:self];
         [prefPaneWindow makeKeyAndOrderFront:self];
