@@ -232,6 +232,11 @@
 		F6D572B41E26AA9900CDA909 /* InfoWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572B61E26AA9900CDA909 /* InfoWindow.xib */; };
 		F6D572B71E26AAA100CDA909 /* RSSFeed.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572B91E26AAA100CDA909 /* RSSFeed.xib */; };
 		F6D572BA1E26AAA900CDA909 /* SearchFolder.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572BC1E26AAA900CDA909 /* SearchFolder.xib */; };
+		F6DC8876295B85E9006E4D66 /* PluginManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DC8875295B85E9006E4D66 /* PluginManagerTests.swift */; };
+		F6DC887A295B8DAA006E4D66 /* PluginBundleWithCapitalizedInfoPlist.viennaplugin in Resources */ = {isa = PBXBuildFile; fileRef = F6DC8877295B8DAA006E4D66 /* PluginBundleWithCapitalizedInfoPlist.viennaplugin */; };
+		F6DC887B295B8DAA006E4D66 /* PluginBundleWithoutInfoPlist.viennaplugin in Resources */ = {isa = PBXBuildFile; fileRef = F6DC8878295B8DAA006E4D66 /* PluginBundleWithoutInfoPlist.viennaplugin */; };
+		F6DC887C295B8DAA006E4D66 /* PluginBundleWithLowercaseInfoPlist.viennaplugin in Resources */ = {isa = PBXBuildFile; fileRef = F6DC8879295B8DAA006E4D66 /* PluginBundleWithLowercaseInfoPlist.viennaplugin */; };
+		F6DC8880295B9290006E4D66 /* PluginBundleWithLocalizedInfoPlist.viennaplugin in Resources */ = {isa = PBXBuildFile; fileRef = F6DC887F295B9290006E4D66 /* PluginBundleWithLocalizedInfoPlist.viennaplugin */; };
 		F6DDB5B12950C87E004E0E87 /* SharingServiceMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DDB5B02950C87E004E0E87 /* SharingServiceMenuItem.swift */; };
 		F6E01A072C652DEE0082E07B /* RSSFeedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E01A062C652DEE0082E07B /* RSSFeedTests.swift */; };
 		F6E01A092C652FA50082E07B /* RSSFeedWithContentElements.rss in Resources */ = {isa = PBXBuildFile; fileRef = F6E01A082C652FA50082E07B /* RSSFeedWithContentElements.rss */; };
@@ -671,6 +676,11 @@
 		F6D5732E1E26B1A000CDA909 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SearchFolder.xib; sourceTree = "<group>"; };
 		F6DA45532940CC9E00D746F8 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Predicates.strings; sourceTree = "<group>"; };
 		F6DAD20A1E75892C00FE2645 /* Vienna-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Vienna-Bridging-Header.h"; sourceTree = "<group>"; };
+		F6DC8875295B85E9006E4D66 /* PluginManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PluginManagerTests.swift; sourceTree = "<group>"; };
+		F6DC8877295B8DAA006E4D66 /* PluginBundleWithCapitalizedInfoPlist.viennaplugin */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PluginBundleWithCapitalizedInfoPlist.viennaplugin; sourceTree = "<group>"; };
+		F6DC8878295B8DAA006E4D66 /* PluginBundleWithoutInfoPlist.viennaplugin */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PluginBundleWithoutInfoPlist.viennaplugin; sourceTree = "<group>"; };
+		F6DC8879295B8DAA006E4D66 /* PluginBundleWithLowercaseInfoPlist.viennaplugin */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PluginBundleWithLowercaseInfoPlist.viennaplugin; sourceTree = "<group>"; };
+		F6DC887F295B9290006E4D66 /* PluginBundleWithLocalizedInfoPlist.viennaplugin */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PluginBundleWithLocalizedInfoPlist.viennaplugin; sourceTree = "<group>"; };
 		F6DDB5B02950C87E004E0E87 /* SharingServiceMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingServiceMenuItem.swift; sourceTree = "<group>"; };
 		F6E01A062C652DEE0082E07B /* RSSFeedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSFeedTests.swift; sourceTree = "<group>"; };
 		F6E01A082C652FA50082E07B /* RSSFeedWithContentElements.rss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = RSSFeedWithContentElements.rss; sourceTree = "<group>"; };
@@ -706,6 +716,7 @@
 				F648C2B71E7F3BEA00CE4043 /* DirectoryMonitorTests.swift */,
 				F6AC41AB25A4FAF6007DED7B /* FeedDiscovererTests.swift */,
 				F6A179D226B82BE3008DDA42 /* NSFileManagerExtensionTests.swift */,
+				F6DC8875295B85E9006E4D66 /* PluginManagerTests.swift */,
 				F6E01A062C652DEE0082E07B /* RSSFeedTests.swift */,
 				F68FE3A5270F6DC700C89D16 /* UnarchiverTests.swift */,
 				F633157726EE3D06008A3673 /* URLFormatterTests.swift */,
@@ -1083,6 +1094,10 @@
 			isa = PBXGroup;
 			children = (
 				F64499FB259773B9005A1EFA /* FeedDiscovery.html */,
+				F6DC8877295B8DAA006E4D66 /* PluginBundleWithCapitalizedInfoPlist.viennaplugin */,
+				F6DC8879295B8DAA006E4D66 /* PluginBundleWithLowercaseInfoPlist.viennaplugin */,
+				F6DC8878295B8DAA006E4D66 /* PluginBundleWithoutInfoPlist.viennaplugin */,
+				F6DC887F295B9290006E4D66 /* PluginBundleWithLocalizedInfoPlist.viennaplugin */,
 				F6E01A082C652FA50082E07B /* RSSFeedWithContentElements.rss */,
 				F6C136592D01C3E2009E42F8 /* RSSFeedWithItemElementUnderRSSAndChannelElement.rss */,
 				F6C136572D01C0D0009E42F8 /* RSSFeedWithItemElementUnderRSSElement.rss */,
@@ -1583,6 +1598,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F6449A0325977521005A1EFA /* FeedDiscovery.html in Resources */,
+				F6DC887A295B8DAA006E4D66 /* PluginBundleWithCapitalizedInfoPlist.viennaplugin in Resources */,
+				F6DC887B295B8DAA006E4D66 /* PluginBundleWithoutInfoPlist.viennaplugin in Resources */,
+				F6DC8880295B9290006E4D66 /* PluginBundleWithLocalizedInfoPlist.viennaplugin in Resources */,
+				F6DC887C295B8DAA006E4D66 /* PluginBundleWithLowercaseInfoPlist.viennaplugin in Resources */,
 				F6E01A092C652FA50082E07B /* RSSFeedWithContentElements.rss in Resources */,
 				F6C1365A2D01C3E2009E42F8 /* RSSFeedWithItemElementUnderRSSAndChannelElement.rss in Resources */,
 				F6C136582D01C0D0009E42F8 /* RSSFeedWithItemElementUnderRSSElement.rss in Resources */,
@@ -1755,6 +1774,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6DC8876295B85E9006E4D66 /* PluginManagerTests.swift in Sources */,
 				3A500129259A640D00AA6AAD /* ArticleStyleLoader.swift in Sources */,
 				3A500122259A63CB00AA6AAD /* ArticleConverter.swift in Sources */,
 				2F437B3D25CF336400AD1B57 /* URL+URIEquivalence.swift in Sources */,
