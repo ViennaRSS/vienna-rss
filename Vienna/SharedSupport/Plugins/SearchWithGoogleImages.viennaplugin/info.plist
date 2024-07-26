@@ -10,7 +10,5 @@
 	<string>https://images.google.com/images?q=$SearchTerm$</string>
 	<key>FriendlyName</key>
 	<string>Google Images</string>
-	<key>Tooltip</key>
-	<string>Search with Google Images</string>
 </dict>
 </plist>

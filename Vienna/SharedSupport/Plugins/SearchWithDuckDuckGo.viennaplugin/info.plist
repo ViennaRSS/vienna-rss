@@ -10,7 +10,5 @@
 	<string>https://duckduckgo.com/?q=$SearchTerm$</string>
 	<key>FriendlyName</key>
 	<string>DuckDuckGo</string>
-	<key>Tooltip</key>
-	<string>Search with DuckDuckGo</string>
 </dict>
 </plist>

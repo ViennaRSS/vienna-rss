@@ -10,7 +10,5 @@
 	<string>https://en.wikipedia.org/w/index.php?title=Special:Search&amp;search=$SearchTerm$&amp;go=Go</string>
 	<key>FriendlyName</key>
 	<string>Wikipedia</string>
-	<key>Tooltip</key>
-	<string>Search with Wikipedia</string>
 </dict>
 </plist>
