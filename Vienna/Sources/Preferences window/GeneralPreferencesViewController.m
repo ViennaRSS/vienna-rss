@@ -36,7 +36,6 @@
 // -(void)selectUserDefaultFont:(NSString *)name size:(int)size control:(NSPopUpButton *)control sizeControl:(NSComboBox *)sizeControl;
 // -(void)controlTextDidEndEditing:(NSNotification *)notification;
 -(void)refreshLinkHandler;
--(IBAction)handleLinkSelector:(id)sender;
 -(void)updateDownloadsPopUp:(NSString *)downloadFolderPath;
 
 @end
@@ -338,7 +337,7 @@
     NSMenuItem * selectedItem = linksHandler.selectedItem;
     if (selectedItem != nil) {
         if (selectedItem.tag == -1) {
-            [self handleLinkSelector:self];
+            [self handleLinkSelector];
             return;
         }
         typeof(self) __weak weakSelf = self;
@@ -356,7 +355,7 @@
  * file browser in the Applications folder and use that to add a new application to the
  * list.
  */
--(IBAction)handleLinkSelector:(id)sender
+- (void)handleLinkSelector
 {
     NSOpenPanel * panel = [NSOpenPanel openPanel];
     NSWindow * prefPaneWindow = linksHandler.window;
