@@ -189,6 +189,7 @@
 		F68792872700A678009B7BB5 /* SecurityScopedBookmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68792862700A678009B7BB5 /* SecurityScopedBookmark.swift */; };
 		F689820A281DD62B0010F4C5 /* XMLFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = F6898209281DD62B0010F4C5 /* XMLFeed.m */; };
 		F68DEBF82A35091600421FAB /* DispatchTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68DEBF72A35091600421FAB /* DispatchTimer.swift */; };
+		F68F85C42C53956200E3E91C /* Plugin.m in Sources */ = {isa = PBXBuildFile; fileRef = F68F85C32C53956200E3E91C /* Plugin.m */; };
 		F68FE3A6270F6DC700C89D16 /* UnarchiverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68FE3A5270F6DC700C89D16 /* UnarchiverTests.swift */; };
 		F69140E41E71B94200D51BFF /* AppController+Notifications.m in Sources */ = {isa = PBXBuildFile; fileRef = F69140E31E71B94200D51BFF /* AppController+Notifications.m */; };
 		F692559A2572A32900D387D8 /* MMTabBarView in Frameworks */ = {isa = PBXBuildFile; productRef = F69255992572A32900D387D8 /* MMTabBarView */; };
@@ -218,6 +219,11 @@
 		F6C1365A2D01C3E2009E42F8 /* RSSFeedWithItemElementUnderRSSAndChannelElement.rss in Resources */ = {isa = PBXBuildFile; fileRef = F6C136592D01C3E2009E42F8 /* RSSFeedWithItemElementUnderRSSAndChannelElement.rss */; };
 		F6C9DA70271BB3BB00FC3027 /* RSSFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = F6C9DA6F271BB3BB00FC3027 /* RSSFeed.m */; };
 		F6C9DA73271BB55000FC3027 /* AtomFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = F6C9DA72271BB55000FC3027 /* AtomFeed.m */; };
+		F6CAA59A2C5D87BA00590858 /* ActionPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = F6CAA5992C5D87BA00590858 /* ActionPlugin.m */; };
+		F6CAA59D2C5D88DE00590858 /* SearchPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = F6CAA59C2C5D88DE00590858 /* SearchPlugin.m */; };
+		F6CAA5A12C5D8A9D00590858 /* BlogEditorPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = F6CAA59F2C5D8A9D00590858 /* BlogEditorPlugin.m */; };
+		F6CAA5A42C5D8B9A00590858 /* ScriptPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = F6CAA5A32C5D8B9A00590858 /* ScriptPlugin.m */; };
+		F6CAA5A72C5D8C2E00590858 /* LinkPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = F6CAA5A62C5D8C2E00590858 /* LinkPlugin.m */; };
 		F6CE47131E7E3DCB0045EAD7 /* ActivityItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F6CE47121E7E3DCB0045EAD7 /* ActivityItem.m */; };
 		F6D0089C1EF95C9D008F2D3B /* InfoPanelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F6D0089B1EF95C9D008F2D3B /* InfoPanelManager.m */; };
 		F6D282621F1A87A900FF865E /* PopUpButtonToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D282611F1A87A900FF865E /* PopUpButtonToolbarItem.swift */; };
@@ -556,6 +562,8 @@
 		F6898209281DD62B0010F4C5 /* XMLFeed.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XMLFeed.m; sourceTree = "<group>"; };
 		F6898213281EE7650010F4C5 /* Feed.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Feed.h; sourceTree = "<group>"; };
 		F68DEBF72A35091600421FAB /* DispatchTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchTimer.swift; sourceTree = "<group>"; };
+		F68F85C22C53956200E3E91C /* Plugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Plugin.h; sourceTree = "<group>"; };
+		F68F85C32C53956200E3E91C /* Plugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Plugin.m; sourceTree = "<group>"; };
 		F68FE3A5270F6DC700C89D16 /* UnarchiverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnarchiverTests.swift; sourceTree = "<group>"; };
 		F69140E21E71B94200D51BFF /* AppController+Notifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppController+Notifications.h"; sourceTree = "<group>"; };
 		F69140E31E71B94200D51BFF /* AppController+Notifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppController+Notifications.m"; sourceTree = "<group>"; };
@@ -641,6 +649,16 @@
 		F6C9DA6F271BB3BB00FC3027 /* RSSFeed.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSSFeed.m; sourceTree = "<group>"; };
 		F6C9DA71271BB55000FC3027 /* AtomFeed.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AtomFeed.h; sourceTree = "<group>"; };
 		F6C9DA72271BB55000FC3027 /* AtomFeed.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AtomFeed.m; sourceTree = "<group>"; };
+		F6CAA5982C5D87BA00590858 /* ActionPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionPlugin.h; sourceTree = "<group>"; };
+		F6CAA5992C5D87BA00590858 /* ActionPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionPlugin.m; sourceTree = "<group>"; };
+		F6CAA59B2C5D88DE00590858 /* SearchPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchPlugin.h; sourceTree = "<group>"; };
+		F6CAA59C2C5D88DE00590858 /* SearchPlugin.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchPlugin.m; sourceTree = "<group>"; };
+		F6CAA59F2C5D8A9D00590858 /* BlogEditorPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlogEditorPlugin.m; sourceTree = "<group>"; };
+		F6CAA5A02C5D8A9D00590858 /* BlogEditorPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlogEditorPlugin.h; sourceTree = "<group>"; };
+		F6CAA5A22C5D8B9A00590858 /* ScriptPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScriptPlugin.h; sourceTree = "<group>"; };
+		F6CAA5A32C5D8B9A00590858 /* ScriptPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScriptPlugin.m; sourceTree = "<group>"; };
+		F6CAA5A52C5D8C2E00590858 /* LinkPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinkPlugin.h; sourceTree = "<group>"; };
+		F6CAA5A62C5D8C2E00590858 /* LinkPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinkPlugin.m; sourceTree = "<group>"; };
 		F6CE47111E7E3DBD0045EAD7 /* ActivityItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityItem.h; sourceTree = "<group>"; };
 		F6CE47121E7E3DCB0045EAD7 /* ActivityItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityItem.m; sourceTree = "<group>"; };
 		F6D0089B1EF95C9D008F2D3B /* InfoPanelManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoPanelManager.m; sourceTree = "<group>"; };
@@ -1097,6 +1115,21 @@
 			name = "XML-based feeds";
 			sourceTree = "<group>";
 		};
+		F6CAA59E2C5D88E900590858 /* Plug-in types */ = {
+			isa = PBXGroup;
+			children = (
+				F6CAA5A02C5D8A9D00590858 /* BlogEditorPlugin.h */,
+				F6CAA59F2C5D8A9D00590858 /* BlogEditorPlugin.m */,
+				F6CAA5A52C5D8C2E00590858 /* LinkPlugin.h */,
+				F6CAA5A62C5D8C2E00590858 /* LinkPlugin.m */,
+				F6CAA5A22C5D8B9A00590858 /* ScriptPlugin.h */,
+				F6CAA5A32C5D8B9A00590858 /* ScriptPlugin.m */,
+				F6CAA59B2C5D88DE00590858 /* SearchPlugin.h */,
+				F6CAA59C2C5D88DE00590858 /* SearchPlugin.m */,
+			);
+			name = "Plug-in types";
+			sourceTree = "<group>";
+		};
 		F6D7FED61F1CDD88004F095A /* Vienna */ = {
 			isa = PBXGroup;
 			children = (
@@ -1308,11 +1341,16 @@
 		F6D7FEE31F1CE162004F095A /* Plug-ins */ = {
 			isa = PBXGroup;
 			children = (
-				F6EB26021E58D37100570B22 /* DirectoryMonitor.swift */,
 				43502879165DE9DF0018EDB7 /* PluginManager.h */,
 				4350287A165DE9DF0018EDB7 /* PluginManager.m */,
+				F68F85C22C53956200E3E91C /* Plugin.h */,
+				F68F85C32C53956200E3E91C /* Plugin.m */,
+				F6CAA5982C5D87BA00590858 /* ActionPlugin.h */,
+				F6CAA5992C5D87BA00590858 /* ActionPlugin.m */,
+				F6CAA59E2C5D88E900590858 /* Plug-in types */,
 				43502881165DE9DF0018EDB7 /* SearchMethod.h */,
 				43502882165DE9DF0018EDB7 /* SearchMethod.m */,
+				F6EB26021E58D37100570B22 /* DirectoryMonitor.swift */,
 			);
 			path = "Plug-ins";
 			sourceTree = "<group>";
@@ -1768,6 +1806,8 @@
 				AA60238108C298FB002CFD06 /* HelperFunctions.m in Sources */,
 				F6164C591E32A6660086261C /* DisclosureView.m in Sources */,
 				F6F12AFD25ABDDE3005B2DCE /* NSFileManager+Paths.m in Sources */,
+				F6CAA59A2C5D87BA00590858 /* ActionPlugin.m in Sources */,
+				F68F85C42C53956200E3E91C /* Plugin.m in Sources */,
 				031E083019DFA3A900194F9F /* SubscriptionModel.m in Sources */,
 				2F125EE024D066ED00868E11 /* AsyncHelper.swift in Sources */,
 				0379E2381A2082E600D58BFE /* AppearancePreferencesViewController.m in Sources */,
@@ -1779,6 +1819,8 @@
 				2F779111253B17C5004ED4EF /* BrowserContextMenuDelegate.swift in Sources */,
 				F6DDB5B12950C87E004E0E87 /* SharingServiceMenuItem.swift in Sources */,
 				664F87C713C62DFE00E266DE /* OpenReader.m in Sources */,
+				F6CAA5A12C5D8A9D00590858 /* BlogEditorPlugin.m in Sources */,
+				F6CAA5A72C5D8C2E00590858 /* LinkPlugin.m in Sources */,
 				F6D282621F1A87A900FF865E /* PopUpButtonToolbarItem.swift in Sources */,
 				435026E6165DD8BE0018EDB7 /* ArticleRef.m in Sources */,
 				F6D0089C1EF95C9D008F2D3B /* InfoPanelManager.m in Sources */,
@@ -1787,6 +1829,7 @@
 				2FEA5829291FD511008C42D3 /* Criteria+NSPredicate.swift in Sources */,
 				2F82DCB725CEFC2800F00EE8 /* URL+Blank.swift in Sources */,
 				F633157626ED73CB008A3673 /* URLFormatter.swift in Sources */,
+				F6CAA5A42C5D8B9A00590858 /* ScriptPlugin.m in Sources */,
 				43502895165DE9E00018EDB7 /* ActivityLog.m in Sources */,
 				2F88FF412969B2A40076B99E /* DatePredicateWithUnit.swift in Sources */,
 				43502896165DE9E00018EDB7 /* ActivityPanelController.m in Sources */,
@@ -1853,6 +1896,7 @@
 				435028B6165DE9E00018EDB7 /* TreeNode.m in Sources */,
 				2FC4A190257CF775005FF227 /* WebKitArticleConverter.swift in Sources */,
 				F69964F71F13029600FC8493 /* OverlayStatusBar.swift in Sources */,
+				F6CAA59D2C5D88DE00590858 /* SearchPlugin.m in Sources */,
 				3AC411A526BBFDFD004A8700 /* WebKitArticleView.swift in Sources */,
 				2FA946C52517D8D8006134C5 /* CustomWKUIDelegate.swift in Sources */,
 				435028B7165DE9E00018EDB7 /* UnifiedDisplayView.m in Sources */,

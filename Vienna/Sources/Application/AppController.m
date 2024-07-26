@@ -544,8 +544,8 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 		}
 		return YES;
 	}
-	if ([filename.pathExtension isEqualToString:@"viennaplugin"]) {
-		NSString * path = PluginManager.plugInsDirectoryURL.path;
+	if ([filename.pathExtension isEqualToString:VNAPluginBundleExtension]) {
+		NSString * path = PluginManager.pluginsDirectoryURL.path;
 		if ([self installFilename:filename toPath:path]) {
 			runOKAlertPanel(NSLocalizedString(@"Plugin installed", nil), NSLocalizedString(@"A new plugin has been installed. It is now available from the menu and you can add it to the toolbar.", nil));			
 			NSString * fullPath = [path stringByAppendingPathComponent:filename.lastPathComponent];
