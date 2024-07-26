@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>FriendlyName</key>
+	<string>Logdown</string>
+	<key>LinkName</key>
+	<string>Enter Logdown user name</string>
+	<key>LinkTemplate</key>
+	<string>https://%@.logdown.com/posts.atom</string>
+	<key>Name</key>
+	<string>LogdownFeedSource</string>
+	<key>SiteHomePage</key>
+	<string>https://logdown.com</string>
+	<key>Type</key>
+	<string>FeedSource</string>
+</dict>
+</plist>

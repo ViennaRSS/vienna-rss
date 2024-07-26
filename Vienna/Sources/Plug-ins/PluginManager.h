@@ -21,6 +21,7 @@
 @import Cocoa;
 
 @class SearchMethod;
+@class VNAPlugin;
 
 extern NSString * const VNAPluginBundleExtension;
 
@@ -35,4 +36,7 @@ extern NSString * const VNAPluginBundleExtension;
 -(NSArray *)defaultToolbarItems;
 -(void)loadPlugin:(NSString *)pluginPath;
 -(NSToolbarItem *)toolbarItemForIdentifier:(NSString *)itemIdentifier;
+
+- (NSArray<VNAPlugin *> *)pluginsOfType:(Class)pluginType;
+
 @end

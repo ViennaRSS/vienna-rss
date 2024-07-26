@@ -217,6 +217,7 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 - (NewSubscription *)rssFeed {
     if (!_rssFeed) {
         _rssFeed = [[NewSubscription alloc] initWithDatabase:db];
+        _rssFeed.pluginManager = self.pluginManager;
     }
     return _rssFeed;
 }

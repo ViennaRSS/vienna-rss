@@ -23,6 +23,8 @@
 #import "StringExtensions.h"
 #import "Preferences.h"
 #import "SubscriptionModel.h"
+#import "PluginManager.h"
+#import "FeedSourcePlugin.h"
 #import "Folder.h"
 #import "Database.h"
 
@@ -52,6 +54,8 @@
     Database *db;
     NSInteger editFolderId;
     SubscriptionModel *subscriptionModel;
+    NSMenuItem *webPageMenuItem;
+    NSMenuItem *localFileMenuItem;
 }
 
 /* initWithDatabase
@@ -61,7 +65,6 @@
 {
 	if ((self = [super init]) != nil) {
 		db = newDb;
-		sourcesDict = nil;
 		editFolderId = -1;
         subscriptionModel = [[SubscriptionModel alloc] init];
 	}
@@ -75,33 +78,42 @@
 {
     [self loadRSSFeedBundle];
 
-    // Load a list of sources from the RSSSources property list. The list of sources
-    // is a dictionary of templates which specify how to create the source URL and a
-    // display name which acts as the key. This allows us to support additional sources
-    // without having to write new code.
-    if (!sourcesDict) {
-        NSURL *plistURL = [NSBundle.mainBundle URLForResource:@"RSSSources"
-                                                withExtension:@"plist"];
-        if (plistURL) {
-            sourcesDict = [NSDictionary dictionaryWithContentsOfURL:plistURL
-                                                              error:NULL];
-            [feedSource removeAllItems];
-            if (sourcesDict.count > 0) {
-                for (NSString *feedSourceType in sourcesDict.allKeys) {
-                    NSMenuItem *feedMenuItem = [[NSMenuItem alloc] initWithTitle:feedSourceType
-                                                                          action:NULL
-                                                                   keyEquivalent:@""];
-                    feedMenuItem.representedObject = feedSourceType;
-                    [feedSource.menu addItem:feedMenuItem];
-                }
-                [feedSource setEnabled:YES];
-                [feedSource selectItemWithTitle:NSLocalizedString(@"URL", @"URL")];
-            }
+    [feedSource removeAllItems];
+
+    NSString *webPageMenuItemTitle = NSLocalizedString(@"URL", @"Title of a menu item");
+    webPageMenuItem = [[NSMenuItem alloc] initWithTitle:webPageMenuItemTitle
+                                                 action:NULL
+                                          keyEquivalent:@""];
+    webPageMenuItem.representedObject = @{
+        @"LinkName": NSLocalizedString(@"Enter URL of RSS feed",
+                                       @"An instruction that will be shown above a text field."),
+        @"LinkTemplate": @"%@",
+    };
+    [feedSource.menu addItem:webPageMenuItem];
+
+    NSString *localFileMenuItemTitle = NSLocalizedString(@"Local file", @"Title of a menu item");
+    localFileMenuItem = [[NSMenuItem alloc] initWithTitle:localFileMenuItemTitle
+                                                   action:NULL
+                                            keyEquivalent:@""];
+    localFileMenuItem.representedObject = @{
+        @"LinkName": NSLocalizedString(@"Enter the path under your home folder",
+                                       @"An instruction that will be shown above a text field."),
+        // LinkTemplate is not required.
+    };
+    [feedSource.menu addItem:localFileMenuItem];
+
+    NSArray<VNAPlugin *> *plugins = [self.pluginManager pluginsOfType:[VNAFeedSourcePlugin class]];
+    if (plugins.count > 0) {
+        [feedSource.menu addItem:[NSMenuItem separatorItem]];
+        for (VNAPlugin *plugin in plugins) {
+            NSMenuItem *feedMenuItem = [[NSMenuItem alloc] initWithTitle:plugin.displayName
+                                                                  action:NULL
+                                                           keyEquivalent:@""];
+            feedMenuItem.representedObject = plugin;
+            [feedSource.menu addItem:feedMenuItem];
         }
     }
-    if (!sourcesDict) {
-        [feedSource setEnabled:NO];
-    }
+    [feedSource selectItem:webPageMenuItem];
 
     // Look on the pasteboard to see if there's an http:// url and, if so, prime the
     // URL field with it. A handy shortcut.
@@ -136,7 +148,6 @@
     if (fromClipboard) {
         [feedURL selectText:self];
     }
-    [feedSource selectItemWithTitle:NSLocalizedString(@"URL", @"URL")];
 
     // Reset from the last time we used this sheet.
     [self enableSubscribeButton];
@@ -194,16 +205,22 @@
 	}
 
 	// Format the URL based on the selected feed source.
-	if (sourcesDict != nil) {
-		NSString * selectedSource = (NSString *)feedSource.selectedItem.representedObject;
-		NSDictionary * feedSourceType = [sourcesDict valueForKey:selectedSource];
-		NSString * linkTemplate = [feedSourceType valueForKey:@"LinkTemplate"];
-        if ([selectedSource.lowercaseString isEqualToString:@"local file"]) {
+    if ([feedSource.selectedItem.representedObject isKindOfClass:[NSDictionary class]]) {
+        if ([feedSource.selectedItem isEqual:localFileMenuItem]) {
             rssFeedURL = [NSURL fileURLWithPath:feedURLString.stringByExpandingTildeInPath];
-        } else if (linkTemplate.length > 0) {
+        } else if ([feedSource.selectedItem isEqual:webPageMenuItem]) {
+            NSDictionary<NSString *, NSString *> *dict = feedSource.selectedItem.representedObject;
+            NSString *linkTemplate = dict[@"LinkTemplate"];
+            NSString *urlString = [NSString stringWithFormat:linkTemplate, feedURLString];
+            rssFeedURL = [NSURL URLWithString:urlString];
+        }
+    } else if ([feedSource.selectedItem.representedObject isKindOfClass:[VNAFeedSourcePlugin class]]) {
+        VNAFeedSourcePlugin *plugin = feedSource.selectedItem.representedObject;
+        NSString *linkTemplate = plugin.queryString;
+        if (linkTemplate.length > 0) {
             rssFeedURL = [NSURL URLWithString:[NSString stringWithFormat:linkTemplate, feedURLString]];
         }
-	}
+    }
 
 	// Validate the subscription, possibly replacing the feedURLString with a real one if
 	// it originally pointed to a web page.
@@ -308,11 +325,15 @@
 	NSString * linkTitleString = nil;
 	BOOL showButton = NO;
 	if (feedSourceItem != nil) {
-		NSDictionary * itemDict = [sourcesDict valueForKey:feedSourceItem.title];
-		if (itemDict != nil) {
-			linkTitleString = [itemDict valueForKey:@"LinkName"];
-			showButton = [itemDict valueForKey:@"SiteHomePage"] != nil;
-		}
+        if ([feedSourceItem.representedObject isKindOfClass:[NSDictionary class]]) {
+            NSDictionary<NSString *, NSString *> *dict = feedSourceItem.representedObject;
+            linkTitleString = dict[@"LinkName"];
+            showButton = NO;
+        } else if ([feedSourceItem.representedObject isKindOfClass:[VNAFeedSourcePlugin class]]) {
+            VNAFeedSourcePlugin *plugin = feedSourceItem.representedObject;
+            linkTitleString = plugin.hintLabel;
+            showButton = plugin.homePageURL != nil;
+        }
 	}
 	if (linkTitleString == nil) {
 		linkTitleString = @"Link";
@@ -325,15 +346,10 @@
  */
 -(void)doShowSiteHomePage:(id)sender
 {
-	NSMenuItem * feedSourceItem = feedSource.selectedItem;
-	if (feedSourceItem != nil) {
-		NSDictionary * itemDict = [sourcesDict valueForKey:feedSourceItem.title];
-		if (itemDict != nil) {
-			NSString * siteHomePageURL = [itemDict valueForKey:@"SiteHomePage"];
-			NSURL * url = [[NSURL alloc] initWithString:siteHomePageURL];
-			[[NSWorkspace sharedWorkspace] openURL:url];
-		}
-	}
+    if ([feedSource.selectedItem.representedObject isKindOfClass:[VNAFeedSourcePlugin class]]) {
+        VNAFeedSourcePlugin *plugin = feedSource.selectedItem.representedObject;
+        [NSWorkspace.sharedWorkspace openURL:plugin.homePageURL];
+    }
 }
 
 /* enableSubscribeButton

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>FriendlyName</key>
+	<string>Hatena Blog</string>
+	<key>LinkName</key>
+	<string>Enter Hatena Blog user name</string>
+	<key>LinkTemplate</key>
+	<string>https://%@.hatenablog.com/feed</string>
+	<key>Name</key>
+	<string>HatenaBlogFeedSource</string>
+	<key>SiteHomePage</key>
+	<string>https://hatenablog.com</string>
+	<key>Type</key>
+	<string>FeedSource</string>
+</dict>
+</plist>

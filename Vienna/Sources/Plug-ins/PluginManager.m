@@ -24,6 +24,7 @@
 #import "AppController.h"
 #import "Article.h"
 #import "BlogEditorPlugin.h"
+#import "FeedSourcePlugin.h"
 #import "HelperFunctions.h"
 #import "LinkPlugin.h"
 #import "NSFileManager+Paths.h"
@@ -66,6 +67,7 @@ static NSString * const VNAPluginsDirectoryName = @"Plugins";
     if (!pluginTypes) {
         pluginTypes = @[
             [VNABlogEditorPlugin class],
+            [VNAFeedSourcePlugin class],
             [VNALinkPlugin class],
             [VNAScriptPlugin class],
             [VNASearchPlugin class],
@@ -275,6 +277,17 @@ static NSString * const VNAPluginsDirectoryName = @"Plugins";
     item.toolTip = plugin.toolbarItemToolTip;
     item.menuFormRepresentation.representedObject = plugin;
     return item;
+}
+
+- (NSArray<VNAPlugin *> *)pluginsOfType:(Class)pluginType
+{
+    NSMutableArray *plugins = [NSMutableArray array];
+    for (VNAPlugin *plugin in allPlugins) {
+        if ([plugin isMemberOfClass:pluginType]) {
+            [plugins addObject:plugin];
+        }
+    }
+    return plugins;
 }
 
 /* validateToolbarItem

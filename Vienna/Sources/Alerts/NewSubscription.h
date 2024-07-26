@@ -21,11 +21,13 @@
 @import Cocoa;
 
 @class Database;
+@class PluginManager;
 
 @interface NewSubscription : NSWindowController
 
 @property BOOL googleOptionButton;
 @property NSArray * topObjects;
+@property (weak, nonatomic) PluginManager *pluginManager;
 
 // Action handlers
 -(IBAction)doSubscribe:(id)sender;
