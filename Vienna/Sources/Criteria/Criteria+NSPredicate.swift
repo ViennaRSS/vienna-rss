@@ -291,9 +291,9 @@ extension Criteria: PredicateConvertible {
         // TODO: constants for fixed criteria values also for Criteria+SQL,
         // e.g. YES, NO, yesterday, today, last week, ...
 
-        if field == MA_Field_LastUpdate && operatorType == .after && value == "yesterday" {
+        if field == MA_Field_LastUpdate && operatorType == .after && value == DateOffset.yesterday.rawValue {
             // Use canonical "is today" instead of "is after yesterday"
-            comparisonPredicate = NSComparisonPredicate(leftExpression: left, rightExpression: NSExpression(forConstantValue: "today"), modifier: .direct, type: .equalTo)
+            comparisonPredicate = NSComparisonPredicate(leftExpression: left, rightExpression: NSExpression(forConstantValue: DateOffset.today), modifier: .direct, type: .equalTo)
         } else if operatorType == .notEqualTo && (value == "No" || value == "Yes") {
             // Use canonical "is yes / is no" representation instead of allowing
             // ambiguous "is not yes - is no / is not no - is yes"

@@ -89,11 +89,11 @@ extension Criteria: SQLConversion {
         let startOfToday = Calendar.current.startOfDay(for: Date())
 
         let startDate: Date?
-        if value == "today" {
+        if value == DateOffset.today.rawValue {
             startDate = startOfToday
-        } else if value == "yesterday" {
+        } else if value == DateOffset.yesterday.rawValue {
             startDate = Calendar.current.date(byAdding: .day, value: -1, to: startOfToday)
-        } else if value == "last week" {
+        } else if value == DateOffset.lastWeek.rawValue {
             startDate = Calendar.current.date(byAdding: .weekOfYear, value: -1, to: startOfToday)
         } else {
             // Check for the pattern for date with unit criteria
@@ -142,10 +142,10 @@ extension Criteria: SQLConversion {
         guard operatorType == .equalTo || operatorType == .notEqualTo else {
             fatalError("Operator type \(operatorType) not applicable to flag field \(sqlFieldName)")
         }
-        let val: String
-        if value == "Yes" { val = "1" } else { val = "0" }
+        let sqlValue: String
+        if value == "Yes" { sqlValue = "1" } else { sqlValue = "0" }
         let sqlOperator = standardSqlOperator()
-        return "\(sqlFieldName) \(sqlOperator) \(val)"
+        return "\(sqlFieldName) \(sqlOperator) \(sqlValue)"
     }
 
     func folderSqlString(sqlFieldName: String, database: Database) -> String {

@@ -45,40 +45,38 @@ enum CriteriaOperator: Int {
 
     // Workaround as long as this enum needs to be exposed to Objective-C and cannot have a string as raw value
     init?(rawValue: String) {
-        let criteriaOperator: CriteriaOperator
         switch rawValue {
         case "\(CriteriaOperator.equalTo)":
-            criteriaOperator = CriteriaOperator.equalTo
+            self = CriteriaOperator.equalTo
         case "\(CriteriaOperator.notEqualTo)":
-            criteriaOperator = CriteriaOperator.notEqualTo
+            self = CriteriaOperator.notEqualTo
         case "\(CriteriaOperator.lessThan)":
-            criteriaOperator = CriteriaOperator.lessThan
+            self = CriteriaOperator.lessThan
         case "\(CriteriaOperator.greaterThan)":
-            criteriaOperator = CriteriaOperator.greaterThan
+            self = CriteriaOperator.greaterThan
         case "\(CriteriaOperator.lessThanOrEqualTo)":
-            criteriaOperator = CriteriaOperator.lessThanOrEqualTo
+            self = CriteriaOperator.lessThanOrEqualTo
         case "\(CriteriaOperator.greaterThanOrEqualTo)":
-            criteriaOperator = CriteriaOperator.greaterThanOrEqualTo
+            self = CriteriaOperator.greaterThanOrEqualTo
         case "\(CriteriaOperator.contains)":
-            criteriaOperator = CriteriaOperator.contains
+            self = CriteriaOperator.contains
         case "\(CriteriaOperator.containsNot)":
-            criteriaOperator = CriteriaOperator.containsNot
+            self = CriteriaOperator.containsNot
         case "\(CriteriaOperator.before)":
-            criteriaOperator = CriteriaOperator.before
+            self = CriteriaOperator.before
         case "\(CriteriaOperator.after)":
-            criteriaOperator = CriteriaOperator.after
+            self = CriteriaOperator.after
         case "\(CriteriaOperator.onOrBefore)":
-            criteriaOperator = CriteriaOperator.onOrBefore
+            self = CriteriaOperator.onOrBefore
         case "\(CriteriaOperator.onOrAfter)":
-            criteriaOperator = CriteriaOperator.onOrAfter
+            self = CriteriaOperator.onOrAfter
         case "\(CriteriaOperator.under)":
-            criteriaOperator = CriteriaOperator.under
+            self = CriteriaOperator.under
         case "\(CriteriaOperator.notUnder)":
-            criteriaOperator = CriteriaOperator.notUnder
+            self = CriteriaOperator.notUnder
         default:
             return nil
         }
-        self.init(rawValue: criteriaOperator.rawValue)
     }
 
     var intValue: Int {
