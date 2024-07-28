@@ -61,7 +61,6 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 
 @property NSView *articleTextView;
 @property (strong) NSLayoutConstraint *textViewWidthConstraint;
-@property (nonatomic) BOOL imbricatedSplitViewResizes; // used to avoid warnings about missing invalidation for a view's changing state
 @property (nonatomic) NSLayoutManager *layoutManager;
 
 // MARK: ArticleView delegate
@@ -109,7 +108,6 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 		markReadTimer = nil;
 		_currentPageFullHTML = NO;
 		isLoadingHTMLArticle = NO;
-		self.imbricatedSplitViewResizes = NO;
         _layoutManager = [NSLayoutManager new];
     }
     return self;
@@ -144,6 +142,20 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 
     [self.contentStackView addView:self.articleTextView inGravity:NSStackViewGravityTop];
 
+    // With "Use Web Page for Articles" set, we need to manage article view's width
+    //  so that it does not grow or shrink randomly on certain sites.
+    // The best solution I found is programmatically setting a constraint with a
+    // "constant" value.
+    // This did not work for me: self.textViewWidthConstraint =
+    //     [NSLayoutConstraint constraintWithItem:articleTextView attribute:NSLayoutAttributeWidth
+    //         relatedBy:NSLayoutRelationEqual toItem:self.contentStackView attribute:NSLayoutAttributeWidth
+    //         multiplier:1.f constant:0.f];
+    self.textViewWidthConstraint = [NSLayoutConstraint constraintWithItem:self.articleTextView
+        attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual
+        toItem:nil attribute:NSLayoutAttributeNotAnAttribute
+        multiplier:0.f constant:self.contentStackView.frame.size.width];
+    self.articleTextView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.contentStackView addConstraint:self.textViewWidthConstraint];
 
 	Preferences * prefs = [Preferences standardPreferences];
 
@@ -171,32 +183,11 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 	// Set the reading pane orientation
 	[self setOrientation:prefs.layout];
 	
-    // With vertical layout and "Use Web Page for Articles" set, we need to
-    // manage article view's width so that it does not grow or shrink randomly
-    // on certain sites.
-    // The best solution I found is programmatically setting a constraint with a
-    // "constant" value.
-    // This did not work for me: self.textViewWidthConstraint =
-    //     [NSLayoutConstraint constraintWithItem:articleTextView attribute:NSLayoutAttributeWidth
-    //         relatedBy:NSLayoutRelationEqual toItem:self.contentStackView attribute:NSLayoutAttributeWidth
-    //         multiplier:1.f constant:0.f];
-    self.textViewWidthConstraint =
-        [NSLayoutConstraint constraintWithItem:self.articleTextView attribute:NSLayoutAttributeWidth
-            relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute
-            multiplier:0.f constant:self.contentStackView.frame.size.width];
-    self.textViewWidthConstraint.priority = NSLayoutPriorityRequired;
-    self.articleTextView.translatesAutoresizingMaskIntoConstraints = NO;
-    // for some reason, this constraint is necessary for new browser with vertical layout, but it is counterproductive with other configurations
-    self.textViewWidthConstraint.active = splitView2.vertical;
-
 	// Initialise the article list view
 	[self initTableView];
 
 	// Make sure we skip the column filter button in the Tab order
     articleList.nextKeyView = self.articleTextView;
-
-    // Allow us to control the behavior of the NSSplitView
-    splitView2.delegate = self;
 
 	// Done initialising
 	isAppInitialising = NO;
@@ -814,9 +805,16 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 	tableLayout = newLayout;
 	splitView2.autosaveName = nil;
 	splitView2.vertical = (newLayout == VNALayoutCondensed);
-	splitView2.dividerStyle = (splitView2.vertical ? NSSplitViewDividerStyleThin : NSSplitViewDividerStylePaneSplitter);
-	splitView2.autosaveName = (newLayout == VNALayoutCondensed ? @"Vienna3SplitView2CondensedLayout" : @"Vienna3SplitView2ReportLayout");
-	self.textViewWidthConstraint.active = splitView2.vertical;
+	if (splitView2.vertical) {
+		splitView2.dividerStyle = NSSplitViewDividerStyleThin;
+		splitView2.autosaveName = @"Vienna3SplitView2CondensedLayout";
+	} else {
+		splitView2.dividerStyle = NSSplitViewDividerStylePaneSplitter;
+		splitView2.autosaveName = @"Vienna3SplitView2ReportLayout";
+	}
+    self.textViewWidthConstraint.constant = self.contentStackView.frame.size.width;
+	self.textViewWidthConstraint.priority = NSLayoutPriorityRequired;
+	self.textViewWidthConstraint.active = self.currentPageFullHTML;
 	[splitView2 display];
 	isChangingOrientation = NO;
 }
@@ -1075,7 +1073,8 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 	if (msgArray.count == 0) {
 		// We are not a FULL HTML page.
 		self.currentPageFullHTML = NO;
-		
+        self.textViewWidthConstraint.active = YES;
+
 		// Clear out the page.
 		[articleText setArticles:@[]];
 	} else {
@@ -1091,6 +1090,9 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 			// Remember we have a full HTML page so we can setup the context menus
 			// appropriately.
 			self.currentPageFullHTML = YES;
+
+            // enforce our constraint
+            self.textViewWidthConstraint.active = YES;
 			
 			// Now set the article to the URL in the RSS feed's article. NOTE: We use
 			// performSelector:withObject:afterDelay: here so that this link load gets
@@ -1106,6 +1108,8 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 			// appropriately.
 			isLoadingHTMLArticle = NO;
 			
+			self.textViewWidthConstraint.active = NO;
+
 			// Set the article to the HTML from the RSS feed.
 			[articleText setArticles:msgArray];
 		}
@@ -1596,48 +1600,38 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
     }
 }
 
-// MARK : splitView2 delegate
+// MARK: splitView2 & main window's splitView delegate
 
 - (void)splitViewWillResizeSubviews:(NSNotification *)notification {
     NSDictionary * info = notification.userInfo;
     NSInteger userResizeKey = ((NSNumber *)info[@"NSSplitViewUserResizeKey"]).integerValue;
     if (userResizeKey == 1) { // user initiated resize
         self.textViewWidthConstraint.active = NO;
-        if (self.imbricatedSplitViewResizes) {
-            // remove any other constraint affecting articleTextView's horizontal axis,
-            // and let autoresizing do the job
-            for (NSLayoutConstraint *c in [self.articleTextView constraintsAffectingLayoutForOrientation:NSLayoutConstraintOrientationHorizontal]) {
-                if ((c.firstItem == self.articleTextView || c.secondItem == self.articleTextView) && (c != self.textViewWidthConstraint)) {
-                    [self.articleTextView removeConstraint:c];
-                }
+        // remove any other constraint affecting articleTextView's horizontal axis,
+        // and let autoresizing do the job
+        for (NSLayoutConstraint *c in [self.articleTextView constraintsAffectingLayoutForOrientation:NSLayoutConstraintOrientationHorizontal]) {
+            if ((c.firstItem == self.articleTextView || c.secondItem == self.articleTextView) && (c != self.textViewWidthConstraint)) {
+                [self.articleTextView removeConstraint:c];
             }
-            self.articleTextView.translatesAutoresizingMaskIntoConstraints = YES;
-        } else {
-            self.imbricatedSplitViewResizes = YES;
         }
+        self.articleTextView.translatesAutoresizingMaskIntoConstraints = YES;
     }
 }
 
 - (void)splitViewDidResizeSubviews:(NSNotification *)notification {
-    // update and reactivate constraint
+    // update constraint
     self.textViewWidthConstraint.constant = self.contentStackView.frame.size.width;
     NSDictionary * info = notification.userInfo;
     NSInteger userResizeKey = ((NSNumber *)info[@"NSSplitViewUserResizeKey"]).integerValue;
     if (userResizeKey == 1) {
-        if (self.imbricatedSplitViewResizes) {
-            // remove again any other constraint affecting articleTextView's horizontal axis,
-            // and let autoresizing do the job
-            for (NSLayoutConstraint *c in [self.articleTextView constraintsAffectingLayoutForOrientation:NSLayoutConstraintOrientationHorizontal]) {
-                if ((c.firstItem == self.articleTextView || c.secondItem == self.articleTextView) && (c != self.textViewWidthConstraint)) {
-                    [self.articleTextView removeConstraint:c];
-                }
+        // remove again any other constraint affecting articleTextView's horizontal axis,
+        // and let autoresizing do the job
+        for (NSLayoutConstraint *c in [self.articleTextView constraintsAffectingLayoutForOrientation:NSLayoutConstraintOrientationHorizontal]) {
+            if ((c.firstItem == self.articleTextView || c.secondItem == self.articleTextView) && (c != self.textViewWidthConstraint)) {
+                [self.articleTextView removeConstraint:c];
             }
-            self.articleTextView.translatesAutoresizingMaskIntoConstraints = YES;
-            self.imbricatedSplitViewResizes = NO;
-        } else {
-            self.articleTextView.translatesAutoresizingMaskIntoConstraints = NO;
-            self.textViewWidthConstraint.active = YES;
         }
+        self.articleTextView.translatesAutoresizingMaskIntoConstraints = YES;
     }
 }
 
