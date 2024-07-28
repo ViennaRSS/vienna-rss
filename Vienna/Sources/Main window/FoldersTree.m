@@ -167,6 +167,8 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
                 (void)[[TreeNode alloc] init:self.rootNode atIndex:-1 folder:folder canHaveChildren:NO];
             }
         }
+        // save the state after recovery
+        [self setManualSortOrderForNode:self.rootNode];
     }
     [self.outlineView reloadData];
     [self unarchiveState:stateArray];
