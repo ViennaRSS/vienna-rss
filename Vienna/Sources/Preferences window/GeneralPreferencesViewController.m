@@ -36,7 +36,6 @@
 // -(void)selectUserDefaultFont:(NSString *)name size:(int)size control:(NSPopUpButton *)control sizeControl:(NSComboBox *)sizeControl;
 // -(void)controlTextDidEndEditing:(NSNotification *)notification;
 -(void)refreshLinkHandler;
--(IBAction)handleLinkSelector:(id)sender;
 -(void)updateDownloadsPopUp:(NSString *)downloadFolderPath;
 
 @end
@@ -318,8 +317,7 @@
     
     downloadPathItem.title = [[NSFileManager defaultManager] displayNameAtPath:downloadFolderPath];
     downloadPathItem.image = pathImage;
-    downloadPathItem.state = NSControlStateValueOff;
-    
+
     [downloadFolder selectItemAtIndex:0];
 }
 
@@ -339,12 +337,17 @@
     NSMenuItem * selectedItem = linksHandler.selectedItem;
     if (selectedItem != nil) {
         if (selectedItem.tag == -1) {
-            [self handleLinkSelector:self];
+            [self handleLinkSelector];
             return;
         }
-        [self setDefaultApplicationForFeedScheme:[appToPathMap valueForKey:selectedItem.title]];
+        typeof(self) __weak weakSelf = self;
+        [self setDefaultApplicationForFeedScheme:[appToPathMap valueForKey:selectedItem.title]
+                               completionHandler:^{
+            [weakSelf refreshLinkHandler];
+        }];
+    } else {
+        [self refreshLinkHandler];
     }
-    [self refreshLinkHandler];
 }
 
 /* handleLinkSelector
@@ -352,7 +355,7 @@
  * file browser in the Applications folder and use that to add a new application to the
  * list.
  */
--(IBAction)handleLinkSelector:(id)sender
+- (void)handleLinkSelector
 {
     NSOpenPanel * panel = [NSOpenPanel openPanel];
     NSWindow * prefPaneWindow = linksHandler.window;
@@ -363,18 +366,25 @@
     } else {
         panel.allowedFileTypes = @[NSFileTypeForHFSTypeCode('APPL')];
     }
+    panel.prompt = NSLocalizedString(@"Select", @"Label of a button on an open panel");
     [panel beginSheetModalForWindow:prefPaneWindow completionHandler:^(NSInteger returnCode) {
         [panel orderOut:self];
         [prefPaneWindow makeKeyAndOrderFront:self];
         
         if (returnCode == NSModalResponseOK) {
-            [self setDefaultApplicationForFeedScheme:panel.URL];
+            typeof(self) __weak weakSelf = self;
+            [self setDefaultApplicationForFeedScheme:panel.URL
+                                   completionHandler:^{
+                [weakSelf refreshLinkHandler];
+            }];
+        } else {
+            [self refreshLinkHandler];
         }
-        [self refreshLinkHandler];
     }];
 }
 
 - (void)setDefaultApplicationForFeedScheme:(NSURL *)applicationURL
+                         completionHandler:(void (^)(void))completionHandler
 {
     NSString *feedURLScheme = @"feed";
     if (@available(macOS 12, *)) {
@@ -395,12 +405,16 @@
             } else {
                 os_log_debug(VNA_LOG, "Handler for the feed URL scheme changed to %@", applicationURL.lastPathComponent);
             }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completionHandler();
+            });
         }];
     } else {
         CFStringRef scheme = (__bridge CFStringRef)feedURLScheme;
         NSBundle *bundle = [NSBundle bundleWithURL:applicationURL];
         CFStringRef bundleID = (__bridge CFStringRef)bundle.bundleIdentifier;
         LSSetDefaultHandlerForURLScheme(scheme, bundleID);
+        completionHandler();
     }
 }
 
