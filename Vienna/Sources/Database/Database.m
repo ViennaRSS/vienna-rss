@@ -123,11 +123,11 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
  *  @return YES if the database is at the correct version and good to go
  */
 - (BOOL)initialiseDatabase {
-    __block BOOL success;
+    __block BOOL success = NO;
     [self.databaseQueue inDatabase:^(FMDatabase *db) {
                             success = [db executeStatements:@"PRAGMA quick_check;"];
     }];
-    if (!success) {
+    if (self.databaseQueue && !success) {
         NSAlert * alert = [NSAlert new];
         alert.alertStyle = NSAlertStyleCritical;
         alert.messageText = NSLocalizedString(@"Vienna's database seems to be corrupted. Would you like to quit Vienna or continue anyway?",

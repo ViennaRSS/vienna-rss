@@ -163,8 +163,7 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
             if ((folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader)
                 && ![installedFolders containsObject:folder])
             {
-                TreeNode *subNode;
-                subNode = [[TreeNode alloc] init:self.rootNode atIndex:-1 folder:folder canHaveChildren:NO];
+                (void)[[TreeNode alloc] init:self.rootNode atIndex:-1 folder:folder canHaveChildren:NO];
             }
         }
     }
