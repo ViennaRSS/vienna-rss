@@ -35,6 +35,7 @@
 #import "Database.h"
 #import "Vienna-Swift.h"
 #import "GeneratedAssetSymbols.h"
+#import "AppController.h"
 
 // Shared defaults key
 NSString * const MAPref_ShowEnclosureBar = @"ShowEnclosureBar";
@@ -1603,6 +1604,9 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 // MARK: splitView2 & main window's splitView delegate
 
 - (void)splitViewWillResizeSubviews:(NSNotification *)notification {
+    if (self != APPCONTROLLER.articleController.mainArticleView) {
+        return;
+    }
     NSDictionary * info = notification.userInfo;
     NSInteger userResizeKey = ((NSNumber *)info[@"NSSplitViewUserResizeKey"]).integerValue;
     if (userResizeKey == 1) { // user initiated resize
@@ -1619,6 +1623,9 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 }
 
 - (void)splitViewDidResizeSubviews:(NSNotification *)notification {
+    if (self != APPCONTROLLER.articleController.mainArticleView) {
+        return;
+    }
     // update constraint
     self.textViewWidthConstraint.constant = self.contentStackView.frame.size.width;
     NSDictionary * info = notification.userInfo;
