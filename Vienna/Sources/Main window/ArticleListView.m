@@ -809,13 +809,14 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 	if (splitView2.vertical) {
 		splitView2.dividerStyle = NSSplitViewDividerStyleThin;
 		splitView2.autosaveName = @"Vienna3SplitView2CondensedLayout";
+		self.textViewWidthConstraint.constant = self.contentStackView.frame.size.width;
 	} else {
 		splitView2.dividerStyle = NSSplitViewDividerStylePaneSplitter;
 		splitView2.autosaveName = @"Vienna3SplitView2ReportLayout";
+		self.textViewWidthConstraint.constant = splitView2.frame.size.width;
 	}
-    self.textViewWidthConstraint.constant = self.contentStackView.frame.size.width;
 	self.textViewWidthConstraint.priority = NSLayoutPriorityRequired;
-	self.textViewWidthConstraint.active = self.currentPageFullHTML;
+	self.textViewWidthConstraint.active = YES;
 	[splitView2 display];
 	isChangingOrientation = NO;
 }
@@ -1071,10 +1072,12 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 {
 	NSArray * msgArray = self.markedArticleRange;
 	
+	// enforce our constraint
+	self.textViewWidthConstraint.active = YES;
+
 	if (msgArray.count == 0) {
 		// We are not a FULL HTML page.
 		self.currentPageFullHTML = NO;
-        self.textViewWidthConstraint.active = YES;
 
 		// Clear out the page.
 		[articleText setArticles:@[]];
@@ -1092,9 +1095,6 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 			// appropriately.
 			self.currentPageFullHTML = YES;
 
-            // enforce our constraint
-            self.textViewWidthConstraint.active = YES;
-			
 			// Now set the article to the URL in the RSS feed's article. NOTE: We use
 			// performSelector:withObject:afterDelay: here so that this link load gets
 			// queued up into the event loop, otherwise the WebView class won't draw the
@@ -1108,8 +1108,6 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 			// Remember we're NOT loading from HTML so the status message is set
 			// appropriately.
 			isLoadingHTMLArticle = NO;
-			
-			self.textViewWidthConstraint.active = NO;
 
 			// Set the article to the HTML from the RSS feed.
 			[articleText setArticles:msgArray];
