@@ -162,7 +162,6 @@
 		F6209C5A23D3FFA700D5537D /* Vienna.sdef in Resources */ = {isa = PBXBuildFile; fileRef = F6209C5923D3FFA700D5537D /* Vienna.sdef */; };
 		F6257FF51E28485F0035E43C /* Downloads.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6257FF71E28485F0035E43C /* Downloads.xib */; };
 		F625801C1E2853B90035E43C /* ActivityViewer.xib in Resources */ = {isa = PBXBuildFile; fileRef = F625801E1E2853B90035E43C /* ActivityViewer.xib */; };
-		F62580E41E286CE60035E43C /* KnownSyncServers.plist in Resources */ = {isa = PBXBuildFile; fileRef = F62580E21E286CE60035E43C /* KnownSyncServers.plist */; };
 		F62581451E29B90B0035E43C /* SearchPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = F62581441E29B90A0035E43C /* SearchPanel.xib */; };
 		F62581591E29BEB90035E43C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F625815B1E29BEB90035E43C /* MainMenu.xib */; };
 		F626F5F424A76B9100D3AAD8 /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F626F5F624A76B9100D3AAD8 /* Preferences.storyboard */; };
@@ -224,6 +223,7 @@
 		F6CAA5A42C5D8B9A00590858 /* ScriptPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = F6CAA5A32C5D8B9A00590858 /* ScriptPlugin.m */; };
 		F6CAA5A72C5D8C2E00590858 /* LinkPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = F6CAA5A62C5D8C2E00590858 /* LinkPlugin.m */; };
 		F6CAA5AA2C5D901600590858 /* FeedSourcePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = F6CAA5A82C5D901600590858 /* FeedSourcePlugin.m */; };
+		F6CAA5AD2C5D91B600590858 /* SyncServerPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = F6CAA5AC2C5D91B600590858 /* SyncServerPlugin.m */; };
 		F6CE47131E7E3DCB0045EAD7 /* ActivityItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F6CE47121E7E3DCB0045EAD7 /* ActivityItem.m */; };
 		F6D0089C1EF95C9D008F2D3B /* InfoPanelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F6D0089B1EF95C9D008F2D3B /* InfoPanelManager.m */; };
 		F6D282621F1A87A900FF865E /* PopUpButtonToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D282611F1A87A900FF865E /* PopUpButtonToolbarItem.swift */; };
@@ -488,25 +488,6 @@
 		F6232EF72B4B402F00D01D2A /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Predicates.strings; sourceTree = "<group>"; };
 		F6257FF61E28485F0035E43C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Downloads.xib; sourceTree = "<group>"; };
 		F625801D1E2853B90035E43C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ActivityViewer.xib; sourceTree = "<group>"; };
-		F62580E31E286CE60035E43C /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = Base.lproj/KnownSyncServers.plist; sourceTree = "<group>"; };
-		F62580E81E286D050035E43C /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = cs; path = cs.lproj/KnownSyncServers.plist; sourceTree = "<group>"; };
-		F62580E91E286D070035E43C /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = da; path = da.lproj/KnownSyncServers.plist; sourceTree = "<group>"; };
-		F62580EA1E286D080035E43C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = de; path = de.lproj/KnownSyncServers.plist; sourceTree = "<group>"; };
-		F62580EB1E286D090035E43C /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = es; path = es.lproj/KnownSyncServers.plist; sourceTree = "<group>"; };
-		F62580EC1E286D0A0035E43C /* eu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = eu; path = eu.lproj/KnownSyncServers.plist; sourceTree = "<group>"; };
-		F62580ED1E286D0C0035E43C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = fr; path = fr.lproj/KnownSyncServers.plist; sourceTree = "<group>"; };
-		F62580EF1E286D0E0035E43C /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = it; path = it.lproj/KnownSyncServers.plist; sourceTree = "<group>"; };
-		F62580F01E286D100035E43C /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ja; path = ja.lproj/KnownSyncServers.plist; sourceTree = "<group>"; };
-		F62580F11E286D110035E43C /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ko; path = ko.lproj/KnownSyncServers.plist; sourceTree = "<group>"; };
-		F62580F21E286D120035E43C /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = nl; path = nl.lproj/KnownSyncServers.plist; sourceTree = "<group>"; };
-		F62580F31E286D140035E43C /* pt-PT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "pt-PT"; path = "pt-PT.lproj/KnownSyncServers.plist"; sourceTree = "<group>"; };
-		F62580F41E286D330035E43C /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "pt-BR"; path = "pt-BR.lproj/KnownSyncServers.plist"; sourceTree = "<group>"; };
-		F62580F51E286D350035E43C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ru; path = ru.lproj/KnownSyncServers.plist; sourceTree = "<group>"; };
-		F62580F61E286D360035E43C /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = sv; path = sv.lproj/KnownSyncServers.plist; sourceTree = "<group>"; };
-		F62580F71E286D370035E43C /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = tr; path = tr.lproj/KnownSyncServers.plist; sourceTree = "<group>"; };
-		F62580F81E286D380035E43C /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = uk; path = uk.lproj/KnownSyncServers.plist; sourceTree = "<group>"; };
-		F62580F91E286D390035E43C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "zh-Hant"; path = "zh-Hant.lproj/KnownSyncServers.plist"; sourceTree = "<group>"; };
-		F62580FA1E286D3B0035E43C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "zh-Hans"; path = "zh-Hans.lproj/KnownSyncServers.plist"; sourceTree = "<group>"; };
 		F62581441E29B90A0035E43C /* SearchPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchPanel.xib; sourceTree = "<group>"; };
 		F625815A1E29BEB90035E43C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		F626F5F524A76B9100D3AAD8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Preferences.storyboard; sourceTree = "<group>"; };
@@ -648,6 +629,8 @@
 		F6CAA5A62C5D8C2E00590858 /* LinkPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinkPlugin.m; sourceTree = "<group>"; };
 		F6CAA5A82C5D901600590858 /* FeedSourcePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedSourcePlugin.m; sourceTree = "<group>"; };
 		F6CAA5A92C5D901600590858 /* FeedSourcePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedSourcePlugin.h; sourceTree = "<group>"; };
+		F6CAA5AB2C5D91B600590858 /* SyncServerPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncServerPlugin.h; sourceTree = "<group>"; };
+		F6CAA5AC2C5D91B600590858 /* SyncServerPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncServerPlugin.m; sourceTree = "<group>"; };
 		F6CE47111E7E3DBD0045EAD7 /* ActivityItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityItem.h; sourceTree = "<group>"; };
 		F6CE47121E7E3DCB0045EAD7 /* ActivityItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityItem.m; sourceTree = "<group>"; };
 		F6D0089B1EF95C9D008F2D3B /* InfoPanelManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoPanelManager.m; sourceTree = "<group>"; };
@@ -963,7 +946,6 @@
 		F63DA1741F1CF04F007CBED4 /* Lists */ = {
 			isa = PBXGroup;
 			children = (
-				F62580E21E286CE60035E43C /* KnownSyncServers.plist */,
 				AACAEA3D0954E71100ACD502 /* DemoFeeds.plist */,
 			);
 			name = Lists;
@@ -1126,6 +1108,8 @@
 				F6CAA5A32C5D8B9A00590858 /* ScriptPlugin.m */,
 				F6CAA59B2C5D88DE00590858 /* SearchPlugin.h */,
 				F6CAA59C2C5D88DE00590858 /* SearchPlugin.m */,
+				F6CAA5AB2C5D91B600590858 /* SyncServerPlugin.h */,
+				F6CAA5AC2C5D91B600590858 /* SyncServerPlugin.m */,
 			);
 			name = "Plug-in types";
 			sourceTree = "<group>";
@@ -1563,7 +1547,6 @@
 				F685D24C292460210097C0D3 /* Predicates.strings in Resources */,
 				F6A7DE4F1E471A7F0017BE5E /* Vienna.help in Resources */,
 				F62581451E29B90B0035E43C /* SearchPanel.xib in Resources */,
-				F62580E41E286CE60035E43C /* KnownSyncServers.plist in Resources */,
 				F6D572B11E26AA9000CDA909 /* GroupFolder.xib in Resources */,
 				F6D572B41E26AA9900CDA909 /* InfoWindow.xib in Resources */,
 				F6832F681F10F5DA007920D4 /* MainWindowController.xib in Resources */,
@@ -1899,6 +1882,7 @@
 				435028B3165DE9E00018EDB7 /* EnclosureView.m in Sources */,
 				2FDF6FC8218A289A002F77E9 /* Tab.swift in Sources */,
 				435028B6165DE9E00018EDB7 /* TreeNode.m in Sources */,
+				F6CAA5AD2C5D91B600590858 /* SyncServerPlugin.m in Sources */,
 				2FC4A190257CF775005FF227 /* WebKitArticleConverter.swift in Sources */,
 				F69964F71F13029600FC8493 /* OverlayStatusBar.swift in Sources */,
 				F6CAA59D2C5D88DE00590858 /* SearchPlugin.m in Sources */,
@@ -1959,32 +1943,6 @@
 				F63C08EC2C4A70A90095BAD7 /* mul */,
 			);
 			name = ActivityViewer.xib;
-			sourceTree = "<group>";
-		};
-		F62580E21E286CE60035E43C /* KnownSyncServers.plist */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F62580E31E286CE60035E43C /* Base */,
-				F62580E81E286D050035E43C /* cs */,
-				F62580E91E286D070035E43C /* da */,
-				F62580EA1E286D080035E43C /* de */,
-				F62580EB1E286D090035E43C /* es */,
-				F62580EC1E286D0A0035E43C /* eu */,
-				F62580ED1E286D0C0035E43C /* fr */,
-				F62580EF1E286D0E0035E43C /* it */,
-				F62580F01E286D100035E43C /* ja */,
-				F62580F11E286D110035E43C /* ko */,
-				F62580F21E286D120035E43C /* nl */,
-				F62580F41E286D330035E43C /* pt-BR */,
-				F62580F31E286D140035E43C /* pt-PT */,
-				F62580F51E286D350035E43C /* ru */,
-				F62580F61E286D360035E43C /* sv */,
-				F62580F71E286D370035E43C /* tr */,
-				F62580F81E286D380035E43C /* uk */,
-				F62580F91E286D390035E43C /* zh-Hant */,
-				F62580FA1E286D3B0035E43C /* zh-Hans */,
-			);
-			name = KnownSyncServers.plist;
 			sourceTree = "<group>";
 		};
 		F625815B1E29BEB90035E43C /* MainMenu.xib */ = {

@@ -33,6 +33,7 @@
 #import "SearchMethod.h"
 #import "SearchPlugin.h"
 #import "StringExtensions.h"
+#import "SyncServerPlugin.h"
 #import "Vienna-Swift.h"
 
 NSString * const VNAPluginBundleExtension = @"viennaplugin";
@@ -71,6 +72,7 @@ static NSString * const VNAPluginsDirectoryName = @"Plugins";
             [VNALinkPlugin class],
             [VNAScriptPlugin class],
             [VNASearchPlugin class],
+            [VNASyncServerPlugin class],
         ];
     }
     return pluginTypes;

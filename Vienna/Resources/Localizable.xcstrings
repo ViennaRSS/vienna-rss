@@ -9663,6 +9663,41 @@
         }
       }
     },
+    "Enter the server's address (API URL) and your credentials. For FreshRSS servers, the API URL typically ends with \"/api/greader.php\", and the API password is defined in the \"Profile\" section of the website." : {
+      "comment" : "An instruction for the user. This will be shown above the text fields.",
+      "localizations" : {
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Indtast serverens adresse og dine loginoplysninger. For FreshRSS-servere slutter API-URL'en typisk med \"/api/greader.php\", og API-adgangskoden er defineret i afsnittet \"Profil\" på hjemmesiden."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geben Sie die Adresse (API-URL) und Anmeldedaten für diesen Server ein. Bei FreshRSS-Servern endet die API-URL in der Regel mit \"/api/greader.php\", und das API-Passwort wird im Abschnitt \"Profil\" der Website festgelegt."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Introduzca la dirección del servidor (URL API) y sus credenciales. En el caso de los servidores FreshRSS, la URL de la API suele terminar en \"/api/greader.php\", y la contraseña de la API se define en la sección \"Perfil\" del sitio web."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entrez l'adresse de l'API du serveur, votre identifiant et le mot de passe. Pour un serveur FreshRSS, l'adresse de l'API se termine généralement par \"/api/greader.php\", et le mot de passe API est défini dans la section \"Profil\" du site web."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введите адрес сервера (URL API) и свои учетные данные. Для серверов FreshRSS URL API обычно заканчивается на \"/api/greader.php\", а пароль API определяется в разделе \"Профиль\" на сайте."
+          }
+        }
+      }
+    },
     "Enter URL of RSS feed" : {
       "comment" : "An instruction that will be shown above a text field.",
       "localizations" : {
@@ -16912,6 +16947,7 @@
       }
     },
     "Other" : {
+      "comment" : "Title of a menu item.",
       "localizations" : {
         "cs" : {
           "stringUnit" : {

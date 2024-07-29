@@ -20,11 +20,14 @@
 
 #import "SyncingPreferencesViewController.h"
 
+#import "AppController.h"
 #import "Constants.h"
 #import "OpenReader.h"
 #import "Keychain.h"
+#import "PluginManager.h"
 #import "Preferences.h"
 #import "StringExtensions.h"
+#import "SyncServerPlugin.h"
 
 @interface SyncingPreferencesViewController ()
 
@@ -32,7 +35,6 @@
 
 @implementation SyncingPreferencesViewController {
     IBOutlet NSPopUpButton *openReaderSource; // List of known service providers
-    NSDictionary *sourcesDict;
     IBOutlet NSTextField *credentialsInfoText;
     IBOutlet NSTextField *openReaderHost;
     IBOutlet NSTextField *username;
@@ -43,6 +45,7 @@
     NSString *serverAndPath;
     NSURL *serverURL;
     NSString *syncingUser;
+    NSMenuItem *otherMenuItem;
 }
 
 @synthesize syncButton;
@@ -58,9 +61,6 @@
     if([NSViewController instancesRespondToSelector:@selector(viewWillAppear)]) {
         [super viewWillAppear];
     }
-    // Do view setup here.
-    sourcesDict = nil;
-    
     // restore from Preferences and from keychain
     Preferences * prefs = [Preferences standardPreferences];
     syncButton.state = prefs.syncGoogleReader ? NSControlStateValueOn : NSControlStateValueOff;
@@ -92,41 +92,34 @@
         [password setEnabled:NO];
     }
     _credentialsChanged = NO;
-    
-    // Load a list of supported servers from the KnownSyncServers property list. The list
-    // is a dictionary with display names which act as keys, host names and a help text
-    // regarding credentials to enter. This allows us to support additional service
-    // providers without having to write new code.
-    if (!sourcesDict) {
-        NSURL *plistURL = [NSBundle.mainBundle URLForResource:@"KnownSyncServers"
-                                                withExtension:@"plist"];
-        if (plistURL) {
-            sourcesDict = [NSDictionary dictionaryWithContentsOfURL:plistURL
-                                                              error:NULL];
-            [openReaderSource removeAllItems];
-            if (sourcesDict) {
-                [openReaderSource setEnabled:YES];
-                BOOL match = NO;
-                for (NSString * key in sourcesDict) {
-                    [openReaderSource addItemWithTitle:key];
-                    NSDictionary * itemDict = [sourcesDict valueForKey:key];
-                    if ([serverAndPath isEqualToString:[itemDict valueForKey:@"Address"]]) {
-                        [openReaderSource selectItemWithTitle:key];
-                        [self changeSource:nil];
-                        match = YES;
-                    }
-                }
-                if (!match) {
-                    [openReaderSource selectItemWithTitle:NSLocalizedString(@"Other", nil)];
-                    [self changeSource:nil];
-                    openReaderHost.stringValue = serverURL.absoluteString;
-                }
-            }
-        } else {
-            [openReaderSource setEnabled:NO];
+
+    [openReaderSource removeAllItems];
+    NSArray *plugins = [APPCONTROLLER.pluginManager pluginsOfType:[VNASyncServerPlugin class]];
+    BOOL match = NO;
+    for (VNASyncServerPlugin *plugin in plugins) {
+        NSMenuItem *menuItem = [[NSMenuItem alloc] initWithTitle:plugin.displayName
+                                                          action:NULL
+                                                   keyEquivalent:@""];
+        menuItem.representedObject = plugin;
+        [openReaderSource.menu addItem:menuItem];
+        if ([serverAndPath isEqualToString:plugin.hostName]) {
+            [openReaderSource selectItem:menuItem];
+            [self changeSource:nil];
+            match = YES;
         }
     }
-    
+    [openReaderSource.menu addItem:[NSMenuItem separatorItem]];
+    otherMenuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Other",
+                                                                        @"Title of a menu item.")
+                                               action:NULL
+                                        keyEquivalent:@""];
+    [openReaderSource.menu addItem:otherMenuItem];
+    if (!match) {
+        [openReaderSource selectItem:otherMenuItem];
+        [self changeSource:nil];
+        openReaderHost.stringValue = serverURL.absoluteString;
+    }
+    [openReaderSource setEnabled:YES];
 }
 
 #pragma mark - Vienna Prferences
@@ -170,16 +163,23 @@
 
 -(IBAction)changeSource:(id)sender
 {
-    NSMenuItem * readerItem = openReaderSource.selectedItem;
-    NSString * key = readerItem.title;
-    NSDictionary * itemDict = [sourcesDict valueForKey:key];
-    NSString* hostName = [itemDict valueForKey:@"Address"];
-    if (!hostName) {
-        hostName=@"";
-    }
-    NSString* hint = [itemDict valueForKey:@"Hint"];
-    if (!hint) {
-        hint=@"";
+    NSMenuItem *readerItem = openReaderSource.selectedItem;
+    NSString *hostName;
+    NSString *hint;
+    if ([readerItem isEqual:otherMenuItem]) {
+        hostName = @"";
+        hint = NSLocalizedString(@"Enter the server's address (API URL) and your credentials. For FreshRSS servers, the API URL typically ends with \"/api/greader.php\", and the API password is defined in the \"Profile\" section of the website.",
+                                 @"An instruction for the user. This will be shown above the text fields.");
+    } else {
+        VNASyncServerPlugin *plugin = readerItem.representedObject;
+        hostName = plugin.hostName;
+        if (!hostName) {
+            hostName=@"";
+        }
+        hint = plugin.hintLabel;
+        if (!hint) {
+            hint=@"";
+        }
     }
     openReaderHost.stringValue = hostName;
     credentialsInfoText.stringValue = hint;
@@ -277,8 +277,7 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     syncButton=nil;
-    sourcesDict=nil;
-    
+
 }
 
 @end

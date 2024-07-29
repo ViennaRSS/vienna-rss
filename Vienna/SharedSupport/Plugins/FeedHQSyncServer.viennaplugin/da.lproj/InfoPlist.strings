@@ -1,0 +1,2 @@
+/* An instruction for the user. This will be shown above the text fields. */
+"Hint" = "Indtast brugernavn (eller emailadressen) og kodeord associeret med din FeedHQ konto";
