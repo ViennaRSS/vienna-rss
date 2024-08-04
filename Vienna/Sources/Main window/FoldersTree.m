@@ -159,10 +159,16 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
         // recover from problems by putting missing folders under root node
         NSArray *allFolders = [[[Database sharedManager] arrayOfAllFolders]
                                sortedArrayUsingSelector:@selector(folderNameCompare:)]; // all RSS and group folders
-        NSArray *installedFolders = [self folders:0];  // RSS folders already present
+        // install group folders first
         for (Folder *folder in allFolders) {
-            if ((folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader)
-                && ![installedFolders containsObject:folder])
+            if (folder.isGroupFolder && ![[self folders:0] containsObject:folder]) {
+                (void)[[TreeNode alloc] init:self.rootNode atIndex:-1 folder:folder canHaveChildren:YES];
+            }
+        }
+        // then install missing RSS folders
+        for (Folder *folder in allFolders) {
+            if ((folder.isRSSFolder || folder.isOpenReaderFolder)
+                && ![[self folders:0] containsObject:folder])
             {
                 (void)[[TreeNode alloc] init:self.rootNode atIndex:-1 folder:folder canHaveChildren:NO];
             }
@@ -172,7 +178,7 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
     }
     [self.outlineView reloadData];
     [self unarchiveState:stateArray];
-}
+} // reloadDatabase
 
 /* saveFolderSettings
  * Preserve the expanded/collapsed and selection state of the folders list
