@@ -125,6 +125,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 	[nc addObserver:self selector:@selector(handleArticleListFontChange:) name:MA_Notify_ArticleListFontChange object:nil];
 	[nc addObserver:self selector:@selector(handleReadingPaneChange:) name:MA_Notify_ReadingPaneChange object:nil];
 	[nc addObserver:self selector:@selector(handleLoadFullHTMLChange:) name:MA_Notify_LoadFullHTMLChange object:nil];
+	[nc addObserver:self selector:@selector(handleStyleChange:) name:MA_Notify_StyleChange object:nil];
 	[nc addObserver:self selector:@selector(handleRefreshArticle:) name:MA_Notify_ArticleViewChange object:nil];
 	[nc addObserver:self selector:@selector(handleArticleViewEnded:) name:MA_Notify_ArticleViewEnded object:nil];
 
@@ -802,6 +803,16 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 		[self updateVisibleColumns];
 		[articleList reloadData];
 	}
+}
+
+/* handleStyleChange
+ * Respond to an article style change
+ */
+-(void)handleStyleChange:(NSNotification *)notification
+{
+    if (self == self.controller.articleController.mainArticleView) {
+        [self performSelector:@selector(refreshArticleAtCurrentRow) withObject:nil afterDelay:0.0];
+    }
 }
 
 /* setOrientation

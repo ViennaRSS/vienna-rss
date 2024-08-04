@@ -85,6 +85,7 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
 	// Register for notification
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self selector:@selector(handleReadingPaneChange:) name:MA_Notify_ReadingPaneChange object:nil];
+	[nc addObserver:self selector:@selector(handleStyleChange:) name:MA_Notify_StyleChange object:nil];
 	[nc addObserver:self selector:@selector(handleCellDidResize:) name:MA_Notify_CellResize object:nil];
 
     [self initTableView];
@@ -338,6 +339,16 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
 	if (self == self.controller.articleController.mainArticleView) {
 		[articleList reloadData];
 	}
+}
+
+/* handleStyleChange
+ * Respond to an article style change
+ */
+-(void)handleStyleChange:(NSNotification *)notification
+{
+    if (self == self.controller.articleController.mainArticleView) {
+        [articleList performSelector:@selector(reloadData) withObject:nil afterDelay:0.0];
+    }
 }
 
 /* makeRowSelectedAndVisible
