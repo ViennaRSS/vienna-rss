@@ -162,6 +162,7 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
         // install group folders first
         for (Folder *folder in allFolders) {
             if (folder.isGroupFolder && ![[self folders:0] containsObject:folder]) {
+                NSLog(@"Fixing group folder '%@'", folder.name);
                 (void)[[TreeNode alloc] init:self.rootNode atIndex:-1 folder:folder canHaveChildren:YES];
             }
         }
@@ -170,6 +171,7 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
             if ((folder.isRSSFolder || folder.isOpenReaderFolder)
                 && ![[self folders:0] containsObject:folder])
             {
+                NSLog(@"Fixing RSS folder '%@'", folder.name);
                 (void)[[TreeNode alloc] init:self.rootNode atIndex:-1 folder:folder canHaveChildren:NO];
             }
         }
