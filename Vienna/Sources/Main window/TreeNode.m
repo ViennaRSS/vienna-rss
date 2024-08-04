@@ -180,11 +180,11 @@
 }
 
 /* childByIndex
- * Returns the TreeNode for the child at the specified index offset. (Note that we don't
- * assert index here. The objectAtIndex function will take care of that for us.)
+ * Returns the TreeNode for the child at the specified index offset.
  */
 -(TreeNode *)childByIndex:(NSInteger)index
 {
+	NSAssert(index>=0 && index < children.count, @"index beyond limits in childByIndex:");
 	return children[index];
 }
 
