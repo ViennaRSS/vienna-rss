@@ -6112,6 +6112,7 @@
     },
     "Date" : {
       "comment" : "Data field name visible in menu/article list/smart folder definition",
+      "extractionState" : "stale",
       "localizations" : {
         "cs" : {
           "stringUnit" : {
@@ -6234,6 +6235,9 @@
           }
         }
       }
+    },
+    "Date Published" : {
+      "comment" : "Data field name visible in menu/article list/smart folder definition"
     },
     "Delete" : {
       "comment" : "Title of a button on an alert\n   Title of a menu item",
@@ -12465,6 +12469,9 @@
           }
         }
       }
+    },
+    "Last Update" : {
+      "comment" : "Data field name visible in menu/article list/smart folder definition"
     },
     "Link" : {
       "comment" : "Data field name visible in menu/article list",

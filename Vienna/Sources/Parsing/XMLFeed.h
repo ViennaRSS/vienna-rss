@@ -31,7 +31,7 @@ NS_SWIFT_NAME(XMLFeed)
 @property (copy, nonatomic) NSString *title;
 @property (nullable, copy, nonatomic) NSString *feedDescription;
 @property (nullable, copy, nonatomic) NSString *homePageURL;
-@property (nonatomic) NSDate *modifiedDate;
+@property (nonatomic) NSDate *modificationDate;
 @property (copy, nonatomic) NSArray<id<VNAFeedItem>> *items;
 
 // MARK: Prefix handling

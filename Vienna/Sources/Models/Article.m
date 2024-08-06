@@ -31,7 +31,7 @@ NSString * const MA_Field_GUID = @"GUID";
 NSString * const MA_Field_Subject = @"Subject";
 NSString * const MA_Field_Author = @"Author";
 NSString * const MA_Field_Link = @"Link";
-NSString * const MA_Field_Date = @"Date";
+NSString * const MA_Field_LastUpdate = @"Date";
 NSString * const MA_Field_Read = @"Read";
 NSString * const MA_Field_Flagged = @"Flagged";
 NSString * const MA_Field_Deleted = @"Deleted";
@@ -40,7 +40,7 @@ NSString * const MA_Field_Folder = @"Folder";
 NSString * const MA_Field_Parent = @"Parent";
 NSString * const MA_Field_Headlines = @"Headlines";
 NSString * const MA_Field_Summary = @"Summary";
-NSString * const MA_Field_CreatedDate = @"CreatedDate";
+NSString * const MA_Field_PublicationDate = @"PublicationDate";
 NSString * const MA_Field_Enclosure = @"Enclosure";
 NSString * const MA_Field_EnclosureDownloaded = @"EnclosureDownloaded";
 NSString * const MA_Field_HasEnclosure = @"HasEnclosure";
@@ -108,17 +108,17 @@ NSString * const MA_Field_HasEnclosure = @"HasEnclosure";
 /* setDate
  * Sets the date when the article was published.
  */
--(void)setDate:(NSDate *)newDate
+-(void)setLastUpdate:(NSDate *)lastUpdate
 {
-    articleData[MA_Field_Date] = [newDate copy];
+    articleData[MA_Field_LastUpdate] = lastUpdate;
 }
 
-/* setCreatedDate
- * Sets the date when the article was first created in the database.
+/*
+ * Sets the date when the article was first published or added to the database.
  */
--(void)setCreatedDate:(NSDate *)newCreatedDate
+- (void)setPublicationDate:(NSDate *)publicationDate
 {
-    articleData[MA_Field_CreatedDate] = [newCreatedDate copy];
+    articleData[MA_Field_PublicationDate] = publicationDate;
 }
 
 /* setBody
@@ -198,8 +198,10 @@ NSString * const MA_Field_HasEnclosure = @"HasEnclosure";
 {
     if ([keyPath hasPrefix:@"articleData."]) {
         NSString * key = [keyPath substringFromIndex:(@"articleData.").length];
-        if ([key isEqualToString:MA_Field_Date]) {
-            return self.date;
+        if ([key isEqualToString:MA_Field_LastUpdate]) {
+            return self.lastUpdate;
+        } else if ([key isEqualToString:MA_Field_PublicationDate]) {
+            return self.publicationDate;
         } else if ([key isEqualToString:MA_Field_Author]) {
             return self.author;
         } else if ([key isEqualToString:MA_Field_Subject]) {
@@ -243,8 +245,8 @@ NSString * const MA_Field_HasEnclosure = @"HasEnclosure";
     }
     return summary;
 }
--(NSDate *)date					{ return articleData[MA_Field_Date]; }
--(NSDate *)createdDate			{ return articleData[MA_Field_CreatedDate]; }
+-(NSDate *)lastUpdate			{ return articleData[MA_Field_LastUpdate]; }
+-(NSDate *)publicationDate		{ return articleData[MA_Field_PublicationDate]; }
 -(NSString *)body				{ return articleData[MA_Field_Text]; }
 -(NSString *)enclosure			{ return articleData[MA_Field_Enclosure]; }
 
@@ -354,7 +356,7 @@ NSString * const MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(NSString *)tagArticleDate
 {
-    return [NSDateFormatter vna_relativeDateStringFromDate:self.date];
+    return [NSDateFormatter vna_relativeDateStringFromDate:self.lastUpdate];
 }
 
 /* tagArticleEnclosureLink

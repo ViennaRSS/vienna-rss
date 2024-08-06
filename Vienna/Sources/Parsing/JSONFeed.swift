@@ -32,7 +32,7 @@ class JSONFeed: NSObject, Feed, Decodable {
     var homePageURL: String?
 
     // JSON Feed has no key for this at the feed level.
-    var modifiedDate: Date?
+    var modificationDate: Date?
 
     // The `items` key is required (but the array may be empty).
     var items: [any FeedItem]
@@ -43,8 +43,8 @@ class JSONFeed: NSObject, Feed, Decodable {
         case title
         case feedDescription = "description"
         case homePageURL = "home_page_url"
-        case modifiedDate = "date_modified"
-        case publishedDate = "date_published"
+        case publicationDate = "date_published"
+        case modificationDate = "date_modified"
         case items
 
         // These keys are only used by JSONFeedItem
