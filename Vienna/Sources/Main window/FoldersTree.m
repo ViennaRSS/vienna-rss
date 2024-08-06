@@ -156,16 +156,14 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 {
     [self.rootNode removeChildren];
     if (![self loadTree:[[Database sharedManager] arrayOfFolders:VNAFolderTypeRoot] rootNode:self.rootNode]) {
-        // recover from problems by putting missing folders under root node
-        NSArray *allFolders = [[Database sharedManager] arrayOfAllFolders];  // all RSS and group folders
-        NSArray *installedFolders = [self folders:0];  // RSS folders already present
-        for (Folder *folder in allFolders) {
-            if ((folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader)
-                && ![installedFolders containsObject:folder])
-            {
-                (void)[[TreeNode alloc] init:self.rootNode atIndex:-1 folder:folder canHaveChildren:NO];
-            }
-        }
+        // recover from problems by switching back to alphabetical auto sort of folders…
+        Preferences *prefs = [Preferences standardPreferences];
+        NSInteger selectedSortMethod = prefs.foldersTreeSortMethod;
+        prefs.foldersTreeSortMethod = VNAFolderSortByName;
+        [self.rootNode removeChildren];
+        [self loadTree:[[Database sharedManager] arrayOfFolders:VNAFolderTypeRoot] rootNode:self.rootNode];
+        // then restore user choice regarding sort method
+        prefs.foldersTreeSortMethod = selectedSortMethod;
     }
     [self.outlineView reloadData];
     [self unarchiveState:stateArray];
@@ -255,13 +253,28 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 		NSArray * listOfFolderIds = [listOfFolders valueForKey:@"itemId"];
 		NSUInteger index = 0;
 		NSInteger nextChildId = (node == self.rootNode) ? [Database sharedManager].firstFolderId : node.folder.firstChildId;
+		NSInteger predecessorId = 0;
 		while (nextChildId > 0) {
 			NSUInteger  listIndex = [listOfFolderIds indexOfObject:@(nextChildId)];
 			if (listIndex == NSNotFound) {
 				NSLog(@"Cannot find child with id %ld for folder with id %ld", (long)nextChildId, (long)node.nodeId);
-				return NO;
+				folder = [[Database sharedManager] folderFromID:nextChildId];
+				if (!folder || folder.parentId != node.nodeId) {
+					return NO;
+				}
+				if (predecessorId == 0) {
+					if (![[Database sharedManager] setFirstChild:nextChildId forFolder:node.nodeId]) {
+						return NO;
+					}
+				} else {
+					if (![[Database sharedManager] setNextSibling:nextChildId forFolder:predecessorId]) {
+						return NO;
+					}
+				}
+				NSLog(@"Repositioned folder %@ as child of folder with id %ld", folder, (long)node.nodeId);
+			} else {
+				folder = listOfFolders[listIndex];
 			}
-			folder = listOfFolders[listIndex];
 			NSArray * listOfSubFolders = [[Database sharedManager] arrayOfFolders:nextChildId];
 			NSUInteger count = listOfSubFolders.count;
 			TreeNode * subNode;
@@ -272,6 +285,7 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 					return NO;
 				}
 			}
+			predecessorId = nextChildId;
 			nextChildId = folder.nextSiblingId;
 			++index;
 		}
