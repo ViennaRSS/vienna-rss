@@ -255,6 +255,10 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 		NSInteger nextChildId = (node == self.rootNode) ? [Database sharedManager].firstFolderId : node.folder.firstChildId;
 		NSInteger predecessorId = 0;
 		while (nextChildId > 0) {
+			if ([self.rootNode nodeFromID:nextChildId]) { // already present in our tree ?
+				NSLog(@"Duplicate child with id %ld asked under folder with id %ld", (long)nextChildId, (long)node.nodeId);
+				return NO;
+			}
 			NSUInteger  listIndex = [listOfFolderIds indexOfObject:@(nextChildId)];
 			if (listIndex == NSNotFound) {
 				NSLog(@"Cannot find child with id %ld for folder with id %ld", (long)nextChildId, (long)node.nodeId);
