@@ -9,5 +9,7 @@
 #import "Field.h"
 #import "FoldersTree.h"
 #import "NSFileManager+Paths.h"
+#import "RSSFeed.h"
 #import "SearchMethod.h"
 #import "SubscriptionModel.h"
+#import "XMLFeedParser.h"

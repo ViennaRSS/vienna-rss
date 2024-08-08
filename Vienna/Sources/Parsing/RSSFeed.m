@@ -228,8 +228,10 @@
                 }
 
                 // Parse detailed item description. This overrides the existing
-                // description for this item.
-                if ([itemChildElement.prefix isEqualToString:self.contentPrefix] && [articleItemTag isEqualToString:@"encoded"]) {
+                // description for this item, provided it is not an empty string.
+                if ([itemChildElement.prefix isEqualToString:self.contentPrefix] &&
+                    [articleItemTag isEqualToString:@"encoded"] &&
+                    !itemChildElement.stringValue.vna_isBlank) {
                     articleBody = [NSMutableString stringWithString:itemChildElement.stringValue];
                     hasDetailedContent = YES;
                     continue;

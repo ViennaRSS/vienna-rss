@@ -223,6 +223,8 @@
 		F6D572B71E26AAA100CDA909 /* RSSFeed.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572B91E26AAA100CDA909 /* RSSFeed.xib */; };
 		F6D572BA1E26AAA900CDA909 /* SearchFolder.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6D572BC1E26AAA900CDA909 /* SearchFolder.xib */; };
 		F6DDB5B12950C87E004E0E87 /* SharingServiceMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DDB5B02950C87E004E0E87 /* SharingServiceMenuItem.swift */; };
+		F6E01A072C652DEE0082E07B /* RSSFeedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E01A062C652DEE0082E07B /* RSSFeedTests.swift */; };
+		F6E01A092C652FA50082E07B /* RSSFeedWithContentElements.rss in Resources */ = {isa = PBXBuildFile; fileRef = F6E01A082C652FA50082E07B /* RSSFeedWithContentElements.rss */; };
 		F6EB26031E58D37100570B22 /* DirectoryMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EB26021E58D37100570B22 /* DirectoryMonitor.swift */; };
 		F6F12AFD25ABDDE3005B2DCE /* NSFileManager+Paths.m in Sources */ = {isa = PBXBuildFile; fileRef = F6F12AFC25ABDDE3005B2DCE /* NSFileManager+Paths.m */; };
 /* End PBXBuildFile section */
@@ -694,6 +696,8 @@
 		F6DA45532940CC9E00D746F8 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Predicates.strings; sourceTree = "<group>"; };
 		F6DAD20A1E75892C00FE2645 /* Vienna-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Vienna-Bridging-Header.h"; sourceTree = "<group>"; };
 		F6DDB5B02950C87E004E0E87 /* SharingServiceMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingServiceMenuItem.swift; sourceTree = "<group>"; };
+		F6E01A062C652DEE0082E07B /* RSSFeedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSFeedTests.swift; sourceTree = "<group>"; };
+		F6E01A082C652FA50082E07B /* RSSFeedWithContentElements.rss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = RSSFeedWithContentElements.rss; sourceTree = "<group>"; };
 		F6EB26021E58D37100570B22 /* DirectoryMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryMonitor.swift; sourceTree = "<group>"; };
 		F6F12AFB25ABDDE3005B2DCE /* NSFileManager+Paths.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "NSFileManager+Paths.h"; sourceTree = "<group>"; };
 		F6F12AFC25ABDDE3005B2DCE /* NSFileManager+Paths.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSFileManager+Paths.m"; sourceTree = "<group>"; };
@@ -725,6 +729,7 @@
 				F648C2B71E7F3BEA00CE4043 /* DirectoryMonitorTests.swift */,
 				F6AC41AB25A4FAF6007DED7B /* FeedDiscovererTests.swift */,
 				F6A179D226B82BE3008DDA42 /* NSFileManagerExtensionTests.swift */,
+				F6E01A062C652DEE0082E07B /* RSSFeedTests.swift */,
 				F68FE3A5270F6DC700C89D16 /* UnarchiverTests.swift */,
 				F633157726EE3D06008A3673 /* URLFormatterTests.swift */,
 				0377BDEB1D3A009B00960555 /* Vienna Tests-Bridging-Header.h */,
@@ -1095,6 +1100,7 @@
 			isa = PBXGroup;
 			children = (
 				F64499FB259773B9005A1EFA /* FeedDiscovery.html */,
+				F6E01A082C652FA50082E07B /* RSSFeedWithContentElements.rss */,
 			);
 			path = Files;
 			sourceTree = "<group>";
@@ -1564,6 +1570,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F6449A0325977521005A1EFA /* FeedDiscovery.html in Resources */,
+				F6E01A092C652FA50082E07B /* RSSFeedWithContentElements.rss in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1741,6 +1748,7 @@
 				F6A179D326B82BE3008DDA42 /* NSFileManagerExtensionTests.swift in Sources */,
 				F6AC41AC25A4FAF6007DED7B /* FeedDiscovererTests.swift in Sources */,
 				4D36B44B1D37F91E009736C1 /* VNAArticleTests.m in Sources */,
+				F6E01A072C652DEE0082E07B /* RSSFeedTests.swift in Sources */,
 				F648C2B81E7F3BEA00CE4043 /* DirectoryMonitorTests.swift in Sources */,
 				3A50014E259AA2BE00AA6AAD /* WebKitArticleConverter.swift in Sources */,
 				F68FE3A6270F6DC700C89D16 /* UnarchiverTests.swift in Sources */,
