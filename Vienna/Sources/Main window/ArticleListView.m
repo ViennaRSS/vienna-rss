@@ -887,6 +887,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
     }
 
     if (![self.contentStackView.views containsObject:self.enclosureView]) {
+        self.articleTextView.translatesAutoresizingMaskIntoConstraints = NO;
         [self.contentStackView addView:self.enclosureView
                             inGravity:NSStackViewGravityTop];
     }
@@ -895,6 +896,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 // Hide the enclosure view if it is present.
 - (void)hideEnclosureView {
     if ([self.contentStackView.views containsObject:self.enclosureView]) {
+        self.articleTextView.translatesAutoresizingMaskIntoConstraints = NO;
         [self.contentStackView removeView:self.enclosureView];
     }
 }
