@@ -787,7 +787,7 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
         BOOL isStatusBarShown = [Preferences standardPreferences].showStatusBar;
         if (isStatusBarShown && !self.statusBar) {
             self.statusBar = [OverlayStatusBar new];
-            [articleList.enclosingScrollView addSubview:self.statusBar];
+            [self addSubview:self.statusBar];
         } else if (!isStatusBarShown && self.statusBar) {
             [self.statusBar removeFromSuperview];
             self.statusBar = nil;

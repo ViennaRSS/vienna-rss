@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22690"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -73,7 +73,7 @@
                                                                     <rect key="frame" x="-1" y="0.0" width="20" height="20"/>
                                                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSActionTemplate" id="a3L-k0-Hh3"/>
                                                                 </imageView>
-                                                                <textField identifier="TextField" horizontalHuggingPriority="249" verticalHuggingPriority="751" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JQW-he-OfP">
+                                                                <textField identifier="TextField" focusRingType="none" horizontalHuggingPriority="249" verticalHuggingPriority="751" horizontalCompressionResistancePriority="250" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JQW-he-OfP">
                                                                     <rect key="frame" x="20" y="1" width="180" height="16"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" title="Folder Name" id="RHN-51-qgk">
                                                                         <font key="font" metaFont="system"/>
@@ -167,6 +167,9 @@
                             <real value="251"/>
                             <real value="250"/>
                         </holdingPriorities>
+                        <connections>
+                            <outlet property="delegate" destination="971" id="SHb-bg-Cde"/>
+                        </connections>
                     </splitView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="659-iz-w4S" customClass="DisclosureView">
                         <rect key="frame" x="0.0" y="0.0" width="942" height="22"/>
@@ -174,7 +177,7 @@
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="5Fc-hn-Xm4">
                                 <rect key="frame" x="0.0" y="0.0" width="942" height="22"/>
                                 <subviews>
-                                    <textField verticalHuggingPriority="750" placeholderIntrinsicWidth="100" placeholderIntrinsicHeight="14" preferredMaxLayoutWidth="350" translatesAutoresizingMaskIntoConstraints="NO" id="917">
+                                    <textField focusRingType="none" verticalHuggingPriority="750" placeholderIntrinsicWidth="100" placeholderIntrinsicHeight="14" preferredMaxLayoutWidth="350" translatesAutoresizingMaskIntoConstraints="NO" id="917">
                                         <rect key="frame" x="419" y="4" width="104" height="14"/>
                                         <textFieldCell key="cell" lineBreakMode="truncatingMiddle" sendsActionOnEndEditing="YES" alignment="center" id="1367">
                                             <font key="font" metaFont="smallSystem"/>
@@ -499,7 +502,7 @@
                         <popUpButton key="view" verticalHuggingPriority="750" id="gOd-tT-XFQ">
                             <rect key="frame" x="0.0" y="14" width="50" height="25"/>
                             <autoresizingMask key="autoresizingMask"/>
-                            <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" selectedItem="lu2-BZ-Gxd" id="5CR-Qn-4pP">
+                            <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="StyleTemplate" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" selectedItem="lu2-BZ-Gxd" id="5CR-Qn-4pP">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="menu"/>
                                 <menu key="menu" identifier="StylesMenu" id="mit-Vi-iR1">
@@ -559,7 +562,7 @@
                                         <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="1391">
                                             <rect key="frame" x="0.0" y="26" width="701" height="5"/>
                                         </box>
-                                        <searchField toolTip="Filter displayed articles by matching text" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" preferredMaxLayoutWidth="250" translatesAutoresizingMaskIntoConstraints="NO" id="1304">
+                                        <searchField toolTip="Filter displayed articles by matching text" wantsLayer="YES" focusRingType="none" horizontalHuggingPriority="750" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" preferredMaxLayoutWidth="250" translatesAutoresizingMaskIntoConstraints="NO" id="1304">
                                             <rect key="frame" x="8" y="5" width="284" height="19"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="LD9-MT-Msv"/>
@@ -585,7 +588,7 @@
                                                 <action selector="hideFilterBar:" target="-1" id="FpS-o7-Ir4"/>
                                             </connections>
                                         </button>
-                                        <textField wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="YES" preferredMaxLayoutWidth="150" translatesAutoresizingMaskIntoConstraints="NO" id="1305">
+                                        <textField wantsLayer="YES" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="YES" preferredMaxLayoutWidth="150" translatesAutoresizingMaskIntoConstraints="NO" id="1305">
                                             <rect key="frame" x="385" y="7" width="50" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="right" title="Filter by:" id="1377">
                                                 <font key="font" metaFont="smallSystem"/>
@@ -734,6 +737,9 @@
                                 <real value="250"/>
                                 <real value="250"/>
                             </holdingPriorities>
+                            <connections>
+                                <outlet property="delegate" destination="971" id="yYg-ym-fZU"/>
+                            </connections>
                         </splitView>
                     </subviews>
                     <constraints>
@@ -771,7 +777,7 @@
                                         <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="6nJ-Cc-qUM">
                                             <rect key="frame" x="0.0" y="26" width="701" height="5"/>
                                         </box>
-                                        <searchField toolTip="Filter displayed articles by matching text" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" preferredMaxLayoutWidth="250" translatesAutoresizingMaskIntoConstraints="NO" id="a7v-eM-oW1">
+                                        <searchField toolTip="Filter displayed articles by matching text" wantsLayer="YES" focusRingType="none" horizontalHuggingPriority="750" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" preferredMaxLayoutWidth="250" translatesAutoresizingMaskIntoConstraints="NO" id="a7v-eM-oW1">
                                             <rect key="frame" x="8" y="5" width="284" height="19"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="4mp-AL-ns3"/>
@@ -797,7 +803,7 @@
                                                 <action selector="hideFilterBar:" target="-1" id="ky2-GB-9kE"/>
                                             </connections>
                                         </button>
-                                        <textField wantsLayer="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="249" allowsCharacterPickerTouchBarItem="YES" preferredMaxLayoutWidth="150" translatesAutoresizingMaskIntoConstraints="NO" id="FDm-UJ-4O9">
+                                        <textField wantsLayer="YES" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="249" allowsCharacterPickerTouchBarItem="YES" preferredMaxLayoutWidth="150" translatesAutoresizingMaskIntoConstraints="NO" id="FDm-UJ-4O9">
                                             <rect key="frame" x="385" y="7" width="50" height="14"/>
                                             <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="right" title="Filter by:" id="VXV-Rv-wn5">
                                                 <font key="font" metaFont="smallSystem"/>
@@ -968,27 +974,22 @@
             <point key="canvasLocation" x="1066" y="109"/>
         </customView>
         <customView translatesAutoresizingMaskIntoConstraints="NO" id="1288" customClass="EnclosureView">
-            <rect key="frame" x="0.0" y="0.0" width="444" height="45"/>
+            <rect key="frame" x="0.0" y="0.0" width="462" height="63"/>
             <subviews>
                 <box verticalHuggingPriority="750" alphaValue="0.79577457904815674" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="1392">
-                    <rect key="frame" x="0.0" y="42" width="444" height="5"/>
+                    <rect key="frame" x="0.0" y="60" width="462" height="5"/>
                 </box>
                 <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="PLo-xw-CXM">
-                    <rect key="frame" x="8" y="6" width="428" height="32"/>
+                    <rect key="frame" x="8" y="6" width="446" height="50"/>
                     <subviews>
-                        <imageView id="1289">
-                            <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="32" id="DHh-hp-lMb"/>
-                                <constraint firstAttribute="height" constant="32" id="Nns-hC-vGL"/>
-                            </constraints>
+                        <imageView verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="1289">
+                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" id="1372"/>
                         </imageView>
                         <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="3" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RFH-Us-xJO">
-                            <rect key="frame" x="40" y="1" width="300" height="31"/>
+                            <rect key="frame" x="58" y="10" width="300" height="31"/>
                             <subviews>
-                                <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="14" preferredMaxLayoutWidth="9000" translatesAutoresizingMaskIntoConstraints="NO" id="1290">
+                                <textField focusRingType="none" horizontalHuggingPriority="249" verticalHuggingPriority="750" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="14" preferredMaxLayoutWidth="9000" translatesAutoresizingMaskIntoConstraints="NO" id="1290">
                                     <rect key="frame" x="-2" y="17" width="304" height="14"/>
                                     <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="left" id="1373">
                                         <font key="font" metaFont="smallSystemBold"/>
@@ -996,7 +997,7 @@
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="14" preferredMaxLayoutWidth="9000" translatesAutoresizingMaskIntoConstraints="NO" id="1292" customClass="DSClickableURLTextField">
+                                <textField focusRingType="none" horizontalHuggingPriority="249" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="14" preferredMaxLayoutWidth="9000" translatesAutoresizingMaskIntoConstraints="NO" id="1292" customClass="DSClickableURLTextField">
                                     <rect key="frame" x="-2" y="0.0" width="304" height="14"/>
                                     <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" id="1375">
                                         <font key="font" metaFont="smallSystem"/>
@@ -1015,7 +1016,7 @@
                             </customSpacing>
                         </stackView>
                         <button horizontalHuggingPriority="251" verticalHuggingPriority="750" placeholderIntrinsicWidth="80" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="1291">
-                            <rect key="frame" x="341" y="-1" width="94" height="33"/>
+                            <rect key="frame" x="359" y="8" width="94" height="33"/>
                             <buttonCell key="cell" type="push" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="1374">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
@@ -1155,7 +1156,7 @@
         <image name="GetInfoTemplate" width="28" height="28"/>
         <image name="MarkReadTemplate" width="19" height="14"/>
         <image name="NSActionTemplate" width="20" height="20"/>
-        <image name="NSShareTemplate" width="19" height="22"/>
+        <image name="NSShareTemplate" width="19" height="23"/>
         <image name="NSStopProgressFreestandingTemplate" width="20" height="20"/>
         <image name="NewFeedTemplate" width="38" height="24"/>
         <image name="NextFolderTemplate" width="19" height="12"/>
