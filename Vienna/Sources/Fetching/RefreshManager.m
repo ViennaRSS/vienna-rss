@@ -731,7 +731,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 
         if (newFeed.items.count == 0) {
             // Mark the feed as empty
-            [self setFolderErrorFlag:folder flag:YES];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [connectorItem setStatus:NSLocalizedString(@"No articles in feed", nil)];
             });
