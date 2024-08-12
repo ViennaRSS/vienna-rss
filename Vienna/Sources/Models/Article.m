@@ -45,13 +45,6 @@ NSString * const MA_Field_HasEnclosure = @"HasEnclosure";
 
 @implementation Article {
     NSMutableDictionary *articleData;
-    BOOL readFlag;
-    BOOL revisedFlag;
-    BOOL markedFlag;
-    BOOL deletedFlag;
-    BOOL enclosureDownloadedFlag;
-    BOOL hasEnclosureFlag;
-    ArticleStatus status;
 }
 
 - (instancetype)init
@@ -59,13 +52,6 @@ NSString * const MA_Field_HasEnclosure = @"HasEnclosure";
     self = [super init];
     if (self) {
         articleData = [[NSMutableDictionary alloc] init];
-        readFlag = NO;
-        revisedFlag = NO;
-        markedFlag = NO;
-        deletedFlag = NO;
-        hasEnclosureFlag = NO;
-        enclosureDownloadedFlag = NO;
-        status = ArticleStatusEmpty;
         self.folderId = -1;
         self.parentId = 0;
     }
@@ -139,48 +125,6 @@ NSString * const MA_Field_HasEnclosure = @"HasEnclosure";
     }
 }
 
-/* setEnclosureDownloaded
- */
--(void)setEnclosureDownloaded:(BOOL)flag
-{
-    enclosureDownloadedFlag = flag;
-}
-
-/* setHasEnclosure
- */
--(void)setHasEnclosure:(BOOL)flag
-{
-    hasEnclosureFlag = flag;
-}
-
-/* setRead
- */
--(void)setRead:(BOOL)flag
-{
-    readFlag = flag;
-}
-
-/* setRevised
- */
--(void)setRevised:(BOOL)flag
-{
-    revisedFlag = flag;
-}
-
-/* setFlagged
- */
--(void)setFlagged:(BOOL)flag
-{
-    markedFlag = flag;
-}
-
-/* setDeleted
- */
--(void)setDeleted:(BOOL)flag
-{
-    deletedFlag = flag;
-}
-
 /* accessInstanceVariablesDirectly
  * Override this so that KVC doesn't get the articleData ivar
  */
@@ -218,13 +162,6 @@ NSString * const MA_Field_HasEnclosure = @"HasEnclosure";
 
 /* Accessor functions
  */
--(BOOL)isRead					{ return readFlag; }
--(BOOL)isRevised				{ return revisedFlag; }
--(BOOL)isFlagged				{ return markedFlag; }
--(BOOL)isDeleted				{ return deletedFlag; }
--(BOOL)hasEnclosure				{ return hasEnclosureFlag; }
--(BOOL)enclosureDownloaded		{ return enclosureDownloadedFlag; }
--(ArticleStatus)status			{ return status; }
 -(NSInteger)folderId			{ return [articleData[MA_Field_Folder] integerValue]; }
 -(NSString *)author				{ return articleData[MA_Field_Author]; }
 -(NSString *)link				{ return articleData[MA_Field_Link]; }
@@ -274,13 +211,6 @@ NSString * const MA_Field_HasEnclosure = @"HasEnclosure";
 -(void)setParentId:(NSInteger)newParentId
 {
     articleData[MA_Field_Parent] = @(newParentId);
-}
-
-/* setStatus
- */
--(void)setStatus:(ArticleStatus)newStatus
-{
-    status = newStatus;
 }
 
 /* description
