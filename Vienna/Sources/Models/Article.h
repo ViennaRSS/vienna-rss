@@ -70,7 +70,7 @@ typedef NS_ENUM(NSInteger, ArticleStatus) {
     ArticleStatusEmpty = 0,
     ArticleStatusNew,
     ArticleStatusUpdated
-};
+} NS_SWIFT_NAME(Article.Status);
 
 @interface Article : NSObject
 
@@ -94,6 +94,6 @@ typedef NS_ENUM(NSInteger, ArticleStatus) {
 @property (nonatomic, getter=isDeleted) BOOL deleted;
 @property (nonatomic) BOOL hasEnclosure;
 @property (nonatomic) BOOL enclosureDownloaded;
-@property (nonatomic) NSInteger status;
+@property (nonatomic) ArticleStatus status;
 
 @end

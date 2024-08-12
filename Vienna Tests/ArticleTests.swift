@@ -144,7 +144,7 @@ class ArticleTests: XCTestCase {
     }
 
     func testStatus() {
-        let status = ArticleStatus.new.rawValue
+        let status = Article.Status.new
 
         self.article.status = status
 

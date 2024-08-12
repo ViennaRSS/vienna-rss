@@ -51,7 +51,7 @@ NSString * const MA_Field_HasEnclosure = @"HasEnclosure";
     BOOL deletedFlag;
     BOOL enclosureDownloadedFlag;
     BOOL hasEnclosureFlag;
-    NSInteger status;
+    ArticleStatus status;
 }
 
 - (instancetype)init
@@ -224,7 +224,7 @@ NSString * const MA_Field_HasEnclosure = @"HasEnclosure";
 -(BOOL)isDeleted				{ return deletedFlag; }
 -(BOOL)hasEnclosure				{ return hasEnclosureFlag; }
 -(BOOL)enclosureDownloaded		{ return enclosureDownloadedFlag; }
--(NSInteger)status				{ return status; }
+-(ArticleStatus)status			{ return status; }
 -(NSInteger)folderId			{ return [articleData[MA_Field_Folder] integerValue]; }
 -(NSString *)author				{ return articleData[MA_Field_Author]; }
 -(NSString *)link				{ return articleData[MA_Field_Link]; }
@@ -278,7 +278,7 @@ NSString * const MA_Field_HasEnclosure = @"HasEnclosure";
 
 /* setStatus
  */
--(void)setStatus:(NSInteger)newStatus
+-(void)setStatus:(ArticleStatus)newStatus
 {
     status = newStatus;
 }
