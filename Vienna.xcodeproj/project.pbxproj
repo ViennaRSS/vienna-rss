@@ -196,6 +196,7 @@
 		F696D23E2561F9FC003DF0C0 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = F696D23D2561F9FC003DF0C0 /* Sparkle */; };
 		F69964F71F13029600FC8493 /* OverlayStatusBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69964F61F13029500FC8493 /* OverlayStatusBar.swift */; };
 		F6A179D326B82BE3008DDA42 /* NSFileManagerExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A179D226B82BE3008DDA42 /* NSFileManagerExtensionTests.swift */; };
+		F6A243E12C69E534000A006F /* Article+Tags.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A243E02C69E534000A006F /* Article+Tags.m */; };
 		F6A464BC272F47BE0071E3F6 /* NSKeyedUnarchiver+Compatibility.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A464BA272F47BE0071E3F6 /* NSKeyedUnarchiver+Compatibility.m */; };
 		F6A464BD272F47BE0071E3F6 /* NSKeyedArchiver+Compatibility.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A464BB272F47BE0071E3F6 /* NSKeyedArchiver+Compatibility.m */; };
 		F6A4E8481F040D58001C9191 /* PlugInToolbarItemButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A4E8471F040D58001C9191 /* PlugInToolbarItemButton.swift */; };
@@ -564,6 +565,8 @@
 		F69964F61F13029500FC8493 /* OverlayStatusBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayStatusBar.swift; sourceTree = "<group>"; };
 		F69AE7E91F2224F500342640 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = da; path = da.lproj/RSSSources.plist; sourceTree = "<group>"; };
 		F6A179D226B82BE3008DDA42 /* NSFileManagerExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSFileManagerExtensionTests.swift; sourceTree = "<group>"; };
+		F6A243DF2C69E534000A006F /* Article+Tags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Article+Tags.h"; sourceTree = "<group>"; };
+		F6A243E02C69E534000A006F /* Article+Tags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Article+Tags.m"; sourceTree = "<group>"; };
 		F6A464B8272F47BE0071E3F6 /* NSKeyedUnarchiver+Compatibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "NSKeyedUnarchiver+Compatibility.h"; sourceTree = "<group>"; };
 		F6A464B9272F47BE0071E3F6 /* NSKeyedArchiver+Compatibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "NSKeyedArchiver+Compatibility.h"; sourceTree = "<group>"; };
 		F6A464BA272F47BE0071E3F6 /* NSKeyedUnarchiver+Compatibility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSKeyedUnarchiver+Compatibility.m"; sourceTree = "<group>"; };
@@ -729,6 +732,8 @@
 				2F88B2A42545BB450067EEA6 /* ArticleConverter.h */,
 				2F88B2A52545BB450067EEA6 /* ArticleConverter.m */,
 				2FC4A1BE25852C0E005FF227 /* ArticleConverter.swift */,
+				F6A243DF2C69E534000A006F /* Article+Tags.h */,
+				F6A243E02C69E534000A006F /* Article+Tags.m */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -1808,6 +1813,7 @@
 				435028AC165DE9E00018EDB7 /* NewSubscription.m in Sources */,
 				2F88FF432969FC530076B99E /* DateWithUnitPredicateEditorRowTemplate.swift in Sources */,
 				F6EB26031E58D37100570B22 /* DirectoryMonitor.swift in Sources */,
+				F6A243E12C69E534000A006F /* Article+Tags.m in Sources */,
 				435028AD165DE9E00018EDB7 /* PluginManager.m in Sources */,
 				B81B536425565CD700C65459 /* Constants.swift in Sources */,
 				435028AE165DE9E00018EDB7 /* ProgressTextCell.m in Sources */,

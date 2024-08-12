@@ -18,13 +18,11 @@
 //  limitations under the License.
 //
 
-
 #import "Article.h"
+
 #import "Database.h"
-#import "DateFormatterExtension.h"
-#import "StringExtensions.h"
-#import "HelperFunctions.h"
 #import "Folder.h"
+#import "StringExtensions.h"
 
 // The names here are internal field names, not for localisation.
 NSString * const MA_Field_GUID = @"GUID";
@@ -308,98 +306,6 @@ NSString * const MA_Field_HasEnclosure = @"HasEnclosure";
                                                                                           index:index];
     }
     return nil;
-}
-
-/* tagArticleLink
- * Returns the article link as a safe string.
- */
--(NSString *)tagArticleLink
-{
-    return cleanedUpUrlFromString(self.link).absoluteString;
-}
-
-/* tagArticleTitle
- * Returns the article title.
- */
--(NSString *)tagArticleTitle
-{
-    NSMutableString * articleTitle = [NSMutableString stringWithString:SafeString([self title])];
-    [articleTitle vna_replaceString:@"$Article" withString:@"$_%$%_Article"];
-    [articleTitle vna_replaceString:@"$Feed" withString:@"$_%$%_Feed"];
-    return [NSString vna_stringByConvertingHTMLEntities:articleTitle];
-}
-
-/* tagArticleBody
- * Returns the article body.
- */
--(NSString *)tagArticleBody
-{
-    NSMutableString * articleBody = [NSMutableString stringWithString:SafeString(self.body)];
-    [articleBody vna_replaceString:@"$Article" withString:@"$_%$%_Article"];
-    [articleBody vna_replaceString:@"$Feed" withString:@"$_%$%_Feed"];
-    [articleBody vna_fixupRelativeImgTags:self.link];
-    [articleBody vna_fixupRelativeIframeTags:self.link];
-    [articleBody vna_fixupRelativeAnchorTags:self.link];
-    return articleBody;
-}
-
-/* tagArticleAuthor
- * Returns the article author as a safe string.
- */
--(NSString *)tagArticleAuthor
-{
-    return SafeString([self author]);
-}
-
-/* tagArticleDate
- * Returns the article date.
- */
--(NSString *)tagArticleDate
-{
-    return [NSDateFormatter vna_relativeDateStringFromDate:self.lastUpdate];
-}
-
-/* tagArticleEnclosureLink
- * Returns the article enclosure link.
- */
--(NSString *)tagArticleEnclosureLink
-{
-    return cleanedUpUrlFromString(self.enclosure).absoluteString;
-}
-
-/* tagArticleEnclosureFilename
- * Returns the article enclosure file name.
- */
--(NSString *)tagArticleEnclosureFilename
-{
-    return [self.enclosure.lastPathComponent stringByRemovingPercentEncoding];
-}
-
-/* tagFeedTitle
- * Returns the article's feed title.
- */
--(NSString *)tagFeedTitle
-{
-    Folder * folder = [[Database sharedManager] folderFromID:self.folderId];
-    return [NSString vna_stringByConvertingHTMLEntities:SafeString([folder name])];
-}
-
-/* tagFeedLink
- * Returns the article's feed URL.
- */
--(NSString *)tagFeedLink
-{
-    Folder * folder = [[Database sharedManager] folderFromID:self.folderId];
-    return cleanedUpUrlFromString(folder.homePage).absoluteString;
-}
-
-/* tagFeedDescription
- * Returns the article's feed description.
- */
--(NSString *)tagFeedDescription
-{
-    Folder * folder = [[Database sharedManager] folderFromID:self.folderId];
-    return folder.feedDescription;
 }
 
 @end
