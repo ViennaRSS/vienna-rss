@@ -139,9 +139,9 @@ NSString * const MA_Field_HasEnclosure = @"HasEnclosure";
     }
 }
 
-/* markEnclosureDownloaded
+/* setEnclosureDownloaded
  */
--(void)markEnclosureDownloaded:(BOOL)flag
+-(void)setEnclosureDownloaded:(BOOL)flag
 {
     enclosureDownloadedFlag = flag;
 }
@@ -153,30 +153,30 @@ NSString * const MA_Field_HasEnclosure = @"HasEnclosure";
     hasEnclosureFlag = flag;
 }
 
-/* markRead
+/* setRead
  */
--(void)markRead:(BOOL)flag
+-(void)setRead:(BOOL)flag
 {
     readFlag = flag;
 }
 
-/* markRevised
+/* setRevised
  */
--(void)markRevised:(BOOL)flag
+-(void)setRevised:(BOOL)flag
 {
     revisedFlag = flag;
 }
 
-/* markFlagged
+/* setFlagged
  */
--(void)markFlagged:(BOOL)flag
+-(void)setFlagged:(BOOL)flag
 {
     markedFlag = flag;
 }
 
-/* markDeleted
+/* setDeleted
  */
--(void)markDeleted:(BOOL)flag
+-(void)setDeleted:(BOOL)flag
 {
     deletedFlag = flag;
 }

@@ -2344,7 +2344,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	Article * theArticle = self.selectedArticle;
 	if (theArticle != nil && !db.readOnly) {
 		NSArray * articleArray = self.articleController.markedArticleRange;
-		[self.articleController markReadByArray:articleArray readFlag:!theArticle.read];
+		[self.articleController markReadByArray:articleArray readFlag:!theArticle.isRead];
 	}
 }
 
@@ -2380,7 +2380,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	Article * theArticle = self.selectedArticle;
 	if (theArticle != nil && !db.readOnly) {
 		NSArray * articleArray = self.articleController.markedArticleRange;
-		[self.articleController markFlaggedByArray:articleArray flagged:!theArticle.flagged];
+		[self.articleController markFlaggedByArray:articleArray flagged:!theArticle.isFlagged];
 	}
 }
 
@@ -3333,7 +3333,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	} else if (theAction == @selector(markFlagged:)) {
 		Article * thisArticle = self.selectedArticle;
 		if (thisArticle != nil) {
-			if (thisArticle.flagged) {
+			if (thisArticle.isFlagged) {
 				[menuItem setTitle:NSLocalizedString(@"Mark Unflagged", nil)];
 			} else {
 				[menuItem setTitle:NSLocalizedString(@"Mark Flagged", nil)];

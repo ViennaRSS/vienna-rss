@@ -88,17 +88,12 @@ typedef NS_ENUM(NSInteger, ArticleStatus) {
 @property (nullable, nonatomic) NSDate *publicationDate;
 @property (nullable, nonatomic, readonly) Folder *containingFolder;
 @property (nonatomic) NSInteger folderId;
-@property (nonatomic, getter=isRead, readonly) BOOL read;
-@property (nonatomic, getter=isRevised, readonly) BOOL revised;
-@property (nonatomic, getter=isFlagged, readonly) BOOL flagged;
-@property (nonatomic, getter=isDeleted, readonly) BOOL deleted;
+@property (nonatomic, getter=isRead) BOOL read;
+@property (nonatomic, getter=isRevised) BOOL revised;
+@property (nonatomic, getter=isFlagged) BOOL flagged;
+@property (nonatomic, getter=isDeleted) BOOL deleted;
 @property (nonatomic) BOOL hasEnclosure;
-@property (nonatomic, readonly) BOOL enclosureDownloaded;
+@property (nonatomic) BOOL enclosureDownloaded;
 @property (nonatomic) NSInteger status;
--(void)markRead:(BOOL)flag;
--(void)markRevised:(BOOL)flag;
--(void)markFlagged:(BOOL)flag;
--(void)markDeleted:(BOOL)flag;
--(void)markEnclosureDownloaded:(BOOL)flag;
 
 @end

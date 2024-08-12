@@ -154,7 +154,7 @@ class ArticleTests: XCTestCase {
     func testMarkRead() {
         XCTAssertFalse(self.article.isRead)
 
-        self.article.markRead(true)
+        self.article.isRead = true
 
         XCTAssert(self.article.isRead)
     }
@@ -162,7 +162,7 @@ class ArticleTests: XCTestCase {
     func testMarkRevised() {
         XCTAssertFalse(self.article.isRevised)
 
-        self.article.markRevised(true)
+        self.article.isRevised = true
 
         XCTAssert(self.article.isRevised)
     }
@@ -170,7 +170,7 @@ class ArticleTests: XCTestCase {
     func testMarkDeleted() {
         XCTAssertFalse(self.article.isDeleted)
 
-        self.article.markDeleted(true)
+        self.article.isDeleted = true
 
         XCTAssert(self.article.isDeleted)
     }
@@ -178,7 +178,7 @@ class ArticleTests: XCTestCase {
     func testMarkFlagged() {
         XCTAssertFalse(self.article.isFlagged)
 
-        self.article.markFlagged(true)
+        self.article.isFlagged = true
 
         XCTAssert(self.article.isFlagged)
     }
@@ -186,7 +186,7 @@ class ArticleTests: XCTestCase {
     func testMarkEnclosureDowloaded() {
         XCTAssertFalse(self.article.enclosureDownloaded)
 
-        self.article.markEnclosureDownloaded(true)
+        self.article.enclosureDownloaded = true
 
         XCTAssert(self.article.enclosureDownloaded)
     }

@@ -157,7 +157,7 @@ static NSString * const Body =
 {
     XCTAssertFalse(self.article.isRead);
 
-    [self.article markRead:YES];
+    self.article.read = YES;
 
     XCTAssert(self.article.isRead);
 }
@@ -166,7 +166,7 @@ static NSString * const Body =
 {
     XCTAssertFalse(self.article.isRevised);
 
-    [self.article markRevised:YES];
+    self.article.revised = YES;
 
     XCTAssert(self.article.isRevised);
 }
@@ -175,7 +175,7 @@ static NSString * const Body =
 {
     XCTAssertFalse(self.article.isDeleted);
 
-    [self.article markDeleted:YES];
+    self.article.deleted = YES;
 
     XCTAssert(self.article.isDeleted);
 }
@@ -184,7 +184,7 @@ static NSString * const Body =
 {
     XCTAssertFalse(self.article.isFlagged);
 
-    [self.article markFlagged:YES];
+    self.article.flagged = YES;
 
     XCTAssert(self.article.isFlagged);
 }
@@ -193,7 +193,7 @@ static NSString * const Body =
 {
     XCTAssertFalse(self.article.enclosureDownloaded);
 
-    [self.article markEnclosureDownloaded:YES];
+    self.article.enclosureDownloaded = YES;
 
     XCTAssert(self.article.enclosureDownloaded);
 }

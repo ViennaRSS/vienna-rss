@@ -1506,10 +1506,10 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
     NSString * articleEnclosure = article.enclosure.vna_trimmed;
     NSString * articleGuid = article.guid;
     NSInteger parentId = article.parentId;
-    BOOL marked_flag = article.flagged;
-    BOOL read_flag = article.read;
-    BOOL revised_flag = article.revised;
-    BOOL deleted_flag = article.deleted;
+    BOOL marked_flag = article.isFlagged;
+    BOOL read_flag = article.isRead;
+    BOOL revised_flag = article.isRevised;
+    BOOL deleted_flag = article.isDeleted;
     BOOL hasenclosure_flag = article.hasEnclosure;
 
     NSDate *currentDate = [NSDate date];
@@ -1601,7 +1601,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
     NSString * userName = articleUpdate.author.vna_trimmed;
     NSString * articleGuid = articleUpdate.guid;
     NSInteger parentId = articleUpdate.parentId;
-    BOOL revised_flag = articleUpdate.revised;
+    BOOL revised_flag = articleUpdate.isRevised;
 
     // keep last update date the same if not set in the current version of the article
     NSDate * lastUpdate = existingArticle.lastUpdate;
@@ -1657,7 +1657,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
         // Articles preexisting in database should be marked as revised.
         // New articles created during the current refresh should not be marked as revised,
         // even if there are multiple versions of the new article in the feed.
-        if (existingArticle.revised || (existingArticle.status == ArticleStatusEmpty)) {
+        if (existingArticle.isRevised || (existingArticle.status == ArticleStatusEmpty)) {
             revised_flag = YES;
         }
 
@@ -1684,7 +1684,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
             // update the existing article in memory
             existingArticle.title = articleTitle;
             existingArticle.body = articleBody;
-            [existingArticle markRevised:revised_flag];
+            existingArticle.revised = revised_flag;
             existingArticle.parentId = parentId;
             existingArticle.author = userName;
             existingArticle.link = articleLink;
@@ -1760,13 +1760,13 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
         }];
 
         if (success) {
-            if (!article.read) {
+            if (!article.isRead) {
                 [self setFolderUnreadCount:folder adjustment:-1];
             }
             if (folder.countOfCachedArticles > 0) {
 				// If we're in a smart folder, the cached article may be different.
 				Article * cachedArticle = [folder articleFromGuid:guid];
-				[cachedArticle markDeleted:YES];
+				cachedArticle.deleted = YES;
 				[folder removeArticleFromCache:guid];
 			}
             return YES;
@@ -2044,10 +2044,10 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
             }
             
             Article * article = [[Article alloc] initWithGuid:guid];
-            [article markRead:read_flag];
-            [article markFlagged:marked_flag];
-            [article markRevised:revised_flag];
-            [article markDeleted:deleted_flag];
+            article.read = read_flag;
+            article.flagged = marked_flag;
+            article.revised = revised_flag;
+            article.deleted = deleted_flag;
             article.folderId = folderId;
             article.title = title;
             article.link = link;
@@ -2241,9 +2241,9 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 			Article * article = [[Article alloc] initWithGuid:guid];
 			article.folderId = [results intForColumnIndex:1];
 			article.parentId = [results intForColumnIndex:2];
-			[article markRead:[results intForColumnIndex:3]];
-			[article markFlagged:[results intForColumnIndex:4]];
-			[article markDeleted:[results intForColumnIndex:5]];
+			article.read = [results intForColumnIndex:3];
+			article.flagged = [results intForColumnIndex:4];
+			article.deleted = [results intForColumnIndex:5];
 			article.title = [results stringForColumnIndex:6];
 			article.author = [results stringForColumnIndex:7];
 			article.link = [results stringForColumnIndex:8];
@@ -2251,18 +2251,18 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 			article.lastUpdate = [NSDate dateWithTimeIntervalSince1970:[results stringForColumnIndex:10].doubleValue];
 			NSString * text = [results stringForColumnIndex:11];
 			article.body = text;
-			[article markRevised:[results intForColumnIndex:12]];
+			article.revised = [results intForColumnIndex:12];
 			article.hasEnclosure = [results intForColumnIndex:13];
 			article.enclosure = [results stringForColumnIndex:14];
 			Folder * articleFolder = [self folderFromID:article.folderId];
 			article.status = [articleFolder retrieveKnownStatusForGuid:guid];
 		
-			if (folder == nil || !article.deleted || folder.type == VNAFolderTypeTrash) {
+			if (folder == nil || !article.isDeleted || folder.type == VNAFolderTypeTrash) {
 				[newArray addObject:article];
 			}
 			
 			// Keep our own track of unread articles
-			if (!article.read) {
+			if (!article.isRead) {
 				++unread_count;
 			}
 			
@@ -2331,7 +2331,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	Folder * folder = [self folderFromID:folderId];
 	if (folder != nil) {
 		Article * article = [folder articleFromGuid:guid];
-		if (article != nil && isRead != article.read) {
+		if (article != nil && isRead != article.isRead) {
 			// Mark an individual article read
             FMDatabaseQueue *queue = self.databaseQueue;
             __block BOOL success;
@@ -2342,7 +2342,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 			if (success) {
 				NSInteger adjustment = (isRead ? -1 : 1);
 
-				[article markRead:isRead];
+				article.read = isRead;
 				[self setFolderUnreadCount:folder adjustment:adjustment];
 			}
 		}
@@ -2426,7 +2426,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	Folder * folder = [self folderFromID:folderId];
 	if (folder != nil) {
 		Article * article = [folder articleFromGuid:guid];
-		if (article != nil && isFlagged != article.flagged) {
+		if (article != nil && isFlagged != article.isFlagged) {
             FMDatabaseQueue *queue = self.databaseQueue;
             __block BOOL success;
             [queue inDatabase:^(FMDatabase *db) {
@@ -2438,7 +2438,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 
 			if (success) {
 				// Mark an individual article flagged
-                [article markFlagged:isFlagged];
+                article.flagged = isFlagged;
 			}
 		}
 	}
@@ -2453,7 +2453,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	NSString * guid = article.guid;
 	Folder * folder = [self folderFromID:folderId];
 	if (folder !=nil) {
-        if (isDeleted && !article.read) {
+        if (isDeleted && !article.isRead) {
 			[self markArticleRead:folderId guid:guid isRead:YES];
 		}
         FMDatabaseQueue *queue = self.databaseQueue;
@@ -2463,14 +2463,14 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
              @(folderId),
              guid];
         }];
-        [article markDeleted:isDeleted];
+        article.deleted = isDeleted;
         //TODO this should all move to the folder implementation, to make this less of a god object.
         // Or even better: when marking an article as deleted it triggers the deletion from its folder itself, and that in turn triggers the db update.
         // The same also applies to deleteArticle and probably many other parts of this class.
         if (folder.countOfCachedArticles > 0) {
             // If we're in a smart folder, the cached article may be different.
             Article * cachedArticle = [folder articleFromGuid:guid];
-            [cachedArticle markDeleted:isDeleted];
+            cachedArticle.deleted = isDeleted;
         }
 	}
 }
