@@ -570,7 +570,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             for (NSDictionary *newsItem in (NSArray *)subscriptionsDict[@"items"]) {
 
                 NSString *articleGuid = newsItem[@"id"];
-                Article *article = [[Article alloc] initWithGuid:articleGuid];
+                Article *article = [[Article alloc] initWithGUID:articleGuid];
                 article.folderId = refreshedFolder.itemId;
 
                 if (newsItem[@"author"] != nil) {

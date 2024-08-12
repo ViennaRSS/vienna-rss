@@ -2043,7 +2043,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
                 ++unread_count;
             }
             
-            Article * article = [[Article alloc] initWithGuid:guid];
+            Article * article = [[Article alloc] initWithGUID:guid];
             article.read = read_flag;
             article.flagged = marked_flag;
             article.revised = revised_flag;
@@ -2238,7 +2238,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 		}
 		while ([results next]) {
 			NSString * guid = [results stringForColumnIndex:0];
-			Article * article = [[Article alloc] initWithGuid:guid];
+			Article * article = [[Article alloc] initWithGUID:guid];
 			article.folderId = [results intForColumnIndex:1];
 			article.parentId = [results intForColumnIndex:2];
 			article.read = [results intForColumnIndex:3];

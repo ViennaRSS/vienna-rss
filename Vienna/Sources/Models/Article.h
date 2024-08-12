@@ -72,8 +72,11 @@ typedef NS_ENUM(NSInteger, ArticleStatus) {
 
 @interface Article : NSObject
 
-// Accessor functions
--(instancetype)initWithGuid:(NSString *)theGuid /*NS_DESIGNATED_INITIALIZER*/;
+- (instancetype)initWithGUID:(NSString *)guid NS_DESIGNATED_INITIALIZER;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
 @property (nonatomic) NSInteger parentId;
 @property (nonatomic, copy) NSString *guid;
 @property (nullable, nonatomic, copy) NSString *author;

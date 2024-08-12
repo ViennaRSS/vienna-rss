@@ -47,23 +47,15 @@ NSString * const MA_Field_HasEnclosure = @"HasEnclosure";
     NSMutableDictionary *articleData;
 }
 
-- (instancetype)init
+- (instancetype)initWithGUID:(NSString *)guid
 {
     self = [super init];
     if (self) {
         articleData = [[NSMutableDictionary alloc] init];
+        // Use the setters to populate the articleData dictionary.
+        self.guid = guid;
         self.folderId = -1;
         self.parentId = 0;
-    }
-    return self;
-}
-
-/* initWithGuid
- */
--(instancetype)initWithGuid:(NSString *)theGuid
-{
-    if ((self = [self init]) != nil) {
-        self.guid = theGuid;
     }
     return self;
 }

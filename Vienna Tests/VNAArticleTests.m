@@ -41,7 +41,7 @@ static NSString * const Body =
 {
     [super setUp];
 
-    self.article = [[Article alloc] initWithGuid:GUID];
+    self.article = [[Article alloc] initWithGUID:GUID];
     self.articleConverter = [[WebKitArticleConverter alloc] init];
 }
 
