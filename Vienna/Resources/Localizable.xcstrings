@@ -752,6 +752,12 @@
         "eu" : {
           "variations" : {
             "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%d artikulu berri jasota"
+                }
+              },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -782,6 +788,12 @@
         "gl" : {
           "variations" : {
             "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Recuperados %d novos artigos"
+                }
+              },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -836,6 +848,18 @@
         "lt" : {
           "variations" : {
             "plural" : {
+              "few" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Parsiųsta %d naujų straipsnių"
+                }
+              },
+              "many" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Parsiųsta %d naujų straipsnių"
+                }
+              },
               "one" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -872,6 +896,12 @@
         "pt-BR" : {
           "variations" : {
             "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%d novos artigos descarregados"
+                }
+              },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -950,6 +980,12 @@
         "tr" : {
           "variations" : {
             "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%d yeni makale alındı"
+                }
+              },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -962,6 +998,24 @@
         "uk" : {
           "variations" : {
             "plural" : {
+              "few" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Отримано %d нових статей"
+                }
+              },
+              "many" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Отримано %d нових статей"
+                }
+              },
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Отримано %d нових статей"
+                }
+              },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -1003,6 +1057,24 @@
         "cs" : {
           "variations" : {
             "plural" : {
+              "few" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Přijato nových nepřečtených příspěvků: %d"
+                }
+              },
+              "many" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Přijato nových nepřečtených příspěvků: %d"
+                }
+              },
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Přijato nových nepřečtených příspěvků: %d"
+                }
+              },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -1087,6 +1159,12 @@
         "eu" : {
           "variations" : {
             "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%d artikulu berri irakurri gabe jasota"
+                }
+              },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -1117,6 +1195,12 @@
         "gl" : {
           "variations" : {
             "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Recuperados novos artigos sen ler"
+                }
+              },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -1171,6 +1255,24 @@
         "lt" : {
           "variations" : {
             "plural" : {
+              "few" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Parsiųsta naujų neperskaitytų straipsnių"
+                }
+              },
+              "many" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Parsiųsta naujų neperskaitytų straipsnių"
+                }
+              },
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Parsiųsta naujų neperskaitytų straipsnių"
+                }
+              },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -1201,6 +1303,12 @@
         "pt-BR" : {
           "variations" : {
             "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%d novos artigos recebidos"
+                }
+              },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -1231,6 +1339,24 @@
         "ru" : {
           "variations" : {
             "plural" : {
+              "few" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Получено %d новых статей"
+                }
+              },
+              "many" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Получено %d новых статей"
+                }
+              },
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Получено %d новых статей"
+                }
+              },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -1261,6 +1387,12 @@
         "tr" : {
           "variations" : {
             "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%d yeni okunmayan makale alındı"
+                }
+              },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -1403,6 +1535,12 @@
         "eu" : {
           "variations" : {
             "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%d harpidetzak zuzen esportatu dira"
+                }
+              },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -1433,6 +1571,12 @@
         "gl" : {
           "variations" : {
             "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%d subscricións correctamente exportadas"
+                }
+              },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -1487,6 +1631,18 @@
         "lt" : {
           "variations" : {
             "plural" : {
+              "few" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Sėkmingai importuota %d naujų prenumeratų"
+                }
+              },
+              "many" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Sėkmingai importuota %d naujų prenumeratų"
+                }
+              },
               "one" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -1523,6 +1679,12 @@
         "pt-BR" : {
           "variations" : {
             "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%d assinaturas exportadas com sucesso"
+                }
+              },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -1601,6 +1763,12 @@
         "tr" : {
           "variations" : {
             "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%d abonelikleri başarılı bir şekilde çıkarıldı"
+                }
+              },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -1613,6 +1781,24 @@
         "uk" : {
           "variations" : {
             "plural" : {
+              "few" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Успішно експортовано %d підписок"
+                }
+              },
+              "many" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Успішно експортовано %d підписок"
+                }
+              },
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Успішно експортовано %d підписок"
+                }
+              },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -1755,6 +1941,12 @@
         "eu" : {
           "variations" : {
             "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%d harpidetzak zuzen inportatu dira"
+                }
+              },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -1785,6 +1977,12 @@
         "gl" : {
           "variations" : {
             "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%d subscricións importadas correctamente"
+                }
+              },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -1839,6 +2037,18 @@
         "lt" : {
           "variations" : {
             "plural" : {
+              "few" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Sėkmingai importuota %d naujų prenumeratų"
+                }
+              },
+              "many" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Sėkmingai importuota %d naujų prenumeratų"
+                }
+              },
               "one" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -1875,6 +2085,12 @@
         "pt-BR" : {
           "variations" : {
             "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%d assinaturas importadas com sucesso"
+                }
+              },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -1953,6 +2169,12 @@
         "tr" : {
           "variations" : {
             "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%d abonelikleri başarılı bir şekilde dahil edildi"
+                }
+              },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -1965,6 +2187,24 @@
         "uk" : {
           "variations" : {
             "plural" : {
+              "few" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Успішно імпортовано %d підписок"
+                }
+              },
+              "many" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Успішно імпортовано %d підписок"
+                }
+              },
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Успішно імпортовано %d підписок"
+                }
+              },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -2107,6 +2347,12 @@
         "eu" : {
           "variations" : {
             "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%d artikulu irakurri gabe"
+                }
+              },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -2137,6 +2383,12 @@
         "gl" : {
           "variations" : {
             "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%d artigos sen ler"
+                }
+              },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -2191,6 +2443,18 @@
         "lt" : {
           "variations" : {
             "plural" : {
+              "few" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%d neskaitytų straipsnių"
+                }
+              },
+              "many" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%d neskaitytų straipsnių"
+                }
+              },
               "one" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -2227,6 +2491,12 @@
         "pt-BR" : {
           "variations" : {
             "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%d artigos não lidos"
+                }
+              },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -2305,6 +2575,12 @@
         "tr" : {
           "variations" : {
             "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%d okunmamış makale"
+                }
+              },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -2317,6 +2593,24 @@
         "uk" : {
           "variations" : {
             "plural" : {
+              "few" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%d непрочитаних статей"
+                }
+              },
+              "many" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%d непрочитаних статей"
+                }
+              },
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%d непрочитаних статей"
+                }
+              },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -2459,6 +2753,12 @@
         "eu" : {
           "variations" : {
             "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%u artikulu"
+                }
+              },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -2489,6 +2789,12 @@
         "gl" : {
           "variations" : {
             "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%u artigos"
+                }
+              },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -2543,6 +2849,18 @@
         "lt" : {
           "variations" : {
             "plural" : {
+              "few" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%u straipsniai"
+                }
+              },
+              "many" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%u straipsniai"
+                }
+              },
               "one" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -2579,6 +2897,12 @@
         "pt-BR" : {
           "variations" : {
             "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%u artigos"
+                }
+              },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -2657,6 +2981,12 @@
         "tr" : {
           "variations" : {
             "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%u makale"
+                }
+              },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -2669,6 +2999,24 @@
         "uk" : {
           "variations" : {
             "plural" : {
+              "few" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%u статей"
+                }
+              },
+              "many" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%u статей"
+                }
+              },
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%u статей"
+                }
+              },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -2901,6 +3249,18 @@
         "lt" : {
           "variations" : {
             "plural" : {
+              "few" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%u neperskaityta"
+                }
+              },
+              "many" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%u neperskaityta"
+                }
+              },
               "one" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -3039,6 +3399,18 @@
         "uk" : {
           "variations" : {
             "plural" : {
+              "few" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%u непрочитаних"
+                }
+              },
+              "many" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%u непрочитаних"
+                }
+              },
               "one" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -5913,7 +6285,21 @@
       }
     },
     "Continue Anyway" : {
-      "comment" : "Button to continue running Vienna despite an unsuccessful check"
+      "comment" : "Button to continue running Vienna despite an unsuccessful check",
+      "localizations" : {
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fortsæt alligevel"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continuer malgré tout"
+          }
+        }
+      }
     },
     "Copy URL" : {
       "comment" : "Copy URL",
@@ -15566,7 +15952,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Open scripts-map"
+            "value" : "Open scriptsmap"
           }
         },
         "pt-BR" : {
@@ -23082,7 +23468,21 @@
       }
     },
     "Vienna may not work as expected if the database is corrupted. We recommend you quit Vienna and either restore the database (%@) from a backup or attempt a sqlite3 recovery." : {
-      "comment" : "Informative text of an alert"
+      "comment" : "Informative text of an alert",
+      "localizations" : {
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vienna fungerer måske ikke som forventet hvis der er fejl i databasen. Vi anbefaler at du afslutter Vienna og enten gendanner databasen (%@) fra en backup, eller prøver en sqlite3 recovery."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vienna peut ne pas fonctionner correctement lorsque sa base de données est corrompue. Nous recommandons de quitter Vienna et de restaurer la base de données (%@) à partir d'une sauvegarde fiable, ou de tenter une récupération via sqlite3."
+          }
+        }
+      }
     },
     "Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconvenience." : {
       "localizations" : {
@@ -23285,7 +23685,21 @@
       }
     },
     "Vienna's database seems to be corrupted. Would you like to quit Vienna or continue anyway?" : {
-      "comment" : "Title of an alert"
+      "comment" : "Title of an alert",
+      "localizations" : {
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Viennas database ser ud til at være korrupt. Vil du gerne afslutte Vienna eller forsætte alligevel?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La base de données de Vienna semble être corrompue. Voulez-vous quitter l'application ou continuer malgré tout ?"
+          }
+        }
+      }
     },
     "You are already subscribed to that feed" : {
       "comment" : "You are already subscribed to that feed",
