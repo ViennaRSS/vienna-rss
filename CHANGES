@@ -8,6 +8,22 @@ most recent build should be at the top of this file.
 
 Thanks!
 
+3.9.2
+-----
+- Change mechanism preventing Vienna from unexpectedly switching to alphabetical sorting of folders and feeds. This
+  phenomenon might still occur but should be much more unlikely
+- Perform a sanity check of database at launch
+- Do not show warning sign on feeds without articles
+- Fix crash when server sends unusual MIMEType
+- Fix various issues in General Preferences window
+- Fix autolayout issues which could unexpectedly resize the article view or the main window, or hide the enclosure view
+- Fix style change to give immediate visual feedback
+- Improve parsing of RSS content:encoded element
+- For Unified layout, move the tip about the hovered link's URL at the bottom of the view
+- Use String Catalogs (.xcstrings) for most translations
+- Add more translations
+- Update some documentation files
+
 3.9.1
 -----
 - Prevent Vienna from unexpectedly switching to alphabetical sorting of folders and feeds

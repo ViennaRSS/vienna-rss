@@ -1,21 +1,17 @@
 <!DOCTYPE html><head><meta charset="utf-8"/></head><h1>Version Notes</h1>
-<h2>Vienna 3.9.1</h2>
-<p>This version is recommended  to all Vienna users, as it fixes problems reported by users having switched from legacy browser (available in previous versions of Vienna) to Vienna 3.9.0 (which completed the switch to WKWebView).</p>
+<h2>Vienna 3.9.2</h2>
+<p>This version is recommended to all Vienna users. It fixes problems reported by users having switched from legacy browser (available in previous versions of Vienna) to Vienna 3.9.x (which completed the switch to WKWebView).</p>
 <ul>
-<li>Prevent Vienna from unexpectedly switching to alphabetical sorting of folders and feeds</li>
-<li>Prevent feed refreshes from causing unexpected changes of articles selection and interruptions of user’s reading experience</li>
-<li>Fix and standardize the visual feedback for articles being marked as read (especially when the selection is a smart folder)</li>
-<li>Fix use of delete key to delete the current article when the focus is on the article view</li>
-<li>Fix use of up/down keys to navigate to previous/next article when the focus is on the article view</li>
-<li>Fix some issues with cache of folder’s articles</li>
-<li>Fix URL cache management</li>
-<li>Fix small parts of French and Dutch translations</li>
-<li>Add credit to Ricardo Pinho for Portuguese translation</li>
-<li>Build with Xcode 15.4 (macoOS 14.5 SDK)</li>
-<li>Fix Xcode and SwiftLint warnings; prepare to Swift 6</li>
-<li>Use generated asset symbols for designating images and colours</li>
-<li>Update MMTabBarView to v/1.5.3</li>
-<li>Remove unused code</li>
-<li>Improve build process</li>
-<li>Update GitHub Action for macOS 14</li>
+<li>Change mechanism preventing Vienna from unexpectedly switching to alphabetical sorting of folders and feeds. This phenomenon might still occur but should be much more unlikely</li>
+<li>Perform a sanity check of database at launch</li>
+<li>Do not show warning sign on feeds without articles</li>
+<li>Fix crash when server sends unusual MIMEType</li>
+<li>Fix various issues in General Preferences window</li>
+<li>Fix autolayout issues which could unexpectedly resize the article view or the main window, or hide the enclosure view</li>
+<li>Fix style change to give immediate visual feedback</li>
+<li>Improve parsing of RSS content:encoded element</li>
+<li>For Unified layout, move the tip about the hovered link’s URL at the bottom of the view</li>
+<li>Use String Catalogs (.xcstrings) for most translations</li>
+<li>Add more translations</li>
+<li>Update some documentation files</li>
 </ul>
