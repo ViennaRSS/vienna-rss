@@ -156,16 +156,14 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 {
     [self.rootNode removeChildren];
     if (![self loadTree:[[Database sharedManager] arrayOfFolders:VNAFolderTypeRoot] rootNode:self.rootNode]) {
-        // recover from problems by putting missing folders under root node
-        NSArray *allFolders = [[Database sharedManager] arrayOfAllFolders];  // all RSS and group folders
-        NSArray *installedFolders = [self folders:0];  // RSS folders already present
-        for (Folder *folder in allFolders) {
-            if ((folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader)
-                && ![installedFolders containsObject:folder])
-            {
-                (void)[[TreeNode alloc] init:self.rootNode atIndex:-1 folder:folder canHaveChildren:NO];
-            }
-        }
+        // recover from problems by switching back to alphabetical auto sort of folders…
+        Preferences *prefs = [Preferences standardPreferences];
+        NSInteger selectedSortMethod = prefs.foldersTreeSortMethod;
+        prefs.foldersTreeSortMethod = VNAFolderSortByName;
+        [self.rootNode removeChildren];
+        [self loadTree:[[Database sharedManager] arrayOfFolders:VNAFolderTypeRoot] rootNode:self.rootNode];
+        // then restore user choice regarding sort method
+        prefs.foldersTreeSortMethod = selectedSortMethod;
     }
     [self.outlineView reloadData];
     [self unarchiveState:stateArray];
@@ -255,13 +253,32 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 		NSArray * listOfFolderIds = [listOfFolders valueForKey:@"itemId"];
 		NSUInteger index = 0;
 		NSInteger nextChildId = (node == self.rootNode) ? [Database sharedManager].firstFolderId : node.folder.firstChildId;
+		NSInteger predecessorId = 0;
 		while (nextChildId > 0) {
+			if ([self.rootNode nodeFromID:nextChildId]) { // already present in our tree ?
+				NSLog(@"Duplicate child with id %ld asked under folder with id %ld", (long)nextChildId, (long)node.nodeId);
+				return NO;
+			}
 			NSUInteger  listIndex = [listOfFolderIds indexOfObject:@(nextChildId)];
 			if (listIndex == NSNotFound) {
 				NSLog(@"Cannot find child with id %ld for folder with id %ld", (long)nextChildId, (long)node.nodeId);
-				return NO;
+				folder = [[Database sharedManager] folderFromID:nextChildId];
+				if (!folder || folder.parentId != node.nodeId) {
+					return NO;
+				}
+				if (predecessorId == 0) {
+					if (![[Database sharedManager] setFirstChild:nextChildId forFolder:node.nodeId]) {
+						return NO;
+					}
+				} else {
+					if (![[Database sharedManager] setNextSibling:nextChildId forFolder:predecessorId]) {
+						return NO;
+					}
+				}
+				NSLog(@"Repositioned folder %@ as child of folder with id %ld", folder, (long)node.nodeId);
+			} else {
+				folder = listOfFolders[listIndex];
 			}
-			folder = listOfFolders[listIndex];
 			NSArray * listOfSubFolders = [[Database sharedManager] arrayOfFolders:nextChildId];
 			NSUInteger count = listOfSubFolders.count;
 			TreeNode * subNode;
@@ -272,6 +289,7 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 					return NO;
 				}
 			}
+			predecessorId = nextChildId;
 			nextChildId = folder.nextSiblingId;
 			++index;
 		}
@@ -915,7 +933,7 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 		NSInteger newPredecessorId = [array[index++] integerValue];
 		Folder * folder = [dbManager folderFromID:folderId];
 		NSInteger oldParentId = folder.parentId;
-		
+
 		TreeNode * node = [self.rootNode nodeFromID:folderId];
 		TreeNode * oldParent = [self.rootNode nodeFromID:oldParentId];
 		NSInteger oldChildIndex = [oldParent indexOfChild:node];
@@ -926,25 +944,22 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 			newPredecessorId = 0;
 		}
 		NSInteger newChildIndex = (newPredecessorId > 0) ? ([newParent indexOfChild:newPredecessor] + 1) : 0;
-        
+
 		if (newParentId == oldParentId) {
 			// With automatic sorting, moving under the same parent is impossible.
-            if (autoSort) {
+			if (autoSort) {
 				continue;
-            }
-			// No need to move if destination is the same as origin.
-            if (newPredecessorId == oldPredecessorId) {
-				continue;
-            }
-			// Adjust the index for the removal of the old child.
-            if (newChildIndex > oldChildIndex) {
-                --newChildIndex;
-            }
-				
-		} else {
-			if (!newParent.canHaveChildren) {
-				[newParent setCanHaveChildren:YES];
 			}
+			// No need to move if destination is the same as origin.
+			if (newPredecessorId == oldPredecessorId) {
+				continue;
+			}
+			// Adjust the index for the removal of the old child.
+			if (newChildIndex > oldChildIndex) {
+				--newChildIndex;
+			}
+
+		} else {
 			if ([dbManager setParent:newParentId forFolder:folderId]) {
 				if (sync && folder.type == VNAFolderTypeOpenReader) {
 					OpenReader * myReader = [OpenReader sharedManager];
@@ -954,14 +969,17 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 					// add new label
 					folderName = [dbManager folderFromID:newParentId].name;
 					if (folderName) {
-					    [myReader setFolderLabel:folderName forFeed:folder.remoteId set:TRUE];
+						[myReader setFolderLabel:folderName forFeed:folder.remoteId set:TRUE];
 					}
 				}
 			} else {
 				continue;
 			}
+			if (!newParent.canHaveChildren) {
+				[newParent setCanHaveChildren:YES];
+			}
 		}
-		
+
 		if (!autoSort) {
 			if (oldPredecessorId > 0) {
 				if (![dbManager setNextSibling:folder.nextSiblingId forFolder:oldPredecessorId]) {
@@ -972,43 +990,41 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 					continue;
 				}
 			}
-		}
-		
-		[oldParent removeChild:node andChildren:NO];
-		[newParent addChild:node atIndex:newChildIndex];
-		
-		// Put at beginning of undoArray in order to undo moves in reverse order.
-		[undoArray insertObject:@(folderId) atIndex:0u];
-		[undoArray insertObject:@(oldParentId) atIndex:1u];
-		[undoArray insertObject:@(oldPredecessorId) atIndex:2u];
-		
-		if (!autoSort) {
 			if (newPredecessorId > 0) {
 				if (![dbManager setNextSibling:[dbManager folderFromID:newPredecessorId].nextSiblingId
-                                     forFolder:folderId]) {
+									 forFolder:folderId]) {
 					continue;
-                }
+				}
 				[dbManager setNextSibling:folderId forFolder:newPredecessorId];
 			} else {
-				NSInteger oldFirstChildId = (newParent == self.rootNode) ? dbManager.firstFolderId : newParent.folder.firstChildId;
+				NSInteger oldFirstChildId = (newParent == self.rootNode) ? dbManager.firstFolderId
+																		 : newParent.folder.firstChildId;
 				if (![dbManager setNextSibling:oldFirstChildId forFolder:folderId]) {
 					continue;
 				}
 				[dbManager setFirstChild:folderId forFolder:newParentId];
 			}
 		}
+
+		[oldParent removeChild:node andChildren:NO];
+		[newParent addChild:node atIndex:newChildIndex];
+
+		// Put at beginning of undoArray in order to undo moves in reverse order.
+		[undoArray insertObject:@(folderId) atIndex:0u];
+		[undoArray insertObject:@(oldParentId) atIndex:1u];
+		[undoArray insertObject:@(oldPredecessorId) atIndex:2u];
 	}
-	
+
 	// If undo array is empty, then nothing has been moved.
 	if (undoArray.count == 0u) {
 		return NO;
 	}
-	
+
 	// Set up to undo this action
 	NSUndoManager * undoManager = NSApp.mainWindow.undoManager;
 	[undoManager registerUndoWithTarget:self selector:@selector(moveFoldersUndo:) object:undoArray];
 	[undoManager setActionName:NSLocalizedString(@"Move Folders", nil)];
-	
+
 	// Make the outline control reload its data
 	[self.outlineView reloadData];
 
@@ -1022,7 +1038,7 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 			}
 		}
 	}
-	
+
 	// Properly set selection back to the original items. This has to be done after the
 	// refresh so that rowForItem returns the new positions.
 	NSMutableIndexSet * selIndexSet = [[NSMutableIndexSet alloc] init];
@@ -1036,7 +1052,7 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 	[self.outlineView scrollRowToVisible:selRowIndex];
 	[self.outlineView selectRowIndexes:selIndexSet byExtendingSelection:NO];
 	return YES;
-}
+} // moveFolders
 
 /* setSearch
  * Set string to filter nodes by name, description, url
