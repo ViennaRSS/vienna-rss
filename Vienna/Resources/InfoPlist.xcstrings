@@ -15,6 +15,7 @@
     },
     "NSAppleEventsUsageDescription" : {
       "comment" : "A message that tells the user why Vienna is requesting the ability to send Apple events.",
+      "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
           "stringUnit" : {
