@@ -1984,6 +1984,7 @@
 				F6A7DEA61E471E3C0017BE5E /* nl */,
 				F6A7DEAD1E471E450017BE5E /* zh-Hant */,
 			);
+			indentWidth = 2;
 			name = advanced.html;
 			sourceTree = "<group>";
 		};
@@ -1999,6 +2000,7 @@
 				F6A7DE931E471E1D0017BE5E /* nl */,
 				F6A7DE9A1E471E280017BE5E /* zh-Hant */,
 			);
+			indentWidth = 2;
 			name = faq.html;
 			sourceTree = "<group>";
 		};
@@ -2014,6 +2016,7 @@
 				F6A7DE6D1E471DCE0017BE5E /* nl */,
 				F6A7DE741E471DDA0017BE5E /* zh-Hant */,
 			);
+			indentWidth = 2;
 			name = intro.html;
 			sourceTree = "<group>";
 		};
@@ -2029,6 +2032,7 @@
 				F6A7DE801E471DFB0017BE5E /* nl */,
 				F6A7DE871E471E040017BE5E /* zh-Hant */,
 			);
+			indentWidth = 2;
 			name = keyboard.html;
 			sourceTree = "<group>";
 		};
@@ -2044,6 +2048,7 @@
 				F6A7DE5A1E471D7E0017BE5E /* nl */,
 				F6A7DE611E471D8C0017BE5E /* zh-Hant */,
 			);
+			indentWidth = 2;
 			name = Vienna.html;
 			sourceTree = "<group>";
 		};
