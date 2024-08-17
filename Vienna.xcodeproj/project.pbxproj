@@ -182,6 +182,7 @@
 		F65D6D711E74619E00A30974 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4398241E1666B3DB00FFE219 /* Credits.rtf */; };
 		F65F2314294E4B5200605F06 /* SeparatorPredicateEditorRowTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65F2313294E4B5200605F06 /* SeparatorPredicateEditorRowTemplate.swift */; };
 		F672876824A2D2170043432F /* UpdatePreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F672876724A2D2170043432F /* UpdatePreferencesViewController.m */; };
+		F6786BB72C709880005B985B /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = F6786BB62C709880005B985B /* InfoPlist.xcstrings */; };
 		F67E7828285DDAB200D1CECE /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67E7827285DDAB100D1CECE /* Toolbar.swift */; };
 		F6832F631F10C4C9007920D4 /* ExportAccessoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6832F651F10C4C9007920D4 /* ExportAccessoryViewController.xib */; };
 		F6832F681F10F5DA007920D4 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6832F661F10F5DA007920D4 /* MainWindowController.xib */; };
@@ -543,6 +544,7 @@
 		F66A7E542A019006002F5D5E /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Predicates.strings; sourceTree = "<group>"; };
 		F672876624A2D20A0043432F /* UpdatePreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdatePreferencesViewController.h; sourceTree = "<group>"; };
 		F672876724A2D2170043432F /* UpdatePreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdatePreferencesViewController.m; sourceTree = "<group>"; };
+		F6786BB62C709880005B985B /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		F67E7827285DDAB100D1CECE /* Toolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Toolbar.swift; sourceTree = "<group>"; };
 		F6832F641F10C4C9007920D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ExportAccessoryViewController.xib; sourceTree = "<group>"; };
 		F6832F671F10F5DA007920D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainWindowController.xib; sourceTree = "<group>"; };
@@ -968,6 +970,7 @@
 		F6A7DE291E4713220017BE5E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F6786BB62C709880005B985B /* InfoPlist.xcstrings */,
 				F6A7DE321E47138B0017BE5E /* Vienna.html */,
 				F6A7DE2E1E47138B0017BE5E /* intro.html */,
 				F6A7DE301E47138B0017BE5E /* keyboard.html */,
@@ -1523,6 +1526,7 @@
 				F6A7DE371E47138B0017BE5E /* keyboard.html in Resources */,
 				F6A7DE351E47138B0017BE5E /* faq.html in Resources */,
 				F6A7DE341E47138B0017BE5E /* advanced.html in Resources */,
+				F6786BB72C709880005B985B /* InfoPlist.xcstrings in Resources */,
 				F6A7DE4A1E4717970017BE5E /* shared in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
