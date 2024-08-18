@@ -1508,7 +1508,6 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
     // Extract the article data from the dictionary.
     NSString * articleBody = article.body;
     NSString * articleTitle = article.title;
-    NSDate * lastUpdate = article.lastUpdate;
     NSString * articleLink = article.link.vna_trimmed;
     NSString * userName = article.author.vna_trimmed;
     NSString * articleEnclosure = article.enclosure.vna_trimmed;
@@ -1520,13 +1519,15 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
     BOOL deleted_flag = article.deleted;
     BOOL hasenclosure_flag = article.hasEnclosure;
 
+    NSDate *currentDate = [NSDate date];
+
     // We set the publication date ourselves if it is not contained in the feed, and only once when the article is created
-    article.publicationDate = article.publicationDate == nil ? [NSDate date] : article.publicationDate;
+    NSDate *publicationDate = article.publicationDate ? article.publicationDate : currentDate;
+    article.publicationDate = publicationDate;
+
+    NSDate * lastUpdate = article.lastUpdate ? article.lastUpdate : currentDate;
 
     // Set some defaults
-    if (lastUpdate == nil) {
-        lastUpdate = [NSDate date];
-    }
     if (userName == nil) {
         userName = @"";
     }
@@ -1538,8 +1539,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 
     // Dates are stored as time intervals
     NSTimeInterval lastUpdateIntervalSince1970 = lastUpdate.timeIntervalSince1970;
-    NSTimeInterval publicationIntervalSince1970 = 
-        (article.publicationDate == nil ? [NSDate date] : article.publicationDate).timeIntervalSince1970;
+    NSTimeInterval publicationIntervalSince1970 = publicationDate.timeIntervalSince1970;
 
     __block BOOL success;
     [queue inTransaction:^(FMDatabase *db,  BOOL *rollback) {
@@ -1594,17 +1594,17 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
     // Extract the data from the new state of article
     NSString * articleBody = article.body;
     NSString * articleTitle = article.title;
-    NSDate * lastUpdate = article.lastUpdate;
     NSString * articleLink = article.link.vna_trimmed;
     NSString * userName = article.author.vna_trimmed;
     NSString * articleGuid = article.guid;
     NSInteger parentId = article.parentId;
     BOOL revised_flag = article.revised;
 
+    //keep last update date the same if not set in the current version of the article
+    NSDate * lastUpdate = article.lastUpdate ? article.lastUpdate : existingArticle.lastUpdate;
+    //we do not update the publication date ever after inserting the article into the DB
+
     // Set some defaults
-    if (lastUpdate == nil) {
-        lastUpdate = existingArticle.lastUpdate;
-    }
     if (userName == nil) {
         userName = @"";
     }
