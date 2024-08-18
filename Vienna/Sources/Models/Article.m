@@ -51,11 +51,9 @@ NSString * const MA_Field_HasEnclosure = @"HasEnclosure";
 {
     self = [super init];
     if (self) {
+        _guid = [guid copy];
+        _folderId = -1;
         articleData = [[NSMutableDictionary alloc] init];
-        // Use the setters to populate the articleData dictionary.
-        self.guid = guid;
-        self.folderId = -1;
-        self.parentId = 0;
     }
     return self;
 }
@@ -154,11 +152,8 @@ NSString * const MA_Field_HasEnclosure = @"HasEnclosure";
 
 /* Accessor functions
  */
--(NSInteger)folderId			{ return [articleData[MA_Field_Folder] integerValue]; }
 -(NSString *)author				{ return articleData[MA_Field_Author]; }
 -(NSString *)link				{ return articleData[MA_Field_Link]; }
--(NSString *)guid				{ return articleData[MA_Field_GUID]; }
--(NSInteger)parentId			{ return [articleData[MA_Field_Parent] integerValue]; }
 -(NSString *)title				{ return articleData[MA_Field_Subject]; }
 -(NSString *)summary
 {
@@ -182,27 +177,6 @@ NSString * const MA_Field_HasEnclosure = @"HasEnclosure";
 -(Folder *)containingFolder
 {
     return [[Database sharedManager] folderFromID:self.folderId];
-}
-
-/* setFolderId
- */
--(void)setFolderId:(NSInteger)newFolderId
-{
-    articleData[MA_Field_Folder] = @(newFolderId);
-}
-
-/* setGuid
- */
--(void)setGuid:(NSString *)newGuid
-{
-    articleData[MA_Field_GUID] = [newGuid copy];
-}
-
-/* setParentId
- */
--(void)setParentId:(NSInteger)newParentId
-{
-    articleData[MA_Field_Parent] = @(newParentId);
 }
 
 /* description
