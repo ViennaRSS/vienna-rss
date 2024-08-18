@@ -1521,11 +1521,25 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 
     NSDate *currentDate = [NSDate date];
 
-    // We set the publication date ourselves if it is not contained in the feed, and only once when the article is created
-    NSDate *publicationDate = article.publicationDate ? article.publicationDate : currentDate;
-    article.publicationDate = publicationDate;
+    // use the given publication date if it is contained in the feed, or the earliest date available
+    NSDate * publicationDate = article.publicationDate;
+    if (!publicationDate) {
+        publicationDate = article.lastUpdate && [article.lastUpdate isLessThan:currentDate]
+                                   ? article.lastUpdate 
+                                   : currentDate;
+        article.publicationDate = publicationDate;
+    }
 
-    NSDate * lastUpdate = article.lastUpdate ? article.lastUpdate : currentDate;
+    // if a last update date is not provided, use our publication date
+    NSDate * lastUpdate = article.lastUpdate;
+    if (!lastUpdate) {
+        lastUpdate = publicationDate;
+        article.lastUpdate = lastUpdate;
+    }
+
+    // Dates are stored as time intervals
+    NSTimeInterval lastUpdateIntervalSince1970 = lastUpdate.timeIntervalSince1970;
+    NSTimeInterval publicationIntervalSince1970 = publicationDate.timeIntervalSince1970;
 
     // Set some defaults
     if (userName == nil) {
@@ -1536,10 +1550,6 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
     if (articleTitle == nil || articleTitle.vna_isBlank) {
         articleTitle = [NSString vna_stringByRemovingHTML:articleBody].vna_firstNonBlankLine;
     }
-
-    // Dates are stored as time intervals
-    NSTimeInterval lastUpdateIntervalSince1970 = lastUpdate.timeIntervalSince1970;
-    NSTimeInterval publicationIntervalSince1970 = publicationDate.timeIntervalSince1970;
 
     __block BOOL success;
     [queue inTransaction:^(FMDatabase *db,  BOOL *rollback) {
@@ -1600,9 +1610,20 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
     NSInteger parentId = article.parentId;
     BOOL revised_flag = article.revised;
 
-    //keep last update date the same if not set in the current version of the article
-    NSDate * lastUpdate = article.lastUpdate ? article.lastUpdate : existingArticle.lastUpdate;
-    //we do not update the publication date ever after inserting the article into the DB
+    // keep last update date the same if not set in the current version of the article
+    NSDate * lastUpdate = article.lastUpdate && [article.lastUpdate isGreaterThan:existingArticle.lastUpdate]
+                            ? article.lastUpdate
+                            : existingArticle.lastUpdate;
+
+    // we never change the publication date, unless the date provided in the feed is prior to it
+    NSDate * publicationDate = existingArticle.publicationDate;
+    if (article.publicationDate && [article.publicationDate isLessThan:existingArticle.publicationDate]) {
+        publicationDate = article.publicationDate;
+    }
+
+    // Dates are stored as time intervals
+    NSTimeInterval lastUpdateIntervalSince1970 = lastUpdate.timeIntervalSince1970;
+    NSTimeInterval publicationIntervalSince1970 = publicationDate.timeIntervalSince1970;
 
     // Set some defaults
     if (userName == nil) {
@@ -1613,9 +1634,6 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
     if (articleTitle == nil || articleTitle.vna_isBlank) {
         articleTitle = [NSString vna_stringByRemovingHTML:articleBody].vna_firstNonBlankLine;
     }
-
-    // Dates are stored as time intervals
-    NSTimeInterval lastUpdateIntervalSince1970 = lastUpdate.timeIntervalSince1970;
 
     // The article is revised if either the title or the body has changed.
 
@@ -1649,12 +1667,13 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 
         __block BOOL success;
         [queue inDatabase:^(FMDatabase *db) {
-            success = [db executeUpdate:@"UPDATE messages SET parent_id=?, sender=?, link=?, date=?, "
+            success = [db executeUpdate:@"UPDATE messages SET parent_id=?, sender=?, link=?, date=?, createddate=?, "
              @"read_flag=0, title=?, text=?, revised_flag=? WHERE folder_id=? AND message_id=?",
              @(parentId),
              userName,
              articleLink,
              @(lastUpdateIntervalSince1970),
+             @(publicationIntervalSince1970),
              articleTitle,
              articleBody,
              @(revised_flag),

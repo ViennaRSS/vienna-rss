@@ -764,6 +764,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 
         for (id<VNAFeedItem> newsItem in newFeed.items) {
             NSDate * articleDate = newsItem.modificationDate;
+            NSDate * publicationDate = newsItem.publicationDate;
 
             NSString * articleGuid = newsItem.guid;
 
@@ -838,6 +839,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
             }
             article.link = articleLink;
             article.lastUpdate = articleDate;
+            article.publicationDate = publicationDate;
             NSString * enclosureLink = newsItem.enclosure;
             if ([enclosureLink isNotEqualTo:@""] && ![enclosureLink hasPrefix:@"http:"] && ![enclosureLink hasPrefix:@"https:"]) {
                 enclosureLink = [NSURL URLWithString:enclosureLink relativeToURL:url].absoluteString;

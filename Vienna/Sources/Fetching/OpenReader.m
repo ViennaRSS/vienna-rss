@@ -611,21 +611,15 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                     article.link = refreshedFolder.feedURL;
                 }
 
-                NSDate *currentDate = [NSDate date];
-
                 NSString *publishedField = newsItem[@"published"];
-                double publishedDate = [publishedField doubleValue];
-                NSDate *publicationDate = [NSDate dateWithTimeIntervalSince1970:publishedDate];
+                if (publishedField) {
+                    article.publicationDate = [NSDate dateWithTimeIntervalSince1970:[publishedField doubleValue]];
+                }
 
                 NSString * updatedField = newsItem[@"updated"];
-                //if we get no update date, use the publication date, if that does not exist either, use the current date.
-                NSDate *lastUpdate = updatedField
-                                        ? [NSDate dateWithTimeIntervalSince1970:[updatedField doubleValue]]
-                                        : (publicationDate ? publicationDate : [NSDate date]);
-
-                //fallback to currentDate for publicationDate; this will not be stored in the db in case of an update
-                article.publicationDate = publicationDate ? publicationDate : currentDate;
-                article.lastUpdate = lastUpdate;
+                if (updatedField) {
+                    article.lastUpdate = [NSDate dateWithTimeIntervalSince1970:[updatedField doubleValue]];
+                }
 
                 if ([newsItem[@"enclosure"] count] != 0) {
                     article.enclosure = newsItem[@"enclosure"][0][@"href"];

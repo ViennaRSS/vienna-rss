@@ -253,14 +253,20 @@
                 }
 
                 // Parse item date
-                if (isArticleElementAtomType && ([articleItemTag isEqualToString:@"modified"] || [articleItemTag isEqualToString:@"created"] || [articleItemTag isEqualToString:@"updated"])) {
+                if (isArticleElementAtomType && ([articleItemTag isEqualToString:@"modified"] || [articleItemTag isEqualToString:@"updated"])) {
                     NSString *dateString = itemChildElement.stringValue;
                     NSDate *newDate = [self dateWithXMLString:dateString];
                     if (newFeedItem.modificationDate == nil || [newDate isGreaterThan:newFeedItem.modificationDate]) {
                         newFeedItem.modificationDate = newDate;
                     }
+                    continue;
+                }
+
+                // Parse item date
+                if (isArticleElementAtomType && ([articleItemTag isEqualToString:@"created"] || [articleItemTag isEqualToString:@"published"])) {
+                    NSString *dateString = itemChildElement.stringValue;
+                    NSDate *newDate = [self dateWithXMLString:dateString];
                     if (newFeedItem.publicationDate == nil || [newDate isLessThan:newFeedItem.publicationDate]) {
-                        //publication date will only be registered once for each article, so later updates don´t matter
                         newFeedItem.publicationDate = newDate;
                     }
                     continue;
