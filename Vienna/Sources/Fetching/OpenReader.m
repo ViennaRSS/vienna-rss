@@ -568,8 +568,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             NSMutableArray *articleArray = [NSMutableArray array];
 
             for (NSDictionary *newsItem in (NSArray *)subscriptionsDict[@"items"]) {
-                NSDate *publicationDate = [NSDate dateWithTimeIntervalSince1970:[newsItem[@"published"] doubleValue]];
-                NSDate *lastUpdate = [NSDate dateWithTimeIntervalSince1970:[newsItem[@"updated"] doubleValue]];
+
                 NSString *articleGuid = newsItem[@"id"];
                 Article *article = [[Article alloc] initWithGuid:articleGuid];
                 article.folderId = refreshedFolder.itemId;
@@ -612,8 +611,21 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                     article.link = refreshedFolder.feedURL;
                 }
 
-                article.publicationDate = publicationDate == nil ? lastUpdate : publicationDate;
-                article.lastUpdate = lastUpdate == nil ? publicationDate : lastUpdate;
+                NSDate *currentDate = [NSDate date];
+
+                NSString *publishedField = newsItem[@"published"];
+                double publishedDate = [publishedField doubleValue];
+                NSDate *publicationDate = [NSDate dateWithTimeIntervalSince1970:publishedDate];
+
+                NSString * updatedField = newsItem[@"updated"];
+                //if we get no update date, use the publication date, if that does not exist either, use the current date.
+                NSDate *lastUpdate = updatedField
+                                        ? [NSDate dateWithTimeIntervalSince1970:[updatedField doubleValue]]
+                                        : (publicationDate ? publicationDate : [NSDate date]);
+
+                //fallback to currentDate for publicationDate; this will not be stored in the db in case of an update
+                article.publicationDate = publicationDate ? publicationDate : currentDate;
+                article.lastUpdate = lastUpdate;
 
                 if ([newsItem[@"enclosure"] count] != 0) {
                     article.enclosure = newsItem[@"enclosure"][0][@"href"];
