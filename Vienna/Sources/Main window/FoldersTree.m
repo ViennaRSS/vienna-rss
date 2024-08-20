@@ -237,6 +237,16 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 {
 	Folder * folder;
 	if ([Preferences standardPreferences].foldersTreeSortMethod != VNAFolderSortManual) {
+		// make sure chaining is coherent…
+		NSInteger siblingsCount = listOfFolders.count;
+		[[Database sharedManager] setFirstChild:((Folder *)listOfFolders[0]).itemId forFolder:node.nodeId];
+		for (NSInteger i=0 ; i < siblingsCount-1 ; i++) {
+			NSInteger current = ((Folder *)listOfFolders[i]).itemId;
+			NSInteger next = ((Folder *)listOfFolders[i+1]).itemId;
+			[[Database sharedManager] setNextSibling:next forFolder:current];
+		}
+		[[Database sharedManager] setNextSibling:0 forFolder:((Folder *)listOfFolders[siblingsCount-1]).itemId];
+		// …then attach the different nodes
 		for (folder in listOfFolders) {
 			NSInteger itemId = folder.itemId;
 			NSArray * listOfSubFolders = [[[Database sharedManager] arrayOfFolders:itemId] sortedArrayUsingSelector:@selector(folderNameCompare:)];
