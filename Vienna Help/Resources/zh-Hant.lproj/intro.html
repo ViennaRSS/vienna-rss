@@ -1,21 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta name="generator" content=
-  "HTML Tidy for HTML5 for Mac OS X version 4.9.35" />
-  <meta http-equiv="Content-Type" content=
-  "text/html; charset=utf-8" />
   <title>Vienna 簡介</title>
-  <link rel="stylesheet" href="../shared/helpstyle.css" type="text/css" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="description" content="Learn how to get started with Vienna." />
+  <link href="../shared/helpstyle.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-  <span><img src="../shared/images/Small-Vienna-Logo.png" alt=
-  "" />&nbsp;&nbsp;</span> <span class="header">Vienna 簡介</span>
-  <p>Vienna 是一套讓您可以在 Mac OS X 環境下，閱讀 RSS 或 Atom
-  檔案訂閱格式的應用程式。這套程式會自動從您所訂閱的站台中取得文章，並且在您的本機電腦中建立一個資料庫，儲存文章資料，讓您可以方便地離線閱讀。這套程式並且提供您以關鍵字或是詞彙搜尋文章、將文章加上旗標標示、以及透過群組檔案夾將相關訂閱頻道組織在一起…等功能。您也可以透過建立智慧型檔案夾，這套程式將會以動態的方式，讓您輕鬆地查閱某些搜尋條件的文章。Vienna
-  內建的網頁瀏覽器，也可以讓您在分頁介面中，直接瀏覽文章的原始網頁。</p>
-  <p>我們將 Vienna
-  設計得簡單好用。我們透過簡潔、毫不凌亂的介面，盡可能放大閱讀文章的版面空間，同時在這樣的介面中，也只需要幾個簡單的指令，就可以完成大部份需要使用的功能。</p>
+  <a id="intro-page" name="intro-page"></a> <span><img src="../shared/images/Small-Vienna-Logo.png" alt="" />&nbsp;&nbsp;</span> <span class="header">Vienna 簡介</span>
+  <p>Vienna 是一套讓您可以在 Mac OS X 環境下，閱讀 RSS 或 Atom 檔案訂閱格式的應用程式。 這套程式會自動從您所訂閱的站台中取得文章，並且在您的本機電腦中建立一個資料庫，儲存文章資料，讓您可以方便地離線閱讀。 這套程式並且提供您以關鍵字或是詞彙搜尋文章、將文章加上旗標標示、以及透過群組檔案夾將相關訂閱頻道組織在一起…等功能。 您也可以透過建立智慧型檔案夾，這套程式將會以動態的方式，讓您輕鬆地查閱某些搜尋條件的文章。 Vienna 內建的網頁瀏覽器，也可以讓您在分頁介面中，直接瀏覽文章的原始網頁。</p>
+  <p>我們將 Vienna 設計得簡單好用。 我們透過簡潔、毫不凌亂的介面，盡可能放大閱讀文章的版面空間，同時在這樣的介面中，也只需要幾個簡單的指令，就可以完成大部份需要使用的功能。</p>
+  <p><b>Getting Started</b></p>
+  <p>If this is the first time that you have used Vienna then it will have created a new database for you and added some sample news subscriptions. So go ahead and press Command+R or choose Refresh All Subscriptions from the File menu to grab the latest articles from those subscriptions.</p>
+  <p>Alternatively, subscribe to your own news feeds. There are various ways to find feeds. When browsing the web, look out for the <img src="../shared/images/rssfeed.gif" alt="RSS feed icon" /> or XML icons indicating that the page has a feed associated with it. Alternatively almost all online blogging services such as LiveJournal or Blogger provide RSS feeds as an alternative to reading the postings online.</p>
+  <p>If you know the user name of a blogger on LiveJournal, Blogger, MSN Spaces or Xanga then Vienna makes it easier to subscribe to their news feed. Start by pressing Command+N or from the File menu, choose the New Subscription command. In the "Create a new RSS subscription" panel, pick the blogging service from the drop down list and enter the user name in the input field below. Then choose Subscribe and Vienna will add the subscription to the folder list. If you are connected to the internet at the time, it will also immediately start collecting articles from the feed.</p>
+  <p>You can also use Vienna in relation with an account in an Open Reader server. Go into Preferences... / Syncing and tick the "Sync with an Open Reader server" checkbox.<br />
+  Beforehand, think about which feeds you prefer reading through Open Reader and which you'll get through direct access. Vienna will avoid creating duplicates between the two categories, but if you have feeds inside Open Reader which Vienna already fetches directly, you will have discrepancies between your reading lists. So, organize your feeds accordingly.<br />
+  You should take into account these elements :</p>
+  <ul>
+    <li>Open Reader feeds can be synchronized across multiple devices/applications supporting it</li>
+    <li>Open Reader does not support feeds requiring username/password</li>
+    <li>Fetching feeds directly avoids the Open Reader service as an intermediary between you and the publishing site; for less "popular" feeds, you'll get articles sooner.</li>
+    <li>Generally, directly fetching feeds from their original website generates less network traffic. When the server signals there is no new articles since last fetch, Vienna avoids an useless download.</li>
+  </ul>
+  <p>Normally you need to manually tell Vienna when to refresh all your subscriptions. However you can opt to ask Vienna to automatically refresh at time intervals. In the General section of the Preferences, pick the desired time interval from the drop down list next to 'Check for new articles'. Vienna needs to be running for it to automatically refresh subscriptions.</p>
+  <p>To read articles, press the Spacebar to skip to the next unread article in any subscription. Each article is marked as read automatically after a short delay. If you prefer to wait until you move to the next unread article before the current one is marked read you can adjust the behaviour in the General tab of the Preferences. To mark an article as unread again, choose the Mark Unread command from the Article menu or simply press the 'R' key.</p>
+  <p>Finally, you can view the article web page or any web page links in an article within Vienna. By default clicking on a web link within Vienna will open the web page in a new tab. Vienna provides a lot of basic web browsing support itself but there may be times when you will prefer to open links in your default web browser. If you prefer to view all web pages outside of Vienna then enable the 'Open links in external browser' option in the General section of the Preferences. However if you prefer to view the current link or page in your external browser, right click on the page and choose the "Open Link in XXX" or "Open Page in XXX" option where XXX will be the name of your default browser.</p>
+  <p>Once you've got comfortable using Vienna, go ahead and explore the various options. You can change the style in which the articles are displayed through the Style drop down list in the View menu. You can find many more custom styles at the <a href="https://www.vienna-rss.com/extras/">Extras</a> page on the Vienna web site along with custom scripts that allow you to integrate Vienna with other applications on your machine. Or experiment with smart folders to organise articles according to criteria based on the contents of each article. For example, you can easily set up a smart folder to group together all articles that mention "Joss Whedon" and "Firefly" to find references to the Firefly cult series or the spin-off movie.</p>
+  <p>If you have any questions about Vienna or run into problems, send an email to <a href="mailto:vienna-rss-help@lists.sourceforge.net">Vienna Help</a> or head over to the <a href="https://github.com/ViennaRSS/vienna-rss/discussions">Support forum</a>.</p>
 </body>
 </html>

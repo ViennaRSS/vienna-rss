@@ -1,0 +1,24 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "HPDBookTitle" : {
+      "comment" : "This title will be shown in the Help Viewer app.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vienna Help"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aide Vienna"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
