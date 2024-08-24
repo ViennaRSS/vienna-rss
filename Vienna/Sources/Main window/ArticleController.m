@@ -292,9 +292,9 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 		NSUInteger index = [[descriptors valueForKey:@"key"] indexOfObject:[specifier valueForKey:@"key"]];
 
 		if (index == NSNotFound) {
-			// Date should be sorted in descending order.
-			// TODO: Add a key to articleSortSpecifiers for a default sort order
-			BOOL ascending = [columnName isEqualToString:MA_Field_PublicationDate] ? NO : YES;
+			// Dates should be sorted initially in descending order
+			// MIGHT DO : Add a key to articleSortSpecifiers for a default sort order
+			BOOL ascending = [columnName isEqualToString:MA_Field_PublicationDate] || [columnName isEqualToString:MA_Field_LastUpdate] ? NO : YES;
 			sortDescriptor = [[NSSortDescriptor alloc] initWithKey:[specifier valueForKey:@"key"] ascending:ascending selector:NSSelectorFromString([specifier valueForKey:@"selector"])];
 		} else {
 			sortDescriptor = descriptors[index];

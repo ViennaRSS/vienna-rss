@@ -594,7 +594,6 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 {
 	NSString * sortColumnIdentifier = self.controller.articleController.sortColumnIdentifier;
 
-    // FIXME: Sort out the order of initialization
     if (!sortColumnIdentifier) {
         sortColumnIdentifier = [Preferences.standardPreferences stringForKey:MAPref_SortColumn];
     }
