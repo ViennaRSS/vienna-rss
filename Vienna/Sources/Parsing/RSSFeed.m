@@ -260,8 +260,19 @@
 
                 // Parse item date
                 if ((isRSSElement && [articleItemTag isEqualToString:@"pubDate"]) || ([itemChildElement.prefix isEqualToString:self.dcPrefix] && [articleItemTag isEqualToString:@"date"])) {
-                    NSString *dateString = itemChildElement.stringValue;
-                    newFeedItem.modificationDate = [self dateWithXMLString:dateString];
+                    NSDate *newDate = [self dateWithXMLString:itemChildElement.stringValue];
+                    if (newFeedItem.publicationDate == nil || [newDate isLessThan:newFeedItem.publicationDate]) {
+                        newFeedItem.publicationDate = newDate;
+                    }
+                    continue;
+                }
+
+                // Parse item modification date
+                if ([itemChildElement.prefix isEqualToString:self.dcPrefix] && [articleItemTag isEqualToString:@"modified"]) {
+                    NSDate *newDate = [self dateWithXMLString:itemChildElement.stringValue];
+                    if (newFeedItem.modificationDate == nil || [newDate isGreaterThan:newFeedItem.modificationDate]) {
+                        newFeedItem.modificationDate = newDate;
+                    }
                     continue;
                 }
 
