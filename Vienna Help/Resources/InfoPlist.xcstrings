@@ -16,6 +16,12 @@
             "state" : "translated",
             "value" : "Aide Vienna"
           }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vienna hjälp"
+          }
         }
       }
     }

@@ -76,6 +76,12 @@
             "value" : "Documento OPML"
           }
         },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Документ OPML"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
