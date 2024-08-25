@@ -437,6 +437,12 @@
             "value" : "Mantenha a tecla Opção premida para adicionar regras encaixadas."
           }
         },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Удерживайте клавишу Опции, чтобы добавить вложенные правила."
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",

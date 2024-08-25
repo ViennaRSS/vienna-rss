@@ -3886,6 +3886,12 @@
             "value" : "Adicionar à lista de leitura do Safari"
           }
         },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добавьте пояснительный лист Safari"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6293,10 +6299,28 @@
             "value" : "Fortsæt alligevel"
           }
         },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trotzdem fortfahren"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Continuer malgré tout"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Продолжить в любом случае"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fortsätt ändå"
           }
         }
       }
@@ -8867,6 +8891,12 @@
             "value" : "Enviar ligação deste artigo ou página por correio"
           }
         },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Электронная почта со ссылкой на текущий артикул или веб-сайт"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9707,6 +9737,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fout tijdens het parsen van deze feed"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ошибка анализа данных в ленте"
           }
         },
         "sv" : {
@@ -18792,6 +18828,12 @@
             "value" : "Lista de leitura do Safari"
           }
         },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пояснительный лист Safari"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -18837,6 +18879,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Procurar"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поиск"
           }
         },
         "sv" : {
@@ -23476,10 +23524,28 @@
             "value" : "Vienna fungerer måske ikke som forventet hvis der er fejl i databasen. Vi anbefaler at du afslutter Vienna og enten gendanner databasen (%@) fra en backup, eller prøver en sqlite3 recovery."
           }
         },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Möglicherweise funktioniert Vienna nicht wie erwartet, wenn die Datenbank beschädigt ist. Wir empfehlen, Vienna zu schließen und entweder die Datenbank (%@) aus einem Backup wiederherzustellen oder eine SQLite3 Wiederherstellung zu versuchen."
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vienna peut ne pas fonctionner correctement lorsque sa base de données est corrompue. Nous recommandons de quitter Vienna et de restaurer la base de données (%@) à partir d'une sauvegarde fiable, ou de tenter une récupération via sqlite3."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vienna может не работать, если база данных повреждена. Мы рекомендуем вам выйти из Vienna и восстановить базу данных (%@) из последнего сохранения или попытаться сделать sqlite3 восстановление."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vienna kanske inte fungerar som väntat om databasen är korrupt. Vi rekommenderar att du avslutar Vienna och antingen återställer databasen (%@) från backup eller provar en sqlite3 recover."
           }
         }
       }
@@ -23693,10 +23759,28 @@
             "value" : "Viennas database ser ud til at være korrupt. Vil du gerne afslutte Vienna eller forsætte alligevel?"
           }
         },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Viennas Datenbank scheint beschädigt zu sein. Möchtest du Vienna schließen oder trotzdem fortfahren?"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "La base de données de Vienna semble être corrompue. Voulez-vous quitter l'application ou continuer malgré tout ?"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Похоже, база данных Vienna повреждена. Хотите ли выйти из Vienna или продолжить в любом случае?"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vienna's databas verkar vara korrupt. Vill du avsluta Vienna eller fortsätta iallafall?"
           }
         }
       }

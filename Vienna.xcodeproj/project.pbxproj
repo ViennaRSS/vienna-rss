@@ -583,6 +583,7 @@
 		F6A7DE551E471D700017BE5E /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = fr; path = fr.lproj/Vienna.html; sourceTree = "<group>"; };
 		F6A7DE571E471D790017BE5E /* it */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = it; path = it.lproj/Vienna.html; sourceTree = "<group>"; };
 		F6A7DE5A1E471D7E0017BE5E /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = nl; path = nl.lproj/Vienna.html; sourceTree = "<group>"; };
+		F6A7DE5E1E471D870017BE5E /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = sv; path = sv.lproj/Vienna.html; sourceTree = "<group>"; };
 		F6A7DE611E471D8C0017BE5E /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hant"; path = "zh-Hant.lproj/Vienna.html"; sourceTree = "<group>"; };
 		F6A7DE641E471D990017BE5E /* da */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = da; path = da.lproj/intro.html; sourceTree = "<group>"; };
 		F6A7DE651E471D9B0017BE5E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = de; path = de.lproj/intro.html; sourceTree = "<group>"; };
@@ -590,6 +591,7 @@
 		F6A7DE681E471DA00017BE5E /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = fr; path = fr.lproj/intro.html; sourceTree = "<group>"; };
 		F6A7DE6A1E471DA40017BE5E /* it */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = it; path = it.lproj/intro.html; sourceTree = "<group>"; };
 		F6A7DE6D1E471DCE0017BE5E /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = nl; path = nl.lproj/intro.html; sourceTree = "<group>"; };
+		F6A7DE711E471DD50017BE5E /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = sv; path = sv.lproj/intro.html; sourceTree = "<group>"; };
 		F6A7DE741E471DDA0017BE5E /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hant"; path = "zh-Hant.lproj/intro.html"; sourceTree = "<group>"; };
 		F6A7DE771E471DE70017BE5E /* da */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = da; path = da.lproj/keyboard.html; sourceTree = "<group>"; };
 		F6A7DE781E471DE80017BE5E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = de; path = de.lproj/keyboard.html; sourceTree = "<group>"; };
@@ -597,6 +599,7 @@
 		F6A7DE7B1E471DED0017BE5E /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = fr; path = fr.lproj/keyboard.html; sourceTree = "<group>"; };
 		F6A7DE7D1E471DF00017BE5E /* it */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = it; path = it.lproj/keyboard.html; sourceTree = "<group>"; };
 		F6A7DE801E471DFB0017BE5E /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = nl; path = nl.lproj/keyboard.html; sourceTree = "<group>"; };
+		F6A7DE841E471E000017BE5E /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = sv; path = sv.lproj/keyboard.html; sourceTree = "<group>"; };
 		F6A7DE871E471E040017BE5E /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hant"; path = "zh-Hant.lproj/keyboard.html"; sourceTree = "<group>"; };
 		F6A7DE8A1E471E0B0017BE5E /* da */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = da; path = da.lproj/faq.html; sourceTree = "<group>"; };
 		F6A7DE8B1E471E0D0017BE5E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = de; path = de.lproj/faq.html; sourceTree = "<group>"; };
@@ -604,6 +607,7 @@
 		F6A7DE8E1E471E130017BE5E /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = fr; path = fr.lproj/faq.html; sourceTree = "<group>"; };
 		F6A7DE901E471E180017BE5E /* it */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = it; path = it.lproj/faq.html; sourceTree = "<group>"; };
 		F6A7DE931E471E1D0017BE5E /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = nl; path = nl.lproj/faq.html; sourceTree = "<group>"; };
+		F6A7DE971E471E230017BE5E /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = sv; path = sv.lproj/faq.html; sourceTree = "<group>"; };
 		F6A7DE9A1E471E280017BE5E /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hant"; path = "zh-Hant.lproj/faq.html"; sourceTree = "<group>"; };
 		F6A7DE9D1E471E2F0017BE5E /* da */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = da; path = da.lproj/advanced.html; sourceTree = "<group>"; };
 		F6A7DE9E1E471E310017BE5E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = de; path = de.lproj/advanced.html; sourceTree = "<group>"; };
@@ -611,6 +615,7 @@
 		F6A7DEA11E471E350017BE5E /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = fr; path = fr.lproj/advanced.html; sourceTree = "<group>"; };
 		F6A7DEA31E471E380017BE5E /* it */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = it; path = it.lproj/advanced.html; sourceTree = "<group>"; };
 		F6A7DEA61E471E3C0017BE5E /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = nl; path = nl.lproj/advanced.html; sourceTree = "<group>"; };
+		F6A7DEAA1E471E410017BE5E /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = sv; path = sv.lproj/advanced.html; sourceTree = "<group>"; };
 		F6A7DEAD1E471E450017BE5E /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hant"; path = "zh-Hant.lproj/advanced.html"; sourceTree = "<group>"; };
 		F6AC41AB25A4FAF6007DED7B /* FeedDiscovererTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDiscovererTests.swift; sourceTree = "<group>"; };
 		F6B059DF2961D0A000F6E31B /* JSONFeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONFeed.swift; sourceTree = "<group>"; };
@@ -1987,6 +1992,7 @@
 				F6A7DEA31E471E380017BE5E /* it */,
 				F6A7DEA61E471E3C0017BE5E /* nl */,
 				F6A7DEAD1E471E450017BE5E /* zh-Hant */,
+				F6A7DEAA1E471E410017BE5E /* sv */,
 			);
 			indentWidth = 2;
 			name = advanced.html;
@@ -2003,6 +2009,7 @@
 				F6A7DE901E471E180017BE5E /* it */,
 				F6A7DE931E471E1D0017BE5E /* nl */,
 				F6A7DE9A1E471E280017BE5E /* zh-Hant */,
+				F6A7DE971E471E230017BE5E /* sv */,
 			);
 			indentWidth = 2;
 			name = faq.html;
@@ -2019,6 +2026,7 @@
 				F6A7DE6A1E471DA40017BE5E /* it */,
 				F6A7DE6D1E471DCE0017BE5E /* nl */,
 				F6A7DE741E471DDA0017BE5E /* zh-Hant */,
+				F6A7DE711E471DD50017BE5E /* sv */,
 			);
 			indentWidth = 2;
 			name = intro.html;
@@ -2035,6 +2043,7 @@
 				F6A7DE7D1E471DF00017BE5E /* it */,
 				F6A7DE801E471DFB0017BE5E /* nl */,
 				F6A7DE871E471E040017BE5E /* zh-Hant */,
+				F6A7DE841E471E000017BE5E /* sv */,
 			);
 			indentWidth = 2;
 			name = keyboard.html;
@@ -2051,6 +2060,7 @@
 				F6A7DE571E471D790017BE5E /* it */,
 				F6A7DE5A1E471D7E0017BE5E /* nl */,
 				F6A7DE611E471D8C0017BE5E /* zh-Hant */,
+				F6A7DE5E1E471D870017BE5E /* sv */,
 			);
 			indentWidth = 2;
 			name = Vienna.html;
