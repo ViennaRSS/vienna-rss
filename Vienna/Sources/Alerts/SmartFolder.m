@@ -172,11 +172,14 @@ static NSNibName const VNASmartFolderNibName = @"SearchFolder";
 
     [rowTemplates addObject:[VNASeparatorPredicateEditorRowTemplate new]];
 
+
+    NSArray *dateLeftExpressions = @[
+        [NSExpression expressionForConstantValue:MA_Field_LastUpdate],
+        [NSExpression expressionForConstantValue:MA_Field_PublicationDate]];
+
     // date < / > days / weeks / months / years old
     NSPredicateEditorRowTemplate *dateCompareTemplate = [[VNADateWithUnitPredicateEditorRowTemplate alloc] 
-                                                         initWithLeftExpressions:@[
-                                                            [NSExpression expressionForConstantValue:MA_Field_LastUpdate],
-                                                            [NSExpression expressionForConstantValue:MA_Field_PublicationDate]]];
+                                                         initWithLeftExpressions:dateLeftExpressions];
     [rowTemplates addObject:dateCompareTemplate];
 
     // date = / < / <= today / yesterday / lastWeek
@@ -189,9 +192,7 @@ static NSNibName const VNASmartFolderNibName = @"SearchFolder";
         @(NSLessThanOrEqualToPredicateOperatorType),
     ];
     NSPredicateEditorRowTemplate *todayTemplate = [[NSPredicateEditorRowTemplate alloc]
-                                                   initWithLeftExpressions:@[
-                                                      [NSExpression expressionForConstantValue:MA_Field_LastUpdate],
-                                                      [NSExpression expressionForConstantValue:MA_Field_PublicationDate]]
+                                                  initWithLeftExpressions:dateLeftExpressions
                                                   rightExpressions:todayRightExpressions
                                                   modifier:NSDirectPredicateModifier
                                                   operators:todayOperators
@@ -209,9 +210,7 @@ static NSNibName const VNASmartFolderNibName = @"SearchFolder";
         @(NSGreaterThanOrEqualToPredicateOperatorType)
     ];
     NSPredicateEditorRowTemplate *yesterdayTemplate = [[NSPredicateEditorRowTemplate alloc]
-                                                       initWithLeftExpressions:@[
-                                                           [NSExpression expressionForConstantValue:MA_Field_LastUpdate],
-                                                           [NSExpression expressionForConstantValue:MA_Field_PublicationDate]]
+                                                       initWithLeftExpressions:dateLeftExpressions
                                                        rightExpressions:yesterdayRightExpressions
                                                        modifier:NSDirectPredicateModifier
                                                        operators:yesterdayOperators
@@ -230,9 +229,7 @@ static NSNibName const VNASmartFolderNibName = @"SearchFolder";
         @(NSLessThanOrEqualToPredicateOperatorType)
     ];
     NSPredicateEditorRowTemplate *dateTemplate = [[NSPredicateEditorRowTemplate alloc]
-                                                  initWithLeftExpressions:@[
-                                                      [NSExpression expressionForConstantValue:MA_Field_LastUpdate],
-                                                      [NSExpression expressionForConstantValue:MA_Field_PublicationDate]]
+                                                  initWithLeftExpressions:dateLeftExpressions
                                                   rightExpressions:weekRightExpressions
                                                   modifier:NSDirectPredicateModifier
                                                   operators:weekOperators
