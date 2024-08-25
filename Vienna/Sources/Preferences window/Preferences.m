@@ -236,7 +236,6 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
 	defaultValues[MAPref_FilterMode] = [NSNumber numberWithInt:VNAFilterAll];
 	defaultValues[MAPref_MinimumFontSize] = @(MA_Default_MinimumFontSize);
 	defaultValues[MAPref_AutoExpireDuration] = @(MA_Default_AutoExpireDuration);
-	defaultValues[MAPref_LastRefreshDate] = [NSDate distantPast];
 	defaultValues[MAPref_Layout] = [NSNumber numberWithInt:VNALayoutReport];
 	defaultValues[MAPref_NewArticlesNotification] = [NSNumber numberWithInt:0];
 	defaultValues[MAPref_EmptyTrashNotification] = [NSNumber numberWithInt:VNAEmptyTrashWithWarning];

@@ -1764,10 +1764,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(void)handleRefreshStatusChange:(NSNotification *)nc
 {
 	if (self.connecting) {
-		// Save the date/time of this refresh so we do the right thing when
-		// we apply the filter.
-		[[Preferences standardPreferences] setObject:[NSDate date] forKey:MAPref_LastRefreshDate];
-		
 		// Toggle the refresh button
 		NSToolbarItem *item = [self toolbarItemWithIdentifier:@"Refresh"];
 		item.action = @selector(cancelAllRefreshesToolbar:);

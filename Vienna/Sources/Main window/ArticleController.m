@@ -1021,10 +1021,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
         case VNAFilterUnread:
             return !article.read;
         case VNAFilterLastRefresh: {
-            NSDate *date = article.publicationDate;
-            Preferences *prefs = [Preferences standardPreferences];
-            NSComparisonResult result = [date compare:[prefs objectForKey:MAPref_LastRefreshDate]];
-            return result != NSOrderedAscending;
+            return article.status == ArticleStatusNew || article.status == ArticleStatusUpdated;
         }
         case VNAFilterToday:
             return [NSCalendar.currentCalendar isDateInToday:article.lastUpdate];
