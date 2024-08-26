@@ -655,7 +655,7 @@
 /* arrayOfUnreadArticlesRefs
  * Return an array of ArticleReference of all unread articles
  */
--(NSArray *)arrayOfUnreadArticlesRefs
+-(NSArray<ArticleReference *> *)arrayOfUnreadArticlesRefs
 {
 @synchronized(self) {
     if (self.isCached) {

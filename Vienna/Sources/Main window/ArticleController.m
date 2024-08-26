@@ -43,7 +43,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 
 @interface ArticleController ()
 
--(NSArray *)applyFilter:(NSArray *)unfilteredArray;
+-(NSArray<Article *> *)applyFilter:(NSArray<Article *> *)unfilteredArray;
 -(void)setSortColumnIdentifier:(NSString *)str;
 -(void)innerMarkReadByArray:(NSArray *)articleArray readFlag:(BOOL)readFlag;
 -(void)innerMarkFlaggedByArray:(NSArray *)articleArray flagged:(BOOL)flagged;
@@ -521,7 +521,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
  * Apply the active filter to unfilteredArray and return the filtered array.
  * This is done here rather than in the folder management code for simplicity.
  */
--(NSArray *)applyFilter:(NSArray *)unfilteredArray
+-(NSArray<Article *> *)applyFilter:(NSArray<Article *> *)unfilteredArray
 {
 	NSMutableArray * filteredArray = [NSMutableArray arrayWithArray:unfilteredArray];
 	
@@ -875,7 +875,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
  * Given an array of folders, mark all the articles in those folders as read and
  * return a reference array listing all the articles that were actually marked.
  */
--(NSArray *)wrappedMarkAllFoldersReadInArray:(NSArray *)folderArray
+-(NSArray<ArticleReference *> *)wrappedMarkAllFoldersReadInArray:(NSArray *)folderArray
 {
 	NSMutableArray * refArray = [NSMutableArray array];
 	
@@ -887,15 +887,16 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 			[refArray addObjectsFromArray:[folder arrayOfUnreadArticlesRefs]];
 			[[Database sharedManager] markFolderRead:folderId];
 		} else if (folder.type == VNAFolderTypeOpenReader) {
-			NSArray * articleArray = [folder arrayOfUnreadArticlesRefs];
-			[refArray addObjectsFromArray:articleArray];
+			[refArray addObjectsFromArray:[folder arrayOfUnreadArticlesRefs]];
 			[[OpenReader sharedManager] markAllReadInFolder:folder];
 		} else {
 		    // For smart folders, we only mark read articles which should be visible with current filters
             NSString *filterString = APPCONTROLLER.filterString;
             NSArray * articleArray = [self applyFilter:[folder articlesWithFilter:filterString]];
-            [refArray addObjectsFromArray:articleArray];
             [self innerMarkReadByArray:articleArray readFlag:YES];
+            for (id article in articleArray) {
+                [refArray addObject:[ArticleReference makeReference:(Article *)article]];
+            }
 		}
 	}
 	return [refArray copy];

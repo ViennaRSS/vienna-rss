@@ -24,6 +24,7 @@
 @class Folder;
 @class Field;
 @class Article;
+@class ArticleReference;
 @class CriteriaTree;
 
 typedef NS_OPTIONS(NSInteger, VNAQueryScope) {
@@ -109,8 +110,8 @@ extern NSNotificationName const VNADatabaseDidDeleteFolderNotification;
 -(BOOL)addArticle:(Article *)article toFolder:(NSInteger)folderID;
 -(BOOL)updateArticle:(Article *)existingArticle ofFolder:(NSInteger)folderID withArticle:(Article *)article;
 -(BOOL)deleteArticle:(Article *)article;
--(NSArray *)arrayOfUnreadArticlesRefs:(NSInteger)folderId;
--(NSArray *)arrayOfArticles:(NSInteger)folderId filterString:(NSString *)filterString;
+-(NSArray<ArticleReference *> *)arrayOfUnreadArticlesRefs:(NSInteger)folderId;
+-(NSArray<Article *> *)arrayOfArticles:(NSInteger)folderId filterString:(NSString *)filterString;
 -(void)markArticleRead:(NSInteger)folderId guid:(NSString *)guid isRead:(BOOL)isRead;
 -(void)markArticleFlagged:(NSInteger)folderId guid:(NSString *)guid isFlagged:(BOOL)isFlagged;
 -(void)markArticleDeleted:(Article *)article isDeleted:(BOOL)isDeleted;
