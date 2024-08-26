@@ -121,17 +121,9 @@
         }
 
         // Parse the date when this feed was last updated
-        if (isAtomElement && [elementTag isEqualToString:@"updated"]) {
+        if (isAtomElement && ([elementTag isEqualToString:@"updated"] || [elementTag isEqualToString:@"modified"])) {
             NSString *dateString = atomChildElement.stringValue;
-            self.modifiedDate = [self dateWithXMLString:dateString];
-            success = YES;
-            continue;
-        }
-
-        // Parse the date when this feed was last updated
-        if (isAtomElement && [elementTag isEqualToString:@"modified"]) {
-            NSString *dateString = atomChildElement.stringValue;
-            self.modifiedDate = [self dateWithXMLString:dateString];
+            self.modificationDate = [self dateWithXMLString:dateString];
             success = YES;
             continue;
         }
@@ -261,31 +253,21 @@
                 }
 
                 // Parse item date
-                if (isArticleElementAtomType && [articleItemTag isEqualToString:@"modified"]) {
+                if (isArticleElementAtomType && ([articleItemTag isEqualToString:@"modified"] || [articleItemTag isEqualToString:@"updated"])) {
                     NSString *dateString = itemChildElement.stringValue;
                     NSDate *newDate = [self dateWithXMLString:dateString];
-                    if (newFeedItem.modifiedDate == nil || [newDate isGreaterThan:newFeedItem.modifiedDate]) {
-                        newFeedItem.modifiedDate = newDate;
+                    if (newFeedItem.modificationDate == nil || [newDate isGreaterThan:newFeedItem.modificationDate]) {
+                        newFeedItem.modificationDate = newDate;
                     }
                     continue;
                 }
 
                 // Parse item date
-                if (isArticleElementAtomType && [articleItemTag isEqualToString:@"created"]) {
+                if (isArticleElementAtomType && ([articleItemTag isEqualToString:@"created"] || [articleItemTag isEqualToString:@"published"])) {
                     NSString *dateString = itemChildElement.stringValue;
                     NSDate *newDate = [self dateWithXMLString:dateString];
-                    if (newFeedItem.modifiedDate == nil || [newDate isGreaterThan:newFeedItem.modifiedDate]) {
-                        newFeedItem.modifiedDate = newDate;
-                    }
-                    continue;
-                }
-
-                // Parse item date
-                if (isArticleElementAtomType && [articleItemTag isEqualToString:@"updated"]) {
-                    NSString *dateString = itemChildElement.stringValue;
-                    NSDate *newDate = [self dateWithXMLString:dateString];
-                    if (newFeedItem.modifiedDate == nil || [newDate isGreaterThan:newFeedItem.modifiedDate]) {
-                        newFeedItem.modifiedDate = newDate;
+                    if (newFeedItem.publicationDate == nil || [newDate isLessThan:newFeedItem.publicationDate]) {
+                        newFeedItem.publicationDate = newDate;
                     }
                     continue;
                 }

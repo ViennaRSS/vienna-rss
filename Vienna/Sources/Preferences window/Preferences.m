@@ -210,7 +210,7 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
 
 	NSFileManager *fileManager = NSFileManager.defaultManager;
 	NSString *appSupportPath = fileManager.vna_applicationSupportDirectory.path;
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:[@"articleData." stringByAppendingString:MA_Field_Date]
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:[@"articleData." stringByAppendingString:MA_Field_LastUpdate]
                                                                    ascending:YES];
 
 	defaultValues[MAPref_DefaultDatabase] = [appSupportPath stringByAppendingPathComponent:MA_Database_Name];
@@ -218,7 +218,7 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
 	defaultValues[MAPref_ShowUnreadArticlesInBold] = boolYes;
 	defaultValues[MAPref_CheckForNewArticlesOnStartup] = boolYes;
 	defaultValues[MAPref_CachedFolderID] = @1;
-	defaultValues[MAPref_SortColumn] = MA_Field_Date;
+	defaultValues[MAPref_SortColumn] = MA_Field_LastUpdate;
 	defaultValues[MAPref_CheckFrequency] = @(MA_Default_Check_Frequency);
 	defaultValues[MAPref_MarkReadInterval] = @((float)MA_Default_Read_Interval);
 	defaultValues[MAPref_ActiveStyleName] = MA_DefaultStyleName;
@@ -236,7 +236,6 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
 	defaultValues[MAPref_FilterMode] = [NSNumber numberWithInt:VNAFilterAll];
 	defaultValues[MAPref_MinimumFontSize] = @(MA_Default_MinimumFontSize);
 	defaultValues[MAPref_AutoExpireDuration] = @(MA_Default_AutoExpireDuration);
-	defaultValues[MAPref_LastRefreshDate] = [NSDate distantPast];
 	defaultValues[MAPref_Layout] = [NSNumber numberWithInt:VNALayoutReport];
 	defaultValues[MAPref_NewArticlesNotification] = [NSNumber numberWithInt:0];
 	defaultValues[MAPref_EmptyTrashNotification] = [NSNumber numberWithInt:VNAEmptyTrashWithWarning];

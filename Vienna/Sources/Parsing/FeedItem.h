@@ -28,7 +28,8 @@ NS_SWIFT_NAME(FeedItem)
 @property (nullable, copy, nonatomic) NSString *title;
 @property (nullable, copy, nonatomic) NSString *authors;
 @property (copy, nonatomic) NSString *content;
-@property (nullable, nonatomic) NSDate *modifiedDate;
+@property (nullable, nonatomic) NSDate *publicationDate;
+@property (nullable, nonatomic) NSDate *modificationDate;
 @property (nullable, copy, nonatomic) NSString *url;
 @property (nullable, copy, nonatomic) NSString *enclosure;
 

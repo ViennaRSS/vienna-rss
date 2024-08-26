@@ -81,20 +81,20 @@ class ArticleTests: XCTestCase {
         XCTAssertEqual(self.article.link, link)
     }
 
-    func testDate() {
+    func testLastUpdate() {
         let date = Date()
 
-        self.article.date = date
+        self.article.lastUpdate = date
 
-        XCTAssertEqual(self.article.date, date)
+        XCTAssertEqual(self.article.lastUpdate, date)
     }
 
-    func testDateCreated() {
+    func testPublicationDate() {
         let date = Date()
 
-        self.article.createdDate = date
+        self.article.publicationDate = date
 
-        XCTAssertEqual(self.article.createdDate, date)
+        XCTAssertEqual(self.article.publicationDate, date)
     }
 
     func testBody() {
@@ -193,9 +193,9 @@ class ArticleTests: XCTestCase {
 
     func testCompatibilityDate() {
         let date = Date()
-        let dateKeyPath = "articleData." + MA_Field_Date
+        let dateKeyPath = "articleData." + MA_Field_LastUpdate
 
-        self.article.date = date
+        self.article.lastUpdate = date
 
         XCTAssertEqual(self.article.value(forKeyPath: dateKeyPath) as? Date, date)
     }

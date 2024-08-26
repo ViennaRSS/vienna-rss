@@ -568,7 +568,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             NSMutableArray *articleArray = [NSMutableArray array];
 
             for (NSDictionary *newsItem in (NSArray *)subscriptionsDict[@"items"]) {
-                NSDate *articleDate = [NSDate dateWithTimeIntervalSince1970:[newsItem[@"published"] doubleValue]];
+
                 NSString *articleGuid = newsItem[@"id"];
                 Article *article = [[Article alloc] initWithGuid:articleGuid];
                 article.folderId = refreshedFolder.itemId;
@@ -611,7 +611,15 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                     article.link = refreshedFolder.feedURL;
                 }
 
-                article.date = articleDate;
+                NSString *publishedField = newsItem[@"published"];
+                if (publishedField) {
+                    article.publicationDate = [NSDate dateWithTimeIntervalSince1970:[publishedField doubleValue]];
+                }
+
+                NSString * updatedField = newsItem[@"updated"];
+                if (updatedField) {
+                    article.lastUpdate = [NSDate dateWithTimeIntervalSince1970:[updatedField doubleValue]];
+                }
 
                 if ([newsItem[@"enclosure"] count] != 0) {
                     article.enclosure = newsItem[@"enclosure"][0][@"href"];

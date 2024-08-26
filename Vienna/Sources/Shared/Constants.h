@@ -87,7 +87,6 @@ extern NSString * const MAPref_UseJavaScript;
 extern NSString * const MAPref_CachedArticleGUID;
 extern NSString * const MAPref_ArticleListSortOrders;
 extern NSString * const MAPref_FilterMode;
-extern NSString * const MAPref_LastRefreshDate;
 extern NSString * const MAPref_TabList;
 extern NSString * const MAPref_TabTitleDictionary;
 extern NSString * const MAPref_Layout;

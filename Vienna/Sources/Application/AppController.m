@@ -1143,15 +1143,15 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	for (Field * field in [db arrayOfFields]) {
 		// Filter out columns we don't sort on. Later we should have an attribute in the
 		// field object itself based on which columns we can sort on.
-		if (field.tag != ArticleFieldIDParent &&
-			field.tag != ArticleFieldIDGUID &&
-			field.tag != ArticleFieldIDDeleted &&
-			field.tag != ArticleFieldIDHeadlines &&
-			field.tag != ArticleFieldIDSummary &&
-			field.tag != ArticleFieldIDLink &&
-			field.tag != ArticleFieldIDText &&
-			field.tag != ArticleFieldIDEnclosureDownloaded &&
-			field.tag != ArticleFieldIDEnclosure)
+		if (field.tag != VNAArticleFieldTagParent &&
+			field.tag != VNAArticleFieldTagGUID &&
+			field.tag != VNAArticleFieldTagDeleted &&
+			field.tag != VNAArticleFieldTagHeadlines &&
+			field.tag != VNAArticleFieldTagSummary &&
+			field.tag != VNAArticleFieldTagLink &&
+			field.tag != VNAArticleFieldTagText &&
+			field.tag != VNAArticleFieldTagEnclosureDownloaded &&
+			field.tag != VNAArticleFieldTagEnclosure)
 		{
 			NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:field.displayName action:@selector(doSortColumn:) keyEquivalent:@""];
 			menuItem.representedObject = field;
@@ -1184,12 +1184,12 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	for (Field * field in [db arrayOfFields]) {
 		// Filter out columns we don't view in the article list. Later we should have an attribute in the
 		// field object based on which columns are visible in the tableview.
-		if (field.tag != ArticleFieldIDText && 
-			field.tag != ArticleFieldIDGUID &&
-			field.tag != ArticleFieldIDDeleted &&
-			field.tag != ArticleFieldIDParent &&
-			field.tag != ArticleFieldIDHeadlines &&
-			field.tag != ArticleFieldIDEnclosureDownloaded)
+		if (field.tag != VNAArticleFieldTagText && 
+			field.tag != VNAArticleFieldTagGUID &&
+			field.tag != VNAArticleFieldTagDeleted &&
+			field.tag != VNAArticleFieldTagParent &&
+			field.tag != VNAArticleFieldTagHeadlines &&
+			field.tag != VNAArticleFieldTagEnclosureDownloaded)
 		{
 			NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:field.displayName action:@selector(doViewColumn:) keyEquivalent:@""];
 			menuItem.representedObject = field;
@@ -1764,10 +1764,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(void)handleRefreshStatusChange:(NSNotification *)nc
 {
 	if (self.connecting) {
-		// Save the date/time of this refresh so we do the right thing when
-		// we apply the filter.
-		[[Preferences standardPreferences] setObject:[NSDate date] forKey:MAPref_LastRefreshDate];
-		
 		// Toggle the refresh button
 		NSToolbarItem *item = [self toolbarItemWithIdentifier:@"Refresh"];
 		item.action = @selector(cancelAllRefreshesToolbar:);

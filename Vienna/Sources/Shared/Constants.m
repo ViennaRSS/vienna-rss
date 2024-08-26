@@ -87,7 +87,6 @@ NSString * const MAPref_UseJavaScript = @"UseJavaScript";
 NSString * const MAPref_CachedArticleGUID = @"CachedArticleGUID";
 NSString * const MAPref_ArticleListSortOrders = @"ArticleListSortOrders";
 NSString * const MAPref_FilterMode = @"FilterMode";
-NSString * const MAPref_LastRefreshDate = @"LastRefreshDate";
 NSString * const MAPref_TabList = @"TabList";
 NSString * const MAPref_TabTitleDictionary = @"TabTitleDict";
 NSString * const MAPref_Layout = @"Layout";

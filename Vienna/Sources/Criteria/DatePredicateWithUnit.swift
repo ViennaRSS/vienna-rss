@@ -19,6 +19,10 @@
 
 import Foundation
 
+enum DateOffset: String {
+    case today, yesterday, lastWeek = "last week"
+}
+
 enum DateUnit: String, CaseIterable {
     case minutes
     case hours

@@ -93,8 +93,12 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 										  @"key": @"isFlagged",
 										  @"selector": NSStringFromSelector(@selector(compare:))
 										  },
-								  MA_Field_Date: @{
-										  @"key": [@"articleData." stringByAppendingString:MA_Field_Date],
+								  MA_Field_LastUpdate: @{
+										  @"key": [@"articleData." stringByAppendingString:MA_Field_LastUpdate],
+										  @"selector": NSStringFromSelector(@selector(compare:))
+										  },
+								  MA_Field_PublicationDate: @{
+										  @"key": [@"articleData." stringByAppendingString:MA_Field_PublicationDate],
 										  @"selector": NSStringFromSelector(@selector(compare:))
 										  },
 								  MA_Field_Author: @{
@@ -288,7 +292,10 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 		NSUInteger index = [[descriptors valueForKey:@"key"] indexOfObject:[specifier valueForKey:@"key"]];
 
 		if (index == NSNotFound) {
-			sortDescriptor = [[NSSortDescriptor alloc] initWithKey:[specifier valueForKey:@"key"] ascending:YES selector:NSSelectorFromString([specifier valueForKey:@"selector"])];
+			// Dates should be sorted initially in descending order
+			// MIGHT DO : Add a key to articleSortSpecifiers for a default sort order
+			BOOL ascending = [columnName isEqualToString:MA_Field_PublicationDate] || [columnName isEqualToString:MA_Field_LastUpdate] ? NO : YES;
+			sortDescriptor = [[NSSortDescriptor alloc] initWithKey:[specifier valueForKey:@"key"] ascending:ascending selector:NSSelectorFromString([specifier valueForKey:@"selector"])];
 		} else {
 			sortDescriptor = descriptors[index];
 			[descriptors removeObjectAtIndex:index];
@@ -1014,19 +1021,16 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
         case VNAFilterUnread:
             return !article.read;
         case VNAFilterLastRefresh: {
-            NSDate *date = article.createdDate;
-            Preferences *prefs = [Preferences standardPreferences];
-            NSComparisonResult result = [date compare:[prefs objectForKey:MAPref_LastRefreshDate]];
-            return result != NSOrderedAscending;
+            return article.status == ArticleStatusNew || article.status == ArticleStatusUpdated;
         }
         case VNAFilterToday:
-            return [NSCalendar.currentCalendar isDateInToday:article.date];
+            return [NSCalendar.currentCalendar isDateInToday:article.lastUpdate];
         case VNAFilterTime48h: {
             NSDate *twoDaysAgo = [NSCalendar.currentCalendar dateByAddingUnit:NSCalendarUnitDay
                                                                         value:-2
                                                                        toDate:[NSDate date]
                                                                       options:0];
-            return [article.date compare:twoDaysAgo] != NSOrderedAscending;
+            return [article.lastUpdate compare:twoDaysAgo] != NSOrderedAscending;
         }
         case VNAFilterFlagged:
             return article.flagged;

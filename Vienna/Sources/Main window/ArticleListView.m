@@ -386,13 +386,13 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 		// Handle which fields can be visible in the condensed (vertical) layout
 		// versus the report (horizontal) layout
 		if (tableLayout == VNALayoutReport) {
-			showField = field.visible && tag != ArticleFieldIDHeadlines;
+			showField = field.visible && tag != VNAArticleFieldTagHeadlines;
 		} else {
 			showField = NO;
-			if (tag == ArticleFieldIDRead || tag == ArticleFieldIDFlagged || tag == ArticleFieldIDHasEnclosure) {
+			if (tag == VNAArticleFieldTagRead || tag == VNAArticleFieldTagFlagged || tag == VNAArticleFieldTagHasEnclosure) {
 				showField = field.visible;
 			}
-			if (tag == ArticleFieldIDHeadlines) {
+			if (tag == VNAArticleFieldTagHeadlines) {
 				showField = YES;
 			}
 		}
@@ -430,7 +430,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 				column.dataCell = cell;
 			}
 
-			BOOL isResizable = (tag != ArticleFieldIDRead && tag != ArticleFieldIDFlagged && tag != ArticleFieldIDHasEnclosure);
+			BOOL isResizable = (tag != VNAArticleFieldTagRead && tag != VNAArticleFieldTagFlagged && tag != VNAArticleFieldTagHasEnclosure);
 			column.resizingMask = (isResizable ? NSTableColumnUserResizingMask : NSTableColumnNoResizing);
 			// the headline column is auto-resizable
 			column.resizingMask = column.resizingMask | ([column.identifier isEqualToString:MA_Field_Headlines] ? NSTableColumnAutoresizingMask : 0);
@@ -571,7 +571,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 		if ([db fieldByName:MA_Field_Subject].visible) {
 			++numberOfRowsInCell;
 		}
-		if ([db fieldByName:MA_Field_Folder].visible || [db fieldByName:MA_Field_Date].visible || [db fieldByName:MA_Field_Author].visible) {
+		if ([db fieldByName:MA_Field_Folder].visible || [db fieldByName:MA_Field_LastUpdate].visible || [db fieldByName:MA_Field_Author].visible) {
 			++numberOfRowsInCell;
 		}
 		if ([db fieldByName:MA_Field_Link].visible) {
@@ -593,7 +593,11 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 -(void)showSortDirection
 {
 	NSString * sortColumnIdentifier = self.controller.articleController.sortColumnIdentifier;
-	
+
+    if (!sortColumnIdentifier) {
+        sortColumnIdentifier = [Preferences.standardPreferences stringForKey:MAPref_SortColumn];
+    }
+
 	for (NSTableColumn * column in articleList.tableColumns) {
 		if ([column.identifier isEqualToString:sortColumnIdentifier]) {
 			// These NSImage names are available in AppKit, but not as constants.
@@ -990,6 +994,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
             break;
         case VNARefreshSortAndRedraw:
             [self.controller.articleController sortArticles];
+            [self showSortDirection];
             break;
     }
 
@@ -1287,8 +1292,8 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 			[summaryString appendFormat:@"%@", folder.name];
 			delimiter = @" - ";
 		}
-		if ([db fieldByName:MA_Field_Date].visible) {
-			[summaryString appendFormat:@"%@%@", delimiter, [NSDateFormatter vna_relativeDateStringFromDate:theArticle.date]];
+		if ([db fieldByName:MA_Field_LastUpdate].visible) {
+			[summaryString appendFormat:@"%@%@", delimiter, [NSDateFormatter vna_relativeDateStringFromDate:theArticle.lastUpdate]];
 			delimiter = @" - ";
 		}
 		if ([db fieldByName:MA_Field_Author].visible) {
@@ -1307,8 +1312,10 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 	}
 	
 	NSString * cellString;
-	if ([identifier isEqualToString:MA_Field_Date]) {
-        cellString = [NSDateFormatter vna_relativeDateStringFromDate:theArticle.date];
+	if ([identifier isEqualToString:MA_Field_LastUpdate]) {
+        cellString = [NSDateFormatter vna_relativeDateStringFromDate:theArticle.lastUpdate];
+	} else if ([identifier isEqualToString:MA_Field_PublicationDate]) {
+		cellString = [NSDateFormatter vna_relativeDateStringFromDate:theArticle.publicationDate];
 	} else if ([identifier isEqualToString:MA_Field_Folder]) {
 		Folder * folder = [db folderFromID:theArticle.folderId];
 		cellString = folder.name;

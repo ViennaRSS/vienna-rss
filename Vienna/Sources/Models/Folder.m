@@ -585,7 +585,7 @@
         [self.cachedArticles setObject:article forKey:[NSString stringWithString:guid]];
         [self.cachedGuids addObject:guid];
         // note if article has incomplete data
-        if (article.createdDate == nil) {
+        if (article.publicationDate == nil) {
             self.containsBodies = NO;
         }
     }
