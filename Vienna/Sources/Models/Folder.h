@@ -21,6 +21,7 @@
 @import Cocoa;
 
 @class Article;
+@class ArticleReference;
 
 /**
  Folder types
@@ -116,7 +117,7 @@ typedef NS_OPTIONS(NSUInteger, VNAFolderFlag) {
 -(void)removeArticleFromCache:(NSString *)guid;
 -(void)restoreArticleToCache:(Article *)article;
 -(void)markArticlesInCacheRead;
--(NSArray *)arrayOfUnreadArticlesRefs;
+-(NSArray<ArticleReference *> *)arrayOfUnreadArticlesRefs;
 -(NSComparisonResult)folderNameCompare:(Folder *)otherObject;
 -(NSComparisonResult)folderIDCompare:(Folder *)otherObject;
 @property (readonly, nonatomic) NSString *feedSourceFilePath;

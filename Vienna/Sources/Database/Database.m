@@ -2171,7 +2171,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
  * articles in the specified folder.
  * Note : when possible, you should use the interface provided by the Folder class instead of this
  */
--(NSArray *)arrayOfUnreadArticlesRefs:(NSInteger)folderId
+-(NSArray<ArticleReference *> *)arrayOfUnreadArticlesRefs:(NSInteger)folderId
 {
 	Folder * folder = [self folderFromID:folderId];
 	if (folder != nil) {
