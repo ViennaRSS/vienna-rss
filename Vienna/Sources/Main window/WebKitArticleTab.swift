@@ -98,7 +98,7 @@ class WebKitArticleTab: BrowserTab, ArticleContentView {
 
     // MARK: Navigation delegate
 
-    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+    override func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         // TODO: how do forms work in the article view?
         // i.e. navigationAction.navigationType == .formSubmitted or .formResubmitted
         // TODO: in the future, we might want to allow limited browsing in the primary tab
