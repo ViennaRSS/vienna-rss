@@ -3800,7 +3800,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Een nieuwe Vienna-databank kan niet worden aangemaakt in \"%@\". De databank bevindt zich waarschijnlijk op een andere computer in het netwerk, wat door deze versie van Vienna niet wordt ondersteund. Kies een andere locatie op deze Mac."
+            "value" : "Een nieuwe Vienna-database kan niet worden aangemaakt in \"%@\". De database bevindt zich waarschijnlijk op een andere computer in het netwerk, wat door deze versie van Vienna niet wordt ondersteund. Kies een andere locatie op deze Mac."
           }
         },
         "pt-BR" : {
@@ -5559,7 +5559,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Kan de Vienna-databank niet aanmaken"
+            "value" : "Kan de Vienna-database niet aanmaken"
           }
         },
         "pt-BR" : {
@@ -6311,6 +6311,12 @@
             "value" : "Continuer malgré tout"
           }
         },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ga toch door"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6467,7 +6473,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Databank bijwerken"
+            "value" : "Database bijwerken"
           }
         },
         "pt-BR" : {
@@ -6647,7 +6653,33 @@
       }
     },
     "Date Published" : {
-      "comment" : "Data field name visible in menu/article list/smart folder definition"
+      "comment" : "Data field name visible in menu/article list/smart folder definition",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Veröffentlicht"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Date de publication"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Publicatiedatum"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Publiceringsdatum"
+          }
+        }
+      }
     },
     "Delete" : {
       "comment" : "Title of a button on an alert\n   Title of a menu item",
@@ -12893,7 +12925,33 @@
       }
     },
     "Last Update" : {
-      "comment" : "Data field name visible in menu/article list/smart folder definition"
+      "comment" : "Data field name visible in menu/article list/smart folder definition",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Letztes Update"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dernière mise à jour"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Laatste update"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Senast uppdaterad"
+          }
+        }
+      }
     },
     "Link" : {
       "comment" : "Data field name visible in menu/article list",
@@ -20152,7 +20210,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vienna kon de databank niet openen"
+            "value" : "Vienna kon de database niet openen"
           }
         },
         "pt-BR" : {
@@ -20276,7 +20334,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vienna kan de databank-map niet aanmaken"
+            "value" : "Vienna kan de database-map niet aanmaken"
           }
         },
         "pt-BR" : {
@@ -20845,7 +20903,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Het bestandsformaat van de databank (%@) wordt door deze versie van Vienna niet ondersteund. Wijzig de naam of verwijder het bestand en start Vienna opnieuw."
+            "value" : "Het bestandsformaat van de database (%@) wordt door deze versie van Vienna niet ondersteund. Wijzig de naam of verwijder het bestand en start Vienna opnieuw."
           }
         },
         "pt-BR" : {
@@ -20969,7 +21027,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Het databank-bestand (%@) kon niet worden geopend. Het zou beschadigd of ontoegankelijk kunnen zijn. Wijzig de naam of verwijder het bestand en start Vienna opnieuw."
+            "value" : "Het database-bestand (%@) kon niet worden geopend. Het zou beschadigd of ontoegankelijk kunnen zijn. Wijzig de naam of verwijder het bestand en start Vienna opnieuw."
           }
         },
         "pt-BR" : {
@@ -21093,7 +21151,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Het bestandsformaat van de databank is gewijzigd"
+            "value" : "Het bestandsformaat van de database is gewijzigd"
           }
         },
         "pt-BR" : {
@@ -22802,7 +22860,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Werk databank bij"
+            "value" : "Werk database bij"
           }
         },
         "pt-BR" : {
@@ -23543,6 +23601,12 @@
             "value" : "Vienna peut ne pas fonctionner correctement lorsque sa base de données est corrompue. Nous recommandons de quitter Vienna et de restaurer la base de données (%@) à partir d'une sauvegarde fiable, ou de tenter une récupération via sqlite3."
           }
         },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vienna werkt mogelijk niet als verwacht als de database beschadigd is. Wij raden aan dat je Vienna stopt en ofwel de database (%@) vanuit een reservekopie herstelt, ofwel ze met sqlite3 probeert te herstellen."
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -23610,7 +23674,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vienna moet de databank bijwerken naar de laatste versie. Dit kan enige tijd duren. Excuses voor het ongemak."
+            "value" : "Vienna moet de database bijwerken naar de laatste versie. Dit kan enige tijd duren. Excuses voor het ongemak."
           }
         },
         "pt-BR" : {
@@ -23776,6 +23840,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "La base de données de Vienna semble être corrompue. Voulez-vous quitter l'application ou continuer malgré tout ?"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vienna's database lijkt beschadigd te zijn. Wil je Vienna stoppen of toch doorgaan?"
           }
         },
         "ru" : {
