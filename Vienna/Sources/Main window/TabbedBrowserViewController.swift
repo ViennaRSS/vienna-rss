@@ -156,6 +156,10 @@ extension TabbedBrowserViewController: Browser {
         createNewTab(url, inBackground: inBackground, load: load, insertAt: nil)
     }
 
+    func createNewTabAfterSelected(_ url: URL?, inBackground: Bool, load: Bool) -> any Tab {
+        createNewTab(url, inBackground: inBackground, load: load, insertAt: getIndexAfterSelected())
+    }
+
     func createNewTab(_ request: URLRequest, config: WKWebViewConfiguration, inBackground: Bool, insertAt index: Int? = nil) -> any Tab {
         let newTab = BrowserTab(request, config: config)
         return initNewTab(newTab, request.url, false, inBackground, insertAt: index)
@@ -339,9 +343,9 @@ extension TabbedBrowserViewController: CustomWKUIDelegate {
         }
         switch menuItem.identifier {
         case NSUserInterfaceItemIdentifier.WKMenuItemOpenLinkInBackground:
-            _ = self.createNewTab(url, inBackground: true, load: true, insertAt: getIndexAfterSelected())
+            _ = self.createNewTabAfterSelected(url, inBackground: true, load: true)
         case NSUserInterfaceItemIdentifier.WKMenuItemOpenLinkInNewWindow, NSUserInterfaceItemIdentifier.WKMenuItemOpenImageInNewWindow, NSUserInterfaceItemIdentifier.WKMenuItemOpenMediaInNewWindow:
-            _ = self.createNewTab(url, inBackground: false, load: true, insertAt: getIndexAfterSelected())
+            _ = self.createNewTabAfterSelected(url, inBackground: false, load: true)
         case NSUserInterfaceItemIdentifier.WKMenuItemOpenLinkInSystemBrowser:
             NSApp.appController.openURL(inDefaultBrowser: url)
         case NSUserInterfaceItemIdentifier.WKMenuItemDownloadImage, NSUserInterfaceItemIdentifier.WKMenuItemDownloadMedia, NSUserInterfaceItemIdentifier.WKMenuItemDownloadLinkedFile:

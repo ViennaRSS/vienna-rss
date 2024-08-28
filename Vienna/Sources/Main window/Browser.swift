@@ -48,6 +48,16 @@ protocol Browser {
     /// - Returns: the new tab
     func createNewTab(_ url: URL?, inBackground: Bool, load: Bool) -> any Tab
 
+    /// Add a new tab to the open tabs of the browser, after the currently selected one
+    ///
+    /// - Parameters:
+    ///   - url: optional URL for the new tab
+    ///   - inBackground: if the tab shall stay unselected
+    ///   - load: whether the page to which the URL points is supposed to be loaded immediately
+    ///           (otherwise it is opened when opening the tab)
+    /// - Returns: the new tab
+    func createNewTabAfterSelected(_ url: URL?, inBackground: Bool, load: Bool) -> any Tab
+
     /// Saves all tabs persistently.
     /// Next time when instanciating the browser, these tabs will be re-instanciated as well.
     func saveOpenTabs()
