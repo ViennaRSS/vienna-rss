@@ -323,15 +323,6 @@ extension TabbedBrowserViewController: CustomWKUIDelegate {
 
     private static var contextMenuCustomizer: any BrowserContextMenuDelegate = WebKitContextMenuCustomizer()
 
-    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
-        let newTab = self.createNewTab(navigationAction.request, config: configuration, inBackground: false, insertAt: getIndexAfterSelected())
-        if let webView = webView as? CustomWKWebView {
-            // The listeners are removed from the old webview userContentController on creating the new one, restore them
-            webView.resetScriptListeners()
-        }
-        return (newTab as? BrowserTab)?.webView
-    }
-
     func contextMenuItemsFor(purpose: WKWebViewContextMenuContext, existingMenuItems: [NSMenuItem]) -> [NSMenuItem] {
         // specific customization of menuItems may be added here
         // using the following commented out construct
