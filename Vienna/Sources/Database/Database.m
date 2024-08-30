@@ -2239,7 +2239,8 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 			results = [db executeQuery:queryString, filterString, filterString];
 		}
 		while ([results next]) {
-			Article * article = [[Article alloc] initWithGuid:[results stringForColumnIndex:0]];
+			NSString * guid = [results stringForColumnIndex:0];
+			Article * article = [[Article alloc] initWithGuid:guid];
 			article.folderId = [results intForColumnIndex:1];
 			article.parentId = [results intForColumnIndex:2];
 			[article markRead:[results intForColumnIndex:3]];
@@ -2255,6 +2256,8 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 			[article markRevised:[results intForColumnIndex:12]];
 			article.hasEnclosure = [results intForColumnIndex:13];
 			article.enclosure = [results stringForColumnIndex:14];
+			Folder * articleFolder = [self folderFromID:article.folderId];
+			article.status = [articleFolder retrieveKnownStatusForGuid:guid];
 		
 			if (folder == nil || !article.deleted || folder.type == VNAFolderTypeTrash) {
 				[newArray addObject:article];

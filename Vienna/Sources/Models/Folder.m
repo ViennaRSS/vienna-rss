@@ -464,6 +464,19 @@
 	}
 }
 
+/* retrieveKnownStatusForGuid
+   Returns article status if already known
+ */
+-(NSInteger)retrieveKnownStatusForGuid:(NSString *)guid
+{
+    Article * article = (Article *)[self.cachedArticles objectForKey:guid];
+    if (article) {
+        return article.status;
+    } else {
+        return ArticleStatusEmpty;
+    }
+}
+
 /* createArticle
  * Adds or updates an article in the folder.
  * Returns YES if the article was added or updated
