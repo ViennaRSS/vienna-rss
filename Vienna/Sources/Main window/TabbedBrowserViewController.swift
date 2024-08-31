@@ -162,11 +162,6 @@ extension TabbedBrowserViewController: Browser {
         createNewTab(url, inBackground: inBackground, load: load, insertAt: getIndexAfterSelected())
     }
 
-    func createNewTab(_ request: URLRequest, config: WKWebViewConfiguration, inBackground: Bool, insertAt index: Int? = nil) -> any Tab {
-        let newTab = BrowserTab(request, config: config)
-        return initNewTab(newTab, request.url, false, inBackground, insertAt: index)
-    }
-
     @discardableResult
     func createNewTab(_ url: URL? = nil, inBackground: Bool = false, load: Bool = false, insertAt index: Int? = nil) -> any Tab {
         let newTab = BrowserTab()
