@@ -152,10 +152,12 @@ class TabbedBrowserViewController: NSViewController, RSSSource {
 }
 
 extension TabbedBrowserViewController: Browser {
+    @discardableResult
     func createNewTab(_ url: URL?, inBackground: Bool, load: Bool) -> any Tab {
         createNewTab(url, inBackground: inBackground, load: load, insertAt: nil)
     }
 
+    @discardableResult
     func createNewTabAfterSelected(_ url: URL?, inBackground: Bool, load: Bool) -> any Tab {
         createNewTab(url, inBackground: inBackground, load: load, insertAt: getIndexAfterSelected())
     }
@@ -165,6 +167,7 @@ extension TabbedBrowserViewController: Browser {
         return initNewTab(newTab, request.url, false, inBackground, insertAt: index)
     }
 
+    @discardableResult
     func createNewTab(_ url: URL? = nil, inBackground: Bool = false, load: Bool = false, insertAt index: Int? = nil) -> any Tab {
         let newTab = BrowserTab()
         return initNewTab(newTab, url, load, inBackground, insertAt: index)
@@ -301,7 +304,7 @@ extension TabbedBrowserViewController: MMTabBarViewDelegate {
     }
 
     func addNewTab(to aTabView: NSTabView) {
-        _ = self.createNewTab()
+        self.createNewTab()
     }
 
     func tabView(_ tabView: NSTabView, willSelect tabViewItem: NSTabViewItem?) {
@@ -343,9 +346,9 @@ extension TabbedBrowserViewController: CustomWKUIDelegate {
         }
         switch menuItem.identifier {
         case NSUserInterfaceItemIdentifier.WKMenuItemOpenLinkInBackground:
-            _ = self.createNewTabAfterSelected(url, inBackground: true, load: true)
+            self.createNewTabAfterSelected(url, inBackground: true, load: true)
         case NSUserInterfaceItemIdentifier.WKMenuItemOpenLinkInNewWindow, NSUserInterfaceItemIdentifier.WKMenuItemOpenImageInNewWindow, NSUserInterfaceItemIdentifier.WKMenuItemOpenMediaInNewWindow:
-            _ = self.createNewTabAfterSelected(url, inBackground: false, load: true)
+            self.createNewTabAfterSelected(url, inBackground: false, load: true)
         case NSUserInterfaceItemIdentifier.WKMenuItemOpenLinkInSystemBrowser:
             NSApp.appController.openURL(inDefaultBrowser: url)
         case NSUserInterfaceItemIdentifier.WKMenuItemDownloadImage, NSUserInterfaceItemIdentifier.WKMenuItemDownloadMedia, NSUserInterfaceItemIdentifier.WKMenuItemDownloadLinkedFile:

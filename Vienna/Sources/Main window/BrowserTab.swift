@@ -345,7 +345,7 @@ extension BrowserTab: WKNavigationDelegate {
             let optionKey = navigationAction.modifierFlags.contains(.option)
             if commandKey {
                 decisionHandler(.cancel)
-                _ = NSApp.appController.browser.createNewTabAfterSelected(navigationAction.request.url, inBackground: true, load: true)
+                NSApp.appController.browser.createNewTabAfterSelected(navigationAction.request.url, inBackground: true, load: true)
             } else if optionKey {
                 decisionHandler(.cancel)
                 NSApp.appController.open(navigationAction.request.url, inPreferredBrowser: false)

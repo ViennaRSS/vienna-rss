@@ -46,6 +46,7 @@ protocol Browser {
     ///   - load: whether the page to which the URL points is supposed to be loaded immediately
     ///           (otherwise it is opened when opening the tab)
     /// - Returns: the new tab
+    @discardableResult
     func createNewTab(_ url: URL?, inBackground: Bool, load: Bool) -> any Tab
 
     /// Add a new tab to the open tabs of the browser, after the currently selected one
@@ -56,6 +57,7 @@ protocol Browser {
     ///   - load: whether the page to which the URL points is supposed to be loaded immediately
     ///           (otherwise it is opened when opening the tab)
     /// - Returns: the new tab
+    @discardableResult
     func createNewTabAfterSelected(_ url: URL?, inBackground: Bool, load: Bool) -> any Tab
 
     /// Saves all tabs persistently.
