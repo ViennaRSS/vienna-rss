@@ -152,9 +152,9 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView, WKNavigationDelega
         }
         switch menuItem.identifier {
         case NSUserInterfaceItemIdentifier.WKMenuItemOpenLinkInBackground:
-            _ = NSApp.appController.browser.createNewTab(url, inBackground: true, load: true)
+            NSApp.appController.browser.createNewTab(url, inBackground: true, load: true)
         case NSUserInterfaceItemIdentifier.WKMenuItemOpenLinkInNewWindow, NSUserInterfaceItemIdentifier.WKMenuItemOpenImageInNewWindow, NSUserInterfaceItemIdentifier.WKMenuItemOpenMediaInNewWindow:
-            _ = NSApp.appController.browser.createNewTab(url, inBackground: false, load: true)
+            NSApp.appController.browser.createNewTab(url, inBackground: false, load: true)
         case NSUserInterfaceItemIdentifier.WKMenuItemOpenLinkInSystemBrowser:
             NSApp.appController.openURL(inDefaultBrowser: url)
         case NSUserInterfaceItemIdentifier.WKMenuItemDownloadImage, NSUserInterfaceItemIdentifier.WKMenuItemDownloadMedia, NSUserInterfaceItemIdentifier.WKMenuItemDownloadLinkedFile:
