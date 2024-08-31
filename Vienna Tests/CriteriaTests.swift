@@ -35,8 +35,6 @@ class CriteriaTests: XCTestCase {
         // Only called by the Database class when loading smart folders
         let criteriaTreeString = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><criteriagroup condition=\"all\"><criteria field=\"\(flaggedField.name!)\"><operator>1</operator><value>Yes</value></criteria></criteriagroup>"
 
-        let treeStringUnformatted: String = criteriaTreeString.replacingOccurrences(of: "  ", with: "").replacingOccurrences(of: "\n", with: "")
-
         let testCriteriaTree = genericConversionChecks(criteriaTreeString)
 
         XCTAssertTrue(testCriteriaTree.criteriaTree.first is Criteria, "Pass")
@@ -132,10 +130,7 @@ class CriteriaTests: XCTestCase {
                                 </criteriagroup>
                                 """
 
-        let testCriteriaTree = genericConversionChecks(criteriaTreeString)
-
-        let treeStringUnformatted: String = criteriaTreeString.replacingOccurrences(of: "  ", with: "").replacingOccurrences(of: "\n", with: "")
-        XCTAssertEqual(treeStringUnformatted, testCriteriaTree.string, "XML reproducible")
+        genericConversionChecks(criteriaTreeString)
     }
 
     func testNestedCriteriaSQLConversion() {
@@ -254,6 +249,7 @@ class CriteriaTests: XCTestCase {
         genericConversionChecks(testCriteriaString)
     }
 
+    @discardableResult
     private func genericConversionChecks(_ criteriaTreeString: String) -> CriteriaTree {
         guard let testCriteriaTree = CriteriaTree(string: criteriaTreeString) else {
             XCTAssert(false)
