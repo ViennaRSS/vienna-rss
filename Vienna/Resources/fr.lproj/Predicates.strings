@@ -1,9 +1,9 @@
 "%[All,Any]@ of the following are true" = "L'article satisfait %1$[toutes les,une des]@ conditions suivantes";
 "%[Author,Folder,Subject,Text]@ %[is,is not]@ %@" = "%1$[Auteur,Dossier,Sujet,Texte]@ %2$[est,n'est pas]@ %3$@";
 "%[Author,Subject,Text]@ %[contains,does not contain]@ %@" = "%1$[Auteur,Sujet,Texte]@ %2$[contient,ne contient pas]@ %3$@";
-"%[Date]@ %[is,is greater than or equal to,is less than,is less than or equal to]@ %[yesterday]@" = "%1$[Date]@ %2$[est,est durant ou après,est avant,est avant ou durant]@ %3$[hier]@";
-"%[Date]@ %[is,is greater than,is greater than or equal to,is less than,is less than or equal to]@ %[last week]@" = "%1$[Date]@ %2$[est durant,est durant ou après,est dans ou après,est avant,est avant ou durant]@ %3$[la dernière semaine]@";
-"%[Date]@ %[is,is less than,is less than or equal to]@ %[today]@" = "%1$[Date]@ %2$[est,est avant,est avant ou durant]@ %3$[aujourd'hui]@";
-"%[Date]@ %[less than ago,more than ago]@ %[days,hours,minutes,months,weeks,years]@ %@" = "%1$[Date]@ %2$[est dans les,n'est pas dans les]@ %4$@ %3$[derniers jours,dernières heures,dernières minutes,derniers mois,dernières semaines,dernières années]@";
+"%[Date,PublicationDate]@ %[is,is greater than or equal to,is less than,is less than or equal to]@ %[yesterday]@" = "%1$[Dernière mise à jour,Date de publication]@ %2$[est,est durant ou après,est avant,est avant ou durant]@ %3$[hier]@";
+"%[Date,PublicationDate]@ %[is,is greater than,is greater than or equal to,is less than,is less than or equal to]@ %[last week]@" = "%1$[Dernière mise à jour,Date de publication]@ %2$[est durant,est durant ou après,est dans ou après,est avant,est avant ou durant]@ %3$[la dernière semaine]@";
+"%[Date,PublicationDate]@ %[is,is less than,is less than or equal to]@ %[today]@" = "%1$[Dernière mise à jour,Date de publication]@ %2$[est,est avant,est avant ou durant]@ %3$[aujourd'hui]@";
+"%[Date,PublicationDate]@ %[less than ago,more than ago]@ %[days,hours,minutes,months,weeks,years]@ %@" = "%1$[Dernière mise à jour,Date de publication]@ %2$[est dans les,n'est pas dans les]@ %4$@ %3$[derniers jours,dernières heures,dernières minutes,derniers mois,dernières semaines,dernières années]@";
 "%[Deleted,Flagged,HasEnclosure,Read]@ is %[No,Yes]@" = "%1$[Effacé,Signalé,Fichier joint,Lu]@ %2$[Non,Oui]@";
 "%[None]@ of the following are true" = "L'article satisfait %1$[aucune]@ des conditions suivantes";
