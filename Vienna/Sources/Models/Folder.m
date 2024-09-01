@@ -609,8 +609,11 @@
         NSArray * myArray = [[Database sharedManager] minimalCacheForFolder:self.itemId];
         for (Article * myArticle in myArray) {
             NSString * guid = myArticle.guid;
+            myArticle.status = [self retrieveKnownStatusForGuid:guid];
             [self.cachedArticles setObject:myArticle forKey:[NSString stringWithString:guid]];
-            [self.cachedGuids addObject:guid];
+            if (![self.cachedGuids containsObject:guid]) {
+                [self.cachedGuids addObject:guid];
+            }
         }
         self.isCached = YES;
         // Note that this only builds a minimal cache, so we cannot set the containsBodies flag
@@ -702,6 +705,7 @@
                     } else {
                         // some problem
                         NSLog(@"Bug retrieving from cache in folder %li : after %lu insertions of %lu, guid %@",(long)self.itemId, (unsigned long)articles.count,(unsigned long)self.cachedGuids.count,object);
+                        [self.cachedArticles removeAllObjects];
                         return [self getCompleteArticles];
                     }
                 }
@@ -728,11 +732,11 @@
     // Only feeds folders can be cached, as they are the only ones to guarantee
     // bijection : one article <-> one guid
     if (self.type == VNAFolderTypeRSS || self.type == VNAFolderTypeOpenReader) {
-        [self.cachedArticles removeAllObjects];
         [self.cachedGuids removeAllObjects];
-        for (id object in articles) {
-            NSString * guid = ((Article *)object).guid;
-            [self.cachedArticles setObject:object forKey:[NSString stringWithString:guid]];
+        for (Article * article in articles) {
+            NSString * guid = article.guid;
+            article.status = [self retrieveKnownStatusForGuid:guid];
+            [self.cachedArticles setObject:article forKey:[NSString stringWithString:guid]];
             [self.cachedGuids addObject:guid];
         }
         self.isCached = YES;
