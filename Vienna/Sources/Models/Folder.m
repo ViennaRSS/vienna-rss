@@ -607,6 +607,7 @@
  */
  -(void)ensureCache
  {
+    NSAssert(self.type == VNAFolderTypeRSS || self.type == VNAFolderTypeOpenReader, @"Attempting to create cache for non RSS folder");
     if (!self.isCached) {
         NSArray * myArray = [[Database sharedManager] minimalCacheForFolder:self.itemId];
         for (Article * myArticle in myArray) {
@@ -683,7 +684,8 @@
  */
 -(NSArray<Article *> *)articlesWithFilter:(NSString *)filterString
 {
-	if ([filterString isEqualToString:@""]) {
+	if ([filterString isEqualToString:@""]
+        && [@[@(VNAFolderTypeGroup), @(VNAFolderTypeRSS), @(VNAFolderTypeOpenReader)] containsObject:@(self.type)]) {
 		if (self.type == VNAFolderTypeGroup) {
 			NSMutableArray * articles = [NSMutableArray array];
 			NSArray * subFolders = [[Database sharedManager] arrayOfFolders:self.itemId];
