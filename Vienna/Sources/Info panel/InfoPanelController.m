@@ -194,14 +194,15 @@
     NSURLComponents *urlComponents = [NSURLComponents componentsWithString:validatorURL];
 
     NSString *validatedURL = self.urlField.stringValue.vna_trimmed;
+    // Override the text field's URL with the validated one.
+    self.urlField.stringValue = validatedURL;
+
     NSCharacterSet *urlQuerySet = NSCharacterSet.URLQueryAllowedCharacterSet;
     NSString *encodedURL = [validatedURL stringByAddingPercentEncodingWithAllowedCharacters:urlQuerySet];
-
-    // Override the text field's URL with the encoded one.
-    self.urlField.stringValue = encodedURL;
-
+    // prevent any confusion between feed's URL query string and validator's URL query string
+    encodedURL = [encodedURL stringByReplacingOccurrencesOfString:@"&" withString:@"%26"];
     // Create the query using the encoded URL.
-    urlComponents.query = [NSString stringWithFormat:@"url=%@", encodedURL];
+    urlComponents.percentEncodedQuery = [NSString stringWithFormat:@"url=%@", encodedURL];
 
     if (self.delegate) {
         [self.delegate infoPanelControllerWillOpenURL:urlComponents.URL];
