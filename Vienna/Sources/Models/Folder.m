@@ -575,22 +575,6 @@
     }
 }
 
-/* restoreArticleToCache
- * Re-add an article to the cache (useful for unmarking article as deleted).
- */
--(void)restoreArticleToCache:(Article *)article
-{
-    @synchronized(self) {
-        NSString * guid = article.guid;
-        [self.cachedArticles setObject:article forKey:[NSString stringWithString:guid]];
-        [self.cachedGuids addObject:guid];
-        // note if article has incomplete data
-        if (article.publicationDate == nil) {
-            self.containsBodies = NO;
-        }
-    }
-}
-
 /* countOfCachedArticles
  * Return the number of articles in our cache, or -1 if the cache is empty.
  * (Note: empty is not the same as a folder with zero articles. The semantics are
@@ -807,10 +791,8 @@
     @synchronized(self) {
         Article * theArticle = ((Article *)obj);
         NSString * guid = theArticle.guid;
-        if (self.isCached && !theArticle.isDeleted) {
-            self.isCached = NO;
-            self.containsBodies = NO;
-        }
+        self.isCached = NO;
+        self.containsBodies = NO;
         [self.cachedGuids removeObject:guid];
     }
 }

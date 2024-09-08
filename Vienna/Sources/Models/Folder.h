@@ -115,7 +115,6 @@ typedef NS_OPTIONS(NSUInteger, VNAFolderFlag) {
 -(Article *)articleFromGuid:(NSString *)guid;
 -(BOOL)createArticle:(Article *)article guidHistory:(NSArray *)guidHistory;
 -(void)removeArticleFromCache:(NSString *)guid;
--(void)restoreArticleToCache:(Article *)article;
 -(void)markArticlesInCacheRead;
 -(NSArray<ArticleReference *> *)arrayOfUnreadArticlesRefs;
 -(NSComparisonResult)folderNameCompare:(Folder *)otherObject;
