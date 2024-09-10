@@ -506,14 +506,16 @@
             // add the article as new
             BOOL success = [[Database sharedManager] addArticle:article toFolder:self.itemId];
             if (success) {
+                [article beginContentAccess];
                 article.status = ArticleStatusNew;
                 // add to the cache
                 NSString * guid = article.guid;
-	            [self.cachedArticles setObject:article forKey:[NSString stringWithString:guid]];
+	            [self.cachedArticles setObject:article forKey:guid];
 	            [self.cachedGuids addObject:guid];
                 if(!article.read) {
                     adjustment = 1;
                 }
+                [article endContentAccess];
             } else {
                 return NO;
             }
@@ -609,12 +611,14 @@
     if (!self.isCached) {
         NSArray * myArray = [[Database sharedManager] minimalCacheForFolder:self.itemId];
         for (Article * myArticle in myArray) {
+            [myArticle beginContentAccess];
             NSString * guid = myArticle.guid;
             myArticle.status = [self retrieveKnownStatusForGuid:guid];
-            [self.cachedArticles setObject:myArticle forKey:[NSString stringWithString:guid]];
+            [self.cachedArticles setObject:myArticle forKey:guid];
             if (![self.cachedGuids containsObject:guid]) {
                 [self.cachedGuids addObject:guid];
             }
+            [myArticle endContentAccess];
         }
         self.isCached = YES;
         // Note that this only builds a minimal cache, so we cannot set the containsBodies flag
@@ -735,10 +739,12 @@
     if (self.type == VNAFolderTypeRSS || self.type == VNAFolderTypeOpenReader) {
         [self.cachedGuids removeAllObjects];
         for (Article * article in articles) {
+            [article beginContentAccess];
             NSString * guid = article.guid;
             article.status = [self retrieveKnownStatusForGuid:guid];
-            [self.cachedArticles setObject:article forKey:[NSString stringWithString:guid]];
+            [self.cachedArticles setObject:article forKey:guid];
             [self.cachedGuids addObject:guid];
+            [article endContentAccess];
         }
         self.isCached = YES;
         self.containsBodies = YES;
