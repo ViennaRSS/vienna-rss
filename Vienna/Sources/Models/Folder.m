@@ -658,6 +658,21 @@
   } // synchronized
 }
 
+/* resetArticleStatuses
+ * iterate through the cache and empty the articles status
+ */
+-(void)resetArticleStatuses
+{
+    for (NSString * guid in self.cachedGuids) {
+        Article * article = [self.cachedArticles objectForKey:guid];
+        if (article) {
+            [article beginContentAccess];
+            article.status = ArticleStatusEmpty;
+            [article endContentAccess];
+        }
+    }
+}
+
 /* arrayOfUnreadArticlesRefs
  * Return an array of ArticleReference of all unread articles
  */
