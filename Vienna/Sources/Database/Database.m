@@ -284,10 +284,11 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
     
     // If we have a DemoFeeds.plist in the resources then use it to create some initial demo
     // RSS feeds.
-    NSBundle *thisBundle = [NSBundle bundleForClass:[self class]];
-    NSString * pathToPList = [thisBundle pathForResource:@"DemoFeeds.plist" ofType:@""];
-    if (pathToPList != nil) {
-        NSDictionary * demoFeedsDict = [NSDictionary dictionaryWithContentsOfFile:pathToPList];
+    NSURL *plistURL = [NSBundle.mainBundle URLForResource:@"DemoFeeds"
+                                            withExtension:@"plist"];
+    if (plistURL) {
+        NSDictionary *demoFeedsDict = [NSDictionary dictionaryWithContentsOfURL:plistURL
+                                                                          error:NULL];
         if (demoFeedsDict) {
             for (NSString * feedName in demoFeedsDict) {
                 NSDictionary * itemDict = demoFeedsDict[feedName];

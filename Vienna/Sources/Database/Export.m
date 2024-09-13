@@ -141,7 +141,7 @@
     [opmlDocument setStandalone:YES];
     
     NSXMLElement *opmlElement = [NSXMLElement elementWithName:@"opml"];
-    [opmlElement setAttributesAsDictionary:@{@"version":@"1.0"}];
+    [opmlElement setAttributesWithDictionary:@{@"version": @"1.0"}];
     
     NSXMLElement *headElement = [NSXMLElement elementWithName:@"head"];
     NSXMLElement *title = [NSXMLElement elementWithName:@"title" stringValue:@"Vienna Subscriptions"];

@@ -692,7 +692,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
                 }
             }
 
-            [receivedData writeToFile:feedSourcePath options:NSAtomicWrite error:NULL];
+            [receivedData writeToFile:feedSourcePath options:NSDataWritingAtomic error:NULL];
         }
 
         id<VNAFeed> newFeed;

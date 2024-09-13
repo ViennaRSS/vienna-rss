@@ -152,11 +152,13 @@
  */
 -(void)refreshLinkHandler
 {
-    NSBundle * appBundle = [NSBundle mainBundle];
-    NSString * ourAppName = [[NSFileManager defaultManager] displayNameAtPath:appBundle.bundlePath];
+    NSFileManager *fileManager = NSFileManager.defaultManager;
+    NSBundle *appBundle = NSBundle.mainBundle;
+    NSString *ourAppName = [fileManager displayNameAtPath:appBundle.bundlePath];
     BOOL onTheList = NO;
-    NSURL *testURL = [NSURL URLWithString:@"feed://www.test.com"];
-    NSURL *registeredAppURL = [NSWorkspace.sharedWorkspace URLForApplicationToOpenURL:testURL];
+    NSURL * const testURL = [NSURL URLWithString:@"feed://www.test.com"];
+    NSWorkspace *workspace = NSWorkspace.sharedWorkspace;
+    NSURL *registeredAppURL = [workspace URLForApplicationToOpenURL:testURL];
     
     // Clear all existing items
     [linksHandler removeAllItems];
@@ -168,12 +170,12 @@
         onTheList = YES;
     }
     
-    NSString * regAppName = [[NSFileManager defaultManager] displayNameAtPath:registeredAppURL.path];
+    NSString *regAppName = [fileManager displayNameAtPath:registeredAppURL.path];
     // Maintain a table to map from the short name to the file URL for when
     // the user changes selection and we later need the file URL to register
     // the new selection.
     if (regAppName != nil) {
-        NSImage *image = [NSWorkspace.sharedWorkspace iconForFile:registeredAppURL.path];
+        NSImage *image = [workspace iconForFile:registeredAppURL.path];
         [linksHandler addItemWithTitle:regAppName image:image];
         [linksHandler.menu addItem:[NSMenuItem separatorItem]];
         [appToPathMap setValue:registeredAppURL forKey:regAppName];
@@ -181,32 +183,35 @@
 
     // Next, add the list of all registered link handlers under the /Applications folder
     // except for the registered application.
-    CFArrayRef cfArrayOfApps = LSCopyApplicationURLsForURL((__bridge CFURLRef)testURL, kLSRolesAll);
-    if (cfArrayOfApps != nil) {
-        CFIndex count = CFArrayGetCount(cfArrayOfApps);
-        NSInteger index;
-        
-        for (index = 0; index < count; ++index) {
-            NSURL * appURL = (NSURL *)CFArrayGetValueAtIndex(cfArrayOfApps, index);
-            if (appURL.fileURL && [appURL.path hasPrefix:@"/Applications/"]) {
-                NSString * appName = [[NSFileManager defaultManager] displayNameAtPath:appURL.path];
-                if ([appName isEqualToString:ourAppName]) {
-                    onTheList = YES;
-                }
-                if (appName != nil && ![appName isEqualToString:regAppName]) {
-                    [linksHandler addItemWithTitle:appName image:[[NSWorkspace sharedWorkspace] iconForFile:appURL.path]];
-                }
-                
-                [appToPathMap setValue:appURL forKey:appName];
-            }
+    NSArray *appURLs;
+    if (@available(macOS 12, *)) {
+        appURLs = [workspace URLsForApplicationsToOpenURL:testURL];
+    } else {
+        CFArrayRef cfArrayOfApps = LSCopyApplicationURLsForURL((__bridge CFURLRef)testURL, kLSRolesAll);
+        if (cfArrayOfApps != NULL) {
+            appURLs = (__bridge_transfer NSArray<NSURL *> *)cfArrayOfApps;
+        } else {
+            appURLs = @[];
         }
-        CFRelease(cfArrayOfApps);
+    }
+    for (NSURL *appURL in appURLs) {
+        if (appURL.fileURL && [appURL.path hasPrefix:@"/Applications/"]) {
+            NSString * appName = [fileManager displayNameAtPath:appURL.path];
+            if ([appName isEqualToString:ourAppName]) {
+                onTheList = YES;
+            }
+            if (appName != nil && ![appName isEqualToString:regAppName]) {
+                [linksHandler addItemWithTitle:appName image:[workspace iconForFile:appURL.path]];
+            }
+
+            [appToPathMap setValue:appURL forKey:appName];
+        }
     }
     
     // Were we on the list? If not, add ourselves
     // complete with our icon.
     if (!onTheList) {
-        [linksHandler addItemWithTitle:ourAppName image:[[NSWorkspace sharedWorkspace] iconForFile:appBundle.bundlePath]];
+        [linksHandler addItemWithTitle:ourAppName image:[workspace iconForFile:appBundle.bundlePath]];
         
         NSURL * fileURL = [[NSURL alloc] initFileURLWithPath:appBundle.bundlePath];
         [appToPathMap setValue:fileURL forKey:ourAppName];
