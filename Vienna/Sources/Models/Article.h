@@ -69,10 +69,11 @@ typedef NS_ENUM(NSInteger, VNAArticleFieldTag) {
 typedef NS_ENUM(NSInteger, ArticleStatus) {
     ArticleStatusEmpty = 0,
     ArticleStatusNew,
-    ArticleStatusUpdated
+    ArticleStatusUpdated,
+    ArticleStatusDiscarded
 };
 
-@interface Article : NSObject
+@interface Article : NSObject<NSDiscardableContent>
 
 // Accessor functions
 -(instancetype _Nonnull)initWithGuid:(NSString * _Nonnull)theGuid /*NS_DESIGNATED_INITIALIZER*/;

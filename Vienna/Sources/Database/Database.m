@@ -2251,7 +2251,8 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 			results = [db executeQuery:queryString, filterString, filterString];
 		}
 		while ([results next]) {
-			Article * article = [[Article alloc] initWithGuid:[results stringForColumnIndex:0]];
+			NSString * guid = [results stringForColumnIndex:0];
+			Article * article = [[Article alloc] initWithGuid:guid];
 			article.folderId = [results intForColumnIndex:1];
 			article.parentId = [results intForColumnIndex:2];
 			[article markRead:[results intForColumnIndex:3]];
@@ -2267,6 +2268,8 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 			[article markRevised:[results intForColumnIndex:12]];
 			article.hasEnclosure = [results intForColumnIndex:13];
 			article.enclosure = [results stringForColumnIndex:14];
+			Folder * articleFolder = [self folderFromID:article.folderId];
+			article.status = [articleFolder retrieveKnownStatusForGuid:guid];
 		
 			if (folder == nil || !article.deleted || folder.type == VNAFolderTypeTrash) {
 				[newArray addObject:article];
@@ -2474,19 +2477,11 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
              @(folderId),
              guid];
         }];
-        if (isDeleted && !article.deleted) {
-            [article markDeleted:YES];
-            if (folder.countOfCachedArticles > 0) {
-				// If we're in a smart folder, the cached article may be different.
-				Article * cachedArticle = [folder articleFromGuid:guid];
-				[cachedArticle markDeleted:YES];
-				[folder removeArticleFromCache:guid];
-			}
-        } else if (!isDeleted) {
-            // if we undelete, allow the RSS or OpenReader folder
-            // to get the restored article 
-            [folder restoreArticleToCache:article];
-            [article markDeleted:NO];
+        [article markDeleted:isDeleted];
+        if (folder.countOfCachedArticles > 0) {
+            // If we're in a smart folder, the cached article may be different.
+            Article * cachedArticle = [folder articleFromGuid:guid];
+            [cachedArticle markDeleted:isDeleted];
         }
 	}
 }

@@ -854,6 +854,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 
         // Here's where we add the articles to the database
         if (articleArray.count > 0u) {
+            [folder resetArticleStatuses];
             NSArray *guidHistory = [dbManager guidHistoryForFolderId:folderId];
             for (Article * article in articleArray) {
                 if ([folder createArticle:article

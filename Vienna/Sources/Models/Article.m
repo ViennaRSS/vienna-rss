@@ -18,13 +18,11 @@
 //  limitations under the License.
 //
 
-
 #import "Article.h"
+
 #import "Database.h"
-#import "DateFormatterExtension.h"
-#import "StringExtensions.h"
-#import "HelperFunctions.h"
 #import "Folder.h"
+#import "StringExtensions.h"
 
 // The names here are internal field names, not for localisation.
 NSString * const MA_Field_GUID = @"GUID";
@@ -310,96 +308,33 @@ NSString * const MA_Field_HasEnclosure = @"HasEnclosure";
     return nil;
 }
 
-/* tagArticleLink
- * Returns the article link as a safe string.
- */
--(NSString *)tagArticleLink
+// MARK: - NSDiscardableContent
+
+-(BOOL)beginContentAccess
 {
-    return cleanedUpUrlFromString(self.link).absoluteString;
+    return self.status != ArticleStatusDiscarded;
 }
 
-/* tagArticleTitle
- * Returns the article title.
- */
--(NSString *)tagArticleTitle
+- (void)endContentAccess
 {
-    NSMutableString * articleTitle = [NSMutableString stringWithString:SafeString([self title])];
-    [articleTitle vna_replaceString:@"$Article" withString:@"$_%$%_Article"];
-    [articleTitle vna_replaceString:@"$Feed" withString:@"$_%$%_Feed"];
-    return [NSString vna_stringByConvertingHTMLEntities:articleTitle];
+    // do nothing special,
+    // as we are not attempting to retrieve discarded content by ourself
+    // and don't manage any access count
 }
 
-/* tagArticleBody
- * Returns the article body.
- */
--(NSString *)tagArticleBody
+-(void)discardContentIfPossible
 {
-    NSMutableString * articleBody = [NSMutableString stringWithString:SafeString(self.body)];
-    [articleBody vna_replaceString:@"$Article" withString:@"$_%$%_Article"];
-    [articleBody vna_replaceString:@"$Feed" withString:@"$_%$%_Feed"];
-    [articleBody vna_fixupRelativeImgTags:self.link];
-    [articleBody vna_fixupRelativeIframeTags:self.link];
-    [articleBody vna_fixupRelativeAnchorTags:self.link];
-    return articleBody;
+    self.status = ArticleStatusDiscarded;
+    [articleData removeObjectForKey:MA_Field_Text];
+    [articleData removeObjectForKey:MA_Field_Summary];
+    [articleData removeObjectForKey:MA_Field_Author];
+    [articleData removeObjectForKey:MA_Field_LastUpdate];
+    [articleData removeObjectForKey:MA_Field_PublicationDate];
 }
 
-/* tagArticleAuthor
- * Returns the article author as a safe string.
- */
--(NSString *)tagArticleAuthor
+- (BOOL)isContentDiscarded
 {
-    return SafeString([self author]);
-}
-
-/* tagArticleDate
- * Returns the article date.
- */
--(NSString *)tagArticleDate
-{
-    return [NSDateFormatter vna_relativeDateStringFromDate:self.lastUpdate];
-}
-
-/* tagArticleEnclosureLink
- * Returns the article enclosure link.
- */
--(NSString *)tagArticleEnclosureLink
-{
-    return cleanedUpUrlFromString(self.enclosure).absoluteString;
-}
-
-/* tagArticleEnclosureFilename
- * Returns the article enclosure file name.
- */
--(NSString *)tagArticleEnclosureFilename
-{
-    return [self.enclosure.lastPathComponent stringByRemovingPercentEncoding];
-}
-
-/* tagFeedTitle
- * Returns the article's feed title.
- */
--(NSString *)tagFeedTitle
-{
-    Folder * folder = [[Database sharedManager] folderFromID:self.folderId];
-    return [NSString vna_stringByConvertingHTMLEntities:SafeString([folder name])];
-}
-
-/* tagFeedLink
- * Returns the article's feed URL.
- */
--(NSString *)tagFeedLink
-{
-    Folder * folder = [[Database sharedManager] folderFromID:self.folderId];
-    return cleanedUpUrlFromString(folder.homePage).absoluteString;
-}
-
-/* tagFeedDescription
- * Returns the article's feed description.
- */
--(NSString *)tagFeedDescription
-{
-    Folder * folder = [[Database sharedManager] folderFromID:self.folderId];
-    return folder.feedDescription;
+    return self.status == ArticleStatusDiscarded;
 }
 
 @end

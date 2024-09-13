@@ -639,6 +639,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 
             // Here's where we add the articles to the database
             if (articleArray.count > 0) {
+                [refreshedFolder resetArticleStatuses];
                 NSArray *guidHistory = [dbManager guidHistoryForFolderId:refreshedFolder.itemId];
 
                 for (Article *article in articleArray) {
