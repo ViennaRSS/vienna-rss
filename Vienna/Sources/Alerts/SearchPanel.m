@@ -40,7 +40,11 @@
 		self.topObjects = objects;
 		((NSSearchFieldCell *)searchField.cell).searchMenuTemplate = APPCONTROLLER.searchFieldMenu;
 	}
-	[searchLabel setStringValue:NSLocalizedString(@"Search", @"Search panel title")];
+	searchLabel.stringValue = NSLocalizedStringWithDefaultValue(@"search.window",
+																nil,
+																NSBundle.mainBundle,
+																@"Search",
+																@"Window title");
 	searchField.stringValue = APPCONTROLLER.searchString ? APPCONTROLLER.searchString : @"";
     [window beginSheet:searchPanelWindow completionHandler:nil];
 }

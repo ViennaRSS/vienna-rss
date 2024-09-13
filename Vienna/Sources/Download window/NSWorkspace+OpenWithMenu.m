@@ -124,7 +124,7 @@
         [submenu addItem:[NSMenuItem separatorItem]];
     }
 
-    NSString *title = NSLocalizedString(@"Select…", @"Title of a popup menu item");
+    NSString *title = NSLocalizedString(@"Select…", @"Title of a menu item");
     NSMenuItem *selectItem = [submenu addItemWithTitle:title action:selector keyEquivalent:@""];
     [selectItem setTag:1];
     [selectItem setTarget:target];

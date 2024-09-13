@@ -573,7 +573,11 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 	NSUndoManager * undoManager = NSApp.mainWindow.undoManager;
 	SEL markDeletedUndoAction = deleteFlag ? @selector(markDeletedUndo:) : @selector(markUndeletedUndo:);
 	[undoManager registerUndoWithTarget:self selector:markDeletedUndoAction object:articleArray];
-	[undoManager setActionName:NSLocalizedString(@"Delete", nil)];
+    [undoManager setActionName:NSLocalizedStringWithDefaultValue(@"delete.undoAction",
+                                                                 nil,
+                                                                 NSBundle.mainBundle,
+                                                                 @"Delete",
+                                                                 @"Name of an undo/redo action in the menu bar's Edit menu.")];
 	
 	// We will make a new copy of currentArrayOfArticles and folderArrayOfArticles with the selected articles removed.
 	NSMutableArray * currentArrayCopy = [NSMutableArray arrayWithArray:currentArrayOfArticles];
@@ -782,7 +786,11 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 	NSUndoManager * undoManager = NSApp.mainWindow.undoManager;	
 	SEL markReadUndoAction = readFlag ? @selector(markUnreadUndo:) : @selector(markReadUndo:);
 	[undoManager registerUndoWithTarget:self selector:markReadUndoAction object:articleArray];
-	[undoManager setActionName:NSLocalizedString(@"Mark Read", nil)];
+	[undoManager setActionName:NSLocalizedStringWithDefaultValue(@"markRead.undoAction",
+																 nil,
+																 NSBundle.mainBundle,
+																 @"Mark Read",
+																 @"Name of an undo/redo action in the menu bar's Edit menu.")];
 
     [self innerMarkReadByArray:articleArray readFlag:readFlag];
 
