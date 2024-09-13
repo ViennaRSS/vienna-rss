@@ -754,7 +754,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "%d artikulu berri jasota"
                 }
               },
@@ -790,7 +790,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "Recuperados %d novos artigos"
                 }
               },
@@ -850,13 +850,13 @@
             "plural" : {
               "few" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "Parsiųsta %d naujų straipsnių"
                 }
               },
               "many" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "Parsiųsta %d naujų straipsnių"
                 }
               },
@@ -898,7 +898,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "%d novos artigos descarregados"
                 }
               },
@@ -982,7 +982,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "%d yeni makale alındı"
                 }
               },
@@ -1000,19 +1000,19 @@
             "plural" : {
               "few" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "Отримано %d нових статей"
                 }
               },
               "many" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "Отримано %d нових статей"
                 }
               },
               "one" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "Отримано %d нових статей"
                 }
               },
@@ -1059,19 +1059,19 @@
             "plural" : {
               "few" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "Přijato nových nepřečtených příspěvků: %d"
                 }
               },
               "many" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "Přijato nových nepřečtených příspěvků: %d"
                 }
               },
               "one" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "Přijato nových nepřečtených příspěvků: %d"
                 }
               },
@@ -1161,7 +1161,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "%d artikulu berri irakurri gabe jasota"
                 }
               },
@@ -1197,7 +1197,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "Recuperados novos artigos sen ler"
                 }
               },
@@ -1257,19 +1257,19 @@
             "plural" : {
               "few" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "Parsiųsta naujų neperskaitytų straipsnių"
                 }
               },
               "many" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "Parsiųsta naujų neperskaitytų straipsnių"
                 }
               },
               "one" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "Parsiųsta naujų neperskaitytų straipsnių"
                 }
               },
@@ -1305,7 +1305,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "%d novos artigos recebidos"
                 }
               },
@@ -1341,19 +1341,19 @@
             "plural" : {
               "few" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "Получено %d новых статей"
                 }
               },
               "many" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "Получено %d новых статей"
                 }
               },
               "one" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "Получено %d новых статей"
                 }
               },
@@ -1389,7 +1389,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "%d yeni okunmayan makale alındı"
                 }
               },
@@ -1537,7 +1537,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "%d harpidetzak zuzen esportatu dira"
                 }
               },
@@ -1573,7 +1573,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "%d subscricións correctamente exportadas"
                 }
               },
@@ -1633,13 +1633,13 @@
             "plural" : {
               "few" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "Sėkmingai importuota %d naujų prenumeratų"
                 }
               },
               "many" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "Sėkmingai importuota %d naujų prenumeratų"
                 }
               },
@@ -1681,7 +1681,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "%d assinaturas exportadas com sucesso"
                 }
               },
@@ -1765,7 +1765,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "%d abonelikleri başarılı bir şekilde çıkarıldı"
                 }
               },
@@ -1783,19 +1783,19 @@
             "plural" : {
               "few" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "Успішно експортовано %d підписок"
                 }
               },
               "many" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "Успішно експортовано %d підписок"
                 }
               },
               "one" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "Успішно експортовано %d підписок"
                 }
               },
@@ -1943,7 +1943,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "%d harpidetzak zuzen inportatu dira"
                 }
               },
@@ -1979,7 +1979,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "%d subscricións importadas correctamente"
                 }
               },
@@ -2039,13 +2039,13 @@
             "plural" : {
               "few" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "Sėkmingai importuota %d naujų prenumeratų"
                 }
               },
               "many" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "Sėkmingai importuota %d naujų prenumeratų"
                 }
               },
@@ -2087,7 +2087,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "%d assinaturas importadas com sucesso"
                 }
               },
@@ -2171,7 +2171,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "%d abonelikleri başarılı bir şekilde dahil edildi"
                 }
               },
@@ -2189,19 +2189,19 @@
             "plural" : {
               "few" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "Успішно імпортовано %d підписок"
                 }
               },
               "many" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "Успішно імпортовано %d підписок"
                 }
               },
               "one" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "Успішно імпортовано %d підписок"
                 }
               },
@@ -2349,7 +2349,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "%d artikulu irakurri gabe"
                 }
               },
@@ -2385,7 +2385,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "%d artigos sen ler"
                 }
               },
@@ -2445,13 +2445,13 @@
             "plural" : {
               "few" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "%d neskaitytų straipsnių"
                 }
               },
               "many" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "%d neskaitytų straipsnių"
                 }
               },
@@ -2493,7 +2493,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "%d artigos não lidos"
                 }
               },
@@ -2577,7 +2577,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "%d okunmamış makale"
                 }
               },
@@ -2595,19 +2595,19 @@
             "plural" : {
               "few" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "%d непрочитаних статей"
                 }
               },
               "many" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "%d непрочитаних статей"
                 }
               },
               "one" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "%d непрочитаних статей"
                 }
               },
@@ -2755,7 +2755,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "%u artikulu"
                 }
               },
@@ -2791,7 +2791,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "%u artigos"
                 }
               },
@@ -2851,13 +2851,13 @@
             "plural" : {
               "few" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "%u straipsniai"
                 }
               },
               "many" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "%u straipsniai"
                 }
               },
@@ -2899,7 +2899,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "%u artigos"
                 }
               },
@@ -2983,7 +2983,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "%u makale"
                 }
               },
@@ -3001,19 +3001,19 @@
             "plural" : {
               "few" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "%u статей"
                 }
               },
               "many" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "%u статей"
                 }
               },
               "one" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "%u статей"
                 }
               },
@@ -3251,13 +3251,13 @@
             "plural" : {
               "few" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "%u neperskaityta"
                 }
               },
               "many" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "%u neperskaityta"
                 }
               },
@@ -3401,13 +3401,13 @@
             "plural" : {
               "few" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "%u непрочитаних"
                 }
               },
               "many" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "%u непрочитаних"
                 }
               },
