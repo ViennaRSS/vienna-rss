@@ -46,6 +46,7 @@
 @implementation Folder {
     NSInteger unreadCount;
     NSInteger childUnreadCount;
+    NSInteger latestFetchCount;         // count of new/updated articles fetched during a feed refresh
     VNAFolderFlag nonPersistedFlags;
     VNAFolderFlag flags;
 }
@@ -508,6 +509,7 @@
             if (success) {
                 [article beginContentAccess];
                 article.status = ArticleStatusNew;
+                latestFetchCount++;
                 // add to the cache
                 NSString * guid = article.guid;
 	            [self.cachedArticles setObject:article forKey:guid];
@@ -535,6 +537,7 @@
             } else {
                 article.status = ArticleStatusUpdated;
             }
+            latestFetchCount++;
         } else {
             return NO;
         }
@@ -663,14 +666,25 @@
  */
 -(void)resetArticleStatuses
 {
-    for (NSString * guid in self.cachedGuids) {
+    NSInteger count = latestFetchCount;
+    // we take profit from the fact that the articles
+    // which were fetched during the last feed refresh 
+    // are located at the end of the array
+    for (NSString * guid in self.cachedGuids.reverseObjectEnumerator.allObjects) {
         Article * article = [self.cachedArticles objectForKey:guid];
-        if (article) {
+        if (article &&
+            (article.status == ArticleStatusNew || article.status == ArticleStatusUpdated))
+        {
             [article beginContentAccess];
             article.status = ArticleStatusEmpty;
             [article endContentAccess];
+            count--;
+            if (count == 0) {
+                break;
+            }
         }
     }
+    latestFetchCount = 0;
 }
 
 /* arrayOfUnreadArticlesRefs
