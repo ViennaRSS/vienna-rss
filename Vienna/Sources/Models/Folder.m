@@ -505,9 +505,9 @@
             return NO; // Article has been deleted and removed from database, so ignore
         } else {
             // add the article as new
+            [article beginContentAccess];
             BOOL success = [[Database sharedManager] addArticle:article toFolder:self.itemId];
             if (success) {
-                [article beginContentAccess];
                 article.status = ArticleStatusNew;
                 latestFetchCount++;
                 // add to the cache
@@ -517,16 +517,18 @@
                 if(!article.read) {
                     adjustment = 1;
                 }
-                [article endContentAccess];
             } else {
+                [article endContentAccess];
                 return NO;
             }
+            [article endContentAccess];
         }
     } else if (existingArticle.deleted) {
         return NO;
     } else if (![[Preferences standardPreferences] boolForKey:MAPref_CheckForUpdatedArticles]) {
         return NO;
     } else {
+        [existingArticle beginContentAccess];
         BOOL success = [[Database sharedManager] updateArticle:existingArticle ofFolder:self.itemId withArticle:article];
         if (success) {
             // Update folder unread count if necessary
@@ -539,8 +541,10 @@
             }
             latestFetchCount++;
         } else {
+            [existingArticle endContentAccess];
             return NO;
         }
+        [existingArticle endContentAccess];
     }
 
     // Fix unread count on parent folders and Database manager
