@@ -729,14 +729,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
                                                                                  @"Number of bytes received, e.g. 1 MB received"),
                                      byteCount]];
 
-        if (newFeed.items.count == 0) {
-            // Mark the feed as empty
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [connectorItem setStatus:NSLocalizedString(@"No articles in feed", nil)];
-            });
-            return;
-        }
-
         // Extract the latest title and description
         NSString * feedTitle = newFeed.title;
         NSString * feedDescription = newFeed.feedDescription;
@@ -750,6 +742,40 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
             feedLink = [NSURL URLWithString:feedLink relativeToURL:url].absoluteString;
         }
 
+        if (feedTitle != nil  && !feedTitle.vna_isBlank && [folder.name hasPrefix:[Database untitledFeedFolderName]]) {
+            // If there's an existing feed with this title, make ours unique
+            // BUGBUG: This duplicates logic in database.m so consider moving it there.
+            NSString * oldFeedTitle = feedTitle;
+            NSString * newFeedTitle = feedTitle;
+            NSUInteger index = 1;
+
+            while (([dbManager folderFromName:newFeedTitle]) != nil) {
+                newFeedTitle = [NSString stringWithFormat:@"%@ (%lu)", oldFeedTitle, (unsigned long)index++];
+            }
+
+            connectorItem.name = newFeedTitle;
+            [dbManager setName:newFeedTitle forFolder:folderId];
+        }
+        if (feedDescription != nil) {
+            [dbManager setDescription:feedDescription forFolder:folderId];
+        }
+        if (feedLink != nil) {
+            [dbManager setHomePage:feedLink forFolder:folderId];
+        }
+        // Remember the last modified date
+        if (lastModifiedString != nil && lastModifiedString.length > 0) {
+            [dbManager setLastUpdateString:lastModifiedString forFolder:folderId];
+        }
+        // Set the last update date for this folder.
+        [dbManager setLastUpdate:[NSDate date] forFolder:folderId];
+
+        if (newFeed.items.count == 0) {
+            // Mark the feed as empty
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [connectorItem setStatus:NSLocalizedString(@"No articles in feed", nil)];
+            });
+            return;
+        }
 
         // We'll be collecting articles into this array
         NSMutableArray *articleArray = [NSMutableArray array];
@@ -864,37 +890,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
                 }
             }
         }
-
-
-        // A notify is only needed if we added any new articles.
-        if (feedTitle != nil  && !feedTitle.vna_isBlank && [folder.name hasPrefix:[Database untitledFeedFolderName]]) {
-            // If there's an existing feed with this title, make ours unique
-            // BUGBUG: This duplicates logic in database.m so consider moving it there.
-            NSString * oldFeedTitle = feedTitle;
-            NSString * newFeedTitle = feedTitle;
-            NSUInteger index = 1;
-
-            while (([dbManager folderFromName:newFeedTitle]) != nil) {
-                newFeedTitle = [NSString stringWithFormat:@"%@ (%lu)", oldFeedTitle, (unsigned long)index++];
-            }
-
-            connectorItem.name = newFeedTitle;
-            [dbManager setName:newFeedTitle forFolder:folderId];
-        }
-        if (feedDescription != nil) {
-            [dbManager setDescription:feedDescription forFolder:folderId];
-        }
-        if (feedLink != nil) {
-            [dbManager setHomePage:feedLink forFolder:folderId];
-        }
-
-        // Remember the last modified date
-        if (lastModifiedString != nil && lastModifiedString.length > 0) {
-            [dbManager setLastUpdateString:lastModifiedString forFolder:folderId];
-        }
-        // Set the last update date for this folder.
-        [dbManager setLastUpdate:[NSDate date] forFolder:folderId];
-
 
         // Mark the feed as succeeded
         [self setFolderErrorFlag:folder flag:NO];
