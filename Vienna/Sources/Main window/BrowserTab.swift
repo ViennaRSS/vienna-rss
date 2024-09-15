@@ -18,7 +18,7 @@
 //
 
 import Cocoa
-import WebKit
+@preconcurrency import WebKit
 
 // MARK: State
 
