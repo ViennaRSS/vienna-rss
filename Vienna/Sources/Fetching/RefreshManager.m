@@ -609,9 +609,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 
         if (responseStatusCode == 304) {
             // No modification from last check
-
-            [dbManager setLastUpdate:[NSDate date] forFolder:folderId];
-
             [self setFolderErrorFlag:folder flag:NO];
             [connectorItem appendDetail:NSLocalizedString(@"Got HTTP status 304 - No news from last check", nil)];
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -766,8 +763,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         if (lastModifiedString != nil && lastModifiedString.length > 0) {
             [dbManager setLastUpdateString:lastModifiedString forFolder:folderId];
         }
-        // Set the last update date for this folder.
-        [dbManager setLastUpdate:[NSDate date] forFolder:folderId];
 
         if (newFeed.items.count == 0) {
             // Mark the feed as empty
@@ -889,6 +884,10 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
                     ++newArticlesFromFeed;
                 }
             }
+        }
+
+        if (newArticlesFromFeed > 0u) {
+            [dbManager setLastUpdate:[NSDate date] forFolder:folderId];
         }
 
         // Mark the feed as succeeded
