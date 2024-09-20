@@ -2345,6 +2345,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	Folder * folder = [self folderFromID:folderId];
 	if (folder != nil) {
 		Article * article = [folder articleFromGuid:guid];
+		[article beginContentAccess];
 		if (article != nil && isRead != article.read) {
 			// Mark an individual article read
             FMDatabaseQueue *queue = self.databaseQueue;
@@ -2360,6 +2361,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 				[self setFolderUnreadCount:folder adjustment:adjustment];
 			}
 		}
+		[article endContentAccess];
 	}
 }
 
@@ -2440,6 +2442,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	Folder * folder = [self folderFromID:folderId];
 	if (folder != nil) {
 		Article * article = [folder articleFromGuid:guid];
+		[article beginContentAccess];
 		if (article != nil && isFlagged != article.flagged) {
             FMDatabaseQueue *queue = self.databaseQueue;
             __block BOOL success;
@@ -2455,6 +2458,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
                 [article markFlagged:isFlagged];
 			}
 		}
+		[article endContentAccess];
 	}
 }
 
@@ -2481,7 +2485,9 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
         if (folder.countOfCachedArticles > 0) {
             // If we're in a smart folder, the cached article may be different.
             Article * cachedArticle = [folder articleFromGuid:guid];
+            [cachedArticle beginContentAccess];
             [cachedArticle markDeleted:isDeleted];
+            [cachedArticle endContentAccess];
         }
 	}
 }
