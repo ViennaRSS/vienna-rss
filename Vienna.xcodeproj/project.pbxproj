@@ -709,7 +709,7 @@
 				035B703519E0E4AE00197334 /* Vienna Tests.xctest */,
 			);
 			name = Products;
-			sourceTree = SOURCE_ROOT;
+			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		2A37F4AAFDCFA73011CA2CEA /* Vienna */ = {
 			isa = PBXGroup;
@@ -720,9 +720,9 @@
 				035B703619E0E4AE00197334 /* Vienna Tests */,
 				F636FEBB2A39031B002AD931 /* Packages */,
 				F63B7D701F1CD001002F71BF /* External */,
-				19C28FB0FE9D524F11CA2CBB /* Products */,
 				439824171666B31700FFE219 /* Scripts */,
 				F6BD1FD72C9D7D9D0075D04F /* Configs */,
+				19C28FB0FE9D524F11CA2CBB /* Products */,
 			);
 			indentWidth = 4;
 			name = Vienna;
@@ -1487,7 +1487,6 @@
 				F69255982572A32900D387D8 /* XCRemoteSwiftPackageReference "MMTabBarView" */,
 				F696D23C2561F9FC003DF0C0 /* XCRemoteSwiftPackageReference "Sparkle" */,
 			);
-			productRefGroup = 19C28FB0FE9D524F11CA2CBB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
