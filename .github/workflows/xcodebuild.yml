@@ -14,13 +14,16 @@ jobs:
     strategy:
       matrix:
         include:
-          - os: macos-13
-            xcode: /Applications/Xcode_15.2.app/Contents/Developer
           - os: macos-14
-    name: Test on ${{ matrix.os }}
+            xcode: Xcode 15
+            developer-dir: /Applications/Xcode_15.4.app/Contents/Developer
+          - os: macos-14
+            xcode: Xcode 16
+            developer-dir: /Applications/Xcode_16.app/Contents/Developer
+    name: Test with ${{ matrix.xcode }}
     runs-on: ${{ matrix.os }}
     env:
-      DEVELOPER_DIR: ${{ matrix.xcode }}
+      DEVELOPER_DIR: ${{ matrix.developer-dir }}
     timeout-minutes: 15
 
     steps:
@@ -28,11 +31,11 @@ jobs:
       uses: actions/checkout@v4
       with:
         fetch-depth: 0
-    - name: Build Xcode project
+    - name: Build Vienna
       run: |
         xcodebuild -version
         xcodebuild build-for-testing -project Vienna.xcodeproj -scheme Vienna -configuration Development | xcpretty && exit ${PIPESTATUS[0]}
-    - name: Test Xcode project
+    - name: Run unit tests
       run: |
         xcodebuild -version
         xcodebuild test -project Vienna.xcodeproj -scheme Vienna -configuration Development | xcpretty && exit ${PIPESTATUS[0]}
