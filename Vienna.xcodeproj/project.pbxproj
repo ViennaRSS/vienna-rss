@@ -629,6 +629,10 @@
 		F6B3561325616302008CA1ED /* DownloadItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadItem.h; sourceTree = "<group>"; };
 		F6B3561425616313008CA1ED /* DownloadItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadItem.m; sourceTree = "<group>"; };
 		F6B76B43284B492E009961AD /* NSPredicateEditor+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "NSPredicateEditor+Private.h"; sourceTree = "<group>"; };
+		F6BD1FD82C9D7DD40075D04F /* .clang-format */ = {isa = PBXFileReference; lastKnownFileType = text; path = ".clang-format"; sourceTree = "<group>"; };
+		F6BD1FDA2C9D7DD40075D04F /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		F6BD1FDC2C9D7E230075D04F /* CONTRIBUTING.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CONTRIBUTING.md; sourceTree = "<group>"; };
+		F6BD1FDD2C9D7E2E0075D04F /* LICENCE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENCE.md; sourceTree = "<group>"; };
 		F6C9DA6E271BB3BB00FC3027 /* RSSFeed.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSSFeed.h; sourceTree = "<group>"; };
 		F6C9DA6F271BB3BB00FC3027 /* RSSFeed.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSSFeed.m; sourceTree = "<group>"; };
 		F6C9DA71271BB55000FC3027 /* AtomFeed.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AtomFeed.h; sourceTree = "<group>"; };
@@ -705,7 +709,7 @@
 				035B703519E0E4AE00197334 /* Vienna Tests.xctest */,
 			);
 			name = Products;
-			sourceTree = SOURCE_ROOT;
+			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		2A37F4AAFDCFA73011CA2CEA /* Vienna */ = {
 			isa = PBXGroup;
@@ -716,8 +720,9 @@
 				035B703619E0E4AE00197334 /* Vienna Tests */,
 				F636FEBB2A39031B002AD931 /* Packages */,
 				F63B7D701F1CD001002F71BF /* External */,
-				19C28FB0FE9D524F11CA2CBB /* Products */,
 				439824171666B31700FFE219 /* Scripts */,
+				F6BD1FD72C9D7D9D0075D04F /* Configs */,
+				19C28FB0FE9D524F11CA2CBB /* Products */,
 			);
 			indentWidth = 4;
 			name = Vienna;
@@ -844,8 +849,10 @@
 				4398241E1666B3DB00FFE219 /* Credits.rtf */,
 				439824201666B3DB00FFE219 /* CHANGES */,
 				439824221666B3DB00FFE219 /* notes.html */,
-				439824231666B3DB00FFE219 /* README.md */,
 				439824241666B3DB00FFE219 /* Release Instructions.md */,
+				439824231666B3DB00FFE219 /* README.md */,
+				F6BD1FDD2C9D7E2E0075D04F /* LICENCE.md */,
+				F6BD1FDC2C9D7E230075D04F /* CONTRIBUTING.md */,
 			);
 			name = Documentation;
 			sourceTree = "<group>";
@@ -1056,6 +1063,15 @@
 				F6E01A082C652FA50082E07B /* RSSFeedWithContentElements.rss */,
 			);
 			path = Files;
+			sourceTree = "<group>";
+		};
+		F6BD1FD72C9D7D9D0075D04F /* Configs */ = {
+			isa = PBXGroup;
+			children = (
+				F6BD1FD82C9D7DD40075D04F /* .clang-format */,
+				F6BD1FDA2C9D7DD40075D04F /* .swiftlint.yml */,
+			);
+			name = Configs;
 			sourceTree = "<group>";
 		};
 		F6C9DA74271BBA4800FC3027 /* XML-based feeds */ = {
@@ -1471,7 +1487,6 @@
 				F69255982572A32900D387D8 /* XCRemoteSwiftPackageReference "MMTabBarView" */,
 				F696D23C2561F9FC003DF0C0 /* XCRemoteSwiftPackageReference "Sparkle" */,
 			);
-			productRefGroup = 19C28FB0FE9D524F11CA2CBB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
