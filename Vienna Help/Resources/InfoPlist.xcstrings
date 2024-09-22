@@ -11,6 +11,12 @@
             "value" : "Vienna Help"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ayuda de Vienna"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",

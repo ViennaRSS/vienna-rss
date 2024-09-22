@@ -290,7 +290,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Indiquer comme non-lus les articles mis à jour"
+            "value" : "Indiquer comme \"non lus\" les articles mis à jour"
           }
         },
         "lt" : {
@@ -2102,7 +2102,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ouvrir les liens à l'arrière plan"
+            "value" : "Ouvrir les liens à l'arrière-plan"
           }
         },
         "it" : {

@@ -10223,6 +10223,12 @@
             "value" : "Share"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compartir"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10275,6 +10281,12 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "Share"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compartir"
           }
         },
         "fr" : {

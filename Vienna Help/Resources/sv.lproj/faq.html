@@ -40,22 +40,22 @@
   </ul>
   <p>En svårighet ligger i det faktum att många servrar inte uttryckligen kommer att ange vilken metod de kräver.</p>
   <p>Att kräva ett användarnamn och ett lösenord är den vanligaste metoden. Det är också det mest transparenta för användaren. Vid första uppdateringen kommer Vienna att visa dig en dialogruta där du kan ange användarnamnet och lösenordet som du har fått.<br />
- Du kan kontrollera att du har tillhandahållit dessa referenser till Vienna (och uppdatera dem om det behövs) genom fönstret "Info" som är kopplat till flödet (som du kan komma åt via menyn "Mapp → Visa info..." eller genom den sammanhangsberoende menyn du får när du högerklickar på flödet i Viennas vänstra ruta).<br />
- Observera att lösenordet är säkert lagrat i Apples Nyckelhanterare.</p>
+  Du kan kontrollera att du har tillhandahållit dessa referenser till Vienna (och uppdatera dem om det behövs) genom fönstret "Info" som är kopplat till flödet (som du kan komma åt via menyn "Mapp → Visa info..." eller genom den sammanhangsberoende menyn du får när du högerklickar på flödet i Viennas vänstra ruta).<br />
+  Observera att lösenordet är säkert lagrat i Apples Nyckelhanterare.</p>
   <p>För servrar som kräver en cookie, får användarnamnet och lösenordet INTE ställas in i "Info"-fönstret. Båda fälten MÅSTE lämnas tomma.<br />
- Istället måste du logga in på webbplatsen via Safari eller via en webbläsarflik i Vienna.<br />
- Ett problem är att du då och då kan behöva logga in igen, eftersom cookies kan upphöra att gälla.</p>
+  Istället måste du logga in på webbplatsen via Safari eller via en webbläsarflik i Vienna.<br />
+  Ett problem är att du då och då kan behöva logga in igen, eftersom cookies kan upphöra att gälla.</p>
   <h2><a id="How_do_I_move_my_Vienna_database_to_another_folder" name="How_do_I_move_my_Vienna_database_to_another_folder">Hur flyttar jag min Vienna databas till en annan mapp?</a></h2>
   <p>Som standard är din Vienna-databas, filen messages.db som finns i ~/Library/Application Support/Vienna. Du kan flytta denna till en annan mapp om du vill. Följande steg visar hur:</p>
   <ol>
     <li>Avsluta Vienna.</li>
     <li>Öppna ett terminalfönster och ange:<br />
- <br />
- <font face="Courier New">defaults write uk.co.opencommunity.vienna2 "DefaultDatabase" '&lt;path to new messages.db&gt;'</font><br />
- <br />
- där &lt;path to new messages.db&gt; är namnet på mappen som innehåller filen messages.db. Själva sökvägen bör ha filnamnet messages.db i slutet. Till exempel:<br />
- <br />
- <font face="Courier New">defaults write uk.co.opencommunity.vienna2 "DefaultDatabase" '/Users/steve/mydata/messages.db'</font><br /></li>
+    <br />
+    <font face="Courier New">defaults write uk.co.opencommunity.vienna2 "DefaultDatabase" '&lt;path to new messages.db&gt;'</font><br />
+    <br />
+    där &lt;path to new messages.db&gt; är namnet på mappen som innehåller filen messages.db. Själva sökvägen bör ha filnamnet messages.db i slutet. Till exempel:<br />
+    <br />
+    <font face="Courier New">defaults write uk.co.opencommunity.vienna2 "DefaultDatabase" '/Users/steve/mydata/messages.db'</font><br /></li>
     <li>Starta om Vienna.</li>
   </ol>
   <h2><a id="One_of_my_subscriptions_reports_Error_parsing_XML_data_in_feed._What_does_this_mean" name="One_of_my_subscriptions_reports_Error_parsing_XML_data_in_feed._What_does_this_mean">En av mina prenumerationer rapporterar "Fel vid analys av XML-data i flöde". Vad betyder det?</a></h2>

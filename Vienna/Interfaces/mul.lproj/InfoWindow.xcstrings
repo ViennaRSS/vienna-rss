@@ -43,7 +43,7 @@
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Dernière actualisation :"
           }
         },
@@ -79,8 +79,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Laatste keer vernieuwd:"
+            "state" : "translated",
+            "value" : "Laatst bijgewerkt:"
           }
         },
         "pt-BR" : {
