@@ -6374,7 +6374,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Connection sur le serveur Open Reader pour récupérer %@"
+            "value" : "Connexion sur le serveur Open Reader pour récupérer %@"
           }
         },
         "gl" : {
@@ -10274,7 +10274,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Erreur lors de la recherche de l'icône RSS"
+            "value" : "Erreur lors de la recherche de l'icône RSS :"
           }
         },
         "gl" : {
@@ -10988,7 +10988,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Echec de téléchargement du fichier %@"
+            "value" : "Échec de téléchargement du fichier %@"
           }
         },
         "gl" : {
@@ -16270,7 +16270,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ouvrir le lien en arrière plan"
+            "value" : "Ouvrir le lien en arrière-plan"
           }
         },
         "nl" : {
@@ -22717,7 +22717,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "La corbeille contient des articles supprimés. Souhaitez-vous la vider avant de quitter ?"
+            "value" : "La corbeille contient des articles supprimés. Souhaitez-vous la vider avant de quitter ?"
           }
         },
         "gl" : {
@@ -24676,7 +24676,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "La base de données de Vienna semble être corrompue. Voulez-vous quitter l'application ou continuer malgré tout ?"
+            "value" : "La base de données de Vienna semble être corrompue. Voulez-vous quitter l'application ou continuer malgré tout ?"
           }
         },
         "nl" : {

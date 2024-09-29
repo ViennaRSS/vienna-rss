@@ -9698,7 +9698,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fermer tout les onglets"
+            "value" : "Fermer tous les onglets"
           }
         },
         "gl" : {
@@ -17777,6 +17777,12 @@
             "value" : "Share…"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compartir…"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -18357,6 +18363,12 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "Add to Safari Reading List"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añadir a la lista de lectura de Safari"
           }
         },
         "fr" : {

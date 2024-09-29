@@ -566,7 +566,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Entrer le lien pour le flux RSS, ou choisir un type de source à partir de la liste et entrer un nom pour obtenir le flux RSS associé."
+            "value" : "Entrer le lien pour le flux RSS, ou choisir à partir de la liste un type de source et entrer un nom pour obtenir le flux RSS associé."
           }
         },
         "it" : {
