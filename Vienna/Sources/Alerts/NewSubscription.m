@@ -80,10 +80,11 @@
     // display name which acts as the key. This allows us to support additional sources
     // without having to write new code.
     if (!sourcesDict) {
-        NSBundle *thisBundle = [NSBundle bundleForClass:[self class]];
-        NSString *pathToPList = [thisBundle pathForResource:@"RSSSources" ofType:@"plist"];
-        if ([[NSFileManager defaultManager] fileExistsAtPath:pathToPList]) {
-            sourcesDict = [NSDictionary dictionaryWithContentsOfFile:pathToPList];
+        NSURL *plistURL = [NSBundle.mainBundle URLForResource:@"RSSSources"
+                                                withExtension:@"plist"];
+        if (plistURL) {
+            sourcesDict = [NSDictionary dictionaryWithContentsOfURL:plistURL
+                                                              error:NULL];
             [feedSource removeAllItems];
             if (sourcesDict.count > 0) {
                 for (NSString *feedSourceType in sourcesDict.allKeys) {

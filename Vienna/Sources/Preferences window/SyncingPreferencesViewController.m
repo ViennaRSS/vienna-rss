@@ -98,10 +98,11 @@
     // regarding credentials to enter. This allows us to support additional service
     // providers without having to write new code.
     if (!sourcesDict) {
-        NSBundle *thisBundle = [NSBundle bundleForClass:[self class]];
-        NSString * pathToPList = [thisBundle pathForResource:@"KnownSyncServers" ofType:@"plist"];
-        if (pathToPList != nil) {
-            sourcesDict = [NSDictionary dictionaryWithContentsOfFile:pathToPList];
+        NSURL *plistURL = [NSBundle.mainBundle URLForResource:@"KnownSyncServers"
+                                                withExtension:@"plist"];
+        if (plistURL) {
+            sourcesDict = [NSDictionary dictionaryWithContentsOfURL:plistURL
+                                                              error:NULL];
             [openReaderSource removeAllItems];
             if (sourcesDict) {
                 [openReaderSource setEnabled:YES];

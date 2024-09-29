@@ -52,7 +52,11 @@ NSString *const UserNotificationContextFileDownloadFailed = @"User Notification 
  any unread articles after the fetch.
  */
 - (void)openWindowAndShowUnreadArticles {
-    [NSApp activateIgnoringOtherApps:YES];
+    if (@available(macOS 14, *)) {
+        [NSApp activate];
+    } else {
+        [NSApp activateIgnoringOtherApps:YES];
+    }
     [self showMainWindow:self];
 
     Folder *unreadArticles = [db folderFromName:NSLocalizedString(@"Unread Articles", nil)];
