@@ -25,19 +25,33 @@ import Cocoa
 // Rather than adding copies of the standard images provided by Apple, they are
 // instead referenced by name. The remaining toolbar items use fallback images
 // in the asset catalog.
-@available(macOS, obsoleted: 11.0)
+@available(macOS, obsoleted: 15)
 class PreferenceTabViewItem: NSTabViewItem {
 
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        if #available(macOS 11.0, *) {
+        guard #unavailable(macOS 15) else {
             return
         }
 
+        // macOS 11 to 14
+        if #available(macOS 11, *) {
+            if identifier as? String == "syncing" {
+                image = NSImage(
+                    systemSymbolName: "arrow.triangle.2.circlepath",
+                    accessibilityDescription: nil
+                )
+            }
+            return
+        }
+
+        // macOS 10.13 to 10.15
         switch identifier as? String {
         case "general":
             image = NSImage(named: NSImage.preferencesGeneralName)
+        case "syncing":
+            image = NSImage(resource: .sync)
         case "updates":
             image = NSImage(named: NSImage.networkName)
         case "advanced":
