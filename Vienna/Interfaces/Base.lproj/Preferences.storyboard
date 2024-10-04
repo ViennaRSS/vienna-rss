@@ -29,16 +29,16 @@
             </objects>
             <point key="canvasLocation" x="129" y="119"/>
         </scene>
-        <!--Tab View Controller-->
+        <!--Settings Tab View Controller-->
         <scene sceneID="qiK-Ji-WhE">
             <objects>
-                <tabViewController tabStyle="toolbar" id="VCh-Za-CPt" sceneMemberID="viewController">
+                <tabViewController tabStyle="toolbar" id="VCh-Za-CPt" customClass="VNASettingsTabViewController" sceneMemberID="viewController">
                     <tabViewItems>
-                        <tabViewItem identifier="general" image="gearshape" catalog="system" id="GJ3-1q-004" userLabel="General" customClass="PreferenceTabViewItem" customModule="Vienna" customModuleProvider="target"/>
+                        <tabViewItem identifier="general" image="gearshape" catalog="system" id="GJ3-1q-004" userLabel="General"/>
                         <tabViewItem image="paintbrush" catalog="system" id="WK4-g4-vJd" userLabel="Appearance"/>
-                        <tabViewItem identifier="syncing" image="arrow.trianglehead.2.counterclockwise" catalog="system" id="zkN-he-3BT" userLabel="Syncing" customClass="PreferenceTabViewItem" customModule="Vienna" customModuleProvider="target"/>
-                        <tabViewItem identifier="updates" image="square.and.arrow.down" catalog="system" id="qyx-3u-1Io" userLabel="Updates" customClass="PreferenceTabViewItem" customModule="Vienna" customModuleProvider="target"/>
-                        <tabViewItem identifier="advanced" image="wrench.and.screwdriver" catalog="system" id="iEw-AM-tMF" userLabel="Advanced" customClass="PreferenceTabViewItem" customModule="Vienna" customModuleProvider="target"/>
+                        <tabViewItem identifier="syncing" image="arrow.trianglehead.2.counterclockwise" catalog="system" id="zkN-he-3BT" userLabel="Syncing"/>
+                        <tabViewItem identifier="updates" image="square.and.arrow.down" catalog="system" id="qyx-3u-1Io" userLabel="Updates"/>
+                        <tabViewItem identifier="advanced" image="wrench.and.screwdriver" catalog="system" id="iEw-AM-tMF" userLabel="Advanced"/>
                     </tabViewItems>
                     <viewControllerTransitionOptions key="transitionOptions" allowUserInteraction="YES"/>
                     <tabView key="tabView" wantsLayer="YES" type="noTabsNoBorder" id="VWZ-OZ-KI2">

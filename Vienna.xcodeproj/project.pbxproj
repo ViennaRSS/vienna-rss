@@ -208,10 +208,10 @@
 		F6A7DE4A1E4717970017BE5E /* shared in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DE491E4717970017BE5E /* shared */; };
 		F6A7DE4F1E471A7F0017BE5E /* Vienna.help in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DDCA1E470E980017BE5E /* Vienna.help */; };
 		F6AC41AC25A4FAF6007DED7B /* FeedDiscovererTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AC41AB25A4FAF6007DED7B /* FeedDiscovererTests.swift */; };
+		F6AFC16D2CAFCD2E00106E80 /* SettingsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AFC16C2CAFCD2E00106E80 /* SettingsTabViewController.swift */; };
 		F6B059E02961D0A100F6E31B /* JSONFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B059DF2961D0A000F6E31B /* JSONFeed.swift */; };
 		F6B059E22961D0A800F6E31B /* JSONFeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B059E12961D0A800F6E31B /* JSONFeedItem.swift */; };
 		F6B059E42961D0DD00F6E31B /* JSONFeedParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B059E32961D0DD00F6E31B /* JSONFeedParser.swift */; };
-		F6B355DB256025D3008CA1ED /* PreferenceTabViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B355DA256025D3008CA1ED /* PreferenceTabViewItem.swift */; };
 		F6B3561525616313008CA1ED /* DownloadItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B3561425616313008CA1ED /* DownloadItem.m */; };
 		F6B7BC3624A2A9A40051D76F /* FMDB in Frameworks */ = {isa = PBXBuildFile; productRef = F6B7BC3524A2A9A40051D76F /* FMDB */; };
 		F6C9DA70271BB3BB00FC3027 /* RSSFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = F6C9DA6F271BB3BB00FC3027 /* RSSFeed.m */; };
@@ -621,11 +621,11 @@
 		F6A7DEAA1E471E410017BE5E /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = sv; path = sv.lproj/advanced.html; sourceTree = "<group>"; };
 		F6A7DEAD1E471E450017BE5E /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hant"; path = "zh-Hant.lproj/advanced.html"; sourceTree = "<group>"; };
 		F6AC41AB25A4FAF6007DED7B /* FeedDiscovererTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDiscovererTests.swift; sourceTree = "<group>"; };
+		F6AFC16C2CAFCD2E00106E80 /* SettingsTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTabViewController.swift; sourceTree = "<group>"; };
 		F6B059DF2961D0A000F6E31B /* JSONFeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONFeed.swift; sourceTree = "<group>"; };
 		F6B059E12961D0A800F6E31B /* JSONFeedItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONFeedItem.swift; sourceTree = "<group>"; };
 		F6B059E32961D0DD00F6E31B /* JSONFeedParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONFeedParser.swift; sourceTree = "<group>"; };
 		F6B1233E1E474D2A00973699 /* IndexHelpbook.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = IndexHelpbook.sh; sourceTree = "<group>"; };
-		F6B355DA256025D3008CA1ED /* PreferenceTabViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceTabViewItem.swift; sourceTree = "<group>"; };
 		F6B3561325616302008CA1ED /* DownloadItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadItem.h; sourceTree = "<group>"; };
 		F6B3561425616313008CA1ED /* DownloadItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadItem.m; sourceTree = "<group>"; };
 		F6B76B43284B492E009961AD /* NSPredicateEditor+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "NSPredicateEditor+Private.h"; sourceTree = "<group>"; };
@@ -1167,6 +1167,7 @@
 			children = (
 				AA9FE2EB08BC133600A9E977 /* Preferences.h */,
 				AA9FE2EC08BC133600A9E977 /* Preferences.m */,
+				F6AFC16C2CAFCD2E00106E80 /* SettingsTabViewController.swift */,
 				0349813C1A206FD900014F29 /* GeneralPreferencesViewController.h */,
 				0349813D1A206FD900014F29 /* GeneralPreferencesViewController.m */,
 				B85F93E4255AE48000B54B68 /* NSPopUpButtonExtensions.swift */,
@@ -1178,7 +1179,6 @@
 				F672876724A2D2170043432F /* UpdatePreferencesViewController.m */,
 				0349813F1A20701600014F29 /* AdvancedPreferencesViewController.h */,
 				034981401A20701600014F29 /* AdvancedPreferencesViewController.m */,
-				F6B355DA256025D3008CA1ED /* PreferenceTabViewItem.swift */,
 				F68792862700A678009B7BB5 /* SecurityScopedBookmark.swift */,
 			);
 			path = "Preferences window";
@@ -1836,9 +1836,9 @@
 				793C95331C42A0DD00984D4E /* FoldersFilterable.m in Sources */,
 				3AB95743258DBC5A00C54E83 /* Browser.swift in Sources */,
 				435028AF165DE9E00018EDB7 /* RefreshManager.m in Sources */,
+				F6AFC16D2CAFCD2E00106E80 /* SettingsTabViewController.swift in Sources */,
 				435028B0165DE9E00018EDB7 /* SmartFolder.m in Sources */,
 				435028B1165DE9E00018EDB7 /* SearchMethod.m in Sources */,
-				F6B355DB256025D3008CA1ED /* PreferenceTabViewItem.swift in Sources */,
 				435028B2165DE9E00018EDB7 /* SearchPanel.m in Sources */,
 				435028B3165DE9E00018EDB7 /* EnclosureView.m in Sources */,
 				2FDF6FC8218A289A002F77E9 /* Tab.swift in Sources */,

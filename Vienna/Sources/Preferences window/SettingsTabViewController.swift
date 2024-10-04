@@ -1,8 +1,8 @@
 //
-//  PreferenceTabViewItem.swift
+//  SettingsTabViewController.swift
 //  Vienna
 //
-//  Copyright 2020 Eitot
+//  Copyright 2024 Eitot
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -20,25 +20,28 @@
 import Cocoa
 
 // This class exists to provide fallback images for several toolbar items of the
-// preferences window.
-// 
-// Rather than adding copies of the standard images provided by Apple, they are
-// instead referenced by name. The remaining toolbar items use fallback images
-// in the asset catalog.
-@available(macOS, obsoleted: 15)
-class PreferenceTabViewItem: NSTabViewItem {
+// settings window.
+@objc(VNASettingsTabViewController)
+class SettingsTabViewController: NSTabViewController {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
         guard #unavailable(macOS 15) else {
             return
         }
 
+        tabViewItems.forEach { item in
+            updateImage(forTabViewItem: item)
+        }
+    }
+
+    @available(macOS, obsoleted: 15)
+    private func updateImage(forTabViewItem tabViewItem: NSTabViewItem) {
         // macOS 11 to 14
         if #available(macOS 11, *) {
-            if identifier as? String == "syncing" {
-                image = NSImage(
+            if tabViewItem.identifier as? String == "syncing" {
+                tabViewItem.image = NSImage(
                     systemSymbolName: "arrow.triangle.2.circlepath",
                     accessibilityDescription: nil
                 )
@@ -47,15 +50,15 @@ class PreferenceTabViewItem: NSTabViewItem {
         }
 
         // macOS 10.13 to 10.15
-        switch identifier as? String {
+        switch tabViewItem.identifier as? String {
         case "general":
-            image = NSImage(named: NSImage.preferencesGeneralName)
+            tabViewItem.image = NSImage(named: NSImage.preferencesGeneralName)
         case "syncing":
-            image = NSImage(resource: .sync)
+            tabViewItem.image = NSImage(resource: .sync)
         case "updates":
-            image = NSImage(named: NSImage.networkName)
+            tabViewItem.image = NSImage(named: NSImage.networkName)
         case "advanced":
-            image = NSImage(named: NSImage.advancedName)
+            tabViewItem.image = NSImage(named: NSImage.advancedName)
         default:
             return
         }
