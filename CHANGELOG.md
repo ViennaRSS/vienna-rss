@@ -4,6 +4,8 @@ Vienna ChangeLog File
 
 3.9.2
 -----
+_released 2024-08-15_
+
 - Change mechanism preventing Vienna from unexpectedly switching to alphabetical sorting of folders and feeds. This
   phenomenon might still occur but should be much more unlikely
 - Perform a sanity check of database at launch
@@ -20,6 +22,8 @@ Vienna ChangeLog File
 
 3.9.1
 -----
+_released 2024-07-06_
+
 - Prevent Vienna from unexpectedly switching to alphabetical sorting of folders and feeds
 - Prevent feed refreshes from causing unexpected changes of articles selection and interruptions of user's reading experience
 - Fix and standardize the visual feedback for articles being marked as read (especially when the selection is a smart folder)
@@ -39,6 +43,8 @@ Vienna ChangeLog File
 
 3.9.0
 -----
+_released 2024-01-20_
+
 - Rearrange some menu items in a more logical way
 - Have auxiliary windows (Downloads, Activity Window, Info) stay on Vienna's main space
 - Fix "mark all read" for folders containing multiple smart folders
@@ -48,8 +54,10 @@ Vienna ChangeLog File
 - Update FMDB to version 2.7.8, Sparkle to 2.5.2, MMTabBarView to v/1.5.2
 - Build with Xcode 15.2 (macOS 14.2 SDK)
 
-3.9.0 Beta 1
+3.9.0 Beta 1
 ------------
+_released 2023-07-09_
+
 ### ! Requires macOS 10.13 or higher !
 - New editor for smart folders: criterias can now be imbricated, allowing more complex and refined selections
 - Add initial JSON Feed support
@@ -66,6 +74,8 @@ Known issue: due to some changes in preferences file format, you may have to res
 
 3.8.8
 -----
+_released 2023-07-09_
+
 - Fix access to list of keyboard shortcuts in helpbook on macOS Ventura
 - Adapt helpbook pages to dark mode
 - Improve information on OpenReader
@@ -73,10 +83,14 @@ Known issue: due to some changes in preferences file format, you may have to res
 
 3.8.7
 -----
+_released 2023-04-16_
+
 - Fix a long standing problem where OpenReader feeds read with another client would not be immediately synced in Vienna
 
 3.8.6
 -----
+_released 2023-04-15_
+
 - Fix Command-W behavior according to tab count: closes window when only main tab is present
 - Fix memory leak when closing tab with the new browser
 - Fix toolbar search field to only start search when the user presses the enter key
@@ -84,10 +98,14 @@ Known issue: due to some changes in preferences file format, you may have to res
 
 3.8.5
 -----
+_released 2023-01-21_
+
 - Fix "Previous Tab / Next Tab" menu commands to cycle between open tabs
 
 3.8.4
 -----
+_released 2022-11-12_
+
 - Add ability to hide/show the enclosure bar (through the View menu)
 - Various OpenReader related improvements:
     - Better URL handling in Preferences / Settings window
@@ -102,6 +120,8 @@ Known issue: due to some changes in preferences file format, you may have to res
 
 3.8.3
 -----
+_released 2022-09-16_
+
 - Fix "Open Link in New Tab" contextual menu item (on main tab when the new browser option is enabled)
 - When the user uses the Space keyboard shortcut, keep the focus on the article list (as version 3.7.x did) to ease navigation with keyboard
 - Fix a problem that could prevent decompression of the application on some configurations
@@ -109,6 +129,8 @@ Known issue: due to some changes in preferences file format, you may have to res
 
 3.8.2
 -----
+_released 2022-08-28_
+
 - Fix loading of styles when the application is launched from a folder with special characters in its path
 - Fix 'Back' / 'Forward' commands on main tab (items activation and management of queue)
 - Update Italian localization
@@ -117,16 +139,22 @@ Known issue: due to some changes in preferences file format, you may have to res
 
 3.7.5
 -----
+_released 2022-08-28_
+
 - Fix backtrack queue used for handling the 'Back' / 'Forward' commands on main tab
 
 3.8.1
 -----
+_released 2022-08-16_
+
 - Fix and improve display when "Use Web Page for Articles" option is enabled for a feed
 - Fix link preview on legacy browser's article view
 - Restore folder list width between app relaunches
 
 3.8.0
 -----
+_released 2022-07-09_
+
 - Add a disclosure triangle in feed credentials dialog, in order to provide additional feed details whenever it is needed to disambiguate the feed
 - Remove "Empty Trash…" contextual menu command added in 3.8.0 Beta 3
 - Fix a crash when trying to view a smart folder (problem introduced by 3.8.0 Beta 3)
@@ -142,12 +170,16 @@ Known issue: due to some changes in preferences file format, you may have to res
 
 3.7.4
 -----
+_released 2022-07-09_
+
 - Fix unwanted changes of toolbar mode (switches to text+icon while the user requested text-only)
 - Remove floodmagazine.com from default feed list and update other URLs
 - Fix scripts building release binaries
 
-3.8.0 Beta 3
+3.8.0 Beta 3
 ------------
+_released 2022-05-15_
+
 - Add "Empty Trash…" menu command to folder list's contextual menu
 - Add a setting regarding emptying of trash in Preferences window
 - Add "Actual Size" menu command for resetting text zoom
@@ -166,11 +198,15 @@ Known issue: due to some changes in preferences file format, you may have to res
 
 3.7.3
 -----
+_released 2022-05-15_
+
 - Fix copy of articles in article list
 - Update Sparkle to version 1.27.1
 
-3.8.0 Beta 2
+3.8.0 Beta 2
 ------------
+_released 2021-10-17_
+
 - Change minimum macOS requirement to 10.12 (Sierra)
 - Speed up database handling (the updated database remains fully compatible with all 3.x.x versions of Vienna)
 - When hovering over a link with new browser, display its address on a floating bar
@@ -190,6 +226,8 @@ Known issue: due to some changes in preferences file format, you may have to res
 
 3.7.2
 -----
+_released 2021-10-17_
+
 - Speed up database handling (the updated database remains fully compatible with all 3.x.x versions of Vienna)
 - Remove preference setting related to notifications (already handled by System Preferences)
 - Fix image overflow with certain feeds
@@ -200,8 +238,10 @@ Known issue: due to some changes in preferences file format, you may have to res
 - Update Sparkle to version 1.27 and add an EdDSA key
 - Update procedures for building binaries (use Sourceforge for binaries instead of Bintray, fix notarization and Github test action)
 
-3.8.0 Beta 1
+3.8.0 Beta 1
 ------------
+_released 2021-08-27_
+
 - Implement an experimental new browser based on WKWebView : it can be selected in Advanced preferences, and will be available after application restart. It is fastest and more secure.
 - Refactor code:
     - modify ArticleController to be a NSViewController
@@ -219,12 +259,16 @@ Known issue: due to some changes in preferences file format, you may have to res
 
 3.7.1
 -----
+_released 2021-01-09_
+
 - Improve autodiscovery of feeds inside webpages (among other improvements, detect URLs of feeds for YouTube channels or users)
 - Fix wrong image used in article list to indicate existence of an enclosure
 - Fix empty folders in build which interferes with plug-in loading
 
 3.7.0
 -----
+_released 2020-12-31_
+
 - Update database to enable auto-vacuum mode (the updated database remains compatible with older versions of Vienna)
 - Add dark color scheme to Default and Serifim styles
 - Fix search field for some macOS versions prior to macOS 11
@@ -242,10 +286,14 @@ Known issue: due to some changes in preferences file format, you may have to res
 
 3.6.2
 -----
+_released 2020-12-06_
+
 - Fix main window not appearing when "checking for new articles" preference is set to "Manually" 
 
 3.6.1
 -----
+_released 2020-12-04_
+
 - Fix brutal resizing of article view column in vertical layout
 - Add ‘hidden’ preference to specify web user agent through command line : `defaults write uk.co.opencommunity.vienna2 UserAgentName <...>`
 - Improve look of main window toolbar under macOS Big Sur
@@ -262,6 +310,8 @@ Known issue: due to some changes in preferences file format, you may have to res
 
 3.6.0
 -----
+_released 2020-11-12_
+
 ### ! 3.6 versions require OS X 10.11 (El Capitan) or later !
 - Universal build (support Apple Silicon processors as well as Intel processors) through Xcode 12.2
 - Refactor constants to be usable by Swift code
@@ -269,24 +319,32 @@ Known issue: due to some changes in preferences file format, you may have to res
 - Fix a warning
 - Change configuration of handling of stale Github issues
 
-3.6.0 Beta 5
+3.6.0 Beta 5
 ------------
+_released 2020-11-08_
+
 - Silence some warnings
 - Remove unused code
 - Add GitHub workflow for testing
 
 3.5.10
 ------
+_released 2020-11-08_
+
 - Fix application crashing on display of certain URLs (bug introduced by version 3.5.9) 
 - Fix a crash when both expansion tooltip and progress animation were triggered
 - Fix an annoyance with tooltip obscuring contextual menu in article list or folder list
 
-3.6.0 Beta 4
+3.6.0 Beta 4
 ------------
+_released 2020-10-24_
+
 - Update to Xcode 12
 
 3.5.9
 -----
+_released 2020-10-24_
+
 - Add toolbar icon for deleting articles
 - Parse more tags from 'media' namespace to get YouTube descriptions
 - Remove support of Bitly URL shortening in plugins
@@ -297,12 +355,16 @@ Known issue: due to some changes in preferences file format, you may have to res
 - Update to MMTabBarView v/1.4.9
 - Fix running individual Xcode tests
 
-3.6.0 Beta 3
+3.6.0 Beta 3
 ------------
+_released 2020-10-04_
+
 - Configure Github configuration to close abandoned issues
 
 3.5.8
 -----
+_released 2020-10-04_
+
 - Fix crash related to macOS Big Sur Beta
 - Fix crash related to Xcode12 (update MMTabBarView to v/1.4.8)
 - Fix tab bar to hide when a single tab is present
@@ -312,12 +374,16 @@ Known issue: due to some changes in preferences file format, you may have to res
 - Fix resetting of article pane when no article is selected anymore and "Use Web Pages for Articles" is enabled
 - Fix Vienna Tests target
 
-3.6.0 Beta 2
+3.6.0 Beta 2
 ------------
+_released 2020-09-08_
+
 - Replace deprecated methods
 
 3.5.7
 -----
+_released 2020-09-08_
+
 - Fix file being hidden at end of "Download image"
 - Fix crash on editing search folder
 - Fix inaccurate information about number of unread articles
@@ -326,14 +392,18 @@ Known issue: due to some changes in preferences file format, you may have to res
 - Increase to 1000 the limit of articles fetched at once from an Open Reader feed
 - Update Sparkle to v1.23.0 and MMTabBarView to v/1.4.7
 
-3.6.0 Beta 1
+3.6.0 Beta 1
 ------------
+_released 2020-08-09_
+
 ### ! 3.6.x versions are for OS X 10.11 (El Capitan) or later only !
 - Lift deployment target to macOS 10.11 & start modernizing code
 - Replaced MASPreferences with Storyboard implementation (Preferences window)
 
 3.5.6
 -----
+_released 2020-08-08_
+
 - Vienna is now notarized (needed by macOS Catalina and later)
 - Much improved OpenReader support :
     - sensibly decrease the number of network requests:
@@ -372,6 +442,8 @@ __Note__ : this version will upgrade the database ; but the newer version of the
 
 3.5.5
 -----
+_released 2019-12-23_
+
 - Fix sizes of cells in Unified view
 - Fix our own RSS URL
 - Fix multiple problems with input and encoding of OpenReader credentials
@@ -388,6 +460,8 @@ __Note__ : this version will upgrade the database ; but the newer version of the
 
 3.5.4
 -----
+_released 2019-02-10_
+
 - Fix dialog sheet handling definition of smart folders with multiple criteria
 - Use w3.org feed validator instead of feedvalidator.org
 - Modify User-Agent header used for fetching feeds (fix problem with Oxford University Press)
@@ -405,6 +479,8 @@ __Note__ : this version will upgrade the database ; but the newer version of the
 
 3.5.3
 -----
+_released 2019-01-13_
+
 - Fix crash with problematic feed
 - Fix parsing of feeds without titles
 - Use basic preemptive authentication to work around some servers which do not send 401 challenges
@@ -420,12 +496,16 @@ __Note__ : this version will upgrade the database ; but the newer version of the
 
 3.5.2
 -----
+_released 2018-12-15_
+
 - Fix behavior when a Javascript attemps to close a tab
 - Refactor browser pane / browser dependency
 - Update Sparkle to 1.21.1
 
 3.5.1
 -----
+_released 2018-12-02_
+
 - Add ‘Open With’ submenu to contextual menu for items in Downloads window
 - Allow ‘Open’ in Downloads window even when file is not yet fully downloaded (handy for audio files)
 - Improve tabs' support of macOS Mojave's dark mode
@@ -438,35 +518,50 @@ __Note__ : this version will upgrade the database ; but the newer version of the
 
 3.5.0
 -----
+_released 2018-10-17_
+
 - Fix dark mode for horizontal layout
 - Improve support of Emoji characters (use CoreText to draw cells)
 
-3.5.0 rc 1
-----------
+3.5.0 Release Candidate 1
+-------------------------
+_released 2018-10-10_
+
 - Initial adaptations to macOS Mojave's dark mode (work in progress)
 - Improve right to left support
 - Improve tab bar management ; fix video which continued to play when last tab was closed
 - Fix background color of selected folder on OS X 10.9
 - Update FMDB to 2.7.5
 
-3.5.0 Beta 1
+3.5.0 Beta 1
 ------------
+_released 2018-08-26_
+
 - Modernize network access (replace ASIHTTPRequest with a wrapper above NSURLSession). Vienna's memory management is now exclusively based on Automatic Reference Counting.
 - Fix an encoding issue in localizable strings
 
 3.4.2
 -----
-- Fix crash on startup on Mac OS X 10.9 and 10.10
+_released 2018-07-24_
+
 - Changed file extension for binaries upload to tar.gz (instead of .tgz) as Github's user interface got picky again
+
+3.4.1
+-----
+- Fix crash on startup on Mac OS X 10.9 and 10.10
 
 3.4.0
 -----
+_released 2018-07-14_
+
 - Initial update for Xcode 10
 - Update for SwiftLint 0.25.1
 - Update Crowdin configuration for Brazilian Portuguese
 
-3.4.0 Beta 1
+3.4.0 Beta 1
 ------------
+_released 2018-05-18_
+
 - New article menu and keyboard shortcut (Command-Y) to get back to the main tab (articles list)
 - New "Share With Pinboard" plugin
 - Remove obsolete Cocoalicious plugin
@@ -479,14 +574,20 @@ __Note__ : this version will upgrade the database ; but the newer version of the
 
 3.3.0
 -----
+_released 2018-04-01_
+
 - Improve Ukrainian localization
 
-3.3.0 rc 1
-----------
+3.3.0 Release Candidate 1
+-------------------------
+_released 2018-03-25_
+
 - Fix a problem with Sparkle autoupdate
 
-3.3.0 Beta 1
+3.3.0 Beta 1
 ------------
+_released 2018-03-10_
+
 - Improve loading of tabs: on application re-open, load of each tab is delayed until the user selects it
 - Change default download location to the macOS default one
 - Fix bug where "Show in Finder" in Downloads window didn't work unless file was fully downloaded
@@ -494,31 +595,43 @@ __Note__ : this version will upgrade the database ; but the newer version of the
 
 3.2.1
 -----
+_released 2018-02-05_
+
 - Fix a crash on parsing some XML files
 - Fix current feed URL not being displayed on edition of a feed
 - Updated translations (Danish, Spanish, German, Russian)
 
 3.2.0
 -----
+_released 2018-01-27_
+
 - Use .tgz file extension for downloadable archives of Vienna.app and .dSYM files
 
-3.2.0 rc 1
-------------
+3.2.0 Release Candidate 1
+-------------------------
+_released 2018-01-25_
+
 - Fix some OpenReader error handling
 - Remove a tab bar animation introduced in 3.2.0 Beta 1
 - Update copyright information
 
-3.2.0 Beta 3
+3.2.0 Beta 3
 ------------
+_released 2018-01-07_
+
 - Fix persistent tab bar at launch
 - Update FMDB to 2.7.4
 
-3.2.0 Beta 2
+3.2.0 Beta 2
 ------------
+_released 2017-12-18_
+
 - Fix crashes on systems prior to Sierra
 
-3.2.0 Beta 1
+3.2.0 Beta 1
 ------------
+_released 2017-12-17_
+
 ### ! For OS X 10.9 or later only !
 - New toolbar icons
 - Use default external application to view content of cached XML files
@@ -539,27 +652,37 @@ __Note__ : this version will upgrade the database ; but the newer version of the
 
 3.1.16
 ------
+_released 2017-09-26_
+
 - Fix article selection after an article is deleted from within the 'Unread Articles' folder
 - Fix bugs related to multithreading
 - Fix handling of impossibility of creating the database
 
 3.1.15
 ------
+_released 2017-09-17_
+
 - Fix article list not scrolling to top when selecting a folder
 - Fix 'Skip Folder' not selecting the first unread article in the next folder with unread articles
 
 3.1.14
 ------
+_released 2017-09-12_
+
 - Fix article pane not updating on article deletion from the 'Unread Articles' folder
 
 3.1.13
 ------
+_released 2017-09-10_
+
 - Fixes related to searching and smart folders
 - Fix for selection of first article when jumping on next feed
 - Better fix for unwanted reload of the article currently being read during sync
 
 3.1.12
 ------
+_released 2017-09-04_
+
 - Fix crashes induced by some URLs
 - Fix crash on macOS 10.13 High Sierra related to Activity window
 - Fix unwanted reload of the article currently being read during sync
@@ -569,17 +692,23 @@ __Note__ : this version will upgrade the database ; but the newer version of the
 
 3.1.11
 ------
+_released 2017-07-08_
+
 - Fix deleting article from smart folder or filtered folder
 - Fix selection of last unread article with Next Unread command
 - Update FMDB to 2.7.2
 
 3.1.10
 ------
+_released 2017-04-24_
+
 - Fix access to Get Info window
 - Fix CoreAnimation related problems
 
 3.1.9
 -----
+_released 2017-03-23_
+
 - Change the website to vienna-rss.com as the old domain name (vienna-rss.org) could not be renewed. Perform a minor database evolution to update this.
 - Add a plug-in supporting wallabag.it
 - Show acknowledgements in "About" dialog box
@@ -592,6 +721,8 @@ __Note__ : this version will upgrade the database ; but the newer version of the
 
 3.1.8
 -----
+_released 2016-11-25_
+
 - Fixed an External XML Entity (XXE) vulnerability which allowed servers to steal the content of files on the machine running Vienna
 - Fix incorrect escaping of OPML export
 - Fix font preferences not working
@@ -600,10 +731,14 @@ __Note__ : this version will upgrade the database ; but the newer version of the
 
 3.1.7
 -----
+_released 2016-11-02_
+
 - Fix incorrect escaping of some feeds
 
 3.1.6
 -----
+_released 2016-10-31_
+
 - Add support for delta feeds (RFC3229+feed)
 - Database performance improvements
 - Fix 'N' key to not scan fresher articles from same folder, except for smart folders
@@ -613,16 +748,20 @@ __Note__ : this version will upgrade the database ; but the newer version of the
 - Fix status message after tasks like marking OpenReader articles read
 - Fixes to Danish and Russian translations, thanks to David Munch and Rinat Shaikhutdinov
 
-3.1.6 Release Candidate 2
+3.1.6 Release Candidate 2
 -------------------------
+_released 2016-07-23_
+
 - New set of default feeds, thanks to Jesse Claven and Ricky Morse
 - Fix infinite loop on ‘Skip Folder’ command when no unread articles were left
 - Fix relative URLs, like in images's `srcset` attributes
 - New developer tests, thanks to György Tóth
 - Code refactoring / cleanup
 
-3.1.6 Release Candidate 1
+3.1.6 Release Candidate 1
 -------------------------
+_released 2016-07-16_
+
 - When the user selects a folder, loading articles from database occurs on a separate thread
 - Fix again the 'N' key not selecting last unread article or not wrapping to the first unread article
 - Keep currently selected article on refresh of a group or smart folder
@@ -635,20 +774,26 @@ __Note__ : this version will upgrade the database ; but the newer version of the
 
 3.1.5
 -----
+_released 2016-06-20_
+
 - Fix syncing with FeedHQ
 - Avoid unwanted eviction from cache
 - Fix enclosure “Open” button when the enclosure URL has a query part
 - Ensures the article pane displays selected article when switching from Unified to Horizontal or Vertical layout
 
-3.1.5 Release Candidate 2
+3.1.5 Release Candidate 2
 -------------------------
+_released 2016-06-08_
+
 - Fix 'N' key breakage when a single unread article remained below current folder selection
 - Fix 'N' key not wrapping to the first unread article under certain circumstances
 - Force images to scale correctly
 - Try to fix an assertion failure on balancing start/stop animations
 
-3.1.5 Release Candidate 1
+3.1.5 Release Candidate 1
 -------------------------
+_released 2016-06-01_
+
 - Fix visual issue on marking read all articles in a group folder
 - Fix deleting articles from a group folder
 - Fix restoring Open Reader article from Trash
@@ -659,21 +804,27 @@ __Note__ : this version will upgrade the database ; but the newer version of the
 
 3.1.4
 -----
+_released 2016-05-25_
+
 - Fix extreme slowness on marking a series of articles deleted
 - Improve selection of next unread article and article list update
 - Fix selection of default RSS reader application in preferences window
 - In General preferences, use localized names for download folder and RSS readers' app names
 - Fixed a problem preventing window from appearing at launch in certain settings
 
-3.1.4 Release Candidate 2
+3.1.4 Release Candidate 2
 -------------------------
+_released 2016-05-17_
+
 - Improved detection of feeds URL
 - Align selection behavior on selecting or skipping folders with 3.0.9's
 - Fix handling of some addresses in internal browser's address field
 - Improved German translation
 
-3.1.4 Release Candidate 1
+3.1.4 Release Candidate 1
 -------------------------
+_released 2016-05-08_
+
 - Refactored code
 - Make sure that unread / starred statuses are in sync between Vienna and the Open Reader server[^314-1]
 - When opening current article in browser, respect what is set in user's preferences on marking it read
@@ -689,6 +840,8 @@ __Note__ : this version will upgrade the database ; but the newer version of the
 
 3.1.3
 -----
+_released 2016-04-06_
+
 - Fix some crashes
 - Fix empty article list displayed by some feeds
 - Prevent unwanted updates of user interface while refreshing Open Reader feeds
@@ -696,6 +849,8 @@ __Note__ : this version will upgrade the database ; but the newer version of the
 
 3.1.2
 -----
+_released 2016-03-26_
+
 - More crash fixes
 - Fix Vienna forgetting current folder/feed after termination and relaunch
 - Restore mechanism required by some plugins, especially "Add to Safari reading list" 
@@ -703,12 +858,16 @@ __Note__ : this version will upgrade the database ; but the newer version of the
 
 3.1.1
 -----
+_released 2016-03-19_
+
 - Fix some crashes
 - Fix deadlocks on OS X 10.8
 - Fix the sort functionality in Activity Window
 
 3.1.0
 -----
+_released 2016-03-14_
+
 - Add search field in subscriptions tree
 - In Atom feeds, prefer the ‘content’ item over the ’summary’ one
 - Fix articles reappearing in a feed after being marked for deletion
@@ -718,27 +877,39 @@ __Note__ : this version will upgrade the database ; but the newer version of the
 - Fix some crashes
 
 
-3.1.0 Beta 5
+3.1.0 Beta 5
 ------------
-- Fix problem w/ subscribing to some feeds
-- Better handling of legal/illegal characters in URL strings
-- Fix enclosure download when the URL string contains a query
-- If adding existing feed, focus it
+_released 2015-11-15_
+
 - Keep order of folders and groups on OPML export
+
+3.0.9
+-----
+_released 2015-11-08_
+
+- Fix problem w/ subscribing to some feeds
+- Improve handling of feeds having duplicate GUIDs
 - Fix some styles to limit maximum image size
 - Improve the ad blocking feature of the Feedlight styles
+- If adding existing feed, focus it
+- Better handling of legal/illegal characters in URL strings
+- Fix enclosure download when the URL string contains a query
 - Recognize a few more file extensions to be directly downloaded
 - Fix some crashes
 
-3.1.0 Beta 4
+3.1.0 Beta 4
 ------------
+_released 2015-09-20_
+
 - Fix a crash
 - Ensure current article remains visible when changing layout
 - Display articles of any newly added folder
 - Some code refactoring
 
-3.1.0 Beta 3
+3.1.0 Beta 3
 ------------
+_released 2015-09-16_
+
 - Improved handling of feeds having duplicate GUIDs
 - Fixed rendering of feeds having XHTML bodies
 - Handle feeds having illegal characters
@@ -747,12 +918,16 @@ __Note__ : this version will upgrade the database ; but the newer version of the
 - Improved cache mechanism for articles (using NSCache)
 - Compiled with XCode 7 GM under OS X El Capitan GM
 
-3.1.0 Beta 2
+3.1.0 Beta 2
 ------------
+_released 2015-08-17_
+
 - Fix unwanted scrolls in Unified layout
 
-3.1.0 Beta 1
+3.1.0 Beta 1
 ------------
+_released 2015-08-17_
+
 ### ! OS X 10.8 or better only !
 - Replace our "in house" database queue with FMDatabaseQueue and reorganize access
 - Use view based NSTableView for unified layout (instead of PXListView)
@@ -760,8 +935,16 @@ __Note__ : this version will upgrade the database ; but the newer version of the
 - Replace XMLParser with NSXMLDocument/NSXMLNode
 - Replace other deprecated functions / Miscellaneous refactoring
 
+3.0.8
+-----
+_released 2015-08-17_
+
+- Fix unwanted scrolls in Unified layout
+
 3.0.7
 -----
+_released 2015-08-17_
+
 - More consistent response to keyboard shortcuts when the user switches to primary tab
 - Add support for handling http/https (allows dragging links into Vienna's Dock icon)
 - Change internal browser’s user agent string to be more Safari like
@@ -769,12 +952,16 @@ __Note__ : this version will upgrade the database ; but the newer version of the
 
 3.0.6
 -----
+_released 2015-07-30_
+
 - Fix a problem with duplicate folders when starting with a fresh database
 - Removed macosxhints.com from the list of default feeds when starting with a fresh database
 - Distribution of Vienna binaries is now done mainly through bintray.com instead of sourceforge.net
 
 3.0.5
 -----
+_released 2015-07-22_
+
 - Add identification of the application as required by Inoreader
 - When encountering a 301 HTTP response code, check if the permanent character of the redirection is OK before updating the database
 - Handle Enter or Return keys in Articles tab by opening the current article
@@ -782,16 +969,22 @@ __Note__ : this version will upgrade the database ; but the newer version of the
 
 3.0.4
 -----
+_released 2015-03-01_
+
 - Add option to enable/disable Webkit plugins (including Flash)
 - Code reorganization : use of Cocoapod for dependancies
 
 3.0.3
 -----
+_released 2015-01-18_
+
 - Fix problems with preferences dialog on OS X < 10.10
 - Fix small localization issues
 
 3.0.2
 -----
+_released 2014-12-29_
+
 - Handles dragging and dropping of .webloc files
 - More accessible Preferences window
 - Fix a synchronization issue with InoReader
@@ -800,33 +993,45 @@ __Note__ : this version will upgrade the database ; but the newer version of the
 
 3.0.1
 -----
+_released 2014-11-16_
+
 - Fix a crash
 - Parse RSS feeds having `rss:title`, `rss:link`, `rss:description`, `rss:items` and `rss:item` tags instead of the standard `title`, `link`, `description`, `items` and `item`
 - Fix diverse localization issues
 
 3.0.0
 -----
+_released 2014-11-02_
+
 - New style : Classy (contributed by user PMP on cocoaforge)
 - Fix some crashes when sharing a link on Google+
 - Improved management of animations in folders list
 
-3.0.0 rc 9
-----------
+3.0.0 Release Candidate 9
+-------------------------
+_released 2014-10-19_
+
 - Fix repeating articles problem on some feeds with repeating GUIDs (notably Netflix)
 - Fix some overly aggressive URL escaping
 - Fix column order and dimensions not being remembered in article list
 - Fix visual glitches with some feeds in article list
 
-3.0.0 rc 8
-----------
+3.0.0 Release Candidate 8
+-------------------------
+_released 2014-10-11_
+
 - Follow-up on crash : disable assertions for deployment config
 
-3.0.0 rc 7
-----------
+3.0.0 Release Candidate 7
+-------------------------
+_released 2014-10-10_
+
 - Fix a crash
 
-3.0.0 rc 6
-----------
+3.0.0 Release Candidate 6
+-------------------------
+_released 2014-10-09_
+
 - Handles multiple authors
 - Adaptations for OS X Yosemite (10.10)
 - Fixed some crashes
@@ -838,19 +1043,25 @@ __Note__ : this version will upgrade the database ; but the newer version of the
 - Start implementing a test suite
 - Built on OS X Yosemite SDK (for running, requirements are limited to OS X Snow Leopard or better)
 
-3.0.0 rc 5
-----------
+3.0.0 Release Candidate 5
+-------------------------
+_released 2014-08-24_
+
 - Improved stability
 - Solves a bug where articles' read/unread situation was not currently reflected in the article list
 
-3.0.0 rc 4
-----------
+3.0.0 Release Candidate 4
+-------------------------
+_released 2014-08-17_
+
 - Fix another crash
 - Improve localizations (including Spanish, thanks to Juan Pablo Atienza Martinez)
 - Improved Unified layout
 
-3.0.0 rc 3
-----------
+3.0.0 Release Candidate 3
+-------------------------
+_released 2014-08-08_
+
 - Fix some crashes
 - Remember chosen text size in article view
 - Fix text vertical centering
@@ -858,8 +1069,10 @@ __Note__ : this version will upgrade the database ; but the newer version of the
 - Handle enclosures with filenames containing spaces or special characters
 - Improved build process
 
-3.0.0 rc 2
-----------
+3.0.0 Release Candidate 2
+-------------------------
+_released 2014-07-27_
+
 - Background fetching and database writing of feeds (yes, such an important change is not expected between two release candidates versions, but the risk has been thoroughly pondered)
 - Separated "Mark Read" and "Mark Unread" menu items for articles
 - Rudimentary support of OPDS feeds (ebooks), like those provided by Calibre
@@ -871,8 +1084,10 @@ __Note__ : this version will upgrade the database ; but the newer version of the
 - Multiple improvements and fixes on memory management
 - Other cosmetic or UI fixes
 
-3.0.0 rc 1
-----------
+3.0.0 Release Candidate 1
+-------------------------
+_released 2014-04-30_
+
 - Add The Old Reader (<https://theoldreader.com>) as a supported OpenReader provider
 - Improved InoReader support (handles homepage and icons)
 - Improved Unified layout
@@ -883,8 +1098,10 @@ __Note__ : this version will upgrade the database ; but the newer version of the
 - Fix some plugins
 Thanks to Emiliano Necciari, Boris Dušek, bavarious and biphuhn for their contributions !
 
-3.0.0 Beta 20
+3.0.0 Beta 20
 -------------
+_released 2014-01-20_
+
 - Largely improved Unified layout
 - Added InoReader (<http://www.inoreader.com>) as a supported OpenReader provider, fix some OpenReader behaviors.
 - Fix 'Feed->Unsubscribe' command with OpenReader feeds
@@ -892,8 +1109,10 @@ Thanks to Emiliano Necciari, Boris Dušek, bavarious and biphuhn for their contr
 - Fix problems with feeds from some servers
 - Fix Vertical layout in situations where there is only a line per cell
 
-3.0.0 Beta 19
+3.0.0 Beta 19
 -------------
+_released 2013-11-27_
+
 - Fix a crash which occured when deleting multiple articles under OS X Mavericks
 - Improved Unified display view
 - Triggers gzip compression with servers using Google Servlet Engine (ie Blogspot)
@@ -902,16 +1121,28 @@ Thanks to Emiliano Necciari, Boris Dušek, bavarious and biphuhn for their contr
 - Fix memory management problems
 - Other bug fixes and code modernization
 
-3.0.0 Beta 18
+3.0.0 Beta 18
 -------------
+_released 2013-09-04_
+
 - Improvement on Beta 17
 
-3.0.0 Beta 17
+3.0.0 Beta 17
 -------------
+_released 2013-09-04_
+
 - Fix a serious problem with using the "Mark updated articles as new" preference
 
-3.0.0 Beta 16
+3.0.0 Beta 16
 -------------
+_released 2013-09-03_
+
+- Fix autoupdate issue for users running 10.6
+
+3.0.0 Beta 15
+-------------
+_released 2013-09-03_
+
 __Mac OS Snow Leopard (10.6) or later only !!!__
 - Improved speed thanks to a new database wrapper (contributed by echelon9 and barijaona)
 - Fix many Unified display view problems
@@ -919,8 +1150,10 @@ __Mac OS Snow Leopard (10.6) or later only !!!__
 - Improved string to date conversion routine (solves problems with some feeds which wrongly showed as updated)
 - Fix some problems reported by analyser
 
-3.0.0 Beta 14
+3.0.0 Beta 14
 -------------
+_released 2013-08-18_
+
 - Fixed a bug in sync password management (__Note__ : if you had connection problems with your Open Reader server, open Keychain Access and delete all Vienna-related elements. Then, reenter your credentials in Vienna).
 - Added a Google Plus plugin
 - Better handling of feeds containing linefeeds
@@ -928,16 +1161,20 @@ __Mac OS Snow Leopard (10.6) or later only !!!__
 - Changed handling of read/starred status for Open Reader feeds
 - Changed handling of Unified layout
 
-3.0.0 Beta 13
+3.0.0 Beta 13
 -------------
+_released 2013-07-17_
+
 Bugfixes :
 - Open Reader server settings were often uncorrectly saved
 - count of unread articles on Open Reader feeds was often incorrect
 - fixed Undo for "mark all read/unread" and Open Reader feeds
 - author names containing linefeeds weren't correctly displayed
 
-3.0.0 Beta 12
+3.0.0 Beta 12
 -------------
+_released 2013-07-13_
+
 - Replaced Google Reader support with support of BazQux and FeedHQ (other services might work too, just give them a try !)
 - Renamed our layouts : Horizontal, Vertical and Unified
 - The Unified layout has been completely rewritten. It now allows selection of an article (right click or click in the left margin)) for sharing it or marking it.
@@ -948,14 +1185,18 @@ Bugfixes :
 - Translation improvements (Brazilian Portuguese, Dutch, German, French, Korean)
 - Many bugfixes
 
-3.0.0 Beta 11
+3.0.0 Beta 11
 -------------
+_released 2013-03-17_
+
 - Fix a bug on preserving article currently being read on refreshes
 - Updated Dutch translation
 - Reviewed the localized versions of the "Get Info..." window, which were often mangled
 
-3.0.0 Beta 10
+3.0.0 Beta 10
 -------------
+_released 2013-03-14_
+
 - New icons (thanks to Nick Dazé and romiq !)
 - New themes (thanks to Nick Dazé and Carles Bellver)
 - New plugin : Add to Safari reading list
@@ -964,8 +1205,10 @@ Bugfixes :
 - Updated Danish and German translations
 - Bugfixes
 
-3.0.0 Beta 9
+3.0.0 Beta 9
 ------------
+_released 2013-01-13_
+
 - Refreshes should be quicker now (especially for Google Reader feeds)
 - Better handling of some ill-formed feeds
 - Videos aren't reset anymore when a feed refresh occurs
@@ -977,14 +1220,18 @@ Bugfixes :
 - Avoid warnings related to date string formats
 - Improvements to the build process
 
-3.0.0 Beta 8 ("Happy New Year" edition)
+3.0.0 Beta 8
 ------------
+_released 2012-12-31_
+
 - Fixes to the build process
 - Fix date parsing
 - Fix cookies issue with some feeds
 
-3.0.0 Beta 7
+3.0.0 Beta 7
 ------------
+_released 2012-12-29_
+
 - Reorganized on disk layout
 - Reorganized build system and version numbering (thanks to dak180)
 - Revised documentation (English and French)
@@ -996,6 +1243,8 @@ Bugfixes :
 
 3.0b.2821
 --------
+_flagged 2012-11-18_
+
 - Refreshes do not interfere anymore with user's reading experience
 - Remember columns positions between relaunches
 - New default style
@@ -1014,6 +1263,8 @@ Bugfixes :
 
 3.0b.2820
 ---------
+_flagged 2012-09-23_
+
 - When closing a tab, close its content
 - Fix the "last refreshed" filter
 - Fix parsing some date strings
@@ -1022,10 +1273,14 @@ Bugfixes :
 
 3.0b.2819
 ---------
+_flagged 2012-09-07_
+
 - Fix other nasty crashes on Mountain Lion
 
 3.0b.2818
 ---------
+_flagged 2012-09-02_
+
 - Fix some nasty crashes on Mountain Lion which occurred when closing tabs
 - Fix the "Check for newer versions of Vienna at startup" preference
 - Make the knob of the vertical scrollbar more visible when reading long lists on Lion/Mountain Lion
@@ -1033,6 +1288,8 @@ Bugfixes :
 
 3.0b.2817
 ---------
+_flagged 2012-08-25_
+
 - Fix fetching of icons associated to feeds.
   *Note* : users of previous versions are invited to use the "Refresh Folder Images" menu item
 - Better accessibility for people with visual impairment through VoiceOver
@@ -1041,6 +1298,8 @@ Bugfixes :
 
 3.0b.2816
 ---------
+_flagged 2012-07-26_
+
 - Google Reader support ! Each feed can either be local (especially authenticated feeds, which are not handled by Google Reader), or hosted on Google Reader
 - 64 bit support
 - Full Screen support on Mac OSX Lion and Mountain Lion
@@ -1054,14 +1313,14 @@ Bugfixes :
 - Larger use of multi-threading
 - Compiled with LLVM
 - Binaries are now signed to avoid blockade by Mountain Lion's gatekeeper default settings (for first run, you'll have to right click and select 'Open')
+- Added Buffer plugin
 - Many other bugfixes
 
-2.6.0.2601
-----------
-- Added Buffer plugin
+2.6.0 (2601)
+------------
+_released 2011-12-18_
+(2.6.0 Release Build)
 
-2.6.0.2600
-----------
 - Added Ascending and Descending items to the View > Sort By menu.
 - Added support for ',' duplicating '<' and '.' duplicating '>' since they appear below them on many country's keyboard layouts and this helps avoid having to hit the shift key since most of the other keyboard shortcuts handle both upper and lower case.
 - Added a feature to load the web page corresponding to a feed article instead of the text from the RSS feed. 
@@ -1078,24 +1337,39 @@ Bugfixes :
 - Fixed bug where edits to the subscription from the Folder menu were not reflected in open InfoWindows.
 - Open Article Page now handles multiple selections both in the built-in browser and in the external browser. Articles opened are also automatically marked as read. Thanks to Jan for the code contribution.
 
-2.5.1.2502
-----------
+ 2.5.1 (2502)
+-------------
+_released 2011-06-11_
+(2.5.1 Release Build)
+
 - Fix issue where styles fail to render under Mac OSX Lion.
 - Fix Share With Twitter plugin.
 
-2.5.0.2500
-----------
+2.5.0 (2501)
+------------
+_released 2010-03-18_
+(2.5.0 Release Build)
+
+- User Interface refresh: Removed the grey headers, made the vertical divider easier to grab and made filtering more discoverable.
 - Added support for plugins.
+- Added support for search engine plugins and the ability to do web-searches from the toolbar.
+- Added support for blog editor plugins.
+- Added support for sharing plugins that work like bookmarklets for social websites.
 - Added "Share With Facebook" button.
 - Added "Share With Evernote" button.
-- Added "Share With Twitter" button.
+- Added "Share With Twitter" button with automatic URL shortening via bit.ly.
 - Added user contributed "Share with Delicious" plugin to the core distribution. Thanks to forum user czanderna.
 - Update to the current version of Sparkle, which prevents auto-updating to a version of Vienna which will not run on the user's system.
 - Fix bug where deleting a feed in Unified view mode would cause Vienna to stop working correctly.
 - Fix bug where changing the article font size would crash Vienna.
+- Fix bug that caused zombiefied update spinners (thanks to Curtis Faith).
+- Fix bug that caused the reading position to be lost upon refresh (thanks to Curtis Faith).
 
-2.4.0.2401
-----------
+2.4.0 (2401)
+------------
+_released 2010-01-13_
+(2.4.0 Release Build)
+
 - Fix the filter field article selection problem reported at http://forums.cocoaforge.com/viewtopic.php?f=18&t=21665
 - Enable navigating the built-in browser's back/forward-list via  left/right three-finger swipes.
 - Enable navigating feeds via left/right three-finger swipes: Left for "Go Back" and right for "View Next Unread".
@@ -1104,6 +1378,8 @@ Bugfixes :
 
 2.4.0.2400
 ----------
+_released 2009-12-13_
+
 - Remove command-shift-g as keyboard shortcut for creating group folder. This is now used for Find Previous.
 - Show an alert when upgrading the database version, because it can take a while.
 - Turn off animation of tab resizing. It was slow, superfluous and apparently sometimes caused drawing errors in the tab bar background.
@@ -1137,27 +1413,42 @@ Bugfixes :
 - Eliminate drawing artifacts in Folders and Articles headers. (Patch from Dan Crosta)
 - Fix a crash reported at http://forums.cocoaforge.com/viewtopic.php?f=18&t=21303
 
-2.3.4.2305
-----------
+2.3.4 (2305)
+------------
+_released 2009-07-31_
+(2.3.4 Release Build)
+
 - Fix General Preferences pane crash when trying to set default RSS reader or Download folder. Sigh.
 
-2.3.3.2304
-----------
+2.3.3 (2304)
+------------
+_released 2009-07-30_
+(2.3.3 Release Build)
+
 - Fix Preferences pane crash introduced in Vienna 2.3.2.
 
-2.3.2.2303
-----------
+2.3.2 (2303)
+------------
+_released 2009-07-27_
+(2.3.2 Release Build)
+
 - SECURITY: fix potential vulnerability when deleting a maliciously crafted subscription. (Reported by Julien Bachmann)
 - Fix for bug 2724576: If network is down, URL tab information is lost. (Patch from Benedict Cohen).
 - Fix for bug 2381168: Keychain issues with https.
 - When switching back and forth from a tab, maintain the selected user interface item in the tab.
 
-2.3.1.2302
-----------
+2.3.1 (2302)
+------------
+_released 2008-11-17_
+(2.3.1 Release Build)
+
 - Fix crash on Tiger when customizing toolbar.
 
-2.3.0.2301
-----------
+2.3.0 (2301)
+------------
+_released 2008-09-16_
+(2.3.0 Release Build)
+
 - Drop Mac OS X 10.3 Panther support. Vienna 2.3 needs 10.4 or greater to launch.
 - Leopard fix: allow option-left-arrow and option-right-arrow as keyboard shortcuts for closing and opening group folders.
 - Bug fix: when validating a URL, escape any special query characters.
@@ -1167,6 +1458,8 @@ Bugfixes :
 
 2.3.0.2300
 ----------
+_released 2008-06-01_
+
 WARNING: MAC OS X 10.3 PANTHER USERS SHOULD NOT DOWNLOAD THIS! IT WON'T RUN.
 
 - Drop Mac OS X 10.3 Panther support. Vienna 2.3 needs 10.4 or greater to launch.
@@ -1179,22 +1472,25 @@ WARNING: MAC OS X 10.3 PANTHER USERS SHOULD NOT DOWNLOAD THIS! IT WON'T RUN.
 - Bug fix: Option-clicking the close tab widget closed the main Articles tab.
 - Add Kaku http://ppmweb.lolipop.jp/apps/kaku to the list of supported blog editors.
 
-2.2.3.2213
-----------
-- Change standard product URLs to the new www.vienna-rss.org web site.
-- Improvement to Send Link for multiple links and escaped characters. (Patch from Anmol Khirbat).
+2.2.2 (2212)
+------------
+_released 2007-12-24_
+(2.2.2 Release Build)
 
-2.2.2.2212
-----------
 - Fix cookie handling on Leopard. (This could cause crashes.)
 - Fix error in Spanish translation. (Thanks to Ramon.)
 
 2.2.2.2211
 ----------
+_released 2007-12-10_
+
 - Fix crash when web page attempts to open pop-under window.
 
-2.2.1.2210
-----------
+2.2.1 (2210)
+------------
+_released 2007-12-02_
+(2.2.1 Release Build)
+
 - Fix appearance of search field in toolbar when using small size.
 - Fix the visual glitch in which the unread count and progress indicator were slightly overlapping
   with the scroll bar if present.
@@ -1209,36 +1505,49 @@ WARNING: MAC OS X 10.3 PANTHER USERS SHOULD NOT DOWNLOAD THIS! IT WON'T RUN.
 - Fix long-standing issue with many messages in console.log while downloading (Patch from Martin H√§cker).
 - Add support for blogging with MarsEdit 2.
 
-2.2.0.2209
-----------
+2.2.0 (2209)
+------------
+_released 2007-09-09_
+(2.2.0 Release Build)
+
 - More minor toolbar bug fixes.
 - Updated toolbar button bitmaps.
 
 2.2.0.2208
-----------
+-----------
+_released 2007-08-26_
+
 - Fixed bug: ampersand in folder name broke smart folder criteria.
 - Fix shrinking toolbar button bug.
 - Fix problem where Vienna failed to launch under 10.3.9.
 
 2.2.0.2207
 ----------
+_released 2007-08-19_
+
 - Add patch to pass selected text to blogging clients. (Contributed by Pukka author Justin R. Miller).
 - Fix exception caused by misparsing author field in some Atom feed items.
 - Fix "CGContextRestoreGState: invalid context" errors reported to the console log.
 
 2.2.0.2206
 ----------
+_released 2007-08-10_
+
 - Updated German localisation.
 - Fixed overpainting bug in Download window.
 
 2.2.0.2205
 ----------
+_released 2007-08-05_
+
 - Allow the Search Results folder to be deleted.
 - Fix memory leak.
 - Minor toolbar button cleanup.
 
 2.2.0.2204
 ----------
+_released 2007-07-29_
+
 - Fixed bug: on launch, filter popup didn't reflect filter setting.
 - Make Refresh toolbar button toggle between refresh and cancel.
 - Add Search panel for when the toolbar is turned off or the Search field is removed from the toolbar.
@@ -1246,6 +1555,8 @@ WARNING: MAC OS X 10.3 PANTHER USERS SHOULD NOT DOWNLOAD THIS! IT WON'T RUN.
 
 2.2.0.2203
 ----------
+_released 2007-07-13_
+
 - Updated all built-in styles to add enclosure field.
 - Improved toolbar styles.
 - Added Ukrainian localisation. (Thanks to Andrew Kachalo).
@@ -1255,6 +1566,8 @@ WARNING: MAC OS X 10.3 PANTHER USERS SHOULD NOT DOWNLOAD THIS! IT WON'T RUN.
 
 2.2.0.2202
 ----------
+_released 2007-07-03_
+
 - Fix bug in 2201 which broke saving a new smart folder.
 - Fix CGContext errors in the system console log caused by the Vienna tab control gradient background.
 - Add Growl events for file download success and failure.
@@ -1263,6 +1576,8 @@ WARNING: MAC OS X 10.3 PANTHER USERS SHOULD NOT DOWNLOAD THIS! IT WON'T RUN.
 
 2.2.0.2201
 ----------
+_released 2007-06-24_
+
 - UI improvements contributed by Philipp Antoni.
 - Switched to polished metal style.
 - Added Russian localization. (Thanks to Taras "sacrat" Brizitsky).
@@ -1272,6 +1587,8 @@ WARNING: MAC OS X 10.3 PANTHER USERS SHOULD NOT DOWNLOAD THIS! IT WON'T RUN.
 
 2.2.0.2200
 ----------
+_released 2007-05-28_
+
 - Added ability to drop OPML files onto Vienna's dock icon.
 - Added support for RSS/Atom enclosures.
 - Add conditional support in templates.
@@ -1294,16 +1611,33 @@ WARNING: MAC OS X 10.3 PANTHER USERS SHOULD NOT DOWNLOAD THIS! IT WON'T RUN.
 - Added flagged article filter.
 - Refresh all subscriptions now refreshes in the folder list sorted order.
 
-2.1.2.2110
-----------
+2.1.3 (2111)
+------------
+_released 2007-07-05_
+(2.1.3 Release Build)
+
+- When opening a link in Vienna, the shift key overrides "Open new links in the background" preference.
+- Improved drag and drop of feeds to Safari.
+- Fixed character encoding issues with exporting subscriptions.
+- If Vienna doesn't handle the URL scheme (e.g., itms), open the URL with the default application for its scheme.
+- Update SQLite to 3.4.0.
+
+2.1.2 (2110)
+------------
+_released 2007-04-07_
+(2.1.2 Release Build)
+
 - Fixed bug: empty trash warning did not reappear after unhiding Vienna.
 - Changed button tooltip to match behavior.
 - New and nicer toolbar icons made by Davide Casali (Folletto).
 - Fixed bug: move articles to Trash preference was counting back to beginning of day rather than by 24 hours.
 - Fixed bug: change in JavaScript preference didn't take effect until relaunching.
 
-2.1.1.2109
-----------
+2.1.1 (2109)
+------------
+_released 2007-01-27_
+(2.1.1 Release Build)
+
 - Added Danish localisation. (Thanks to David Munch).
 - Added Czech localisation. (Thanks to Jakub Formanek).
 - If folder manual sort order is corrupt, automatically reset.
@@ -1334,11 +1668,15 @@ WARNING: MAC OS X 10.3 PANTHER USERS SHOULD NOT DOWNLOAD THIS! IT WON'T RUN.
 
 2.1.0.2108
 ----------
+_released 2006-11-10_
+
 - Convert InfoPlist.strings files to UTF-16.
 - Fix bug with marking all subscriptions read from group or smart folder.
 
 2.1.0.2107
 ----------
+_released 2006-11-05_
+
 - Fix article selection after deleting or restoring.
 - Fix bug: deleted article wasn't removed from trash when using filter.
 
@@ -1356,6 +1694,8 @@ WARNING: MAC OS X 10.3 PANTHER USERS SHOULD NOT DOWNLOAD THIS! IT WON'T RUN.
 
 2.1.0.2105
 ----------
+_released 2006-09-23_
+
 - Add Blog With feature.
 - Fix bug where mouse was tracking wrong browser tab.
 - Fix bug: searching in 'any' smart folders wasn't done correctly.
@@ -1377,6 +1717,8 @@ WARNING: MAC OS X 10.3 PANTHER USERS SHOULD NOT DOWNLOAD THIS! IT WON'T RUN.
 
 2.1.0.2104
 ----------
+_released 2006-08-27_
+
 - Update to Sparkle 1.1.
 - Fix bug: preserved article is marked unread after folder reloaded.
 - Fix bug: browser buttons were always enabled.
@@ -1409,6 +1751,8 @@ WARNING: MAC OS X 10.3 PANTHER USERS SHOULD NOT DOWNLOAD THIS! IT WON'T RUN.
 
 2.1.0.2103
 ----------
+_released 2006-07-27_
+
 - Fix next unread behavior in sorted article list.
 - Select a new subscription after dragging from an external source.
 - Add Applescript support for retrieving html source of article pane.
@@ -1427,6 +1771,8 @@ WARNING: MAC OS X 10.3 PANTHER USERS SHOULD NOT DOWNLOAD THIS! IT WON'T RUN.
 
 2.1.0.2102
 ----------
+_released 2006-07-02_
+
 - Fixed bug: folder attributes (e.g., unread count) not always written to database.
 - Don't reload current folder after refresh if preference is set to mark articles read automatically.
 - Avoid leaking or crashing with URL connections.
@@ -1448,6 +1794,8 @@ WARNING: MAC OS X 10.3 PANTHER USERS SHOULD NOT DOWNLOAD THIS! IT WON'T RUN.
 
 2.1.0.2101
 ----------
+_released 2006-06-05_
+
 - Restored Mac OS 10.3.9 support.
 
 2.1.0.2100
@@ -1479,12 +1827,21 @@ WARNING: MAC OS X 10.3 PANTHER USERS SHOULD NOT DOWNLOAD THIS! IT WON'T RUN.
 - Change user agent string from Mozilla/Safari to Vienna.
 - Use Sparkle framework (http://andymatuschak.org/pages/sparkle) for version updates.
 
+ 2.0.4.2034
+-----------
+_released 2006-05-17_
+
+- Changed modifier key for overriding default browser preference from shift to option.
+
 2.0.4.2033
 ----------
 - Parse entity characters in RSS article links.
+- Various bug and performance fixes.
 
 2.0.3.2032
 ----------
+_released 2006-04-08_
+
 - Minor article cache tweak and bug fixes.
 
 2.0.3.2031
@@ -1495,14 +1852,19 @@ WARNING: MAC OS X 10.3 PANTHER USERS SHOULD NOT DOWNLOAD THIS! IT WON'T RUN.
 
 2.0.2.2030
 ----------
+_released 2006-03-07_
+
 - Completed Spanish localisation.
 
 2.0.2.2029
 ----------
 - Fix database performance issue introduced in 2026.
 
-2.0.1.2028 (2.0.1 Release Build)
---------------------------------
+2.0.1.2028
+----------
+_released 2006-03-01_
+(2.0.1 Release Build)
+
 - Updated localisation.
 
 2.0.1.2027
@@ -1527,8 +1889,11 @@ WARNING: MAC OS X 10.3 PANTHER USERS SHOULD NOT DOWNLOAD THIS! IT WON'T RUN.
 - Shift+Spacebar scrolls up the article view or goes to the previously viewed message.
 - Added four more built-in styles: Broadsheet Clipping, Perlucida, Prague and Prague-light.
 
-2.0.0.2025 (2.0 Release Build)
-------------------------------
+2.0.0.2025
+----------
+_released 2006-02-07_
+(2.0 Release Build)
+
 - Added Dutch localisation (Thanks to Martijn van Exel).
 - Fix corrupted display of iframe on some articles due to encoding mismatch.
 - Fix Mark All Read behaviour in smart folders which broke in 2024.
@@ -1540,6 +1905,8 @@ WARNING: MAC OS X 10.3 PANTHER USERS SHOULD NOT DOWNLOAD THIS! IT WON'T RUN.
 
 2.0.0.2023
 ----------
+_released 2006-01-23_
+
 - Incorporated a fix from Mark Evenson for the cursor.org RSS feed.
 - Refresh keystrokes changed to Cmd+R/Shift+Cmd+R.
 - Mark Read keystroke changed to Cmd+Shift+U ('u' single key added to complement).
@@ -1552,11 +1919,15 @@ WARNING: MAC OS X 10.3 PANTHER USERS SHOULD NOT DOWNLOAD THIS! IT WON'T RUN.
 
 2.0.0.2022
 ----------
+_released 2006-01-16_
+
 - More feed parsing issues fixed.
 - Improved General and Appearance icons contributed by Brandon Booth.
 
 2.0.0.2021
 ----------
+_released 2006-01-12_
+
 - Fixed a few left-over localisation issues.
 - Parse out a subset of HTML tags from titles.
 - Add a fix for unescaped & characters in links which some feeds are prone to.
@@ -1564,17 +1935,23 @@ WARNING: MAC OS X 10.3 PANTHER USERS SHOULD NOT DOWNLOAD THIS! IT WON'T RUN.
 
 2.0.0.2020
 ----------
+_released 2006-01-07_
+
 - New 'star' shaped unread count on the application icon.
 - Disable Delete Article unless the article list has focus.
 - Minor fit-and-finish polish to the UI and parsing code.
 
 2.0.0.2019
 ----------
+_released 2006-01-01_
+
 - New RSS feed icon.
 - Fixed a few more feed parsing issues.
 
 2.0.0.2018
 ----------
+_released 2005-12-27_
+
 - Improved handling of feeds with invalid XML encoding so most of these are now accepted.
 - Fix Growl integration to work in localised builds.
 - Fix handling of folder icons from sites like FeedBurner.
@@ -1582,6 +1959,8 @@ WARNING: MAC OS X 10.3 PANTHER USERS SHOULD NOT DOWNLOAD THIS! IT WON'T RUN.
 
 2.0.0.2017
 ----------
+_released 2005-12-22_
+
 - Fix localisation article scroll bar truncation.
 - Clear download list should not remove items being downloaded.
 - Fix handling of Javascript web pages.
@@ -1593,6 +1972,8 @@ WARNING: MAC OS X 10.3 PANTHER USERS SHOULD NOT DOWNLOAD THIS! IT WON'T RUN.
 
 2.0.0.2016
 ----------
+_released 2005-12-16_
+
 - Added Traditional Chinese localisation. (Thanks to Weizhong Yang).
 - Accept HTTP 200 responses with no data as meaning 0 new articles rather than an error.
 - Show count of unread on title bar. (Patch submitted by Jussi Hagman).
@@ -1600,6 +1981,8 @@ WARNING: MAC OS X 10.3 PANTHER USERS SHOULD NOT DOWNLOAD THIS! IT WON'T RUN.
 
 2.0.0.2015
 ----------
+_released 2005-12-03_
+
 - Improvements to universal date parsing to fix some mis-parsed article dates.
 - Fixed OPML format in exported subscriptions to conform to the standard.
 - A warning icon now appears next to the folder name in the folders list if an error
@@ -1607,6 +1990,8 @@ WARNING: MAC OS X 10.3 PANTHER USERS SHOULD NOT DOWNLOAD THIS! IT WON'T RUN.
 
 2.0.0.2014
 ----------
+_released 2005-11-25_
+
 - Fix "Folder NOT xxx" implementation which wasn't working right for group folders.
 - Cmd+W closes the Download, Preference or Activity windows even when they are active.
 - $FeedDescription$ added as a tag for styles. This expands to the feed description if available.
@@ -1618,12 +2003,16 @@ WARNING: MAC OS X 10.3 PANTHER USERS SHOULD NOT DOWNLOAD THIS! IT WON'T RUN.
 
 2.0.0.2013
 ----------
+_released 2005-11-05_
+
 - Resort the folder list when a folder is renamed.
 - Cmd-click on a link in the web view opens the link in a new tab.
 - Download SITX files as SITX files even if the server returns a MIME type of text.
 
 2.0.0.2012
 ----------
+_released 2005-10-28_
+
 - Fix bug which prevented a system from going to sleep if automatic refreshes are enabled.
 - Stepping through article lists does not refresh the article pane until the steps complete.
 - Completed all localisation fixes.
@@ -1634,6 +2023,8 @@ WARNING: MAC OS X 10.3 PANTHER USERS SHOULD NOT DOWNLOAD THIS! IT WON'T RUN.
 
 2.0.0.2011
 ----------
+_released 2005-10-20_
+
 - Added option to export subscriptions with groups or as a flat file.
 - Refresh when the system awakes from sleep if the refresh frequency is not set to manual.
 - Added German Localisation. (Thanks to Jan Kampling).
@@ -1654,6 +2045,8 @@ WARNING: MAC OS X 10.3 PANTHER USERS SHOULD NOT DOWNLOAD THIS! IT WON'T RUN.
 
 2.0.0.2010
 ----------
+_released 2005-10-05_
+
 - Added auto-expire support. Articles older than a given number of days can be automatically moved
   to the trash folder.
 - Handle RDF:Sequence parsing for feeds such as http://www.kongisking.net. This ensures that
@@ -1671,6 +2064,8 @@ WARNING: MAC OS X 10.3 PANTHER USERS SHOULD NOT DOWNLOAD THIS! IT WON'T RUN.
 
 2.0.0.2009
 ----------
+_released 2005-09-26_
+
 - Fixed potential database corruption bug introduced in build 2007 when refreshing a feed that
   uses entity characters specified with hexadecimal notation.
 - Cmd+W closes Preferences window if it is open, rather than the main window.
@@ -1679,8 +2074,11 @@ WARNING: MAC OS X 10.3 PANTHER USERS SHOULD NOT DOWNLOAD THIS! IT WON'T RUN.
 - Holding down Cmd+Alt keys while clicking tab close button closes all tabs.
 - Fixed close tab behaviour properly this time.
 
-2.0.0.2008 (BETA 2)
--------------------
+ 2.0.0.2008
+-----------
+_released 2005-09-24_
+(2.0 BETA 2 build)
+
 - Added final Swedish localisation changes for beta 2.
 - Fixed French localisation import error.
 - Fix bug with importing OPML files.
@@ -1693,6 +2091,8 @@ WARNING: MAC OS X 10.3 PANTHER USERS SHOULD NOT DOWNLOAD THIS! IT WON'T RUN.
 
 2.0.0.2007
 ----------
+_released 2005-09-18_
+
 - You can now undo/redo Mark All Read, even across multiple folders.
 - Article view split bar position is now properly persisted across sessions.
 - Disabled proportional folder and article list split bar resizing when the main window is resized.
@@ -1713,6 +2113,8 @@ WARNING: MAC OS X 10.3 PANTHER USERS SHOULD NOT DOWNLOAD THIS! IT WON'T RUN.
 
 2.0.0.2006
 ----------
+_released 2005-09-03_
+
 - Can now sort and double-click activity log items.
 - Added option to set the minimum font size in the article display pane.
 - Search field now searches article titles as well as the text.
@@ -1724,6 +2126,8 @@ WARNING: MAC OS X 10.3 PANTHER USERS SHOULD NOT DOWNLOAD THIS! IT WON'T RUN.
 
 2.0.0.2005
 ----------
+_released 2005-08-19_
+
 - Updates to Swedish localisation.
 - Fixed entity decoding bug that caused corrupted characters in the Der Spiegel feed.
 - Fixed character set translation bug that caused some UTF8 characters to appear corrupted.
@@ -1748,8 +2152,11 @@ WARNING: MAC OS X 10.3 PANTHER USERS SHOULD NOT DOWNLOAD THIS! IT WON'T RUN.
   default browser.
 - Improved the UI refresh after drag and drop re-ordering of folders in the folder list.
 
-2.0.0.2004 (Refresh)
---------------------
+2.0.0.2004
+----------
+_released 2005-07-28_
+(Refresh)
+
 - Added support for automatically installing custom styles.
 - Refresh button now toggles between starting and stopping a refresh.
 - Remove the unread count from the application icon in the dock when closing Vienna.
@@ -1783,6 +2190,8 @@ WARNING: MAC OS X 10.3 PANTHER USERS SHOULD NOT DOWNLOAD THIS! IT WON'T RUN.
 
 2.0.0.2003
 ----------
+_released 2005-07-16_
+
 - Add an option to mark the current article read after 1 second. This is now the new default.
 - Fix import/export to convert characters such as <, > and & to and from their entity equivalents
   in URL fields as per XML specification.
@@ -1808,6 +2217,9 @@ WARNING: MAC OS X 10.3 PANTHER USERS SHOULD NOT DOWNLOAD THIS! IT WON'T RUN.
   of the position of the article pane. It'll be interesting to see if anybody really wants the
   summary view when the article pane is below the article list.
 
-2.0.0.2002 (BETA 1)
--------------------
+2.0.0.2002
+----------
+_released 2005-07-10_
+(2.0 BETA 1 build)
+
 - Original beta 1 release.
