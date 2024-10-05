@@ -519,6 +519,14 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 	[db close];
 }
 
+/* applicationSupportsSecureRestorableState [delegate]
+ */
+-(BOOL)applicationSupportsSecureRestorableState:(NSApplication *)app
+{
+    // We do not use override NSApplication delegate `initWithCoder` method, nor the methods
+    // for restoring application state, so we are fine with SecureCoding.
+    return YES;
+}
 
 /* openFile [delegate]
  * Called when the user opens a data file associated with Vienna by clicking in the finder or dragging it onto the dock.
