@@ -1,12 +1,6 @@
 Vienna ChangeLog File
 =====================
 
-As you release new builds, update this file with details of the changes in each build. The
-most recent build should be at the top of this file.
-
-** The notes.html file should reflect the same infos, but only for recent updates : it is displayed when a new version is detected.
-
-Thanks!
 
 3.9.2
 -----

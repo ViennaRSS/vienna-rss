@@ -63,8 +63,8 @@ Tags should be in one of the following formats:
 ## Steps before releasing Vienna: ##
 
  1.	Review all recent code changes and make sure you should not change `MACOSX_DEPLOYMENT_TARGET` in the project configuration in order to protect users whose machines do not match minimum macOS requirements from a counter-productive "upgrade".
- 2.	Make sure that the "CHANGES" file is up to date.
- 3.	Copy the most recent part of "CHANGES" in a new text document and process it with Markdown to get a new "notes.html".
+ 2.	Update the "CHANGELOG.md" file with a summary of the changes for this build. The most recent build should be at the top of this file. Interesting advices on writing a good changelog can be found [in this blog post](https://xavd.id/blog/post/effective-changelogs/).
+ 3.	Copy the most recent part of "CHANGELOG.md" in a new Markdown document to generate a new "notes.html" file. This file will be displayed by the autoupdate mechanism when the new version will be detected.
  4.	Commit anything unstaged (on `master` branch if you are releasing a beta or on `stable` branch if you are doing a normal release).
  5.	Make a new tag using `git tag -s` _tagname_, respecting the above mentioned convention (if you do not have a gpg key, you can use `git tag -a` instead).
 
