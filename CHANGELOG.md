@@ -2219,7 +2219,7 @@ _released 2005-07-16_
 
 2.0.0.2002
 ----------
-_released 2005-07-10_
+_released 2005-07-07_
 (2.0 BETA 1 build)
 
 - Original beta 1 release.
