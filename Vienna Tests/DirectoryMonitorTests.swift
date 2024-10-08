@@ -44,31 +44,31 @@ class DirectoryMonitorTests: XCTestCase {
 
     var testExpectation: XCTestExpectation?
 
-    override func setUp() {
-        super.setUp()
+    override func setUpWithError() throws {
+        try super.setUpWithError()
 
         // Set the test expectation.
         testExpectation = expectation(description: "The monitor's event handler is called")
 
         // Create the temp directory.
-        XCTAssertNoThrow(try fileManager.createDirectory(at: tempDirectory, withIntermediateDirectories: false))
+        tempDirectory = try fileManager.url(for: .itemReplacementDirectory, in: .userDomainMask, appropriateFor: fileManager.applicationScriptsDirectory, create: true)
 
         // Create the monitor.
         monitor = DirectoryMonitor(directories: [tempDirectory])
     }
 
-    override func tearDown() {
+    override func tearDownWithError() throws {
         // Deinitialize the monitor and reset the failsafe.
         monitor = nil
         hasHandlerBeenCalled = false
 
         // Delete the temp directory.
-        XCTAssertNoThrow(try fileManager.removeItem(at: tempDirectory))
+        try fileManager.removeItem(at: tempDirectory)
 
         // Unset the test expectation.
         testExpectation = nil
 
-        super.tearDown()
+        try super.tearDownWithError()
     }
 
     // MARK: Test methods
@@ -167,7 +167,7 @@ class DirectoryMonitorTests: XCTestCase {
 
     let fileManager = FileManager.default
 
-    let tempDirectory = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(ProcessInfo.processInfo.globallyUniqueString, isDirectory: true)
+    var tempDirectory: URL!
 
     var tempDirectoryItemCount: Int {
         return (try? fileManager.contentsOfDirectory(at: tempDirectory, includingPropertiesForKeys: nil))?.count ?? -1
