@@ -1,17 +1,34 @@
 <!DOCTYPE html><head><meta charset="utf-8"/></head><h1>Version Notes</h1>
-<h2>Vienna 3.9.2</h2>
-<p>This version is recommended to all Vienna users. It fixes problems reported by users having switched from legacy browser (available in previous versions of Vienna) to Vienna 3.9.x (which completed the switch to WKWebView).</p>
+<h2>Vienna 3.9.3</h2>
+<p><em>released 2024-10-12</em></p>
+<p>This version is recommended to all Vienna users.<br />
+It fixes problems reported by users having switched from legacy browser (available in previous versions of Vienna) to Vienna 3.9.x (which completed the switch to WKWebView).</p>
+<h3>🚲 Changes</h3>
 <ul>
-<li>Change mechanism preventing Vienna from unexpectedly switching to alphabetical sorting of folders and feeds. This phenomenon might still occur but should be much more unlikely</li>
-<li>Perform a sanity check of database at launch</li>
-<li>Do not show warning sign on feeds without articles</li>
-<li>Fix crash when server sends unusual MIMEType</li>
-<li>Fix various issues in General Preferences window</li>
-<li>Fix autolayout issues which could unexpectedly resize the article view or the main window, or hide the enclosure view</li>
-<li>Fix style change to give immediate visual feedback</li>
-<li>Improve parsing of RSS content:encoded element</li>
-<li>For Unified layout, move the tip about the hovered link’s URL at the bottom of the view</li>
-<li>Use String Catalogs (.xcstrings) for most translations</li>
-<li>Add more translations</li>
-<li>Update some documentation files</li>
+<li>Distinguish “Date published” and “Last update” dates for articles.<br />
+This distinction can be used to define sort order or in smart folders definitions. To keep things simple and tidy, the “Date Published” information has not been added to the vertical layout.</li>
+<li>Change application category from “utilities” to “news”</li>
+</ul>
+<h3>🤷🏻 Bugfixes</h3>
+<ul>
+<li>Fix text entry in the main tab’s article view when the “Use Web Page for Articles” option is enabled</li>
+<li>Make command-click on a link open a new tab with this link</li>
+<li>Make option-click on a link open it in the browser which is not set as the default in General settings (either it is the system’s default browser or Vienna’s internal browser)</li>
+<li>Fix “Validate Feed” button in Info window when the feed has a query-based URL</li>
+</ul>
+<h3>⚙️ Internals improvements</h3>
+<ul>
+<li>Make finding Vienna related content in help menus easier</li>
+<li>Improve recovery mechanism when Vienna is forced to switch to alphabetical sort for folders and feeds.<br />
+Hopefully, this should limit the risk of seeing the problem reoccur.</li>
+<li>Update informations related to folder even when the feed has no articles</li>
+<li>Make “Last Updated” date displayed in “Info” window more consistent</li>
+<li>Improve memory management (cache of folder’s articles)</li>
+</ul>
+<h3>🛤️ Infrastructure updates</h3>
+<ul>
+<li>Build with Xcode 16 and macOS 15 SDK</li>
+<li>Update to latest version of GitHub actions</li>
+<li>Use Crowdin.com for localizing content of HTML help files</li>
+<li>Enhance ChangeLog</li>
 </ul>

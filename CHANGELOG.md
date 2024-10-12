@@ -2,6 +2,32 @@ Vienna ChangeLog File
 =====================
 
 
+Vienna 3.9.3
+-----
+_released 2024-10-12_
+
+### 🚲 Changes
+- Distinguish "Date published" and "Last update" dates for articles.  
+  This distinction can be used to define sort order or in smart folders definitions. To keep things simple and tidy, the "Date Published" information has not been added to the vertical layout.
+- Change application category from "utilities" to "news"
+### 🤷🏻 Bugfixes
+- Fix text entry in the main tab's article view when the "Use Web Page for Articles" option is enabled
+- Make command-click on a link open a new tab with this link
+- Make option-click on a link open it in the browser which is not set as the default in General settings (either it is the system's default browser or Vienna's internal browser)
+- Fix "Validate Feed" button in Info window when the feed has a query-based URL
+### ⚙️ Internals improvements
+- Make finding Vienna related content in help menus easier
+- Improve recovery mechanism when Vienna is forced to switch to alphabetical sort for folders and feeds.  
+  Hopefully, this should limit the risk of seeing the problem reoccur.
+- Update informations related to folder even when the feed has no articles
+- Make "Last Updated" date displayed in "Info" window more consistent
+- Improve memory management (cache of folder's articles)
+### 🛤️ Infrastructure updates
+- Build with Xcode 16 and macOS 15 SDK
+- Update to latest version of GitHub actions
+- Use Crowdin.com for localizing content of HTML help files
+- Enhance ChangeLog
+
 3.9.2
 -----
 _released 2024-08-15_
