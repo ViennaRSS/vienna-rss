@@ -2472,7 +2472,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	NSString * guid = article.guid;
 	Folder * folder = [self folderFromID:folderId];
 	if (folder !=nil) {
-		if (isDeleted && !article.read) {
+        if (isDeleted && !article.read) {
 			[self markArticleRead:folderId guid:guid isRead:YES];
 		}
         FMDatabaseQueue *queue = self.databaseQueue;
@@ -2483,6 +2483,9 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
              guid];
         }];
         [article markDeleted:isDeleted];
+        //TODO this should all move to the folder implementation, to make this less of a god object.
+        // Or even better: when marking an article as deleted it triggers the deletion from its folder itself, and that in turn triggers the db update.
+        // The same also applies to deleteArticle and probably many other parts of this class.
         if (folder.countOfCachedArticles > 0) {
             // If we're in a smart folder, the cached article may be different.
             Article * cachedArticle = [folder articleFromGuid:guid];
