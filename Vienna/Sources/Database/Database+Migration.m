@@ -250,6 +250,10 @@
             database.userVersion = (uint32_t)23;
             NSLog(@"Updated database schema to version 23.");
         }
+        case 24: {
+            //correct articles that were saved with updatedDate is 1.1.1970 00:00
+            [database executeStatements:@"UPDATE messages SET date = createddate WHERE date = 0"];
+        }
     }
 }
 
