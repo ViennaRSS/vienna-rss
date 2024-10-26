@@ -1605,7 +1605,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 
     // keep last update date the same if not set in the current version of the article
     NSDate * lastUpdate = existingArticle.lastUpdate;
-    if (articleUpdate.lastUpdate && [articleUpdate.lastUpdate isGreaterThan:existingArticle.lastUpdate]) {
+    if (articleUpdate.lastUpdate && [articleUpdate.lastUpdate isGreaterThan:lastUpdate]) {
         lastUpdate = articleUpdate.lastUpdate;
     }
 
