@@ -739,7 +739,10 @@
                 for (id object in self.cachedGuids) {
                     Article * theArticle = [self.cachedArticles objectForKey:object];
                     if (theArticle != nil) {
-                        [articles addObject:theArticle];
+                        // deleted articles are not removed from cache any more
+                        if (!theArticle.isDeleted) {
+                            [articles addObject:theArticle];
+                        }
                     } else {
                         // some problem
                         NSLog(@"Bug retrieving from cache in folder %li : after %lu insertions of %lu, guid %@",(long)self.itemId, (unsigned long)articles.count,(unsigned long)self.cachedGuids.count,object);
