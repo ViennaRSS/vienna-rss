@@ -2,6 +2,16 @@ Vienna ChangeLog File
 =====================
 
 
+Vienna 3.9.4
+-----
+_released 2024-10-27_
+
+### 🤷🏻 Bugfix
+- Prevent deleted articles from reappearing in feeds after refresh
+- Prevent "Date published" and "Last update" dates from being set to January 1st, 1970
+### ⚙️ Internals improvement
+- Include a database update to fix entries that had January 1st, 1970 as the last update date
+
 Vienna 3.9.3
 -----
 _released 2024-10-12_
