@@ -58,7 +58,7 @@
 
 // The current database version number
 static NSInteger const VNAMinimumSupportedDatabaseVersion = 12;
-static NSInteger const VNACurrentDatabaseVersion = 23;
+static NSInteger const VNACurrentDatabaseVersion = 24;
 
 @implementation Database
 
@@ -457,26 +457,6 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
             [db executeUpdate:@"INSERT INTO smart_folders (folder_id, search_string) VALUES (?, ?)", @(db.lastInsertRowId), preparedCriteriaString];
         }];
 	}
-}
-
-/* syncLastUpdate
- * Call this function to update the field in the info table which contains the last_updated
- * date. This is basically auditing data and is only called when the database is first opened
- * in this session.
- */
--(void)syncLastUpdate
-{
-    __block BOOL success;
-    
-	[self.databaseQueue inDatabase:^(FMDatabase *db) {
-		success = [db executeUpdate:@"UPDATE info SET last_opened=?", [NSDate date]];
-
-	}];
-    if (success) {
-        self.readOnly = NO;
-    } else {
-        self.readOnly = YES;
-    }
 }
 
 /* countOfUnread
@@ -1536,7 +1516,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 
     // use the given publication date if it is contained in the feed, or the earliest date available
     NSDate * publicationDate = article.publicationDate;
-    if (!publicationDate) {
+    if (!publicationDate || [publicationDate timeIntervalSince1970] == 0) {
         publicationDate = article.lastUpdate && [article.lastUpdate isLessThan:currentDate]
                                    ? article.lastUpdate 
                                    : currentDate;
@@ -1545,7 +1525,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 
     // if a last update date is not provided, use our publication date
     NSDate * lastUpdate = article.lastUpdate;
-    if (!lastUpdate) {
+    if (!lastUpdate || [lastUpdate timeIntervalSince1970] == 0) {
         lastUpdate = publicationDate;
         article.lastUpdate = lastUpdate;
     }
@@ -1605,7 +1585,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
  * article was updated or NO if we couldn't update the article for
  * some reason.
  */
--(BOOL)updateArticle:(Article *)existingArticle ofFolder:(NSInteger)folderID withArticle:(Article *)article
+-(BOOL)updateArticle:(Article *)existingArticle ofFolder:(NSInteger)folderID withArticle:(Article *)articleUpdate
 {
     // Exit now if we're read-only
 	if (self.readOnly) {
@@ -1615,23 +1595,26 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	FMDatabaseQueue *queue = self.databaseQueue;
 
     // Extract the data from the new state of article
-    NSString * articleBody = article.body;
-    NSString * articleTitle = article.title;
-    NSString * articleLink = article.link.vna_trimmed;
-    NSString * userName = article.author.vna_trimmed;
-    NSString * articleGuid = article.guid;
-    NSInteger parentId = article.parentId;
-    BOOL revised_flag = article.revised;
+    NSString * articleBody = articleUpdate.body;
+    NSString * articleTitle = articleUpdate.title;
+    NSString * articleLink = articleUpdate.link.vna_trimmed;
+    NSString * userName = articleUpdate.author.vna_trimmed;
+    NSString * articleGuid = articleUpdate.guid;
+    NSInteger parentId = articleUpdate.parentId;
+    BOOL revised_flag = articleUpdate.revised;
 
     // keep last update date the same if not set in the current version of the article
-    NSDate * lastUpdate = article.lastUpdate && [article.lastUpdate isGreaterThan:existingArticle.lastUpdate]
-                            ? article.lastUpdate
-                            : existingArticle.lastUpdate;
+    NSDate * lastUpdate = existingArticle.lastUpdate;
+    if (articleUpdate.lastUpdate && [articleUpdate.lastUpdate isGreaterThan:lastUpdate]) {
+        lastUpdate = articleUpdate.lastUpdate;
+    }
 
     // we never change the publication date, unless the date provided in the feed is prior to it
     NSDate * publicationDate = existingArticle.publicationDate;
-    if (article.publicationDate && [article.publicationDate isLessThan:existingArticle.publicationDate]) {
-        publicationDate = article.publicationDate;
+    if (articleUpdate.publicationDate
+        && [articleUpdate.publicationDate timeIntervalSince1970] > 0
+        && [articleUpdate.publicationDate isLessThan:publicationDate]) {
+        publicationDate = articleUpdate.publicationDate;
     }
 
     // Dates are stored as time intervals
@@ -1705,6 +1688,8 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
             existingArticle.parentId = parentId;
             existingArticle.author = userName;
             existingArticle.link = articleLink;
+            existingArticle.lastUpdate = lastUpdate;
+            existingArticle.publicationDate = publicationDate;
             return YES;
         }
     } else {
