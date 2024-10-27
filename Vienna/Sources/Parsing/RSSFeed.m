@@ -309,6 +309,12 @@
                         newFeedItem.enclosure =
                             ([[itemChildElement elementsForName:enclosureString].firstObject attributeForName:@"url"]).stringValue;
                     }
+                    if (!newFeedItem.enclosure || [newFeedItem.enclosure isEqualToString:@""]) {
+                        // use first thumbnail as a workaround for enclosure
+                        NSString *enclosureString = [NSString stringWithFormat:@"%@:thumbnail", self.mediaPrefix];
+                        newFeedItem.enclosure =
+                            ([[itemChildElement elementsForName:enclosureString].firstObject attributeForName:@"url"]).stringValue;
+                    }
                     if (!articleBody || [articleBody isEqualToString:@""]) {
                         // use enclosure description as a workaround for feed description
                         NSString *descriptionString = [NSString stringWithFormat:@"%@:description", self.mediaPrefix];
