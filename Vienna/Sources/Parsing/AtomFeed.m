@@ -294,13 +294,13 @@
 
                 // Parse media group
                 if ([itemChildElement.prefix isEqualToString:self.mediaPrefix] && [articleItemTag isEqualToString:@"group"]) {
-                    if ([newFeedItem.enclosure isEqualToString:@""]) {
+                    if (!newFeedItem.enclosure || [newFeedItem.enclosure isEqualToString:@""]) {
                         // group's first enclosure
                         NSString *enclosureString = [NSString stringWithFormat:@"%@:content", self.mediaPrefix];
                         newFeedItem.enclosure =
                             ([[itemChildElement elementsForName:enclosureString].firstObject attributeForName:@"url"]).stringValue;
                     }
-                    if (!articleBody) {
+                    if (!articleBody || [articleBody isEqualToString:@""]) {
                         // use enclosure description as a workaround for feed description
                         NSString *descriptionString = [NSString stringWithFormat:@"%@:description", self.mediaPrefix];
                         articleBody =
