@@ -340,6 +340,11 @@ extension BrowserTab: Tab {
 extension BrowserTab: WKNavigationDelegate {
 
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if let url = navigationAction.request.url, url.scheme == "mailto" {
+            decisionHandler(.cancel)
+            NSApp.appController.openURL(inDefaultBrowser: url)
+            return
+        }
         if navigationAction.navigationType == .linkActivated {
             let commandKey = navigationAction.modifierFlags.contains(.command)
             let optionKey = navigationAction.modifierFlags.contains(.option)
