@@ -3868,6 +3868,12 @@
             "value" : "Zur Safari-Leseliste hinzufügen"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añadir a lista de lectura de Safari"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6442,6 +6448,12 @@
             "value" : "Trotzdem fortfahren"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continuar de todos modos"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6670,6 +6682,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Veröffentlicht"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fecha de publicación"
           }
         },
         "fr" : {
@@ -10143,6 +10161,12 @@
             "value" : "Fehler beim Analysieren des Feeds"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error analizando datos en fuente"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -13311,6 +13335,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Letztes Update"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Última actualización"
           }
         },
         "fr" : {
@@ -19529,6 +19559,12 @@
             "value" : "Safari-Leseliste"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lista de lectura de Safari"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -19955,6 +19991,12 @@
             "value" : "Search"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buscar"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -20012,6 +20054,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Search"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buscar"
           }
         },
         "fr" : {
@@ -20073,6 +20121,12 @@
             "value" : "Search"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buscar"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
@@ -20130,6 +20184,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Search"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buscar"
           }
         },
         "fr" : {
@@ -24432,6 +24492,12 @@
             "value" : "Möglicherweise funktioniert Vienna nicht wie erwartet, wenn die Datenbank beschädigt ist. Wir empfehlen, Vienna zu schließen und entweder die Datenbank (%@) aus einem Backup wiederherzustellen oder eine SQLite3 Wiederherstellung zu versuchen."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vienna puede no funcionar de manera esperada si la base de datos está dañada. Le recomendamos salir de Vienna y restarurar la base de datos (%@) desde una copia de seguridad o intentar una restauración de sqlite3."
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -24671,6 +24737,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Viennas Datenbank scheint beschädigt zu sein. Möchtest du Vienna schließen oder trotzdem fortfahren?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La base de datos de Vienna parece estar dañada. ¿Desea salir de Vienna o continuar de todos modos?"
           }
         },
         "fr" : {
