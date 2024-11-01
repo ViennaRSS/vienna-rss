@@ -1131,8 +1131,15 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 			// appropriately.
 			isLoadingHTMLArticle = NO;
 
-			// Set the article to the HTML from the RSS feed.
-			[articleText setArticles:msgArray];
+			if ([firstArticle beginContentAccess]) { // has first article's content been discarded ? 
+                // Set the article to the HTML from the RSS feed.
+                [articleText setArticles:msgArray];
+                [firstArticle endContentAccess];
+            } else {
+                // article was discarded : force articleController to reload articles, then restart display refresh
+                [[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_ArticleListContentChange object:nil];
+                [self performSelector:@selector(refreshArticlePane) withObject:nil afterDelay:0.0];
+            }
 		}
 	}
 	
