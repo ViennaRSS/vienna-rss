@@ -430,9 +430,7 @@
  */
 -(void)setNonPersistedFlag:(VNAFolderFlag)flagToSet
 {
-	@synchronized(self) {
-		nonPersistedFlags |= flagToSet;
-	}
+    nonPersistedFlags |= flagToSet;
 }
 
 /* clearNonPersistedFlag
@@ -440,9 +438,7 @@
  */
 -(void)clearNonPersistedFlag:(VNAFolderFlag)flagToClear
 {
-	@synchronized(self) {
-		nonPersistedFlags &= ~flagToClear;
-	}
+    nonPersistedFlags &= ~flagToClear;
 }
 
 /* indexOfArticle
@@ -450,20 +446,16 @@
  */
 -(NSUInteger)indexOfArticle:(Article *)article
 {
-    @synchronized(self) {
-        [self ensureCache];
-        return [self.cachedGuids indexOfObject:article.guid];
-    }
+    [self ensureCache];
+    return [self.cachedGuids indexOfObject:article.guid];
 }
 
 /* articleFromGuid
  */
 -(Article *)articleFromGuid:(NSString *)guid
 {
-    @synchronized(self) {
-        [self ensureCache];
-	    return [self.cachedArticles objectForKey:guid];
-	}
+    [self ensureCache];
+    return [self.cachedArticles objectForKey:guid];
 }
 
 /* retrieveKnownStatusForGuid
@@ -488,7 +480,6 @@
  */
 -(BOOL)createArticle:(Article *)article guidHistory:(NSArray *)guidHistory
 {
-@synchronized(self) {
     // Prime the article cache
     [self ensureCache];
 
@@ -552,7 +543,6 @@
 		[[Database sharedManager] setFolderUnreadCount:self adjustment:adjustment];
     }
     return YES;
-  } // synchronized
 }
 
 /* setUnreadCount
@@ -578,12 +568,10 @@
  */
 -(void)clearCache
 {
-    @synchronized(self) {
-		[self.cachedArticles removeAllObjects];
-		[self.cachedGuids removeAllObjects];
-		self.isCached = NO;
-		self.containsBodies = NO;
-	}
+    [self.cachedArticles removeAllObjects];
+    [self.cachedGuids removeAllObjects];
+    self.isCached = NO;
+    self.containsBodies = NO;
 }
 
 /* removeArticleFromCache
@@ -591,11 +579,9 @@
  */
 -(void)removeArticleFromCache:(NSString *)guid
 {
-    @synchronized(self) {
-        NSAssert(self.isCached, @"Folder's cache of articles should be initialized before removeArticleFromCache can be used");
-        [self.cachedArticles removeObjectForKey:guid];
-        [self.cachedGuids removeObject:guid];
-    }
+    NSAssert(self.isCached, @"Folder's cache of articles should be initialized before removeArticleFromCache can be used");
+    [self.cachedArticles removeObjectForKey:guid];
+    [self.cachedGuids removeObject:guid];
 }
 
 /* countOfCachedArticles
@@ -646,7 +632,6 @@
  */
 -(void)markArticlesInCacheRead
 {
-@synchronized(self) {
     NSInteger count = unreadCount;
     // Note the use of reverseObjectEnumerator
     // since the unread articles are likely to be clustered
@@ -662,7 +647,6 @@
             }
         }
     }
-  } // synchronized
 }
 
 /* resetArticleStatuses
@@ -696,7 +680,6 @@
  */
 -(NSArray<ArticleReference *> *)arrayOfUnreadArticlesRefs
 {
-@synchronized(self) {
     if (self.isCached) {
         NSInteger count = unreadCount;
         NSMutableArray * result = [NSMutableArray arrayWithCapacity:unreadCount];
@@ -714,7 +697,6 @@
     } else {
         return [[Database sharedManager] arrayOfUnreadArticlesRefs:self.itemId];
     }
-  } // synchronized
 }
 
 /*! Get an array of filtered articles in the current
@@ -732,29 +714,27 @@
 			}
 			return [articles copy];
 		}
-		@synchronized(self) {
-            if (self.isCached && self.containsBodies) {
-                // attempt to retrieve from cache
-                NSMutableArray * articles = [NSMutableArray arrayWithCapacity:self.cachedGuids.count];
-                for (id object in self.cachedGuids) {
-                    Article * theArticle = [self.cachedArticles objectForKey:object];
-                    if (theArticle != nil) {
-                        // deleted articles are not removed from cache any more
-                        if (!theArticle.isDeleted) {
-                            [articles addObject:theArticle];
-                        }
-                    } else {
-                        // some problem
-                        NSLog(@"Bug retrieving from cache in folder %li : after %lu insertions of %lu, guid %@",(long)self.itemId, (unsigned long)articles.count,(unsigned long)self.cachedGuids.count,object);
-                        [self.cachedArticles removeAllObjects];
-                        return [self getCompleteArticles];
+        if (self.isCached && self.containsBodies) {
+            // attempt to retrieve from cache
+            NSMutableArray * articles = [NSMutableArray arrayWithCapacity:self.cachedGuids.count];
+            for (id object in self.cachedGuids) {
+                Article * theArticle = [self.cachedArticles objectForKey:object];
+                if (theArticle != nil) {
+                    // deleted articles are not removed from cache any more
+                    if (!theArticle.isDeleted) {
+                        [articles addObject:theArticle];
                     }
+                } else {
+                    // some problem
+                    NSLog(@"Bug retrieving from cache in folder %li : after %lu insertions of %lu, guid %@",(long)self.itemId, (unsigned long)articles.count,(unsigned long)self.cachedGuids.count,object);
+                    [self.cachedArticles removeAllObjects];
+                    return [self getCompleteArticles];
                 }
-                return [articles copy];
-            } else {
-                return [self getCompleteArticles];
-           }
-        } // synchronized
+            }
+            return [articles copy];
+        } else {
+            return [self getCompleteArticles];
+       }
 	} else {
 	    return [[Database sharedManager] arrayOfArticles:self.itemId filterString:filterString];
     }
@@ -848,12 +828,10 @@
 #pragma mark NSCacheDelegate
 -(void)cache:(NSCache *)cache willEvictObject:(id)obj
 {
-    @synchronized(self) {
-        Article * theArticle = ((Article *)obj);
-        NSString * guid = theArticle.guid;
-        self.isCached = NO;
-        self.containsBodies = NO;
-        [self.cachedGuids removeObject:guid];
-    }
+    Article * theArticle = ((Article *)obj);
+    NSString * guid = theArticle.guid;
+    self.isCached = NO;
+    self.containsBodies = NO;
+    [self.cachedGuids removeObject:guid];
 }
 @end
