@@ -655,6 +655,50 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     }
 }
 
+- (NSString *)getOrCalculateArticleGuid:(id<VNAFeedItem>)newsItem folderId:(NSInteger)folderId articles:(NSMutableArray *)articleArray articleGuidArray:(NSMutableArray *)articleGuidArray {
+    NSString * articleGuid = newsItem.guid;
+    
+    // This routine attempts to synthesize a GUID from an incomplete item that lacks an
+    // ID field. Generally we'll have three things to work from: a link, a title and a
+    // description. The link alone is not sufficiently unique and I've seen feeds where
+    // the description is also not unique. The title field generally does vary but we need
+    // to be careful since separate articles with different descriptions may have the same
+    // title. The solution is to use the link and title and build a GUID from those.
+    // We add the folderId at the beginning to ensure that items in different feeds do not share a guid.
+    if ([articleGuid isEqualToString:@""]) {
+        articleGuid = [NSString stringWithFormat:@"%ld-%@-%@", (long)folderId, newsItem.url, newsItem.title];
+    }
+    // This is a horrible hack for horrible feeds that contain more than one item with the same guid.
+    // Bad feeds! I'm talking to you, kerbalstuff.com
+    NSUInteger articleIndex = [articleGuidArray indexOfObject:articleGuid];
+    if (articleIndex != NSNotFound) {
+        // We rebuild complex guids which should eliminate most duplicates
+        Article * firstFoundArticle = articleArray[articleIndex];
+        if (newsItem.publicationDate == nil) {
+            // first, hack the initial article (which is probably the first loaded / most recent one)
+            NSString * firstFoundArticleNewGuid =
+            [NSString stringWithFormat:@"%ld-%@-%@", (long)folderId, firstFoundArticle.link, firstFoundArticle.title];
+            firstFoundArticle.guid = firstFoundArticleNewGuid;
+            articleGuidArray[articleIndex] = firstFoundArticleNewGuid;
+            // then hack the guid for the item being processed
+            articleGuid = [NSString stringWithFormat:@"%ld-%@-%@", (long)folderId, newsItem.url, newsItem.title];
+        } else {
+            // first, hack the initial article (which is probably the first loaded / most recent one)
+            NSString * firstFoundArticleNewGuid =
+            [NSString stringWithFormat:@"%ld-%@-%@-%@", (long)folderId,
+             [NSString stringWithFormat:@"%1.3f", firstFoundArticle.lastUpdate.timeIntervalSince1970], firstFoundArticle.link,
+             firstFoundArticle.title];
+            firstFoundArticle.guid = firstFoundArticleNewGuid;
+            articleGuidArray[articleIndex] = firstFoundArticleNewGuid;
+            // then hack the guid for the item being processed
+            articleGuid =
+            [NSString stringWithFormat:@"%ld-%@-%@-%@", (long)folderId,
+             [NSString stringWithFormat:@"%1.3f", newsItem.publicationDate.timeIntervalSince1970], newsItem.url, newsItem.title];
+        }
+    }
+    return articleGuid;
+}
+
 -(void)finalizeFolderRefresh:(NSDictionary *)parameters
 {
     if (!parameters) {
@@ -801,45 +845,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 
         NSString * articleGuid = newsItem.guid;
 
-        // This routine attempts to synthesize a GUID from an incomplete item that lacks an
-        // ID field. Generally we'll have three things to work from: a link, a title and a
-        // description. The link alone is not sufficiently unique and I've seen feeds where
-        // the description is also not unique. The title field generally does vary but we need
-        // to be careful since separate articles with different descriptions may have the same
-        // title. The solution is to use the link and title and build a GUID from those.
-        // We add the folderId at the beginning to ensure that items in different feeds do not share a guid.
-        if ([articleGuid isEqualToString:@""]) {
-            articleGuid = [NSString stringWithFormat:@"%ld-%@-%@", (long)folderId, newsItem.url, newsItem.title];
-        }
-        // This is a horrible hack for horrible feeds that contain more than one item with the same guid.
-        // Bad feeds! I'm talking to you, kerbalstuff.com
-        NSUInteger articleIndex = [articleGuidArray indexOfObject:articleGuid];
-        if (articleIndex != NSNotFound) {
-            // We rebuild complex guids which should eliminate most duplicates
-            Article * firstFoundArticle = articleArray[articleIndex];
-            if (articleDate == nil) {
-                // first, hack the initial article (which is probably the first loaded / most recent one)
-                NSString * firstFoundArticleNewGuid =
-                [NSString stringWithFormat:@"%ld-%@-%@", (long)folderId, firstFoundArticle.link, firstFoundArticle.title];
-                firstFoundArticle.guid = firstFoundArticleNewGuid;
-                articleGuidArray[articleIndex] = firstFoundArticleNewGuid;
-                // then hack the guid for the item being processed
-                articleGuid = [NSString stringWithFormat:@"%ld-%@-%@", (long)folderId, newsItem.url, newsItem.title];
-            } else {
-                // first, hack the initial article (which is probably the first loaded / most recent one)
-                NSString * firstFoundArticleNewGuid =
-                [NSString stringWithFormat:@"%ld-%@-%@-%@", (long)folderId,
-                 [NSString stringWithFormat:@"%1.3f", firstFoundArticle.lastUpdate.timeIntervalSince1970], firstFoundArticle.link,
-                 firstFoundArticle.title];
-                firstFoundArticle.guid = firstFoundArticleNewGuid;
-                articleGuidArray[articleIndex] = firstFoundArticleNewGuid;
-                // then hack the guid for the item being processed
-                articleGuid =
-                [NSString stringWithFormat:@"%ld-%@-%@-%@", (long)folderId,
-                 [NSString stringWithFormat:@"%1.3f", articleDate.timeIntervalSince1970], newsItem.url, newsItem.title];
-            }
-        }
-        [articleGuidArray addObject:articleGuid];
 
         // set the article date if it is missing. We'll use the
         // last modified date of the feed and set each article to be 1 second older than the
@@ -848,6 +853,8 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
             articleDate = itemAlternativeDate;
             itemAlternativeDate = [itemAlternativeDate dateByAddingTimeInterval:-1.0];
         }
+        NSString * articleGuid = [self getOrCalculateArticleGuid:newsItem articleDate:articleDate folderId:folderId articles:articleArray articleGuidArray:articleGuidArray];
+        [articleGuidArray addObject:articleGuid];
 
         Article * article = [[Article alloc] initWithGuid:articleGuid];
         article.folderId = folderId;
@@ -897,7 +904,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
             }
         }
     }
-    
+
     if (newArticlesFromFeed > 0u) {
         [dbManager setLastUpdate:[NSDate date] forFolder:folderId];
     }
