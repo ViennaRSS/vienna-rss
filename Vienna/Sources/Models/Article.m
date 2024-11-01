@@ -328,8 +328,6 @@ NSString * const MA_Field_HasEnclosure = @"HasEnclosure";
     [articleData removeObjectForKey:MA_Field_Text];
     [articleData removeObjectForKey:MA_Field_Summary];
     [articleData removeObjectForKey:MA_Field_Author];
-    [articleData removeObjectForKey:MA_Field_LastUpdate];
-    [articleData removeObjectForKey:MA_Field_PublicationDate];
 }
 
 - (BOOL)isContentDiscarded
