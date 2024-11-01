@@ -471,13 +471,9 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
  */
 -(void)reloadArrayOfArticles
 {
-    Folder *folder = [[Database sharedManager] folderFromID:currentFolderId];
-    NSString *filterString = APPCONTROLLER.filterString;
-    dispatch_sync(queue, ^{
-        self.folderArrayOfArticles = [folder articlesWithFilter:filterString];
-    });
-    Article *article = self.selectedArticle;
+    [self getArrayOfArticles];
 
+    Article *article = self.selectedArticle;
     // Make sure selectedArticle hasn't changed since reload started.
     if (articleToPreserve != nil && articleToPreserve != article) {
         if (article != nil && !article.deleted) {
@@ -509,6 +505,18 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
     }
 } // reloadArrayOfArticles
 
+/* getArrayOfArticles
+ * Reload the folderArrayOfArticles from the current folder
+ */
+-(void)getArrayOfArticles
+{
+    Folder *folder = [[Database sharedManager] folderFromID:currentFolderId];
+    NSString *filterString = APPCONTROLLER.filterString;
+    dispatch_sync(queue, ^{
+        self.folderArrayOfArticles = [folder articlesWithFilter:filterString];
+    });
+}
+
 /* refilterArrayOfArticles
  * Reapply the current filter to the article array.
  */
@@ -530,15 +538,19 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 	NSInteger filterMode = [Preferences standardPreferences].filterMode;
 	for (NSInteger index = filteredArray.count - 1; index >= 0; --index) {
 		Article * article = filteredArray[index];
-        [article beginContentAccess];
-		if (guidOfArticleToPreserve != nil
-			&& article.folderId == articleToPreserve.folderId 
-			&& [article.guid isEqualToString:guidOfArticleToPreserve]) {
-			guidOfArticleToPreserve = nil;
-		} else if ([self filterArticle:article usingMode:filterMode] == false) {
-			[filteredArray removeObjectAtIndex:index];
+        if ([article beginContentAccess]) {
+            if (guidOfArticleToPreserve != nil
+                && article.folderId == articleToPreserve.folderId
+                && [article.guid isEqualToString:guidOfArticleToPreserve]) {
+                guidOfArticleToPreserve = nil;
+            } else if ([self filterArticle:article usingMode:filterMode] == false) {
+                [filteredArray removeObjectAtIndex:index];
+            }
+            [article endContentAccess];
+        } else { // some articles had discarded content 
+            [self getArrayOfArticles];
+            return [self applyFilter:folderArrayOfArticles];
         }
-        [article endContentAccess];
 	}
 	
 	if (guidOfArticleToPreserve != nil) {
