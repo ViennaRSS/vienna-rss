@@ -178,6 +178,10 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 	[self loadView];
 	[Preferences standardPreferences].layout = newLayout;
 	if (currentSelectedArticle != nil) {
+		if (![currentSelectedArticle beginContentAccess]) {
+			[self reloadArrayOfArticles];
+		}
+		[currentSelectedArticle endContentAccess];
 		[self selectFolderAndArticle:currentFolderId guid:currentSelectedArticle.guid];
 		[self ensureSelectedArticle];
 	}
