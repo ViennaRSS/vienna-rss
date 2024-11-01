@@ -647,6 +647,14 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     });     //block for dispatch_async on _queue
 } // folderRefreshCompleted
 
+- (void)refreshImageForFolderIfNeeded:(Folder *)folder {
+    if ((folder.flags & VNAFolderFlagCheckForImage)) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self refreshFavIconForFolder:folder];
+        });
+    }
+}
+
 -(void)finalizeFolderRefresh:(NSDictionary *)parameters
 {
     if (!parameters) {
@@ -675,225 +683,228 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     }
 
     // Empty data feed is OK if we got HTTP 200
-    __block NSUInteger newArticlesFromFeed = 0;
-    if (receivedData.length > 0) {
-        Preferences *standardPreferences = [Preferences standardPreferences];
-        if (standardPreferences.shouldSaveFeedSource) {
-            NSString * feedSourcePath = folder.feedSourceFilePath;
-
-            if ([standardPreferences boolForKey:MAPref_ShouldSaveFeedSourceBackup]) {
-                BOOL isDirectory = YES;
-                NSFileManager *defaultManager = [NSFileManager defaultManager];
-                if ([defaultManager fileExistsAtPath:feedSourcePath isDirectory:&isDirectory] && !isDirectory) {
-                    NSString * backupPath = [feedSourcePath stringByAppendingPathExtension:@"bak"];
-                    if (![defaultManager fileExistsAtPath:backupPath] || [defaultManager removeItemAtPath:backupPath error:NULL]) {  // Remove any old backup first
-                        [defaultManager moveItemAtPath:feedSourcePath toPath:backupPath error:NULL];
-                    }
-                }
-            }
-
-            [receivedData writeToFile:feedSourcePath options:NSDataWritingAtomic error:NULL];
-        }
-
-        id<VNAFeed> newFeed;
-        NSError *error;
-        NSString *mimeType = parameters[@"mimeType"];
-        if ([mimeType containsString:@"application/feed+json"] ||
-            [mimeType containsString:@"application/json"]) {
-            VNAJSONFeedParser *parser = [[VNAJSONFeedParser alloc] init];
-            newFeed = [parser feedWithJSONData:receivedData error:&error];
-        } else {
-            VNAXMLFeedParser *parser = [[VNAXMLFeedParser alloc] init];
-            newFeed = [parser feedWithXMLData:receivedData error:&error];
-        }
-        if (!newFeed) {
-            NSString *errorDebugDescription = error.userInfo[NSDebugDescriptionErrorKey];
-            if (errorDebugDescription) {
-                os_log_error(VNA_LOG, "%@", errorDebugDescription);
-            }
-            // Mark the feed as failed
-            [self setFolderErrorFlag:folder flag:YES];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [connectorItem setStatus:NSLocalizedString(@"Error parsing data in feed", nil)];
-            });
-            return;
-        }
-
-        // Log number of bytes we received
-        NSString * byteCount = [NSByteCountFormatter stringFromByteCount:receivedData.length
-                                                             countStyle:NSByteCountFormatterCountStyleFile];
-        [connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%@ received",
-                                                                                 @"Number of bytes received, e.g. 1 MB received"),
-                                     byteCount]];
-
-        // Extract the latest title and description
-        NSString * feedTitle = newFeed.title;
-        NSString * feedDescription = newFeed.feedDescription;
-        NSString * feedLink = newFeed.homePageURL;
-
-        // Synthesize feed link if it is missing
-        if (feedLink == nil || feedLink.vna_isBlank) {
-            feedLink = folder.feedURL.vna_baseURL;
-        }
-        if (feedLink != nil && ![feedLink hasPrefix:@"http:"] && ![feedLink hasPrefix:@"https:"]) {
-            feedLink = [NSURL URLWithString:feedLink relativeToURL:url].absoluteString;
-        }
-
-        if (feedTitle != nil  && !feedTitle.vna_isBlank && [folder.name hasPrefix:[Database untitledFeedFolderName]]) {
-            // If there's an existing feed with this title, make ours unique
-            // BUGBUG: This duplicates logic in database.m so consider moving it there.
-            NSString * oldFeedTitle = feedTitle;
-            NSString * newFeedTitle = feedTitle;
-            NSUInteger index = 1;
-
-            while (([dbManager folderFromName:newFeedTitle]) != nil) {
-                newFeedTitle = [NSString stringWithFormat:@"%@ (%lu)", oldFeedTitle, (unsigned long)index++];
-            }
-
-            connectorItem.name = newFeedTitle;
-            [dbManager setName:newFeedTitle forFolder:folderId];
-        }
-        if (feedDescription != nil) {
-            [dbManager setDescription:feedDescription forFolder:folderId];
-        }
-        if (feedLink != nil) {
-            [dbManager setHomePage:feedLink forFolder:folderId];
-        }
-        // Remember the last modified date
-        if (lastModifiedString != nil && lastModifiedString.length > 0) {
-            [dbManager setLastUpdateString:lastModifiedString forFolder:folderId];
-        }
-
-        if (newFeed.items.count == 0) {
-            // Mark the feed as empty
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [connectorItem setStatus:NSLocalizedString(@"No articles in feed", nil)];
-            });
-            return;
-        }
-
-        // We'll be collecting articles into this array
-        NSMutableArray *articleArray = [NSMutableArray array];
-        NSMutableArray *articleGuidArray = [NSMutableArray array];
-
-        NSDate *itemAlternativeDate = newFeed.modificationDate;
-        if (itemAlternativeDate == nil) {
-            itemAlternativeDate = [NSDate date];
-        }
-
-        // Parse off items.
-
-        for (id<VNAFeedItem> newsItem in newFeed.items) {
-            NSDate * articleDate = newsItem.publicationDate;
-            NSDate * modificationDate = newsItem.modificationDate;
-
-            NSString * articleGuid = newsItem.guid;
-
-            // This routine attempts to synthesize a GUID from an incomplete item that lacks an
-            // ID field. Generally we'll have three things to work from: a link, a title and a
-            // description. The link alone is not sufficiently unique and I've seen feeds where
-            // the description is also not unique. The title field generally does vary but we need
-            // to be careful since separate articles with different descriptions may have the same
-            // title. The solution is to use the link and title and build a GUID from those.
-            // We add the folderId at the beginning to ensure that items in different feeds do not share a guid.
-            if ([articleGuid isEqualToString:@""]) {
-                articleGuid = [NSString stringWithFormat:@"%ld-%@-%@", (long)folderId, newsItem.url, newsItem.title];
-            }
-            // This is a horrible hack for horrible feeds that contain more than one item with the same guid.
-            // Bad feeds! I'm talking to you, kerbalstuff.com
-            NSUInteger articleIndex = [articleGuidArray indexOfObject:articleGuid];
-            if (articleIndex != NSNotFound) {
-                // We rebuild complex guids which should eliminate most duplicates
-                Article * firstFoundArticle = articleArray[articleIndex];
-                if (articleDate == nil) {
-                    // first, hack the initial article (which is probably the first loaded / most recent one)
-                    NSString * firstFoundArticleNewGuid =
-                        [NSString stringWithFormat:@"%ld-%@-%@", (long)folderId, firstFoundArticle.link, firstFoundArticle.title];
-                    firstFoundArticle.guid = firstFoundArticleNewGuid;
-                    articleGuidArray[articleIndex] = firstFoundArticleNewGuid;
-                    // then hack the guid for the item being processed
-                    articleGuid = [NSString stringWithFormat:@"%ld-%@-%@", (long)folderId, newsItem.url, newsItem.title];
-                } else {
-                    // first, hack the initial article (which is probably the first loaded / most recent one)
-                    NSString * firstFoundArticleNewGuid =
-                        [NSString stringWithFormat:@"%ld-%@-%@-%@", (long)folderId,
-                         [NSString stringWithFormat:@"%1.3f", firstFoundArticle.lastUpdate.timeIntervalSince1970], firstFoundArticle.link,
-                         firstFoundArticle.title];
-                    firstFoundArticle.guid = firstFoundArticleNewGuid;
-                    articleGuidArray[articleIndex] = firstFoundArticleNewGuid;
-                    // then hack the guid for the item being processed
-                    articleGuid =
-                        [NSString stringWithFormat:@"%ld-%@-%@-%@", (long)folderId,
-                         [NSString stringWithFormat:@"%1.3f", articleDate.timeIntervalSince1970], newsItem.url, newsItem.title];
-                }
-            }
-            [articleGuidArray addObject:articleGuid];
-
-            // set the article date if it is missing. We'll use the
-            // last modified date of the feed and set each article to be 1 second older than the
-            // previous one. So the array is effectively newest first.
-            if (articleDate == nil) {
-                articleDate = itemAlternativeDate;
-                itemAlternativeDate = [itemAlternativeDate dateByAddingTimeInterval:-1.0];
-            }
-
-            Article * article = [[Article alloc] initWithGuid:articleGuid];
-            article.folderId = folderId;
-            article.author = newsItem.authors;
-            article.body = newsItem.content;
-            if (!newsItem.title || newsItem.title.vna_isBlank) {
-                NSString *newTitle = newsItem.content.vna_titleTextFromHTML.vna_stringByUnescapingExtendedCharacters;
-                if (newTitle.vna_isBlank) {
-                    article.title = NSLocalizedString(@"(No title)", @"Fallback for feed items without a title");
-                } else {
-                    article.title = newTitle;
-                }
-            } else {
-                article.title = newsItem.title;
-            }
-            NSString * articleLink = newsItem.url;
-            if (![articleLink hasPrefix:@"http:"] && ![articleLink hasPrefix:@"https:"]) {
-                articleLink = [NSURL URLWithString:articleLink relativeToURL:url].absoluteString;
-            }
-            if (articleLink == nil) {
-                articleLink = feedLink;
-            }
-            article.link = articleLink;
-            article.publicationDate = articleDate;
-            article.lastUpdate = modificationDate;
-            NSString * enclosureLink = newsItem.enclosure;
-            if ([enclosureLink isNotEqualTo:@""] && ![enclosureLink hasPrefix:@"http:"] && ![enclosureLink hasPrefix:@"https:"]) {
-                enclosureLink = [NSURL URLWithString:enclosureLink relativeToURL:url].absoluteString;
-            }
-            article.enclosure = enclosureLink;
-            if ([enclosureLink isNotEqualTo:@""]) {
-                [article setHasEnclosure:YES];
-            }
-            [articleArray addObject:article];
-        }
-
-
-        // Here's where we add the articles to the database
-        if (articleArray.count > 0u) {
-            [folder resetArticleStatuses];
-            NSArray *guidHistory = [dbManager guidHistoryForFolderId:folderId];
-            for (Article * article in articleArray) {
-                if ([folder createArticle:article
-                              guidHistory:guidHistory] && (article.status == ArticleStatusNew))
-                {
-                    ++newArticlesFromFeed;
-                }
-            }
-        }
-
-        if (newArticlesFromFeed > 0u) {
-            [dbManager setLastUpdate:[NSDate date] forFolder:folderId];
-        }
-
-        // Mark the feed as succeeded
-        [self setFolderErrorFlag:folder flag:NO];
-        [folder clearNonPersistedFlag:VNAFolderFlagBuggySync];
+    if (receivedData.length == 0) {
+        [self refreshImageForFolderIfNeeded:folder];
+        return;
     }
+
+    __block NSUInteger newArticlesFromFeed = 0;
+    Preferences *standardPreferences = [Preferences standardPreferences];
+    if (standardPreferences.shouldSaveFeedSource) {
+        NSString * feedSourcePath = folder.feedSourceFilePath;
+
+        if ([standardPreferences boolForKey:MAPref_ShouldSaveFeedSourceBackup]) {
+            BOOL isDirectory = YES;
+            NSFileManager *defaultManager = [NSFileManager defaultManager];
+            if ([defaultManager fileExistsAtPath:feedSourcePath isDirectory:&isDirectory] && !isDirectory) {
+                NSString * backupPath = [feedSourcePath stringByAppendingPathExtension:@"bak"];
+                if (![defaultManager fileExistsAtPath:backupPath] || [defaultManager removeItemAtPath:backupPath error:NULL]) {  // Remove any old backup first
+                    [defaultManager moveItemAtPath:feedSourcePath toPath:backupPath error:NULL];
+                }
+            }
+        }
+
+        [receivedData writeToFile:feedSourcePath options:NSDataWritingAtomic error:NULL];
+    }
+
+    id<VNAFeed> newFeed;
+    NSError *error;
+    NSString *mimeType = parameters[@"mimeType"];
+    if ([mimeType containsString:@"application/feed+json"] ||
+        [mimeType containsString:@"application/json"]) {
+        VNAJSONFeedParser *parser = [[VNAJSONFeedParser alloc] init];
+        newFeed = [parser feedWithJSONData:receivedData error:&error];
+    } else {
+        VNAXMLFeedParser *parser = [[VNAXMLFeedParser alloc] init];
+        newFeed = [parser feedWithXMLData:receivedData error:&error];
+    }
+    if (!newFeed) {
+        NSString *errorDebugDescription = error.userInfo[NSDebugDescriptionErrorKey];
+        if (errorDebugDescription) {
+            os_log_error(VNA_LOG, "%@", errorDebugDescription);
+        }
+        // Mark the feed as failed
+        [self setFolderErrorFlag:folder flag:YES];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [connectorItem setStatus:NSLocalizedString(@"Error parsing data in feed", nil)];
+        });
+        return;
+    }
+
+    // Log number of bytes we received
+    NSString * byteCount = [NSByteCountFormatter stringFromByteCount:receivedData.length
+                                                          countStyle:NSByteCountFormatterCountStyleFile];
+    [connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%@ received",
+                                                                             @"Number of bytes received, e.g. 1 MB received"),
+                                 byteCount]];
+
+    // Extract the latest title and description
+    NSString * feedTitle = newFeed.title;
+    NSString * feedDescription = newFeed.feedDescription;
+    NSString * feedLink = newFeed.homePageURL;
+
+    // Synthesize feed link if it is missing
+    if (feedLink == nil || feedLink.vna_isBlank) {
+        feedLink = folder.feedURL.vna_baseURL;
+    }
+    if (feedLink != nil && ![feedLink hasPrefix:@"http:"] && ![feedLink hasPrefix:@"https:"]) {
+        feedLink = [NSURL URLWithString:feedLink relativeToURL:url].absoluteString;
+    }
+
+    if (feedTitle != nil  && !feedTitle.vna_isBlank && [folder.name hasPrefix:[Database untitledFeedFolderName]]) {
+        // If there's an existing feed with this title, make ours unique
+        // BUGBUG: This duplicates logic in database.m so consider moving it there.
+        NSString * oldFeedTitle = feedTitle;
+        NSString * newFeedTitle = feedTitle;
+        NSUInteger index = 1;
+
+        while (([dbManager folderFromName:newFeedTitle]) != nil) {
+            newFeedTitle = [NSString stringWithFormat:@"%@ (%lu)", oldFeedTitle, (unsigned long)index++];
+        }
+
+        connectorItem.name = newFeedTitle;
+        [dbManager setName:newFeedTitle forFolder:folderId];
+    }
+    if (feedDescription != nil) {
+        [dbManager setDescription:feedDescription forFolder:folderId];
+    }
+    if (feedLink != nil) {
+        [dbManager setHomePage:feedLink forFolder:folderId];
+    }
+    // Remember the last modified date
+    if (lastModifiedString != nil && lastModifiedString.length > 0) {
+        [dbManager setLastUpdateString:lastModifiedString forFolder:folderId];
+    }
+
+    if (newFeed.items.count == 0) {
+        // Mark the feed as empty
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [connectorItem setStatus:NSLocalizedString(@"No articles in feed", nil)];
+        });
+        return;
+    }
+
+    // We'll be collecting articles into this array
+    NSMutableArray *articleArray = [NSMutableArray array];
+    NSMutableArray *articleGuidArray = [NSMutableArray array];
+
+    NSDate *itemAlternativeDate = newFeed.modificationDate;
+    if (itemAlternativeDate == nil) {
+        itemAlternativeDate = [NSDate date];
+    }
+
+    // Parse off items.
+
+    for (id<VNAFeedItem> newsItem in newFeed.items) {
+        NSDate * articleDate = newsItem.publicationDate;
+        NSDate * modificationDate = newsItem.modificationDate;
+
+        NSString * articleGuid = newsItem.guid;
+
+        // This routine attempts to synthesize a GUID from an incomplete item that lacks an
+        // ID field. Generally we'll have three things to work from: a link, a title and a
+        // description. The link alone is not sufficiently unique and I've seen feeds where
+        // the description is also not unique. The title field generally does vary but we need
+        // to be careful since separate articles with different descriptions may have the same
+        // title. The solution is to use the link and title and build a GUID from those.
+        // We add the folderId at the beginning to ensure that items in different feeds do not share a guid.
+        if ([articleGuid isEqualToString:@""]) {
+            articleGuid = [NSString stringWithFormat:@"%ld-%@-%@", (long)folderId, newsItem.url, newsItem.title];
+        }
+        // This is a horrible hack for horrible feeds that contain more than one item with the same guid.
+        // Bad feeds! I'm talking to you, kerbalstuff.com
+        NSUInteger articleIndex = [articleGuidArray indexOfObject:articleGuid];
+        if (articleIndex != NSNotFound) {
+            // We rebuild complex guids which should eliminate most duplicates
+            Article * firstFoundArticle = articleArray[articleIndex];
+            if (articleDate == nil) {
+                // first, hack the initial article (which is probably the first loaded / most recent one)
+                NSString * firstFoundArticleNewGuid =
+                [NSString stringWithFormat:@"%ld-%@-%@", (long)folderId, firstFoundArticle.link, firstFoundArticle.title];
+                firstFoundArticle.guid = firstFoundArticleNewGuid;
+                articleGuidArray[articleIndex] = firstFoundArticleNewGuid;
+                // then hack the guid for the item being processed
+                articleGuid = [NSString stringWithFormat:@"%ld-%@-%@", (long)folderId, newsItem.url, newsItem.title];
+            } else {
+                // first, hack the initial article (which is probably the first loaded / most recent one)
+                NSString * firstFoundArticleNewGuid =
+                [NSString stringWithFormat:@"%ld-%@-%@-%@", (long)folderId,
+                 [NSString stringWithFormat:@"%1.3f", firstFoundArticle.lastUpdate.timeIntervalSince1970], firstFoundArticle.link,
+                 firstFoundArticle.title];
+                firstFoundArticle.guid = firstFoundArticleNewGuid;
+                articleGuidArray[articleIndex] = firstFoundArticleNewGuid;
+                // then hack the guid for the item being processed
+                articleGuid =
+                [NSString stringWithFormat:@"%ld-%@-%@-%@", (long)folderId,
+                 [NSString stringWithFormat:@"%1.3f", articleDate.timeIntervalSince1970], newsItem.url, newsItem.title];
+            }
+        }
+        [articleGuidArray addObject:articleGuid];
+
+        // set the article date if it is missing. We'll use the
+        // last modified date of the feed and set each article to be 1 second older than the
+        // previous one. So the array is effectively newest first.
+        if (articleDate == nil) {
+            articleDate = itemAlternativeDate;
+            itemAlternativeDate = [itemAlternativeDate dateByAddingTimeInterval:-1.0];
+        }
+
+        Article * article = [[Article alloc] initWithGuid:articleGuid];
+        article.folderId = folderId;
+        article.author = newsItem.authors;
+        article.body = newsItem.content;
+        if (!newsItem.title || newsItem.title.vna_isBlank) {
+            NSString *newTitle = newsItem.content.vna_titleTextFromHTML.vna_stringByUnescapingExtendedCharacters;
+            if (newTitle.vna_isBlank) {
+                article.title = NSLocalizedString(@"(No title)", @"Fallback for feed items without a title");
+            } else {
+                article.title = newTitle;
+            }
+        } else {
+            article.title = newsItem.title;
+        }
+        NSString * articleLink = newsItem.url;
+        if (![articleLink hasPrefix:@"http:"] && ![articleLink hasPrefix:@"https:"]) {
+            articleLink = [NSURL URLWithString:articleLink relativeToURL:url].absoluteString;
+        }
+        if (articleLink == nil) {
+            articleLink = feedLink;
+        }
+        article.link = articleLink;
+        article.publicationDate = articleDate;
+        article.lastUpdate = modificationDate;
+        NSString * enclosureLink = newsItem.enclosure;
+        if ([enclosureLink isNotEqualTo:@""] && ![enclosureLink hasPrefix:@"http:"] && ![enclosureLink hasPrefix:@"https:"]) {
+            enclosureLink = [NSURL URLWithString:enclosureLink relativeToURL:url].absoluteString;
+        }
+        article.enclosure = enclosureLink;
+        if ([enclosureLink isNotEqualTo:@""]) {
+            [article setHasEnclosure:YES];
+        }
+        [articleArray addObject:article];
+    }
+
+
+    // Here's where we add the articles to the database
+    if (articleArray.count > 0u) {
+        [folder resetArticleStatuses];
+        NSArray *guidHistory = [dbManager guidHistoryForFolderId:folderId];
+        for (Article * article in articleArray) {
+            if ([folder createArticle:article
+                          guidHistory:guidHistory] && (article.status == ArticleStatusNew))
+            {
+                ++newArticlesFromFeed;
+            }
+        }
+    }
+    
+    if (newArticlesFromFeed > 0u) {
+        [dbManager setLastUpdate:[NSDate date] forFolder:folderId];
+    }
+
+    // Mark the feed as succeeded
+    [self setFolderErrorFlag:folder flag:NO];
+    [folder clearNonPersistedFlag:VNAFolderFlagBuggySync];
 
     // Send status to the activity log
     if (newArticlesFromFeed == 0) {
@@ -915,11 +926,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     countOfNewArticles += newArticlesFromFeed;
 
     // If this folder also requires an image refresh, do that
-    if ((folder.flags & VNAFolderFlagCheckForImage)) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self refreshFavIconForFolder:folder];
-        });
-    }
+    [self refreshImageForFolderIfNeeded:folder];
 }
 
 /* getRedirectURL
