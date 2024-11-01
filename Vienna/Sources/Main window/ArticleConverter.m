@@ -42,8 +42,6 @@
  */
 -(NSString *)expandTagsOfArticle:(Article *)theArticle intoTemplate:(NSString *)theString withConditional:(BOOL)cond
 {
-    NSAssert(theArticle.status != ArticleStatusDiscarded,
-             @"Attempting to access %@ with discarded elements", theArticle);
     NSMutableString * newString = [NSMutableString stringWithString:SafeString(theString)];
     NSUInteger tagStartIndex = 0;
 
