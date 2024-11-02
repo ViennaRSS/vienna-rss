@@ -354,6 +354,9 @@ extension BrowserTab: WKNavigationDelegate {
             } else if optionKey {
                 decisionHandler(.cancel)
                 NSApp.appController.open(navigationAction.request.url, inPreferredBrowser: false)
+            } else if navigationAction.targetFrame == nil { // link with target="_blank"
+                decisionHandler(.cancel)
+                NSApp.appController.browser.createNewTabAfterSelected(navigationAction.request.url, inBackground: false, load: true)
             } else {
                 decisionHandler(.allow)
             }
