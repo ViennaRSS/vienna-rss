@@ -230,17 +230,11 @@ extension BrowserTab: Tab {
 
     func back() -> Bool {
         let couldGoBack = self.webView.goBack() != nil
-        // title and url observation not triggered by goBack() -> manual setting
-        self.url = self.webView.url
-        updateTabTitle()
         return couldGoBack
     }
 
     func forward() -> Bool {
         let couldGoForward = self.webView.goForward() != nil
-        // title observation not triggered by goForware() -> manual setting
-        self.url = self.webView.url
-        updateTabTitle()
         return couldGoForward
     }
 
