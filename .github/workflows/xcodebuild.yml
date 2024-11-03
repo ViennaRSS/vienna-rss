@@ -1,3 +1,5 @@
+# GitHub Actions runners: https://github.com/actions/runner-images
+
 name: Build and test
 
 on:
@@ -17,9 +19,9 @@ jobs:
           - os: macos-14
             xcode: Xcode 15
             developer-dir: /Applications/Xcode_15.4.app/Contents/Developer
-          - os: macos-14
+          - os: macos-15
             xcode: Xcode 16
-            developer-dir: /Applications/Xcode_16.app/Contents/Developer
+            developer-dir: /Applications/Xcode_16.1.app/Contents/Developer
     name: Test with ${{ matrix.xcode }}
     runs-on: ${{ matrix.os }}
     env:
