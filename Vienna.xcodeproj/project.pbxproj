@@ -1434,7 +1434,7 @@
 				BuildIndependentTargetsInParallel = YES;
 				CLASSPREFIX = VNA;
 				LastSwiftUpdateCheck = 1410;
-				LastUpgradeCheck = 1600;
+				LastUpgradeCheck = 1610;
 				ORGANIZATIONNAME = "Vienna project";
 				TargetAttributes = {
 					035B703419E0E4AE00197334 = {
