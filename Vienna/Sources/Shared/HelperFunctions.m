@@ -174,31 +174,6 @@ void loadMapFromPath(NSString * path, NSMutableDictionary * pathMappings, BOOL f
 	}
 }
 
-/* isAccessible
- * Returns whether the specified URL is immediately accessible.
- */
-BOOL isAccessible(NSString * urlString)
-{
-	SCNetworkReachabilityRef   target;
-	SCNetworkReachabilityFlags flags = 0;
-	Boolean                   ok;
-	
-	NSURL * url = [NSURL URLWithString:urlString];
-
-	target = SCNetworkReachabilityCreateWithName(NULL, url.host.UTF8String);
-    if (target!= nil) {
-        ok = SCNetworkReachabilityGetFlags(target, &flags);
-        CFRelease(target);
-
-        if (!ok) {
-            return NO;
-        }
-        return (flags & kSCNetworkReachabilityFlagsReachable) && !(flags & kSCNetworkReachabilityFlagsConnectionRequired);
-    } else {
-        return NO;
-    }
-}
-
 void runOKAlertPanelPlain(NSString * titleString, NSString * bodyText) {
     runOKAlertPanel(titleString, bodyText);
 }
