@@ -18,7 +18,6 @@
 //
 
 @import Cocoa;
-@import SystemConfiguration;
 
 #define kLeftArrow  0x7B
 #define kRightArrow 0x7C
@@ -42,7 +41,6 @@ void loadMapFromPath(NSString *path,
                      NSMutableDictionary *pathMappings,
                      BOOL foldersOnly,
                      NSArray * _Nullable validExtensions);
-BOOL isAccessible(NSString *urlString);
 void runOKAlertPanelPlain(NSString *titleString, NSString *bodyText);
 void runOKAlertPanel(NSString *titleString, NSString *bodyText, ...);
 void runOKAlertSheet(NSString *titleString, NSString *bodyText, ...);
