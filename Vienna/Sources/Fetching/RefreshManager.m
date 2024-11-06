@@ -79,11 +79,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     dispatch_queue_t _queue;
 }
 
-+(void)initialize
-{
-}
-
-
 /* init
  * Initialise the class.
  */
