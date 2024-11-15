@@ -727,11 +727,12 @@
             NSMutableArray * articles = [NSMutableArray arrayWithCapacity:self.cachedGuids.count];
             for (id object in self.cachedGuids) {
                 Article * theArticle = [self.cachedArticles objectForKey:object];
-                if (theArticle != nil) {
+                if (theArticle != nil && [theArticle beginContentAccess]) {
                     // deleted articles are not removed from cache any more
                     if (!theArticle.isDeleted) {
                         [articles addObject:theArticle];
                     }
+                    [theArticle endContentAccess];
                 } else {
                     // some problem
                     NSLog(@"Bug retrieving from cache in folder %li : after %lu insertions of %lu, guid %@",(long)self.itemId, (unsigned long)articles.count,(unsigned long)self.cachedGuids.count,object);
@@ -764,6 +765,18 @@
     // Only feeds folders can be cached, as they are the only ones to guarantee
     // bijection : one article <-> one guid
     if (self.type == VNAFolderTypeRSS || self.type == VNAFolderTypeOpenReader) {
+        [self performSelector:@selector(constituteCompleteCache:) withObject:articles afterDelay:0.0];
+    }
+    return articles;
+  }
+}
+
+/* constituteCompleteCache
+ * Ensure the cache contains description
+ */
+-(void)constituteCompleteCache:(NSArray<Article *> *)articles
+{
+    @synchronized(self) {
         [self.cachedGuids removeAllObjects];
         for (Article * article in articles) {
             [article beginContentAccess];
@@ -776,8 +789,6 @@
         self.isCached = YES;
         self.containsBodies = YES;
     }
-    return articles;
-  }
 }
 
 /* folderNameCompare
