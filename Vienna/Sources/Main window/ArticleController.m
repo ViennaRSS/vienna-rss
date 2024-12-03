@@ -530,7 +530,6 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 	NSInteger filterMode = [Preferences standardPreferences].filterMode;
 	for (NSInteger index = filteredArray.count - 1; index >= 0; --index) {
 		Article * article = filteredArray[index];
-        [article beginContentAccess];
 		if (guidOfArticleToPreserve != nil
 			&& article.folderId == articleToPreserve.folderId 
 			&& [article.guid isEqualToString:guidOfArticleToPreserve]) {
@@ -538,7 +537,6 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 		} else if ([self filterArticle:article usingMode:filterMode] == false) {
 			[filteredArray removeObjectAtIndex:index];
         }
-        [article endContentAccess];
 	}
 	
 	if (guidOfArticleToPreserve != nil) {
@@ -752,7 +750,6 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 -(void)innerMarkFlaggedByArray:(NSArray *)articleArray flagged:(BOOL)flagged
 {
 	for (Article * theArticle in articleArray) {
-        [theArticle beginContentAccess];
 		Folder *myFolder = [[Database sharedManager] folderFromID:theArticle.folderId];
 		if (myFolder.type == VNAFolderTypeOpenReader) {
 			[[OpenReader sharedManager] markStarred:theArticle starredFlag:flagged];
@@ -761,7 +758,6 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
                                                 guid:theArticle.guid
                                            isFlagged:flagged];
         [theArticle markFlagged:flagged];
-        [theArticle endContentAccess];
 	}
 }
 
@@ -807,7 +803,6 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 -(void)innerMarkReadByArray:(NSArray *)articleArray readFlag:(BOOL)readFlag
 {
 	for (Article * theArticle in articleArray) {
-        [theArticle beginContentAccess];
 		NSInteger folderId = theArticle.folderId;
 		if (theArticle.read != readFlag) {
 			if ([[Database sharedManager] folderFromID:folderId].type == VNAFolderTypeOpenReader) {
@@ -817,7 +812,6 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 				[theArticle markRead:readFlag];
 			}
 		}
-        [theArticle endContentAccess];
 	}
 }
 

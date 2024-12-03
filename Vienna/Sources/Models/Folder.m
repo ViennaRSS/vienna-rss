@@ -70,7 +70,6 @@
 		_containsBodies = NO;
 		_hasPassword = NO;
 		_cachedArticles = [NSCache new];
-		_cachedArticles.evictsObjectsWithDiscardedContent = NO;
 		_cachedArticles.delegate = self;
 		_cachedGuids = [NSMutableArray array];
 		_attributes = [NSMutableDictionary dictionary];
@@ -497,7 +496,6 @@
             return NO; // Article has been deleted and removed from database, so ignore
         } else {
             // add the article as new
-            [article beginContentAccess];
             BOOL success = [[Database sharedManager] addArticle:article toFolder:self.itemId];
             if (success) {
                 article.status = ArticleStatusNew;
@@ -510,17 +508,14 @@
                     adjustment = 1;
                 }
             } else {
-                [article endContentAccess];
                 return NO;
             }
-            [article endContentAccess];
         }
     } else if (existingArticle.deleted) {
         return NO;
     } else if (![[Preferences standardPreferences] boolForKey:MAPref_CheckForUpdatedArticles]) {
         return NO;
     } else {
-        [existingArticle beginContentAccess];
         BOOL success = [[Database sharedManager] updateArticle:existingArticle ofFolder:self.itemId withArticle:article];
         if (success) {
             // Update folder unread count if necessary
@@ -533,10 +528,8 @@
             }
             latestFetchCount++;
         } else {
-            [existingArticle endContentAccess];
             return NO;
         }
-        [existingArticle endContentAccess];
     }
 
     // Fix unread count on parent folders and Database manager
@@ -611,14 +604,12 @@
       @synchronized(self) {
         NSArray * myArray = [[Database sharedManager] minimalCacheForFolder:self.itemId];
         for (Article * myArticle in myArray) {
-            [myArticle beginContentAccess];
             NSString * guid = myArticle.guid;
             myArticle.status = [self retrieveKnownStatusForGuid:guid];
             [self.cachedArticles setObject:myArticle forKey:guid];
             if (![self.cachedGuids containsObject:guid]) {
                 [self.cachedGuids addObject:guid];
             }
-            [myArticle endContentAccess];
         }
         self.isCached = YES;
         // Note that this only builds a minimal cache, so we cannot set the containsBodies flag
@@ -671,9 +662,7 @@
         if (article &&
             (article.status == ArticleStatusNew || article.status == ArticleStatusUpdated))
         {
-            [article beginContentAccess];
             article.status = ArticleStatusEmpty;
-            [article endContentAccess];
             count--;
             if (count == 0) {
                 break;
@@ -766,12 +755,10 @@
     if (self.type == VNAFolderTypeRSS || self.type == VNAFolderTypeOpenReader) {
         [self.cachedGuids removeAllObjects];
         for (Article * article in articles) {
-            [article beginContentAccess];
             NSString * guid = article.guid;
             article.status = [self retrieveKnownStatusForGuid:guid];
             [self.cachedArticles setObject:article forKey:guid];
             [self.cachedGuids addObject:guid];
-            [article endContentAccess];
         }
         self.isCached = YES;
         self.containsBodies = YES;
