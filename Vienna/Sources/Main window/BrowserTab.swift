@@ -230,17 +230,11 @@ extension BrowserTab: Tab {
 
     func back() -> Bool {
         let couldGoBack = self.webView.goBack() != nil
-        // title and url observation not triggered by goBack() -> manual setting
-        self.url = self.webView.url
-        updateTabTitle()
         return couldGoBack
     }
 
     func forward() -> Bool {
         let couldGoForward = self.webView.goForward() != nil
-        // title observation not triggered by goForware() -> manual setting
-        self.url = self.webView.url
-        updateTabTitle()
         return couldGoForward
     }
 
@@ -354,6 +348,9 @@ extension BrowserTab: WKNavigationDelegate {
             } else if optionKey {
                 decisionHandler(.cancel)
                 NSApp.appController.open(navigationAction.request.url, inPreferredBrowser: false)
+            } else if navigationAction.targetFrame == nil { // link with target="_blank"
+                decisionHandler(.cancel)
+                NSApp.appController.browser.createNewTabAfterSelected(navigationAction.request.url, inBackground: false, load: true)
             } else {
                 decisionHandler(.allow)
             }
