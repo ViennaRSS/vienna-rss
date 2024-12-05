@@ -23,6 +23,32 @@ class RSSFeedTests: XCTestCase {
 
     // MARK: Test methods
 
+    func testParsingItemElementUnderRSSElement() throws {
+        let fileData = try data(
+            forResource: "RSSFeedWithItemElementUnderRSSElement",
+            withExtension: "rss"
+        )
+        let feedData = try VNAXMLFeedParser().feed(withXMLData: fileData)
+        let rssFeed = try XCTUnwrap(feedData as? RSSFeed)
+        let feedItems = rssFeed.items
+
+        XCTAssert(feedItems.count == 1)
+        XCTAssert(feedItems.first?.guid == "itemGUID")
+    }
+
+    func testParsingItemElementUnderRSSAndChannelElement() throws {
+        let fileData = try data(
+            forResource: "RSSFeedWithItemElementUnderRSSAndChannelElement",
+            withExtension: "rss"
+        )
+        let feedData = try VNAXMLFeedParser().feed(withXMLData: fileData)
+        let rssFeed = try XCTUnwrap(feedData as? RSSFeed)
+        let feedItems = rssFeed.items
+
+        XCTAssert(feedItems.count == 1)
+        XCTAssert(feedItems.first?.guid == "channelItemGUID")
+    }
+
     /// Validate the content:encoded elements.
     func testParsingContentElement() throws {
         let fileData = try data(forResource: "RSSFeedWithContentElements", withExtension: "rss")
