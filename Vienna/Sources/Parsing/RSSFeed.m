@@ -59,15 +59,15 @@
     success = [self initRSSFeedHeaderWithElement:channelElement];
     if (success) {
         if (isRDF) {
-            success = [self initRSSFeedItems:rssElement];
+            [self initRSSFeedItems:rssElement];
         } else {
-            success = [self initRSSFeedItems:channelElement];
+            [self initRSSFeedItems:channelElement];
 
             // Previous versions of RSS allowed <item> elements under the <rss>
             // element instead of the <channel> element. If no items were found
             // under the <channel> element then traverse the <rss> element too.
             if (self.items.count == 0) {
-                success = [self initRSSFeedItems:rssElement];
+                [self initRSSFeedItems:rssElement];
             }
         }
     }
@@ -175,9 +175,8 @@
     }
 }
 
-- (BOOL)initRSSFeedItems:(NSXMLElement *)startElement
+- (void)initRSSFeedItems:(NSXMLElement *)startElement
 {
-    BOOL success = YES;
     NSMutableArray *items = [NSMutableArray array];
 
     for (NSXMLElement *element in startElement.children) {
@@ -355,7 +354,7 @@
 
     self.items = items;
 
-    return success;
+    return;
 }
 
 // MARK: Overrides
