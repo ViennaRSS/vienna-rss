@@ -62,6 +62,13 @@
             success = [self initRSSFeedItems:rssElement];
         } else {
             success = [self initRSSFeedItems:channelElement];
+
+            // Previous versions of RSS allowed <item> elements under the <rss>
+            // element instead of the <channel> element. If no items were found
+            // under the <channel> element then traverse the <rss> element too.
+            if (self.items.count == 0) {
+                success = [self initRSSFeedItems:rssElement];
+            }
         }
     }
     return success;
