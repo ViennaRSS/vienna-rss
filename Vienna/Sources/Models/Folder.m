@@ -70,7 +70,6 @@
 		_containsBodies = NO;
 		_hasPassword = NO;
 		_cachedArticles = [NSCache new];
-		_cachedArticles.evictsObjectsWithDiscardedContent = NO;
 		_cachedArticles.delegate = self;
 		_cachedGuids = [NSMutableArray array];
 		_attributes = [NSMutableDictionary dictionary];
@@ -430,9 +429,7 @@
  */
 -(void)setNonPersistedFlag:(VNAFolderFlag)flagToSet
 {
-	@synchronized(self) {
-		nonPersistedFlags |= flagToSet;
-	}
+    nonPersistedFlags |= flagToSet;
 }
 
 /* clearNonPersistedFlag
@@ -440,9 +437,7 @@
  */
 -(void)clearNonPersistedFlag:(VNAFolderFlag)flagToClear
 {
-	@synchronized(self) {
-		nonPersistedFlags &= ~flagToClear;
-	}
+    nonPersistedFlags &= ~flagToClear;
 }
 
 /* indexOfArticle
@@ -450,20 +445,16 @@
  */
 -(NSUInteger)indexOfArticle:(Article *)article
 {
-    @synchronized(self) {
-        [self ensureCache];
-        return [self.cachedGuids indexOfObject:article.guid];
-    }
+    [self ensureCache];
+    return [self.cachedGuids indexOfObject:article.guid];
 }
 
 /* articleFromGuid
  */
 -(Article *)articleFromGuid:(NSString *)guid
 {
-    @synchronized(self) {
-        [self ensureCache];
-	    return [self.cachedArticles objectForKey:guid];
-	}
+    [self ensureCache];
+    return [self.cachedArticles objectForKey:guid];
 }
 
 /* retrieveKnownStatusForGuid
@@ -488,10 +479,10 @@
  */
 -(BOOL)createArticle:(Article *)article guidHistory:(NSArray *)guidHistory
 {
-@synchronized(self) {
     // Prime the article cache
     [self ensureCache];
 
+    @synchronized(self) {
     // Unread count adjustment factor
     NSInteger adjustment = 0;
 
@@ -505,7 +496,6 @@
             return NO; // Article has been deleted and removed from database, so ignore
         } else {
             // add the article as new
-            [article beginContentAccess];
             BOOL success = [[Database sharedManager] addArticle:article toFolder:self.itemId];
             if (success) {
                 article.status = ArticleStatusNew;
@@ -518,17 +508,14 @@
                     adjustment = 1;
                 }
             } else {
-                [article endContentAccess];
                 return NO;
             }
-            [article endContentAccess];
         }
     } else if (existingArticle.deleted) {
         return NO;
     } else if (![[Preferences standardPreferences] boolForKey:MAPref_CheckForUpdatedArticles]) {
         return NO;
     } else {
-        [existingArticle beginContentAccess];
         BOOL success = [[Database sharedManager] updateArticle:existingArticle ofFolder:self.itemId withArticle:article];
         if (success) {
             // Update folder unread count if necessary
@@ -541,18 +528,16 @@
             }
             latestFetchCount++;
         } else {
-            [existingArticle endContentAccess];
             return NO;
         }
-        [existingArticle endContentAccess];
     }
 
     // Fix unread count on parent folders and Database manager
     if (adjustment != 0) {
 		[[Database sharedManager] setFolderUnreadCount:self adjustment:adjustment];
     }
+    } // synchronized
     return YES;
-  } // synchronized
 }
 
 /* setUnreadCount
@@ -616,20 +601,20 @@
  {
     NSAssert(self.type == VNAFolderTypeRSS || self.type == VNAFolderTypeOpenReader, @"Attempting to create cache for non RSS folder");
     if (!self.isCached) {
+      @synchronized(self) {
         NSArray * myArray = [[Database sharedManager] minimalCacheForFolder:self.itemId];
         for (Article * myArticle in myArray) {
-            [myArticle beginContentAccess];
             NSString * guid = myArticle.guid;
             myArticle.status = [self retrieveKnownStatusForGuid:guid];
             [self.cachedArticles setObject:myArticle forKey:guid];
             if (![self.cachedGuids containsObject:guid]) {
                 [self.cachedGuids addObject:guid];
             }
-            [myArticle endContentAccess];
         }
         self.isCached = YES;
         // Note that this only builds a minimal cache, so we cannot set the containsBodies flag
         // Note also that articles' statuses are left at the default value (0) which is ArticleStatusEmpty
+      }
     }
 }
 
@@ -646,7 +631,6 @@
  */
 -(void)markArticlesInCacheRead
 {
-@synchronized(self) {
     NSInteger count = unreadCount;
     // Note the use of reverseObjectEnumerator
     // since the unread articles are likely to be clustered
@@ -662,7 +646,6 @@
             }
         }
     }
-  } // synchronized
 }
 
 /* resetArticleStatuses
@@ -679,9 +662,7 @@
         if (article &&
             (article.status == ArticleStatusNew || article.status == ArticleStatusUpdated))
         {
-            [article beginContentAccess];
             article.status = ArticleStatusEmpty;
-            [article endContentAccess];
             count--;
             if (count == 0) {
                 break;
@@ -696,7 +677,6 @@
  */
 -(NSArray<ArticleReference *> *)arrayOfUnreadArticlesRefs
 {
-@synchronized(self) {
     if (self.isCached) {
         NSInteger count = unreadCount;
         NSMutableArray * result = [NSMutableArray arrayWithCapacity:unreadCount];
@@ -714,7 +694,6 @@
     } else {
         return [[Database sharedManager] arrayOfUnreadArticlesRefs:self.itemId];
     }
-  } // synchronized
 }
 
 /*! Get an array of filtered articles in the current
@@ -732,29 +711,29 @@
 			}
 			return [articles copy];
 		}
-		@synchronized(self) {
-            if (self.isCached && self.containsBodies) {
-                // attempt to retrieve from cache
-                NSMutableArray * articles = [NSMutableArray arrayWithCapacity:self.cachedGuids.count];
-                for (id object in self.cachedGuids) {
-                    Article * theArticle = [self.cachedArticles objectForKey:object];
-                    if (theArticle != nil) {
-                        // deleted articles are not removed from cache any more
-                        if (!theArticle.isDeleted) {
-                            [articles addObject:theArticle];
-                        }
-                    } else {
-                        // some problem
-                        NSLog(@"Bug retrieving from cache in folder %li : after %lu insertions of %lu, guid %@",(long)self.itemId, (unsigned long)articles.count,(unsigned long)self.cachedGuids.count,object);
+        if (self.isCached && self.containsBodies) {
+            // attempt to retrieve from cache
+            NSMutableArray * articles = [NSMutableArray arrayWithCapacity:self.cachedGuids.count];
+            for (id object in self.cachedGuids) {
+                Article * theArticle = [self.cachedArticles objectForKey:object];
+                if (theArticle != nil) {
+                    // deleted articles are not removed from cache any more
+                    if (!theArticle.isDeleted) {
+                        [articles addObject:theArticle];
+                    }
+                } else {
+                    // some problem
+                    NSLog(@"Bug retrieving from cache in folder %li : after %lu insertions of %lu, guid %@",(long)self.itemId, (unsigned long)articles.count,(unsigned long)self.cachedGuids.count,object);
+                    @synchronized(self) {
                         [self.cachedArticles removeAllObjects];
                         return [self getCompleteArticles];
                     }
                 }
-                return [articles copy];
-            } else {
-                return [self getCompleteArticles];
-           }
-        } // synchronized
+            }
+            return [articles copy];
+        } else {
+            return [self getCompleteArticles];
+       }
 	} else {
 	    return [[Database sharedManager] arrayOfArticles:self.itemId filterString:filterString];
     }
@@ -767,6 +746,7 @@
  */
 -(NSArray<Article *> *)getCompleteArticles
 {
+  @synchronized(self){
     NSArray * articles = [[Database sharedManager] arrayOfArticles:self.itemId filterString:@""];
     self.isCached = NO;
     self.containsBodies = NO;
@@ -775,17 +755,16 @@
     if (self.type == VNAFolderTypeRSS || self.type == VNAFolderTypeOpenReader) {
         [self.cachedGuids removeAllObjects];
         for (Article * article in articles) {
-            [article beginContentAccess];
             NSString * guid = article.guid;
             article.status = [self retrieveKnownStatusForGuid:guid];
             [self.cachedArticles setObject:article forKey:guid];
             [self.cachedGuids addObject:guid];
-            [article endContentAccess];
         }
         self.isCached = YES;
         self.containsBodies = YES;
     }
     return articles;
+  }
 }
 
 /* folderNameCompare
