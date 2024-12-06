@@ -214,6 +214,8 @@
 		F6B059E42961D0DD00F6E31B /* JSONFeedParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B059E32961D0DD00F6E31B /* JSONFeedParser.swift */; };
 		F6B3561525616313008CA1ED /* DownloadItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B3561425616313008CA1ED /* DownloadItem.m */; };
 		F6B7BC3624A2A9A40051D76F /* FMDB in Frameworks */ = {isa = PBXBuildFile; productRef = F6B7BC3524A2A9A40051D76F /* FMDB */; };
+		F6C136582D01C0D0009E42F8 /* RSSFeedWithItemElementUnderRSSElement.rss in Resources */ = {isa = PBXBuildFile; fileRef = F6C136572D01C0D0009E42F8 /* RSSFeedWithItemElementUnderRSSElement.rss */; };
+		F6C1365A2D01C3E2009E42F8 /* RSSFeedWithItemElementUnderRSSAndChannelElement.rss in Resources */ = {isa = PBXBuildFile; fileRef = F6C136592D01C3E2009E42F8 /* RSSFeedWithItemElementUnderRSSAndChannelElement.rss */; };
 		F6C9DA70271BB3BB00FC3027 /* RSSFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = F6C9DA6F271BB3BB00FC3027 /* RSSFeed.m */; };
 		F6C9DA73271BB55000FC3027 /* AtomFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = F6C9DA72271BB55000FC3027 /* AtomFeed.m */; };
 		F6CE47131E7E3DCB0045EAD7 /* ActivityItem.m in Sources */ = {isa = PBXBuildFile; fileRef = F6CE47121E7E3DCB0045EAD7 /* ActivityItem.m */; };
@@ -633,6 +635,8 @@
 		F6BD1FDA2C9D7DD40075D04F /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		F6BD1FDC2C9D7E230075D04F /* CONTRIBUTING.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CONTRIBUTING.md; sourceTree = "<group>"; };
 		F6BD1FDD2C9D7E2E0075D04F /* LICENCE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENCE.md; sourceTree = "<group>"; };
+		F6C136572D01C0D0009E42F8 /* RSSFeedWithItemElementUnderRSSElement.rss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = RSSFeedWithItemElementUnderRSSElement.rss; sourceTree = "<group>"; };
+		F6C136592D01C3E2009E42F8 /* RSSFeedWithItemElementUnderRSSAndChannelElement.rss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = RSSFeedWithItemElementUnderRSSAndChannelElement.rss; sourceTree = "<group>"; };
 		F6C9DA6E271BB3BB00FC3027 /* RSSFeed.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSSFeed.h; sourceTree = "<group>"; };
 		F6C9DA6F271BB3BB00FC3027 /* RSSFeed.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSSFeed.m; sourceTree = "<group>"; };
 		F6C9DA71271BB55000FC3027 /* AtomFeed.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AtomFeed.h; sourceTree = "<group>"; };
@@ -1062,6 +1066,8 @@
 			children = (
 				F64499FB259773B9005A1EFA /* FeedDiscovery.html */,
 				F6E01A082C652FA50082E07B /* RSSFeedWithContentElements.rss */,
+				F6C136592D01C3E2009E42F8 /* RSSFeedWithItemElementUnderRSSAndChannelElement.rss */,
+				F6C136572D01C0D0009E42F8 /* RSSFeedWithItemElementUnderRSSElement.rss */,
 			);
 			path = Files;
 			sourceTree = "<group>";
@@ -1540,6 +1546,8 @@
 			files = (
 				F6449A0325977521005A1EFA /* FeedDiscovery.html in Resources */,
 				F6E01A092C652FA50082E07B /* RSSFeedWithContentElements.rss in Resources */,
+				F6C1365A2D01C3E2009E42F8 /* RSSFeedWithItemElementUnderRSSAndChannelElement.rss in Resources */,
+				F6C136582D01C0D0009E42F8 /* RSSFeedWithItemElementUnderRSSElement.rss in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
