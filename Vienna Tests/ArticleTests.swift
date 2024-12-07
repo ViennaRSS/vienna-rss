@@ -249,18 +249,6 @@ class ArticleTests: XCTestCase {
         XCTAssertEqual(self.article.value(forKeyPath: summaryKeyPath) as? String, summary)
     }
 
-//    func testRandomCompatibilityKeyPath() {
-//        let randomArticleDataKeyPath = "articleData.dummyProperty"
-//
-//        XCTAssertThrowsSpecificNamed(self.article.value(forKeyPath: randomArticleDataKeyPath), NSException, NSUndefinedKeyException);
-//    }
-
-//    func testRandomKeyPath() {
-//        let randomKeyPath = "dummyProperty"
-//
-//        XCTAssertThrowsSpecificNamed(self.article.value(forKeyPath: randomKeyPath), NSException, NSUndefinedKeyException);
-//    }
-
     func testDescription() {
         let title = "Lorem ipsum dolor sit amet"
 
