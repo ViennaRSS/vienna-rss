@@ -58,7 +58,7 @@
 
 // The current database version number
 static NSInteger const VNAMinimumSupportedDatabaseVersion = 12;
-static NSInteger const VNACurrentDatabaseVersion = 24;
+static NSInteger const VNACurrentDatabaseVersion = 25;
 
 @implementation Database
 
