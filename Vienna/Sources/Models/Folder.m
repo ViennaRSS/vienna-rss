@@ -712,6 +712,14 @@
 			return [articles copy];
 		}
         if (self.isCached && self.containsBodies) {
+            // check consistency
+            if (self.cachedGuids.count < self.unreadCount) {
+                NSLog(@"Bug from cache in folder %li : inconsistent count",(long)self.itemId);
+                @synchronized(self) {
+                    [self.cachedArticles removeAllObjects];
+                    return [self getCompleteArticles];
+                }
+            }
             // attempt to retrieve from cache
             NSMutableArray * articles = [NSMutableArray arrayWithCapacity:self.cachedGuids.count];
             for (id object in self.cachedGuids) {
