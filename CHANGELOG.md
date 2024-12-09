@@ -2,6 +2,25 @@ Vienna ChangeLog File
 =====================
 
 
+Vienna 3.9.5
+-----
+_released 2024-12-09_
+
+### 🚲 Changes
+- Search `<item>` elements under feed's `<rss>` element if they are not found under `<channel>`
+- Improve handling of Media RSS specification in feeds: `<media:thumbnail>` may be used as a workaround for enclosures
+- Update localizations
+### 🤷🏻 Bugfix
+- Extend fixes for "Last update" dates being set to January 1st, 1970
+- Fix handling of `mailto:` URLs
+- Fix handling of links specifying `target="_blank"`
+- Work around situations with inconsistent unread counts
+### ⚙️ Internals improvement
+- Revert some of the changes in memory management introduced in version 3.9.3 (caching of folder's articles)
+- Include a database update to fix entries that had January 1st, 1970 as the last update date
+### 🛤️ Infrastructure updates
+- Test build with Xcode 16.1 (macOS 15) and Xcode 15.4 (macOS 14)
+
 Vienna 3.9.4
 -----
 _released 2024-10-27_

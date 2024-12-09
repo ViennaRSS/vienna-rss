@@ -1,12 +1,24 @@
-<!DOCTYPE html><head><meta charset="utf-8"/></head><h1>Version Notes</h1>
-<h2>Vienna 3.9.4</h2>
-<p><em>released 2024-10-27</em></p>
+<!DOCTYPE html><head><meta charset="utf-8"/></head><h2>Vienna 3.9.5</h2>
+<p><em>released 2024-12-09</em></p>
+<h3>🚲 Changes</h3>
+<ul>
+<li>Search <code>&lt;item&gt;</code> elements under feed’s <code>&lt;rss&gt;</code> element if they are not found under <code>&lt;channel&gt;</code></li>
+<li>Improve handling of Media RSS specification in feeds: <code>&lt;media:thumbnail&gt;</code> may be used as a workaround for enclosures</li>
+<li>Update localizations</li>
+</ul>
 <h3>🤷🏻 Bugfix</h3>
 <ul>
-<li>Prevent deleted articles from reappearing in feeds after refresh</li>
-<li>Prevent “Date published” and “Last update” dates from being set to January 1st, 1970</li>
+<li>Extend fixes for “Last update” dates being set to January 1st, 1970</li>
+<li>Fix handling of <code>mailto:</code> URLs</li>
+<li>Fix handling of links specifying <code>target=&quot;_blank&quot;</code></li>
+<li>Work around situations with inconsistent unread counts</li>
 </ul>
 <h3>⚙️ Internals improvement</h3>
 <ul>
+<li>Revert some of the changes in memory management introduced in version 3.9.3 (caching of folder’s articles)</li>
 <li>Include a database update to fix entries that had January 1st, 1970 as the last update date</li>
+</ul>
+<h3>🛤️ Infrastructure updates</h3>
+<ul>
+<li>Test build with Xcode 16.1 (macOS 15) and Xcode 15.4 (macOS 14)</li>
 </ul>
