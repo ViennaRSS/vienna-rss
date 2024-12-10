@@ -2016,6 +2016,13 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		case 'K':
 			[self markAllRead:self];
 			return YES;
+        
+        // Mark all as read, go to next unread
+        case 'l':
+        case 'L':
+            [self markAllRead:self];
+            [self viewFirstUnread:self];
+            return YES;
 			
 		case 'm':
 		case 'M':
