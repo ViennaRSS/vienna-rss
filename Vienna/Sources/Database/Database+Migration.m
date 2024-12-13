@@ -258,6 +258,19 @@
             database.userVersion = (uint32_t)25;
             NSLog(@"Updated database schema to version 25.");
         }
+        case 26: {
+            // Add opened_flag to messages table, and initialize stuff.
+
+            [database executeUpdate:@"ALTER TABLE messages "
+                                     "ADD COLUMN opened_flag"];
+            [database executeUpdate:@"UPDATE messages "
+                                     "SET opened_flag = 0"];
+            [database executeUpdate:@"CREATE INDEX messages_opened_flag "
+                                     "ON messages (opened_flag)"];
+            database.userVersion = (uint32_t)26;
+
+            NSLog(@"Updated database schema to version 26.");
+        }
     }
 }
 

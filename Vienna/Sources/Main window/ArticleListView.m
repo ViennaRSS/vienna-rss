@@ -96,6 +96,8 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
     BOOL isLoadingHTMLArticle;
 }
 
+@synthesize messageListView = articleList;
+
 /* initWithFrame
  * Initialise our view.
  */
@@ -393,7 +395,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 			showField = field.visible && tag != VNAArticleFieldTagHeadlines;
 		} else {
 			showField = NO;
-			if (tag == VNAArticleFieldTagRead || tag == VNAArticleFieldTagFlagged || tag == VNAArticleFieldTagHasEnclosure) {
+            if (tag == VNAArticleFieldTagRead || tag == VNAArticleFieldTagFlagged || tag == VNAArticleFieldTagHasEnclosure || tag == VNAArticleFieldTagFlagged || tag == VNAArticleFieldTagOpened) {
 				showField = field.visible;
 			}
 			if (tag == VNAArticleFieldTagHeadlines) {
@@ -434,7 +436,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 				column.dataCell = cell;
 			}
 
-			BOOL isResizable = (tag != VNAArticleFieldTagRead && tag != VNAArticleFieldTagFlagged && tag != VNAArticleFieldTagHasEnclosure);
+            BOOL isResizable = (tag != VNAArticleFieldTagRead && tag != VNAArticleFieldTagFlagged && tag != VNAArticleFieldTagHasEnclosure && tag != VNAArticleFieldTagOpened);
 			column.resizingMask = (isResizable ? NSTableColumnUserResizingMask : NSTableColumnNoResizing);
 			// the headline column is auto-resizable
 			column.resizingMask = column.resizingMask | ([column.identifier isEqualToString:MA_Field_Headlines] ? NSTableColumnAutoresizingMask : 0);
@@ -470,6 +472,9 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
         NSImage *enclImage = [NSImage imageWithSystemSymbolName:@"paperclip"
                                        accessibilityDescription:nil];
         enclImage = [enclImage imageWithSymbolConfiguration:config];
+        NSImage *openedImage = [NSImage imageWithSystemSymbolName:@"safari"
+                                       accessibilityDescription:nil];
+        openedImage = [openedImage imageWithSymbolConfiguration:config];
 
         [articleList setTableColumnHeaderImage:readImage
                        forColumnWithIdentifier:MA_Field_Read];
@@ -477,11 +482,15 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
                        forColumnWithIdentifier:MA_Field_Flagged];
         [articleList setTableColumnHeaderImage:enclImage
                        forColumnWithIdentifier:MA_Field_HasEnclosure];
+        [articleList setTableColumnHeaderImage:openedImage
+                       forColumnWithIdentifier:MA_Field_Opened];
     } else {
         [articleList setTableColumnHeaderImage:[NSImage imageNamed:ACImageNameUnreadHeader]
                        forColumnWithIdentifier:MA_Field_Read];
         [articleList setTableColumnHeaderImage:[NSImage imageNamed:ACImageNameFlaggedHeader]
                        forColumnWithIdentifier:MA_Field_Flagged];
+        [articleList setTableColumnHeaderImage:[NSImage imageNamed:ACImageNameOpenedHeader]
+                       forColumnWithIdentifier:MA_Field_Opened];
         [articleList setTableColumnHeaderImage:[NSImage imageNamed:ACImageNameEnclosureHeader]
                        forColumnWithIdentifier:MA_Field_HasEnclosure];
     }
@@ -1226,6 +1235,20 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
         }
         return nil;
 	}
+    if ([identifier isEqualToString:MA_Field_Opened]) {
+        if (theArticle.isOpened) {
+            if (@available(macOS 11, *)) {
+                NSImage *image = [NSImage imageWithSystemSymbolName:@"safari"
+                                           accessibilityDescription:nil];
+                // Setting the template property to NO enables the tint color.
+                image.template = YES;
+                return image;
+            } else {
+                return [NSImage imageNamed:ACImageNameOpened];
+            }
+        }
+        return nil;
+    }
 	if ([identifier isEqualToString:MA_Field_HasEnclosure]) {
         if (theArticle.hasEnclosure) {
             if (@available(macOS 11, *)) {
@@ -1662,6 +1685,10 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
         }
         self.articleTextView.translatesAutoresizingMaskIntoConstraints = YES;
     }
+}
+
+- (MessageListView *) getMessageListView {
+    return self->articleList;
 }
 
 @end

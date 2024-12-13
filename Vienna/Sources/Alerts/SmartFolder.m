@@ -243,6 +243,7 @@ static NSNibName const VNASmartFolderNibName = @"SearchFolder";
         [NSExpression expressionForConstantValue:MA_Field_Read],
         [NSExpression expressionForConstantValue:MA_Field_Flagged],
         [NSExpression expressionForConstantValue:MA_Field_Deleted],
+        [NSExpression expressionForConstantValue:MA_Field_Opened],
         [NSExpression expressionForConstantValue:MA_Field_HasEnclosure]
     ];
     NSArray<NSExpression *> *booleanRightExpressions = @[

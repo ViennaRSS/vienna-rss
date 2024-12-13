@@ -33,6 +33,7 @@ extern NSString * const MA_Field_LastUpdate;
 extern NSString * const MA_Field_Read;
 extern NSString * const MA_Field_Flagged;
 extern NSString * const MA_Field_Deleted;
+extern NSString * const MA_Field_Opened;
 extern NSString * const MA_Field_Text;
 extern NSString * const MA_Field_Folder;
 extern NSString * const MA_Field_Parent;
@@ -63,7 +64,8 @@ typedef NS_ENUM(NSInteger, VNAArticleFieldTag) {
     VNAArticleFieldTagPublicationDate,
     VNAArticleFieldTagEnclosure,
     VNAArticleFieldTagEnclosureDownloaded,
-    VNAArticleFieldTagHasEnclosure
+    VNAArticleFieldTagHasEnclosure,
+    VNAArticleFieldTagOpened,
 } NS_SWIFT_NAME(Article.FieldTag);
 
 typedef NS_ENUM(NSInteger, ArticleStatus) {
@@ -92,6 +94,7 @@ typedef NS_ENUM(NSInteger, ArticleStatus) {
 @property (nonatomic, getter=isRevised, readonly) BOOL revised;
 @property (nonatomic, getter=isFlagged, readonly) BOOL flagged;
 @property (nonatomic, getter=isDeleted, readonly) BOOL deleted;
+@property (nonatomic, getter=isOpened, readonly) BOOL opened;
 @property (nonatomic) BOOL hasEnclosure;
 @property (nonatomic, readonly) BOOL enclosureDownloaded;
 @property (nonatomic) NSInteger status;
@@ -99,6 +102,7 @@ typedef NS_ENUM(NSInteger, ArticleStatus) {
 -(void)markRevised:(BOOL)flag;
 -(void)markFlagged:(BOOL)flag;
 -(void)markDeleted:(BOOL)flag;
+-(void)markOpened:(BOOL)flag;
 -(void)markEnclosureDownloaded:(BOOL)flag;
 
 @end

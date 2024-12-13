@@ -103,13 +103,16 @@ class WebKitArticleTab: BrowserTab, ArticleContentView {
         // i.e. navigationAction.navigationType == .formSubmitted or .formResubmitted
         // TODO: in the future, we might want to allow limited browsing in the primary tab
         if navigationAction.navigationType == .linkActivated {
-            // prevent navigation to links opened through klick
+            // prevent navigation to links opened through click
             decisionHandler(.cancel)
             // open in new preferred browser instead, or the alternate one if the option key is pressed
             let openInPreferredBrower = !navigationAction.modifierFlags.contains(.option)
             // TODO: maybe we need to add an api that opens a clicked link in foreground to the AppController
             NSApp.appController.open(navigationAction.request.url, inPreferredBrowser: openInPreferredBrower)
             NSApp.mainWindow?.makeFirstResponder((NSApp.appController.articleListView).mainView)
+            if self.articles.count == 1 {
+                Database.shared.markArticleOpened(self.articles.first!.folderId, guid: self.articles.first!.guid, isOpened: true)
+            }
         } else {
             decisionHandler(.allow)
         }

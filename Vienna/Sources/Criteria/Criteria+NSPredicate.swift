@@ -195,7 +195,7 @@ extension Criteria: PredicateConvertible {
                 fallback = true
                 criteriaOperator = .equalTo
             }
-        case MA_Field_Read, MA_Field_Flagged, MA_Field_HasEnclosure, MA_Field_Deleted:
+        case MA_Field_Read, MA_Field_Flagged, MA_Field_HasEnclosure, MA_Field_Deleted, MA_Field_Opened:
             switch predicate.predicateOperatorType {
             case .notEqualTo:
                 // Not representable by predicate editor, because it would not

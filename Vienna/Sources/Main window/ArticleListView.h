@@ -26,6 +26,8 @@
 #import "MessageListView.h"
 
 @interface ArticleListView : NSView <BaseView, ArticleBaseView, ArticleViewDelegate, MessageListViewDelegate, NSTableViewDataSource, ExtendedTableViewDelegate, NSSplitViewDelegate>
+    
+@property (readonly) MessageListView *messageListView;
 
 // Public functions
 -(void)updateVisibleColumns;

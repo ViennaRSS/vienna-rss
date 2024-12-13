@@ -365,6 +365,9 @@
 			<property type="boolean" name="flag" code="arFG" access="r" description="Whether the article has been flagged">
 				<cocoa key="isFlagged"/>
 			</property>
+			<property type="boolean" name="opened" code="arOP" access="r" description="Whether the article has been opened in the browser">
+				<cocoa key="isOpened"/>
+			</property>
 			<property type="text" name="guid" code="arGD" access="r" description="The unique GUID of the article">
 				<cocoa key="guid"/>
 			</property>

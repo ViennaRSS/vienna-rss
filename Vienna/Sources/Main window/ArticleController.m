@@ -36,6 +36,7 @@
 #import "BackTrackArray.h"
 #import "StringExtensions.h"
 #import "Vienna-Swift.h"
+#import "FMDatabase.h"
 
 #define VNA_LOG os_log_create("--", "ArticleController")
 
@@ -93,6 +94,10 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 										  @"key": @"isFlagged",
 										  @"selector": NSStringFromSelector(@selector(compare:))
 										  },
+                                  MA_Field_Opened: @{
+                                          @"key": @"isOpened",
+                                          @"selector": NSStringFromSelector(@selector(compare:))
+                                          },
 								  MA_Field_LastUpdate: @{
 										  @"key": [@"articleData." stringByAppendingString:MA_Field_LastUpdate],
 										  @"selector": NSStringFromSelector(@selector(compare:))
@@ -750,10 +755,6 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 -(void)innerMarkFlaggedByArray:(NSArray *)articleArray flagged:(BOOL)flagged
 {
 	for (Article * theArticle in articleArray) {
-		Folder *myFolder = [[Database sharedManager] folderFromID:theArticle.folderId];
-		if (myFolder.type == VNAFolderTypeOpenReader) {
-			[[OpenReader sharedManager] markStarred:theArticle starredFlag:flagged];
-		}
 		[[Database sharedManager] markArticleFlagged:theArticle.folderId
                                                 guid:theArticle.guid
                                            isFlagged:flagged];
@@ -937,6 +938,51 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 		}
 	}
 }
+
+/* markUnopenedUndo
+ * Undo handler to flag un-opened an array of articles.
+ */
+-(void)markUnopenedUndo:(id)anObject
+{
+    [self markOpenedByArray:(NSArray *)anObject opened:NO];
+}
+
+/* markOpenedUndo
+ * Undo handler to flag opened an array of articles.
+ */
+-(void)markOpenedUndo:(id)anObject
+{
+    [self markOpenedByArray:(NSArray *)anObject opened:YES];
+}
+
+/* markOpenedByArray
+ * Mark the specified articles in articleArray as opened.
+ */
+-(void)markOpenedByArray:(NSArray *)articleArray opened:(BOOL)opened
+{
+    // Set up to undo this action
+    NSUndoManager * undoManager = NSApp.mainWindow.undoManager;
+    SEL markOpenedUndoAction = opened ? @selector(markUnopenedUndo:) : @selector(markOpenedUndo:);
+    [undoManager registerUndoWithTarget:self selector:markOpenedUndoAction object:articleArray];
+    [undoManager setActionName:NSLocalizedString(@"Opened", nil)];
+
+    [self innerMarkOpenedByArray:articleArray opened:opened];
+    [mainArticleView refreshFolder:VNARefreshRedrawList];
+}
+
+/* innerMarkOpenedByArray
+ * Marks all articles in the specified array opened or un-opened.
+ */
+-(void)innerMarkOpenedByArray:(NSArray *)articleArray opened:(BOOL)opened
+{
+    for (Article * theArticle in articleArray) {
+        [[Database sharedManager] markArticleOpened:theArticle.folderId
+                                               guid:theArticle.guid
+                                           isOpened:opened];
+        [theArticle markOpened:opened];
+    }
+}
+
 
 /* addBacktrack
  * Add the specified article to the backtrack queue. The folder is taken from

@@ -1874,6 +1874,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         if (([Preferences standardPreferences].markReadInterval > 0.0f) && !db.readOnly) {
             [self.articleController markReadByArray:articlesWithLinks readFlag:YES];
         }
+        [self.articleController markOpenedByArray:articleArray opened:YES];
 	}
 }
 
@@ -1973,7 +1974,14 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 					}
 					[self.mainWindow makeFirstResponder:(self.selectedArticle != nil) ? ((NSView<BaseView> *)self.browser.primaryTab.view).mainView : self.foldersTree.mainView];
 					return YES;
-				}
+                } else if (self.mainWindow.firstResponder == self.articleListView.messageListView) {
+                    if (flags & NSEventModifierFlagOption) {
+                        [self viewArticlePagesInAlternateBrowser:self];
+                    } else {
+                        [self viewArticlePages:self];
+                    }
+                    return YES;
+                }
 			}
 			return NO;
 			

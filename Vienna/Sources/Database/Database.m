@@ -58,7 +58,7 @@
 
 // The current database version number
 static NSInteger const VNAMinimumSupportedDatabaseVersion = 12;
-static NSInteger const VNACurrentDatabaseVersion = 25;
+static NSInteger const VNACurrentDatabaseVersion = 26;
 
 @implementation Database
 
@@ -314,7 +314,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
         return NO;
     }
     [db executeUpdate:@"CREATE TABLE folders (folder_id integer primary key, parent_id, foldername, unread_count, last_update, type, flags, next_sibling, first_child)"];
-    [db executeUpdate:@"CREATE TABLE messages (message_id, folder_id, parent_id, read_flag, marked_flag, deleted_flag, title, sender, link, createddate, date, text, revised_flag, enclosuredownloaded_flag, hasenclosure_flag, enclosure)"];
+    [db executeUpdate:@"CREATE TABLE messages (message_id, folder_id, parent_id, read_flag, marked_flag, deleted_flag, opened_flag, title, sender, link, createddate, date, text, revised_flag, enclosuredownloaded_flag, hasenclosure_flag, enclosure)"];
     [db executeUpdate:@"CREATE TABLE smart_folders (folder_id, search_string)"];
     [db executeUpdate:@"CREATE TABLE rss_folders (folder_id, feed_url, username, last_update_string, description, home_page, bloglines_id)"];
     [db executeUpdate:@"CREATE TABLE rss_guids (message_id, folder_id)"];
@@ -323,6 +323,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
     [db executeUpdate:@"CREATE INDEX rss_guids_idx ON rss_guids (folder_id)"];
     [db executeUpdate:@"CREATE INDEX messages_read_flag ON messages(read_flag)"];
     [db executeUpdate:@"CREATE INDEX messages_deleted_flag ON messages(deleted_flag)"];
+    [db executeUpdate:@"CREATE INDEX messages_opened_flag ON messages(opened_flag)"];
     if ([db hadError]) {
         return NO;
     }
@@ -341,6 +342,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
     [self addField:MA_Field_Flagged type:VNAFieldTypeFlag tag:VNAArticleFieldTagFlagged sqlField:@"marked_flag" visible:YES width:17];
     [self addField:MA_Field_HasEnclosure type:VNAFieldTypeFlag tag:VNAArticleFieldTagHasEnclosure sqlField:@"hasenclosure_flag" visible:YES width:17];
     [self addField:MA_Field_Deleted type:VNAFieldTypeFlag tag:VNAArticleFieldTagDeleted sqlField:@"deleted_flag" visible:NO width:15];
+    [self addField:MA_Field_Opened type:VNAFieldTypeFlag tag:VNAArticleFieldTagOpened sqlField:@"opened_flag" visible:YES width:17];
     [self addField:MA_Field_GUID type:VNAFieldTypeInteger tag:VNAArticleFieldTagGUID sqlField:@"message_id" visible:NO width:72];
     [self addField:MA_Field_Subject type:VNAFieldTypeString tag:VNAArticleFieldTagSubject sqlField:@"title" visible:YES width:472];
     [self addField:MA_Field_Folder type:VNAFieldTypeFolder tag:VNAArticleFieldTagFolder sqlField:@"folder_id" visible:NO width:130];
@@ -361,6 +363,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	[self fieldByName:MA_Field_HasEnclosure].displayName = NSLocalizedString(@"Enclosure", @"Data field name (Y/N) visible in menu/smart folder definition");
 	[self fieldByName:MA_Field_Enclosure].displayName = NSLocalizedString(@"Enclosure URL", @"Data field name (URL) visible in menu/article list");
 	[self fieldByName:MA_Field_Deleted].displayName = NSLocalizedString(@"Deleted", @"Data field name visible in smart folder definition");
+    [self fieldByName:MA_Field_Opened].displayName = NSLocalizedString(@"Opened", @"Data field name visible in smart folder definition");
 	[self fieldByName:MA_Field_Subject].displayName = NSLocalizedString(@"Subject", @"Data field name visible in menu/article list/smart folder definition");
 	[self fieldByName:MA_Field_Folder].displayName = NSLocalizedString(@"Folder", @"Data field name visible in menu/article list/smart folder definition");
 	[self fieldByName:MA_Field_LastUpdate].displayName = NSLocalizedString(@"Last Update", @"Data field name visible in menu/article list/smart folder definition");
@@ -1508,6 +1511,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
     NSInteger parentId = article.parentId;
     BOOL marked_flag = article.flagged;
     BOOL read_flag = article.read;
+    BOOL opened_flag = article.opened;
     BOOL revised_flag = article.revised;
     BOOL deleted_flag = article.deleted;
     BOOL hasenclosure_flag = article.hasEnclosure;
@@ -1546,8 +1550,8 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 
     __block BOOL success;
     [queue inTransaction:^(FMDatabase *db,  BOOL *rollback) {
-        success = [db executeUpdate:@"INSERT INTO messages (message_id, parent_id, folder_id, sender, link, date, createddate, read_flag, marked_flag, deleted_flag, title, text, revised_flag, enclosure, hasenclosure_flag) "
-         @"VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        success = [db executeUpdate:@"INSERT INTO messages (message_id, parent_id, folder_id, sender, link, date, createddate, read_flag, marked_flag, deleted_flag, opened_flag, title, text, revised_flag, enclosure, hasenclosure_flag) "
+         @"VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
          articleGuid,
          @(parentId),
          @(folderID),
@@ -1558,6 +1562,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
          @(read_flag),
          @(marked_flag),
          @(deleted_flag),
+         @(opened_flag),
          articleTitle,
          articleBody,
          @(revised_flag),
@@ -2026,7 +2031,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 
     FMDatabaseQueue *queue = self.databaseQueue;
     [queue inDatabase:^(FMDatabase *db) {
-        FMResultSet * results = [db executeQueryWithFormat:@"SELECT message_id, read_flag, marked_flag, deleted_flag, title, link, revised_flag, hasenclosure_flag, enclosure FROM messages WHERE folder_id=%ld", (long)folderId];
+        FMResultSet * results = [db executeQueryWithFormat:@"SELECT message_id, read_flag, marked_flag, deleted_flag, title, link, revised_flag, hasenclosure_flag, enclosure, opened_flag FROM messages WHERE folder_id=%ld", (long)folderId];
         while ([results next]) {
             NSString * guid = [results stringForColumnIndex:0];
             BOOL read_flag = [results stringForColumnIndex:1].integerValue;
@@ -2037,7 +2042,8 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
             BOOL revised_flag = [results stringForColumnIndex:6].integerValue;
             BOOL hasenclosure_flag = [results stringForColumnIndex:7].integerValue;
             NSString * enclosure = [results stringForColumnIndex:8];
-
+            BOOL opened_flag = [results stringForColumnIndex:9].integerValue;
+            
             // Keep our own track of unread articles
             if (!read_flag) {
                 ++unread_count;
@@ -2048,6 +2054,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
             [article markFlagged:marked_flag];
             [article markRevised:revised_flag];
             [article markDeleted:deleted_flag];
+            [article markOpened:opened_flag];
             article.folderId = folderId;
             article.title = title;
             article.link = link;
@@ -2204,7 +2211,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	__block NSInteger unread_count = 0;
 
 	queryString=@"SELECT message_id, folder_id, parent_id, read_flag, marked_flag, deleted_flag, title, sender,"
-		@" link, createddate, date, text, revised_flag, hasenclosure_flag, enclosure FROM messages";
+		@" link, createddate, date, text, revised_flag, hasenclosure_flag, enclosure, opened_flag FROM messages";
 
 	// If folderId is zero then we're searching the entire database
 	// otherwise we need to construct a criteria tree for this folder
@@ -2254,6 +2261,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 			[article markRevised:[results intForColumnIndex:12]];
 			article.hasEnclosure = [results intForColumnIndex:13];
 			article.enclosure = [results stringForColumnIndex:14];
+            [article markOpened:[results intForColumnIndex:15]];
 			Folder * articleFolder = [self folderFromID:article.folderId];
 			article.status = [articleFolder retrieveKnownStatusForGuid:guid];
 		
@@ -2473,6 +2481,34 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
             [cachedArticle markDeleted:isDeleted];
         }
 	}
+}
+
+
+
+/* markArticleOpened
+ * Marks an article as opened.
+ */
+-(void)markArticleOpened:(NSInteger)folderId guid:(NSString *)guid isOpened:(BOOL)isOpened
+{
+    Folder * folder = [self folderFromID:folderId];
+    if (folder != nil) {
+        Article * article = [folder articleFromGuid:guid];
+        if (article != nil && isOpened != article.opened) {
+            FMDatabaseQueue *queue = self.databaseQueue;
+            __block BOOL success;
+            [queue inDatabase:^(FMDatabase *db) {
+                success = [db executeUpdate:@"UPDATE messages SET opened_flag=? WHERE folder_id=? AND message_id=?",
+                 @(isOpened),
+                 @(folderId),
+                 guid];
+            }];
+
+            if (success) {
+                // Mark an individual article opened
+                [article markOpened:isOpened];
+            }
+        }
+    }
 }
 
 /* isTrashEmpty

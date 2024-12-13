@@ -76,6 +76,7 @@
 -(void)markAllFoldersReadByArray:(NSArray *)folderArray;
 -(void)markDeletedByArray:(NSArray *)articleArray deleteFlag:(BOOL)deleteFlag;
 -(void)markFlaggedByArray:(NSArray *)articleArray flagged:(BOOL)flagged;
+-(void)markOpenedByArray:(NSArray *)articleArray opened:(BOOL)flagged;
 -(void)selectFolderAndArticle:(NSInteger)folderId guid:(NSString *)guid;
 -(void)addBacktrack:(NSString *)guid;
 -(void)goForward;
