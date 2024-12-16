@@ -90,7 +90,9 @@ final class FeedDiscoverer: NSObject {
         switch attributes["type"]?.lowercased() {
         // These types are recommended, requiring no further validation.
         case "application/rss+xml",
-             "application/atom+xml":
+             "application/atom+xml",
+             "application/feed+json",
+             "application/json":
             return true
         // These types are not sanctioned, but nevertheless used. They require
         // further validation to rule out false-positives.
