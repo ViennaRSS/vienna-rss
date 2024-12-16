@@ -222,6 +222,8 @@
 		F6B7F9CF2E22E7BE005ADB06 /* DownloadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6B7F9CE2E22E7BE005ADB06 /* DownloadViewController.m */; };
 		F6C136582D01C0D0009E42F8 /* RSSFeedWithItemElementUnderRSSElement.rss in Resources */ = {isa = PBXBuildFile; fileRef = F6C136572D01C0D0009E42F8 /* RSSFeedWithItemElementUnderRSSElement.rss */; };
 		F6C1365A2D01C3E2009E42F8 /* RSSFeedWithItemElementUnderRSSAndChannelElement.rss in Resources */ = {isa = PBXBuildFile; fileRef = F6C136592D01C3E2009E42F8 /* RSSFeedWithItemElementUnderRSSAndChannelElement.rss */; };
+		F6C136622D07408E009E42F8 /* HTMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C136612D07408A009E42F8 /* HTMLParser.swift */; };
+		F6C136642D0759D6009E42F8 /* HTMLParserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6C136632D0759D2009E42F8 /* HTMLParserDelegate.swift */; };
 		F6C983002E11ABD4005BA1F8 /* NSResponder+EventHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F6C982FF2E11ABD4005BA1F8 /* NSResponder+EventHandler.m */; };
 		F6C9DA70271BB3BB00FC3027 /* RSSFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = F6C9DA6F271BB3BB00FC3027 /* RSSFeed.m */; };
 		F6C9DA73271BB55000FC3027 /* AtomFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = F6C9DA72271BB55000FC3027 /* AtomFeed.m */; };
@@ -633,6 +635,8 @@
 		F6BD1FDD2C9D7E2E0075D04F /* LICENCE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENCE.md; sourceTree = "<group>"; };
 		F6C136572D01C0D0009E42F8 /* RSSFeedWithItemElementUnderRSSElement.rss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = RSSFeedWithItemElementUnderRSSElement.rss; sourceTree = "<group>"; };
 		F6C136592D01C3E2009E42F8 /* RSSFeedWithItemElementUnderRSSAndChannelElement.rss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = RSSFeedWithItemElementUnderRSSAndChannelElement.rss; sourceTree = "<group>"; };
+		F6C136612D07408A009E42F8 /* HTMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLParser.swift; sourceTree = "<group>"; };
+		F6C136632D0759D2009E42F8 /* HTMLParserDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLParserDelegate.swift; sourceTree = "<group>"; };
 		F6C982FE2E11ABD4005BA1F8 /* NSResponder+EventHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSResponder+EventHandler.h"; sourceTree = "<group>"; };
 		F6C982FF2E11ABD4005BA1F8 /* NSResponder+EventHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSResponder+EventHandler.m"; sourceTree = "<group>"; };
 		F6C9DA6E271BB3BB00FC3027 /* RSSFeed.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSSFeed.h; sourceTree = "<group>"; };
@@ -1361,6 +1365,8 @@
 				F63503F32960846D006F1F76 /* FeedItem.h */,
 				F6256C122960D037003131AA /* JSON Feed */,
 				F6C9DA74271BBA4800FC3027 /* XML-based feeds */,
+				F6C136612D07408A009E42F8 /* HTMLParser.swift */,
+				F6C136632D0759D2009E42F8 /* HTMLParserDelegate.swift */,
 			);
 			path = Parsing;
 			sourceTree = "<group>";
@@ -1882,6 +1888,7 @@
 				F6B059E22961D0A800F6E31B /* JSONFeedItem.swift in Sources */,
 				F68DEBF82A35091600421FAB /* DispatchTimer.swift in Sources */,
 				F6C9DA70271BB3BB00FC3027 /* RSSFeed.m in Sources */,
+				F6C136642D0759D6009E42F8 /* HTMLParserDelegate.swift in Sources */,
 				0349813E1A206FD900014F29 /* GeneralPreferencesViewController.m in Sources */,
 				2F5AC4202198E1AA00A7EDDE /* TitleChangingTabViewItem.swift in Sources */,
 				2F2280382271B18A005D1023 /* ArticleStyleLoader.swift in Sources */,
@@ -1982,6 +1989,7 @@
 				3AB95743258DBC5A00C54E83 /* Browser.swift in Sources */,
 				435028AF165DE9E00018EDB7 /* RefreshManager.m in Sources */,
 				F6AFC16D2CAFCD2E00106E80 /* SettingsTabViewController.swift in Sources */,
+				F6C136622D07408E009E42F8 /* HTMLParser.swift in Sources */,
 				435028B0165DE9E00018EDB7 /* SmartFolder.m in Sources */,
 				435028B1165DE9E00018EDB7 /* SearchMethod.m in Sources */,
 				F6CAA5AA2C5D901600590858 /* FeedSourcePlugin.m in Sources */,

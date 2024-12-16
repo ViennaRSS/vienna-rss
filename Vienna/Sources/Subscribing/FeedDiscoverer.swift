@@ -2,7 +2,7 @@
 //  FeedDiscoverer.swift
 //  Vienna
 //
-//  Copyright 2020-2021 Eitot
+//  Copyright 2020-2021, 2024 Eitot
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -18,8 +18,6 @@
 //
 
 import Foundation
-import libxml2
-import os.log
 
 @objc(VNAFeedDiscoverer)
 final class FeedDiscoverer: NSObject {
@@ -32,21 +30,14 @@ final class FeedDiscoverer: NSObject {
 
     // MARK: Initialization
 
-    // This static property ensures that xmlInitParser() is called only once,
-    // even if this class is instantiated multiple times.
-    private static let htmlParser: Void = xmlInitParser()
-
-    /// Initializes a parser with the HTML contents encapsulated in a given data
-    /// object.
+    /// Initializes a feed discoverer with the HTML contents encapsulated in a
+    /// given data object.
     ///
     /// - Parameters:
     ///   - data: A data object containing the HTML document.
     ///   - baseURL: The base URL of the HTML document.
     @objc
     init(data: Data, baseURL: URL) {
-        // Call the static initializer of xmlInitParser().
-        FeedDiscoverer.htmlParser
-
         self.data = data
         self.baseURL = baseURL
     }
@@ -76,64 +67,9 @@ final class FeedDiscoverer: NSObject {
         return results
     }
 
-    private var parserContext: htmlParserCtxtPtr?
-
     private func parse() {
-        guard parserContext == nil else {
-            return
-        }
-
-        data.withUnsafeBytes { buffer in
-            // According to the UnsafeRawBufferPointer documentation, each byte
-            // is addressed as a UInt8 value.
-            guard let baseAddress = buffer.baseAddress?.assumingMemoryBound(to: UInt8.self) else {
-                os_log("Buffer base address is nil", log: .discoverer, type: .fault)
-                return
-            }
-
-            let numberOfBytes = Int32(buffer.count)
-
-            // Even if the base address is not nil, the byte count can be 0.
-            guard numberOfBytes > 0 else {
-                os_log("Buffer data count is 0", log: .discoverer, type: .fault)
-                return
-            }
-
-            // Set up the HTML parser.
-            var handler = htmlParserHandler()
-            let parser = Unmanaged.passUnretained(self).toOpaque()
-            let address = UnsafeRawPointer(baseAddress).bindMemory(to: Int8.self, capacity: 1)
-            let encoding = xmlDetectCharEncoding(baseAddress, numberOfBytes)
-            parserContext = htmlCreatePushParserCtxt(&handler, parser, address, numberOfBytes, nil, encoding)
-
-            let opts = Int32(HTML_PARSE_RECOVER.rawValue | HTML_PARSE_NOBLANKS.rawValue | HTML_PARSE_NONET.rawValue)
-            htmlCtxtUseOptions(parserContext, opts)
-
-            // Parse the document.
-            htmlParseDocument(parserContext)
-
-            // Clean up the parser.
-            htmlFreeParserCtxt(parserContext)
-            self.parserContext = nil
-        }
-    }
-
-    fileprivate func parser(_ parser: FeedDiscoverer, didStartElement elementName: String, attributes: [String: String]) {
-        guard validateElement(elementName: elementName, attributes: attributes) else {
-            return
-        }
-
-        guard let absoluteURL = formatURL(attributes: attributes, baseURL: parser.baseURL) else {
-            return
-        }
-
-        let feedURL = FeedURL(url: absoluteURL, title: attributes["title"])
-        parser.results.append(feedURL)
-
-        if parser.abortOnFirstResult {
-            xmlStopParser(parserContext)
-            return
-        }
+        let parser = HTMLParser(data: data, baseURL: baseURL, delegate: self)
+        parser.parse()
     }
 
     // MARK: Validating
@@ -178,15 +114,11 @@ final class FeedDiscoverer: NSObject {
 
     // Formats the href attribute into an absolute URL, if possible.
     private func formatURL(attributes: [String: String], baseURL: URL) -> URL? {
-        guard let urlString = attributes["href"] else {
-            return nil
-        }
-
-        guard let components = URLComponents(string: urlString) else {
-            return nil
-        }
-
-        guard let absoluteFeedURL = components.url(relativeTo: baseURL) else {
+        guard
+            let urlString = attributes["href"],
+            let components = URLComponents(string: urlString),
+            let absoluteFeedURL = components.url(relativeTo: baseURL)
+        else {
             return nil
         }
 
@@ -198,7 +130,7 @@ final class FeedDiscoverer: NSObject {
 // MARK: - Nested types
 
 @objc(VNAFeedURL)
-final class FeedURL: NSObject {
+class FeedURL: NSObject {
     @objc let absoluteURL: URL
     @objc let title: String?
 
@@ -209,52 +141,28 @@ final class FeedURL: NSObject {
     }
 }
 
-// MARK: - libxml2 handlers
+// MARK: - HTMLParserDelegate
 
-private func htmlParserHandler() -> htmlSAXHandler {
-    var handler = libxml2.htmlSAXHandler()
-    handler.startElement = htmlParserElementStart
-    return handler
-}
+extension FeedDiscoverer: HTMLParserDelegate {
 
-private func htmlParserElementStart(_ parser: UnsafeMutableRawPointer?, elementName: UnsafePointer<xmlChar>?, attributesArray: UnsafeMutablePointer<UnsafePointer<xmlChar>?>?) {
-    guard let pointer = parser, let cString = elementName else {
-        os_log("Parser returned nil pointers", log: .discoverer, type: .fault)
-        return
-    }
-
-    // Each element of the C array consists of two NULL terminated C strings.
-    var attributes: [String: String] = [:]
-    var currentAttributeIndex = 0
-    var currentAttributeKey: String?
-
-    while true {
-        guard let attribute = attributesArray?[currentAttributeIndex] else {
-            break
+    func parser(
+        _ parser: HTMLParser,
+        didStartElement elementName: String,
+        attributes: [String: String]
+    ) {
+        guard
+            validateElement(elementName: elementName, attributes: attributes),
+            let absoluteURL = formatURL(attributes: attributes, baseURL: parser.baseURL)
+        else {
+            return
         }
 
-        // If the key is present, parse the attribute value.
-        if let arrayKey = currentAttributeKey {
-            attributes[arrayKey] = String(cString: attribute)
-                .trimmingCharacters(in: .whitespacesAndNewlines)
-            currentAttributeKey = nil
-        // No key is present, therefore parse a key first.
-        } else {
-            currentAttributeKey = String(cString: attribute)
+        let feedURL = FeedURL(url: absoluteURL, title: attributes["title"])
+        results.append(feedURL)
+
+        if abortOnFirstResult {
+            parser.abortParsing()
         }
-
-        currentAttributeIndex += 1
     }
-
-    let parser = Unmanaged<FeedDiscoverer>.fromOpaque(pointer).takeUnretainedValue()
-    let elementName = String(cString: cString)
-    parser.parser(parser, didStartElement: elementName, attributes: attributes)
-}
-
-// MARK: - Public extensions
-
-extension OSLog {
-
-    static let discoverer = OSLog(subsystem: "--", category: "FeedDiscoverer")
 
 }
