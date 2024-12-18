@@ -504,14 +504,14 @@
                 NSString * guid = article.guid;
 	            [self.cachedArticles setObject:article forKey:guid];
 	            [self.cachedGuids addObject:guid];
-                if(!article.read) {
+                if(!article.isRead) {
                     adjustment = 1;
                 }
             } else {
                 return NO;
             }
         }
-    } else if (existingArticle.deleted) {
+    } else if (existingArticle.isDeleted) {
         return NO;
     } else if (![[Preferences standardPreferences] boolForKey:MAPref_CheckForUpdatedArticles]) {
         return NO;
@@ -519,10 +519,10 @@
         BOOL success = [[Database sharedManager] updateArticle:existingArticle ofFolder:self.itemId withArticle:article];
         if (success) {
             // Update folder unread count if necessary
-            if (existingArticle.read) {
+            if (existingArticle.isRead) {
                 adjustment = 1;
                 article.status = ArticleStatusNew;
-                [existingArticle markRead:NO];
+                existingArticle.read = NO;
             } else {
                 article.status = ArticleStatusUpdated;
             }
@@ -638,8 +638,8 @@
     // so it makes the code slightly faster.
     for (id obj in self.cachedGuids.reverseObjectEnumerator.allObjects) {
         Article * article = [self.cachedArticles objectForKey:(NSString *)obj];
-        if (!article.read) {
-            [article markRead:YES];
+        if (!article.isRead) {
+            article.read = YES;
             count--;
             if (count == 0) {
                 break;
@@ -682,7 +682,7 @@
         NSMutableArray * result = [NSMutableArray arrayWithCapacity:unreadCount];
         for (id obj in self.cachedGuids.reverseObjectEnumerator.allObjects) {
             Article * article = [self.cachedArticles objectForKey:(NSString *)obj];
-            if (!article.read) {
+            if (!article.isRead) {
                 [result addObject:[ArticleReference makeReference:article]];
                 count--;
                 if (count == 0) {

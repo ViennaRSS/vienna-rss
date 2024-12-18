@@ -321,11 +321,11 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 			Article * theArticle = allArticles[row];
 			NSString * columnName = ((NSTableColumn *)columns[column]).identifier;
 			if ([columnName isEqualToString:MA_Field_Read]) {
-				[self.controller.articleController markReadByArray:@[theArticle] readFlag:!theArticle.read];
+				[self.controller.articleController markReadByArray:@[theArticle] readFlag:!theArticle.isRead];
 				return;
 			}
 			if ([columnName isEqualToString:MA_Field_Flagged]) {
-				[self.controller.articleController markFlaggedByArray:@[theArticle] flagged:!theArticle.flagged];
+				[self.controller.articleController markFlaggedByArray:@[theArticle] flagged:!theArticle.isFlagged];
 				return;
 			}
 			if ([columnName isEqualToString:MA_Field_HasEnclosure]) {
@@ -889,7 +889,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 	Article * theArticle;
 	while (currentRow < totalRows) {
 		theArticle = allArticles[currentRow];
-		if (!theArticle.read) {
+		if (!theArticle.isRead) {
 			[self makeRowSelectedAndVisible:currentRow];
 			return YES;
 		}
@@ -968,7 +968,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 		BOOL shouldSelectArticle = YES;
 		if ([Preferences standardPreferences].markReadInterval > 0.0f) {
 			Article * article = self.controller.articleController.allArticles[0u];
-            if (!article.read) {
+            if (!article.isRead) {
 				shouldSelectArticle = NO;
             }
 		}
@@ -1016,7 +1016,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 	[self refreshArticlePane];
 	
 	Article * theArticle = self.selectedArticle;
-	if (theArticle != nil && !theArticle.read) {
+	if (theArticle != nil && !theArticle.isRead) {
 		CGFloat interval = [Preferences standardPreferences].markReadInterval;
 		if (interval > 0 && !isAppInitialising) {
 			markReadTimer = [NSTimer scheduledTimerWithTimeInterval:(double)interval
@@ -1157,7 +1157,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 -(void)markCurrentRead:(NSTimer *)aTimer
 {
 	Article * theArticle = self.selectedArticle;
-	if (theArticle != nil && !theArticle.read && ![Database sharedManager].readOnly) {
+	if (theArticle != nil && !theArticle.isRead && ![Database sharedManager].readOnly) {
 		[self.controller.articleController markReadByArray:@[theArticle] readFlag:YES];
 	}
 }
@@ -1187,10 +1187,10 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 	theArticle = allArticles[rowIndex];
 	NSString * identifier = aTableColumn.identifier;
 	if ([identifier isEqualToString:MA_Field_Read]) {
-        if (!theArticle.read) {
+        if (!theArticle.isRead) {
             if (@available(macOS 11, *)) {
                 NSImage *image = nil;
-                if (theArticle.revised) {
+                if (theArticle.isRevised) {
                     image = [NSImage imageWithSystemSymbolName:@"sparkles"
                                       accessibilityDescription:nil];
                     // Setting the template property to NO enables the tint color.
@@ -1203,7 +1203,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
                 }
                 return image;
             } else {
-                if (theArticle.revised) {
+                if (theArticle.isRevised) {
                     return [NSImage imageNamed:ACImageNameRevised];
                 } else {
                     return [NSImage imageNamed:ACImageNameUnread];
@@ -1213,7 +1213,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
         return nil;
 	}
 	if ([identifier isEqualToString:MA_Field_Flagged]) {
-        if (theArticle.flagged) {
+        if (theArticle.isFlagged) {
             if (@available(macOS 11, *)) {
                 NSImage *image = [NSImage imageWithSystemSymbolName:@"flag.fill"
                                            accessibilityDescription:nil];
@@ -1247,7 +1247,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 		if ([db fieldByName:MA_Field_Subject].visible) {
 			NSDictionary * topLineDictPtr;
 
-			if (theArticle.read) {
+			if (theArticle.isRead) {
 				topLineDictPtr = (isSelectedRow ? selectionDict : topLineDict);
 			} else {
 				topLineDictPtr = (isSelectedRow ? unreadTopLineSelectionDict : unreadTopLineDict);
@@ -1338,7 +1338,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 		[NSException raise:@"ArticleListView unknown table column identifier exception" format:@"Unknown table column identifier: %@", identifier];
 	}
 	
-	theAttributedString = [[NSMutableAttributedString alloc] initWithString:SafeString(cellString) attributes:(theArticle.read ? reportCellDict : unreadReportCellDict)];
+	theAttributedString = [[NSMutableAttributedString alloc] initWithString:SafeString(cellString) attributes:(theArticle.isRead ? reportCellDict : unreadReportCellDict)];
 	[theAttributedString fixFontAttributeInRange:NSMakeRange(0u, theAttributedString.length)];
     return theAttributedString;
 }

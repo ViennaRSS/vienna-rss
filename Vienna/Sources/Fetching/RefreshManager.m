@@ -839,7 +839,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         NSString * articleGuid = [self getOrCalculateArticleGuid:newsItem folderId:folderId articles:articleArray articleGuidArray:articleGuidArray];
         [articleGuidArray addObject:articleGuid];
 
-        Article * article = [[Article alloc] initWithGuid:articleGuid];
+        Article * article = [[Article alloc] initWithGUID:articleGuid];
         article.folderId = folderId;
         article.author = newsItem.authors;
         article.body = newsItem.content;

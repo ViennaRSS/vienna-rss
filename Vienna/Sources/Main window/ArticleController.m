@@ -364,7 +364,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 {
 	// mark current article read
 	Article * currentArticle = self.selectedArticle;
-	if (currentArticle != nil && !currentArticle.read) {
+	if (currentArticle != nil && !currentArticle.isRead) {
 		[self markReadByArray:@[currentArticle] readFlag:YES];
 	}
 
@@ -392,7 +392,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 {
 	// mark current article read
 	Article * currentArticle = self.selectedArticle;
-	if (currentArticle != nil && !currentArticle.read) {
+	if (currentArticle != nil && !currentArticle.isRead) {
 		[self markReadByArray:@[currentArticle] readFlag:YES];
 	}
 
@@ -480,7 +480,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 
     // Make sure selectedArticle hasn't changed since reload started.
     if (articleToPreserve != nil && articleToPreserve != article) {
-        if (article != nil && !article.deleted) {
+        if (article != nil && !article.isDeleted) {
             articleToPreserve = article;
         } else {
             articleToPreserve = nil;
@@ -503,7 +503,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
     Article *currentArticle = self.selectedArticle;
     if (currentArticle == article &&
         [[Preferences standardPreferences] boolForKey:MAPref_CheckForUpdatedArticles]
-        && currentArticle.revised)
+        && currentArticle.isRevised)
     {
         [[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_ArticleViewChange object:nil];
     }
@@ -757,7 +757,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 		[[Database sharedManager] markArticleFlagged:theArticle.folderId
                                                 guid:theArticle.guid
                                            isFlagged:flagged];
-        [theArticle markFlagged:flagged];
+        theArticle.flagged = flagged;
 	}
 }
 
@@ -804,12 +804,12 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 {
 	for (Article * theArticle in articleArray) {
 		NSInteger folderId = theArticle.folderId;
-		if (theArticle.read != readFlag) {
+		if (theArticle.isRead != readFlag) {
 			if ([[Database sharedManager] folderFromID:folderId].type == VNAFolderTypeOpenReader) {
 				[[OpenReader sharedManager] markRead:theArticle readFlag:readFlag];
 			} else {
 				[[Database sharedManager] markArticleRead:folderId guid:theArticle.guid isRead:readFlag];
-				[theArticle markRead:readFlag];
+				theArticle.read = readFlag;
 			}
 		}
 	}
@@ -872,7 +872,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 		 ![folderArray containsObject:currentFolder]))
 	{
 		for (Article *theArticle in folderArrayOfArticles) {
-			[theArticle markRead:YES];
+			theArticle.read = YES;
 		}
 	}
 	
@@ -1028,7 +1028,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 - (BOOL)filterArticle:(Article *)article usingMode:(NSInteger)filterMode {
     switch (filterMode) {
         case VNAFilterUnread:
-            return !article.read;
+            return !article.isRead;
         case VNAFilterLastRefresh: {
             return article.status == ArticleStatusNew || article.status == ArticleStatusUpdated;
         }
@@ -1042,9 +1042,9 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
             return [article.lastUpdate compare:twoDaysAgo] != NSOrderedAscending;
         }
         case VNAFilterFlagged:
-            return article.flagged;
+            return article.isFlagged;
         case VNAFilterUnreadOrFlagged:
-            return (!article.read || article.flagged);
+            return (!article.isRead || article.isFlagged);
         default:
             return true;
     }
