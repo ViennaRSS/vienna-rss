@@ -41,7 +41,7 @@
 @property (nonatomic) NSMutableArray *fieldsOrdered;
 @property (nonatomic) NSMutableDictionary *fieldsByName;
 @property (nonatomic) NSMutableDictionary *foldersDict;
-@property (nonatomic) NSMutableDictionary *smartfoldersDict;
+@property (nonatomic) NSMutableDictionary<NSNumber *, CriteriaTree *> *smartfoldersDict;
 @property (readwrite, nonatomic) BOOL readOnly;
 @property (readwrite, nonatomic) NSInteger countOfUnread;
 
@@ -1466,6 +1466,20 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 		}
 	}
 	return folder;
+}
+
+- (Folder *)folderForPredicate:(NSPredicate *)predicate
+{
+    __block Folder *folder;
+    [self.smartfoldersDict enumerateKeysAndObjectsUsingBlock:^(NSNumber *folderID, CriteriaTree *criteriaTree, BOOL *stop) {
+        // Two predicates may have the same format string, but be of different
+        // predicate types that cannot be compared with -isEqual:.
+        if ([criteriaTree.predicate.predicateFormat isEqualToString:predicate.predicateFormat]) {
+            folder = [self folderFromID:folderID.integerValue];
+            *stop = YES;
+        }
+    }];
+    return folder;
 }
 
 /* handleAutoSortFoldersTreeChange
