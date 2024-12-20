@@ -68,6 +68,7 @@ extern NSNotificationName const VNADatabaseDidDeleteFolderNotification;
 -(Folder *)folderFromFeedURL:(NSString *)wantedFeedURL;
 -(Folder *)folderFromRemoteId:(NSString *)wantedRemoteId;
 -(Folder *)folderFromName:(NSString *)wantedName;
+- (Folder *)folderForPredicate:(NSPredicate *)predicate;
 -(NSString *)sqlScopeForFolder:(Folder *)folder flags:(VNAQueryScope)scopeFlags field:(NSString *)field;
 -(NSInteger)addFolder:(NSInteger)parentId afterChild:(NSInteger)predecessorId folderName:(NSString *)name type:(NSInteger)type canAppendIndex:(BOOL)canAppendIndex;
 -(BOOL)deleteFolder:(NSInteger)folderId;
@@ -100,7 +101,6 @@ extern NSNotificationName const VNADatabaseDidDeleteFolderNotification;
         subscriptionURL:(NSString *)url remoteId:(NSString *)remoteId;
 
 // Smart folder functions
--(void)initSmartfoldersDict;
 -(NSInteger)addSmartFolder:(NSString *)folderName underParent:(NSInteger)parentId withQuery:(CriteriaTree *)criteriaTree;
 -(void)updateSearchFolder:(NSInteger)folderId withFolder:(NSString *)folderName withQuery:(CriteriaTree *)criteriaTree;
 -(CriteriaTree *)searchStringForSmartFolder:(NSInteger)folderId;
