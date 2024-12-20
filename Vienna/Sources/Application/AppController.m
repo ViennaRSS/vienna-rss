@@ -1606,13 +1606,13 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)handleFolderSelection:(NSNotification *)nc
 {
-	NSInteger newFolderId = ((TreeNode *)nc.object).nodeId;
+    TreeNode *treeNode = nc.object;
 	
 	// We don't filter when we switch folders.
 	self.filterString = @"";
 	
 	// Call through the controller to display the new folder.
-	[self.articleController displayFolder:newFolderId];
+	[self.articleController displayFolder:treeNode.nodeId];
 	[self updateSearchPlaceholderAndSearchMethod];
 	
 	// Make sure article viewer is active
@@ -1624,13 +1624,21 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 
     // If the user selects the unread-articles smart folder, then clear the
     // relevant user notifications.
-    if (newFolderId == [db folderFromName:NSLocalizedString(@"Unread Articles", nil)].itemId) {
-        NSUserNotificationCenter *center = NSUserNotificationCenter.defaultUserNotificationCenter;
-        [center.deliveredNotifications enumerateObjectsUsingBlock:^(NSUserNotification * notification, NSUInteger idx, BOOL *stop) {
-            if ([notification.userInfo[UserNotificationContextKey] isEqualToString:UserNotificationContextFetchCompleted]) {
-                [center removeDeliveredNotification:notification];
-            }
-        }];
+    if (treeNode.folder.type == VNAFolderTypeSmart) {
+        Criteria *unreadCriteria =
+            [[Criteria alloc] initWithField:MA_Field_Read
+                               operatorType:VNACriteriaOperatorEqualTo
+                                      value:@"No"];
+        NSString *predicateFormat = unreadCriteria.predicate.predicateFormat;
+        Folder *smartFolder = [db folderForPredicateFormat:predicateFormat];
+        if ([smartFolder isEqual:treeNode.folder]) {
+            NSUserNotificationCenter *center = NSUserNotificationCenter.defaultUserNotificationCenter;
+            [center.deliveredNotifications enumerateObjectsUsingBlock:^(NSUserNotification *notification, NSUInteger idx, BOOL *stop) {
+                if ([notification.userInfo[UserNotificationContextKey] isEqualToString:UserNotificationContextFetchCompleted]) {
+                    [center removeDeliveredNotification:notification];
+                }
+            }];
+        }
     }
 }
 

@@ -41,7 +41,7 @@
 @property (nonatomic) NSMutableArray *fieldsOrdered;
 @property (nonatomic) NSMutableDictionary *fieldsByName;
 @property (nonatomic) NSMutableDictionary *foldersDict;
-@property (nonatomic) NSMutableDictionary *smartfoldersDict;
+@property (nonatomic) NSMutableDictionary<NSNumber *, CriteriaTree *> *smartfoldersDict;
 @property (readwrite, nonatomic) BOOL readOnly;
 @property (readwrite, nonatomic) NSInteger countOfUnread;
 
@@ -1468,6 +1468,23 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	return folder;
 }
 
+- (Folder *)folderForPredicateFormat:(NSString *)predicateFormat
+{
+    __block Folder *folder;
+    [self.smartfoldersDict enumerateKeysAndObjectsUsingBlock:^(
+        NSNumber *folderID, CriteriaTree *criteriaTree, BOOL *stop) {
+        // Different predicate types that cannot be compared with -isEqual: can
+        // have the same format string. For example, a comparison predicate and
+        // an all/any compound predicate with a comparison predicate can result
+        // in the same format string.
+        if ([criteriaTree.predicate.predicateFormat isEqualToString:predicateFormat]) {
+            folder = [self folderFromID:folderID.integerValue];
+            *stop = YES;
+        }
+    }];
+    return folder;
+}
+
 /* handleAutoSortFoldersTreeChange
  * Called when preference changes for sorting folders tree.
  * Store the new method in the database.
@@ -1772,7 +1789,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	return NO;
 }
 
-- (NSMutableDictionary *)smartfoldersDict
+- (NSMutableDictionary<NSNumber *, CriteriaTree *> *)smartfoldersDict
 {
     if (!_smartfoldersDict) {
         _smartfoldersDict = [[NSMutableDictionary alloc] init];
