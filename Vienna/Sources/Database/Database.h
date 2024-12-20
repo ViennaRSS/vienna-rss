@@ -100,7 +100,6 @@ extern NSNotificationName const VNADatabaseDidDeleteFolderNotification;
         subscriptionURL:(NSString *)url remoteId:(NSString *)remoteId;
 
 // Smart folder functions
--(void)initSmartfoldersDict;
 -(NSInteger)addSmartFolder:(NSString *)folderName underParent:(NSInteger)parentId withQuery:(CriteriaTree *)criteriaTree;
 -(void)updateSearchFolder:(NSInteger)folderId withFolder:(NSString *)folderName withQuery:(CriteriaTree *)criteriaTree;
 -(CriteriaTree *)searchStringForSmartFolder:(NSInteger)folderId;

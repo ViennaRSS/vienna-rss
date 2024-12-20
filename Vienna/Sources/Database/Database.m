@@ -38,7 +38,6 @@
 @interface Database ()
 
 @property (nonatomic) BOOL initializedfoldersDict;
-@property (nonatomic) BOOL initializedSmartfoldersDict;
 @property (nonatomic) NSMutableArray *fieldsOrdered;
 @property (nonatomic) NSMutableDictionary *fieldsByName;
 @property (nonatomic) NSMutableDictionary *foldersDict;
@@ -77,12 +76,10 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
     self = [super init];
     if (self) {
         _initializedfoldersDict = NO;
-        _initializedSmartfoldersDict = NO;
         _countOfUnread = 0;
         _trashFolder = nil;
         _searchFolder = nil;
         _searchString = @"";
-        _smartfoldersDict = [[NSMutableDictionary alloc] init];
         _foldersDict = [[NSMutableDictionary alloc] init];
         [self initaliseFields];
         _databaseQueue = [FMDatabaseQueue databaseQueueWithPath:dbPath];
@@ -1775,12 +1772,12 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	return NO;
 }
 
-/* initSmartfoldersDict
- * Preloads all the smart folders into the smartfoldersDict dictionary.
- */
--(void)initSmartfoldersDict
+- (NSMutableDictionary *)smartfoldersDict
 {
-	if (!self.initializedSmartfoldersDict) {
+    if (!_smartfoldersDict) {
+        _smartfoldersDict = [[NSMutableDictionary alloc] init];
+
+        // Preload all the smart folders into the dictionary.
         FMDatabaseQueue *queue = self.databaseQueue;
         // Make sure we have a database queue.
 		NSAssert(queue, @"Database queue not assigned for this item");
@@ -1792,12 +1789,12 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 				NSString * search_string = [results stringForColumnIndex:1];
 				
 				CriteriaTree * criteriaTree = [[CriteriaTree alloc] initWithString:search_string];
-				self.smartfoldersDict[@(folderId)] = criteriaTree;
+				_smartfoldersDict[@(folderId)] = criteriaTree;
 			}
 			[results close];
 		}];
-		self.initializedSmartfoldersDict = YES;
 	}
+    return _smartfoldersDict;
 }
 
 /* searchStringForSmartFolder
@@ -1806,7 +1803,6 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
  */
 -(CriteriaTree *)searchStringForSmartFolder:(NSInteger)folderId
 {
-	[self initSmartfoldersDict];
 	return self.smartfoldersDict[@(folderId)];
 }
 
@@ -2154,7 +2150,6 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	}
 
 	if (folder.type == VNAFolderTypeSmart) {
-		[self initSmartfoldersDict];
 		return self.smartfoldersDict[@(folderId)];
 	}
 
@@ -2556,11 +2551,10 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[self.foldersDict removeAllObjects];
-	[self.smartfoldersDict removeAllObjects];
+	self.smartfoldersDict = nil;
 	self.trashFolder = nil;
 	self.searchFolder = nil;
 	self.initializedfoldersDict = NO;
-	self.initializedSmartfoldersDict = NO;
 	_countOfUnread = 0;
     [self.databaseQueue close];
 }
