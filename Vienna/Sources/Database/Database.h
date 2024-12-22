@@ -65,7 +65,21 @@ extern NSNotificationName const VNADatabaseDidDeleteFolderNotification;
 -(NSArray *)arrayOfAllFolders;
 -(NSArray *)arrayOfFolders:(NSInteger)parentId;
 -(Folder *)folderFromID:(NSInteger)wantedId;
+/*!
+ *  folderFromFeedURL
+ *
+ *  @param wantedFeedURL The feed URL the folder is wanted for
+ *
+ *  @return An RSSFolder that is subscribed to the specified feed URL.
+ */
 -(Folder *)folderFromFeedURL:(NSString *)wantedFeedURL;
+/*!
+ *  folderFromRemoteId
+ *
+ *  @param wantedRemoteId The remote identifier the folder is wanted for
+ *
+ *  @return An OpenReaderFolder that corresponds
+ */
 -(Folder *)folderFromRemoteId:(NSString *)wantedRemoteId;
 -(Folder *)folderFromName:(NSString *)wantedName;
 /// Returns a smart folder for the predicate format string.

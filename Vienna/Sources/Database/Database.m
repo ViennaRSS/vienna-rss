@@ -1428,14 +1428,6 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	return folder;
 }
 
-
-/*!
- *  folderFromFeedURL
- *
- *  @param wantedFeedURL The feed URL the folder is wanted for
- *
- *  @return An RSSFolder that is subscribed to the specified feed URL.
- */
 -(Folder *)folderFromFeedURL:(NSString *)wantedFeedURL
 {
 	Folder * folder;
@@ -1447,14 +1439,6 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	}
 	return folder;
 }
-
-/*!
- *  folderFromRemoteId
- *
- *  @param wantedRemoteId The remote identifier the folder is wanted for
- *
- *  @return An OpenReaderFolder that corresponds
- */
 
 -(Folder *)folderFromRemoteId:(NSString *)wantedRemoteId
 {
