@@ -10,6 +10,7 @@
         <customObject id="-2" userLabel="Window Controller" customClass="MainWindowController" customModule="Vienna" customModuleProvider="target">
             <connections>
                 <outlet property="articleListView" destination="971" id="OE4-G3-4mz"/>
+                <outlet property="mainWindowContentViewController" destination="vme-CY-QQH" id="5sj-RS-Y2y"/>
                 <outlet property="outlineView" destination="Kk7-ax-B3r" id="bhW-7c-vBp"/>
                 <outlet property="placeholderDetailView" destination="9MG-Tu-1xT" id="hUt-Ea-jcm"/>
                 <outlet property="splitView" destination="993" id="adu-5b-ldR"/>
@@ -731,6 +732,11 @@
             </connections>
             <point key="canvasLocation" x="-186" y="42.5"/>
         </customView>
+        <viewController id="vme-CY-QQH">
+            <connections>
+                <outlet property="view" destination="2" id="V76-VG-IDQ"/>
+            </connections>
+        </viewController>
         <menu id="uhR-6M-OgB">
             <items>
                 <menuItem title="Refresh Selected Subscriptions" id="zPC-lc-x1k">

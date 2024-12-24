@@ -53,6 +53,7 @@
 #import "Field.h"
 #import "Folder.h"
 #import "FolderView.h"
+#import "SubscribeViewController.h"
 #import "SubscriptionModel.h"
 #import "Vienna-Swift.h"
 #import "GeneratedAssetSymbols.h"
@@ -94,6 +95,7 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 @property (nonatomic) VNADirectoryMonitor *directoryMonitor;
 @property (weak, nonatomic) FolderView *outlineView;
 @property (weak, nonatomic) NSSearchField *toolbarSearchField;
+@property (nonatomic) NewSubscription *rssFeed;
 
 @end
 
@@ -114,11 +116,7 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
     NSMenuItem *scriptsMenuItem;
     BOOL didCompleteInitialisation;
     NSString *searchString;
-
-    NewSubscription *_rssFeed;
 }
-
-@synthesize rssFeed = _rssFeed;
 
 /* init
  * Class instance initialisation.
@@ -204,7 +202,6 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 - (NewSubscription *)rssFeed {
     if (!_rssFeed) {
         _rssFeed = [[NewSubscription alloc] initWithDatabase:db];
-        _rssFeed.pluginManager = self.pluginManager;
     }
     return _rssFeed;
 }
@@ -563,7 +560,9 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
             [self.mainWindow makeKeyAndOrderFront:self];
         }
         if (url != nil && !db.readOnly) {
-            [self.rssFeed newSubscription:self.mainWindow initialURL:url.absoluteString];
+            VNASubscribeViewController *viewController = [VNASubscribeViewController instantiateFromStoryboard];
+            viewController.initialURL = url;
+            [self.mainWindow.contentViewController presentViewControllerAsSheet:viewController];
 		    return YES;
         } else {
             return NO;
@@ -691,7 +690,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
     NSString *urlStr = [event paramDescriptorForKeyword:keyDirectObject].stringValue;
     if (urlStr) {
-        [self.rssFeed newSubscription:self.mainWindow initialURL:urlStr];
+        VNASubscribeViewController *viewController = [VNASubscribeViewController instantiateFromStoryboard];
+        viewController.initialURL = [NSURL URLWithString:urlStr];
+        [self.mainWindow.contentViewController presentViewControllerAsSheet:viewController];
     }
 }
 
@@ -1920,7 +1921,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)newSubscription:(id)sender
 {
-	[self.rssFeed newSubscription:self.mainWindow initialURL:nil];
+    VNASubscribeViewController *viewController = [VNASubscribeViewController instantiateFromStoryboard];
+    [self.mainWindow.contentViewController presentViewControllerAsSheet:viewController];
 }
 
 /* newSmartFolder

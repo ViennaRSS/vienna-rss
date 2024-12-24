@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="2KB-Uw-ELh">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23727"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Subscribe View Controller-->
+        <scene sceneID="Yi7-G1-omd">
+            <objects>
+                <viewController id="2KB-Uw-ELh" customClass="VNASubscribeViewController" sceneMemberID="viewController">
+                    <view key="view" id="MMC-oA-yLt">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="281"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="YES" preferredMaxLayoutWidth="380" translatesAutoresizingMaskIntoConstraints="NO" id="wJ5-4V-x2L">
+                                <rect key="frame" x="18" y="245" width="414" height="16"/>
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Create a new subscription" id="GUd-jl-hft">
+                                    <font key="font" metaFont="systemBold"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="YES" preferredMaxLayoutWidth="380" translatesAutoresizingMaskIntoConstraints="NO" id="vx6-mg-hVs">
+                                <rect key="frame" x="18" y="211" width="414" height="26"/>
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="3iY-uG-Ohs">
+                                    <font key="font" metaFont="label"/>
+                                    <string key="title">Enter the link for the news feed below. Or choose from the Source list to enter a shortcut name for the news feed provided by the source.</string>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" preferredMaxLayoutWidth="180" translatesAutoresizingMaskIntoConstraints="NO" id="i4P-xu-JjH">
+                                <rect key="frame" x="18" y="185" width="51" height="16"/>
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Source:" id="Ecq-9m-Kje">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <popUpButton horizontalHuggingPriority="750" verticalHuggingPriority="750" placeholderIntrinsicWidth="120" placeholderIntrinsicHeight="21" translatesAutoresizingMaskIntoConstraints="NO" id="lXT-vq-Ssg">
+                                <rect key="frame" x="72" y="178" width="127" height="26"/>
+                                <popUpButtonCell key="cell" type="push" bezelStyle="rounded" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" id="V9V-Ul-uOY">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="message"/>
+                                    <menu key="menu" id="H2V-w2-we8"/>
+                                </popUpButtonCell>
+                                <connections>
+                                    <action selector="doLinkSourceChanged:" target="2KB-Uw-ELh" id="RPs-HE-eAf"/>
+                                </connections>
+                            </popUpButton>
+                            <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6aY-RP-CRz">
+                                <rect key="frame" x="204" y="178" width="25" height="25"/>
+                                <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" inset="2" id="D0K-xm-FNa">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="doShowSiteHomePage:" target="2KB-Uw-ELh" id="pMb-Ob-gin"/>
+                                </connections>
+                            </button>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" preferredMaxLayoutWidth="380" translatesAutoresizingMaskIntoConstraints="NO" id="J5Q-6e-7F2">
+                                <rect key="frame" x="18" y="158" width="414" height="16"/>
+                                <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="URL:" id="tVY-u7-siT">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" preferredMaxLayoutWidth="380" translatesAutoresizingMaskIntoConstraints="NO" id="NKn-AF-nJ0">
+                                <rect key="frame" x="20" y="84" width="410" height="66"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="66" id="BdL-Sn-VWW"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="198" id="sqG-E7-3Bz"/>
+                                </constraints>
+                                <textFieldCell key="cell" controlSize="small" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="nD9-H3-p6a">
+                                    <font key="font" metaFont="smallSystem"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="f2y-cx-rCu">
+                                <rect key="frame" x="18" y="59" width="412" height="18"/>
+                                <buttonCell key="cell" type="check" title="Subscribe in Open Reader" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="aRg-GQ-OaB">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="doGoogleOption:" target="2KB-Uw-ELh" id="W9G-0A-Zfg"/>
+                                    <binding destination="2KB-Uw-ELh" name="value" keyPath="self.googleOptionButton" id="IpB-pY-DlB"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1d2-WD-CbX">
+                                <rect key="frame" x="268" y="13" width="76" height="32"/>
+                                <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="bOV-Ki-w44">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="dismissController:" target="l2l-94-OEr" id="d4c-Nu-ME8"/>
+                                </connections>
+                            </button>
+                            <button tag="100" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4gd-is-33z">
+                                <rect key="frame" x="342" y="13" width="95" height="32"/>
+                                <buttonCell key="cell" type="push" title="Subscribe" bezelStyle="rounded" alignment="center" borderStyle="border" tag="100" inset="2" id="E4e-yE-wwv">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="doSubscribe:" target="2KB-Uw-ELh" id="fZZ-yR-QPQ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="1d2-WD-CbX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="MMC-oA-yLt" secondAttribute="leading" constant="20" symbolic="YES" id="0kO-Py-z8f"/>
+                            <constraint firstItem="4gd-is-33z" firstAttribute="leading" secondItem="1d2-WD-CbX" secondAttribute="trailing" constant="12" symbolic="YES" id="0z4-BP-BVG"/>
+                            <constraint firstItem="f2y-cx-rCu" firstAttribute="leading" secondItem="MMC-oA-yLt" secondAttribute="leading" constant="20" symbolic="YES" id="2Kj-A3-WUE"/>
+                            <constraint firstAttribute="trailing" secondItem="vx6-mg-hVs" secondAttribute="trailing" constant="20" symbolic="YES" id="2S6-4n-ds1"/>
+                            <constraint firstItem="vx6-mg-hVs" firstAttribute="leading" secondItem="MMC-oA-yLt" secondAttribute="leading" constant="20" symbolic="YES" id="2yn-r3-8PZ"/>
+                            <constraint firstItem="wJ5-4V-x2L" firstAttribute="leading" secondItem="MMC-oA-yLt" secondAttribute="leading" constant="20" symbolic="YES" id="6YX-py-5vc"/>
+                            <constraint firstItem="NKn-AF-nJ0" firstAttribute="leading" secondItem="MMC-oA-yLt" secondAttribute="leading" constant="20" symbolic="YES" id="6le-DZ-pxO"/>
+                            <constraint firstAttribute="trailing" secondItem="NKn-AF-nJ0" secondAttribute="trailing" constant="20" symbolic="YES" id="7Pn-2e-3fy"/>
+                            <constraint firstAttribute="bottom" secondItem="4gd-is-33z" secondAttribute="bottom" constant="20" symbolic="YES" id="Cji-jC-95u"/>
+                            <constraint firstItem="4gd-is-33z" firstAttribute="baseline" secondItem="1d2-WD-CbX" secondAttribute="baseline" id="HYR-am-8sz"/>
+                            <constraint firstItem="lXT-vq-Ssg" firstAttribute="top" secondItem="vx6-mg-hVs" secondAttribute="bottom" constant="8" symbolic="YES" id="Iie-gm-hNg"/>
+                            <constraint firstAttribute="trailing" secondItem="4gd-is-33z" secondAttribute="trailing" constant="20" symbolic="YES" id="O6z-Fe-rDo"/>
+                            <constraint firstItem="6aY-RP-CRz" firstAttribute="baseline" secondItem="lXT-vq-Ssg" secondAttribute="baseline" id="Q75-Wc-Uej"/>
+                            <constraint firstItem="4gd-is-33z" firstAttribute="top" secondItem="f2y-cx-rCu" secondAttribute="bottom" constant="20" symbolic="YES" id="Qhw-mH-vx5"/>
+                            <constraint firstItem="i4P-xu-JjH" firstAttribute="leading" secondItem="MMC-oA-yLt" secondAttribute="leading" constant="20" symbolic="YES" id="T5Q-OE-s6U"/>
+                            <constraint firstItem="f2y-cx-rCu" firstAttribute="top" secondItem="NKn-AF-nJ0" secondAttribute="bottom" constant="8" symbolic="YES" id="VVo-j6-9Fx"/>
+                            <constraint firstItem="6aY-RP-CRz" firstAttribute="leading" secondItem="lXT-vq-Ssg" secondAttribute="trailing" constant="12" symbolic="YES" id="X5B-9i-rE6"/>
+                            <constraint firstItem="J5Q-6e-7F2" firstAttribute="leading" secondItem="MMC-oA-yLt" secondAttribute="leading" constant="20" symbolic="YES" id="Xny-hZ-n9X"/>
+                            <constraint firstItem="vx6-mg-hVs" firstAttribute="top" secondItem="wJ5-4V-x2L" secondAttribute="bottom" constant="8" symbolic="YES" id="cQH-a5-JhN"/>
+                            <constraint firstItem="NKn-AF-nJ0" firstAttribute="top" secondItem="J5Q-6e-7F2" secondAttribute="bottom" constant="8" symbolic="YES" id="gWm-C8-EuU"/>
+                            <constraint firstItem="i4P-xu-JjH" firstAttribute="baseline" secondItem="lXT-vq-Ssg" secondAttribute="baseline" id="gvS-og-hFs"/>
+                            <constraint firstItem="wJ5-4V-x2L" firstAttribute="top" secondItem="MMC-oA-yLt" secondAttribute="top" constant="20" symbolic="YES" id="hEa-ew-zUU"/>
+                            <constraint firstItem="lXT-vq-Ssg" firstAttribute="leading" secondItem="i4P-xu-JjH" secondAttribute="trailing" constant="8" symbolic="YES" id="iCq-a9-JKj"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6aY-RP-CRz" secondAttribute="trailing" constant="20" symbolic="YES" id="jdI-FO-7hW"/>
+                            <constraint firstAttribute="trailing" secondItem="wJ5-4V-x2L" secondAttribute="trailing" constant="20" symbolic="YES" id="liX-3P-dlS"/>
+                            <constraint firstAttribute="trailing" secondItem="J5Q-6e-7F2" secondAttribute="trailing" constant="20" symbolic="YES" id="p3O-dz-8qX"/>
+                            <constraint firstAttribute="trailing" secondItem="f2y-cx-rCu" secondAttribute="trailing" constant="20" symbolic="YES" id="wqg-F7-FCX"/>
+                            <constraint firstItem="J5Q-6e-7F2" firstAttribute="top" secondItem="lXT-vq-Ssg" secondAttribute="bottom" constant="8" symbolic="YES" id="wrk-8H-Efi"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="feedSource" destination="lXT-vq-Ssg" id="2Q4-jl-jdc"/>
+                        <outlet property="feedURL" destination="NKn-AF-nJ0" id="EBt-T3-5mf"/>
+                        <outlet property="linkTitle" destination="J5Q-6e-7F2" id="A3O-mY-j8M"/>
+                        <outlet property="siteHomePageButton" destination="6aY-RP-CRz" id="hlW-9q-1Tz"/>
+                        <outlet property="subscribeButton" destination="4gd-is-33z" id="yNe-AQ-VNp"/>
+                    </connections>
+                </viewController>
+                <customObject id="l2l-94-OEr" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="679" y="1125"/>
+        </scene>
+    </scenes>
+</document>

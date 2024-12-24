@@ -177,6 +177,7 @@
 		F65D6D711E74619E00A30974 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4398241E1666B3DB00FFE219 /* Credits.rtf */; };
 		F65F2314294E4B5200605F06 /* SeparatorPredicateEditorRowTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65F2313294E4B5200605F06 /* SeparatorPredicateEditorRowTemplate.swift */; };
 		F672876824A2D2170043432F /* UpdatePreferencesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F672876724A2D2170043432F /* UpdatePreferencesViewController.m */; };
+		F67294282D1AFC1F0019B57E /* Subscribe.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F67294272D1AFC1F0019B57E /* Subscribe.storyboard */; };
 		F6786BB72C709880005B985B /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = F6786BB62C709880005B985B /* InfoPlist.xcstrings */; };
 		F67E7828285DDAB200D1CECE /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67E7827285DDAB100D1CECE /* Toolbar.swift */; };
 		F6832F631F10C4C9007920D4 /* ExportAccessoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6832F651F10C4C9007920D4 /* ExportAccessoryViewController.xib */; };
@@ -250,6 +251,7 @@
 		F6E01A092C652FA50082E07B /* RSSFeedWithContentElements.rss in Resources */ = {isa = PBXBuildFile; fileRef = F6E01A082C652FA50082E07B /* RSSFeedWithContentElements.rss */; };
 		F6EB26031E58D37100570B22 /* DirectoryMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EB26021E58D37100570B22 /* DirectoryMonitor.swift */; };
 		F6F12AFD25ABDDE3005B2DCE /* NSFileManager+Paths.m in Sources */ = {isa = PBXBuildFile; fileRef = F6F12AFC25ABDDE3005B2DCE /* NSFileManager+Paths.m */; };
+		F6F2029F2D19DD3A004BB948 /* SubscribeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6F2029E2D19DD3A004BB948 /* SubscribeViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -525,6 +527,8 @@
 		F66A7E542A019006002F5D5E /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Predicates.strings; sourceTree = "<group>"; };
 		F672876624A2D20A0043432F /* UpdatePreferencesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdatePreferencesViewController.h; sourceTree = "<group>"; };
 		F672876724A2D2170043432F /* UpdatePreferencesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdatePreferencesViewController.m; sourceTree = "<group>"; };
+		F67294262D1AFC1F0019B57E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Subscribe.storyboard; sourceTree = "<group>"; };
+		F67294292D1AFC1F0019B57E /* mul */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = mul; path = mul.lproj/Subscribe.xcstrings; sourceTree = "<group>"; };
 		F6786BB62C709880005B985B /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		F67E7827285DDAB100D1CECE /* Toolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Toolbar.swift; sourceTree = "<group>"; };
 		F6832F641F10C4C9007920D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ExportAccessoryViewController.xib; sourceTree = "<group>"; };
@@ -674,6 +678,8 @@
 		F6EB26021E58D37100570B22 /* DirectoryMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryMonitor.swift; sourceTree = "<group>"; };
 		F6F12AFB25ABDDE3005B2DCE /* NSFileManager+Paths.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "NSFileManager+Paths.h"; sourceTree = "<group>"; };
 		F6F12AFC25ABDDE3005B2DCE /* NSFileManager+Paths.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSFileManager+Paths.m"; sourceTree = "<group>"; };
+		F6F2029D2D19DD3A004BB948 /* SubscribeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SubscribeViewController.h; sourceTree = "<group>"; };
+		F6F2029E2D19DD3A004BB948 /* SubscribeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SubscribeViewController.m; sourceTree = "<group>"; };
 		F6FEBCFE2CA06980005E3788 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Predicates.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -935,6 +941,7 @@
 				F6832F651F10C4C9007920D4 /* ExportAccessoryViewController.xib */,
 				F6D572B31E26AA9000CDA909 /* GroupFolder.xib */,
 				F6D572B91E26AAA100CDA909 /* RSSFeed.xib */,
+				F67294272D1AFC1F0019B57E /* Subscribe.storyboard */,
 				F6D572BC1E26AAA900CDA909 /* SearchFolder.xib */,
 				F6D572B61E26AA9900CDA909 /* InfoWindow.xib */,
 				F6B220322E2ECBC900AE7C75 /* Activity.storyboard */,
@@ -1186,6 +1193,7 @@
 				F6D7FEDD1F1CDFCD004F095A /* Download window */,
 				F69743D72ADAC473006C5BBC /* UserNotifications */,
 				F6D7FEDE1F1CE135004F095A /* Alerts */,
+				F6F202992D19A0A1004BB948 /* Subscribing */,
 				F6D7FEDF1F1CE13F004F095A /* Fetching */,
 				F6D7FEE01F1CE147004F095A /* Parsing */,
 				2F88FF3F2969A61C0076B99E /* Criteria */,
@@ -1335,7 +1343,6 @@
 				F63503F32960846D006F1F76 /* FeedItem.h */,
 				F6256C122960D037003131AA /* JSON Feed */,
 				F6C9DA74271BBA4800FC3027 /* XML-based feeds */,
-				F615824223834D6500D2BD41 /* FeedDiscoverer.swift */,
 			);
 			path = Parsing;
 			sourceTree = "<group>";
@@ -1415,8 +1422,6 @@
 				F6C982FF2E11ABD4005BA1F8 /* NSResponder+EventHandler.m */,
 				AAF3B14006095E7B0025CC7F /* StringExtensions.h */,
 				AAF3B14106095E7B0025CC7F /* StringExtensions.m */,
-				031E082E19DFA3A900194F9F /* SubscriptionModel.h */,
-				031E082F19DFA3A900194F9F /* SubscriptionModel.m */,
 				F633157526ED73CB008A3673 /* URLFormatter.swift */,
 				3A7BD0DB1989AC7700E9444B /* VNAVerticallyCenteredTextFieldCell.h */,
 				3A7BD0DC1989AC7700E9444B /* VNAVerticallyCenteredTextFieldCell.m */,
@@ -1424,6 +1429,18 @@
 				2F82DCB625CEFC2800F00EE8 /* URL+Blank.swift */,
 			);
 			path = Shared;
+			sourceTree = "<group>";
+		};
+		F6F202992D19A0A1004BB948 /* Subscribing */ = {
+			isa = PBXGroup;
+			children = (
+				F6F2029D2D19DD3A004BB948 /* SubscribeViewController.h */,
+				F6F2029E2D19DD3A004BB948 /* SubscribeViewController.m */,
+				031E082E19DFA3A900194F9F /* SubscriptionModel.h */,
+				031E082F19DFA3A900194F9F /* SubscriptionModel.m */,
+				F615824223834D6500D2BD41 /* FeedDiscoverer.swift */,
+			);
+			path = Subscribing;
 			sourceTree = "<group>";
 		};
 		F6F2CD1A25853B5F003C80D3 /* NSURL+CaminoExtensions */ = {
@@ -1594,6 +1611,7 @@
 				F685D24C292460210097C0D3 /* Predicates.strings in Resources */,
 				F6A7DE4F1E471A7F0017BE5E /* Vienna.help in Resources */,
 				F62581451E29B90B0035E43C /* SearchPanel.xib in Resources */,
+				F67294282D1AFC1F0019B57E /* Subscribe.storyboard in Resources */,
 				F6D572B11E26AA9000CDA909 /* GroupFolder.xib in Resources */,
 				F6D572B41E26AA9900CDA909 /* InfoWindow.xib in Resources */,
 				F6832F681F10F5DA007920D4 /* MainWindowController.xib in Resources */,
@@ -1944,6 +1962,7 @@
 				B81B536425565CD700C65459 /* Constants.swift in Sources */,
 				435028AE165DE9E00018EDB7 /* ProgressTextCell.m in Sources */,
 				793C95331C42A0DD00984D4E /* FoldersFilterable.m in Sources */,
+				F6F2029F2D19DD3A004BB948 /* SubscribeViewController.m in Sources */,
 				3AB95743258DBC5A00C54E83 /* Browser.swift in Sources */,
 				435028AF165DE9E00018EDB7 /* RefreshManager.m in Sources */,
 				F6AFC16D2CAFCD2E00106E80 /* SettingsTabViewController.swift in Sources */,
@@ -2016,6 +2035,15 @@
 				F63C08E82C4A70A90095BAD7 /* mul */,
 			);
 			name = Preferences.storyboard;
+			sourceTree = "<group>";
+		};
+		F67294272D1AFC1F0019B57E /* Subscribe.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F67294262D1AFC1F0019B57E /* Base */,
+				F67294292D1AFC1F0019B57E /* mul */,
+			);
+			name = Subscribe.storyboard;
 			sourceTree = "<group>";
 		};
 		F6832F651F10C4C9007920D4 /* ExportAccessoryViewController.xib */ = {
