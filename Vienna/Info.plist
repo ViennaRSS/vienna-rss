@@ -7,10 +7,6 @@
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>viennaplugin</string>
-			</array>
 			<key>CFBundleTypeIconFile</key>
 			<string>PluginIcon</string>
 			<key>CFBundleTypeIconSystemGenerated</key>
@@ -25,14 +21,8 @@
 			<array>
 				<string>com.vienna-rss.plugin</string>
 			</array>
-			<key>LSTypeIsPackage</key>
-			<string>YES</string>
 		</dict>
 		<dict>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>viennastyle</string>
-			</array>
 			<key>CFBundleTypeIconFile</key>
 			<string>StyleIcon</string>
 			<key>CFBundleTypeIconSystemGenerated</key>
@@ -47,24 +37,18 @@
 			<array>
 				<string>com.vienna-rss.style</string>
 			</array>
-			<key>LSTypeIsPackage</key>
-			<string>YES</string>
 		</dict>
 		<dict>
-			<key>CFBundleTypeExtension</key>
-			<array>
-				<string>scpt</string>
-			</array>
 			<key>CFBundleTypeName</key>
-			<string>Script File</string>
-			<key>CFBundleTypeOSTypes</key>
-			<array>
-				<string>****</string>
-			</array>
+			<string>Open Scripting Architecture script</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
 			<key>LSHandlerRank</key>
 			<string>Default</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.apple.applescript.script</string>
+			</array>
 		</dict>
 		<dict>
 			<key>CFBundleTypeName</key>
