@@ -66,6 +66,18 @@
 			<key>LSHandlerRank</key>
 			<string>Default</string>
 		</dict>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>OPML document</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>org.opml.opml</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
@@ -211,6 +223,11 @@
 				<key>public.filename-extension</key>
 				<array>
 					<string>opml</string>
+				</array>
+				<key>public.mime-type</key>
+				<array>
+					<string>application/xml</string>
+					<string>text/xml</string>
 				</array>
 			</dict>
 		</dict>
