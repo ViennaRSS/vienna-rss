@@ -287,76 +287,13 @@
                                     <font key="font" metaFont="menu"/>
                                     <menu key="menu" id="Awq-ex-o9L">
                                         <items>
-                                            <menuItem title="1" state="on" id="Byc-c2-qnN">
-                                                <attributedString key="userComments">
-                                                    <fragment content="Do not localize">
-                                                        <attributes>
-                                                            <font key="NSFont" metaFont="menu" size="11"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
-                                            </menuItem>
-                                            <menuItem title="2" id="ILd-2a-Vjb">
-                                                <attributedString key="userComments">
-                                                    <fragment content="Do not localize">
-                                                        <attributes>
-                                                            <font key="NSFont" metaFont="menu" size="11"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
-                                            </menuItem>
-                                            <menuItem title="5" id="aYj-Ub-Isd">
-                                                <attributedString key="userComments">
-                                                    <fragment content="Do not localize">
-                                                        <attributes>
-                                                            <font key="NSFont" metaFont="menu" size="11"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
-                                            </menuItem>
-                                            <menuItem title="10" id="xjZ-nG-iOH">
-                                                <attributedString key="userComments">
-                                                    <fragment content="Do not localize">
-                                                        <attributes>
-                                                            <font key="NSFont" metaFont="menu" size="11"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
-                                            </menuItem>
-                                            <menuItem title="15" id="5Y4-ws-cQJ">
-                                                <attributedString key="userComments">
-                                                    <fragment content="Do not localize">
-                                                        <attributes>
-                                                            <font key="NSFont" metaFont="menu" size="11"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
-                                            </menuItem>
-                                            <menuItem title="50" id="vyo-cC-5Xv">
-                                                <attributedString key="userComments">
-                                                    <fragment content="Do not localize">
-                                                        <attributes>
-                                                            <font key="NSFont" metaFont="menu" size="11"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
-                                            </menuItem>
-                                            <menuItem title="30" id="jbS-7v-rF4">
-                                                <attributedString key="userComments">
-                                                    <fragment content="Do not localize">
-                                                        <attributes>
-                                                            <font key="NSFont" metaFont="menu" size="11"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
-                                            </menuItem>
+                                            <menuItem title="1" state="on" id="Byc-c2-qnN"/>
+                                            <menuItem title="2" id="ILd-2a-Vjb"/>
+                                            <menuItem title="5" id="aYj-Ub-Isd"/>
+                                            <menuItem title="10" id="xjZ-nG-iOH"/>
+                                            <menuItem title="15" id="5Y4-ws-cQJ"/>
+                                            <menuItem title="50" id="vyo-cC-5Xv"/>
+                                            <menuItem title="30" id="jbS-7v-rF4"/>
                                         </items>
                                     </menu>
                                 </popUpButtonCell>

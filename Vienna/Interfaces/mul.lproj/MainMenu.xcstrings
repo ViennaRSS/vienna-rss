@@ -1199,7 +1199,8 @@
             "value" : "Vienna"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "57.title" : {
       "comment" : "Class = \"NSMenu\"; title = \"Vienna\"; ObjectID = \"57\";",
@@ -1211,7 +1212,8 @@
             "value" : "Vienna"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "58.title" : {
       "comment" : "Class = \"NSMenuItem\"; title = \"About Vienna\"; ObjectID = \"58\";",

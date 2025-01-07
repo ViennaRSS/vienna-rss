@@ -337,14 +337,18 @@ static NSNibName const VNASmartFolderNibName = @"SearchFolder";
 {
     NSPopUpButton *button = [[NSPopUpButton alloc] initWithFrame:NSZeroRect
                                                        pullsDown:YES];
-    [button addItemWithTitle:NSLocalizedString(@"Development Options",
-                                               @"Do not localize")];
-    [button.menu addItemWithTitle:NSLocalizedString(@"Log Predicate String",
-                                                    @"Do not localize")
+    NSBundle *mainBundle = NSBundle.mainBundle;
+    [button addItemWithTitle:[mainBundle localizedStringForKey:@"Development Options"
+                                                         value:nil
+                                                         table:nil]];
+    [button.menu addItemWithTitle:[mainBundle localizedStringForKey:@"Log Predicate String"
+                                                              value:nil
+                                                              table:nil]
                            action:@selector(logPredicateString)
                     keyEquivalent:@""];
-    [button.menu addItemWithTitle:NSLocalizedString(@"Log Formatting Strings",
-                                                    @"Do not localize")
+    [button.menu addItemWithTitle:[mainBundle localizedStringForKey:@"Log Formatting Strings"
+                                                              value:nil
+                                                              table:nil]
                            action:@selector(logFormattingStrings)
                     keyEquivalent:@""];
     button.translatesAutoresizingMaskIntoConstraints = NO;
