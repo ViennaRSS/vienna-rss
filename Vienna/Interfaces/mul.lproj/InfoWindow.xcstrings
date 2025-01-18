@@ -7,19 +7,19 @@
       "localizations" : {
         "cs" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Obnoveno:"
           }
         },
         "da" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Sidst opdateret:"
           }
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Letzte Aktualisierung:"
           }
         },
@@ -31,13 +31,13 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Última actualización:"
           }
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Azken Eguneratuak:"
           }
         },
@@ -49,31 +49,31 @@
         },
         "gl" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Última actualización:"
           }
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Ultimo Aggiornamento:"
+            "state" : "translated",
+            "value" : "Ultimo aggiornamento:"
           }
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "最後の更新："
           }
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "최종 갱신일:"
           }
         },
         "lt" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Paskutinį kartą atnaujinta:"
           }
         },
@@ -85,49 +85,49 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Última atualização:"
           }
         },
         "pt-PT" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Última actualização:"
           }
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Последние обновленные:"
           }
         },
         "sv" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Senaste uppdaterad:"
           }
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "En son yenilendi:"
           }
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Останнє оновлення:"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "上次更新:"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "上次重新整理："
           }
         }
@@ -596,7 +596,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aggiorna Autenticazione"
+            "value" : "Aggiorna autenticazione"
           }
         },
         "ja" : {
@@ -1112,7 +1112,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Use Web Page for Articles"
+            "value" : "Carica la pagina web completa per gli articoli"
           }
         },
         "ja" : {
@@ -1628,7 +1628,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "URL Feed"
+            "value" : "URL del feed"
           }
         },
         "ja" : {
@@ -1742,7 +1742,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apri file memorizzato nella cache …"
+            "value" : "Apri file memorizzato nella cache…"
           }
         },
         "lt" : {

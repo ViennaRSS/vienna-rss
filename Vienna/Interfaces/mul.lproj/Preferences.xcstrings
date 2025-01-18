@@ -293,6 +293,12 @@
             "value" : "Indiquer comme \"non lus\" les articles mis à jour"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Segnala gli articoli modificati come nuovi"
+          }
+        },
         "lt" : {
           "stringUnit" : {
             "state" : "translated",
@@ -605,6 +611,12 @@
             "value" : "Téléchargements simultanés :"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Download simultanei:"
+          }
+        },
         "lt" : {
           "stringUnit" : {
             "state" : "translated",
@@ -819,6 +831,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Afficher en gras les flux ayant des articles non lus"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra feed con articoli non letti in grassetto"
           }
         },
         "nl" : {
@@ -6029,6 +6047,12 @@
             "value" : "Rechercher les dernières versions Beta"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Controlla le ultime versioni beta"
+          }
+        },
         "lt" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6111,6 +6135,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Synchroniser avec un serveur Open Reader"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sincronizza con un server Open Reader"
           }
         },
         "lt" : {
@@ -6279,6 +6309,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Afficher en gras les articles non lus"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra articoli non letti in grassetto"
           }
         },
         "nl" : {

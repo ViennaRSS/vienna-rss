@@ -455,6 +455,12 @@
             "value" : "%1$@ sur %2$@"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ di %@"
+          }
+        },
         "lt" : {
           "stringUnit" : {
             "state" : "translated",
@@ -524,6 +530,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@ reçu"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ ricevuti"
           }
         },
         "lt" : {
@@ -600,6 +612,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@ non lus"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ non letti"
           }
         },
         "nl" : {
@@ -3685,6 +3703,12 @@
             "value" : "Un novo plugin foi instalado. Agora está dispoñible no menú e pode engadilo á barra de ferramentas."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "È stato installato un nuovo plugin. È disponibile dal menu e può essere aggiunto alla barra degli strumenti."
+          }
+        },
         "lt" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3880,6 +3904,12 @@
             "value" : "Ajouter à la liste de lecture de Safari"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aggiungo all'elenco lettura di Safari"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3942,6 +3972,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Erro de appleScript en script '%@'"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Errore AppleScript nel sorgente '%@'"
           }
         },
         "lt" : {
@@ -4912,6 +4948,12 @@
             "value" : "Ascendente"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Crescente"
+          }
+        },
         "lt" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4998,6 +5040,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Autenticando en Open Reader"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autenticazione su Open Reader"
           }
         },
         "lt" : {
@@ -5587,6 +5635,12 @@
             "value" : "Non se pode crear o cartafol"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile creare la cartella"
+          }
+        },
         "lt" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5678,7 +5732,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Impossibile creare il database per Vienna"
+            "value" : "Impossibile creare il database di Vienna"
           }
         },
         "ja" : {
@@ -5802,7 +5856,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Impossibile importare il file indicato. Il contenuto del file non è in formato XML OPML valido."
+            "value" : "Impossibile importare il file indicato. Il contenuto del file non è un formato XML OPML valido."
           }
         },
         "ja" : {
@@ -6050,7 +6104,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cancella Ricerche Recenti"
+            "value" : "Cancella ricerche recenti"
           }
         },
         "ja" : {
@@ -6460,6 +6514,12 @@
             "value" : "Continuer malgré tout"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continua ugualmente"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6505,6 +6565,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Copier l'URL"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copia URL"
           }
         },
         "lt" : {
@@ -6696,6 +6762,12 @@
             "value" : "Date de publication"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Data di pubblicazione"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6758,7 +6830,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Elimina Articolo"
+            "value" : "Elimina articolo"
           }
         },
         "ja" : {
@@ -7113,6 +7185,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Eliminar subscrición de Open Reader"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancella feed RSS di Open Reader"
           }
         },
         "lt" : {
@@ -7811,7 +7889,7 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Löschen"
           }
         },
@@ -8212,6 +8290,12 @@
             "value" : "Descendente"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Decrescente"
+          }
+        },
         "lt" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8556,7 +8640,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Non Svuotare il Cestino"
+            "value" : "Non svuotare il cestino"
           }
         },
         "lt" : {
@@ -9197,7 +9281,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Invia via e-mail un collegamento all'articolo o sito web selezionato"
+            "value" : "Invia via e-mail un collegamento all'articolo o al sito web selezionato"
           }
         },
         "lt" : {
@@ -9637,7 +9721,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Svuota Cestino"
+            "value" : "Svuota cestino"
           }
         },
         "ja" : {
@@ -10097,6 +10181,12 @@
             "value" : "Erro ao cargar o script '%@'"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Errore di caricamento dello script '%@'"
+          }
+        },
         "lt" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10173,6 +10263,12 @@
             "value" : "Erreur de traitement des données dans le flux"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Errore nell'analisi dei dati del feed"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10229,6 +10325,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Erro recuperando subscrición"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Errore di ricezione del feed RSS:"
           }
         },
         "lt" : {
@@ -10307,6 +10409,12 @@
             "value" : "Erro recuperando a icona da subscrición:"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Errore di ricezione dell'icona del feed RSS:"
+          }
+        },
         "lt" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10381,6 +10489,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Erro: Fonta non atopada!"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Errore: feed non trovato!"
           }
         },
         "lt" : {
@@ -10474,7 +10588,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Esportazione Completata"
+            "value" : "Esportazione completata"
           }
         },
         "ja" : {
@@ -10598,7 +10712,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Browser Esterno"
+            "value" : "Browser esterno"
           }
         },
         "ja" : {
@@ -10722,7 +10836,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "URL del Feed aggiornata a %@"
+            "value" : "URL del feed aggiornata a %@"
           }
         },
         "ja" : {
@@ -10829,6 +10943,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Procurando subscricións de Open Reader…"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ricezione delle iscrizioni Open Reader…"
           }
         },
         "lt" : {
@@ -11024,7 +11144,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Scaricamento File %@ fallito"
+            "value" : "Scaricamento del file %@ fallito"
           }
         },
         "lt" : {
@@ -11115,6 +11235,12 @@
             "value" : "filtrer par : %@"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "filtro per: %@"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11171,6 +11297,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Filtrer par : %@"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtro per: %@"
           }
         },
         "nl" : {
@@ -11501,7 +11633,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Con Contrassegno"
+            "value" : "Con contrassegno"
           }
         },
         "ja" : {
@@ -11977,6 +12109,12 @@
             "value" : "A forzar a actualización de subscricións…"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Forza aggiornamento delle iscrizioni…"
+          }
+        },
         "lt" : {
           "stringUnit" : {
             "state" : "translated",
@@ -12051,6 +12189,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Recibido estado HTTP 304 - Non hai novas dende a última procura"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ricevuto stato HTTP 304 - nessuna novità dall'ultimo controllo"
           }
         },
         "lt" : {
@@ -12263,7 +12407,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nascondi Barra Filtro"
+            "value" : "Nascondi Barra del filtro"
           }
         },
         "lt" : {
@@ -12370,7 +12514,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nascondi Barra di Stato"
+            "value" : "Nascondi Barra di stato"
           }
         },
         "lt" : {
@@ -12477,7 +12621,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nascondi barra degli strumenti"
+            "value" : "Nascondi Barra degli strumenti"
           }
         },
         "lt" : {
@@ -12577,7 +12721,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "codice HTTP %d riportato dal server"
+            "value" : "Il server ha riportato il codice HTTP %d"
           }
         },
         "ja" : {
@@ -12702,7 +12846,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vuoi interrompere tutti i download e chiudere Vienna ora?"
+            "value" : "Se chiudi Vienna tutti i download verranno interrotti."
           }
         },
         "ja" : {
@@ -12939,7 +13083,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Importazione Completata"
+            "value" : "Importazione completata"
           }
         },
         "ja" : {
@@ -13284,6 +13428,12 @@
             "value" : "Redirixir URL infinitamente cíclica a %@"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ciclo di redirezione infinito in %@"
+          }
+        },
         "lt" : {
           "stringUnit" : {
             "state" : "translated",
@@ -13347,6 +13497,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dernière mise à jour"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ultimo aggiornamento"
           }
         },
         "nl" : {
@@ -13520,6 +13676,12 @@
             "value" : "A cargar…"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Caricamento"
+          }
+        },
         "lt" : {
           "stringUnit" : {
             "state" : "translated",
@@ -13603,6 +13765,12 @@
             "value" : "Ubicar…"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Localizza…"
+          }
+        },
         "lt" : {
           "stringUnit" : {
             "state" : "translated",
@@ -13683,6 +13851,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Asegúrate de que o nome de usuario e o contrasinal precisos para acceder ao servidor de Open Reader foron inseridos correctamente nas preferencias de Vienna. Comproba tamén o teu acceso a internet."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verifica di aver fornito le corrette credenziali di accesso Open Reader nelle impostazioni di Vienna. Controlla anche la connessione internet."
           }
         },
         "nl" : {
@@ -13770,7 +13944,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Segnala tutti come Letti"
+            "value" : "Segnala tutti come letti"
           }
         },
         "ja" : {
@@ -13895,7 +14069,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Segnala Tutte le Iscrizioni come Lette"
+            "value" : "Segnala tutte le iscrizioni come lette"
           }
         },
         "ja" : {
@@ -14144,7 +14318,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Segnala Senza Contrassegno"
+            "value" : "Segnala senza contrassegno"
           }
         },
         "ja" : {
@@ -14269,7 +14443,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Segnala Come Non Letto"
+            "value" : "Segnala come non letto"
           }
         },
         "ja" : {
@@ -14393,7 +14567,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Articoli Con Contrassegno"
+            "value" : "Articoli con contrassegno"
           }
         },
         "ja" : {
@@ -14524,7 +14698,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Segnala Come Letto"
+            "value" : "Segnala come letto"
           }
         },
         "ja" : {
@@ -14654,8 +14828,8 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Segnala Come Letto"
+            "state" : "translated",
+            "value" : "Segnala come letto"
           }
         },
         "ja" : {
@@ -14903,7 +15077,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sposta Cartelle"
+            "value" : "Sposta cartelle"
           }
         },
         "ja" : {
@@ -15152,7 +15326,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nuovi Articoli"
+            "value" : "Nuovi articoli ricevuti"
           }
         },
         "ja" : {
@@ -15270,7 +15444,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nuovo Pannello"
+            "value" : "Nuovo pannello"
           }
         },
         "lt" : {
@@ -15359,6 +15533,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aucun article dans le flux"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nessun articolo nel feed"
           }
         },
         "lt" : {
@@ -15827,7 +16007,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vai alla Pagina dell'Articolo"
+            "value" : "Vai alla pagina dell'articolo"
           }
         },
         "ja" : {
@@ -15951,7 +16131,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apri la Pagina dell'Articolo in %@"
+            "value" : "Apri la pagina dell'articolo in %@"
           }
         },
         "ja" : {
@@ -16076,7 +16256,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apri la Pagina dell'Articolo nel Browser Esterno"
+            "value" : "Apri la pagina dell'articolo nel browser esterno"
           }
         },
         "ja" : {
@@ -16200,7 +16380,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apri Collegamento in %@"
+            "value" : "Apri collegamento in %@"
           }
         },
         "ja" : {
@@ -16303,6 +16483,12 @@
             "value" : "Ouvrir le lien en arrière-plan"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apri collegamento sullo sfondo"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -16382,7 +16568,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apri Collegamento in Nuovo Pannello"
+            "value" : "Apri collegamento in nuovo pannello"
           }
         },
         "ja" : {
@@ -16491,6 +16677,12 @@
             "value" : "Erro ao autenticar en Open Reader"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Errore di autenticazione Open Reader"
+          }
+        },
         "lt" : {
           "stringUnit" : {
             "state" : "translated",
@@ -16576,7 +16768,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apri Cartella Script"
+            "value" : "Apri cartella degli Script"
           }
         },
         "ja" : {
@@ -16701,7 +16893,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vai alla Pagina Iniziale dell'Iscrizione"
+            "value" : "Vai alla pagina iniziale dell'iscrizione"
           }
         },
         "ja" : {
@@ -16825,7 +17017,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apri la Pagina Iniziale dell'Iscrizione in %@"
+            "value" : "Apri la pagina iniziale dell'iscrizione in %@"
           }
         },
         "ja" : {
@@ -16950,7 +17142,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apri la Pagina Iniziale dell'Iscrizione nel Browser Esterno"
+            "value" : "Apri la pagina iniziale dell'iscrizione nel browser esterno"
           }
         },
         "ja" : {
@@ -17053,6 +17245,12 @@
             "value" : "Ouvrir avec"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apri con"
+          }
+        },
         "lt" : {
           "stringUnit" : {
             "state" : "translated",
@@ -17116,6 +17314,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ouvrir avec %@"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apri con %@"
           }
         },
         "nl" : {
@@ -17318,6 +17522,12 @@
             "value" : "Plugin instalado"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plugin installato"
+          }
+        },
         "lt" : {
           "stringUnit" : {
             "state" : "translated",
@@ -17392,6 +17602,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cola"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Coda"
           }
         },
         "lt" : {
@@ -17991,7 +18207,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ricerche Recenti"
+            "value" : "Ricerche recenti"
           }
         },
         "ja" : {
@@ -18310,7 +18526,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aggiorna Tutte Le Iscrizioni"
+            "value" : "Aggiorna tutte le iscrizioni"
           }
         },
         "ja" : {
@@ -18555,6 +18771,12 @@
             "value" : "Actualizando as iconas dos cartafoles…"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aggiornamento delle icone delle cartelle…"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -18664,7 +18886,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aggiorno iscrizioni…"
+            "value" : "Aggiornamento delle iscrizioni…"
           }
         },
         "ja" : {
@@ -18914,7 +19136,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ripristina Articolo"
+            "value" : "Ripristina articolo"
           }
         },
         "ja" : {
@@ -19032,7 +19254,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reiscriviti al Feed"
+            "value" : "Reiscriviti al feed"
           }
         },
         "lt" : {
@@ -19144,7 +19366,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ricevo articoli"
+            "value" : "Ricezione degli articoli"
           }
         },
         "ja" : {
@@ -19268,7 +19490,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ricevo immagine cartella"
+            "value" : "Ricezione dell'immagine della cartella"
           }
         },
         "ja" : {
@@ -19377,6 +19599,12 @@
             "value" : "Recuperando a icona do cartafol para a fonte de Open Reader"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ricezione dell'immagine della cartella per il feed Open Reader"
+          }
+        },
         "lt" : {
           "stringUnit" : {
             "state" : "translated",
@@ -19447,6 +19675,12 @@
             "value" : "Icona da subscrición non atopada!"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Icona RSS non trovata!"
+          }
+        },
         "lt" : {
           "stringUnit" : {
             "state" : "translated",
@@ -19512,6 +19746,12 @@
             "value" : "Lancer le script « %@ »"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esegui script “%@”"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -19569,6 +19809,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Liste de lecture de Safari"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lista di lettura di Safari"
           }
         },
         "nl" : {
@@ -19743,6 +19989,12 @@
             "value" : "Procurar na páxina web actual"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cerca pagina web attuale"
+          }
+        },
         "lt" : {
           "stringUnit" : {
             "state" : "translated",
@@ -19812,6 +20064,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rechercher dans les dossiers"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cerca cartelle"
           }
         },
         "lt" : {
@@ -19905,7 +20163,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cerca nei Risultati"
+            "value" : "Risultati della ricerca"
           }
         },
         "lt" : {
@@ -20001,6 +20259,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rechercher"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cerca"
           }
         },
         "nl" : {
@@ -20573,7 +20837,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mostra Barra Filtro"
+            "value" : "Mostra Barra del filtro"
           }
         },
         "lt" : {
@@ -20870,7 +21134,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mostra Barra di Stato"
+            "value" : "Mostra Barra di stato"
           }
         },
         "lt" : {
@@ -21207,7 +21471,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Spiacente, ma Vienna non è stata in grado di creare la cartella database"
+            "value" : "Spiacente, ma Vienna non è stata in grado di creare la cartella del database"
           }
         },
         "ja" : {
@@ -21776,7 +22040,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Il file esistente %@ non è supportato da questa versione di Vienna. Elimina o rinomina il file e riavvia  Vienna."
+            "value" : "Il database esistente (%@) non è supportato da questa versione di Vienna. Elimina o rinomina il file e riavvia Vienna."
           }
         },
         "ja" : {
@@ -21900,7 +22164,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Non è stato possibile aprire il file del database (%@) per qualche ragione. Può essere corrotto o inaccessibile. Prego elimina o rinomina il file del database e riavvia Vienna."
+            "value" : "Non è stato possibile aprire il file del database (%@). Può essere corrotto o inaccessibile. Si prega di elimina o rinomina il file del database e riavvia Vienna."
           }
         },
         "ja" : {
@@ -22403,7 +22667,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lo stile '%@' è stato installato nella cartella Styles ed aggiunto al menu Stile."
+            "value" : "Lo stile '%@' è stato installato nella cartella Styles e aggiunto al menu Stile."
           }
         },
         "ja" : {
@@ -22658,7 +22922,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "L'iscrizione a '%@' richiede un nome utente ed una password per l'accesso."
+            "value" : "L'iscrizione a '%@' richiede un nome utente e una password per l'accesso."
           }
         },
         "ja" : {
@@ -23196,7 +23460,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Articoli di Oggi"
+            "value" : "Articoli di oggi"
           }
         },
         "ja" : {
@@ -23456,7 +23720,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Articoli Non Letti"
+            "value" : "Articoli non letti"
           }
         },
         "ja" : {
@@ -23910,7 +24174,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vienna non è riuscita ad aprire il file \"%@\" perché è stato spostato dopo lo scaricamento."
+            "value" : "Vienna non può aprire il file \"%@\" perché è stato spostato dopo lo scaricamento."
           }
         },
         "ja" : {
@@ -24028,7 +24292,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vienna non è riuscita ad aprire il file."
+            "value" : "Vienna non può aprire il file."
           }
         },
         "ja" : {
@@ -24158,7 +24422,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vienna non è riuscita ad aprire il file \"%@\" perché è stato spostato dopo lo scaricamento."
+            "value" : "Vienna non può aprire il file \"%@\" perché è stato spostato dopo lo scaricamento."
           }
         },
         "ja" : {
