@@ -63,6 +63,12 @@
             "value" : "Document OPML"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Documento OPML"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -122,6 +128,12 @@
             "value" : "Plug-in de Vienna"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plug-in di Vienna"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -179,6 +191,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Style de présentation pour Vienna"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stile di Vienna"
           }
         },
         "nl" : {

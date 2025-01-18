@@ -23,6 +23,12 @@
             "value" : "Aide Vienna"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aiuto di Vienna"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",

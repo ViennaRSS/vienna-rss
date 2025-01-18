@@ -572,7 +572,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Inserisci il collegamento al feed RSS in basso. Oppure scegli dalla lista Sorgente ed inserisci il nome breve per il feed RSS fornito da tale sorgente."
+            "value" : "Inserisci l'url del feed, oppure scegli il servizio dalla lista Sorgente e inserisci il nome breve da utilizzare."
           }
         },
         "ja" : {
@@ -692,7 +692,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Collegamento:"
+            "value" : "Indirizzo:"
           }
         },
         "lt" : {
@@ -800,7 +800,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Registra"
+            "value" : "Salva"
           }
         },
         "ja" : {
@@ -1161,6 +1161,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "S'abonner à travers le serveur Open Reader"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iscriviti in Open Reader"
           }
         },
         "lt" : {

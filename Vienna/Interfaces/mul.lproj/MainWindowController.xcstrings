@@ -1232,7 +1232,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Forza l'aggiornamento degli abbonamenti selezionati da Open Reader"
+            "value" : "Forza l'aggiornamento delle iscrizioni selezionate da Open Reader"
           }
         },
         "lt" : {
@@ -1820,7 +1820,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Chiudi la barra del filtro"
+            "value" : "Chiudi la Barra del filtro"
           }
         },
         "lt" : {
@@ -1934,7 +1934,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Chiudi la barra del filtro"
+            "value" : "Chiudi la Barra del filtro"
           }
         },
         "lt" : {
@@ -3275,6 +3275,12 @@
             "value" : "S'abonner à un flux, ajouter un groupe ou ajouter un dossier intelligent."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iscrivi a un feed, aggiungi una cartella o una cartella smart."
+          }
+        },
         "lt" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4034,7 +4040,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apri la Pagina Iniziale dell'Iscrizione nel Browser Esterno"
+            "value" : "Apri la pagina iniziale dell'iscrizione nel browser esterno"
           }
         },
         "ja" : {
@@ -4631,6 +4637,12 @@
             "value" : "Tout marquer comme lu"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Segna tutti come letti"
+          }
+        },
         "lt" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4937,6 +4949,12 @@
             "value" : "Filtrer"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtra"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5001,6 +5019,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Filtrer"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtra"
           }
         },
         "nl" : {
@@ -5078,7 +5102,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Forza l'aggiornamento degli abbonamenti selezionati da Open Reader"
+            "value" : "Forza l'aggiornamento delle iscrizioni selezionate da Open Reader"
           }
         },
         "lt" : {
@@ -6440,7 +6464,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nuova Cartella Smart…"
+            "value" : "Nuova Cartella smart…"
           }
         },
         "ja" : {
@@ -6572,7 +6596,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nuova Iscrizione…"
+            "value" : "Nuova iscrizione…"
           }
         },
         "ja" : {
@@ -6945,6 +6969,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Afficher tous les flux"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra tutte le iscrizioni"
           }
         },
         "nl" : {
@@ -8075,6 +8105,12 @@
             "value" : "Acción"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Azione"
+          }
+        },
         "lt" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8181,6 +8217,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Acción"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Azione"
           }
         },
         "lt" : {
@@ -8918,7 +8960,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mostra la barra dei filtri"
+            "value" : "Mostra la Barra del filtro"
           }
         },
         "lt" : {
@@ -9422,7 +9464,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ottieni Info"
+            "value" : "Ottieni info"
           }
         },
         "ja" : {
@@ -10235,6 +10277,12 @@
             "value" : "Partager"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Condividi"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10293,6 +10341,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Partager"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Condividi"
           }
         },
         "nl" : {
@@ -10376,7 +10430,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Si è verificato un errore nell'ultimo aggiornamento di questo feed"
+            "value" : "Si è verificato un errore nell'ultimo aggiornamento di questa iscrizione"
           }
         },
         "ja" : {
@@ -10502,7 +10556,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Chiudi la barra del filtro"
+            "value" : "Chiudi la Barra del filtro"
           }
         },
         "lt" : {
@@ -10616,7 +10670,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Chiudi la barra del filtro"
+            "value" : "Chiudi la Barra del filtro"
           }
         },
         "lt" : {
@@ -10736,7 +10790,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aggiorna Iscrizioni Selezionate"
+            "value" : "Aggiorna iscrizioni selezionate"
           }
         },
         "ja" : {
@@ -10994,7 +11048,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vai alla Pagina Iniziale dell'Iscrizione"
+            "value" : "Vai alla pagina iniziale dell'iscrizione"
           }
         },
         "ja" : {
@@ -11126,7 +11180,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apri la Pagina Iniziale dell'Iscrizione nel Browser Esterno"
+            "value" : "Apri la pagina iniziale dell'iscrizione nel browser esterno"
           }
         },
         "ja" : {

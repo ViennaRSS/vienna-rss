@@ -56,7 +56,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nuova Cartella Gruppo"
+            "value" : "Nuova Cartella gruppo"
           }
         },
         "ja" : {
@@ -188,7 +188,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Registra"
+            "value" : "Crea"
           }
         },
         "ja" : {
@@ -452,7 +452,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Inserisci il nome della cartella gruppo:"
+            "value" : "Inserisci il nome della Cartella gruppo:"
           }
         },
         "ja" : {

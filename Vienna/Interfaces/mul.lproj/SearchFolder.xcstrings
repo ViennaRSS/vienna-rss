@@ -50,7 +50,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nome cartella smart:"
+            "value" : "Nome Cartella Smart:"
           }
         },
         "ja" : {
@@ -182,7 +182,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Registra"
+            "value" : "Salva"
           }
         },
         "ja" : {
@@ -423,6 +423,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Appuyez sur la touche Option pour ajouter des conditions imbriquées."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Premi il tasto Option per aggiungere delle regole nidificate."
           }
         },
         "nl" : {
