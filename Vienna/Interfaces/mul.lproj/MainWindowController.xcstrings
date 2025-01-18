@@ -1295,7 +1295,8 @@
             "value" : "Vienna"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "676-5a-TdF.title" : {
       "comment" : "Class = \"NSMenuItem\"; title = \"Open Subscription Home Page\"; ObjectID = \"676-5a-TdF\";",
@@ -7253,7 +7254,8 @@
             "value" : "Folder Name"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "RSJ-ph-xG6.title" : {
       "comment" : "Class = \"NSButtonCell\"; title = \"0\"; ObjectID = \"RSJ-ph-xG6\";",
@@ -7265,7 +7267,8 @@
             "value" : "0"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "sDP-Ni-g3a.title" : {
       "comment" : "Class = \"NSMenuItem\"; title = \"Unread Articles\"; ObjectID = \"sDP-Ni-g3a\";",

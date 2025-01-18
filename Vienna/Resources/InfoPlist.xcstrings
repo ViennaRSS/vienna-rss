@@ -11,7 +11,8 @@
             "value" : "Vienna"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "NSAppleEventsUsageDescription" : {
       "comment" : "A message that tells the user why Vienna is requesting the ability to send Apple events.",
@@ -22,7 +23,8 @@
             "value" : ""
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "NSHumanReadableCopyright" : {
       "comment" : "Copyright (human-readable)",
@@ -34,7 +36,8 @@
             "value" : "© 2004–2024 The Vienna RSS Project"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "OPML document" : {
       "comment" : "A label for OPML (Outline Processor Markup Language) documents. This is shown in Finder's Get Info window, for example.",

@@ -434,7 +434,7 @@
       }
     },
     "5Y4-ws-cQJ.title" : {
-      "comment" : "Class = \"NSMenuItem\"; title = \"15\"; ObjectID = \"5Y4-ws-cQJ\"; Note = \"Do not localize\";",
+      "comment" : "Class = \"NSMenuItem\"; title = \"15\"; ObjectID = \"5Y4-ws-cQJ\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -443,7 +443,8 @@
             "value" : "15"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "6GF-Pk-gI9.title" : {
       "comment" : "Class = \"NSMenuItem\"; title = \"Every 6 hours\"; ObjectID = \"6GF-Pk-gI9\";",
@@ -1232,7 +1233,7 @@
       }
     },
     "aYj-Ub-Isd.title" : {
-      "comment" : "Class = \"NSMenuItem\"; title = \"5\"; ObjectID = \"aYj-Ub-Isd\"; Note = \"Do not localize\";",
+      "comment" : "Class = \"NSMenuItem\"; title = \"5\"; ObjectID = \"aYj-Ub-Isd\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -1241,7 +1242,8 @@
             "value" : "5"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "bom-nB-4zx.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Move articles to Trash:\"; ObjectID = \"bom-nB-4zx\";",
@@ -1490,7 +1492,7 @@
       }
     },
     "Byc-c2-qnN.title" : {
-      "comment" : "Class = \"NSMenuItem\"; title = \"1\"; ObjectID = \"Byc-c2-qnN\"; Note = \"Do not localize\";",
+      "comment" : "Class = \"NSMenuItem\"; title = \"1\"; ObjectID = \"Byc-c2-qnN\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -1499,7 +1501,8 @@
             "value" : "1"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "c4l-M5-qB1.title" : {
       "comment" : "Class = \"NSMenuItem\"; title = \"After one day\"; ObjectID = \"c4l-M5-qB1\";",
@@ -3464,7 +3467,7 @@
       }
     },
     "ILd-2a-Vjb.title" : {
-      "comment" : "Class = \"NSMenuItem\"; title = \"2\"; ObjectID = \"ILd-2a-Vjb\"; Note = \"Do not localize\";",
+      "comment" : "Class = \"NSMenuItem\"; title = \"2\"; ObjectID = \"ILd-2a-Vjb\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -3473,7 +3476,8 @@
             "value" : "2"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "ITA-U9-lhX.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"Article list font:\"; ObjectID = \"ITA-U9-lhX\";",
@@ -3602,7 +3606,7 @@
       }
     },
     "jbS-7v-rF4.title" : {
-      "comment" : "Class = \"NSMenuItem\"; title = \"30\"; ObjectID = \"jbS-7v-rF4\"; Note = \"Do not localize\";",
+      "comment" : "Class = \"NSMenuItem\"; title = \"30\"; ObjectID = \"jbS-7v-rF4\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -3611,7 +3615,8 @@
             "value" : "30"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "jfH-Hq-gRk.title" : {
       "comment" : "Class = \"NSButtonCell\"; title = \"Bounce the application icon\"; ObjectID = \"jfH-Hq-gRk\";",
@@ -6344,7 +6349,7 @@
       }
     },
     "vyo-cC-5Xv.title" : {
-      "comment" : "Class = \"NSMenuItem\"; title = \"50\"; ObjectID = \"vyo-cC-5Xv\"; Note = \"Do not localize\";",
+      "comment" : "Class = \"NSMenuItem\"; title = \"50\"; ObjectID = \"vyo-cC-5Xv\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -6353,7 +6358,8 @@
             "value" : "50"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "wyk-W1-xMh.title" : {
       "comment" : "Class = \"NSViewController\"; title = \"Updates\"; ObjectID = \"wyk-W1-xMh\";",
@@ -6614,7 +6620,7 @@
       }
     },
     "xjZ-nG-iOH.title" : {
-      "comment" : "Class = \"NSMenuItem\"; title = \"10\"; ObjectID = \"xjZ-nG-iOH\"; Note = \"Do not localize\";",
+      "comment" : "Class = \"NSMenuItem\"; title = \"10\"; ObjectID = \"xjZ-nG-iOH\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
@@ -6623,7 +6629,8 @@
             "value" : "10"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "YG6-9k-gKH.title" : {
       "comment" : "Class = \"NSTextFieldCell\"; title = \"URL:\"; ObjectID = \"YG6-9k-gKH\";",
