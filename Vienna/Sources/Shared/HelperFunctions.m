@@ -18,6 +18,8 @@
 // 
 
 #import "HelperFunctions.h"
+#import "Constants.h"
+#import "Preferences.h"
 @import WebKit;
 
 // Determines whether the system-wide script menu is present. This is usually
@@ -240,4 +242,15 @@ void runOKAlertSheet(NSString * titleString, NSString * bodyText, ...)
     }];
     
 	va_end(arguments);
+}
+
+/* Returns a fully-formed HTTP user agent of the reader.
+ */
+NSString * userAgent(void) {
+    NSString *osVersion;
+    NSOperatingSystemVersion version = [NSProcessInfo processInfo].operatingSystemVersion;
+    osVersion = [NSString stringWithFormat:@"%ld_%ld_%ld", version.majorVersion, version.minorVersion, version.patchVersion];
+    Preferences *prefs = [Preferences standardPreferences];
+    NSString *name = prefs.userAgentName;
+    return [NSString stringWithFormat:MA_DefaultUserAgentString, name, [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"], osVersion];
 }

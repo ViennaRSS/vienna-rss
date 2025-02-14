@@ -38,6 +38,7 @@
 #import "Vienna-Swift.h"
 #import "XMLFeed.h"
 #import "XMLFeedParser.h"
+#import "HelperFunctions.h"
 
 typedef NS_ENUM (NSInteger, Redirect301Status) {
     HTTP301Unknown = 0,
@@ -96,16 +97,9 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         networkQueue = [[NSOperationQueue alloc] init];
         networkQueue.name = @"VNAHTTPSession queue";
         networkQueue.maxConcurrentOperationCount = [[Preferences standardPreferences] integerForKey:MAPref_ConcurrentDownloads];
-        NSString * osVersion;
-        NSOperatingSystemVersion version = [NSProcessInfo processInfo].operatingSystemVersion;
-        osVersion = [NSString stringWithFormat:@"%ld_%ld_%ld", version.majorVersion, version.minorVersion, version.patchVersion];
-        Preferences * prefs = [Preferences standardPreferences];
-        NSString *name = prefs.userAgentName;
-
-        NSString * userAgent = [NSString stringWithFormat:MA_DefaultUserAgentString, name, [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"], osVersion];
         NSURLSessionConfiguration * config = [NSURLSessionConfiguration defaultSessionConfiguration];
         config.timeoutIntervalForResource = 300;
-        config.HTTPAdditionalHeaders = @{@"User-Agent": userAgent};
+        config.HTTPAdditionalHeaders = @{@"User-Agent": userAgent()};
         config.HTTPMaximumConnectionsPerHost = 6;
         config.HTTPShouldUsePipelining = YES;
         _urlSession = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:[NSOperationQueue mainQueue]];
