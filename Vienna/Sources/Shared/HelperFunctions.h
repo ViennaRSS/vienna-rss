@@ -51,5 +51,6 @@ NSString * _Nullable getDefaultBrowser(void);
 NSURL * _Nullable cleanedUpUrlFromString(NSString * _Nullable urlString);
 NSURL * _Nullable urlFromUserString(NSString *urlString);
 BOOL hasOSScriptsMenu(void);
+NSString * userAgent(void);
 
 NS_ASSUME_NONNULL_END

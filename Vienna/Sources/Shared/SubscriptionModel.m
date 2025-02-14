@@ -46,7 +46,10 @@
     __block NSURL * myURL;
     // semaphore with count equal to zero for synchronizing completion of work
     dispatch_semaphore_t sema = dispatch_semaphore_create(0);
-    NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithURL:rssFeedURL
+    NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+    config.HTTPAdditionalHeaders = @{@"User-Agent": userAgent()};
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
+    NSURLSessionDataTask *task = [session dataTaskWithURL:rssFeedURL
       completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (error || (((NSHTTPURLResponse *)response).statusCode != 200)) {
             myURL = rssFeedURL;
