@@ -21,7 +21,6 @@
 #import "Constants.h"
 
 NSString * const MA_DefaultUserAgentString = @"%@/%@ (Macintosh; Intel macOS %@)";
-NSString * const MA_BrowserUserAgentString = @"(Macintosh; Intel Mac OS X %@) AppleWebKit/%@ (KHTML, like Gecko) Version/%@ Safari/604.1.38 %@/%@";
 
 NSNotificationName const MA_Notify_ArticleListContentChange = @"MA_Notify_ArticleListContentChange";
 NSNotificationName const MA_Notify_ArticleListFontChange = @"MA_Notify_ArticleListFontChange";
@@ -87,8 +86,6 @@ NSString * const MAPref_UseJavaScript = @"UseJavaScript";
 NSString * const MAPref_CachedArticleGUID = @"CachedArticleGUID";
 NSString * const MAPref_ArticleListSortOrders = @"ArticleListSortOrders";
 NSString * const MAPref_FilterMode = @"FilterMode";
-NSString * const MAPref_TabList = @"TabList";
-NSString * const MAPref_TabTitleDictionary = @"TabTitleDict";
 NSString * const MAPref_Layout = @"Layout";
 NSString * const MAPref_NewArticlesNotification = @"NewArticlesNotification";
 NSString * const MAPref_EmptyTrashNotification = @"EmptyTrashNotification";
