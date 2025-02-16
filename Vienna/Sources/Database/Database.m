@@ -38,11 +38,10 @@
 @interface Database ()
 
 @property (nonatomic) BOOL initializedfoldersDict;
-@property (nonatomic) BOOL initializedSmartfoldersDict;
 @property (nonatomic) NSMutableArray *fieldsOrdered;
 @property (nonatomic) NSMutableDictionary *fieldsByName;
 @property (nonatomic) NSMutableDictionary *foldersDict;
-@property (nonatomic) NSMutableDictionary *smartfoldersDict;
+@property (nonatomic) NSMutableDictionary<NSNumber *, CriteriaTree *> *smartfoldersDict;
 @property (readwrite, nonatomic) BOOL readOnly;
 @property (readwrite, nonatomic) NSInteger countOfUnread;
 
@@ -77,12 +76,10 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
     self = [super init];
     if (self) {
         _initializedfoldersDict = NO;
-        _initializedSmartfoldersDict = NO;
         _countOfUnread = 0;
         _trashFolder = nil;
         _searchFolder = nil;
         _searchString = @"";
-        _smartfoldersDict = [[NSMutableDictionary alloc] init];
         _foldersDict = [[NSMutableDictionary alloc] init];
         [self initaliseFields];
         _databaseQueue = [FMDatabaseQueue databaseQueueWithPath:dbPath];
@@ -1431,14 +1428,6 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	return folder;
 }
 
-
-/*!
- *  folderFromFeedURL
- *
- *  @param wantedFeedURL The feed URL the folder is wanted for
- *
- *  @return An RSSFolder that is subscribed to the specified feed URL.
- */
 -(Folder *)folderFromFeedURL:(NSString *)wantedFeedURL
 {
 	Folder * folder;
@@ -1451,14 +1440,6 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	return folder;
 }
 
-/*!
- *  folderFromRemoteId
- *
- *  @param wantedRemoteId The remote identifier the folder is wanted for
- *
- *  @return An OpenReaderFolder that corresponds
- */
-
 -(Folder *)folderFromRemoteId:(NSString *)wantedRemoteId
 {
 	Folder * folder;
@@ -1469,6 +1450,23 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 		}
 	}
 	return folder;
+}
+
+- (Folder *)folderForPredicateFormat:(NSString *)predicateFormat
+{
+    __block Folder *folder;
+    [self.smartfoldersDict enumerateKeysAndObjectsUsingBlock:^(
+        NSNumber *folderID, CriteriaTree *criteriaTree, BOOL *stop) {
+        // Different predicate types that cannot be compared with -isEqual: can
+        // have the same format string. For example, a comparison predicate and
+        // an all/any compound predicate with a comparison predicate can result
+        // in the same format string.
+        if ([criteriaTree.predicate.predicateFormat isEqualToString:predicateFormat]) {
+            folder = [self folderFromID:folderID.integerValue];
+            *stop = YES;
+        }
+    }];
+    return folder;
 }
 
 /* handleAutoSortFoldersTreeChange
@@ -1775,12 +1773,12 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	return NO;
 }
 
-/* initSmartfoldersDict
- * Preloads all the smart folders into the smartfoldersDict dictionary.
- */
--(void)initSmartfoldersDict
+- (NSMutableDictionary<NSNumber *, CriteriaTree *> *)smartfoldersDict
 {
-	if (!self.initializedSmartfoldersDict) {
+    if (!_smartfoldersDict) {
+        _smartfoldersDict = [[NSMutableDictionary alloc] init];
+
+        // Preload all the smart folders into the dictionary.
         FMDatabaseQueue *queue = self.databaseQueue;
         // Make sure we have a database queue.
 		NSAssert(queue, @"Database queue not assigned for this item");
@@ -1792,12 +1790,12 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 				NSString * search_string = [results stringForColumnIndex:1];
 				
 				CriteriaTree * criteriaTree = [[CriteriaTree alloc] initWithString:search_string];
-				self.smartfoldersDict[@(folderId)] = criteriaTree;
+				_smartfoldersDict[@(folderId)] = criteriaTree;
 			}
 			[results close];
 		}];
-		self.initializedSmartfoldersDict = YES;
 	}
+    return _smartfoldersDict;
 }
 
 /* searchStringForSmartFolder
@@ -1806,7 +1804,6 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
  */
 -(CriteriaTree *)searchStringForSmartFolder:(NSInteger)folderId
 {
-	[self initSmartfoldersDict];
 	return self.smartfoldersDict[@(folderId)];
 }
 
@@ -2154,7 +2151,6 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	}
 
 	if (folder.type == VNAFolderTypeSmart) {
-		[self initSmartfoldersDict];
 		return self.smartfoldersDict[@(folderId)];
 	}
 
@@ -2556,11 +2552,10 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[self.foldersDict removeAllObjects];
-	[self.smartfoldersDict removeAllObjects];
+	self.smartfoldersDict = nil;
 	self.trashFolder = nil;
 	self.searchFolder = nil;
 	self.initializedfoldersDict = NO;
-	self.initializedSmartfoldersDict = NO;
 	_countOfUnread = 0;
     [self.databaseQueue close];
 }
