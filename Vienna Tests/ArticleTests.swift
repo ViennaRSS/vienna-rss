@@ -42,20 +42,16 @@ class ArticleTests: XCTestCase {
     var article: Article!
     var articleConverter: WebKitArticleConverter!
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    override func setUp() {
         self.article = Article(guid: guid)
         self.articleConverter = WebKitArticleConverter()
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    override func tearDown() {
         self.article = nil
-        try super.tearDownWithError()
     }
 
-    // MARK: Article Tests
+    // MARK: - Article Tests
 
     func testAccessInstanceVariablesDirectly() {
         XCTAssertFalse(Article.accessInstanceVariablesDirectly)
@@ -64,24 +60,32 @@ class ArticleTests: XCTestCase {
     // MARK: - Test custom setters
 
     func testTitle() {
+        XCTAssertNil(self.article.title)
+
         self.article.title = title
 
         XCTAssertEqual(self.article.title, title)
     }
 
     func testAuthor() {
+        XCTAssertNil(self.article.author)
+
         self.article.author = author
 
         XCTAssertEqual(self.article.author, author)
     }
 
     func testLink() {
+        XCTAssertNil(self.article.link)
+
         self.article.link = link
 
         XCTAssertEqual(self.article.link, link)
     }
 
     func testLastUpdate() {
+        XCTAssertNil(self.article.lastUpdate)
+
         let date = Date()
 
         self.article.lastUpdate = date
@@ -90,6 +94,8 @@ class ArticleTests: XCTestCase {
     }
 
     func testPublicationDate() {
+        XCTAssertNil(self.article.publicationDate)
+
         let date = Date()
 
         self.article.publicationDate = date
@@ -98,30 +104,35 @@ class ArticleTests: XCTestCase {
     }
 
     func testBody() {
+        XCTAssertNil(self.article.body)
+
         self.article.body = body
 
         XCTAssertEqual(self.article.body, body)
     }
 
     func testEnclosure() {
+        XCTAssertNil(self.article.enclosure)
+
         self.article.enclosure = enclosure
 
         XCTAssertEqual(self.article.enclosure, enclosure)
-    }
 
-    func testEnclosureRemoval() {
         self.article.enclosure = nil
-
         XCTAssertNil(self.article.enclosure)
     }
 
     func testHasEnclosure() {
+        XCTAssertFalse(self.article.hasEnclosure)
+
         self.article.hasEnclosure = true
 
         XCTAssert(self.article.hasEnclosure)
     }
 
     func testFolderId() {
+        XCTAssertEqual(self.article.folderId, -1)
+
         let folderId = 111
 
         self.article.folderId = folderId
@@ -130,12 +141,13 @@ class ArticleTests: XCTestCase {
     }
 
     func testGuid() {
-        self.article.guid = guid
-
+        // The GUID is set by the initializer.
         XCTAssertEqual(self.article.guid, guid)
     }
 
     func testParentId() {
+        XCTAssertEqual(self.article.parentId, 0)
+
         let parentId = 222
 
         self.article.parentId = parentId
@@ -144,7 +156,9 @@ class ArticleTests: XCTestCase {
     }
 
     func testStatus() {
-        let status = ArticleStatus.new.rawValue
+        XCTAssertEqual(self.article.status, .empty)
+
+        let status = Article.Status.new
 
         self.article.status = status
 
@@ -154,7 +168,7 @@ class ArticleTests: XCTestCase {
     func testMarkRead() {
         XCTAssertFalse(self.article.isRead)
 
-        self.article.markRead(true)
+        self.article.isRead = true
 
         XCTAssert(self.article.isRead)
     }
@@ -162,7 +176,7 @@ class ArticleTests: XCTestCase {
     func testMarkRevised() {
         XCTAssertFalse(self.article.isRevised)
 
-        self.article.markRevised(true)
+        self.article.isRevised = true
 
         XCTAssert(self.article.isRevised)
     }
@@ -170,7 +184,7 @@ class ArticleTests: XCTestCase {
     func testMarkDeleted() {
         XCTAssertFalse(self.article.isDeleted)
 
-        self.article.markDeleted(true)
+        self.article.isDeleted = true
 
         XCTAssert(self.article.isDeleted)
     }
@@ -178,7 +192,7 @@ class ArticleTests: XCTestCase {
     func testMarkFlagged() {
         XCTAssertFalse(self.article.isFlagged)
 
-        self.article.markFlagged(true)
+        self.article.isFlagged = true
 
         XCTAssert(self.article.isFlagged)
     }
@@ -186,7 +200,7 @@ class ArticleTests: XCTestCase {
     func testMarkEnclosureDowloaded() {
         XCTAssertFalse(self.article.enclosureDownloaded)
 
-        self.article.markEnclosureDownloaded(true)
+        self.article.enclosureDownloaded = true
 
         XCTAssert(self.article.enclosureDownloaded)
     }
@@ -234,18 +248,6 @@ class ArticleTests: XCTestCase {
 
         XCTAssertEqual(self.article.value(forKeyPath: summaryKeyPath) as? String, summary)
     }
-
-//    func testRandomCompatibilityKeyPath() {
-//        let randomArticleDataKeyPath = "articleData.dummyProperty"
-//
-//        XCTAssertThrowsSpecificNamed(self.article.value(forKeyPath: randomArticleDataKeyPath), NSException, NSUndefinedKeyException);
-//    }
-
-//    func testRandomKeyPath() {
-//        let randomKeyPath = "dummyProperty"
-//
-//        XCTAssertThrowsSpecificNamed(self.article.value(forKeyPath: randomKeyPath), NSException, NSUndefinedKeyException);
-//    }
 
     func testDescription() {
         let title = "Lorem ipsum dolor sit amet"

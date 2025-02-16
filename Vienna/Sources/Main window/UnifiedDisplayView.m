@@ -247,7 +247,7 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
 		BOOL shouldSelectArticle = YES;
 		if ([Preferences standardPreferences].markReadInterval > 0.0f) {
 			Article * article = self.controller.articleController.allArticles[0u];
-			if (!article.read) {
+			if (!article.isRead) {
 				shouldSelectArticle = NO;
 			}
 		}
@@ -393,7 +393,7 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
 	Article * theArticle;
 	while (currentRow < totalRows) {
 		theArticle = allArticles[currentRow];
-		if (!theArticle.read) {
+		if (!theArticle.isRead) {
 			[self makeRowSelectedAndVisible:currentRow];
 			return YES;
 		}
@@ -483,7 +483,7 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
 -(void)markCurrentRead:(NSTimer *)aTimer
 {
 	Article * theArticle = self.selectedArticle;
-	if (theArticle != nil && !theArticle.read && ![Database sharedManager].readOnly) {
+	if (theArticle != nil && !theArticle.isRead && ![Database sharedManager].readOnly) {
 		[self.controller.articleController markReadByArray:@[theArticle] readFlag:YES];
 	}
 }

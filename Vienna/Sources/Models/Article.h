@@ -43,8 +43,6 @@ extern NSString * const MA_Field_Enclosure;
 extern NSString * const MA_Field_EnclosureDownloaded;
 extern NSString * const MA_Field_HasEnclosure;
 
-NS_ASSUME_NONNULL_END
-
 typedef NS_ENUM(NSInteger, VNAArticleFieldTag) {
     VNAArticleFieldTagGUID = 400,
     VNAArticleFieldTagSubject,
@@ -70,14 +68,17 @@ typedef NS_ENUM(NSInteger, ArticleStatus) {
     ArticleStatusEmpty = 0,
     ArticleStatusNew,
     ArticleStatusUpdated
-};
+} NS_SWIFT_NAME(Article.Status);
 
 @interface Article : NSObject
 
-// Accessor functions
--(instancetype _Nonnull)initWithGuid:(NSString * _Nonnull)theGuid /*NS_DESIGNATED_INITIALIZER*/;
+- (instancetype)initWithGUID:(NSString *)guid NS_DESIGNATED_INITIALIZER;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
 @property (nonatomic) NSInteger parentId;
-@property (nonnull, nonatomic, copy) NSString *guid;
+@property (nonatomic, copy) NSString *guid;
 @property (nullable, nonatomic, copy) NSString *author;
 @property (nullable, nonatomic, copy) NSString *body;
 @property (nullable, nonatomic, copy) NSString *title;
@@ -88,17 +89,14 @@ typedef NS_ENUM(NSInteger, ArticleStatus) {
 @property (nullable, nonatomic) NSDate *publicationDate;
 @property (nullable, nonatomic, readonly) Folder *containingFolder;
 @property (nonatomic) NSInteger folderId;
-@property (nonatomic, getter=isRead, readonly) BOOL read;
-@property (nonatomic, getter=isRevised, readonly) BOOL revised;
-@property (nonatomic, getter=isFlagged, readonly) BOOL flagged;
-@property (nonatomic, getter=isDeleted, readonly) BOOL deleted;
+@property (nonatomic, getter=isRead) BOOL read;
+@property (nonatomic, getter=isRevised) BOOL revised;
+@property (nonatomic, getter=isFlagged) BOOL flagged;
+@property (nonatomic, getter=isDeleted) BOOL deleted;
 @property (nonatomic) BOOL hasEnclosure;
-@property (nonatomic, readonly) BOOL enclosureDownloaded;
-@property (nonatomic) NSInteger status;
--(void)markRead:(BOOL)flag;
--(void)markRevised:(BOOL)flag;
--(void)markFlagged:(BOOL)flag;
--(void)markDeleted:(BOOL)flag;
--(void)markEnclosureDownloaded:(BOOL)flag;
+@property (nonatomic) BOOL enclosureDownloaded;
+@property (nonatomic) ArticleStatus status;
 
 @end
+
+NS_ASSUME_NONNULL_END

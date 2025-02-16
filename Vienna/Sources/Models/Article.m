@@ -45,39 +45,15 @@ NSString * const MA_Field_HasEnclosure = @"HasEnclosure";
 
 @implementation Article {
     NSMutableDictionary *articleData;
-    BOOL readFlag;
-    BOOL revisedFlag;
-    BOOL markedFlag;
-    BOOL deletedFlag;
-    BOOL enclosureDownloadedFlag;
-    BOOL hasEnclosureFlag;
-    NSInteger status;
 }
 
-- (instancetype)init
+- (instancetype)initWithGUID:(NSString *)guid
 {
     self = [super init];
     if (self) {
+        _guid = [guid copy];
+        _folderId = -1;
         articleData = [[NSMutableDictionary alloc] init];
-        readFlag = NO;
-        revisedFlag = NO;
-        markedFlag = NO;
-        deletedFlag = NO;
-        hasEnclosureFlag = NO;
-        enclosureDownloadedFlag = NO;
-        status = ArticleStatusEmpty;
-        self.folderId = -1;
-        self.parentId = 0;
-    }
-    return self;
-}
-
-/* initWithGuid
- */
--(instancetype)initWithGuid:(NSString *)theGuid
-{
-    if ((self = [self init]) != nil) {
-        self.guid = theGuid;
     }
     return self;
 }
@@ -139,48 +115,6 @@ NSString * const MA_Field_HasEnclosure = @"HasEnclosure";
     }
 }
 
-/* markEnclosureDownloaded
- */
--(void)markEnclosureDownloaded:(BOOL)flag
-{
-    enclosureDownloadedFlag = flag;
-}
-
-/* setHasEnclosure
- */
--(void)setHasEnclosure:(BOOL)flag
-{
-    hasEnclosureFlag = flag;
-}
-
-/* markRead
- */
--(void)markRead:(BOOL)flag
-{
-    readFlag = flag;
-}
-
-/* markRevised
- */
--(void)markRevised:(BOOL)flag
-{
-    revisedFlag = flag;
-}
-
-/* markFlagged
- */
--(void)markFlagged:(BOOL)flag
-{
-    markedFlag = flag;
-}
-
-/* markDeleted
- */
--(void)markDeleted:(BOOL)flag
-{
-    deletedFlag = flag;
-}
-
 /* accessInstanceVariablesDirectly
  * Override this so that KVC doesn't get the articleData ivar
  */
@@ -218,18 +152,8 @@ NSString * const MA_Field_HasEnclosure = @"HasEnclosure";
 
 /* Accessor functions
  */
--(BOOL)isRead					{ return readFlag; }
--(BOOL)isRevised				{ return revisedFlag; }
--(BOOL)isFlagged				{ return markedFlag; }
--(BOOL)isDeleted				{ return deletedFlag; }
--(BOOL)hasEnclosure				{ return hasEnclosureFlag; }
--(BOOL)enclosureDownloaded		{ return enclosureDownloadedFlag; }
--(NSInteger)status				{ return status; }
--(NSInteger)folderId			{ return [articleData[MA_Field_Folder] integerValue]; }
 -(NSString *)author				{ return articleData[MA_Field_Author]; }
 -(NSString *)link				{ return articleData[MA_Field_Link]; }
--(NSString *)guid				{ return articleData[MA_Field_GUID]; }
--(NSInteger)parentId			{ return [articleData[MA_Field_Parent] integerValue]; }
 -(NSString *)title				{ return articleData[MA_Field_Subject]; }
 -(NSString *)summary
 {
@@ -253,34 +177,6 @@ NSString * const MA_Field_HasEnclosure = @"HasEnclosure";
 -(Folder *)containingFolder
 {
     return [[Database sharedManager] folderFromID:self.folderId];
-}
-
-/* setFolderId
- */
--(void)setFolderId:(NSInteger)newFolderId
-{
-    articleData[MA_Field_Folder] = @(newFolderId);
-}
-
-/* setGuid
- */
--(void)setGuid:(NSString *)newGuid
-{
-    articleData[MA_Field_GUID] = [newGuid copy];
-}
-
-/* setParentId
- */
--(void)setParentId:(NSInteger)newParentId
-{
-    articleData[MA_Field_Parent] = @(newParentId);
-}
-
-/* setStatus
- */
--(void)setStatus:(NSInteger)newStatus
-{
-    status = newStatus;
 }
 
 /* description
