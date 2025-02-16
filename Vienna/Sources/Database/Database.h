@@ -82,9 +82,15 @@ extern NSNotificationName const VNADatabaseDidDeleteFolderNotification;
  */
 -(Folder *)folderFromRemoteId:(NSString *)wantedRemoteId;
 -(Folder *)folderFromName:(NSString *)wantedName;
-/// Returns a smart folder for the predicate format string.
-/// - Parameter predicateFormat: An NSPredicate format string.
-/// - Returns: A Folder of type `VNAFolderTypeSmart` or `nil`.
+/*!
+ * folderForPredicateFormat
+ * Returns a smart folder for the predicate format string.
+ * This function is reliable only with simple one-term predicates
+ *
+ * @param predicateFormat: An NSPredicate format string
+ *
+ * @return A Folder of type `VNAFolderTypeSmart` or `nil`
+ */
 - (Folder *)folderForPredicateFormat:(NSString *)predicateFormat;
 -(NSString *)sqlScopeForFolder:(Folder *)folder flags:(VNAQueryScope)scopeFlags field:(NSString *)field;
 -(NSInteger)addFolder:(NSInteger)parentId afterChild:(NSInteger)predecessorId folderName:(NSString *)name type:(NSInteger)type canAppendIndex:(BOOL)canAppendIndex;
