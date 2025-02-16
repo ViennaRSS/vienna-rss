@@ -87,7 +87,7 @@ extern NSNotificationName const VNADatabaseDidDeleteFolderNotification;
  * Returns a smart folder for the predicate format string.
  * This function is reliable only with simple one-term predicates
  *
- * @param predicateFormat: An NSPredicate format string
+ * @param predicateFormat An NSPredicate format string
  *
  * @return A Folder of type `VNAFolderTypeSmart` or `nil`
  */
