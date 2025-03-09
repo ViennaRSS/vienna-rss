@@ -715,10 +715,9 @@
             // check consistency
             if (self.cachedGuids.count < self.unreadCount) {
                 NSLog(@"Bug from cache in folder %li : inconsistent count",(long)self.itemId);
-                @synchronized(self) {
-                    [self.cachedArticles removeAllObjects];
-                    return [self getCompleteArticles];
-                }
+                self.isCached = NO;
+                [self.cachedArticles removeAllObjects];
+                return [self getCompleteArticles];
             }
             // attempt to retrieve from cache
             NSMutableArray * articles = [NSMutableArray arrayWithCapacity:self.cachedGuids.count];
@@ -732,10 +731,9 @@
                 } else {
                     // some problem
                     NSLog(@"Bug retrieving from cache in folder %li : after %lu insertions of %lu, guid %@",(long)self.itemId, (unsigned long)articles.count,(unsigned long)self.cachedGuids.count,object);
-                    @synchronized(self) {
-                        [self.cachedArticles removeAllObjects];
-                        return [self getCompleteArticles];
-                    }
+                    self.isCached = NO;
+                    [self.cachedArticles removeAllObjects];
+                    return [self getCompleteArticles];
                 }
             }
             return [articles copy];
@@ -756,7 +754,6 @@
 {
   @synchronized(self){
     NSArray * articles = [[Database sharedManager] arrayOfArticles:self.itemId filterString:@""];
-    self.isCached = NO;
     self.containsBodies = NO;
     // Only feeds folders can be cached, as they are the only ones to guarantee
     // bijection : one article <-> one guid
