@@ -85,10 +85,10 @@ class CustomWKWebView: WKWebView {
         contentController.addUserScript(linkHoverScript)
 
         // configuration
-        // for useragent, we mimic the installed version of Safari and add our own identifier
+        // for useragent, we mimic the installed version of Safari, with some parts hardcoded cf.
+        // https://commits.webkit.org/210255@main#diff-6b380f6aad66e056453550b8479034403c064a5a763d8bf0d0b202be06fa2691R40
         let shortSafariVersion = Bundle(path: "/Applications/Safari.app")?.infoDictionary?["CFBundleShortVersionString"] as? String
-        let viennaVersion = (NSApp as? ViennaApp)?.applicationVersion
-        configuration.applicationNameForUserAgent = "Version/\(shortSafariVersion ?? "9.1") Safari/605 Vienna/\(viennaVersion ?? "3.5+")"
+        configuration.applicationNameForUserAgent = "Version/\(shortSafariVersion ?? "9.1") Safari/605.1.15"
         configuration.allowsAirPlayForMediaPlayback = true
         configuration.mediaTypesRequiringUserActionForPlayback = WKAudiovisualMediaTypes.all
 
