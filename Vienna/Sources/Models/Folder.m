@@ -70,7 +70,6 @@
 		_containsBodies = NO;
 		_hasPassword = NO;
 		_cachedArticles = [NSCache new];
-		_cachedArticles.delegate = self;
 		_cachedGuids = [NSMutableArray array];
 		_attributes = [NSMutableDictionary dictionary];
 		self.name = newName;
@@ -612,6 +611,7 @@
             }
         }
         self.isCached = YES;
+        self.containsBodies = NO;
         // Note that this only builds a minimal cache, so we cannot set the containsBodies flag
         // Note also that articles' statuses are left at the default value (0) which is ArticleStatusEmpty
       }
@@ -829,15 +829,4 @@
 	return [NSString stringWithFormat:@"Folder id %li (%@)", (long)self.itemId, self.name];
 }
 
-#pragma mark NSCacheDelegate
--(void)cache:(NSCache *)cache willEvictObject:(id)obj
-{
-    @synchronized(self) {
-        Article * theArticle = ((Article *)obj);
-        NSString * guid = theArticle.guid;
-        self.isCached = NO;
-        self.containsBodies = NO;
-        [self.cachedGuids removeObject:guid];
-    }
-}
 @end
