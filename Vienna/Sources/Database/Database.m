@@ -1595,29 +1595,24 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
     // Extract the data from the new state of article
     NSString * articleBody = articleUpdate.body;
     NSString * articleTitle = articleUpdate.title;
+    NSDate * lastUpdate = articleUpdate.lastUpdate;
     NSString * articleLink = articleUpdate.link.vna_trimmed;
     NSString * userName = articleUpdate.author.vna_trimmed;
     NSString * articleGuid = articleUpdate.guid;
     NSInteger parentId = articleUpdate.parentId;
     BOOL revised_flag = articleUpdate.isRevised;
 
-    // keep last update date the same if not set in the current version of the article
-    NSDate * lastUpdate = existingArticle.lastUpdate;
-    if (articleUpdate.lastUpdate && [articleUpdate.lastUpdate isGreaterThan:lastUpdate]) {
-        lastUpdate = articleUpdate.lastUpdate;
-    }
-
-    // we never change the publication date, unless the date provided in the feed is prior to it
-    NSDate * publicationDate = existingArticle.publicationDate;
-    if (articleUpdate.publicationDate
-        && [articleUpdate.publicationDate timeIntervalSince1970] > 0
-        && [articleUpdate.publicationDate isLessThan:publicationDate]) {
-        publicationDate = articleUpdate.publicationDate;
+    // if a last update date is not provided, use either publication date or current date
+    if (!lastUpdate || [lastUpdate timeIntervalSince1970] == 0) {
+        lastUpdate = articleUpdate.publicationDate;
+        if (!lastUpdate || [lastUpdate timeIntervalSince1970] == 0) {
+            lastUpdate = [NSDate date];
+        }
+        articleUpdate.lastUpdate = lastUpdate;
     }
 
     // Dates are stored as time intervals
     NSTimeInterval lastUpdateIntervalSince1970 = lastUpdate.timeIntervalSince1970;
-    NSTimeInterval publicationIntervalSince1970 = publicationDate.timeIntervalSince1970;
 
     // Set some defaults
     if (userName == nil) {
@@ -1659,15 +1654,15 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
             revised_flag = YES;
         }
 
+        // Note: we never change the publication date
         __block BOOL success;
         [queue inDatabase:^(FMDatabase *db) {
-            success = [db executeUpdate:@"UPDATE messages SET parent_id=?, sender=?, link=?, date=?, createddate=?, "
+            success = [db executeUpdate:@"UPDATE messages SET parent_id=?, sender=?, link=?, date=?, "
              @"read_flag=0, title=?, text=?, revised_flag=? WHERE folder_id=? AND message_id=?",
              @(parentId),
              userName,
              articleLink,
              @(lastUpdateIntervalSince1970),
-             @(publicationIntervalSince1970),
              articleTitle,
              articleBody,
              @(revised_flag),
@@ -1687,7 +1682,6 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
             existingArticle.author = userName;
             existingArticle.link = articleLink;
             existingArticle.lastUpdate = lastUpdate;
-            existingArticle.publicationDate = publicationDate;
             return YES;
         }
     } else {
