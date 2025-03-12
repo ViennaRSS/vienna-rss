@@ -2017,7 +2017,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 
     FMDatabaseQueue *queue = self.databaseQueue;
     [queue inDatabase:^(FMDatabase *db) {
-        FMResultSet * results = [db executeQueryWithFormat:@"SELECT message_id, read_flag, marked_flag, deleted_flag, title, link, revised_flag, hasenclosure_flag, enclosure FROM messages WHERE folder_id=%ld", (long)folderId];
+        FMResultSet * results = [db executeQueryWithFormat:@"SELECT message_id, read_flag, marked_flag, deleted_flag, title, link, revised_flag FROM messages WHERE folder_id=%ld", (long)folderId];
         while ([results next]) {
             NSString * guid = [results stringForColumnIndex:0];
             BOOL read_flag = [results stringForColumnIndex:1].integerValue;
@@ -2026,8 +2026,6 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
             NSString * title = [results stringForColumnIndex:4];
             NSString * link = [results stringForColumnIndex:5];
             BOOL revised_flag = [results stringForColumnIndex:6].integerValue;
-            BOOL hasenclosure_flag = [results stringForColumnIndex:7].integerValue;
-            NSString * enclosure = [results stringForColumnIndex:8];
 
             // Keep our own track of unread articles
             if (!read_flag) {
@@ -2042,8 +2040,6 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
             article.folderId = folderId;
             article.title = title;
             article.link = link;
-            article.enclosure = enclosure;
-            article.hasEnclosure = hasenclosure_flag;
             [myCache addObject:article];
         }
         [results close];
