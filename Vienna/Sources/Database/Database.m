@@ -1272,6 +1272,14 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 		parentFolder = [self folderFromID:parentFolder.parentId];
 	}
 
+	__block BOOL success = NO;
+	[self.databaseQueue inDatabase:^(FMDatabase *db) {
+							success = [db executeStatements:@"PRAGMA locking_mode = EXCLUSIVE;"];
+	}];
+	if (!success) {
+		return NO;
+	}
+
 	// Adjust the child unread count for the old parent.
 	NSInteger adjustment = 0;
 	if (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader) {
@@ -1305,6 +1313,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
     [queue inDatabase:^(FMDatabase *db) {
         [db executeUpdate:@"UPDATE folders SET parent_id=? WHERE folder_id=?",
          @(newParentID), @(folderId)];
+        [db executeStatements:@"PRAGMA locking_mode = NORMAL;"];
     }];
 	return YES;
 }
@@ -1323,7 +1332,9 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
     
 	if (folderId == VNAFolderTypeRoot) {
 		[queue inDatabase:^(FMDatabase *db) {
+            [db executeStatements:@"PRAGMA locking_mode = EXCLUSIVE"];
             [db executeUpdate:@"UPDATE info SET first_folder=?", @(childId)];
+            [db executeStatements:@"PRAGMA locking_mode = NORMAL;"];
         }];
 	} else {
 		Folder * folder = [self folderFromID:folderId];
@@ -1333,8 +1344,10 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 		
 		folder.firstChildId = childId;
         [queue inDatabase:^(FMDatabase *db) {
+            [db executeStatements:@"PRAGMA locking_mode = EXCLUSIVE;"];
             [db executeUpdate:@"UPDATE folders SET first_child=? WHERE folder_id=?",
              @(childId), @(folderId)];
+            [db executeStatements:@"PRAGMA locking_mode = NORMAL;"];
         }];
 	}
 	
@@ -1356,12 +1369,21 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 		return NO;
 	}
 	
+	__block BOOL success = NO;
+	[self.databaseQueue inDatabase:^(FMDatabase *db) {
+							success = [db executeStatements:@"PRAGMA locking_mode = EXCLUSIVE;"];
+	}];
+	if (!success) {
+		return NO;
+	}
+
 	folder.nextSiblingId = nextSiblingId;
 	
     FMDatabaseQueue *queue = self.databaseQueue;
     [queue inDatabase:^(FMDatabase *db) {
         [db executeUpdate:@"UPDATE folders SET next_sibling=? WHERE folder_id=?",
          @(nextSiblingId), @(folderId)];
+        [db executeStatements:@"PRAGMA locking_mode = NORMAL;"];
     }];
 
 	return YES;
@@ -1867,6 +1889,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
         FMDatabaseQueue *queue = self.databaseQueue;
         
         [queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
+            [db executeStatements:@"PRAGMA locking_mode = EXCLUSIVE;"];
             FMResultSet * results = [db executeQuery:@"SELECT folder_id, parent_id, foldername, unread_count, last_update,"
                 @" type, flags, next_sibling, first_child FROM folders ORDER BY folder_id"];
             if (!results) {
@@ -1934,6 +1957,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 				folder.remoteId = remoteId;
 			}
 			[results close];
+			[db executeStatements:@"PRAGMA locking_mode = NORMAL;"];
 		}];
 		// Fix the childUnreadCount for every parent
 		for (Folder * folder in [self.foldersDict objectEnumerator]) {
