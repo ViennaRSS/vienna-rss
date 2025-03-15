@@ -70,7 +70,6 @@
 		_containsBodies = NO;
 		_hasPassword = NO;
 		_cachedArticles = [NSCache new];
-		_cachedArticles.delegate = self;
 		_cachedGuids = [NSMutableArray array];
 		_attributes = [NSMutableDictionary dictionary];
 		self.name = newName;
@@ -612,6 +611,7 @@
             }
         }
         self.isCached = YES;
+        self.containsBodies = NO;
         // Note that this only builds a minimal cache, so we cannot set the containsBodies flag
         // Note also that articles' statuses are left at the default value (0) which is ArticleStatusEmpty
       }
@@ -715,10 +715,9 @@
             // check consistency
             if (self.cachedGuids.count < self.unreadCount) {
                 NSLog(@"Bug from cache in folder %li : inconsistent count",(long)self.itemId);
-                @synchronized(self) {
-                    [self.cachedArticles removeAllObjects];
-                    return [self getCompleteArticles];
-                }
+                self.isCached = NO;
+                [self.cachedArticles removeAllObjects];
+                return [self getCompleteArticles];
             }
             // attempt to retrieve from cache
             NSMutableArray * articles = [NSMutableArray arrayWithCapacity:self.cachedGuids.count];
@@ -732,10 +731,9 @@
                 } else {
                     // some problem
                     NSLog(@"Bug retrieving from cache in folder %li : after %lu insertions of %lu, guid %@",(long)self.itemId, (unsigned long)articles.count,(unsigned long)self.cachedGuids.count,object);
-                    @synchronized(self) {
-                        [self.cachedArticles removeAllObjects];
-                        return [self getCompleteArticles];
-                    }
+                    self.isCached = NO;
+                    [self.cachedArticles removeAllObjects];
+                    return [self getCompleteArticles];
                 }
             }
             return [articles copy];
@@ -756,7 +754,6 @@
 {
   @synchronized(self){
     NSArray * articles = [[Database sharedManager] arrayOfArticles:self.itemId filterString:@""];
-    self.isCached = NO;
     self.containsBodies = NO;
     // Only feeds folders can be cached, as they are the only ones to guarantee
     // bijection : one article <-> one guid
@@ -832,15 +829,4 @@
 	return [NSString stringWithFormat:@"Folder id %li (%@)", (long)self.itemId, self.name];
 }
 
-#pragma mark NSCacheDelegate
--(void)cache:(NSCache *)cache willEvictObject:(id)obj
-{
-    @synchronized(self) {
-        Article * theArticle = ((Article *)obj);
-        NSString * guid = theArticle.guid;
-        self.isCached = NO;
-        self.containsBodies = NO;
-        [self.cachedGuids removeObject:guid];
-    }
-}
 @end

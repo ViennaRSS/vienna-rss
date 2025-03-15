@@ -57,7 +57,7 @@
 
 // The current database version number
 static NSInteger const VNAMinimumSupportedDatabaseVersion = 12;
-static NSInteger const VNACurrentDatabaseVersion = 25;
+static NSInteger const VNACurrentDatabaseVersion = 26;
 
 @implementation Database
 
@@ -1595,29 +1595,26 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
     // Extract the data from the new state of article
     NSString * articleBody = articleUpdate.body;
     NSString * articleTitle = articleUpdate.title;
+    NSDate * lastUpdate = articleUpdate.lastUpdate;
     NSString * articleLink = articleUpdate.link.vna_trimmed;
     NSString * userName = articleUpdate.author.vna_trimmed;
     NSString * articleGuid = articleUpdate.guid;
     NSInteger parentId = articleUpdate.parentId;
     BOOL revised_flag = articleUpdate.isRevised;
+    BOOL hasenclosure_flag = articleUpdate.hasEnclosure;
+    NSString * articleEnclosure = articleUpdate.enclosure.vna_trimmed;
 
-    // keep last update date the same if not set in the current version of the article
-    NSDate * lastUpdate = existingArticle.lastUpdate;
-    if (articleUpdate.lastUpdate && [articleUpdate.lastUpdate isGreaterThan:lastUpdate]) {
-        lastUpdate = articleUpdate.lastUpdate;
-    }
-
-    // we never change the publication date, unless the date provided in the feed is prior to it
-    NSDate * publicationDate = existingArticle.publicationDate;
-    if (articleUpdate.publicationDate
-        && [articleUpdate.publicationDate timeIntervalSince1970] > 0
-        && [articleUpdate.publicationDate isLessThan:publicationDate]) {
-        publicationDate = articleUpdate.publicationDate;
+    // if a last update date is not provided, use either publication date or current date
+    if (!lastUpdate || [lastUpdate timeIntervalSince1970] == 0) {
+        lastUpdate = articleUpdate.publicationDate;
+        if (!lastUpdate || [lastUpdate timeIntervalSince1970] == 0) {
+            lastUpdate = [NSDate date];
+        }
+        articleUpdate.lastUpdate = lastUpdate;
     }
 
     // Dates are stored as time intervals
     NSTimeInterval lastUpdateIntervalSince1970 = lastUpdate.timeIntervalSince1970;
-    NSTimeInterval publicationIntervalSince1970 = publicationDate.timeIntervalSince1970;
 
     // Set some defaults
     if (userName == nil) {
@@ -1629,26 +1626,30 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
         articleTitle = [NSString vna_stringByRemovingHTML:articleBody].vna_firstNonBlankLine;
     }
 
-    // The article is revised if either the title or the body has changed.
+    // The article is revised if either the title, the body or the enclosure link has changed.
 
     NSString * existingTitle = existingArticle.title;
     BOOL isArticleRevised = ![existingTitle isEqualToString:articleTitle];
     if (!isArticleRevised) {
         __block NSString * existingBody = existingArticle.body;
+        __block NSString * existingEnclosure = existingArticle.enclosure;
         // the article text may not have been loaded yet, for instance if the folder is not displayed
         if (existingBody == nil) {
             [queue inDatabase:^(FMDatabase *db) {
-                FMResultSet * results = [db executeQuery:@"SELECT text FROM messages WHERE folder_id=? AND message_id=?",
+                FMResultSet * results = [db executeQuery:@"SELECT text, enclosure FROM messages WHERE folder_id=? AND message_id=?",
                                          @(folderID), articleGuid];
                 if ([results next]) {
-                        existingBody = [results stringForColumn:@"text"];
+                        existingBody = [results stringForColumnIndex:0];
+                        existingEnclosure = [results stringForColumnIndex:1];
                 } else {
                         existingBody = @"";
+                        existingEnclosure = @"";
                 }
                 [results close];
             }];
         }
-        isArticleRevised = ![existingBody isEqualToString:articleBody];
+        isArticleRevised = ![existingBody isEqualToString:articleBody]
+                           || (articleEnclosure != nil && ![existingEnclosure isEqualToString:articleEnclosure]);
     }
 
     if (isArticleRevised) {
@@ -1659,18 +1660,21 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
             revised_flag = YES;
         }
 
+        // Note: we never change the publication date
         __block BOOL success;
         [queue inDatabase:^(FMDatabase *db) {
-            success = [db executeUpdate:@"UPDATE messages SET parent_id=?, sender=?, link=?, date=?, createddate=?, "
-             @"read_flag=0, title=?, text=?, revised_flag=? WHERE folder_id=? AND message_id=?",
+            success = [db executeUpdate:@"UPDATE messages SET parent_id=?, sender=?, link=?, date=?, "
+             @"read_flag=0, title=?, text=?, revised_flag=?, enclosure=?, hasenclosure_flag=? "
+             @"WHERE folder_id=? AND message_id=?",
              @(parentId),
              userName,
              articleLink,
              @(lastUpdateIntervalSince1970),
-             @(publicationIntervalSince1970),
              articleTitle,
              articleBody,
              @(revised_flag),
+             articleEnclosure,
+             @(hasenclosure_flag),
              @(folderID),
              articleGuid];
 
@@ -1687,7 +1691,8 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
             existingArticle.author = userName;
             existingArticle.link = articleLink;
             existingArticle.lastUpdate = lastUpdate;
-            existingArticle.publicationDate = publicationDate;
+            existingArticle.hasEnclosure = hasenclosure_flag;
+            existingArticle.enclosure = articleEnclosure;
             return YES;
         }
     } else {
@@ -2023,7 +2028,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 
     FMDatabaseQueue *queue = self.databaseQueue;
     [queue inDatabase:^(FMDatabase *db) {
-        FMResultSet * results = [db executeQueryWithFormat:@"SELECT message_id, read_flag, marked_flag, deleted_flag, title, link, revised_flag, hasenclosure_flag, enclosure FROM messages WHERE folder_id=%ld", (long)folderId];
+        FMResultSet * results = [db executeQueryWithFormat:@"SELECT message_id, read_flag, marked_flag, deleted_flag, title, link, revised_flag FROM messages WHERE folder_id=%ld", (long)folderId];
         while ([results next]) {
             NSString * guid = [results stringForColumnIndex:0];
             BOOL read_flag = [results stringForColumnIndex:1].integerValue;
@@ -2032,8 +2037,6 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
             NSString * title = [results stringForColumnIndex:4];
             NSString * link = [results stringForColumnIndex:5];
             BOOL revised_flag = [results stringForColumnIndex:6].integerValue;
-            BOOL hasenclosure_flag = [results stringForColumnIndex:7].integerValue;
-            NSString * enclosure = [results stringForColumnIndex:8];
 
             // Keep our own track of unread articles
             if (!read_flag) {
@@ -2048,8 +2051,6 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
             article.folderId = folderId;
             article.title = title;
             article.link = link;
-            article.enclosure = enclosure;
-            article.hasEnclosure = hasenclosure_flag;
             [myCache addObject:article];
         }
         [results close];
