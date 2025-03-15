@@ -1601,6 +1601,8 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
     NSString * articleGuid = articleUpdate.guid;
     NSInteger parentId = articleUpdate.parentId;
     BOOL revised_flag = articleUpdate.isRevised;
+    BOOL hasenclosure_flag = articleUpdate.hasEnclosure;
+    NSString * articleEnclosure = articleUpdate.enclosure.vna_trimmed;
 
     // if a last update date is not provided, use either publication date or current date
     if (!lastUpdate || [lastUpdate timeIntervalSince1970] == 0) {
@@ -1624,26 +1626,30 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
         articleTitle = [NSString vna_stringByRemovingHTML:articleBody].vna_firstNonBlankLine;
     }
 
-    // The article is revised if either the title or the body has changed.
+    // The article is revised if either the title, the body or the enclosure link has changed.
 
     NSString * existingTitle = existingArticle.title;
     BOOL isArticleRevised = ![existingTitle isEqualToString:articleTitle];
     if (!isArticleRevised) {
         __block NSString * existingBody = existingArticle.body;
+        __block NSString * existingEnclosure = existingArticle.enclosure;
         // the article text may not have been loaded yet, for instance if the folder is not displayed
         if (existingBody == nil) {
             [queue inDatabase:^(FMDatabase *db) {
-                FMResultSet * results = [db executeQuery:@"SELECT text FROM messages WHERE folder_id=? AND message_id=?",
+                FMResultSet * results = [db executeQuery:@"SELECT text, enclosure FROM messages WHERE folder_id=? AND message_id=?",
                                          @(folderID), articleGuid];
                 if ([results next]) {
-                        existingBody = [results stringForColumn:@"text"];
+                        existingBody = [results stringForColumnIndex:0];
+                        existingEnclosure = [results stringForColumnIndex:1];
                 } else {
                         existingBody = @"";
+                        existingEnclosure = @"";
                 }
                 [results close];
             }];
         }
-        isArticleRevised = ![existingBody isEqualToString:articleBody];
+        isArticleRevised = ![existingBody isEqualToString:articleBody]
+                           || (articleEnclosure != nil && ![existingEnclosure isEqualToString:articleEnclosure]);
     }
 
     if (isArticleRevised) {
@@ -1658,7 +1664,8 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
         __block BOOL success;
         [queue inDatabase:^(FMDatabase *db) {
             success = [db executeUpdate:@"UPDATE messages SET parent_id=?, sender=?, link=?, date=?, "
-             @"read_flag=0, title=?, text=?, revised_flag=? WHERE folder_id=? AND message_id=?",
+             @"read_flag=0, title=?, text=?, revised_flag=?, enclosure=?, hasenclosure_flag=? "
+             @"WHERE folder_id=? AND message_id=?",
              @(parentId),
              userName,
              articleLink,
@@ -1666,6 +1673,8 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
              articleTitle,
              articleBody,
              @(revised_flag),
+             articleEnclosure,
+             @(hasenclosure_flag),
              @(folderID),
              articleGuid];
 
@@ -1682,6 +1691,8 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
             existingArticle.author = userName;
             existingArticle.link = articleLink;
             existingArticle.lastUpdate = lastUpdate;
+            existingArticle.hasEnclosure = hasenclosure_flag;
+            existingArticle.enclosure = articleEnclosure;
             return YES;
         }
     } else {
