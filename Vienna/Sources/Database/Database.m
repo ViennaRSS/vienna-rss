@@ -1604,18 +1604,6 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
     BOOL hasenclosure_flag = articleUpdate.hasEnclosure;
     NSString * articleEnclosure = articleUpdate.enclosure.vna_trimmed;
 
-    // if a last update date is not provided, use either publication date or current date
-    if (!lastUpdate || [lastUpdate timeIntervalSince1970] == 0) {
-        lastUpdate = articleUpdate.publicationDate;
-        if (!lastUpdate || [lastUpdate timeIntervalSince1970] == 0) {
-            lastUpdate = [NSDate date];
-        }
-        articleUpdate.lastUpdate = lastUpdate;
-    }
-
-    // Dates are stored as time intervals
-    NSTimeInterval lastUpdateIntervalSince1970 = lastUpdate.timeIntervalSince1970;
-
     // Set some defaults
     if (userName == nil) {
         userName = @"";
@@ -1630,18 +1618,21 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 
     NSString * existingTitle = existingArticle.title;
     BOOL isArticleRevised = ![existingTitle isEqualToString:articleTitle];
+    __block NSString * existingBody = existingArticle.body;
+    __block NSString * existingEnclosure = existingArticle.enclosure;
+    __block NSDate * existingLastUpdate;
     if (!isArticleRevised) {
-        __block NSString * existingBody = existingArticle.body;
-        __block NSString * existingEnclosure = existingArticle.enclosure;
         // the article text may not have been loaded yet, for instance if the folder is not displayed
         if (existingBody == nil) {
             [queue inDatabase:^(FMDatabase *db) {
-                FMResultSet * results = [db executeQuery:@"SELECT text, enclosure FROM messages WHERE folder_id=? AND message_id=?",
+                FMResultSet * results = [db executeQuery:@"SELECT date, text, enclosure FROM messages WHERE folder_id=? AND message_id=?",
                                          @(folderID), articleGuid];
                 if ([results next]) {
-                        existingBody = [results stringForColumnIndex:0];
-                        existingEnclosure = [results stringForColumnIndex:1];
-                } else {
+                        existingLastUpdate = [NSDate dateWithTimeIntervalSince1970:[results stringForColumnIndex:0].doubleValue];
+                        existingBody = [results stringForColumnIndex:1];
+                        existingEnclosure = [results stringForColumnIndex:2];
+                } else {  // should never occur; set sensible fallbacks anyway
+                        existingLastUpdate = articleUpdate.publicationDate;
                         existingBody = @"";
                         existingEnclosure = @"";
                 }
@@ -1651,6 +1642,21 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
         isArticleRevised = ![existingBody isEqualToString:articleBody]
                            || (articleEnclosure != nil && ![existingEnclosure isEqualToString:articleEnclosure]);
     }
+
+    // if a last update date is not provided in articleUpdate, use the one previously stored in database
+    // or the publication date or the current date
+    if (!lastUpdate || [lastUpdate timeIntervalSince1970] == 0) {
+        lastUpdate = existingLastUpdate;
+        if (!lastUpdate || [lastUpdate timeIntervalSince1970] == 0) {
+            lastUpdate = articleUpdate.publicationDate;
+            if (!lastUpdate || [lastUpdate timeIntervalSince1970] == 0) {
+                lastUpdate = [NSDate date];
+            }
+        }
+    }
+
+    // Dates are stored as time intervals
+    NSTimeInterval lastUpdateIntervalSince1970 = lastUpdate.timeIntervalSince1970;
 
     if (isArticleRevised) {
         // Articles preexisting in database should be marked as revised.
