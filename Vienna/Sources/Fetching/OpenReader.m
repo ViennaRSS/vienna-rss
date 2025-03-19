@@ -192,16 +192,17 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             NSURLSessionDataTask * task = [[NSURLSession sharedSession] dataTaskWithRequest:myRequest
                 completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                     self.openReaderStatus = notAuthenticated;
+                    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 					if (error) {
 						NSString * alertDescription = error.localizedDescription;
 						if (![alertDescription isEqualToString:self->latestAlertDescription]) {
-						    [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:MA_Notify_GoogleAuthFailed object:alertDescription];
+						    [nc vna_postNotificationOnMainThreadWithName:MA_Notify_GoogleAuthFailed object:alertDescription];
 						    self->latestAlertDescription = alertDescription;
 						}
 					} else if (((NSHTTPURLResponse *)response).statusCode != 200) {
 						NSString * alertDescription = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 						if (![alertDescription isEqualToString:self->latestAlertDescription]) {
-						    [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:MA_Notify_GoogleAuthFailed object:alertDescription];
+						    [nc vna_postNotificationOnMainThreadWithName:MA_Notify_GoogleAuthFailed object:alertDescription];
 						    self->latestAlertDescription = alertDescription;
 						}
  					} else {         // statusCode 200
@@ -212,7 +213,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 							if([item hasPrefix:@"Auth="]) {
 								self.clientAuthToken = [item substringFromIndex:5];
                                 if ([self.clientAuthToken isEqualToString:@"(null)"] || [self.clientAuthToken isEqualToString:@""]) {
-                                    [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:MA_Notify_GoogleAuthFailed object:@""];
+                                    [nc vna_postNotificationOnMainThreadWithName:MA_Notify_GoogleAuthFailed object:@""];
                                     self->latestAlertDescription = @"";
 								} else {
 								    self.openReaderStatus = missingTToken;								
@@ -527,15 +528,10 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 
         ActivityItem *aItem = ((NSDictionary *)[request vna_userInfo])[@"log"];
         Folder *refreshedFolder = ((NSDictionary *)[request vna_userInfo])[@"folder"];
+        NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+        NSInteger statusCode = ((NSHTTPURLResponse *)response).statusCode;
 
-        if (((NSHTTPURLResponse *)response).statusCode == 404) {
-            [aItem appendDetail:NSLocalizedString(@"Error: Feed not found!", nil)];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [aItem setStatus:NSLocalizedString(@"Error", nil)];
-            });
-            [refreshedFolder clearNonPersistedFlag:VNAFolderFlagUpdating];
-            [refreshedFolder setNonPersistedFlag:VNAFolderFlagError];
-        } else if (((NSHTTPURLResponse *)response).statusCode == 200) {
+        if (statusCode == 200) {
             // reset unread statuses in cache : we will receive in -ReadRequestDone: the updated list of unreads
             [refreshedFolder markArticlesInCacheRead];
             NSDictionary *subscriptionsDict;
@@ -689,8 +685,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                 });
             }
         } else { //other HTTP status response...
-            [aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil),
-                                 (int)((NSHTTPURLResponse *)response).statusCode]];
+            [aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %ld reported from server", nil), statusCode]];
             os_log_error(VNA_LOG, "Unhandled status code %ld for request %{mask.hash}@", ((NSHTTPURLResponse *)response).statusCode, request.URL);
             os_log_debug(VNA_LOG, "Request header for request %{mask.hash}@: %@", request.URL, request.allHTTPHeaderFields);
             os_log_debug(VNA_LOG, "Request body for request %{mask.hash}@: %@", request.URL, [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
@@ -699,12 +694,18 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [aItem setStatus:NSLocalizedString(@"Error", nil)];
             });
+            if (statusCode == 401 || statusCode == 403) {
+                NSString * alertDescription = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                if (![alertDescription isEqualToString:self->latestAlertDescription]) {
+                    [nc vna_postNotificationOnMainThreadWithName:MA_Notify_GoogleAuthFailed object:alertDescription];
+                    self->latestAlertDescription = alertDescription;
+                }
+            }
             [refreshedFolder clearNonPersistedFlag:VNAFolderFlagUpdating];
             [refreshedFolder setNonPersistedFlag:VNAFolderFlagError];
             [refreshedFolder clearNonPersistedFlag:VNAFolderFlagSyncedOK];
         }
-        [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:MA_Notify_FoldersUpdated
-                                                                                object:@(refreshedFolder.itemId)];
+        [nc vna_postNotificationOnMainThreadWithName:MA_Notify_FoldersUpdated object:@(refreshedFolder.itemId)];
     });     //block for dispatch_async
 } // feedRequestDone
 

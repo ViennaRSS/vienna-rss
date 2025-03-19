@@ -10458,6 +10458,7 @@
       }
     },
     "Error: Feed not found!" : {
+      "extractionState" : "stale",
       "localizations" : {
         "da" : {
           "stringUnit" : {
@@ -12795,6 +12796,9 @@
           }
         }
       }
+    },
+    "HTTP code %ld reported from server" : {
+
     },
     "If you quit Vienna now, all downloads will stop." : {
       "comment" : "Message text of an alert",
