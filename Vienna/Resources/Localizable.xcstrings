@@ -12673,132 +12673,129 @@
         }
       }
     },
-    "HTTP code %d reported from server" : {
+    "HTTP code %ld reported from server" : {
       "localizations" : {
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ze serveru byl obdržen kód HTTP: %d"
+            "value" : "Ze serveru byl obdržen kód HTTP: %ld"
           }
         },
         "da" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "HTTP-kode %d angivet af server"
+            "value" : "HTTP-kode %ld angivet af server"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Der Server lieferte den HTTP-Code %d"
+            "value" : "Der Server lieferte den HTTP-Code %ld"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Código HTTP %d notificado desde el servidor"
+            "value" : "Código HTTP %ld notificado desde el servidor"
           }
         },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zerbitzariak %d HTTP kodea bueltatu du"
+            "value" : "Zerbitzariak %ld HTTP kodea bueltatu du"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Code HTTP %d renvoyé par le serveur"
+            "value" : "Code HTTP %ld renvoyé par le serveur"
           }
         },
         "gl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Código HTTP %d notificado dende o servidor"
+            "value" : "Código HTTP %ld notificado dende o servidor"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Il server ha riportato il codice HTTP %d"
+            "value" : "Il server ha riportato il codice HTTP %ld"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "HTTP コード %d がサーバから送られました。"
+            "value" : "HTTP コード %ld がサーバから送られました。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "서버로부터 HTTP 코드 보고: %d"
+            "value" : "서버로부터 HTTP 코드 보고: %ld"
           }
         },
         "lt" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Serveris pateikė HTTP kodą %d"
+            "value" : "Serveris pateikė HTTP kodą %ld"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "HTTP-code %d gemeld door de server"
+            "value" : "HTTP-code %ld gemeld door de server"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Código HTTP %d relatado do servidor"
+            "value" : "Código HTTP %ld relatado do servidor"
           }
         },
         "pt-PT" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Código HTTP %d devolvido pelo servidor"
+            "value" : "Código HTTP %ld devolvido pelo servidor"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Сервер передал HTTP код %d"
+            "value" : "Сервер передал HTTP код %ld"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "HTTP-kod %d rapporterad från server"
+            "value" : "HTTP-kod %ld rapporterad från server"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%d HTTP kodu sunucudan alındı"
+            "value" : "%ld HTTP kodu sunucudan alındı"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "З серверу отримано HTTP код %d"
+            "value" : "З серверу отримано HTTP код %ld"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "服务器回报 HTTP 代码 %d"
+            "value" : "服务器回报 HTTP 代码 %ld"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "伺服器回報 HTTP 碼 %d"
+            "value" : "伺服器回報 HTTP 碼 %ld"
           }
         }
       }
-    },
-    "HTTP code %ld reported from server" : {
-
     },
     "If you quit Vienna now, all downloads will stop." : {
       "comment" : "Message text of an alert",
