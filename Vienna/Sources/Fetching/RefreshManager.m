@@ -434,8 +434,8 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
                         [aItem appendDetail:NSLocalizedString(@"RSS Icon not found!", nil)];
                     }
                 } else {
-                    [aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server",
-                                                                                     nil), (int)((NSHTTPURLResponse *)response).statusCode]];
+                    [aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %ld reported from server",
+                                                                                     nil), ((NSHTTPURLResponse *)response).statusCode]];
                 }
 
                 [[Database sharedManager] clearFlag:VNAFolderFlagCheckForImage forFolder:folder.itemId];
@@ -626,8 +626,8 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
                  }];
             }
         } else { //other HTTP response codes like 404, 403...
-            [connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil),
-                                         (int)responseStatusCode]];
+            [connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %ld reported from server", nil),
+                                         responseStatusCode]];
             [connectorItem appendDetail:[NSHTTPURLResponse localizedStringForStatusCode:responseStatusCode]];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [connectorItem setStatus:NSLocalizedString(@"Error", nil)];

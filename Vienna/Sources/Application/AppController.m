@@ -1069,7 +1069,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         } else {
             alert.informativeText = NSLocalizedString(@"Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences. Also check your network access.",nil);
         }
-        [alert beginSheetModalForWindow:self.mainWindow completionHandler:nil];
+        [alert beginSheetModalForWindow:self.mainWindow completionHandler:^(NSModalResponse returnCode) {
+            [[OpenReader sharedManager] clearAuthentication];
+        }];
     }
 }
 
