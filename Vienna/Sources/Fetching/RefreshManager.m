@@ -66,7 +66,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 -(void)pumpFolderIconRefresh:(Folder *)folder;
 -(void)refreshFeed:(Folder *)folder fromURL:(NSURL *)url withLog:(ActivityItem *)aItem shouldForceRefresh:(BOOL)force;
 -(NSString *)getRedirectURL:(NSData *)data;
--(void)syncFinishedForFolder:(Folder *)folder;
 
 @end
 
@@ -566,7 +565,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     [aItem appendDetail:[NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Error retrieving RSS feed:", nil),
                          error.localizedDescription ]];
     [aItem setStatus:NSLocalizedString(@"Error", nil)];
-    [self syncFinishedForFolder:folder];
+    [self setFolderUpdatingFlag:folder flag:NO];
 } // folderRefreshFailed
 
 /* folderRefreshCompleted
@@ -607,8 +606,8 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
             [connectorItem appendDetail:NSLocalizedString(@"Got HTTP status 304 - No news from last check", nil)];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [connectorItem setStatus:NSLocalizedString(@"No new articles available", nil)];
-                [self syncFinishedForFolder:folder];
             });
+            [self setFolderUpdatingFlag:folder flag:NO];
             return;
         } else if (responseStatusCode == 410) {
             // We got HTTP 410 which means the feed has been intentionally removed so unsubscribe the feed.
@@ -635,9 +634,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
             [self setFolderErrorFlag:folder flag:YES];
         }
 
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self syncFinishedForFolder:folder];
-        });
+        [self setFolderUpdatingFlag:folder flag:NO];
     });     //block for dispatch_async on _queue
 } // folderRefreshCompleted
 
@@ -998,11 +995,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     }
     return nil;
 } // getRedirectURL
-
--(void)syncFinishedForFolder:(Folder *)folder
-{
-    [self setFolderUpdatingFlag:folder flag:NO];
-}
 
 #pragma mark NSURLSession redirection delegate
 -(void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task willPerformHTTPRedirection:(NSHTTPURLResponse *)response newRequest:(

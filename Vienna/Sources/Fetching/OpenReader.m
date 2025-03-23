@@ -741,7 +741,6 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [aItem setStatus:NSLocalizedString(@"Error", nil)];
                 });
-                [refreshedFolder clearNonPersistedFlag:VNAFolderFlagUpdating];
                 [refreshedFolder setNonPersistedFlag:VNAFolderFlagError];
                 [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:MA_Notify_FoldersUpdated object:@(
                      refreshedFolder.itemId)];
@@ -759,7 +758,6 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [aItem setStatus:NSLocalizedString(@"Error", nil)];
             });
-            [refreshedFolder clearNonPersistedFlag:VNAFolderFlagUpdating];
             [refreshedFolder setNonPersistedFlag:VNAFolderFlagError];
         }
     });     //block for dispatch_async
@@ -796,14 +794,11 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                 }
 
                 [[Database sharedManager] markStarredArticlesFromFolder:refreshedFolder guidArray:guidArray];
-
-                [refreshedFolder clearNonPersistedFlag:VNAFolderFlagUpdating];
             } @catch (NSException *exception) {
                 [aItem appendDetail:[NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Error", nil), exception]];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [aItem setStatus:NSLocalizedString(@"Error", nil)];
                 });
-                [refreshedFolder clearNonPersistedFlag:VNAFolderFlagUpdating];
                 [refreshedFolder setNonPersistedFlag:VNAFolderFlagError];
             } // try/catch
         } else { //response status other than OK (200)
@@ -812,10 +807,10 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [aItem setStatus:NSLocalizedString(@"Error", nil)];
             });
-            [refreshedFolder clearNonPersistedFlag:VNAFolderFlagUpdating];
             [refreshedFolder setNonPersistedFlag:VNAFolderFlagError];
         }
         // mark end of feed refresh
+        [refreshedFolder clearNonPersistedFlag:VNAFolderFlagUpdating];
         [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:MA_Notify_FoldersUpdated
                                                                                 object:@(refreshedFolder.itemId)];
     });     //block for dispatch_async
