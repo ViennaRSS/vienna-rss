@@ -573,7 +573,6 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
         FMDatabaseQueue *queue = self.databaseQueue;
         [queue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"UPDATE folders SET flags=? WHERE folder_id=?", @(folder.flags), @(folderId)];
-        [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:MA_Notify_FoldersUpdated object:@(folderId)];
         }];
 	}
 }
@@ -598,7 +597,6 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
         FMDatabaseQueue *queue = self.databaseQueue;
         [queue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"UPDATE folders SET flags=? WHERE folder_id=?", @(folder.flags), @(folderId)];
-            [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:MA_Notify_FoldersUpdated object:@(folderId)];
         }];
 	}
 }

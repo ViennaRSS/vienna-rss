@@ -695,7 +695,6 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             [refreshedFolder setNonPersistedFlag:VNAFolderFlagError];
             [refreshedFolder clearNonPersistedFlag:VNAFolderFlagSyncedOK];
         }
-        [nc vna_postNotificationOnMainThreadWithName:MA_Notify_FoldersUpdated object:@(refreshedFolder.itemId)];
     });     //block for dispatch_async
 } // feedRequestDone
 
@@ -742,11 +741,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                     [aItem setStatus:NSLocalizedString(@"Error", nil)];
                 });
                 [refreshedFolder setNonPersistedFlag:VNAFolderFlagError];
-                [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:MA_Notify_FoldersUpdated object:@(
-                     refreshedFolder.itemId)];
-                return;
             } // try/catch
-
 
             // If this folder also requires an image refresh, add that
             if (refreshedFolder.flags & VNAFolderFlagCheckForImage) {

@@ -363,7 +363,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     } else {
         [folder clearNonPersistedFlag:VNAFolderFlagError];
     }
-    [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:MA_Notify_FoldersUpdated object:@(folder.itemId)];
 }
 
 /* setFolderUpdatingFlag
@@ -377,7 +376,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     } else {
         [folder clearNonPersistedFlag:VNAFolderFlagUpdating];
     }
-    [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:MA_Notify_FoldersUpdated object:@(folder.itemId)];
 }
 
 /* pumpFolderIconRefresh
@@ -566,6 +564,8 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
                          error.localizedDescription ]];
     [aItem setStatus:NSLocalizedString(@"Error", nil)];
     [self setFolderUpdatingFlag:folder flag:NO];
+    NSNotificationCenter *nc = NSNotificationCenter.defaultCenter;
+    [nc vna_postNotificationOnMainThreadWithName:MA_Notify_FoldersUpdated object:@(folder.itemId)];
 } // folderRefreshFailed
 
 /* folderRefreshCompleted
@@ -635,6 +635,8 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         }
 
         [self setFolderUpdatingFlag:folder flag:NO];
+        NSNotificationCenter *nc = NSNotificationCenter.defaultCenter;
+        [nc vna_postNotificationOnMainThreadWithName:MA_Notify_FoldersUpdated object:@(folder.itemId)];
     });     //block for dispatch_async on _queue
 } // folderRefreshCompleted
 
