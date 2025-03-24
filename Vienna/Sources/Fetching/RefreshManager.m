@@ -1196,7 +1196,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     if (hasStarted && networkQueue.operationCount == 0) {
         NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
         [nc postNotificationName:MA_Notify_RefreshStatus object:nil];
-        [nc postNotificationName:MA_Notify_ArticleListContentChange object:nil];
         statusMessageDuringRefresh = NSLocalizedString(@"Refresh completed", nil);
         hasStarted = NO;
         os_log_info(VNA_LOG, "Finished refreshing");

@@ -806,8 +806,9 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
         }
         // mark end of feed refresh
         [refreshedFolder clearNonPersistedFlag:VNAFolderFlagUpdating];
-        [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:MA_Notify_FoldersUpdated
-                                                                                object:@(refreshedFolder.itemId)];
+        NSNotificationCenter * nc = NSNotificationCenter.defaultCenter;
+        [nc vna_postNotificationOnMainThreadWithName:MA_Notify_FoldersUpdated object:@(refreshedFolder.itemId)];
+        [nc vna_postNotificationOnMainThreadWithName:MA_Notify_ArticleListContentChange object:@(refreshedFolder.itemId)];
     });     //block for dispatch_async
 } // starredRequestDone
 
