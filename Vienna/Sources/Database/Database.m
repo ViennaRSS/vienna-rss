@@ -1515,7 +1515,8 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
     // use the given publication date if it is contained in the feed, or the earliest date available
     NSDate * publicationDate = article.publicationDate;
     if (!publicationDate || [publicationDate timeIntervalSince1970] == 0) {
-        publicationDate = article.lastUpdate && [article.lastUpdate isLessThan:currentDate]
+        publicationDate = article.lastUpdate && [article.lastUpdate timeIntervalSince1970] != 0
+                            && [article.lastUpdate isLessThan:currentDate]
                                    ? article.lastUpdate 
                                    : currentDate;
         article.publicationDate = publicationDate;
