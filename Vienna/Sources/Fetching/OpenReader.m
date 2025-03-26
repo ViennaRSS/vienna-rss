@@ -358,8 +358,6 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 -(void)requestFailed:(NSMutableURLRequest *)request response:(NSURLResponse *)response error:(NSError *)error
 {
     os_log_error(VNA_LOG, "Failed on request %{mask.hash}@. Reason: %{public}@", request.URL, error.localizedDescription);
-    os_log_debug(VNA_LOG, "Request header for %{mask.hash}@: %@", request.URL, request.allHTTPHeaderFields);
-    os_log_debug(VNA_LOG, "Response header for %{mask.hash}@: %@", request.URL, ((NSHTTPURLResponse *)response).allHeaderFields);
     if (error.code == NSURLErrorUserAuthenticationRequired) {   //Error caused by lack of authentication
         [self clearAuthentication];
     }
@@ -371,8 +369,6 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     NSString *requestResponse = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     if (![requestResponse isEqualToString:@"OK"]) {
         os_log_error(VNA_LOG, "Error (response: %{public}@, status code: %ld) on request %{mask.hash}@", requestResponse, ((NSHTTPURLResponse *)response).statusCode, request.URL);
-        os_log_debug(VNA_LOG, "Request header for %{mask.hash}@: %@", request.URL, request.allHTTPHeaderFields);
-        os_log_debug(VNA_LOG, "Response header for %{mask.hash}@: %@", request.URL, ((NSHTTPURLResponse *)response).allHeaderFields);
     }
 }
 
@@ -505,9 +501,6 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 -(void)feedRequestFailed:(NSMutableURLRequest *)request response:(NSURLResponse *)response error:(NSError *)error
 {
     os_log_error(VNA_LOG, "Open Reader feed request %{mask.hash}@ failed. Reason: %{public}@", request.URL, error.localizedDescription);
-    os_log_debug(VNA_LOG, "Request header for request %{mask.hash}@: %@", request.URL, request.allHTTPHeaderFields);
-    os_log_debug(VNA_LOG, "Request body for request %{mask.hash}@: %@", request.URL, [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
-    os_log_debug(VNA_LOG, "Response header for request %{mask.hash}@: %@", request.URL, ((NSHTTPURLResponse *)response).allHeaderFields);
     ActivityItem *aItem = ((NSDictionary *)[request vna_userInfo])[@"log"];
     Folder *refreshedFolder = ((NSDictionary *)[request vna_userInfo])[@"folder"];
 
@@ -686,10 +679,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             }
         } else { //other HTTP status response...
             [aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %ld reported from server", nil), statusCode]];
-            os_log_error(VNA_LOG, "Unhandled status code %ld for request %{mask.hash}@", ((NSHTTPURLResponse *)response).statusCode, request.URL);
-            os_log_debug(VNA_LOG, "Request header for request %{mask.hash}@: %@", request.URL, request.allHTTPHeaderFields);
-            os_log_debug(VNA_LOG, "Request body for request %{mask.hash}@: %@", request.URL, [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
-            os_log_debug(VNA_LOG, "Response header for request %{mask.hash}@: %@", request.URL, ((NSHTTPURLResponse *)response).allHeaderFields);
+            os_log_error(VNA_LOG, "Unexpected status code %ld for request %{mask.hash}@", ((NSHTTPURLResponse *)response).statusCode, request.URL);
             os_log_debug(VNA_LOG, "Data for request %{mask.hash}@: %@", request.URL, [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
             dispatch_async(dispatch_get_main_queue(), ^{
                 [aItem setStatus:NSLocalizedString(@"Error", nil)];
@@ -705,7 +695,6 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             [refreshedFolder setNonPersistedFlag:VNAFolderFlagError];
             [refreshedFolder clearNonPersistedFlag:VNAFolderFlagSyncedOK];
         }
-        [nc vna_postNotificationOnMainThreadWithName:MA_Notify_FoldersUpdated object:@(refreshedFolder.itemId)];
     });     //block for dispatch_async
 } // feedRequestDone
 
@@ -751,13 +740,8 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [aItem setStatus:NSLocalizedString(@"Error", nil)];
                 });
-                [refreshedFolder clearNonPersistedFlag:VNAFolderFlagUpdating];
                 [refreshedFolder setNonPersistedFlag:VNAFolderFlagError];
-                [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:MA_Notify_FoldersUpdated object:@(
-                     refreshedFolder.itemId)];
-                return;
             } // try/catch
-
 
             // If this folder also requires an image refresh, add that
             if (refreshedFolder.flags & VNAFolderFlagCheckForImage) {
@@ -769,7 +753,6 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [aItem setStatus:NSLocalizedString(@"Error", nil)];
             });
-            [refreshedFolder clearNonPersistedFlag:VNAFolderFlagUpdating];
             [refreshedFolder setNonPersistedFlag:VNAFolderFlagError];
         }
     });     //block for dispatch_async
@@ -806,14 +789,11 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                 }
 
                 [[Database sharedManager] markStarredArticlesFromFolder:refreshedFolder guidArray:guidArray];
-
-                [refreshedFolder clearNonPersistedFlag:VNAFolderFlagUpdating];
             } @catch (NSException *exception) {
                 [aItem appendDetail:[NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Error", nil), exception]];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [aItem setStatus:NSLocalizedString(@"Error", nil)];
                 });
-                [refreshedFolder clearNonPersistedFlag:VNAFolderFlagUpdating];
                 [refreshedFolder setNonPersistedFlag:VNAFolderFlagError];
             } // try/catch
         } else { //response status other than OK (200)
@@ -822,18 +802,20 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [aItem setStatus:NSLocalizedString(@"Error", nil)];
             });
-            [refreshedFolder clearNonPersistedFlag:VNAFolderFlagUpdating];
             [refreshedFolder setNonPersistedFlag:VNAFolderFlagError];
         }
         // mark end of feed refresh
-        [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:MA_Notify_FoldersUpdated
-                                                                                object:@(refreshedFolder.itemId)];
+        [refreshedFolder clearNonPersistedFlag:VNAFolderFlagUpdating];
+        NSNotificationCenter * nc = NSNotificationCenter.defaultCenter;
+        [nc vna_postNotificationOnMainThreadWithName:MA_Notify_FoldersUpdated object:@(refreshedFolder.itemId)];
+        [nc vna_postNotificationOnMainThreadWithName:MA_Notify_ArticleListContentChange object:@(refreshedFolder.itemId)];
     });     //block for dispatch_async
 } // starredRequestDone
 
 -(void)loadSubscriptions
 {
     [[RefreshManager sharedManager] suspendConnectionsQueue];
+    latestAlertDescription = @"";
     NSMutableURLRequest *subscriptionRequest =
         [self requestFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/list?client=%@&output=json", APIBaseURL,
                                                    ClientName]]];

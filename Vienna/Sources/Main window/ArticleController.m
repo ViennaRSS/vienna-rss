@@ -1015,12 +1015,16 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
  */
 -(void)handleArticleListContentChange:(NSNotification *)note
 {
-	// With automatic refresh and automatic mark read,
-	// the article you're current reading can disappear.
-	// For example, if you're reading in the Unread Articles smart folder.
-	// So make sure we keep this article around.
-	articleToPreserve = self.selectedArticle;
-    [self reloadArrayOfArticles];
+    NSInteger folderId = ((NSNumber *)note.object).integerValue;
+    Folder * currentFolder = [[Database sharedManager] folderFromID:currentFolderId];
+    if ((folderId == currentFolderId) || (currentFolder.type != VNAFolderTypeRSS && currentFolder.type != VNAFolderTypeOpenReader)) {
+        // With automatic refresh and automatic mark read,
+        // the article you're current reading can disappear.
+        // For example, if you're reading in the Unread Articles smart folder.
+        // So make sure we keep this article around.
+        articleToPreserve = self.selectedArticle;
+        [self reloadArrayOfArticles];
+    }
 }
 
 // MARK: Filter article

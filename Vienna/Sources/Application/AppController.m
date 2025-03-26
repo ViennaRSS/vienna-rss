@@ -2544,7 +2544,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
             // Currently subscribed, so unsubscribe locally
             [[Database sharedManager] setFlag:VNAFolderFlagUnsubscribed forFolder:folder.itemId];
         }
-
+        [NSNotificationCenter.defaultCenter postNotificationName:MA_Notify_FoldersUpdated object:@(folder.itemId)];
 	}
 }
 
