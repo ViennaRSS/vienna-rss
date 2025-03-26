@@ -815,6 +815,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 -(void)loadSubscriptions
 {
     [[RefreshManager sharedManager] suspendConnectionsQueue];
+    latestAlertDescription = @"";
     NSMutableURLRequest *subscriptionRequest =
         [self requestFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@subscription/list?client=%@&output=json", APIBaseURL,
                                                    ClientName]]];
