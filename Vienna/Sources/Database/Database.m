@@ -1301,12 +1301,16 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	}
 
 	// Update the database now
-    FMDatabaseQueue *queue = self.databaseQueue;
-    [queue inDatabase:^(FMDatabase *db) {
-        [db executeUpdate:@"UPDATE folders SET parent_id=? WHERE folder_id=?",
-         @(newParentID), @(folderId)];
-    }];
-	return YES;
+	FMDatabaseQueue *queue = self.databaseQueue;
+	__block BOOL success = NO;
+	[queue inExclusiveTransaction:^(FMDatabase *db, BOOL *rollback) {
+		success = [db executeUpdate:@"UPDATE folders SET parent_id=? WHERE folder_id=?",
+			@(newParentID), @(folderId)];
+		if (!success) {
+			*rollback = YES;
+		}
+	}];
+	return success;
 }
 
 /* setFirstChild
@@ -1320,25 +1324,33 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
     }
 	
     FMDatabaseQueue *queue = self.databaseQueue;
-    
-	if (folderId == VNAFolderTypeRoot) {
-		[queue inDatabase:^(FMDatabase *db) {
-            [db executeUpdate:@"UPDATE info SET first_folder=?", @(childId)];
-        }];
-	} else {
-		Folder * folder = [self folderFromID:folderId];
-		if (folder == nil) {
-			return NO;
-		}
-		
-		folder.firstChildId = childId;
-        [queue inDatabase:^(FMDatabase *db) {
-            [db executeUpdate:@"UPDATE folders SET first_child=? WHERE folder_id=?",
-             @(childId), @(folderId)];
-        }];
-	}
-	
-	return YES;
+    __block BOOL success = NO;
+	[queue inExclusiveTransaction:^(FMDatabase *db, BOOL *rollback) {
+	    if (folderId == VNAFolderTypeRoot) {
+            success = [db executeUpdate:@"UPDATE info SET first_folder=?", @(childId)];
+            if (!success) {
+                *rollback = YES;
+                return;
+            }
+        } else {
+            Folder * folder = [self folderFromID:folderId];
+            if (folder == nil) {
+                success = NO;
+                *rollback = YES;
+                return;
+            }
+
+            folder.firstChildId = childId;
+            success = [db executeUpdate:@"UPDATE folders SET first_child=? WHERE folder_id=?",
+                 @(childId), @(folderId)];
+             if (!success) {
+                *rollback = YES;
+                return;
+            }
+       }
+    }];
+
+    return success;
 }
 
 /* setNextSibling
@@ -1359,12 +1371,16 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	folder.nextSiblingId = nextSiblingId;
 	
     FMDatabaseQueue *queue = self.databaseQueue;
-    [queue inDatabase:^(FMDatabase *db) {
-        [db executeUpdate:@"UPDATE folders SET next_sibling=? WHERE folder_id=?",
-         @(nextSiblingId), @(folderId)];
+    __block BOOL success = NO;
+    [queue inExclusiveTransaction:^(FMDatabase *db, BOOL *rollback) {
+        success = [db executeUpdate:@"UPDATE folders SET next_sibling=? WHERE folder_id=?",
+            @(nextSiblingId), @(folderId)];
+        if (!success) {
+            *rollback = YES;
+        }
     }];
 
-	return YES;
+    return success;
 }
 
 /* firstFolderId
@@ -1878,11 +1894,12 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
         
         FMDatabaseQueue *queue = self.databaseQueue;
         
-        [queue inTransaction:^(FMDatabase *db, BOOL *rollback) {
-            FMResultSet * results = [db executeQuery:@"SELECT folder_id, parent_id, foldername, unread_count, last_update,"
+        [queue inExclusiveTransaction:^(FMDatabase *db, BOOL *rollback) {
+             FMResultSet * results = [db executeQuery:@"SELECT folder_id, parent_id, foldername, unread_count, last_update,"
                 @" type, flags, next_sibling, first_child FROM folders ORDER BY folder_id"];
             if (!results) {
                 NSLog(@"%s: executeQuery error: %@", __FUNCTION__, [db lastErrorMessage]);
+                *rollback = YES;
                 return;
             }
             
