@@ -857,26 +857,21 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
  */
 -(void)markAllFoldersReadByArray:(NSArray *)folderArray
 {
-	NSArray * refArray = [self wrappedMarkAllFoldersReadInArray:folderArray];
-	if (refArray != nil && refArray.count > 0) {
-		NSUndoManager * undoManager = NSApp.mainWindow.undoManager;
-		[undoManager registerUndoWithTarget:self selector:@selector(markAllReadUndo:) object:refArray];
-		[undoManager setActionName:NSLocalizedString(@"Mark All Read", nil)];
-	}
-	
-	// Smart and Search folders are not included in folderArray when you mark all subscriptions read,
-	// so we need to mark articles read if they're the current folder or might be inside it.
-	Folder * currentFolder = [[Database sharedManager] folderFromID:currentFolderId];
-	if (currentFolder != nil &&
-		(currentFolder.type == VNAFolderTypeSmart || currentFolder.type == VNAFolderTypeGroup ||
-		 ![folderArray containsObject:currentFolder]))
-	{
-		for (Article *theArticle in folderArrayOfArticles) {
-			theArticle.read = YES;
-		}
-	}
-	
-	[mainArticleView refreshFolder:VNARefreshRedrawList];
+    NSArray * refArray = [self wrappedMarkAllFoldersReadInArray:folderArray];
+    if (refArray != nil && refArray.count > 0) {
+        NSUndoManager * undoManager = NSApp.mainWindow.undoManager;
+        [undoManager registerUndoWithTarget:self selector:@selector(markAllReadUndo:) object:refArray];
+        [undoManager setActionName:NSLocalizedString(@"Mark All Read", nil)];
+    }
+
+    // We need to refresh view if current folder is Group, Smart or Search folder
+    Folder * currentFolder = [[Database sharedManager] folderFromID:currentFolderId];
+    if (currentFolder != nil && !currentFolder.isRSSFolder && !currentFolder.isOpenReaderFolder) {
+        articleToPreserve = self.selectedArticle;
+        [self reloadArrayOfArticles];
+    } else {
+        [mainArticleView refreshFolder:VNARefreshRedrawList];
+    }
 }
 
 /* wrappedMarkAllFoldersReadInArray
