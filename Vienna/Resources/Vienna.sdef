@@ -326,6 +326,12 @@
 			<property type="boolean" name="rss folder" code="flIR" access="r" description="Returns a true value if the folder is an RSS subscription">
 				<cocoa key="isRSSFolder"/>
 			</property>
+			<property type="boolean" name="open reader folder" code="flIO" access="r" description="Returns a true value if the folder is an OpenReader Cloud subscription">
+				<cocoa key="isOpenReaderFolder"/>
+			</property>
+			<property type="boolean" name="subscription folder" code="flIF" access="r" description="Returns a true value if the folder is a feed subscription">
+				<cocoa key="isSubscriptionFolder"/>
+			</property>
 			<property type="boolean" name="smart folder" code="flIS" access="r" description="Returns a strue value if the folder is a smart folder">
 				<cocoa key="isSmartFolder"/>
 			</property>
