@@ -356,8 +356,11 @@
 			<property type="folder" name="containing folder" code="arFL" access="r" description="The folder to which this article belongs">
 				<cocoa key="containingFolder"/>
 			</property>
-			<property type="date" name="date" code="arDA" access="r" description="The date when the article was posted">
-				<cocoa key="date"/>
+			<property type="date" name="date" code="arDA" access="r" description="The date when the article was posted/updated">
+				<cocoa key="lastUpdate"/>
+			</property>
+			<property type="date" name="publication date" code="arDP" access="r" description="The date when the article was initially published">
+				<cocoa key="publicationDate"/>
 			</property>
 			<property type="boolean" name="deleted" code="arDL" access="r" description="Whether the article has been deleted">
 				<cocoa key="isDeleted"/>
