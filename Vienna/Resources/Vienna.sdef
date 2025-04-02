@@ -359,6 +359,9 @@
 			<property type="text" name="body" code="arTX" access="r" description="The contents of the article">
 				<cocoa key="body"/>
 			</property>
+			<property type="text" name="summary" code="arSU" access="r" description="The contents of the article, cleaned up">
+				<cocoa key="summary"/>
+			</property>
 			<property type="folder" name="containing folder" code="arFL" access="r" description="The folder to which this article belongs">
 				<cocoa key="containingFolder"/>
 			</property>
