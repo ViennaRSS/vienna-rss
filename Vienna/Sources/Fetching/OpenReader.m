@@ -51,7 +51,8 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     waitingClientToken,
     missingTToken,
     waitingTToken,
-    fullyAuthenticated
+    fullyAuthenticated,
+    clientTokenError
 };
 
 #define VNA_LOG os_log_create("--", "OpenReader")
@@ -99,6 +100,9 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
         password = nil;
         APIBaseURL = nil;
         _asyncQueue = dispatch_queue_create("uk.co.opencommunity.vienna2.openReaderTasks", DISPATCH_QUEUE_SERIAL);
+        [NSNotificationCenter.defaultCenter addObserver:self
+                                               selector:@selector(handleRefreshStatusChange:)
+                                                   name:MA_Notify_RefreshStatus object:nil];
     }
 
     return self;
@@ -127,7 +131,9 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 {
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [self addClientTokenToRequest:request];
-    [self specificHeadersPrepare:request];
+    if (self.openReaderStatus != clientTokenError) {
+        [self specificHeadersPrepare:request];
+    }
     return request;
 }
 
@@ -164,6 +170,8 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     }
 
     switch (self.openReaderStatus) {
+    case clientTokenError:
+        return;
     case fullyAuthenticated:
     case waitingTToken:
     case missingTToken:
@@ -194,12 +202,14 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                     self.openReaderStatus = notAuthenticated;
                     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 					if (error) {
+						self.openReaderStatus = clientTokenError;
 						NSString * alertDescription = error.localizedDescription;
 						if (![alertDescription isEqualToString:self->latestAlertDescription]) {
 						    [nc vna_postNotificationOnMainThreadWithName:MA_Notify_GoogleAuthFailed object:alertDescription];
 						    self->latestAlertDescription = alertDescription;
 						}
 					} else if (((NSHTTPURLResponse *)response).statusCode != 200) {
+						self.openReaderStatus = clientTokenError;
 						NSString * alertDescription = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 						if (![alertDescription isEqualToString:self->latestAlertDescription]) {
 						    [nc vna_postNotificationOnMainThreadWithName:MA_Notify_GoogleAuthFailed object:alertDescription];
@@ -213,12 +223,17 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 							if([item hasPrefix:@"Auth="]) {
 								self.clientAuthToken = [item substringFromIndex:5];
                                 if ([self.clientAuthToken isEqualToString:@"(null)"] || [self.clientAuthToken isEqualToString:@""]) {
+                                    self.openReaderStatus = clientTokenError;
                                     [nc vna_postNotificationOnMainThreadWithName:MA_Notify_GoogleAuthFailed object:@""];
                                     self->latestAlertDescription = @"";
 								} else {
 								    self.openReaderStatus = missingTToken;								
 								}
 								break;
+							} else {
+							    self.openReaderStatus = clientTokenError;
+                                [nc vna_postNotificationOnMainThreadWithName:MA_Notify_GoogleAuthFailed object:@""];
+                                self->latestAlertDescription = @"";
 							}
 						}
                         if (self.clientAuthTimer == nil || !self.clientAuthTimer.valid) {
@@ -283,7 +298,9 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     static NSOperation * tTokenOperation;
     dispatch_semaphore_t sema;
 
-    if (self.openReaderStatus == fullyAuthenticated) {
+    if (self.openReaderStatus == clientTokenError) {
+        return;
+    } else if (self.openReaderStatus == fullyAuthenticated) {
         [clientRequest vna_setPostValue:self.tToken forKey:@"T"];
         return;
     } else {
@@ -350,6 +367,16 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 {
     [self clearAuthentication];
     [self addClientTokenToRequest:nil];
+}
+
+/* handleRefreshStatusChange
+ * Handle a change of the network queue running.
+ */
+-(void)handleRefreshStatusChange:(NSNotification *)nc
+{
+    if (self.openReaderStatus == clientTokenError) {
+        self.openReaderStatus = notAuthenticated;
+    }
 }
 
 # pragma mark default handlers
