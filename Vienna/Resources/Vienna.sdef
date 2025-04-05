@@ -213,7 +213,7 @@
 			<property type="folder" name="current folder" code="cuFL" description="The current folder in the article list pane">
 				<cocoa key="currentFolder"/>
 			</property>
-			<property type="text" name="current selection" code="cuSE" access="r" description="Returns the text selected in the current article or web page">
+			<property type="text" name="current selection" code="cuSE" access="r" description="Returns the text selected in the current web page">
 				<cocoa key="currentTextSelection"/>
 			</property>
 			<property type="text" name="display style" code="dpSY" description="The current display style for articles">
@@ -326,6 +326,12 @@
 			<property type="boolean" name="rss folder" code="flIR" access="r" description="Returns a true value if the folder is an RSS subscription">
 				<cocoa key="isRSSFolder"/>
 			</property>
+			<property type="boolean" name="open reader folder" code="flIO" access="r" description="Returns a true value if the folder is an OpenReader Cloud subscription">
+				<cocoa key="isOpenReaderFolder"/>
+			</property>
+			<property type="boolean" name="subscription folder" code="flIF" access="r" description="Returns a true value if the folder is a feed subscription">
+				<cocoa key="isSubscriptionFolder"/>
+			</property>
 			<property type="boolean" name="smart folder" code="flIS" access="r" description="Returns a strue value if the folder is a smart folder">
 				<cocoa key="isSmartFolder"/>
 			</property>
@@ -353,11 +359,17 @@
 			<property type="text" name="body" code="arTX" access="r" description="The contents of the article">
 				<cocoa key="body"/>
 			</property>
+			<property type="text" name="summary" code="arSU" access="r" description="The contents of the article, cleaned up">
+				<cocoa key="summary"/>
+			</property>
 			<property type="folder" name="containing folder" code="arFL" access="r" description="The folder to which this article belongs">
 				<cocoa key="containingFolder"/>
 			</property>
-			<property type="date" name="date" code="arDA" access="r" description="The date when the article was posted">
-				<cocoa key="date"/>
+			<property type="date" name="date" code="arDA" access="r" description="The date when the article was posted/updated">
+				<cocoa key="lastUpdate"/>
+			</property>
+			<property type="date" name="publication date" code="arDP" access="r" description="The date when the article was initially published">
+				<cocoa key="publicationDate"/>
 			</property>
 			<property type="boolean" name="deleted" code="arDL" access="r" description="Whether the article has been deleted">
 				<cocoa key="isDeleted"/>

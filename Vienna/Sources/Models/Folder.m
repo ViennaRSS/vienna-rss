@@ -383,6 +383,13 @@
     return self.type == VNAFolderTypeOpenReader;
 }
 
+/* isSubscriptionFolder
+ * Returns YES if this folder is a subscription folder.
+ */
+-(BOOL)isSubscriptionFolder {
+    return self.type == VNAFolderTypeRSS || self.type == VNAFolderTypeOpenReader;
+}
+
 // MARK: - VNAFolderFlag methods
 
 /* loadsFullHTML
