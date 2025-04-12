@@ -213,7 +213,7 @@
 			<property type="folder" name="current folder" code="cuFL" description="The current folder in the article list pane">
 				<cocoa key="currentFolder"/>
 			</property>
-			<property type="text" name="current selection" code="cuSE" access="r" description="Returns the text selected in the current web page">
+			<property type="text" name="current selection" code="cuSE" access="r" description="Returns the text selected in the current article or web page">
 				<cocoa key="currentTextSelection"/>
 			</property>
 			<property type="text" name="display style" code="dpSY" description="The current display style for articles">

@@ -257,10 +257,16 @@
  */
 -(NSString *)currentTextSelection
 {
-    id<Tab> activeBrowserTab = ((AppController*)self.delegate).browser.activeTab;
+    AppController *appController = ((AppController *)self.delegate);
 
+    id<Tab> activeBrowserTab = appController.browser.activeTab;
     if (activeBrowserTab) {
         return activeBrowserTab.textSelection;
+    } else {
+        id obj = appController.mainWindow.firstResponder;
+        if ([obj respondsToSelector:@selector(textSelection)]) {
+            return [obj textSelection];
+        }
     }
     return @"";
 }
