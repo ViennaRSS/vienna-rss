@@ -222,6 +222,9 @@
 			<property type="text" name="documentHTMLSource" code="dSdS" access="r" description="The source of the currently open tab">
 				<cocoa key="documentHTMLSource"/>
 			</property>
+			<property type="text" name="documentTabTitle" code="dSmT" access="r" description="The title of the currently open tab">
+				<cocoa key="documentTabTitle"/>
+			</property>
 			<property type="text" name="documentTabURL" code="dSmU" access="r" description="The URL of the currently open tab">
 				<cocoa key="documentTabURL"/>
 			</property>

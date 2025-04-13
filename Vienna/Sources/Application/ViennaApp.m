@@ -291,6 +291,16 @@
     }
 }
 
+-(NSString *)documentTabTitle
+{
+    id<Tab> activeBrowserTab = ((AppController*)self.delegate).browser.activeTab;
+	if (activeBrowserTab) {
+		return activeBrowserTab.title;
+	} else {
+		return @"";
+    }
+}
+
 /* currentArticle
  * Retrieves the current article.
  */

@@ -63,6 +63,7 @@
 @property (readonly, nonatomic) NSString *currentTextSelection;
 @property (readonly, nonatomic) NSString *documentHTMLSource;
 @property (readonly, nonatomic) NSString *documentTabURL;
+@property (readonly, nonatomic) NSString *documentTabTitle;
 
 // Change folder selection
 @property (nonatomic) Folder *currentFolder;
