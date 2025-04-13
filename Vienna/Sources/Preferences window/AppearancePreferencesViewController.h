@@ -20,7 +20,7 @@
 
 @import Cocoa;
 
-@interface AppearancePreferencesViewController : NSViewController
+@interface AppearancePreferencesViewController : NSViewController <NSFontChanging>
 
 // Action functions
 -(IBAction)selectArticleFont:(id)sender;
