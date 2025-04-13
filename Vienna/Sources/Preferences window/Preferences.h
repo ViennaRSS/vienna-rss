@@ -94,8 +94,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) CGFloat textSizeMultiplier;
 
 // Article list font
-@property (nonatomic, copy) NSString *articleListFont;
-@property (nonatomic) NSInteger articleListFontSize;
+@property (nonatomic) NSFont *articleListFont;
 
 // Article list sort descriptors
 @property (null_resettable, nonatomic, copy) NSArray *articleSortDescriptors;

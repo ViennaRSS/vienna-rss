@@ -79,7 +79,6 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
     CGFloat textSizeMultiplier;
     NSString *defaultDatabase;
     NSString *feedSourcesFolder;
-    NSFont *articleFont;
     NSArray *articleSortDescriptors;
     SearchMethod *searchMethod;
     NSUInteger concurrentDownloads;
@@ -145,8 +144,6 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
         _userAgentName = [self stringForKey:MAPref_UserAgentName];
 
         // Archived objects
-        articleFont = [NSKeyedUnarchiver vna_unarchivedObjectOfClass:[NSFont class]
-                                                            fromData:[self objectForKey:MAPref_ArticleListFont]];
         searchMethod = [NSKeyedUnarchiver vna_unarchivedObjectOfClass:[SearchMethod class]
                                                              fromData:[self objectForKey:MAPref_SearchMethod]];
         articleSortDescriptors = [NSKeyedUnarchiver vna_unarchivedArrayOfObjectsOfClass:[NSSortDescriptor class]
@@ -849,44 +846,30 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
 	}
 }
 
-/* articleListFont
- * Retrieve the name of the font used in the article list
- */
--(NSString *)articleListFont
+- (NSFont *)articleListFont
 {
-	return articleFont.fontName;
+    NSData *archive = [self objectForKey:MAPref_ArticleListFont];
+    NSFont *font = [NSKeyedUnarchiver vna_unarchivedObjectOfClass:[NSFont class]
+                                                         fromData:archive];
+    // If the unarchived data cannot be resolved to a font instance, the data
+    // is likely corrupted and should be removed.
+    if (!font) {
+        [self removeObjectForKey:MAPref_ArticleListFont];
+        // Load the archived data again, this time from registered defaults.
+        NSData *registeredArchive = [self objectForKey:MAPref_ArticleListFont];
+        font = [NSKeyedUnarchiver vna_unarchivedObjectOfClass:[NSFont class]
+                                                     fromData:registeredArchive];
+    }
+    return font;
 }
 
-/* articleListFontSize
- * Retrieve the size of the font used in the article list
- */
--(NSInteger)articleListFontSize
+- (void)setArticleListFont:(NSFont *)articleListFont
 {
-	return articleFont.pointSize;
-}
-
-/* setArticleListFont
- * Retrieve the name of the font used in the article list
- */
--(void)setArticleListFont:(NSString *)newFontName
-{
-	articleFont = [NSFont fontWithName:[newFontName copy] size:self.articleListFontSize];
-    NSData *archive = [NSKeyedArchiver vna_archivedDataWithRootObject:articleFont
+    NSData *archive = [NSKeyedArchiver vna_archivedDataWithRootObject:articleListFont
                                                 requiringSecureCoding:YES];
     [self setObject:archive forKey:MAPref_ArticleListFont];
-	[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_ArticleListFontChange object:articleFont];
-}
-
-/* setArticleListFontSize
- * Changes the size of the font used in the article list.
- */
--(void)setArticleListFontSize:(NSInteger)newFontSize
-{
-	articleFont = [NSFont fontWithName:self.articleListFont size:newFontSize];
-    NSData *archive = [NSKeyedArchiver vna_archivedDataWithRootObject:articleFont
-                                                requiringSecureCoding:YES];
-    [self setObject:archive forKey:MAPref_ArticleListFont];
-	[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_ArticleListFontChange object:articleFont];
+    [NSNotificationCenter.defaultCenter postNotificationName:MA_Notify_ArticleListFontChange
+                                                      object:articleListFont];
 }
 
 /* articleSortDescriptors

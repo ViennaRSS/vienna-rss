@@ -31,7 +31,6 @@ static NSInteger const availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24
 
 @interface AppearancePreferencesViewController ()
 -(void)initializePreferences;
--(void)selectUserDefaultFont:(NSString *)name size:(NSInteger)size control:(NSTextField *)control;
 
 @end
 
@@ -72,7 +71,7 @@ static NSInteger const availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24
     Preferences * prefs = [Preferences standardPreferences];
     
     // Populate the drop downs with the font names and sizes
-    [self selectUserDefaultFont:prefs.articleListFont size:prefs.articleListFontSize control:articleFontSample];
+    [self displaySelectedFont:prefs.articleListFont inTextField:articleFontSample];
 
     // Show folder images option
     showFolderImagesButton.state = prefs.showFolderImages ? NSControlStateValueOn : NSControlStateValueOff;
@@ -117,13 +116,13 @@ static NSInteger const availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24
     [Preferences standardPreferences].minimumFontSize = newMinimumFontSize;
 }
 
-/* selectUserDefaultFont
- * Display sample text in the specified font and size.
- */
--(void)selectUserDefaultFont:(NSString *)name size:(NSInteger)size control:(NSTextField *)control
+// Display sample text in the specified font and size.
+- (void)displaySelectedFont:(NSFont *)font inTextField:(NSTextField *)textField
 {
-    control.font = [NSFont fontWithName:name size:size];
-    control.stringValue = [NSString stringWithFormat:@"%@ %li", name, (long)size];
+    textField.font = font;
+    textField.stringValue = [NSString stringWithFormat:@"%@ %.0f",
+                                                       font.displayName,
+                                                       font.pointSize];
 }
 
 /* selectArticleFont
@@ -137,7 +136,7 @@ static NSInteger const availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24
     fontManager.action = @selector(changeArticleFont:);
 
     NSFontPanel *fontPanel = [fontManager fontPanel:YES];
-    [fontPanel setPanelFont:[NSFont fontWithName:prefs.articleListFont size:prefs.articleListFontSize] isMultiple:NO];
+    [fontPanel setPanelFont:prefs.articleListFont isMultiple:NO];
     [fontPanel orderFront:self];
     fontPanel.enabled = YES;
 }
@@ -148,11 +147,10 @@ static NSInteger const availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24
 -(IBAction)changeArticleFont:(id)sender
 {
     Preferences * prefs = [Preferences standardPreferences];
-    NSFont * font = [NSFont fontWithName:prefs.articleListFont size:prefs.articleListFontSize];
+    NSFont *font = prefs.articleListFont;
     font = [sender convertFont:font];
-    prefs.articleListFont = font.fontName;
-    prefs.articleListFontSize = font.pointSize;
-    [self selectUserDefaultFont:prefs.articleListFont size:prefs.articleListFontSize control:articleFontSample];
+    prefs.articleListFont = font;
+    [self displaySelectedFont:font inTextField:articleFontSample];
 }
 
 /* dealloc

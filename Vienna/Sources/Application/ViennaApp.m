@@ -330,8 +330,6 @@
 -(BOOL)enableMinimumFontSize		{ return [Preferences standardPreferences].enableMinimumFontSize; }
 -(NSInteger)refreshFrequency				{ return [Preferences standardPreferences].refreshFrequency; }
 -(NSString *)displayStyle			{ return [Preferences standardPreferences].displayStyle; }
--(NSString *)articleListFont		{ return [Preferences standardPreferences].articleListFont; }
--(NSInteger)articleListFontSize			{ return [Preferences standardPreferences].articleListFontSize; }
 -(BOOL)statusBarVisible				{ return [Preferences standardPreferences].showStatusBar; }
 -(BOOL)filterBarVisible				{ return [Preferences standardPreferences].showFilterBar; }
 
@@ -349,11 +347,8 @@
 -(void)setEnableMinimumFontSize:(BOOL)flag			{ [Preferences standardPreferences].enableMinimumFontSize = flag; }
 -(void)setRefreshFrequency:(NSInteger)newFrequency		{ [Preferences standardPreferences].refreshFrequency = newFrequency; }
 -(void)setDisplayStyle:(NSString *)newStyle			{ [Preferences standardPreferences].displayStyle = [newStyle copy]; }
--(void)setArticleListFont:(NSString *)newFontName	{ [Preferences standardPreferences].articleListFont = [newFontName copy]; }
--(void)setArticleListFontSize:(NSInteger)newFontSize		{ [Preferences standardPreferences].articleListFontSize = newFontSize; }
 -(void)setStatusBarVisible:(BOOL)flag				{ [Preferences standardPreferences].showStatusBar = flag; }
 -(void)setFilterBarVisible:(BOOL)flag				{ [Preferences standardPreferences].showFilterBar = flag; }
-
 
 - (VNAFeedListSizeMode)feedListSizeMode
 {
@@ -381,6 +376,32 @@
     }
     NSUserDefaults *defaults = NSUserDefaults.standardUserDefaults;
     [defaults setInteger:feedListSizeMode forKey:MAPref_FeedListSizeMode];
+}
+
+- (NSString *)articleListFont
+{
+    return Preferences.standardPreferences.articleListFont.fontName;
+}
+
+- (void)setArticleListFont:(NSString *)articleListFont
+{
+    NSFont *font = Preferences.standardPreferences.articleListFont;
+    font = [NSFontManager.sharedFontManager convertFont:font
+                                                 toFace:articleListFont];
+    Preferences.standardPreferences.articleListFont = font;
+}
+
+- (NSInteger)articleListFontSize
+{
+    return Preferences.standardPreferences.articleListFont.pointSize;
+}
+
+- (void)setArticleListFontSize:(NSInteger)articleListFontSize
+{
+    NSFont *font = Preferences.standardPreferences.articleListFont;
+    font = [NSFontManager.sharedFontManager convertFont:font
+                                                 toSize:articleListFontSize];
+    Preferences.standardPreferences.articleListFont = font;
 }
 
 // MARK: Obsolete accessors
