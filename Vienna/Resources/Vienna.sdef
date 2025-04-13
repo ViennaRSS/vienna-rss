@@ -196,7 +196,7 @@
 				<cocoa key="version"/>
 			</property>
 			<property type="text" name="article list font" code="mlFt" description="The font used in the article list pane">
-				<cocoa key="articleListFont"/>
+				<cocoa key="articleListFontName"/>
 			</property>
 			<property type="integer" name="article list font size" code="mlFS" description="The size of the font used in the article list pane">
 				<cocoa key="articleListFontSize"/>

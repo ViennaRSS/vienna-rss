@@ -79,7 +79,7 @@
 @property (nonatomic) BOOL enableMinimumFontSize;
 @property (nonatomic) NSInteger refreshFrequency;
 @property (nonatomic, copy) NSString *displayStyle;
-@property (nonatomic, copy) NSString *articleListFont;
+@property (nonatomic, copy) NSString *articleListFontName;
 @property (nonatomic) NSInteger articleListFontSize;
 @property (nonatomic) BOOL statusBarVisible;
 @property (nonatomic) BOOL filterBarVisible;

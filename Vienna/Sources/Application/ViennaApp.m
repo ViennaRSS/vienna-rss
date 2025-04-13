@@ -378,16 +378,16 @@
     [defaults setInteger:feedListSizeMode forKey:MAPref_FeedListSizeMode];
 }
 
-- (NSString *)articleListFont
+- (NSString *)articleListFontName
 {
     return Preferences.standardPreferences.articleListFont.fontName;
 }
 
-- (void)setArticleListFont:(NSString *)articleListFont
+- (void)setArticleListFontName:(NSString *)articleListFontName
 {
     NSFont *font = Preferences.standardPreferences.articleListFont;
     font = [NSFontManager.sharedFontManager convertFont:font
-                                                 toFace:articleListFont];
+                                                 toFace:articleListFontName];
     Preferences.standardPreferences.articleListFont = font;
 }
 
