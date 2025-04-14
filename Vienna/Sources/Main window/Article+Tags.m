@@ -56,6 +56,11 @@
     return [NSDateFormatter vna_relativeDateStringFromDate:self.lastUpdate];
 }
 
+- (NSString *)tagArticlePublicationDate
+{
+    return [NSDateFormatter vna_relativeDateStringFromDate:self.publicationDate];
+}
+
 - (NSString *)tagArticleLink
 {
     return cleanedUpUrlFromString(self.link).absoluteString;
