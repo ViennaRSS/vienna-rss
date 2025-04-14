@@ -540,7 +540,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 {
 
 	Preferences * prefs = [Preferences standardPreferences];
-	articleListFont = [NSFont fontWithName:prefs.articleListFont size:prefs.articleListFontSize];
+	articleListFont = prefs.articleListFont;
 	articleListUnreadFont = [prefs boolForKey:MAPref_ShowUnreadArticlesInBold] ? [[NSFontManager sharedFontManager] convertWeight:YES ofFont:articleListFont] : articleListFont;
 
 	reportCellDict[NSFontAttributeName] = articleListFont;
