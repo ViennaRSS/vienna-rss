@@ -168,8 +168,8 @@
     }
     
     if (@available(macOS 10.15, *)) {
-        NSURL *appURL = [NSURL URLWithString:appPath];
-        NSURL *fileURL = [NSURL URLWithString:filePath];
+        NSURL *appURL = [NSURL fileURLWithPath:appPath];
+        NSURL *fileURL = [NSURL fileURLWithPath:filePath];
         if (!appURL || !fileURL) {
             return;
         }
