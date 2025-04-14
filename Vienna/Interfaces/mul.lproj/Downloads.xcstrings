@@ -264,6 +264,32 @@
           }
         }
       }
+    },
+    "58C-pD-ihm.title" : {
+      "comment" : "Class = \"NSTextFieldCell\"; title = \"Status\"; ObjectID = \"58C-pD-ihm\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Status"
+          }
+        }
+      },
+      "shouldTranslate" : false
+    },
+    "Pln-hT-1Z4.title" : {
+      "comment" : "Class = \"NSTextFieldCell\"; title = \"Filename\"; ObjectID = \"Pln-hT-1Z4\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filename"
+          }
+        }
+      },
+      "shouldTranslate" : false
     }
   },
   "version" : "1.0"

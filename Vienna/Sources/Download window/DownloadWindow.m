@@ -23,9 +23,9 @@
 #import "AppController+Notifications.h"
 #import "Constants.h"
 #import "DownloadItem.h"
+#import "DownloadListCellView.h"
 #import "DownloadManager.h"
 #import "HelperFunctions.h"
-#import "ImageAndTextCell.h"
 #import "NSWorkspace+OpenWithMenu.h"
 
 @implementation DownloadWindow {
@@ -60,14 +60,6 @@
 	// Register to get notified when the download manager's list changes
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 	[nc addObserver:self selector:@selector(handleDownloadsChange:) name:MA_Notify_DownloadsListChange object:nil];
-
-	// Set the cell for each row
-	ImageAndTextCell * imageAndTextCell;
-	NSTableColumn * tableColumn = [table tableColumnWithIdentifier:@"listColumn"];
-	imageAndTextCell = [[ImageAndTextCell alloc] init];
-	imageAndTextCell.font = [NSFont systemFontOfSize:[NSFont smallSystemFontSize]];
-	imageAndTextCell.textColor = [NSColor darkGrayColor];
-	tableColumn.dataCell = imageAndTextCell;	
 
 	// We are the delegate and the datasource
 	table.delegate = self;
@@ -193,7 +185,8 @@
 	if (index != -1) {
 		DownloadItem * item = list[index];
 		[[DownloadManager sharedInstance] removeItem:item];
-		[table reloadData];
+        [table removeRowsAtIndexes:[NSIndexSet indexSetWithIndex:index]
+                     withAnimation:(NSTableViewAnimationEffectFade | NSTableViewAnimationSlideUp)];
 	}
 }
 
@@ -207,128 +200,34 @@
 	if (index != -1) {
 		DownloadItem * item = list[index];
 		[[DownloadManager sharedInstance] cancelItem:item];
-		[table reloadData];
+        [table removeRowsAtIndexes:[NSIndexSet indexSetWithIndex:index]
+                     withAnimation:(NSTableViewAnimationEffectFade | NSTableViewAnimationSlideUp)];
 	}
-}
-
-/* numberOfRowsInTableView [datasource]
- * Datasource for the table view. Return the total number of rows we'll display which
- * is equivalent to the number of log items.
- */
--(NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView
-{
-	NSInteger itemCount = [DownloadManager sharedInstance].downloadsList.count;
-	clearButton.enabled = itemCount > 0;
-	return itemCount;
-}
-
-/* menuWillAppear [ExtendedTableView delegate]
- * Called when the popup menu is opened on the table. We ensure that the item under the
- * cursor is selected.
- */
--(void)tableView:(ExtendedTableView *)tableView menuWillAppear:(NSEvent *)theEvent
-{
-	NSInteger row = [table rowAtPoint:[table convertPoint:theEvent.locationInWindow fromView:nil]];
-	if (row >= 0) {
-		// Select the row under the cursor if it isn't already selected
-		if (table.numberOfSelectedRows <= 1) {
-			[table selectRowIndexes:[NSIndexSet indexSetWithIndex:(NSUInteger)row] byExtendingSelection:NO];
-		}
-	}
-}
-
-/* willDisplayCell [delegate]
- * Catch the table view before it displays a cell.
- */
--(void)tableView:(NSTableView *)aTableView willDisplayCell:(id)aCell forTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex
-{
-	if ([aCell isKindOfClass:[ImageAndTextCell class]]) {
-		NSArray * list = [DownloadManager sharedInstance].downloadsList;
-		DownloadItem * item = list[rowIndex];
-
-		if (item.image != nil) {
-			[aCell setImage:item.image];
-		}
-		[aCell setTextColor:(rowIndex == aTableView.selectedRow) ? [NSColor whiteColor] : [NSColor controlTextColor]];
-	}
-}
-
-/* objectValueForTableColumn [datasource]
- * Called by the table view to obtain the object at the specified column and row.
- */
--(id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex
-{
-	NSArray * list = [DownloadManager sharedInstance].downloadsList;
-	NSAssert(rowIndex >= 0 && rowIndex < [list count], @"objectValueForTableColumn sent an out-of-range rowIndex");
-	DownloadItem * item = list[rowIndex];
-
-	// TODO: return item when we have a cell that can parse it. Until then, construct our own data.
-	NSString * rawfilename = item.filename.lastPathComponent;
-    NSString * filename = [rawfilename stringByRemovingPercentEncoding];
-	if (filename == nil) {
-		filename = @"";
-	}
-
-	// Different layout depending on the state
-	NSString * objectString = filename;
-	switch (item.state) {
-        case DownloadStateInit:
-        case DownloadStateFailed:
-        case DownloadStateCancelled:
-			break;
-
-		case DownloadStateCompleted: {
-            NSString *byteCount = [NSByteCountFormatter stringFromByteCount:item.size
-                                                                 countStyle:NSByteCountFormatterCountStyleFile];
-            objectString = [NSString stringWithFormat:@"%@\n%@", filename, byteCount];
-			break;
-		}
-
-		case DownloadStateStarted: {
-			// Filename on top
-			// Progress gauge in middle
-			// Size gathered so far at bottom
-			NSString * progressString = @"";
-
-			if (item.expectedSize == -1) {
-                progressString = [NSByteCountFormatter stringFromByteCount:item.size
-                                                                countStyle:NSByteCountFormatterCountStyleFile];
-			} else {
-                NSString *bytesSoFar = [NSByteCountFormatter stringFromByteCount:item.size
-                                                                      countStyle:NSByteCountFormatterCountStyleFile];
-                NSString *expectedBytes = [NSByteCountFormatter stringFromByteCount:item.expectedSize
-                                                                         countStyle:NSByteCountFormatterCountStyleFile];
-                progressString = [NSString stringWithFormat:NSLocalizedString(@"%@ of %@", @"Progress in bytes, e.g. 1 KB of 1 MB"), bytesSoFar, expectedBytes];
-			}
-			objectString = [NSString stringWithFormat:@"%@\n%@", filename, progressString];
-			break;
-		}
-	}
-	
-	return objectString;
 }
 
 /* handleDownloadsChange
  * Called when the downloads list has changed. The notification item is the DownloadItem
- * that has been changed. If it exists in our list, we update it. Otherwise we add it to
- * the end of the table.
+ * that has been changed. If it has been added to our list, we insert it. Otherwise we
+ * reload the table.
  */
 -(void)handleDownloadsChange:(NSNotification *)notification
 {
 	DownloadItem * item = (DownloadItem *)notification.object;
 	NSArray * list = [DownloadManager sharedInstance].downloadsList;
 	NSUInteger  rowIndex = [list indexOfObject:item];
-	if (list.count != lastCount) {
-		[table reloadData];
-		if (rowIndex != NSNotFound) {
-			NSIndexSet * indexes = [NSIndexSet indexSetWithIndex:rowIndex];
-			[table selectRowIndexes:indexes byExtendingSelection:NO];
-			[table scrollRowToVisible:rowIndex];
-		}
+	if (list.count != lastCount && rowIndex != NSNotFound) {
+        NSIndexSet *rowIndexes = [NSIndexSet indexSetWithIndex:rowIndex];
+        [table insertRowsAtIndexes:rowIndexes
+                     withAnimation:(NSTableViewAnimationEffectFade | NSTableViewAnimationSlideDown)];
+        [table selectRowIndexes:rowIndexes byExtendingSelection:NO];
+        [table scrollRowToVisible:rowIndex];
 		lastCount = list.count;
-	} else {
-		[table reloadData];
-	}
+	} else if (rowIndex != NSNotFound) {
+        [table reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:rowIndex]
+                         columnIndexes:[NSIndexSet indexSetWithIndex:table.numberOfColumns - 1]];
+    } else {
+        [table reloadData];
+    }
 }
 
 /* dealloc
@@ -340,4 +239,97 @@
 	[downloadWindow setDelegate:nil];
 	[table setDelegate:nil];
 }
+
+// MARK: - NSTableViewDataSource
+
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
+{
+    return DownloadManager.sharedInstance.downloadsList.count;
+}
+
+// MARK: - NSTableViewDelegate
+
+- (NSView *)tableView:(NSTableView *)tableView
+    viewForTableColumn:(NSTableColumn *)tableColumn
+                   row:(NSInteger)row
+{
+    // Retrieve the cell data.
+    NSArray *list = DownloadManager.sharedInstance.downloadsList;
+    DownloadItem *item = list[row];
+    NSString *fileName = item.filename.lastPathComponent.stringByRemovingPercentEncoding;
+    if (!fileName) {
+        fileName = @"";
+    }
+    NSString *progressString;
+    switch (item.state) {
+        case DownloadStateInit:
+        case DownloadStateFailed:
+        case DownloadStateCancelled:
+            break;
+
+        case DownloadStateCompleted: {
+            progressString = [NSByteCountFormatter stringFromByteCount:item.size
+                                                            countStyle:NSByteCountFormatterCountStyleFile];
+            break;
+        }
+
+        case DownloadStateStarted: {
+            // Filename on top
+            // Progress gauge in middle
+            // Size gathered so far at bottom
+            if (item.expectedSize == -1) {
+                progressString = [NSByteCountFormatter stringFromByteCount:item.size
+                                                                countStyle:NSByteCountFormatterCountStyleFile];
+            } else {
+                NSString *bytesSoFar = [NSByteCountFormatter stringFromByteCount:item.size
+                                                                      countStyle:NSByteCountFormatterCountStyleFile];
+                NSString *expectedBytes = [NSByteCountFormatter stringFromByteCount:item.expectedSize
+                                                                         countStyle:NSByteCountFormatterCountStyleFile];
+                progressString = [NSString stringWithFormat:NSLocalizedString(@"%@ of %@", @"Progress in bytes, e.g. 1 KB of 1 MB"), bytesSoFar, expectedBytes];
+            }
+            break;
+        }
+    }
+
+    // Set up the cell view.
+    VNADownloadListCellView *cellView =
+        [tableView makeViewWithIdentifier:VNADownloadListCellViewIdentifier
+                                    owner:self];
+    cellView.imageView.image = item.image;
+    cellView.textField.stringValue = fileName;
+    cellView.fileSizeString = progressString;
+    return cellView;
+}
+
+- (void)tableView:(NSTableView *)tableView
+    didAddRowView:(NSTableRowView *)rowView
+           forRow:(NSInteger)row
+{
+    clearButton.enabled = tableView.numberOfRows > 0;
+}
+
+- (void)tableView:(NSTableView *)tableView
+    didRemoveRowView:(NSTableRowView *)rowView
+              forRow:(NSInteger)row
+{
+    clearButton.enabled = tableView.numberOfRows > 0;
+}
+
+// MARK: - ExtendedTableViewDelegate
+
+/* menuWillAppear [ExtendedTableView delegate]
+ * Called when the popup menu is opened on the table. We ensure that the item under the
+ * cursor is selected.
+ */
+-(void)tableView:(ExtendedTableView *)tableView menuWillAppear:(NSEvent *)theEvent
+{
+    NSInteger row = [table rowAtPoint:[table convertPoint:theEvent.locationInWindow fromView:nil]];
+    if (row >= 0) {
+        // Select the row under the cursor if it isn't already selected
+        if (table.numberOfSelectedRows <= 1) {
+            [table selectRowIndexes:[NSIndexSet indexSetWithIndex:(NSUInteger)row] byExtendingSelection:NO];
+        }
+    }
+}
+
 @end

@@ -172,7 +172,7 @@
     item.downloadTask = task;
     item.filename = destPath;
     item.fileURL = [NSURL fileURLWithPath:destPath];
-    [self.downloads addObject:item];
+    [self.downloads insertObject:item atIndex:0];
 
     [task resume];
 }
