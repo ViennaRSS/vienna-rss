@@ -30,13 +30,9 @@
 #import "Article.h"
 #import "Database.h"
 #import "StringExtensions.h"
-#import "FeedListConstants.h"
 #import "Vienna-Swift.h"
 
 @interface ViennaApp ()
-
-@property (nonatomic) VNAFeedListSizeMode feedListSizeMode;
-@property (readonly, nonatomic) BOOL readingPaneOnRight;
 
 // MARK: Obsolete
 

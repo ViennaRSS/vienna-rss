@@ -23,6 +23,8 @@
 @class Folder;
 @class Article;
 
+#import "FeedListConstants.h"
+
 @interface ViennaApp : NSApplication
 
 @property (nonatomic) IBOutlet NSMenu *articleMenu;
@@ -71,6 +73,7 @@
 // Preference properties
 @property (nonatomic) NSInteger autoExpireDuration;
 @property (nonatomic) float markReadInterval;
+@property (readonly, nonatomic) BOOL readingPaneOnRight;
 @property (nonatomic) BOOL refreshOnStartup;
 @property (nonatomic) BOOL checkForNewOnStartup;
 @property (nonatomic) BOOL openLinksInVienna;
@@ -79,6 +82,7 @@
 @property (nonatomic) BOOL enableMinimumFontSize;
 @property (nonatomic) NSInteger refreshFrequency;
 @property (nonatomic, copy) NSString *displayStyle;
+@property (nonatomic) VNAFeedListSizeMode feedListSizeMode;
 @property (nonatomic, copy) NSString *articleListFontName;
 @property (nonatomic) NSInteger articleListFontSize;
 @property (nonatomic) BOOL statusBarVisible;
