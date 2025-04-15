@@ -202,6 +202,18 @@
 	return nil;
 }
 
+/* handleNewTab
+ * Open a new tab with the specified URL
+ */
+-(id)handleNewTab:(NSScriptCommand *)cmd
+{
+	NSDictionary * args = cmd.evaluatedArguments;
+	NSURL * urlToLoad = cleanedUpUrlFromString(args[@"URL"]);
+
+	[((AppController*)self.delegate).browser createNewTab:urlToLoad inBackground:NO load:YES];
+	return nil;
+}
+
 /* resetFolderSort
  * Reset the folder sort order.
  */

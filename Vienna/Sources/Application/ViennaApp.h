@@ -46,6 +46,9 @@
 // New subscription
 -(id)handleNewSubscription:(NSScriptCommand *)cmd;
 
+// New tab
+-(id)handleNewTab:(NSScriptCommand *)cmd;
+
 // Compact database
 -(id)handleCompactDatabase:(NSScriptCommand *)cmd;
 

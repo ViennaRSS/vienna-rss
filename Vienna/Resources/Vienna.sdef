@@ -284,6 +284,9 @@
 			<responds-to command="create new subscription">
 				<cocoa method="handleNewSubscription:"/>
 			</responds-to>
+			<responds-to command="open new tab">
+				<cocoa method="handleNewTab:"/>
+			</responds-to>
 			<responds-to command="empty trash">
 				<cocoa method="handleEmptyTrash:"/>
 			</responds-to>
@@ -406,6 +409,12 @@
 			</parameter>
 			<parameter type="folder" name="under" code="unFL" optional="yes" description="Optional folder under which the subscription will be created">
 				<cocoa key="UnderFolder"/>
+			</parameter>
+		</command>
+		<command name="open new tab" code="VnnanwTb" description="Open a new tab with the specified URL">
+			<cocoa name="NewTab"/>
+			<parameter type="text" name="for" code="urlT" description="The URL of the new tab">
+				<cocoa key="URL"/>
 			</parameter>
 		</command>
 		<command name="empty trash" code="VnnaVnET" description="Empty the trash">
