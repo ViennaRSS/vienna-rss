@@ -18,15 +18,6 @@
 		<key>LinkTemplate</key>
 		<string>http://www.livejournal.com/users/%@/data/rss</string>
 	</dict>
-	<key>MSN Spaces</key>
-	<dict>
-		<key>SiteHomePage</key>
-		<string>http://spaces.msn.com</string>
-		<key>LinkName</key>
-		<string>输入 MSN Spaces 用户名</string>
-		<key>LinkTemplate</key>
-		<string>http://spaces.msn.com/members/%@/feed.rss</string>
-	</dict>
 	<key>Blogspot</key>
 	<dict>
 		<key>SiteHomePage</key>
@@ -35,15 +26,6 @@
 		<string>输入 Blogspot 用户名</string>
 		<key>LinkTemplate</key>
 		<string>http://%@.blogspot.com/atom.xml</string>
-	</dict>
-	<key>Xanga</key>
-	<dict>
-		<key>SiteHomePage</key>
-		<string>http://www.xanga.com</string>
-		<key>LinkName</key>
-		<string>输入 Xanga 用户名</string>
-		<key>LinkTemplate</key>
-		<string>http://www.xanga.com/rss.aspx?user=%@</string>
 	</dict>
 	<key>URL</key>
 	<dict>
