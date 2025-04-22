@@ -46,6 +46,9 @@
 // New subscription
 -(id)handleNewSubscription:(NSScriptCommand *)cmd;
 
+// New tab
+-(id)handleNewTab:(NSScriptCommand *)cmd;
+
 // Compact database
 -(id)handleCompactDatabase:(NSScriptCommand *)cmd;
 
@@ -63,6 +66,7 @@
 @property (readonly, nonatomic) NSString *currentTextSelection;
 @property (readonly, nonatomic) NSString *documentHTMLSource;
 @property (readonly, nonatomic) NSString *documentTabURL;
+@property (readonly, nonatomic) NSString *documentTabTitle;
 
 // Change folder selection
 @property (nonatomic) Folder *currentFolder;

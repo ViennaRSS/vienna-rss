@@ -202,6 +202,18 @@
 	return nil;
 }
 
+/* handleNewTab
+ * Open a new tab with the specified URL
+ */
+-(id)handleNewTab:(NSScriptCommand *)cmd
+{
+	NSDictionary * args = cmd.evaluatedArguments;
+	NSURL * urlToLoad = cleanedUpUrlFromString(args[@"URL"]);
+
+	[((AppController*)self.delegate).browser createNewTab:urlToLoad inBackground:NO load:YES];
+	return nil;
+}
+
 /* resetFolderSort
  * Reset the folder sort order.
  */
@@ -257,10 +269,16 @@
  */
 -(NSString *)currentTextSelection
 {
-    id<Tab> activeBrowserTab = ((AppController*)self.delegate).browser.activeTab;
+    AppController *appController = ((AppController *)self.delegate);
 
+    id<Tab> activeBrowserTab = appController.browser.activeTab;
     if (activeBrowserTab) {
         return activeBrowserTab.textSelection;
+    } else {
+        id obj = appController.mainWindow.firstResponder;
+        if ([obj respondsToSelector:@selector(textSelection)]) {
+            return [obj textSelection];
+        }
     }
     return @"";
 }
@@ -280,6 +298,16 @@
     id<Tab> activeBrowserTab = ((AppController*)self.delegate).browser.activeTab;
 	if (activeBrowserTab) {
 		return activeBrowserTab.tabUrl.absoluteString;
+	} else {
+		return @"";
+    }
+}
+
+-(NSString *)documentTabTitle
+{
+    id<Tab> activeBrowserTab = ((AppController*)self.delegate).browser.activeTab;
+	if (activeBrowserTab) {
+		return activeBrowserTab.title;
 	} else {
 		return @"";
     }

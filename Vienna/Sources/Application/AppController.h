@@ -136,6 +136,7 @@
 @property (nonatomic, readonly) Article *selectedArticle;
 @property (nonatomic, readonly) NSInteger currentFolderId;
 @property (nonatomic, getter=isConnecting, readonly) BOOL connecting;
+@property (weak, nonatomic) NSWindow *mainWindow;
 -(void)runAppleScript:(NSString *)scriptName;
 @property (readonly, nonatomic) NSArray *folders;
 -(void)blogWithExternalEditor:(NSString *)externalEditorBundleIdentifier;

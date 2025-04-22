@@ -97,7 +97,6 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 @property (nonatomic) VNADispatchTimer *refreshTimer;
 
 @property (nonatomic) MainWindowController *mainWindowController;
-@property (weak, nonatomic) NSWindow *mainWindow;
 @property (nonatomic) ActivityPanelController *activityPanelController;
 @property (nonatomic) VNADirectoryMonitor *directoryMonitor;
 @property (nonatomic) NSWindowController *preferencesWindowController;
