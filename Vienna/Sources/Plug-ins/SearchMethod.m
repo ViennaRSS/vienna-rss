@@ -30,12 +30,13 @@ static NSString * const VNACodingKeyQueryString = @"searchQueryString";
 
 // MARK: Initialization
 
-- (instancetype)initWithDictionary:(NSDictionary *)dict
+- (instancetype)initWithDisplayName:(NSString *)displayName
+                        queryString:(NSString *)queryString
 {
-    self = [self init];
+    self = [super init];
     if (self) {
-        _displayName = [[dict valueForKey:@"FriendlyName"] copy];
-        _queryString = [[dict valueForKey:@"SearchQueryString"] copy];
+        _displayName = [displayName copy];
+        _queryString = [queryString copy];
         _handler = @selector(performWebSearch:);
     }
     return self;
@@ -82,7 +83,7 @@ static NSString * const VNACodingKeyQueryString = @"searchQueryString";
     return method;
 }
 
-- (NSURL *)queryURLforSearchString:(NSString *)searchString
+- (nullable NSURL *)queryURLforSearchString:(NSString *)searchString
 {
     NSURL *queryURL;
     NSString *temp =

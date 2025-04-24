@@ -1,0 +1,2 @@
+/* An instruction for the user. This will be shown above the text fields. */
+"Hint" = "Введите имя пользователя и пароль, указанные в разделе Settings/General ресурса theoldreader.com";

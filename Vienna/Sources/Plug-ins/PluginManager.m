@@ -20,117 +20,133 @@
 
 #import "PluginManager.h"
 
+#import "ActionPlugin.h"
 #import "AppController.h"
 #import "Article.h"
+#import "BlogEditorPlugin.h"
+#import "FeedSourcePlugin.h"
 #import "HelperFunctions.h"
+#import "LinkPlugin.h"
 #import "NSFileManager+Paths.h"
+#import "Plugin.h"
+#import "ScriptPlugin.h"
 #import "SearchMethod.h"
+#import "SearchPlugin.h"
 #import "StringExtensions.h"
+#import "SyncServerPlugin.h"
 #import "Vienna-Swift.h"
 
-static NSString * const VNAPlugInsDirectoryName = @"Plugins";
+NSString * const VNAPluginBundleExtension = @"viennaplugin";
+
+static NSString * const VNAPluginsDirectoryName = @"Plugins";
 
 @implementation PluginManager {
-    NSMutableDictionary *allPlugins;
+    NSMutableArray *allPlugins;
 }
 
-/* init
- * Initialises the plugin manager.
- */
--(instancetype)init
+- (instancetype)init
 {
-	if ((self = [super init]) != nil) {
-		allPlugins = nil;
-	}
-	return self;
+    self = [super init];
+    if (self) {
+        allPlugins = [NSMutableArray new];
+    }
+    return self;
 }
 
-+ (NSURL *)plugInsDirectoryURL
++ (NSURL *)pluginsDirectoryURL
 {
     NSFileManager *fileManager = NSFileManager.defaultManager;
     NSURL *appSupportURL = fileManager.vna_applicationSupportDirectory;
-    NSString *pathComponent = VNAPlugInsDirectoryName;
-    NSURL *plugInsURL = [appSupportURL URLByAppendingPathComponent:pathComponent
-                                                       isDirectory:YES];
-    return plugInsURL;
+    NSString *pathComponent = VNAPluginsDirectoryName;
+    return [appSupportURL URLByAppendingPathComponent:pathComponent
+                                          isDirectory:YES];
 }
 
-/* resetPlugins
- * Called to unload all existing plugins and load all new plugins from the
- * builtin cache and from the user directory.
- */
--(void)resetPlugins
++ (NSArray<Class> *)pluginTypes
 {
-	NSMutableDictionary * pluginPaths;
-	NSString * pluginName;
-	NSString * path;
+    static NSArray *pluginTypes;
+    if (!pluginTypes) {
+        pluginTypes = @[
+            [VNABlogEditorPlugin class],
+            [VNAFeedSourcePlugin class],
+            [VNALinkPlugin class],
+            [VNAScriptPlugin class],
+            [VNASearchPlugin class],
+            [VNASyncServerPlugin class],
+        ];
+    }
+    return pluginTypes;
+}
 
-	if (allPlugins == nil) {
-		allPlugins = [[NSMutableDictionary alloc] init];
-	} else {
-		[allPlugins removeAllObjects];
-	}
-	
-	pluginPaths = [[NSMutableDictionary alloc] init];
-	
-	path = [[NSBundle mainBundle].sharedSupportPath stringByAppendingPathComponent:@"Plugins"];
+- (void)resetPlugins
+{
+	[allPlugins removeAllObjects];
+
+	NSMutableDictionary *pluginPaths = [NSMutableDictionary dictionary];
+
+	NSString *path = [NSBundle.mainBundle.sharedSupportPath stringByAppendingPathComponent:VNAPluginsDirectoryName];
 	loadMapFromPath(path, pluginPaths, YES, nil);
 
-	path = PluginManager.plugInsDirectoryURL.path;
+	path = PluginManager.pluginsDirectoryURL.path;
 	loadMapFromPath(path, pluginPaths, YES, nil);
 
-	for (pluginName in pluginPaths) {
-		NSString * pluginPath = pluginPaths[pluginName];
+	for (NSString *pluginName in pluginPaths) {
+		NSString *pluginPath = pluginPaths[pluginName];
 		[self loadPlugin:pluginPath];
 	}
 
+    [allPlugins sortUsingDescriptors:@[
+        [NSSortDescriptor sortDescriptorWithKey:NSStringFromSelector(@selector(displayName))
+                                      ascending:YES
+                                       selector:@selector(localizedCaseInsensitiveCompare:)]
+    ]];
 }
 
-/* loadPlugin
- * Load the plugin at the specified path.
- */
--(void)loadPlugin:(NSString *)pluginPath
+- (void)loadPlugin:(NSString *)pluginPath
 {
-	NSString * listFile = [pluginPath stringByAppendingPathComponent:@"info.plist"];
-	NSString * pluginName = pluginPath.lastPathComponent;
-	NSMutableDictionary * pluginInfo = [NSMutableDictionary dictionaryWithContentsOfFile:listFile];
-	
-	// If the info.plist is missing or corrupted, warn but then just move on and the user
-	// will have to figure it out.
-	if (pluginInfo == nil) {
-		NSLog(@"Missing or corrupt info.plist in %@", pluginPath);
-	} else {
-		// We need to save the path to the plugin in the plugin object for later access to other
-		// resources in the plugin folder.
-		pluginInfo[@"Path"] = pluginPath;
+    VNAPlugin *plugin;
+    NSBundle *bundle = [NSBundle bundleWithPath:pluginPath];
+    for (Class pluginType in PluginManager.pluginTypes) {
+        if (![pluginType canInitWithBundle:bundle]) {
+            continue;
+        }
+
+        plugin = [[pluginType alloc] initWithBundle:bundle];
+        break;
+    }
+
+    if (plugin) {
         [self willChangeValueForKey:NSStringFromSelector(@selector(numberOfPlugins))];
-		allPlugins[pluginName] = pluginInfo;
+        [allPlugins addObject:plugin];
         [self didChangeValueForKey:NSStringFromSelector(@selector(numberOfPlugins))];
-	}
+    } else {
+        NSLog(@"Missing or corrupt info.plist in %@", pluginPath);
+    }
 }
 
-- (NSUInteger)numberOfPlugins {
+- (NSUInteger)numberOfPlugins
+{
     return allPlugins.count;
 }
 
 - (NSArray<NSMenuItem *> *)menuItems {
     NSMutableArray<NSMenuItem *> *plugins = [NSMutableArray array];
 
-    for (NSDictionary *onePlugin in allPlugins.allValues) {
+    for (VNAPlugin *plugin in allPlugins) {
+        if (![plugin isKindOfClass:[VNAActionPlugin class]]) {
+            continue;
+        }
+        VNAActionPlugin *actionPlugin = (VNAActionPlugin *)plugin;
+
         // If it's a blog editor plugin, don't show it in the menu
         // if the app in question is not present on the system.
-        if ([onePlugin[@"Type"] isEqualToString:@"BlogEditor"]) {
-            NSString * bundleIdentifier = onePlugin[@"BundleIdentifier"];
+        if ([plugin isKindOfClass:[VNABlogEditorPlugin class]]) {
+            VNABlogEditorPlugin *blogEditorPlugin = (VNABlogEditorPlugin *)plugin;
+            NSString *bundleIdentifier = blogEditorPlugin.targetBundleIdentifier;
 
             if (![NSWorkspace.sharedWorkspace URLForApplicationWithBundleIdentifier:bundleIdentifier]) {
                 continue;
             }
-        }
-
-        NSString * pluginName = onePlugin[@"Name"];
-        NSString * menuPath = onePlugin[@"MenuPath"];
-        if (menuPath == nil) {
-            continue;
         }
 
         // Parse off the shortcut key, if there is one. The format is a series of
@@ -138,12 +154,12 @@ static NSString * const VNAPlugInsDirectoryName = @"Plugins";
         // order and separated by '+', plus a single key character. If more than
         // one key character is given, the last one is used but generally that is
         // a bug in the MenuKey.
-        NSString * menuKey = onePlugin[@"MenuKey"];
+        NSString *menuItemKeyEquivalent = actionPlugin.menuItemKeyEquivalent;
         NSUInteger keyMod = 0;
         NSString * keyChar = @"";
 
-        if (menuKey != nil) {
-            NSArray * keyArray = [menuKey componentsSeparatedByString:@"+"];
+        if (menuItemKeyEquivalent) {
+            NSArray *keyArray = [menuItemKeyEquivalent componentsSeparatedByString:@"+"];
             NSString * oneKey;
 
             for (oneKey in keyArray) {
@@ -157,7 +173,7 @@ static NSString * const VNAPlugInsDirectoryName = @"Plugins";
                     keyMod |= NSEventModifierFlagControl;
                 } else {
                     if (!keyChar.vna_isBlank) {
-                        NSLog(@"Warning: malformed MenuKey found in info.plist for plugin %@", pluginName);
+                        NSLog(@"Warning: malformed MenuKey found in info.plist for plugin %@", plugin.identifier);
                     }
                     keyChar = oneKey;
                 }
@@ -167,18 +183,20 @@ static NSString * const VNAPlugInsDirectoryName = @"Plugins";
         // Finally add the plugin to the end of the selected menu complete with
         // key equivalent and save the plugin object in the NSMenuItem so that we
         // can associate it in pluginInvocator.
-        NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:menuPath action:@selector(pluginInvocator:) keyEquivalent:keyChar];
+        NSMenuItem *menuItem = [[NSMenuItem alloc] initWithTitle:actionPlugin.menuItemTitle
+                                                          action:@selector(pluginInvocator:)
+                                                   keyEquivalent:keyChar];
         menuItem.target = self;
         menuItem.keyEquivalentModifierMask = keyMod;
-        menuItem.representedObject = onePlugin;
+        menuItem.representedObject = plugin;
         [plugins addObject:menuItem];
     }
 
     // Sort the menu items alphabetically.
-    NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"title"
-                                                                 ascending:true
-                                                                  selector:@selector(localizedCaseInsensitiveCompare:)];
-    [plugins sortUsingDescriptors:@[descriptor]];
+    [plugins sortUsingDescriptors:@[
+        [NSSortDescriptor sortDescriptorWithKey:NSStringFromSelector(@selector(title))
+                                      ascending:YES
+                                       selector:@selector(localizedCaseInsensitiveCompare:)]]];
 
     return [plugins copy];
 }
@@ -189,9 +207,11 @@ static NSString * const VNAPlugInsDirectoryName = @"Plugins";
 -(NSArray *)searchMethods
 {
 	NSMutableArray * searchMethods = [NSMutableArray arrayWithCapacity:allPlugins.count];
-	for (NSDictionary * plugin in allPlugins.allValues) {
-		if ([[plugin valueForKey:@"Type"] isEqualToString:@"SearchEngine"]) {
-			SearchMethod * method = [[SearchMethod alloc] initWithDictionary:plugin];
+	for (VNAPlugin* plugin in allPlugins) {
+		if ([VNAPlugin isKindOfClass:[VNASearchPlugin class]]) {
+			VNASearchPlugin *searchPlugin = (VNASearchPlugin *)plugin;
+			SearchMethod *method = [[SearchMethod alloc] initWithDisplayName:searchPlugin.displayName
+																 queryString:searchPlugin.queryString];
 			[searchMethods addObject:method];
 		}
 	}
@@ -204,13 +224,9 @@ static NSString * const VNAPlugInsDirectoryName = @"Plugins";
 -(NSArray *)toolbarItems
 {
 	NSMutableArray * toolbarKeys = [NSMutableArray arrayWithCapacity:allPlugins.count];
-	NSString * pluginName;
-	NSString * pluginType;	
-	for (pluginName in allPlugins) {
-		NSDictionary * onePlugin = allPlugins[pluginName];
-		pluginType = onePlugin[@"Type"];
-		if (![pluginType isEqualToString:@"SearchEngine"]) {
-			[toolbarKeys addObject:pluginName];
+	for (VNAPlugin *plugin in allPlugins) {
+		if ([plugin isKindOfClass:[VNAActionPlugin class]]) {
+			[toolbarKeys addObject:plugin.identifier];
 		}
 	}
 	return [toolbarKeys copy];
@@ -222,15 +238,26 @@ static NSString * const VNAPlugInsDirectoryName = @"Plugins";
 -(NSArray *)defaultToolbarItems
 {
 	NSMutableArray * newArray = [NSMutableArray arrayWithCapacity:allPlugins.count];
-	NSString * pluginName;
-
-	for (pluginName in allPlugins) {
-		NSDictionary * onePlugin = allPlugins[pluginName];
-		if ([onePlugin[@"Default"] integerValue]) {
-			[newArray addObject:pluginName];
+	for (VNAPlugin *plugin in allPlugins) {
+		if ([plugin isKindOfClass:[VNAActionPlugin class]]) {
+			VNAActionPlugin *actionPlugin = (VNAActionPlugin *)plugin;
+			if (actionPlugin.isDefaultToolbarItem) {
+				[newArray addObject:actionPlugin.identifier];
+			}
 		}
 	}
 	return [newArray copy];
+}
+
+- (nullable VNAActionPlugin *)actionPluginWithIdentifier:(NSString *)identifier
+{
+    for (VNAPlugin *plugin in allPlugins) {
+        if ([plugin isKindOfClass:[VNAActionPlugin class]] &&
+            [plugin.identifier isEqualToString:identifier]) {
+            return (VNAActionPlugin *)plugin;
+        }
+    }
+    return nil;
 }
 
 /* toolbarItem
@@ -238,32 +265,31 @@ static NSString * const VNAPlugInsDirectoryName = @"Plugins";
  */
 -(NSToolbarItem *)toolbarItemForIdentifier:(NSString *)itemIdentifier
 {
-    NSDictionary *pluginItem = allPlugins[itemIdentifier];
-    if (pluginItem) {
-        VNAPlugInToolbarItem *item = [[VNAPlugInToolbarItem alloc] initWithItemIdentifier:itemIdentifier];
-		NSString * friendlyName = pluginItem[@"FriendlyName"];
-		NSString * tooltip = pluginItem[@"Tooltip"];
-        NSString *imagePath = [NSString stringWithFormat:@"%@/%@.tiff", pluginItem[@"Path"], pluginItem[@"ButtonImage"]];
-
-		if (friendlyName == nil) {
-			friendlyName = itemIdentifier;
-		}
-		if (tooltip == nil) {
-			tooltip = friendlyName;
-		}
-		
-        item.label = friendlyName;
-        item.paletteLabel = item.label;
-        item.image = [[NSImage alloc] initByReferencingFile:imagePath];
-        item.target = self;
-        item.action = @selector(pluginInvocator:);
-		item.toolTip = tooltip;
-        item.menuFormRepresentation.representedObject = pluginItem;
-
-        return item;
-    } else {
+    VNAActionPlugin *plugin = [self actionPluginWithIdentifier:itemIdentifier];
+    if (!plugin) {
         return nil;
     }
+
+    VNAPlugInToolbarItem *item = [[VNAPlugInToolbarItem alloc] initWithItemIdentifier:itemIdentifier];
+    item.label = plugin.displayName;
+    item.paletteLabel = item.label;
+    item.image = plugin.toolbarItemImage;
+    item.target = self;
+    item.action = @selector(pluginInvocator:);
+    item.toolTip = plugin.toolbarItemToolTip;
+    item.menuFormRepresentation.representedObject = plugin;
+    return item;
+}
+
+- (NSArray<VNAPlugin *> *)pluginsOfType:(Class)pluginType
+{
+    NSMutableArray *plugins = [NSMutableArray array];
+    for (VNAPlugin *plugin in allPlugins) {
+        if ([plugin isMemberOfClass:pluginType]) {
+            [plugins addObject:plugin];
+        }
+    }
+    return plugins;
 }
 
 /* validateToolbarItem
@@ -301,27 +327,21 @@ static NSString * const VNAPlugInsDirectoryName = @"Plugins";
  */
 -(IBAction)pluginInvocator:(id)sender
 {
-	NSDictionary * pluginItem;
-
+    VNAActionPlugin *plugin;
     if ([sender isKindOfClass:[VNAPlugInToolbarItemButton class]]) {
         VNAPlugInToolbarItemButton *button = sender;
-        pluginItem = allPlugins[button.toolbarItem.itemIdentifier];
+        plugin = [self actionPluginWithIdentifier:button.toolbarItem.itemIdentifier];
     } else {
 		NSMenuItem * menuItem = (NSMenuItem *)sender;
-		pluginItem = menuItem.representedObject;
+		plugin = menuItem.representedObject;
 	}
 	
-	if (pluginItem != nil) {
+	if (plugin) {
 		// This is a link plugin. There should be a URL field which we invoke and possibly
 		// placeholders to be filled from the current article or website.
-
-		NSString * itemType = pluginItem[@"Type"];
-		if ([itemType isEqualToString:@"Link"]) {
-			NSMutableString * urlString  = [NSMutableString stringWithString:pluginItem[@"URL"]];
-			if (urlString == nil) {
-				return;
-			}
-
+		if ([plugin isKindOfClass:[VNALinkPlugin class]]) {
+			VNALinkPlugin *linkPlugin = (VNALinkPlugin *)plugin;
+			NSMutableString *urlString = [linkPlugin.queryString mutableCopy];
             id<Tab> activeBrowserTab = APPCONTROLLER.browser.activeTab;
 
 			// ...and do the following in case the user is currently looking at a website.
@@ -346,20 +366,14 @@ static NSString * const VNAPlugInsDirectoryName = @"Plugins";
 				NSBeep();
 				NSLog(@"Creation of the sharing URL failed!");
 			}
-		} else if ([itemType isEqualToString:@"Script"]) {
-			// This is a script plugin. There should be a Script field which specifies the
-			// filename of the script file in the same folder.
-			NSString * pluginPath = pluginItem[@"Path"];
-			NSString * scriptFile = [pluginPath stringByAppendingPathComponent:pluginItem[@"Script"]];
-			if (scriptFile == nil) {
-				return;
-			}
-
+		} else if ([plugin isKindOfClass:[VNAScriptPlugin class]]) {
+			VNAScriptPlugin *scriptPlugin = (VNAScriptPlugin *)plugin;
 			// Just run the script
-			[APPCONTROLLER runAppleScript:scriptFile];
-		} else if ([itemType isEqualToString:@"BlogEditor"]) {
+			[APPCONTROLLER runAppleScript:scriptPlugin.scriptFileURL.path];
+		} else if ([plugin isKindOfClass:[VNABlogEditorPlugin class]]) {
+			VNABlogEditorPlugin *blogEditorPlugin = (VNABlogEditorPlugin *)plugin;
 			// This is a blog-editor plugin. Simply send the info to the application.
-			[APPCONTROLLER blogWithExternalEditor:pluginItem[@"BundleIdentifier"]];
+			[APPCONTROLLER blogWithExternalEditor:blogEditorPlugin.targetBundleIdentifier];
 		}
 	}
 }

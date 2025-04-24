@@ -1,0 +1,11 @@
+/* The name of feed source. */
+"FriendlyName" = "PChome 個人新聞台";
+
+/* An instruction for the user. This will be shown above a text field. */
+"LinkName" = "Enter PChome user name";
+
+/* The feed or web-page URL that will be used to add or discover a feed. You can change the domain or parts of the URL query to use a version of the website that matches the language. */
+"LinkTemplate" = "https://mypaper.pchome.com.tw/%@/rss";
+
+/* The home page of the feed source. */
+"SiteHomePage" = "https://mypaper.pchome.com.tw";

@@ -1,0 +1,11 @@
+/* The name of the plug-in, such as the name of the website or app. */
+"FriendlyName" = "Buffer";
+
+/* The label for the plug-in in toolbar items and menu items. */
+"MenuPath" = "Add to Buffer";
+
+/* The tool tip for the plug-in in toolbar items. */
+"Tooltip" = "Add the current article to Buffer";
+
+/* The URL that will be opened when the plug-in is invoked. You can change the domain or parts of the URL query to use a version of the website that matches the language. The tokens "$ArticleLink$" and "$ArticleTitle$" must be kept and must not be translated. */
+"URL" = "http://bufferapp.com/add?url=$ArticleLink$&text=$ArticleTitle$&source=vienna";

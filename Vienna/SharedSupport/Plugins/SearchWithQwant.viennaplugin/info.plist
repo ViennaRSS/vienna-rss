@@ -10,7 +10,5 @@
 	<string>https://www.qwant.com/?q=$SearchTerm$</string>
 	<key>FriendlyName</key>
 	<string>Qwant</string>
-	<key>Tooltip</key>
-	<string>Search with Qwant</string>
 </dict>
 </plist>

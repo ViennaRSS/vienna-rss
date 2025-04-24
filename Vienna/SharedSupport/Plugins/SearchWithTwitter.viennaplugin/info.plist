@@ -10,7 +10,5 @@
 	<string>https://twitter.com/search?q=$SearchTerm$&amp;src=typd</string>
 	<key>FriendlyName</key>
 	<string>Twitter</string>
-	<key>Tooltip</key>
-	<string>Search with Twitter</string>
 </dict>
 </plist>

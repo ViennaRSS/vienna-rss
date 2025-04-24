@@ -1,0 +1,8 @@
+/* The host name (domain) of the sync server. You can change the domain to use a version of the website that matches the language. */
+"Address" = "theoldreader.com";
+
+/* The name of sync server. */
+"FriendlyName" = "The Old Reader";
+
+/* An instruction for the user. This will be shown above the text fields. */
+"Hint" = "Enter username and password defined in Settings/General section of theoldreader.com";

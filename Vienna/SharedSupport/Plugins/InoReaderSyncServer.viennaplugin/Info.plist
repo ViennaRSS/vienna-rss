@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Address</key>
+	<string>www.inoreader.com</string>
+	<key>FriendlyName</key>
+	<string>InoReader</string>
+	<key>Hint</key>
+	<string>Enter username and password associated to your InoReader account</string>
+	<key>Name</key>
+	<string>InoReaderSyncServer</string>
+	<key>Type</key>
+	<string>SyncServer</string>
+</dict>
+</plist>

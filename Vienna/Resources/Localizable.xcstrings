@@ -9610,6 +9610,159 @@
         }
       }
     },
+    "Enter the path under your home folder" : {
+      "comment" : "An instruction that will be shown above a text field.",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zadejte cestu k souboru ve vaší domovské složce"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Indtast stien under din hjemmemappe"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sartu zure \"home\" direktorioa kokatzen den helbidea"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entrer le chemin à partir de votre dossier personnel"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Home klasörünüzün yolunu girin"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введіть шлях відносно Вашої домашньої папки"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "输入你的用户文件夹路径"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "請輸入您個人專屬檔案夾的路徑"
+          }
+        }
+      }
+    },
+    "Enter the server's address (API URL) and your credentials. For FreshRSS servers, the API URL typically ends with \"/api/greader.php\", and the API password is defined in the \"Profile\" section of the website." : {
+      "comment" : "An instruction for the user. This will be shown above the text fields.",
+      "localizations" : {
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Indtast serverens adresse og dine loginoplysninger. For FreshRSS-servere slutter API-URL'en typisk med \"/api/greader.php\", og API-adgangskoden er defineret i afsnittet \"Profil\" på hjemmesiden."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geben Sie die Adresse (API-URL) und Anmeldedaten für diesen Server ein. Bei FreshRSS-Servern endet die API-URL in der Regel mit \"/api/greader.php\", und das API-Passwort wird im Abschnitt \"Profil\" der Website festgelegt."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Introduzca la dirección del servidor (URL API) y sus credenciales. En el caso de los servidores FreshRSS, la URL de la API suele terminar en \"/api/greader.php\", y la contraseña de la API se define en la sección \"Perfil\" del sitio web."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entrez l'adresse de l'API du serveur, votre identifiant et le mot de passe. Pour un serveur FreshRSS, l'adresse de l'API se termine généralement par \"/api/greader.php\", et le mot de passe API est défini dans la section \"Profil\" du site web."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введите адрес сервера (URL API) и свои учетные данные. Для серверов FreshRSS URL API обычно заканчивается на \"/api/greader.php\", а пароль API определяется в разделе \"Профиль\" на сайте."
+          }
+        }
+      }
+    },
+    "Enter URL of RSS feed" : {
+      "comment" : "An instruction that will be shown above a text field.",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zadejte URL zdroje"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Indtast henvisning til RSS feedet"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sartu RSS jarioaren URL-a"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entrer l'URL d'un flux RSS"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geef de URL voor de RSS-feed"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ange URL till RSS-ström"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "RSS Beslemesinin URL'sini Girin"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введіть URL RSS-стрічки"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "输入 RSS 频道的 URL 地址"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "請輸入 RSS feed 的網址"
+          }
+        }
+      }
+    },
     "Error" : {
       "comment" : "Already subscribed title",
       "localizations" : {
@@ -13144,6 +13297,35 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "連結"
+          }
+        }
+      }
+    },
+    "Local file" : {
+      "comment" : "Title of a menu item",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Místní soubor"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fitxategi lokala"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "本地文件"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "本機檔案"
           }
         }
       }
@@ -16765,6 +16947,7 @@
       }
     },
     "Other" : {
+      "comment" : "Title of a menu item.",
       "localizations" : {
         "cs" : {
           "stringUnit" : {
@@ -23467,7 +23650,7 @@
       }
     },
     "URL" : {
-      "comment" : "URL",
+      "comment" : "Title of a menu item\nURL",
       "localizations" : {
         "da" : {
           "stringUnit" : {

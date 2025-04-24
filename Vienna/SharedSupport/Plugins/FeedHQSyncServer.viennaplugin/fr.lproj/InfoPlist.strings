@@ -1,0 +1,2 @@
+/* An instruction for the user. This will be shown above the text fields. */
+"Hint" = "Entrez le nom utilisateur (ou l'adresse mail) et le mot de passe associé à votre compte FeedHQ";
