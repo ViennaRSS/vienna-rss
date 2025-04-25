@@ -40,7 +40,7 @@
 	<key>Cool Hunting</key>
 	<dict>
 		<key>URL</key>
-		<string>http://feeds.coolhunting.com/ch</string>
+		<string>https://coolhunting.com/feed/</string>
 	</dict>
 	<key>Xkcd</key>
 	<dict>
