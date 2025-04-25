@@ -3,9 +3,3 @@
 
 /* An instruction for the user. This will be shown above a text field. */
 "LinkName" = "Enter Hatena Blog user name";
-
-/* The feed or web-page URL that will be used to add or discover a feed. You can change the domain or parts of the URL query to use a version of the website that matches the language. */
-"LinkTemplate" = "https://%@.hatenablog.com/feed";
-
-/* The home page of the feed source. */
-"SiteHomePage" = "https://hatenablog.com";
