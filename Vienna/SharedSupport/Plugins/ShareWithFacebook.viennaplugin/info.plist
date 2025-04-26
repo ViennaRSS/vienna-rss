@@ -9,7 +9,7 @@
 	<key>Type</key>
 	<string>Link</string>
 	<key>URL</key>
-	<string>http://www.facebook.com/sharer.php?u=$ArticleLink$&amp;t=$ArticleTitle$</string>
+	<string>https://www.facebook.com/sharer.php?u=$ArticleLink$&amp;t=$ArticleTitle$</string>
 	<key>FriendlyName</key>
 	<string>Facebook</string>
 	<key>Tooltip</key>

@@ -8,4 +8,4 @@
 "Tooltip" = "Share the current article on Evernote";
 
 /* The URL that will be opened when the plug-in is invoked. You can change the domain or parts of the URL query to use a version of the website that matches the language. The tokens "$ArticleLink$" and "$ArticleTitle$" must be kept and must not be translated. */
-"URL" = "http://www.evernote.com/clip.action?url=$ArticleLink$&title=$ArticleTitle$";
+"URL" = "https://www.evernote.com/clip.action?url=$ArticleLink$&title=$ArticleTitle$";
