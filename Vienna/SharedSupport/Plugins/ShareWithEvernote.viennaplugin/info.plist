@@ -7,7 +7,7 @@
 	<key>Type</key>
 	<string>Link</string>
 	<key>URL</key>
-	<string>http://www.evernote.com/clip.action?url=$ArticleLink$&amp;title=$ArticleTitle$</string>
+	<string>https://www.evernote.com/clip.action?url=$ArticleLink$&amp;title=$ArticleTitle$</string>
 	<key>Default</key>
 	<false/>
 	<key>FriendlyName</key>
