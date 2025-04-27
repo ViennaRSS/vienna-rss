@@ -1,5 +1,5 @@
 /* The name of feed source. */
-"FriendlyName" = "LiveJournal";
+"FriendlyName" = "Hatena Blog";
 
 /* An instruction for the user. This will be shown above a text field. */
-"LinkName" = "Entrer le nom d'utilisateur LiveJournal";
+"LinkName" = "Entrer le nom d'utilisateur Hatena Blog";

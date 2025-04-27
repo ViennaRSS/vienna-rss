@@ -1,0 +1,8 @@
+/* The name of the plug-in, such as the name of the website or app. */
+"FriendlyName" = "Mastodon";
+
+/* The label for the plug-in in toolbar items and menu items. */
+"MenuPath" = "Dela via en Mastodon-instans";
+
+/* The tool tip for the plug-in in toolbar items. */
+"Tooltip" = "Dela till Fediverse via en Mastodon-instans";
