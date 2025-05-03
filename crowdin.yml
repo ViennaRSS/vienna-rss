@@ -1,0 +1,51 @@
+#
+# Basic Crowdin CLI configuration
+# https://crowdin.github.io/crowdin-cli/configuration
+# https://support.crowdin.com/developer/configuration-file/
+#
+---
+project_id: '262108'
+api_token_env: CROWDIN_PERSONAL_TOKEN
+
+preserve_hierarchy: true
+
+files: [
+  {
+    # Vienna/Interfaces/mul.lproj/*.xcstrings
+    # Vienna/Resources/*.xcstrings
+    source: /Vienna/**/*.xcstrings,
+    translation: /Vienna/**/%original_file_name%,
+    multilingual: true
+  },
+  {
+    # Vienna/SharedSupport/Plugins/*.viennaplugin/en.lproj/*.strings
+    source: /Vienna/**/en.lproj/*.strings,
+    translation: /Vienna/**/%osx_code%/%original_file_name%
+  },
+  {
+    # Vienna/Resources/Base.lproj/Predicates.strings
+    source: /Vienna/**/Base.lproj/*.strings,
+    translation: /Vienna/**/%osx_code%/%original_file_name%
+  },
+  {
+    # Vienna Help/Resources/InfoPlist.xcstrings
+    source: /Vienna Help/**/*.xcstrings,
+    translation: /Vienna Help/**/%original_file_name%,
+    multilingual: true
+  },
+  {
+    # Vienna Help/Resources/en.lproj/*.html (except advanced.html)
+    source: /Vienna Help/**/en.lproj/*.html,
+    translation: /Vienna Help/**/%osx_code%/%original_file_name%,
+    content_segmentation: false,
+    ignore: [
+      /**/advanced.html
+    ]
+  },
+  {
+    # Vienna Help/Resources/en.lproj/advanced.html
+    source: /Vienna Help/**/en.lproj/advanced.html,
+    translation: /Vienna Help/**/%osx_code%/%original_file_name%,
+    content_segmentation: true
+  }
+]

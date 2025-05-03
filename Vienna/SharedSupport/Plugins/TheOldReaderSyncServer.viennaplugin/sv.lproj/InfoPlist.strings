@@ -1,0 +1,5 @@
+/* The name of sync server. */
+"FriendlyName" = "The Old Reader";
+
+/* An instruction for the user. This will be shown above the text fields. */
+"Hint" = "Ange användarnamn och lösenord som anges i Inställningar/Allmänt på theoldreader.com";

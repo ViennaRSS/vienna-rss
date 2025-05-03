@@ -9637,6 +9637,12 @@
             "value" : "Entrer le chemin à partir de votre dossier personnel"
           }
         },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ange sökvägen under din hemmapp"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9694,6 +9700,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Введите адрес сервера (URL API) и свои учетные данные. Для серверов FreshRSS URL API обычно заканчивается на \"/api/greader.php\", а пароль API определяется в разделе \"Профиль\" на сайте."
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ange serverns adress (API-URL) och dina inloggningsuppgifter. För FreshRSS-servrar slutar API-URL:en vanligtvis med \"/api/greader.php\", och API-lösenordet anges i avsnittet \"Profil\" på webbplatsen."
           }
         }
       }
@@ -13314,6 +13326,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fitxategi lokala"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fichier local"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lokal fil"
           }
         },
         "zh-Hans" : {
