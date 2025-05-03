@@ -230,10 +230,6 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 								    self.openReaderStatus = missingTToken;								
 								}
 								break;
-							} else {
-							    self.openReaderStatus = clientTokenError;
-                                [nc vna_postNotificationOnMainThreadWithName:MA_Notify_GoogleAuthFailed object:@""];
-                                self->latestAlertDescription = @"";
 							}
 						}
                         if (self.clientAuthTimer == nil || !self.clientAuthTimer.valid) {
