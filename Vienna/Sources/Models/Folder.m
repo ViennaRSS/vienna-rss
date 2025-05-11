@@ -723,9 +723,7 @@
             // check consistency
             if (self.cachedGuids.count < self.unreadCount) {
                 NSLog(@"Bug from cache in folder %li : inconsistent count",(long)self.itemId);
-                self.isCached = NO;
-                [self.cachedArticles removeAllObjects];
-                return [self getCompleteArticles];
+                return [self getCompleteArticles:YES];
             }
             // attempt to retrieve from cache
             NSMutableArray * articles = [NSMutableArray arrayWithCapacity:self.cachedGuids.count];
@@ -739,14 +737,12 @@
                 } else {
                     // some problem
                     NSLog(@"Bug retrieving from cache in folder %li : after %lu insertions of %lu, guid %@",(long)self.itemId, (unsigned long)articles.count,(unsigned long)self.cachedGuids.count,object);
-                    self.isCached = NO;
-                    [self.cachedArticles removeAllObjects];
-                    return [self getCompleteArticles];
+                    return [self getCompleteArticles:YES];
                 }
             }
             return [articles copy];
         } else {
-            return [self getCompleteArticles];
+            return [self getCompleteArticles:NO];
        }
 	} else {
 	    return [[Database sharedManager] arrayOfArticles:self.itemId filterString:filterString];
@@ -758,10 +754,14 @@
  * and store it in cache if appropriate
  * returns articles
  */
--(NSArray<Article *> *)getCompleteArticles
+-(NSArray<Article *> *)getCompleteArticles:(BOOL)resetCache
 {
   @synchronized(self){
     NSArray * articles = [[Database sharedManager] arrayOfArticles:self.itemId filterString:@""];
+    if (resetCache) {
+        self.isCached = NO;
+        [self.cachedArticles removeAllObjects];
+    }
     self.containsBodies = NO;
     // Only feeds folders can be cached, as they are the only ones to guarantee
     // bijection : one article <-> one guid
@@ -769,7 +769,6 @@
         [self.cachedGuids removeAllObjects];
         for (Article * article in articles) {
             NSString * guid = article.guid;
-            article.status = [self retrieveKnownStatusForGuid:guid];
             [self.cachedArticles setObject:article forKey:guid];
             [self.cachedGuids addObject:guid];
         }
