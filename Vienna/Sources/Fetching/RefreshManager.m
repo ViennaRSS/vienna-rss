@@ -899,9 +899,8 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         dispatch_async(dispatch_get_main_queue(), ^{
             connectorItem.status = logText;
         });
-        [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:MA_Notify_ArticleListContentChange object:@(folder.
-                                                                                                                                  itemId)];
     }
+    [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:MA_Notify_ArticleListContentChange object:@(folder.itemId)];
 
     // Done with this connection
 
