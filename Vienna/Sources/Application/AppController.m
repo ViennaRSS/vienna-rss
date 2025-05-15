@@ -351,8 +351,8 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 	// Add the app to the status bar if needed.
 	[self showAppInStatusBar];
 
-    // Notification Center delegate
-    NSUserNotificationCenter.defaultUserNotificationCenter.delegate = self;
+    // User Notification Center delegate
+    VNAUserNotificationCenter.current.delegate = self;
 
 	// Register to be notified when the scripts folder changes.
 	if (!hasOSScriptsMenu()) {
@@ -1634,11 +1634,15 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         NSString *predicateFormat = unreadCriteria.predicate.predicateFormat;
         Folder *smartFolder = [db folderForPredicateFormat:predicateFormat];
         if ([smartFolder isEqual:treeNode.folder]) {
-            NSUserNotificationCenter *center = NSUserNotificationCenter.defaultUserNotificationCenter;
-            [center.deliveredNotifications enumerateObjectsUsingBlock:^(NSUserNotification *notification, NSUInteger idx, BOOL *stop) {
-                if ([notification.userInfo[UserNotificationContextKey] isEqualToString:UserNotificationContextFetchCompleted]) {
-                    [center removeDeliveredNotification:notification];
+            VNAUserNotificationCenter *center = VNAUserNotificationCenter.current;
+            [center getDeliveredNotificationsWithCompletionHandler:^(NSArray<VNAUserNotificationResponse *> *responses) {
+                NSMutableArray<NSString *> *identifiers = [NSMutableArray array];
+                for (VNAUserNotificationResponse *response in responses) {
+                    if ([response.userInfo[UserNotificationContextKey] isEqualToString:UserNotificationContextFetchCompleted]) {
+                        [identifiers addObject:response.identifier];
+                    }
                 }
+                [center removeDeliveredNotificationsWithIdentifiers:identifiers];
             }];
         }
     }
@@ -1822,22 +1826,43 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 
         // User notification
         if (newUnread > 0) {
-            NSUserNotification *notification = [NSUserNotification new];
-            notification.title = NSLocalizedString(@"New articles retrieved", @"Notification title");
-            notification.informativeText = [NSString stringWithFormat:NSLocalizedString(@"%d new unread articles retrieved", @"Notification body"), (int)newUnread];
-            notification.userInfo = @{UserNotificationContextKey: UserNotificationContextFetchCompleted};
-            notification.soundName = NSUserNotificationDefaultSoundName;
+            VNAUserNotificationCenter *center = VNAUserNotificationCenter.current;
+            [center getNotificationSettingsWithCompletionHandler:^(VNAUserNotificationSettings *settings) {
+                VNAUserNotificationAuthorizationStatus status = settings.authorizationStatus;
+                if (status == VNAUserNotificationAuthorizationStatusDenied) {
+                    return;
+                }
 
-            // Set a unique identifier to assure that this notifications cannot
-            // appear more than once.
-            notification.identifier = UserNotificationContextFetchCompleted;
+                void (^deliverNotification)(void) = ^{
+                    NSString *identifier = UserNotificationContextFetchCompleted;
+                    NSString *title = NSLocalizedString(@"New articles retrieved",
+                                                        @"Notification title");
+                    NSString *body = [NSString stringWithFormat:NSLocalizedString(@"%d new unread articles retrieved",
+                                                                                  @"Notification body"),
+                                      (int)newUnread];
+                    VNAUserNotificationRequest *request =
+                        [[VNAUserNotificationRequest alloc] initWithIdentifier:identifier
+                                                                         title:title];
+                    request.body = body;
+                    request.playSound = settings.isSoundEnabled;
+                    request.userInfo = @{
+                        UserNotificationContextKey: UserNotificationContextFetchCompleted
+                    };
+                    [center addNotificationRequest:request
+                             withCompletionHandler:nil];
+                };
 
-            // Remove the previous notification, if present, before sending a
-            // new one. This will assure that the user can receive an alert and
-            // and can see the updated notification in Notification Center.
-            NSUserNotificationCenter *center = NSUserNotificationCenter.defaultUserNotificationCenter;
-            [center removeDeliveredNotification:notification];
-            [center deliverNotification:notification];
+                if (status == VNAUserNotificationAuthorizationStatusProvisional ||
+                    status == VNAUserNotificationAuthorizationStatusAuthorized) {
+                    deliverNotification();
+                } else if (status == VNAUserNotificationAuthorizationStatusNotDetermined) {
+                    [center requestAuthorizationWithCompletionHandler:^(BOOL granted) {
+                        if (granted) {
+                            deliverNotification();
+                        }
+                    }];
+                }
+            }];
         }
 	}
 }

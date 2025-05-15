@@ -27,6 +27,7 @@
 #import "DownloadManager.h"
 #import "HelperFunctions.h"
 #import "NSWorkspace+OpenWithMenu.h"
+#import "Vienna-Swift.h"
 
 @implementation DownloadWindow {
     IBOutlet NSWindow *downloadWindow;
@@ -116,15 +117,18 @@
 - (void)windowDidBecomeKey:(NSNotification *)notification
 {
 	// Clear relevant notifications when the user views this window.
-	NSUserNotificationCenter *center = NSUserNotificationCenter.defaultUserNotificationCenter;
-	[center.deliveredNotifications enumerateObjectsUsingBlock:^(NSUserNotification *notification, NSUInteger idx, BOOL *stop) {
-		BOOL completed = [notification.userInfo[UserNotificationContextKey] isEqualToString:UserNotificationContextFileDownloadCompleted];
-		BOOL failed = [notification.userInfo[UserNotificationContextKey] isEqualToString:UserNotificationContextFileDownloadFailed];
-
-		if (completed || failed) {
-			[center removeDeliveredNotification: notification];
-		}
-	}];
+    VNAUserNotificationCenter *center = VNAUserNotificationCenter.current;
+    [center getDeliveredNotificationsWithCompletionHandler:^(NSArray<VNAUserNotificationResponse *> *responses) {
+        NSMutableArray *identifiers = [NSMutableArray array];
+        for (VNAUserNotificationResponse *response in responses) {
+            NSString *context = response.userInfo[UserNotificationContextKey];
+            if ([context isEqualToString:UserNotificationContextFileDownloadCompleted] ||
+                [context isEqualToString:UserNotificationContextFileDownloadFailed]) {
+                [identifiers addObject:response.identifier];
+            }
+        }
+        [center removeDeliveredNotificationsWithIdentifiers:identifiers];
+    }];
 }
 
 /* clearList

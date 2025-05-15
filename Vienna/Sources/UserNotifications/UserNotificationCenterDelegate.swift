@@ -1,8 +1,8 @@
 //
-//  AppController+Notifications.h
+//  UserNotificationCenterDelegate.swift
 //  Vienna
 //
-//  Copyright 2017
+//  Copyright 2023-2025 Eitot
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -17,19 +17,13 @@
 //  limitations under the License.
 //
 
-#import "AppController.h"
+@objc(VNAUserNotificationCenterDelegate)
+protocol UserNotificationCenterDelegate: AnyObject {
 
-#import "Vienna-Swift.h"
+    @objc(userNotificationCenter:didReceiveResponse:)
+    func userNotificationCenter(
+        _ center: UserNotificationCenter,
+        didReceive response: UserNotificationResponse
+    )
 
-@interface AppController (Notifications) <VNAUserNotificationCenterDelegate>
-
-// Notification keys
-extern NSString *const UserNotificationContextKey;
-extern NSString *const UserNotificationFilePathKey;
-
-// Notification context descriptors
-extern NSString *const UserNotificationContextFetchCompleted;
-extern NSString *const UserNotificationContextFileDownloadCompleted;
-extern NSString *const UserNotificationContextFileDownloadFailed;
-
-@end
+}

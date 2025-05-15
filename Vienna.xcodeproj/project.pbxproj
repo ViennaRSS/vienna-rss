@@ -192,6 +192,10 @@
 		F69140E41E71B94200D51BFF /* AppController+Notifications.m in Sources */ = {isa = PBXBuildFile; fileRef = F69140E31E71B94200D51BFF /* AppController+Notifications.m */; };
 		F692559A2572A32900D387D8 /* MMTabBarView in Frameworks */ = {isa = PBXBuildFile; productRef = F69255992572A32900D387D8 /* MMTabBarView */; };
 		F696D23E2561F9FC003DF0C0 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = F696D23D2561F9FC003DF0C0 /* Sparkle */; };
+		F69743E92ADAC497006C5BBC /* UserNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69743E82ADAC497006C5BBC /* UserNotificationCenter.swift */; };
+		F69743EB2ADAC49D006C5BBC /* UserNotificationCenterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69743EA2ADAC49D006C5BBC /* UserNotificationCenterDelegate.swift */; };
+		F69743ED2ADAC4A2006C5BBC /* UserNotificationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69743EC2ADAC4A2006C5BBC /* UserNotificationRequest.swift */; };
+		F69743EF2ADAC4A7006C5BBC /* UserNotificationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69743EE2ADAC4A7006C5BBC /* UserNotificationResponse.swift */; };
 		F69964F71F13029600FC8493 /* OverlayStatusBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69964F61F13029500FC8493 /* OverlayStatusBar.swift */; };
 		F69EA3962DAC3B7800A97F71 /* DownloadListCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = F69EA3952DAC3B7800A97F71 /* DownloadListCellView.m */; };
 		F6A179D326B82BE3008DDA42 /* NSFileManagerExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A179D226B82BE3008DDA42 /* NSFileManagerExtensionTests.swift */; };
@@ -538,6 +542,10 @@
 		F69140E31E71B94200D51BFF /* AppController+Notifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppController+Notifications.m"; sourceTree = "<group>"; };
 		F695E9E1283CF02D00320578 /* FeedListConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeedListConstants.h; sourceTree = "<group>"; };
 		F695E9E2283D0C8100320578 /* FolderViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FolderViewDelegate.h; sourceTree = "<group>"; };
+		F69743E82ADAC497006C5BBC /* UserNotificationCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNotificationCenter.swift; sourceTree = "<group>"; };
+		F69743EA2ADAC49D006C5BBC /* UserNotificationCenterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNotificationCenterDelegate.swift; sourceTree = "<group>"; };
+		F69743EC2ADAC4A2006C5BBC /* UserNotificationRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNotificationRequest.swift; sourceTree = "<group>"; };
+		F69743EE2ADAC4A7006C5BBC /* UserNotificationResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNotificationResponse.swift; sourceTree = "<group>"; };
 		F698E6FF29E9D1CA00D49475 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Predicates.strings; sourceTree = "<group>"; };
 		F69964F61F13029500FC8493 /* OverlayStatusBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayStatusBar.swift; sourceTree = "<group>"; };
 		F69EA3942DAC3B7800A97F71 /* DownloadListCellView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DownloadListCellView.h; sourceTree = "<group>"; };
@@ -973,6 +981,17 @@
 			name = "Smart folder";
 			sourceTree = "<group>";
 		};
+		F69743D72ADAC473006C5BBC /* UserNotifications */ = {
+			isa = PBXGroup;
+			children = (
+				F69743E82ADAC497006C5BBC /* UserNotificationCenter.swift */,
+				F69743EA2ADAC49D006C5BBC /* UserNotificationCenterDelegate.swift */,
+				F69743EC2ADAC4A2006C5BBC /* UserNotificationRequest.swift */,
+				F69743EE2ADAC4A7006C5BBC /* UserNotificationResponse.swift */,
+			);
+			path = UserNotifications;
+			sourceTree = "<group>";
+		};
 		F6A7DDCB1E470E980017BE5E /* Vienna Help */ = {
 			isa = PBXGroup;
 			children = (
@@ -1138,6 +1157,7 @@
 				F6D7FEDB1F1CDF41004F095A /* Info panel */,
 				F6D7FEDC1F1CDF49004F095A /* Activity panel */,
 				F6D7FEDD1F1CDFCD004F095A /* Download window */,
+				F69743D72ADAC473006C5BBC /* UserNotifications */,
 				F6D7FEDE1F1CE135004F095A /* Alerts */,
 				F6D7FEDF1F1CE13F004F095A /* Fetching */,
 				F6D7FEE01F1CE147004F095A /* Parsing */,
@@ -1821,6 +1841,7 @@
 				2F88FF412969B2A40076B99E /* DatePredicateWithUnit.swift in Sources */,
 				43502896165DE9E00018EDB7 /* ActivityPanelController.m in Sources */,
 				0378753125E34743009AB1C9 /* FeedListCellView.m in Sources */,
+				F69743EF2ADAC4A7006C5BBC /* UserNotificationResponse.swift in Sources */,
 				2FE44CAD25B7995400554E82 /* NSApplication+AppController.swift in Sources */,
 				F6CE47131E7E3DCB0045EAD7 /* ActivityItem.m in Sources */,
 				43502897165DE9E00018EDB7 /* AppController.m in Sources */,
@@ -1831,9 +1852,11 @@
 				F67E7828285DDAB200D1CECE /* Toolbar.swift in Sources */,
 				2FE44CB525B79EDE00554E82 /* WebKitContextMenuCustomizer.swift in Sources */,
 				F61CEA661F039E57009C878E /* ButtonToolbarItem.swift in Sources */,
+				F69743EB2ADAC49D006C5BBC /* UserNotificationCenterDelegate.swift in Sources */,
 				F6B059E42961D0DD00F6E31B /* JSONFeedParser.swift in Sources */,
 				F68792872700A678009B7BB5 /* SecurityScopedBookmark.swift in Sources */,
 				F6094E331F10107800677D3B /* ExportAccessoryViewController.swift in Sources */,
+				F69743ED2ADAC4A2006C5BBC /* UserNotificationRequest.swift in Sources */,
 				2FCD69302260B3E7005BAA75 /* CustomWKWebView.swift in Sources */,
 				F6A464BC272F47BE0071E3F6 /* NSKeyedUnarchiver+Compatibility.m in Sources */,
 				2FDF6FC0218A266A002F77E9 /* BrowserTab.swift in Sources */,
@@ -1902,6 +1925,7 @@
 				F69140E41E71B94200D51BFF /* AppController+Notifications.m in Sources */,
 				3A4DBEC71733C207006DD2AB /* ArticleCellView.m in Sources */,
 				F6A464BD272F47BE0071E3F6 /* NSKeyedArchiver+Compatibility.m in Sources */,
+				F69743E92ADAC497006C5BBC /* UserNotificationCenter.swift in Sources */,
 				37C650801816EBAD3C0D9DBF /* NSURL+CaminoExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

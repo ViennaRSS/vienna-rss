@@ -1,8 +1,8 @@
 //
-//  AppController+Notifications.h
+//  UserNotificationResponse.swift
 //  Vienna
 //
-//  Copyright 2017
+//  Copyright 2023-2025 Eitot
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -17,19 +17,23 @@
 //  limitations under the License.
 //
 
-#import "AppController.h"
+import Foundation
 
-#import "Vienna-Swift.h"
+@objc(VNAUserNotificationResponse)
+class UserNotificationResponse: NSObject {
 
-@interface AppController (Notifications) <VNAUserNotificationCenterDelegate>
+    /// The identifier of the notification.
+    @objc let identifier: String
 
-// Notification keys
-extern NSString *const UserNotificationContextKey;
-extern NSString *const UserNotificationFilePathKey;
+    /// Additional user info that is attached to the notification.
+    @objc let userInfo: [AnyHashable: Any]?
 
-// Notification context descriptors
-extern NSString *const UserNotificationContextFetchCompleted;
-extern NSString *const UserNotificationContextFileDownloadCompleted;
-extern NSString *const UserNotificationContextFileDownloadFailed;
+    init(
+        identifier: String,
+        userInfo: [AnyHashable: Any]? = nil
+    ) {
+        self.identifier = identifier
+        self.userInfo = userInfo
+    }
 
-@end
+}
