@@ -29,6 +29,8 @@
 #import "Preferences.h"
 #import "Vienna-Swift.h"
 
+static NSString * const VNAUserNotificationFileDownloadThreadIdentifier = @"FileDownloadThreadIdentifier";
+
 @interface DownloadManager ()
 
 // Private properties
@@ -311,6 +313,9 @@
             VNAUserNotificationRequest *request =
                 [[VNAUserNotificationRequest alloc] initWithIdentifier:item.fileURL.absoluteString
                                                                  title:title];
+            // Use a thread identifier to group all file download notifications
+            // (this can be disabled by the user in System Settings).
+            request.threadIdentifier = VNAUserNotificationFileDownloadThreadIdentifier;
             request.body = body;
             request.playSound = settings.isSoundEnabled;
             request.userInfo = userInfo;

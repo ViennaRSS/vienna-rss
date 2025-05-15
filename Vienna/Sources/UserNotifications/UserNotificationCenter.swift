@@ -154,6 +154,9 @@ class UserNotificationCenter: NSObject {
         if let userInfo = request.userInfo {
             content.userInfo = userInfo
         }
+        if let threadIdentifier = request.threadIdentifier {
+            content.threadIdentifier = threadIdentifier
+        }
         content.sound = request.playSound ? .default : nil
         let notificationRequest = UNNotificationRequest(
             identifier: request.identifier,
@@ -178,6 +181,7 @@ class UserNotificationCenter: NSObject {
                 let request = notification.request
                 return UserNotificationResponse(
                     identifier: request.identifier,
+                    threadIdentifier: request.content.threadIdentifier,
                     userInfo: request.content.userInfo
                 )
             }
@@ -229,9 +233,11 @@ extension UserNotificationCenter: UNUserNotificationCenterDelegate {
         }
         let request = response.notification.request
         let identifier = request.identifier
+        let threadIdentifier = request.content.threadIdentifier
         let userInfo = request.content.userInfo as? [String: AnyHashable]
         let response = UserNotificationResponse(
             identifier: identifier,
+            threadIdentifier: threadIdentifier,
             userInfo: userInfo
         )
         delegate.userNotificationCenter(self, didReceive: response)

@@ -25,6 +25,9 @@ class UserNotificationRequest: NSObject {
     /// The identifier of the notification.
     @objc let identifier: String
 
+    /// The identifier of the thread to which the notification belongs.
+    @objc var threadIdentifier: String?
+
     /// Additional user info that is attached to the notification.
     @objc var userInfo: [AnyHashable: Any]?
 

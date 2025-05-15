@@ -25,14 +25,19 @@ class UserNotificationResponse: NSObject {
     /// The identifier of the notification.
     @objc let identifier: String
 
+    /// The identifier of the thread to which the notification belongs.
+    @objc let threadIdentifier: String?
+
     /// Additional user info that is attached to the notification.
     @objc let userInfo: [AnyHashable: Any]?
 
     init(
         identifier: String,
+        threadIdentifier: String? = nil,
         userInfo: [AnyHashable: Any]? = nil
     ) {
         self.identifier = identifier
+        self.threadIdentifier = threadIdentifier
         self.userInfo = userInfo
     }
 
