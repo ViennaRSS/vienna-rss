@@ -719,35 +719,39 @@
 			}
 			return [articles copy];
 		}
-        if (self.isCached && self.containsBodies) {
-            // check consistency
-            if (self.cachedGuids.count < self.unreadCount) {
-                NSLog(@"Bug from cache in folder %li : inconsistent count",(long)self.itemId);
-                return [self getCompleteArticles:YES];
-            }
-            // attempt to retrieve from cache
-            NSMutableArray * articles = [NSMutableArray arrayWithCapacity:self.cachedGuids.count];
-            for (id object in self.cachedGuids) {
-                Article * theArticle = [self.cachedArticles objectForKey:object];
-                if (theArticle != nil) {
-                    // deleted articles are not removed from cache any more
-                    if (!theArticle.isDeleted) {
-                        [articles addObject:theArticle];
-                    }
-                } else {
-                    // some problem
-                    NSLog(@"Bug retrieving from cache in folder %li : after %lu insertions of %lu, guid %@",(long)self.itemId, (unsigned long)articles.count,(unsigned long)self.cachedGuids.count,object);
+        // starting from here, we only deal with feed folders
+        @synchronized(self) {
+            if (self.isCached && self.containsBodies) {
+                // check consistency
+                if (self.cachedGuids.count < self.unreadCount) {
+                    NSLog(@"Bug from cache in folder %li : inconsistent count", (long)self.itemId);
                     return [self getCompleteArticles:YES];
                 }
+                // attempt to retrieve from cache
+                NSMutableArray *articles = [NSMutableArray arrayWithCapacity:self.cachedGuids.count];
+                for (id object in self.cachedGuids) {
+                    Article *theArticle = [self.cachedArticles objectForKey:object];
+                    if (theArticle != nil) {
+                        // deleted articles are not removed from cache any more
+                        if (!theArticle.isDeleted) {
+                            [articles addObject:theArticle];
+                        }
+                    } else {
+                        // some problem
+                        NSLog(@"Bug retrieving from cache in folder %li : after %lu insertions of %lu, guid %@", (long)self.itemId,
+                              (unsigned long)articles.count, (unsigned long)self.cachedGuids.count, object);
+                        return [self getCompleteArticles:YES];
+                    }
+                }
+                return [articles copy];
+            } else {
+                return [self getCompleteArticles:NO];
             }
-            return [articles copy];
-        } else {
-            return [self getCompleteArticles:NO];
-       }
-	} else {
-	    return [[Database sharedManager] arrayOfArticles:self.itemId filterString:filterString];
+        }
+    } else {
+        return [[Database sharedManager] arrayOfArticles:self.itemId filterString:filterString];
     }
-}
+} // articlesWithFilter
 
 /* getCompleteArticles
  * get complete information for all articles
@@ -758,9 +762,8 @@
  */
 -(NSArray<Article *> *)getCompleteArticles:(BOOL)resetCache
 {
-  NSAssert(self.isSubscriptionFolder, @"Attempting to build complete cache for non RSS folder");
-  self.containsBodies = NO;
-  @synchronized(self){
+    NSAssert(self.isSubscriptionFolder, @"Attempting to build complete cache for non RSS folder");
+    self.containsBodies = NO;
     NSArray * articles = [[Database sharedManager] arrayOfArticles:self.itemId filterString:@""];
     if (resetCache || articles.count != self.cachedGuids.count) {
         // completely reset cache when we have noticed some discrepancies
@@ -776,7 +779,6 @@
     self.isCached = YES;
     self.containsBodies = YES;
     return articles;
-  }
 }
 
 /* folderNameCompare
