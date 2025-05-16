@@ -606,7 +606,7 @@
  */
  -(void)ensureCache
  {
-    NSAssert(self.type == VNAFolderTypeRSS || self.type == VNAFolderTypeOpenReader, @"Attempting to create cache for non RSS folder");
+    NSAssert(self.isSubscriptionFolder, @"Attempting to create cache for non RSS folder");
     if (!self.isCached) {
       @synchronized(self) {
         NSArray * myArray = [[Database sharedManager] minimalCacheForFolder:self.itemId];
@@ -753,9 +753,12 @@
  * get complete information for all articles
  * and store it in cache if appropriate
  * returns articles
+ * Should be called only for feeds folders, which are the only ones
+ * to guarantee the bijectivity : one article <=> one guid
  */
 -(NSArray<Article *> *)getCompleteArticles:(BOOL)resetCache
 {
+  NSAssert(self.isSubscriptionFolder, @"Attempting to build complete cache for non RSS folder");
   @synchronized(self){
     NSArray * articles = [[Database sharedManager] arrayOfArticles:self.itemId filterString:@""];
     if (resetCache) {
@@ -763,18 +766,14 @@
         [self.cachedArticles removeAllObjects];
     }
     self.containsBodies = NO;
-    // Only feeds folders can be cached, as they are the only ones to guarantee
-    // bijection : one article <-> one guid
-    if (self.type == VNAFolderTypeRSS || self.type == VNAFolderTypeOpenReader) {
-        [self.cachedGuids removeAllObjects];
-        for (Article * article in articles) {
-            NSString * guid = article.guid;
-            [self.cachedArticles setObject:article forKey:guid];
-            [self.cachedGuids addObject:guid];
-        }
-        self.isCached = YES;
-        self.containsBodies = YES;
+    [self.cachedGuids removeAllObjects];
+    for (Article * article in articles) {
+        NSString * guid = article.guid;
+        [self.cachedArticles setObject:article forKey:guid];
+        [self.cachedGuids addObject:guid];
     }
+    self.isCached = YES;
+    self.containsBodies = YES;
     return articles;
   }
 }
