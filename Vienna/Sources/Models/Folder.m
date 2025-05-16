@@ -759,13 +759,14 @@
 -(NSArray<Article *> *)getCompleteArticles:(BOOL)resetCache
 {
   NSAssert(self.isSubscriptionFolder, @"Attempting to build complete cache for non RSS folder");
+  self.containsBodies = NO;
   @synchronized(self){
     NSArray * articles = [[Database sharedManager] arrayOfArticles:self.itemId filterString:@""];
-    if (resetCache) {
+    if (resetCache || articles.count != self.cachedGuids.count) {
+        // completely reset cache when we have noticed some discrepancies
         self.isCached = NO;
         [self.cachedArticles removeAllObjects];
     }
-    self.containsBodies = NO;
     [self.cachedGuids removeAllObjects];
     for (Article * article in articles) {
         NSString * guid = article.guid;
