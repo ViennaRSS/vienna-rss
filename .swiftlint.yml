@@ -24,7 +24,6 @@ opt_in_rules:
   - convenience_type
   - empty_count
   - empty_string
-  - extension_access_modifier
   - fatal_error_message
   - file_header
   - file_name
@@ -59,7 +58,6 @@ opt_in_rules:
   - required_enum_case
   - single_test_class
   - sorted_first_last
-  - sorted_imports
   - static_operator
   - switch_case_on_newline
   - toggle_bool
