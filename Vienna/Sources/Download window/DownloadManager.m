@@ -29,6 +29,8 @@
 #import "Preferences.h"
 #import "Vienna-Swift.h"
 
+static NSString * const VNAUserNotificationFileDownloadThreadIdentifier = @"FileDownloadThreadIdentifier";
+
 @interface DownloadManager ()
 
 // Private properties
@@ -275,26 +277,63 @@
     [self notifyDownloadItemChange:item];
     [self archiveDownloadsList];
 
-    NSString *fileName = item.filename.lastPathComponent;
-
-    NSUserNotification *notification = [NSUserNotification new];
-    notification.soundName = NSUserNotificationDefaultSoundName;
+    NSString *filename = item.filename.lastPathComponent;
 
     if (item.state == DownloadStateCompleted) {
-        notification.title = NSLocalizedString(@"Download completed", @"Notification title");
-        notification.informativeText = [NSString stringWithFormat:NSLocalizedString(@"File %@ downloaded", @"Notification body"), fileName];
-        notification.userInfo = @{UserNotificationContextKey: UserNotificationContextFileDownloadCompleted,
-                                  UserNotificationFilePathKey: fileName};
-
-        [NSNotificationCenter.defaultCenter postNotificationName:MA_Notify_DownloadCompleted object:fileName];
-    } else if (item.state == DownloadStateFailed) {
-        notification.title = NSLocalizedString(@"Download failed", @"Notification title");
-        notification.informativeText = [NSString stringWithFormat:NSLocalizedString(@"File %@ failed to download", @"Notification body"), fileName];
-        notification.userInfo = @{UserNotificationContextKey: UserNotificationContextFileDownloadFailed,
-                                  UserNotificationFilePathKey: fileName};
+        [NSNotificationCenter.defaultCenter postNotificationName:MA_Notify_DownloadCompleted
+                                                          object:filename];
     }
 
-    [NSUserNotificationCenter.defaultUserNotificationCenter deliverNotification:notification];
+    VNAUserNotificationCenter *center = VNAUserNotificationCenter.current;
+    [center getNotificationSettingsWithCompletionHandler:^(VNAUserNotificationSettings *settings) {
+        VNAUserNotificationAuthorizationStatus status = settings.authorizationStatus;
+        if (status == VNAUserNotificationAuthorizationStatusDenied) {
+            return;
+        }
+
+        void (^deliverNotification)(void) = ^{
+            NSString *title;
+            NSString *body;
+            NSDictionary<NSString *, id> *userInfo;
+            if (item.state == DownloadStateCompleted) {
+                title = NSLocalizedString(@"Download completed", @"Notification title");
+                body = [NSString stringWithFormat:NSLocalizedString(@"File %@ downloaded", @"Notification body"), filename];
+                userInfo = @{
+                    UserNotificationContextKey: UserNotificationContextFileDownloadCompleted,
+                    UserNotificationFilePathKey: item.fileURL.path
+                };
+            } else if (item.state == DownloadStateFailed) {
+                title = NSLocalizedString(@"Download failed", @"Notification title");
+                body = [NSString stringWithFormat:NSLocalizedString(@"File %@ failed to download", @"Notification body"), filename];
+                userInfo = @{
+                    UserNotificationContextKey: UserNotificationContextFileDownloadFailed,
+                    UserNotificationFilePathKey: item.fileURL.path
+                };
+            }
+            VNAUserNotificationRequest *request =
+                [[VNAUserNotificationRequest alloc] initWithIdentifier:item.fileURL.absoluteString
+                                                                 title:title];
+            // Use a thread identifier to group all file download notifications
+            // (this can be disabled by the user in System Settings).
+            request.threadIdentifier = VNAUserNotificationFileDownloadThreadIdentifier;
+            request.body = body;
+            request.playSound = settings.isSoundEnabled;
+            request.userInfo = userInfo;
+            [center addNotificationRequest:request
+                     withCompletionHandler:nil];
+        };
+
+        if (status == VNAUserNotificationAuthorizationStatusProvisional ||
+            status == VNAUserNotificationAuthorizationStatusAuthorized) {
+            deliverNotification();
+        } else if (status == VNAUserNotificationAuthorizationStatusNotDetermined) {
+            [center requestAuthorizationWithCompletionHandler:^(BOOL granted) {
+                if (granted) {
+                    deliverNotification();
+                }
+            }];
+        }
+    }];
 }
 
 // MARK: - NSURLSessionDownloadDelegate

@@ -21,7 +21,6 @@
 
 #import "Database.h"
 #import "Folder.h"
-#import "Vienna-Swift.h"
 
 @implementation AppController (Notifications)
 
@@ -36,9 +35,10 @@ NSString *const UserNotificationContextFileDownloadFailed = @"User Notification 
 
 // MARK: Delegate methods
 
-- (void)userNotificationCenter:(NSUserNotificationCenter *)center
-       didActivateNotification:(NSUserNotification *)notification {
-    NSDictionary<NSString *, NSString *> *userInfo = notification.userInfo;
+- (void)userNotificationCenter:(VNAUserNotificationCenter *)center
+            didReceiveResponse:(VNAUserNotificationResponse *)response
+{
+    NSDictionary<NSString *, NSString *> *userInfo = response.userInfo;
     if ([userInfo[UserNotificationContextKey] isEqual:UserNotificationContextFetchCompleted]) {
         [self openWindowAndShowUnreadArticles];
     } else if ([userInfo[UserNotificationContextKey] isEqual:UserNotificationContextFileDownloadCompleted]) {
@@ -76,7 +76,7 @@ NSString *const UserNotificationContextFileDownloadFailed = @"User Notification 
  */
 - (void)showFileInFinderAtPath:(NSString *)filePath {
     [[NSWorkspace sharedWorkspace] selectFile:filePath
-                     inFileViewerRootedAtPath:@""];
+                     inFileViewerRootedAtPath:[filePath stringByDeletingLastPathComponent]];
 }
 
 @end
