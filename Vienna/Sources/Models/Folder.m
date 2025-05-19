@@ -606,7 +606,7 @@
  */
  -(void)ensureCache
  {
-    NSAssert(self.type == VNAFolderTypeRSS || self.type == VNAFolderTypeOpenReader, @"Attempting to create cache for non RSS folder");
+    NSAssert(self.isSubscriptionFolder, @"Attempting to create cache for non RSS folder");
     if (!self.isCached) {
       @synchronized(self) {
         NSArray * myArray = [[Database sharedManager] minimalCacheForFolder:self.itemId];
@@ -719,65 +719,66 @@
 			}
 			return [articles copy];
 		}
-        if (self.isCached && self.containsBodies) {
-            // check consistency
-            if (self.cachedGuids.count < self.unreadCount) {
-                NSLog(@"Bug from cache in folder %li : inconsistent count",(long)self.itemId);
-                self.isCached = NO;
-                [self.cachedArticles removeAllObjects];
-                return [self getCompleteArticles];
-            }
-            // attempt to retrieve from cache
-            NSMutableArray * articles = [NSMutableArray arrayWithCapacity:self.cachedGuids.count];
-            for (id object in self.cachedGuids) {
-                Article * theArticle = [self.cachedArticles objectForKey:object];
-                if (theArticle != nil) {
-                    // deleted articles are not removed from cache any more
-                    if (!theArticle.isDeleted) {
-                        [articles addObject:theArticle];
-                    }
-                } else {
-                    // some problem
-                    NSLog(@"Bug retrieving from cache in folder %li : after %lu insertions of %lu, guid %@",(long)self.itemId, (unsigned long)articles.count,(unsigned long)self.cachedGuids.count,object);
-                    self.isCached = NO;
-                    [self.cachedArticles removeAllObjects];
-                    return [self getCompleteArticles];
+        // starting from here, we only deal with feed folders
+        @synchronized(self) {
+            if (self.isCached && self.containsBodies) {
+                // check consistency
+                if (self.cachedGuids.count < self.unreadCount) {
+                    NSLog(@"Bug from cache in folder %li : inconsistent count", (long)self.itemId);
+                    return [self getCompleteArticles:YES];
                 }
+                // attempt to retrieve from cache
+                NSMutableArray *articles = [NSMutableArray arrayWithCapacity:self.cachedGuids.count];
+                for (id object in self.cachedGuids) {
+                    Article *theArticle = [self.cachedArticles objectForKey:object];
+                    if (theArticle != nil) {
+                        // deleted articles are not removed from cache any more
+                        if (!theArticle.isDeleted) {
+                            [articles addObject:theArticle];
+                        }
+                    } else {
+                        // some problem
+                        NSLog(@"Bug retrieving from cache in folder %li : after %lu insertions of %lu, guid %@", (long)self.itemId,
+                              (unsigned long)articles.count, (unsigned long)self.cachedGuids.count, object);
+                        return [self getCompleteArticles:YES];
+                    }
+                }
+                return [articles copy];
+            } else {
+                return [self getCompleteArticles:NO];
             }
-            return [articles copy];
-        } else {
-            return [self getCompleteArticles];
-       }
-	} else {
-	    return [[Database sharedManager] arrayOfArticles:self.itemId filterString:filterString];
+        }
+    } else {
+        return [[Database sharedManager] arrayOfArticles:self.itemId filterString:filterString];
     }
-}
+} // articlesWithFilter
 
 /* getCompleteArticles
  * get complete information for all articles
  * and store it in cache if appropriate
  * returns articles
+ * Should be called only for feeds folders, which are the only ones
+ * to guarantee the bijectivity : one article <=> one guid
  */
--(NSArray<Article *> *)getCompleteArticles
+-(NSArray<Article *> *)getCompleteArticles:(BOOL)resetCache
 {
-  @synchronized(self){
-    NSArray * articles = [[Database sharedManager] arrayOfArticles:self.itemId filterString:@""];
+    NSAssert(self.isSubscriptionFolder, @"Attempting to build complete cache for non RSS folder");
     self.containsBodies = NO;
-    // Only feeds folders can be cached, as they are the only ones to guarantee
-    // bijection : one article <-> one guid
-    if (self.type == VNAFolderTypeRSS || self.type == VNAFolderTypeOpenReader) {
-        [self.cachedGuids removeAllObjects];
-        for (Article * article in articles) {
-            NSString * guid = article.guid;
-            article.status = [self retrieveKnownStatusForGuid:guid];
-            [self.cachedArticles setObject:article forKey:guid];
-            [self.cachedGuids addObject:guid];
-        }
-        self.isCached = YES;
-        self.containsBodies = YES;
+    NSArray * articles = [[Database sharedManager] arrayOfArticles:self.itemId filterString:@""];
+    if (resetCache || articles.count != self.cachedGuids.count) {
+        // completely reset cache when we have noticed some discrepancies
+        self.isCached = NO;
+        [self.cachedArticles removeAllObjects];
     }
+    [self.cachedGuids removeAllObjects];
+    for (Article * article in articles) {
+        NSString * guid = article.guid;
+        [self.cachedArticles setObject:article forKey:guid];
+        [self.cachedGuids addObject:guid];
+    }
+    self.isCached = YES;
+    self.containsBodies = YES;
     return articles;
-  }
 }
 
 /* folderNameCompare
