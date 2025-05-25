@@ -90,7 +90,10 @@ protocol CriteriaElement: PredicateConvertible {
 
 // Workaround while this variable is needed for objc, due to generics in traverse function
 protocol Traversable: CriteriaElement {
+    /// traversal for conversion
     func traverse<ResultType>(treeConversion: (_ element: CriteriaTree, _ subresult: [ResultType]) -> ResultType, criteriaConversion: (_ element: Criteria) -> ResultType) -> ResultType
+    /// traversal for modification
+    func traverse(treeModifier: ((_ element: CriteriaTree) -> Void)?, criteriaModifier: ((_ element: Criteria) -> Void)?)
 }
 
 @objc
@@ -130,6 +133,17 @@ class CriteriaTree: NSObject, Traversable {
         }
         return treeConversion(self, subresult)
     }
+
+    func traverse(treeModifier: ((CriteriaTree) -> Void)?, criteriaModifier: ((Criteria) -> Void)?) {
+        //traversion to modify is the same as traversion for conversion with implicit modification while discarding conversion result
+        _ = traverse { criteriaTree, _ in
+            treeModifier?(criteriaTree)
+            return ""
+        } criteriaConversion: { criteria in
+            criteriaModifier?(criteria)
+            return ""
+        }
+    }
 }
 
 @objc
@@ -148,5 +162,9 @@ class Criteria: NSObject, Traversable {
 
     func traverse<ResultType>(treeConversion: (_ element: CriteriaTree, _ subresult: [ResultType]) -> ResultType, criteriaConversion: (_ element: Criteria) -> ResultType) -> ResultType {
         return criteriaConversion(self)
+    }
+
+    func traverse(treeModifier: ((CriteriaTree) -> Void)?, criteriaModifier: ((Criteria) -> Void)?) {
+        criteriaModifier?(self)
     }
 }

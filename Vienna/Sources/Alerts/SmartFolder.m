@@ -321,7 +321,7 @@ static NSNibName const VNASmartFolderNibName = @"SearchFolder";
         [controller selectFolder:self.smartFolderId];
     } else {
         [Database.sharedManager updateSearchFolder:self.smartFolderId
-                                        withFolder:folderName
+                                        withNewFolderName:folderName
                                          withQuery:criteriaTree];
     }
 

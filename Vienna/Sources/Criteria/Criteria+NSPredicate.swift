@@ -146,7 +146,11 @@ extension Criteria: PredicateConvertible {
 
     convenience init?(predicate: NSComparisonPredicate, notContains: Bool) {
         let field = predicate.leftExpression.constantValue as? String ?? predicate.leftExpression.keyPath
-        let value = predicate.rightExpression.constantValue as? String ?? predicate.rightExpression.keyPath
+        let value = if field != MA_Field_Folder {
+            predicate.rightExpression.constantValue as? String ?? predicate.rightExpression.keyPath
+        } else {
+            Criteria.convertIndentedFolderNameToFolderId(predicate.rightExpression.constantValue as? String ?? "", on: Database.shared)
+        }
         var fallback = false
 
         let criteriaOperator: CriteriaOperator
@@ -225,6 +229,16 @@ extension Criteria: PredicateConvertible {
         return buildPredicate()
     }
 
+    class func convertIndentedFolderNameToFolderId(_ value: String, on database: Database) -> String {
+        // indentation of subfolders that was added for visual purposes has to be removed
+        let folderName = String(value.drop { $0 == " " })
+        guard let folder = database.folder(fromName: folderName) else {
+            // no error, since it is possible that a folder was deleted without considering the smart folder referencing it
+            return ""
+        }
+        return "\(folder.itemId)"
+    }
+
     private func buildPredicate() -> NSPredicate {
 
         let field = self.field
@@ -283,9 +297,13 @@ extension Criteria: PredicateConvertible {
 
     private func buildComparisonPredicate(_ field: String, _ value: String, _ operatorType: CriteriaOperator) -> NSPredicate {
         let left = NSExpression(forConstantValue: field)
-        let right = NSExpression(forConstantValue: value)
 
-        let type: NSComparisonPredicate.Operator = convertOperatorTypeForComparisonPredicate(operatorType)
+        let expressionValue: String
+        if field == MA_Field_Folder {
+            expressionValue = convertFolderIdToIndentedName(value)
+        } else {
+            expressionValue = value
+        }
 
         let comparisonPredicate: NSComparisonPredicate
 
@@ -293,15 +311,17 @@ extension Criteria: PredicateConvertible {
         // e.g. YES, NO, yesterday, today, last week, ...
 
         if (field == MA_Field_LastUpdate || field == MA_Field_PublicationDate)
-            && operatorType == .after && value == DateOffset.yesterday.rawValue {
+            && operatorType == .after && expressionValue == DateOffset.yesterday.rawValue {
             // Use canonical "is today" instead of "is after yesterday"
             comparisonPredicate = NSComparisonPredicate(leftExpression: left, rightExpression: NSExpression(forConstantValue: DateOffset.today), modifier: .direct, type: .equalTo)
-        } else if operatorType == .notEqualTo && (value == "No" || value == "Yes") {
+        } else if operatorType == .notEqualTo && (expressionValue == "No" || expressionValue == "Yes") {
             // Use canonical "is yes / is no" representation instead of allowing
             // ambiguous "is not yes - is no / is not no - is yes"
-            let invertedRight = NSExpression(forConstantValue: value == "No" ? "Yes" : "No")
+            let invertedRight = NSExpression(forConstantValue: expressionValue == "No" ? "Yes" : "No")
             comparisonPredicate = NSComparisonPredicate(leftExpression: left, rightExpression: invertedRight, modifier: .direct, type: .equalTo)
         } else {
+            let right = NSExpression(forConstantValue: expressionValue)
+            let type: NSComparisonPredicate.Operator = convertOperatorTypeForComparisonPredicate(operatorType)
             comparisonPredicate = NSComparisonPredicate(leftExpression: left, rightExpression: right, modifier: .direct, type: type)
         }
 
@@ -312,5 +332,23 @@ extension Criteria: PredicateConvertible {
         } else {
             return comparisonPredicate
         }
+    }
+
+    private func convertFolderIdToIndentedName(_ value: String) -> String {
+        guard let database = Database.shared, let folderId = Int(value) else {
+            fatalError("Database not available or folder name was not converted to id")
+        }
+        guard let folder = Database.shared.folder(fromID: folderId) else {
+            // no error, since it is possible that a folder was deleted without considering the smart folder referencing it
+            return ""
+        }
+
+        var parentFolder = database.folder(fromID: folder.parentId)
+        var indent = 0
+        while parentFolder != nil {
+            indent += 1
+            parentFolder = database.folder(fromID: parentFolder?.parentId ?? 0)
+        }
+        return String(repeating: "  ", count: indent) + folder.name
     }
 }
