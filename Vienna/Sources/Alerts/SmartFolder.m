@@ -286,6 +286,8 @@ static NSNibName const VNASmartFolderNibName = @"SearchFolder";
         if (folder.type == VNAFolderTypeRSS ||
             folder.type == VNAFolderTypeOpenReader ||
             folder.type == VNAFolderTypeGroup) {
+            // The two spaces per level in the indentation have to match with the indentation given to the value in Criteria+NSPredicate.swift,
+            // otherwise the predicate editor cannot associate the predicate value with the selection options
             NSString *indentSpaces = [@"" stringByPaddingToLength:indentation * 2
                                                        withString:@" "
                                                   startingAtIndex:0];
