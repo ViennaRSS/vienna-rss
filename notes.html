@@ -1,24 +1,42 @@
-<!DOCTYPE html><head><meta charset="utf-8"/></head><h2>Vienna 3.9.5</h2>
-<p><em>released 2024-12-09</em></p>
+<!DOCTYPE html><head><meta charset="utf-8"/></head><h2>Vienna 3.10.0 Beta 1</h2>
+<p><em>released 2025-05-25</em></p>
+<p>Please report any new bugs to <a href="https://github.com/ViennaRSS/vienna-rss/issues">https://github.com/ViennaRSS/vienna-rss/issues</a></p>
+<p>We particularly want to make sure that Vienna handles large number of folders and articles nicely.</p>
 <h3>🚲 Changes</h3>
 <ul>
-<li>Search <code>&lt;item&gt;</code> elements under feed’s <code>&lt;rss&gt;</code> element if they are not found under <code>&lt;channel&gt;</code></li>
-<li>Improve handling of Media RSS specification in feeds: <code>&lt;media:thumbnail&gt;</code> may be used as a workaround for enclosures</li>
-<li>Update localizations</li>
+<li>Add a Mastodon plugin (based on AppleScript) :  configuration can be modified by holding down the Option key when invoking the plugin</li>
+<li>Multiple improvements and fixes to AppleScript support</li>
+<li>Overhaul plugin manager with NSBundle instances to enable plugins localization</li>
+<li>Convert RSS feed sources to plugins</li>
+<li>Convert templates of OpenReader services to plugins</li>
+<li>Update URLs in plugins and default feeds; use https (instead of http) wherever possible</li>
+<li>Enable Vienna style templates to include a specific tag ($ArticlePublicationDate$) to support the display of article publication dates</li>
+<li>Improve the behavior of the font selection panel</li>
+<li>Group file download notifications in Notification Center</li>
+<li>Display latest downloads at the top of the download window</li>
+<li>Mimic Safari for web browser’s user agent</li>
+<li>Update documentation and translations</li>
 </ul>
 <h3>🤷🏻 Bugfix</h3>
 <ul>
-<li>Extend fixes for “Last update” dates being set to January 1st, 1970</li>
-<li>Fix handling of <code>mailto:</code> URLs</li>
-<li>Fix handling of links specifying <code>target=&quot;_blank&quot;</code></li>
-<li>Work around situations with inconsistent unread counts</li>
+<li>Fix date 1.1.1970 or 31.12.1969 appearing for “Last Update”</li>
+<li>Fix “open with” menu in download window</li>
+<li>Prevent some of the situations which led Vienna to reset its folder order to alphabetical order</li>
+<li>Fix discrepancy in HTTP user-agent when adding a new subscription</li>
+<li>Remove obsolete sources of RSS feeds</li>
 </ul>
 <h3>⚙️ Internals improvement</h3>
 <ul>
-<li>Revert some of the changes in memory management introduced in version 3.9.3 (caching of folder’s articles)</li>
-<li>Include a database update to fix entries that had January 1st, 1970 as the last update date</li>
+<li>Refactor Article’s properties and accessors</li>
+<li>Improve cache management for feed articles</li>
+<li>Improve error handling in OpenReader</li>
+<li>Optimize notifications number and timing during feed refreshes</li>
+<li>Improve lookup/selection of the “Unread Articles” smart folder</li>
+<li>Use view-based table view in download window</li>
+<li>Make handling and retention of font selection more robust</li>
 </ul>
 <h3>🛤️ Infrastructure updates</h3>
 <ul>
-<li>Test build with Xcode 16.1 (macOS 15) and Xcode 15.4 (macOS 14)</li>
+<li>Build with Xcode 16</li>
+<li>Add Crowdin CLI configuration for translations management</li>
 </ul>

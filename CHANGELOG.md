@@ -1,6 +1,40 @@
 Vienna ChangeLog File
 =====================
 
+Vienna 3.10.0 Beta 1
+--------------------
+_released 2025-05-25_
+
+### 🚲 Changes
+- Add a Mastodon plugin (based on AppleScript) :  configuration can be modified by holding down the Option key when invoking the plugin 
+- Multiple improvements and fixes to AppleScript support
+- Overhaul plugin manager with NSBundle instances to enable plugins localization
+- Convert RSS feed sources to plugins
+- Convert templates of OpenReader services to plugins
+- Update URLs in plugins and default feeds; use https (instead of http) wherever possible
+- Enable Vienna style templates to include a specific tag ($ArticlePublicationDate$) to support the display of article publication dates
+- Improve the behavior of the font selection panel
+- Group file download notifications in Notification Center
+- Display latest downloads at the top of the download window
+- Mimic Safari for web browser's user agent
+- Update documentation and translations
+### 🤷🏻 Bugfix
+- Fix date 1.1.1970 or 31.12.1969 appearing for "Last Update"
+- Fix "open with" menu in download window
+- Prevent some of the situations which led Vienna to reset its folder order to alphabetical order
+- Fix discrepancy in HTTP user-agent when adding a new subscription
+- Remove obsolete sources of RSS feeds
+### ⚙️ Internals improvement
+- Refactor Article's properties and accessors
+- Improve cache management for feed articles
+- Improve error handling in OpenReader
+- Optimize notifications number and timing during feed refreshes
+- Improve lookup/selection of the "Unread Articles" smart folder
+- Use view-based table view in download window
+- Make handling and retention of font selection more robust
+### 🛤️ Infrastructure updates
+- Build with Xcode 16
+- Add Crowdin CLI configuration for translations management
 
 Vienna 3.9.5
 -----
