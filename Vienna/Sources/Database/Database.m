@@ -43,7 +43,6 @@
 @property (nonatomic) NSMutableDictionary *fieldsByName;
 @property (nonatomic) NSMutableDictionary *foldersDict;
 @property (nonatomic) FMDatabaseQueue *databaseQueue;
-@property (nonatomic) NSMutableDictionary<NSNumber *, CriteriaTree *> *smartfoldersDict;
 @property (readwrite, nonatomic) BOOL readOnly;
 @property (readwrite, nonatomic) NSInteger countOfUnread;
 
@@ -59,7 +58,7 @@
 
 // The current database version number
 static NSInteger const VNAMinimumSupportedDatabaseVersion = 12;
-static NSInteger const VNACurrentDatabaseVersion = 26;
+static NSInteger const VNACurrentDatabaseVersion = 27;
 
 @implementation Database
 
@@ -180,7 +179,9 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
             // TODO: move this into transaction so we can rollback on failure
             [Database migrateDatabase:db fromVersion:databaseVersion];
         }];
-        
+
+        [self migrateCriteriaFrom:databaseVersion];
+
         // Confirm the database is now at the correct version
         if (self.databaseVersion == VNACurrentDatabaseVersion) {
             return YES;
@@ -1445,8 +1446,9 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 /* folderFromName
  * Retrieve a Folder given its name.
  */
--(Folder *)folderFromName:(NSString *)wantedName
+-(Folder * _Nullable)folderFromName:(NSString *)wantedName
 {
+    [self initFolderArray];
 	Folder * folder;
 	for (folder in [self.foldersDict objectEnumerator]) {
 		if ([folder.name isEqualToString:wantedName]) {
@@ -1870,10 +1872,10 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 /* updateSearchFolder
  * Updates the search string for the specified folder.
  */
--(void)updateSearchFolder:(NSInteger)folderId withFolder:(NSString *)folderName withQuery:(CriteriaTree *)criteriaTree
+-(void)updateSearchFolder:(NSInteger)folderId withNewFolderName:(nullable NSString *)folderName withQuery:(CriteriaTree *)criteriaTree
 {
 	Folder * folder = [self folderFromID:folderId];
-    if (![folder.name isEqualToString:folderName]) {
+    if (folderName && ![folder.name isEqualToString:folderName]) {
         [self setName:folderName forFolder:folderId];
     }
 

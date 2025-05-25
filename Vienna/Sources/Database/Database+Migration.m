@@ -259,6 +259,9 @@
             database.userVersion = (uint32_t)26;
             NSLog(@"Updated database schema to version 26.");
         }
+        case 27: //change smart folder search strings from name to id, happens in Database+CriteriaMigration
+            database.userVersion = (uint32_t)27;
+            NSLog(@"Updated database schema to version 27.");
     }
 }
 

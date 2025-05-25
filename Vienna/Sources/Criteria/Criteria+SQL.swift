@@ -149,7 +149,11 @@ extension Criteria: SQLConversion {
     }
 
     func folderSqlString(sqlFieldName: String, database: Database) -> String {
-        let folder = database.folder(fromName: value)
+        guard let value = Int(value) else {
+            fatalError("Value should have been migrated to folder id")
+        }
+        let folder = database.folder(fromID: Int(value))
+
         let scope: QueryScope
         switch operatorType {
         case .under:

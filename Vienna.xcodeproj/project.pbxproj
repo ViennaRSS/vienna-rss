@@ -55,6 +55,7 @@
 		03A131B31AA54EAC0037471F /* Database+Migration.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A131B21AA54EAC0037471F /* Database+Migration.m */; };
 		03F33D961DF2A2F900B04FAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03F33D951DF2A2F900B04FAF /* Assets.xcassets */; };
 		2F06504C2506B5B500468A0E /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F06504B2506B5B500468A0E /* LoadingIndicator.swift */; };
+		2F1248372DE3447E00C96C40 /* Database+CriteriaMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1248362DE3447E00C96C40 /* Database+CriteriaMigration.swift */; };
 		2F125EDE24D0638600868E11 /* BrowserTabWithLegacyAddressBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F125EDD24D0638600868E11 /* BrowserTabWithLegacyAddressBar.xib */; };
 		2F125EE024D066ED00868E11 /* AsyncHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F125EDF24D066ED00868E11 /* AsyncHelper.swift */; };
 		2F20FF8F25618627000F68C2 /* WebKitArticleTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F20FF8E25618627000F68C2 /* WebKitArticleTab.swift */; };
@@ -312,6 +313,7 @@
 		03F33D951DF2A2F900B04FAF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2A37F4B0FDCFA73011CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = main.m; sourceTree = "<group>"; };
 		2F06504B2506B5B500468A0E /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
+		2F1248362DE3447E00C96C40 /* Database+CriteriaMigration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Database+CriteriaMigration.swift"; sourceTree = "<group>"; };
 		2F125EDD24D0638600868E11 /* BrowserTabWithLegacyAddressBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BrowserTabWithLegacyAddressBar.xib; sourceTree = "<group>"; };
 		2F125EDF24D066ED00868E11 /* AsyncHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncHelper.swift; sourceTree = "<group>"; };
 		2F20FF8E25618627000F68C2 /* WebKitArticleTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebKitArticleTab.swift; sourceTree = "<group>"; };
@@ -1319,6 +1321,7 @@
 				AA26F4D50604927300FE7994 /* Database.m */,
 				03A131B11AA54EAC0037471F /* Database+Migration.h */,
 				03A131B21AA54EAC0037471F /* Database+Migration.m */,
+				2F1248362DE3447E00C96C40 /* Database+CriteriaMigration.swift */,
 				AA36CD7906100692001E33A4 /* Field.h */,
 				AA36CD7A06100692001E33A4 /* Field.m */,
 				43502865165DE9DF0018EDB7 /* Export.h */,
@@ -1880,6 +1883,7 @@
 				435028A8165DE9E00018EDB7 /* Import.m in Sources */,
 				435028A9165DE9E00018EDB7 /* InfoPanelController.m in Sources */,
 				435028AA165DE9E00018EDB7 /* MessageListView.m in Sources */,
+				2F1248372DE3447E00C96C40 /* Database+CriteriaMigration.swift in Sources */,
 				435028AB165DE9E00018EDB7 /* NewGroupFolder.m in Sources */,
 				F6A4E8481F040D58001C9191 /* PlugInToolbarItemButton.swift in Sources */,
 				2F33DB3229244ADB00A9716A /* DoesNotContainPredicateEditorRowTemplate.swift in Sources */,
