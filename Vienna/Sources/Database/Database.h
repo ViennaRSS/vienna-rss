@@ -48,6 +48,7 @@ extern NSNotificationName const VNADatabaseDidDeleteFolderNotification;
 - (instancetype)initWithDatabaseAtPath:(NSString *)dbPath /*NS_DESIGNATED_INITIALIZER*/;
 -(void)compactDatabase;
 -(void)reindexDatabase;
+-(void)optimizeDatabase;
 @property (nonatomic, readonly) NSInteger countOfUnread;
 @property (nonatomic, readonly) NSInteger databaseVersion;
 @property (nonatomic, readonly) BOOL readOnly;
