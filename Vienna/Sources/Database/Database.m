@@ -554,6 +554,18 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
     }
 }
 
+/* optimizeDatabase
+ * Optimize the database before closing
+ */
+-(void)optimizeDatabase
+{
+    if (!self.readOnly) {
+        [self.databaseQueue inDatabase:^(FMDatabase *db) {
+            [db executeUpdate:@"PRAGMA optimize"];
+        }];
+    }
+}
+
 /**
  *  Clears a specified flag for the specified folder
  *

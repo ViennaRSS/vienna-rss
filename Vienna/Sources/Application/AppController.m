@@ -516,6 +516,7 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 		
         [[NSNotificationCenter defaultCenter]  removeObserver:self];
 	}
+	[db optimizeDatabase];
 	[db close];
 }
 
