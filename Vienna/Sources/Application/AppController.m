@@ -2156,7 +2156,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(void)createSubscriptionInCurrentLocationForUrl:(NSURL *)url {
     NSInteger currentFolderId = self.foldersTree.actualSelection;
     NSInteger parentFolderId = self.foldersTree.groupParentSelection;
-    Folder * currentFolder = [[Database sharedManager] folderFromID:currentFolderId];
+    Folder * currentFolder = [db folderFromID:currentFolderId];
     if (parentFolderId == VNAFolderTypeRoot && currentFolder.type != VNAFolderTypeRSS && currentFolder.type != VNAFolderTypeOpenReader) {
         currentFolderId = -1;
     }
@@ -2564,10 +2564,10 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         
         if (folder.isUnsubscribed) {
             // Currently unsubscribed, so re-subscribe locally
-            [[Database sharedManager] clearFlag:VNAFolderFlagUnsubscribed forFolder:folder.itemId];
+            [db clearFlag:VNAFolderFlagUnsubscribed forFolder:folder.itemId];
         } else {
             // Currently subscribed, so unsubscribe locally
-            [[Database sharedManager] setFlag:VNAFolderFlagUnsubscribed forFolder:folder.itemId];
+            [db setFlag:VNAFolderFlagUnsubscribed forFolder:folder.itemId];
         }
         [NSNotificationCenter.defaultCenter postNotificationName:MA_Notify_FoldersUpdated object:@(folder.itemId)];
 	}
@@ -2589,10 +2589,10 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		
 		if (loadFullHTMLPages) {
 			[folder setFlag:VNAFolderFlagLoadFullHTML];
-            [[Database sharedManager] setFlag:VNAFolderFlagLoadFullHTML forFolder:folderID];
+            [db setFlag:VNAFolderFlagLoadFullHTML forFolder:folderID];
 		} else {
 			[folder clearFlag:VNAFolderFlagLoadFullHTML];
-            [[Database sharedManager] clearFlag:VNAFolderFlagLoadFullHTML forFolder:folderID];
+            [db clearFlag:VNAFolderFlagLoadFullHTML forFolder:folderID];
 		}
 		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_LoadFullHTMLChange object:@(folderID)];
 	}
