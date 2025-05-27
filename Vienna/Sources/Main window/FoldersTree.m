@@ -1550,12 +1550,15 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 
     Database *dbManager = [Database sharedManager];
     if ([dbManager folderFromName:newValue] != nil) {
-        runOKAlertPanel(NSLocalizedString(@"Cannot rename folder", nil), NSLocalizedString(@"A folder with that name already exists", nil));
-    } else {
-        [dbManager setName:newValue forFolder:folder.itemId];
-        if (folder.type == VNAFolderTypeOpenReader) {
-            [[OpenReader sharedManager] setFolderTitle:newValue forFeed:folder.remoteId];
-        }
+        textField.stringValue = folder.name;
+        runOKAlertPanel(NSLocalizedString(@"Cannot rename folder", nil),
+                        NSLocalizedString(@"A folder with that name already exists", nil));
+        return;
+    }
+
+    [dbManager setName:newValue forFolder:folder.itemId];
+    if (folder.type == VNAFolderTypeOpenReader) {
+        [OpenReader.sharedManager setFolderTitle:newValue forFeed:folder.remoteId];
     }
 }
 
