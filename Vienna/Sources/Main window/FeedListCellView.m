@@ -237,15 +237,26 @@ static CGFloat const VNAFontSizeMedium = 15.0;
 
 - (void)updateUnreadCountWithAnimation:(BOOL)animated
 {
+    NSButton *unreadCountButton = self.unreadCountButton;
     NSInteger unreadCount = self.unreadCount;
     NSString *countString = [NSString stringWithFormat:@"%ld", unreadCount];
     BOOL showUnreadCount = self.canShowUnreadCount && unreadCount > 0;
     if (animated) {
-        self.unreadCountButton.animator.hidden = !showUnreadCount;
-        self.unreadCountButton.animator.title = countString;
+        if (unreadCountButton.hidden && showUnreadCount) {
+            unreadCountButton.hidden = NO;
+        }
+        [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
+            unreadCountButton.animator.title = countString;
+            unreadCountButton.animator.alphaValue = showUnreadCount ? 1.0 : 0.0;
+        } completionHandler:^{
+            if (!unreadCountButton.hidden && !showUnreadCount) {
+                unreadCountButton.hidden = YES;
+            }
+        }];
     } else {
-        self.unreadCountButton.hidden = !showUnreadCount;
-        self.unreadCountButton.title = countString;
+        unreadCountButton.title = countString;
+        unreadCountButton.hidden = !showUnreadCount;
+        unreadCountButton.alphaValue = showUnreadCount ? 1.0 : 0.0;
     }
 }
 
