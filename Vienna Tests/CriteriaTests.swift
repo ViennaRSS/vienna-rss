@@ -256,7 +256,7 @@ class CriteriaTests: XCTestCase {
             fatalError("cannot happen")
         }
 
-        let treeStringUnformatted: String = criteriaTreeString.replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: "  ", with: "")
+        let treeStringUnformatted: String = criteriaTreeString.replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: VNASubfolderIndentation, with: "")
         XCTAssertEqual(treeStringUnformatted, testCriteriaTree.string, "XML reproducible")
 
         XCTAssertNotNil(testCriteriaTree.toSQL(database: getDatabase()))
