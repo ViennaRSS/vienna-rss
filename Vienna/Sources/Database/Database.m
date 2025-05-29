@@ -20,6 +20,7 @@
 
 #import "Database.h"
 
+@import FMDB;
 @import os.log;
 
 #import "Database+Migration.h"
@@ -41,6 +42,7 @@
 @property (nonatomic) NSMutableArray *fieldsOrdered;
 @property (nonatomic) NSMutableDictionary *fieldsByName;
 @property (nonatomic) NSMutableDictionary *foldersDict;
+@property (nonatomic) FMDatabaseQueue *databaseQueue;
 @property (nonatomic) NSMutableDictionary<NSNumber *, CriteriaTree *> *smartfoldersDict;
 @property (readwrite, nonatomic) BOOL readOnly;
 @property (readwrite, nonatomic) NSInteger countOfUnread;

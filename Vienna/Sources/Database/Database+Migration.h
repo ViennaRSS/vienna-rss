@@ -19,6 +19,8 @@
 
 #import "Database.h"
 
+@import FMDB;
+
 @interface Database (Migration)
 
 /// Migrates the Vienna database schema.
