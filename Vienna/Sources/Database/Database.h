@@ -19,7 +19,6 @@
 //
 
 @import Foundation;
-@import FMDB;
 
 @class Folder;
 @class Field;
@@ -39,7 +38,6 @@ extern NSNotificationName const VNADatabaseDidDeleteFolderNotification;
 
 @property(nonatomic) Folder * trashFolder;
 @property(nonatomic) Folder * searchFolder;
-@property(nonatomic) FMDatabaseQueue * databaseQueue;
 @property (copy, nonatomic) NSString *searchString;
 
 @property (class, readonly, nonatomic) Database *sharedManager NS_SWIFT_NAME(shared);
