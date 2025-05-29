@@ -349,8 +349,6 @@ extension Criteria: PredicateConvertible {
             indent += 1
             parentFolder = database.folder(fromID: parentFolder?.parentId ?? 0)
         }
-        // The two spaces per level in the indentation have to match with the indentation in the options list built in SmartFolder.m
-        // otherwise the predicate editor cannot associate the predicate value with the selection options
-        return String(repeating: "  ", count: indent) + folder.name
+        return String(repeating: VNASubfolderIndentation, count: indent) + folder.name
     }
 }
