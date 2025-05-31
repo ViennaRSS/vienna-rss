@@ -1,8 +1,8 @@
 /* The name of the plug-in, such as the name of the website or app. */
-"FriendlyName" = "Google Currents";
+"FriendlyName" = "X";
 
 /* The label for the plug-in in toolbar items and menu items. */
-"MenuPath" = "Share With Google Currents";
+"MenuPath" = "Dela med X";
 
 /* The tool tip for the plug-in in toolbar items. */
-"Tooltip" = "Share the current article on Google Currents";
+"Tooltip" = "Dela nuvarande artikel på X";

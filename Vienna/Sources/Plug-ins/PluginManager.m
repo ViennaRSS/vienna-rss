@@ -208,7 +208,7 @@ static NSString * const VNAPluginsDirectoryName = @"Plugins";
 {
 	NSMutableArray * searchMethods = [NSMutableArray arrayWithCapacity:allPlugins.count];
 	for (VNAPlugin* plugin in allPlugins) {
-		if ([VNAPlugin isKindOfClass:[VNASearchPlugin class]]) {
+		if ([plugin isKindOfClass:[VNASearchPlugin class]]) {
 			VNASearchPlugin *searchPlugin = (VNASearchPlugin *)plugin;
 			SearchMethod *method = [[SearchMethod alloc] initWithDisplayName:searchPlugin.displayName
 																 queryString:searchPlugin.queryString];

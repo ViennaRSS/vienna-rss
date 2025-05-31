@@ -3,20 +3,20 @@
 <plist version="1.0">
 <dict>
 	<key>Name</key>
-	<string>ShareWithGoogle+</string>
-	<key>Default</key>
-	<false/>
+	<string>ShareWithX</string>
 	<key>Type</key>
 	<string>Link</string>
 	<key>URL</key>
-	<string>https://currents.google.com/share?url=$ArticleLink$</string>
+	<string>https://x.com/intent/post?url=$ArticleLink$</string>
+	<key>Default</key>
+	<false/>
 	<key>FriendlyName</key>
-	<string>Google Currents</string>
+	<string>X</string>
 	<key>Tooltip</key>
-	<string>Share the current article on Google Currents</string>
+	<string>Share the current article on X</string>
 	<key>ButtonImage</key>
-	<string>google+Button</string>
+	<string>xTemplate</string>
 	<key>MenuPath</key>
-	<string>Share With Google Currents</string>
+	<string>Share With X</string>
 </dict>
 </plist>
