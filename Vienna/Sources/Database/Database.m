@@ -2582,6 +2582,17 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	self.searchFolder = nil;
 	self.initializedfoldersDict = NO;
 	_countOfUnread = 0;
+
+    if (self.revertToDatabaseVersion >= 26) {
+        [self rollbackCriteriaTo:self.revertToDatabaseVersion];
+
+        [self.databaseQueue inDatabase:^(FMDatabase *db) {
+            // Rollback the database to the requested version
+            // TODO: move this into transaction so we can rollback on failure
+            [Database rollbackDatabase:db toVersion:self.revertToDatabaseVersion];
+        }];
+    }
+
     [self.databaseQueue close];
 }
 
