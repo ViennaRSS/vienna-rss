@@ -3,12 +3,12 @@
 <plist version="1.0">
 <dict>
 	<key>Name</key>
-	<string>SearchWithTwitter</string>
+	<string>SearchWithX</string>
 	<key>Type</key>
 	<string>SearchEngine</string>
 	<key>SearchQueryString</key>
-	<string>https://twitter.com/search?q=$SearchTerm$&amp;src=typd</string>
+	<string>https://x.com/search?q=$SearchTerm$&amp;src=typd</string>
 	<key>FriendlyName</key>
-	<string>Twitter</string>
+	<string>X</string>
 </dict>
 </plist>
