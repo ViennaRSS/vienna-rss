@@ -286,8 +286,8 @@ static NSNibName const VNASmartFolderNibName = @"SearchFolder";
         if (folder.type == VNAFolderTypeRSS ||
             folder.type == VNAFolderTypeOpenReader ||
             folder.type == VNAFolderTypeGroup) {
-            NSString *indentSpaces = [@"" stringByPaddingToLength:indentation * 2
-                                                       withString:@" "
+            NSString *indentSpaces = [@"" stringByPaddingToLength:indentation * [VNASubfolderIndentation length]
+                                                       withString:VNASubfolderIndentation
                                                   startingAtIndex:0];
             NSString *constantValue = [indentSpaces stringByAppendingString:folder.name];
             [expressions addObject:[NSExpression expressionForConstantValue:constantValue]];
@@ -321,7 +321,7 @@ static NSNibName const VNASmartFolderNibName = @"SearchFolder";
         [controller selectFolder:self.smartFolderId];
     } else {
         [Database.sharedManager updateSearchFolder:self.smartFolderId
-                                        withFolder:folderName
+                                        withNewFolderName:folderName
                                          withQuery:criteriaTree];
     }
 

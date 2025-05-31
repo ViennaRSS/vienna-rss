@@ -138,3 +138,7 @@ NSPasteboardType const VNAPasteboardTypeRSSSource = @"CorePasteboardFlavorType 0
 NSPasteboardType const VNAPasteboardTypeRSSItem = @"CorePasteboardFlavorType 0x52535369";
 NSPasteboardType const VNAPasteboardTypeURLName = @"public.url-name";
 NSPasteboardType const VNAPasteboardTypeWebURLsWithTitles = @"WebURLsWithTitlesPboardType";
+
+//Other string constants
+NSString *const VNAOpenReaderFolderPrefix = @"☁️ ";
+NSString *const VNASubfolderIndentation = @"  ";
