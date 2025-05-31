@@ -28,5 +28,7 @@
 /// @param previousVersion The version to migrate from.
 + (void)migrateDatabase:(FMDatabase *)database
             fromVersion:(NSInteger)previousVersion;
-
++ (void)rollbackDatabase:(FMDatabase *)database
+               toVersion:(NSInteger)oldVersion;
++ (NSArray *)availableVersionsForRollback;
 @end

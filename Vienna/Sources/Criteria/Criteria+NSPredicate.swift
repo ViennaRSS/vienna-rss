@@ -230,13 +230,17 @@ extension Criteria: PredicateConvertible {
     }
 
     class func convertIndentedFolderNameToFolderId(_ value: String, on database: Database) -> String {
-        // indentation of subfolders that was added for visual purposes has to be removed
-        let folderName = String(value.drop { $0 == " " })
+        let folderName = removeIndentationFromFolderName(value)
         guard let folder = database.folder(fromName: folderName) else {
             // no error, since it is possible that a folder was deleted without considering the smart folder referencing it
             return ""
         }
         return "\(folder.itemId)"
+    }
+
+    class func removeIndentationFromFolderName(_ value: String) -> String {
+        // indentation of subfolders that was added for visual purposes has to be removed
+        return String(value.drop { $0 == " " })
     }
 
     private func buildPredicate() -> NSPredicate {
@@ -300,7 +304,7 @@ extension Criteria: PredicateConvertible {
 
         let expressionValue: String
         if field == MA_Field_Folder {
-            expressionValue = convertFolderIdToIndentedName(value)
+            expressionValue = Criteria.convertFolderIdToIndentedName(value)
         } else {
             expressionValue = value
         }
@@ -334,15 +338,34 @@ extension Criteria: PredicateConvertible {
         }
     }
 
-    private func convertFolderIdToIndentedName(_ value: String) -> String {
+    class func convertFolderIdToIndentedName(_ value: String) -> String {
         guard let database = Database.shared, let folderId = Int(value) else {
             fatalError("Database not available or folder name was not converted to id")
         }
-        guard let folder = Database.shared.folder(fromID: folderId) else {
+        guard let folder = database.folder(fromID: folderId) else {
             // no error, since it is possible that a folder was deleted without considering the smart folder referencing it
             return ""
         }
 
+        return indentedFolderName(for: folder)
+    }
+
+    class func indentFolderName(_ value: String) -> String {
+        guard let database = Database.shared else {
+            fatalError("Database not available")
+        }
+        guard let folder = database.folder(fromName: value) else {
+            // no error, since it is possible that a folder was deleted or renamed without considering the smart folder referencing it
+            return ""
+        }
+
+        return indentedFolderName(for: folder)
+    }
+
+    class func indentedFolderName(for folder: Folder) -> String {
+        guard let database = Database.shared else {
+            fatalError("Database not available")
+        }
         var parentFolder = database.folder(fromID: folder.parentId)
         var indent = 0
         while parentFolder != nil {

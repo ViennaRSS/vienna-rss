@@ -259,10 +259,37 @@
             database.userVersion = (uint32_t)26;
             NSLog(@"Updated database schema to version 26.");
         }
-        case 27: //change smart folder search strings from name to id, happens in Database+CriteriaMigration
+        case 27: // change folder names in smart folder search strings from name to id in Database+CriteriaMigration
             database.userVersion = (uint32_t)27;
             NSLog(@"Updated database schema to version 27.");
     }
+}
+
++(void)rollbackDatabase:(FMDatabase *)database toVersion:(NSInteger)oldVersion {
+    NSMutableArray<void(^)(void)> *revertFunctions = [NSMutableArray array];
+    switch (oldVersion + 1) {
+        //no option to revert beyond version 26
+        case 27: // revert change folder names in smart folder search strings from name to id in Database+CriteriaMigration
+            [revertFunctions addObject:^{
+                //revert changes that happened in this version
+                database.userVersion = (uint32_t)26;
+                NSLog(@"Reverted database schema updates of version 27.");
+            }];
+        // add future rollbacks like this:
+        // case 28:
+        //    [revertFunctions addObject:^{
+        //        //revert changes that happened in this version
+        //        database.userVersion = (uint32_t)27;
+        //    }];
+    }
+    //apply revert functions in reverse (latest change first)
+    for (void (^revertFunction)(void) in [revertFunctions reverseObjectEnumerator]) {
+        revertFunction();
+    }
+}
+
++(NSArray *)availableVersionsForRollback {
+    return @[@26];
 }
 
 @end

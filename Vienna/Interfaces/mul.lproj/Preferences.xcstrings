@@ -800,6 +800,18 @@
         }
       }
     },
+    "45s-r3-NZe.title" : {
+      "comment" : "Class = \"NSMenuItem\"; title = \"10\"; ObjectID = \"45s-r3-NZe\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "10"
+          }
+        }
+      }
+    },
     "86e-38-zCh.title" : {
       "comment" : "Class = \"NSButtonCell\"; title = \"Display feeds with unread articles with bold font\"; ObjectID = \"86e-38-zCh\";",
       "extractionState" : "extracted_with_value",
@@ -1954,6 +1966,18 @@
         }
       }
     },
+    "DSP-jq-EiP.title" : {
+      "comment" : "Class = \"NSMenuItem\"; title = \"2\"; ObjectID = \"DSP-jq-EiP\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "2"
+          }
+        }
+      }
+    },
     "Dw9-en-4Zu.title" : {
       "comment" : "Class = \"NSMenuItem\"; title = \"After two weeks\"; ObjectID = \"Dw9-en-4Zu\";",
       "extractionState" : "extracted_with_value",
@@ -2592,6 +2616,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "數字越大代表訂閱項目越快被下載更新。"
+          }
+        }
+      }
+    },
+    "gag-UV-4uN.title" : {
+      "comment" : "Class = \"NSMenuItem\"; title = \"30\"; ObjectID = \"gag-UV-4uN\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "30"
           }
         }
       }
@@ -3466,6 +3502,18 @@
         }
       }
     },
+    "IhO-Wy-WdL.title" : {
+      "comment" : "Class = \"NSMenuItem\"; title = \"1\"; ObjectID = \"IhO-Wy-WdL\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "1"
+          }
+        }
+      }
+    },
     "ILd-2a-Vjb.title" : {
       "comment" : "Class = \"NSMenuItem\"; title = \"2\"; ObjectID = \"ILd-2a-Vjb\";",
       "extractionState" : "extracted_with_value",
@@ -3601,6 +3649,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "文章列表字體："
+          }
+        }
+      }
+    },
+    "iYT-sJ-txV.title" : {
+      "comment" : "Class = \"NSMenuItem\"; title = \"5\"; ObjectID = \"iYT-sJ-txV\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "5"
           }
         }
       }
@@ -5564,6 +5624,42 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "每 5 分鐘"
+          }
+        }
+      }
+    },
+    "R5q-al-MUD.title" : {
+      "comment" : "Class = \"NSTextFieldCell\"; title = \"On closing, reset database to version:\"; ObjectID = \"R5q-al-MUD\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "On closing, reset database to version:"
+          }
+        }
+      }
+    },
+    "rQE-KO-lts.title" : {
+      "comment" : "Class = \"NSMenuItem\"; title = \"15\"; ObjectID = \"rQE-KO-lts\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "15"
+          }
+        }
+      }
+    },
+    "SEE-DS-Cn4.title" : {
+      "comment" : "Class = \"NSMenuItem\"; title = \"50\"; ObjectID = \"SEE-DS-Cn4\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "50"
           }
         }
       }

@@ -49,6 +49,7 @@ extern NSNotificationName const VNADatabaseDidDeleteFolderNotification;
 -(void)optimizeDatabase;
 @property (nonatomic, readonly) NSInteger countOfUnread;
 @property (nonatomic, readonly) NSInteger databaseVersion;
+@property (nonatomic, readwrite) int revertToDatabaseVersion;
 @property (nonatomic, readonly) BOOL readOnly;
 -(void)close;
 
