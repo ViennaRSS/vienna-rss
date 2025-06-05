@@ -66,6 +66,8 @@ class BrowserTab: NSViewController {
     /// backing storage only, access via rssUrl property
     var rssFeedUrls: [URL] = []
 
+
+    var rssSourceEnabled = true
     var showRssButton = false
 
     var viewVisible = false
@@ -172,7 +174,9 @@ class BrowserTab: NSViewController {
             self.url = url
         }
 
-        self.viewDidLoadRss()
+        if rssSourceEnabled {
+            self.viewDidLoadRss()
+        }
 
         self.viewDidLoadHoverLinkUI()
 

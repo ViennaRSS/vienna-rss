@@ -61,6 +61,8 @@ class WebKitArticleTab: BrowserTab, ArticleContentView {
     init() {
         self.articleWebView = WebKitArticleView(frame: CGRect.zero)
         super.init(articleWebView)
+        //article view should not have react to embedded rss feeds
+        super.rssSourceEnabled = false
     }
 
     override func viewDidLoad() {
