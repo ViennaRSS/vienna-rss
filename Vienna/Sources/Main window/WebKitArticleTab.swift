@@ -60,7 +60,7 @@ class WebKitArticleTab: BrowserTab, ArticleContentView {
     @objc
     init() {
         self.articleWebView = WebKitArticleView(frame: CGRect.zero)
-        super.init()
+        super.init(articleWebView)
     }
 
     override func viewDidLoad() {
