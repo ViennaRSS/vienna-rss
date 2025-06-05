@@ -268,22 +268,8 @@ static NSString * const VNAUserNotificationFileDownloadThreadIdentifier = @"File
 }
 
 // Delivers a user notification for the given download item.
-- (void)deliverNotificationForDownloadItem:(DownloadItem *)item {
-    if (item.state != DownloadStateCompleted &&
-        item.state != DownloadStateFailed) {
-        return;
-    }
-
-    [self notifyDownloadItemChange:item];
-    [self archiveDownloadsList];
-
-    NSString *filename = item.filename.lastPathComponent;
-
-    if (item.state == DownloadStateCompleted) {
-        [NSNotificationCenter.defaultCenter postNotificationName:MA_Notify_DownloadCompleted
-                                                          object:filename];
-    }
-
+- (void)deliverUserNotificationForDownloadItem:(DownloadItem *)item
+{
     VNAUserNotificationCenter *center = VNAUserNotificationCenter.current;
     [center getNotificationSettingsWithCompletionHandler:^(VNAUserNotificationSettings *settings) {
         VNAUserNotificationAuthorizationStatus status = settings.authorizationStatus;
@@ -294,21 +280,31 @@ static NSString * const VNAUserNotificationFileDownloadThreadIdentifier = @"File
         void (^deliverNotification)(void) = ^{
             NSString *title;
             NSString *body;
+            NSString *filename = item.filename.lastPathComponent;
             NSDictionary<NSString *, id> *userInfo;
-            if (item.state == DownloadStateCompleted) {
+            switch (item.state) {
+            case DownloadStateCompleted:
                 title = NSLocalizedString(@"Download completed", @"Notification title");
-                body = [NSString stringWithFormat:NSLocalizedString(@"File %@ downloaded", @"Notification body"), filename];
+                body = [NSString stringWithFormat:NSLocalizedString(@"File %@ downloaded",
+                                                                    @"Notification body"),
+                                                  filename];
                 userInfo = @{
                     UserNotificationContextKey: UserNotificationContextFileDownloadCompleted,
                     UserNotificationFilePathKey: item.fileURL.path
                 };
-            } else if (item.state == DownloadStateFailed) {
+                break;
+            case DownloadStateFailed:
                 title = NSLocalizedString(@"Download failed", @"Notification title");
-                body = [NSString stringWithFormat:NSLocalizedString(@"File %@ failed to download", @"Notification body"), filename];
+                body = [NSString stringWithFormat:NSLocalizedString(@"File %@ failed to download",
+                                                                    @"Notification body"),
+                                                  filename];
                 userInfo = @{
                     UserNotificationContextKey: UserNotificationContextFileDownloadFailed,
                     UserNotificationFilePathKey: item.fileURL.path
                 };
+                break;
+            default:
+                return;
             }
             VNAUserNotificationRequest *request =
                 [[VNAUserNotificationRequest alloc] initWithIdentifier:item.fileURL.absoluteString
@@ -365,7 +361,11 @@ static NSString * const VNAUserNotificationFileDownloadThreadIdentifier = @"File
                                               toURL:item.fileURL
                                               error:nil];
         item.state = DownloadStateCompleted;
-        [self deliverNotificationForDownloadItem:item];
+        [self notifyDownloadItemChange:item];
+        [self archiveDownloadsList];
+        [NSNotificationCenter.defaultCenter postNotificationName:MA_Notify_DownloadCompleted
+                                                          object:item.filename.lastPathComponent];
+        [self deliverUserNotificationForDownloadItem:item];
     });
 }
 
@@ -381,7 +381,9 @@ static NSString * const VNAUserNotificationFileDownloadThreadIdentifier = @"File
     dispatch_sync(dispatch_get_main_queue(), ^{
         DownloadItem *item = [self itemForSessionTask:task];
         item.state = DownloadStateFailed;
-        [self deliverNotificationForDownloadItem:item];
+        [self notifyDownloadItemChange:item];
+        [self archiveDownloadsList];
+        [self deliverUserNotificationForDownloadItem:item];
     });
 }
 
