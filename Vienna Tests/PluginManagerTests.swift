@@ -45,11 +45,19 @@ final class PluginManagerTests: XCTestCase {
             forResource: "PluginBundleWithLowercaseInfoPlist",
             withExtension: fileExtension)
         let bundleURL = try XCTUnwrap(url)
+        let bundleURLResourceValues = try bundleURL.resourceValues(
+            forKeys: Set([.volumeSupportsCaseSensitiveNamesKey])
+        )
         let bundle = try XCTUnwrap(Bundle(url: bundleURL))
-        XCTAssertNotNil(bundle.infoDictionary)
-        XCTAssertNil(bundle.localizedInfoDictionary)
-        let name = try XCTUnwrap(bundle.object(forInfoDictionaryKey: identifierKey) as? String)
-        XCTAssert(name == "TestPlugin")
+        if try XCTUnwrap(bundleURLResourceValues.volumeSupportsCaseSensitiveNames) {
+            XCTAssertNil(bundle.infoDictionary)
+            XCTAssertNil(bundle.localizedInfoDictionary)
+        } else {
+            XCTAssertNotNil(bundle.infoDictionary)
+            XCTAssertNil(bundle.localizedInfoDictionary)
+            let name = try XCTUnwrap(bundle.object(forInfoDictionaryKey: identifierKey) as? String)
+            XCTAssert(name == "TestPlugin")
+        }
     }
 
     func testBundleWithoutInfoPlist() throws {
