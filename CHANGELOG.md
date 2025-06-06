@@ -1,6 +1,27 @@
 Vienna ChangeLog File
 =====================
 
+Vienna 3.10.0 Beta 2
+--------------------
+_released 2025-06-06_
+
+### 🚲 Changes
+- Replace Twitter plugin with X plugin
+- Remove deprecated Google Currents plugin
+### 🤷🏻 Bugfix
+- Fix search of plugins on case-sensitive file systems
+- Fix search plugins
+- Fix animation bug when collapsing/expanding groups in folder list sidebar
+- Fix bug that caused an invalid (duplicate) folder name being displayed while it has been rejected by the app
+### ⚙️ Internals improvement
+- Remove superfluous web view which might create problems
+- Change BrowserTab initializers
+- Resolve analyser warning about DownloadManager
+- Optimize database before closing the app
+### 🛤️ Infrastructure updates
+- Build with Xcode 16.4
+- Fix xcodebuild "fatal error" message in Github test pipeline log
+
 Vienna 3.10.0 Beta 1
 --------------------
 _released 2025-05-25_
@@ -33,8 +54,9 @@ _released 2025-05-25_
 - Use view-based table view in download window
 - Make handling and retention of font selection more robust
 ### 🛤️ Infrastructure updates
-- Build with Xcode 16
+- Build with Xcode 16.3
 - Add Crowdin CLI configuration for translations management
+- Update tests
 
 Vienna 3.9.5
 -----

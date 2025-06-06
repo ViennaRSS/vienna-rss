@@ -1,42 +1,28 @@
-<!DOCTYPE html><head><meta charset="utf-8"/></head><h2>Vienna 3.10.0 Beta 1</h2>
-<p><em>released 2025-05-25</em></p>
-<p>Please report any new bugs to <a href="https://github.com/ViennaRSS/vienna-rss/issues">https://github.com/ViennaRSS/vienna-rss/issues</a></p>
-<p>We particularly want to make sure that Vienna handles large number of folders and articles nicely.</p>
+<!DOCTYPE html><head><meta charset="utf-8"/></head><h2>Vienna 3.10.0 Beta 2</h2>
+<p><em>released 2025-06-06</em></p>
+<p>Please report any new bugs to <a href="https://github.com/ViennaRSS/vienna-rss/issues">https://github.com/ViennaRSS/vienna-rss/issues</a>.<br />
+We particularly want to verify whether Vienna stops responding after sitting in the background for a long time.</p>
 <h3>🚲 Changes</h3>
 <ul>
-<li>Add a Mastodon plugin (based on AppleScript) :  configuration can be modified by holding down the Option key when invoking the plugin</li>
-<li>Multiple improvements and fixes to AppleScript support</li>
-<li>Overhaul plugin manager with NSBundle instances to enable plugins localization</li>
-<li>Convert RSS feed sources to plugins</li>
-<li>Convert templates of OpenReader services to plugins</li>
-<li>Update URLs in plugins and default feeds; use https (instead of http) wherever possible</li>
-<li>Enable Vienna style templates to include a specific tag ($ArticlePublicationDate$) to support the display of article publication dates</li>
-<li>Improve the behavior of the font selection panel</li>
-<li>Group file download notifications in Notification Center</li>
-<li>Display latest downloads at the top of the download window</li>
-<li>Mimic Safari for web browser’s user agent</li>
-<li>Update documentation and translations</li>
+<li>Replace Twitter plugin with X plugin</li>
+<li>Remove deprecated Google Currents plugin</li>
 </ul>
 <h3>🤷🏻 Bugfix</h3>
 <ul>
-<li>Fix date 1.1.1970 or 31.12.1969 appearing for “Last Update”</li>
-<li>Fix “open with” menu in download window</li>
-<li>Prevent some of the situations which led Vienna to reset its folder order to alphabetical order</li>
-<li>Fix discrepancy in HTTP user-agent when adding a new subscription</li>
-<li>Remove obsolete sources of RSS feeds</li>
+<li>Fix search of plugins on case-sensitive file systems</li>
+<li>Fix search plugins</li>
+<li>Fix animation bug when collapsing/expanding groups in folder list sidebar</li>
+<li>Fix bug that caused an invalid (duplicate) folder name being displayed while it has been rejected by the app</li>
 </ul>
 <h3>⚙️ Internals improvement</h3>
 <ul>
-<li>Refactor Article’s properties and accessors</li>
-<li>Improve cache management for feed articles</li>
-<li>Improve error handling in OpenReader</li>
-<li>Optimize notifications number and timing during feed refreshes</li>
-<li>Improve lookup/selection of the “Unread Articles” smart folder</li>
-<li>Use view-based table view in download window</li>
-<li>Make handling and retention of font selection more robust</li>
+<li>Remove superfluous web view which might create problems</li>
+<li>Change BrowserTab initializers</li>
+<li>Resolve analyser warning about DownloadManager</li>
+<li>Optimize database before closing the app</li>
 </ul>
 <h3>🛤️ Infrastructure updates</h3>
 <ul>
-<li>Build with Xcode 16</li>
-<li>Add Crowdin CLI configuration for translations management</li>
+<li>Build with Xcode 16.4</li>
+<li>Fix xcodebuild “fatal error” message in Github test pipeline log</li>
 </ul>
