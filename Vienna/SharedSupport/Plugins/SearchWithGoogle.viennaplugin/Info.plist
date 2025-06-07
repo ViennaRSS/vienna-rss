@@ -9,6 +9,6 @@
 	<key>SearchQueryString</key>
 	<string>https://www.google.com/search?q=$SearchTerm$</string>
 	<key>FriendlyName</key>
-	<string>Google</string>
+	<string>Search Google</string>
 </dict>
 </plist>
