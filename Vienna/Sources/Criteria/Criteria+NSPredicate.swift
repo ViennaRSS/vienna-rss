@@ -336,7 +336,7 @@ extension Criteria: PredicateConvertible {
             indent += 1
             parentFolder = database.folder(fromID: parentFolder?.parentId ?? 0)
         }
-        return String(repeating: "  ", count: indent) + folder.name
+        return String(repeating: VNASubfolderIndentation, count: indent) + folder.name
     }
 
 }

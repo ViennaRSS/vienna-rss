@@ -276,7 +276,7 @@
 {
 	if (folder != nil) {
 		if (folder.type == VNAFolderTypeOpenReader) {
-			return [NSString stringWithFormat:@"☁️ %@",folder.name];
+			return [VNAOpenReaderFolderPrefix stringByAppendingString:folder.name];
 		} else {
 			return folder.name;
 		}
