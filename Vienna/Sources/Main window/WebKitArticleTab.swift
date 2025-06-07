@@ -69,6 +69,10 @@ class WebKitArticleTab: BrowserTab, ArticleContentView {
         hideAddressBar(true)
     }
 
+    override func viewDidLoadRss() {
+        // No need to search RSS feed in article tab
+    }
+
     // MARK: gui
 
     override func activateAddressBar() {
