@@ -131,6 +131,7 @@ class CustomWKWebView: WKWebView {
         }
     }
 
+    @available(macOS, deprecated: 11, message: "Use find(_:configuration:completionHandler:)")
     func search(_ text: String = "", upward: Bool = false) {
         self.evaluateJavaScript("window.find(textToFind='\(text)', matchCase=false, searchUpward=\(upward ? "true" : "false"), wrapAround=true)", completionHandler: nil)
     }
