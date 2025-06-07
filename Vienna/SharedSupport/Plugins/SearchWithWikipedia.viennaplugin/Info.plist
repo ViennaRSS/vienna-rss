@@ -9,6 +9,6 @@
 	<key>SearchQueryString</key>
 	<string>https://en.wikipedia.org/w/index.php?title=Special:Search&amp;search=$SearchTerm$&amp;go=Go</string>
 	<key>FriendlyName</key>
-	<string>Wikipedia</string>
+	<string>Search Wikipedia</string>
 </dict>
 </plist>
