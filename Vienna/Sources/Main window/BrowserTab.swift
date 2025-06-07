@@ -258,8 +258,14 @@ extension BrowserTab: Tab {
     }
 
     func searchFor(_ searchString: String, action: NSFindPanelAction) {
-        // webView.evaluateJavaScript("document.execCommand('HiliteColor', false, 'yellow')", completionHandler: nil)
-        self.webView.search(searchString, upward: action == .previous)
+        if #available(macOS 11, *) {
+            let configuration = WKFindConfiguration()
+            configuration.backwards = action == .previous
+            webView.find(searchString, configuration: configuration) { _ in }
+        } else {
+            // webView.evaluateJavaScript("document.execCommand('HiliteColor', false, 'yellow')", completionHandler: nil)
+            self.webView.search(searchString, upward: action == .previous)
+        }
     }
 
     func loadTab() {
