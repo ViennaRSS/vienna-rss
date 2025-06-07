@@ -9,6 +9,6 @@
 	<key>SearchQueryString</key>
 	<string>https://images.google.com/images?q=$SearchTerm$</string>
 	<key>FriendlyName</key>
-	<string>Google Images</string>
+	<string>Search Google Images</string>
 </dict>
 </plist>
