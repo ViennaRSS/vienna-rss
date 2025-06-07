@@ -20,10 +20,13 @@
 
 #import "AdvancedPreferencesViewController.h"
 #import "Preferences.h"
+#import "Database.h"
+#import "Database+Migration.h"
 
 @interface AdvancedPreferencesViewController ()
 
 @property (weak, nonatomic) IBOutlet NSTextField *javaScriptNoticeTextField;
+@property (weak) IBOutlet NSPopUpButton *databaseRollbackChoice;
 
 @end
 
@@ -69,6 +72,15 @@
     useJavaScriptButton.state = prefs.useJavaScript ? NSControlStateValueOn : NSControlStateValueOff;
 
     [concurrentDownloads selectItemWithTitle:[NSString stringWithFormat:@"%lu",(unsigned long)prefs.concurrentDownloads]];
+
+    self.databaseRollbackChoice.menu.itemArray = @[
+        [[NSMenuItem alloc] initWithTitle:@"-" action:nil keyEquivalent:@"-"]
+    ];
+
+    for (NSNumber *version in [Database availableVersionsForRollback]) {
+        [self.databaseRollbackChoice.menu addItem:
+         [[NSMenuItem alloc] initWithTitle:version.description action:nil keyEquivalent:@""]];
+    }
 }
 
 /* changeUseJavaScript
@@ -82,5 +94,10 @@
 
 -(IBAction)changeConcurrentDownloads:(id)sender {
     [Preferences standardPreferences].concurrentDownloads = concurrentDownloads.titleOfSelectedItem.integerValue;
+}
+
+-(void)chooseVersionForDBRollback:(id)sender {
+    int rollbackVersion = self.databaseRollbackChoice.titleOfSelectedItem.intValue;
+    [[Database sharedManager] setRevertToDatabaseVersion: rollbackVersion];
 }
 @end

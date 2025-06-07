@@ -49,6 +49,7 @@ extern NSNotificationName const VNADatabaseDidDeleteFolderNotification;
 -(void)optimizeDatabase;
 @property (nonatomic, readonly) NSInteger countOfUnread;
 @property (nonatomic, readonly) NSInteger databaseVersion;
+@property (nonatomic, readwrite) int revertToDatabaseVersion;
 @property (nonatomic, readonly) BOOL readOnly;
 -(void)close;
 
@@ -80,7 +81,7 @@ extern NSNotificationName const VNADatabaseDidDeleteFolderNotification;
  *  @return An OpenReaderFolder that corresponds
  */
 -(Folder *)folderFromRemoteId:(NSString *)wantedRemoteId;
--(Folder *)folderFromName:(NSString *)wantedName;
+-(Folder * _Nullable)folderFromName:(NSString *)wantedName;
 /*!
  * folderForPredicateFormat
  * Returns a smart folder for the predicate format string.
@@ -123,8 +124,9 @@ extern NSNotificationName const VNADatabaseDidDeleteFolderNotification;
         subscriptionURL:(NSString *)url remoteId:(NSString *)remoteId;
 
 // Smart folder functions
+@property (nonatomic) NSMutableDictionary<NSNumber *, CriteriaTree *> *smartfoldersDict;
 -(NSInteger)addSmartFolder:(NSString *)folderName underParent:(NSInteger)parentId withQuery:(CriteriaTree *)criteriaTree;
--(void)updateSearchFolder:(NSInteger)folderId withFolder:(NSString *)folderName withQuery:(CriteriaTree *)criteriaTree;
+-(void)updateSearchFolder:(NSInteger)folderId withNewFolderName:(NSString *)folderName withQuery:(CriteriaTree *)criteriaTree;
 -(CriteriaTree *)searchStringForSmartFolder:(NSInteger)folderId;
 
 // Article functions

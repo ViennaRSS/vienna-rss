@@ -26,5 +26,5 @@
 -(IBAction)changeUseJavaScript:(id)sender;
 -(IBAction)changeConcurrentDownloads:(id)sender;
 -(IBAction)showAdvancedHelp:(id)sender;
-
+-(IBAction)chooseVersionForDBRollback:(id)sender;
 @end

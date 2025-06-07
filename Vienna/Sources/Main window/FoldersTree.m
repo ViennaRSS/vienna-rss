@@ -1538,28 +1538,32 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
         return;
     }
 
+    //Vienna can´t handle empty folder names
     if (newValue.vna_isBlank) {
         textField.stringValue = folder.name;
         return;
     }
 
-    if (folder.type == VNAFolderTypeOpenReader && [newValue hasPrefix:@"☁️ "]) {
-        NSString *tmpName = [newValue substringFromIndex:3];
-        newValue = tmpName;
+    //OpenReader folders must not use the cloud prefix
+    if (folder.type == VNAFolderTypeOpenReader && [newValue hasPrefix:VNAOpenReaderFolderPrefix]) {
+        NSString *nameWithoutCloud = [newValue substringFromIndex:3];
+        newValue = nameWithoutCloud;
     }
 
     Database *dbManager = [Database sharedManager];
+    //Vienna can´t handle if two folder names equal
     if ([dbManager folderFromName:newValue] != nil) {
         textField.stringValue = folder.name;
-        runOKAlertPanel(NSLocalizedString(@"Cannot rename folder", nil),
-                        NSLocalizedString(@"A folder with that name already exists", nil));
+        runOKAlertPanel(NSLocalizedString(@"Cannot rename folder", nil), 
+						NSLocalizedString(@"A folder with that name already exists", nil));
         return;
     }
 
     [dbManager setName:newValue forFolder:folder.itemId];
     if (folder.type == VNAFolderTypeOpenReader) {
-        [OpenReader.sharedManager setFolderTitle:newValue forFeed:folder.remoteId];
+        [[OpenReader sharedManager] setFolderTitle:newValue forFeed:folder.remoteId];
     }
+
 }
 
 @end
