@@ -199,8 +199,8 @@ class CriteriaTests: XCTestCase {
             <criteria field="Subject"><operator>2</operator><value>NichtTestBetreff</value></criteria>
             <criteria field="Subject"><operator>7</operator><value>BeinhaltetTestBetreff</value></criteria>
             <criteria field="Subject"><operator>8</operator><value>BeinhaltetNichtTestBetreff</value></criteria>
-            <criteria field="Folder"><operator>1</operator><value>MacRumors: Mac News and Rumors - All Stories</value></criteria>
-            <criteria field="Folder"><operator>2</operator><value>Mac &amp; i</value></criteria>
+            <criteria field="Folder"><operator>1</operator><value>BBC World News</value></criteria>
+            <criteria field="Folder"><operator>2</operator><value>Xkcd</value></criteria>
             <criteria field="Date"><operator>1</operator><value>yesterday</value></criteria>
             <criteria field="Date"><operator>10</operator><value>last week</value></criteria>
             <criteria field="Date"><operator>9</operator><value>today</value></criteria>
@@ -239,7 +239,7 @@ class CriteriaTests: XCTestCase {
         let testCriteriaString = """
         <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
         <criteriagroup condition="none">
-            <criteria field="Folder"><operator>2</operator><value>Apple Newsroom</value></criteria>
+            <criteria field="Folder"><operator>2</operator><value>BBC World News</value></criteria>
             <criteria field="Text"><operator>7</operator><value>Apple</value></criteria>
         </criteriagroup>
         """
