@@ -276,6 +276,7 @@ static NSNibName const VNASmartFolderNibName = @"SearchFolder";
 /// folders in the database under the specified folder ID. The indentation value
 /// is used to indent the items in the menu when they are part of a group. I've
 /// used an increment of 2 which looks clearer than 1 in the UI.
+// FIXME: replace w/ custom NSPredicateRowTemplate w/ NSMutableParagraphStyle in NSMenuItem's attributedStyle ?
 - (NSArray<NSExpression *> *)fillFolderValueField:(NSInteger)fromId
                                          atIndent:(NSInteger)indentation
 {
@@ -286,8 +287,8 @@ static NSNibName const VNASmartFolderNibName = @"SearchFolder";
         if (folder.type == VNAFolderTypeRSS ||
             folder.type == VNAFolderTypeOpenReader ||
             folder.type == VNAFolderTypeGroup) {
-            NSString *indentSpaces = [@"" stringByPaddingToLength:indentation * 2
-                                                       withString:@" "
+            NSString *indentSpaces = [@"" stringByPaddingToLength:indentation * VNASubfolderIndentation.length
+                                                       withString:VNASubfolderIndentation
                                                   startingAtIndex:0];
             NSString *constantValue = [indentSpaces stringByAppendingString:folder.name];
             [expressions addObject:[NSExpression expressionForConstantValue:constantValue]];

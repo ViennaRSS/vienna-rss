@@ -1543,8 +1543,9 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
         return;
     }
 
-    if (folder.type == VNAFolderTypeOpenReader && [newValue hasPrefix:@"☁️ "]) {
-        NSString *tmpName = [newValue substringFromIndex:3];
+    // remove the prefix marking it is a cloud (Open Reader) feed
+    if (folder.type == VNAFolderTypeOpenReader && [newValue hasPrefix:VNAOpenReaderFolderPrefix]) {
+        NSString *tmpName = [newValue substringFromIndex:VNAOpenReaderFolderPrefix.length];
         newValue = tmpName;
     }
 

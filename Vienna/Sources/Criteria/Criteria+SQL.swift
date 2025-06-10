@@ -149,7 +149,9 @@ extension Criteria: SQLConversion {
     }
 
     func folderSqlString(sqlFieldName: String, database: Database) -> String {
-        let folder = database.folder(fromName: value)
+        // trim extra spaces added by predicate editor's formatting
+        let cleanedValue = String(value.drop { $0 == " " })
+        let folder = database.folder(fromName: cleanedValue)
         let scope: QueryScope
         switch operatorType {
         case .under:

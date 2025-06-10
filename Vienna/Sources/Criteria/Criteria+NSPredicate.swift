@@ -301,6 +301,15 @@ extension Criteria: PredicateConvertible {
             // ambiguous "is not yes - is no / is not no - is yes"
             let invertedRight = NSExpression(forConstantValue: value == "No" ? "Yes" : "No")
             comparisonPredicate = NSComparisonPredicate(leftExpression: left, rightExpression: invertedRight, modifier: .direct, type: .equalTo)
+        } else if field == MA_Field_Folder {
+            // remove existing indentation spaces
+            let rightValue = right.constantValue as? String ?? ""
+            let folderName = String(rightValue.drop { $0 == " " })
+            // FIXME: avoid this with custom NSPredicateEditorRowTemplate in FoldersTree.m ?
+            // add the number of indentation spaces fitting the current folder tree
+            let newRightValue = convertFolderNameToIndentedName(folderName)
+            let newRightExpression = NSExpression(forConstantValue: newRightValue)
+            comparisonPredicate = NSComparisonPredicate(leftExpression: left, rightExpression: newRightExpression, modifier: .direct, type: type)
         } else {
             comparisonPredicate = NSComparisonPredicate(leftExpression: left, rightExpression: right, modifier: .direct, type: type)
         }
@@ -313,4 +322,21 @@ extension Criteria: PredicateConvertible {
             return comparisonPredicate
         }
     }
+
+    private func convertFolderNameToIndentedName(_ value: String) -> String {
+        guard let database = Database.shared, let folder = database.folder(fromName: value) else {
+            // no error, since it is possible that a folder was renamed or deleted
+            // without considering the smart folder referencing it
+            return ""
+        }
+
+        var parentFolder = database.folder(fromID: folder.parentId)
+        var indent = 0
+        while parentFolder != nil {
+            indent += 1
+            parentFolder = database.folder(fromID: parentFolder?.parentId ?? 0)
+        }
+        return String(repeating: VNASubfolderIndentation, count: indent) + folder.name
+    }
+
 }

@@ -140,3 +140,7 @@ extern AEKeyword const DataItemGUID;
 extern AEKeyword const DataItemSourceName;
 extern AEKeyword const DataItemSourceHomeURL;
 extern AEKeyword const DataItemSourceFeedURL;
+
+// Other string constants for aesthetic use
+extern NSString *const VNAOpenReaderFolderPrefix;
+extern NSString *const VNASubfolderIndentation;
