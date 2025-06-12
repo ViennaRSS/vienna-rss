@@ -1,28 +1,20 @@
-<!DOCTYPE html><head><meta charset="utf-8"/></head><h2>Vienna 3.10.0 Beta 2</h2>
-<p><em>released 2025-06-06</em></p>
-<p>Please report any new bugs to <a href="https://github.com/ViennaRSS/vienna-rss/issues">https://github.com/ViennaRSS/vienna-rss/issues</a>.<br />
-We particularly want to verify whether Vienna stops responding after sitting in the background for a long time.</p>
+<!DOCTYPE html><head><meta charset="utf-8"/></head><h2>Vienna 3.10.0 Beta 3</h2>
+<p>_released 2025-06-12</p>
 <h3>🚲 Changes</h3>
 <ul>
-<li>Replace Twitter plugin with X plugin</li>
-<li>Remove deprecated Google Currents plugin</li>
+<li>Make search plug-in names in toolbar more explicit</li>
 </ul>
 <h3>🤷🏻 Bugfix</h3>
 <ul>
-<li>Fix search of plugins on case-sensitive file systems</li>
-<li>Fix search plugins</li>
-<li>Fix animation bug when collapsing/expanding groups in folder list sidebar</li>
-<li>Fix bug that caused an invalid (duplicate) folder name being displayed while it has been rejected by the app</li>
+<li>Fix some freezes by blocking attempts to detect RSS in main tab</li>
+<li>Make tests about folders in smart folders more robust</li>
+<li>Fix non working setting for minimum font size</li>
 </ul>
 <h3>⚙️ Internals improvement</h3>
 <ul>
-<li>Remove superfluous web view which might create problems</li>
-<li>Change BrowserTab initializers</li>
-<li>Resolve analyser warning about DownloadManager</li>
-<li>Optimize database before closing the app</li>
+<li>Use find(_:configuration:completionHandler:) for searching in WKWebView in macOS 11.0+</li>
 </ul>
 <h3>🛤️ Infrastructure updates</h3>
 <ul>
-<li>Build with Xcode 16.4</li>
-<li>Fix xcodebuild “fatal error” message in Github test pipeline log</li>
+<li>Update GitHub Action for Xcode 16.4</li>
 </ul>

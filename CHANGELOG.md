@@ -1,6 +1,21 @@
 Vienna ChangeLog File
 =====================
 
+Vienna 3.10.0 Beta 3
+--------------------
+_released 2025-06-12
+
+### 🚲 Changes
+- Make search plug-in names in toolbar more explicit
+### 🤷🏻 Bugfix
+- Fix some freezes by blocking attempts to detect RSS in main tab
+- Make tests about folders in smart folders more robust
+- Fix non working setting for minimum font size
+### ⚙️ Internals improvement
+- Use find(_:configuration:completionHandler:) for searching in WKWebView in macOS 11.0+
+### 🛤️ Infrastructure updates
+- Update GitHub Action for Xcode 16.4
+
 Vienna 3.10.0 Beta 2
 --------------------
 _released 2025-06-06_
