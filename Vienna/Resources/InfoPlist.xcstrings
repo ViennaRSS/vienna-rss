@@ -16,15 +16,15 @@
     },
     "NSAppleEventsUsageDescription" : {
       "comment" : "A message that tells the user why Vienna is requesting the ability to send Apple events.",
+      "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
+            "state" : "new",
+            "value" : "Vienna's blog editor plug-ins use Apple events to share article data. Script plug-ins and AppleScript files may use Apple events as well."
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "NSHumanReadableCopyright" : {
       "comment" : "Copyright (human-readable)",

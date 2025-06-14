@@ -125,7 +125,7 @@
 		<true/>
 	</dict>
 	<key>NSAppleEventsUsageDescription</key>
-	<string></string>
+	<string>Vienna&apos;s blog editor plug-ins use Apple events to share article data. Script plug-ins and AppleScript files may use Apple events as well.</string>
 	<key>NSAppleScriptEnabled</key>
 	<string>YES</string>
 	<key>NSHumanReadableCopyright</key>
