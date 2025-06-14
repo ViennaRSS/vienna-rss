@@ -118,10 +118,9 @@
         fileImage.image = [NSWorkspace.sharedWorkspace iconForFileType:extension];
     }
 	NSDictionary *linkAttributes = @{
-									 NSLinkAttributeName: enclosureURLString,
-									 NSForegroundColorAttributeName: [NSColor colorWithCalibratedHue:240.0f/360.0f saturation:1.0f brightness:0.75f alpha:1.0f],
-									 NSUnderlineStyleAttributeName: @YES,
-									 };
+		NSLinkAttributeName: enclosureURLString,
+        NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),
+	};
 	NSAttributedString * link = [[NSAttributedString alloc] initWithString:basename attributes:linkAttributes];
 	filenameField.attributedStringValue = link;
 }
