@@ -120,7 +120,7 @@ static NSString * const VNAPluginsDirectoryName = @"Plugins";
         [allPlugins addObject:plugin];
         [self didChangeValueForKey:NSStringFromSelector(@selector(numberOfPlugins))];
     } else {
-        NSLog(@"Missing or corrupt info.plist in %@", pluginPath);
+        NSLog(@"Missing or corrupt Info.plist in %@", pluginPath);
     }
 }
 
@@ -173,7 +173,7 @@ static NSString * const VNAPluginsDirectoryName = @"Plugins";
                     keyMod |= NSEventModifierFlagControl;
                 } else {
                     if (!keyChar.vna_isBlank) {
-                        NSLog(@"Warning: malformed MenuKey found in info.plist for plugin %@", plugin.identifier);
+                        NSLog(@"Warning: malformed MenuKey found in Info.plist for plugin %@", plugin.identifier);
                     }
                     keyChar = oneKey;
                 }
