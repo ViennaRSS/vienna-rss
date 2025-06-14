@@ -175,7 +175,7 @@
  */
 -(void)handleFolderNameTextDidChange:(NSNotification *)aNotification
 {
-    [[Database sharedManager] setName:self.folderName.stringValue forFolder:self.infoFolderId];
+    [[Database sharedManager] setName:self.folderName.stringValue.vna_trimmed forFolder:self.infoFolderId];
 }
 
 /* enableValidateButton

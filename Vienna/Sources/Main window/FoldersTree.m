@@ -1549,6 +1549,7 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
         newValue = tmpName;
     }
 
+    newValue = newValue.vna_trimmed;
     Database *dbManager = [Database sharedManager];
     if ([dbManager folderFromName:newValue] != nil) {
         textField.stringValue = folder.name;
