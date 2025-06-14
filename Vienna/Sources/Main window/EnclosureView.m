@@ -113,7 +113,11 @@
     NSString *extension = basename.pathExtension;
     if (@available(macOS 11, *)) {
         UTType *type = [UTType typeWithFilenameExtension:extension];
-        fileImage.image = [NSWorkspace.sharedWorkspace iconForContentType:type];
+        if (type) {
+            fileImage.image = [NSWorkspace.sharedWorkspace iconForContentType:type];
+        } else {
+            fileImage.image = [NSWorkspace.sharedWorkspace iconForContentType:UTTypeItem];
+        }
     } else {
         fileImage.image = [NSWorkspace.sharedWorkspace iconForFileType:extension];
     }
