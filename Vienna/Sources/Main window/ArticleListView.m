@@ -158,6 +158,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
         multiplier:0.f constant:self.contentStackView.frame.size.width];
     self.articleTextView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.contentStackView addConstraint:self.textViewWidthConstraint];
+    self.textViewWidthConstraint.active = splitView2.vertical;
 
 	Preferences * prefs = [Preferences standardPreferences];
 
@@ -829,13 +830,14 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 		splitView2.dividerStyle = NSSplitViewDividerStyleThin;
 		splitView2.autosaveName = @"Vienna3SplitView2CondensedLayout";
 		self.textViewWidthConstraint.constant = self.contentStackView.frame.size.width;
+		self.textViewWidthConstraint.active = YES;
 	} else {
 		splitView2.dividerStyle = NSSplitViewDividerStylePaneSplitter;
 		splitView2.autosaveName = @"Vienna3SplitView2ReportLayout";
 		self.textViewWidthConstraint.constant = splitView2.frame.size.width;
+		self.textViewWidthConstraint.active = NO;
 	}
 	self.textViewWidthConstraint.priority = NSLayoutPriorityRequired;
-	self.textViewWidthConstraint.active = YES;
 	[splitView2 display];
 	isChangingOrientation = NO;
 }
@@ -1661,6 +1663,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
             }
         }
         self.articleTextView.translatesAutoresizingMaskIntoConstraints = YES;
+        self.textViewWidthConstraint.active = splitView2.vertical;
     }
 }
 
