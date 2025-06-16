@@ -762,6 +762,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         }
         // Mark the feed as failed
         [self setFolderErrorFlag:folder flag:YES];
+        [connectorItem appendDetail:error.localizedDescription];
         dispatch_async(dispatch_get_main_queue(), ^{
             [connectorItem setStatus:NSLocalizedString(@"Error parsing data in feed", nil)];
         });

@@ -56,12 +56,17 @@
                                                         error:&xmlDocumentError];
         }
     } @catch (NSException * __unused) {
-        if (xmlDocumentError && error) {
-            *error = xmlDocumentError;
+        if (error) {
+            if (xmlDocumentError) {
+                *error = xmlDocumentError;
+            } else {
+                *error = [NSError errorWithDomain:NSXMLParserErrorDomain
+                                             code:NSXMLParserInternalError
+                                         userInfo:nil];
+            }
         }
         xmlDocument = nil;
-
-        // FIXME: Should this method not return nil here?
+        return nil;
     }
 
     VNAXMLFeed *feed = nil;
