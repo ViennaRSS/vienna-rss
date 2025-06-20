@@ -528,6 +528,8 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
                 } else {
                     [weakSelf folderRefreshCompleted:myRequest response:response data:data];
                 }
+                NSNotificationCenter *nc = NSNotificationCenter.defaultCenter;
+                [nc vna_postNotificationOnMainThreadWithName:MA_Notify_FoldersUpdated object:@(folder.itemId)];
                 }];
     } else {     // Open Reader feed
         [[OpenReader sharedManager] refreshFeed:folder withLog:(ActivityItem *)aItem shouldIgnoreArticleLimit:force];
@@ -566,8 +568,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
                          error.localizedDescription ]];
     [aItem setStatus:NSLocalizedString(@"Error", nil)];
     [self setFolderUpdatingFlag:folder flag:NO];
-    NSNotificationCenter *nc = NSNotificationCenter.defaultCenter;
-    [nc vna_postNotificationOnMainThreadWithName:MA_Notify_FoldersUpdated object:@(folder.itemId)];
 } // folderRefreshFailed
 
 /* folderRefreshCompleted
@@ -637,8 +637,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         }
 
         [self setFolderUpdatingFlag:folder flag:NO];
-        NSNotificationCenter *nc = NSNotificationCenter.defaultCenter;
-        [nc vna_postNotificationOnMainThreadWithName:MA_Notify_FoldersUpdated object:@(folder.itemId)];
     });     //block for dispatch_async on _queue
 } // folderRefreshCompleted
 
