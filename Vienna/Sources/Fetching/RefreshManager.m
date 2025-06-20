@@ -481,6 +481,8 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     // persistent so we set this directly on the folder rather than
     // through the database.
     [self setFolderUpdatingFlag:folder flag:YES];
+    [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:MA_Notify_FoldersUpdated
+                                                                            object:@(folder.itemId)];
 
     // Additional detail for the log
     if (folder.type == VNAFolderTypeOpenReader) {
