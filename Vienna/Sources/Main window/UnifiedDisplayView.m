@@ -58,7 +58,7 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
 @end
 
 @implementation UnifiedDisplayView {
-    IBOutlet ExtendedTableView *articleList;
+    IBOutlet NSTableView *articleList;
 
     NSTimer *markReadTimer;
 
@@ -148,6 +148,7 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
 	openItemInBrowser.alternate = YES;
 	[articleListMenu addItem:openItemInBrowser];
 
+	articleListMenu.delegate = self;
 	articleList.menu = articleListMenu;
 
 	// Set the target for copy, drag...
@@ -559,22 +560,6 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
     return cellView;
 }
 
-/* menuWillAppear [ExtendedTableView delegate]
- * Called when the popup menu is opened on the table. We ensure that the item under the
- * cursor is selected.
- */
--(void)tableView:(ExtendedTableView *)tableView menuWillAppear:(NSEvent *)theEvent
-{
-	NSInteger row = [articleList rowAtPoint:[articleList convertPoint:theEvent.locationInWindow fromView:nil]];
-	if (row >= 0) {
-		// Select the row under the cursor if it isn't already selected
-		if (articleList.numberOfSelectedRows <= 1) {
-			[articleList selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
-		}
-	}
-	[articleList scrollRowToVisible:row];
-}
-
 /* tableViewSelectionDidChange [delegate]
  * Handle the selection changing in the table view.
  */
@@ -786,6 +771,23 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
             self.statusBar = nil;
         }
     }
+}
+
+// MARK: - NSMenuDelegate
+
+// Called when the popup menu is opened on the table. We ensure that the item
+// under the cursor is selected.
+- (void)menuWillOpen:(NSMenu *)menu
+{
+    NSInteger clickedRow = articleList.clickedRow;
+    if (clickedRow >= 0) {
+        // Select the row under the cursor if it isn't already selected
+        if (articleList.numberOfSelectedRows <= 1) {
+            [articleList selectRowIndexes:[NSIndexSet indexSetWithIndex:clickedRow]
+                     byExtendingSelection:NO];
+        }
+    }
+    [articleList scrollRowToVisible:clickedRow];
 }
 
 // MARK: CustomWKHoverUIDelegate

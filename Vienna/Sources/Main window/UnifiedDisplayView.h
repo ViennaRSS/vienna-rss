@@ -20,12 +20,16 @@
 
 #import "ArticleBaseView.h"
 #import "BaseView.h"
-#import "MessageListView.h"
 
 @class AppController;
 @class ArticleController;
 
-@interface UnifiedDisplayView : NSView <BaseView, ArticleBaseView, NSMenuItemValidation, MessageListViewDelegate, NSTableViewDataSource, ExtendedTableViewDelegate>
+@interface UnifiedDisplayView : NSView <ArticleBaseView,
+										BaseView,
+                                        NSMenuDelegate,
+                                        NSMenuItemValidation,
+                                        NSTableViewDataSource,
+                                        NSTableViewDelegate>
 
 @property (weak, nonatomic) AppController *appController;
 @property (weak, nonatomic) ArticleController *articleController;

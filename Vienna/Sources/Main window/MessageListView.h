@@ -20,23 +20,18 @@
 
 @import Cocoa;
 
-#import "TableViewExtensions.h"
-
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol MessageListViewDelegate <ExtendedTableViewDelegate>
+@protocol MessageListViewDelegate <NSTableViewDelegate>
 
 - (BOOL)canDeleteMessageAtRow:(NSInteger)row;
 
-@optional
-
-// TODO: Implement this in UnifiedDisplayView and make it non-optional
 - (BOOL)copyTableSelection:(NSIndexSet *)rowIndexes
               toPasteboard:(NSPasteboard *)pboard;
 
 @end
 
-@interface MessageListView : ExtendedTableView <NSMenuItemValidation>
+@interface MessageListView : NSTableView <NSMenuItemValidation>
 
 // This property overrides a superclass property.
 @property (weak, nullable) id<MessageListViewDelegate> delegate;

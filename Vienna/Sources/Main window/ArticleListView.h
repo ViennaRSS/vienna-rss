@@ -28,7 +28,13 @@
 @class AppController;
 @class ArticleController;
 
-@interface ArticleListView : NSView <BaseView, ArticleBaseView, ArticleViewDelegate, MessageListViewDelegate, NSTableViewDataSource, ExtendedTableViewDelegate, NSSplitViewDelegate>
+@interface ArticleListView : NSView <ArticleBaseView,
+                                     ArticleViewDelegate,
+                                     BaseView,
+                                     MessageListViewDelegate,
+                                     NSMenuDelegate,
+                                     NSSplitViewDelegate,
+                                     NSTableViewDataSource>
 
 @property (weak, nonatomic) AppController *appController;
 @property (weak, nonatomic) ArticleController *articleController;
