@@ -9,7 +9,6 @@
         <customObject id="-2" userLabel="File's Owner" customClass="DownloadWindow">
             <connections>
                 <outlet property="clearButton" destination="13" id="15"/>
-                <outlet property="downloadWindow" destination="5" id="20"/>
                 <outlet property="table" destination="8" id="11"/>
                 <outlet property="window" destination="5" id="21"/>
             </connections>

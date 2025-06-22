@@ -30,7 +30,6 @@
 #import "Vienna-Swift.h"
 
 @implementation DownloadWindow {
-    IBOutlet NSWindow *downloadWindow;
     IBOutlet NSTableView *table;
     IBOutlet NSButton *clearButton;
     NSInteger lastCount;
@@ -50,9 +49,7 @@
 
 - (void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [downloadWindow setDelegate:nil];
-    [table setDelegate:nil];
+    [NSNotificationCenter.defaultCenter removeObserver:self];
 }
 
 /* windowDidLoad
@@ -63,7 +60,7 @@
 	// Work around a Cocoa bug where the window positions aren't saved
 	[self setShouldCascadeWindows:NO];
 	self.windowFrameAutosaveName = @"downloadWindow";
-	downloadWindow.delegate = self;
+    self.window.delegate = self;
 
 	// Register to get notified when the download manager's list changes
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
@@ -103,7 +100,6 @@
 							action:@selector(cancelDownload:)
 					 keyEquivalent:@""];
 
-	[downloadMenu setDelegate:self];
 	table.menu = downloadMenu;
 }
 

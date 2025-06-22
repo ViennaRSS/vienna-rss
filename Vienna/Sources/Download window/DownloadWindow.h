@@ -20,9 +20,9 @@
 
 @import Cocoa;
 
-@interface DownloadWindow : NSWindowController <NSWindowDelegate, NSMenuDelegate, NSTableViewDelegate, NSTableViewDataSource>
+@interface DownloadWindow : NSWindowController <NSMenuDelegate,
+                                                NSTableViewDelegate,
+                                                NSTableViewDataSource,
+                                                NSWindowDelegate>
 
-
-// Public functions
--(IBAction)clearList:(id)sender;
 @end
