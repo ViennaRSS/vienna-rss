@@ -16,7 +16,11 @@
 #pragma clang diagnostic pop
 }
 
-- (instancetype)initWithDataSource:(id<NSOutlineViewDataSource>)dataSource /*NS_DESIGNATED_INITIALIZER*/;
+- (instancetype)initWithDataSource:(id<NSOutlineViewDataSource>)dataSource
+    NS_DESIGNATED_INITIALIZER;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
 
 @end
 
