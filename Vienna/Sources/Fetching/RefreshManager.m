@@ -481,6 +481,8 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     // persistent so we set this directly on the folder rather than
     // through the database.
     [self setFolderUpdatingFlag:folder flag:YES];
+    [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:MA_Notify_FoldersUpdated
+                                                                            object:@(folder.itemId)];
 
     // Additional detail for the log
     if (folder.type == VNAFolderTypeOpenReader) {
@@ -608,6 +610,8 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
                 [connectorItem setStatus:NSLocalizedString(@"No new articles available", nil)];
             });
             [self setFolderUpdatingFlag:folder flag:NO];
+            NSNotificationCenter *nc = NSNotificationCenter.defaultCenter;
+            [nc vna_postNotificationOnMainThreadWithName:MA_Notify_FoldersUpdated object:@(folder.itemId)];
             return;
         } else if (responseStatusCode == 410) {
             // We got HTTP 410 which means the feed has been intentionally removed so unsubscribe the feed.
