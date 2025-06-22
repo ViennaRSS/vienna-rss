@@ -72,14 +72,14 @@
 	// We are the delegate and the datasource
 	table.delegate = self;
 	table.dataSource = self;
-	table.doubleAction = @selector(handleDoubleClick:);
+	table.doubleAction = @selector(openFile:);
 	table.target = self;
 
 	// Create the popup menu
 	NSMenu * downloadMenu = [[NSMenu alloc] init];
     
 	// Open
-	[downloadMenu addItemWithTitle:NSLocalizedString(@"Open", @"Title of a popup menu item") action:@selector(handleDoubleClick:) keyEquivalent:@""];
+	[downloadMenu addItemWithTitle:NSLocalizedString(@"Open", @"Title of a popup menu item") action:@selector(openFile:) keyEquivalent:@""];
 
 	// Open With
 	NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Open With", @"") action:nil keyEquivalent:@""];
@@ -117,11 +117,11 @@
 	[[DownloadManager sharedInstance] clearList];
 }
 
-/* handleDoubleClick
+/* openFile
  * Handle a double click on a row. Use this to launch the file that was
  * downloaded if it has completed.
  */
--(void)handleDoubleClick:(id)sender
+- (void)openFile:(id)sender
 {
     DownloadItem *item = [self downloadItemForClickedRow];
     if (!item) {
