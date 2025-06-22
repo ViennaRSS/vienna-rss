@@ -48,6 +48,13 @@
 	return self;
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [downloadWindow setDelegate:nil];
+    [table setDelegate:nil];
+}
+
 /* windowDidLoad
  * Do the things that only make sense after the window file is loaded.
  */
@@ -100,38 +107,7 @@
 	table.menu = downloadMenu;
 }
 
-- (void)menuWillOpen:(NSMenu *)menu
-{
-    // Dynamically generate Open With submenu for item
-    if (menu != openWithMenu) {
-        return;
-    }
-
-    DownloadItem *item = [self downloadItemForClickedRow];
-    if (item) {
-        [NSWorkspace.sharedWorkspace vna_openWithMenuForFile:item.filename
-                                                      target:nil
-                                                      action:NULL
-                                                        menu:menu];
-    }
-}
-
-- (void)windowDidBecomeKey:(NSNotification *)notification
-{
-	// Clear relevant notifications when the user views this window.
-    VNAUserNotificationCenter *center = VNAUserNotificationCenter.current;
-    [center getDeliveredNotificationsWithCompletionHandler:^(NSArray<VNAUserNotificationResponse *> *responses) {
-        NSMutableArray *identifiers = [NSMutableArray array];
-        for (VNAUserNotificationResponse *response in responses) {
-            NSString *context = response.userInfo[UserNotificationContextKey];
-            if ([context isEqualToString:UserNotificationContextFileDownloadCompleted] ||
-                [context isEqualToString:UserNotificationContextFileDownloadFailed]) {
-                [identifiers addObject:response.identifier];
-            }
-        }
-        [center removeDeliveredNotificationsWithIdentifiers:identifiers];
-    }];
-}
+// MARK: Actions
 
 /* clearList
  * Remove everything from the list.
@@ -216,6 +192,8 @@
                  withAnimation:(NSTableViewAnimationEffectFade | NSTableViewAnimationSlideUp)];
 }
 
+// MARK: Notifications
+
 /* handleDownloadsChange
  * Called when the downloads list has changed. The notification item is the DownloadItem
  * that has been changed. If it has been added to our list, we insert it. Otherwise we
@@ -254,14 +232,22 @@
     return list[clickedRow];
 }
 
-/* dealloc
- * Do away with ourself.
- */
--(void)dealloc
+// MARK: - NSMenuDelegate
+
+- (void)menuWillOpen:(NSMenu *)menu
 {
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[downloadWindow setDelegate:nil];
-	[table setDelegate:nil];
+    // Dynamically generate Open With submenu for item
+    if (menu != openWithMenu) {
+        return;
+    }
+
+    DownloadItem *item = [self downloadItemForClickedRow];
+    if (item) {
+        [NSWorkspace.sharedWorkspace vna_openWithMenuForFile:item.filename
+                                                      target:nil
+                                                      action:NULL
+                                                        menu:menu];
+    }
 }
 
 // MARK: - NSTableViewDataSource
@@ -337,6 +323,25 @@
               forRow:(NSInteger)row
 {
     clearButton.enabled = tableView.numberOfRows > 0;
+}
+
+// MARK: - NSWindowDelegate
+
+- (void)windowDidBecomeKey:(NSNotification *)notification
+{
+    // Clear relevant notifications when the user views this window.
+    VNAUserNotificationCenter *center = VNAUserNotificationCenter.current;
+    [center getDeliveredNotificationsWithCompletionHandler:^(NSArray<VNAUserNotificationResponse *> *responses) {
+        NSMutableArray *identifiers = [NSMutableArray array];
+        for (VNAUserNotificationResponse *response in responses) {
+            NSString *context = response.userInfo[UserNotificationContextKey];
+            if ([context isEqualToString:UserNotificationContextFileDownloadCompleted] ||
+                [context isEqualToString:UserNotificationContextFileDownloadFailed]) {
+                [identifiers addObject:response.identifier];
+            }
+        }
+        [center removeDeliveredNotificationsWithIdentifiers:identifiers];
+    }];
 }
 
 @end
