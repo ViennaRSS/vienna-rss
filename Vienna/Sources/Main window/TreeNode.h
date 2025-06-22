@@ -26,8 +26,15 @@
 
 @interface TreeNode : NSObject
 
+- (instancetype)init:(TreeNode *)parentNode
+             atIndex:(NSInteger)insertIndex
+              folder:(Folder *)folder
+     canHaveChildren:(BOOL)childflag NS_DESIGNATED_INITIALIZER;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
 // Accessor functions
--(instancetype)init:(TreeNode *)parentNode atIndex:(NSInteger)insertIndex folder:(Folder *)folder canHaveChildren:(BOOL)childflag /*NS_DESIGNATED_INITIALIZER*/;
 @property (nonatomic) TreeNode *parentNode;
 @property (nonatomic, readonly) TreeNode *nextSibling;
 @property (nonatomic, readonly) TreeNode *firstChild;

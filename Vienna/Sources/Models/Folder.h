@@ -71,8 +71,14 @@ typedef NS_OPTIONS(NSUInteger, VNAFolderFlag) {
 
 @interface Folder : NSObject <NSCacheDelegate>
 
-// Initialisation functions
--(instancetype)initWithId:(NSInteger)itemId parentId:(NSInteger)parentId name:(NSString *)name type:(VNAFolderType)type /*NS_DESIGNATED_INITIALIZER*/;
+- (instancetype)initWithId:(NSInteger)itemId
+                  parentId:(NSInteger)parentId
+                      name:(NSString *)name
+                      type:(VNAFolderType)type NS_DESIGNATED_INITIALIZER;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *feedDescription;
 @property (nonatomic, copy) NSString *homePage;

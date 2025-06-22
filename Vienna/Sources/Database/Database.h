@@ -31,19 +31,21 @@ typedef NS_OPTIONS(NSInteger, VNAQueryScope) {
     VNAQueryScopeSubFolders = 2
 } NS_SWIFT_NAME(QueryScope);
 
-@interface Database : NSObject
-
 extern NSNotificationName const VNADatabaseWillDeleteFolderNotification;
 extern NSNotificationName const VNADatabaseDidDeleteFolderNotification;
+
+@interface Database : NSObject
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@property (class, readonly, nonatomic) Database *sharedManager NS_SWIFT_NAME(shared);
 
 @property(nonatomic) Folder * trashFolder;
 @property(nonatomic) Folder * searchFolder;
 @property (copy, nonatomic) NSString *searchString;
 
-@property (class, readonly, nonatomic) Database *sharedManager NS_SWIFT_NAME(shared);
-
 // General database functions
-- (instancetype)initWithDatabaseAtPath:(NSString *)dbPath /*NS_DESIGNATED_INITIALIZER*/;
 -(void)compactDatabase;
 -(void)reindexDatabase;
 -(void)optimizeDatabase;
