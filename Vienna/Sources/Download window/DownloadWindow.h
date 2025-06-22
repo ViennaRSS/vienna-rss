@@ -21,6 +21,7 @@
 @import Cocoa;
 
 @interface DownloadWindow : NSWindowController <NSMenuDelegate,
+                                                NSMenuItemValidation,
                                                 NSTableViewDelegate,
                                                 NSTableViewDataSource,
                                                 NSWindowDelegate>

@@ -246,6 +246,28 @@
     }
 }
 
+// MARK: - NSMenuItemValidation
+
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem
+{
+    DownloadItem *item = [self downloadItemForClickedRow];
+    if (!item) {
+        return NO;
+    }
+
+    SEL action = menuItem.action;
+    DownloadState state = item.state;
+    if (action == @selector(openFile:) || action == @selector(showInFinder:)) {
+        return state == DownloadStateCompleted;
+    } else if (action == @selector(removeFromList:)) {
+        return state != DownloadStateInit && state != DownloadStateStarted;
+    } else if (action == @selector(cancelDownload:)) {
+        return state == DownloadStateInit || state == DownloadStateStarted;
+    }
+
+    return YES;
+}
+
 // MARK: - NSTableViewDataSource
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
