@@ -30,8 +30,7 @@
 #import "Vienna-Swift.h"
 
 @implementation DownloadWindow {
-    IBOutlet NSWindow *downloadWindow;
-    IBOutlet ExtendedTableView *table;
+    IBOutlet NSTableView *table;
     IBOutlet NSButton *clearButton;
     NSInteger lastCount;
     NSMenu *openWithMenu;
@@ -48,6 +47,11 @@
 	return self;
 }
 
+- (void)dealloc
+{
+    [NSNotificationCenter.defaultCenter removeObserver:self];
+}
+
 /* windowDidLoad
  * Do the things that only make sense after the window file is loaded.
  */
@@ -56,7 +60,7 @@
 	// Work around a Cocoa bug where the window positions aren't saved
 	[self setShouldCascadeWindows:NO];
 	self.windowFrameAutosaveName = @"downloadWindow";
-	downloadWindow.delegate = self;
+    self.window.delegate = self;
 
 	// Register to get notified when the download manager's list changes
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
@@ -65,14 +69,14 @@
 	// We are the delegate and the datasource
 	table.delegate = self;
 	table.dataSource = self;
-	table.doubleAction = @selector(handleDoubleClick:);
+	table.doubleAction = @selector(openFile:);
 	table.target = self;
 
 	// Create the popup menu
 	NSMenu * downloadMenu = [[NSMenu alloc] init];
     
 	// Open
-	[downloadMenu addItemWithTitle:NSLocalizedString(@"Open", @"Title of a popup menu item") action:@selector(handleDoubleClick:) keyEquivalent:@""];
+	[downloadMenu addItemWithTitle:NSLocalizedString(@"Open", @"Title of a popup menu item") action:@selector(openFile:) keyEquivalent:@""];
 
 	// Open With
 	NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Open With", @"") action:nil keyEquivalent:@""];
@@ -96,40 +100,10 @@
 							action:@selector(cancelDownload:)
 					 keyEquivalent:@""];
 
-	[downloadMenu setDelegate:self];
 	table.menu = downloadMenu;
 }
 
-- (void)menuWillOpen:(NSMenu *)menu
-{
-	
-	// Dynamically generate Open With submenu for item
-	if (menu == openWithMenu) {
-		NSArray * list = [DownloadManager sharedInstance].downloadsList;
-		NSInteger index = table.selectedRow;
-		if (index != -1) {
-			DownloadItem * item = list[index];
-			[[NSWorkspace sharedWorkspace] vna_openWithMenuForFile:item.filename target:nil action:nil menu:menu];
-		}
-	}
-}
-
-- (void)windowDidBecomeKey:(NSNotification *)notification
-{
-	// Clear relevant notifications when the user views this window.
-    VNAUserNotificationCenter *center = VNAUserNotificationCenter.current;
-    [center getDeliveredNotificationsWithCompletionHandler:^(NSArray<VNAUserNotificationResponse *> *responses) {
-        NSMutableArray *identifiers = [NSMutableArray array];
-        for (VNAUserNotificationResponse *response in responses) {
-            NSString *context = response.userInfo[UserNotificationContextKey];
-            if ([context isEqualToString:UserNotificationContextFileDownloadCompleted] ||
-                [context isEqualToString:UserNotificationContextFileDownloadFailed]) {
-                [identifiers addObject:response.identifier];
-            }
-        }
-        [center removeDeliveredNotificationsWithIdentifiers:identifiers];
-    }];
-}
+// MARK: Actions
 
 /* clearList
  * Remove everything from the list.
@@ -139,75 +113,82 @@
 	[[DownloadManager sharedInstance] clearList];
 }
 
-/* handleDoubleClick
+/* openFile
  * Handle a double click on a row. Use this to launch the file that was
  * downloaded if it has completed.
  */
--(void)handleDoubleClick:(id)sender
+- (void)openFile:(id)sender
 {
-	NSArray * list = [DownloadManager sharedInstance].downloadsList;
-	NSInteger index = table.selectedRow;
-	if (index != -1) {
-		DownloadItem * item = list[index];
-		if (item) {
-            NSURL *url = [NSURL fileURLWithPath:item.filename];
-            if (url && ![NSWorkspace.sharedWorkspace openURL:url]) {
-                runOKAlertSheet(NSLocalizedString(@"Vienna cannot open the file.", nil),
-                                NSLocalizedString(@"Vienna cannot open the file \"%@\" because it moved since you downloaded it.", nil),
-                                item.filename.lastPathComponent);
-            }
-		}
-	}
+    DownloadItem *item = [self downloadItemForClickedRow];
+    if (!item) {
+        return;
+    }
+
+    NSURL *url = [NSURL fileURLWithPath:item.filename];
+    if (url && ![NSWorkspace.sharedWorkspace openURL:url]) {
+        runOKAlertSheet(NSLocalizedString(@"Vienna cannot open the file.", nil),
+                        NSLocalizedString(@"Vienna cannot open the file \"%@\" because it moved "
+                                           "since you downloaded it.",
+                                          nil),
+                        item.filename.lastPathComponent);
+    }
 }
 
 /* showInFinder
  * Open the Finder with the path set to where the selected item was downloaded.
  */
--(void)showInFinder:(id)sender
+- (void)showInFinder:(id)sender
 {
-	NSArray * list = [DownloadManager sharedInstance].downloadsList;
-	NSInteger index = table.selectedRow;
-	if (index != -1) {
-		DownloadItem * item = list[index];
-		if (item && [[NSFileManager defaultManager] fileExistsAtPath:item.filename]) {
-			if ([[NSWorkspace sharedWorkspace] selectFile:item.filename inFileViewerRootedAtPath:@""] == NO) {
-				runOKAlertSheet(NSLocalizedString(@"Vienna cannot show the file.", nil), NSLocalizedString(@"Vienna cannot show the file \"%@\" because it moved since you downloaded it.", nil), item.filename.lastPathComponent);
-			}
-		} else {
-			NSBeep();
-		}
-	}
+    DownloadItem *item = [self downloadItemForClickedRow];
+    if (!item) {
+        return;
+    }
+
+    if (item && [NSFileManager.defaultManager fileExistsAtPath:item.filename]) {
+        if ([NSWorkspace.sharedWorkspace selectFile:item.filename
+                           inFileViewerRootedAtPath:@""] == NO) {
+            runOKAlertSheet(NSLocalizedString(@"Vienna cannot show the file.", nil),
+                            NSLocalizedString(@"Vienna cannot show the file \"%@\" because it "
+                                               "moved since you downloaded it.",
+                                              nil),
+                            item.filename.lastPathComponent);
+        }
+    } else {
+        NSBeep();
+    }
 }
 
 /* removeFromList
  * Remove the selected item from the list.
  */
--(void)removeFromList:(id)sender
+- (void)removeFromList:(id)sender
 {
-	NSArray * list = [DownloadManager sharedInstance].downloadsList;
-	NSInteger index = table.selectedRow;
-	if (index != -1) {
-		DownloadItem * item = list[index];
-		[[DownloadManager sharedInstance] removeItem:item];
-        [table removeRowsAtIndexes:[NSIndexSet indexSetWithIndex:index]
-                     withAnimation:(NSTableViewAnimationEffectFade | NSTableViewAnimationSlideUp)];
-	}
+    DownloadItem *item = [self downloadItemForClickedRow];
+    if (!item) {
+        return;
+    }
+
+    [DownloadManager.sharedInstance removeItem:item];
+    [table removeRowsAtIndexes:[NSIndexSet indexSetWithIndex:table.clickedRow]
+                 withAnimation:(NSTableViewAnimationEffectFade | NSTableViewAnimationSlideUp)];
 }
 
 /* cancelDownload
  * Abort the selected download and delete the partially downloaded file.
  */
--(void)cancelDownload:(id)sender
+- (void)cancelDownload:(id)sender
 {
-	NSArray * list = [DownloadManager sharedInstance].downloadsList;
-	NSInteger index = table.selectedRow;
-	if (index != -1) {
-		DownloadItem * item = list[index];
-		[[DownloadManager sharedInstance] cancelItem:item];
-        [table removeRowsAtIndexes:[NSIndexSet indexSetWithIndex:index]
-                     withAnimation:(NSTableViewAnimationEffectFade | NSTableViewAnimationSlideUp)];
-	}
+    DownloadItem *item = [self downloadItemForClickedRow];
+    if (!item) {
+        return;
+    }
+
+    [DownloadManager.sharedInstance cancelItem:item];
+    [table removeRowsAtIndexes:[NSIndexSet indexSetWithIndex:table.clickedRow]
+                 withAnimation:(NSTableViewAnimationEffectFade | NSTableViewAnimationSlideUp)];
 }
+
+// MARK: Notifications
 
 /* handleDownloadsChange
  * Called when the downloads list has changed. The notification item is the DownloadItem
@@ -234,14 +215,57 @@
     }
 }
 
-/* dealloc
- * Do away with ourself.
- */
--(void)dealloc
+// MARK: Helper methods
+
+- (nullable DownloadItem *)downloadItemForClickedRow
 {
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[downloadWindow setDelegate:nil];
-	[table setDelegate:nil];
+    NSInteger clickedRow = table.clickedRow;
+    if (clickedRow == -1) {
+        return nil;
+    }
+
+    NSArray *list = DownloadManager.sharedInstance.downloadsList;
+    return list[clickedRow];
+}
+
+// MARK: - NSMenuDelegate
+
+- (void)menuWillOpen:(NSMenu *)menu
+{
+    // Dynamically generate Open With submenu for item
+    if (menu != openWithMenu) {
+        return;
+    }
+
+    DownloadItem *item = [self downloadItemForClickedRow];
+    if (item) {
+        [NSWorkspace.sharedWorkspace vna_openWithMenuForFile:item.filename
+                                                      target:nil
+                                                      action:NULL
+                                                        menu:menu];
+    }
+}
+
+// MARK: - NSMenuItemValidation
+
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem
+{
+    DownloadItem *item = [self downloadItemForClickedRow];
+    if (!item) {
+        return NO;
+    }
+
+    SEL action = menuItem.action;
+    DownloadState state = item.state;
+    if (action == @selector(openFile:) || action == @selector(showInFinder:)) {
+        return state == DownloadStateCompleted;
+    } else if (action == @selector(removeFromList:)) {
+        return state != DownloadStateInit && state != DownloadStateStarted;
+    } else if (action == @selector(cancelDownload:)) {
+        return state == DownloadStateInit || state == DownloadStateStarted;
+    }
+
+    return YES;
 }
 
 // MARK: - NSTableViewDataSource
@@ -319,21 +343,23 @@
     clearButton.enabled = tableView.numberOfRows > 0;
 }
 
-// MARK: - ExtendedTableViewDelegate
+// MARK: - NSWindowDelegate
 
-/* menuWillAppear [ExtendedTableView delegate]
- * Called when the popup menu is opened on the table. We ensure that the item under the
- * cursor is selected.
- */
--(void)tableView:(ExtendedTableView *)tableView menuWillAppear:(NSEvent *)theEvent
+- (void)windowDidBecomeKey:(NSNotification *)notification
 {
-    NSInteger row = [table rowAtPoint:[table convertPoint:theEvent.locationInWindow fromView:nil]];
-    if (row >= 0) {
-        // Select the row under the cursor if it isn't already selected
-        if (table.numberOfSelectedRows <= 1) {
-            [table selectRowIndexes:[NSIndexSet indexSetWithIndex:(NSUInteger)row] byExtendingSelection:NO];
+    // Clear relevant notifications when the user views this window.
+    VNAUserNotificationCenter *center = VNAUserNotificationCenter.current;
+    [center getDeliveredNotificationsWithCompletionHandler:^(NSArray<VNAUserNotificationResponse *> *responses) {
+        NSMutableArray *identifiers = [NSMutableArray array];
+        for (VNAUserNotificationResponse *response in responses) {
+            NSString *context = response.userInfo[UserNotificationContextKey];
+            if ([context isEqualToString:UserNotificationContextFileDownloadCompleted] ||
+                [context isEqualToString:UserNotificationContextFileDownloadFailed]) {
+                [identifiers addObject:response.identifier];
+            }
         }
-    }
+        [center removeDeliveredNotificationsWithIdentifiers:identifiers];
+    }];
 }
 
 @end
