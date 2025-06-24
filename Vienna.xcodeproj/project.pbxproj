@@ -770,7 +770,7 @@
 			name = Common;
 			sourceTree = "<group>";
 		};
-		2F2280362271B065005D1023 /* ArticleContent */ = {
+		2F2280362271B065005D1023 /* Article content */ = {
 			isa = PBXGroup;
 			children = (
 				2F20FF952561927D000F68C2 /* Common */,
@@ -778,7 +778,7 @@
 				2F2280342271B041005D1023 /* ArticleContentView.swift */,
 				2F88B2C22545DAB40067EEA6 /* ArticleViewDelegate.h */,
 			);
-			name = ArticleContent;
+			name = "Article content";
 			sourceTree = "<group>";
 		};
 		2F88B2BC2545C9660067EEA6 /* WebKitArticleContent */ = {
@@ -907,6 +907,34 @@
 				3A58F4572E2247880066C871 /* Resources */,
 			);
 			path = Scripts;
+			sourceTree = "<group>";
+		};
+		F612499D2E08B4410004045A /* Split layouts */ = {
+			isa = PBXGroup;
+			children = (
+				43502852165DE9DF0018EDB7 /* ArticleListView.h */,
+				43502853165DE9DF0018EDB7 /* ArticleListView.m */,
+				43502873165DE9DF0018EDB7 /* MessageListView.h */,
+				43502874165DE9DF0018EDB7 /* MessageListView.m */,
+				3A7BD0DB1989AC7700E9444B /* VNAVerticallyCenteredTextFieldCell.h */,
+				3A7BD0DC1989AC7700E9444B /* VNAVerticallyCenteredTextFieldCell.m */,
+				4350287B165DE9DF0018EDB7 /* ProgressTextCell.h */,
+				4350287C165DE9DF0018EDB7 /* ProgressTextCell.m */,
+				43502885165DE9DF0018EDB7 /* EnclosureView.h */,
+				43502886165DE9DF0018EDB7 /* EnclosureView.m */,
+			);
+			name = "Split layouts";
+			sourceTree = "<group>";
+		};
+		F612499E2E08B4A50004045A /* Unified layout */ = {
+			isa = PBXGroup;
+			children = (
+				4350288D165DE9DF0018EDB7 /* UnifiedDisplayView.h */,
+				4350288E165DE9DF0018EDB7 /* UnifiedDisplayView.m */,
+				3A4DBEC51733C206006DD2AB /* ArticleCellView.h */,
+				3A4DBEC61733C206006DD2AB /* ArticleCellView.m */,
+			);
+			name = "Unified layout";
 			sourceTree = "<group>";
 		};
 		F6256C122960D037003131AA /* JSON Feed */ = {
@@ -1082,26 +1110,16 @@
 		F6A7EA5A1F1CE63500BD4450 /* Article list */ = {
 			isa = PBXGroup;
 			children = (
-				3A4DBEC51733C206006DD2AB /* ArticleCellView.h */,
-				3A4DBEC61733C206006DD2AB /* ArticleCellView.m */,
 				4350284E165DE9DF0018EDB7 /* ArticleController.h */,
 				4350284F165DE9DF0018EDB7 /* ArticleController.m */,
 				43502856165DE9DF0018EDB7 /* BaseView.h */,
 				4350284D165DE9DF0018EDB7 /* ArticleBaseView.h */,
 				F6A82C162E1584F300B26F6C /* ArticleListConstants.h */,
-				43502852165DE9DF0018EDB7 /* ArticleListView.h */,
-				43502853165DE9DF0018EDB7 /* ArticleListView.m */,
-				43502885165DE9DF0018EDB7 /* EnclosureView.h */,
-				43502886165DE9DF0018EDB7 /* EnclosureView.m */,
-				2F2280362271B065005D1023 /* ArticleContent */,
 				AA26F4D70604927300FE7994 /* BackTrackArray.h */,
 				AA26F4D80604927300FE7994 /* BackTrackArray.m */,
-				43502873165DE9DF0018EDB7 /* MessageListView.h */,
-				43502874165DE9DF0018EDB7 /* MessageListView.m */,
-				4350287B165DE9DF0018EDB7 /* ProgressTextCell.h */,
-				4350287C165DE9DF0018EDB7 /* ProgressTextCell.m */,
-				4350288D165DE9DF0018EDB7 /* UnifiedDisplayView.h */,
-				4350288E165DE9DF0018EDB7 /* UnifiedDisplayView.m */,
+				F612499D2E08B4410004045A /* Split layouts */,
+				F612499E2E08B4A50004045A /* Unified layout */,
+				2F2280362271B065005D1023 /* Article content */,
 				F61901842E0F16B000A7A200 /* FilterBarViewController.h */,
 				F61901852E0F16B000A7A200 /* FilterBarViewController.m */,
 			);
@@ -1423,8 +1441,6 @@
 				AAF3B14006095E7B0025CC7F /* StringExtensions.h */,
 				AAF3B14106095E7B0025CC7F /* StringExtensions.m */,
 				F633157526ED73CB008A3673 /* URLFormatter.swift */,
-				3A7BD0DB1989AC7700E9444B /* VNAVerticallyCenteredTextFieldCell.h */,
-				3A7BD0DC1989AC7700E9444B /* VNAVerticallyCenteredTextFieldCell.m */,
 				2FE44CB425B79EDD00554E82 /* WebKitContextMenuCustomizer.swift */,
 				2F82DCB625CEFC2800F00EE8 /* URL+Blank.swift */,
 			);
