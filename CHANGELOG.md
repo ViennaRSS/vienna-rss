@@ -1,6 +1,23 @@
 Vienna ChangeLog File
 =====================
 
+Vienna 3.10.0 Beta 4
+--------------------
+_released 2025-06-24
+
+### 🚲 Changes
+- Register Vienna as being able to open OPML files,  e.g. in "Open With" menus
+- Display details about failures on parsing feed in activity window
+- Update link underline color to match system link color
+- Trim whitespaces at start or end of folder names entered by user
+### 🤷🏻 Bugfix
+- Fix start and end of spinner animation informing of feed refreshes (bug introduced in 3.10.0 Beta 1)
+### ⚙️ Internals improvement
+- Refactor Download Window and its contextual menus
+-  Resolve warnings in Xcode 26 beta
+- Update document type declarations in Info.plist
+- Declare some Objective-C designated initializers
+
 Vienna 3.10.0 Beta 3
 --------------------
 _released 2025-06-12

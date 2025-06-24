@@ -1,20 +1,20 @@
-<!DOCTYPE html><head><meta charset="utf-8"/></head><h2>Vienna 3.10.0 Beta 3</h2>
-<p>_released 2025-06-12</p>
+<!DOCTYPE html><head><meta charset="utf-8"/></head><h2>Vienna 3.10.0 Beta 4</h2>
+<p>_released 2025-06-24</p>
 <h3>🚲 Changes</h3>
 <ul>
-<li>Make search plug-in names in toolbar more explicit</li>
+<li>Register Vienna as being able to open OPML files,  e.g. in “Open With” menus</li>
+<li>Display details about failures on parsing feed in activity window</li>
+<li>Update link underline color to match system link color</li>
+<li>Trim whitespaces at start or end of folder names entered by user</li>
 </ul>
 <h3>🤷🏻 Bugfix</h3>
 <ul>
-<li>Fix some freezes by blocking attempts to detect RSS in main tab</li>
-<li>Make tests about folders in smart folders more robust</li>
-<li>Fix non working setting for minimum font size</li>
+<li>Fix start and end of spinner animation informing of feed refreshes (bug introduced in 3.10.0 Beta 1)</li>
 </ul>
 <h3>⚙️ Internals improvement</h3>
 <ul>
-<li>Use find(_:configuration:completionHandler:) for searching in WKWebView in macOS 11.0+</li>
-</ul>
-<h3>🛤️ Infrastructure updates</h3>
-<ul>
-<li>Update GitHub Action for Xcode 16.4</li>
+<li>Refactor Download Window and its contextual menus</li>
+<li>Resolve warnings in Xcode 26 beta</li>
+<li>Update document type declarations in Info.plist</li>
+<li>Declare some Objective-C designated initializers</li>
 </ul>
