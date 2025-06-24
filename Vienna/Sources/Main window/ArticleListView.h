@@ -20,7 +20,6 @@
 
 @import Cocoa;
 
-#import "BaseView.h"
 #import "ArticleBaseView.h"
 #import "ArticleViewDelegate.h"
 #import "MessageListView.h"
@@ -30,7 +29,6 @@
 
 @interface ArticleListView : NSView <ArticleBaseView,
                                      ArticleViewDelegate,
-                                     BaseView,
                                      MessageListViewDelegate,
                                      NSMenuDelegate,
                                      NSSplitViewDelegate,

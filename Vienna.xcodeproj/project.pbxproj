@@ -1071,6 +1071,7 @@
 				3A4DBEC61733C206006DD2AB /* ArticleCellView.m */,
 				4350284E165DE9DF0018EDB7 /* ArticleController.h */,
 				4350284F165DE9DF0018EDB7 /* ArticleController.m */,
+				43502856165DE9DF0018EDB7 /* BaseView.h */,
 				4350284D165DE9DF0018EDB7 /* ArticleBaseView.h */,
 				F6A82C162E1584F300B26F6C /* ArticleListConstants.h */,
 				43502852165DE9DF0018EDB7 /* ArticleListView.h */,
@@ -1381,7 +1382,6 @@
 			isa = PBXGroup;
 			children = (
 				2F125EDF24D066ED00868E11 /* AsyncHelper.swift */,
-				43502856165DE9DF0018EDB7 /* BaseView.h */,
 				4350285D165DE9DF0018EDB7 /* Constants.h */,
 				4350285E165DE9DF0018EDB7 /* Constants.m */,
 				B81B536325565CD700C65459 /* Constants.swift */,

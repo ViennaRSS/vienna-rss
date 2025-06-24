@@ -20,7 +20,6 @@
 
 @import Cocoa;
 
-#import "BaseView.h"
 #import "ArticleBaseView.h"
 #import "ArticleListConstants.h"
 
@@ -43,14 +42,14 @@
 @property (nonatomic) FoldersTree * foldersTree;
 @property (nonatomic) ArticleListView *articleListView;
 @property (nonatomic) UnifiedDisplayView *unifiedListView;
-@property (nonatomic) NSView<ArticleBaseView, BaseView> * mainArticleView;
+@property (nonatomic) NSView<ArticleBaseView> * mainArticleView;
 @property (nonatomic, copy) NSArray * currentArrayOfArticles;
 @property (nonatomic, copy) NSArray * folderArrayOfArticles;
 @property (nonatomic) NSDictionary * articleSortSpecifiers;
 @property (nonatomic) BackTrackArray * backtrackArray;
 
 // Public functions
--(NSView<ArticleBaseView, BaseView> *)mainArticleView;
+-(NSView<ArticleBaseView> *)mainArticleView;
 -(void)setLayout:(NSInteger)newLayout;
 @property (nonatomic, readonly) NSInteger currentFolderId;
 @property (nonatomic, readonly) Article *selectedArticle;

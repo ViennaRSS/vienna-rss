@@ -19,13 +19,11 @@
 //
 
 #import "ArticleBaseView.h"
-#import "BaseView.h"
 
 @class AppController;
 @class ArticleController;
 
 @interface UnifiedDisplayView : NSView <ArticleBaseView,
-										BaseView,
                                         NSMenuDelegate,
                                         NSMenuItemValidation,
                                         NSTableViewDataSource,
