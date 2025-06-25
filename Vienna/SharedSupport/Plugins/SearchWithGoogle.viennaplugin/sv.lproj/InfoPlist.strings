@@ -1,5 +1,5 @@
 /* The name of the plug-in, such as the name of the website or app. */
-"FriendlyName" = "Google";
+"FriendlyName" = "Sök Google";
 
 /* The URL that will be opened when the plug-in is invoked. You can change the domain or parts of the URL query to use a version of the website that matches the language. The token "$SearchTerm$" must be kept and must not be translated. */
 "SearchQueryString" = "https://www.google.com/search?q=$SearchTerm$";
