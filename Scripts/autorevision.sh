@@ -3,11 +3,11 @@
 # Config
 export PATH=/sw/bin:/opt/local/bin:/usr/local/bin:/usr/local/git/bin:${PATH}
 BUILD_NUMBER="2821"
-intermediateHeaderOutput="/tmp/autorevision.h"
+intermediateHeaderOutput="${DERIVED_FILE_DIR}/autorevision.h"
 finalHeaderOutput="${SRCROOT}/Vienna/Sources/autorevision.h"
 plistHeaderOutput="${OBJROOT}/autorevision.plist.h"
 cacheOutput="${OBJROOT}/autorevision.cache"
-tempCacheOutput="/tmp/autorevision.tmp"
+tempCacheOutput="${DERIVED_FILE_DIR}/autorevision.tmp"
 
 # Check our paths
 if [ ! -d "${BUILT_PRODUCTS_DIR}" ]; then

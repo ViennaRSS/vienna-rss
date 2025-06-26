@@ -1677,6 +1677,8 @@
 			name = "Run Autorevision";
 			outputPaths = (
 				"${SRCROOT}/Vienna/Sources/autorevision.h",
+				"${DERIVED_FILE_DIR}/autorevision.h",
+				"${DERIVED_FILE_DIR}/autorevision.tmp",
 				"${OBJROOT}/autorevision.cache",
 				"${OBJROOT}/autorevision.plist.h",
 			);
