@@ -3,8 +3,8 @@
 # Config
 export PATH=/sw/bin:/opt/local/bin:/usr/local/bin:/usr/local/git/bin:${PATH}
 BUILD_NUMBER="2821"
-plistHeaderOutput="${OBJROOT}/autorevision.plist.h"
-cacheOutput="${OBJROOT}/autorevision.cache"
+plistHeaderOutput="${PROJECT_DERIVED_FILE_DIR}/autorevision.plist.h"
+cacheOutput="${PROJECT_DERIVED_FILE_DIR}/autorevision.cache"
 tempCacheOutput="${DERIVED_FILE_DIR}/autorevision.tmp"
 
 # Check our paths

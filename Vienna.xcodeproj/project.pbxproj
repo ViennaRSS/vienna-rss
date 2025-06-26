@@ -1675,8 +1675,8 @@
 			name = "Run Autorevision";
 			outputPaths = (
 				"${DERIVED_FILE_DIR}/autorevision.tmp",
-				"${OBJROOT}/autorevision.cache",
-				"${OBJROOT}/autorevision.plist.h",
+				"${PROJECT_DERIVED_FILE_DIR}/autorevision.cache",
+				"${PROJECT_DERIVED_FILE_DIR}/autorevision.plist.h",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2302,7 +2302,7 @@
 				);
 				INFOPLIST_FILE = Vienna/Info.plist;
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
-				INFOPLIST_PREFIX_HEADER = "$(OBJROOT)/autorevision.plist.h";
+				INFOPLIST_PREFIX_HEADER = "$(PROJECT_DERIVED_FILE_DIR)/autorevision.plist.h";
 				INFOPLIST_PREPROCESS = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2345,7 +2345,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				INFOPLIST_FILE = Vienna/Info.plist;
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
-				INFOPLIST_PREFIX_HEADER = "$(OBJROOT)/autorevision.plist.h";
+				INFOPLIST_PREFIX_HEADER = "$(PROJECT_DERIVED_FILE_DIR)/autorevision.plist.h";
 				INFOPLIST_PREPROCESS = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
