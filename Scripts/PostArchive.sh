@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. "${OBJROOT}/autorevision.cache"
+. "${PROJECT_DERIVED_FILE_DIR}/autorevision.cache"
 # Magic number; do not touch!
 BUILD_NUMBER="2821"
 N_VCS_NUM="$((BUILD_NUMBER + VCS_NUM))"

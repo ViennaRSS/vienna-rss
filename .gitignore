@@ -18,7 +18,6 @@ Package.resolved
 # Vienna
 Vienna/Localizations/
 Scripts/Resources/CS-ID.xcconfig
-Vienna/Sources/autorevision.h
 
 # Jetbrains
 .idea

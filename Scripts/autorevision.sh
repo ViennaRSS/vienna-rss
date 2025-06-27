@@ -3,11 +3,9 @@
 # Config
 export PATH=/sw/bin:/opt/local/bin:/usr/local/bin:/usr/local/git/bin:${PATH}
 BUILD_NUMBER="2821"
-intermediateHeaderOutput="/tmp/autorevision.h"
-finalHeaderOutput="${SRCROOT}/Vienna/Sources/autorevision.h"
-plistHeaderOutput="${OBJROOT}/autorevision.plist.h"
-cacheOutput="${OBJROOT}/autorevision.cache"
-tempCacheOutput="/tmp/autorevision.tmp"
+plistHeaderOutput="${PROJECT_DERIVED_FILE_DIR}/autorevision.plist.h"
+cacheOutput="${PROJECT_DERIVED_FILE_DIR}/autorevision.cache"
+tempCacheOutput="${DERIVED_FILE_DIR}/autorevision.tmp"
 
 # Check our paths
 if [ ! -d "${BUILT_PRODUCTS_DIR}" ]; then
@@ -21,16 +19,6 @@ fi
 if ! ./External/autorevision/autorevision -o "${cacheOutput}" -t sh; then
 	exit ${?}
 fi
-
-
-# Output for Vienna/Sources/autorevision.h.
-# This header might be useful for including in code, (currently Vienna does not use it)
-# Be warned however that the VCS_NUM set will not reflect the reality, because of historical issues in Vienna
-./External/autorevision/autorevision -f -o "${cacheOutput}" -t h > "${intermediateHeaderOutput}"
-if [ ! -f "${finalHeaderOutput}" ] || ! cmp -s "${intermediateHeaderOutput}" "${finalHeaderOutput}"; then
-	mv "${intermediateHeaderOutput}" "${finalHeaderOutput}"
-fi
-
 
 # Source the initial autorevision output for filtering.
 . "${cacheOutput}"
