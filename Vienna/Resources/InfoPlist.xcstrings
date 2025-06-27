@@ -23,6 +23,12 @@
             "state" : "new",
             "value" : "Vienna's blog editor plug-ins use Apple events to share article data. Script plug-ins and AppleScript files may use Apple events as well."
           }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Viennas plugin för bloggredigering använder Apple-händelser för att dela artikeldata. Skript-plugin och AppleScript-filer kan också använda Apple-händelser."
+          }
         }
       }
     },

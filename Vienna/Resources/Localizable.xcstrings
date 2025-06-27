@@ -647,7 +647,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ 篇未讀的"
+            "value" : "%@ 篇未讀"
           }
         }
       }
@@ -3125,7 +3125,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "<无>"
+            "value" : "<無>"
           }
         }
       }
@@ -6132,6 +6132,12 @@
             "state" : "translated",
             "value" : "Fortsätt ändå"
           }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "仍要繼續"
+          }
         }
       }
     },
@@ -6373,6 +6379,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Publiceringsdatum"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "發布日期"
           }
         }
       }
@@ -13190,6 +13202,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Senast uppdaterad"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "上次更新"
           }
         }
       }
@@ -24648,6 +24666,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vienna's databas verkar vara korrupt. Vill du avsluta Vienna eller fortsätta iallafall?"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vienna 資料庫似乎已損壞。您希望退出 Vienna 還是仍要繼續？"
           }
         }
       }
