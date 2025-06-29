@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="22505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23727" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23727"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ViennaApp">
@@ -431,17 +431,20 @@ CA
                             <menuItem title="Layout" id="1108">
                                 <menu key="submenu" title="Layout" id="1109">
                                     <items>
-                                        <menuItem title="Horizontal" id="1110">
+                                        <menuItem title="Horizontal" keyEquivalent="1" id="1110">
+                                            <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                                             <connections>
                                                 <action selector="reportLayout:" target="-1" id="0Ip-Ms-HlM"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Vertical" id="1116">
+                                        <menuItem title="Vertical" keyEquivalent="2" id="1116">
+                                            <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                                             <connections>
                                                 <action selector="condensedLayout:" target="-1" id="ioq-M7-LK7"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Unified" id="1160">
+                                        <menuItem title="Unified" keyEquivalent="3" id="1160">
+                                            <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                                             <connections>
                                                 <action selector="unifiedLayout:" target="-1" id="dF4-n7-MJd"/>
                                             </connections>
