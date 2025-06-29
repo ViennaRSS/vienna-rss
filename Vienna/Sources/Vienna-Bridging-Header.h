@@ -11,6 +11,7 @@
 #import "FolderView.h"
 #import "HelperFunctions.h"
 #import "NSFileManager+Paths.h"
+#import "NSResponder+EventHandler.h"
 #import "OpenReader.h"
 #import "PluginManager.h"
 #import "Preferences.h"

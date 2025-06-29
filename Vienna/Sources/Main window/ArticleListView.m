@@ -746,15 +746,6 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 	return YES;
 }
 
-/* handleKeyDown [delegate]
- * Support special key codes. If we handle the key, return YES otherwise
- * return NO to allow the framework to pass it on for default processing.
- */
--(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags
-{
-	return [self.appController handleKeyDown:keyChar withFlags:flags];
-}
-
 /* selectedArticle
  * Returns the selected article, or nil if no article is selected.
  */

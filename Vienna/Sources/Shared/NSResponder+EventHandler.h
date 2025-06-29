@@ -1,15 +1,14 @@
 //
-//  BaseView.h
+//  NSResponder+EventHandler.h
 //  Vienna
 //
-//  Created by Steve on 5/6/06.
-//  Copyright (c) 2004-2005 Steve Palmer. All rights reserved.
+//  Copyright 2025 Eitot
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
 //  You may obtain a copy of the License at
 //
-//  http://www.apache.org/licenses/LICENSE-2.0
+//  https://www.apache.org/licenses/LICENSE-2.0
 //
 //  Unless required by applicable law or agreed to in writing, software
 //  distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,16 +19,12 @@
 
 @import Cocoa;
 
-@protocol BaseView
-@required
-	-(void)performFindPanelAction:(NSInteger)tag;
-	@property (nonatomic, readonly) NSView *mainView;
-@optional
-	-(void)updateAlternateMenuTitle;
-	@property (readonly, nonatomic) NSString *title;
-	-(IBAction)handleGoForward:(id)sender;
-	-(IBAction)handleGoBack:(id)sender;
-	@property (nonatomic, readonly) BOOL canGoForward;
-	@property (nonatomic, readonly) BOOL canGoBack;
+NS_ASSUME_NONNULL_BEGIN
+
+@interface NSResponder (EventHandler)
+
+- (BOOL)vna_handleEvent:(NSEvent *)event NS_SWIFT_NAME(handle(_:));
+
 @end
 
+NS_ASSUME_NONNULL_END

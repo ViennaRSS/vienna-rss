@@ -25,6 +25,7 @@
 #import "AppController.h"
 #import "FeedListCellView.h"
 #import "FoldersFilterable.h"
+#import "NSResponder+EventHandler.h"
 
 #define VNA_LOG os_log_create("--", "FolderView")
 
@@ -82,15 +83,12 @@ VNAFeedListRowHeight const VNAFeedListRowHeightMedium = 28.0;
     return [super validateProposedFirstResponder:responder forEvent:event];
 }
 
-- (void)keyDown:(NSEvent *)theEvent
+- (void)keyDown:(NSEvent *)event
 {
-    if (theEvent.characters.length == 1) {
-        unichar keyChar = [theEvent.characters characterAtIndex:0];
-        if ([APPCONTROLLER handleKeyDown:keyChar withFlags:theEvent.modifierFlags]) {
-            return;
-        }
+    if ([self vna_handleEvent:event]) {
+        return;
     }
-    [super keyDown:theEvent];
+    [super keyDown:event];
 }
 
 - (void)setDataSource:(id<NSOutlineViewDataSource>)aSource

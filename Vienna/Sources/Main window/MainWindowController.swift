@@ -274,6 +274,10 @@ final class MainWindowController: NSWindowController {
         return super.supplementalTarget(forAction: action, sender: sender)
     }
 
+    override func handle(_ event: NSEvent) -> Bool {
+        return NSApp.appController.handleKeyDown(event)
+    }
+
     // MARK: Observation
 
     private var observationTokens: [NSKeyValueObservation] = []

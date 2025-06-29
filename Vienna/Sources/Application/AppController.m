@@ -1930,8 +1930,13 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  * Support special key codes. If we handle the key, return YES otherwise
  * return NO to allow the framework to pass it on for default processing.
  */
--(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags
+-(BOOL)handleKeyDown:(NSEvent *)event
 {
+    if (event.type != NSEventTypeKeyDown && event.characters.length != 1) {
+        return NO;
+    }
+    unichar keyChar = [event.characters characterAtIndex:0];
+    NSEventModifierFlags flags = event.modifierFlags;
 	switch (keyChar) {
 		case NSLeftArrowFunctionKey:
             if (flags & (NSEventModifierFlagCommand | NSEventModifierFlagOption)) {
