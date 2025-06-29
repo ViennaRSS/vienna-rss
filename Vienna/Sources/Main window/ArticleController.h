@@ -22,6 +22,7 @@
 
 #import "BaseView.h"
 #import "ArticleBaseView.h"
+#import "ArticleListConstants.h"
 
 @class Article;
 @class ArticleListView;
@@ -61,7 +62,6 @@
 -(void)displayFirstUnread;
 -(void)displayNextUnread;
 -(void)displayNextFolderWithUnread;
-@property (readonly, nonatomic) NSString *searchPlaceholderString;
 -(void)reloadArrayOfArticles;
 -(void)displayFolder:(NSInteger)newFolderId;
 -(void)refilterArrayOfArticles;
@@ -86,5 +86,9 @@
 - (IBAction)reportLayout:(id)sender;
 - (IBAction)condensedLayout:(id)sender;
 - (IBAction)unifiedLayout:(id)sender;
+
+// MARK: Filter bar
+
+@property (readonly, nonatomic) NSString *filterModeLabel;
 
 @end

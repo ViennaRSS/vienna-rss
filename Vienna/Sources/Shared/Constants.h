@@ -35,7 +35,6 @@ extern NSNotificationName const MA_Notify_ConcurrentDownloadsChange;
 extern NSNotificationName const MA_Notify_DownloadCompleted;
 extern NSNotificationName const MA_Notify_DownloadsListChange;
 extern NSNotificationName const MA_Notify_EditFolder;
-extern NSNotificationName const MA_Notify_FilterBarChanged;
 extern NSNotificationName const MA_Notify_FolderAdded;
 extern NSNotificationName const MA_Notify_FolderDescriptionChanged; // Unused
 extern NSNotificationName const MA_Notify_FolderHomePageChanged; // Unused

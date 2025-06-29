@@ -40,7 +40,6 @@
 #import "InfoPanelManager.h"
 #import "DownloadManager.h"
 #import "HelperFunctions.h"
-#import "DisclosureView.h"
 #import "SearchPanel.h"
 #import "SearchMethod.h"
 #import "OpenReader.h"
@@ -69,11 +68,9 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 -(void)handleTabChange:(NSNotification *)nc;
 -(void)handleFolderSelection:(NSNotification *)nc;
 -(void)handleCheckFrequencyChange:(NSNotification *)nc;
--(void)handleFolderNameChange:(NSNotification *)nc;
 -(void)handleDidBecomeKeyWindow:(NSNotification *)nc;
 -(void)handleReloadPreferences:(NSNotification *)nc;
 -(void)handleShowAppInStatusBar:(NSNotification *)nc;
--(void)handleShowFilterBar:(NSNotification *)nc;
 -(void)setAppStatusBarIcon;
 -(void)updateNewArticlesNotification;
 -(void)showAppInStatusBar;
@@ -82,14 +79,11 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 -(void)initScriptsMenu;
 -(void)doEditFolder:(Folder *)folder;
 -(BOOL)installFilename:(NSString *)srcFile toPath:(NSString *)path;
--(void)setFilterBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate;
--(void)setPersistedFilterBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate;
 -(void)runAppleScript:(NSString *)scriptName;
 -(void)sendBlogEvent:(NSString *)externalEditorBundleIdentifier title:(NSString *)title url:(NSString *)url body:(NSString *)body author:(NSString *)author guid:(NSString *)guid;
 -(void)updateAlternateMenuTitle;
 -(void)updateSearchPlaceholderAndSearchMethod;
 -(void)updateCloseCommands;
-@property (nonatomic, getter=isFilterBarVisible, readonly) BOOL filterBarVisible;
 -(IBAction)cancelAllRefreshesToolbar:(id)sender;
 
 @property (nonatomic) VNADispatchTimer *refreshTimer;
@@ -100,8 +94,6 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 @property (nonatomic) VNADirectoryMonitor *directoryMonitor;
 @property (nonatomic) NSWindowController *preferencesWindowController;
 @property (weak, nonatomic) FolderView *outlineView;
-@property (weak, nonatomic) DisclosureView *filterDisclosureView;
-@property (weak, nonatomic) NSSearchField *filterSearchField;
 @property (weak, nonatomic) NSSearchField *toolbarSearchField;
 
 @end
@@ -185,8 +177,6 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 
 		Preferences * prefs = [Preferences standardPreferences];
 
-		// Set the initial filter bar state
-		[self setFilterBarState:prefs.showFilterBar withAnimation:NO];
 		// Select the folder and article from the last session
 		NSInteger previousFolderId = [prefs integerForKey:MAPref_CachedFolderID];
 		NSString * previousArticleGuid = [prefs stringForKey:MAPref_CachedArticleGUID];
@@ -275,11 +265,9 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 	[nc addObserver:self selector:@selector(handleRefreshStatusChange:) name:MA_Notify_RefreshStatus object:nil];
 	[nc addObserver:self selector:@selector(handleTabChange:) name:MA_Notify_TabChanged object:nil];
 	[nc addObserver:self selector:@selector(handleTabCountChange:) name:MA_Notify_TabCountChanged object:nil];
-	[nc addObserver:self selector:@selector(handleFolderNameChange:) name:MA_Notify_FolderNameChanged object:nil];
 	[nc addObserver:self selector:@selector(handleDidBecomeKeyWindow:) name:NSWindowDidBecomeKeyNotification object:nil];
 	[nc addObserver:self selector:@selector(handleReloadPreferences:) name:MA_Notify_PreferenceChange object:nil];
 	[nc addObserver:self selector:@selector(handleShowAppInStatusBar:) name:MA_Notify_ShowAppInStatusBarChanged object:nil];
-	[nc addObserver:self selector:@selector(handleShowFilterBar:) name:MA_Notify_FilterBarChanged object:nil];
 	[nc addObserver:self selector:@selector(handleUpdateUnreadCount:) name:MA_Notify_FoldersUpdated object:nil];
 	//Open Reader Notifications
     [nc addObserver:self selector:@selector(handleGoogleAuthFailed:) name:MA_Notify_GoogleAuthFailed object:nil];
@@ -702,27 +690,6 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 	[db reindexDatabase];
 }
 
-// FIXME: Refactor
-- (void)updateFilterBarStateForLayout:(NSInteger)layout
-{
-    BOOL isFilterBarVisible = self.isFilterBarVisible;
-    switch (layout) {
-    case VNALayoutReport:
-    case VNALayoutCondensed:
-        self.filterDisclosureView = self.mainWindowController.filterDisclosureView;
-        self.filterSearchField = self.mainWindowController.filterSearchField;
-        break;
-
-    case VNALayoutUnified:
-        self.filterDisclosureView = self.mainWindowController.filterDisclosureView2;
-        self.filterSearchField = self.mainWindowController.filterSearchField2;
-        break;
-    }
-    [self setFilterBarState:isFilterBarVisible withAnimation:NO];
-    [self updateSearchPlaceholderAndSearchMethod];
-}
-
-
 /* getUrl
  * Handle http https URL Scheme passed to applicaton
  */
@@ -1001,16 +968,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 }
 
-#pragma mark Filter Bar
-
-/* isFilterBarVisible
- * Simple function that returns whether or not the filter bar is visible.
- */
--(BOOL)isFilterBarVisible
-{
-    return self.filterDisclosureView.isDisclosed;
-}
-
 -(void)handleGoogleAuthFailed:(NSNotification *)nc
 {
     if (self.mainWindow.keyWindow) {
@@ -1025,81 +982,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
             [[OpenReader sharedManager] clearAuthentication];
         }];
     }
-}
-
-/* handleShowFilterBar
- * Respond to the filter bar being shown or hidden programmatically.
- */
--(void)handleShowFilterBar:(NSNotification *)nc
-{
-    if (self.browser.activeTab == nil) {
-		[self setFilterBarState:[Preferences standardPreferences].showFilterBar withAnimation:YES];
-    }
-}
-
-/* showHideFilterBar
- * Toggle the filter bar on/off.
- */
--(IBAction)showHideFilterBar:(id)sender
-{
-	[self setPersistedFilterBarState:!self.filterBarVisible withAnimation:YES];
-}
-
-/* hideFilterBar
- * Removes the filter bar from the current article view.
- */
--(IBAction)hideFilterBar:(id)sender
-{
-	[self setPersistedFilterBarState:NO withAnimation:YES];
-}
-
-/* setPersistedFilterBarState
- * Calls setFilterBarState but also persists the new state to the preferences.
- */
--(void)setPersistedFilterBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate
-{
-	[self setFilterBarState:isVisible withAnimation:doAnimate];
-	[Preferences standardPreferences].showFilterBar = isVisible;
-}
-
-/* setFilterBarState
- * Show or hide the filter bar. The withAnimation flag specifies whether or not we do the
- * animated show/hide. It should be set to NO for actions that are not user initiated as
- * otherwise the background rendering of the control can cause complications.
- */
--(void)setFilterBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate
-{
-	if (isVisible && !self.filterBarVisible) {
-        [self.filterDisclosureView disclose:doAnimate];
-
-		// Hook up the Tab ordering so Tab from the search field goes to the
-		// article view.
-		self.foldersTree.mainView.nextKeyView = self.filterSearchField;
-		self.filterSearchField.nextKeyView = ((NSView<BaseView> *)self.browser.primaryTab.view).mainView;
-		
-		// Set focus only if this was user initiated
-        if (doAnimate) {
-			[self.mainWindow makeFirstResponder:self.filterSearchField];
-        }
-	}
-	if (!isVisible && self.filterBarVisible) {
-        [self.filterDisclosureView collapse:doAnimate];
-
-		// Fix up the tab ordering
-		self.foldersTree.mainView.nextKeyView = ((NSView<BaseView> *)self.browser.primaryTab.view).mainView;
-		
-		// Clear the filter, otherwise we end up with no way remove it!
-		self.filterString = @"";
-		if (doAnimate) {
-			[self searchUsingFilterField:self];
-			
-			// If the focus was originally on the filter bar then we should
-			// move it to the message list
-			if (self.mainWindow.firstResponder == self.mainWindow) {
-				[self.mainWindow makeFirstResponder:((NSView<BaseView> *)self.browser.primaryTab.view).mainView];
-			}
-		}
-	}
 }
 
 /* initSortMenu
@@ -1562,9 +1444,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
     TreeNode *treeNode = nc.object;
 	
-	// We don't filter when we switch folders.
-	self.filterString = @"";
-	
 	// Call through the controller to display the new folder.
 	[self.articleController displayFolder:treeNode.nodeId];
 	[self updateSearchPlaceholderAndSearchMethod];
@@ -1725,7 +1604,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	} else {
 		[activeBrowserTab activateWebView];
 	}
-	[self updateStatusBarFilterButtonVisibility];
 	[self updateSearchPlaceholderAndSearchMethod];
 }
 
@@ -1735,17 +1613,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 - (void)handleTabCountChange:(NSNotification *)nc
 {
 	[self updateCloseCommands];	
-}
-
-/* handleFolderNameChange
- * Handle folder name change.
- */
--(void)handleFolderNameChange:(NSNotification *)nc
-{
-	NSInteger folderId = ((NSNumber *)nc.object).integerValue;
-	if (folderId == self.articleController.currentFolderId) {
-		[self updateSearchPlaceholderAndSearchMethod];
-	}
 }
 
 /* handleRefreshStatusChange
@@ -1980,14 +1847,15 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			[self setFocusToSearchField:self];
 			return YES;
 			
-		case 'f':
-		case 'F':
-			if (!self.filterBarVisible) {
-				[self setPersistedFilterBarState:YES withAnimation:YES];
-			} else {
-				[self.mainWindow makeFirstResponder:self.filterSearchField];
-			}
-			return YES;
+// FIXME: Reimplement
+//		case 'f':
+//		case 'F':
+//			if (!self.filterBarVisible) {
+//				[self setPersistedFilterBarState:YES withAnimation:YES];
+//			} else {
+//				[self.mainWindow makeFirstResponder:self.filterSearchField];
+//			}
+//			return YES;
 			
 		case '>':
 		case '.':
@@ -2682,20 +2550,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 }
 
-/* updateStatusBarFilterButtonVisibility
- * Sets whether the filterin indication on the status bar is visible or not.
- */
-
--(void)updateStatusBarFilterButtonVisibility
-{
-    id<Tab> activeBrowserTab = self.browser.activeTab;
-	if (activeBrowserTab) {
-		[self setFilterBarState:NO withAnimation:NO];
-	} else {
-		[self setFilterBarState:[Preferences standardPreferences].showFilterBar withAnimation:NO];
-	}
-}
-
 /* updateSearchPlaceholder
  * Update the search placeholder string in the search field depending on the view in
  * the active tab.
@@ -2730,8 +2584,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		}
 	// END of switching between "Search all articles" and "Search current web page".
 	}
-	
-	((NSSearchFieldCell *)self.filterSearchField.cell).placeholderString = self.articleController.searchPlaceholderString;
 }
 
 #pragma mark Searching
@@ -2767,32 +2619,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(NSString *)searchString
 {
 	return searchString;
-}
-
-
-/* setFilterString
- * Sets the filter bar's search string when the users enters it in the filter bar's search field.
- */
--(void)setFilterString:(NSString *)newFilterString
-{
-	self.filterSearchField.stringValue = [newFilterString copy];
-}
-
-/* filterString
- * Return the contents of the filter bar's search field.
- */
--(NSString *)filterString
-{
-	return self.filterSearchField.stringValue;
-}
-
-/* searchUsingFilterField
- * Executes a search using the filter control.
- */
--(IBAction)searchUsingFilterField:(id)sender
-{
-    NSView<BaseView> * articleListView = (NSView<BaseView> *)self.browser.primaryTab.view;
-    [articleListView performFindPanelAction:NSFindPanelActionNext];
 }
 
 - (IBAction)searchUsingTreeFilter:(id)sender
@@ -3142,9 +2968,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(BOOL)validateToolbarItem:(NSToolbarItem *)toolbarItem
 {
 	BOOL flag;
-	if (toolbarItem.action == @selector(showHideFilterBar:)) {
-		return self.mainWindow.visible && self.browser.activeTab == nil;
-	}
 	[self validateCommonToolbarAndMenuItems:toolbarItem.action validateFlag:&flag];
 	return (flag && (NSApp.active));
 }
@@ -3177,13 +3000,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         return isMainWindowVisible && isAnyArticleView && self.articleController.canGoForward;
 	} else if (theAction == @selector(newGroupFolder:)) {
 		return !db.readOnly && isMainWindowVisible;
-	} else if (theAction == @selector(showHideFilterBar:)) {
-		if ([Preferences standardPreferences].showFilterBar) {
-			[menuItem setTitle:NSLocalizedString(@"Hide Filter Bar", nil)];
-		} else {
-			[menuItem setTitle:NSLocalizedString(@"Show Filter Bar", nil)];
-		}
-		return isMainWindowVisible && isAnyArticleView;
 	} else if (theAction == @selector(makeTextStandardSize:)) {
         return self.browser.activeTab != nil;
 	} else if (theAction == @selector(makeTextLarger:)) {

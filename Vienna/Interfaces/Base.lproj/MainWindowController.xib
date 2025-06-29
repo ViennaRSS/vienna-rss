@@ -10,10 +10,6 @@
         <customObject id="-2" userLabel="Window Controller" customClass="MainWindowController" customModule="Vienna" customModuleProvider="target">
             <connections>
                 <outlet property="articleListView" destination="971" id="OE4-G3-4mz"/>
-                <outlet property="filterDisclosureView" destination="cTN-D0-dY2" id="sKF-FL-hKC"/>
-                <outlet property="filterDisclosureView2" destination="jsc-Kj-wj8" id="Zjf-Wd-fF4"/>
-                <outlet property="filterSearchField" destination="1304" id="n8w-oi-CCg"/>
-                <outlet property="filterSearchField2" destination="a7v-eM-oW1" id="1gv-eS-8ME"/>
                 <outlet property="outlineView" destination="Kk7-ax-B3r" id="bhW-7c-vBp"/>
                 <outlet property="placeholderDetailView" destination="9MG-Tu-1xT" id="hUt-Ea-jcm"/>
                 <outlet property="splitView" destination="993" id="adu-5b-ldR"/>
@@ -682,6 +678,7 @@
                                     </constraints>
                                     <connections>
                                         <outlet property="filterByLabel" destination="1305" id="Toc-r7-JYz"/>
+                                        <outlet property="filterSearchField" destination="1304" id="y4g-c6-bjr"/>
                                         <outlet property="filterViewPopUp" destination="1306" id="1322"/>
                                     </connections>
                                 </visualEffectView>
@@ -757,6 +754,8 @@
                 <outlet property="articleList" destination="977" id="996"/>
                 <outlet property="contentStackView" destination="rHW-hk-9Of" id="oce-W6-yQd"/>
                 <outlet property="enclosureView" destination="1288" id="1296"/>
+                <outlet property="filterBarDisclosureView" destination="cTN-D0-dY2" id="qZr-ua-Z8z"/>
+                <outlet property="filterBarView" destination="1300" id="zs8-c4-p8E"/>
                 <outlet property="splitView2" destination="972" id="998"/>
             </connections>
             <point key="canvasLocation" x="1065.5" y="-628.5"/>
@@ -896,6 +895,7 @@
                                     </constraints>
                                     <connections>
                                         <outlet property="filterByLabel" destination="FDm-UJ-4O9" id="u9z-Rg-07U"/>
+                                        <outlet property="filterSearchField" destination="a7v-eM-oW1" id="mVr-ga-JOc"/>
                                         <outlet property="filterViewPopUp" destination="Ymd-v7-5ML" id="v4W-E6-1vU"/>
                                     </connections>
                                 </visualEffectView>
@@ -970,6 +970,8 @@
             </constraints>
             <connections>
                 <outlet property="articleList" destination="NgO-hM-mCz" id="x5w-1V-UjV"/>
+                <outlet property="filterBarDisclosureView" destination="jsc-Kj-wj8" id="BQJ-3w-VaI"/>
+                <outlet property="filterBarView" destination="oq7-In-wpt" id="Rok-UH-lSc"/>
             </connections>
             <point key="canvasLocation" x="1066" y="109"/>
         </customView>

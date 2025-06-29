@@ -209,6 +209,7 @@
 		F6A7DE381E47138B0017BE5E /* Vienna.html in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DE321E47138B0017BE5E /* Vienna.html */; };
 		F6A7DE4A1E4717970017BE5E /* shared in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DE491E4717970017BE5E /* shared */; };
 		F6A7DE4F1E471A7F0017BE5E /* Vienna.help in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DDCA1E470E980017BE5E /* Vienna.help */; };
+		F6A82C172E1584F300B26F6C /* ArticleListConstants.h in Sources */ = {isa = PBXBuildFile; fileRef = F6A82C162E1584F300B26F6C /* ArticleListConstants.h */; };
 		F6AC41AC25A4FAF6007DED7B /* FeedDiscovererTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AC41AB25A4FAF6007DED7B /* FeedDiscovererTests.swift */; };
 		F6AFC16D2CAFCD2E00106E80 /* SettingsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AFC16C2CAFCD2E00106E80 /* SettingsTabViewController.swift */; };
 		F6B059E02961D0A100F6E31B /* JSONFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B059DF2961D0A000F6E31B /* JSONFeed.swift */; };
@@ -603,6 +604,7 @@
 		F6A7DEA61E471E3C0017BE5E /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = nl; path = nl.lproj/advanced.html; sourceTree = "<group>"; };
 		F6A7DEAA1E471E410017BE5E /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = sv; path = sv.lproj/advanced.html; sourceTree = "<group>"; };
 		F6A7DEAD1E471E450017BE5E /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hant"; path = "zh-Hant.lproj/advanced.html"; sourceTree = "<group>"; };
+		F6A82C162E1584F300B26F6C /* ArticleListConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ArticleListConstants.h; sourceTree = "<group>"; };
 		F6AC41AB25A4FAF6007DED7B /* FeedDiscovererTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDiscovererTests.swift; sourceTree = "<group>"; };
 		F6AFC16C2CAFCD2E00106E80 /* SettingsTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTabViewController.swift; sourceTree = "<group>"; };
 		F6B059DF2961D0A000F6E31B /* JSONFeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONFeed.swift; sourceTree = "<group>"; };
@@ -1055,6 +1057,7 @@
 				4350284E165DE9DF0018EDB7 /* ArticleController.h */,
 				4350284F165DE9DF0018EDB7 /* ArticleController.m */,
 				4350284D165DE9DF0018EDB7 /* ArticleBaseView.h */,
+				F6A82C162E1584F300B26F6C /* ArticleListConstants.h */,
 				43502852165DE9DF0018EDB7 /* ArticleListView.h */,
 				43502853165DE9DF0018EDB7 /* ArticleListView.m */,
 				43502885165DE9DF0018EDB7 /* EnclosureView.h */,
@@ -1833,6 +1836,7 @@
 				F6C9DA73271BB55000FC3027 /* AtomFeed.m in Sources */,
 				4350283E165DE7F60018EDB7 /* NSNotificationAdditions.m in Sources */,
 				2FEA5829291FD511008C42D3 /* Criteria+NSPredicate.swift in Sources */,
+				F6A82C172E1584F300B26F6C /* ArticleListConstants.h in Sources */,
 				2F82DCB725CEFC2800F00EE8 /* URL+Blank.swift in Sources */,
 				F633157626ED73CB008A3673 /* URLFormatter.swift in Sources */,
 				F6CAA5A42C5D8B9A00590858 /* ScriptPlugin.m in Sources */,

@@ -35,7 +35,6 @@ NSNotificationName const MA_Notify_ConcurrentDownloadsChange = @"MA_Notify_Concu
 NSNotificationName const MA_Notify_DownloadCompleted = @"MA_Notify_DownloadCompleted";
 NSNotificationName const MA_Notify_DownloadsListChange = @"MA_Notify_DownloadsListChange";
 NSNotificationName const MA_Notify_EditFolder = @"MA_Notify_EditFolder";
-NSNotificationName const MA_Notify_FilterBarChanged = @"MA_Notify_FilterBarChanged";
 NSNotificationName const MA_Notify_FolderAdded = @"MA_Notify_FolderAdded";
 NSNotificationName const MA_Notify_FolderDescriptionChanged = @"MA_Notify_FolderDescriptionChanged";
 NSNotificationName const MA_Notify_FolderHomePageChanged = @"MA_Notify_FolderHomePageChanged";

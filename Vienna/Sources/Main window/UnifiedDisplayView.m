@@ -22,6 +22,7 @@
 #import "ArticleController.h"
 #import "AppController.h"
 #import "ArticleCellView.h"
+#import "DisclosureView.h"
 #import "Preferences.h"
 #import "Constants.h"
 #import "StringExtensions.h"
@@ -43,6 +44,8 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
 
 @interface UnifiedDisplayView () <CustomWKHoverUIDelegate>
 
+@property (readwrite, nonatomic) IBOutlet DisclosureView *filterBarDisclosureView;
+@property (readwrite, nonatomic) IBOutlet FilterView *filterBarView;
 @property (nonatomic) OverlayStatusBar *statusBar;
 
 -(void)initTableView;

@@ -43,6 +43,12 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 
 @interface ArticleController ()
 
+@property (weak, nonatomic) DisclosureView *filterBarDisclosureView;
+@property (weak, nonatomic) NSSearchField *filterBarSearchField;
+
+@property (readwrite, copy, nonatomic) NSString *filterModeLabel;
+@property (copy, nonatomic) NSString *filterString;
+
 -(NSArray<Article *> *)applyFilter:(NSArray<Article *> *)unfilteredArray;
 -(void)setSortColumnIdentifier:(NSString *)str;
 -(void)innerMarkReadByArray:(NSArray *)articleArray readFlag:(BOOL)readFlag;
@@ -78,6 +84,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 		articleToPreserve = nil;
 		guidOfArticleToSelect = nil;
 		firstUnreadArticleRequired = NO;
+        _filterModeLabel = @"";
 
 		// Set default values to generate article sort descriptors
 		articleSortSpecifiers = @{
@@ -142,11 +149,20 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 		[nc addObserver:self selector:@selector(handleArticleListContentChange:) name:MA_Notify_ArticleListContentChange object:nil];
         [nc addObserver:self selector:@selector(handleArticleListStateChange:) name:MA_Notify_ArticleListStateChange object:nil];
+        [nc addObserver:self
+               selector:@selector(folderNameChanged:)
+                   name:MA_Notify_FolderNameChanged
+                 object:nil];
 
-        [NSUserDefaults.standardUserDefaults addObserver:self
-                                              forKeyPath:MAPref_FilterMode
-                                                 options:0
-                                                 context:VNAArticleControllerObserverContext];
+        NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+        [userDefaults addObserver:self
+                       forKeyPath:MAPref_FilterMode
+                          options:NSKeyValueObservingOptionNew
+                          context:VNAArticleControllerObserverContext];
+        [userDefaults addObserver:self
+                       forKeyPath:MAPref_ShowFilterBar
+                          options:NSKeyValueObservingOptionNew
+                          context:VNAArticleControllerObserverContext];
 
         queue = dispatch_queue_create("uk.co.opencommunity.vienna2.displayRefresh", DISPATCH_QUEUE_SERIAL);
     }
@@ -168,12 +184,19 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 		case VNALayoutReport:
 		case VNALayoutCondensed:
 			self.mainArticleView = self.articleListView;
+			self.filterBarDisclosureView = self.articleListView.filterBarDisclosureView;
+			self.filterBarSearchField = self.articleListView.filterBarView.filterSearchField;
 			break;
 
 		case VNALayoutUnified:
 			self.mainArticleView = self.unifiedListView;
+			self.filterBarDisclosureView = self.unifiedListView.filterBarDisclosureView;
+			self.filterBarSearchField = self.unifiedListView.filterBarView.filterSearchField;
 			break;
 	}
+
+    [self setFilterBarState:Preferences.standardPreferences.showFilterBar
+              withAnimation:NO];
 
 	[self loadView];
 	[Preferences standardPreferences].layout = newLayout;
@@ -190,8 +213,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
         [self.view.window makeFirstResponder:self.mainArticleView];
     }
 
-    // FIXME: Refactor
-    [APPCONTROLLER updateFilterBarStateForLayout:newLayout];
+    // TODO: Refactor
     NSTabViewItem *primaryTab = [[NSTabViewItem alloc] initWithIdentifier:@"Articles"];
     primaryTab.label = NSLocalizedString(@"Articles", nil);
     primaryTab.viewController = self;
@@ -257,19 +279,6 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 -(void)ensureSelectedArticle
 {
     [mainArticleView ensureSelectedArticle];
-}
-
-/* searchPlaceholderString
- * Return the search field placeholder.
- */
--(NSString *)searchPlaceholderString
-{
-	if (currentFolderId == -1) {
-		return @"";
-	}
-
-	Folder * folder = [[Database sharedManager] folderFromID:currentFolderId];
-	return [NSString stringWithFormat:NSLocalizedString(@"Filter in %@", nil), folder.name];
 }
 
 /* sortColumnIdentifier
@@ -448,6 +457,9 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
  */
 -(void)displayFolder:(NSInteger)newFolderId
 {
+    // We don't filter when we switch folders.
+    self.filterString = @"";
+
 	if (currentFolderId != newFolderId && newFolderId != 0) {
 		// Deselect all in current folder.
 		// Otherwise, the new folder might attempt to preserve selection.
@@ -457,7 +469,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 		currentFolderId = newFolderId;
 		[self reloadArrayOfArticles];
 	}
-
+    [self setFilterBarPlaceholderStringForFolderID:newFolderId];
 }
 
 /* selectFolderAndArticle
@@ -486,7 +498,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 -(void)reloadArrayOfArticles
 {
     Folder *folder = [[Database sharedManager] folderFromID:currentFolderId];
-    NSString *filterString = APPCONTROLLER.filterString;
+    NSString *filterString = self.filterString;
     dispatch_sync(queue, ^{
         self.folderArrayOfArticles = [folder articlesWithFilter:filterString];
     });
@@ -727,6 +739,17 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
     }
 }
 
+- (void)changeFiltering:(NSMenuItem *)sender
+{
+    NSInteger tag = sender.tag;
+    Preferences.standardPreferences.filterMode = tag;
+    if (tag == VNAFilterAll) {
+        self.filterModeLabel = @"";
+    } else {
+        self.filterModeLabel = sender.title;
+    }
+}
+
 /* markUnflagUndo
  * Undo handler to un-flag an array of articles.
  */
@@ -908,7 +931,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 			[[OpenReader sharedManager] markAllReadInFolder:folder];
 		} else {
 		    // For smart folders, we only mark read articles which should be visible with current filters
-            NSString *filterString = APPCONTROLLER.filterString;
+            NSString *filterString = self.filterString;
             NSArray * articleArray = [self applyFilter:[folder articlesWithFilter:filterString]];
             [self innerMarkReadByArray:articleArray readFlag:YES];
             for (id article in articleArray) {
@@ -1063,7 +1086,101 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
     }
 }
 
+- (void)folderNameChanged:(NSNotification *)notification
+{
+    NSNumber *folderID = notification.object;
+    [self setFilterBarPlaceholderStringForFolderID:folderID.integerValue];
+}
+
 // MARK: Filter article
+
+- (NSString *)filterString
+{
+    return self.filterBarSearchField.stringValue;
+}
+
+- (void)setFilterString:(NSString *)filterString
+{
+    self.filterBarSearchField.stringValue = filterString;
+}
+
+- (void)setFilterBarPlaceholderStringForFolderID:(NSInteger)folderID
+{
+    NSInteger currentFolderID = self.currentFolderId;
+    if (folderID != currentFolderID) {
+        return;
+    }
+
+    NSString *placeholderString = @"";
+    if (currentFolderID >= 0) {
+        Folder *folder = [Database.sharedManager folderFromID:currentFolderID];
+        placeholderString = [NSString stringWithFormat:NSLocalizedString(@"Filter in %@", nil),
+                                                       folder.name];
+    }
+    self.filterBarSearchField.placeholderString = placeholderString;
+}
+
+/* showHideFilterBar
+ * Toggle the filter bar on/off.
+ */
+- (IBAction)showHideFilterBar:(id)sender
+{
+    BOOL isVisible = self.filterBarDisclosureView.isDisclosed;
+    [self setFilterBarState:!isVisible withAnimation:YES];
+    Preferences.standardPreferences.showFilterBar = !isVisible;
+}
+
+- (IBAction)hideFilterBar:(id)sender
+{
+    [self setFilterBarState:NO withAnimation:YES];
+    Preferences.standardPreferences.showFilterBar = NO;
+}
+
+- (void)searchUsingFilterField:(NSSearchField *)searchField
+{
+    self.filterString = searchField.stringValue;
+    [self.mainArticleView performFindPanelAction:NSFindPanelActionNext];
+}
+
+/* setFilterBarState
+ * Show or hide the filter bar. The withAnimation flag specifies whether or not we do the
+ * animated show/hide. It should be set to NO for actions that are not user initiated as
+ * otherwise the background rendering of the control can cause complications.
+ */
+- (void)setFilterBarState:(BOOL)showFilterBar withAnimation:(BOOL)doAnimate
+{
+    BOOL isFilterVisible = self.filterBarDisclosureView.isDisclosed;
+    if (showFilterBar && !isFilterVisible) {
+        [self.filterBarDisclosureView disclose:doAnimate];
+
+        // Hook up the Tab ordering so Tab from the search field goes to the
+        // article view.
+        self.foldersTree.mainView.nextKeyView = self.filterBarSearchField;
+        self.filterBarSearchField.nextKeyView = self.mainArticleView;
+
+        // Set focus only if this was user initiated
+        if (doAnimate) {
+            [self.view.window makeFirstResponder:self.filterBarSearchField];
+        }
+    } else if (!showFilterBar && isFilterVisible) {
+        [self.filterBarDisclosureView collapse:doAnimate];
+
+        // Fix up the tab ordering
+        self.foldersTree.mainView.nextKeyView = self.mainArticleView;
+
+        // Clear the filter, otherwise we end up with no way remove it!
+        self.filterString = @"";
+        if (doAnimate) {
+            [self searchUsingFilterField:self.filterBarSearchField];
+
+            // If the focus was originally on the filter bar then we should
+            // move it to the message list
+            if ([self.view.window.firstResponder isEqual:self.view.window]) {
+                [self.view.window makeFirstResponder:self.mainArticleView];
+            }
+        }
+    }
+}
 
 - (BOOL)filterArticle:(Article *)article usingMode:(NSInteger)filterMode {
     switch (filterMode) {
@@ -1110,6 +1227,9 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
         @synchronized(mainArticleView) {
             [mainArticleView refreshFolder:VNARefreshReapplyFilter];
         }
+    } else if ([keyPath isEqualToString:MAPref_ShowFilterBar]) {
+        NSNumber *showFilterBar = change[NSKeyValueChangeNewKey];
+        [self setFilterBarState:showFilterBar.boolValue withAnimation:YES];
     }
 }
 
@@ -1130,6 +1250,17 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
         VNALayout layout = Preferences.standardPreferences.layout;
         menuItem.state = (layout == VNALayoutUnified) ? NSControlStateValueOn : NSControlStateValueOff;
         return YES;
+    } else if (action == @selector(changeFiltering:)) {
+        VNAFilter filterMode = Preferences.standardPreferences.filterMode;
+        menuItem.state = (menuItem.tag == filterMode) ? NSControlStateValueOn : NSControlStateValueOff;
+        return YES;
+    } else if (action == @selector(showHideFilterBar:)) {
+        if (self.filterBarDisclosureView.isDisclosed) {
+            menuItem.title = NSLocalizedString(@"Hide Filter Bar", nil);
+        } else {
+            menuItem.title = NSLocalizedString(@"Show Filter Bar", nil);
+        }
+        return YES;
     }
     os_log_debug(VNA_LOG, "Unhandled menu-item validation for menu item %@", menuItem);
     return NO;
@@ -1137,9 +1268,13 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 
 - (void)dealloc {
     [NSNotificationCenter.defaultCenter removeObserver:self];
-    [NSUserDefaults.standardUserDefaults removeObserver:self
-                                             forKeyPath:MAPref_FilterMode
-                                                context:VNAArticleControllerObserverContext];
+    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+    [userDefaults removeObserver:self
+                      forKeyPath:MAPref_FilterMode
+                         context:VNAArticleControllerObserverContext];
+    [userDefaults removeObserver:self
+                      forKeyPath:MAPref_ShowFilterBar
+                         context:VNAArticleControllerObserverContext];
 }
 
 @end

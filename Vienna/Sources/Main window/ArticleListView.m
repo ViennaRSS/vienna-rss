@@ -24,6 +24,7 @@
 #import "Preferences.h"
 #import "Constants.h"
 #import "DateFormatterExtension.h"
+#import "DisclosureView.h"
 #import "ArticleController.h"
 #import "StringExtensions.h"
 #import "HelperFunctions.h"
@@ -43,6 +44,9 @@ NSString * const MAPref_ShowEnclosureBar = @"ShowEnclosureBar";
 static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverContext;
 
 @interface ArticleListView ()
+
+@property (readwrite, nonatomic) IBOutlet DisclosureView *filterBarDisclosureView;
+@property (readwrite, nonatomic) IBOutlet FilterView *filterBarView;
 
 @property (weak, nonatomic) IBOutlet NSStackView *contentStackView;
 @property (weak, nonatomic) IBOutlet EnclosureView *enclosureView;

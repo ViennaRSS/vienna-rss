@@ -23,18 +23,6 @@ enum NewArticlesNotification: Int {
     case bounce = 2
 }
 
-/// Filtering options
-@objc(VNAFilter)
-enum Filter: Int {
-    case all = 0
-    case unread = 1
-    case lastRefresh = 2
-    case today = 3
-    case time48h = 4
-    case flagged = 5
-    case unreadOrFlagged = 6
-}
-
 /// Refresh folder options
 @objc(VNARefresh)
 enum Refresh: Int {

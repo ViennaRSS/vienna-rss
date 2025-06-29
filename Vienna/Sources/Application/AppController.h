@@ -26,7 +26,6 @@
 
 @class FoldersTree;
 @class NewSubscription;
-@class DisclosureView;
 @class PluginManager;
 @class SearchMethod;
 @class Database;
@@ -50,7 +49,6 @@
 -(IBAction)deleteMessage:(id)sender;
 -(IBAction)deleteFolder:(id)sender;
 -(IBAction)searchUsingToolbarTextField:(id)sender;
--(IBAction)searchUsingFilterField:(id)sender;
 -(IBAction)markAllRead:(id)sender;
 -(IBAction)markAllSubscriptionsRead:(id)sender;
 -(IBAction)markUnread:(id)sender;
@@ -100,8 +98,6 @@
 -(IBAction)useWebPageForArticles:(id)sender;
 -(IBAction)keyboardShortcutsHelp:(id)sender;
 -(IBAction)downloadEnclosure:(id)sender;
--(IBAction)showHideFilterBar:(id)sender;
--(IBAction)hideFilterBar:(id)sender;
 -(IBAction)setFocusToSearchField:(id)sender;
 -(IBAction)localPerformFindPanelAction:(id)sender;
 -(IBAction)keepFoldersArranged:(id)sender;
@@ -122,7 +118,6 @@
 -(void)markSelectedFoldersRead:(NSArray *)arrayOfFolders;
 -(void)doSafeInitialisation;
 -(void)clearUndoStack;
-@property (nonatomic, copy) NSString *filterString;
 @property (nonatomic, copy) NSString *searchString;
 @property (nonatomic, readonly) Article *selectedArticle;
 @property (nonatomic, readonly) NSInteger currentFolderId;
@@ -131,13 +126,9 @@
 -(void)runAppleScript:(NSString *)scriptName;
 @property (readonly, nonatomic) NSArray *folders;
 -(void)blogWithExternalEditor:(NSString *)externalEditorBundleIdentifier;
--(void)updateStatusBarFilterButtonVisibility;
 -(void)performWebSearch:(SearchMethod *)searchMethod;
 -(void)performAllArticlesSearch;
 -(void)performWebPageSearch;
 -(void)searchArticlesWithString:(NSString *)searchString;
-
-// FIXME: Refactor
-- (void)updateFilterBarStateForLayout:(NSInteger)layout;
 
 @end
