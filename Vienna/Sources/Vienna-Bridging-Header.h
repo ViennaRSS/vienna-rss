@@ -1,5 +1,6 @@
 #import "AppController.h"
 #import "Article.h"
+#import "ArticleController.h"
 #import "ArticleConverter.h"
 #import "ArticleListView.h"
 #import "ArticleViewDelegate.h"

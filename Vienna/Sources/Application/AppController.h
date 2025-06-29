@@ -31,8 +31,6 @@
 @class SearchMethod;
 @class Database;
 @class Article;
-@class UnifiedDisplayView;
-@class ArticleListView;
 @protocol Browser;
 
 @interface AppController : NSObject <NSApplicationDelegate> {
@@ -43,8 +41,6 @@
 @property (nonatomic) IBOutlet SPUStandardUpdaterController *sparkleController;
 @property (nonatomic) PluginManager *pluginManager;
 @property (nonatomic, weak) id<Browser> browser;
-@property (nonatomic, weak) UnifiedDisplayView *unifiedListView;
-@property (nonatomic, weak) ArticleListView *articleListView;
 @property (nonatomic) NewSubscription *rssFeed;
 @property (nonatomic) FoldersTree *foldersTree;
 @property (readonly, nonatomic) NSMenu *searchFieldMenu;
@@ -103,9 +99,6 @@
 -(IBAction)useCurrentStyleForArticles:(id)sender;
 -(IBAction)useWebPageForArticles:(id)sender;
 -(IBAction)keyboardShortcutsHelp:(id)sender;
--(IBAction)unifiedLayout:(id)sender;
--(IBAction)reportLayout:(id)sender;
--(IBAction)condensedLayout:(id)sender;
 -(IBAction)downloadEnclosure:(id)sender;
 -(IBAction)showHideFilterBar:(id)sender;
 -(IBAction)hideFilterBar:(id)sender;
@@ -143,5 +136,8 @@
 -(void)performAllArticlesSearch;
 -(void)performWebPageSearch;
 -(void)searchArticlesWithString:(NSString *)searchString;
+
+// FIXME: Refactor
+- (void)updateFilterBarStateForLayout:(NSInteger)layout;
 
 @end

@@ -21,6 +21,8 @@ import Cocoa
 
 final class MainWindowController: NSWindowController {
 
+    @objc weak var articleController: ArticleController!
+
     // MARK: Transitional outlets
 
     @IBOutlet private(set) var splitView: NSSplitView!
@@ -54,6 +56,13 @@ final class MainWindowController: NSWindowController {
 
         splitView.addSubview(browser.view)
         placeholderDetailView.removeFromSuperview()
+
+        self.articleController.articleListView = self.articleListView
+        self.articleController.unifiedListView = self.unifiedDisplayView
+        self.articleListView?.appController = NSApp.appController
+        self.unifiedDisplayView?.appController = NSApp.appController
+        self.articleListView?.articleController = self.articleController
+        self.unifiedDisplayView?.articleController = self.articleController
     }
 
     // MARK: Subtitle
@@ -254,6 +263,15 @@ final class MainWindowController: NSWindowController {
             sharingService.delegate = self
             sharingService.perform(withItems: shareableItems)
         }
+    }
+
+    // MARK: Responder chain
+
+    override func supplementalTarget(forAction action: Selector, sender: Any?) -> Any? {
+        if self.browser.activeTab == nil && articleController.responds(to: action) {
+            return articleController
+        }
+        return super.supplementalTarget(forAction: action, sender: sender)
     }
 
     // MARK: Observation

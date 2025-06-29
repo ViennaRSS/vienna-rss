@@ -182,6 +182,20 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 		[self ensureSelectedArticle];
 	}
     [[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_ArticleViewChange object:nil];
+
+    self.foldersTree.mainView.nextKeyView = self.mainArticleView;
+    if (self.selectedArticle == nil) {
+        [self.view.window makeFirstResponder:self.foldersTree.mainView];
+    } else {
+        [self.view.window makeFirstResponder:self.mainArticleView];
+    }
+
+    // FIXME: Refactor
+    [APPCONTROLLER updateFilterBarStateForLayout:newLayout];
+    NSTabViewItem *primaryTab = [[NSTabViewItem alloc] initWithIdentifier:@"Articles"];
+    primaryTab.label = NSLocalizedString(@"Articles", nil);
+    primaryTab.viewController = self;
+    APPCONTROLLER.browser.primaryTab = primaryTab;
 }
 
 /* currentFolderId
@@ -990,6 +1004,33 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 	return !backtrackArray.atStartOfQueue;
 }
 
+/* reportLayout
+ * Switch to report layout
+ */
+- (IBAction)reportLayout:(id)sender
+{
+    [self setLayout:VNALayoutReport];
+    [self.mainArticleView refreshFolder:VNARefreshRedrawList];
+}
+
+/* condensedLayout
+ * Switch to condensed layout
+ */
+- (IBAction)condensedLayout:(id)sender
+{
+    [self setLayout:VNALayoutCondensed];
+    [self.mainArticleView refreshFolder:VNARefreshRedrawList];
+}
+
+/* unifiedLayout
+ * Switch to unified layout.
+ */
+- (IBAction)unifiedLayout:(id)sender
+{
+    [self setLayout:VNALayoutUnified];
+    [self.mainArticleView refreshFolder:VNARefreshRedrawList];
+}
+
 /* handleArticleListStateChange
 * Called if a folder content has changed
 * but we don't need to add new articles
@@ -1070,6 +1111,28 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
             [mainArticleView refreshFolder:VNARefreshReapplyFilter];
         }
     }
+}
+
+// MARK: NSMenuItemValidation
+
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem
+{
+    SEL action = menuItem.action;
+    if (action == @selector(reportLayout:)) {
+        VNALayout layout = Preferences.standardPreferences.layout;
+        menuItem.state = (layout == VNALayoutReport) ? NSControlStateValueOn : NSControlStateValueOff;
+        return YES;
+    } else if (action == @selector(condensedLayout:)) {
+        VNALayout layout = Preferences.standardPreferences.layout;
+        menuItem.state = (layout == VNALayoutCondensed) ? NSControlStateValueOn : NSControlStateValueOff;
+        return YES;
+    } else if (action == @selector(unifiedLayout:)) {
+        VNALayout layout = Preferences.standardPreferences.layout;
+        menuItem.state = (layout == VNALayoutUnified) ? NSControlStateValueOn : NSControlStateValueOff;
+        return YES;
+    }
+    os_log_debug(VNA_LOG, "Unhandled menu-item validation for menu item %@", menuItem);
+    return NO;
 }
 
 - (void)dealloc {

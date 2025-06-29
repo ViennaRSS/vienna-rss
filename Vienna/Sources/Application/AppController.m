@@ -54,8 +54,6 @@
 #import "TreeNode.h"
 #import "Field.h"
 #import "Folder.h"
-#import "ArticleListView.h"
-#import "UnifiedDisplayView.h"
 #import "FolderView.h"
 #import "SubscriptionModel.h"
 #import "Vienna-Swift.h"
@@ -88,7 +86,6 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 -(void)setPersistedFilterBarState:(BOOL)isVisible withAnimation:(BOOL)doAnimate;
 -(void)runAppleScript:(NSString *)scriptName;
 -(void)sendBlogEvent:(NSString *)externalEditorBundleIdentifier title:(NSString *)title url:(NSString *)url body:(NSString *)body author:(NSString *)author guid:(NSString *)guid;
--(void)setLayout:(NSInteger)newLayout withRefresh:(BOOL)refreshFlag;
 -(void)updateAlternateMenuTitle;
 -(void)updateSearchPlaceholderAndSearchMethod;
 -(void)updateCloseCommands;
@@ -252,15 +249,10 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 -(void)applicationDidFinishLaunching:(NSNotification *)aNot
 {
 	self.mainWindowController = [[MainWindowController alloc] initWithWindowNibName:@"MainWindowController"];
+    self.mainWindowController.articleController = self.articleController;
 	self.mainWindow = self.mainWindowController.window;
 
 	self.browser = self.mainWindowController.browser;
-	self.articleListView = self.mainWindowController.articleListView;
-	self.articleListView.appController = self;
-	self.articleListView.articleController = self.articleController;
-	self.unifiedListView = self.mainWindowController.unifiedDisplayView;
-	self.unifiedListView.appController = self;
-	self.unifiedListView.articleController = self.articleController;
 
 	self.outlineView = self.mainWindowController.outlineView;
     self.foldersTree.controller = self;
@@ -269,8 +261,6 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
     self.outlineView.dataSource = self.foldersTree;
 
     self.articleController.foldersTree = self.foldersTree;
-    self.articleController.unifiedListView = self.unifiedListView;
-    self.articleController.articleListView = self.articleListView;
 
 	self.toolbarSearchField = self.mainWindowController.toolbarSearchField;
 
@@ -300,10 +290,8 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 		return;
 	}
 
-	Preferences * prefs = [Preferences standardPreferences];
-
     // Restore the most recent layout
-    [self setLayout:prefs.layout withRefresh:NO];
+    [self.articleController setLayout:Preferences.standardPreferences.layout];
 
 	// Initialize the Sort By and Columns menu
 	[self initSortMenu];
@@ -714,66 +702,24 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 	[db reindexDatabase];
 }
 
-/* reportLayout
- * Switch to report layout
- */
--(IBAction)reportLayout:(id)sender
+// FIXME: Refactor
+- (void)updateFilterBarStateForLayout:(NSInteger)layout
 {
-	[self setLayout:VNALayoutReport withRefresh:YES];
-}
+    BOOL isFilterBarVisible = self.isFilterBarVisible;
+    switch (layout) {
+    case VNALayoutReport:
+    case VNALayoutCondensed:
+        self.filterDisclosureView = self.mainWindowController.filterDisclosureView;
+        self.filterSearchField = self.mainWindowController.filterSearchField;
+        break;
 
-/* condensedLayout
- * Switch to condensed layout
- */
--(IBAction)condensedLayout:(id)sender
-{
-	[self setLayout:VNALayoutCondensed withRefresh:YES];
-}
-
-/* unifiedLayout
- * Switch to unified layout.
- */
--(IBAction)unifiedLayout:(id)sender
-{
-	[self setLayout:VNALayoutUnified withRefresh:YES];
-}
-
-/* setLayout
- * Changes the layout of the panes.
- */
--(void)setLayout:(NSInteger)newLayout withRefresh:(BOOL)refreshFlag
-{
-	[self.articleController setLayout:newLayout];
-    if (refreshFlag) {
-        [self.articleController.mainArticleView refreshFolder:VNARefreshRedrawList];
+    case VNALayoutUnified:
+        self.filterDisclosureView = self.mainWindowController.filterDisclosureView2;
+        self.filterSearchField = self.mainWindowController.filterSearchField2;
+        break;
     }
-    NSTabViewItem *primaryTab = [[NSTabViewItem alloc] initWithIdentifier:@"Articles"];
-    [primaryTab setLabel:NSLocalizedString(@"Articles", nil)];
-    [primaryTab setViewController:self.articleController];
-
-	[self.browser setPrimaryTab:primaryTab];
-	self.foldersTree.mainView.nextKeyView = ((NSView<BaseView> *)self.browser.primaryTab.view).mainView;
-    if (self.selectedArticle == nil) {
-        [self.mainWindow makeFirstResponder:self.foldersTree.mainView];
-    } else {
-        [self.mainWindow makeFirstResponder:((NSView<BaseView> *)self.browser.primaryTab.view).mainView];
-    }
-
-	BOOL isFilterBarVisible = self.isFilterBarVisible;
-	switch (newLayout) {
-		case VNALayoutReport:
-		case VNALayoutCondensed:
-			self.filterDisclosureView = self.mainWindowController.filterDisclosureView;
-			self.filterSearchField = self.mainWindowController.filterSearchField;
-			break;
-
-		case VNALayoutUnified:
-			self.filterDisclosureView = self.mainWindowController.filterDisclosureView2;
-			self.filterSearchField = self.mainWindowController.filterSearchField2;
-			break;
-	}
-	[self setFilterBarState:isFilterBarVisible withAnimation:NO];
-	[self updateSearchPlaceholderAndSearchMethod];
+    [self setFilterBarState:isFilterBarVisible withAnimation:NO];
+    [self updateSearchPlaceholderAndSearchMethod];
 }
 
 
@@ -898,6 +844,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         for (NSURL * url in urls) {
 			(void)[self.browser createNewTab:url inBackground:openInBackground load:true];
         }
+        [self.mainWindow makeFirstResponder:((NSView<BaseView> *)self.browser.primaryTab.view).mainView];
 	} else {
 		[self openURLsInDefaultBrowser:urls];
 	}
@@ -3352,18 +3299,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		menuItem.state = (prefs.self.foldersTreeSortMethod == menuItem.tag) ? NSControlStateValueOn : NSControlStateValueOff;
 		return isMainWindowVisible;
 	} else if (theAction == @selector(setFocusToSearchField:)) {
-		return isMainWindowVisible;
-	} else if (theAction == @selector(reportLayout:)) {
-		Preferences * prefs = [Preferences standardPreferences];
-		menuItem.state = (prefs.layout == VNALayoutReport) ? NSControlStateValueOn : NSControlStateValueOff;
-		return isMainWindowVisible;
-	} else if (theAction == @selector(condensedLayout:)) {
-		Preferences * prefs = [Preferences standardPreferences];
-		menuItem.state = (prefs.layout == VNALayoutCondensed) ? NSControlStateValueOn : NSControlStateValueOff;
-		return isMainWindowVisible;
-	} else if (theAction == @selector(unifiedLayout:)) {
-		Preferences * prefs = [Preferences standardPreferences];
-		menuItem.state = (prefs.layout == VNALayoutUnified) ? NSControlStateValueOn : NSControlStateValueOff;
 		return isMainWindowVisible;
 	} else if (theAction == @selector(markFlagged:)) {
 		Article * thisArticle = self.selectedArticle;
