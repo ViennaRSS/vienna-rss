@@ -210,7 +210,7 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
 {
 	if (guid != nil) {
 		NSInteger rowIndex = 0;
-		for (Article * thisArticle in self.controller.articleController.allArticles) {
+		for (Article * thisArticle in self.articleController.allArticles) {
 			if ([thisArticle.guid isEqualToString:guid]) {
 				[self makeRowSelectedAndVisible:rowIndex];
 				return;
@@ -240,13 +240,13 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
  */
 -(void)performFindPanelAction:(NSInteger)actionTag
 {
-	[self.controller.articleController reloadArrayOfArticles];
+	[self.articleController reloadArrayOfArticles];
 
 	// make sure to not change the mark read while searching
-    if (articleList.selectedRow < 0 && self.controller.articleController.allArticles.count > 0 ) {
+    if (articleList.selectedRow < 0 && self.articleController.allArticles.count > 0 ) {
 		BOOL shouldSelectArticle = YES;
 		if ([Preferences standardPreferences].markReadInterval > 0.0f) {
-			Article * article = self.controller.articleController.allArticles[0u];
+			Article * article = self.articleController.allArticles[0u];
 			if (!article.isRead) {
 				shouldSelectArticle = NO;
 			}
@@ -297,7 +297,7 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
 
 	// Remember the current folder and article
     NSString * guid = self.selectedArticle.guid;
-	[prefs setInteger:self.controller.articleController.currentFolderId forKey:MAPref_CachedFolderID];
+	[prefs setInteger:self.articleController.currentFolderId forKey:MAPref_CachedFolderID];
 	[prefs setString:(guid != nil ? guid : @"") forKey:MAPref_CachedArticleGUID];
 }
 
@@ -307,7 +307,7 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
  */
 -(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags
 {
-	return [self.controller handleKeyDown:keyChar withFlags:flags];
+	return [self.appController handleKeyDown:keyChar withFlags:flags];
 }
 
 /* canDeleteMessageAtRow
@@ -324,7 +324,7 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
 -(Article *)selectedArticle
 {
 	NSInteger currentSelectedRow = articleList.selectedRow;
-	return (currentSelectedRow >= 0 && currentSelectedRow < self.controller.articleController.allArticles.count) ? self.controller.articleController.allArticles[currentSelectedRow] : nil;
+	return (currentSelectedRow >= 0 && currentSelectedRow < self.articleController.allArticles.count) ? self.articleController.allArticles[currentSelectedRow] : nil;
 }
 
 /* printDocument
@@ -340,7 +340,7 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
  */
 -(void)handleReadingPaneChange:(NSNotification *)notification
 {
-	if (self == self.controller.articleController.mainArticleView) {
+	if (self == self.articleController.mainArticleView) {
 		[articleList reloadData];
 	}
 }
@@ -350,7 +350,7 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
  */
 -(void)handleStyleChange:(NSNotification *)notification
 {
-    if (self == self.controller.articleController.mainArticleView) {
+    if (self == self.articleController.mainArticleView) {
         [articleList performSelector:@selector(reloadData) withObject:nil afterDelay:0.0];
     }
 }
@@ -361,7 +361,7 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
  */
 -(void)makeRowSelectedAndVisible:(NSInteger)rowIndex
 {
-	if (self.controller.articleController.allArticles.count == 0u) {
+	if (self.articleController.allArticles.count == 0u) {
 		[articleList deselectAll:self];
 	} else {
 		[articleList selectRowIndexes:[NSIndexSet indexSetWithIndex:rowIndex] byExtendingSelection:NO];
@@ -388,7 +388,7 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
 		currentRow = 0;
 	}
 
-	NSArray * allArticles = self.controller.articleController.allArticles;
+	NSArray * allArticles = self.articleController.allArticles;
 	NSInteger totalRows = allArticles.count;
 	Article * theArticle;
 	while (currentRow < totalRows) {
@@ -410,7 +410,7 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
 {
 	BOOL result = [self viewNextUnreadInCurrentFolder:-1];
 	if (!result) {
-		NSInteger count = self.controller.articleController.allArticles.count;
+		NSInteger count = self.articleController.allArticles.count;
 		if (count > 0) {
 			[self makeRowSelectedAndVisible:0];
 		}
@@ -431,7 +431,7 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
         [scrollView reflectScrolledClipView:[scrollView contentView]];
         [NSAnimationContext endGrouping];
     } else {
-        [self.controller skipFolder:nil];
+        [self.appController skipFolder:nil];
     }
 }
 
@@ -448,7 +448,7 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
         [scrollView reflectScrolledClipView:[scrollView contentView]];
         [NSAnimationContext endGrouping];
     } else {
-        [self.controller.articleController goBack];
+        [self.articleController goBack];
     }
 }
 
@@ -465,11 +465,11 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
         case VNARefreshRedrawList:
             break;
         case VNARefreshReapplyFilter:
-            [self.controller.articleController refilterArrayOfArticles];
-            [self.controller.articleController sortArticles];
+            [self.articleController refilterArrayOfArticles];
+            [self.articleController sortArticles];
             break;
         case VNARefreshSortAndRedraw:
-            [self.controller.articleController sortArticles];
+            [self.articleController sortArticles];
             break;
     }
 
@@ -484,7 +484,7 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
 {
 	Article * theArticle = self.selectedArticle;
 	if (theArticle != nil && !theArticle.isRead && ![Database sharedManager].readOnly) {
-		[self.controller.articleController markReadByArray:@[theArticle] readFlag:YES];
+		[self.articleController markReadByArray:@[theArticle] readFlag:YES];
 	}
 }
 
@@ -497,7 +497,7 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
  */
 -(NSInteger)numberOfRowsInTableView:(NSTableView*)aTableView
 {
-	return self.controller.articleController.allArticles.count;
+	return self.articleController.allArticles.count;
 }
 
 - (CGFloat)tableView:(NSTableView *)aListView heightOfRow:(NSInteger)row
@@ -540,7 +540,7 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
         self.statusBar.label = nil;
 	}
 
-	NSArray * allArticles = self.controller.articleController.allArticles;
+	NSArray * allArticles = self.articleController.allArticles;
 	if (row < 0 || row >= allArticles.count) {
 	    return nil;
 	}
@@ -548,6 +548,7 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
 	Article * theArticle = allArticles[row];
 	NSInteger articleFolderId = theArticle.folderId;
 
+	cellView.articleController = self.articleController;
 	cellView.folderId = articleFolderId;
 	cellView.articleRow = row;
 	cellView.listView = articleList;
@@ -626,7 +627,7 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
 	// Get all the articles that are being dragged
 	NSUInteger msgIndex = rowIndexes.firstIndex;
 	while (msgIndex != NSNotFound) {
-		Article * thisArticle = self.controller.articleController.allArticles[msgIndex];
+		Article * thisArticle = self.articleController.allArticles[msgIndex];
 		Folder * folder = [db folderFromID:thisArticle.folderId];
 		NSString * msgText = thisArticle.body;
 		NSString * msgTitle = thisArticle.title;
@@ -697,7 +698,7 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
  */
 -(IBAction)delete:(id)sender
 {
-	[APPCONTROLLER deleteMessage:self];
+	[self.appController deleteMessage:self];
 }
 
 /* validateMenuItem
@@ -730,7 +731,7 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
 
 		articleArray = [NSMutableArray arrayWithCapacity:rowIndexes.count];
 		while (rowIndex != NSNotFound) {
-			[articleArray addObject:self.controller.articleController.allArticles[rowIndex]];
+			[articleArray addObject:self.articleController.allArticles[rowIndex]];
 			rowIndex = [rowIndexes indexGreaterThanIndex:rowIndex];
 		}
 	}
@@ -748,9 +749,9 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
 -(BOOL)becomeFirstResponder
 {
     NSInteger currentSelectedRow = articleList.selectedRow;
-	if (currentSelectedRow >= 0 && currentSelectedRow < self.controller.articleController.allArticles.count) {
+	if (currentSelectedRow >= 0 && currentSelectedRow < self.articleController.allArticles.count) {
 		[articleList selectRowIndexes:[NSIndexSet indexSetWithIndex:currentSelectedRow] byExtendingSelection:NO];
-    } else if (self.controller.articleController.allArticles.count != 0u) {
+    } else if (self.articleController.allArticles.count != 0u) {
 		[articleList selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
     }
 	[NSApp.mainWindow makeFirstResponder:articleList];
@@ -765,7 +766,7 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
 {
 	if (theEvent.characters.length == 1) {
 		unichar keyChar = [theEvent.characters characterAtIndex:0];
-		if ([self.controller handleKeyDown:keyChar withFlags:theEvent.modifierFlags]) {
+		if ([self.appController handleKeyDown:keyChar withFlags:theEvent.modifierFlags]) {
 			return;
 		}
 	}

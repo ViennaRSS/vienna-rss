@@ -313,7 +313,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 {
 	NSInteger row = articleList.clickedRow;
 	NSInteger column = articleList.clickedColumn;
-	NSArray * allArticles = self.controller.articleController.allArticles;
+	NSArray * allArticles = self.articleController.allArticles;
 	
 	if (row >= 0 && row < (NSInteger)allArticles.count) {
 		NSArray * columns = articleList.tableColumns;
@@ -321,11 +321,11 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 			Article * theArticle = allArticles[row];
 			NSString * columnName = ((NSTableColumn *)columns[column]).identifier;
 			if ([columnName isEqualToString:MA_Field_Read]) {
-				[self.controller.articleController markReadByArray:@[theArticle] readFlag:!theArticle.isRead];
+				[self.articleController markReadByArray:@[theArticle] readFlag:!theArticle.isRead];
 				return;
 			}
 			if ([columnName isEqualToString:MA_Field_Flagged]) {
-				[self.controller.articleController markFlaggedByArray:@[theArticle] flagged:!theArticle.isFlagged];
+				[self.articleController markFlaggedByArray:@[theArticle] flagged:!theArticle.isFlagged];
 				return;
 			}
 			if ([columnName isEqualToString:MA_Field_HasEnclosure]) {
@@ -344,8 +344,8 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 {
 	NSInteger clickedRow = articleList.clickedRow;
 	if (clickedRow != -1) {
-		Article * theArticle = self.controller.articleController.allArticles[clickedRow];
-		[self.controller openURLFromString:theArticle.link inPreferredBrowser:YES];
+		Article * theArticle = self.articleController.allArticles[clickedRow];
+		[self.appController openURLFromString:theArticle.link inPreferredBrowser:YES];
 	}
 }
 
@@ -512,7 +512,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 	
 	// Remember the current folder and article
     NSString * guid = self.selectedArticle.guid;
-	[prefs setInteger:self.controller.articleController.currentFolderId forKey:MAPref_CachedFolderID];
+	[prefs setInteger:self.articleController.currentFolderId forKey:MAPref_CachedFolderID];
 	[prefs setString:(guid != nil ? guid : @"") forKey:MAPref_CachedArticleGUID];
 
 	// An array we need for the settings
@@ -596,7 +596,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
  */
 -(void)showSortDirection
 {
-	NSString * sortColumnIdentifier = self.controller.articleController.sortColumnIdentifier;
+	NSString * sortColumnIdentifier = self.articleController.sortColumnIdentifier;
 
     if (!sortColumnIdentifier) {
         sortColumnIdentifier = [Preferences.standardPreferences stringForKey:MAPref_SortColumn];
@@ -623,7 +623,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 {
 	if (guid != nil) {
 		NSInteger rowIndex = 0;
-		for (Article * thisArticle in self.controller.articleController.allArticles) {
+		for (Article * thisArticle in self.articleController.allArticles) {
 			if ([thisArticle.guid isEqualToString:guid]) {
 				[self makeRowSelectedAndVisible:rowIndex];
 				return;
@@ -659,7 +659,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
  */
 -(BOOL)canGoForward
 {
-	return self.controller.articleController.canGoForward;
+	return self.articleController.canGoForward;
 }
 
 /* canGoBack
@@ -667,7 +667,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
  */
 -(BOOL)canGoBack
 {
-	return self.controller.articleController.canGoBack;
+	return self.articleController.canGoBack;
 }
 
 /* handleGoForward
@@ -675,7 +675,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
  */
 -(IBAction)handleGoForward:(id)sender
 {
-	[self.controller.articleController goForward];
+	[self.articleController goForward];
 }
 
 /* handleGoBack
@@ -683,7 +683,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
  */
 -(IBAction)handleGoBack:(id)sender
 {
-	[self.controller.articleController goBack];
+	[self.articleController goBack];
 }
 
 /* makeTextStandardSize
@@ -752,7 +752,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
  */
 -(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags
 {
-	return [self.controller handleKeyDown:keyChar withFlags:flags];
+	return [self.appController handleKeyDown:keyChar withFlags:flags];
 }
 
 /* selectedArticle
@@ -761,7 +761,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 -(Article *)selectedArticle
 {
 	NSInteger currentSelectedRow = articleList.selectedRow;
-	return (currentSelectedRow >= 0 && currentSelectedRow < self.controller.articleController.allArticles.count) ? self.controller.articleController.allArticles[currentSelectedRow] : nil;
+	return (currentSelectedRow >= 0 && currentSelectedRow < self.articleController.allArticles.count) ? self.articleController.allArticles[currentSelectedRow] : nil;
 }
 
 /* printDocument
@@ -778,7 +778,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 -(void)handleArticleListFontChange:(NSNotification *)note
 {
 	[self setTableViewFont];
-	if (self == self.controller.articleController.mainArticleView) {
+	if (self == self.articleController.mainArticleView) {
 		[articleList reloadData];
 	}
 }
@@ -788,7 +788,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
  */
 -(void)handleLoadFullHTMLChange:(NSNotification *)note
 {
-	if (self == self.controller.articleController.mainArticleView) {
+	if (self == self.articleController.mainArticleView) {
 		[self refreshArticlePane];
 	}
 }
@@ -798,7 +798,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
  */
 -(void)handleReadingPaneChange:(NSNotification *)notification
 {
-	if (self == self.controller.articleController.mainArticleView) {
+	if (self == self.articleController.mainArticleView) {
 		[self setOrientation:[Preferences standardPreferences].layout];
 		[self updateVisibleColumns];
 		[articleList reloadData];
@@ -810,7 +810,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
  */
 -(void)handleStyleChange:(NSNotification *)notification
 {
-    if (self == self.controller.articleController.mainArticleView) {
+    if (self == self.articleController.mainArticleView) {
         [self performSelector:@selector(refreshArticleAtCurrentRow) withObject:nil afterDelay:0.0];
     }
 }
@@ -846,7 +846,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
  */
 -(void)makeRowSelectedAndVisible:(NSInteger)rowIndex
 {
-	if (self.controller.articleController.allArticles.count == 0u) {
+	if (self.articleController.allArticles.count == 0u) {
 		[articleList deselectAll:self];
 	} else if (rowIndex != articleList.selectedRow) {
 		[articleList selectRowIndexes:[NSIndexSet indexSetWithIndex:rowIndex] byExtendingSelection:NO];
@@ -884,7 +884,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 		currentRow = 0;
 	}
 	
-	NSArray * allArticles = self.controller.articleController.allArticles;
+	NSArray * allArticles = self.articleController.allArticles;
 	NSInteger totalRows = allArticles.count;
 	Article * theArticle;
 	while (currentRow < totalRows) {
@@ -928,7 +928,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 {
 	BOOL result = [self viewNextUnreadInCurrentFolder:-1];
 	if (!result) {
-		NSInteger count = self.controller.articleController.allArticles.count;
+		NSInteger count = self.articleController.allArticles.count;
 		if (count > 0) {
 			[self makeRowSelectedAndVisible:0];
 		}
@@ -941,7 +941,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
     if (articleText.canScrollDown) {
         [(NSView *)articleText scrollPageDown:nil];
     } else {
-        ArticleController * articleController = self.controller.articleController;
+        ArticleController * articleController = self.articleController;
         [articleController markReadByArray:self.markedArticleRange readFlag:YES];
         [articleController displayNextUnread];
     }
@@ -952,7 +952,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
     if (articleText.canScrollUp) {
         [(NSView *)articleText scrollPageUp:nil];
     } else {
-        [self.controller.articleController goBack];
+        [self.articleController goBack];
     }
 }
 
@@ -961,13 +961,13 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
  */
 -(void)performFindPanelAction:(NSInteger)actionTag
 {
-	[self.controller.articleController reloadArrayOfArticles];
+	[self.articleController reloadArrayOfArticles];
 	
 	// This action is send continuously by the filter field, so make sure not the mark read while searching
-    if (articleList.selectedRow < 0 && self.controller.articleController.allArticles.count > 0 ) {
+    if (articleList.selectedRow < 0 && self.articleController.allArticles.count > 0 ) {
 		BOOL shouldSelectArticle = YES;
 		if ([Preferences standardPreferences].markReadInterval > 0.0f) {
-			Article * article = self.controller.articleController.allArticles[0u];
+			Article * article = self.articleController.allArticles[0u];
             if (!article.isRead) {
 				shouldSelectArticle = NO;
             }
@@ -993,11 +993,11 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
         case VNARefreshRedrawList:
             break;
         case VNARefreshReapplyFilter:
-            [self.controller.articleController refilterArrayOfArticles];
-            [self.controller.articleController sortArticles];
+            [self.articleController refilterArrayOfArticles];
+            [self.articleController sortArticles];
             break;
         case VNARefreshSortAndRedraw:
-            [self.controller.articleController sortArticles];
+            [self.articleController sortArticles];
             [self showSortDirection];
             break;
     }
@@ -1042,7 +1042,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 		
 		// Add this to the backtrack list
         NSString * guid = article.guid;
-		[self.controller.articleController addBacktrack:guid];
+		[self.articleController addBacktrack:guid];
 	}
 }
 
@@ -1051,7 +1051,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
  */
 -(void)handleRefreshArticle:(NSNotification *)nc
 {
-	if (self == self.controller.articleController.mainArticleView && !isAppInitialising) {
+	if (self == self.articleController.mainArticleView && !isAppInitialising) {
 		[self refreshArticlePane];
 	}
 }
@@ -1158,7 +1158,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 {
 	Article * theArticle = self.selectedArticle;
 	if (theArticle != nil && !theArticle.isRead && ![Database sharedManager].readOnly) {
-		[self.controller.articleController markReadByArray:@[theArticle] readFlag:YES];
+		[self.articleController markReadByArray:@[theArticle] readFlag:YES];
 	}
 }
 
@@ -1168,7 +1168,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
  */
 -(NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView
 {
-	return self.controller.articleController.allArticles.count;
+	return self.articleController.allArticles.count;
 }
 
 /* objectValueForTableColumn [datasource]
@@ -1178,7 +1178,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 -(id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex
 {
 	Database * db = [Database sharedManager];
-	NSArray * allArticles = self.controller.articleController.allArticles;
+	NSArray * allArticles = self.articleController.allArticles;
 	Article * theArticle;
 	
 	if(rowIndex < 0 || rowIndex >= allArticles.count) {
@@ -1392,7 +1392,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 -(void)tableView:(NSTableView *)tableView didClickTableColumn:(NSTableColumn *)tableColumn
 {
 	NSString * columnName = tableColumn.identifier;
-	[self.controller.articleController sortByIdentifier:columnName];
+	[self.articleController sortByIdentifier:columnName];
 	[self showSortDirection];
 }
 
@@ -1484,7 +1484,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 	// Get all the articles that are being dragged
 	NSUInteger msgIndex = rowIndexes.firstIndex;
 	while (msgIndex != NSNotFound) {
-		Article * thisArticle = self.controller.articleController.allArticles[msgIndex];
+		Article * thisArticle = self.articleController.allArticles[msgIndex];
 		Folder * folder = [db folderFromID:thisArticle.folderId];
 		NSString * msgText = thisArticle.body;
 		NSString * msgTitle = thisArticle.title;
@@ -1544,7 +1544,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 
 		articleArray = [NSMutableArray arrayWithCapacity:rowIndexes.count];
 		while (rowIndex != NSNotFound) {
-			[articleArray addObject:self.controller.articleController.allArticles[rowIndex]];
+			[articleArray addObject:self.articleController.allArticles[rowIndex]];
 			rowIndex = [rowIndexes indexGreaterThanIndex:rowIndex];
 		}
 	}
@@ -1595,7 +1595,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 
     if ([keyPath isEqualToString:MAPref_ShowUnreadArticlesInBold]) {
         [self setTableViewFont];
-        if (self == self.controller.articleController.mainArticleView) {
+        if (self == self.articleController.mainArticleView) {
             [articleList reloadData];
         }
     }
@@ -1606,7 +1606,6 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 // MARK: ArticleView delegate
 
 @synthesize error;
-@synthesize controller;
 
 - (void)startMainFrameLoad
 {
@@ -1626,7 +1625,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 // MARK: splitView2 & main window's splitView delegate
 
 - (void)splitViewWillResizeSubviews:(NSNotification *)notification {
-    if (self != APPCONTROLLER.articleController.mainArticleView) {
+    if (self != self.articleController.mainArticleView) {
         return;
     }
     NSDictionary * info = notification.userInfo;
@@ -1645,7 +1644,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 }
 
 - (void)splitViewDidResizeSubviews:(NSNotification *)notification {
-    if (self != APPCONTROLLER.articleController.mainArticleView) {
+    if (self != self.articleController.mainArticleView) {
         return;
     }
     // update constraint

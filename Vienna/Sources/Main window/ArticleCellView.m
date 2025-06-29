@@ -16,7 +16,6 @@
 #define PROGRESS_INDICATOR_DIMENSION_REGULAR 24
 
 @implementation ArticleCellView {
-    AppController *controller;
     BOOL inProgress;
     NSInteger folderId;
     NSUInteger articleRow;
@@ -34,7 +33,6 @@
 -(instancetype)initWithFrame:(NSRect)frameRect
 {
 	if ((self = [super initWithFrame:frameRect])) {
-		controller = APPCONTROLLER;
         [self initializeWebKitArticleView:frameRect];
 
 		[self setInProgress:NO];
@@ -136,7 +134,7 @@
     if ([webView isEqualTo:((WebKitArticleView *)self.articleView)]) {
         [self setInProgress:NO];
         NSUInteger row = self.articleRow;
-        NSArray *allArticles = self->controller.articleController.allArticles;
+        NSArray *allArticles = self.articleController.allArticles;
         if (row < (NSInteger)allArticles.count) {
             [self.listView reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:row] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
         }
@@ -160,7 +158,7 @@
     if ([webView isEqualTo:((WebKitArticleView *)self.articleView)]) {
         [self setInProgress:NO];
         NSUInteger row = self.articleRow;
-        NSArray *allArticles = self->controller.articleController.allArticles;
+        NSArray *allArticles = self.articleController.allArticles;
         if (row < (NSInteger)allArticles.count) {
             [self.listView reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:row] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
         }
@@ -176,8 +174,8 @@
 {
     if ([webView isEqualTo:((WebKitArticleView *)self.articleView)]) {
         NSUInteger row = [self.listView rowForView:self];
-        if (row == self.articleRow && row < self->controller.articleController.allArticles.count
-            && self.folderId == [self->controller.articleController.allArticles[row] folderId])
+        if (row == self.articleRow && row < self.articleController.allArticles.count
+            && self.folderId == [self.articleController.allArticles[row] folderId])
         {    //relevant cell
             [webView evaluateJavaScript:@"document.documentElement.offsetHeight"
                       completionHandler:^(id _Nullable result, NSError *_Nullable error) {
@@ -196,7 +194,7 @@
                       }];
         } else { //non relevant cell
             [self setInProgress:NO];
-            if (row < self->controller.articleController.allArticles.count) {
+            if (row < self.articleController.allArticles.count) {
                 [self.listView reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:row] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
             }
             WebKitArticleView *articleView = (WebKitArticleView *)(self.articleView);

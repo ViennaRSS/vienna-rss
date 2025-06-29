@@ -24,6 +24,7 @@
 @import UniformTypeIdentifiers;
 
 #import "AppController+Notifications.h"
+#import "ArticleController.h"
 #import "Import.h"
 #import "Export.h"
 #import "RefreshManager.h"
@@ -97,6 +98,7 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 @property (nonatomic) VNADispatchTimer *refreshTimer;
 
 @property (nonatomic) MainWindowController *mainWindowController;
+@property (nonatomic) ArticleController *articleController;
 @property (nonatomic) ActivityPanelController *activityPanelController;
 @property (nonatomic) VNADirectoryMonitor *directoryMonitor;
 @property (nonatomic) NSWindowController *preferencesWindowController;
@@ -254,9 +256,11 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 
 	self.browser = self.mainWindowController.browser;
 	self.articleListView = self.mainWindowController.articleListView;
-	self.articleListView.controller = self;
+	self.articleListView.appController = self;
+	self.articleListView.articleController = self.articleController;
 	self.unifiedListView = self.mainWindowController.unifiedDisplayView;
-	self.unifiedListView.controller = self;
+	self.unifiedListView.appController = self;
+	self.unifiedListView.articleController = self.articleController;
 
 	self.outlineView = self.mainWindowController.outlineView;
     self.foldersTree.controller = self;

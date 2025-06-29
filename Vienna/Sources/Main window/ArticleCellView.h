@@ -8,6 +8,7 @@
 @import Cocoa;
 @import WebKit;
 
+@class ArticleController;
 @class ArticleConverter;
 @protocol ArticleContentView;
 
@@ -19,6 +20,7 @@
 @property BOOL inProgress;
 @property NSInteger folderId;
 @property NSUInteger articleRow;
+@property (weak, nonatomic) ArticleController *articleController;
 @property (nonatomic, weak) NSTableView *listView;
 @property CGFloat fittingHeight;
 
