@@ -23,7 +23,21 @@
 
 - (BOOL)vna_handleEvent:(NSEvent *)event
 {
+    NSResponder *supplementalHandler = [self.nextResponder vna_supplementalHandlerForEvent:event];
+    if (supplementalHandler) {
+        return [supplementalHandler vna_handleEvent:event];
+    }
     return [self.nextResponder vna_handleEvent:event];
+}
+
+- (BOOL)vna_canHandleEvent:(NSEvent *)event
+{
+    return NO;
+}
+
+- (nullable NSResponder *)vna_supplementalHandlerForEvent:(NSEvent *)event
+{
+    return nil;
 }
 
 @end

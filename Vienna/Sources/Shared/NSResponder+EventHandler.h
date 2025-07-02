@@ -23,7 +23,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSResponder (EventHandler)
 
+/// Handles the event and returns `YES` if handled successfully. The default
+/// implementation first sends `-vna_supplementalHandlerForEvent:` to its next
+/// responder and passes the message to it, if not `nil`. Otherwise, it passes
+/// the message to its next responder recursively, ultimately returning `NO` if
+/// there are no more responders.
 - (BOOL)vna_handleEvent:(NSEvent *)event NS_SWIFT_NAME(handle(_:));
+
+/// Whether the receiver can handle the event. The default implementation
+/// returns `NO`.
+- (BOOL)vna_canHandleEvent:(NSEvent *)event NS_SWIFT_NAME(canHandle(_:));
+
+/// Returns a supplemental handler for the event or `nil` if there is none.
+/// The default implementation returns `nil`.
+- (nullable NSResponder *)vna_supplementalHandlerForEvent:(NSEvent *)event
+    NS_SWIFT_NAME(supplementalHandler(for:));
 
 @end
 

@@ -1847,16 +1847,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			[self setFocusToSearchField:self];
 			return YES;
 			
-// FIXME: Reimplement
-//		case 'f':
-//		case 'F':
-//			if (!self.filterBarVisible) {
-//				[self setPersistedFilterBarState:YES withAnimation:YES];
-//			} else {
-//				[self.mainWindow makeFirstResponder:self.filterSearchField];
-//			}
-//			return YES;
-			
 		case '>':
 		case '.':
 			[self goForward:self];

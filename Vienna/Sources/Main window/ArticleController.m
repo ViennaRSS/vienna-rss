@@ -1207,6 +1207,38 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
     }
 }
 
+// MARK: Event handling
+
+- (BOOL)vna_canHandleEvent:(NSEvent *)event
+{
+    if (event.type != NSEventTypeKeyDown && event.characters.length != 1) {
+        return [super vna_canHandleEvent:event];
+    }
+    unichar keyChar = [event.characters characterAtIndex:0];
+    if (keyChar == 'f' || keyChar == 'F') {
+        return YES;
+    }
+    return [super vna_canHandleEvent:event];
+}
+
+- (BOOL)vna_handleEvent:(NSEvent *)event
+{
+    if (event.type != NSEventTypeKeyDown && event.characters.length != 1) {
+        return [super vna_handleEvent:event];
+    }
+    unichar keyChar = [event.characters characterAtIndex:0];
+    if (keyChar == 'f' || keyChar == 'F') {
+        if (self.filterBarDisclosureView.isDisclosed) {
+            [self.view.window makeFirstResponder:self.filterBarSearchField];
+        } else {
+            [self setFilterBarState:YES withAnimation:YES];
+            Preferences.standardPreferences.showFilterBar = YES;
+        }
+        return YES;
+    }
+    return [super vna_handleEvent:event];
+}
+
 // MARK: Key-value observation
 
 - (void)observeValueForKeyPath:(NSString *)keyPath

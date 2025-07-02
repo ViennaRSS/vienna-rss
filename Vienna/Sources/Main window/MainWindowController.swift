@@ -261,6 +261,13 @@ final class MainWindowController: NSWindowController {
         return super.supplementalTarget(forAction: action, sender: sender)
     }
 
+    override func supplementalHandler(for event: NSEvent) -> NSResponder? {
+        if self.articleController.canHandle(event) {
+            return self.articleController
+        }
+        return self
+    }
+
     override func handle(_ event: NSEvent) -> Bool {
         return NSApp.appController.handleKeyDown(event)
     }
