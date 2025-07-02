@@ -157,13 +157,14 @@
 		F6094E331F10107800677D3B /* ExportAccessoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6094E311F10107800677D3B /* ExportAccessoryViewController.swift */; };
 		F615824323834D6500D2BD41 /* FeedDiscoverer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F615824223834D6500D2BD41 /* FeedDiscoverer.swift */; };
 		F6164C591E32A6660086261C /* DisclosureView.m in Sources */ = {isa = PBXBuildFile; fileRef = F6164C581E32A6660086261C /* DisclosureView.m */; };
+		F61901882E0F16B000A7A200 /* FilterBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F61901852E0F16B000A7A200 /* FilterBarViewController.m */; };
+		F619018B2E0F1D5400A7A200 /* FilterBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F619018A2E0F1D5400A7A200 /* FilterBarViewController.xib */; };
 		F61CEA661F039E57009C878E /* ButtonToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61CEA651F039E56009C878E /* ButtonToolbarItem.swift */; };
 		F61CEA681F03F277009C878E /* PlugInToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61CEA671F03F277009C878E /* PlugInToolbarItem.swift */; };
 		F6209C5A23D3FFA700D5537D /* Vienna.sdef in Resources */ = {isa = PBXBuildFile; fileRef = F6209C5923D3FFA700D5537D /* Vienna.sdef */; };
 		F625801C1E2853B90035E43C /* ActivityViewer.xib in Resources */ = {isa = PBXBuildFile; fileRef = F625801E1E2853B90035E43C /* ActivityViewer.xib */; };
 		F62581451E29B90B0035E43C /* SearchPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = F62581441E29B90A0035E43C /* SearchPanel.xib */; };
 		F626F5F424A76B9100D3AAD8 /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F626F5F624A76B9100D3AAD8 /* Preferences.storyboard */; };
-		F628DFE31ED2698A00FACFD3 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F628DFE21ED2698A00FACFD3 /* FilterView.swift */; };
 		F62E324E284E0CAF0046EA1F /* SharingServiceToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62E324D284E0CAF0046EA1F /* SharingServiceToolbarItem.swift */; };
 		F633157626ED73CB008A3673 /* URLFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F633157526ED73CB008A3673 /* URLFormatter.swift */; };
 		F633157826EE3D06008A3673 /* URLFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F633157726EE3D06008A3673 /* URLFormatterTests.swift */; };
@@ -488,6 +489,10 @@
 		F615824223834D6500D2BD41 /* FeedDiscoverer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDiscoverer.swift; sourceTree = "<group>"; };
 		F6164C571E32A6660086261C /* DisclosureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisclosureView.h; sourceTree = "<group>"; };
 		F6164C581E32A6660086261C /* DisclosureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisclosureView.m; sourceTree = "<group>"; };
+		F61901842E0F16B000A7A200 /* FilterBarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterBarViewController.h; sourceTree = "<group>"; };
+		F61901852E0F16B000A7A200 /* FilterBarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FilterBarViewController.m; sourceTree = "<group>"; };
+		F61901892E0F1D5400A7A200 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FilterBarViewController.xib; sourceTree = "<group>"; };
+		F619018C2E0F1D5400A7A200 /* mul */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = mul; path = mul.lproj/FilterBarViewController.xcstrings; sourceTree = "<group>"; };
 		F61CEA651F039E56009C878E /* ButtonToolbarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ButtonToolbarItem.swift; sourceTree = "<group>"; };
 		F61CEA671F03F277009C878E /* PlugInToolbarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PlugInToolbarItem.swift; sourceTree = "<group>"; };
 		F6209C5923D3FFA700D5537D /* Vienna.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; lineEnding = 0; path = Vienna.sdef; sourceTree = "<group>"; usesTabs = 1; };
@@ -495,7 +500,6 @@
 		F625801D1E2853B90035E43C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ActivityViewer.xib; sourceTree = "<group>"; };
 		F62581441E29B90A0035E43C /* SearchPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchPanel.xib; sourceTree = "<group>"; };
 		F626F5F524A76B9100D3AAD8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Preferences.storyboard; sourceTree = "<group>"; };
-		F628DFE21ED2698A00FACFD3 /* FilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		F62E324D284E0CAF0046EA1F /* SharingServiceToolbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingServiceToolbarItem.swift; sourceTree = "<group>"; };
 		F633157526ED73CB008A3673 /* URLFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = URLFormatter.swift; sourceTree = "<group>"; };
 		F633157726EE3D06008A3673 /* URLFormatterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = URLFormatterTests.swift; sourceTree = "<group>"; };
@@ -922,6 +926,7 @@
 				2FDF6FBD218A266A002F77E9 /* TabbedBrowserViewController.xib */,
 				2FDF6FBE218A266A002F77E9 /* BrowserTab.xib */,
 				2F125EDD24D0638600868E11 /* BrowserTabWithLegacyAddressBar.xib */,
+				F619018A2E0F1D5400A7A200 /* FilterBarViewController.xib */,
 				F62581441E29B90A0035E43C /* SearchPanel.xib */,
 				F6D572B01E26AA8A00CDA909 /* FeedCredentials.xib */,
 				F6832F651F10C4C9007920D4 /* ExportAccessoryViewController.xib */,
@@ -1087,7 +1092,8 @@
 				4350287C165DE9DF0018EDB7 /* ProgressTextCell.m */,
 				4350288D165DE9DF0018EDB7 /* UnifiedDisplayView.h */,
 				4350288E165DE9DF0018EDB7 /* UnifiedDisplayView.m */,
-				F628DFE21ED2698A00FACFD3 /* FilterView.swift */,
+				F61901842E0F16B000A7A200 /* FilterBarViewController.h */,
+				F61901852E0F16B000A7A200 /* FilterBarViewController.m */,
 			);
 			name = "Article list";
 			sourceTree = "<group>";
@@ -1577,6 +1583,7 @@
 				F6D572B71E26AAA100CDA909 /* RSSFeed.xib in Resources */,
 				F6B7F9CB2E22E77F005ADB06 /* Downloads.storyboard in Resources */,
 				F6832F631F10C4C9007920D4 /* ExportAccessoryViewController.xib in Resources */,
+				F619018B2E0F1D5400A7A200 /* FilterBarViewController.xib in Resources */,
 				AACAEA3E0954E71100ACD502 /* DemoFeeds.plist in Resources */,
 				F65D6D711E74619E00A30974 /* Credits.rtf in Resources */,
 				F685D24C292460210097C0D3 /* Predicates.strings in Resources */,
@@ -1892,11 +1899,11 @@
 				F6B059E42961D0DD00F6E31B /* JSONFeedParser.swift in Sources */,
 				F68792872700A678009B7BB5 /* SecurityScopedBookmark.swift in Sources */,
 				F6094E331F10107800677D3B /* ExportAccessoryViewController.swift in Sources */,
+				F61901882E0F16B000A7A200 /* FilterBarViewController.m in Sources */,
 				F69743ED2ADAC4A2006C5BBC /* UserNotificationRequest.swift in Sources */,
 				2FCD69302260B3E7005BAA75 /* CustomWKWebView.swift in Sources */,
 				F6A464BC272F47BE0071E3F6 /* NSKeyedUnarchiver+Compatibility.m in Sources */,
 				2FDF6FC0218A266A002F77E9 /* BrowserTab.swift in Sources */,
-				F628DFE31ED2698A00FACFD3 /* FilterView.swift in Sources */,
 				F64C2CCC1E83825D00ED4E04 /* DateFormatterExtension.m in Sources */,
 				B85F93E5255AE48000B54B68 /* NSPopUpButtonExtensions.swift in Sources */,
 				4350289F165DE9E00018EDB7 /* Constants.m in Sources */,
@@ -1987,6 +1994,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		F619018A2E0F1D5400A7A200 /* FilterBarViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F61901892E0F1D5400A7A200 /* Base */,
+				F619018C2E0F1D5400A7A200 /* mul */,
+			);
+			name = FilterBarViewController.xib;
+			sourceTree = "<group>";
+		};
 		F625801E1E2853B90035E43C /* ActivityViewer.xib */ = {
 			isa = PBXVariantGroup;
 			children = (

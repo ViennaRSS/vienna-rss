@@ -24,8 +24,7 @@
 
 @class ArticleView;
 @class Article;
-@class DisclosureView;
-@class FilterView;
+@class VNAFilterBarViewController;
 
 @protocol ArticleBaseView <BaseView>
     @property (readonly, nonatomic) BOOL selectFirstUnreadInFolder;
@@ -39,7 +38,6 @@
 	-(void)saveTableSettings;
 	-(void)ensureSelectedArticle;
 
-@property (readonly, nonatomic) DisclosureView *filterBarDisclosureView;
-@property (readonly, nonatomic) FilterView *filterBarView;
+@property (readonly, nonatomic) VNAFilterBarViewController *filterBarViewController;
 
 @end

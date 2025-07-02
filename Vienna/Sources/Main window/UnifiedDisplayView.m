@@ -30,6 +30,7 @@
 #import "Article.h"
 #import "Folder.h"
 #import "Database.h"
+#import "FilterBarViewController.h"
 #import "NSResponder+EventHandler.h"
 #import "Vienna-Swift.h"
 
@@ -44,8 +45,6 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
 
 @interface UnifiedDisplayView () <CustomWKHoverUIDelegate>
 
-@property (readwrite, nonatomic) IBOutlet DisclosureView *filterBarDisclosureView;
-@property (readwrite, nonatomic) IBOutlet FilterView *filterBarView;
 @property (nonatomic) OverlayStatusBar *statusBar;
 
 -(void)initTableView;
@@ -65,6 +64,8 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
     NSMutableArray *rowHeightArray;
 }
 
+@synthesize filterBarViewController = _filterBarViewController;
+
 #pragma mark -
 #pragma mark Init/Dealloc
 
@@ -77,6 +78,7 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
     if (self) {
 		markReadTimer = nil;
 		rowHeightArray = [[NSMutableArray alloc] init];
+        _filterBarViewController = [VNAFilterBarViewController instantiateFromNib];
     }
     return self;
 }
@@ -155,6 +157,8 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
     articleList.delegate = self;
     articleList.dataSource = self;
     articleList.accessibilityValueDescription = NSLocalizedString(@"Articles", nil);
+
+    self.filterBarViewController.filterBarContainer = articleList.enclosingScrollView;
 
     [NSUserDefaults.standardUserDefaults addObserver:self
                                           forKeyPath:MAPref_ShowStatusBar
