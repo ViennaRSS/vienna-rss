@@ -37,6 +37,7 @@
 #import "Vienna-Swift.h"
 #import "GeneratedAssetSymbols.h"
 #import "AppController.h"
+#import "FilterBarViewController.h"
 
 // Shared defaults key
 NSString * const MAPref_ShowEnclosureBar = @"ShowEnclosureBar";
@@ -44,9 +45,6 @@ NSString * const MAPref_ShowEnclosureBar = @"ShowEnclosureBar";
 static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverContext;
 
 @interface ArticleListView ()
-
-@property (readwrite, nonatomic) IBOutlet DisclosureView *filterBarDisclosureView;
-@property (readwrite, nonatomic) IBOutlet FilterView *filterBarView;
 
 @property (weak, nonatomic) IBOutlet NSStackView *contentStackView;
 @property (weak, nonatomic) IBOutlet EnclosureView *enclosureView;
@@ -100,6 +98,8 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
     BOOL isLoadingHTMLArticle;
 }
 
+@synthesize filterBarViewController = _filterBarViewController;
+
 /* initWithFrame
  * Initialise our view.
  */
@@ -114,6 +114,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 		_currentPageFullHTML = NO;
 		isLoadingHTMLArticle = NO;
         _layoutManager = [NSLayoutManager new];
+        _filterBarViewController = [VNAFilterBarViewController instantiateFromNib];
     }
     return self;
 }
@@ -185,6 +186,9 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
     middleLineDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, [NSColor systemBlueColor], NSForegroundColorAttributeName, nil];
     linkLineDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, [NSColor systemBlueColor], NSForegroundColorAttributeName, nil];
     bottomLineDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, [NSColor systemGrayColor], NSForegroundColorAttributeName, nil];
+
+    NSScrollView *articleListScrollView = articleList.enclosingScrollView;
+    self.filterBarViewController.filterBarContainer = articleListScrollView;
 
 	// Set the reading pane orientation
 	[self setOrientation:prefs.layout];
@@ -821,10 +825,12 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 	splitView2.autosaveName = nil;
 	splitView2.vertical = (newLayout == VNALayoutCondensed);
 	if (splitView2.vertical) {
+        self.filterBarViewController.compact = YES;
 		splitView2.dividerStyle = NSSplitViewDividerStyleThin;
 		splitView2.autosaveName = @"Vienna3SplitView2CondensedLayout";
 		self.textViewWidthConstraint.constant = self.contentStackView.frame.size.width;
 	} else {
+        self.filterBarViewController.compact = NO;
 		splitView2.dividerStyle = NSSplitViewDividerStylePaneSplitter;
 		splitView2.autosaveName = @"Vienna3SplitView2ReportLayout";
 		self.textViewWidthConstraint.constant = splitView2.frame.size.width;
