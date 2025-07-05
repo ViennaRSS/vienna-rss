@@ -20,12 +20,12 @@
 @import Foundation;
 
 /// Filtering options
-typedef NS_ENUM(NSInteger, VNAFilter) {
-    VNAFilterAll,
-    VNAFilterUnread,
-    VNAFilterLastRefresh,
-    VNAFilterToday,
-    VNAFilterTime48h,
-    VNAFilterFlagged,
-    VNAFilterUnreadOrFlagged,
-} NS_SWIFT_NAME(Filter);
+typedef NS_ENUM(NSInteger, VNAFilterMode) {
+    VNAFilterModeNone,
+    VNAFilterModeUnread,
+    VNAFilterModeLastRefresh,
+    VNAFilterModeToday,
+    VNAFilterModeTime48h,
+    VNAFilterModeFlagged,
+    VNAFilterModeUnreadOrFlagged,
+} NS_SWIFT_NAME(FilterMode);
