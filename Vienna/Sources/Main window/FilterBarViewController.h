@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic) NSString *placeholderFilterString;
 
-@property (nonatomic) VNAFilter filterMode;
+@property (nonatomic) VNAFilterMode filterMode;
 
 // MARK: Filter bar presentation
 
