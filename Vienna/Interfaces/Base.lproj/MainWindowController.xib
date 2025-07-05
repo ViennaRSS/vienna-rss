@@ -796,10 +796,10 @@
         </menu>
         <userDefaultsController representsSharedInstance="YES" id="fAX-Jg-YQ6"/>
         <visualEffectView blendingMode="behindWindow" material="sidebar" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="ZRe-FS-qxT">
-            <rect key="frame" x="0.0" y="0.0" width="288" height="36"/>
+            <rect key="frame" x="0.0" y="0.0" width="288" height="32"/>
             <subviews>
                 <button wantsLayer="YES" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="pAl-AW-rM9">
-                    <rect key="frame" x="90" y="3" width="108" height="27"/>
+                    <rect key="frame" x="90" y="1" width="108" height="27"/>
                     <buttonCell key="cell" type="push" title="Show All Feeds" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Qqb-bF-tIg">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="smallSystem"/>
@@ -814,11 +814,11 @@
             </subviews>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="5Fz-yB-GwX" secondAttribute="bottom" id="0CJ-b8-D4N"/>
-                <constraint firstAttribute="bottom" secondItem="pAl-AW-rM9" secondAttribute="bottom" constant="10" id="3Hh-kM-U0q"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pAl-AW-rM9" secondAttribute="trailing" constant="9" id="4qp-sf-j4j"/>
                 <constraint firstAttribute="trailing" secondItem="5Fz-yB-GwX" secondAttribute="trailing" id="DQX-0q-FzY"/>
+                <constraint firstItem="pAl-AW-rM9" firstAttribute="centerY" secondItem="ZRe-FS-qxT" secondAttribute="centerY" id="Ear-nd-Enm"/>
+                <constraint firstAttribute="height" constant="32" id="Hg3-Fq-Bgl"/>
                 <constraint firstItem="pAl-AW-rM9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ZRe-FS-qxT" secondAttribute="leading" constant="9" id="PBh-CQ-jvM"/>
-                <constraint firstItem="pAl-AW-rM9" firstAttribute="top" secondItem="ZRe-FS-qxT" secondAttribute="top" constant="10" id="arZ-nw-3Rp"/>
                 <constraint firstItem="5Fz-yB-GwX" firstAttribute="leading" secondItem="ZRe-FS-qxT" secondAttribute="leading" id="rwU-U9-4ly"/>
                 <constraint firstItem="pAl-AW-rM9" firstAttribute="centerX" secondItem="ZRe-FS-qxT" secondAttribute="centerX" id="thU-7y-6Z9"/>
             </constraints>
