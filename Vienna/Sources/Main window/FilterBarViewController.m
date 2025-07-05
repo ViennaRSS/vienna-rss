@@ -82,12 +82,12 @@ static NSNibName const VNAFilterBarViewControllerNibName = @"FilterBarViewContro
     self.searchField.placeholderString = placeholderFilterString;
 }
 
-- (VNAFilter)filterMode
+- (VNAFilterMode)filterMode
 {
     return self.popUpButton.selectedTag;
 }
 
-- (void)setFilterMode:(VNAFilter)selectedFilter
+- (void)setFilterMode:(VNAFilterMode)selectedFilter
 {
     [self.popUpButton selectItemWithTag:selectedFilter];
 }

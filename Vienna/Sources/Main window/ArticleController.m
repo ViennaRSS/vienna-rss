@@ -741,7 +741,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 {
     NSInteger tag = sender.tag;
     Preferences.standardPreferences.filterMode = tag;
-    if (tag == VNAFilterAll) {
+    if (tag == VNAFilterModeNone) {
         self.filterModeLabel = @"";
     } else {
         self.filterModeLabel = sender.title;
@@ -1183,23 +1183,23 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 
 - (BOOL)filterArticle:(Article *)article usingMode:(NSInteger)filterMode {
     switch (filterMode) {
-        case VNAFilterUnread:
+        case VNAFilterModeUnread:
             return !article.isRead;
-        case VNAFilterLastRefresh: {
+        case VNAFilterModeLastRefresh: {
             return article.status == ArticleStatusNew || article.status == ArticleStatusUpdated;
         }
-        case VNAFilterToday:
+        case VNAFilterModeToday:
             return [NSCalendar.currentCalendar isDateInToday:article.lastUpdate];
-        case VNAFilterTime48h: {
+        case VNAFilterModeTime48h: {
             NSDate *twoDaysAgo = [NSCalendar.currentCalendar dateByAddingUnit:NSCalendarUnitDay
                                                                         value:-2
                                                                        toDate:[NSDate date]
                                                                       options:0];
             return [article.lastUpdate compare:twoDaysAgo] != NSOrderedAscending;
         }
-        case VNAFilterFlagged:
+        case VNAFilterModeFlagged:
             return article.isFlagged;
-        case VNAFilterUnreadOrFlagged:
+        case VNAFilterModeUnreadOrFlagged:
             return (!article.isRead || article.isFlagged);
         default:
             return true;
@@ -1285,7 +1285,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
         menuItem.state = (layout == VNALayoutUnified) ? NSControlStateValueOn : NSControlStateValueOff;
         return YES;
     } else if (action == @selector(changeFiltering:)) {
-        VNAFilter filterMode = Preferences.standardPreferences.filterMode;
+        VNAFilterMode filterMode = Preferences.standardPreferences.filterMode;
         menuItem.state = (menuItem.tag == filterMode) ? NSControlStateValueOn : NSControlStateValueOff;
         return YES;
     } else if (action == @selector(showHideFilterBar:)) {
