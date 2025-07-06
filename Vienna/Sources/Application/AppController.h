@@ -30,7 +30,6 @@
 @class PluginManager;
 @class SearchMethod;
 @class Database;
-@class ArticleController;
 @class Article;
 @class UnifiedDisplayView;
 @class ArticleListView;
@@ -44,7 +43,6 @@
 @property (nonatomic) IBOutlet SPUStandardUpdaterController *sparkleController;
 @property (nonatomic) PluginManager *pluginManager;
 @property (nonatomic, weak) id<Browser> browser;
-@property (nonatomic) ArticleController *articleController;
 @property (nonatomic, weak) UnifiedDisplayView *unifiedListView;
 @property (nonatomic, weak) ArticleListView *articleListView;
 @property (nonatomic) NewSubscription *rssFeed;

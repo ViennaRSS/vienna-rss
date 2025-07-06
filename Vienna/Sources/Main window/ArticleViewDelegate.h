@@ -19,14 +19,11 @@
 
 @import Foundation;
 
-@class AppController;
-
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol ArticleViewDelegate <NSObject>
 
 @property (nullable) NSError *error;
-@property AppController *controller;
 @property (getter=isCurrentPageFullHTML, readonly) BOOL currentPageFullHTML;
 
 - (void)startMainFrameLoad;
