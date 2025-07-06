@@ -1981,11 +1981,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags
 {
-    if (keyChar >= '0' && keyChar <= '9' && (flags & NSEventModifierFlagControl)) {
-		NSInteger layoutStyle = VNALayoutReport + (keyChar - '0');
-		[self setLayout:layoutStyle withRefresh:YES];
-		return YES;
-	}
 	switch (keyChar) {
 		case NSLeftArrowFunctionKey:
             if (flags & (NSEventModifierFlagCommand | NSEventModifierFlagOption)) {
