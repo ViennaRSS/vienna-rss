@@ -143,8 +143,9 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
         _userAgentName = [self stringForKey:MAPref_UserAgentName];
 
         // Archived objects
-        searchMethod = [NSKeyedUnarchiver vna_unarchivedObjectOfClass:[SearchMethod class]
-                                                             fromData:[self objectForKey:MAPref_SearchMethod]];
+        searchMethod = [NSKeyedUnarchiver unarchivedObjectOfClass:[SearchMethod class]
+                                                         fromData:[self objectForKey:MAPref_SearchMethod]
+                                                            error:NULL];
         articleSortDescriptors = [NSKeyedUnarchiver vna_unarchivedArrayOfObjectsOfClass:[NSSortDescriptor class]
                                                                                fromData:[self objectForKey:MAPref_ArticleListSortOrders]];
         // Securely decoded sort descriptors must be explicitely set to allow
@@ -354,8 +355,9 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
         NSData *archive = [self objectForKey:folderListFontKey];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-        NSFont *font = [NSKeyedUnarchiver vna_unarchivedObjectOfClass:[NSFont class]
-                                                             fromData:archive];
+        NSFont *font = [NSKeyedUnarchiver unarchivedObjectOfClass:[NSFont class]
+                                                         fromData:archive
+                                                            error:NULL];
 #pragma clang diagnostic pop
         if (font && font.pointSize <= 11.0) {
             [userPrefs setInteger:VNAFeedListSizeModeTiny
@@ -855,16 +857,18 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
 - (NSFont *)articleListFont
 {
     NSData *archive = [self objectForKey:MAPref_ArticleListFont];
-    NSFont *font = [NSKeyedUnarchiver vna_unarchivedObjectOfClass:[NSFont class]
-                                                         fromData:archive];
+    NSFont *font = [NSKeyedUnarchiver unarchivedObjectOfClass:[NSFont class]
+                                                     fromData:archive
+                                                        error:NULL];
     // If the unarchived data cannot be resolved to a font instance, the data
     // is likely corrupted and should be removed.
     if (!font) {
         [self removeObjectForKey:MAPref_ArticleListFont];
         // Load the archived data again, this time from registered defaults.
         NSData *registeredArchive = [self objectForKey:MAPref_ArticleListFont];
-        font = [NSKeyedUnarchiver vna_unarchivedObjectOfClass:[NSFont class]
-                                                     fromData:registeredArchive];
+        font = [NSKeyedUnarchiver unarchivedObjectOfClass:[NSFont class]
+                                                 fromData:registeredArchive
+                                                    error:NULL];
     }
     return font;
 }
