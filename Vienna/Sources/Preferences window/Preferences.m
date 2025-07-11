@@ -28,7 +28,6 @@
 #import "DownloadItem.h"
 #import "FeedListConstants.h"
 #import "NSFileManager+Paths.h"
-#import "NSKeyedArchiver+Compatibility.h"
 #import "NSKeyedUnarchiver+Compatibility.h"
 #import "SearchMethod.h"
 #import "StringExtensions.h"
@@ -244,12 +243,15 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
     defaultValues[MAPref_ShowEnclosureBar] = boolYes;
 
     // Archives
-    defaultValues[MAPref_ArticleListFont] = [NSKeyedArchiver vna_archivedDataWithRootObject:defaultFont
-                                                                      requiringSecureCoding:YES];
-    defaultValues[MAPref_ArticleListSortOrders] = [NSKeyedArchiver vna_archivedDataWithRootObject:@[sortDescriptor]
-                                                                            requiringSecureCoding:YES];
-    defaultValues[MAPref_SearchMethod] = [NSKeyedArchiver vna_archivedDataWithRootObject:SearchMethod.allArticlesSearchMethod
-                                                                   requiringSecureCoding:YES];
+    defaultValues[MAPref_ArticleListFont] = [NSKeyedArchiver archivedDataWithRootObject:defaultFont
+                                                                  requiringSecureCoding:YES
+                                                                                  error:NULL];
+    defaultValues[MAPref_ArticleListSortOrders] = [NSKeyedArchiver archivedDataWithRootObject:@[sortDescriptor]
+                                                                        requiringSecureCoding:YES
+                                                                                        error:NULL];
+    defaultValues[MAPref_SearchMethod] = [NSKeyedArchiver archivedDataWithRootObject:SearchMethod.allArticlesSearchMethod
+                                                               requiringSecureCoding:YES
+                                                                               error:NULL];
 
     defaultValues[MAPref_ConcurrentDownloads] = @(MA_Default_ConcurrentDownloads);
     defaultValues[MAPref_SyncGoogleReader] = boolNo;
@@ -290,8 +292,9 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
                                            withObject:descriptor];
             }
         }];
-        NSData *keyedArchive = [NSKeyedArchiver vna_archivedDataWithRootObject:[sortDescriptors copy]
-                                                         requiringSecureCoding:YES];
+        NSData *keyedArchive = [NSKeyedArchiver archivedDataWithRootObject:[sortDescriptors copy]
+                                                     requiringSecureCoding:YES
+                                                                     error:NULL];
         [self setObject:keyedArchive forKey:MAPref_ArticleListSortOrders];
         [userPrefs removeObjectForKey:articleSortDescriptorsKey];
     }
@@ -314,8 +317,9 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
             }
         }
 
-        NSData *keyedArchive = [NSKeyedArchiver vna_archivedDataWithRootObject:downloadItems
-                                                         requiringSecureCoding:YES];
+        NSData *keyedArchive = [NSKeyedArchiver archivedDataWithRootObject:downloadItems
+                                                     requiringSecureCoding:YES
+                                                                     error:NULL];
         [self setObject:keyedArchive forKey:MAPref_DownloadItemList];
         [userPrefs removeObjectForKey:downloadsListKey];
     }
@@ -326,8 +330,9 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
         NSFont *font = [NSUnarchiver unarchiveObjectWithData:archive];
 #pragma clang diagnostic pop
-        NSData *keyedArchive = [NSKeyedArchiver vna_archivedDataWithRootObject:font
-                                                         requiringSecureCoding:YES];
+        NSData *keyedArchive = [NSKeyedArchiver archivedDataWithRootObject:font
+                                                     requiringSecureCoding:YES
+                                                                     error:NULL];
         [self setObject:keyedArchive forKey:MAPref_ArticleListFont];
         [userPrefs removeObjectForKey:messageListFontKey];
     }
@@ -616,8 +621,9 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
 -(void)setSearchMethod:(SearchMethod *)newMethod
 {
 	searchMethod = newMethod;
-    NSData *archive = [NSKeyedArchiver vna_archivedDataWithRootObject:searchMethod
-                                                requiringSecureCoding:YES];
+    NSData *archive = [NSKeyedArchiver archivedDataWithRootObject:searchMethod
+                                            requiringSecureCoding:YES
+                                                            error:NULL];
     [self setObject:archive forKey:MAPref_SearchMethod];
 }
 
@@ -865,8 +871,9 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
 
 - (void)setArticleListFont:(NSFont *)articleListFont
 {
-    NSData *archive = [NSKeyedArchiver vna_archivedDataWithRootObject:articleListFont
-                                                requiringSecureCoding:YES];
+    NSData *archive = [NSKeyedArchiver archivedDataWithRootObject:articleListFont
+                                            requiringSecureCoding:YES
+                                                            error:NULL];
     [self setObject:archive forKey:MAPref_ArticleListFont];
     [NSNotificationCenter.defaultCenter postNotificationName:MA_Notify_ArticleListFontChange
                                                       object:articleListFont];
@@ -899,8 +906,9 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
 
 	if (![articleSortDescriptors isEqualToArray:newSortDescriptors]) {
 		articleSortDescriptors = [newSortDescriptors copy];
-        NSData *archive = [NSKeyedArchiver vna_archivedDataWithRootObject:articleSortDescriptors
-                                                    requiringSecureCoding:YES];
+        NSData *archive = [NSKeyedArchiver archivedDataWithRootObject:articleSortDescriptors
+                                                requiringSecureCoding:YES
+                                                                error:NULL];
         [self setObject:archive forKey:MAPref_ArticleListSortOrders];
 		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_PreferenceChange object:nil];
 	}

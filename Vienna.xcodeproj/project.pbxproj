@@ -201,7 +201,6 @@
 		F6A179D326B82BE3008DDA42 /* NSFileManagerExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A179D226B82BE3008DDA42 /* NSFileManagerExtensionTests.swift */; };
 		F6A243E12C69E534000A006F /* Article+Tags.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A243E02C69E534000A006F /* Article+Tags.m */; };
 		F6A464BC272F47BE0071E3F6 /* NSKeyedUnarchiver+Compatibility.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A464BA272F47BE0071E3F6 /* NSKeyedUnarchiver+Compatibility.m */; };
-		F6A464BD272F47BE0071E3F6 /* NSKeyedArchiver+Compatibility.m in Sources */ = {isa = PBXBuildFile; fileRef = F6A464BB272F47BE0071E3F6 /* NSKeyedArchiver+Compatibility.m */; };
 		F6A4E8481F040D58001C9191 /* PlugInToolbarItemButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6A4E8471F040D58001C9191 /* PlugInToolbarItemButton.swift */; };
 		F6A7DE341E47138B0017BE5E /* advanced.html in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DE2A1E47138B0017BE5E /* advanced.html */; };
 		F6A7DE351E47138B0017BE5E /* faq.html in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DE2C1E47138B0017BE5E /* faq.html */; };
@@ -553,9 +552,7 @@
 		F6A243DF2C69E534000A006F /* Article+Tags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Article+Tags.h"; sourceTree = "<group>"; };
 		F6A243E02C69E534000A006F /* Article+Tags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Article+Tags.m"; sourceTree = "<group>"; };
 		F6A464B8272F47BE0071E3F6 /* NSKeyedUnarchiver+Compatibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "NSKeyedUnarchiver+Compatibility.h"; sourceTree = "<group>"; };
-		F6A464B9272F47BE0071E3F6 /* NSKeyedArchiver+Compatibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "NSKeyedArchiver+Compatibility.h"; sourceTree = "<group>"; };
 		F6A464BA272F47BE0071E3F6 /* NSKeyedUnarchiver+Compatibility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSKeyedUnarchiver+Compatibility.m"; sourceTree = "<group>"; };
-		F6A464BB272F47BE0071E3F6 /* NSKeyedArchiver+Compatibility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSKeyedArchiver+Compatibility.m"; sourceTree = "<group>"; };
 		F6A4E8471F040D58001C9191 /* PlugInToolbarItemButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PlugInToolbarItemButton.swift; sourceTree = "<group>"; };
 		F6A7DDCA1E470E980017BE5E /* Vienna.help */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Vienna.help; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6A7DDCC1E470E980017BE5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1376,8 +1373,6 @@
 				2FE44CAC25B7995400554E82 /* NSApplication+AppController.swift */,
 				F6F12AFB25ABDDE3005B2DCE /* NSFileManager+Paths.h */,
 				F6F12AFC25ABDDE3005B2DCE /* NSFileManager+Paths.m */,
-				F6A464B9272F47BE0071E3F6 /* NSKeyedArchiver+Compatibility.h */,
-				F6A464BB272F47BE0071E3F6 /* NSKeyedArchiver+Compatibility.m */,
 				F6A464B8272F47BE0071E3F6 /* NSKeyedUnarchiver+Compatibility.h */,
 				F6A464BA272F47BE0071E3F6 /* NSKeyedUnarchiver+Compatibility.m */,
 				3A23F13315276935008AF863 /* NSNotificationAdditions.h */,
@@ -1922,7 +1917,6 @@
 				43BA97FE1664804E00B95F35 /* DSClickableURLTextField.m in Sources */,
 				F69140E41E71B94200D51BFF /* AppController+Notifications.m in Sources */,
 				3A4DBEC71733C207006DD2AB /* ArticleCellView.m in Sources */,
-				F6A464BD272F47BE0071E3F6 /* NSKeyedArchiver+Compatibility.m in Sources */,
 				F69743E92ADAC497006C5BBC /* UserNotificationCenter.swift in Sources */,
 				37C650801816EBAD3C0D9DBF /* NSURL+CaminoExtensions.m in Sources */,
 			);
