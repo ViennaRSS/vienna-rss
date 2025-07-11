@@ -644,13 +644,15 @@
     // since the unread articles are likely to be clustered
     // with the most recent articles at the end of the array
     // so it makes the code slightly faster.
-    for (id obj in self.cachedGuids.reverseObjectEnumerator.allObjects) {
-        Article * article = [self.cachedArticles objectForKey:(NSString *)obj];
-        if (!article.isRead) {
-            article.read = YES;
-            count--;
-            if (count == 0) {
-                break;
+    @synchronized(self) {
+        for (id obj in self.cachedGuids.reverseObjectEnumerator.allObjects) {
+            Article * article = [self.cachedArticles objectForKey:(NSString *)obj];
+            if (!article.isRead) {
+                article.read = YES;
+                count--;
+                if (count == 0) {
+                    break;
+                }
             }
         }
     }
@@ -662,23 +664,25 @@
 -(void)resetArticleStatuses
 {
     NSInteger count = latestFetchCount;
-    // we take profit from the fact that the articles
-    // which were fetched during the last feed refresh 
-    // are located at the end of the array
-    for (NSString * guid in self.cachedGuids.reverseObjectEnumerator.allObjects) {
-        Article * article = [self.cachedArticles objectForKey:guid];
-        if (article &&
-            (article.status == ArticleStatusNew || article.status == ArticleStatusUpdated))
-        {
-            article.status = ArticleStatusEmpty;
-            count--;
-            if (count == 0) {
-                break;
+    @synchronized(self) {
+        // we take profit from the fact that the articles
+        // which were fetched during the last feed refresh
+        // are located at the end of the array
+        for (NSString *guid in self.cachedGuids.reverseObjectEnumerator.allObjects) {
+            Article *article = [self.cachedArticles objectForKey:guid];
+            if (article &&
+                (article.status == ArticleStatusNew || article.status == ArticleStatusUpdated))
+            {
+                article.status = ArticleStatusEmpty;
+                count--;
+                if (count == 0) {
+                    break;
+                }
             }
         }
     }
     latestFetchCount = 0;
-}
+} // resetArticleStatuses
 
 /* arrayOfUnreadArticlesRefs
  * Return an array of ArticleReference of all unread articles
