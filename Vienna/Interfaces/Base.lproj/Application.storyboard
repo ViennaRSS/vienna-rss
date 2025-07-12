@@ -27,7 +27,7 @@
                                                 </fragment>
                                             </attributedString>
                                             <connections>
-                                                <action selector="showPreferences:" target="Ady-hI-5gd" id="UuH-UI-a6l"/>
+                                                <segue destination="wZu-Fr-9fZ" kind="show" id="6id-EG-QL4"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Check for Updates" id="1104">
@@ -833,6 +833,14 @@ CA
                 </menu>
             </objects>
             <point key="canvasLocation" x="0.0" y="0.0"/>
+        </scene>
+        <!--Preferences-->
+        <scene sceneID="TRG-yU-6gM">
+            <objects>
+                <controllerPlaceholder storyboardName="Preferences" id="wZu-Fr-9fZ" sceneMemberID="viewController"/>
+                <customObject id="6ci-2y-nV0" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-135" y="185"/>
         </scene>
     </scenes>
 </document>
