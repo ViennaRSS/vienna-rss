@@ -1,15 +1,14 @@
 //
-//  DownloadWindow.h
+//  DownloadViewController.h
 //  Vienna
 //
-//  Created by Steve on 10/9/05.
-//  Copyright (c) 2004-2005 Steve Palmer. All rights reserved.
+//  Copyright 2004-2005 Steve Palmer, 2025 Eitot
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
 //  You may obtain a copy of the License at
 //
-//  http://www.apache.org/licenses/LICENSE-2.0
+//  https://www.apache.org/licenses/LICENSE-2.0
 //
 //  Unless required by applicable law or agreed to in writing, software
 //  distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,6 +19,14 @@
 
 @import Cocoa;
 
-@interface DownloadWindow : NSWindowController <NSWindowDelegate>
+NS_ASSUME_NONNULL_BEGIN
+
+NS_SWIFT_NAME(DownloadViewController)
+@interface VNADownloadViewController : NSViewController <NSMenuDelegate,
+                                                         NSMenuItemValidation,
+                                                         NSTableViewDelegate,
+                                                         NSTableViewDataSource>
 
 @end
+
+NS_ASSUME_NONNULL_END

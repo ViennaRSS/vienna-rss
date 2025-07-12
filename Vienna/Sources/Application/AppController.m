@@ -49,7 +49,6 @@
 #import "ArticleController.h"
 #import "FoldersTree.h"
 #import "Article.h"
-#import "DownloadWindow.h"
 #import "TreeNode.h"
 #import "Field.h"
 #import "Folder.h"
@@ -104,7 +103,6 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
     IBOutlet NSMenuItem *sortByMenu;
     IBOutlet NSMenuItem *columnsMenu;
 
-    DownloadWindow *downloadWindow;
     SmartFolder *smartFolder;
     NewGroupFolder *groupFolder;
     SearchPanel *searchPanel;
@@ -2108,17 +2106,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
             }];
 		}
 	}
-}
-
-/* showDownloadsWindow
- * Show the Downloads window, bringing it to the front if necessary.
- */
--(IBAction)showDownloadsWindow:(id)sender
-{
-	if (downloadWindow == nil) {
-		downloadWindow = [[DownloadWindow alloc] init];
-	}
-	[downloadWindow.window makeKeyAndOrderFront:sender];
 }
 
 /* viewFirstUnread

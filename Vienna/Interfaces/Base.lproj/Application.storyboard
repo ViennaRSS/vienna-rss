@@ -756,7 +756,7 @@ CA
                                         </menuItem>
                                         <menuItem title="Downloads" keyEquivalent="2" id="1061">
                                             <connections>
-                                                <action selector="showDownloadsWindow:" target="Ady-hI-5gd" id="JdX-7A-Jxj"/>
+                                                <segue destination="alz-dD-EM2" kind="show" id="3bh-ga-Ypr"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="403"/>
@@ -841,6 +841,14 @@ CA
                 <customObject id="6ci-2y-nV0" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-135" y="185"/>
+        </scene>
+        <!--Downloads-->
+        <scene sceneID="g4c-Wd-eba">
+            <objects>
+                <controllerPlaceholder storyboardName="Downloads" id="alz-dD-EM2" sceneMemberID="viewController"/>
+                <customObject id="gc0-3V-a5Y" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="135" y="185"/>
         </scene>
     </scenes>
 </document>
