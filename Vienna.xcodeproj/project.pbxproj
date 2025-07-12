@@ -34,6 +34,7 @@
 			buildConfigurationList = EAAF335914BDE402002A8837 /* Build configuration list for PBXAggregateTarget "Prepare Upload" */;
 			buildPhases = (
 				F6743B10224BB6980054FE1E /* Build Release Notes */,
+				3A58F4582E224BC00066C871 /* Prepare DMG */,
 				EAAF336614BEF4DF002A8837 /* Release For Upload */,
 			);
 			dependencies = (
@@ -363,6 +364,8 @@
 		3A4DBEC51733C206006DD2AB /* ArticleCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleCellView.h; sourceTree = "<group>"; };
 		3A4DBEC61733C206006DD2AB /* ArticleCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleCellView.m; sourceTree = "<group>"; };
 		3A5482F7168F5F4800887F91 /* Sparkle-setup.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "Sparkle-setup.sh"; sourceTree = "<group>"; };
+		3A58F4562E2247880066C871 /* DS_Store */ = {isa = PBXFileReference; lastKnownFileType = file; path = DS_Store; sourceTree = "<group>"; };
+		3A58F4592E227EC30066C871 /* DMGBackground.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = DMGBackground.psd; sourceTree = "<group>"; };
 		3A60E6092114AD740004D81D /* URLRequestExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = URLRequestExtensions.h; sourceTree = "<group>"; };
 		3A60E60A2114AD740004D81D /* URLRequestExtensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = URLRequestExtensions.m; sourceTree = "<group>"; };
 		3A6CC18623BBA49D0084ABEE /* Codesigning.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Codesigning.xcconfig; sourceTree = "<group>"; };
@@ -375,6 +378,7 @@
 		3A932D8923BB999A009B8061 /* ViennaDeployment.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = ViennaDeployment.entitlements; sourceTree = "<group>"; };
 		3AC411A426BBFDFD004A8700 /* WebKitArticleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebKitArticleView.swift; sourceTree = "<group>"; };
 		3ADBA70C23DDAFCA00156722 /* Notarize.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = Notarize.sh; sourceTree = "<group>"; };
+		3AF674562E2239EB00955D05 /* CreateDMG.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = CreateDMG.sh; sourceTree = "<group>"; };
 		430C4AE0166175C20079C9FC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		435026E5165DD8BE0018EDB7 /* ArticleRef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleRef.m; sourceTree = "<group>"; };
 		4350283D165DE7F60018EDB7 /* NSNotificationAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNotificationAdditions.m; sourceTree = "<group>"; };
@@ -844,6 +848,15 @@
 			path = TRVSURLSessionOperation;
 			sourceTree = "<group>";
 		};
+		3A58F4572E2247880066C871 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3A58F4562E2247880066C871 /* DS_Store */,
+				3A58F4592E227EC30066C871 /* DMGBackground.psd */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		43501F8E165DBCCB0018EDB7 /* DSClickableURLTextField */ = {
 			isa = PBXGroup;
 			children = (
@@ -876,7 +889,9 @@
 				3A78208829FF536400570771 /* PostArchive.sh */,
 				4398241A1666B37000FFE219 /* Changes-and-Notes.sh */,
 				3ADBA70C23DDAFCA00156722 /* Notarize.sh */,
+				3AF674562E2239EB00955D05 /* CreateDMG.sh */,
 				4398241C1666B37000FFE219 /* Release-for-upload.sh */,
+				3A58F4572E2247880066C871 /* Resources */,
 			);
 			path = Scripts;
 			sourceTree = "<group>";
@@ -1627,6 +1642,25 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Scripts/Sparkle-setup.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3A58F4582E224BC00066C871 /* Prepare DMG */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Prepare DMG";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Scripts/CreateDMG.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		3A6CC18823BBD1BF0084ABEE /* Archival Checks */ = {
