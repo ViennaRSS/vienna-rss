@@ -51,6 +51,7 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView, WKNavigationDelega
         if responds(to: #selector(setter: _textZoomFactor)) {
             _textZoomFactor = Preferences.standard.textSizeMultiplier
         }
+        allowsBackForwardNavigationGestures = false
         contextMenuProvider = self
     }
 
@@ -123,22 +124,23 @@ class WebKitArticleView: CustomWKWebView, ArticleContentView, WKNavigationDelega
     func contextMenuItemsFor(purpose: WKWebViewContextMenuContext, existingMenuItems: [NSMenuItem]) -> [NSMenuItem] {
         var menuItems = existingMenuItems
         switch purpose {
-        case .link(let url):
-            addLinkMenuCustomizations(&menuItems, url)
-        case .mediaLink(media: _, link: let link):
-            addLinkMenuCustomizations(&menuItems, link)
+        case .link, .mediaLink:
+            if let index = menuItems.firstIndex(where: { $0.identifier == .WKMenuItemOpenLink }) {
+                menuItems.remove(at: index)
+            }
+            fallthrough
         default:
-            break
+            if let index = menuItems.firstIndex(where: { $0.identifier == .WKMenuItemGoBack }) {
+                menuItems.remove(at: index)
+            }
+            if let index = menuItems.firstIndex(where: { $0.identifier == .WKMenuItemGoForward }) {
+                menuItems.remove(at: index)
+            }
         }
-        return contextMenuCustomizer.contextMenuItemsFor(purpose: purpose, existingMenuItems: menuItems)
-    }
-
-    private func addLinkMenuCustomizations(_ menuItems: inout [NSMenuItem], _ url: (URL)) {
-
-        if let index = menuItems.firstIndex(where: { $0.identifier == .WKMenuItemOpenLink }) {
-            menuItems.remove(at: index)
-        }
-
+        return contextMenuCustomizer.contextMenuItemsFor(
+            purpose: purpose,
+            existingMenuItems: menuItems
+        )
     }
 
     @objc
