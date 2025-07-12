@@ -22,7 +22,6 @@
 @import Sparkle;
 
 #define APPCONTROLLER ((AppController *)[NSApp delegate])
-#define APP ((ViennaApp *)NSApp)
 
 @class FoldersTree;
 @class NewSubscription;

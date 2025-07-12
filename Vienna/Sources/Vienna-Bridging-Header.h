@@ -17,7 +17,6 @@
 #import "Preferences.h"
 #import "RefreshManager.h"
 #import "UnifiedDisplayView.h"
-#import "ViennaApp.h"
 #import "WKPreferences+Private.h"
 #import "WKWebView+Private.h"
 #import "WKWebViewConfiguration+Private.h"

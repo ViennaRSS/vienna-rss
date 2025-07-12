@@ -1777,7 +1777,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     NSInteger action = [sender tag];
 	switch (action) {
 		case NSFindPanelActionSetFindString:
-			self.searchString = APP.currentTextSelection;
+			self.searchString = self.browser.activeTab ? self.browser.activeTab.textSelection : @"";
 			break;
 			
 		case NSFindPanelActionShowFindPanel:
@@ -2823,11 +2823,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     id<Tab> activeBrowserTab = self.browser.activeTab;
     if (activeBrowserTab) {
         //is browser tab
-        [self sendBlogEvent:externalEditorBundleIdentifier title:activeBrowserTab.title url:activeBrowserTab.tabUrl.absoluteString body:APP.currentTextSelection author:@"" guid:@""];
+        [self sendBlogEvent:externalEditorBundleIdentifier title:activeBrowserTab.title url:activeBrowserTab.tabUrl.absoluteString body:activeBrowserTab.textSelection author:@"" guid:@""];
     } else {
 		// Get the currently selected articles from the ArticleView and iterate over them.
         for (Article * currentArticle in self.articleController.markedArticleRange) {
-			[self sendBlogEvent:externalEditorBundleIdentifier title:currentArticle.title url:currentArticle.link body:APP.currentTextSelection author:currentArticle.author guid:currentArticle.guid];
+			[self sendBlogEvent:externalEditorBundleIdentifier title:currentArticle.title url:currentArticle.link body:@"" author:currentArticle.author guid:currentArticle.guid];
         }
 	}
 }
