@@ -21,10 +21,6 @@
 
 @interface WKPreferences (Private)
 
-#ifdef DEBUG
-@property (setter=_setDeveloperExtrasEnabled:, nonatomic) BOOL _developerExtrasEnabled;
-#endif
-
 // This is implemented by WKPreferences.elementFullscreenEnabled as of
 // macOS 12.3.
 @property (setter=_setFullScreenEnabled:, nonatomic) BOOL _fullScreenEnabled

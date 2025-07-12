@@ -56,12 +56,6 @@ class CustomWKWebView: WKWebView {
             prefs._isFullScreenEnabled = true
         }
 
-        #if DEBUG
-        if prefs.responds(to: #selector(setter: WKPreferences._developerExtrasEnabled)) {
-            prefs._developerExtrasEnabled = true
-        }
-        #endif
-
         usesMinimumFontSizeObservation = Preferences.standard
             .observe(\.enableMinimumFontSize, options: .initial) { preferences, _ in
                 guard !preferences.enableMinimumFontSize else {
