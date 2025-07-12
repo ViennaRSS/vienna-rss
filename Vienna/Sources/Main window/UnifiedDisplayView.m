@@ -22,6 +22,7 @@
 #import "ArticleController.h"
 #import "AppController.h"
 #import "ArticleCellView.h"
+#import "DisclosureView.h"
 #import "Preferences.h"
 #import "Constants.h"
 #import "StringExtensions.h"
@@ -29,6 +30,7 @@
 #import "Article.h"
 #import "Folder.h"
 #import "Database.h"
+#import "NSResponder+EventHandler.h"
 #import "Vienna-Swift.h"
 
 #define LISTVIEW_CELL_IDENTIFIER		@"ArticleCellView"
@@ -42,6 +44,8 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
 
 @interface UnifiedDisplayView () <CustomWKHoverUIDelegate>
 
+@property (readwrite, nonatomic) IBOutlet DisclosureView *filterBarDisclosureView;
+@property (readwrite, nonatomic) IBOutlet FilterView *filterBarView;
 @property (nonatomic) OverlayStatusBar *statusBar;
 
 -(void)initTableView;
@@ -299,15 +303,6 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
     NSString * guid = self.selectedArticle.guid;
 	[prefs setInteger:self.articleController.currentFolderId forKey:MAPref_CachedFolderID];
 	[prefs setString:(guid != nil ? guid : @"") forKey:MAPref_CachedArticleGUID];
-}
-
-/* handleKeyDown [delegate]
- * Support special key codes. If we handle the key, return YES otherwise
- * return NO to allow the framework to pass it on for default processing.
- */
--(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags
-{
-	return [self.appController handleKeyDown:keyChar withFlags:flags];
 }
 
 /* canDeleteMessageAtRow
@@ -758,19 +753,12 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
     return YES;
 }
 
-/* keyDown
- * Here is where we handle special keys when this view
- * has the focus so we can do custom things.
- */
--(void)keyDown:(NSEvent *)theEvent
+-(void)keyDown:(NSEvent *)event
 {
-	if (theEvent.characters.length == 1) {
-		unichar keyChar = [theEvent.characters characterAtIndex:0];
-		if ([self.appController handleKeyDown:keyChar withFlags:theEvent.modifierFlags]) {
-			return;
-		}
-	}
-	[self interpretKeyEvents:@[theEvent]];
+    if ([self vna_handleEvent:event]) {
+        return;
+    }
+    [super keyDown:event];
 }
 
 // MARK: Key-value observation

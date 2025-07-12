@@ -26,13 +26,10 @@
 
 @class FoldersTree;
 @class NewSubscription;
-@class DisclosureView;
 @class PluginManager;
 @class SearchMethod;
 @class Database;
 @class Article;
-@class UnifiedDisplayView;
-@class ArticleListView;
 @protocol Browser;
 
 @interface AppController : NSObject <NSApplicationDelegate> {
@@ -43,8 +40,6 @@
 @property (nonatomic) IBOutlet SPUStandardUpdaterController *sparkleController;
 @property (nonatomic) PluginManager *pluginManager;
 @property (nonatomic, weak) id<Browser> browser;
-@property (nonatomic, weak) UnifiedDisplayView *unifiedListView;
-@property (nonatomic, weak) ArticleListView *articleListView;
 @property (nonatomic) NewSubscription *rssFeed;
 @property (nonatomic) FoldersTree *foldersTree;
 @property (readonly, nonatomic) NSMenu *searchFieldMenu;
@@ -54,7 +49,6 @@
 -(IBAction)deleteMessage:(id)sender;
 -(IBAction)deleteFolder:(id)sender;
 -(IBAction)searchUsingToolbarTextField:(id)sender;
--(IBAction)searchUsingFilterField:(id)sender;
 -(IBAction)markAllRead:(id)sender;
 -(IBAction)markAllSubscriptionsRead:(id)sender;
 -(IBAction)markUnread:(id)sender;
@@ -103,12 +97,7 @@
 -(IBAction)useCurrentStyleForArticles:(id)sender;
 -(IBAction)useWebPageForArticles:(id)sender;
 -(IBAction)keyboardShortcutsHelp:(id)sender;
--(IBAction)unifiedLayout:(id)sender;
--(IBAction)reportLayout:(id)sender;
--(IBAction)condensedLayout:(id)sender;
 -(IBAction)downloadEnclosure:(id)sender;
--(IBAction)showHideFilterBar:(id)sender;
--(IBAction)hideFilterBar:(id)sender;
 -(IBAction)setFocusToSearchField:(id)sender;
 -(IBAction)localPerformFindPanelAction:(id)sender;
 -(IBAction)keepFoldersArranged:(id)sender;
@@ -120,7 +109,7 @@
 -(void)showUnreadCountOnApplicationIconAndWindowTitle;
 -(void)openURLFromString:(NSString *)urlString inPreferredBrowser:(BOOL)openInPreferredBrowserFlag;
 -(void)openURL:(NSURL *)url inPreferredBrowser:(BOOL)openInPreferredBrowserFlag;
--(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags;
+-(BOOL)handleKeyDown:(NSEvent *)event;
 -(void)openURLInDefaultBrowser:(NSURL *)url;
 -(void)handleRSSLink:(NSString *)linkPath;
 -(void)selectFolder:(NSInteger)folderId;
@@ -129,7 +118,6 @@
 -(void)markSelectedFoldersRead:(NSArray *)arrayOfFolders;
 -(void)doSafeInitialisation;
 -(void)clearUndoStack;
-@property (nonatomic, copy) NSString *filterString;
 @property (nonatomic, copy) NSString *searchString;
 @property (nonatomic, readonly) Article *selectedArticle;
 @property (nonatomic, readonly) NSInteger currentFolderId;
@@ -138,7 +126,6 @@
 -(void)runAppleScript:(NSString *)scriptName;
 @property (readonly, nonatomic) NSArray *folders;
 -(void)blogWithExternalEditor:(NSString *)externalEditorBundleIdentifier;
--(void)updateStatusBarFilterButtonVisibility;
 -(void)performWebSearch:(SearchMethod *)searchMethod;
 -(void)performAllArticlesSearch;
 -(void)performWebPageSearch;

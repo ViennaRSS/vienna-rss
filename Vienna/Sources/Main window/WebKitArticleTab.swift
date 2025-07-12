@@ -113,7 +113,6 @@ class WebKitArticleTab: BrowserTab, ArticleContentView {
             let openInPreferredBrower = !navigationAction.modifierFlags.contains(.option)
             // TODO: maybe we need to add an api that opens a clicked link in foreground to the AppController
             NSApp.appController.open(navigationAction.request.url, inPreferredBrowser: openInPreferredBrower)
-            NSApp.mainWindow?.makeFirstResponder((NSApp.appController.articleListView).mainView)
         } else {
             decisionHandler(.allow)
         }

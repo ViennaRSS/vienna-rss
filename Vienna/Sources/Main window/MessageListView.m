@@ -20,6 +20,7 @@
 
 #import "MessageListView.h"
 #import "AppController.h"
+#import "NSResponder+EventHandler.h"
 
 @implementation MessageListView
 
@@ -36,19 +37,12 @@
     tableColumn.dataCell = imageCell;
 }
 
-/* keyDown
- * Here is where we handle special keys when the article list view
- * has the focus so we can do custom things.
- */
--(void)keyDown:(NSEvent *)theEvent
+-(void)keyDown:(NSEvent *)event
 {
-	if (theEvent.characters.length == 1) {
-		unichar keyChar = [theEvent.characters characterAtIndex:0];
-		if ([APPCONTROLLER handleKeyDown:keyChar withFlags:theEvent.modifierFlags]) {
-			return;
-		}
-	}
-	[super keyDown:theEvent];
+    if ([self vna_handleEvent:event]) {
+        return;
+    }
+    [super keyDown:event];
 }
 
 /* copy

@@ -209,6 +209,7 @@
 		F6A7DE381E47138B0017BE5E /* Vienna.html in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DE321E47138B0017BE5E /* Vienna.html */; };
 		F6A7DE4A1E4717970017BE5E /* shared in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DE491E4717970017BE5E /* shared */; };
 		F6A7DE4F1E471A7F0017BE5E /* Vienna.help in Resources */ = {isa = PBXBuildFile; fileRef = F6A7DDCA1E470E980017BE5E /* Vienna.help */; };
+		F6A82C172E1584F300B26F6C /* ArticleListConstants.h in Sources */ = {isa = PBXBuildFile; fileRef = F6A82C162E1584F300B26F6C /* ArticleListConstants.h */; };
 		F6AC41AC25A4FAF6007DED7B /* FeedDiscovererTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AC41AB25A4FAF6007DED7B /* FeedDiscovererTests.swift */; };
 		F6AFC16D2CAFCD2E00106E80 /* SettingsTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6AFC16C2CAFCD2E00106E80 /* SettingsTabViewController.swift */; };
 		F6B059E02961D0A100F6E31B /* JSONFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B059DF2961D0A000F6E31B /* JSONFeed.swift */; };
@@ -218,6 +219,7 @@
 		F6B7BC3624A2A9A40051D76F /* FMDB in Frameworks */ = {isa = PBXBuildFile; productRef = F6B7BC3524A2A9A40051D76F /* FMDB */; };
 		F6C136582D01C0D0009E42F8 /* RSSFeedWithItemElementUnderRSSElement.rss in Resources */ = {isa = PBXBuildFile; fileRef = F6C136572D01C0D0009E42F8 /* RSSFeedWithItemElementUnderRSSElement.rss */; };
 		F6C1365A2D01C3E2009E42F8 /* RSSFeedWithItemElementUnderRSSAndChannelElement.rss in Resources */ = {isa = PBXBuildFile; fileRef = F6C136592D01C3E2009E42F8 /* RSSFeedWithItemElementUnderRSSAndChannelElement.rss */; };
+		F6C983002E11ABD4005BA1F8 /* NSResponder+EventHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F6C982FF2E11ABD4005BA1F8 /* NSResponder+EventHandler.m */; };
 		F6C9DA70271BB3BB00FC3027 /* RSSFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = F6C9DA6F271BB3BB00FC3027 /* RSSFeed.m */; };
 		F6C9DA73271BB55000FC3027 /* AtomFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = F6C9DA72271BB55000FC3027 /* AtomFeed.m */; };
 		F6CAA59A2C5D87BA00590858 /* ActionPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = F6CAA5992C5D87BA00590858 /* ActionPlugin.m */; };
@@ -602,6 +604,7 @@
 		F6A7DEA61E471E3C0017BE5E /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = nl; path = nl.lproj/advanced.html; sourceTree = "<group>"; };
 		F6A7DEAA1E471E410017BE5E /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = sv; path = sv.lproj/advanced.html; sourceTree = "<group>"; };
 		F6A7DEAD1E471E450017BE5E /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = "zh-Hant"; path = "zh-Hant.lproj/advanced.html"; sourceTree = "<group>"; };
+		F6A82C162E1584F300B26F6C /* ArticleListConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ArticleListConstants.h; sourceTree = "<group>"; };
 		F6AC41AB25A4FAF6007DED7B /* FeedDiscovererTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDiscovererTests.swift; sourceTree = "<group>"; };
 		F6AFC16C2CAFCD2E00106E80 /* SettingsTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTabViewController.swift; sourceTree = "<group>"; };
 		F6B059DF2961D0A000F6E31B /* JSONFeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONFeed.swift; sourceTree = "<group>"; };
@@ -617,6 +620,8 @@
 		F6BD1FDD2C9D7E2E0075D04F /* LICENCE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENCE.md; sourceTree = "<group>"; };
 		F6C136572D01C0D0009E42F8 /* RSSFeedWithItemElementUnderRSSElement.rss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = RSSFeedWithItemElementUnderRSSElement.rss; sourceTree = "<group>"; };
 		F6C136592D01C3E2009E42F8 /* RSSFeedWithItemElementUnderRSSAndChannelElement.rss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = RSSFeedWithItemElementUnderRSSAndChannelElement.rss; sourceTree = "<group>"; };
+		F6C982FE2E11ABD4005BA1F8 /* NSResponder+EventHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSResponder+EventHandler.h"; sourceTree = "<group>"; };
+		F6C982FF2E11ABD4005BA1F8 /* NSResponder+EventHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSResponder+EventHandler.m"; sourceTree = "<group>"; };
 		F6C9DA6E271BB3BB00FC3027 /* RSSFeed.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSSFeed.h; sourceTree = "<group>"; };
 		F6C9DA6F271BB3BB00FC3027 /* RSSFeed.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSSFeed.m; sourceTree = "<group>"; };
 		F6C9DA71271BB55000FC3027 /* AtomFeed.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AtomFeed.h; sourceTree = "<group>"; };
@@ -1052,6 +1057,7 @@
 				4350284E165DE9DF0018EDB7 /* ArticleController.h */,
 				4350284F165DE9DF0018EDB7 /* ArticleController.m */,
 				4350284D165DE9DF0018EDB7 /* ArticleBaseView.h */,
+				F6A82C162E1584F300B26F6C /* ArticleListConstants.h */,
 				43502852165DE9DF0018EDB7 /* ArticleListView.h */,
 				43502853165DE9DF0018EDB7 /* ArticleListView.m */,
 				43502885165DE9DF0018EDB7 /* EnclosureView.h */,
@@ -1377,6 +1383,8 @@
 				F6A464BA272F47BE0071E3F6 /* NSKeyedUnarchiver+Compatibility.m */,
 				3A23F13315276935008AF863 /* NSNotificationAdditions.h */,
 				4350283D165DE7F60018EDB7 /* NSNotificationAdditions.m */,
+				F6C982FE2E11ABD4005BA1F8 /* NSResponder+EventHandler.h */,
+				F6C982FF2E11ABD4005BA1F8 /* NSResponder+EventHandler.m */,
 				AAF3B14006095E7B0025CC7F /* StringExtensions.h */,
 				AAF3B14106095E7B0025CC7F /* StringExtensions.m */,
 				031E082E19DFA3A900194F9F /* SubscriptionModel.h */,
@@ -1824,9 +1832,11 @@
 				F6D282621F1A87A900FF865E /* PopUpButtonToolbarItem.swift in Sources */,
 				435026E6165DD8BE0018EDB7 /* ArticleRef.m in Sources */,
 				F6D0089C1EF95C9D008F2D3B /* InfoPanelManager.m in Sources */,
+				F6C983002E11ABD4005BA1F8 /* NSResponder+EventHandler.m in Sources */,
 				F6C9DA73271BB55000FC3027 /* AtomFeed.m in Sources */,
 				4350283E165DE7F60018EDB7 /* NSNotificationAdditions.m in Sources */,
 				2FEA5829291FD511008C42D3 /* Criteria+NSPredicate.swift in Sources */,
+				F6A82C172E1584F300B26F6C /* ArticleListConstants.h in Sources */,
 				2F82DCB725CEFC2800F00EE8 /* URL+Blank.swift in Sources */,
 				F633157626ED73CB008A3673 /* URLFormatter.swift in Sources */,
 				F6CAA5A42C5D8B9A00590858 /* ScriptPlugin.m in Sources */,

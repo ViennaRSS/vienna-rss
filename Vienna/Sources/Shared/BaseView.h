@@ -24,7 +24,6 @@
 @required
 	-(void)performFindPanelAction:(NSInteger)tag;
 	@property (nonatomic, readonly) NSView *mainView;
-	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags;
 @optional
 	-(void)updateAlternateMenuTitle;
 	@property (readonly, nonatomic) NSString *title;

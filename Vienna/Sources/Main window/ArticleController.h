@@ -22,6 +22,7 @@
 
 #import "BaseView.h"
 #import "ArticleBaseView.h"
+#import "ArticleListConstants.h"
 
 @class Article;
 @class ArticleListView;
@@ -37,7 +38,7 @@
  * article view. Thus all control of the article view now passes through the article
  * controller.
  */
-@interface ArticleController : NSViewController
+@interface ArticleController : NSViewController <NSMenuItemValidation>
 
 @property (nonatomic) FoldersTree * foldersTree;
 @property (nonatomic) ArticleListView *articleListView;
@@ -61,7 +62,6 @@
 -(void)displayFirstUnread;
 -(void)displayNextUnread;
 -(void)displayNextFolderWithUnread;
-@property (readonly, nonatomic) NSString *searchPlaceholderString;
 -(void)reloadArrayOfArticles;
 -(void)displayFolder:(NSInteger)newFolderId;
 -(void)refilterArrayOfArticles;
@@ -82,4 +82,13 @@
 -(void)goBack;
 @property (nonatomic, readonly) BOOL canGoForward;
 @property (nonatomic, readonly) BOOL canGoBack;
+
+- (IBAction)reportLayout:(id)sender;
+- (IBAction)condensedLayout:(id)sender;
+- (IBAction)unifiedLayout:(id)sender;
+
+// MARK: Filter bar
+
+@property (readonly, nonatomic) NSString *filterModeLabel;
+
 @end

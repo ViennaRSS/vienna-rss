@@ -21,16 +21,14 @@ import Cocoa
 
 final class MainWindowController: NSWindowController {
 
+    @objc weak var articleController: ArticleController!
+
     // MARK: Transitional outlets
 
     @IBOutlet private(set) var splitView: NSSplitView!
     @IBOutlet private(set) var outlineView: FolderView?
     @IBOutlet private(set) var articleListView: ArticleListView?
     @IBOutlet private(set) var unifiedDisplayView: UnifiedDisplayView?
-    @IBOutlet private(set) var filterDisclosureView: DisclosureView?
-    @IBOutlet private(set) var filterDisclosureView2: DisclosureView?
-    @IBOutlet private(set) var filterSearchField: NSSearchField?
-    @IBOutlet private(set) var filterSearchField2: NSSearchField?
 
     @objc private(set) var toolbarSearchField: NSSearchField?
     @IBOutlet private(set) weak var placeholderDetailView: NSView!
@@ -54,6 +52,13 @@ final class MainWindowController: NSWindowController {
 
         splitView.addSubview(browser.view)
         placeholderDetailView.removeFromSuperview()
+
+        self.articleController.articleListView = self.articleListView
+        self.articleController.unifiedListView = self.unifiedDisplayView
+        self.articleListView?.appController = NSApp.appController
+        self.unifiedDisplayView?.appController = NSApp.appController
+        self.articleListView?.articleController = self.articleController
+        self.unifiedDisplayView?.articleController = self.articleController
     }
 
     // MARK: Subtitle
@@ -152,15 +157,6 @@ final class MainWindowController: NSWindowController {
 
     // MARK: Actions
 
-    @IBAction private func changeFiltering(_ sender: NSMenuItem) { // TODO: This should be handled by ArticleController
-        Preferences.standard.filterMode = sender.tag
-        if sender.tag == Filter.all.rawValue {
-            currentFilter = ""
-        } else {
-            currentFilter = sender.title
-        }
-    }
-
     @IBAction private func toggleStatusBar(_ sender: AnyObject) {
         statusBarState(disclosed: !statusBar.isDisclosed)
     }
@@ -256,6 +252,26 @@ final class MainWindowController: NSWindowController {
         }
     }
 
+    // MARK: Responder chain
+
+    override func supplementalTarget(forAction action: Selector, sender: Any?) -> Any? {
+        if self.browser.activeTab == nil && articleController.responds(to: action) {
+            return articleController
+        }
+        return super.supplementalTarget(forAction: action, sender: sender)
+    }
+
+    override func supplementalHandler(for event: NSEvent) -> NSResponder? {
+        if self.articleController.canHandle(event) {
+            return self.articleController
+        }
+        return self
+    }
+
+    override func handle(_ event: NSEvent) -> Bool {
+        return NSApp.appController.handleKeyDown(event)
+    }
+
     // MARK: Observation
 
     private var observationTokens: [NSKeyValueObservation] = []
@@ -276,9 +292,6 @@ extension MainWindowController: NSMenuItemValidation {
 
     func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         switch menuItem.action {
-        case #selector(changeFiltering(_:)):
-            menuItem.state = menuItem.tag == Preferences.standard.filterMode ? .on : .off
-            return browser.activeTab == nil
         case #selector(performSharingService(_:)), #selector(invokeSharingServicePicker(_:)):
             return hasShareableItems
         case #selector(toggleStatusBar(_:)):
@@ -327,6 +340,9 @@ extension MainWindowController: NSWindowDelegate {
         }
 
         observationTokens = [
+            articleController.observe(\.filterModeLabel, options: .initial) { [weak self] controller, _ in
+                self?.currentFilter = controller.filterModeLabel
+            },
             OpenReader.shared.observe(\.statusMessage, options: [.initial, .new]) { [weak self] manager, change in
                 if change.newValue is String {
                     self?.statusLabel.stringValue = manager.statusMessage

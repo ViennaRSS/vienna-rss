@@ -44,8 +44,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setTableColumnHeaderImage:(NSImage *)image
           forColumnWithIdentifier:(NSUserInterfaceItemIdentifier)identifier;
 
-- (void)keyDown:(NSEvent *)theEvent;
-
 @end
 
 NS_ASSUME_NONNULL_END

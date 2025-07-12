@@ -13,9 +13,6 @@ protocol ArticleContentView {
     var listView: (any ArticleViewDelegate)? { get set }
     var articles: [Article] { get set }
 
-    @objc(keyDown:)
-    func keyDown(with event: NSEvent)
-
     // MARK: visual settings
 
     func resetTextSize()

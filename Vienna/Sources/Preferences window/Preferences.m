@@ -24,6 +24,7 @@
 @import Sparkle;
 
 #import "Article.h"
+#import "ArticleListConstants.h"
 #import "Constants.h"
 #import "DownloadItem.h"
 #import "FeedListConstants.h"
@@ -69,7 +70,6 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
     BOOL useJavaScript;
     BOOL showAppInStatusBar;
     BOOL showStatusBar;
-    BOOL showFilterBar;
     BOOL shouldSaveFeedSource;
     BOOL syncGoogleReader;
     BOOL prefersGoogleNewSubscription;
@@ -135,7 +135,6 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
 		textSizeMultiplier = [userPrefs doubleForKey:MAPref_ActiveTextSizeMultiplier];
 		showFolderImages = [self boolForKey:MAPref_ShowFolderImages];
 		showStatusBar = [self boolForKey:MAPref_ShowStatusBar];
-		showFilterBar = [self boolForKey:MAPref_ShowFilterBar];
 		useJavaScript = [self boolForKey:MAPref_UseJavaScript];
 		showAppInStatusBar = [self boolForKey:MAPref_ShowAppInStatusBar];
 		shouldSaveFeedSource = [self boolForKey:MAPref_ShouldSaveFeedSource];
@@ -1002,19 +1001,15 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
  */
 -(BOOL)showFilterBar
 {
-	return showFilterBar;
+    return [self boolForKey:MAPref_ShowFilterBar];
 }
 
 /* setShowFilterBar
  * Specifies whether the filter bar is shown or hidden.
  */
--(void)setShowFilterBar:(BOOL)show
+-(void)setShowFilterBar:(BOOL)showFilterBar
 {
-	if (showFilterBar != show) {
-		showFilterBar = show;
-		[self setBool:showFilterBar forKey:MAPref_ShowFilterBar];
-		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_FilterBarChanged object:nil];
-	}
+    [self setBool:showFilterBar forKey:MAPref_ShowFilterBar];
 }
 
 /* feedSourcesFolder

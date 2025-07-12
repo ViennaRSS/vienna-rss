@@ -22,6 +22,8 @@
 
 @class ArticleView;
 @class Article;
+@class DisclosureView;
+@class FilterView;
 
 @protocol ArticleBaseView
     @property (readonly, nonatomic) BOOL selectFirstUnreadInFolder;
@@ -34,4 +36,8 @@
 	@property (readonly, nonatomic) NSArray *markedArticleRange;
 	-(void)saveTableSettings;
 	-(void)ensureSelectedArticle;
+
+@property (readonly, nonatomic) DisclosureView *filterBarDisclosureView;
+@property (readonly, nonatomic) FilterView *filterBarView;
+
 @end
