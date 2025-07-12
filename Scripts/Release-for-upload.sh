@@ -8,7 +8,7 @@ GITHUB_REPO="https://github.com/ViennaRSS/vienna-rss"
 GITHUB_RELEASE_URL="${GITHUB_REPO}/releases/tag/v%2F${N_VCS_TAG}"
 SOURCEFORGE_ASSETS_URL="https://downloads.sourceforge.net/project/vienna-rss/v_${N_VCS_TAG}"
 
-TGZ_FILENAME="Vienna${N_VCS_TAG}.tgz"
+DMG_FILENAME="Vienna${N_VCS_TAG}.dmg"
 dSYM_FILENAME="Vienna${N_VCS_TAG}.${VCS_SHORT_HASH}-dSYM"
 
 case "${N_VCS_TAG}" in
@@ -25,14 +25,10 @@ esac
 
 pushd "${VIENNA_UPLOADS_DIR}"
 
+mv "${PROJECT_DERIVED_FILE_DIR}/Vienna${N_VCS_TAG}.dmg" .
+
 # Make the dSYM Bundle
 tar -c -f "${dSYM_FILENAME}.tgz" --format ustar --gzip --no-xattrs --exclude '.DS_Store' -C "$ARCHIVE_DSYMS_PATH" .
-
-# Zip up the app
-# Copy the app cleanly
-xcodebuild -exportNotarizedApp -archivePath "$ARCHIVE_PATH" -exportPath .
-tar -c -f "${TGZ_FILENAME}" --format ustar --gzip --no-xattrs --exclude '.DS_Store' Vienna.app
-rm -rf Vienna.app
 
 # Output the sparkle change log
 SPARKLE_BIN=$(find "${HOME}/Library/Developer/Xcode/DerivedData" -regex "${HOME}/Library/Developer/Xcode/DerivedData/${PROJECT}-.*/SourcePackages/artifacts/sparkle/Sparkle/bin")
@@ -51,7 +47,7 @@ if [ ! -f "$PRIVATE_EDDSA_KEY_PATH" ]; then
 	printf 'Unable to load signing private key vienna_private_eddsa_key.pem. Set PRIVATE_EDDSA_KEY_PATH in Scripts/Resources/CS-ID.xcconfig\n' 1>&2
 	exit 1
 fi
-ED_SIGNATURE_AND_LENGTH="$(sign_update "$TGZ_FILENAME" -f "$PRIVATE_EDDSA_KEY_PATH")"
+ED_SIGNATURE_AND_LENGTH="$(sign_update "$DMG_FILENAME" -f "$PRIVATE_EDDSA_KEY_PATH")"
 
 pubDate="$(LC_ALL=en_US.UTF8 TZ=GMT date -jf '%FT%TZ' "${VCS_DATE}" '+%a, %d %b %G %T %z')"
 
@@ -63,7 +59,7 @@ cat > "${VIENNA_CHANGELOG}" << EOF
 		<link>https://www.vienna-rss.com/</link>
 		<description>Vienna Changelog</description>
 		<language>en-us</language>
-		<copyright>Copyright 2010-2020, Steve Palmer and contributors</copyright>
+		<copyright>Copyright 2010-2025, Steve Palmer and contributors</copyright>
 		<item>
 			<title>Vienna ${V_VCS_TAG} :${VCS_SHORT_HASH}:</title>
 			<pubDate>${pubDate}</pubDate>
@@ -71,7 +67,7 @@ cat > "${VIENNA_CHANGELOG}" << EOF
 			<sparkle:version>${N_VCS_NUM}</sparkle:version>
 			<sparkle:shortVersionString>${V_VCS_TAG} :${VCS_SHORT_HASH}:</sparkle:shortVersionString>
 			<sparkle:minimumSystemVersion>${MACOSX_DEPLOYMENT_TARGET}.0</sparkle:minimumSystemVersion>
-			<enclosure url="${SOURCEFORGE_ASSETS_URL}/${TGZ_FILENAME}" $ED_SIGNATURE_AND_LENGTH type="application/octet-stream" />
+			<enclosure url="${SOURCEFORGE_ASSETS_URL}/${DMG_FILENAME}" $ED_SIGNATURE_AND_LENGTH type="application/octet-stream" />
 			<sparkle:releaseNotesLink>https://www.vienna-rss.com/sparkle-files/noteson${N_VCS_TAG}.html</sparkle:releaseNotesLink>
 		</item>
 		<item>
