@@ -26,35 +26,16 @@
 
 @implementation NSKeyedUnarchiver (Compatibility)
 
-+ (nullable id)vna_unarchivedObjectOfClass:(Class)cls fromData:(NSData *)data
-{
-    id object = nil;
-
-    NSError *error = nil;
-    object = [NSKeyedUnarchiver unarchivedObjectOfClass:cls
-                                               fromData:data
-                                                  error:&error];
-    if (error) {
-        os_log_error(VNA_LOG,
-                     "Failed to unarchive %{public}s using keyed "
-                     "unarchiver",
-                     class_getName(cls));
-    }
-
-    return object;
-}
-
 + (nullable id)vna_unarchivedArrayOfObjectsOfClass:(Class)cls
                                           fromData:(NSData *)data
 {
     id object = nil;
-
     if (@available(macOS 11, *)) {
         NSError *error = nil;
         object = [NSKeyedUnarchiver unarchivedArrayOfObjectsOfClass:cls
                                                            fromData:data
                                                               error:&error];
-        if (error) {
+        if (!object && error) {
             os_log_error(VNA_LOG,
                          "Failed to unarchive %{public}s using keyed "
                          "unarchiver",
@@ -66,14 +47,13 @@
         object = [NSKeyedUnarchiver unarchivedObjectOfClasses:classes
                                                      fromData:data
                                                         error:&error];
-        if (error) {
+        if (!object && error) {
             os_log_error(VNA_LOG,
                          "Failed to unarchive %{public}s using keyed "
                          "unarchiver",
                          class_getName(cls));
         }
     }
-
     return object;
 }
 

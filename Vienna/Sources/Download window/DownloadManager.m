@@ -24,7 +24,6 @@
 #import "Constants.h"
 #import "DownloadItem.h"
 #import "NSFileManager+Paths.h"
-#import "NSKeyedArchiver+Compatibility.h"
 #import "NSKeyedUnarchiver+Compatibility.h"
 #import "Preferences.h"
 #import "Vienna-Swift.h"
@@ -110,8 +109,9 @@ static NSString * const VNAUserNotificationFileDownloadThreadIdentifier = @"File
 
 // Archive the downloads list to the preferences.
 - (void)archiveDownloadsList {
-    NSData *data = [NSKeyedArchiver vna_archivedDataWithRootObject:[self.downloads copy]
-                                             requiringSecureCoding:YES];
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[self.downloads copy]
+                                         requiringSecureCoding:YES
+                                                         error:NULL];;
 
     if (data) {
         [Preferences.standardPreferences setObject:data
