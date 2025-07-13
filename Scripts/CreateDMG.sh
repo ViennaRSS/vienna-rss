@@ -41,4 +41,6 @@ hdiutil convert -ov ${rawdmgfile} -format ULFO -o ${finaldmgfile}
 rm -rf ${dmgsource}
 rm ${rawdmgfile}
 
+codesign --verbose --force --sign "$CODE_SIGN_IDENTITY" --options runtime ${finaldmgfile}
+
 exit 0
