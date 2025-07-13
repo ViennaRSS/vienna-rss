@@ -22,7 +22,6 @@
 @import Sparkle;
 
 #define APPCONTROLLER ((AppController *)[NSApp delegate])
-#define APP ((ViennaApp *)NSApp)
 
 @class FoldersTree;
 @class NewSubscription;
@@ -121,6 +120,7 @@
 @property (nonatomic, copy) NSString *searchString;
 @property (nonatomic, readonly) Article *selectedArticle;
 @property (nonatomic, readonly) NSInteger currentFolderId;
+@property (nonatomic, readonly) NSString *currentTextSelection;
 @property (nonatomic, getter=isConnecting, readonly) BOOL connecting;
 @property (weak, nonatomic) NSWindow *mainWindow;
 -(void)runAppleScript:(NSString *)scriptName;
