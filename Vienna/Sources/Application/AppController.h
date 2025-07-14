@@ -19,7 +19,6 @@
 //
 
 @import Cocoa;
-@import Sparkle;
 
 #define APPCONTROLLER ((AppController *)[NSApp delegate])
 
@@ -36,7 +35,6 @@
     Database *db;
 }
 
-@property (nonatomic) IBOutlet SPUStandardUpdaterController *sparkleController;
 @property (nonatomic) PluginManager *pluginManager;
 @property (nonatomic, weak) id<Browser> browser;
 @property (nonatomic) NewSubscription *rssFeed;

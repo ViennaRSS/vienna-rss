@@ -797,6 +797,7 @@ CA
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                         <outlet property="dockMenu" destination="JWi-Bw-kAV" id="S3Z-Bl-WjG"/>
                         <outlet property="filterMenu" destination="1118" id="ulZ-To-isZ"/>
+                        <outlet property="sparkleUpdaterController" destination="LzF-8y-hiG" id="twm-xX-uFy"/>
                         <outlet property="styleMenu" destination="827" id="1mz-vS-fyL"/>
                     </connections>
                 </application>
@@ -808,7 +809,6 @@ CA
                         <outlet property="closeWindowItem" destination="935" id="1034"/>
                         <outlet property="columnsMenu" destination="442" id="1050"/>
                         <outlet property="sortByMenu" destination="387" id="1054"/>
-                        <outlet property="sparkleController" destination="LzF-8y-hiG" id="7Oy-0I-Ll4"/>
                     </connections>
                 </customObject>
                 <customObject id="LzF-8y-hiG" userLabel="Sparkle Updater Controller" customClass="SPUStandardUpdaterController">
