@@ -92,7 +92,6 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 @property (nonatomic) ArticleController *articleController;
 @property (nonatomic) ActivityPanelController *activityPanelController;
 @property (nonatomic) VNADirectoryMonitor *directoryMonitor;
-@property (nonatomic) NSWindowController *preferencesWindowController;
 @property (weak, nonatomic) FolderView *outlineView;
 @property (weak, nonatomic) NSSearchField *toolbarSearchField;
 
@@ -3161,22 +3160,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     }
 
 	return YES;
-}
-
-#pragma mark Preferences
-
-- (NSWindowController *)preferencesWindowController {
-    if (!_preferencesWindowController) {
-        NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"Preferences"
-                                                             bundle:nil];
-        _preferencesWindowController = [storyboard instantiateInitialController];
-    }
-
-    return _preferencesWindowController;
-}
-
-- (IBAction)showPreferences:(id)sender {
-    [self.preferencesWindowController showWindow:self];
 }
 
 // MARK: Info panel delegate

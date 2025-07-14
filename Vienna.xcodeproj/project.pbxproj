@@ -164,7 +164,6 @@
 		F6257FF51E28485F0035E43C /* Downloads.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6257FF71E28485F0035E43C /* Downloads.xib */; };
 		F625801C1E2853B90035E43C /* ActivityViewer.xib in Resources */ = {isa = PBXBuildFile; fileRef = F625801E1E2853B90035E43C /* ActivityViewer.xib */; };
 		F62581451E29B90B0035E43C /* SearchPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = F62581441E29B90A0035E43C /* SearchPanel.xib */; };
-		F62581591E29BEB90035E43C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F625815B1E29BEB90035E43C /* MainMenu.xib */; };
 		F626F5F424A76B9100D3AAD8 /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F626F5F624A76B9100D3AAD8 /* Preferences.storyboard */; };
 		F628DFE31ED2698A00FACFD3 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F628DFE21ED2698A00FACFD3 /* FilterView.swift */; };
 		F62E324E284E0CAF0046EA1F /* SharingServiceToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62E324D284E0CAF0046EA1F /* SharingServiceToolbarItem.swift */; };
@@ -244,6 +243,7 @@
 		F6DC887C295B8DAA006E4D66 /* PluginBundleWithLowercaseInfoPlist.viennaplugin in Resources */ = {isa = PBXBuildFile; fileRef = F6DC8879295B8DAA006E4D66 /* PluginBundleWithLowercaseInfoPlist.viennaplugin */; };
 		F6DC8880295B9290006E4D66 /* PluginBundleWithLocalizedInfoPlist.viennaplugin in Resources */ = {isa = PBXBuildFile; fileRef = F6DC887F295B9290006E4D66 /* PluginBundleWithLocalizedInfoPlist.viennaplugin */; };
 		F6DDB5B12950C87E004E0E87 /* SharingServiceMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DDB5B02950C87E004E0E87 /* SharingServiceMenuItem.swift */; };
+		F6DE2B662E22B6D300FCD376 /* Application.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6DE2B642E22B6D300FCD376 /* Application.storyboard */; };
 		F6E01A072C652DEE0082E07B /* RSSFeedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E01A062C652DEE0082E07B /* RSSFeedTests.swift */; };
 		F6E01A092C652FA50082E07B /* RSSFeedWithContentElements.rss in Resources */ = {isa = PBXBuildFile; fileRef = F6E01A082C652FA50082E07B /* RSSFeedWithContentElements.rss */; };
 		F6EB26031E58D37100570B22 /* DirectoryMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EB26021E58D37100570B22 /* DirectoryMonitor.swift */; };
@@ -497,7 +497,6 @@
 		F6257FF61E28485F0035E43C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Downloads.xib; sourceTree = "<group>"; };
 		F625801D1E2853B90035E43C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ActivityViewer.xib; sourceTree = "<group>"; };
 		F62581441E29B90A0035E43C /* SearchPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchPanel.xib; sourceTree = "<group>"; };
-		F625815A1E29BEB90035E43C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		F626F5F524A76B9100D3AAD8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Preferences.storyboard; sourceTree = "<group>"; };
 		F628DFE21ED2698A00FACFD3 /* FilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		F62E324D284E0CAF0046EA1F /* SharingServiceToolbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingServiceToolbarItem.swift; sourceTree = "<group>"; };
@@ -511,7 +510,6 @@
 		F63C08E82C4A70A90095BAD7 /* mul */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = mul; path = mul.lproj/Preferences.xcstrings; sourceTree = "<group>"; };
 		F63C08E92C4A70A90095BAD7 /* mul */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = mul; path = mul.lproj/Downloads.xcstrings; sourceTree = "<group>"; };
 		F63C08EA2C4A70A90095BAD7 /* mul */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = mul; path = mul.lproj/RSSFeed.xcstrings; sourceTree = "<group>"; };
-		F63C08EB2C4A70A90095BAD7 /* mul */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = mul; path = mul.lproj/MainMenu.xcstrings; sourceTree = "<group>"; };
 		F63C08EC2C4A70A90095BAD7 /* mul */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = mul; path = mul.lproj/ActivityViewer.xcstrings; sourceTree = "<group>"; };
 		F63C08ED2C4A70A90095BAD7 /* mul */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = mul; path = mul.lproj/SearchFolder.xcstrings; sourceTree = "<group>"; };
 		F63C08EE2C4A70A90095BAD7 /* mul */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = mul; path = mul.lproj/InfoWindow.xcstrings; sourceTree = "<group>"; };
@@ -662,6 +660,8 @@
 		F6DC8879295B8DAA006E4D66 /* PluginBundleWithLowercaseInfoPlist.viennaplugin */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PluginBundleWithLowercaseInfoPlist.viennaplugin; sourceTree = "<group>"; };
 		F6DC887F295B9290006E4D66 /* PluginBundleWithLocalizedInfoPlist.viennaplugin */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PluginBundleWithLocalizedInfoPlist.viennaplugin; sourceTree = "<group>"; };
 		F6DDB5B02950C87E004E0E87 /* SharingServiceMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingServiceMenuItem.swift; sourceTree = "<group>"; };
+		F6DE2B652E22B6D300FCD376 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Application.storyboard; sourceTree = "<group>"; };
+		F6DE2B692E22BC8A00FCD376 /* mul */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = mul; path = mul.lproj/Application.xcstrings; sourceTree = "<group>"; };
 		F6E01A062C652DEE0082E07B /* RSSFeedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSFeedTests.swift; sourceTree = "<group>"; };
 		F6E01A082C652FA50082E07B /* RSSFeedWithContentElements.rss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = RSSFeedWithContentElements.rss; sourceTree = "<group>"; };
 		F6EB26021E58D37100570B22 /* DirectoryMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryMonitor.swift; sourceTree = "<group>"; };
@@ -917,7 +917,7 @@
 		F63739FB1F1CFEDC00ED3B09 /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
-				F625815B1E29BEB90035E43C /* MainMenu.xib */,
+				F6DE2B642E22B6D300FCD376 /* Application.storyboard */,
 				F6832F661F10F5DA007920D4 /* MainWindowController.xib */,
 				2FDF6FBD218A266A002F77E9 /* TabbedBrowserViewController.xib */,
 				2FDF6FBE218A266A002F77E9 /* BrowserTab.xib */,
@@ -1571,7 +1571,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F625801C1E2853B90035E43C /* ActivityViewer.xib in Resources */,
-				F62581591E29BEB90035E43C /* MainMenu.xib in Resources */,
 				F6D572AE1E26AA8A00CDA909 /* FeedCredentials.xib in Resources */,
 				03F33D961DF2A2F900B04FAF /* Assets.xcassets in Resources */,
 				2F125EDE24D0638600868E11 /* BrowserTabWithLegacyAddressBar.xib in Resources */,
@@ -1586,6 +1585,7 @@
 				F6D572B11E26AA9000CDA909 /* GroupFolder.xib in Resources */,
 				F6D572B41E26AA9900CDA909 /* InfoWindow.xib in Resources */,
 				F6832F681F10F5DA007920D4 /* MainWindowController.xib in Resources */,
+				F6DE2B662E22B6D300FCD376 /* Application.storyboard in Resources */,
 				3A0F2A55258FBB8B0036397F /* TabbedBrowserViewController.xib in Resources */,
 				3A0F2A9E258FCB780036397F /* BrowserTab.xib in Resources */,
 				F63C08F52C4A70AA0095BAD7 /* InfoPlist.xcstrings in Resources */,
@@ -2005,15 +2005,6 @@
 			name = ActivityViewer.xib;
 			sourceTree = "<group>";
 		};
-		F625815B1E29BEB90035E43C /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F625815A1E29BEB90035E43C /* Base */,
-				F63C08EB2C4A70A90095BAD7 /* mul */,
-			);
-			name = MainMenu.xib;
-			sourceTree = "<group>";
-		};
 		F626F5F624A76B9100D3AAD8 /* Preferences.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -2182,6 +2173,15 @@
 				F63C08ED2C4A70A90095BAD7 /* mul */,
 			);
 			name = SearchFolder.xib;
+			sourceTree = "<group>";
+		};
+		F6DE2B642E22B6D300FCD376 /* Application.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F6DE2B652E22B6D300FCD376 /* Base */,
+				F6DE2B692E22BC8A00FCD376 /* mul */,
+			);
+			name = Application.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
