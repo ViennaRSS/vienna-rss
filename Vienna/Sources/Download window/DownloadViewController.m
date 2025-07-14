@@ -1,15 +1,14 @@
 //
-//  DownloadWindow.m
+//  DownloadViewController.m
 //  Vienna
 //
-//  Created by Steve on 10/9/05.
-//  Copyright (c) 2004-2005 Steve Palmer. All rights reserved.
+//  Copyright 2004-2005 Steve Palmer, 2025 Eitot
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
 //  You may obtain a copy of the License at
 //
-//  http://www.apache.org/licenses/LICENSE-2.0
+//  https://www.apache.org/licenses/LICENSE-2.0
 //
 //  Unless required by applicable law or agreed to in writing, software
 //  distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,33 +17,29 @@
 //  limitations under the License.
 //
 
-#import "DownloadWindow.h"
+#import "DownloadViewController.h"
 
-#import "AppController+Notifications.h"
 #import "Constants.h"
 #import "DownloadItem.h"
 #import "DownloadListCellView.h"
 #import "DownloadManager.h"
 #import "HelperFunctions.h"
 #import "NSWorkspace+OpenWithMenu.h"
-#import "Vienna-Swift.h"
 
-@implementation DownloadWindow {
+@implementation VNADownloadViewController {
     IBOutlet NSTableView *table;
     IBOutlet NSButton *clearButton;
     NSInteger lastCount;
     NSMenu *openWithMenu;
 }
 
-/* init
- * Just init the download window.
- */
--(instancetype)init
+- (instancetype)initWithCoder:(NSCoder *)coder
 {
-	if ((self = [super initWithWindowNibName:@"Downloads"]) != nil) {
-		lastCount = 0;
-	}
-	return self;
+    self = [super initWithCoder:coder];
+    if (self) {
+        lastCount = 0;
+    }
+    return self;
 }
 
 - (void)dealloc
@@ -52,55 +47,58 @@
     [NSNotificationCenter.defaultCenter removeObserver:self];
 }
 
-/* windowDidLoad
- * Do the things that only make sense after the window file is loaded.
- */
--(void)windowDidLoad
+- (void)viewDidLoad
 {
-	// Work around a Cocoa bug where the window positions aren't saved
-	[self setShouldCascadeWindows:NO];
-	self.windowFrameAutosaveName = @"downloadWindow";
-    self.window.delegate = self;
+    [super viewDidLoad];
 
-	// Register to get notified when the download manager's list changes
-	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-	[nc addObserver:self selector:@selector(handleDownloadsChange:) name:MA_Notify_DownloadsListChange object:nil];
+    // Register to get notified when the download manager's list changes
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self
+           selector:@selector(handleDownloadsChange:)
+               name:MA_Notify_DownloadsListChange
+             object:nil];
 
-	// We are the delegate and the datasource
-	table.delegate = self;
-	table.dataSource = self;
-	table.doubleAction = @selector(openFile:);
-	table.target = self;
+    // We are the delegate and the datasource
+    table.doubleAction = @selector(openFile:);
+    table.target = self;
 
-	// Create the popup menu
-	NSMenu * downloadMenu = [[NSMenu alloc] init];
-    
-	// Open
-	[downloadMenu addItemWithTitle:NSLocalizedString(@"Open", @"Title of a popup menu item") action:@selector(openFile:) keyEquivalent:@""];
+    // Create the popup menu
+    NSMenu *downloadMenu = [[NSMenu alloc] init];
 
-	// Open With
-	NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Open With", @"") action:nil keyEquivalent:@""];
-	openWithMenu = [[NSMenu alloc] init];
-	openWithMenu.delegate = self;
-	[item setSubmenu:openWithMenu];
-	[downloadMenu addItem:item];
+    // Open
+    [downloadMenu addItemWithTitle:NSLocalizedString(@"Open", @"Title of a popup menu item")
+                            action:@selector(openFile:)
+                     keyEquivalent:@""];
 
-	// Show in Finder
-	[downloadMenu addItemWithTitle:NSLocalizedString(@"Show in Finder", @"Title of a popup menu item") action:@selector(showInFinder:) keyEquivalent:@""];
-    
-	// Remove from List
-	[downloadMenu addItemWithTitle:NSLocalizedString(@"Remove From List", @"Title of a popup menu item") action:@selector(removeFromList:) keyEquivalent:@""];
-    
-	// Cancel
-	[downloadMenu addItemWithTitle:NSLocalizedStringWithDefaultValue(@"cancel.menuItem",
-																	 nil,
-																	 NSBundle.mainBundle,
-																	 @"Cancel",
-																	 @"Title of a menu item")
-							action:@selector(cancelDownload:)
-					 keyEquivalent:@""];
+    // Open With
+    NSMenuItem *item = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Open With", @"")
+                                                  action:nil
+                                           keyEquivalent:@""];
+    openWithMenu = [[NSMenu alloc] init];
+    openWithMenu.delegate = self;
+    [item setSubmenu:openWithMenu];
+    [downloadMenu addItem:item];
 
-	table.menu = downloadMenu;
+    // Show in Finder
+    [downloadMenu addItemWithTitle:NSLocalizedString(@"Show in Finder", @"Title of a popup menu item")
+                            action:@selector(showInFinder:)
+                     keyEquivalent:@""];
+
+    // Remove from List
+    [downloadMenu addItemWithTitle:NSLocalizedString(@"Remove From List", @"Title of a popup menu item")
+                            action:@selector(removeFromList:)
+                     keyEquivalent:@""];
+
+    // Cancel
+    [downloadMenu addItemWithTitle:NSLocalizedStringWithDefaultValue(@"cancel.menuItem",
+                                                                     nil,
+                                                                     NSBundle.mainBundle,
+                                                                     @"Cancel",
+                                                                     @"Title of a menu item")
+                            action:@selector(cancelDownload:)
+                     keyEquivalent:@""];
+
+    table.menu = downloadMenu;
 }
 
 // MARK: Actions
@@ -108,9 +106,9 @@
 /* clearList
  * Remove everything from the list.
  */
--(IBAction)clearList:(id)sender
+- (IBAction)clearList:(id)sender
 {
-	[[DownloadManager sharedInstance] clearList];
+    [[DownloadManager sharedInstance] clearList];
 }
 
 /* openFile
@@ -191,23 +189,23 @@
 // MARK: Notifications
 
 /* handleDownloadsChange
- * Called when the downloads list has changed. The notification item is the DownloadItem
- * that has been changed. If it has been added to our list, we insert it. Otherwise we
- * reload the table.
+ * Called when the downloads list has changed. The notification item is the
+ * DownloadItem that has been changed. If it has been added to our list, we
+ * insert it. Otherwise we reload the table.
  */
--(void)handleDownloadsChange:(NSNotification *)notification
+- (void)handleDownloadsChange:(NSNotification *)notification
 {
-	DownloadItem * item = (DownloadItem *)notification.object;
-	NSArray * list = [DownloadManager sharedInstance].downloadsList;
-	NSUInteger  rowIndex = [list indexOfObject:item];
-	if (list.count != lastCount && rowIndex != NSNotFound) {
+    DownloadItem *item = (DownloadItem *)notification.object;
+    NSArray *list = [DownloadManager sharedInstance].downloadsList;
+    NSUInteger rowIndex = [list indexOfObject:item];
+    if (list.count != lastCount && rowIndex != NSNotFound) {
         NSIndexSet *rowIndexes = [NSIndexSet indexSetWithIndex:rowIndex];
         [table insertRowsAtIndexes:rowIndexes
                      withAnimation:(NSTableViewAnimationEffectFade | NSTableViewAnimationSlideDown)];
         [table selectRowIndexes:rowIndexes byExtendingSelection:NO];
         [table scrollRowToVisible:rowIndex];
-		lastCount = list.count;
-	} else if (rowIndex != NSNotFound) {
+        lastCount = list.count;
+    } else if (rowIndex != NSNotFound) {
         [table reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:rowIndex]
                          columnIndexes:[NSIndexSet indexSetWithIndex:table.numberOfColumns - 1]];
     } else {
@@ -290,33 +288,33 @@
     }
     NSString *progressString;
     switch (item.state) {
-        case DownloadStateInit:
-        case DownloadStateFailed:
-        case DownloadStateCancelled:
-            break;
+    case DownloadStateInit:
+    case DownloadStateFailed:
+    case DownloadStateCancelled:
+        break;
 
-        case DownloadStateCompleted: {
+    case DownloadStateCompleted: {
+        progressString = [NSByteCountFormatter stringFromByteCount:item.size
+                                                        countStyle:NSByteCountFormatterCountStyleFile];
+        break;
+    }
+
+    case DownloadStateStarted: {
+        // Filename on top
+        // Progress gauge in middle
+        // Size gathered so far at bottom
+        if (item.expectedSize == -1) {
             progressString = [NSByteCountFormatter stringFromByteCount:item.size
                                                             countStyle:NSByteCountFormatterCountStyleFile];
-            break;
+        } else {
+            NSString *bytesSoFar = [NSByteCountFormatter stringFromByteCount:item.size
+                                                                  countStyle:NSByteCountFormatterCountStyleFile];
+            NSString *expectedBytes = [NSByteCountFormatter stringFromByteCount:item.expectedSize
+                                                                     countStyle:NSByteCountFormatterCountStyleFile];
+            progressString = [NSString stringWithFormat:NSLocalizedString(@"%@ of %@", @"Progress in bytes, e.g. 1 KB of 1 MB"), bytesSoFar, expectedBytes];
         }
-
-        case DownloadStateStarted: {
-            // Filename on top
-            // Progress gauge in middle
-            // Size gathered so far at bottom
-            if (item.expectedSize == -1) {
-                progressString = [NSByteCountFormatter stringFromByteCount:item.size
-                                                                countStyle:NSByteCountFormatterCountStyleFile];
-            } else {
-                NSString *bytesSoFar = [NSByteCountFormatter stringFromByteCount:item.size
-                                                                      countStyle:NSByteCountFormatterCountStyleFile];
-                NSString *expectedBytes = [NSByteCountFormatter stringFromByteCount:item.expectedSize
-                                                                         countStyle:NSByteCountFormatterCountStyleFile];
-                progressString = [NSString stringWithFormat:NSLocalizedString(@"%@ of %@", @"Progress in bytes, e.g. 1 KB of 1 MB"), bytesSoFar, expectedBytes];
-            }
-            break;
-        }
+        break;
+    }
     }
 
     // Set up the cell view.
@@ -341,25 +339,6 @@
               forRow:(NSInteger)row
 {
     clearButton.enabled = tableView.numberOfRows > 0;
-}
-
-// MARK: - NSWindowDelegate
-
-- (void)windowDidBecomeKey:(NSNotification *)notification
-{
-    // Clear relevant notifications when the user views this window.
-    VNAUserNotificationCenter *center = VNAUserNotificationCenter.current;
-    [center getDeliveredNotificationsWithCompletionHandler:^(NSArray<VNAUserNotificationResponse *> *responses) {
-        NSMutableArray *identifiers = [NSMutableArray array];
-        for (VNAUserNotificationResponse *response in responses) {
-            NSString *context = response.userInfo[UserNotificationContextKey];
-            if ([context isEqualToString:UserNotificationContextFileDownloadCompleted] ||
-                [context isEqualToString:UserNotificationContextFileDownloadFailed]) {
-                [identifiers addObject:response.identifier];
-            }
-        }
-        [center removeDeliveredNotificationsWithIdentifiers:identifiers];
-    }];
 }
 
 @end
