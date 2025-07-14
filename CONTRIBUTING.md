@@ -39,3 +39,6 @@ We recommend to install [SwiftLint](https://github.com/realm/SwiftLint).
 7. Use the body to explain _what_ and _why_ (and not on the _how_). Focus on the reasons which required the change - the way things worked before the change (and what was wrong with that), the way they work now, and why you decided to solve it the way you did.  
 You may reference issues/discussions raised at GitHub, but avoid relying heavily on them: a reviewer should be able to make an analysis based solely on code and commit messages.
 
+### Note
+
+Many Git clients show visual markers to help respect the __50/72 Rule__ when entering a commit message. One can also configure Git with a commit template, with a [good example provided here](https://gist.github.com/lisawolderiksen/a7b99d94c92c6671181611be1641c733).
