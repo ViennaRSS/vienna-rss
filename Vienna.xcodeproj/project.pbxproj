@@ -111,7 +111,7 @@
 		4350289A165DE9E00018EDB7 /* ArticleListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502853165DE9DF0018EDB7 /* ArticleListView.m */; };
 		4350289F165DE9E00018EDB7 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350285E165DE9DF0018EDB7 /* Constants.m */; };
 		435028A0165DE9E00018EDB7 /* DownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502860165DE9DF0018EDB7 /* DownloadManager.m */; };
-		435028A1165DE9E00018EDB7 /* DownloadWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502862165DE9DF0018EDB7 /* DownloadWindow.m */; };
+		435028A1165DE9E00018EDB7 /* DownloadWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502862165DE9DF0018EDB7 /* DownloadWindowController.m */; };
 		435028A3165DE9E00018EDB7 /* Export.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502866165DE9DF0018EDB7 /* Export.m */; };
 		435028A4165DE9E00018EDB7 /* FeedCredentials.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502868165DE9DF0018EDB7 /* FeedCredentials.m */; };
 		435028A6165DE9E00018EDB7 /* FoldersTree.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350286C165DE9DF0018EDB7 /* FoldersTree.m */; };
@@ -398,8 +398,8 @@
 		4350285E165DE9DF0018EDB7 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		4350285F165DE9DF0018EDB7 /* DownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadManager.h; sourceTree = "<group>"; };
 		43502860165DE9DF0018EDB7 /* DownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadManager.m; sourceTree = "<group>"; };
-		43502861165DE9DF0018EDB7 /* DownloadWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadWindow.h; sourceTree = "<group>"; };
-		43502862165DE9DF0018EDB7 /* DownloadWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadWindow.m; sourceTree = "<group>"; };
+		43502861165DE9DF0018EDB7 /* DownloadWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadWindowController.h; sourceTree = "<group>"; };
+		43502862165DE9DF0018EDB7 /* DownloadWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadWindowController.m; sourceTree = "<group>"; };
 		43502865165DE9DF0018EDB7 /* Export.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Export.h; sourceTree = "<group>"; };
 		43502866165DE9DF0018EDB7 /* Export.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Export.m; sourceTree = "<group>"; };
 		43502867165DE9DF0018EDB7 /* FeedCredentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedCredentials.h; sourceTree = "<group>"; };
@@ -1273,8 +1273,8 @@
 		F6D7FEDD1F1CDFCD004F095A /* Download window */ = {
 			isa = PBXGroup;
 			children = (
-				43502861165DE9DF0018EDB7 /* DownloadWindow.h */,
-				43502862165DE9DF0018EDB7 /* DownloadWindow.m */,
+				43502861165DE9DF0018EDB7 /* DownloadWindowController.h */,
+				43502862165DE9DF0018EDB7 /* DownloadWindowController.m */,
 				F6B7F9CD2E22E7BE005ADB06 /* DownloadViewController.h */,
 				F6B7F9CE2E22E7BE005ADB06 /* DownloadViewController.m */,
 				4350285F165DE9DF0018EDB7 /* DownloadManager.h */,
@@ -1909,7 +1909,7 @@
 				2F20FF8F25618627000F68C2 /* WebKitArticleTab.swift in Sources */,
 				034981411A20701600014F29 /* AdvancedPreferencesViewController.m in Sources */,
 				435028A0165DE9E00018EDB7 /* DownloadManager.m in Sources */,
-				435028A1165DE9E00018EDB7 /* DownloadWindow.m in Sources */,
+				435028A1165DE9E00018EDB7 /* DownloadWindowController.m in Sources */,
 				0379E23B1A20831600D58BFE /* SyncingPreferencesViewController.m in Sources */,
 				B856F8E125782F8100E91AC7 /* AppController+Sparkle.swift in Sources */,
 				435028A3165DE9E00018EDB7 /* Export.m in Sources */,

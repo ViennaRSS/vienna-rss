@@ -9,7 +9,7 @@
         <!--Window Controller-->
         <scene sceneID="c1O-Ma-b7n">
             <objects>
-                <windowController showSeguePresentationStyle="single" id="959-S2-UHq" customClass="DownloadWindow" sceneMemberID="viewController">
+                <windowController showSeguePresentationStyle="single" id="959-S2-UHq" customClass="VNADownloadWindowController" sceneMemberID="viewController">
                     <window key="window" title="Downloads" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" tabbingMode="disallowed" id="5">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowCollectionBehavior key="collectionBehavior" moveToActiveSpace="YES" fullScreenAuxiliary="YES"/>

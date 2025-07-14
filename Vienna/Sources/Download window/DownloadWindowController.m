@@ -1,5 +1,5 @@
 //
-//  DownloadWindow.m
+//  DownloadWindowController.m
 //  Vienna
 //
 //  Created by Steve on 10/9/05.
@@ -18,12 +18,12 @@
 //  limitations under the License.
 //
 
-#import "DownloadWindow.h"
+#import "DownloadWindowController.h"
 
 #import "AppController+Notifications.h"
 #import "Vienna-Swift.h"
 
-@implementation DownloadWindow
+@implementation VNADownloadWindowController
 
 /* windowDidLoad
  * Do the things that only make sense after the window file is loaded.

@@ -1,5 +1,5 @@
 //
-//  DownloadWindow.h
+//  DownloadWindowController.h
 //  Vienna
 //
 //  Created by Steve on 10/9/05.
@@ -20,6 +20,7 @@
 
 @import Cocoa;
 
-@interface DownloadWindow : NSWindowController <NSWindowDelegate>
+NS_SWIFT_NAME(DownloadWindowController)
+@interface VNADownloadWindowController : NSWindowController <NSWindowDelegate>
 
 @end
