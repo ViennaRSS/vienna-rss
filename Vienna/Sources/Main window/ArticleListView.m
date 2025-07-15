@@ -663,38 +663,6 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 	return articleList.window.visible && self.selectedArticle != nil && ![Database sharedManager].readOnly;
 }
 
-/* canGoForward
- * Return TRUE if we can go forward in the backtrack queue.
- */
--(BOOL)canGoForward
-{
-	return self.articleController.canGoForward;
-}
-
-/* canGoBack
- * Return TRUE if we can go backward in the backtrack queue.
- */
--(BOOL)canGoBack
-{
-	return self.articleController.canGoBack;
-}
-
-/* handleGoForward
- * Move forward through the backtrack queue.
- */
--(IBAction)handleGoForward:(id)sender
-{
-	[self.articleController goForward];
-}
-
-/* handleGoBack
- * Move backward through the backtrack queue.
- */
--(IBAction)handleGoBack:(id)sender
-{
-	[self.articleController goBack];
-}
-
 /* makeTextStandardSize
  * Reset webview text size to default
  */
@@ -952,7 +920,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
     if (articleText.canScrollUp) {
         [(NSView *)articleText scrollPageUp:nil];
     } else {
-        [self.articleController goBack];
+        [self.articleController goBack:nil];
     }
 }
 

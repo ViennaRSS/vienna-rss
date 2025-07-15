@@ -23,6 +23,7 @@
 @import os.log;
 
 #import "AppController.h"
+#import "Field.h"
 #import "Preferences.h"
 #import "Constants.h"
 #import "Database.h"
@@ -982,7 +983,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 /* goForward
  * Move forward through the backtrack queue.
  */
--(void)goForward
+- (IBAction)goForward:(nullable id)sender
 {
 	NSInteger folderId;
 	NSString * guid;
@@ -997,7 +998,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 /* goBack
  * Move backward through the backtrack queue.
  */
--(void)goBack
+- (IBAction)goBack:(nullable id)sender
 {
 	NSInteger folderId;
 	NSString * guid;
@@ -1025,6 +1026,41 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 	return !backtrackArray.atStartOfQueue;
 }
 
+/* doViewColumn
+ * Toggle whether or not a specified column is visible.
+ */
+- (IBAction)doViewColumn:(NSMenuItem *)sender
+{
+    if ([sender.representedObject isKindOfClass:[Field class]]) {
+        Field *field = sender.representedObject;
+        field.visible = !field.visible;
+        [self updateVisibleColumns];
+        [self saveTableSettings];
+    }
+}
+
+/* doSortColumn
+ * Handle the user picking a sort column item from the Sort By submenu
+ */
+- (IBAction)doSortColumn:(NSMenuItem *)sender
+{
+    if ([sender.representedObject isKindOfClass:[Field class]]) {
+        Field *field = sender.representedObject;
+        [self sortByIdentifier:field.name];
+    }
+}
+
+/* doSortDirection
+ * Handle the user picking ascending or descending from the Sort By submenu
+ */
+- (IBAction)doSortDirection:(NSMenuItem *)sender
+{
+    if ([sender.representedObject isKindOfClass:[NSNumber class]]) {
+        NSNumber *sortAscending = sender.representedObject;
+        [self sortAscending:sortAscending.boolValue];
+    }
+}
+
 /* reportLayout
  * Switch to report layout
  */
@@ -1050,6 +1086,65 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 {
     [self setLayout:VNALayoutUnified];
     [self.mainArticleView refreshFolder:VNARefreshRedrawList];
+}
+
+/* markRead
+ * Mark read the selected articles
+ */
+- (IBAction)markRead:(nullable id)sender
+{
+    Article *article = self.selectedArticle;
+    if (article && !Database.sharedManager.readOnly) {
+        [self markReadByArray:self.markedArticleRange readFlag:YES];
+    }
+}
+
+/* markUnread
+ * Mark unread the selected articles
+ */
+- (IBAction)markUnread:(nullable id)sender
+{
+    Article *article = self.selectedArticle;
+    if (article && !Database.sharedManager.readOnly) {
+        [self markReadByArray:self.markedArticleRange readFlag:NO];
+    }
+}
+
+/* markFlagged
+ * Toggle the flagged/unflagged state of the selected article
+ */
+- (IBAction)markFlagged:(nullable id)sender
+{
+    Article *article = self.selectedArticle;
+    if (article && !Database.sharedManager.readOnly) {
+        [self markFlaggedByArray:self.markedArticleRange
+                         flagged:!article.isFlagged];
+    }
+}
+
+/* downloadEnclosure
+ * Downloads the enclosures of the currently selected articles
+ */
+- (IBAction)downloadEnclosure:(nullable id)sender
+{
+    for (Article *article in self.markedArticleRange) {
+        if (article.hasEnclosure) {
+            [DownloadManager.sharedInstance downloadFileFromURL:article.enclosure];
+        }
+    }
+}
+
+/* restoreMessage
+ * Restore a message in the Trash folder back to where it came from.
+ */
+- (IBAction)restoreMessage:(nullable id)sender
+{
+    Database *database = Database.sharedManager;
+    Folder *folder = [database folderFromID:self.currentFolderId];
+    if (folder.type == VNAFolderTypeTrash && self.selectedArticle && !database.readOnly) {
+        [self markDeletedByArray:self.markedArticleRange deleteFlag:NO];
+        [self.view.window.undoManager removeAllActions];
+    }
 }
 
 /* handleArticleListStateChange
@@ -1210,12 +1305,16 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 
 - (BOOL)vna_canHandleEvent:(NSEvent *)event
 {
-    if (event.type != NSEventTypeKeyDown && event.characters.length != 1) {
-        return [super vna_canHandleEvent:event];
-    }
-    unichar keyChar = [event.characters characterAtIndex:0];
-    if (keyChar == 'f' || keyChar == 'F') {
-        return YES;
+    if (event.type == NSEventTypeKeyDown && event.characters.length == 1) {
+        unichar keyChar = [event.characters characterAtIndex:0];
+        if (keyChar == 'f' || keyChar == 'F' ||
+            keyChar == 'm' || keyChar == 'M' ||
+            keyChar == 'r' || keyChar == 'R' ||
+            keyChar == 'u' || keyChar == 'U' ||
+            keyChar == '<' || keyChar == ',' ||
+            keyChar == '>' || keyChar == '.') {
+            return YES;
+        }
     }
     return [super vna_canHandleEvent:event];
 }
@@ -1234,6 +1333,23 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
             [self setFilterBarState:YES withAnimation:YES];
             Preferences.standardPreferences.showFilterBar = YES;
         }
+        return YES;
+    } else if (keyChar == 'm' || keyChar == 'M') {
+        [self markFlagged:nil];
+        return YES;
+    } else if (keyChar == 'r' || keyChar == 'R' ||
+               keyChar == 'u' || keyChar == 'U') {
+        Article *article = self.selectedArticle;
+        if (article && !Database.sharedManager.readOnly) {
+            [self markReadByArray:self.markedArticleRange
+                         readFlag:!article.isRead];
+        }
+        return YES;
+    } else if (keyChar == '<' || keyChar == ',') {
+        [self goBack:nil];
+        return YES;
+    } else if (keyChar == '>' || keyChar == '.') {
+        [self goForward:nil];
         return YES;
     }
     return [super vna_handleEvent:event];
@@ -1272,7 +1388,27 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
     SEL action = menuItem.action;
-    if (action == @selector(reportLayout:)) {
+    if (action == @selector(doViewColumn:)) {
+        Field *field = menuItem.representedObject;
+        menuItem.state = field.visible ? NSControlStateValueOn : NSControlStateValueOff;
+        return YES;
+    } else if (action == @selector(doSortColumn:)) {
+        Field *field = menuItem.representedObject;
+        if ([field.name isEqualToString:self.sortColumnIdentifier]) {
+            menuItem.state = NSControlStateValueOn;
+        } else {
+            menuItem.state = NSControlStateValueOff;
+        }
+        return YES;
+    } else if (action == @selector(doSortDirection:)) {
+        NSNumber *sortAscending = menuItem.representedObject;
+        if (sortAscending.boolValue == self.sortIsAscending) {
+            menuItem.state = NSControlStateValueOn;
+        } else {
+            menuItem.state = NSControlStateValueOff;
+        }
+        return YES;
+    } else if (action == @selector(reportLayout:)) {
         VNALayout layout = Preferences.standardPreferences.layout;
         menuItem.state = (layout == VNALayoutReport) ? NSControlStateValueOn : NSControlStateValueOff;
         return YES;
@@ -1295,8 +1431,49 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
             menuItem.title = NSLocalizedString(@"Show Filter Bar", nil);
         }
         return YES;
+    } else if (action == @selector(goBack:)) {
+        return self.canGoBack;
+    } else if (action == @selector(goForward:)) {
+        return self.canGoForward;
+    } else if (action == @selector(markFlagged:)) {
+        Article *selectedArticle = self.selectedArticle;
+        if (selectedArticle) {
+            if (selectedArticle.isFlagged) {
+                menuItem.title = NSLocalizedString(@"Mark Unflagged", nil);
+            } else {
+                menuItem.title = NSLocalizedString(@"Mark Flagged", nil);
+            }
+            return !Database.sharedManager.readOnly;
+        }
+        return NO;
+    } else if (action == @selector(markRead:)) {
+        return self.selectedArticle && !Database.sharedManager.readOnly;
+    } else if (action == @selector(markUnread:)) {
+        return self.selectedArticle && !Database.sharedManager.readOnly;
+    } else if (action == @selector(restoreMessage:)) {
+        Database *database = Database.sharedManager;
+        Folder *folder = [database folderFromID:self.foldersTree.actualSelection];
+        return folder.type == VNAFolderTypeTrash && self.selectedArticle && !database.readOnly;
+    } else if (action == @selector(downloadEnclosure:)) {
+        if (self.markedArticleRange.count > 1) {
+            menuItem.title = NSLocalizedString(@"Download Enclosures", @"Title of a menu item");
+        } else {
+            menuItem.title = NSLocalizedString(@"Download Enclosure", @"Title of a menu item");
+        }
+        return self.selectedArticle.hasEnclosure;
     }
     os_log_debug(VNA_LOG, "Unhandled menu-item validation for menu item %@", menuItem);
+    return NO;
+}
+
+// MARK: - NSToolbarItemValidation
+
+- (BOOL)validateToolbarItem:(NSToolbarItem *)item
+{
+    SEL action = item.action;
+    if (action == @selector(goBack:)) {
+        return self.canGoBack;
+    }
     return NO;
 }
 

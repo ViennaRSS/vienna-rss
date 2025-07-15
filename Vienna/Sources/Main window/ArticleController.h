@@ -77,14 +77,22 @@
 -(void)markFlaggedByArray:(NSArray *)articleArray flagged:(BOOL)flagged;
 -(void)selectFolderAndArticle:(NSInteger)folderId guid:(NSString *)guid;
 -(void)addBacktrack:(NSString *)guid;
--(void)goForward;
--(void)goBack;
-@property (nonatomic, readonly) BOOL canGoForward;
-@property (nonatomic, readonly) BOOL canGoBack;
 
 - (IBAction)reportLayout:(id)sender;
 - (IBAction)condensedLayout:(id)sender;
 - (IBAction)unifiedLayout:(id)sender;
+
+- (IBAction)doViewColumn:(NSMenuItem *)sender;
+- (IBAction)doSortColumn:(NSMenuItem *)sender;
+- (IBAction)doSortDirection:(NSMenuItem *)sender;
+
+- (IBAction)goBack:(/*nullable*/ id)sender;
+- (IBAction)goForward:(/*nullable*/ id)sender;
+- (IBAction)markRead:(/*nullable*/ id)sender;
+- (IBAction)markUnread:(/*nullable*/ id)sender;
+- (IBAction)markFlagged:(/*nullable*/ id)sender;
+- (IBAction)restoreMessage:(/*nullable*/ id)sender;
+- (IBAction)downloadEnclosure:(/*nullable*/ id)sender;
 
 // MARK: Filter bar
 

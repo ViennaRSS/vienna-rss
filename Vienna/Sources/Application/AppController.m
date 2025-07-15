@@ -823,18 +823,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	[self openURLs:@[url] inPreferredBrowser:openInPreferredBrowserFlag];
 }
 
-/* downloadEnclosure
- * Downloads the enclosures of the currently selected articles
- */
--(IBAction)downloadEnclosure:(id)sender
-{
-	for (Article * currentArticle in self.articleController.markedArticleRange) {
-		if (currentArticle.hasEnclosure) {
-			[[DownloadManager sharedInstance] downloadFileFromURL:currentArticle.enclosure];
-		}
-	}
-}
-
 /* openVienna
  * Calls into showMainWindow but activates the app first.
  */
@@ -1526,44 +1514,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     }
 }
 
-/* doViewColumn
- * Toggle whether or not a specified column is visible.
- */
--(IBAction)doViewColumn:(id)sender
-{
-	NSMenuItem * menuItem = (NSMenuItem *)sender;
-	Field * field = menuItem.representedObject;
-	
-	field.visible = !field.visible;
-	[self.articleController updateVisibleColumns];
-	[self.articleController saveTableSettings];
-}
-
-/* doSortColumn
- * Handle the user picking a sort column item from the Sort By submenu
- */
--(IBAction)doSortColumn:(id)sender
-{
-	NSMenuItem * menuItem = (NSMenuItem *)sender;
-	Field * field = menuItem.representedObject;
-	
-	NSAssert1(field, @"Somehow got a nil representedObject for Sort column sub-menu item '%@'", [menuItem title]);
-	[self.articleController sortByIdentifier:field.name];
-}
-
-/* doSortDirection
- * Handle the user picking ascending or descending from the Sort By submenu
- */
--(IBAction)doSortDirection:(id)sender
-{
-	NSMenuItem * menuItem = (NSMenuItem *)sender;
-	NSNumber * ascendingNumber = menuItem.representedObject;
-	
-	NSAssert1(ascendingNumber != nil, @"Somehow got a nil representedObject for Sort direction sub-menu item '%@'", [menuItem title]);
-	BOOL ascending = ascendingNumber.boolValue;
-	[self.articleController sortAscending:ascending];
-}
-
 /* doOpenScriptsFolder
  * Open the standard Vienna scripts folder.
  */
@@ -1754,25 +1704,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	[self viewArticlePages:sender inPreferredBrowser:NO];
 }
 
-
-/* goForward
- * In article view, forward track through the list of articles displayed.
- */
--(IBAction)goForward:(id)sender
-{
-    [self.browser switchToPrimaryTab];
-    [self.articleController goForward];
-}
-
-/* goBack
- * In article view, back track through the list of articles displayed.
- */
--(IBAction)goBack:(id)sender
-{
-    [self.browser switchToPrimaryTab];
-    [self.articleController goBack];
-}
-
 /* localPerformFindPanelAction
  * The default handler for the Find actions is the first responder. Unfortunately the
  * WebView, although it claims to implement this, doesn't. So we redirect the Find
@@ -1854,24 +1785,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			[self setFocusToSearchField:self];
 			return YES;
 			
-		case '>':
-		case '.':
-			[self goForward:self];
-			return YES;
-			
-		case '<':
-		case ',':
-			[self goBack:self];
-			return YES;
-			
 		case 'k':
 		case 'K':
 			[self markAllRead:self];
-			return YES;
-			
-		case 'm':
-		case 'M':
-			[self markFlagged:self];
 			return YES;
 			
 		case 'b':
@@ -1887,13 +1803,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		case 'y':
 		case 'Y':
 			[self viewArticlesTab:self];
-			return YES;
-			
-		case 'u':
-		case 'U':
-		case 'r':
-		case 'R':
-			[self markReadToggle:self];
 			return YES;
 			
 		case 's':
@@ -2051,19 +1960,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	[groupFolder newGroupFolder:self.mainWindow underParent:self.foldersTree.groupParentSelection];
 }
 
-/* restoreMessage
- * Restore a message in the Trash folder back to where it came from.
- */
--(IBAction)restoreMessage:(id)sender
-{
-	Folder * folder = [db folderFromID:self.articleController.currentFolderId];
-	if (folder.type == VNAFolderTypeTrash && self.selectedArticle != nil && !db.readOnly) {
-		NSArray * articleArray = self.articleController.markedArticleRange;
-		[self.articleController markDeletedByArray:articleArray deleteFlag:NO];
-		[self clearUndoStack];
-	}
-}
-
 /* deleteMessage
  * Delete the current article. If we're in the Trash folder, this represents a permanent
  * delete. Otherwise we just move the article to the trash folder.
@@ -2174,54 +2070,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
 	if (!db.readOnly) {
 		[self.articleController markAllFoldersReadByArray:[self.foldersTree folders:0]];
-	}
-}
-
-/* markReadToggle
- * Toggle the read/unread state of the selected articles
- */
--(IBAction)markReadToggle:(id)sender
-{
-	Article * theArticle = self.selectedArticle;
-	if (theArticle != nil && !db.readOnly) {
-		NSArray * articleArray = self.articleController.markedArticleRange;
-		[self.articleController markReadByArray:articleArray readFlag:!theArticle.isRead];
-	}
-}
-
-/* markRead
- * Mark read the selected articles
- */
--(IBAction)markRead:(id)sender
-{
-	Article * theArticle = self.selectedArticle;
-	if (theArticle != nil && !db.readOnly) {
-		NSArray * articleArray = self.articleController.markedArticleRange;
-		[self.articleController markReadByArray:articleArray readFlag:YES];
-	}
-}
-
-/* markUnread
- * Mark unread the selected articles
- */
--(IBAction)markUnread:(id)sender
-{
-	Article * theArticle = self.selectedArticle;
-	if (theArticle != nil && !db.readOnly) {
-		NSArray * articleArray = self.articleController.markedArticleRange;
-		[self.articleController markReadByArray:articleArray readFlag:NO];
-	}
-}
-
-/* markFlagged
- * Toggle the flagged/unflagged state of the selected article
- */
--(IBAction)markFlagged:(id)sender
-{
-	Article * theArticle = self.selectedArticle;
-	if (theArticle != nil && !db.readOnly) {
-		NSArray * articleArray = self.articleController.markedArticleRange;
-		[self.articleController markFlaggedByArray:articleArray flagged:!theArticle.isFlagged];
 	}
 }
 
@@ -2928,10 +2776,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         }
         return YES;
     }
-	if (theAction == @selector(goBack:)) {
-        *validateFlag = isMainWindowVisible && isAnyArticleView && self.articleController.canGoBack;
-        return YES;
-	}
 	if (theAction == @selector(deleteMessage:)) {
 		Folder * folder = [db folderFromID:self.foldersTree.actualSelection];
 		*validateFlag = self.selectedArticle != nil && !db.readOnly
@@ -2982,8 +2826,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		} else {
 			return !self.browser.activeTab.isLoading;
 		}
-	} else if (theAction == @selector(goForward:)) {
-        return isMainWindowVisible && isAnyArticleView && self.articleController.canGoForward;
 	} else if (theAction == @selector(newGroupFolder:)) {
 		return !db.readOnly && isMainWindowVisible;
 	} else if (theAction == @selector(makeTextStandardSize:)) {
@@ -2992,30 +2834,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         return self.browser.activeTab != nil;
 	} else if (theAction == @selector(makeTextSmaller:)) {
         return self.browser.activeTab != nil;
-	} else if (theAction == @selector(doViewColumn:)) {
-		Field * field = menuItem.representedObject;
-		menuItem.state = field.visible ? NSControlStateValueOn : NSControlStateValueOff;
-		return isMainWindowVisible && isArticleView;
 	} else if (theAction == @selector(doSelectStyle:)) {
 		NSString * styleName = menuItem.title;
 		menuItem.state = [styleName isEqualToString:[Preferences standardPreferences].displayStyle] ? NSControlStateValueOn : NSControlStateValueOff;
-		return isMainWindowVisible && isAnyArticleView;
-	} else if (theAction == @selector(doSortColumn:)) {
-		Field * field = menuItem.representedObject;
-        if ([field.name isEqualToString:self.articleController.sortColumnIdentifier]) {
-			menuItem.state = NSControlStateValueOn;
-        } else {
-			menuItem.state = NSControlStateValueOff;
-        }
-		return isMainWindowVisible && isAnyArticleView;
-	} else if (theAction == @selector(doSortDirection:)) {
-		NSNumber * ascendingNumber = menuItem.representedObject;
-		BOOL ascending = ascendingNumber.integerValue;
-        if (ascending == self.articleController.sortIsAscending) {
-			menuItem.state = NSControlStateValueOn;
-        } else {
-			menuItem.state = NSControlStateValueOff;
-        }
 		return isMainWindowVisible && isAnyArticleView;
 	} else if (theAction == @selector(unsubscribeFeed:)) {
 		Folder * folder = [db folderFromID:self.foldersTree.actualSelection];
@@ -3086,9 +2907,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	} else if (theAction == @selector(editFolder:)) {
 		Folder * folder = [db folderFromID:self.foldersTree.actualSelection];
 		return folder && (folder.type == VNAFolderTypeSmart || folder.type == VNAFolderTypeRSS) && !db.readOnly && isMainWindowVisible;
-	} else if (theAction == @selector(restoreMessage:)) {
-		Folder * folder = [db folderFromID:self.foldersTree.actualSelection];
-		return folder.type == VNAFolderTypeTrash && self.selectedArticle != nil && !db.readOnly && isMainWindowVisible;
 	} else if (theAction == @selector(previousTab:)) {
 		return isMainWindowVisible && self.browser.browserTabCount > 1;
 	} else if (theAction == @selector(nextTab:)) {
@@ -3107,29 +2925,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		return isMainWindowVisible;
 	} else if (theAction == @selector(setFocusToSearchField:)) {
 		return isMainWindowVisible;
-	} else if (theAction == @selector(markFlagged:)) {
-		Article * thisArticle = self.selectedArticle;
-		if (thisArticle != nil) {
-			if (thisArticle.isFlagged) {
-				[menuItem setTitle:NSLocalizedString(@"Mark Unflagged", nil)];
-			} else {
-				[menuItem setTitle:NSLocalizedString(@"Mark Flagged", nil)];
-			}
-		}
-		return (thisArticle != nil && !db.readOnly && isMainWindowVisible);
-	} else if (theAction == @selector(markRead:)) {
-		Article * thisArticle = self.selectedArticle;
-		return (thisArticle != nil && !db.readOnly && isMainWindowVisible);
-	} else if (theAction == @selector(markUnread:)) {
-		Article * thisArticle = self.selectedArticle;
-		return (thisArticle != nil && !db.readOnly && isMainWindowVisible);
-	} else if (theAction == @selector(downloadEnclosure:)) {
-        if (self.articleController.markedArticleRange.count > 1) {
-			[menuItem setTitle:NSLocalizedString(@"Download Enclosures", @"Title of a menu item")];
-        } else {
-			[menuItem setTitle:NSLocalizedString(@"Download Enclosure", @"Title of a menu item")];
-        }
-		return (self.selectedArticle.hasEnclosure && isMainWindowVisible);
 	} else if (theAction == @selector(setSearchMethod:)) {
 		Preferences * prefs = [Preferences standardPreferences];
 		if ([prefs.searchMethod.displayName isEqualToString:[menuItem.representedObject displayName]]) {

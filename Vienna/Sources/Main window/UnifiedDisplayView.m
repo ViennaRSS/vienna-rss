@@ -448,7 +448,7 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
         [scrollView reflectScrolledClipView:[scrollView contentView]];
         [NSAnimationContext endGrouping];
     } else {
-        [self.articleController goBack];
+        [self.articleController goBack:nil];
     }
 }
 
