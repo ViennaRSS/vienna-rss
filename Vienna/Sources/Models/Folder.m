@@ -169,6 +169,7 @@
         case VNAFolderTypeOpenReader: {
             NSString *homePageSiteRoot = self.homePage.vna_host.vna_convertStringToValidPath;
             folderImage = [FolderImageCache.defaultCache retrieveImage:homePageSiteRoot];
+            folderImage.size = NSMakeSize(16.0, 16.0);
             if (!folderImage) {
                 folderImage = [NSImage imageNamed:ACImageNameRSSFeed];
             }
@@ -216,18 +217,19 @@
     }
 }
 
-/* setImage
+/* setImageData
  * Used to set the image for a folder in the array. The image is cached for this session
  * and also written to the image folder if there is a valid one.
  */
--(void)setImage:(NSImage *)image
+- (BOOL)setImageData:(NSData *)imageData
 {
-    NSImage *iconImage = [image copy];
-	if (self.feedURL != nil && iconImage != nil) {
-		NSString * homePageSiteRoot;
-		homePageSiteRoot = self.homePage.vna_host.vna_convertStringToValidPath;
-		[[FolderImageCache defaultCache] addImage:iconImage forURL:homePageSiteRoot];
-	}
+    if (!imageData || !self.feedURL) {
+        return NO;
+    }
+
+    NSString *hostName = self.homePage.vna_host.vna_convertStringToValidPath;
+    return [FolderImageCache.defaultCache cacheImageData:imageData
+                                                filename:hostName];
 }
 
 /* setFeedDescription

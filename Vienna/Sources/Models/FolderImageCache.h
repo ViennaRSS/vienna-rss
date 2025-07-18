@@ -8,11 +8,16 @@
 
 @import Cocoa;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface FolderImageCache : NSObject
 
 @property (class, readonly, nonatomic) FolderImageCache *defaultCache;
 
--(void)addImage:(NSImage *)image forURL:(NSString *)baseURL;
--(NSImage *)retrieveImage:(NSString *)baseURL;
+- (BOOL)cacheImageData:(NSData *)imageData filename:(NSString *)filename;
+
+- (nullable NSImage *)retrieveImage:(NSString *)filename;
 
 @end
+
+NS_ASSUME_NONNULL_END

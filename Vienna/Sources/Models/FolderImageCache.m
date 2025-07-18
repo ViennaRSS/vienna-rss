@@ -8,10 +8,15 @@
 
 #import "FolderImageCache.h"
 
+@import UniformTypeIdentifiers;
+
 #import "NSFileManager+Paths.h"
 #import "StringExtensions.h"
 
 @interface FolderImageCache ()
+
+@property (nonatomic) NSURL *cacheDirectoryURL;
+
 -(void)initFolderImagesArray;
 
 @end
@@ -49,39 +54,64 @@
     return self;
 }
 
-/* addImage
+/* cacheImageData:filename:
  * Add the specified image to the cache and save it to disk.
  */
--(void)addImage:(NSImage *)image forURL:(NSString *)baseURL
+- (BOOL)cacheImageData:(NSData *)imageData
+              filename:(NSString *)filename
 {
-    // Add in memory
     [self initFolderImagesArray];
-    folderImagesArray[baseURL] = image;
-    
-    // Save icon to disk here.
-    if (imagesCacheFolder != nil) {
-        NSString * fullFilePath = [[imagesCacheFolder stringByAppendingPathComponent:baseURL] stringByAppendingPathExtension:@"tiff"];
-        NSData *imageData = nil;
-        @try {
-            imageData = image.TIFFRepresentation;
+
+    // This method presumes that the imageData object represents an ICO file.
+    // NSImage uses one or more NSImageRep instances to create the image. The
+    // ICO format is a container for PNG and BMP, both of which are supported
+    // by NSBitmapImageRep. An ICO file can comprise multiple images, similar
+    // to TIFF, the target format for storage.
+    NSImage *image = [[NSImage alloc] initWithData:imageData];
+    if (!image) {
+        return NO;
+    }
+
+    // macOS 15 does not handle images with indexed pixel samples correctly.
+    // Those images have to be converted by applying the standard RGB color
+    // space (sRGB) that is commonly used on the web.
+    for (NSImageRep *rep in image.representations) {
+        if (![rep isKindOfClass:[NSBitmapImageRep class]]) {
+            continue;
         }
-        @catch (NSException *error) {
-            imageData = nil;
-            NSLog(@"tiff exception with %@", fullFilePath);
-        }
-        if (imageData != nil) {
-            [[NSFileManager defaultManager] createFileAtPath:fullFilePath contents:imageData attributes:nil];
+        NSBitmapImageRep *bitmapRep = (NSBitmapImageRep *)rep;
+        // -bitmapImageRepByConvertingToColorSpace:renderingIntent: returns the
+        // same bitmap image rep if the color space is the same.
+        NSBitmapImageRep *convertedBitmapRep =
+            [bitmapRep bitmapImageRepByConvertingToColorSpace:NSColorSpace.sRGBColorSpace
+                                              renderingIntent:NSColorRenderingIntentDefault];
+        if (convertedBitmapRep && ![convertedBitmapRep isEqual:bitmapRep]) {
+            [image removeRepresentation:bitmapRep];
+            [image addRepresentation:convertedBitmapRep];
         }
     }
+
+    folderImagesArray[filename] = image;
+
+    NSURL *url = nil;
+    if (@available(macOS 11, *)) {
+        url = [self.cacheDirectoryURL URLByAppendingPathComponent:filename
+                                                 conformingToType:UTTypeTIFF];
+    } else {
+        url = [self.cacheDirectoryURL URLByAppendingPathComponent:filename
+                                                      isDirectory:NO];
+        url = [url URLByAppendingPathExtension:@"tiff"];
+    }
+    return [image.TIFFRepresentation writeToURL:url atomically:YES];
 }
 
 /* retrieveImage
  * Retrieve the image for the specified URL from the cache.
  */
--(NSImage *)retrieveImage:(NSString *)baseURL
+- (nullable NSImage *)retrieveImage:(NSString *)filename
 {
     [self initFolderImagesArray];
-    return folderImagesArray[baseURL];
+    return folderImagesArray[filename];
 }
 
 /* initFolderImagesArray
@@ -102,6 +132,7 @@
         NSURL *appSupportURL = fileManager.vna_applicationSupportDirectory;
         NSURL *imagesURL = [appSupportURL URLByAppendingPathComponent:@"Images"
                                                           isDirectory:YES];
+        self.cacheDirectoryURL = imagesURL;
         imagesCacheFolder = imagesURL.path;
         if (![fileManager fileExistsAtPath:imagesCacheFolder isDirectory:&isDir]) {
             if (![fileManager createDirectoryAtPath:imagesCacheFolder withIntermediateDirectories:YES attributes:nil error:nil]) {
@@ -130,8 +161,7 @@
                     NSString * fullPath = [imagesCacheFolder stringByAppendingPathComponent:fileName];
                     NSData * imageData = [fileManager contentsAtPath:fullPath];
                     NSImage * iconImage = [[NSImage alloc] initWithData:imageData];
-                    if (iconImage.valid) {
-                        iconImage.size = NSMakeSize(16, 16);
+                    if (iconImage.isValid) {
                         NSString * homePageSiteRoot = (fullPath.lastPathComponent.stringByDeletingPathExtension).vna_convertStringToValidPath;
                         folderImagesArray[homePageSiteRoot] = iconImage;
                     }

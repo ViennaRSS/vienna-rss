@@ -409,11 +409,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
                 if (((NSHTTPURLResponse *)response).statusCode == 404) {
                     [aItem appendDetail:NSLocalizedString(@"RSS Icon not found!", nil)];
                 } else if (((NSHTTPURLResponse *)response).statusCode == 200) {
-                    NSImage *iconImage = [[NSImage alloc] initWithData:data];
-                    if (iconImage != nil && iconImage.valid) {
-                        iconImage.size = NSMakeSize(16, 16);
-                        folder.image = iconImage;
-
+                    if ([folder setImageData:data] && folder.image.isValid) {
                         // Broadcast a notification since the folder image has now changed
                         [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:MA_Notify_FoldersUpdated
                                                                                                 object:@(folder.itemId)];
