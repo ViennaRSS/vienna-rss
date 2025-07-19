@@ -287,10 +287,9 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
  */
 -(void)refreshFavIconForFolder:(Folder *)folder
 {
-    // Do nothing if there's no homepage associated with the feed
-    // or if the feed already has a favicon.
+    // Do nothing if there's no homepage associated with the feed.
     if ((folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader) &&
-        (folder.homePage == nil || folder.homePage.vna_isBlank || folder.hasCachedImage))
+        (folder.homePage == nil || folder.homePage.vna_isBlank))
     {
         [[Database sharedManager] clearFlag:VNAFolderFlagCheckForImage forFolder:folder.itemId];
         return;
@@ -409,11 +408,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
                 if (((NSHTTPURLResponse *)response).statusCode == 404) {
                     [aItem appendDetail:NSLocalizedString(@"RSS Icon not found!", nil)];
                 } else if (((NSHTTPURLResponse *)response).statusCode == 200) {
-                    NSImage *iconImage = [[NSImage alloc] initWithData:data];
-                    if (iconImage != nil && iconImage.valid) {
-                        iconImage.size = NSMakeSize(16, 16);
-                        folder.image = iconImage;
-
+                    if ([folder setImageData:data] && folder.image.isValid) {
                         // Broadcast a notification since the folder image has now changed
                         [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:MA_Notify_FoldersUpdated
                                                                                                 object:@(folder.itemId)];
