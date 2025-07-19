@@ -188,22 +188,6 @@
     return folderImage;
 }
 
-/*!Check if an RSS or OpenReader folder
- * has an image stored in cache.
- * @return YES if the folder has an image stored in the cache.
- */
--(BOOL)hasCachedImage {
-    if (self.type != VNAFolderTypeRSS && self.type != VNAFolderTypeOpenReader) {
-		return NO;
-    }
-	NSImage * imagePtr = nil;
-	if (self.feedURL) {
-		NSString * homePageSiteRoot = self.homePage.vna_host.vna_convertStringToValidPath;
-		imagePtr = [[FolderImageCache defaultCache] retrieveImage:homePageSiteRoot];
-	}
-	return (imagePtr != nil);
-}
-
 /*!Get the standard (not feed customised) image for this folder.
  * @return The standard image.
  */

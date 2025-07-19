@@ -287,10 +287,9 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
  */
 -(void)refreshFavIconForFolder:(Folder *)folder
 {
-    // Do nothing if there's no homepage associated with the feed
-    // or if the feed already has a favicon.
+    // Do nothing if there's no homepage associated with the feed.
     if ((folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader) &&
-        (folder.homePage == nil || folder.homePage.vna_isBlank || folder.hasCachedImage))
+        (folder.homePage == nil || folder.homePage.vna_isBlank))
     {
         [[Database sharedManager] clearFlag:VNAFolderFlagCheckForImage forFolder:folder.itemId];
         return;
