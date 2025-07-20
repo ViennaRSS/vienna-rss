@@ -26,7 +26,6 @@
 	@property (nonatomic, readonly) NSView *mainView;
 @optional
 	-(void)updateAlternateMenuTitle;
-	@property (readonly, nonatomic) NSString *title;
 	-(IBAction)handleGoForward:(id)sender;
 	-(IBAction)handleGoBack:(id)sender;
 	@property (nonatomic, readonly) BOOL canGoForward;
