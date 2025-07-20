@@ -169,7 +169,8 @@
         case VNAFolderTypeOpenReader: {
             NSString *homePageSiteRoot = self.homePage.vna_host.vna_convertStringToValidPath;
             folderImage = [FolderImageCache.defaultCache retrieveImage:homePageSiteRoot];
-            if (!folderImage) {
+            folderImage.size = NSMakeSize(16.0, 16.0);
+            if (!folderImage || !folderImage.isValid) {
                 folderImage = [NSImage imageNamed:ACImageNameRSSFeed];
             }
             break;
@@ -187,22 +188,6 @@
     return folderImage;
 }
 
-/*!Check if an RSS or OpenReader folder
- * has an image stored in cache.
- * @return YES if the folder has an image stored in the cache.
- */
--(BOOL)hasCachedImage {
-    if (self.type != VNAFolderTypeRSS && self.type != VNAFolderTypeOpenReader) {
-		return NO;
-    }
-	NSImage * imagePtr = nil;
-	if (self.feedURL) {
-		NSString * homePageSiteRoot = self.homePage.vna_host.vna_convertStringToValidPath;
-		imagePtr = [[FolderImageCache defaultCache] retrieveImage:homePageSiteRoot];
-	}
-	return (imagePtr != nil);
-}
-
 /*!Get the standard (not feed customised) image for this folder.
  * @return The standard image.
  */
@@ -216,18 +201,19 @@
     }
 }
 
-/* setImage
+/* setImageData
  * Used to set the image for a folder in the array. The image is cached for this session
  * and also written to the image folder if there is a valid one.
  */
--(void)setImage:(NSImage *)image
+- (BOOL)setImageData:(NSData *)imageData
 {
-    NSImage *iconImage = [image copy];
-	if (self.feedURL != nil && iconImage != nil) {
-		NSString * homePageSiteRoot;
-		homePageSiteRoot = self.homePage.vna_host.vna_convertStringToValidPath;
-		[[FolderImageCache defaultCache] addImage:iconImage forURL:homePageSiteRoot];
-	}
+    if (!imageData || !self.feedURL) {
+        return NO;
+    }
+
+    NSString *hostName = self.homePage.vna_host.vna_convertStringToValidPath;
+    return [FolderImageCache.defaultCache cacheImageData:imageData
+                                                filename:hostName];
 }
 
 /* setFeedDescription

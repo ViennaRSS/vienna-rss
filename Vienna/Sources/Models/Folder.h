@@ -99,8 +99,8 @@ typedef NS_OPTIONS(NSUInteger, VNAFolderFlag) {
 @property (nonatomic) VNAFolderType type;
 @property (nonatomic, readonly) VNAFolderFlag nonPersistedFlags;
 @property (nonatomic, readonly) VNAFolderFlag flags;
-@property (nonatomic, copy) NSImage *image;
-@property (nonatomic, readonly) BOOL hasCachedImage;
+@property (readonly, copy, nonatomic) NSImage *image;
+- (BOOL)setImageData:(NSData *)imageData;
 -(NSImage *)standardImage;
 @property (nonatomic) NSInteger childUnreadCount;
 -(void)clearCache;
