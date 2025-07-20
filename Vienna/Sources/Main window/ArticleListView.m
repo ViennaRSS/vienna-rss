@@ -297,6 +297,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 	openItemInBrowser.alternate = YES;
 	[articleListMenu addItem:openItemInBrowser];
 
+	articleListMenu.delegate = self;
 	articleList.menu = articleListMenu;
 
 	// Set the target for double-click actions
@@ -1338,27 +1339,6 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
     return theAttributedString;
 }
 
-/* menuWillAppear [ExtendedTableView delegate]
- * Called when the popup menu is opened on the table. We ensure that the item under the
- * cursor is selected.
- */
--(void)tableView:(ExtendedTableView *)tableView menuWillAppear:(NSEvent *)theEvent
-{
-	NSInteger row = [articleList rowAtPoint:[articleList convertPoint:theEvent.locationInWindow fromView:nil]];
-	if (row >= 0) {
-		// Select the row under the cursor if it isn't already selected
-		if (articleList.numberOfSelectedRows <= 1) {
-			blockSelectionHandler = YES; // to prevent expansion tooltip from overlapping the menu
-			if (row != articleList.selectedRow) {
-				[articleList selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
-				// will perform a refresh once the menu is deselected
-				[self performSelector: @selector(refreshArticleAtCurrentRow) withObject:nil afterDelay:0.0];
-			}
-			blockSelectionHandler = NO;
-		}
-	}
-}
-
 /* tableViewSelectionDidChange [delegate]
  * Handle the selection changing in the table view unless blockSelectionHandler is set.
  */
@@ -1617,7 +1597,33 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
     }
 }
 
-// MARK: splitView2 & main window's splitView delegate
+// MARK: - NSMenuDelegate
+
+// Called when the popup menu is opened on the table. We ensure that the item under the
+// cursor is selected.
+- (void)menuWillOpen:(NSMenu *)menu
+{
+    NSInteger clickedRow = articleList.clickedRow;
+    if (clickedRow < 0) {
+        return;
+    }
+    // Select the row under the cursor if it isn't already selected
+    if (articleList.numberOfSelectedRows <= 1) {
+        blockSelectionHandler = YES; // to prevent expansion tooltip from overlapping the menu
+        if (clickedRow != articleList.selectedRow) {
+            [articleList selectRowIndexes:[NSIndexSet indexSetWithIndex:clickedRow]
+                     byExtendingSelection:NO];
+            // will perform a refresh once the menu is deselected
+            [self performSelector:@selector(refreshArticleAtCurrentRow)
+                       withObject:nil
+                       afterDelay:0.0];
+        }
+        blockSelectionHandler = NO;
+    }
+}
+
+// MARK: - NSSplitViewDelegate
+// splitView2 & main window's splitView delegate
 
 - (void)splitViewWillResizeSubviews:(NSNotification *)notification {
     if (self != self.articleController.mainArticleView) {

@@ -20,7 +20,6 @@
 
 @import Cocoa;
 
-#import "BaseView.h"
 #import "ArticleBaseView.h"
 #import "ArticleViewDelegate.h"
 #import "MessageListView.h"
@@ -28,7 +27,12 @@
 @class AppController;
 @class ArticleController;
 
-@interface ArticleListView : NSView <BaseView, ArticleBaseView, ArticleViewDelegate, MessageListViewDelegate, NSTableViewDataSource, ExtendedTableViewDelegate, NSSplitViewDelegate>
+@interface ArticleListView : NSView <ArticleBaseView,
+                                     ArticleViewDelegate,
+                                     MessageListViewDelegate,
+                                     NSMenuDelegate,
+                                     NSSplitViewDelegate,
+                                     NSTableViewDataSource>
 
 @property (weak, nonatomic) AppController *appController;
 @property (weak, nonatomic) ArticleController *articleController;

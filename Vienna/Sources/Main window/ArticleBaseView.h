@@ -20,12 +20,14 @@
 
 @import Foundation;
 
+#import "BaseView.h"
+
 @class ArticleView;
 @class Article;
 @class DisclosureView;
 @class FilterView;
 
-@protocol ArticleBaseView
+@protocol ArticleBaseView <BaseView>
     @property (readonly, nonatomic) BOOL selectFirstUnreadInFolder;
     @property (readonly, nonatomic) BOOL viewNextUnreadInFolder;
 	-(void)scrollDownDetailsOrNextUnread;

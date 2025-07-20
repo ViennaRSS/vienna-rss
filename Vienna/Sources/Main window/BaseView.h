@@ -1,8 +1,8 @@
 //
-//  TableViewExtensions.h
+//  BaseView.h
 //  Vienna
 //
-//  Created by Steve on Thu Jun 17 2004.
+//  Created by Steve on 5/6/06.
 //  Copyright (c) 2004-2005 Steve Palmer. All rights reserved.
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,21 +20,15 @@
 
 @import Cocoa;
 
-NS_ASSUME_NONNULL_BEGIN
-
-@class ExtendedTableView;
-
-@protocol ExtendedTableViewDelegate <NSTableViewDelegate>
-
-- (void)tableView:(ExtendedTableView *)tableView menuWillAppear:(NSEvent *)event;
-
+@protocol BaseView
+@required
+	-(void)performFindPanelAction:(NSInteger)tag;
+	@property (nonatomic, readonly) NSView *mainView;
+@optional
+	-(void)updateAlternateMenuTitle;
+	-(IBAction)handleGoForward:(id)sender;
+	-(IBAction)handleGoBack:(id)sender;
+	@property (nonatomic, readonly) BOOL canGoForward;
+	@property (nonatomic, readonly) BOOL canGoBack;
 @end
 
-@interface ExtendedTableView : NSTableView
-
-// This property overrides a superclass property.
-@property (weak, nullable) id<ExtendedTableViewDelegate> delegate;
-
-@end
-
-NS_ASSUME_NONNULL_END

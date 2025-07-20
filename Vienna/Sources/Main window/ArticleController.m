@@ -57,7 +57,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 @end
 
 @implementation ArticleController {
-    NSView<ArticleBaseView, BaseView> *mainArticleView;
+    NSView<ArticleBaseView> *mainArticleView;
     NSArray *currentArrayOfArticles;
     NSArray *folderArrayOfArticles;
     NSInteger currentFolderId;
