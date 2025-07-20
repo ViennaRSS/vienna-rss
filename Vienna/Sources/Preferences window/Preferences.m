@@ -352,12 +352,9 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
 
     if ([userPrefs objectForKey:folderListFontKey]) {
         NSData *archive = [self objectForKey:folderListFontKey];
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
         NSFont *font = [NSKeyedUnarchiver unarchivedObjectOfClass:[NSFont class]
                                                          fromData:archive
                                                             error:NULL];
-#pragma clang diagnostic pop
         if (font && font.pointSize <= 11.0) {
             [userPrefs setInteger:VNAFeedListSizeModeTiny
                            forKey:MAPref_FeedListSizeMode];
