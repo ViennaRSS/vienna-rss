@@ -28,6 +28,13 @@ pushd "${mounteddmgfile}"
 echo Creating supporting files...
 ln -s "/Applications" .
 cp "${SRCROOT}/Scripts/Resources/DS_Store" .DS_Store
+
+open .
+say -v Junior "Check the look in Finder and modify View / View options"
+sleep 2m
+say -v Junior "One minute left"
+sleep 1m
+
 rm -rf .fseventsd
 
 popd
