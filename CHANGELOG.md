@@ -1,9 +1,37 @@
 Vienna ChangeLog File
 =====================
 
+Vienna 3.10.0 Beta 5
+--------------------
+_released 2025-07-20_
+
+___This is a [20th anniversary edition](https://www.vienna-rss.com/blog/news/2025/07/07/Celebrating-20-years-of-ViennaRSS.html)!___
+### 🚲 Changes
+- Distribute Vienna in _.dmg_ disk images instead of _.tgz_ archives
+- Use Command-Control-0 to Command-Control-2 shortcuts for layout selection (these replace Control+Number shortcuts which are reserved)
+- Update some translations (Traditional Chinese, Swedish, Danish, Dutch)
+- Modify article view in Unified layout to be borderless
+- Disable back/forward navigation in main tab's article web views
+### 🤷🏻 Bugfix
+- Fix crashes and other potential problems caused by folder cache being emptied during refresh
+- Work around incorrect support of palette-color icons by newer macOS versions (15 and +); reorganize the code used for fetching and caching websites' favicons
+### ⚙️ Internals improvement
+- Rebalance AppController role:
+    - move parts of the layout code to ArticleController
+    - modify handling of keyboard events to avoid doing everything in AppController
+    - diminish ArticleListView and UnifiedDisplayView reliance on AppController
+    - move Sparkle Updater controller to ViennaApp
+- Use an Application.storyboard as the starting point in "Interface Builder" for the design and the main menu; connect Preferences and Downloads storyboards to it.
+- Remove ExtendedTableViewDelegate in favor of NSMenuDelegate
+- Remove NSKeyedArchiver/NSKeyedUnarchiver methods which were needed for macOS 10.12 backwards compatibility
+- Remove unnecessary debugging code using some private properties of WKWebView
+### 🛤️ Infrastructure updates
+- Simplify our version of Autorevision
+- Clarify the directories used for derived files during build process
+
 Vienna 3.10.0 Beta 4
 --------------------
-_released 2025-06-24
+_released 2025-06-24_
 
 ### 🚲 Changes
 - Register Vienna as being able to open OPML files,  e.g. in "Open With" menus
@@ -20,7 +48,7 @@ _released 2025-06-24
 
 Vienna 3.10.0 Beta 3
 --------------------
-_released 2025-06-12
+_released 2025-06-12_
 
 ### 🚲 Changes
 - Make search plug-in names in toolbar more explicit

@@ -1,20 +1,36 @@
-<!DOCTYPE html><head><meta charset="utf-8"/></head><h2>Vienna 3.10.0 Beta 4</h2>
-<p>_released 2025-06-24</p>
+<!DOCTYPE html><head><meta charset="utf-8"/></head><h2>Vienna 3.10.0 Beta 5</h2>
+<p><em>released 2025-07-20</em></p>
+<p><em><strong>This is a <a href="https://www.vienna-rss.com/blog/news/2025/07/07/Celebrating-20-years-of-ViennaRSS.html">20th anniversary edition</a>!</strong></em></p>
 <h3>🚲 Changes</h3>
 <ul>
-<li>Register Vienna as being able to open OPML files,  e.g. in “Open With” menus</li>
-<li>Display details about failures on parsing feed in activity window</li>
-<li>Update link underline color to match system link color</li>
-<li>Trim whitespaces at start or end of folder names entered by user</li>
+<li>Distribute Vienna in <em>.dmg</em> disk images instead of <em>.tgz</em> archives</li>
+<li>Use Command-Control-0 to Command-Control-2 shortcuts for layout selection (these replace Control+Number shortcuts which are reserved)</li>
+<li>Update some translations (Traditional Chinese, Swedish, Danish, Dutch)</li>
+<li>Modify article view in Unified layout to be borderless</li>
+<li>Disable back/forward navigation in main tab’s article web views</li>
 </ul>
 <h3>🤷🏻 Bugfix</h3>
 <ul>
-<li>Fix start and end of spinner animation informing of feed refreshes (bug introduced in 3.10.0 Beta 1)</li>
+<li>Fix crashes and other potential problems caused by folder cache being emptied during refresh</li>
+<li>Work around incorrect support of palette-color icons by newer macOS versions (15 and +); reorganize the code used for fetching and caching websites’ favicons</li>
 </ul>
 <h3>⚙️ Internals improvement</h3>
 <ul>
-<li>Refactor Download Window and its contextual menus</li>
-<li>Resolve warnings in Xcode 26 beta</li>
-<li>Update document type declarations in Info.plist</li>
-<li>Declare some Objective-C designated initializers</li>
+<li>Rebalance AppController role:
+<ul>
+<li>move parts of the layout code to ArticleController</li>
+<li>modify handling of keyboard events to avoid doing everything in AppController</li>
+<li>diminish ArticleListView and UnifiedDisplayView reliance on AppController</li>
+<li>move Sparkle Updater controller to ViennaApp</li>
+</ul>
+</li>
+<li>Use an Application.storyboard as the starting point in “Interface Builder” for the design and the main menu; connect Preferences and Downloads storyboards to it.</li>
+<li>Remove ExtendedTableViewDelegate in favor of NSMenuDelegate</li>
+<li>Remove NSKeyedArchiver/NSKeyedUnarchiver methods which were needed for macOS 10.12 backwards compatibility</li>
+<li>Remove unnecessary debugging code using some private properties of WKWebView</li>
+</ul>
+<h3>🛤️ Infrastructure updates</h3>
+<ul>
+<li>Simplify our version of Autorevision</li>
+<li>Clarify the directories used for derived files during build process</li>
 </ul>
