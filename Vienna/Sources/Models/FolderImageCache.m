@@ -97,8 +97,8 @@
 
         NSString *filePath =
             [cacheDirectoryPath stringByAppendingPathComponent:filenameWithExtension];
-        NSImage *image = [[NSImage alloc] initWithContentsOfFile:filePath];
-        if (image && image.isValid) {
+        NSImage *image = [[NSImage alloc] initByReferencingFile:filePath];
+        if (image) {
             NSString *filename = filePath
                                      .lastPathComponent
                                      .stringByDeletingPathExtension

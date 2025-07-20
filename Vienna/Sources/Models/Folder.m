@@ -170,7 +170,7 @@
             NSString *homePageSiteRoot = self.homePage.vna_host.vna_convertStringToValidPath;
             folderImage = [FolderImageCache.defaultCache retrieveImage:homePageSiteRoot];
             folderImage.size = NSMakeSize(16.0, 16.0);
-            if (!folderImage) {
+            if (!folderImage || !folderImage.isValid) {
                 folderImage = [NSImage imageNamed:ACImageNameRSSFeed];
             }
             break;
