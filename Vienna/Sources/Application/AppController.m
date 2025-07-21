@@ -91,7 +91,6 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 
 @property (nonatomic) MainWindowController *mainWindowController;
 @property (nonatomic) ArticleController *articleController;
-@property (nonatomic) ActivityPanelController *activityPanelController;
 @property (nonatomic) VNADirectoryMonitor *directoryMonitor;
 @property (weak, nonatomic) FolderView *outlineView;
 @property (weak, nonatomic) NSSearchField *toolbarSearchField;
@@ -473,11 +472,6 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
     [self unregisterEventHandlers];
     
 	if (didCompleteInitialisation) {
-		// Close the activity window explicitly to force it to
-		// save its split bar position to the preferences.
-		NSWindow *activityPanel = self.activityPanelController.window;
-		[activityPanel performClose:self];
-		
 		// Put back the original app icon
 		[NSApp.dockTile setBadgeLabel:nil];
 		
@@ -3191,7 +3185,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
     if ([segue.identifier isEqualToString:VNAOrderFrontActivityPanelSegueIdentifier]) {
         ActivityPanelController *activityPanelController = segue.destinationController;
-        self.activityPanelController = activityPanelController;
         activityPanelController.delegate = self;
     }
 }
