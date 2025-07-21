@@ -59,6 +59,8 @@
 
 #define VNA_LOG os_log_create("--", "AppController")
 
+static NSStoryboardSegueIdentifier const VNAOrderFrontActivityPanelSegueIdentifier = @"OrderFrontActivityPanel";
+
 static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 
 @interface AppController () <InfoPanelControllerDelegate, ActivityPanelControllerDelegate, NSMenuItemValidation, NSToolbarItemValidation>
@@ -3159,22 +3161,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 
 #pragma mark Activity panel
 
-- (ActivityPanelController *)activityPanelController {
-    if (!_activityPanelController) {
-        _activityPanelController = [ActivityPanelController new];
-        _activityPanelController.delegate = self;
-    }
-
-    return _activityPanelController;
-}
-
-/**
- * Show the activity window
- */
-- (IBAction)showActivityWindow:(id)sender {
-    [self.activityPanelController showWindow:self];
-}
-
 /**
  This delegate method is called when the user clicks on a row in the activity
  panel's table view. This will be used to select a correspondng folder.
@@ -3197,6 +3183,17 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         _foldersTree = [FoldersTree new];
     }
     return _foldersTree;
+}
+
+// MARK: - NSSeguePerforming
+
+- (void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:VNAOrderFrontActivityPanelSegueIdentifier]) {
+        ActivityPanelController *activityPanelController = segue.destinationController;
+        self.activityPanelController = activityPanelController;
+        activityPanelController.delegate = self;
+    }
 }
 
 #pragma mark Dealloc
