@@ -78,7 +78,15 @@
     if (!item) {
         item = [ActivityItem new];
         item.name = name;
+        NSIndexSet *indexes = [NSIndexSet indexSetWithIndex:insertionIndex];
+        NSString *allItemsKey = NSStringFromSelector(@selector(allItems));
+        [self willChange:NSKeyValueChangeInsertion
+            valuesAtIndexes:indexes
+                     forKey:allItemsKey];
         [self.log insertObject:item atIndex:insertionIndex];
+        [self didChange:NSKeyValueChangeInsertion
+            valuesAtIndexes:indexes
+                     forKey:allItemsKey];
         item = self.log[insertionIndex];
     }
 
@@ -122,7 +130,17 @@
  */
 - (void)handleWillDeleteFolder:(NSNotification *)nc {
     Folder *folder = [[Database sharedManager] folderFromID:[nc.object integerValue]];
-    [self.log removeObject:[self itemByName:folder.name]];
+    ActivityItem *activityItem = [self itemByName:folder.name];
+    NSUInteger activityItemIndex = [self.log indexOfObject:activityItem];
+    NSIndexSet *indexes = [NSIndexSet indexSetWithIndex:activityItemIndex];
+    NSString *allItemsKey = NSStringFromSelector(@selector(allItems));
+    [self willChange:NSKeyValueChangeRemoval
+        valuesAtIndexes:indexes
+                 forKey:allItemsKey];
+    [self.log removeObject:activityItem];
+    [self didChange:NSKeyValueChangeRemoval
+        valuesAtIndexes:indexes
+                 forKey:allItemsKey];
 
     [NSNotificationCenter.defaultCenter postNotificationName:activityItemStatusUpdatedNotification
                                                       object:nil];
