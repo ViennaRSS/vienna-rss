@@ -106,7 +106,6 @@
     }
 
     [ActivityLog.defaultLog sortUsingDescriptors:self.tableView.sortDescriptors];
-    self.activityLog = ActivityLog.defaultLog;
 
     if (!selectedItem) {
         self.textView.string = @"";
