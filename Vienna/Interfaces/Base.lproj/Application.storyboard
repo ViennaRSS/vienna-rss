@@ -747,7 +747,7 @@ CA
                                         <menuItem isSeparatorItem="YES" id="1077"/>
                                         <menuItem title="Activity Window" keyEquivalent="0" id="402">
                                             <connections>
-                                                <action selector="showActivityWindow:" target="Voe-Tx-rLC" id="yBV-uf-mcx"/>
+                                                <segue destination="syU-vb-zNa" kind="show" identifier="OrderFrontActivityPanel" id="cd6-VH-psO"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Main Window" keyEquivalent="1" id="940">
@@ -841,6 +841,14 @@ CA
                 <customObject id="6ci-2y-nV0" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-135" y="185"/>
+        </scene>
+        <!--Activity-->
+        <scene sceneID="kGq-ZN-IHs">
+            <objects>
+                <controllerPlaceholder storyboardName="Activity" id="syU-vb-zNa" sceneMemberID="viewController"/>
+                <customObject id="QO1-H9-51m" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1" y="185"/>
         </scene>
         <!--Downloads-->
         <scene sceneID="g4c-Wd-eba">
