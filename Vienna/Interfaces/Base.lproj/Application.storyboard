@@ -481,7 +481,7 @@ CA
                                         <menuItem isSeparatorItem="YES" id="1260"/>
                                         <menuItem title="Show Filter Bar" keyEquivalent="B" id="1325">
                                             <connections>
-                                                <action selector="showHideFilterBar:" target="Ady-hI-5gd" id="WfC-Sk-kRK"/>
+                                                <action selector="toggleFilterBar:" target="Ady-hI-5gd" id="WfC-Sk-kRK"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Hide Status Bar" keyEquivalent="/" id="1259">
@@ -639,7 +639,7 @@ CA
                                     <items>
                                         <menuItem title="Mark Flagged" keyEquivalent="M" id="790">
                                             <connections>
-                                                <action selector="markFlagged:" target="Ady-hI-5gd" id="XQZ-kF-iNW"/>
+                                                <action selector="toggleFlag:" target="Ady-hI-5gd" id="XQZ-kF-iNW"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Next Unread" keyEquivalent="u" id="344">
@@ -649,13 +649,13 @@ CA
                                         </menuItem>
                                         <menuItem title="Mark Read" keyEquivalent="U" id="pKl-6f-Hlc">
                                             <connections>
-                                                <action selector="markRead:" target="Ady-hI-5gd" id="hcC-jq-vKm"/>
+                                                <action selector="markAsRead:" target="Ady-hI-5gd" id="hcC-jq-vKm"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Mark Unread" keyEquivalent="U" id="789">
                                             <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                             <connections>
-                                                <action selector="markUnread:" target="Ady-hI-5gd" id="UTn-Gi-s5P"/>
+                                                <action selector="markAsUnread:" target="Ady-hI-5gd" id="UTn-Gi-s5P"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Delete Article" id="1198">
@@ -668,7 +668,7 @@ CA
                                         </menuItem>
                                         <menuItem title="Restore Article" keyEquivalent="O" id="1044">
                                             <connections>
-                                                <action selector="restoreMessage:" target="Ady-hI-5gd" id="Pvj-jE-Oiq"/>
+                                                <action selector="restore:" target="Ady-hI-5gd" id="Pvj-jE-Oiq"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="308"/>

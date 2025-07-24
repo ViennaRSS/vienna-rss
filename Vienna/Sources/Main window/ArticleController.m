@@ -1026,10 +1026,10 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 	return !backtrackArray.atStartOfQueue;
 }
 
-/* doViewColumn
+/* toggleColumnVisibility
  * Toggle whether or not a specified column is visible.
  */
-- (IBAction)doViewColumn:(NSMenuItem *)sender
+- (IBAction)toggleColumnVisibility:(NSMenuItem *)sender
 {
     if ([sender.representedObject isKindOfClass:[Field class]]) {
         Field *field = sender.representedObject;
@@ -1039,10 +1039,10 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
     }
 }
 
-/* doSortColumn
+/* changeSortColumn
  * Handle the user picking a sort column item from the Sort By submenu
  */
-- (IBAction)doSortColumn:(NSMenuItem *)sender
+- (IBAction)changeSortColumn:(NSMenuItem *)sender
 {
     if ([sender.representedObject isKindOfClass:[Field class]]) {
         Field *field = sender.representedObject;
@@ -1053,7 +1053,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 /* doSortDirection
  * Handle the user picking ascending or descending from the Sort By submenu
  */
-- (IBAction)doSortDirection:(NSMenuItem *)sender
+- (IBAction)changeSortDirection:(NSMenuItem *)sender
 {
     if ([sender.representedObject isKindOfClass:[NSNumber class]]) {
         NSNumber *sortAscending = sender.representedObject;
@@ -1088,10 +1088,10 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
     [self.mainArticleView refreshFolder:VNARefreshRedrawList];
 }
 
-/* markRead
+/* markAsRead
  * Mark read the selected articles
  */
-- (IBAction)markRead:(nullable id)sender
+- (IBAction)markAsRead:(nullable id)sender
 {
     Article *article = self.selectedArticle;
     if (article && !Database.sharedManager.readOnly) {
@@ -1099,10 +1099,10 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
     }
 }
 
-/* markUnread
+/* markAsUnread
  * Mark unread the selected articles
  */
-- (IBAction)markUnread:(nullable id)sender
+- (IBAction)markAsUnread:(nullable id)sender
 {
     Article *article = self.selectedArticle;
     if (article && !Database.sharedManager.readOnly) {
@@ -1110,10 +1110,10 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
     }
 }
 
-/* markFlagged
+/* toggleFlag
  * Toggle the flagged/unflagged state of the selected article
  */
-- (IBAction)markFlagged:(nullable id)sender
+- (IBAction)toggleFlag:(nullable id)sender
 {
     Article *article = self.selectedArticle;
     if (article && !Database.sharedManager.readOnly) {
@@ -1134,10 +1134,10 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
     }
 }
 
-/* restoreMessage
+/* restore
  * Restore a message in the Trash folder back to where it came from.
  */
-- (IBAction)restoreMessage:(nullable id)sender
+- (IBAction)restore:(nullable id)sender
 {
     Database *database = Database.sharedManager;
     Folder *folder = [database folderFromID:self.currentFolderId];
@@ -1213,10 +1213,10 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
     self.filterBarViewController.placeholderFilterString = placeholderString;
 }
 
-/* showHideFilterBar
+/* toggleFilterBar
  * Toggle the filter bar on/off.
  */
-- (IBAction)showHideFilterBar:(id)sender
+- (IBAction)toggleFilterBar:(id)sender
 {
     BOOL isVisible = self.filterBarViewController.isVisible;
     [self setFilterBarState:!isVisible withAnimation:YES];
@@ -1335,7 +1335,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
         }
         return YES;
     } else if (keyChar == 'm' || keyChar == 'M') {
-        [self markFlagged:nil];
+        [self toggleFlag:nil];
         return YES;
     } else if (keyChar == 'r' || keyChar == 'R' ||
                keyChar == 'u' || keyChar == 'U') {
@@ -1388,11 +1388,11 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 - (BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
     SEL action = menuItem.action;
-    if (action == @selector(doViewColumn:)) {
+    if (action == @selector(toggleColumnVisibility:)) {
         Field *field = menuItem.representedObject;
         menuItem.state = field.visible ? NSControlStateValueOn : NSControlStateValueOff;
         return YES;
-    } else if (action == @selector(doSortColumn:)) {
+    } else if (action == @selector(changeSortColumn:)) {
         Field *field = menuItem.representedObject;
         if ([field.name isEqualToString:self.sortColumnIdentifier]) {
             menuItem.state = NSControlStateValueOn;
@@ -1400,7 +1400,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
             menuItem.state = NSControlStateValueOff;
         }
         return YES;
-    } else if (action == @selector(doSortDirection:)) {
+    } else if (action == @selector(changeSortDirection:)) {
         NSNumber *sortAscending = menuItem.representedObject;
         if (sortAscending.boolValue == self.sortIsAscending) {
             menuItem.state = NSControlStateValueOn;
@@ -1424,7 +1424,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
         VNAFilterMode filterMode = Preferences.standardPreferences.filterMode;
         menuItem.state = (menuItem.tag == filterMode) ? NSControlStateValueOn : NSControlStateValueOff;
         return YES;
-    } else if (action == @selector(showHideFilterBar:)) {
+    } else if (action == @selector(toggleFilterBar:)) {
         if (self.filterBarViewController.isVisible) {
             menuItem.title = NSLocalizedString(@"Hide Filter Bar", nil);
         } else {
@@ -1435,7 +1435,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
         return self.canGoBack;
     } else if (action == @selector(goForward:)) {
         return self.canGoForward;
-    } else if (action == @selector(markFlagged:)) {
+    } else if (action == @selector(toggleFlag:)) {
         Article *selectedArticle = self.selectedArticle;
         if (selectedArticle) {
             if (selectedArticle.isFlagged) {
@@ -1446,11 +1446,11 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
             return !Database.sharedManager.readOnly;
         }
         return NO;
-    } else if (action == @selector(markRead:)) {
+    } else if (action == @selector(markAsRead:)) {
         return self.selectedArticle && !Database.sharedManager.readOnly;
-    } else if (action == @selector(markUnread:)) {
+    } else if (action == @selector(markAsUnread:)) {
         return self.selectedArticle && !Database.sharedManager.readOnly;
-    } else if (action == @selector(restoreMessage:)) {
+    } else if (action == @selector(restore:)) {
         Database *database = Database.sharedManager;
         Folder *folder = [database folderFromID:self.foldersTree.actualSelection];
         return folder.type == VNAFolderTypeTrash && self.selectedArticle && !database.readOnly;

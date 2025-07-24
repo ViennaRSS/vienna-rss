@@ -986,7 +986,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			field.tag != VNAArticleFieldTagEnclosureDownloaded &&
 			field.tag != VNAArticleFieldTagEnclosure)
 		{
-			NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:field.displayName action:@selector(doSortColumn:) keyEquivalent:@""];
+			NSMenuItem *menuItem = [[NSMenuItem alloc] initWithTitle:field.displayName action:@selector(changeSortColumn:) keyEquivalent:@""];
 			menuItem.representedObject = field;
 			[sortSubmenu addItem:menuItem];
 		}
@@ -996,10 +996,10 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	[sortSubmenu addItem:[NSMenuItem separatorItem]];
 
 	// Now add the ascending and descending menu items.
-	NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Ascending", nil) action:@selector(doSortDirection:) keyEquivalent:@""];
+	NSMenuItem *menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Ascending", nil) action:@selector(changeSortDirection:) keyEquivalent:@""];
 	menuItem.representedObject = @YES;
 	[sortSubmenu addItem:menuItem];
-	menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Descending", nil) action:@selector(doSortDirection:) keyEquivalent:@""];
+	menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Descending", nil) action:@selector(changeSortDirection:) keyEquivalent:@""];
 	menuItem.representedObject = @NO;
 	[sortSubmenu addItem:menuItem];
 	
@@ -1024,7 +1024,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			field.tag != VNAArticleFieldTagHeadlines &&
 			field.tag != VNAArticleFieldTagEnclosureDownloaded)
 		{
-			NSMenuItem * menuItem = [[NSMenuItem alloc] initWithTitle:field.displayName action:@selector(doViewColumn:) keyEquivalent:@""];
+			NSMenuItem *menuItem = [[NSMenuItem alloc] initWithTitle:field.displayName action:@selector(toggleColumnVisibility:) keyEquivalent:@""];
 			menuItem.representedObject = field;
 			[columnsSubMenu addItem:menuItem];
 		}

@@ -402,7 +402,7 @@
                                         <menuItem isSeparatorItem="YES" id="CE6-oq-8KJ"/>
                                         <menuItem title="Show Filter Bar" id="Wy3-T4-9eO">
                                             <connections>
-                                                <action selector="showHideFilterBar:" target="-1" id="kSu-qc-5hy"/>
+                                                <action selector="toggleFilterBar:" target="-1" id="kSu-qc-5hy"/>
                                             </connections>
                                         </menuItem>
                                     </items>

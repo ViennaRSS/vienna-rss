@@ -82,16 +82,16 @@
 - (IBAction)condensedLayout:(id)sender;
 - (IBAction)unifiedLayout:(id)sender;
 
-- (IBAction)doViewColumn:(NSMenuItem *)sender;
-- (IBAction)doSortColumn:(NSMenuItem *)sender;
-- (IBAction)doSortDirection:(NSMenuItem *)sender;
+- (IBAction)toggleColumnVisibility:(NSMenuItem *)sender;
+- (IBAction)changeSortColumn:(NSMenuItem *)sender;
+- (IBAction)changeSortDirection:(NSMenuItem *)sender;
 
 - (IBAction)goBack:(/*nullable*/ id)sender;
 - (IBAction)goForward:(/*nullable*/ id)sender;
-- (IBAction)markRead:(/*nullable*/ id)sender;
-- (IBAction)markUnread:(/*nullable*/ id)sender;
-- (IBAction)markFlagged:(/*nullable*/ id)sender;
-- (IBAction)restoreMessage:(/*nullable*/ id)sender;
+- (IBAction)toggleFlag:(/*nullable*/ id)sender;
+- (IBAction)markAsRead:(/*nullable*/ id)sender;
+- (IBAction)markAsUnread:(/*nullable*/ id)sender;
+- (IBAction)restore:(/*nullable*/ id)sender;
 - (IBAction)downloadEnclosure:(/*nullable*/ id)sender;
 
 // MARK: Filter bar

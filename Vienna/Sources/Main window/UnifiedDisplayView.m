@@ -113,19 +113,19 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
 																		NSBundle.mainBundle,
 																		@"Mark Read",
 																		@"Title of a menu item")
-							   action:@selector(markRead:)
+							   action:@selector(markAsRead:)
 						keyEquivalent:@""];
 	[articleListMenu addItemWithTitle:NSLocalizedString(@"Mark Unread", @"Title of a menu item")
-							   action:@selector(markUnread:)
+							   action:@selector(markAsUnread:)
 						keyEquivalent:@""];
 	[articleListMenu addItemWithTitle:NSLocalizedString(@"Mark Flagged", @"Title of a menu item")
-							   action:@selector(markFlagged:)
+							   action:@selector(toggleFlag:)
 						keyEquivalent:@""];
 	[articleListMenu addItemWithTitle:NSLocalizedString(@"Delete Article", @"Title of a menu item")
 							   action:@selector(deleteMessage:)
 						keyEquivalent:@""];
 	[articleListMenu addItemWithTitle:NSLocalizedString(@"Restore Article", @"Title of a menu item")
-							   action:@selector(restoreMessage:)
+							   action:@selector(restore:)
 						keyEquivalent:@""];
 	[articleListMenu addItemWithTitle:NSLocalizedString(@"Download Enclosure", @"Title of a menu item")
 							   action:@selector(downloadEnclosure:)
