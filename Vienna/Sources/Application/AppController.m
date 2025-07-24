@@ -1775,7 +1775,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 				[self deleteFolder:self];
 				return YES;
 			} else if (self.browser.activeTab == nil) { // make sure we are in the articles tab
-				[self deleteMessage:self];
+				[self.articleController delete:self];
 				return YES;
 			}
 			return NO;
@@ -1958,46 +1958,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		groupFolder = [[NewGroupFolder alloc] init];
 	}
 	[groupFolder newGroupFolder:self.mainWindow underParent:self.foldersTree.groupParentSelection];
-}
-
-/* deleteMessage
- * Delete the current article. If we're in the Trash folder, this represents a permanent
- * delete. Otherwise we just move the article to the trash folder.
- */
--(IBAction)deleteMessage:(id)sender
-{
-	if (self.selectedArticle != nil && !db.readOnly) {
-		Folder * folder = [db folderFromID:self.articleController.currentFolderId];
-		if (folder.type != VNAFolderTypeTrash) {
-			NSArray * articleArray = self.articleController.markedArticleRange;
-			[self.articleController markDeletedByArray:articleArray deleteFlag:YES];
-		} else {
-            NSAlert *alert = [NSAlert new];
-            alert.messageText = NSLocalizedString(@"Are you sure you want to permanently delete the selected articles?", nil);
-            alert.informativeText = NSLocalizedString(@"This operation cannot be undone.", nil);
-            [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"delete.button",
-                                                                        nil,
-                                                                        NSBundle.mainBundle,
-                                                                        @"Delete",
-                                                                        @"Title of a button on an alert")];
-            [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"cancel.button",
-                                                                        nil,
-                                                                        NSBundle.mainBundle,
-                                                                        @"Cancel",
-                                                                        @"Title of a button on an alert")];
-            [alert beginSheetModalForWindow:self.mainWindow completionHandler:^(NSModalResponse returnCode) {
-                if (returnCode == NSAlertFirstButtonReturn) {
-                    NSArray *articleArray = self.articleController.markedArticleRange;
-                    [self.articleController deleteArticlesByArray:articleArray];
-
-                    // Blow away the undo stack here since undo actions may refer to
-                    // articles that have been deleted. This is a bit of a cop-out but
-                    // it's the easiest approach for now.
-                    [self clearUndoStack];
-                }
-            }];
-		}
-	}
 }
 
 /* viewFirstUnread
@@ -2776,12 +2736,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         }
         return YES;
     }
-	if (theAction == @selector(deleteMessage:)) {
-		Folder * folder = [db folderFromID:self.foldersTree.actualSelection];
-		*validateFlag = self.selectedArticle != nil && !db.readOnly
-	    		&& isMainWindowVisible && folder.type != VNAFolderTypeOpenReader;
-		return YES;
-	}
 	if (theAction == @selector(emptyTrash:)) {
 		*validateFlag = !db.readOnly;
 		return YES;

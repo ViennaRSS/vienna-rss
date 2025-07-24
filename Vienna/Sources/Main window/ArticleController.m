@@ -1134,6 +1134,47 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
     }
 }
 
+/* delete
+ * Delete the current article. If we're in the Trash folder, this represents a permanent
+ * delete. Otherwise we just move the article to the trash folder.
+ */
+- (IBAction)delete:(nullable id)sender
+{
+    Database *database = Database.sharedManager;
+    if (!self.selectedArticle || database.readOnly) {
+        return;
+    }
+    Folder *folder = [database folderFromID:self.currentFolderId];
+    if (folder.type != VNAFolderTypeTrash) {
+        [self markDeletedByArray:self.markedArticleRange deleteFlag:YES];
+    } else {
+        NSAlert *alert = [[NSAlert alloc] init];
+        alert.messageText = NSLocalizedString(@"Are you sure you want to permanently delete the selected articles?", nil);
+        alert.informativeText = NSLocalizedString(@"This operation cannot be undone.", nil);
+        [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"delete.button",
+                                                                    nil,
+                                                                    NSBundle.mainBundle,
+                                                                    @"Delete",
+                                                                    @"Title of a button on an alert")];
+        [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"cancel.button",
+                                                                    nil,
+                                                                    NSBundle.mainBundle,
+                                                                    @"Cancel",
+                                                                    @"Title of a button on an alert")];
+        [alert beginSheetModalForWindow:self.view.window
+                      completionHandler:^(NSModalResponse returnCode) {
+            if (returnCode == NSAlertFirstButtonReturn) {
+                [self deleteArticlesByArray:self.markedArticleRange];
+
+                // Blow away the undo stack here since undo actions may refer to
+                // articles that have been deleted. This is a bit of a cop-out but
+                // it's the easiest approach for now.
+                [self.view.window.undoManager removeAllActions];
+            }
+        }];
+    }
+}
+
 /* restore
  * Restore a message in the Trash folder back to where it came from.
  */
@@ -1450,6 +1491,10 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
         return self.selectedArticle && !Database.sharedManager.readOnly;
     } else if (action == @selector(markAsUnread:)) {
         return self.selectedArticle && !Database.sharedManager.readOnly;
+    } else if (action == @selector(delete:)) {
+        Database *database = Database.sharedManager;
+        Folder *folder = [database folderFromID:self.foldersTree.actualSelection];
+        return folder.type != VNAFolderTypeOpenReader && self.selectedArticle && !database.readOnly;
     } else if (action == @selector(restore:)) {
         Database *database = Database.sharedManager;
         Folder *folder = [database folderFromID:self.foldersTree.actualSelection];
@@ -1473,6 +1518,10 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
     SEL action = item.action;
     if (action == @selector(goBack:)) {
         return self.canGoBack;
+    } else if (item.action == @selector(delete:)) {
+        Database *database = Database.sharedManager;
+        Folder *folder = [database folderFromID:self.foldersTree.actualSelection];
+        return folder.type != VNAFolderTypeOpenReader && self.selectedArticle && !database.readOnly;
     }
     return NO;
 }

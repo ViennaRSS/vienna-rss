@@ -273,7 +273,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 							   action:@selector(toggleFlag:)
 						keyEquivalent:@""];
 	[articleListMenu addItemWithTitle:NSLocalizedString(@"Delete Article", @"Title of a menu item")
-							   action:@selector(deleteMessage:)
+							   action:@selector(delete:)
 						keyEquivalent:@""];
 	[articleListMenu addItemWithTitle:NSLocalizedString(@"Restore Article", @"Title of a menu item")
 							   action:@selector(restore:)
@@ -653,14 +653,6 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 -(NSView *)mainView
 {
 	return articleList;
-}
-
-/* canDeleteMessageAtRow
- * Returns YES if the message at the specified row can be deleted, otherwise NO.
- */
--(BOOL)canDeleteMessageAtRow:(NSInteger)row
-{
-	return articleList.window.visible && self.selectedArticle != nil && ![Database sharedManager].readOnly;
 }
 
 /* makeTextStandardSize

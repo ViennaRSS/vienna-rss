@@ -37,7 +37,8 @@
  * article view. Thus all control of the article view now passes through the article
  * controller.
  */
-@interface ArticleController : NSViewController <NSMenuItemValidation>
+@interface ArticleController : NSViewController <NSMenuItemValidation,
+                                                 NSToolbarItemValidation>
 
 @property (nonatomic) FoldersTree * foldersTree;
 @property (nonatomic) ArticleListView *articleListView;
@@ -91,6 +92,7 @@
 - (IBAction)toggleFlag:(/*nullable*/ id)sender;
 - (IBAction)markAsRead:(/*nullable*/ id)sender;
 - (IBAction)markAsUnread:(/*nullable*/ id)sender;
+- (IBAction)delete:(/*nullable*/ id)sender;
 - (IBAction)restore:(/*nullable*/ id)sender;
 - (IBAction)downloadEnclosure:(/*nullable*/ id)sender;
 

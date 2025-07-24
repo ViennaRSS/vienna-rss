@@ -24,8 +24,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol MessageListViewDelegate <NSTableViewDelegate>
 
-- (BOOL)canDeleteMessageAtRow:(NSInteger)row;
-
 - (BOOL)copyTableSelection:(NSIndexSet *)rowIndexes
               toPasteboard:(NSPasteboard *)pboard;
 

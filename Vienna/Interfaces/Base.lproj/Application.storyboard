@@ -208,6 +208,9 @@ CA
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Delete" id="164">
+                                            <string key="keyEquivalent" base64-UTF8="YES">
+CA
+</string>
                                             <connections>
                                                 <action selector="delete:" target="Ady-hI-5gd" id="195"/>
                                             </connections>
@@ -656,14 +659,6 @@ CA
                                             <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                             <connections>
                                                 <action selector="markAsUnread:" target="Ady-hI-5gd" id="UTn-Gi-s5P"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Delete Article" id="1198">
-                                            <string key="keyEquivalent" base64-UTF8="YES">
-CA
-</string>
-                                            <connections>
-                                                <action selector="deleteMessage:" target="Ady-hI-5gd" id="pX6-Cb-Bjj"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Restore Article" keyEquivalent="O" id="1044">

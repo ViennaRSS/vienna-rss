@@ -43,7 +43,6 @@
 
 // Menu action items
 -(IBAction)reindexDatabase:(id)sender;
--(IBAction)deleteMessage:(id)sender;
 -(IBAction)deleteFolder:(id)sender;
 -(IBAction)searchUsingToolbarTextField:(id)sender;
 -(IBAction)markAllRead:(id)sender;
