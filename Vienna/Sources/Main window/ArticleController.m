@@ -1033,7 +1033,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 {
     if ([sender.representedObject isKindOfClass:[Field class]]) {
         Field *field = sender.representedObject;
-        field.visible = !field.visible;
+        field.visible = !field.isVisible;
         [self updateVisibleColumns];
         [self saveTableSettings];
     }
@@ -1431,7 +1431,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
     SEL action = menuItem.action;
     if (action == @selector(toggleColumnVisibility:)) {
         Field *field = menuItem.representedObject;
-        menuItem.state = field.visible ? NSControlStateValueOn : NSControlStateValueOff;
+        menuItem.state = field.isVisible ? NSControlStateValueOn : NSControlStateValueOff;
         return YES;
     } else if (action == @selector(changeSortColumn:)) {
         Field *field = menuItem.representedObject;

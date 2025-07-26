@@ -57,6 +57,6 @@ typedef NS_ENUM(NSUInteger, VNAFieldType) {
 
 /// Whether this field is intended to be visible in the article list view by
 /// default.
-@property (nonatomic) BOOL visible;
+@property (getter=isVisible, nonatomic) BOOL visible;
 
 @end

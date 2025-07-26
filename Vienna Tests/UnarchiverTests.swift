@@ -51,7 +51,7 @@ class UnarchiverTests: XCTestCase {
         field.sqlField = "SQL Field"
         field.tag = 1
         field.type = .string
-        field.visible = true
+        field.isVisible = true
 
         // NSKeyedArchiver without secure coding (deprecated; macOS 10.12 only)
         var data = NSKeyedArchiver.archivedData(withRootObject: field)
@@ -79,7 +79,7 @@ class UnarchiverTests: XCTestCase {
         field.sqlField = "SQL Field"
         field.tag = 1
         field.type = .string
-        field.visible = true
+        field.isVisible = true
 
         // NSArchiver (deprecated)
         var data = NSArchiver.archivedData(withRootObject: field)

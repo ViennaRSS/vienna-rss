@@ -57,7 +57,7 @@ static NSString * const VNACodingKeyWidth = @"width";
                                        ", tag=%ld, width=%ld, visible=%d)",
                                       self.name, self.displayName,
                                       self.sqlField, self.tag, self.width,
-                                      self.visible];
+                                      self.isVisible];
 }
 
 // MARK: - NSSecureCoding
@@ -120,7 +120,7 @@ static NSString * const VNACodingKeyWidth = @"width";
         [coder encodeInteger:self.tag forKey:VNACodingKeyTag];
         [coder encodeInteger:self.type forKey:VNACodingKeyType];
         [coder encodeInteger:self.width forKey:VNACodingKeyWidth];
-        [coder encodeBool:self.visible forKey:VNACodingKeyVisible];
+        [coder encodeBool:self.isVisible forKey:VNACodingKeyVisible];
     } else {
         // NSArchiver is deprecated since macOS 10.13 and replaced with
         // NSKeyedArchiver.
