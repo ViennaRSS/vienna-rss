@@ -86,7 +86,8 @@ static NSString * const VNACodingKeyCustomizationOptions = @"customizationOption
             _customizationOptions = [coder decodeIntegerForKey:VNACodingKeyCustomizationOptions];
         } else {
             // NSUnarchiver is deprecated since macOS 10.13 and replaced with
-            // NSKeyedUnarchiver.
+            // NSKeyedUnarchiver. For backwards-compatibility with NSArchiver,
+            // decoding using NSUnarchiver is still supported.
             //
             // Important: The order in which the values are decoded must match
             // the order in which they were encoded. Changing the code below can
@@ -100,6 +101,7 @@ static NSString * const VNACodingKeyCustomizationOptions = @"customizationOption
             [coder decodeValueOfObjCType:@encode(NSInteger)
                                       at:&_width
                                     size:sizeof(NSInteger)];
+            // Previously created archives still have the tag property.
             NSInteger tag;
             [coder decodeValueOfObjCType:@encode(NSInteger)
                                       at:&tag
@@ -114,30 +116,18 @@ static NSString * const VNACodingKeyCustomizationOptions = @"customizationOption
 
 - (void)encodeWithCoder:(NSCoder *)coder
 {
-    if (coder.allowsKeyedCoding) {
-        [coder encodeObject:self.name forKey:VNACodingKeyName];
-        [coder encodeObject:self.displayName forKey:VNACodingKeyDisplayName];
-        [coder encodeObject:self.sqlField forKey:VNACodingKeySQLField];
-        [coder encodeInteger:self.type forKey:VNACodingKeyType];
-        [coder encodeInteger:self.width forKey:VNACodingKeyWidth];
-        [coder encodeBool:self.isVisible forKey:VNACodingKeyVisible];
-        [coder encodeInteger:self.customizationOptions forKey:VNACodingKeyCustomizationOptions];
-    } else {
-        // NSArchiver is deprecated since macOS 10.13 and replaced with
-        // NSKeyedArchiver.
-        //
-        // Important: The order in which the values are encoded must match the
-        // the order in which they will be decoded. Changing the code below can
-        // lead to decoding failure.
-        [coder encodeObject:self.displayName];
-        [coder encodeObject:self.name];
-        [coder encodeObject:self.sqlField];
-        [coder encodeValueOfObjCType:@encode(bool) at:&_visible];
-        [coder encodeValueOfObjCType:@encode(NSInteger) at:&_width];
-        NSInteger tag = -1;
-        [coder encodeValueOfObjCType:@encode(NSInteger) at:&tag];
-        [coder encodeValueOfObjCType:@encode(NSInteger) at:&_type];
+    if (!coder.allowsKeyedCoding) {
+        [NSException raise:NSInvalidArchiveOperationException
+                    format:@"Coder does not support keyed coding."];
+        return;
     }
+    [coder encodeObject:self.name forKey:VNACodingKeyName];
+    [coder encodeObject:self.displayName forKey:VNACodingKeyDisplayName];
+    [coder encodeObject:self.sqlField forKey:VNACodingKeySQLField];
+    [coder encodeInteger:self.type forKey:VNACodingKeyType];
+    [coder encodeInteger:self.width forKey:VNACodingKeyWidth];
+    [coder encodeBool:self.isVisible forKey:VNACodingKeyVisible];
+    [coder encodeInteger:self.customizationOptions forKey:VNACodingKeyCustomizationOptions];
 }
 
 @end
