@@ -421,6 +421,7 @@ CA
                                                             <action selector="changeFiltering:" target="Ady-hI-5gd" id="K3L-iy-fUI"/>
                                                         </connections>
                                                     </menuItem>
+                                                    <menuItem isSeparatorItem="YES" id="hL5-dV-Sym"/>
                                                     <menuItem title="Unread Articles" tag="1" id="rNG-xr-3x7">
                                                         <connections>
                                                             <action selector="changeFiltering:" target="Ady-hI-5gd" id="HZS-xT-lzD"/>
