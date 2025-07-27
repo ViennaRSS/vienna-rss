@@ -369,6 +369,30 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	[self fieldByName:MA_Field_Summary].displayName = NSLocalizedString(@"Summary", @"Pseudo field name visible in menu/article list");
 	[self fieldByName:MA_Field_Headlines].displayName = NSLocalizedString(@"Headlines", @"Pseudo field name visible in article list");
 	[self fieldByName:MA_Field_Link].displayName = NSLocalizedString(@"Link", @"Data field name visible in menu/article list");
+
+    // Disable visibility customization for some fields
+    [self fieldByName:MA_Field_Text].customizationOptions &= ~VNAFieldCustomizationVisibility;
+    [self fieldByName:MA_Field_GUID].customizationOptions &= ~VNAFieldCustomizationVisibility;
+    [self fieldByName:MA_Field_Deleted].customizationOptions &= ~VNAFieldCustomizationVisibility;
+    [self fieldByName:MA_Field_Parent].customizationOptions &= ~VNAFieldCustomizationVisibility;
+    [self fieldByName:MA_Field_Headlines].customizationOptions &= ~VNAFieldCustomizationVisibility;
+    [self fieldByName:MA_Field_EnclosureDownloaded].customizationOptions &= ~VNAFieldCustomizationVisibility;
+
+    // Disable resizing for some fields
+    [self fieldByName:MA_Field_Read].customizationOptions &= ~VNAFieldCustomizationResizing;
+    [self fieldByName:MA_Field_Flagged].customizationOptions &= ~VNAFieldCustomizationResizing;
+    [self fieldByName:MA_Field_HasEnclosure].customizationOptions &= ~VNAFieldCustomizationResizing;
+
+    // Disable sorting for some fields
+    [self fieldByName:MA_Field_Parent].customizationOptions &= ~VNAFieldCustomizationSorting;
+    [self fieldByName:MA_Field_GUID].customizationOptions &= ~VNAFieldCustomizationSorting;
+    [self fieldByName:MA_Field_Deleted].customizationOptions &= ~VNAFieldCustomizationSorting;
+    [self fieldByName:MA_Field_Headlines].customizationOptions &= ~VNAFieldCustomizationSorting;
+    [self fieldByName:MA_Field_Summary].customizationOptions &= ~VNAFieldCustomizationSorting;
+    [self fieldByName:MA_Field_Link].customizationOptions &= ~VNAFieldCustomizationSorting;
+    [self fieldByName:MA_Field_Text].customizationOptions &= ~VNAFieldCustomizationSorting;
+    [self fieldByName:MA_Field_EnclosureDownloaded].customizationOptions &= ~VNAFieldCustomizationSorting;
+    [self fieldByName:MA_Field_Enclosure].customizationOptions &= ~VNAFieldCustomizationSorting;
 }
 
 /* relocateLockedDatabase

@@ -443,7 +443,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 				column.dataCell = cell;
 			}
 
-			BOOL isResizable = (tag != VNAArticleFieldTagRead && tag != VNAArticleFieldTagFlagged && tag != VNAArticleFieldTagHasEnclosure);
+			BOOL isResizable = field.customizationOptions & VNAFieldCustomizationResizing;
 			column.resizingMask = (isResizable ? NSTableColumnUserResizingMask : NSTableColumnNoResizing);
 			// the headline column is auto-resizable
 			column.resizingMask = column.resizingMask | ([column.identifier isEqualToString:MA_Field_Headlines] ? NSTableColumnAutoresizingMask : 0);

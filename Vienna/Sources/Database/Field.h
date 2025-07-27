@@ -29,6 +29,12 @@ typedef NS_ENUM(NSUInteger, VNAFieldType) {
     VNAFieldTypeFolder
 } NS_SWIFT_NAME(Field.FieldType);
 
+typedef NS_OPTIONS(NSUInteger, VNAFieldCustomizationOptions) {
+    VNAFieldCustomizationVisibility = 1 << 0,
+    VNAFieldCustomizationResizing = 1 << 1,
+    VNAFieldCustomizationSorting = 1 << 2,
+} NS_SWIFT_NAME(Field.CustomizationOptions);
+
 @interface Field : NSObject <NSSecureCoding>
 
 /// The field name is the unlocalised display name; useful for writing to data
@@ -58,5 +64,8 @@ typedef NS_ENUM(NSUInteger, VNAFieldType) {
 /// Whether this field is intended to be visible in the article list view by
 /// default.
 @property (getter=isVisible, nonatomic) BOOL visible;
+
+/// The allowed display options for the article list view.
+@property (nonatomic) VNAFieldCustomizationOptions customizationOptions;
 
 @end

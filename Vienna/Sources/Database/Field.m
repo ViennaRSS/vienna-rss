@@ -27,6 +27,7 @@ static NSString * const VNACodingKeyTag = @"tag";
 static NSString * const VNACodingKeyType = @"type";
 static NSString * const VNACodingKeyVisible = @"visible";
 static NSString * const VNACodingKeyWidth = @"width";
+static NSString * const VNACodingKeyCustomizationOptions = @"customizationOptions";
 
 @implementation Field
 
@@ -35,7 +36,6 @@ static NSString * const VNACodingKeyWidth = @"width";
 - (instancetype)init
 {
     self = [super init];
-
     if (self) {
         _name = nil;
         _displayName = nil;
@@ -44,8 +44,10 @@ static NSString * const VNACodingKeyWidth = @"width";
         _type = VNAFieldTypeInteger;
         _width = 20;
         _visible = NO;
+        _customizationOptions = (VNAFieldCustomizationVisibility |
+                                 VNAFieldCustomizationResizing |
+                                 VNAFieldCustomizationSorting);
     }
-
     return self;
 }
 
@@ -54,10 +56,11 @@ static NSString * const VNACodingKeyWidth = @"width";
 - (NSString *)description
 {
     return [NSString stringWithFormat:@"('%@', displayName='%@', sqlField='%@'"
-                                       ", tag=%ld, width=%ld, visible=%d)",
+                                       ", tag=%ld, width=%ld, visible=%d"
+                                       ", customizationOptions=%lu)",
                                       self.name, self.displayName,
                                       self.sqlField, self.tag, self.width,
-                                      self.isVisible];
+                                      self.isVisible, self.customizationOptions];
 }
 
 // MARK: - NSSecureCoding
@@ -70,7 +73,6 @@ static NSString * const VNACodingKeyWidth = @"width";
 - (instancetype)initWithCoder:(NSCoder *)coder
 {
     self = [super init];
-
     if (self) {
         if (coder.allowsKeyedCoding) {
             _name = [coder decodeObjectOfClass:[NSString class]
@@ -83,6 +85,7 @@ static NSString * const VNACodingKeyWidth = @"width";
             _type = [coder decodeIntegerForKey:VNACodingKeyType];
             _width = [coder decodeIntegerForKey:VNACodingKeyWidth];
             _visible = [coder decodeBoolForKey:VNACodingKeyVisible];
+            _customizationOptions = [coder decodeIntegerForKey:VNACodingKeyCustomizationOptions];
         } else {
             // NSUnarchiver is deprecated since macOS 10.13 and replaced with
             // NSKeyedUnarchiver.
@@ -107,7 +110,6 @@ static NSString * const VNACodingKeyWidth = @"width";
                                     size:sizeof(NSInteger)];
         }
     }
-
     return self;
 }
 
@@ -121,6 +123,7 @@ static NSString * const VNACodingKeyWidth = @"width";
         [coder encodeInteger:self.type forKey:VNACodingKeyType];
         [coder encodeInteger:self.width forKey:VNACodingKeyWidth];
         [coder encodeBool:self.isVisible forKey:VNACodingKeyVisible];
+        [coder encodeInteger:self.customizationOptions forKey:VNACodingKeyCustomizationOptions];
     } else {
         // NSArchiver is deprecated since macOS 10.13 and replaced with
         // NSKeyedArchiver.
