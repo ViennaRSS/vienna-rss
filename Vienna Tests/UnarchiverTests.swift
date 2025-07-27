@@ -49,7 +49,6 @@ class UnarchiverTests: XCTestCase {
         field.name = "Name"
         field.displayName = "Display Name"
         field.sqlField = "SQL Field"
-        field.tag = 1
         field.type = .string
         field.isVisible = true
 
@@ -77,7 +76,6 @@ class UnarchiverTests: XCTestCase {
         field.name = "Name"
         field.displayName = "Display Name"
         field.sqlField = "SQL Field"
-        field.tag = 1
         field.type = .string
         field.isVisible = true
 

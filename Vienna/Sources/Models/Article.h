@@ -43,27 +43,6 @@ extern NSString * const MA_Field_Enclosure;
 extern NSString * const MA_Field_EnclosureDownloaded;
 extern NSString * const MA_Field_HasEnclosure;
 
-typedef NS_ENUM(NSInteger, VNAArticleFieldTag) {
-    VNAArticleFieldTagGUID = 400,
-    VNAArticleFieldTagSubject,
-    VNAArticleFieldTagAuthor,
-    VNAArticleFieldTagLastUpdate,
-    VNAArticleFieldTagParent,
-    VNAArticleFieldTagRead,
-    VNAArticleFieldTagFlagged,
-    VNAArticleFieldTagText,
-    VNAArticleFieldTagFolder,
-    VNAArticleFieldTagLink,
-    /* 410 was previously used */
-    VNAArticleFieldTagHeadlines = 411,
-    VNAArticleFieldTagDeleted,
-    VNAArticleFieldTagSummary,
-    VNAArticleFieldTagPublicationDate,
-    VNAArticleFieldTagEnclosure,
-    VNAArticleFieldTagEnclosureDownloaded,
-    VNAArticleFieldTagHasEnclosure
-} NS_SWIFT_NAME(Article.FieldTag);
-
 typedef NS_ENUM(NSInteger, ArticleStatus) {
     ArticleStatusEmpty = 0,
     ArticleStatusNew,

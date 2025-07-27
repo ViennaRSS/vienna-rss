@@ -40,7 +40,6 @@ static NSString * const VNACodingKeyCustomizationOptions = @"customizationOption
         _name = nil;
         _displayName = nil;
         _sqlField = nil;
-        _tag = -1;
         _type = VNAFieldTypeInteger;
         _width = 20;
         _visible = NO;
@@ -56,10 +55,10 @@ static NSString * const VNACodingKeyCustomizationOptions = @"customizationOption
 - (NSString *)description
 {
     return [NSString stringWithFormat:@"('%@', displayName='%@', sqlField='%@'"
-                                       ", tag=%ld, width=%ld, visible=%d"
+                                       ", width=%ld, visible=%d"
                                        ", customizationOptions=%lu)",
                                       self.name, self.displayName,
-                                      self.sqlField, self.tag, self.width,
+                                      self.sqlField, self.width,
                                       self.isVisible, self.customizationOptions];
 }
 
@@ -81,7 +80,6 @@ static NSString * const VNACodingKeyCustomizationOptions = @"customizationOption
                                                forKey:VNACodingKeyDisplayName];
             _sqlField = [coder decodeObjectOfClass:[NSString class]
                                             forKey:VNACodingKeySQLField];
-            _tag = [coder decodeIntegerForKey:VNACodingKeyTag];
             _type = [coder decodeIntegerForKey:VNACodingKeyType];
             _width = [coder decodeIntegerForKey:VNACodingKeyWidth];
             _visible = [coder decodeBoolForKey:VNACodingKeyVisible];
@@ -102,8 +100,9 @@ static NSString * const VNACodingKeyCustomizationOptions = @"customizationOption
             [coder decodeValueOfObjCType:@encode(NSInteger)
                                       at:&_width
                                     size:sizeof(NSInteger)];
+            NSInteger tag;
             [coder decodeValueOfObjCType:@encode(NSInteger)
-                                      at:&_tag
+                                      at:&tag
                                     size:sizeof(NSInteger)];
             [coder decodeValueOfObjCType:@encode(NSInteger)
                                       at:&_type
@@ -119,7 +118,6 @@ static NSString * const VNACodingKeyCustomizationOptions = @"customizationOption
         [coder encodeObject:self.name forKey:VNACodingKeyName];
         [coder encodeObject:self.displayName forKey:VNACodingKeyDisplayName];
         [coder encodeObject:self.sqlField forKey:VNACodingKeySQLField];
-        [coder encodeInteger:self.tag forKey:VNACodingKeyTag];
         [coder encodeInteger:self.type forKey:VNACodingKeyType];
         [coder encodeInteger:self.width forKey:VNACodingKeyWidth];
         [coder encodeBool:self.isVisible forKey:VNACodingKeyVisible];
@@ -136,7 +134,8 @@ static NSString * const VNACodingKeyCustomizationOptions = @"customizationOption
         [coder encodeObject:self.sqlField];
         [coder encodeValueOfObjCType:@encode(bool) at:&_visible];
         [coder encodeValueOfObjCType:@encode(NSInteger) at:&_width];
-        [coder encodeValueOfObjCType:@encode(NSInteger) at:&_tag];
+        NSInteger tag = -1;
+        [coder encodeValueOfObjCType:@encode(NSInteger) at:&tag];
         [coder encodeValueOfObjCType:@encode(NSInteger) at:&_type];
     }
 }

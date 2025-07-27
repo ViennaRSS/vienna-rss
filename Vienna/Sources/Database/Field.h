@@ -49,11 +49,6 @@ typedef NS_OPTIONS(NSUInteger, VNAFieldCustomizationOptions) {
 /// originally created.
 @property (copy, nonatomic) NSString *sqlField;
 
-/// The tag is simply an unique integer that identifies the field in the same
-/// way that the field name is used. I suspect that at some point one of these
-/// two will be deprecated for simplicity.
-@property (nonatomic) NSInteger tag;
-
 /// Sets the field type. This must be one of the valid values in the FieldType
 /// enum. The field type is used to govern how the field value is interpreted.
 @property (nonatomic) VNAFieldType type;
