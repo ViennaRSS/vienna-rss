@@ -2876,6 +2876,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		return YES;
 	} else if (theAction == @selector(openVienna:)) {
         return self.mainWindow.isKeyWindow == false;
+    } else if (theAction == @selector(updateRemoteSubscriptions:)) {
+        return Preferences.standardPreferences.syncGoogleReader;
     }
 
 	return YES;
