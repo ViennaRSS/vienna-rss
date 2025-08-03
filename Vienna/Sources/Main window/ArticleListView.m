@@ -1140,30 +1140,46 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 	theArticle = allArticles[rowIndex];
 	NSString * identifier = aTableColumn.identifier;
 	if ([identifier isEqualToString:MA_Field_Read]) {
-        if (!theArticle.isRead) {
-            if (@available(macOS 11, *)) {
-                NSImage *image = nil;
-                if (theArticle.isRevised) {
-                    image = [NSImage imageWithSystemSymbolName:@"sparkles"
-                                      accessibilityDescription:nil];
-                    // Setting the template property to NO enables the tint color.
-                    image.template = NO;
+        if (theArticle.isRead) {
+            return nil;
+        }
+        if (@available(macOS 11, *)) {
+            NSImage *image = [NSImage imageWithSystemSymbolName:@"circlebadge.fill"
+                                       accessibilityDescription:nil];
+            if (theArticle.isRevised) {
+                NSColor *revisedColor = NSColor.systemGreenColor;
+                if (@available(macOS 12, *)) {
+                    NSImageSymbolConfiguration *config =
+                        [NSImageSymbolConfiguration
+                            configurationWithHierarchicalColor:revisedColor];
+                    image = [image imageWithSymbolConfiguration:config];
                 } else {
-                    image = [NSImage imageWithSystemSymbolName:@"circlebadge.fill"
-                                      accessibilityDescription:nil];
-                    // Setting the template property to NO enables the tint color.
-                    image.template = NO;
-                }
-                return image;
-            } else {
-                if (theArticle.isRevised) {
-                    return [NSImage imageNamed:ACImageNameRevised];
-                } else {
-                    return [NSImage imageNamed:ACImageNameUnread];
+                    // macOS 11 did not support SF Symbol images with colors.
+                    // Instead, the image is redrawn with a different color.
+                    // Source: https://stackoverflow.com/a/64049177/6423906
+                    image = [NSImage imageWithSize:image.size
+                                           flipped:NO
+                                    drawingHandler:^BOOL(NSRect dstRect) {
+                        [revisedColor setFill];
+                        NSRectFill(dstRect);
+                        [image drawInRect:dstRect
+                                 fromRect:NSZeroRect
+                                operation:NSCompositingOperationDestinationIn
+                                 fraction:1.0];
+                        return YES;
+                    }];
                 }
             }
+            // Setting the template property to NO enables the tint color.
+            image.template = NO;
+            return image;
+        } else {
+            if (theArticle.isRevised) {
+                return [NSImage imageNamed:ACImageNameRevised];
+            } else {
+                return [NSImage imageNamed:ACImageNameUnread];
+            }
         }
-        return nil;
 	}
 	if ([identifier isEqualToString:MA_Field_Flagged]) {
         if (theArticle.isFlagged) {
