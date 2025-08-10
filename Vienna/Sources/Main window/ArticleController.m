@@ -245,16 +245,6 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 	[mainArticleView saveTableSettings];
 }
 
-/* updateVisibleColumns
- * For relevant layouts, adapt table settings
- */
--(void)updateVisibleColumns
-{
-    if (mainArticleView ==  self.articleListView) {
-        [self.articleListView updateVisibleColumns];
-    }
-}
-
 /* selectedArticle
  * Returns the currently selected article from the article list.
  */
@@ -1034,8 +1024,8 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
     if ([sender.representedObject isKindOfClass:[Field class]]) {
         Field *field = sender.representedObject;
         field.visible = !field.isVisible;
-        [self updateVisibleColumns];
-        [self saveTableSettings];
+        [self.articleListView updateVisibleColumns];
+        [self.articleListView saveTableSettings];
     }
 }
 
@@ -1432,7 +1422,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
     if (action == @selector(toggleColumnVisibility:)) {
         Field *field = menuItem.representedObject;
         menuItem.state = field.isVisible ? NSControlStateValueOn : NSControlStateValueOff;
-        return YES;
+        return [mainArticleView isEqual:self.articleListView];
     } else if (action == @selector(changeSortColumn:)) {
         Field *field = menuItem.representedObject;
         if ([field.name isEqualToString:self.sortColumnIdentifier]) {
