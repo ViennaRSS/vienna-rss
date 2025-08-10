@@ -181,7 +181,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 	topLineDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, [NSColor textColor], NSForegroundColorAttributeName, nil];
     middleLineDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, [NSColor systemBlueColor], NSForegroundColorAttributeName, nil];
     linkLineDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, [NSColor systemBlueColor], NSForegroundColorAttributeName, nil];
-    bottomLineDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, [NSColor systemGrayColor], NSForegroundColorAttributeName, nil];
+    bottomLineDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, NSColor.secondaryLabelColor, NSForegroundColorAttributeName, nil];
 
     NSScrollView *articleListScrollView = articleList.enclosingScrollView;
     self.filterBarViewController.filterBarContainer = articleListScrollView;
