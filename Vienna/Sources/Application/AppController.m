@@ -1908,10 +1908,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
                               subscriptionURL:urlString];
 
 		if (folderId != -1) {
-            if (isAccessible(urlString) || [urlString hasPrefix:@"file"]) {
-                Folder * folder = [db folderFromID:folderId];
-                [[RefreshManager sharedManager] refreshSubscriptions:@[folder] ignoringSubscriptionStatus:NO];
-            }
+			Folder *folder = [db folderFromID:folderId];
+			[RefreshManager.sharedManager refreshSubscriptions:@[folder]
+									ignoringSubscriptionStatus:NO];
 		}
 	}
 }
