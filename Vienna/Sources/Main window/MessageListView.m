@@ -19,7 +19,7 @@
 //
 
 #import "MessageListView.h"
-#import "AppController.h"
+
 #import "NSResponder+EventHandler.h"
 
 @implementation MessageListView
@@ -56,14 +56,6 @@
 	}
 }
 
-/* delete
- * Handle the Delete action when the article list has focus.
- */
--(IBAction)delete:(id)sender
-{
-	[APPCONTROLLER deleteMessage:self];
-}
-
 /* validateMenuItem
  * This is our override where we handle item validation for the
  * commands that we own.
@@ -72,9 +64,6 @@
 {
 	if (menuItem.action == @selector(copy:)) {
 		return self.selectedRow >= 0;
-	}
-	if (menuItem.action == @selector(delete:)) {
-        return [self.delegate canDeleteMessageAtRow:self.selectedRow];
 	}
 	if (menuItem.action == @selector(selectAll:)) {
 		return YES;

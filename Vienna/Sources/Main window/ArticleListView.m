@@ -264,19 +264,19 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 																		NSBundle.mainBundle,
 																		@"Mark Read",
 																		@"Title of a menu item")
-							   action:@selector(markRead:)
+							   action:@selector(markAsRead:)
 						keyEquivalent:@""];
 	[articleListMenu addItemWithTitle:NSLocalizedString(@"Mark Unread", @"Title of a menu item")
-							   action:@selector(markUnread:)
+							   action:@selector(markAsUnread:)
 						keyEquivalent:@""];
 	[articleListMenu addItemWithTitle:NSLocalizedString(@"Mark Flagged", @"Title of a menu item")
-							   action:@selector(markFlagged:)
+							   action:@selector(toggleFlag:)
 						keyEquivalent:@""];
 	[articleListMenu addItemWithTitle:NSLocalizedString(@"Delete Article", @"Title of a menu item")
-							   action:@selector(deleteMessage:)
+							   action:@selector(delete:)
 						keyEquivalent:@""];
 	[articleListMenu addItemWithTitle:NSLocalizedString(@"Restore Article", @"Title of a menu item")
-							   action:@selector(restoreMessage:)
+							   action:@selector(restore:)
 						keyEquivalent:@""];
 	[articleListMenu addItemWithTitle:NSLocalizedString(@"Download Enclosure", @"Title of a menu item")
 							   action:@selector(downloadEnclosure:)
@@ -399,11 +399,11 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 		// Handle which fields can be visible in the condensed (vertical) layout
 		// versus the report (horizontal) layout
 		if (tableLayout == VNALayoutReport) {
-			showField = field.visible && tag != VNAArticleFieldTagHeadlines;
+			showField = field.isVisible && tag != VNAArticleFieldTagHeadlines;
 		} else {
 			showField = NO;
 			if (tag == VNAArticleFieldTagRead || tag == VNAArticleFieldTagFlagged || tag == VNAArticleFieldTagHasEnclosure) {
-				showField = field.visible;
+				showField = field.isVisible;
 			}
 			if (tag == VNAArticleFieldTagHeadlines) {
 				showField = YES;
@@ -531,7 +531,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 	
 	for (Field * field in  [[Database sharedManager] arrayOfFields]) {
 		[dataArray addObject:field.name];
-		[dataArray addObject:@(field.visible)];
+		[dataArray addObject:@(field.isVisible)];
 		[dataArray addObject:@(field.width)];
 	}
 	
@@ -581,16 +581,16 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 		numberOfRowsInCell = 1;
 	} else {
 		numberOfRowsInCell = 0;
-		if ([db fieldByName:MA_Field_Subject].visible) {
+		if ([db fieldByName:MA_Field_Subject].isVisible) {
 			++numberOfRowsInCell;
 		}
-		if ([db fieldByName:MA_Field_Folder].visible || [db fieldByName:MA_Field_LastUpdate].visible || [db fieldByName:MA_Field_Author].visible) {
+		if ([db fieldByName:MA_Field_Folder].isVisible || [db fieldByName:MA_Field_LastUpdate].isVisible || [db fieldByName:MA_Field_Author].isVisible) {
 			++numberOfRowsInCell;
 		}
-		if ([db fieldByName:MA_Field_Link].visible) {
+		if ([db fieldByName:MA_Field_Link].isVisible) {
 			++numberOfRowsInCell;
 		}
-		if ([db fieldByName:MA_Field_Summary].visible) {
+		if ([db fieldByName:MA_Field_Summary].isVisible) {
 			++numberOfRowsInCell;
 		}
 		if (numberOfRowsInCell == 0) {
@@ -653,46 +653,6 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 -(NSView *)mainView
 {
 	return articleList;
-}
-
-/* canDeleteMessageAtRow
- * Returns YES if the message at the specified row can be deleted, otherwise NO.
- */
--(BOOL)canDeleteMessageAtRow:(NSInteger)row
-{
-	return articleList.window.visible && self.selectedArticle != nil && ![Database sharedManager].readOnly;
-}
-
-/* canGoForward
- * Return TRUE if we can go forward in the backtrack queue.
- */
--(BOOL)canGoForward
-{
-	return self.articleController.canGoForward;
-}
-
-/* canGoBack
- * Return TRUE if we can go backward in the backtrack queue.
- */
--(BOOL)canGoBack
-{
-	return self.articleController.canGoBack;
-}
-
-/* handleGoForward
- * Move forward through the backtrack queue.
- */
--(IBAction)handleGoForward:(id)sender
-{
-	[self.articleController goForward];
-}
-
-/* handleGoBack
- * Move backward through the backtrack queue.
- */
--(IBAction)handleGoBack:(id)sender
-{
-	[self.articleController goBack];
 }
 
 /* makeTextStandardSize
@@ -952,7 +912,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
     if (articleText.canScrollUp) {
         [(NSView *)articleText scrollPageUp:nil];
     } else {
-        [self.articleController goBack];
+        [self.articleController goBack:nil];
     }
 }
 
@@ -1244,7 +1204,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 		theAttributedString = [[NSMutableAttributedString alloc] initWithString:@""];
 		BOOL isSelectedRow = [aTableView isRowSelected:rowIndex] && (NSApp.mainWindow.firstResponder == aTableView);
 
-		if ([db fieldByName:MA_Field_Subject].visible) {
+		if ([db fieldByName:MA_Field_Subject].isVisible) {
 			NSDictionary * topLineDictPtr;
 
 			if (theArticle.isRead) {
@@ -1259,7 +1219,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 		}
 
 		// Add the summary line that appears below the title.
-		if ([db fieldByName:MA_Field_Summary].visible) {
+		if ([db fieldByName:MA_Field_Summary].isVisible) {
 			NSString * summaryString = theArticle.summary;
 			NSInteger maxSummaryLength = MIN([summaryString length], 150);
 			NSString * middleString = [NSString stringWithFormat:@"\n%@", [summaryString substringToIndex:maxSummaryLength]];
@@ -1270,7 +1230,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 		}
 		
 		// Add the link line that appears below the summary and title.
-		if ([db fieldByName:MA_Field_Link].visible) {
+		if ([db fieldByName:MA_Field_Link].isVisible) {
 			NSString * articleLink = theArticle.link;
 			if (articleLink != nil) {
 				NSString * linkString = [NSString stringWithFormat:@"\n%@", articleLink];
@@ -1291,16 +1251,16 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 		NSMutableString * summaryString = [NSMutableString stringWithString:@""];
 		NSString * delimiter = @"";
 
-		if ([db fieldByName:MA_Field_Folder].visible) {
+		if ([db fieldByName:MA_Field_Folder].isVisible) {
 			Folder * folder = [db folderFromID:theArticle.folderId];
 			[summaryString appendFormat:@"%@", folder.name];
 			delimiter = @" - ";
 		}
-		if ([db fieldByName:MA_Field_LastUpdate].visible) {
+		if ([db fieldByName:MA_Field_LastUpdate].isVisible) {
 			[summaryString appendFormat:@"%@%@", delimiter, [NSDateFormatter vna_relativeDateStringFromDate:theArticle.lastUpdate]];
 			delimiter = @" - ";
 		}
-		if ([db fieldByName:MA_Field_Author].visible) {
+		if ([db fieldByName:MA_Field_Author].isVisible) {
 			if (!theArticle.author.vna_isBlank) {
 				[summaryString appendFormat:@"%@%@", delimiter, theArticle.author];
 			}

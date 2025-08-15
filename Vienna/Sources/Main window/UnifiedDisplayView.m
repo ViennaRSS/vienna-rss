@@ -113,19 +113,19 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
 																		NSBundle.mainBundle,
 																		@"Mark Read",
 																		@"Title of a menu item")
-							   action:@selector(markRead:)
+							   action:@selector(markAsRead:)
 						keyEquivalent:@""];
 	[articleListMenu addItemWithTitle:NSLocalizedString(@"Mark Unread", @"Title of a menu item")
-							   action:@selector(markUnread:)
+							   action:@selector(markAsUnread:)
 						keyEquivalent:@""];
 	[articleListMenu addItemWithTitle:NSLocalizedString(@"Mark Flagged", @"Title of a menu item")
-							   action:@selector(markFlagged:)
+							   action:@selector(toggleFlag:)
 						keyEquivalent:@""];
 	[articleListMenu addItemWithTitle:NSLocalizedString(@"Delete Article", @"Title of a menu item")
-							   action:@selector(deleteMessage:)
+							   action:@selector(delete:)
 						keyEquivalent:@""];
 	[articleListMenu addItemWithTitle:NSLocalizedString(@"Restore Article", @"Title of a menu item")
-							   action:@selector(restoreMessage:)
+							   action:@selector(restore:)
 						keyEquivalent:@""];
 	[articleListMenu addItemWithTitle:NSLocalizedString(@"Download Enclosure", @"Title of a menu item")
 							   action:@selector(downloadEnclosure:)
@@ -310,14 +310,6 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
 	[prefs setString:(guid != nil ? guid : @"") forKey:MAPref_CachedArticleGUID];
 }
 
-/* canDeleteMessageAtRow
- * Returns YES if the message at the specified row can be deleted, otherwise NO.
- */
--(BOOL)canDeleteMessageAtRow:(NSInteger)row
-{
-	return articleList.window.visible && self.selectedArticle != nil && ![Database sharedManager].readOnly;
-}
-
 /* selectedArticle
  * Returns the selected article, or nil if no article is selected.
  */
@@ -448,7 +440,7 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
         [scrollView reflectScrolledClipView:[scrollView contentView]];
         [NSAnimationContext endGrouping];
     } else {
-        [self.articleController goBack];
+        [self.articleController goBack:nil];
     }
 }
 
@@ -677,14 +669,6 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
 	[self copyIndexesSelection:articleList.selectedRowIndexes toPasteboard:[NSPasteboard generalPasteboard]];
 }
 
-/* delete
- * Handle the Delete action when the article list has focus.
- */
--(IBAction)delete:(id)sender
-{
-	[self.appController deleteMessage:self];
-}
-
 /* validateMenuItem
  * This is our override where we handle item validation for the
  * commands that we own.
@@ -693,9 +677,6 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
 {
 	if (menuItem.action == @selector(copy:)) {
 		return (articleList.numberOfSelectedRows > 0);
-	}
-	if (menuItem.action == @selector(delete:)) {
-        return [self canDeleteMessageAtRow:articleList.selectedRow];
 	}
 	if (menuItem.action == @selector(selectAll:)) {
 		return YES;

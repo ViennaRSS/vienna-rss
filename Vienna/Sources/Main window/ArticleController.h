@@ -37,7 +37,8 @@
  * article view. Thus all control of the article view now passes through the article
  * controller.
  */
-@interface ArticleController : NSViewController <NSMenuItemValidation>
+@interface ArticleController : NSViewController <NSMenuItemValidation,
+                                                 NSToolbarItemValidation>
 
 @property (nonatomic) FoldersTree * foldersTree;
 @property (nonatomic) ArticleListView *articleListView;
@@ -54,7 +55,6 @@
 @property (nonatomic, readonly) NSInteger currentFolderId;
 @property (nonatomic, readonly) Article *selectedArticle;
 @property (readonly, nonatomic) NSArray *markedArticleRange;
--(void)updateVisibleColumns;
 -(void)saveTableSettings;
 -(void)sortArticles;
 @property (readonly, nonatomic) NSArray *allArticles;
@@ -77,14 +77,23 @@
 -(void)markFlaggedByArray:(NSArray *)articleArray flagged:(BOOL)flagged;
 -(void)selectFolderAndArticle:(NSInteger)folderId guid:(NSString *)guid;
 -(void)addBacktrack:(NSString *)guid;
--(void)goForward;
--(void)goBack;
-@property (nonatomic, readonly) BOOL canGoForward;
-@property (nonatomic, readonly) BOOL canGoBack;
 
 - (IBAction)reportLayout:(id)sender;
 - (IBAction)condensedLayout:(id)sender;
 - (IBAction)unifiedLayout:(id)sender;
+
+- (IBAction)toggleColumnVisibility:(NSMenuItem *)sender;
+- (IBAction)changeSortColumn:(NSMenuItem *)sender;
+- (IBAction)changeSortDirection:(NSMenuItem *)sender;
+
+- (IBAction)goBack:(/*nullable*/ id)sender;
+- (IBAction)goForward:(/*nullable*/ id)sender;
+- (IBAction)toggleFlag:(/*nullable*/ id)sender;
+- (IBAction)markAsRead:(/*nullable*/ id)sender;
+- (IBAction)markAsUnread:(/*nullable*/ id)sender;
+- (IBAction)delete:(/*nullable*/ id)sender;
+- (IBAction)restore:(/*nullable*/ id)sender;
+- (IBAction)downloadEnclosure:(/*nullable*/ id)sender;
 
 // MARK: Filter bar
 

@@ -43,21 +43,15 @@
 
 // Menu action items
 -(IBAction)reindexDatabase:(id)sender;
--(IBAction)deleteMessage:(id)sender;
 -(IBAction)deleteFolder:(id)sender;
 -(IBAction)searchUsingToolbarTextField:(id)sender;
 -(IBAction)markAllRead:(id)sender;
 -(IBAction)markAllSubscriptionsRead:(id)sender;
--(IBAction)markUnread:(id)sender;
--(IBAction)markRead:(id)sender;
--(IBAction)markFlagged:(id)sender;
 -(IBAction)renameFolder:(id)sender;
 -(IBAction)viewFirstUnread:(id)sender;
 -(IBAction)viewArticlesTab:(id)sender;
 -(IBAction)viewNextUnread:(id)sender;
 -(IBAction)printDocument:(id)sender;
--(IBAction)goBack:(id)sender;
--(IBAction)goForward:(id)sender;
 -(IBAction)newSmartFolder:(id)sender;
 -(IBAction)newSubscription:(id)sender;
 -(IBAction)newGroupFolder:(id)sender;
@@ -85,7 +79,6 @@
 -(IBAction)closeAllTabs:(id)sender;
 -(IBAction)reloadPage:(id)sender;
 -(IBAction)stopReloadingPage:(id)sender;
--(IBAction)restoreMessage:(id)sender;
 -(IBAction)skipFolder:(id)sender;
 -(IBAction)openWebLocation:(id)sender;
 -(IBAction)getInfo:(id)sender;
@@ -93,7 +86,6 @@
 -(IBAction)useCurrentStyleForArticles:(id)sender;
 -(IBAction)useWebPageForArticles:(id)sender;
 -(IBAction)keyboardShortcutsHelp:(id)sender;
--(IBAction)downloadEnclosure:(id)sender;
 -(IBAction)setFocusToSearchField:(id)sender;
 -(IBAction)localPerformFindPanelAction:(id)sender;
 -(IBAction)keepFoldersArranged:(id)sender;
