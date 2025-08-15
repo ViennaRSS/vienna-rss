@@ -2703,7 +2703,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 	if (theAction == @selector(forceRefreshSelectedSubscriptions:)) {
 		Folder * folder = [db folderFromID:self.foldersTree.actualSelection];
-		*validateFlag = folder.type == VNAFolderTypeOpenReader;
+		*validateFlag = folder.type == VNAFolderTypeOpenReader && isMainWindowVisible;
 		return YES;
 	}
 	if (theAction == @selector(viewArticlesTab:)) {
@@ -2711,7 +2711,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		return YES;
 	}
 	if (theAction == @selector(viewNextUnread:)) {
-		*validateFlag = db.countOfUnread > 0;
+		*validateFlag = db.countOfUnread > 0 && isMainWindowVisible;
 		return YES;
 	}
     if (theAction == @selector(markAllRead:)) {
@@ -2819,7 +2819,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		return folder && folder.type != VNAFolderTypeTrash && !db.readOnly && isMainWindowVisible;
 	} else if (theAction == @selector(refreshSelectedSubscriptions:)) {
 		Folder * folder = [db folderFromID:self.foldersTree.actualSelection];
-		return folder && (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeGroup || folder.type == VNAFolderTypeOpenReader) && !db.readOnly;
+		return folder && (folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeGroup || folder.type == VNAFolderTypeOpenReader) && !db.readOnly && isMainWindowVisible;
 	} else if (theAction == @selector(refreshAllFolderIcons:)) {
 		return !self.connecting && !db.readOnly;
 	} else if (theAction == @selector(renameFolder:)) {
@@ -2876,6 +2876,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		return YES;
 	} else if (theAction == @selector(openVienna:)) {
         return self.mainWindow.isKeyWindow == false;
+    } else if (theAction == @selector(updateRemoteSubscriptions:)) {
+        return Preferences.standardPreferences.syncGoogleReader;
     }
 
 	return YES;
