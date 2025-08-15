@@ -59,6 +59,8 @@
 
 #define VNA_LOG os_log_create("--", "AppController")
 
+static NSStoryboardSegueIdentifier const VNAOrderFrontActivityPanelSegueIdentifier = @"OrderFrontActivityPanel";
+
 static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 
 @interface AppController () <InfoPanelControllerDelegate, ActivityPanelControllerDelegate, NSMenuItemValidation, NSToolbarItemValidation>
@@ -89,7 +91,6 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 
 @property (nonatomic) MainWindowController *mainWindowController;
 @property (nonatomic) ArticleController *articleController;
-@property (nonatomic) ActivityPanelController *activityPanelController;
 @property (nonatomic) VNADirectoryMonitor *directoryMonitor;
 @property (weak, nonatomic) FolderView *outlineView;
 @property (weak, nonatomic) NSSearchField *toolbarSearchField;
@@ -471,11 +472,6 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
     [self unregisterEventHandlers];
     
 	if (didCompleteInitialisation) {
-		// Close the activity window explicitly to force it to
-		// save its split bar position to the preferences.
-		NSWindow *activityPanel = self.activityPanelController.window;
-		[activityPanel performClose:self];
-		
 		// Put back the original app icon
 		[NSApp.dockTile setBadgeLabel:nil];
 		
@@ -3159,22 +3155,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 
 #pragma mark Activity panel
 
-- (ActivityPanelController *)activityPanelController {
-    if (!_activityPanelController) {
-        _activityPanelController = [ActivityPanelController new];
-        _activityPanelController.delegate = self;
-    }
-
-    return _activityPanelController;
-}
-
-/**
- * Show the activity window
- */
-- (IBAction)showActivityWindow:(id)sender {
-    [self.activityPanelController showWindow:self];
-}
-
 /**
  This delegate method is called when the user clicks on a row in the activity
  panel's table view. This will be used to select a correspondng folder.
@@ -3197,6 +3177,16 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         _foldersTree = [FoldersTree new];
     }
     return _foldersTree;
+}
+
+// MARK: - NSSeguePerforming
+
+- (void)prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:VNAOrderFrontActivityPanelSegueIdentifier]) {
+        ActivityPanelController *activityPanelController = segue.destinationController;
+        activityPanelController.delegate = self;
+    }
 }
 
 #pragma mark Dealloc

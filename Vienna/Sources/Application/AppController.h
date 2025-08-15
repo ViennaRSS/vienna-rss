@@ -30,7 +30,7 @@
 @class Article;
 @protocol Browser;
 
-@interface AppController : NSObject <NSApplicationDelegate> {
+@interface AppController : NSObject <NSApplicationDelegate, NSSeguePerforming> {
 #pragma clang diagnostic ignored "-Wobjc-interface-ivars"
     Database *db;
 }
