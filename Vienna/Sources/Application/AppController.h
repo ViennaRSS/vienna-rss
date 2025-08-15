@@ -23,7 +23,6 @@
 #define APPCONTROLLER ((AppController *)[NSApp delegate])
 
 @class FoldersTree;
-@class NewSubscription;
 @class PluginManager;
 @class SearchMethod;
 @class Database;
@@ -37,7 +36,6 @@
 
 @property (nonatomic) PluginManager *pluginManager;
 @property (nonatomic, weak) id<Browser> browser;
-@property (nonatomic) NewSubscription *rssFeed;
 @property (nonatomic) FoldersTree *foldersTree;
 @property (readonly, nonatomic) NSMenu *searchFieldMenu;
 

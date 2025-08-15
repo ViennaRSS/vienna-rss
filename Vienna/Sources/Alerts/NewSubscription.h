@@ -21,26 +21,17 @@
 @import Cocoa;
 
 @class Database;
-@class PluginManager;
 
 @interface NewSubscription : NSWindowController
 
-@property BOOL googleOptionButton;
 @property NSArray * topObjects;
-@property (weak, nonatomic) PluginManager *pluginManager;
 
 // Action handlers
--(IBAction)doSubscribe:(id)sender;
 -(IBAction)doSave:(id)sender;
--(IBAction)doSubscribeCancel:(id)sender;
 -(IBAction)doEditCancel:(id)sender;
--(IBAction)doLinkSourceChanged:(id)sender;
--(IBAction)doShowSiteHomePage:(id)sender;
--(IBAction)doGoogleOption:(id)sender;
 
 // General functions
 -(instancetype)initWithDatabase:(Database *)newDb /*NS_DESIGNATED_INITIALIZER*/;
--(void)newSubscription:(NSWindow *)window initialURL:(NSString *)initialURL;
 -(void)editSubscription:(NSWindow *)window folderId:(NSInteger)folderId;
 
 @end

@@ -25,6 +25,8 @@ final class MainWindowController: NSWindowController {
 
     // MARK: Transitional outlets
 
+    @IBOutlet private(set) var mainWindowContentViewController: NSViewController!
+
     @IBOutlet private(set) var splitView: NSSplitView!
     @IBOutlet private(set) var outlineView: FolderView?
     @IBOutlet private(set) var articleListView: ArticleListView?
@@ -42,6 +44,11 @@ final class MainWindowController: NSWindowController {
 
     override func windowDidLoad() {
         super.windowDidLoad()
+
+        // This view controller is needed to perform storyboard segues, until
+        // the window controller itself is instantiated by a storyboard.
+        contentViewController = mainWindowContentViewController
+
         // workaround for autosave not working when name is set in Interface Builder
         // cf. https://stackoverflow.com/q/16587058
         splitView.autosaveName = "VNASplitView"
