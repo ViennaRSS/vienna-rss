@@ -55,7 +55,7 @@ extern NSNotificationName const VNADatabaseDidDeleteFolderNotification;
 -(void)close;
 
 // Fields functions
--(void)addField:(NSString *)name type:(NSInteger)type tag:(NSInteger)tag sqlField:(NSString *)sqlField visible:(BOOL)visible width:(NSInteger)width;
+-(void)addField:(NSString *)name type:(NSInteger)type sqlField:(NSString *)sqlField visible:(BOOL)visible width:(NSInteger)width;
 -(NSArray *)arrayOfFields;
 -(Field *)fieldByName:(NSString *)name;
 

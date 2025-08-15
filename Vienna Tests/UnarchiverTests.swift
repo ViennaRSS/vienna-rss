@@ -49,7 +49,6 @@ class UnarchiverTests: XCTestCase {
         field.name = "Name"
         field.displayName = "Display Name"
         field.sqlField = "SQL Field"
-        field.tag = 1
         field.type = .string
         field.isVisible = true
 
@@ -69,34 +68,6 @@ class UnarchiverTests: XCTestCase {
         XCTAssertNotNil(NSKeyedUnarchiver.unarchiveObject(with: data) as? Field)
         XCTAssertNotNil(try NSKeyedUnarchiver.unarchivedObject(ofClass: Field.self, from: data))
         XCTAssertNoThrow(try NSKeyedUnarchiver.unarchivedObject(ofClass: Field.self, from: data))
-    }
-
-    @available(*, deprecated)
-    func testUnarchivingFieldWithUnkeyedArchive() throws {
-        let field = Field()
-        field.name = "Name"
-        field.displayName = "Display Name"
-        field.sqlField = "SQL Field"
-        field.tag = 1
-        field.type = .string
-        field.isVisible = true
-
-        // NSArchiver (deprecated)
-        var data = NSArchiver.archivedData(withRootObject: field)
-        XCTAssertNotNil(NSUnarchiver.unarchiveObject(with: data) as? Field)
-        XCTAssertNil(NSKeyedUnarchiver.unarchiveObject(with: data))
-        XCTAssertThrowsError(try NSKeyedUnarchiver.unarchivedObject(ofClass: Field.self, from: data))
-
-        // NSKeyedArchiver without secure coding (deprecated; macOS 10.12 only)
-        data = NSKeyedArchiver.archivedData(withRootObject: field)
-        XCTAssertNil(NSUnarchiver.unarchiveObject(with: data))
-
-        // NSKeyedArchiver with secure coding (macOS 10.13+)
-        data = try NSKeyedArchiver.archivedData(withRootObject: field, requiringSecureCoding: false)
-        XCTAssertNil(NSUnarchiver.unarchiveObject(with: data))
-
-        data = try NSKeyedArchiver.archivedData(withRootObject: field, requiringSecureCoding: true)
-        XCTAssertNil(NSUnarchiver.unarchiveObject(with: data))
     }
 
     func testUnarchivingSearchMethod() throws {

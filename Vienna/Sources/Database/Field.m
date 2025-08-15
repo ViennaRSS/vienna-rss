@@ -27,6 +27,7 @@ static NSString * const VNACodingKeyTag = @"tag";
 static NSString * const VNACodingKeyType = @"type";
 static NSString * const VNACodingKeyVisible = @"visible";
 static NSString * const VNACodingKeyWidth = @"width";
+static NSString * const VNACodingKeyCustomizationOptions = @"customizationOptions";
 
 @implementation Field
 
@@ -35,17 +36,17 @@ static NSString * const VNACodingKeyWidth = @"width";
 - (instancetype)init
 {
     self = [super init];
-
     if (self) {
         _name = nil;
         _displayName = nil;
         _sqlField = nil;
-        _tag = -1;
         _type = VNAFieldTypeInteger;
         _width = 20;
         _visible = NO;
+        _customizationOptions = (VNAFieldCustomizationVisibility |
+                                 VNAFieldCustomizationResizing |
+                                 VNAFieldCustomizationSorting);
     }
-
     return self;
 }
 
@@ -54,10 +55,11 @@ static NSString * const VNACodingKeyWidth = @"width";
 - (NSString *)description
 {
     return [NSString stringWithFormat:@"('%@', displayName='%@', sqlField='%@'"
-                                       ", tag=%ld, width=%ld, visible=%d)",
+                                       ", width=%ld, visible=%d"
+                                       ", customizationOptions=%lu)",
                                       self.name, self.displayName,
-                                      self.sqlField, self.tag, self.width,
-                                      self.isVisible];
+                                      self.sqlField, self.width,
+                                      self.isVisible, self.customizationOptions];
 }
 
 // MARK: - NSSecureCoding
@@ -70,7 +72,6 @@ static NSString * const VNACodingKeyWidth = @"width";
 - (instancetype)initWithCoder:(NSCoder *)coder
 {
     self = [super init];
-
     if (self) {
         if (coder.allowsKeyedCoding) {
             _name = [coder decodeObjectOfClass:[NSString class]
@@ -79,13 +80,14 @@ static NSString * const VNACodingKeyWidth = @"width";
                                                forKey:VNACodingKeyDisplayName];
             _sqlField = [coder decodeObjectOfClass:[NSString class]
                                             forKey:VNACodingKeySQLField];
-            _tag = [coder decodeIntegerForKey:VNACodingKeyTag];
             _type = [coder decodeIntegerForKey:VNACodingKeyType];
             _width = [coder decodeIntegerForKey:VNACodingKeyWidth];
             _visible = [coder decodeBoolForKey:VNACodingKeyVisible];
+            _customizationOptions = [coder decodeIntegerForKey:VNACodingKeyCustomizationOptions];
         } else {
             // NSUnarchiver is deprecated since macOS 10.13 and replaced with
-            // NSKeyedUnarchiver.
+            // NSKeyedUnarchiver. For backwards-compatibility with NSArchiver,
+            // decoding using NSUnarchiver is still supported.
             //
             // Important: The order in which the values are decoded must match
             // the order in which they were encoded. Changing the code below can
@@ -99,43 +101,33 @@ static NSString * const VNACodingKeyWidth = @"width";
             [coder decodeValueOfObjCType:@encode(NSInteger)
                                       at:&_width
                                     size:sizeof(NSInteger)];
+            // Previously created archives still have the tag property.
+            NSInteger tag;
             [coder decodeValueOfObjCType:@encode(NSInteger)
-                                      at:&_tag
+                                      at:&tag
                                     size:sizeof(NSInteger)];
             [coder decodeValueOfObjCType:@encode(NSInteger)
                                       at:&_type
                                     size:sizeof(NSInteger)];
         }
     }
-
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder
 {
-    if (coder.allowsKeyedCoding) {
-        [coder encodeObject:self.name forKey:VNACodingKeyName];
-        [coder encodeObject:self.displayName forKey:VNACodingKeyDisplayName];
-        [coder encodeObject:self.sqlField forKey:VNACodingKeySQLField];
-        [coder encodeInteger:self.tag forKey:VNACodingKeyTag];
-        [coder encodeInteger:self.type forKey:VNACodingKeyType];
-        [coder encodeInteger:self.width forKey:VNACodingKeyWidth];
-        [coder encodeBool:self.isVisible forKey:VNACodingKeyVisible];
-    } else {
-        // NSArchiver is deprecated since macOS 10.13 and replaced with
-        // NSKeyedArchiver.
-        //
-        // Important: The order in which the values are encoded must match the
-        // the order in which they will be decoded. Changing the code below can
-        // lead to decoding failure.
-        [coder encodeObject:self.displayName];
-        [coder encodeObject:self.name];
-        [coder encodeObject:self.sqlField];
-        [coder encodeValueOfObjCType:@encode(bool) at:&_visible];
-        [coder encodeValueOfObjCType:@encode(NSInteger) at:&_width];
-        [coder encodeValueOfObjCType:@encode(NSInteger) at:&_tag];
-        [coder encodeValueOfObjCType:@encode(NSInteger) at:&_type];
+    if (!coder.allowsKeyedCoding) {
+        [NSException raise:NSInvalidArchiveOperationException
+                    format:@"Coder does not support keyed coding."];
+        return;
     }
+    [coder encodeObject:self.name forKey:VNACodingKeyName];
+    [coder encodeObject:self.displayName forKey:VNACodingKeyDisplayName];
+    [coder encodeObject:self.sqlField forKey:VNACodingKeySQLField];
+    [coder encodeInteger:self.type forKey:VNACodingKeyType];
+    [coder encodeInteger:self.width forKey:VNACodingKeyWidth];
+    [coder encodeBool:self.isVisible forKey:VNACodingKeyVisible];
+    [coder encodeInteger:self.customizationOptions forKey:VNACodingKeyCustomizationOptions];
 }
 
 @end

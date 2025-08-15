@@ -974,22 +974,13 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	
 	// Add the fields which are sortable to the menu.
 	for (Field * field in [db arrayOfFields]) {
-		// Filter out columns we don't sort on. Later we should have an attribute in the
-		// field object itself based on which columns we can sort on.
-		if (field.tag != VNAArticleFieldTagParent &&
-			field.tag != VNAArticleFieldTagGUID &&
-			field.tag != VNAArticleFieldTagDeleted &&
-			field.tag != VNAArticleFieldTagHeadlines &&
-			field.tag != VNAArticleFieldTagSummary &&
-			field.tag != VNAArticleFieldTagLink &&
-			field.tag != VNAArticleFieldTagText &&
-			field.tag != VNAArticleFieldTagEnclosureDownloaded &&
-			field.tag != VNAArticleFieldTagEnclosure)
-		{
-			NSMenuItem *menuItem = [[NSMenuItem alloc] initWithTitle:field.displayName action:@selector(changeSortColumn:) keyEquivalent:@""];
-			menuItem.representedObject = field;
-			[sortSubmenu addItem:menuItem];
-		}
+        if (field.customizationOptions & VNAFieldCustomizationSorting) {
+            NSMenuItem *menuItem = [[NSMenuItem alloc] initWithTitle:field.displayName
+                                                              action:@selector(changeSortColumn:)
+                                                       keyEquivalent:@""];
+            menuItem.representedObject = field;
+            [sortSubmenu addItem:menuItem];
+        }
 	}
 	
 	// Add the separator.
@@ -1013,21 +1004,15 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(void)initColumnsMenu
 {
 	NSMenu * columnsSubMenu = [NSMenu new];
-	
 	for (Field * field in [db arrayOfFields]) {
-		// Filter out columns we don't view in the article list. Later we should have an attribute in the
-		// field object based on which columns are visible in the tableview.
-		if (field.tag != VNAArticleFieldTagText && 
-			field.tag != VNAArticleFieldTagGUID &&
-			field.tag != VNAArticleFieldTagDeleted &&
-			field.tag != VNAArticleFieldTagParent &&
-			field.tag != VNAArticleFieldTagHeadlines &&
-			field.tag != VNAArticleFieldTagEnclosureDownloaded)
-		{
-			NSMenuItem *menuItem = [[NSMenuItem alloc] initWithTitle:field.displayName action:@selector(toggleColumnVisibility:) keyEquivalent:@""];
-			menuItem.representedObject = field;
-			[columnsSubMenu addItem:menuItem];
-		}
+        if (field.customizationOptions & VNAFieldCustomizationVisibility) {
+            NSMenuItem *menuItem =
+                [[NSMenuItem alloc] initWithTitle:field.displayName
+                                           action:@selector(toggleColumnVisibility:)
+                                    keyEquivalent:@""];
+            menuItem.representedObject = field;
+            [columnsSubMenu addItem:menuItem];
+        }
 	}
 	columnsMenu.submenu = columnsSubMenu;
 }

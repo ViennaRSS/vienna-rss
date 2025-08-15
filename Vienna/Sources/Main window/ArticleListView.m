@@ -393,19 +393,18 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 	for (index = 0; index < count; ++index) {
 		Field * field = fields[index];
 		NSString * identifier = field.name;
-		NSInteger tag = field.tag;
 		BOOL showField;
 		
 		// Handle which fields can be visible in the condensed (vertical) layout
 		// versus the report (horizontal) layout
 		if (tableLayout == VNALayoutReport) {
-			showField = field.isVisible && tag != VNAArticleFieldTagHeadlines;
+			showField = field.isVisible && ![identifier isEqualToString:MA_Field_Headlines];
 		} else {
 			showField = NO;
-			if (tag == VNAArticleFieldTagRead || tag == VNAArticleFieldTagFlagged || tag == VNAArticleFieldTagHasEnclosure) {
+			if ([identifier isEqualToString:MA_Field_Read] || [identifier isEqualToString:MA_Field_Flagged] || [identifier isEqualToString:MA_Field_HasEnclosure]) {
 				showField = field.isVisible;
 			}
-			if (tag == VNAArticleFieldTagHeadlines) {
+			if ([identifier isEqualToString:MA_Field_Headlines]) {
 				showField = YES;
 			}
 		}
@@ -443,7 +442,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 				column.dataCell = cell;
 			}
 
-			BOOL isResizable = (tag != VNAArticleFieldTagRead && tag != VNAArticleFieldTagFlagged && tag != VNAArticleFieldTagHasEnclosure);
+			BOOL isResizable = field.customizationOptions & VNAFieldCustomizationResizing;
 			column.resizingMask = (isResizable ? NSTableColumnUserResizingMask : NSTableColumnNoResizing);
 			// the headline column is auto-resizable
 			column.resizingMask = column.resizingMask | ([column.identifier isEqualToString:MA_Field_Headlines] ? NSTableColumnAutoresizingMask : 0);

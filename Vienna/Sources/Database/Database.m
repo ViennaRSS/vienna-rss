@@ -336,23 +336,23 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
     self.fieldsByName = [[NSMutableDictionary alloc] init];
     self.fieldsOrdered = [[NSMutableArray alloc] init];
     
-    [self addField:MA_Field_Read type:VNAFieldTypeFlag tag:VNAArticleFieldTagRead sqlField:@"read_flag" visible:YES width:17];
-    [self addField:MA_Field_Flagged type:VNAFieldTypeFlag tag:VNAArticleFieldTagFlagged sqlField:@"marked_flag" visible:YES width:17];
-    [self addField:MA_Field_HasEnclosure type:VNAFieldTypeFlag tag:VNAArticleFieldTagHasEnclosure sqlField:@"hasenclosure_flag" visible:YES width:17];
-    [self addField:MA_Field_Deleted type:VNAFieldTypeFlag tag:VNAArticleFieldTagDeleted sqlField:@"deleted_flag" visible:NO width:15];
-    [self addField:MA_Field_GUID type:VNAFieldTypeInteger tag:VNAArticleFieldTagGUID sqlField:@"message_id" visible:NO width:72];
-    [self addField:MA_Field_Subject type:VNAFieldTypeString tag:VNAArticleFieldTagSubject sqlField:@"title" visible:YES width:472];
-    [self addField:MA_Field_Folder type:VNAFieldTypeFolder tag:VNAArticleFieldTagFolder sqlField:@"folder_id" visible:NO width:130];
-    [self addField:MA_Field_LastUpdate type:VNAFieldTypeDate tag:VNAArticleFieldTagLastUpdate sqlField:@"date" visible:YES width:152];
-    [self addField:MA_Field_PublicationDate type:VNAFieldTypeDate tag:VNAArticleFieldTagPublicationDate sqlField:@"createddate" visible:NO width:152];
-    [self addField:MA_Field_Parent type:VNAFieldTypeInteger tag:VNAArticleFieldTagParent sqlField:@"parent_id" visible:NO width:72];
-    [self addField:MA_Field_Author type:VNAFieldTypeString tag:VNAArticleFieldTagAuthor sqlField:@"sender" visible:YES width:138];
-    [self addField:MA_Field_Link type:VNAFieldTypeString tag:VNAArticleFieldTagLink sqlField:@"link" visible:NO width:138];
-    [self addField:MA_Field_Text type:VNAFieldTypeString tag:VNAArticleFieldTagText sqlField:@"text" visible:NO width:152];
-    [self addField:MA_Field_Summary type:VNAFieldTypeString tag:VNAArticleFieldTagSummary sqlField:@"summary" visible:NO width:152];
-    [self addField:MA_Field_Headlines type:VNAFieldTypeString tag:VNAArticleFieldTagHeadlines sqlField:@"" visible:NO width:100];
-    [self addField:MA_Field_Enclosure type:VNAFieldTypeString tag:VNAArticleFieldTagEnclosure sqlField:@"enclosure" visible:NO width:100];
-    [self addField:MA_Field_EnclosureDownloaded type:VNAFieldTypeFlag tag:VNAArticleFieldTagEnclosureDownloaded sqlField:@"enclosuredownloaded_flag" visible:NO width:100];
+    [self addField:MA_Field_Read type:VNAFieldTypeFlag sqlField:@"read_flag" visible:YES width:17];
+    [self addField:MA_Field_Flagged type:VNAFieldTypeFlag sqlField:@"marked_flag" visible:YES width:17];
+    [self addField:MA_Field_HasEnclosure type:VNAFieldTypeFlag sqlField:@"hasenclosure_flag" visible:YES width:17];
+    [self addField:MA_Field_Deleted type:VNAFieldTypeFlag sqlField:@"deleted_flag" visible:NO width:15];
+    [self addField:MA_Field_GUID type:VNAFieldTypeInteger sqlField:@"message_id" visible:NO width:72];
+    [self addField:MA_Field_Subject type:VNAFieldTypeString sqlField:@"title" visible:YES width:472];
+    [self addField:MA_Field_Folder type:VNAFieldTypeFolder sqlField:@"folder_id" visible:NO width:130];
+    [self addField:MA_Field_LastUpdate type:VNAFieldTypeDate sqlField:@"date" visible:YES width:152];
+    [self addField:MA_Field_PublicationDate type:VNAFieldTypeDate sqlField:@"createddate" visible:NO width:152];
+    [self addField:MA_Field_Parent type:VNAFieldTypeInteger sqlField:@"parent_id" visible:NO width:72];
+    [self addField:MA_Field_Author type:VNAFieldTypeString sqlField:@"sender" visible:YES width:138];
+    [self addField:MA_Field_Link type:VNAFieldTypeString sqlField:@"link" visible:NO width:138];
+    [self addField:MA_Field_Text type:VNAFieldTypeString sqlField:@"text" visible:NO width:152];
+    [self addField:MA_Field_Summary type:VNAFieldTypeString sqlField:@"summary" visible:NO width:152];
+    [self addField:MA_Field_Headlines type:VNAFieldTypeString sqlField:@"" visible:NO width:100];
+    [self addField:MA_Field_Enclosure type:VNAFieldTypeString sqlField:@"enclosure" visible:NO width:100];
+    [self addField:MA_Field_EnclosureDownloaded type:VNAFieldTypeFlag sqlField:@"enclosuredownloaded_flag" visible:NO width:100];
 
 	//set user friendly and localizable names for some fields
 	[self fieldByName:MA_Field_Read].displayName = NSLocalizedString(@"Read", @"Data field name visible in menu/smart folder definition");
@@ -369,6 +369,30 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	[self fieldByName:MA_Field_Summary].displayName = NSLocalizedString(@"Summary", @"Pseudo field name visible in menu/article list");
 	[self fieldByName:MA_Field_Headlines].displayName = NSLocalizedString(@"Headlines", @"Pseudo field name visible in article list");
 	[self fieldByName:MA_Field_Link].displayName = NSLocalizedString(@"Link", @"Data field name visible in menu/article list");
+
+    // Disable visibility customization for some fields
+    [self fieldByName:MA_Field_Text].customizationOptions &= ~VNAFieldCustomizationVisibility;
+    [self fieldByName:MA_Field_GUID].customizationOptions &= ~VNAFieldCustomizationVisibility;
+    [self fieldByName:MA_Field_Deleted].customizationOptions &= ~VNAFieldCustomizationVisibility;
+    [self fieldByName:MA_Field_Parent].customizationOptions &= ~VNAFieldCustomizationVisibility;
+    [self fieldByName:MA_Field_Headlines].customizationOptions &= ~VNAFieldCustomizationVisibility;
+    [self fieldByName:MA_Field_EnclosureDownloaded].customizationOptions &= ~VNAFieldCustomizationVisibility;
+
+    // Disable resizing for some fields
+    [self fieldByName:MA_Field_Read].customizationOptions &= ~VNAFieldCustomizationResizing;
+    [self fieldByName:MA_Field_Flagged].customizationOptions &= ~VNAFieldCustomizationResizing;
+    [self fieldByName:MA_Field_HasEnclosure].customizationOptions &= ~VNAFieldCustomizationResizing;
+
+    // Disable sorting for some fields
+    [self fieldByName:MA_Field_Parent].customizationOptions &= ~VNAFieldCustomizationSorting;
+    [self fieldByName:MA_Field_GUID].customizationOptions &= ~VNAFieldCustomizationSorting;
+    [self fieldByName:MA_Field_Deleted].customizationOptions &= ~VNAFieldCustomizationSorting;
+    [self fieldByName:MA_Field_Headlines].customizationOptions &= ~VNAFieldCustomizationSorting;
+    [self fieldByName:MA_Field_Summary].customizationOptions &= ~VNAFieldCustomizationSorting;
+    [self fieldByName:MA_Field_Link].customizationOptions &= ~VNAFieldCustomizationSorting;
+    [self fieldByName:MA_Field_Text].customizationOptions &= ~VNAFieldCustomizationSorting;
+    [self fieldByName:MA_Field_EnclosureDownloaded].customizationOptions &= ~VNAFieldCustomizationSorting;
+    [self fieldByName:MA_Field_Enclosure].customizationOptions &= ~VNAFieldCustomizationSorting;
 }
 
 /* relocateLockedDatabase
@@ -470,13 +494,12 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 /* addField
  * Add the specified field to our fields array.
  */
--(void)addField:(NSString *)name type:(NSInteger)type tag:(NSInteger)tag sqlField:(NSString *)sqlField visible:(BOOL)visible width:(NSInteger)width
+-(void)addField:(NSString *)name type:(NSInteger)type sqlField:(NSString *)sqlField visible:(BOOL)visible width:(NSInteger)width
 {
 	Field * field = [Field new];
 	if (field != nil) {
 		field.name = name;
 		field.type = type;
-		field.tag = tag;
 		field.visible = visible;
 		field.width = width;
 		field.sqlField = sqlField;

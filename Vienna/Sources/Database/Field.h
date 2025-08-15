@@ -29,6 +29,12 @@ typedef NS_ENUM(NSUInteger, VNAFieldType) {
     VNAFieldTypeFolder
 } NS_SWIFT_NAME(Field.FieldType);
 
+typedef NS_OPTIONS(NSUInteger, VNAFieldCustomizationOptions) {
+    VNAFieldCustomizationVisibility = 1 << 0,
+    VNAFieldCustomizationResizing = 1 << 1,
+    VNAFieldCustomizationSorting = 1 << 2,
+} NS_SWIFT_NAME(Field.CustomizationOptions);
+
 @interface Field : NSObject <NSSecureCoding>
 
 /// The field name is the unlocalised display name; useful for writing to data
@@ -43,11 +49,6 @@ typedef NS_ENUM(NSUInteger, VNAFieldType) {
 /// originally created.
 @property (copy, nonatomic) NSString *sqlField;
 
-/// The tag is simply an unique integer that identifies the field in the same
-/// way that the field name is used. I suspect that at some point one of these
-/// two will be deprecated for simplicity.
-@property (nonatomic) NSInteger tag;
-
 /// Sets the field type. This must be one of the valid values in the FieldType
 /// enum. The field type is used to govern how the field value is interpreted.
 @property (nonatomic) VNAFieldType type;
@@ -58,5 +59,8 @@ typedef NS_ENUM(NSUInteger, VNAFieldType) {
 /// Whether this field is intended to be visible in the article list view by
 /// default.
 @property (getter=isVisible, nonatomic) BOOL visible;
+
+/// The allowed display options for the article list view.
+@property (nonatomic) VNAFieldCustomizationOptions customizationOptions;
 
 @end
