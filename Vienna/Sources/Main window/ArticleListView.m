@@ -87,13 +87,11 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
     NSFont *articleListUnreadFont;
     NSMutableDictionary *reportCellDict;
     NSMutableDictionary *unreadReportCellDict;
-    NSMutableDictionary *selectionDict;
     NSMutableDictionary *topLineDict;
     NSMutableDictionary *linkLineDict;
     NSMutableDictionary *middleLineDict;
     NSMutableDictionary *bottomLineDict;
     NSMutableDictionary *unreadTopLineDict;
-    NSMutableDictionary *unreadTopLineSelectionDict;
 
     BOOL isLoadingHTMLArticle;
 }
@@ -179,13 +177,11 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
     reportCellDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, [NSColor textColor], NSForegroundColorAttributeName, nil];
     unreadReportCellDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, [NSColor textColor], NSForegroundColorAttributeName, nil];
     		
-	selectionDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, [NSColor whiteColor], NSForegroundColorAttributeName, nil];
 	unreadTopLineDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, [NSColor textColor], NSForegroundColorAttributeName, nil];
 	topLineDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, [NSColor textColor], NSForegroundColorAttributeName, nil];
-	unreadTopLineSelectionDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, [NSColor whiteColor], NSForegroundColorAttributeName, nil];
     middleLineDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, [NSColor systemBlueColor], NSForegroundColorAttributeName, nil];
     linkLineDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, [NSColor systemBlueColor], NSForegroundColorAttributeName, nil];
-    bottomLineDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, [NSColor systemGrayColor], NSForegroundColorAttributeName, nil];
+    bottomLineDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:style, NSParagraphStyleAttributeName, NSColor.secondaryLabelColor, NSForegroundColorAttributeName, nil];
 
     NSScrollView *articleListScrollView = articleList.enclosingScrollView;
     self.filterBarViewController.filterBarContainer = articleListScrollView;
@@ -559,8 +555,6 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 	middleLineDict[NSFontAttributeName] = articleListFont;
 	linkLineDict[NSFontAttributeName] = articleListFont;
 	bottomLineDict[NSFontAttributeName] = articleListFont;
-	selectionDict[NSFontAttributeName] = articleListFont;
-	unreadTopLineSelectionDict[NSFontAttributeName] = articleListUnreadFont;
 	
 	[self updateArticleListRowHeight];
 }
@@ -1201,15 +1195,14 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 	NSMutableAttributedString * theAttributedString;
 	if ([identifier isEqualToString:MA_Field_Headlines]) {
 		theAttributedString = [[NSMutableAttributedString alloc] initWithString:@""];
-		BOOL isSelectedRow = [aTableView isRowSelected:rowIndex] && (NSApp.mainWindow.firstResponder == aTableView);
 
 		if ([db fieldByName:MA_Field_Subject].isVisible) {
 			NSDictionary * topLineDictPtr;
 
 			if (theArticle.isRead) {
-				topLineDictPtr = (isSelectedRow ? selectionDict : topLineDict);
+				topLineDictPtr = topLineDict;
 			} else {
-				topLineDictPtr = (isSelectedRow ? unreadTopLineSelectionDict : unreadTopLineDict);
+				topLineDictPtr = unreadTopLineDict;
 			}
 			NSString * topString = [NSString stringWithFormat:@"%@", theArticle.title];
 			NSMutableAttributedString * topAttributedString = [[NSMutableAttributedString alloc] initWithString:topString attributes:topLineDictPtr];
@@ -1222,7 +1215,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 			NSString * summaryString = theArticle.summary;
 			NSInteger maxSummaryLength = MIN([summaryString length], 150);
 			NSString * middleString = [NSString stringWithFormat:@"\n%@", [summaryString substringToIndex:maxSummaryLength]];
-			NSDictionary * middleLineDictPtr = (isSelectedRow ? selectionDict : middleLineDict);
+			NSDictionary * middleLineDictPtr = middleLineDict;
 			NSMutableAttributedString * middleAttributedString = [[NSMutableAttributedString alloc] initWithString:middleString attributes:middleLineDictPtr];
 			[middleAttributedString fixFontAttributeInRange:NSMakeRange(0u, middleAttributedString.length)];
 			[theAttributedString appendAttributedString:middleAttributedString];
@@ -1233,7 +1226,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 			NSString * articleLink = theArticle.link;
 			if (articleLink != nil) {
 				NSString * linkString = [NSString stringWithFormat:@"\n%@", articleLink];
-				NSMutableDictionary * linkLineDictPtr = (isSelectedRow ? selectionDict : linkLineDict);
+				NSMutableDictionary * linkLineDictPtr = linkLineDict;
 				NSURL * articleURL = [NSURL URLWithString:articleLink];
 				if (articleURL != nil) {
 					linkLineDictPtr = [linkLineDictPtr mutableCopy];
@@ -1246,7 +1239,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 		}
 		
 		// Create the detail line that appears at the bottom.
-		NSDictionary * bottomLineDictPtr = (isSelectedRow ? selectionDict : bottomLineDict);
+		NSDictionary * bottomLineDictPtr = bottomLineDict;
 		NSMutableString * summaryString = [NSMutableString stringWithString:@""];
 		NSString * delimiter = @"";
 
