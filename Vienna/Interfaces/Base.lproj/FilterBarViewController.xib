@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23727" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23727"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="VNAFilterBarViewController">
+            <connections>
+                <outlet property="popUpButton" destination="xZ7-GC-jmm" id="BlN-67-b6r"/>
+                <outlet property="searchField" destination="wGJ-R9-zCA" id="imm-HN-yGi"/>
+                <outlet property="view" destination="4t5-ft-GSK" id="VHs-pH-BXR"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <visualEffectView wantsLayer="YES" verticalHuggingPriority="255" blendingMode="withinWindow" material="headerView" state="followsWindowActiveState" id="4t5-ft-GSK">
+            <rect key="frame" x="0.0" y="0.0" width="500" height="32"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+            <subviews>
+                <stackView distribution="fill" orientation="horizontal" alignment="firstBaseline" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2yY-VY-jiK">
+                    <rect key="frame" x="0.0" y="7" width="500" height="19"/>
+                    <subviews>
+                        <searchField toolTip="Filter displayed articles by matching text" wantsLayer="YES" focusRingType="none" horizontalHuggingPriority="249" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wGJ-R9-zCA">
+                            <rect key="frame" x="8" y="0.0" width="287" height="19"/>
+                            <constraints>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="7vg-ac-tV1"/>
+                            </constraints>
+                            <searchFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Filter" bezelStyle="round" recentsAutosaveName="filterStrings" id="JMv-fT-5v9">
+                                <font key="font" metaFont="smallSystem"/>
+                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            </searchFieldCell>
+                            <connections>
+                                <action selector="searchUsingFilterField:" target="-1" id="15Q-gl-4cW"/>
+                            </connections>
+                        </searchField>
+                        <stackView distribution="fill" orientation="horizontal" alignment="firstBaseline" spacing="4" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tpN-rS-q7T">
+                            <rect key="frame" x="303" y="1" width="168" height="16"/>
+                            <subviews>
+                                <textField wantsLayer="YES" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oNl-me-N81">
+                                    <rect key="frame" x="-2" y="1" width="50" height="14"/>
+                                    <textFieldCell key="cell" controlSize="small" alignment="right" title="Filter by:" id="b0x-SO-lhy">
+                                        <font key="font" metaFont="smallSystem"/>
+                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                    <connections>
+                                        <accessibilityConnection property="title" destination="xZ7-GC-jmm" id="1Vg-zU-tOQ"/>
+                                        <binding destination="-2" name="hidden" keyPath="self.popUpButton.pullsDown" id="Sr0-6k-NdR"/>
+                                    </connections>
+                                </textField>
+                                <popUpButton toolTip="Filter articles" wantsLayer="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xZ7-GC-jmm">
+                                    <rect key="frame" x="50" y="-1" width="118" height="17"/>
+                                    <popUpButtonCell key="cell" type="roundRect" title="All Articles" bezelStyle="roundedRect" controlSize="small" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="crL-qM-TDg" id="Chi-pe-MCd">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="smallSystem"/>
+                                        <menu key="menu" id="gQP-1Y-B9U">
+                                            <items>
+                                                <menuItem title="Filter" tag="-1" hidden="YES" id="ZlS-NV-Ihb"/>
+                                                <menuItem title="All Articles" state="on" id="crL-qM-TDg">
+                                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                                    <connections>
+                                                        <action selector="changeFiltering:" target="-1" id="oTt-Q8-zxt"/>
+                                                    </connections>
+                                                </menuItem>
+                                                <menuItem isSeparatorItem="YES" id="oqA-fu-woP"/>
+                                                <menuItem title="Unread or Flagged" tag="6" id="8fC-W9-yqr">
+                                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                                    <connections>
+                                                        <action selector="changeFiltering:" target="-1" id="ANc-dp-YcM"/>
+                                                    </connections>
+                                                </menuItem>
+                                                <menuItem title="Last Refresh" tag="2" id="tK5-pk-3t8">
+                                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                                    <connections>
+                                                        <action selector="changeFiltering:" target="-1" id="dZo-8f-E33"/>
+                                                    </connections>
+                                                </menuItem>
+                                                <menuItem title="Today" tag="3" id="33G-uT-Fss">
+                                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                                    <connections>
+                                                        <action selector="changeFiltering:" target="-1" id="Q8R-iK-k06"/>
+                                                    </connections>
+                                                </menuItem>
+                                                <menuItem title="Last 48 Hours" tag="4" id="Z3e-EY-ag9">
+                                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                                    <connections>
+                                                        <action selector="changeFiltering:" target="-1" id="TVA-FR-aq2"/>
+                                                    </connections>
+                                                </menuItem>
+                                                <menuItem title="Flagged" tag="5" id="2um-FU-Guo">
+                                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                                    <connections>
+                                                        <action selector="changeFiltering:" target="-1" id="Y6w-18-uwP"/>
+                                                    </connections>
+                                                </menuItem>
+                                                <menuItem title="Unread Articles" tag="1" id="RcW-lY-G68">
+                                                    <modifierMask key="keyEquivalentModifierMask"/>
+                                                    <connections>
+                                                        <action selector="changeFiltering:" target="-1" id="efb-In-DeE"/>
+                                                    </connections>
+                                                </menuItem>
+                                            </items>
+                                        </menu>
+                                    </popUpButtonCell>
+                                </popUpButton>
+                            </subviews>
+                            <visibilityPriorities>
+                                <real value="500"/>
+                                <integer value="1000"/>
+                            </visibilityPriorities>
+                            <customSpacing>
+                                <real value="3.4028234663852886e+38"/>
+                                <real value="3.4028234663852886e+38"/>
+                            </customSpacing>
+                        </stackView>
+                        <button toolTip="Close the filter bar" wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7FZ-GG-rxd">
+                            <rect key="frame" x="479" y="2.5" width="13" height="13"/>
+                            <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSStopProgressFreestandingTemplate" imagePosition="only" controlSize="small" lineBreakMode="truncatingTail" inset="2" id="NTg-RR-XE1">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                <font key="font" metaFont="message" size="11"/>
+                            </buttonCell>
+                            <accessibility description="Close the filter bar"/>
+                            <connections>
+                                <action selector="hideFilterBar:" target="-1" id="QTD-df-oGY"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <edgeInsets key="edgeInsets" left="8" right="8" top="0.0" bottom="0.0"/>
+                    <visibilityPriorities>
+                        <real value="999"/>
+                        <real value="999"/>
+                        <integer value="1000"/>
+                    </visibilityPriorities>
+                    <customSpacing>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                    </customSpacing>
+                </stackView>
+                <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="zaG-g0-Z5s">
+                    <rect key="frame" x="0.0" y="-2" width="500" height="5"/>
+                </box>
+            </subviews>
+            <constraints>
+                <constraint firstItem="zaG-g0-Z5s" firstAttribute="leading" secondItem="4t5-ft-GSK" secondAttribute="leading" id="8Jw-Yv-VBy"/>
+                <constraint firstAttribute="bottom" secondItem="zaG-g0-Z5s" secondAttribute="bottom" id="Gee-BJ-gMv"/>
+                <constraint firstAttribute="trailing" secondItem="2yY-VY-jiK" secondAttribute="trailing" id="RgK-4B-veZ"/>
+                <constraint firstItem="2yY-VY-jiK" firstAttribute="leading" secondItem="4t5-ft-GSK" secondAttribute="leading" id="TBx-gs-WqI"/>
+                <constraint firstAttribute="trailing" secondItem="zaG-g0-Z5s" secondAttribute="trailing" id="WW6-Rl-rRx"/>
+                <constraint firstAttribute="bottom" secondItem="2yY-VY-jiK" secondAttribute="bottom" constant="7" id="Wcw-PB-0qh"/>
+                <constraint firstItem="2yY-VY-jiK" firstAttribute="top" secondItem="4t5-ft-GSK" secondAttribute="top" constant="6" id="ubD-Z9-0NU"/>
+            </constraints>
+            <connections>
+                <outlet property="nextKeyView" destination="wGJ-R9-zCA" id="Md2-Jq-FAn"/>
+            </connections>
+            <point key="canvasLocation" x="0.0" y="-41"/>
+        </visualEffectView>
+    </objects>
+    <resources>
+        <image name="NSStopProgressFreestandingTemplate" width="20" height="20"/>
+    </resources>
+</document>

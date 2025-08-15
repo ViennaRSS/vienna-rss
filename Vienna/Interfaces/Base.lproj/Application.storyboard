@@ -421,6 +421,7 @@ CA
                                                             <action selector="changeFiltering:" target="Ady-hI-5gd" id="K3L-iy-fUI"/>
                                                         </connections>
                                                     </menuItem>
+                                                    <menuItem isSeparatorItem="YES" id="hL5-dV-Sym"/>
                                                     <menuItem title="Unread Articles" tag="1" id="rNG-xr-3x7">
                                                         <connections>
                                                             <action selector="changeFiltering:" target="Ady-hI-5gd" id="HZS-xT-lzD"/>
@@ -796,7 +797,6 @@ CA
                         <outlet property="articleMenu" destination="300" id="299-Bq-gOu"/>
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                         <outlet property="dockMenu" destination="JWi-Bw-kAV" id="S3Z-Bl-WjG"/>
-                        <outlet property="filterMenu" destination="1118" id="ulZ-To-isZ"/>
                         <outlet property="sparkleUpdaterController" destination="LzF-8y-hiG" id="twm-xX-uFy"/>
                         <outlet property="styleMenu" destination="827" id="1mz-vS-fyL"/>
                     </connections>
