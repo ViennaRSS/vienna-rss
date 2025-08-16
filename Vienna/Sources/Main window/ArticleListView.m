@@ -24,7 +24,6 @@
 #import "Preferences.h"
 #import "Constants.h"
 #import "DateFormatterExtension.h"
-#import "DisclosureView.h"
 #import "ArticleController.h"
 #import "StringExtensions.h"
 #import "HelperFunctions.h"
