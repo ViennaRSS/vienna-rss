@@ -465,9 +465,10 @@
 
 /* createArticle
  * Adds or updates an article in the folder.
- * Returns YES if the article was added or updated
- * or NO if we couldn't add the article for some reason.
- * On success, status information is updated in the article to mark
+ * Returns YES if the article was added as new,
+ *         NO otherwise (it is an update of an existing article
+ *            or we couldn't add it for some reason).
+ * Status information is updated in the article to mark
  * if it is new or updated (from the point of view of the user).
  */
 -(BOOL)createArticle:(Article *)article guidHistory:(NSArray *)guidHistory
@@ -511,15 +512,13 @@
     } else {
         BOOL success = [[Database sharedManager] updateArticle:existingArticle ofFolder:self.itemId withArticle:article];
         if (success) {
+            article.status = ArticleStatusUpdated;
+            latestFetchCount++;
             // Update folder unread count if necessary
             if (existingArticle.isRead) {
                 adjustment = 1;
-                article.status = ArticleStatusNew;
                 existingArticle.read = NO;
-            } else {
-                article.status = ArticleStatusUpdated;
             }
-            latestFetchCount++;
         } else {
             return NO;
         }
@@ -528,9 +527,11 @@
     // Fix unread count on parent folders and Database manager
     if (adjustment != 0) {
 		[[Database sharedManager] setFolderUnreadCount:self adjustment:adjustment];
+		return YES;
+    } else {
+        return NO;
     }
     } // synchronized
-    return YES;
 }
 
 /* setUnreadCount
