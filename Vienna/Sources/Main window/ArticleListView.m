@@ -38,6 +38,7 @@
 #import "GeneratedAssetSymbols.h"
 #import "AppController.h"
 #import "FilterBarViewController.h"
+#import "VNAVerticallyCenteredTextFieldCell.h"
 
 // Shared defaults key
 NSString * const MAPref_ShowEnclosureBar = @"ShowEnclosureBar";
