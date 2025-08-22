@@ -873,8 +873,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         [folder resetArticleStatuses];
         NSArray *guidHistory = [dbManager guidHistoryForFolderId:folderId];
         for (Article * article in articleArray) {
-            if ([folder createArticle:article
-                          guidHistory:guidHistory] && (article.status == ArticleStatusNew))
+            if ([folder createArticle:article guidHistory:guidHistory])
             {
                 ++newArticlesFromFeed;
             }

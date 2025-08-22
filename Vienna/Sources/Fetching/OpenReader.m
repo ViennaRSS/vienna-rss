@@ -655,8 +655,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
                 NSArray *guidHistory = [dbManager guidHistoryForFolderId:refreshedFolder.itemId];
 
                 for (Article *article in articleArray) {
-                    if ([refreshedFolder createArticle:article guidHistory:guidHistory] &&
-                        (article.status == ArticleStatusNew))
+                    if ([refreshedFolder createArticle:article guidHistory:guidHistory])
                     {
                         newArticlesFromFeed++;
                     }
