@@ -79,11 +79,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     dispatch_queue_t _queue;
 }
 
-+(void)initialize
-{
-}
-
-
 /* init
  * Initialise the class.
  */
@@ -109,9 +104,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
             object:nil];
         [nc addObserver:self selector:@selector(handleWillDeleteFolder:) name:VNADatabaseWillDeleteFolderNotification object:nil];
         [nc addObserver:self selector:@selector(handleChangeConcurrentDownloads:) name:MA_Notify_ConcurrentDownloadsChange object:nil];
-        // be notified on system wake up after sleep
-        [[NSWorkspace sharedWorkspace].notificationCenter addObserver:self selector:@selector(handleDidWake:)
-            name:@"NSWorkspaceDidWakeNotification" object:nil];
         _queue = dispatch_queue_create("uk.co.opencommunity.vienna2.refresh", NULL);
         _redirect301WaitQueue = [[NSMutableArray alloc] init];
         hasStarted = NO;
@@ -171,6 +163,10 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         self.redirect301Status = HTTP301Unknown;
         [self.unsafe301RedirectionTimer invalidate];
         self.unsafe301RedirectionTimer = nil;
+        NSWorkspace *workspace = NSWorkspace.sharedWorkspace;
+        [workspace.notificationCenter removeObserver:self
+                                                name:NSWorkspaceDidWakeNotification
+                                              object:nil];
     }
 }
 
@@ -1086,6 +1082,11 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
                                                                     userInfo:nil
                                                                      repeats:NO];
     self.riskyIPAddress = [NSHost currentHost].address;
+    NSWorkspace *workspace = NSWorkspace.sharedWorkspace;
+    [workspace.notificationCenter addObserver:self
+                                     selector:@selector(handleDidWake:)
+                                         name:NSWorkspaceDidWakeNotification
+                                       object:nil];
     [self purge301WaitQueue];
 }
 
