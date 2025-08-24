@@ -43,6 +43,7 @@
                 case NSXMLParserGTRequiredError:
                 case NSXMLParserTagNameMismatchError:
                 case NSXMLParserEmptyDocumentError:
+                case NSXMLParserNAMERequiredError:
                     if (error) {
                         *error = xmlDocumentError;
                     }
