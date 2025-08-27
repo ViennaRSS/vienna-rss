@@ -202,8 +202,10 @@
                 }
 
                 // Parse item description
-                if (isRSSElement && [articleItemTag isEqualToString:@"description"] &&
-                    !hasDetailedContent) {
+                if (isRSSElement && ([articleItemTag isEqualToString:@"description"]
+                                     // not in specifications, added for flexibility
+                                     || [articleItemTag isEqualToString:@"content"])
+                    && !hasDetailedContent) {
                     NSString *type = [itemChildElement attributeForName:@"type"].stringValue;
                     if ([type isEqualToString:@"xhtml"]) {
                         articleBody = [NSMutableString stringWithString:itemChildElement.XMLString];
