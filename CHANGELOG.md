@@ -1484,14 +1484,18 @@ _flagged 2012-07-26_
 - Larger use of multi-threading
 - Compiled with LLVM
 - Binaries are now signed to avoid blockade by Mountain Lion's gatekeeper default settings (for first run, you'll have to right click and select 'Open')
-- Added Buffer plugin
 - Many other bugfixes
 
 2.6.0 (2601)
 ------------
 _released 2011-12-18_
-(2.6.0 Release Build)
+(2.6.0 Release Build, only released with i386 architecture)
+- Added Buffer plugin
 
+2.6.0 (2600)
+------------
+_released 2011-06-11_
+(2.6.0 Test Build)
 - Added Ascending and Descending items to the View > Sort By menu.
 - Added support for ',' duplicating '<' and '.' duplicating '>' since they appear below them on many country's keyboard layouts and this helps avoid having to hit the shift key since most of the other keyboard shortcuts handle both upper and lower case.
 - Added a feature to load the web page corresponding to a feed article instead of the text from the RSS feed. 
