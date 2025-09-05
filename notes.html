@@ -1,36 +1,29 @@
-<!DOCTYPE html><head><meta charset="utf-8"/></head><h2>Vienna 3.10.0 Beta 5</h2>
-<p><em>released 2025-07-20</em></p>
-<p><em><strong>This is a <a href="https://www.vienna-rss.com/blog/news/2025/07/07/Celebrating-20-years-of-ViennaRSS.html">20th anniversary edition</a>!</strong></em></p>
+<!DOCTYPE html><head><meta charset="utf-8"/></head><h2>Vienna 3.10.0 Beta 6</h2>
+<p><em>released 2025-09-05</em></p>
 <h3>🚲 Changes</h3>
 <ul>
-<li>Distribute Vienna in <em>.dmg</em> disk images instead of <em>.tgz</em> archives</li>
-<li>Use Command-Control-0 to Command-Control-2 shortcuts for layout selection (these replace Control+Number shortcuts which are reserved)</li>
-<li>Update some translations (Traditional Chinese, Swedish, Danish, Dutch)</li>
-<li>Modify article view in Unified layout to be borderless</li>
-<li>Disable back/forward navigation in main tab’s article web views</li>
+<li>Support closing tabs by clicking the middle button of the mouse</li>
+<li>Change application icon to conform to style of macOS 11 and later</li>
+<li>Change position of filter bar in vertical layout</li>
+<li>Suspend (up to 5 minutes) connection attempts when the computer is disconnected from network</li>
+<li>Use green double dot instead of yellow sparkle as mark of revised articles in article list</li>
+<li>Be more tolerant with feeds using RSS tags instead of Atom tags (or vice-versa)</li>
 </ul>
 <h3>🤷🏻 Bugfix</h3>
 <ul>
-<li>Fix crashes and other potential problems caused by folder cache being emptied during refresh</li>
-<li>Work around incorrect support of palette-color icons by newer macOS versions (15 and +); reorganize the code used for fetching and caching websites’ favicons</li>
+<li>Fix colors when a cell is selected and right clicked in article list</li>
+<li>Respect the high contrast accessibility setting for bottom line</li>
+<li>Add missing separator to filter submenu in main menu</li>
+<li>Fix / improve validation for some menu / toolbar items</li>
+<li>Fix crash or inability to parse caused by some feeds containing HTML tags instead of their XHTML equivalents</li>
 </ul>
 <h3>⚙️ Internals improvement</h3>
 <ul>
-<li>Rebalance AppController role:
-<ul>
-<li>move parts of the layout code to ArticleController</li>
-<li>modify handling of keyboard events to avoid doing everything in AppController</li>
-<li>diminish ArticleListView and UnifiedDisplayView reliance on AppController</li>
-<li>move Sparkle Updater controller to ViennaApp</li>
-</ul>
-</li>
-<li>Use an Application.storyboard as the starting point in “Interface Builder” for the design and the main menu; connect Preferences and Downloads storyboards to it.</li>
-<li>Remove ExtendedTableViewDelegate in favor of NSMenuDelegate</li>
-<li>Remove NSKeyedArchiver/NSKeyedUnarchiver methods which were needed for macOS 10.12 backwards compatibility</li>
-<li>Remove unnecessary debugging code using some private properties of WKWebView</li>
-</ul>
-<h3>🛤️ Infrastructure updates</h3>
-<ul>
-<li>Simplify our version of Autorevision</li>
-<li>Clarify the directories used for derived files during build process</li>
+<li>Refactor filter bar into its own view controller</li>
+<li>Move several actions from AppController to ArticleController; rename many actions; remove unused methods from BaseView protocol</li>
+<li>Use storyboard for activity window and NewSubscription</li>
+<li>Remove deprecated network calls</li>
+<li>Reorganize classes related to article list in Xcode layout</li>
+<li>Fix definition &amp; handling of ArticleStatusUpdated</li>
+<li>Minor fix in Changelog regarding versions 2.6.0</li>
 </ul>
