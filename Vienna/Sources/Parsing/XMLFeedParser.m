@@ -40,8 +40,6 @@
                 // NSXMLDocument's -initWithData:options:error
                 // when option NSXMLDocumentTidyXML is enabled
                 switch (xmlDocumentError.code) {
-                case NSXMLParserGTRequiredError:
-                case NSXMLParserTagNameMismatchError:
                 case NSXMLParserEmptyDocumentError:
                     if (error) {
                         *error = xmlDocumentError;
@@ -52,7 +50,8 @@
 
             // recover some cases like text encoding errors, non standard tags...
             xmlDocument = [[NSXMLDocument alloc] initWithData:xmlData
-                                                      options:NSXMLDocumentTidyXML | NSXMLNodeLoadExternalEntitiesNever
+                                                      options:NSXMLDocumentTidyXML | NSXMLDocumentTidyHTML |
+                                                      NSXMLNodeLoadExternalEntitiesNever
                                                         error:&xmlDocumentError];
         }
     } @catch (NSException * __unused) {

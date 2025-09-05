@@ -160,7 +160,9 @@
                 }
 
                 // Parse item description
-                if (isArticleElementAtomType && [articleItemTag isEqualToString:@"content"]) {
+                if (isArticleElementAtomType && ([articleItemTag isEqualToString:@"content"]
+                                                 // not in specifications, added for flexibility
+                                                 || [articleItemTag isEqualToString:@"description"])) {
                     NSString *type = [itemChildElement attributeForName:@"type"].stringValue;
                     if ([type isEqualToString:@"xhtml"]) {
                         articleBody = [NSMutableString stringWithString:itemChildElement.XMLString];
@@ -263,7 +265,9 @@
                 }
 
                 // Parse item date
-                if (isArticleElementAtomType && ([articleItemTag isEqualToString:@"published"] || [articleItemTag isEqualToString:@"created"] || [articleItemTag isEqualToString:@"issued"])) {
+                if (isArticleElementAtomType && ([articleItemTag isEqualToString:@"published"]
+                                                 // not in specifications, added for flexibility
+                                                 || [articleItemTag isEqualToString:@"created"] || [articleItemTag isEqualToString:@"issued"] || [articleItemTag isEqualToString:@"pubDate"])) {
                     NSString *dateString = itemChildElement.stringValue;
                     NSDate *newDate = [self dateWithXMLString:dateString];
                     if (newFeedItem.publicationDate == nil || [newDate isLessThan:newFeedItem.publicationDate]) {

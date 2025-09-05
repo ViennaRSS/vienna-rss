@@ -202,8 +202,10 @@
                 }
 
                 // Parse item description
-                if (isRSSElement && [articleItemTag isEqualToString:@"description"] &&
-                    !hasDetailedContent) {
+                if (isRSSElement && ([articleItemTag isEqualToString:@"description"]
+                                     // not in specifications, added for flexibility
+                                     || [articleItemTag isEqualToString:@"content"])
+                    && !hasDetailedContent) {
                     NSString *type = [itemChildElement attributeForName:@"type"].stringValue;
                     if ([type isEqualToString:@"xhtml"]) {
                         articleBody = [NSMutableString stringWithString:itemChildElement.XMLString];
@@ -265,7 +267,10 @@
                 }
 
                 // Parse item date
-                if ((isRSSElement && [articleItemTag isEqualToString:@"pubDate"]) || ([itemChildElement.prefix isEqualToString:self.dcPrefix] && [articleItemTag isEqualToString:@"date"])) {
+                if ((isRSSElement && ([articleItemTag isEqualToString:@"pubDate"] ||
+                                      // not in specifications, added for flexibility
+                                      [articleItemTag isEqualToString:@"published"] || [articleItemTag isEqualToString:@"created"] || [articleItemTag isEqualToString:@"issued"]))
+                    || ([itemChildElement.prefix isEqualToString:self.dcPrefix] && [articleItemTag isEqualToString:@"date"])) {
                     NSDate *newDate = [self dateWithXMLString:itemChildElement.stringValue];
                     if (newFeedItem.publicationDate == nil || [newDate isLessThan:newFeedItem.publicationDate]) {
                         newFeedItem.publicationDate = newDate;
