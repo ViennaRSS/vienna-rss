@@ -2806,7 +2806,7 @@
 			repositoryURL = "https://github.com/ccgus/fmdb";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.7.8;
+				minimumVersion = 2.7.12;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
