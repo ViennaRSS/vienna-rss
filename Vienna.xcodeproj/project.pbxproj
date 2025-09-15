@@ -2798,7 +2798,7 @@
 			repositoryURL = "https://github.com/sparkle-project/Sparkle";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.5.2;
+				minimumVersion = 2.7.3;
 			};
 		};
 		F6B7BC3424A2A9A40051D76F /* XCRemoteSwiftPackageReference "fmdb" */ = {
@@ -2806,7 +2806,7 @@
 			repositoryURL = "https://github.com/ccgus/fmdb";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.7.8;
+				minimumVersion = 2.7.12;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
