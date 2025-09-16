@@ -857,9 +857,33 @@
       "comment" : "Class = \"NSSearchFieldCell\"; placeholderString = \"Filter\"; ObjectID = \"JMv-fT-5v9\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtrer"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtern"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
+            "value" : "Filter"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filter"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
             "value" : "Filter"
           }
         }
@@ -1493,9 +1517,33 @@
       "comment" : "Class = \"NSMenuItem\"; title = \"Filter\"; ObjectID = \"ZlS-NV-Ihb\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtrer"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtern"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
+            "value" : "Filter"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filter"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
             "value" : "Filter"
           }
         }
