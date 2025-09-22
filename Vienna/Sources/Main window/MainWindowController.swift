@@ -40,6 +40,11 @@ final class MainWindowController: NSWindowController {
         return controller
     }()
 
+    @IBOutlet private var subscribeToolbarItemMenu: NSMenu!
+    @IBOutlet private var actionToolbarItemMenu: NSMenu!
+    @IBOutlet private var filterToolbarItemMenu: NSMenu!
+    @IBOutlet private var styleToolbarItemMenu: NSMenu!
+
     // MARK: Initialization
 
     override func windowDidLoad() {
@@ -373,7 +378,11 @@ extension MainWindowController: NSToolbarDelegate {
         return NSApp.appController.pluginManager
     }
 
-    func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
+    func toolbar(
+        _ toolbar: NSToolbar,
+        itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier,
+        willBeInsertedIntoToolbar flag: Bool
+    ) -> NSToolbarItem? {
         if itemIdentifier == .search {
             let item: NSToolbarItem
             if #available(macOS 11, *) {
@@ -445,6 +454,118 @@ extension MainWindowController: NSToolbarDelegate {
             } else {
                 item.image = service.image
             }
+            return item
+        }
+
+        if itemIdentifier == .subscribe {
+            let item: NSToolbarItem
+            if #available(macOS 10.15, *) {
+                let menuToolbarItem = NSMenuToolbarItem(itemIdentifier: itemIdentifier)
+                menuToolbarItem.menu = subscribeToolbarItemMenu
+                item = menuToolbarItem
+            } else {
+                let popUpButtonToolbarItem = PopUpButtonToolbarItem(itemIdentifier: itemIdentifier)
+                popUpButtonToolbarItem.menu = subscribeToolbarItemMenu
+                item = popUpButtonToolbarItem
+            }
+            item.image = NSImage(resource: .newFeedTemplate)
+            item.label = NSLocalizedString(
+                "subscribe.toolbarItem.label",
+                value: "Add",
+                comment: "Toolbar item label"
+            )
+            item.paletteLabel = NSLocalizedString(
+                "subscribe.toolbarItem.paletteLabel",
+                value: "Add",
+                comment: "Toolbar item palette label"
+            )
+            item.toolTip = NSLocalizedString(
+                "Subscribe to a feed or add a folder or smart folder.",
+                comment: "Toolbar item tooltip"
+            )
+            return item
+        }
+
+        if itemIdentifier == .action {
+            let item: NSToolbarItem
+            if #available(macOS 10.15, *) {
+                let menuToolbarItem = NSMenuToolbarItem(itemIdentifier: itemIdentifier)
+                menuToolbarItem.menu = actionToolbarItemMenu
+                item = menuToolbarItem
+            } else {
+                let popUpButtonToolbarItem = PopUpButtonToolbarItem(itemIdentifier: itemIdentifier)
+                popUpButtonToolbarItem.menu = actionToolbarItemMenu
+                item = popUpButtonToolbarItem
+            }
+            item.image = NSImage(named: NSImage.actionTemplateName)
+            item.label = NSLocalizedString(
+                "action.toolbarItem.label",
+                value: "Action",
+                comment: "Toolbar item label"
+            )
+            item.paletteLabel = NSLocalizedString(
+                "action.toolbarItem.paletteLabel",
+                value: "Action",
+                comment: "Toolbar item palette label"
+            )
+            item.toolTip = NSLocalizedString(
+                "Additional actions for the selected folder",
+                comment: "Toolbar item tooltip"
+            )
+            return item
+        }
+
+        if itemIdentifier == .filter {
+            let item: NSToolbarItem
+            if #available(macOS 10.15, *) {
+                let menuToolbarItem = NSMenuToolbarItem(itemIdentifier: itemIdentifier)
+                menuToolbarItem.menu = filterToolbarItemMenu
+                item = menuToolbarItem
+            } else {
+                let popUpButtonToolbarItem = PopUpButtonToolbarItem(itemIdentifier: itemIdentifier)
+                popUpButtonToolbarItem.menu = filterToolbarItemMenu
+                item = popUpButtonToolbarItem
+            }
+            item.image = NSImage(resource: .funnelFilterTemplate)
+            item.label = NSLocalizedString(
+                "filter.toolbarItem.label",
+                value: "Filter",
+                comment: "Toolbar item label"
+            )
+            item.paletteLabel = NSLocalizedString(
+                "filter.toolbarItem.paletteLabel",
+                value: "Filter",
+                comment: "Toolbar item palette label"
+            )
+            return item
+        }
+
+        if itemIdentifier == .styles {
+            let item: NSToolbarItem
+            if #available(macOS 10.15, *) {
+                let menuToolbarItem = NSMenuToolbarItem(itemIdentifier: itemIdentifier)
+                menuToolbarItem.menu = styleToolbarItemMenu
+                item = menuToolbarItem
+            } else {
+                let popUpButtonToolbarItem = PopUpButtonToolbarItem(itemIdentifier: itemIdentifier)
+                popUpButtonToolbarItem.menu = styleToolbarItemMenu
+                item = popUpButtonToolbarItem
+            }
+            item.image = NSImage(resource: .styleTemplate)
+            item.label = NSLocalizedString(
+                "style.toolbarItem.label",
+                value: "Style",
+                comment: "Toolbar item label"
+            )
+            item.paletteLabel = NSLocalizedString(
+                "style.toolbarItem.paletteLabel",
+                value: "Style",
+                comment: "Toolbar item palette label"
+            )
+            item.toolTip = NSLocalizedString(
+                "Display the list of available styles",
+                comment: "Toolbar item tooltip"
+            )
             return item
         }
 
