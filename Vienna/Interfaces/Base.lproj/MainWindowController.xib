@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23727" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="24127" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23727"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24127"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="Window Controller" customClass="MainWindowController" customModule="Vienna" customModuleProvider="target">
             <connections>
+                <outlet property="actionToolbarItemMenu" destination="0bc-TU-NSg" id="ixN-bt-tEG"/>
                 <outlet property="articleListView" destination="971" id="OE4-G3-4mz"/>
+                <outlet property="filterToolbarItemMenu" destination="Mx2-fn-A84" id="9li-Tg-XaM"/>
                 <outlet property="mainWindowContentViewController" destination="vme-CY-QQH" id="5sj-RS-Y2y"/>
                 <outlet property="outlineView" destination="Kk7-ax-B3r" id="bhW-7c-vBp"/>
                 <outlet property="placeholderDetailView" destination="9MG-Tu-1xT" id="hUt-Ea-jcm"/>
                 <outlet property="splitView" destination="993" id="adu-5b-ldR"/>
                 <outlet property="statusBar" destination="659-iz-w4S" id="TOq-Cx-3vW"/>
                 <outlet property="statusLabel" destination="917" id="JHA-Ed-cZl"/>
+                <outlet property="styleToolbarItemMenu" destination="mit-Vi-iR1" id="dKg-eX-ZQD"/>
+                <outlet property="subscribeToolbarItemMenu" destination="tQg-b5-Yiu" id="v7i-lR-S6e"/>
                 <outlet property="unifiedDisplayView" destination="1148" id="WY2-tM-sYn"/>
                 <outlet property="window" destination="21" id="AIh-iW-OLE"/>
             </connections>
@@ -215,39 +219,6 @@
             </view>
             <toolbar key="toolbar" implicitIdentifier="9BE5691C-FD10-407B-A43E-74580FF42F4B" explicitIdentifier="MA_Toolbar" showsBaselineSeparator="NO" displayMode="iconOnly" sizeMode="regular" id="Vtx-1j-Pbt" customClass="VNAToolbar">
                 <allowedToolbarItems>
-                    <toolbarItem implicitItemIdentifier="3B81A7E6-BC01-4E5D-8598-E3749E1C39BF" explicitItemIdentifier="Subscribe" label="Add" paletteLabel="Add" toolTip="Subscribe to a feed or add a folder or smart folder." image="NewFeedTemplate" sizingBehavior="auto" autovalidates="NO" id="CPA-Ha-aj1" userLabel="Add" customClass="VNAPopUpButtonToolbarItem">
-                        <popUpButton key="view" verticalHuggingPriority="750" id="DDQ-PY-F2c">
-                            <rect key="frame" x="0.0" y="14" width="64" height="25"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                            <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" selectedItem="pdk-MS-QME" id="xAh-aB-Ek3">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="menu"/>
-                                <menu key="menu" id="tQg-b5-Yiu">
-                                    <items>
-                                        <menuItem state="on" image="NewFeedTemplate" hidden="YES" id="pdk-MS-QME">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem title="New Subscription…" id="psA-wp-PcZ">
-                                            <connections>
-                                                <action selector="newSubscription:" target="-1" id="ZrW-KY-2C0"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="fKm-HE-ohV"/>
-                                        <menuItem title="New Folder…" id="RaH-Yu-Ija">
-                                            <connections>
-                                                <action selector="newGroupFolder:" target="-1" id="4Bq-7h-XfS"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="New Smart Folder…" id="Pqr-dM-SQQ">
-                                            <connections>
-                                                <action selector="newSmartFolder:" target="-1" id="zGS-yX-GNs"/>
-                                            </connections>
-                                        </menuItem>
-                                    </items>
-                                </menu>
-                            </popUpButtonCell>
-                        </popUpButton>
-                    </toolbarItem>
                     <toolbarItem implicitItemIdentifier="0E560FB8-D8D4-477F-87CE-D3451015D08F" explicitItemIdentifier="PreviousButton" label="Back" paletteLabel="Back" toolTip="Back" image="PreviousItemTemplate" sizingBehavior="auto" id="gOG-UJ-Pin" customClass="VNAButtonToolbarItem">
                         <button key="view" verticalHuggingPriority="750" id="tUv-uw-U24">
                             <rect key="frame" x="2" y="14" width="30" height="23"/>
@@ -352,65 +323,6 @@
                             <action selector="getInfo:" target="-1" id="Xvh-S3-PIS"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="C907E8D1-9919-4292-AF82-865D069359AA" explicitItemIdentifier="Filter" label="Filter" paletteLabel="Filter" image="FunnelFilterTemplate" sizingBehavior="auto" autovalidates="NO" id="I8N-Dr-P6W" customClass="VNAPopUpButtonToolbarItem">
-                        <popUpButton key="view" verticalHuggingPriority="750" id="eKU-qn-2dn">
-                            <rect key="frame" x="0.0" y="14" width="53" height="25"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                            <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" id="NJC-fy-OS8">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="menu"/>
-                                <menu key="menu" id="Mx2-fn-A84">
-                                    <items>
-                                        <menuItem image="FunnelFilterTemplate" hidden="YES" id="yGM-WH-fbb">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem title="All Articles" id="cJi-Kc-4fg">
-                                            <connections>
-                                                <action selector="changeFiltering:" target="-1" id="VaW-FL-0JJ"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="h5j-08-XNb"/>
-                                        <menuItem title="Unread or Flagged" tag="6" id="mbZ-oU-TDn">
-                                            <connections>
-                                                <action selector="changeFiltering:" target="-1" id="QC3-cR-Lqx"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Last Refresh" tag="2" id="5RA-iE-L8a">
-                                            <connections>
-                                                <action selector="changeFiltering:" target="-1" id="eVE-5R-l4E"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Today" tag="3" id="Sne-Nd-bEA">
-                                            <connections>
-                                                <action selector="changeFiltering:" target="-1" id="ifP-Af-Q2b"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Last 48 Hours" tag="4" id="yqJ-tO-HNW">
-                                            <connections>
-                                                <action selector="changeFiltering:" target="-1" id="oKL-XJ-BAA"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Flagged" tag="5" id="ci8-W6-ewN">
-                                            <connections>
-                                                <action selector="changeFiltering:" target="-1" id="zc2-22-OLF"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Unread Articles" tag="1" id="dId-uc-qfG">
-                                            <connections>
-                                                <action selector="changeFiltering:" target="-1" id="BCF-fe-yba"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="CE6-oq-8KJ"/>
-                                        <menuItem title="Show Filter Bar" id="Wy3-T4-9eO">
-                                            <connections>
-                                                <action selector="toggleFilterBar:" target="-1" id="kSu-qc-5hy"/>
-                                            </connections>
-                                        </menuItem>
-                                    </items>
-                                </menu>
-                            </popUpButtonCell>
-                        </popUpButton>
-                    </toolbarItem>
                     <toolbarItem implicitItemIdentifier="2194A0A2-BEF2-4411-AE86-F573CC3E7FFB" explicitItemIdentifier="Share" label="Share" paletteLabel="Share" image="NSShareTemplate" sizingBehavior="auto" id="YVR-Ym-Do7" customClass="VNAButtonToolbarItem">
                         <button key="view" verticalHuggingPriority="750" id="XcR-k5-Au0">
                             <rect key="frame" x="6" y="14" width="27" height="23"/>
@@ -424,111 +336,11 @@
                             <action selector="invokeSharingServicePicker:" target="-1" id="uUn-Rf-hIQ"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="A51AB11F-9F76-48DF-A4E8-39C7224775BA" explicitItemIdentifier="Action" label="Action" paletteLabel="Action" toolTip="Additional actions for the selected folder" image="NSActionTemplate" sizingBehavior="auto" autovalidates="NO" id="TSQ-UW-4gU" customClass="VNAPopUpButtonToolbarItem">
-                        <popUpButton key="view" verticalHuggingPriority="750" id="Tq4-6N-ErM">
-                            <rect key="frame" x="0.0" y="14" width="50" height="25"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                            <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" id="anL-VR-Fny">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="menu"/>
-                                <menu key="menu" id="0bc-TU-NSg">
-                                    <items>
-                                        <menuItem state="on" image="NSActionTemplate" hidden="YES" id="A67-46-hiu">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem title="Refresh Selected Subscriptions" id="Hs0-hu-A2g">
-                                            <connections>
-                                                <action selector="refreshSelectedSubscriptions:" target="-1" id="Ehf-dd-Y5q"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="web-Y7-7C8"/>
-                                        <menuItem title="Edit…" id="vOQ-xo-w8E">
-                                            <connections>
-                                                <action selector="editFolder:" target="-1" id="mCG-Dj-ZeY"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Rename…" id="l14-tu-w7l">
-                                            <connections>
-                                                <action selector="renameFolder:" target="-1" id="CV5-se-GZw"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Delete…" id="Rdq-QU-3hM">
-                                            <connections>
-                                                <action selector="deleteFolder:" target="-1" id="MpG-0A-YWK"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="KGk-gM-ZBr"/>
-                                        <menuItem title="Mark All Articles as Read" id="xNW-zC-IMZ">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="markAllRead:" target="-1" id="eew-yQ-Ej1"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="KJR-1w-S3j"/>
-                                        <menuItem title="Open Subscription Home Page" id="Zu1-zW-uo2">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="viewSourceHomePage:" target="-1" id="7Wc-Qn-N0n"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Open Subscription Home Page in External Browser" alternate="YES" id="ZVp-Nv-0jh">
-                                            <modifierMask key="keyEquivalentModifierMask" option="YES"/>
-                                            <connections>
-                                                <action selector="viewSourceHomePageInAlternateBrowser:" target="-1" id="E0v-KS-lTV"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Get Info" id="Y0d-K7-46f">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="getInfo:" target="-1" id="mAW-li-bDY"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="ig3-ao-8RK"/>
-                                        <menuItem title="Force Refresh Selected Subscriptions From Open Reader" id="iqm-sr-F8U">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="forceRefreshSelectedSubscriptions:" target="-1" id="hJm-Nf-jsT"/>
-                                            </connections>
-                                        </menuItem>
-                                    </items>
-                                </menu>
-                            </popUpButtonCell>
-                        </popUpButton>
-                    </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="3C962AB1-0C7E-4CBA-8477-2436ED2B6383" explicitItemIdentifier="Styles" label="Style" paletteLabel="Style" toolTip="Display the list of available styles" image="StyleTemplate" sizingBehavior="auto" autovalidates="NO" id="azL-oz-mJL" customClass="VNAPopUpButtonToolbarItem">
-                        <popUpButton key="view" verticalHuggingPriority="750" id="gOd-tT-XFQ">
-                            <rect key="frame" x="0.0" y="14" width="50" height="25"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                            <popUpButtonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="StyleTemplate" imagePosition="only" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" pullsDown="YES" selectedItem="lu2-BZ-Gxd" id="5CR-Qn-4pP">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="menu"/>
-                                <menu key="menu" identifier="StylesMenu" id="mit-Vi-iR1">
-                                    <items>
-                                        <menuItem state="on" image="StyleTemplate" hidden="YES" id="lu2-BZ-Gxd">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="Bld-FV-QeM"/>
-                                        <menuItem title="More Styles…" id="MaO-r1-tcm">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="openStylesPage:" target="-1" id="YsY-VC-HFK"/>
-                                            </connections>
-                                        </menuItem>
-                                    </items>
-                                    <connections>
-                                        <outlet property="delegate" destination="-2" id="USO-HL-cLd"/>
-                                    </connections>
-                                </menu>
-                            </popUpButtonCell>
-                        </popUpButton>
-                    </toolbarItem>
                     <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="oqq-lf-hKd"/>
                     <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="VNl-qM-XKj"/>
                 </allowedToolbarItems>
                 <defaultToolbarItems>
-                    <toolbarItem reference="CPA-Ha-aj1"/>
                     <toolbarItem reference="SoG-b2-O1S"/>
-                    <toolbarItem reference="TSQ-UW-4gU"/>
                     <toolbarItem reference="Nmd-zx-Dys"/>
                     <toolbarItem reference="VNl-qM-XKj"/>
                 </defaultToolbarItems>
@@ -830,20 +642,159 @@
             </constraints>
             <point key="canvasLocation" x="-5" y="-1066"/>
         </visualEffectView>
+        <menu id="tQg-b5-Yiu" userLabel="Subscribe Menu">
+            <items>
+                <menuItem title="New Subscription…" id="psA-wp-PcZ">
+                    <connections>
+                        <action selector="newSubscription:" target="-1" id="ZrW-KY-2C0"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="fKm-HE-ohV"/>
+                <menuItem title="New Folder…" id="RaH-Yu-Ija">
+                    <connections>
+                        <action selector="newGroupFolder:" target="-1" id="4Bq-7h-XfS"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="New Smart Folder…" id="Pqr-dM-SQQ">
+                    <connections>
+                        <action selector="newSmartFolder:" target="-1" id="zGS-yX-GNs"/>
+                    </connections>
+                </menuItem>
+            </items>
+            <point key="canvasLocation" x="406" y="-1255"/>
+        </menu>
+        <menu id="0bc-TU-NSg" userLabel="Action Menu">
+            <items>
+                <menuItem title="Refresh Selected Subscriptions" id="Hs0-hu-A2g">
+                    <connections>
+                        <action selector="refreshSelectedSubscriptions:" target="-1" id="Ehf-dd-Y5q"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="web-Y7-7C8"/>
+                <menuItem title="Edit…" id="vOQ-xo-w8E">
+                    <connections>
+                        <action selector="editFolder:" target="-1" id="mCG-Dj-ZeY"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Rename…" id="l14-tu-w7l">
+                    <connections>
+                        <action selector="renameFolder:" target="-1" id="CV5-se-GZw"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Delete…" id="Rdq-QU-3hM">
+                    <connections>
+                        <action selector="deleteFolder:" target="-1" id="MpG-0A-YWK"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="KGk-gM-ZBr"/>
+                <menuItem title="Mark All Articles as Read" id="xNW-zC-IMZ">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="markAllRead:" target="-1" id="eew-yQ-Ej1"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="KJR-1w-S3j"/>
+                <menuItem title="Open Subscription Home Page" id="Zu1-zW-uo2">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="viewSourceHomePage:" target="-1" id="7Wc-Qn-N0n"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Open Subscription Home Page in External Browser" alternate="YES" id="ZVp-Nv-0jh">
+                    <modifierMask key="keyEquivalentModifierMask" option="YES"/>
+                    <connections>
+                        <action selector="viewSourceHomePageInAlternateBrowser:" target="-1" id="E0v-KS-lTV"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Get Info" id="Y0d-K7-46f">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="getInfo:" target="-1" id="mAW-li-bDY"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="ig3-ao-8RK"/>
+                <menuItem title="Force Refresh Selected Subscriptions From Open Reader" id="iqm-sr-F8U">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="forceRefreshSelectedSubscriptions:" target="-1" id="hJm-Nf-jsT"/>
+                    </connections>
+                </menuItem>
+            </items>
+            <point key="canvasLocation" x="-415" y="-1245"/>
+        </menu>
+        <menu id="Mx2-fn-A84" userLabel="Filter Menu">
+            <items>
+                <menuItem title="All Articles" id="cJi-Kc-4fg">
+                    <connections>
+                        <action selector="changeFiltering:" target="-1" id="VaW-FL-0JJ"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="h5j-08-XNb"/>
+                <menuItem title="Unread or Flagged" tag="6" id="mbZ-oU-TDn">
+                    <connections>
+                        <action selector="changeFiltering:" target="-1" id="QC3-cR-Lqx"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Last Refresh" tag="2" id="5RA-iE-L8a">
+                    <connections>
+                        <action selector="changeFiltering:" target="-1" id="eVE-5R-l4E"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Today" tag="3" id="Sne-Nd-bEA">
+                    <connections>
+                        <action selector="changeFiltering:" target="-1" id="ifP-Af-Q2b"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Last 48 Hours" tag="4" id="yqJ-tO-HNW">
+                    <connections>
+                        <action selector="changeFiltering:" target="-1" id="oKL-XJ-BAA"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Flagged" tag="5" id="ci8-W6-ewN">
+                    <connections>
+                        <action selector="changeFiltering:" target="-1" id="zc2-22-OLF"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Unread Articles" tag="1" id="dId-uc-qfG">
+                    <connections>
+                        <action selector="changeFiltering:" target="-1" id="BCF-fe-yba"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="CE6-oq-8KJ"/>
+                <menuItem title="Show Filter Bar" id="Wy3-T4-9eO">
+                    <connections>
+                        <action selector="toggleFilterBar:" target="-1" id="kSu-qc-5hy"/>
+                    </connections>
+                </menuItem>
+            </items>
+            <point key="canvasLocation" x="-480" y="-775"/>
+        </menu>
+        <menu identifier="StylesMenu" id="mit-Vi-iR1" userLabel="Style Menu">
+            <items>
+                <menuItem isSeparatorItem="YES" id="Bld-FV-QeM"/>
+                <menuItem title="More Styles…" id="MaO-r1-tcm">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="openStylesPage:" target="-1" id="YsY-VC-HFK"/>
+                    </connections>
+                </menuItem>
+            </items>
+            <connections>
+                <outlet property="delegate" destination="-2" id="USO-HL-cLd"/>
+            </connections>
+            <point key="canvasLocation" x="-274" y="-1032"/>
+        </menu>
     </objects>
     <resources>
         <image name="DeleteTemplate" width="18" height="14"/>
         <image name="EmptyTrashTemplate" width="19" height="14"/>
-        <image name="FunnelFilterTemplate" width="35" height="35"/>
         <image name="GetInfoTemplate" width="28" height="28"/>
         <image name="MarkReadTemplate" width="19" height="14"/>
         <image name="NSActionTemplate" width="20" height="20"/>
         <image name="NSShareTemplate" width="19" height="23"/>
-        <image name="NewFeedTemplate" width="38" height="24"/>
         <image name="NextFolderTemplate" width="19" height="12"/>
         <image name="NextItemTemplate" width="18" height="12"/>
         <image name="PreviousItemTemplate" width="18" height="12"/>
-        <image name="StyleTemplate" width="15" height="15"/>
         <image name="SyncTemplate" width="30" height="30"/>
         <image name="exclamationmark.triangle.fill" catalog="system" width="17" height="15"/>
     </resources>
