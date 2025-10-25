@@ -980,7 +980,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Forceer bijwerken abonnementen van Open Reader"
+            "value" : "Werk geselecteerde abonnementen van Open Reader geforceerd bij"
           }
         },
         "pt-BR" : {
@@ -3777,7 +3777,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Forceer bijwerken abonnementen van Open Reader"
+            "value" : "Werk geselecteerde abonnementen van Open Reader geforceerd bij"
           }
         },
         "pt-BR" : {

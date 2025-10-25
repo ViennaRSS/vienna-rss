@@ -13352,6 +13352,12 @@
             "value" : "Fichier local"
           }
         },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lokaal bestand"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
@@ -22989,7 +22995,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Deze actie kan niet ongedaan worden gemaakt."
+            "value" : "Deze bewerking kan niet ongedaan worden gemaakt."
           }
         },
         "pt-BR" : {
@@ -24872,7 +24878,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dit kan niet ongedaan worden gemaakt"
+            "value" : "Je kunt deze bewerking niet ongedaan maken"
           }
         },
         "pt-BR" : {
