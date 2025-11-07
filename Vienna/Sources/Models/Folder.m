@@ -730,17 +730,17 @@
                         // some problem
                         NSLog(@"Bug retrieving from cache in folder %li : after %lu insertions of %lu, guid %@", (long)self.itemId,
                               (unsigned long)articles.count, (unsigned long)self.cachedGuids.count, object);
-                        return [self getCompleteArticles:YES];
+                        return [self getCompleteArticles];
                     }
                 }
                 if (self.unreadCount == cacheUnreadCount) {
                     return [articles copy];
                 } else {
                     NSLog(@"Bug in folder %li : inconsistent unread count : %li in folder vs. %li in cache", (long)self.itemId, self.unreadCount, cacheUnreadCount);
-                    return [self getCompleteArticles:YES];
+                    return [self getCompleteArticles];
                 }
             } else {
-                return [self getCompleteArticles:NO];
+                return [self getCompleteArticles];
             }
         }
     } else {
@@ -755,17 +755,14 @@
  * Should be called only for feeds folders, which are the only ones
  * to guarantee the bijectivity : one article <=> one guid
  */
--(NSArray<Article *> *)getCompleteArticles:(BOOL)resetCache
+-(NSArray<Article *> *)getCompleteArticles
 {
     NSAssert(self.isSubscriptionFolder, @"Attempting to build complete cache for non RSS folder");
     self.containsBodies = NO;
-    NSArray * articles = [[Database sharedManager] arrayOfArticles:self.itemId filterString:@""];
-    if (resetCache || articles.count != self.cachedGuids.count) {
-        // completely reset cache when we have noticed some discrepancies
-        self.isCached = NO;
-        [self.cachedArticles removeAllObjects];
-    }
+    self.isCached = NO;
+    [self.cachedArticles removeAllObjects];
     [self.cachedGuids removeAllObjects];
+    NSArray * articles = [[Database sharedManager] arrayOfArticles:self.itemId filterString:@""];
     for (Article * article in articles) {
         NSString * guid = article.guid;
         [self.cachedArticles setObject:article forKey:guid];
