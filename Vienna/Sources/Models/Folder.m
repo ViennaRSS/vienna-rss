@@ -713,19 +713,18 @@
         // starting from here, we only deal with feed folders
         @synchronized(self) {
             if (self.isCached && self.containsBodies) {
-                // check consistency
-                if (self.cachedGuids.count < self.unreadCount) {
-                    NSLog(@"Bug from cache in folder %li : inconsistent count", (long)self.itemId);
-                    return [self getCompleteArticles:YES];
-                }
                 // attempt to retrieve from cache
                 NSMutableArray *articles = [NSMutableArray arrayWithCapacity:self.cachedGuids.count];
+                NSInteger cacheUnreadCount = 0;
                 for (id object in self.cachedGuids) {
                     Article *theArticle = [self.cachedArticles objectForKey:object];
                     if (theArticle != nil) {
                         // deleted articles are not removed from cache any more
                         if (!theArticle.isDeleted) {
                             [articles addObject:theArticle];
+                        }
+                        if (!theArticle.isRead) {
+                            cacheUnreadCount++;
                         }
                     } else {
                         // some problem
@@ -734,7 +733,12 @@
                         return [self getCompleteArticles:YES];
                     }
                 }
-                return [articles copy];
+                if (self.unreadCount == cacheUnreadCount) {
+                    return [articles copy];
+                } else {
+                    NSLog(@"Bug in folder %li : inconsistent unread count : %li in folder vs. %li in cache", (long)self.itemId, self.unreadCount, cacheUnreadCount);
+                    return [self getCompleteArticles:YES];
+                }
             } else {
                 return [self getCompleteArticles:NO];
             }
