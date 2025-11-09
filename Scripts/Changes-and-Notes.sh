@@ -1,8 +1,8 @@
 #!/bin/sh
 
-. "${SOURCE_ROOT}/Build/Post-archive-exports.txt"
+. "${SOURCE_ROOT}/build/Post-archive-exports.txt"
 
-VIENNA_UPLOADS_DIR="${SOURCE_ROOT}/Build/Uploads"
+VIENNA_UPLOADS_DIR="${SOURCE_ROOT}/build/Uploads"
 VIENNA_NOTES="${SRCROOT}/notes.html"
 
 # Fail if not deployment

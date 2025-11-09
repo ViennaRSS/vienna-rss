@@ -1,9 +1,9 @@
 #!/bin/bash
 
-. "${SOURCE_ROOT}/Build/Post-archive-exports.txt"
+. "${SOURCE_ROOT}/build/Post-archive-exports.txt"
 
 # Directory created during the Changes-and-Notes.sh stage
-VIENNA_UPLOADS_DIR="${SOURCE_ROOT}/Build/Uploads"
+VIENNA_UPLOADS_DIR="${SOURCE_ROOT}/build/Uploads"
 GITHUB_REPO="https://github.com/ViennaRSS/vienna-rss"
 GITHUB_RELEASE_URL="${GITHUB_REPO}/releases/tag/v%2F${N_VCS_TAG}"
 SOURCEFORGE_ASSETS_URL="https://downloads.sourceforge.net/project/vienna-rss/v_${N_VCS_TAG}"

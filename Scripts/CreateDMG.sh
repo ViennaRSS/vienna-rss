@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. "${SOURCE_ROOT}/Build/Post-archive-exports.txt"
+. "${SOURCE_ROOT}/build/Post-archive-exports.txt"
 
 dmgsource="${PROJECT_DERIVED_FILE_DIR}/viennadist/"
 rawdmgfile="${PROJECT_DERIVED_FILE_DIR}/Vienna${N_VCS_TAG}.raw.dmg"    # Temporary uncompressed DMG file

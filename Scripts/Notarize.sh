@@ -2,7 +2,7 @@
 
 # Some ideas derived from https://twocanoes.com/adding-notarization-to-xcode-builds/
 
-. "${SOURCE_ROOT}/Build/Post-archive-exports.txt"
+. "${SOURCE_ROOT}/build/Post-archive-exports.txt"
 
 # Fail if not deployment
 if [ ! "${CONFIGURATION}" = "Deployment" ]; then
@@ -26,7 +26,7 @@ fi
 product_name=$(/usr/libexec/PlistBuddy -c "Print CFBundleName" "${app_path}/Contents/Info.plist")
 zipped_app="${product_name}.zip"
 
-pushd "Build"
+pushd "build"
 
 echo "Compressing ${product_name} to ${zipped_app}"
 ditto -c -k --rsrc --keepParent "${app_path}" "${zipped_app}" 2>&1 > /dev/null
