@@ -29,6 +29,11 @@ extern NSUserInterfaceItemIdentifier const VNAFeedListCellViewCountButtonIdentif
 
 @interface VNAFeedListCellView : NSTableCellView
 
+// This class is initialized in Interface Builder (-initWithCoder:).
+- (instancetype)initWithFrame:(NSRect)frameRect NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
 @property (nonatomic) VNAFeedListSizeMode sizeMode;
 @property (nonatomic) BOOL inProgress;
 @property (nonatomic) NSInteger unreadCount;
