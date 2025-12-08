@@ -35,7 +35,7 @@ VNAFeedListRowHeight const VNAFeedListRowHeightMedium = 28.0;
 
 @interface FolderView ()
 
-@property (weak, nonatomic) IBOutlet NSView *floatingResetButtonView;
+@property (nonatomic) IBOutlet NSView *floatingResetButtonView;
 
 @end
 
@@ -47,6 +47,12 @@ VNAFeedListRowHeight const VNAFeedListRowHeightMedium = 28.0;
 }
 
 @dynamic delegate;
+
+- (nullable instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    return self;
+}
 
 // MARK: Overrides
 

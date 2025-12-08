@@ -30,14 +30,12 @@
 
 @implementation DisclosureView
 
-// Override designated initializer
-- (instancetype)initWithFrame:(NSRect)frameRect {
-    self = [super initWithFrame:frameRect];
-
+- (nullable instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
     if (self) {
-        _disclosed = frameRect.size.height > 0;
+        _disclosed = NSHeight(self.frame) > 0;
     }
-
     return self;
 }
 

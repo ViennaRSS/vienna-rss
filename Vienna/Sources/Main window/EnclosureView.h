@@ -22,6 +22,12 @@
 
 @interface EnclosureView : NSView
 
+- (/*nullable*/ instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
+
+- (instancetype)initWithFrame:(NSRect)frameRect NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
 // Public functions
 -(IBAction)downloadFile:(id)sender;
 -(void)setEnclosureFile:(NSString *)filename;
