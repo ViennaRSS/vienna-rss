@@ -27,6 +27,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FolderView : NSOutlineView <NSMenuItemValidation>
 
+// This class is initialized in Interface Builder (-initWithCoder:).
+- (instancetype)initWithFrame:(NSRect)frameRect NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
 @property (nonatomic) VNAFeedListSizeMode sizeMode;
 - (CGFloat)rowHeightForSize:(VNAFeedListSizeMode)sizeMode;
 

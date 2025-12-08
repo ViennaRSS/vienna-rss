@@ -31,6 +31,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MessageListView : NSTableView <NSMenuItemValidation>
 
+// This class is initialized in Interface Builder (-initWithCoder:).
+- (instancetype)initWithFrame:(NSRect)frameRect NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
 // This property overrides a superclass property.
 @property (weak, nullable) id<MessageListViewDelegate> delegate;
 

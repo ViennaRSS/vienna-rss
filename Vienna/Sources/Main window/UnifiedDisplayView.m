@@ -67,12 +67,9 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
 #pragma mark -
 #pragma mark Init/Dealloc
 
-/* initWithFrame
- * Initialise our view.
- */
--(instancetype)initWithFrame:(NSRect)frame
+- (nullable instancetype)initWithCoder:(NSCoder *)coder
 {
-    self= [super initWithFrame:frame];
+    self = [super initWithCoder:coder];
     if (self) {
 		markReadTimer = nil;
 		rowHeightArray = [[NSMutableArray alloc] init];
@@ -81,25 +78,25 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
     return self;
 }
 
-/* awakeFromNib
- * Do things that only make sense once the NIB is loaded.
- */
--(void)awakeFromNib
-{
-	// Register for notification
-	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-	[nc addObserver:self selector:@selector(handleReadingPaneChange:) name:MA_Notify_ReadingPaneChange object:nil];
-	[nc addObserver:self selector:@selector(handleStyleChange:) name:MA_Notify_StyleChange object:nil];
-	[nc addObserver:self selector:@selector(handleCellDidResize:) name:MA_Notify_CellResize object:nil];
-
-    [self initTableView];
-}
-
 /* initTableView
  * Do all the initialization for the article list table view control
  */
 -(void)initTableView
 {
+    NSNotificationCenter *notificationCenter = NSNotificationCenter.defaultCenter;
+    [notificationCenter addObserver:self
+                           selector:@selector(handleReadingPaneChange:)
+                               name:MA_Notify_ReadingPaneChange
+                             object:nil];
+    [notificationCenter addObserver:self
+                           selector:@selector(handleStyleChange:)
+                               name:MA_Notify_StyleChange
+                             object:nil];
+    [notificationCenter addObserver:self
+                           selector:@selector(handleCellDidResize:)
+                               name:MA_Notify_CellResize
+                             object:nil];
+
 	// Variable initialization here
 	[articleList sizeToFit];
 	[articleList setAllowsMultipleSelection:YES];

@@ -35,7 +35,7 @@ VNAFeedListRowHeight const VNAFeedListRowHeightMedium = 28.0;
 
 @interface FolderView ()
 
-@property (weak, nonatomic) IBOutlet NSView *floatingResetButtonView;
+@property (nonatomic) IBOutlet NSView *floatingResetButtonView;
 
 @end
 

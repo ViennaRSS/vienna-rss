@@ -22,6 +22,11 @@
 
 @interface DisclosureView : NSView
 
+// This class is initialized in Interface Builder (-initWithCoder:).
+- (instancetype)initWithFrame:(NSRect)frameRect NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
 @property (nonatomic) IBOutlet NSView *disclosedView;
 @property (readonly, getter=isDisclosed, nonatomic) BOOL disclosed;
 
