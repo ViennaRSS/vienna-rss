@@ -1331,6 +1331,10 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
                                  action:@selector(openVienna:)
                           keyEquivalent:@""];
         [statusBarMenu addItem:[NSMenuItem separatorItem]];
+		[statusBarMenu addItemWithTitle:NSLocalizedString(@"Add Subscription…", @"Title of a menu item")
+								 action:@selector(newSubscriptionFromMenuBar:)
+						  keyEquivalent:@""];
+		[statusBarMenu addItem:[NSMenuItem separatorItem]];
 		[statusBarMenu addItemWithTitle:NSLocalizedString(@"Refresh All Subscriptions", @"Title of a menu item")
 								 action:@selector(refreshAllSubscriptions:)
 						  keyEquivalent:@""];
@@ -1920,6 +1924,19 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)newSubscription:(id)sender
 {
+    VNASubscribeViewController *viewController = [VNASubscribeViewController instantiateFromStoryboard];
+    [self.mainWindow.contentViewController presentViewControllerAsSheet:viewController];
+}
+
+-(IBAction)newSubscriptionFromMenuBar:(id)sender
+{
+    if (@available(macOS 14, *)) {
+        [NSApp activate];
+    } else {
+        [NSApp activateIgnoringOtherApps:YES];
+    }
+
+    [self showMainWindow:self];
     VNASubscribeViewController *viewController = [VNASubscribeViewController instantiateFromStoryboard];
     [self.mainWindow.contentViewController presentViewControllerAsSheet:viewController];
 }
