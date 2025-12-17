@@ -22,10 +22,9 @@ import Cocoa
 @objc(VNAMainWindowViewController)
 final class MainWindowViewController: NSViewController {
 
-    @IBOutlet private(set) var splitView: NSSplitView!
+    @IBOutlet private var splitView: NSSplitView!
     @IBOutlet private(set) var outlineView: FolderView!
-    // TODO: Replace with container view
-    @IBOutlet private(set) weak var placeholderDetailView: NSView!
+    private(set) var browser: (any Browser & NSViewController)!
     private(set) var articleController = ArticleController()
     @IBOutlet private(set) var articleListView: ArticleListView!
     @IBOutlet private(set) var unifiedDisplayView: UnifiedDisplayView!
@@ -51,6 +50,17 @@ final class MainWindowViewController: NSViewController {
         // own view controllers, we have to initiate post-init setup here.
         articleListView.initialiseArticleView()
         unifiedDisplayView.initTableView()
+    }
+
+    // MARK: NSSeguePerforming
+
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+
+        if let browser = segue.destinationController as? TabbedBrowserViewController {
+            self.browser = browser
+            return
+        }
     }
 
 }
