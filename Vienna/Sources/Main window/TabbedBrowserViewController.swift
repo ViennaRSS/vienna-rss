@@ -87,28 +87,6 @@ class TabbedBrowserViewController: NSViewController, RSSSource {
         }
     }
 
-    override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-
-    required init?(coder: NSCoder) {
-        guard
-            let tabBar = coder.decodeObject(of: MMTabBarView.self, forKey: "tabBar"),
-            let tabView = coder.decodeObject(of: NSTabView.self, forKey: "tabView"),
-            let primaryTab = coder.decodeObject(of: NSTabViewItem.self, forKey: "primaryTab")
-        else { return nil }
-        self.tabBar = tabBar
-        self.tabView = tabView
-        self.primaryTab = primaryTab
-        super.init(coder: coder)
-    }
-
-    override func encode(with aCoder: NSCoder) {
-        aCoder.encode(tabBar, forKey: "tabBar")
-        aCoder.encode(tabBar, forKey: "tabView")
-        aCoder.encode(tabBar, forKey: "primaryTab")
-    }
-
     override func viewWillAppear() {
         super.viewWillAppear()
         if !restoredTabs {

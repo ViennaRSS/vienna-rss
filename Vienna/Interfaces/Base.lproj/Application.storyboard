@@ -1266,10 +1266,13 @@ CA
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                     </scrollView>
-                                    <customView fixedFrame="YES" id="9MG-Tu-1xT">
+                                    <containerView fixedFrame="YES" id="gP0-fy-wka">
                                         <rect key="frame" x="289" y="0.0" width="653" height="603"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </customView>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <connections>
+                                            <segue destination="Ej7-dL-hvm" kind="embed" id="9aQ-Iy-a7l"/>
+                                        </connections>
+                                    </containerView>
                                 </subviews>
                                 <holdingPriorities>
                                     <real value="251"/>
@@ -1324,7 +1327,6 @@ CA
                     <connections>
                         <outlet property="articleListView" destination="971" id="5Rl-oX-hZF"/>
                         <outlet property="outlineView" destination="Kk7-ax-B3r" id="czL-Uj-5f8"/>
-                        <outlet property="placeholderDetailView" destination="9MG-Tu-1xT" id="auY-AB-TTY"/>
                         <outlet property="splitView" destination="993" id="fju-O0-6u8"/>
                         <outlet property="statusBar" destination="659-iz-w4S" id="IhE-z9-14H"/>
                         <outlet property="statusLabel" destination="917" id="fAO-Dl-mjx"/>
@@ -1612,6 +1614,49 @@ CA
                 </menu>
             </objects>
             <point key="canvasLocation" x="-1" y="1450"/>
+        </scene>
+        <!--Tabbed Browser View Controller-->
+        <scene sceneID="OSI-ht-EUK">
+            <objects>
+                <viewController id="Ej7-dL-hvm" customClass="TabbedBrowserViewController" customModule="Vienna" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="WPI-9b-TEM">
+                        <rect key="frame" x="0.0" y="0.0" width="653" height="603"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <customView verticalHuggingPriority="300" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NQ9-WY-Cbm" customClass="MMTabBarView">
+                                <rect key="frame" x="0.0" y="575" width="653" height="28"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Ej7-dL-hvm" id="N7U-Ul-9ts"/>
+                                    <outlet property="partnerView" destination="tnb-vE-K05" id="jY2-p6-YWx"/>
+                                    <outlet property="tabView" destination="tnb-vE-K05" id="vze-g7-tre"/>
+                                </connections>
+                            </customView>
+                            <tabView horizontalCompressionResistancePriority="751" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="tnb-vE-K05">
+                                <rect key="frame" x="0.0" y="0.0" width="653" height="575"/>
+                                <font key="font" metaFont="system"/>
+                                <connections>
+                                    <outlet property="delegate" destination="NQ9-WY-Cbm" id="uzD-eS-JMk"/>
+                                </connections>
+                            </tabView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="tnb-vE-K05" firstAttribute="top" secondItem="NQ9-WY-Cbm" secondAttribute="bottom" id="D9r-Eh-NO9"/>
+                            <constraint firstItem="NQ9-WY-Cbm" firstAttribute="top" secondItem="WPI-9b-TEM" secondAttribute="top" id="N8S-uy-S4O"/>
+                            <constraint firstItem="tnb-vE-K05" firstAttribute="leading" secondItem="WPI-9b-TEM" secondAttribute="leading" id="NiK-bN-uiv"/>
+                            <constraint firstAttribute="trailing" secondItem="NQ9-WY-Cbm" secondAttribute="trailing" id="Qn4-O6-CN4"/>
+                            <constraint firstItem="NQ9-WY-Cbm" firstAttribute="leading" secondItem="WPI-9b-TEM" secondAttribute="leading" id="im4-Wa-YbC"/>
+                            <constraint firstAttribute="bottom" secondItem="tnb-vE-K05" secondAttribute="bottom" id="shx-LQ-GFs"/>
+                            <constraint firstAttribute="trailing" secondItem="tnb-vE-K05" secondAttribute="trailing" id="tNZ-Qs-8Ep"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tabBar" destination="NQ9-WY-Cbm" id="5Xp-PN-vrk"/>
+                        <outlet property="tabView" destination="tnb-vE-K05" id="2Rj-AU-rjY"/>
+                    </connections>
+                </viewController>
+                <customObject id="hng-4V-cU6" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="174" y="2250"/>
         </scene>
         <!--Preferences-->
         <scene sceneID="TRG-yU-6gM">
