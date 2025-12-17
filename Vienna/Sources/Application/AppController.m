@@ -24,7 +24,6 @@
 @import UniformTypeIdentifiers;
 
 #import "AppController+Notifications.h"
-#import "ArticleController.h"
 #import "Import.h"
 #import "Export.h"
 #import "RefreshManager.h"
