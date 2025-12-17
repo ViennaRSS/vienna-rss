@@ -32,13 +32,8 @@ final class MainWindowController: NSWindowController {
     @IBOutlet private var filterToolbarItemMenu: NSMenu!
     @IBOutlet private var styleToolbarItemMenu: NSMenu!
 
-    private var splitView: NSSplitView!
     @objc private(set) var outlineView: FolderView?
-    private weak var placeholderDetailView: NSView!
-    @objc private(set) lazy var browser: (any Browser & NSViewController) = {
-        var controller = TabbedBrowserViewController() as (any Browser & NSViewController)
-        return controller
-    }()
+    @objc private(set) var browser: (any Browser & NSViewController)!
     @objc weak var articleController: ArticleController!
 
     // MARK: Initialization
@@ -54,9 +49,8 @@ final class MainWindowController: NSWindowController {
         MainWindowController.shared = self
 
         if let mainWindowViewController = contentViewController as? MainWindowViewController {
-            splitView = mainWindowViewController.splitView
             outlineView = mainWindowViewController.outlineView
-            placeholderDetailView = mainWindowViewController.placeholderDetailView
+            browser = mainWindowViewController.browser
             articleController = mainWindowViewController.articleController
             statusBar = mainWindowViewController.statusBar
             statusLabel = mainWindowViewController.statusLabel
@@ -65,9 +59,6 @@ final class MainWindowController: NSWindowController {
         (self.browser as? any RSSSource)?.rssSubscriber = self
 
         statusBarState(disclosed: Preferences.standard.showStatusBar, animate: false)
-
-        splitView.addSubview(browser.view)
-        placeholderDetailView.removeFromSuperview()
     }
 
     // MARK: Subtitle
