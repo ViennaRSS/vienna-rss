@@ -83,11 +83,7 @@ class BrowserTab: NSViewController {
     init(_ webView: CustomWKWebView) {
         self.webView = webView
 
-        if #available(macOS 10.14, *) {
-            super.init(nibName: "BrowserTab", bundle: nil)
-        } else {
-            super.init(nibName: "BrowserTabWithLegacyAddressBar", bundle: nil)
-        }
+        super.init(nibName: "BrowserTab", bundle: nil)
 
         titleObservation = webView.observe(\.title, options: .new) { [weak self] _, change in
             guard let newValue = change.newValue ?? "", !newValue.isEmpty else {
