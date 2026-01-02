@@ -2,7 +2,7 @@
 //  MainWindowViewController.swift
 //  Vienna
 //
-//  Copyright 2025 Eitot
+//  Copyright 2025-2026 Eitot
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import Cocoa
 final class MainWindowViewController: NSViewController {
 
     @IBOutlet private var splitView: NSSplitView!
-    @IBOutlet private(set) var outlineView: FolderView!
+    private(set) var foldersTree: FoldersTree!
     private(set) var browser: (any Browser & NSViewController)!
     private(set) var articleController = ArticleController()
     @IBOutlet private(set) var articleListView: ArticleListView!
@@ -57,9 +57,11 @@ final class MainWindowViewController: NSViewController {
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
 
-        if let browser = segue.destinationController as? TabbedBrowserViewController {
+        let destinationController = segue.destinationController
+        if let foldersTree = destinationController as? FoldersTree {
+            self.foldersTree = foldersTree
+        } else if let browser = destinationController as? TabbedBrowserViewController {
             self.browser = browser
-            return
         }
     }
 

@@ -32,7 +32,7 @@ final class MainWindowController: NSWindowController {
     @IBOutlet private var filterToolbarItemMenu: NSMenu!
     @IBOutlet private var styleToolbarItemMenu: NSMenu!
 
-    @objc private(set) var outlineView: FolderView?
+    @objc private(set) var foldersTree: FoldersTree!
     @objc private(set) var browser: (any Browser & NSViewController)!
     @objc weak var articleController: ArticleController!
 
@@ -49,7 +49,7 @@ final class MainWindowController: NSWindowController {
         MainWindowController.shared = self
 
         if let mainWindowViewController = contentViewController as? MainWindowViewController {
-            outlineView = mainWindowViewController.outlineView
+            foldersTree = mainWindowViewController.foldersTree
             browser = mainWindowViewController.browser
             articleController = mainWindowViewController.articleController
             statusBar = mainWindowViewController.statusBar
