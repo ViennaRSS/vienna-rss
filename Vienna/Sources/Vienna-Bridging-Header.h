@@ -8,7 +8,7 @@
 #import "DisclosureView.h"
 #import "Feed.h"
 #import "FeedItem.h"
-#import "FolderView.h"
+#import "FoldersTree.h"
 #import "HelperFunctions.h"
 #import "NSFileManager+Paths.h"
 #import "NSResponder+EventHandler.h"
