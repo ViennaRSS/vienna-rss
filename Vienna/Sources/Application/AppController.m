@@ -51,7 +51,6 @@
 #import "TreeNode.h"
 #import "Field.h"
 #import "Folder.h"
-#import "FolderView.h"
 #import "SubscribeViewController.h"
 #import "SubscriptionModel.h"
 #import "Vienna-Swift.h"
@@ -89,7 +88,6 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 @property (nonatomic) VNAMainWindowController *mainWindowController;
 @property (nonatomic) ArticleController *articleController;
 @property (nonatomic) VNADirectoryMonitor *directoryMonitor;
-@property (weak, nonatomic) FolderView *outlineView;
 @property (weak, nonatomic) NSSearchField *toolbarSearchField;
 @property (nonatomic) NewSubscription *rssFeed;
 
@@ -240,11 +238,8 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 
 	self.browser = self.mainWindowController.browser;
 
-	self.outlineView = self.mainWindowController.outlineView;
+    self.foldersTree = self.mainWindowController.foldersTree;
     self.foldersTree.controller = self;
-    self.foldersTree.outlineView = self.outlineView;
-    self.outlineView.delegate = self.foldersTree;
-    self.outlineView.dataSource = self.foldersTree;
 
     self.articleController = self.mainWindowController.articleController;
     self.articleController.foldersTree = self.foldersTree;
@@ -1986,7 +1981,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(IBAction)renameFolder:(id)sender
 {
-	[self.foldersTree renameFolder:self.foldersTree.actualSelection];
+	[self.foldersTree renameFolderWithIdentifier:self.foldersTree.actualSelection];
 }
 
 /* deleteFolder
@@ -2889,14 +2884,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 - (void)activityPanelControllerDidSelectFolder:(Folder *)folder {
     [self selectFolder:folder.itemId];
-}
-
-// MARK: Folders Tree
-- (FoldersTree *)foldersTree {
-    if (!_foldersTree) {
-        _foldersTree = [FoldersTree new];
-    }
-    return _foldersTree;
 }
 
 // MARK: - NSSeguePerforming
