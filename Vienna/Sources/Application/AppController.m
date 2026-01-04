@@ -2296,6 +2296,14 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     [self.browser closeAllTabs];
 }
 
+/* reopenLastClosedTab
+ * Reopens the most recently closed tab (cmd+shift+t).
+ */
+- (IBAction)reopenLastClosedTab:(id)sender
+{
+    [self.browser reopenLastClosedTab];
+}
+
 /* closeTab
  * Close the active tab unless it's the primary view.
  */
@@ -2872,6 +2880,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		return isMainWindowVisible && !isArticleView;
 	} else if (theAction == @selector(closeAllTabs:)) {
 		return isMainWindowVisible && self.browser.browserTabCount > 1;
+	} else if (theAction == @selector(reopenLastClosedTab:)) {
+		return isMainWindowVisible && self.browser.hasClosedTabs;
 	} else if (theAction == @selector(reloadPage:)) {
 		return !isAnyArticleView;
 	} else if (theAction == @selector(stopReloadingPage:)) {

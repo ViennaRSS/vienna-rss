@@ -73,6 +73,14 @@ protocol Browser {
     /// are saved another time after closing!
     func closeAllTabs()
 
+    /// Reopens the most recently closed tab (cmd+shift+t functionality)
+    /// - Returns: true if a tab was reopened, false if no recently closed tabs exist
+    @discardableResult
+    func reopenLastClosedTab() -> Bool
+
+    /// Check if there are any closed tabs available for reopening
+    var hasClosedTabs: Bool { get }
+
     // MARK: tab navigation
 
     /// if there is a primary tab set, the browser will select it and make it the active tab

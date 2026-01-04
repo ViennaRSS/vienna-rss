@@ -109,6 +109,11 @@ CA
                                                 <action selector="newTab:" target="Ady-hI-5gd" id="joQ-qq-nUH"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Reopen Last Closed Tab" keyEquivalent="T" id="Qlz-BL-rsc">
+                                            <connections>
+                                                <action selector="reopenLastClosedTab:" target="Ady-hI-5gd" id="d9h-AV-d1p"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="1102"/>
                                         <menuItem title="Close Window" id="935">
                                             <connections>

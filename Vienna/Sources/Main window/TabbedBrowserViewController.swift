@@ -63,6 +63,14 @@ class TabbedBrowserViewController: NSViewController, RSSSource {
 
     var restoredTabs = false
 
+    /// Stack to track recently closed tabs for cmd+shift+t functionality
+    private var recentlyClosedTabs: [(url: URL, title: String?)] = []
+
+    /// Check if there are any closed tabs available for reopening
+    var hasClosedTabs: Bool {
+        return !recentlyClosedTabs.isEmpty
+    }
+
     var activeTab: (any Tab)? {
         tabView?.selectedTabViewItem?.viewController as? any Tab
     }
@@ -238,6 +246,18 @@ extension TabbedBrowserViewController: Browser {
             .forEach(closeTab)
     }
 
+    /// Reopens the most recently closed tab (cmd+shift+t functionality)
+    @discardableResult
+    func reopenLastClosedTab() -> Bool {
+        guard !recentlyClosedTabs.isEmpty else {
+            return false
+        }
+
+        let lastClosed = recentlyClosedTabs.removeLast()
+        createNewTab(lastClosed.url, inBackground: false, load: true)
+        return true
+    }
+
     func getTextSelection() -> String {
         // TODO: implement
         return ""
@@ -263,6 +283,18 @@ extension TabbedBrowserViewController: MMTabBarViewDelegate {
         guard let tab = tabViewItem.viewController as? any Tab else {
             return
         }
+
+        // Track closed tab for potential reopening (cmd+shift+t)
+        if let browserTab = tab as? BrowserTab,
+           let url = browserTab.tabUrl,
+           tabViewItem != primaryTab {
+            recentlyClosedTabs.append((url: url, title: browserTab.title))
+            // Limit the history to reasonable number (e.g., 20)
+            if recentlyClosedTabs.count > 20 {
+                recentlyClosedTabs.removeFirst()
+            }
+        }
+
         tab.closeTab()
     }
 
