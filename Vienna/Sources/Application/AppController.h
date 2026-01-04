@@ -75,6 +75,7 @@
 -(IBAction)nextTab:(id)sender;
 -(IBAction)closeActiveTab:(id)sender;
 -(IBAction)closeAllTabs:(id)sender;
+- (IBAction)reopenLastClosedTab:(id)sender;
 -(IBAction)reloadPage:(id)sender;
 -(IBAction)stopReloadingPage:(id)sender;
 -(IBAction)skipFolder:(id)sender;
