@@ -255,6 +255,7 @@
 		F6EB26031E58D37100570B22 /* DirectoryMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EB26021E58D37100570B22 /* DirectoryMonitor.swift */; };
 		F6F12AFD25ABDDE3005B2DCE /* NSFileManager+Paths.m in Sources */ = {isa = PBXBuildFile; fileRef = F6F12AFC25ABDDE3005B2DCE /* NSFileManager+Paths.m */; };
 		F6F2029F2D19DD3A004BB948 /* SubscribeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F6F2029E2D19DD3A004BB948 /* SubscribeViewController.m */; };
+		F6F844EA2F0C6EBF00A8D8D6 /* TableHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6F844E92F0C6EBF00A8D8D6 /* TableHeaderCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -686,6 +687,8 @@
 		F6F12AFC25ABDDE3005B2DCE /* NSFileManager+Paths.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSFileManager+Paths.m"; sourceTree = "<group>"; };
 		F6F2029D2D19DD3A004BB948 /* SubscribeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SubscribeViewController.h; sourceTree = "<group>"; };
 		F6F2029E2D19DD3A004BB948 /* SubscribeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SubscribeViewController.m; sourceTree = "<group>"; };
+		F6F844E82F0C6EBF00A8D8D6 /* TableHeaderCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableHeaderCell.h; sourceTree = "<group>"; };
+		F6F844E92F0C6EBF00A8D8D6 /* TableHeaderCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableHeaderCell.m; sourceTree = "<group>"; };
 		F6FEBCFE2CA06980005E3788 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Predicates.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -923,6 +926,8 @@
 				43502853165DE9DF0018EDB7 /* ArticleListView.m */,
 				43502873165DE9DF0018EDB7 /* MessageListView.h */,
 				43502874165DE9DF0018EDB7 /* MessageListView.m */,
+				F6F844E82F0C6EBF00A8D8D6 /* TableHeaderCell.h */,
+				F6F844E92F0C6EBF00A8D8D6 /* TableHeaderCell.m */,
 				3A7BD0DB1989AC7700E9444B /* VNAVerticallyCenteredTextFieldCell.h */,
 				3A7BD0DC1989AC7700E9444B /* VNAVerticallyCenteredTextFieldCell.m */,
 				4350287B165DE9DF0018EDB7 /* ProgressTextCell.h */,
@@ -1990,6 +1995,7 @@
 				435028AE165DE9E00018EDB7 /* ProgressTextCell.m in Sources */,
 				793C95331C42A0DD00984D4E /* FoldersFilterable.m in Sources */,
 				F6F2029F2D19DD3A004BB948 /* SubscribeViewController.m in Sources */,
+				F6F844EA2F0C6EBF00A8D8D6 /* TableHeaderCell.m in Sources */,
 				3AB95743258DBC5A00C54E83 /* Browser.swift in Sources */,
 				435028AF165DE9E00018EDB7 /* RefreshManager.m in Sources */,
 				F6AFC16D2CAFCD2E00106E80 /* SettingsTabViewController.swift in Sources */,
