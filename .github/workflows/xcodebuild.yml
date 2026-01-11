@@ -17,11 +17,11 @@ jobs:
       matrix:
         include:
           - os: macos-15
-            xcode: Xcode 16
+            xcode: Xcode 16.4
             developer-dir: /Applications/Xcode_16.4.app/Contents/Developer
-          - os: macos-15
-            xcode: Xcode 26
-            developer-dir: /Applications/Xcode_26.0.app/Contents/Developer
+          - os: macos-26
+            xcode: Xcode 26.2
+            developer-dir: /Applications/Xcode_26.2.app/Contents/Developer
     name: Test with ${{ matrix.xcode }}
     runs-on: ${{ matrix.os }}
     env:
@@ -30,7 +30,7 @@ jobs:
 
     steps:
     - name: Set up Git repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         fetch-depth: 0
     - name: Build Vienna
