@@ -32,6 +32,12 @@
     NSTableColumn *tableColumn = [self tableColumnWithIdentifier:identifier];
     NSTableHeaderCell *headerCell = tableColumn.headerCell;
     headerCell.image = image;
+    // In macOS 26, the cell's image is not drawn. Enabling this property seems
+    // to address this problem. However, it causes the image to be drawn skewed
+    // on older versions of macOS.
+    if (@available(macOS 26, *)) {
+        headerCell.bezeled = YES;
+    }
 
     NSImageCell *imageCell = [[NSImageCell alloc] init];
     tableColumn.dataCell = imageCell;
