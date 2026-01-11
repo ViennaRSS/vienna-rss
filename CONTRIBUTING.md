@@ -2,7 +2,7 @@
 
 ## Writing code
 
-We currently build Vienna with Xcode 16 and the macOS 15 SDK.
+We currently build Vienna with Xcode 26 and the macOS 26 SDK.
 
 Most of Vienna is made with Objective-C, but some newer code is being created in Swift. We welcome both Objective-C and Swift contributions.
 
