@@ -129,9 +129,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark Open Reader syncing
 
-@property (nonatomic) BOOL syncGoogleReader;
+@property (nonatomic) BOOL syncOpenReader;
 
-@property (nonatomic) BOOL prefersGoogleNewSubscription;
+@property (nonatomic) BOOL prefersOpenReaderNewSubscription;
 
 // server used for syncing
 @property (nonatomic, copy) NSString *syncServer;

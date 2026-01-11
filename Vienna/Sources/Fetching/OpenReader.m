@@ -165,7 +165,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
     dispatch_semaphore_t sema;
 
     // Do nothing if syncing is disabled in preferences
-    if (![Preferences standardPreferences].syncGoogleReader) {
+    if (![Preferences standardPreferences].syncOpenReader) {
         return;
     }
 
@@ -205,14 +205,14 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 						self.openReaderStatus = clientTokenError;
 						NSString * alertDescription = error.localizedDescription;
 						if (![alertDescription isEqualToString:self->latestAlertDescription]) {
-						    [nc vna_postNotificationOnMainThreadWithName:MA_Notify_GoogleAuthFailed object:alertDescription];
+						    [nc vna_postNotificationOnMainThreadWithName:MA_Notify_OpenReaderAuthFailed object:alertDescription];
 						    self->latestAlertDescription = alertDescription;
 						}
 					} else if (((NSHTTPURLResponse *)response).statusCode != 200) {
 						self.openReaderStatus = clientTokenError;
 						NSString * alertDescription = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 						if (![alertDescription isEqualToString:self->latestAlertDescription]) {
-						    [nc vna_postNotificationOnMainThreadWithName:MA_Notify_GoogleAuthFailed object:alertDescription];
+						    [nc vna_postNotificationOnMainThreadWithName:MA_Notify_OpenReaderAuthFailed object:alertDescription];
 						    self->latestAlertDescription = alertDescription;
 						}
  					} else {         // statusCode 200
@@ -224,7 +224,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 								self.clientAuthToken = [item substringFromIndex:5];
                                 if ([self.clientAuthToken isEqualToString:@"(null)"] || [self.clientAuthToken isEqualToString:@""]) {
                                     self.openReaderStatus = clientTokenError;
-                                    [nc vna_postNotificationOnMainThreadWithName:MA_Notify_GoogleAuthFailed object:@""];
+                                    [nc vna_postNotificationOnMainThreadWithName:MA_Notify_OpenReaderAuthFailed object:@""];
                                     self->latestAlertDescription = @"";
 								} else {
 								    self.openReaderStatus = missingTToken;								
@@ -458,7 +458,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
 
     NSMutableURLRequest *request = [self requestFromURL:refreshFeedUrl];
     [request vna_setUserInfo:
-        @{ @"folder": thisFolder, @"log": aItem, @"lastupdatestring": folderLastUpdateString, @"type": @(MA_Refresh_GoogleFeed) }];
+        @{ @"folder": thisFolder, @"log": aItem, @"lastupdatestring": folderLastUpdateString, @"type": @(MA_Refresh_OpenReaderFeed) }];
 
     // Request id's of unread items
     NSString *args =
@@ -709,7 +709,7 @@ typedef NS_ENUM (NSInteger, OpenReaderStatus) {
             if (statusCode == 401 || statusCode == 403) {
                 NSString * alertDescription = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                 if (![alertDescription isEqualToString:self->latestAlertDescription]) {
-                    [nc vna_postNotificationOnMainThreadWithName:MA_Notify_GoogleAuthFailed object:alertDescription];
+                    [nc vna_postNotificationOnMainThreadWithName:MA_Notify_OpenReaderAuthFailed object:alertDescription];
                     self->latestAlertDescription = alertDescription;
                 }
             }

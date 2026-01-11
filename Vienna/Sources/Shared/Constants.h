@@ -41,8 +41,8 @@ extern NSNotificationName const MA_Notify_FolderHomePageChanged; // Unused
 extern NSNotificationName const MA_Notify_FolderNameChanged;
 extern NSNotificationName const MA_Notify_FolderSelectionChange;
 extern NSNotificationName const MA_Notify_FoldersUpdated;
-extern NSNotificationName const MA_Notify_GoogleAuthFailed;
-extern NSNotificationName const MA_Notify_GoogleReaderNewSubscriptionChange; // Unused
+extern NSNotificationName const MA_Notify_OpenReaderAuthFailed;
+extern NSNotificationName const MA_Notify_OpenReaderNewSubscriptionChange; // Unused
 extern NSNotificationName const MA_Notify_GotAuthenticationForFolder;
 extern NSNotificationName const MA_Notify_LoadFullHTMLChange;
 extern NSNotificationName const MA_Notify_MinimumFontSizeChange;
@@ -53,7 +53,7 @@ extern NSNotificationName const MA_Notify_RefreshStatus;
 extern NSNotificationName const MA_Notify_ShowAppInStatusBarChanged;
 extern NSNotificationName const MA_Notify_ShowFolderImages;
 extern NSNotificationName const MA_Notify_StyleChange NS_SWIFT_NAME(styleChanged);
-extern NSNotificationName const MA_Notify_SyncGoogleReaderChange; // Unused
+extern NSNotificationName const MA_Notify_SyncOpenReaderChange; // Unused
 extern NSNotificationName const MA_Notify_TabChanged NS_SWIFT_NAME(tabChanged);
 extern NSNotificationName const MA_Notify_TabCountChanged NS_SWIFT_NAME(tabCountChanged);
 extern NSNotificationName const MA_Notify_UseJavaScriptChange; // Unused
@@ -96,8 +96,8 @@ extern NSString * const MAPref_HighestViennaVersionRun;
 extern NSString * const MAPref_ShouldSaveFeedSource;
 extern NSString * const MAPref_ShouldSaveFeedSourceBackup;
 extern NSString * const MAPref_SearchMethod;
-extern NSString * const MAPref_SyncGoogleReader;
-extern NSString * const MAPref_GoogleNewSubscription;
+extern NSString * const MAPref_SyncOpenReader;
+extern NSString * const MAPref_OpenReaderNewSubscription;
 extern NSString * const MAPref_ConcurrentDownloads;
 extern NSString * const MAPref_SyncServer;
 extern NSString * const MAPref_SyncScheme;

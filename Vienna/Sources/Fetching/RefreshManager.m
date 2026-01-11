@@ -208,8 +208,8 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         if (folder.type == VNAFolderTypeGroup) {
             [self forceRefreshSubscriptionForFolders:[[Database sharedManager] arrayOfFolders:folder.itemId]];
         } else if (folder.type == VNAFolderTypeOpenReader) {
-            if (![self isRefreshingFolder:folder ofType:MA_Refresh_GoogleFeed] &&
-                ![self isRefreshingFolder:folder ofType:MA_ForceRefresh_Google_Feed])
+            if (![self isRefreshingFolder:folder ofType:MA_Refresh_OpenReaderFeed] &&
+                ![self isRefreshingFolder:folder ofType:MA_ForceRefresh_OpenReader_Feed])
             {
                 [self pumpSubscriptionRefresh:folder shouldForceRefresh:YES];
             }
@@ -232,8 +232,8 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
                 [self pumpSubscriptionRefresh:folder shouldForceRefresh:NO];
             }
         } else if (folder.isOpenReaderFolder) {
-            if ((!folder.isUnsubscribed || ignoreSubStatus)  && ![self isRefreshingFolder:folder ofType:MA_Refresh_GoogleFeed] &&
-                ![self isRefreshingFolder:folder ofType:MA_ForceRefresh_Google_Feed])
+            if ((!folder.isUnsubscribed || ignoreSubStatus)  && ![self isRefreshingFolder:folder ofType:MA_Refresh_OpenReaderFeed] &&
+                ![self isRefreshingFolder:folder ofType:MA_ForceRefresh_OpenReader_Feed])
             {
                 // we depend of pieces of info gathered by loadSubscriptions
                 NSOperation * op = [NSBlockOperation blockOperationWithBlock:^(void) {

@@ -752,7 +752,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 }
 
 /*!
- *  Add a Google Reader RSS Feed folder and return the ID of the new folder.
+ *  Add an Open Reader RSS Feed folder and return the ID of the new folder.
  *
  *  @param feedName      The name of the RSS folder
  *  @param parentId      The parent folder ID
