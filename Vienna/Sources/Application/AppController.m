@@ -805,7 +805,10 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         for (NSURL * url in urls) {
 			(void)[self.browser createNewTab:url inBackground:openInBackground load:true];
         }
-        [self.mainWindow makeFirstResponder:((NSView<BaseView> *)self.browser.primaryTab.view).mainView];
+        NSView *mainView = ((NSView<BaseView> *)self.browser.primaryTab.view).mainView;
+        if ([mainView.window isEqual:self.mainWindow]) {
+            [self.mainWindow makeFirstResponder:mainView];
+        }
 	} else {
 		[self openURLsInDefaultBrowser:urls];
 	}
