@@ -26,6 +26,20 @@ class UserNotificationCenter: NSObject {
 
     @objc static let current = UserNotificationCenter()
 
+    @objc static let notificationSettingsURL = {
+        var components = URLComponents()
+        components.scheme = "x-apple.systempreferences"
+        if #available(macOS 13, *) {
+            components.path = "com.apple.Notifications-Settings.extension"
+        } else {
+            components.path = "com.apple.preference.notifications"
+        }
+        components.queryItems = [
+            URLQueryItem(name: "id", value: Bundle.main.bundleIdentifier)
+        ]
+        return components.url!
+    }()
+
     // MARK: Registering notifications
 
     @objc(VNAUserNotificationAuthorizationStatus)
