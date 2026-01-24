@@ -91,12 +91,12 @@ final class FeedDiscoverer: NSObject {
         // These types are recommended, requiring no further validation.
         case "application/rss+xml",
              "application/atom+xml",
-             "application/feed+json",
-             "application/json":
+             "application/feed+json":
             return true
         // These types are not sanctioned, but nevertheless used. They require
         // further validation to rule out false-positives.
         case "application/xml",
+             "application/json",
              "application/rdf+xml",
              "text/xml":
             break
@@ -104,7 +104,7 @@ final class FeedDiscoverer: NSObject {
             return false
         }
 
-        // At this point, the link could refer to any type of XML document. The
+        // At this point, the link could refer to any type of XML or JSON document. The
         // document name can be the final clue.
         switch attributes["href"]?.lowercased() {
         case .some(let urlString) where urlString.contains("feed") || urlString.contains("rss"):
