@@ -87,8 +87,8 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="doGoogleOption:" target="2KB-Uw-ELh" id="W9G-0A-Zfg"/>
-                                    <binding destination="2KB-Uw-ELh" name="value" keyPath="self.googleOptionButton" id="IpB-pY-DlB"/>
+                                    <action selector="doOpenReaderOption:" target="2KB-Uw-ELh" id="W9G-0A-Zfg"/>
+                                    <binding destination="2KB-Uw-ELh" name="value" keyPath="self.openReaderOptionButton" id="IpB-pY-DlB"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1d2-WD-CbX">

@@ -53,7 +53,7 @@
 - (void)viewWillAppear {
     // Set up to be notified
     NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver:self selector:@selector(handleGoogleAuthFailed:) name:MA_Notify_GoogleAuthFailed object:nil];
+    [nc addObserver:self selector:@selector(handleOpenReaderAuthFailed:) name:MA_Notify_OpenReaderAuthFailed object:nil];
     [nc addObserver:self selector:@selector(handleServerTextDidChange:) name:NSControlTextDidChangeNotification object:openReaderHost];
     [nc addObserver:self selector:@selector(handleUserTextDidChange:) name:NSControlTextDidChangeNotification object:username];
     [nc addObserver:self selector:@selector(handlePasswordTextDidChange:) name:NSControlTextDidChangeNotification object:password];
@@ -63,7 +63,7 @@
     }
     // restore from Preferences and from keychain
     Preferences * prefs = [Preferences standardPreferences];
-    syncButton.state = prefs.syncGoogleReader ? NSControlStateValueOn : NSControlStateValueOff;
+    syncButton.state = prefs.syncOpenReader ? NSControlStateValueOn : NSControlStateValueOff;
     syncingUser = prefs.syncingUser;
     if (!syncingUser) {
         syncingUser=@"";
@@ -85,7 +85,7 @@
     openReaderHost.stringValue = serverAndPath;
     password.stringValue = thePassword;
     
-    if (!prefs.syncGoogleReader) {
+    if (!prefs.syncOpenReader) {
         [openReaderSource setEnabled:NO];
         [openReaderHost setEnabled:NO];
         [username setEnabled:NO];
@@ -145,7 +145,7 @@
     // enable/disable syncing
     BOOL sync = [sender state] == NSControlStateValueOn;
     Preferences *prefs = [Preferences standardPreferences];
-    prefs.syncGoogleReader = sync;
+    prefs.syncOpenReader = sync;
     if (sync) {
         [openReaderSource setEnabled:YES];
         [openReaderHost setEnabled:YES];
@@ -257,7 +257,7 @@
     [VNAKeychain setGenericPasswordInKeychain:password.stringValue username:username.stringValue service:@"Vienna sync"];
 }
 
--(void)handleGoogleAuthFailed:(NSNotification *)nc
+-(void)handleOpenReaderAuthFailed:(NSNotification *)nc
 {    
     if (self.view.window.visible) {
         NSAlert *alert = [NSAlert new];

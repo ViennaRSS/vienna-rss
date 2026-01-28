@@ -108,7 +108,7 @@
 	self.urlField.stringValue = folder.feedURL;
 	self.username.stringValue = folder.username;
 	self.password.stringValue = folder.password;
-	// for Google feeds, URL may not be changed and no authentication is supported
+	// for Open Reader feeds, URL may not be changed and no authentication is supported
 	if (folder.type == VNAFolderTypeOpenReader) {
 		//[urlField setSelectable:NO];
 		[self.urlField setEditable:NO];

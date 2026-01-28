@@ -71,8 +71,8 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
     BOOL showAppInStatusBar;
     BOOL showStatusBar;
     BOOL shouldSaveFeedSource;
-    BOOL syncGoogleReader;
-    BOOL prefersGoogleNewSubscription;
+    BOOL syncOpenReader;
+    BOOL prefersOpenReaderNewSubscription;
     BOOL markUpdatedAsNew;
     NSString *displayStyle;
     CGFloat textSizeMultiplier;
@@ -154,8 +154,8 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
         }
         
         // Open Reader sync
-        syncGoogleReader = [self boolForKey:MAPref_SyncGoogleReader];
-        prefersGoogleNewSubscription = [self boolForKey:MAPref_GoogleNewSubscription];
+        syncOpenReader = [self boolForKey:MAPref_SyncOpenReader];
+        prefersOpenReaderNewSubscription = [self boolForKey:MAPref_OpenReaderNewSubscription];
 		syncServer = [userPrefs stringForKey:MAPref_SyncServer];
         syncScheme = [userPrefs stringForKey:MAPref_SyncScheme];
 		syncingUser = [userPrefs stringForKey:MAPref_SyncingUser];
@@ -254,8 +254,8 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
                                                                                error:NULL];
 
     defaultValues[MAPref_ConcurrentDownloads] = @(MA_Default_ConcurrentDownloads);
-    defaultValues[MAPref_SyncGoogleReader] = boolNo;
-    defaultValues[MAPref_GoogleNewSubscription] = boolNo;
+    defaultValues[MAPref_SyncOpenReader] = boolNo;
+    defaultValues[MAPref_OpenReaderNewSubscription] = boolNo;
     defaultValues[MAPref_SyncingAppId] = @"1000001359";
     defaultValues[MAPref_SyncingAppKey] = @"rAlfs2ELSuFxZJ5adJAW54qsNbUa45Qn";
     defaultValues[MAPref_AlwaysAcceptBetas] = boolNo;
@@ -1057,34 +1057,34 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
 #pragma mark -
 #pragma mark Open Reader syncing
 
--(BOOL)syncGoogleReader 
+-(BOOL)syncOpenReader 
 {
-    return syncGoogleReader;
+    return syncOpenReader;
 }
 
--(void)setSyncGoogleReader:(BOOL)flag 
+-(void)setSyncOpenReader:(BOOL)flag 
 {
-    if (syncGoogleReader != flag) {
-		syncGoogleReader = flag;
-		[self setBool:syncGoogleReader forKey:MAPref_SyncGoogleReader];
-		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_SyncGoogleReaderChange object:nil];
+    if (syncOpenReader != flag) {
+		syncOpenReader = flag;
+		[self setBool:syncOpenReader forKey:MAPref_SyncOpenReader];
+		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_SyncOpenReaderChange object:nil];
 	}
 }
 
-/* Getter/setters for prefersGoogleNewSubscription
+/* Getter/setters for prefersOpenReaderNewSubscription
  * Specifies whether Vienna defaults to Open Reader when entering a new subscription
  */
--(BOOL)prefersGoogleNewSubscription
+-(BOOL)prefersOpenReaderNewSubscription
 {
-    return prefersGoogleNewSubscription;
+    return prefersOpenReaderNewSubscription;
 }
 
--(void)setPrefersGoogleNewSubscription:(BOOL)flag
+-(void)setPrefersOpenReaderNewSubscription:(BOOL)flag
 {
-	if (prefersGoogleNewSubscription != flag) {
-		prefersGoogleNewSubscription = flag;
-		[self setBool:prefersGoogleNewSubscription forKey:MAPref_GoogleNewSubscription];
-		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_GoogleReaderNewSubscriptionChange object:nil];
+	if (prefersOpenReaderNewSubscription != flag) {
+		prefersOpenReaderNewSubscription = flag;
+		[self setBool:prefersOpenReaderNewSubscription forKey:MAPref_OpenReaderNewSubscription];
+		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_OpenReaderNewSubscriptionChange object:nil];
 	}
 }
 
@@ -1101,7 +1101,7 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
 	if (![syncServer isEqualToString:newServer]) {
 		syncServer = [newServer copy];
 		[self setString:syncServer forKey:MAPref_SyncServer];
-		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_SyncGoogleReaderChange object:nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_SyncOpenReaderChange object:nil];
 	}
 }
 
@@ -1118,7 +1118,7 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
     if (![syncScheme isEqualToString:newScheme]) {
         syncScheme = [newScheme copy];
         [self setString:syncScheme forKey:MAPref_SyncScheme];
-        [[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_SyncGoogleReaderChange object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_SyncOpenReaderChange object:nil];
     }
 }
 
@@ -1135,7 +1135,7 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
 	if (![syncingUser isEqualToString:newUser]) {
 		syncingUser = [newUser copy];
 		[self setString:syncingUser forKey:MAPref_SyncingUser];
-		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_SyncGoogleReaderChange object:nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_SyncOpenReaderChange object:nil];
 	}
 }
 
