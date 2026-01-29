@@ -33,7 +33,7 @@ static NSStoryboardName const VNAStoryboardNameSubscribe = @"Subscribe";
 
 @property (weak, nonatomic) NSMenuItem *webPageMenuItem;
 @property (weak, nonatomic) NSMenuItem *localFileMenuItem;
-@property BOOL googleOptionButton;
+@property BOOL openReaderOptionButton;
 
 @end
 
@@ -141,9 +141,9 @@ static NSStoryboardName const VNAStoryboardNameSubscribe = @"Subscribe";
     [self enableSubscribeButton];
     [self setLinkTitle];
     // restore from preferences, if it can be done ; otherwise, uncheck this option
-    self.googleOptionButton =
-        Preferences.standardPreferences.syncGoogleReader &&
-        Preferences.standardPreferences.prefersGoogleNewSubscription;
+    self.openReaderOptionButton =
+        Preferences.standardPreferences.syncOpenReader &&
+        Preferences.standardPreferences.prefersOpenReaderNewSubscription;
 
     [self.view.window makeFirstResponder:feedURL];
 }
@@ -206,9 +206,9 @@ static NSStoryboardName const VNAStoryboardNameSubscribe = @"Subscribe";
 
 // Action called by the Open Reader checkbox
 // Memorizes the setting in preferences
-- (IBAction)doGoogleOption:(id)sender
+- (IBAction)doOpenReaderOption:(id)sender
 {
-    Preferences.standardPreferences.prefersGoogleNewSubscription =
+    Preferences.standardPreferences.prefersOpenReaderNewSubscription =
         ([sender state] == NSControlStateValueOn);
 }
 

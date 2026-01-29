@@ -4452,6 +4452,18 @@
         }
       }
     },
+    "MKr-uG-HFL.title" : {
+      "comment" : "Class = \"NSTextFieldCell\"; title = \"Notifications:\"; ObjectID = \"MKr-uG-HFL\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Notifications:"
+          }
+        }
+      }
+    },
     "MnV-8D-Qyq.title" : {
       "comment" : "Class = \"NSButtonCell\"; title = \"Enable JavaScript in the internal browser\"; ObjectID = \"MnV-8D-Qyq\";",
       "extractionState" : "extracted_with_value",
@@ -5438,6 +5450,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "每 2 小時"
+          }
+        }
+      }
+    },
+    "Ptg-JZ-D7m.title" : {
+      "comment" : "Class = \"NSButtonCell\"; title = \"Notification Settings…\"; ObjectID = \"Ptg-JZ-D7m\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Notification Settings…"
           }
         }
       }

@@ -456,6 +456,12 @@
     [Preferences standardPreferences].markReadInterval = newReadInterval;
 }
 
+- (IBAction)openNotificationSettings:(id)sender
+{
+    NSURL *settingsURL = VNAUserNotificationCenter.notificationSettingsURL;
+    [NSWorkspace.sharedWorkspace openURL:settingsURL];
+}
+
 /* dealloc
  * Clean up and release resources.
  */

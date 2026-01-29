@@ -265,7 +265,7 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 	[nc addObserver:self selector:@selector(handleShowAppInStatusBar:) name:MA_Notify_ShowAppInStatusBarChanged object:nil];
 	[nc addObserver:self selector:@selector(handleUpdateUnreadCount:) name:MA_Notify_FoldersUpdated object:nil];
 	//Open Reader Notifications
-    [nc addObserver:self selector:@selector(handleGoogleAuthFailed:) name:MA_Notify_GoogleAuthFailed object:nil];
+    [nc addObserver:self selector:@selector(handleOpenReaderAuthFailed:) name:MA_Notify_OpenReaderAuthFailed object:nil];
 
 	// Initialize the database
 	if ((db = [Database sharedManager]) == nil) {
@@ -953,7 +953,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 }
 
--(void)handleGoogleAuthFailed:(NSNotification *)nc
+-(void)handleOpenReaderAuthFailed:(NSNotification *)nc
 {
     if (self.mainWindow.keyWindow) {
         NSAlert *alert = [NSAlert new];
@@ -1905,7 +1905,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 	
 	// Create the new folder.
-	if ([Preferences standardPreferences].syncGoogleReader && [Preferences standardPreferences].prefersGoogleNewSubscription) {	//creates in OpenReader
+	if ([Preferences standardPreferences].syncOpenReader && [Preferences standardPreferences].prefersOpenReaderNewSubscription) {	//creates in OpenReader
 		NSString * folderName = [db folderFromID:parentId].name;
 		[[OpenReader sharedManager] subscribeToFeed:urlString withLabel:folderName];
 	} else { //creates locally
@@ -2538,7 +2538,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         return;
     }
 
-    if (Preferences.standardPreferences.syncGoogleReader) {
+    if (Preferences.standardPreferences.syncOpenReader) {
         [OpenReader.sharedManager loadSubscriptions];
     }
     [RefreshManager.sharedManager refreshSubscriptions:[self.foldersTree folders:0]
@@ -2906,7 +2906,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	} else if (theAction == @selector(openVienna:)) {
         return self.mainWindow.isKeyWindow == false;
     } else if (theAction == @selector(updateRemoteSubscriptions:)) {
-        return Preferences.standardPreferences.syncGoogleReader;
+        return Preferences.standardPreferences.syncOpenReader;
     }
 
 	return YES;

@@ -60,7 +60,7 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 -(void)handleShowFolderImagesChange:(NSNotification *)nc;
 -(void)reloadFolderItem:(id)node reloadChildren:(BOOL)flag;
 -(void)expandToParent:(TreeNode *)node;
--(BOOL)moveFolders:(NSArray *)array withGoogleSync:(BOOL)sync;
+-(BOOL)moveFolders:(NSArray *)array withOpenReaderSync:(BOOL)sync;
 
 @end
 
@@ -146,7 +146,7 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 {
     // No need to sync with OpenReader server because this is triggered when
     // folder layout has changed at server level. Making a sync call would be redundant.
-    [self moveFolders:nc.object withGoogleSync:NO];
+    [self moveFolders:nc.object withOpenReaderSync:NO];
 }
 
 /* reloadDatabase
@@ -913,7 +913,7 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
  */
 -(void)moveFoldersUndo:(id)anObject
 {
-	[self moveFolders:(NSArray *)anObject withGoogleSync:YES];
+	[self moveFolders:(NSArray *)anObject withOpenReaderSync:YES];
 }
 
 /* moveFolders
@@ -922,7 +922,7 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
  * the second number is the ID of the parent to which the folder should be moved,
  * the third number is the ID of the folder's new predecessor sibling.
  */
--(BOOL)moveFolders:(NSArray *)array withGoogleSync:(BOOL)sync
+-(BOOL)moveFolders:(NSArray *)array withOpenReaderSync:(BOOL)sync
 {
 	NSAssert(([array count] % 3) == 0, @"Incorrect number of items in array passed to moveFolders");
 	NSInteger count = array.count;
@@ -1245,7 +1245,7 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
         }
 
         // Do the move
-        BOOL result = [self moveFolders:array withGoogleSync:YES];
+        BOOL result = [self moveFolders:array withOpenReaderSync:YES];
         return result;
     }
     if ([type isEqualToString:VNAPasteboardTypeRSSSource]) {
