@@ -51,6 +51,8 @@
 }
 
 - (void)viewWillAppear {
+    [super viewWillAppear];
+
     // Set up to be notified
     NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(handleOpenReaderAuthFailed:) name:MA_Notify_OpenReaderAuthFailed object:nil];
@@ -58,9 +60,6 @@
     [nc addObserver:self selector:@selector(handleUserTextDidChange:) name:NSControlTextDidChangeNotification object:username];
     [nc addObserver:self selector:@selector(handlePasswordTextDidChange:) name:NSControlTextDidChangeNotification object:password];
 
-    if([NSViewController instancesRespondToSelector:@selector(viewWillAppear)]) {
-        [super viewWillAppear];
-    }
     // restore from Preferences and from keychain
     Preferences * prefs = [Preferences standardPreferences];
     self.syncEnabled = prefs.syncOpenReader;
