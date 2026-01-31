@@ -31,6 +31,9 @@
 
 @interface SyncingPreferencesViewController ()
 
+// This property is also bound in Interface Builder (Cocoa bindings).
+@property (getter=isSyncEnabled, nonatomic) BOOL syncEnabled;
+
 @end
 
 @implementation SyncingPreferencesViewController {
@@ -39,7 +42,6 @@
     IBOutlet NSTextField *openReaderHost;
     IBOutlet NSTextField *username;
     IBOutlet NSSecureTextField *password;
-    IBOutlet NSButton *__weak syncButton;
     BOOL _credentialsChanged;
     NSString *syncScheme;
     NSString *serverAndPath;
@@ -47,8 +49,6 @@
     NSString *syncingUser;
     NSMenuItem *otherMenuItem;
 }
-
-@synthesize syncButton;
 
 - (void)viewWillAppear {
     // Set up to be notified
@@ -63,7 +63,7 @@
     }
     // restore from Preferences and from keychain
     Preferences * prefs = [Preferences standardPreferences];
-    syncButton.state = prefs.syncOpenReader ? NSControlStateValueOn : NSControlStateValueOff;
+    self.syncEnabled = prefs.syncOpenReader;
     syncingUser = prefs.syncingUser;
     if (!syncingUser) {
         syncingUser=@"";
@@ -85,12 +85,6 @@
     openReaderHost.stringValue = serverAndPath;
     password.stringValue = thePassword;
     
-    if (!prefs.syncOpenReader) {
-        [openReaderSource setEnabled:NO];
-        [openReaderHost setEnabled:NO];
-        [username setEnabled:NO];
-        [password setEnabled:NO];
-    }
     _credentialsChanged = NO;
 
     [openReaderSource removeAllItems];
@@ -119,7 +113,6 @@
         [self changeSource:nil];
         openReaderHost.stringValue = serverURL.absoluteString;
     }
-    [openReaderSource setEnabled:YES];
 }
 
 #pragma mark - Vienna Prferences
@@ -132,7 +125,7 @@
     prefs.syncScheme = syncScheme;
     prefs.syncServer = serverAndPath;
     prefs.syncingUser = syncingUser;
-    if (syncButton.state == NSControlStateValueOn && _credentialsChanged) {
+    if (self.isSyncEnabled && _credentialsChanged) {
         [[OpenReader sharedManager] resetAuthentication];
         [[OpenReader sharedManager] loadSubscriptions];
     }
@@ -147,16 +140,8 @@
     Preferences *prefs = [Preferences standardPreferences];
     prefs.syncOpenReader = sync;
     if (sync) {
-        [openReaderSource setEnabled:YES];
-        [openReaderHost setEnabled:YES];
-        [username setEnabled:YES];
-        [password setEnabled:YES];
         _credentialsChanged = YES;
     } else {
-        [openReaderSource setEnabled:NO];
-        [openReaderHost setEnabled:NO];
-        [username setEnabled:NO];
-        [password setEnabled:NO];
         [[OpenReader sharedManager] clearAuthentication];
     };
 }
@@ -276,8 +261,6 @@
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    syncButton=nil;
-
 }
 
 @end

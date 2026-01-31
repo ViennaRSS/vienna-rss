@@ -22,8 +22,6 @@
 
 @interface SyncingPreferencesViewController : NSViewController <NSTextFieldDelegate>
 
-@property (weak) IBOutlet NSButton *syncButton;
-
 -(IBAction)changeSyncOpenReader:(id)sender;
 -(IBAction)changeSource:(id)sender;
 -(IBAction)visitWebsite:(id)sender;
