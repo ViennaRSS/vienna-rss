@@ -248,7 +248,7 @@
 		F6DC887C295B8DAA006E4D66 /* PluginBundleWithLowercaseInfoPlist.viennaplugin in Resources */ = {isa = PBXBuildFile; fileRef = F6DC8879295B8DAA006E4D66 /* PluginBundleWithLowercaseInfoPlist.viennaplugin */; };
 		F6DC8880295B9290006E4D66 /* PluginBundleWithLocalizedInfoPlist.viennaplugin in Resources */ = {isa = PBXBuildFile; fileRef = F6DC887F295B9290006E4D66 /* PluginBundleWithLocalizedInfoPlist.viennaplugin */; };
 		F6DDB5B12950C87E004E0E87 /* SharingServiceMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DDB5B02950C87E004E0E87 /* SharingServiceMenuItem.swift */; };
-		F6DE2B662E22B6D300FCD376 /* Application.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6DE2B642E22B6D300FCD376 /* Application.storyboard */; };
+		F6DE2B662E22B6D300FCD376 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6DE2B642E22B6D300FCD376 /* Main.storyboard */; };
 		F6E01A072C652DEE0082E07B /* RSSFeedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E01A062C652DEE0082E07B /* RSSFeedTests.swift */; };
 		F6E01A092C652FA50082E07B /* RSSFeedWithContentElements.rss in Resources */ = {isa = PBXBuildFile; fileRef = F6E01A082C652FA50082E07B /* RSSFeedWithContentElements.rss */; };
 		F6EB26031E58D37100570B22 /* DirectoryMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6EB26021E58D37100570B22 /* DirectoryMonitor.swift */; };
@@ -676,8 +676,8 @@
 		F6DC8879295B8DAA006E4D66 /* PluginBundleWithLowercaseInfoPlist.viennaplugin */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PluginBundleWithLowercaseInfoPlist.viennaplugin; sourceTree = "<group>"; };
 		F6DC887F295B9290006E4D66 /* PluginBundleWithLocalizedInfoPlist.viennaplugin */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PluginBundleWithLocalizedInfoPlist.viennaplugin; sourceTree = "<group>"; };
 		F6DDB5B02950C87E004E0E87 /* SharingServiceMenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingServiceMenuItem.swift; sourceTree = "<group>"; };
-		F6DE2B652E22B6D300FCD376 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Application.storyboard; sourceTree = "<group>"; };
-		F6DE2B692E22BC8A00FCD376 /* mul */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = mul; path = mul.lproj/Application.xcstrings; sourceTree = "<group>"; };
+		F6DE2B652E22B6D300FCD376 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F6DE2B692E22BC8A00FCD376 /* mul */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = mul; path = mul.lproj/Main.xcstrings; sourceTree = "<group>"; };
 		F6E01A062C652DEE0082E07B /* RSSFeedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSFeedTests.swift; sourceTree = "<group>"; };
 		F6E01A082C652FA50082E07B /* RSSFeedWithContentElements.rss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = RSSFeedWithContentElements.rss; sourceTree = "<group>"; };
 		F6EB26021E58D37100570B22 /* DirectoryMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryMonitor.swift; sourceTree = "<group>"; };
@@ -968,7 +968,7 @@
 		F63739FB1F1CFEDC00ED3B09 /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
-				F6DE2B642E22B6D300FCD376 /* Application.storyboard */,
+				F6DE2B642E22B6D300FCD376 /* Main.storyboard */,
 				2FDF6FBE218A266A002F77E9 /* BrowserTab.xib */,
 				F619018A2E0F1D5400A7A200 /* FilterBarViewController.xib */,
 				F62581441E29B90A0035E43C /* SearchPanel.xib */,
@@ -1642,7 +1642,7 @@
 				F67294282D1AFC1F0019B57E /* Subscribe.storyboard in Resources */,
 				F6D572B11E26AA9000CDA909 /* GroupFolder.xib in Resources */,
 				F6D572B41E26AA9900CDA909 /* InfoWindow.xib in Resources */,
-				F6DE2B662E22B6D300FCD376 /* Application.storyboard in Resources */,
+				F6DE2B662E22B6D300FCD376 /* Main.storyboard in Resources */,
 				3A0F2A9E258FCB780036397F /* BrowserTab.xib in Resources */,
 				F63C08F52C4A70AA0095BAD7 /* InfoPlist.xcstrings in Resources */,
 				F6D572BA1E26AAA900CDA909 /* SearchFolder.xib in Resources */,
@@ -2247,13 +2247,13 @@
 			name = SearchFolder.xib;
 			sourceTree = "<group>";
 		};
-		F6DE2B642E22B6D300FCD376 /* Application.storyboard */ = {
+		F6DE2B642E22B6D300FCD376 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				F6DE2B652E22B6D300FCD376 /* Base */,
 				F6DE2B692E22BC8A00FCD376 /* mul */,
 			);
-			name = Application.storyboard;
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
