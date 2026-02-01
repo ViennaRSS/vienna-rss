@@ -3485,7 +3485,7 @@
         "da" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Begivenhed"
+            "value" : "Handling"
           }
         },
         "de" : {
@@ -3533,7 +3533,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Actie"
+            "value" : "Taak"
           }
         },
         "pt-BR" : {
@@ -3599,7 +3599,7 @@
         "da" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Begivenhed"
+            "value" : "Handling"
           }
         },
         "de" : {
@@ -3647,7 +3647,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Actie"
+            "value" : "Taak"
           }
         },
         "pt-BR" : {
@@ -3843,7 +3843,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Meer acties voor de geselecteerde map"
+            "value" : "Meer taken voor de geselecteerde map"
           }
         },
         "pt-BR" : {
@@ -13954,6 +13954,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Místní soubor"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lokale Datei"
           }
         },
         "eu" : {
