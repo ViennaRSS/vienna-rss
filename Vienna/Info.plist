@@ -129,7 +129,7 @@
 	<key>NSHumanReadableCopyright</key>
 	<string>© 2004–2026 The Vienna RSS Project</string>
 	<key>NSMainStoryboardFile</key>
-	<string>Application</string>
+	<string>Main</string>
 	<key>NSPrincipalClass</key>
 	<string>ViennaApp</string>
 	<key>NSSupportsAutomaticGraphicsSwitching</key>
