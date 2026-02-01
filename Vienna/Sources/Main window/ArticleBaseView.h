@@ -22,7 +22,6 @@
 
 #import "BaseView.h"
 
-@class ArticleView;
 @class Article;
 @class VNAFilterBarViewController;
 
