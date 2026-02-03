@@ -56,7 +56,6 @@
 		03A131B31AA54EAC0037471F /* Database+Migration.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A131B21AA54EAC0037471F /* Database+Migration.m */; };
 		03F33D961DF2A2F900B04FAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03F33D951DF2A2F900B04FAF /* Assets.xcassets */; };
 		2F06504C2506B5B500468A0E /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F06504B2506B5B500468A0E /* LoadingIndicator.swift */; };
-		2F125EDE24D0638600868E11 /* BrowserTabWithLegacyAddressBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F125EDD24D0638600868E11 /* BrowserTabWithLegacyAddressBar.xib */; };
 		2F125EE024D066ED00868E11 /* AsyncHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F125EDF24D066ED00868E11 /* AsyncHelper.swift */; };
 		2F20FF8F25618627000F68C2 /* WebKitArticleTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F20FF8E25618627000F68C2 /* WebKitArticleTab.swift */; };
 		2F2280352271B041005D1023 /* ArticleContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2280342271B041005D1023 /* ArticleContentView.swift */; };
@@ -321,7 +320,6 @@
 		03F33D951DF2A2F900B04FAF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2A37F4B0FDCFA73011CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = main.m; sourceTree = "<group>"; };
 		2F06504B2506B5B500468A0E /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
-		2F125EDD24D0638600868E11 /* BrowserTabWithLegacyAddressBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BrowserTabWithLegacyAddressBar.xib; sourceTree = "<group>"; };
 		2F125EDF24D066ED00868E11 /* AsyncHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncHelper.swift; sourceTree = "<group>"; };
 		2F20FF8E25618627000F68C2 /* WebKitArticleTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebKitArticleTab.swift; sourceTree = "<group>"; };
 		2F2280342271B041005D1023 /* ArticleContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleContentView.swift; sourceTree = "<group>"; };
@@ -968,7 +966,6 @@
 				F6832F661F10F5DA007920D4 /* MainWindowController.xib */,
 				2FDF6FBD218A266A002F77E9 /* TabbedBrowserViewController.xib */,
 				2FDF6FBE218A266A002F77E9 /* BrowserTab.xib */,
-				2F125EDD24D0638600868E11 /* BrowserTabWithLegacyAddressBar.xib */,
 				F619018A2E0F1D5400A7A200 /* FilterBarViewController.xib */,
 				F62581441E29B90A0035E43C /* SearchPanel.xib */,
 				F6D572B01E26AA8A00CDA909 /* FeedCredentials.xib */,
@@ -1626,7 +1623,6 @@
 				F6D572AE1E26AA8A00CDA909 /* FeedCredentials.xib in Resources */,
 				3AA9880E2F2159CD0035B027 /* AppIcon.icon in Resources */,
 				03F33D961DF2A2F900B04FAF /* Assets.xcassets in Resources */,
-				2F125EDE24D0638600868E11 /* BrowserTabWithLegacyAddressBar.xib in Resources */,
 				F6D572B71E26AAA100CDA909 /* RSSFeed.xib in Resources */,
 				F6B7F9CB2E22E77F005ADB06 /* Downloads.storyboard in Resources */,
 				F6832F631F10C4C9007920D4 /* ExportAccessoryViewController.xib in Resources */,
