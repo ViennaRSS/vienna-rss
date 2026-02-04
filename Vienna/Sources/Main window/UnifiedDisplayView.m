@@ -22,7 +22,6 @@
 #import "ArticleController.h"
 #import "AppController.h"
 #import "ArticleCellView.h"
-#import "DisclosureView.h"
 #import "Preferences.h"
 #import "Constants.h"
 #import "StringExtensions.h"
