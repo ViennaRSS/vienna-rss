@@ -15259,10 +15259,40 @@
       "comment" : "Class = \"NSMenuItem\"; title = \"Reopen Last Closed Tab\"; ObjectID = \"Qlz-BL-rsc\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Genåben sidst lukkede fane"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zuletzt geschlossenen Tab erneut öffnen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Reopen Last Closed Tab"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rouvrir le dernier onglet fermé"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open laatst gesloten tabblad opnieuw"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öppna senast stängda flik igen"
           }
         }
       }
@@ -17021,6 +17051,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Verklig storlek"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "真实大小"
           }
         },
         "zh-Hant" : {
