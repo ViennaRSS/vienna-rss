@@ -7,11 +7,14 @@ included:
 # Rules
 
 disabled_rules:
+  - closure_parameter_position
   - cyclomatic_complexity
   - file_length
   - function_body_length
   - line_length
+  - opening_brace
   - todo
+  - trailing_comma
 
 opt_in_rules:
   - attributes
