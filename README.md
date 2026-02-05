@@ -50,6 +50,8 @@ Contributing
 
 Want to contribute? Great! There are many ways you can, even if you aren't a developer.
 
+This project has strict rules regarding usage of so-called "AI". Please see the [LLM usage policy](LLM-USAGE-POLICY.md).
+
 ### Writing code
 
 Please check [CONTRIBUTING.md](CONTRIBUTING.md).
