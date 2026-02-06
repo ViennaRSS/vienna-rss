@@ -166,11 +166,13 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
  */
 -(void)doSafeInitialisation
 {
-	static BOOL doneSafeInit = NO;
-	if (!doneSafeInit) {
+	if (!didCompleteInitialisation) {
 		[self.foldersTree initialiseFoldersTree];
 
 		Preferences * prefs = [Preferences standardPreferences];
+
+        // Restore the most recent layout
+        [self.articleController setLayout:prefs.layout];
 
 		// Select the folder and article from the last session
 		NSInteger previousFolderId = [prefs integerForKey:MAPref_CachedFolderID];
@@ -189,8 +191,6 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
         } else if (prefs.refreshOnStartup) {
             [self refreshAllSubscriptions];
         }
-
-		doneSafeInit = YES;
 		
 	}
 	didCompleteInitialisation = YES;
@@ -271,9 +271,6 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 		[NSApp terminate:nil];
 		return;
 	}
-
-    // Restore the most recent layout
-    [self.articleController setLayout:Preferences.standardPreferences.layout];
 
 	// Initialize the Sort By and Columns menu
 	[self initSortMenu];
