@@ -166,8 +166,7 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
  */
 -(void)doSafeInitialisation
 {
-	static BOOL doneSafeInit = NO;
-	if (!doneSafeInit) {
+	if (!didCompleteInitialisation) {
 		[self.foldersTree initialiseFoldersTree];
 
 		Preferences * prefs = [Preferences standardPreferences];
@@ -192,8 +191,6 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
         } else if (prefs.refreshOnStartup) {
             [self refreshAllSubscriptions];
         }
-
-		doneSafeInit = YES;
 		
 	}
 	didCompleteInitialisation = YES;
