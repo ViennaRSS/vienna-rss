@@ -342,9 +342,9 @@
             }
 
             // Do relative IMG, IFRAME and A tags fixup
-            [articleBody vna_fixupRelativeImgTags:self.homePageURL];
-            [articleBody vna_fixupRelativeIframeTags:self.homePageURL];
-            [articleBody vna_fixupRelativeAnchorTags:self.homePageURL];
+            [articleBody vna_fixupRelativeImgTags:newFeedItem.url];
+            [articleBody vna_fixupRelativeIframeTags:newFeedItem.url];
+            [articleBody vna_fixupRelativeAnchorTags:newFeedItem.url];
             newFeedItem.content = SafeString(articleBody);
 
             // Add this item in the proper location in the array

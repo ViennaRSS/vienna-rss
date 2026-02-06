@@ -136,11 +136,8 @@
 
             // Look for the xml:base attribute, and use absolute url or stack relative url
             NSString *entryBase = [NSString vna_stringByCleaningURLString:[atomChildElement attributeForName:@"xml:base"].stringValue];
-            if (entryBase == nil) {
-                entryBase = linkBase;
-            }
 
-            NSURL *entryBaseURL = (entryBase != nil) ? [NSURL URLWithString:entryBase] : nil;
+            NSURL *entryBaseURL = [entryBase isEqualToString:@""] ? nil : [NSURL URLWithString:entryBase];
             if ((entryBaseURL != nil) && (linkBaseURL != nil) && (entryBaseURL.scheme == nil)) {
                 entryBaseURL = [NSURL URLWithString:entryBase relativeToURL:linkBaseURL];
                 if (entryBaseURL != nil) {
@@ -323,6 +320,10 @@
             // if we didn't find an author, set it to the default one
             if ([newFeedItem.authors isEqualToString:@""]) {
                 newFeedItem.authors = defaultAuthor;
+            }
+
+            if ([entryBase isEqualToString:@""]) {
+                entryBase = newFeedItem.url ? newFeedItem.url : linkBase;
             }
 
             // Do relative IMG, IFRAME and A tags fixup
