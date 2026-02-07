@@ -493,13 +493,9 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
             [self finishReloadArrayOfArticles];
         });
     });
-} // reloadArrayOfArticles
 
--(void)finishReloadArrayOfArticles
-{
     Article *article = self.selectedArticle;
-
-    // Make sure selectedArticle hasn't changed since reload started.
+    // To verify later if selectedArticle has changed after reload started.
     if (articleToPreserve != nil && articleToPreserve != article) {
         if (article != nil && !article.isDeleted) {
             articleToPreserve = article;
@@ -507,6 +503,10 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
             articleToPreserve = nil;
         }
     }
+} // reloadArrayOfArticles
+
+-(void)finishReloadArrayOfArticles
+{
 
     [self->mainArticleView refreshFolder:VNARefreshReapplyFilter];
 
@@ -522,7 +522,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
     // we check to see if the selected article is the same
     // and if it has been updated
     Article *currentArticle = self.selectedArticle;
-    if (currentArticle == article &&
+    if (currentArticle == articleToPreserve &&
         [[Preferences standardPreferences] boolForKey:MAPref_CheckForUpdatedArticles]
         && currentArticle.isRevised)
     {
