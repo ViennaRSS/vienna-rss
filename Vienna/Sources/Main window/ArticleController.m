@@ -69,7 +69,6 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
     Article *articleToPreserve;
     NSString *guidOfArticleToSelect;
     BOOL firstUnreadArticleRequired;
-    dispatch_queue_t queue;
 }
 
 @synthesize mainArticleView, currentArrayOfArticles, folderArrayOfArticles, articleSortSpecifiers, backtrackArray;
@@ -164,8 +163,6 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
                        forKeyPath:MAPref_ShowFilterBar
                           options:NSKeyValueObservingOptionNew
                           context:VNAArticleControllerObserverContext];
-
-        queue = dispatch_queue_create("uk.co.opencommunity.vienna2.displayRefresh", DISPATCH_QUEUE_SERIAL);
     }
     return self;
 }
@@ -488,9 +485,18 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 {
     Folder *folder = [[Database sharedManager] folderFromID:currentFolderId];
     NSString *filterString = self.filterString;
-    dispatch_sync(queue, ^{
-        self.folderArrayOfArticles = [folder articlesWithFilter:filterString];
+    __block NSArray * articles;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        articles = [folder articlesWithFilter:filterString];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            self.folderArrayOfArticles = articles;
+            [self finishReloadArrayOfArticles];
+        });
     });
+} // reloadArrayOfArticles
+
+-(void)finishReloadArrayOfArticles
+{
     Article *article = self.selectedArticle;
 
     // Make sure selectedArticle hasn't changed since reload started.
@@ -522,7 +528,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
     {
         [[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_ArticleViewChange object:nil];
     }
-} // reloadArrayOfArticles
+} // finishReloadArrayOfArticles
 
 /* refilterArrayOfArticles
  * Reapply the current filter to the article array.
