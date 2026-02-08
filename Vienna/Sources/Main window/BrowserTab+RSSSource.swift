@@ -58,8 +58,8 @@ extension BrowserTab: RSSSource {
 
     @objc
     func viewDidLoadRss() {
-        refreshRSSState()
         registerNavigationEndHandler { [weak self] success in self?.handleNavigationEndRss(success: success) }
+        refreshRSSState()
     }
 
     func refreshRSSState() {
@@ -81,14 +81,14 @@ extension BrowserTab: RSSSource {
         // TODO: deal with multiple links
         waitForAsyncExecution(until: DispatchTime.now() + DispatchTimeInterval.milliseconds(200)) { [weak self] finishHandler in
             self?.webView.evaluateJavaScript(BrowserTab.extractRssLinkScript) { result, error in
-                if error == nil, let result = result as? [String] {
+                defer { finishHandler() }
+                if let result = result as? [String], error == nil {
                     // RSS feed link(s) detected
                     self?.rssUrls = result.compactMap { URL(string: $0 as String) }
                 } else {
                     // error or no rss url available
                     self?.rssUrls = []
                 }
-                finishHandler()
             }
         }
     }
