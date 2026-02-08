@@ -1566,7 +1566,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		// Toggle the refresh button
 		NSToolbarItem *item = [self toolbarItemWithIdentifier:@"Refresh"];
 		item.action = @selector(cancelAllRefreshesToolbar:);
-        item.image = [NSImage imageNamed:ACImageNameCancelTemplate];
+        item.image = [NSImage imageNamed:NSImageNameStopProgressTemplate];
 	} else {
 		// Run the auto-expire now
 		Preferences * prefs = [Preferences standardPreferences];
@@ -1575,7 +1575,13 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		// Toggle the refresh button
 		NSToolbarItem *item = [self toolbarItemWithIdentifier:@"Refresh"];
 		item.action = @selector(refreshAllSubscriptions:);
-        item.image = [NSImage imageNamed:ACImageNameSyncTemplate];
+        if (@available(macOS 15, *)) {
+            NSString *symbolName = @"arrow.trianglehead.clockwise.rotate.90";
+            item.image = [NSImage imageWithSystemSymbolName:symbolName
+                                   accessibilityDescription:nil];
+        } else {
+            item.image = [NSImage imageNamed:ACImageNameArrowTriangleheadClockwiseRotate90];
+        }
 
 		[self showUnreadCountOnApplicationIconAndWindowTitle];
 		
