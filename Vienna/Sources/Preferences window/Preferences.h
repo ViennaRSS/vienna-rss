@@ -144,6 +144,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *syncingAppId;
 @property (nonatomic, copy) NSString *syncingAppKey;
 
+// apply Tahoe menu images
+@property (nonatomic) BOOL menuEnableActionImages;
+
 @end
 
 NS_ASSUME_NONNULL_END

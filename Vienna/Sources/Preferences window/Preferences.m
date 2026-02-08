@@ -139,6 +139,9 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
 		shouldSaveFeedSource = [self boolForKey:MAPref_ShouldSaveFeedSource];
 		concurrentDownloads = [self integerForKey:MAPref_ConcurrentDownloads];
         _userAgentName = [self stringForKey:MAPref_UserAgentName];
+        // if there isn't a choice already set, this saves
+        // the default into Preferences file
+        self.menuEnableActionImages = [userPrefs boolForKey:MAPref_MenuEnableActionImages];
 
         // Archived objects
         searchMethod = [NSKeyedUnarchiver unarchivedObjectOfClass:[SearchMethod class]
@@ -239,6 +242,7 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
 	defaultValues[MAPref_ShouldSaveFeedSourceBackup] = boolNo;
     defaultValues[MAPref_ShowDetailsOnFeedCredentialsDialog] = boolNo;
     defaultValues[MAPref_ShowEnclosureBar] = boolYes;
+    defaultValues[MAPref_MenuEnableActionImages] = boolNo;
 
     // Archives
     defaultValues[MAPref_ArticleListFont] = [NSKeyedArchiver archivedDataWithRootObject:defaultFont
@@ -1005,6 +1009,22 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
 -(void)setShowFilterBar:(BOOL)showFilterBar
 {
     [self setBool:showFilterBar forKey:MAPref_ShowFilterBar];
+}
+
+/* menuEnableActionImages
+ * Returns whether we apply icons to menu items
+ */
+-(BOOL)menuEnableActionImages
+{
+    return [self boolForKey:MAPref_MenuEnableActionImages];
+}
+
+/* setMenuEnableActionImages
+ * Specifies whether the filter bar is shown or hidden.
+ */
+-(void)setMenuEnableActionImages:(BOOL)menuEnableActionImages
+{
+    [self setBool:menuEnableActionImages forKey:MAPref_MenuEnableActionImages];
 }
 
 /* feedSourcesFolder
