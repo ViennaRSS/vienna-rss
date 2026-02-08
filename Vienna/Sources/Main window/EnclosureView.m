@@ -31,6 +31,8 @@
 
 @interface EnclosureView ()
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *stackViewTrailingConstraint;
+
 -(IBAction)openFile:(id)sender;
 
 @end
@@ -64,6 +66,16 @@
 -(void)awakeFromNib
 {
 	[filenameField setCanCopyURLs:YES];
+
+    if (@available(macOS 26, *)) {
+        // Constrain the download button to the trailing layout margin.
+        NSLayoutXAxisAnchor *marginAnchor = self.layoutMarginsGuide.trailingAnchor;
+        NSLayoutXAxisAnchor *downloadButtonAnchor = downloadButton.trailingAnchor;
+        [marginAnchor constraintEqualToAnchor:downloadButtonAnchor].active = YES;
+
+        // Disable the existing layout constraint to avoid conflicts.
+        self.stackViewTrailingConstraint.active = NO;
+    }
 }
 
 /* handleDownloadCompleted
