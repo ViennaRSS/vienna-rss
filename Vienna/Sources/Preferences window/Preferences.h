@@ -131,7 +131,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic) BOOL syncOpenReader;
 
-@property (nonatomic) BOOL prefersOpenReaderNewSubscription;
+@property (nonatomic) BOOL preferOpenReaderWhenSubscribing;
 
 // server used for syncing
 @property (nonatomic, copy) NSString *syncServer;

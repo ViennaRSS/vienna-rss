@@ -72,7 +72,6 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
     BOOL showStatusBar;
     BOOL shouldSaveFeedSource;
     BOOL syncOpenReader;
-    BOOL prefersOpenReaderNewSubscription;
     BOOL markUpdatedAsNew;
     NSString *displayStyle;
     CGFloat textSizeMultiplier;
@@ -155,7 +154,6 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
         
         // Open Reader sync
         syncOpenReader = [self boolForKey:MAPref_SyncOpenReader];
-        prefersOpenReaderNewSubscription = [self boolForKey:MAPref_OpenReaderNewSubscription];
 		syncServer = [userPrefs stringForKey:MAPref_SyncServer];
         syncScheme = [userPrefs stringForKey:MAPref_SyncScheme];
 		syncingUser = [userPrefs stringForKey:MAPref_SyncingUser];
@@ -255,7 +253,7 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
 
     defaultValues[MAPref_ConcurrentDownloads] = @(MA_Default_ConcurrentDownloads);
     defaultValues[MAPref_SyncOpenReader] = boolNo;
-    defaultValues[MAPref_OpenReaderNewSubscription] = boolNo;
+    defaultValues[MAPref_PreferOpenReaderWhenSubscribing] = boolNo;
     defaultValues[MAPref_SyncingAppId] = @"1000001359";
     defaultValues[MAPref_SyncingAppKey] = @"rAlfs2ELSuFxZJ5adJAW54qsNbUa45Qn";
     defaultValues[MAPref_AlwaysAcceptBetas] = boolNo;
@@ -1071,21 +1069,18 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
 	}
 }
 
-/* Getter/setters for prefersOpenReaderNewSubscription
+/* Getter/setters for preferOpenReaderWhenSubscribing
  * Specifies whether Vienna defaults to Open Reader when entering a new subscription
  */
--(BOOL)prefersOpenReaderNewSubscription
+- (BOOL)preferOpenReaderWhenSubscribing
 {
-    return prefersOpenReaderNewSubscription;
+    return [self boolForKey:MAPref_PreferOpenReaderWhenSubscribing];
 }
 
--(void)setPrefersOpenReaderNewSubscription:(BOOL)flag
+- (void)setPreferOpenReaderWhenSubscribing:(BOOL)preferOpenReaderWhenSubscribing
 {
-	if (prefersOpenReaderNewSubscription != flag) {
-		prefersOpenReaderNewSubscription = flag;
-		[self setBool:prefersOpenReaderNewSubscription forKey:MAPref_OpenReaderNewSubscription];
-		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_OpenReaderNewSubscriptionChange object:nil];
-	}
+    [self setBool:preferOpenReaderWhenSubscribing
+           forKey:MAPref_PreferOpenReaderWhenSubscribing];
 }
 
 -(NSString *)syncServer

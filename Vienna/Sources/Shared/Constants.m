@@ -42,7 +42,6 @@ NSNotificationName const MA_Notify_FolderNameChanged = @"MA_Notify_FolderNameCha
 NSNotificationName const MA_Notify_FolderSelectionChange = @"MA_Notify_FolderSelectionChange";
 NSNotificationName const MA_Notify_FoldersUpdated = @"MA_Notify_FoldersUpdated";
 NSNotificationName const MA_Notify_OpenReaderAuthFailed = @"MA_Notify_OpenReaderAuthFailed";
-NSNotificationName const MA_Notify_OpenReaderNewSubscriptionChange = @"MA_Notify_OpenReaderNewSubscriptionChange";
 NSNotificationName const MA_Notify_GotAuthenticationForFolder = @"MA_Notify_GotAuthenticationForFolder";
 NSNotificationName const MA_Notify_LoadFullHTMLChange = @"MA_Notify_LoadFullHTMLChange";
 NSNotificationName const MA_Notify_MinimumFontSizeChange = @"MA_Notify_MinimumFontSizeChange";
@@ -99,7 +98,7 @@ NSString * const MAPref_SearchMethod = @"SearchMethod";
 // The old value is used here for backward compatibility.
 NSString * const MAPref_SyncOpenReader = @"SyncGoogleReader";
 // The old value is used here for backward compatibility.
-NSString * const MAPref_OpenReaderNewSubscription = @"GoogleNewSubscription";
+NSString * const MAPref_PreferOpenReaderWhenSubscribing = @"GoogleNewSubscription";
 NSString * const MAPref_ConcurrentDownloads = @"ConcurrentDownloads";
 NSString * const MAPref_SyncServer = @"SyncServer";
 NSString * const MAPref_SyncScheme = @"SyncScheme";

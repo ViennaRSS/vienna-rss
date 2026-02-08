@@ -23,7 +23,6 @@
 #import "Database.h"
 #import "FeedSourcePlugin.h"
 #import "PluginManager.h"
-#import "Preferences.h"
 #import "StringExtensions.h"
 #import "SubscriptionModel.h"
 
@@ -33,7 +32,6 @@ static NSStoryboardName const VNAStoryboardNameSubscribe = @"Subscribe";
 
 @property (weak, nonatomic) NSMenuItem *webPageMenuItem;
 @property (weak, nonatomic) NSMenuItem *localFileMenuItem;
-@property BOOL openReaderOptionButton;
 
 @end
 
@@ -140,10 +138,6 @@ static NSStoryboardName const VNAStoryboardNameSubscribe = @"Subscribe";
 
     [self enableSubscribeButton];
     [self setLinkTitle];
-    // restore from preferences, if it can be done ; otherwise, uncheck this option
-    self.openReaderOptionButton =
-        Preferences.standardPreferences.syncOpenReader &&
-        Preferences.standardPreferences.prefersOpenReaderNewSubscription;
 
     [self.view.window makeFirstResponder:feedURL];
 }
@@ -202,14 +196,6 @@ static NSStoryboardName const VNAStoryboardNameSubscribe = @"Subscribe";
 - (IBAction)doLinkSourceChanged:(id)sender
 {
     [self setLinkTitle];
-}
-
-// Action called by the Open Reader checkbox
-// Memorizes the setting in preferences
-- (IBAction)doOpenReaderOption:(id)sender
-{
-    Preferences.standardPreferences.prefersOpenReaderNewSubscription =
-        ([sender state] == NSControlStateValueOn);
 }
 
 // Set the text of the label that prompts for the link based on the source
