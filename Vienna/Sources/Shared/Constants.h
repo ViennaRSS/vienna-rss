@@ -42,7 +42,6 @@ extern NSNotificationName const MA_Notify_FolderNameChanged;
 extern NSNotificationName const MA_Notify_FolderSelectionChange;
 extern NSNotificationName const MA_Notify_FoldersUpdated;
 extern NSNotificationName const MA_Notify_OpenReaderAuthFailed;
-extern NSNotificationName const MA_Notify_OpenReaderNewSubscriptionChange; // Unused
 extern NSNotificationName const MA_Notify_GotAuthenticationForFolder;
 extern NSNotificationName const MA_Notify_LoadFullHTMLChange;
 extern NSNotificationName const MA_Notify_MinimumFontSizeChange;

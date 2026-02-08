@@ -72,7 +72,6 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
     BOOL showStatusBar;
     BOOL shouldSaveFeedSource;
     BOOL syncOpenReader;
-    BOOL prefersOpenReaderNewSubscription;
     BOOL markUpdatedAsNew;
     NSString *displayStyle;
     CGFloat textSizeMultiplier;
@@ -155,7 +154,6 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
         
         // Open Reader sync
         syncOpenReader = [self boolForKey:MAPref_SyncOpenReader];
-        prefersOpenReaderNewSubscription = [self boolForKey:MAPref_OpenReaderNewSubscription];
 		syncServer = [userPrefs stringForKey:MAPref_SyncServer];
         syncScheme = [userPrefs stringForKey:MAPref_SyncScheme];
 		syncingUser = [userPrefs stringForKey:MAPref_SyncingUser];
@@ -1076,16 +1074,13 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
  */
 -(BOOL)prefersOpenReaderNewSubscription
 {
-    return prefersOpenReaderNewSubscription;
+    return [self boolForKey:MAPref_OpenReaderNewSubscription];
 }
 
 -(void)setPrefersOpenReaderNewSubscription:(BOOL)flag
 {
-	if (prefersOpenReaderNewSubscription != flag) {
-		prefersOpenReaderNewSubscription = flag;
-		[self setBool:prefersOpenReaderNewSubscription forKey:MAPref_OpenReaderNewSubscription];
-		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_OpenReaderNewSubscriptionChange object:nil];
-	}
+    [self setBool:flag
+           forKey:MAPref_OpenReaderNewSubscription];
 }
 
 -(NSString *)syncServer
