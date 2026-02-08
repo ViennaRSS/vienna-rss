@@ -96,7 +96,7 @@ extern NSString * const MAPref_ShouldSaveFeedSource;
 extern NSString * const MAPref_ShouldSaveFeedSourceBackup;
 extern NSString * const MAPref_SearchMethod;
 extern NSString * const MAPref_SyncOpenReader;
-extern NSString * const MAPref_OpenReaderNewSubscription;
+extern NSString * const MAPref_PreferOpenReaderWhenSubscribing;
 extern NSString * const MAPref_ConcurrentDownloads;
 extern NSString * const MAPref_SyncServer;
 extern NSString * const MAPref_SyncScheme;

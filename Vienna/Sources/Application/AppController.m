@@ -1897,7 +1897,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 	
 	// Create the new folder.
-	if ([Preferences standardPreferences].syncOpenReader && [Preferences standardPreferences].prefersOpenReaderNewSubscription) {	//creates in OpenReader
+	if ([Preferences standardPreferences].syncOpenReader && [Preferences standardPreferences].preferOpenReaderWhenSubscribing) {	//creates in OpenReader
 		NSString * folderName = [db folderFromID:parentId].name;
 		[[OpenReader sharedManager] subscribeToFeed:urlString withLabel:folderName];
 	} else { //creates locally

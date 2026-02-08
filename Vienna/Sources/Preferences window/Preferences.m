@@ -253,7 +253,7 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
 
     defaultValues[MAPref_ConcurrentDownloads] = @(MA_Default_ConcurrentDownloads);
     defaultValues[MAPref_SyncOpenReader] = boolNo;
-    defaultValues[MAPref_OpenReaderNewSubscription] = boolNo;
+    defaultValues[MAPref_PreferOpenReaderWhenSubscribing] = boolNo;
     defaultValues[MAPref_SyncingAppId] = @"1000001359";
     defaultValues[MAPref_SyncingAppKey] = @"rAlfs2ELSuFxZJ5adJAW54qsNbUa45Qn";
     defaultValues[MAPref_AlwaysAcceptBetas] = boolNo;
@@ -1069,18 +1069,18 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
 	}
 }
 
-/* Getter/setters for prefersOpenReaderNewSubscription
+/* Getter/setters for preferOpenReaderWhenSubscribing
  * Specifies whether Vienna defaults to Open Reader when entering a new subscription
  */
--(BOOL)prefersOpenReaderNewSubscription
+- (BOOL)preferOpenReaderWhenSubscribing
 {
-    return [self boolForKey:MAPref_OpenReaderNewSubscription];
+    return [self boolForKey:MAPref_PreferOpenReaderWhenSubscribing];
 }
 
--(void)setPrefersOpenReaderNewSubscription:(BOOL)flag
+- (void)setPreferOpenReaderWhenSubscribing:(BOOL)preferOpenReaderWhenSubscribing
 {
-    [self setBool:flag
-           forKey:MAPref_OpenReaderNewSubscription];
+    [self setBool:preferOpenReaderWhenSubscribing
+           forKey:MAPref_PreferOpenReaderWhenSubscribing];
 }
 
 -(NSString *)syncServer

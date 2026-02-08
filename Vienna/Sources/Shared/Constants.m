@@ -98,7 +98,7 @@ NSString * const MAPref_SearchMethod = @"SearchMethod";
 // The old value is used here for backward compatibility.
 NSString * const MAPref_SyncOpenReader = @"SyncGoogleReader";
 // The old value is used here for backward compatibility.
-NSString * const MAPref_OpenReaderNewSubscription = @"GoogleNewSubscription";
+NSString * const MAPref_PreferOpenReaderWhenSubscribing = @"GoogleNewSubscription";
 NSString * const MAPref_ConcurrentDownloads = @"ConcurrentDownloads";
 NSString * const MAPref_SyncServer = @"SyncServer";
 NSString * const MAPref_SyncScheme = @"SyncScheme";
