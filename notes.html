@@ -1,29 +1,38 @@
-<!DOCTYPE html><head><meta charset="utf-8"/></head><h2>Vienna 3.10.0 Beta 6</h2>
-<p><em>released 2025-09-05</em></p>
+<!DOCTYPE html><head><meta charset="utf-8"/></head><h2>Vienna 3.10.0 Beta 7</h2>
+<p><em>released 2026-02-09</em></p>
 <h3>🚲 Changes</h3>
 <ul>
-<li>Support closing tabs by clicking the middle button of the mouse</li>
-<li>Change application icon to conform to style of macOS 11 and later</li>
-<li>Change position of filter bar in vertical layout</li>
-<li>Suspend (up to 5 minutes) connection attempts when the computer is disconnected from network</li>
-<li>Use green double dot instead of yellow sparkle as mark of revised articles in article list</li>
-<li>Be more tolerant with feeds using RSS tags instead of Atom tags (or vice-versa)</li>
+<li>Add a command to reopen the last closed tab</li>
+<li>Add a button to access notifications settings from Vienna’s settings</li>
+<li>Disable “Subscribe in Open Reader” option when syncing is not yet configured</li>
+<li>Visual adaptations to macOS 26 (app icon, window corners)</li>
+<li>Remove deprecated Pocket plugin</li>
+<li>Update translations</li>
 </ul>
 <h3>🤷🏻 Bugfix</h3>
 <ul>
-<li>Fix colors when a cell is selected and right clicked in article list</li>
-<li>Respect the high contrast accessibility setting for bottom line</li>
-<li>Add missing separator to filter submenu in main menu</li>
-<li>Fix / improve validation for some menu / toolbar items</li>
-<li>Fix crash or inability to parse caused by some feeds containing HTML tags instead of their XHTML equivalents</li>
+<li>Fix icons not being visible in table header on macOS 26</li>
+<li>Fix text-only mode of toolbar not working on macOS 15+</li>
+<li>Improve detection and repair of inconsistent counts of unread articles</li>
+<li>Fix relative URLs for certain feeds</li>
 </ul>
 <h3>⚙️ Internals improvement</h3>
 <ul>
-<li>Refactor filter bar into its own view controller</li>
-<li>Move several actions from AppController to ArticleController; rename many actions; remove unused methods from BaseView protocol</li>
-<li>Use storyboard for activity window and NewSubscription</li>
-<li>Remove deprecated network calls</li>
-<li>Reorganize classes related to article list in Xcode layout</li>
-<li>Fix definition &amp; handling of ArticleStatusUpdated</li>
-<li>Minor fix in Changelog regarding versions 2.6.0</li>
+<li>Have article controller fetch articles asynchronously</li>
+<li>Refactor feed discovery</li>
+<li>Remove legacy address bar</li>
+<li>Improve size limits for split views involving web view</li>
+<li>Clean up imports and class forward declaration</li>
+<li>Rename multiple variables/constants for consistency</li>
+</ul>
+<h3>🛤️ Infrastructure updates</h3>
+<ul>
+<li>Update FMDB to version 2.7.12, Sparkle to version 3.8.0</li>
+<li>Build on macOS 26.2 / Xcode 26.2</li>
+<li>Update Github checkout action to version 6</li>
+<li>Update SwiftLint settings</li>
+</ul>
+<h3>📖 Documentation</h3>
+<ul>
+<li>Add documentation about usage of large language models (so-called “AI”)</li>
 </ul>
