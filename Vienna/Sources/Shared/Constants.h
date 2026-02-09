@@ -110,6 +110,7 @@ extern NSString * const MAPref_ShowDetailsOnFeedCredentialsDialog;
 extern NSString * const MAPref_ShowEnclosureBar;
 extern NSString * const MAPref_FeedListSizeMode;
 extern NSString * const MAPref_ShowFeedsWithUnreadItemsInBold;
+extern NSString * const MAPref_MenuEnableActionImages;
 
 extern NSInteger const MA_Default_BackTrackQueueSize;
 extern float const MA_Default_Read_Interval;
