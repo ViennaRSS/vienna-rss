@@ -100,7 +100,6 @@
 		3A7BD0DD1989AC7700E9444B /* VNAVerticallyCenteredTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7BD0DC1989AC7700E9444B /* VNAVerticallyCenteredTextFieldCell.m */; };
 		3A8D9AE325A9DA4B0016F30F /* ArticleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D9AE225A9DA4B0016F30F /* ArticleTests.swift */; };
 		3AA9880E2F2159CD0035B027 /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 3AA9880D2F2159CD0035B027 /* AppIcon.icon */; };
-		3AA988102F34F3E40035B027 /* LLM-USAGE-POLICY.md in Resources */ = {isa = PBXBuildFile; fileRef = 3AA9880F2F34F3E40035B027 /* LLM-USAGE-POLICY.md */; };
 		3AB95743258DBC5A00C54E83 /* Browser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDF6FC5218A26B0002F77E9 /* Browser.swift */; };
 		3AC411A526BBFDFD004A8700 /* WebKitArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC411A426BBFDFD004A8700 /* WebKitArticleView.swift */; };
 		435026E6165DD8BE0018EDB7 /* ArticleRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 435026E5165DD8BE0018EDB7 /* ArticleRef.m */; };
@@ -1652,7 +1651,6 @@
 				F6D572BA1E26AAA900CDA909 /* SearchFolder.xib in Resources */,
 				F626F5F424A76B9100D3AAD8 /* Preferences.storyboard in Resources */,
 				F6209C5A23D3FFA700D5537D /* Vienna.sdef in Resources */,
-				3AA988102F34F3E40035B027 /* LLM-USAGE-POLICY.md in Resources */,
 				F63C08F02C4A70AA0095BAD7 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
