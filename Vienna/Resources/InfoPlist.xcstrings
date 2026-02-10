@@ -24,6 +24,12 @@
             "value" : "Vienna's blog editor plug-ins use Apple events to share article data. Script plug-ins and AppleScript files may use Apple events as well."
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les plugins de Vienna qui transmettent des éléments d'articles à des éditeurs de blogs ont recours à des messages de type AppleEvent. De même, les plugins à base de scripts ou AppleScript peuvent recourir aux AppleEvents."
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",

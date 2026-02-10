@@ -1,0 +1,8 @@
+/* The name of the plug-in, such as the name of the website or app. */
+"FriendlyName" = "wallabag";
+
+/* The label for the plug-in in toolbar items and menu items. */
+"MenuPath" = "Partager avec wallabag.it";
+
+/* The tool tip for the plug-in in toolbar items. */
+"Tooltip" = "Ajouter l'article en cours à wallabag.it";
