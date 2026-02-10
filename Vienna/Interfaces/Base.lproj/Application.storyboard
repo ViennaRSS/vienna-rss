@@ -33,6 +33,7 @@
                                         <menuItem title="Check for Updates" id="1104">
                                             <connections>
                                                 <action selector="checkForUpdates:" target="LzF-8y-hiG" id="1176"/>
+                                                <binding destination="LzF-8y-hiG" name="enabled" keyPath="updater.canCheckForUpdates" id="CC1-3R-dew"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="143"/>
