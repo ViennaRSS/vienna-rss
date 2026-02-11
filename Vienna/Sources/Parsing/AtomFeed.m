@@ -218,7 +218,7 @@
                 // Parse item link
                 if (isArticleElementAtomType && [articleItemTag isEqualToString:@"link"]) {
                     if ([[itemChildElement attributeForName:@"rel"].stringValue isEqualToString:@"enclosure"] ||
-                        [[itemChildElement attributeForName:@"rel"].stringValue isEqualToString:@"http://opds-spec.org/acquisition"]) {
+                        [[itemChildElement attributeForName:@"rel"].stringValue hasPrefix:@"http://opds-spec.org/acquisition"]) {
                         NSString *theLink = ([itemChildElement attributeForName:@"href"].stringValue).vna_stringByUnescapingExtendedCharacters;
                         if (theLink != nil) {
                             if ((entryBaseURL != nil) && ([NSURL URLWithString:theLink].scheme == nil)) {
