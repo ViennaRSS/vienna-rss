@@ -115,6 +115,8 @@
 	<true/>
 	<key>LSMinimumSystemVersion</key>
 	<string>$(MACOSX_DEPLOYMENT_TARGET).0</string>
+	<key>MDItemKeywords</key>
+	<string>RSS, Atom, JSON Feed, Feed, News, Reader, OPML, OPDS, Podcasts</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
