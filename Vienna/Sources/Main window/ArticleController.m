@@ -487,10 +487,13 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
     NSString *filterString = self.filterString;
     __block NSArray * articles;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSInteger requestedFolderId = self->currentFolderId;
         articles = [folder articlesWithFilter:filterString];
         dispatch_sync(dispatch_get_main_queue(), ^{
-            self.folderArrayOfArticles = articles;
-            [self finishReloadArrayOfArticles];
+            if (self->currentFolderId == requestedFolderId) {
+                self.folderArrayOfArticles = articles;
+                [self finishReloadArrayOfArticles];
+            }
         });
     });
 
