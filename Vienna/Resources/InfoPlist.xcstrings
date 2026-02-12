@@ -14,6 +14,18 @@
       },
       "shouldTranslate" : false
     },
+    "MDItemKeywords" : {
+      "comment" : "A list of keywords that will show up in the ‘More Info’ window for the app and will make the app surface if these keywords are searched in Spotlight",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "RSS, Atom, JSON Feed, Feed, News, Reader, OPML, OPDS, Podcasts"
+          }
+        }
+      }
+    },
     "NSAppleEventsUsageDescription" : {
       "comment" : "A message that tells the user why Vienna is requesting the ability to send Apple events.",
       "extractionState" : "extracted_with_value",
