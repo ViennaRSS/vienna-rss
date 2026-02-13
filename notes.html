@@ -1,38 +1,116 @@
-<!DOCTYPE html><head><meta charset="utf-8"/></head><h2>Vienna 3.10.0 Beta 7</h2>
-<p><em>released 2026-02-09</em></p>
+<!DOCTYPE html><head><meta charset="utf-8"/></head><h2>Vienna 3.10.0</h2>
+<p>This version is recommended for all Vienna users. Development has focused on stability and consistency,  in the spirit of Apple’s <em>“Snow Leopard”</em>.</p>
+<h2><em>1. Evolutions since Vienna 3.9.5</em></h2>
 <h3>🚲 Changes</h3>
 <ul>
+<li>Support closing tabs by clicking the middle button of the mouse</li>
 <li>Add a command to reopen the last closed tab</li>
+<li>Use a new icon</li>
+<li>Make other visual adaptations necessary for macOS Tahoe (macOS 26), while avoiding Tahoe’s tendency to put icons on every menu item</li>
+<li>Distribute Vienna in <em>.dmg</em> disk images instead of <em>.tgz</em> archives</li>
 <li>Add a button to access notifications settings from Vienna’s settings</li>
-<li>Disable “Subscribe in Open Reader” option when syncing is not yet configured</li>
-<li>Visual adaptations to macOS 26 (app icon, window corners)</li>
-<li>Remove deprecated Pocket plugin</li>
+<li>Use Command-Control-0 to Command-Control-2 shortcuts for layout selection (these replace Control+Number shortcuts which are reserved)</li>
+<li>Use green double dot instead of yellow sparkle as mark of revised articles in article list</li>
+<li>Change filter bar position in vertical layout and refactor filter bar into its own view controller</li>
+<li>Display new downloads at the top of the download window</li>
+<li>Group file download notifications in Notification Center</li>
+<li>Add a Mastodon plugin (based on AppleScript) :  configuration can be modified by holding down the Option key when invoking the plugin</li>
+<li>Remove deprecated Pocket and Google Current plugins</li>
+<li>Replace Twitter plugin with X plugin</li>
+<li>Remove obsolete sources of RSS feeds</li>
+<li>Make search plug-in names in toolbar more explicit</li>
+<li>Register Vienna as being able to open OPML files,  e.g. in “Open With” menus</li>
+<li>Add keywords for Spotlight search</li>
+<li>Disable in the user interface the “Subscribe in Open Reader” option if syncing is not yet configured</li>
+<li>Suspend (up to 5 minutes) connection attempts when the computer is disconnected from network</li>
+<li>Be more tolerant with feeds using RSS tags instead of Atom tags (or vice-versa)</li>
+<li>Display details about failures on parsing feed in activity window</li>
 <li>Update translations</li>
 </ul>
-<h3>🤷🏻 Bugfix</h3>
+<h3>🤷🏻 Bugfixes</h3>
 <ul>
+<li>Prevent some freezes related to attempts to detect RSS feeds</li>
+<li>Fix date 1.1.1970 or 31.12.1969 appearing for “Last Update”</li>
+<li>Prevent some of the situations which led Vienna to reset its folder order to alphabetical order</li>
+<li>Fix search plugins</li>
+<li>Fix search of plugins on case-sensitive file systems</li>
+<li>Multiple improvements and fixes to AppleScript support</li>
 <li>Fix icons not being visible in table header on macOS 26</li>
-<li>Fix text-only mode of toolbar not working on macOS 15+</li>
-<li>Improve detection and repair of inconsistent counts of unread articles</li>
+<li>Improve handling and retention of the font selected in settings</li>
+<li>Fix / improve validation for many menu / toolbar items</li>
+<li>Fix text-only mode of toolbar and support of palette-color icons on macOS 15+</li>
+<li>Fix minimum font size setting</li>
+<li>Update link underline color to match system link color</li>
+<li>Fix animation bug when collapsing/expanding groups in folder list sidebar</li>
+<li>Fix bug that caused an invalid (duplicate) folder name being displayed while it has been rejected by the app</li>
+<li>Trim whitespaces at start or end of folder names entered by user</li>
+<li>Fix enclosure detection in OPDS acquisition feeds</li>
+<li>Fix crash or inability to parse some feeds containing HTML tags instead of their XHTML equivalent</li>
 <li>Fix relative URLs for certain feeds</li>
 </ul>
-<h3>⚙️ Internals improvement</h3>
+<h3>⚙️ Internals improvements</h3>
 <ul>
-<li>Have article controller fetch articles asynchronously</li>
+<li>Have article controller fetch articles asynchronously (makes the application more responsive on folder selection)</li>
+<li>Improve detection and repair of inconsistent counts of unread articles</li>
+<li>Improve management of feed articles cache</li>
+<li>Overhaul plugin manager with NSBundle instances to enable plugins localization</li>
+<li>Improve error handling in OpenReader</li>
+<li>Rebalance AppController role:
+<ul>
+<li>move parts of the layout code and many actions to ArticleController</li>
+<li>modify handling of keyboard events to avoid doing everything in AppController</li>
+<li>diminish ArticleListView and UnifiedDisplayView reliance on AppController</li>
+<li>move Sparkle Updater controller to ViennaApp</li>
+</ul>
+</li>
+<li>Remove unused methods from BaseView protocol</li>
+<li>Optimize notifications timings during feed refreshes</li>
+<li>Improve lookup/selection of the “Unread Articles” smart folder</li>
+<li>Use storyboards as starting points for application, activity window, NewSubscription</li>
 <li>Refactor feed discovery</li>
+<li>Use view-based table view in download window; refactor the window and its contextual menus</li>
+<li>Remove ExtendedTableViewDelegate in favor of NSMenuDelegate</li>
+<li>Remove NSKeyedArchiver/NSKeyedUnarchiver methods which were needed for macOS 10.12 backwards compatibility</li>
+<li>Mimic Safari for web browser’s user agent</li>
 <li>Remove legacy address bar</li>
-<li>Improve size limits for split views involving web view</li>
+<li>Use find(_:configuration:completionHandler:) for searching in WKWebView in macOS 11.0+</li>
+<li>Remove unnecessary debugging code using some private properties of WKWebView</li>
+<li>Fix discrepancy in HTTP user-agent when adding a new subscription</li>
+<li>Reorganize the code used for fetching and caching websites’ favicons</li>
+<li>Improve the code which manages the size of a split view involving web view</li>
+<li>Remove deprecated network calls</li>
+<li>Update document type declarations in Info.plist</li>
 <li>Clean up imports and class forward declaration</li>
-<li>Rename multiple variables/constants for consistency</li>
+<li>Refactor Article’s properties and accessors</li>
+<li>Declare some Objective-C designated initializers</li>
+<li>Rename multiple actions/variables/constants for consistency</li>
+<li>Reorganize items in Xcode</li>
+<li>Update tests</li>
+<li>Simplify our version of Autorevision</li>
 </ul>
 <h3>🛤️ Infrastructure updates</h3>
 <ul>
+<li>Build on macOS 26.3 / Xcode 26.2</li>
 <li>Update FMDB to version 2.7.12, Sparkle to version 3.8.0</li>
-<li>Build on macOS 26.2 / Xcode 26.2</li>
+<li>Add Crowdin CLI configuration for translations management</li>
+<li>Clarify the directories used for derived files during build process</li>
 <li>Update Github checkout action to version 6</li>
 <li>Update SwiftLint settings</li>
 </ul>
 <h3>📖 Documentation</h3>
 <ul>
 <li>Add documentation about usage of large language models (so-called “AI”)</li>
+<li>Minor fix in Changelog regarding versions 2.6.0</li>
+<li>Various updates</li>
+</ul>
+<h2><em>2. Evolutions since Vienna 3.10.0 Beta 7</em></h2>
+<ul>
+<li>Add keywords for Spotlight search</li>
+<li>Replace some toolbar icons with symbols having a higher resolution</li>
+<li>Update translations</li>
+<li>Fix enclosure detection in OPDS acquisition feeds</li>
+<li>Optimize asynchronous articles refresh</li>
+<li>Improve handling of “Check for Updates” menu item</li>
+<li>Remove a documentation file from bundle resources</li>
+<li>Build on macOS 26.3 / Xcode 26.2</li>
 </ul>

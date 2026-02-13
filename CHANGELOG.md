@@ -1,6 +1,22 @@
 Vienna ChangeLog File
 =====================
 
+Vienna 3.10.0
+--------------
+_released 2026-02-13_
+### 🚲 Changes
+- Add keywords for Spotlight search
+- Replace some toolbar icons with symbols having a higher resolution
+- Update translations
+### 🤷🏻 Bugfix
+- Fix enclosure detection in OPDS acquisition feeds
+### ⚙️ Internals improvements
+- Optimize asynchronous articles refresh
+- Improve handling of "Check for Updates" menu item
+- Remove a documentation file from bundle resources
+### 🛤️ Infrastructure updates
+- Build on macOS 26.3 / Xcode 26.2
+
 Vienna 3.10.0 Beta 7
 --------------------
 _released 2026-02-09_
