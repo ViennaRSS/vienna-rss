@@ -42,7 +42,8 @@
 // Shared defaults key
 NSString * const MAPref_ShowEnclosureBar = @"ShowEnclosureBar";
 
-static CGFloat const VNAMinimumArticleListViewWidth = 140.0;
+static CGFloat const VNAMinimumArticleListViewHeight = 160.0;
+static CGFloat const VNAMinimumArticleListViewWidth = 200.0;
 static CGFloat const VNAMinimumArticleTextViewWidth = 360.0;
 
 static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverContext;
@@ -1583,14 +1584,22 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
     constrainMinCoordinate:(CGFloat)proposedMinimumPosition
                ofSubviewAt:(NSInteger)dividerIndex
 {
-    return proposedMinimumPosition + VNAMinimumArticleListViewWidth;
+    if (splitView.isVertical) {
+        return proposedMinimumPosition + VNAMinimumArticleListViewWidth;
+    } else {
+        return proposedMinimumPosition + VNAMinimumArticleListViewHeight;
+    }
 }
 
 - (CGFloat)splitView:(NSSplitView *)splitView
     constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
                ofSubviewAt:(NSInteger)dividerIndex
 {
-    return proposedMaximumPosition - VNAMinimumArticleTextViewWidth;
+    if (splitView.isVertical) {
+        return proposedMaximumPosition - VNAMinimumArticleTextViewWidth;
+    } else {
+        return proposedMaximumPosition;
+    }
 }
 
 @end
