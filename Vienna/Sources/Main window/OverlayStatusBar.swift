@@ -70,7 +70,7 @@ final class OverlayStatusBar: NSView {
 
         // Set the constraints.
         var backgroundViewConstraints: [NSLayoutConstraint] = []
-        backgroundViewConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-3-[view]-3-|",
+        backgroundViewConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-3@750-[view]-3-|",
                                                                     metrics: nil, views: ["view": backgroundView])
         backgroundViewConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-3-[view]-3-|",
                                                                     metrics: nil, views: ["view": backgroundView])
