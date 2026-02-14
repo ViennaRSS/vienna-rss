@@ -291,18 +291,6 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 	// Show the current unread count on the app icon
 	[self showUnreadCountOnApplicationIconAndWindowTitle];
 	
-	// Set alternate in main menu for opening pages, and check for correct title of menu item
-	// This is a hack, because Interface Builder refuses to set alternates with only the shift key as modifier.
-	NSMenuItem * alternateItem = menuItemWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
-	if (alternateItem != nil) {
-        alternateItem.keyEquivalentModifierMask = NSEventModifierFlagOption;
-		[alternateItem setAlternate:YES];
-	}
-	alternateItem = menuItemWithAction(@selector(viewArticlePagesInAlternateBrowser:));
-	if (alternateItem != nil) {
-        alternateItem.keyEquivalentModifierMask = NSEventModifierFlagOption;
-		[alternateItem setAlternate:YES];
-	}
 	[self updateAlternateMenuTitle];
 	
 	// Create a menu for the search field

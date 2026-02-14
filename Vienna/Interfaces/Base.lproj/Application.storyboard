@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="24506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23727"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24506"/>
     </dependencies>
     <scenes>
         <!--Vienna App-->
@@ -635,7 +635,8 @@ CA
                                                 <action selector="viewSourceHomePage:" target="Ady-hI-5gd" id="rHQ-Zu-nhC"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Open Subscription Home Page in External Browser" id="1192">
+                                        <menuItem title="Open Subscription Home Page in External Browser" alternate="YES" id="1192">
+                                            <modifierMask key="keyEquivalentModifierMask" option="YES"/>
                                             <connections>
                                                 <action selector="viewSourceHomePageInAlternateBrowser:" target="Ady-hI-5gd" id="6Jp-ae-p6L"/>
                                             </connections>
@@ -678,7 +679,8 @@ CA
                                                 <action selector="viewArticlePages:" target="Ady-hI-5gd" id="ChF-ZC-cmD"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Open Article Page in External Browser" id="1067">
+                                        <menuItem title="Open Article Page in External Browser" alternate="YES" id="1067">
+                                            <modifierMask key="keyEquivalentModifierMask" option="YES"/>
                                             <connections>
                                                 <action selector="viewArticlePagesInAlternateBrowser:" target="Ady-hI-5gd" id="ypC-pj-XY6"/>
                                             </connections>
