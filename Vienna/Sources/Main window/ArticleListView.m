@@ -660,37 +660,6 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 	[articleText increaseTextSize];
 }
 
-/* updateAlternateMenuTitle
- * Sets the approprate title for the alternate item in the contextual menu
- * when user changes preference for opening pages in external browser
- */
-- (void)updateAlternateMenuTitle
-{
-    NSMenuItem *mainMenuItem;
-    NSMenuItem *contextualMenuItem;
-    NSInteger index;
-    NSMenu *articleListMenu = articleList.menu;
-    if (articleListMenu == nil) {
-        return;
-    }
-    mainMenuItem = menuItemWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
-    if (mainMenuItem != nil) {
-        index = [articleListMenu indexOfItemWithTarget:nil andAction:@selector(viewSourceHomePageInAlternateBrowser:)];
-        if (index >= 0) {
-            contextualMenuItem = [articleListMenu itemAtIndex:index];
-            contextualMenuItem.title = mainMenuItem.title;
-        }
-    }
-    mainMenuItem = menuItemWithAction(@selector(viewArticlePagesInAlternateBrowser:));
-    if (mainMenuItem != nil) {
-        index = [articleListMenu indexOfItemWithTarget:nil andAction:@selector(viewArticlePagesInAlternateBrowser:)];
-        if (index >= 0) {
-            contextualMenuItem = [articleListMenu itemAtIndex:index];
-            contextualMenuItem.title = mainMenuItem.title;
-        }
-    }
-} // updateAlternateMenuTitle
-
 - (BOOL)acceptsFirstResponder
 {
 	return YES;

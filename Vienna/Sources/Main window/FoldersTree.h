@@ -32,7 +32,6 @@
 
 -(void)initialiseFoldersTree;
 -(void)saveFolderSettings;
--(void)updateAlternateMenuTitle;
 -(void)updateFolder:(NSInteger)folderId recurseToParents:(BOOL)recurseToParents;
 -(BOOL)selectFolder:(NSInteger)folderId;
 -(void)renameFolder:(NSInteger)folderId;
