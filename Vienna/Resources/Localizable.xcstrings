@@ -16347,6 +16347,7 @@
       }
     },
     "Open Article Page in %@" : {
+      "comment" : "Title of a menu item. The variable is the web browser name.",
       "localizations" : {
         "cs" : {
           "stringUnit" : {
@@ -16594,6 +16595,9 @@
           }
         }
       }
+    },
+    "Open Article Page in Vienna" : {
+      "comment" : "Title of a menu item",
     },
     "Open Link in %@" : {
       "localizations" : {
@@ -17233,6 +17237,7 @@
       }
     },
     "Open Subscription Home Page in %@" : {
+      "comment" : "Title of a menu item. The variable is the web browser name.",
       "localizations" : {
         "cs" : {
           "stringUnit" : {
@@ -17480,6 +17485,9 @@
           }
         }
       }
+    },
+    "Open Subscription Home Page in Vienna" : {
+      "comment" : "Title of a menu item"
     },
     "Open With" : {
       "localizations" : {
