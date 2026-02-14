@@ -24,7 +24,5 @@
 @required
 	-(void)performFindPanelAction:(NSInteger)tag;
 	@property (nonatomic, readonly) NSView *mainView;
-@optional
-	-(void)updateAlternateMenuTitle;
 @end
 
