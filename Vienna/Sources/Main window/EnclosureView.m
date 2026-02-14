@@ -45,12 +45,10 @@
     NSString *enclosureURLString;
 }
 
-/* initWithFrame
- * Initialise the standard enclosure view.
- */
--(instancetype)initWithFrame:(NSRect)frameRect
+- (nullable instancetype)initWithCoder:(NSCoder *)coder
 {
-	if ((self = [super initWithFrame:frameRect]) != nil) {
+    self = [super initWithCoder:coder];
+    if (self) {
 		enclosureURLString = nil;
 
 		// Register to be notified when a download completes.
