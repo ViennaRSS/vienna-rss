@@ -44,7 +44,6 @@ void loadMapFromPath(NSString *path,
 void runOKAlertPanelPlain(NSString *titleString, NSString *bodyText);
 void runOKAlertPanel(NSString *titleString, NSString *bodyText, ...);
 void runOKAlertSheet(NSString *titleString, NSString *bodyText, ...);
-NSMenuItem * _Nullable menuItemWithAction(SEL theSelector);
 NSString * _Nullable getDefaultBrowser(void);
 NSURL * _Nullable cleanedUpUrlFromString(NSString * _Nullable urlString);
 NSURL * _Nullable urlFromUserString(NSString *urlString);
