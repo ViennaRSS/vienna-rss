@@ -2799,16 +2799,20 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		Folder * folder = (thisArticle) ? [db folderFromID:thisArticle.folderId] : [db folderFromID:self.foldersTree.actualSelection];
 		return folder && (thisArticle || folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader) && (folder.homePage && !folder.homePage.vna_isBlank && isMainWindowVisible);
     } else if (theAction == @selector(viewSourceHomePageInAlternateBrowser:)) {
-        NSString *alternateLocation = nil;
         if (Preferences.standardPreferences.openLinksInVienna) {
-            alternateLocation = getDefaultBrowser();
-            if (!alternateLocation) {
-                alternateLocation = NSLocalizedString(@"External Browser", nil);
+            NSString *defaultWebBrowserName = getDefaultBrowser();
+            if (defaultWebBrowserName) {
+                menuItem.title = [NSString stringWithFormat:NSLocalizedString(@"Open Subscription Home Page in %@",
+                                                                              @"Title of a menu item. The variable is the web browser name."),
+                                                            defaultWebBrowserName];
+            } else {
+                menuItem.title = NSLocalizedString(@"Open Subscription Home Page in External Browser",
+                                                   @"Title of a menu item");
             }
         } else {
-            alternateLocation = NSRunningApplication.currentApplication.localizedName;
+            menuItem.title = NSLocalizedString(@"Open Subscription Home Page in Vienna",
+                                               @"Title of a menu item");
         }
-        menuItem.title = [NSString stringWithFormat:NSLocalizedString(@"Open Subscription Home Page in %@", nil), alternateLocation];
         Article *selectedArticle = self.selectedArticle;
         Folder *currentFolder = (selectedArticle) ? [db folderFromID:selectedArticle.folderId] : [db folderFromID:self.foldersTree.actualSelection];
         return currentFolder && (selectedArticle || currentFolder.type == VNAFolderTypeRSS || currentFolder.type == VNAFolderTypeOpenReader) && (currentFolder.homePage && !currentFolder.homePage.vna_isBlank && isMainWindowVisible);
@@ -2819,16 +2823,20 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		}
 		return NO;
     } else if (theAction == @selector(viewArticlePagesInAlternateBrowser:)) {
-        NSString *alternateLocation = nil;
         if (Preferences.standardPreferences.openLinksInVienna) {
-            alternateLocation = getDefaultBrowser();
-            if (!alternateLocation) {
-                alternateLocation = NSLocalizedString(@"External Browser", nil);
+            NSString *defaultWebBrowserName = getDefaultBrowser();
+            if (defaultWebBrowserName) {
+                menuItem.title = [NSString stringWithFormat:NSLocalizedString(@"Open Article Page in %@",
+                                                                              @"Title of a menu item. The variable is the web browser name."),
+                                                            defaultWebBrowserName];
+            } else {
+                menuItem.title = NSLocalizedString(@"Open Article Page in External Browser",
+                                                   @"Title of a menu item");
             }
         } else {
-            alternateLocation = NSRunningApplication.currentApplication.localizedName;
+            menuItem.title = NSLocalizedString(@"Open Article Page in Vienna",
+                                               @"Title of a menu item");
         }
-        menuItem.title = [NSString stringWithFormat:NSLocalizedString(@"Open Article Page in %@", nil), alternateLocation];
         Article *selectedArticle = self.selectedArticle;
         if (selectedArticle) {
             return (selectedArticle.link && !selectedArticle.link.vna_isBlank && isMainWindowVisible);
