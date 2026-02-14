@@ -70,10 +70,8 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 -(void)handleFolderSelection:(NSNotification *)nc;
 -(void)handleCheckFrequencyChange:(NSNotification *)nc;
 -(void)handleDidBecomeKeyWindow:(NSNotification *)nc;
--(void)handleReloadPreferences:(NSNotification *)nc;
 -(void)handleShowAppInStatusBar:(NSNotification *)nc;
 -(void)setAppStatusBarIcon;
--(void)updateNewArticlesNotification;
 -(void)showAppInStatusBar;
 -(void)initSortMenu;
 -(void)initColumnsMenu;
@@ -265,7 +263,6 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 	[nc addObserver:self selector:@selector(handleTabChange:) name:MA_Notify_TabChanged object:nil];
 	[nc addObserver:self selector:@selector(handleTabCountChange:) name:MA_Notify_TabCountChanged object:nil];
 	[nc addObserver:self selector:@selector(handleDidBecomeKeyWindow:) name:NSWindowDidBecomeKeyNotification object:nil];
-	[nc addObserver:self selector:@selector(handleReloadPreferences:) name:MA_Notify_PreferenceChange object:nil];
 	[nc addObserver:self selector:@selector(handleShowAppInStatusBar:) name:MA_Notify_ShowAppInStatusBarChanged object:nil];
 	[nc addObserver:self selector:@selector(handleUpdateUnreadCount:) name:MA_Notify_FoldersUpdated object:nil];
 	//Open Reader Notifications
@@ -1149,15 +1146,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 }
 
-/* updateNewArticlesNotification
- * Respond to a change in how we notify when new articles are retrieved.
- */
--(void)updateNewArticlesNotification
-{
-	lastCountOfUnread = -1;	// Force an update
-	[self showUnreadCountOnApplicationIconAndWindowTitle];
-}
-
 - (void)handleUpdateUnreadCount:(NSNotification *)nc
 {
 	[self showUnreadCountOnApplicationIconAndWindowTitle];
@@ -1450,15 +1438,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(void)handleDidBecomeKeyWindow:(NSNotification *)nc
 {
 	[self updateCloseCommands];
-}
-
-/* handleReloadPreferences
- * Called when MA_Notify_PreferencesUpdated is broadcast.
- * Update the menus.
- */
--(void)handleReloadPreferences:(NSNotification *)nc
-{
-	[self updateNewArticlesNotification];
 }
 
 /* handleShowAppInStatusBar
