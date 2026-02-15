@@ -77,6 +77,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     NSString *statusMessageDuringRefresh;
     NSOperationQueue *networkQueue;
     dispatch_queue_t _queue;
+    NSOperation *completionOperation;
 }
 
 /* init
@@ -1141,14 +1142,18 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 {
     TRVSURLSessionOperation *op =
         [[TRVSURLSessionOperation alloc] initWithSession:self.urlSession request:urlRequest completionHandler:completionHandler];
-    NSOperation *completionOperation = [NSBlockOperation blockOperationWithBlock:^{
-                                                         if (self->networkQueue.operationCount == 0) {
-                                                            [self performSelector:@selector(finishConnectionQueue) withObject:nil afterDelay:0.1];
-                                                         }
-                                                         [self updateStatus];
-                                                     }];
-    [completionOperation addDependency:op];
-    [[NSOperationQueue mainQueue] addOperation:completionOperation];
+    if (completionOperation && !completionOperation.isFinished) {
+        [completionOperation addDependency:op];
+    } else {
+        completionOperation = [NSBlockOperation blockOperationWithBlock:^{
+            if (self->networkQueue.operationCount == 0) {
+                [self performSelector:@selector(finishConnectionQueue) withObject:nil afterDelay:0.1];
+            }
+            [self updateStatus];
+        }];
+        [completionOperation addDependency:op];
+        [[NSOperationQueue mainQueue] addOperation:completionOperation];
+    }
 
     [networkQueue addOperation:op];
     return op;
