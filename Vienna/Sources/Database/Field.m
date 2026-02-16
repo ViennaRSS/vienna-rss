@@ -33,19 +33,23 @@ static NSString * const VNACodingKeyCustomizationOptions = @"customizationOption
 
 // MARK: Initialization
 
-- (instancetype)init
+- (instancetype)initWithName:(NSString *)name
+                        type:(VNAFieldType)type
+                    sqlField:(NSString *)sqlField
+                 displayName:(NSString *)displayName
+                     visible:(BOOL)isVisible
+                       width:(NSInteger)width
+        customizationOptions:(VNAFieldCustomizationOptions)customizationOptions
 {
     self = [super init];
     if (self) {
-        _name = nil;
-        _displayName = nil;
-        _sqlField = nil;
-        _type = VNAFieldTypeInteger;
-        _width = 20;
-        _visible = NO;
-        _customizationOptions = (VNAFieldCustomizationVisibility |
-                                 VNAFieldCustomizationResizing |
-                                 VNAFieldCustomizationSorting);
+        _name = [name copy];
+        _type = type;
+        _sqlField = [sqlField copy];
+        _displayName = [displayName copy];
+        _visible = isVisible;
+        _width = width;
+        _customizationOptions = customizationOptions;
     }
     return self;
 }

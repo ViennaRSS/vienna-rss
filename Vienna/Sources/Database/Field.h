@@ -33,9 +33,20 @@ typedef NS_OPTIONS(NSUInteger, VNAFieldCustomizationOptions) {
     VNAFieldCustomizationVisibility = 1 << 0,
     VNAFieldCustomizationResizing = 1 << 1,
     VNAFieldCustomizationSorting = 1 << 2,
+    VNAFieldCustomizationAll = (VNAFieldCustomizationVisibility |
+                                VNAFieldCustomizationResizing |
+                                VNAFieldCustomizationSorting)
 } NS_SWIFT_NAME(Field.CustomizationOptions);
 
 @interface Field : NSObject <NSSecureCoding>
+
+- (instancetype)initWithName:(NSString *)name
+                        type:(VNAFieldType)type
+                    sqlField:(NSString *)sqlField
+                 displayName:(NSString *)displayName
+                     visible:(BOOL)isVisible
+                       width:(NSInteger)width
+        customizationOptions:(VNAFieldCustomizationOptions)customizationOptions;
 
 /// The field name is the unlocalised display name; useful for writing to data
 /// files where sysName isn't appropriate.

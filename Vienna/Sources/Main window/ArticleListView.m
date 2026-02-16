@@ -360,7 +360,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
  */
 -(void)updateVisibleColumns
 {
-	NSArray * fields = [[Database sharedManager] arrayOfFields];
+	NSArray *fields = Database.sharedManager.fields;
 	NSInteger count = fields.count;
 	NSInteger index;
 
@@ -511,8 +511,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 	NSMutableArray * dataArray = [[NSMutableArray alloc] init];
 	
 	// Create the new columns
-	
-	for (Field * field in  [[Database sharedManager] arrayOfFields]) {
+	for (Field *field in Database.sharedManager.fields) {
 		[dataArray addObject:field.name];
 		[dataArray addObject:@(field.isVisible)];
 		[dataArray addObject:@(field.width)];

@@ -955,7 +955,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	NSMenu * sortSubmenu = [NSMenu new];
 	
 	// Add the fields which are sortable to the menu.
-	for (Field * field in [db arrayOfFields]) {
+	for (Field *field in db.fields) {
         if (field.customizationOptions & VNAFieldCustomizationSorting) {
             NSMenuItem *menuItem = [[NSMenuItem alloc] initWithTitle:field.displayName
                                                               action:@selector(changeSortColumn:)
@@ -986,7 +986,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(void)initColumnsMenu
 {
 	NSMenu * columnsSubMenu = [NSMenu new];
-	for (Field * field in [db arrayOfFields]) {
+	for (Field *field in db.fields) {
         if (field.customizationOptions & VNAFieldCustomizationVisibility) {
             NSMenuItem *menuItem =
                 [[NSMenuItem alloc] initWithTitle:field.displayName
