@@ -66,14 +66,7 @@ static NSInteger const VNACurrentDatabaseVersion = 27;
 NSNotificationName const VNADatabaseWillDeleteFolderNotification = @"Database Will Delete Folder";
 NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did Delete Folder";
 
-/*!
- *  initialise the Database object with a specific path
- *
- *  @param dbPath the path to the database we want to initialise
- *
- *  @return an initialised Database object
- */
-- (instancetype)initWithDatabaseAtPath:(NSString *)dbPath
+- (instancetype)init
 {
     self = [super init];
     if (self) {
@@ -84,49 +77,46 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
         _searchString = @"";
         _foldersDict = [[NSMutableDictionary alloc] init];
         [self initaliseFields];
-        _databaseQueue = [FMDatabaseQueue databaseQueueWithPath:dbPath];
-        // If we did not succeed getting read/write+create status,
-        // then we need to prompt the user for a different location.
-        if (_databaseQueue == nil) {
-        	dbPath = [self relocateLockedDatabase:dbPath];
-        	if (dbPath != nil) {
-        		_databaseQueue = [FMDatabaseQueue databaseQueueWithPath:dbPath];
-        	}
-        }
-        if (![self initialiseDatabase]) {
-			self = nil;
-		}
     }
     return self;
 }
 
-
-/* sharedManager
- * Returns the single instance of the database manager.
- */
-+ (instancetype)sharedManager {
-    static id sharedMyManager = nil;
++ (Database *)sharedManager
+{
+    static Database *sharedManager;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        sharedMyManager = [[Database alloc] initWithDatabaseAtPath:[Database databasePath]];
+        sharedManager = [[Database alloc] init];
     });
-    
-    return sharedMyManager;
+    return sharedManager;
 }
 
+- (BOOL)loadDatabaseStore
+{
+    NSString *path = [Database databasePath];
+    if (!path) {
+        return NO;
+    }
 
-/*!
- *  Initialise the Vienna database. Create the initial database if
- *  necessary, otherwise migrate to the correct version if it is out of date
- *
- *  @return YES if the database is at the correct version and good to go
- */
-- (BOOL)initialiseDatabase {
+    FMDatabaseQueue *databaseQueue = [[FMDatabaseQueue alloc] initWithPath:path];
+    // If we did not succeed getting read/write+create status,
+    // then we need to prompt the user for a different location.
+    if (!databaseQueue) {
+        NSString *relocatedPath = [self relocateLockedDatabase:path];
+        if (relocatedPath) {
+            databaseQueue = [[FMDatabaseQueue alloc] initWithPath:relocatedPath];
+            if (!databaseQueue) {
+                return NO;
+            }
+        }
+    }
+    self.databaseQueue = databaseQueue;
+
     __block BOOL success = NO;
-    [self.databaseQueue inDatabase:^(FMDatabase *db) {
-                            success = [db executeStatements:@"PRAGMA quick_check;"];
+    [databaseQueue inDatabase:^(FMDatabase *db) {
+        success = [db executeStatements:@"PRAGMA quick_check;"];
     }];
-    if (self.databaseQueue && !success) {
+    if (!success) {
         NSAlert * alert = [NSAlert new];
         alert.alertStyle = NSAlertStyleCritical;
         alert.messageText = NSLocalizedString(@"Vienna's database seems to be corrupted. Would you like to quit Vienna or continue anyway?",
@@ -135,7 +125,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
             [NSString stringWithFormat:NSLocalizedString(
                  @"Vienna may not work as expected if the database is corrupted. We recommend you quit Vienna and either restore the database (%@) from a backup or attempt a sqlite3 recovery.",
                  @"Informative text of an alert"),
-             self.databaseQueue.path.lastPathComponent];
+             databaseQueue.path.lastPathComponent];
         [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"quitVienna.button",
                                                                     nil,
                                                                     NSBundle.mainBundle,
@@ -175,7 +165,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 
         [self backupDatabase];
 
-        [self.databaseQueue inDatabase:^(FMDatabase *db) {
+        [databaseQueue inDatabase:^(FMDatabase *db) {
             // Migrate the database to the newest version
             // TODO: move this into transaction so we can rollback on failure
             [Database migrateDatabase:db fromVersion:databaseVersion];
@@ -193,7 +183,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
         NSAlert *alert = [NSAlert new];
         alert.alertStyle = NSAlertStyleCritical;
         alert.messageText = NSLocalizedString(@"The database file format has changed", nil);
-        alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna.", nil), self.databaseQueue.path];
+        alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna.", nil), databaseQueue.path];
         [alert runModal];
         return NO;
     } else if (databaseVersion == 0) {

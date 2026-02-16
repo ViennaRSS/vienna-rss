@@ -230,7 +230,8 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 -(void)applicationDidFinishLaunching:(NSNotification *)aNot
 {
     // Initialize the database
-    if ((db = [Database sharedManager]) == nil) {
+    db = Database.sharedManager;
+    if (!db || ![db loadDatabaseStore]) {
         [NSApp terminate:nil];
         return;
     }

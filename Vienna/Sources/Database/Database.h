@@ -41,6 +41,22 @@ extern NSNotificationName const VNADatabaseDidDeleteFolderNotification;
 
 @property (class, readonly, nonatomic) Database *sharedManager NS_SWIFT_NAME(shared);
 
+/**
+ Loads the database store.
+
+ This method performs these operations in order:
+  1. Retrieve and create if necessary the database path.
+  2. Load the database queue and ask if necessary to relocate the database.
+  3. Perform a SQLite3 `quick_check` and alert if issues are found.
+  4. Depending on the database version:
+     - perform a database migration,
+     - alert that the database is too old or
+     - set up an initial database.
+ @return `YES` if the database is loaded and has the current version or `NO`
+   if any of the operations failed.
+ */
+- (BOOL)loadDatabaseStore;
+
 @property(nonatomic) Folder * trashFolder;
 @property(nonatomic) Folder * searchFolder;
 @property (copy, nonatomic) NSString *searchString;
