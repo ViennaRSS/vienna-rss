@@ -48,6 +48,10 @@ typedef NS_OPTIONS(NSUInteger, VNAFieldCustomizationOptions) {
                        width:(NSInteger)width
         customizationOptions:(VNAFieldCustomizationOptions)customizationOptions;
 
+- (instancetype)initWithName:(NSString *)name
+                        type:(VNAFieldType)type
+                    sqlField:(NSString *)sqlField;
+
 /// The field name is the unlocalised display name; useful for writing to data
 /// files where sysName isn't appropriate.
 @property (copy, nonatomic) NSString *name;

@@ -54,6 +54,19 @@ static NSString * const VNACodingKeyCustomizationOptions = @"customizationOption
     return self;
 }
 
+- (instancetype)initWithName:(NSString *)name
+                        type:(VNAFieldType)type
+                    sqlField:(NSString *)sqlField
+{
+    self = [super init];
+    if (self) {
+        _name = [name copy];
+        _type = type;
+        _sqlField = [sqlField copy];
+    }
+    return self;
+}
+
 // MARK: Overrides
 
 - (NSString *)description

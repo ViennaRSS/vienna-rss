@@ -452,11 +452,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
                customizationOptions:VNAFieldCustomizationResizing],
         [[Field alloc] initWithName:MA_Field_GUID
                                type:VNAFieldTypeInteger
-                           sqlField:@"message_id"
-                        displayName:nil
-                            visible:NO
-                              width:72
-               customizationOptions:VNAFieldCustomizationResizing],
+                           sqlField:@"message_id"],
         [[Field alloc] initWithName:MA_Field_Subject
                                type:VNAFieldTypeString
                            sqlField:@"title"
@@ -491,11 +487,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
                customizationOptions:VNAFieldCustomizationAll],
         [[Field alloc] initWithName:MA_Field_Parent
                                type:VNAFieldTypeInteger
-                           sqlField:@"parent_id"
-                        displayName:nil
-                            visible:NO
-                              width:72
-               customizationOptions:VNAFieldCustomizationResizing],
+                           sqlField:@"parent_id"],
         [[Field alloc] initWithName:MA_Field_Author
                                type:VNAFieldTypeString
                            sqlField:@"sender"
@@ -546,11 +538,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
                customizationOptions:(VNAFieldCustomizationVisibility | VNAFieldCustomizationResizing)],
         [[Field alloc] initWithName:MA_Field_EnclosureDownloaded
                                type:VNAFieldTypeFlag
-                           sqlField:@"enclosuredownloaded_flag"
-                        displayName:nil
-                            visible:NO
-                              width:100
-               customizationOptions:VNAFieldCustomizationResizing],
+                           sqlField:@"enclosuredownloaded_flag"],
     ];
     return _fields;
 }
