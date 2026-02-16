@@ -18,9 +18,13 @@
 // 
 
 #import "HelperFunctions.h"
+
+@import Darwin;
+@import SystemConfiguration;
+@import WebKit;
+
 #import "Constants.h"
 #import "Preferences.h"
-@import WebKit;
 
 // Determines whether the system-wide script menu is present. This is usually
 // not enabled by default and must be enabled in Script Editor's preferences.
@@ -208,4 +212,32 @@ NSString * userAgent(void) {
     Preferences *prefs = [Preferences standardPreferences];
     NSString *name = prefs.userAgentName;
     return [NSString stringWithFormat:MA_DefaultUserAgentString, name, [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"], osVersion];
+}
+
+// This function reused parts of Vienna's isAccessible() function, removed by
+// commit 4ddf93d. Inspiration was also taken from Apple's Reachability sample
+// code, last accessed on 16 February 2026 at:
+// https://developer.apple.com/library/archive/samplecode/Reachability/Introduction/Intro.html
+BOOL VNANetworkIsReachable(void)
+{
+    // TODO: Find a replacement for SCNetworkReachability
+    struct sockaddr address;
+    memset(&address, 0, sizeof(address));
+    address.sa_len = sizeof(address);
+    address.sa_family = AF_INET;
+    SCNetworkReachabilityRef reachabilityRef =
+        SCNetworkReachabilityCreateWithAddress(kCFAllocatorDefault, &address);
+    if (!reachabilityRef) {
+        // Return NO if a reachability reference could not created, since the
+        // network status has not been determined.
+        return NO;
+    }
+    SCNetworkReachabilityFlags flags = 0;
+    Boolean isValid = SCNetworkReachabilityGetFlags(reachabilityRef, &flags);
+    CFRelease(reachabilityRef);
+    if (!isValid) {
+        // Return NO if network status could not be determined.
+        return NO;
+    }
+    return (flags & kSCNetworkReachabilityFlagsReachable);
 }
