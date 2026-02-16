@@ -232,6 +232,12 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
  */
 -(void)applicationDidFinishLaunching:(NSNotification *)aNot
 {
+    // Initialize the database
+    if ((db = [Database sharedManager]) == nil) {
+        [NSApp terminate:nil];
+        return;
+    }
+
 	self.mainWindowController = [[MainWindowController alloc] initWithWindowNibName:@"MainWindowController"];
     self.mainWindowController.articleController = self.articleController;
 	self.mainWindow = self.mainWindowController.window;
@@ -265,12 +271,6 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 	[nc addObserver:self selector:@selector(handleUpdateUnreadCount:) name:MA_Notify_FoldersUpdated object:nil];
 	//Open Reader Notifications
     [nc addObserver:self selector:@selector(handleOpenReaderAuthFailed:) name:MA_Notify_OpenReaderAuthFailed object:nil];
-
-	// Initialize the database
-	if ((db = [Database sharedManager]) == nil) {
-		[NSApp terminate:nil];
-		return;
-	}
 
 	// Initialize the Sort By and Columns menu
 	[self initSortMenu];
