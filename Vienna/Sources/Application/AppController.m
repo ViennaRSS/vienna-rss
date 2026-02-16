@@ -2442,7 +2442,12 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
                                        fireImmediately:refreshImmediately
                                          dispatchQueue:dispatch_get_main_queue()
                                           eventHandler:^{
-                [self refreshAllSubscriptions];
+                if (refreshImmediately){
+                    [self refreshAllSubscriptions];
+                } else {
+                    // the time offset is for allowing network reactivation after wakeup from sleep
+                    [self performSelector:@selector(refreshAllSubscriptions) withObject:nil afterDelay:20.0];
+                }
             }];
     }
 }
