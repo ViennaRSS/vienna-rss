@@ -2442,11 +2442,14 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
                                        fireImmediately:refreshImmediately
                                          dispatchQueue:dispatch_get_main_queue()
                                           eventHandler:^{
-                if (refreshImmediately){
+                if (VNANetworkIsReachable()) {
                     [self refreshAllSubscriptions];
                 } else {
-                    // the time offset is for allowing network reactivation after wakeup from sleep
-                    [self performSelector:@selector(refreshAllSubscriptions) withObject:nil afterDelay:20.0];
+                    // the time offset is for allowing network reactivation
+                    // after wakeup from sleep
+                    [self performSelector:@selector(refreshAllSubscriptions)
+                               withObject:nil
+                               afterDelay:20.0];
                 }
             }];
     }
