@@ -566,7 +566,6 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 	if (guidOfArticleToPreserve != nil) {
 		[filteredArray addObject:articleToPreserve];
 	}
-	articleToPreserve = nil;
 	
 	return [filteredArray copy];
 }
