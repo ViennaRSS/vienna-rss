@@ -63,26 +63,6 @@ NSString * getDefaultBrowser(void)
     return defaultBrowserURL.lastPathComponent.stringByDeletingPathExtension;
 }
 
-/* menuWithAction
- * Returns the first NSMenuItem that matches the one that implements the corresponding
- * action in the application main menu. Returns nil if no match is found.
- */
-NSMenuItem * menuItemWithAction(SEL theSelector)
-{
-	NSArray * arrayOfMenus = NSApp.mainMenu.itemArray;
-	NSInteger count = arrayOfMenus.count;
-	NSInteger index;
-
-	for (index = 0; index < count; ++index) {
-		NSMenu * subMenu = [arrayOfMenus[index] submenu];
-		NSInteger itemIndex = [subMenu indexOfItemWithTarget:NSApp.delegate andAction:theSelector];
-		if (itemIndex >= 0) {
-			return [subMenu itemAtIndex:itemIndex];
-		}
-	}
-	return nil;
-}
-
 /* cleanedUpUrlFromString
  * Uses WebKit to clean up user-entered URLs that might contain umlauts, diacritics and other
  * IDNA related stuff in the domain, or whatever may hide in filenames and arguments.

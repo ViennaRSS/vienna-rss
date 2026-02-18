@@ -70,10 +70,8 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 -(void)handleFolderSelection:(NSNotification *)nc;
 -(void)handleCheckFrequencyChange:(NSNotification *)nc;
 -(void)handleDidBecomeKeyWindow:(NSNotification *)nc;
--(void)handleReloadPreferences:(NSNotification *)nc;
 -(void)handleShowAppInStatusBar:(NSNotification *)nc;
 -(void)setAppStatusBarIcon;
--(void)updateNewArticlesNotification;
 -(void)showAppInStatusBar;
 -(void)initSortMenu;
 -(void)initColumnsMenu;
@@ -82,7 +80,6 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 -(BOOL)installFilename:(NSString *)srcFile toPath:(NSString *)path;
 -(void)runAppleScript:(NSString *)scriptName;
 -(void)sendBlogEvent:(NSString *)externalEditorBundleIdentifier title:(NSString *)title url:(NSString *)url body:(NSString *)body author:(NSString *)author guid:(NSString *)guid;
--(void)updateAlternateMenuTitle;
 -(void)updateSearchPlaceholderAndSearchMethod;
 -(void)updateCloseCommands;
 -(IBAction)cancelAllRefreshesToolbar:(id)sender;
@@ -266,7 +263,6 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 	[nc addObserver:self selector:@selector(handleTabChange:) name:MA_Notify_TabChanged object:nil];
 	[nc addObserver:self selector:@selector(handleTabCountChange:) name:MA_Notify_TabCountChanged object:nil];
 	[nc addObserver:self selector:@selector(handleDidBecomeKeyWindow:) name:NSWindowDidBecomeKeyNotification object:nil];
-	[nc addObserver:self selector:@selector(handleReloadPreferences:) name:MA_Notify_PreferenceChange object:nil];
 	[nc addObserver:self selector:@selector(handleShowAppInStatusBar:) name:MA_Notify_ShowAppInStatusBarChanged object:nil];
 	[nc addObserver:self selector:@selector(handleUpdateUnreadCount:) name:MA_Notify_FoldersUpdated object:nil];
 	//Open Reader Notifications
@@ -290,20 +286,6 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 
 	// Show the current unread count on the app icon
 	[self showUnreadCountOnApplicationIconAndWindowTitle];
-	
-	// Set alternate in main menu for opening pages, and check for correct title of menu item
-	// This is a hack, because Interface Builder refuses to set alternates with only the shift key as modifier.
-	NSMenuItem * alternateItem = menuItemWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
-	if (alternateItem != nil) {
-        alternateItem.keyEquivalentModifierMask = NSEventModifierFlagOption;
-		[alternateItem setAlternate:YES];
-	}
-	alternateItem = menuItemWithAction(@selector(viewArticlePagesInAlternateBrowser:));
-	if (alternateItem != nil) {
-        alternateItem.keyEquivalentModifierMask = NSEventModifierFlagOption;
-		[alternateItem setAlternate:YES];
-	}
-	[self updateAlternateMenuTitle];
 	
 	// Create a menu for the search field
 	// The menu title doesn't appear anywhere so we don't localise it. The titles of each
@@ -1164,15 +1146,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 }
 
-/* updateNewArticlesNotification
- * Respond to a change in how we notify when new articles are retrieved.
- */
--(void)updateNewArticlesNotification
-{
-	lastCountOfUnread = -1;	// Force an update
-	[self showUnreadCountOnApplicationIconAndWindowTitle];
-}
-
 - (void)handleUpdateUnreadCount:(NSNotification *)nc
 {
 	[self showUnreadCountOnApplicationIconAndWindowTitle];
@@ -1465,18 +1438,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(void)handleDidBecomeKeyWindow:(NSNotification *)nc
 {
 	[self updateCloseCommands];
-}
-
-/* handleReloadPreferences
- * Called when MA_Notify_PreferencesUpdated is broadcast.
- * Update the menus.
- */
--(void)handleReloadPreferences:(NSNotification *)nc
-{
-	[self updateAlternateMenuTitle];
-	[self.foldersTree updateAlternateMenuTitle];
-	[self.articleController.mainArticleView updateAlternateMenuTitle];
-	[self updateNewArticlesNotification];
 }
 
 /* handleShowAppInStatusBar
@@ -2312,33 +2273,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     [self.browser.activeTab stopLoadingTab];
 }
 
-/* updateAlternateMenuTitle
- * Set the appropriate title for the menu items that override browser preferences
- * For future implementation, perhaps we can save a lot of code by
- * creating an ivar for the title string and binding the menu's title to it.
- */
--(void)updateAlternateMenuTitle
-{
-	Preferences * prefs = [Preferences standardPreferences];
-	NSString * alternateLocation;
-	if (prefs.openLinksInVienna) {
-		alternateLocation = getDefaultBrowser();
-		if (alternateLocation == nil) {
-			alternateLocation = NSLocalizedString(@"External Browser", nil);
-		}
-	} else {
-		alternateLocation = NSRunningApplication.currentApplication.localizedName;
-	}
-	NSMenuItem * item = menuItemWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
-	if (item != nil) {
-		item.title = [NSString stringWithFormat:NSLocalizedString(@"Open Subscription Home Page in %@", nil), alternateLocation];
-	}
-	item = menuItemWithAction(@selector(viewArticlePagesInAlternateBrowser:));
-	if (item != nil) {
-		item.title = [NSString stringWithFormat:NSLocalizedString(@"Open Article Page in %@", nil), alternateLocation];
-	}
-}
-
 /* updateSearchPlaceholder
  * Update the search placeholder string in the search field depending on the view in
  * the active tab.
@@ -2839,16 +2773,54 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		return !db.readOnly && isMainWindowVisible;
 	} else if (theAction == @selector(cancelAllRefreshes:)) {
 		return !db.readOnly && self.connecting;
-	} else if ((theAction == @selector(viewSourceHomePage:)) || (theAction == @selector(viewSourceHomePageInAlternateBrowser:))) {
+	} else if (theAction == @selector(viewSourceHomePage:)) {
 		Article * thisArticle = self.selectedArticle;
 		Folder * folder = (thisArticle) ? [db folderFromID:thisArticle.folderId] : [db folderFromID:self.foldersTree.actualSelection];
 		return folder && (thisArticle || folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader) && (folder.homePage && !folder.homePage.vna_isBlank && isMainWindowVisible);
-	} else if ((theAction == @selector(viewArticlePages:)) || (theAction == @selector(viewArticlePagesInAlternateBrowser:))) {
+    } else if (theAction == @selector(viewSourceHomePageInAlternateBrowser:)) {
+        if (Preferences.standardPreferences.openLinksInVienna) {
+            NSString *defaultWebBrowserName = getDefaultBrowser();
+            if (defaultWebBrowserName) {
+                menuItem.title = [NSString stringWithFormat:NSLocalizedString(@"Open Subscription Home Page in %@",
+                                                                              @"Title of a menu item. The variable is the web browser name."),
+                                                            defaultWebBrowserName];
+            } else {
+                menuItem.title = NSLocalizedString(@"Open Subscription Home Page in External Browser",
+                                                   @"Title of a menu item");
+            }
+        } else {
+            menuItem.title = NSLocalizedString(@"Open Subscription Home Page in Vienna",
+                                               @"Title of a menu item");
+        }
+        Article *selectedArticle = self.selectedArticle;
+        Folder *currentFolder = (selectedArticle) ? [db folderFromID:selectedArticle.folderId] : [db folderFromID:self.foldersTree.actualSelection];
+        return currentFolder && (selectedArticle || currentFolder.type == VNAFolderTypeRSS || currentFolder.type == VNAFolderTypeOpenReader) && (currentFolder.homePage && !currentFolder.homePage.vna_isBlank && isMainWindowVisible);
+	} else if (theAction == @selector(viewArticlePages:)) {
 		Article * thisArticle = self.selectedArticle;
 		if (thisArticle != nil) {
 			return (thisArticle.link && !thisArticle.link.vna_isBlank && isMainWindowVisible);
 		}
 		return NO;
+    } else if (theAction == @selector(viewArticlePagesInAlternateBrowser:)) {
+        if (Preferences.standardPreferences.openLinksInVienna) {
+            NSString *defaultWebBrowserName = getDefaultBrowser();
+            if (defaultWebBrowserName) {
+                menuItem.title = [NSString stringWithFormat:NSLocalizedString(@"Open Article Page in %@",
+                                                                              @"Title of a menu item. The variable is the web browser name."),
+                                                            defaultWebBrowserName];
+            } else {
+                menuItem.title = NSLocalizedString(@"Open Article Page in External Browser",
+                                                   @"Title of a menu item");
+            }
+        } else {
+            menuItem.title = NSLocalizedString(@"Open Article Page in Vienna",
+                                               @"Title of a menu item");
+        }
+        Article *selectedArticle = self.selectedArticle;
+        if (selectedArticle) {
+            return (selectedArticle.link && !selectedArticle.link.vna_isBlank && isMainWindowVisible);
+        }
+        return NO;
 	} else if (theAction == @selector(exportSubscriptions:)) {
 		return isMainWindowVisible;
 	} else if (theAction == @selector(reindexDatabase:)) {
