@@ -34,10 +34,16 @@
                                      NSSplitViewDelegate,
                                      NSTableViewDataSource>
 
+// This class is initialized in Interface Builder (-initWithCoder:).
+- (instancetype)initWithFrame:(NSRect)frameRect NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
 @property (weak, nonatomic) AppController *appController;
 @property (weak, nonatomic) ArticleController *articleController;
 
 // Public functions
+- (void)initialiseArticleView;
 -(void)updateVisibleColumns;
 -(void)saveTableSettings;
 -(void)loadArticleLink:(NSString *) articleLink;

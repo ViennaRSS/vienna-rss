@@ -25,16 +25,23 @@
 @class AppController;
 @class FolderView;
 
-@interface FoldersTree : NSObject <FolderViewDelegate, NSOutlineViewDataSource, NSTextFieldDelegate>
+@interface FoldersTree : NSViewController <FolderViewDelegate,
+                                           NSOutlineViewDataSource,
+                                           NSTextFieldDelegate>
+
+// This class is initialized in Interface Builder (-initWithCoder:).
+- (instancetype)initWithNibName:(/*nullable*/ NSNibName)nibNameOrNil
+                         bundle:(/*nullable*/ NSBundle *)nibBundleOrNil NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
 
 @property (weak, nonatomic) AppController *controller;
-@property (weak, nonatomic) FolderView *outlineView;
 
 -(void)initialiseFoldersTree;
 -(void)saveFolderSettings;
 -(void)updateFolder:(NSInteger)folderId recurseToParents:(BOOL)recurseToParents;
 -(BOOL)selectFolder:(NSInteger)folderId;
--(void)renameFolder:(NSInteger)folderId;
+-(void)renameFolderWithIdentifier:(NSInteger)folderId;
 @property (nonatomic, readonly) NSInteger actualSelection;
 @property (nonatomic, readonly) NSInteger groupParentSelection;
 @property (nonatomic, readonly) NSInteger countOfSelectedFolders;

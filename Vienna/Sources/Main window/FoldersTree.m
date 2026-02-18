@@ -41,6 +41,8 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 
 @interface FoldersTree ()
 
+@property (weak, nonatomic) IBOutlet FolderView *outlineView;
+
 @property (readonly, nonatomic) NSArray *archiveState;
 @property (nonatomic) TreeNode *rootNode;
 @property (nonatomic) BOOL blockSelectionHandler;
@@ -66,10 +68,9 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 
 @implementation FoldersTree
 
-- (instancetype)init
+- (nullable instancetype)initWithCoder:(NSCoder *)coder
 {
-    self = [super init];
-
+    self = [super initWithCoder:coder];
 	if (self) {
 		// Root node is never displayed since we always display from
 		// the second level down. It simply provides a convenient way
@@ -77,7 +78,6 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 		_rootNode = [[TreeNode alloc] init:nil atIndex:0 folder:nil canHaveChildren:YES];
 		_blockSelectionHandler = NO;
 	}
-
 	return self;
 }
 
@@ -789,10 +789,10 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 	return self.outlineView;
 }
 
-/* renameFolder
+/* renameFolderWithIdentifier
  * Begin in-place editing of the selected folder name.
  */
--(void)renameFolder:(NSInteger)folderId
+-(void)renameFolderWithIdentifier:(NSInteger)folderId
 {	
 	TreeNode * node = [self.rootNode nodeFromID:folderId];
 	NSInteger rowIndex = [self.outlineView rowForItem:node];
