@@ -485,11 +485,15 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 {
     Folder *folder = [[Database sharedManager] folderFromID:currentFolderId];
     NSString *filterString = self.filterString;
+    [folder setNonPersistedFlag:VNAFolderFlagUpdating];
+    [[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_FoldersUpdated object:@(folder.itemId)];
     __block NSArray * articles;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSInteger requestedFolderId = self->currentFolderId;
         articles = [folder articlesWithFilter:filterString];
         dispatch_sync(dispatch_get_main_queue(), ^{
+            [folder clearNonPersistedFlag:VNAFolderFlagUpdating];
+            [[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_FoldersUpdated object:@(folder.itemId)];
             if (self->currentFolderId == requestedFolderId) {
                 self.folderArrayOfArticles = articles;
                 [self finishReloadArrayOfArticles];
