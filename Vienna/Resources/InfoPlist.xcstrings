@@ -10,6 +10,12 @@
             "state" : "new",
             "value" : "Vienna"
           }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vienna"
+          }
         }
       },
       "shouldTranslate" : false
@@ -18,7 +24,37 @@
       "comment" : "A list of keywords that will show up in the ‘More Info’ window for the app and will make the app surface if these keywords are searched in Spotlight",
       "extractionState" : "manual",
       "localizations" : {
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "RSS, Atom, JSON Feed, Feed, Nyheder, Læser, OPML, OPDS, Podcasts"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "RSS, Atom, JSON Feed, Feed, Nachrichten, Reader, OPML, OPDS, Podcasts"
+          }
+        },
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "RSS, Atom, JSON Feed, Feed, News, Reader, OPML, OPDS, Podcasts"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "RSS, Atom, JSON Feed, Feed, Flux, News, Info, Nouvelles, Reader, Lecteur, OPML, OPDS, Podcasts"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "RSS, Atom, JSON Feed, feed, nieuws, reader, OPML, OPDS, podcasts"
+          }
+        },
+        "sv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "RSS, Atom, JSON Feed, Feed, News, Reader, OPML, OPDS, Podcasts"
@@ -58,6 +94,12 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "© 2004–2026 The Vienna RSS Project"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "© 2004–2026 Projet Vienna RSS"
           }
         }
       },

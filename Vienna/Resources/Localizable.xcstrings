@@ -16239,7 +16239,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Öffne Webseite des Artikels"
+            "value" : "Zur Artikelseite"
           }
         },
         "es" : {
@@ -16364,7 +16364,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Öffne Artikelseite in %@"
+            "value" : "Artikelseite in %@ öffnen"
           }
         },
         "es" : {
@@ -16489,7 +16489,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Öffne Artikelseite im externen Browser"
+            "value" : "Artikelseite im externen Browser öffnen"
           }
         },
         "es" : {
@@ -16598,6 +16598,32 @@
     },
     "Open Article Page in Vienna" : {
       "comment" : "Title of a menu item",
+      "localizations" : {
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Åbn artikelside i Vienna"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Artikelseite in Vienna öffnen"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher la page de l'article dans Vienna"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open artikelpagina in Vienna"
+          }
+        }
+      }
     },
     "Open Link in %@" : {
       "localizations" : {
@@ -17129,7 +17155,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Öffne Webseite des Abonnements"
+            "value" : "Zur Homepage des Abonnements"
           }
         },
         "es" : {
@@ -17254,7 +17280,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Öffne Homepage des Abonnements in %@"
+            "value" : "Homepage des Abonnements in %@ öffnen"
           }
         },
         "es" : {
@@ -17308,7 +17334,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Open homepage van abonnement in %@"
+            "value" : "Open startpagina van abonnement in %@"
           }
         },
         "pt-BR" : {
@@ -17379,7 +17405,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Öffne Homepage des Abonnements im externen Browser"
+            "value" : "Homepage des Abonnements im externen Browser öffnen"
           }
         },
         "es" : {
@@ -17433,7 +17459,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Open abonnement-pagina in externe browser"
+            "value" : "Open startpagina van abonnement in externe browser"
           }
         },
         "pt-BR" : {
@@ -17487,7 +17513,33 @@
       }
     },
     "Open Subscription Home Page in Vienna" : {
-      "comment" : "Title of a menu item"
+      "comment" : "Title of a menu item",
+      "localizations" : {
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Åbn abonnementshjemmeside i Vienna"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Homepage des Abonnements in Vienna öffnen"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher la page de l'abonnement dans Vienna"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open startpagina van abonnement in Vienna"
+          }
+        }
+      }
     },
     "Open With" : {
       "localizations" : {
