@@ -56,14 +56,6 @@ static NSInteger const availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24
     [self initializePreferences];
 }
 
-- (void)viewDidAppear
-{
-    [super viewDidAppear];
-    // The NSFontChanging callbacks are sent to the first responder. This view
-    // controller is not added to the responder chain by default.
-    [self.view.window makeFirstResponder:self];
-}
-
 - (void)viewWillDisappear
 {
     [super viewWillDisappear];
@@ -155,6 +147,14 @@ static NSInteger const availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24
         self.fontPanel = fontPanel;
     }
     [fontManager setSelectedFont:prefs.articleListFont isMultiple:NO];
+    // The NSFontChanging callbacks are sent to the first responder, which this
+    // view controller is not by default.
+    [self.view.window makeFirstResponder:self];
+    // If the view controller loses first-responder status, e.g. when the user
+    // selects or inserts text in the combo box, -changeFont: can still be sent
+    // to a predefined target. -validModesForFontPanel: is not affected by this,
+    // however.
+    fontManager.target = self;
     [fontManager orderFrontFontPanel:self];
 }
 
