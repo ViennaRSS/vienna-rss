@@ -1053,7 +1053,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Öffne Webseite des Abonnements"
+            "value" : "Zur Homepage des Abonnements"
           }
         },
         "en" : {
@@ -1977,7 +1977,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Öffne Homepage des Abonnements im externen Browser"
+            "value" : "Homepage des Abonnements im externen Browser öffnen"
           }
         },
         "en" : {
@@ -2037,7 +2037,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Open abonnement-pagina in externe browser"
+            "value" : "Open startpagina van abonnement in externe browser"
           }
         },
         "pt-BR" : {
@@ -6869,7 +6869,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Öffne Webseite des Abonnements"
+            "value" : "Zur Homepage des Abonnements"
           }
         },
         "en" : {
@@ -7001,7 +7001,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Öffne Homepage des Abonnements im externen Browser"
+            "value" : "Homepage des Abonnements im externen Browser öffnen"
           }
         },
         "en" : {
@@ -7061,7 +7061,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Open abonnement-pagina in externe browser"
+            "value" : "Open startpagina van abonnement in externe browser"
           }
         },
         "pt-BR" : {
