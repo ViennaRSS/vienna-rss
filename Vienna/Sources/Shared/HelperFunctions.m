@@ -25,6 +25,7 @@
 
 #import "Constants.h"
 #import "Preferences.h"
+#import "Vienna-Swift.h"
 
 // Determines whether the system-wide script menu is present. This is usually
 // not enabled by default and must be enabled in Script Editor's preferences.
@@ -220,24 +221,33 @@ NSString * userAgent(void) {
 // https://developer.apple.com/library/archive/samplecode/Reachability/Introduction/Intro.html
 BOOL VNANetworkIsReachable(void)
 {
-    // TODO: Find a replacement for SCNetworkReachability
-    struct sockaddr address;
-    memset(&address, 0, sizeof(address));
-    address.sa_len = sizeof(address);
-    address.sa_family = AF_INET;
-    SCNetworkReachabilityRef reachabilityRef =
-        SCNetworkReachabilityCreateWithAddress(kCFAllocatorDefault, &address);
-    if (!reachabilityRef) {
-        // Return NO if a reachability reference could not created, since the
-        // network status has not been determined.
-        return NO;
+    if (@available(macOS 10.14, *)) {
+        static VNANetworkMonitor *monitor = nil;
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            monitor = [[VNANetworkMonitor alloc] init];
+        });
+        return monitor.isReachable;
+    } else {
+        struct sockaddr address;
+        memset(&address, 0, sizeof(address));
+        address.sa_len = sizeof(address);
+        address.sa_family = AF_INET;
+        SCNetworkReachabilityRef reachabilityRef =
+            SCNetworkReachabilityCreateWithAddress(kCFAllocatorDefault, &address);
+        if (!reachabilityRef) {
+            // Return NO if a reachability reference could not created, since the
+            // network status has not been determined.
+            return NO;
+        }
+        SCNetworkReachabilityFlags flags = 0;
+        Boolean isValid = SCNetworkReachabilityGetFlags(reachabilityRef, &flags);
+        CFRelease(reachabilityRef);
+        if (!isValid) {
+            // Return NO if network status could not be determined.
+            return NO;
+        }
+        return (flags & kSCNetworkReachabilityFlagsReachable);
     }
-    SCNetworkReachabilityFlags flags = 0;
-    Boolean isValid = SCNetworkReachabilityGetFlags(reachabilityRef, &flags);
-    CFRelease(reachabilityRef);
-    if (!isValid) {
-        // Return NO if network status could not be determined.
-        return NO;
-    }
-    return (flags & kSCNetworkReachabilityFlagsReachable);
 }
+
