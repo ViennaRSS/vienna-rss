@@ -319,6 +319,9 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 	
 	// Hook up the key sequence properly now that all NIBs are loaded.
 	self.foldersTree.mainView.nextKeyView = ((NSView<BaseView> *)self.browser.primaryTab.view).mainView;
+
+    // Initial call needed to have NWPathMonitor completely set up
+    (void)VNANetworkIsReachable();
     
 	// Do safe initialisation.
 	[self performSelector:@selector(doSafeInitialisation)
