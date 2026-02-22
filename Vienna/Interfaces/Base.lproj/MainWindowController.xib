@@ -268,12 +268,12 @@
                             <action selector="markAllRead:" target="-1" id="Am6-Sz-pet"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="145A8A8B-193F-46E7-87FD-FE2B915C1B08" explicitItemIdentifier="Refresh" label="Refresh" paletteLabel="Refresh" toolTip="Refresh all your subscriptions" image="SyncTemplate" sizingBehavior="auto" id="Nmd-zx-Dys" customClass="VNAButtonToolbarItem">
+                    <toolbarItem implicitItemIdentifier="145A8A8B-193F-46E7-87FD-FE2B915C1B08" explicitItemIdentifier="Refresh" label="Refresh" paletteLabel="Refresh" toolTip="Refresh all your subscriptions" image="arrow.trianglehead.clockwise.rotate.90" catalog="system" sizingBehavior="auto" id="Nmd-zx-Dys" customClass="VNAButtonToolbarItem">
                         <button key="view" verticalHuggingPriority="750" id="PJJ-4H-4dE">
-                            <rect key="frame" x="9" y="14" width="30" height="23"/>
+                            <rect key="frame" x="10" y="14" width="28" height="23"/>
                             <autoresizingMask key="autoresizingMask"/>
-                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="SyncTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="F19-ww-YfI">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="arrow.trianglehead.clockwise.rotate.90" catalog="system" imagePosition="only" alignment="center" alternateImage="NSStopProgressTemplate" lineBreakMode="truncatingTail" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="F19-ww-YfI">
+                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeContents="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
                         </button>
@@ -538,6 +538,7 @@
                 <outlet property="fileImage" destination="1289" id="1294"/>
                 <outlet property="filenameField" destination="1292" id="1298"/>
                 <outlet property="filenameLabel" destination="1290" id="1299"/>
+                <outlet property="stackViewTrailingConstraint" destination="v5m-a9-btO" id="hIA-hH-1PZ"/>
             </connections>
             <point key="canvasLocation" x="-186" y="42.5"/>
         </customView>
@@ -789,10 +790,11 @@
         <image name="MarkReadTemplate" width="19" height="14"/>
         <image name="NSActionTemplate" width="20" height="20"/>
         <image name="NSShareTemplate" width="19" height="23"/>
+        <image name="NSStopProgressTemplate" width="17" height="16"/>
         <image name="NextFolderTemplate" width="19" height="12"/>
         <image name="NextItemTemplate" width="18" height="12"/>
         <image name="PreviousItemTemplate" width="18" height="12"/>
-        <image name="SyncTemplate" width="30" height="30"/>
+        <image name="arrow.trianglehead.clockwise.rotate.90" catalog="system" width="16" height="15"/>
         <image name="exclamationmark.triangle.fill" catalog="system" width="17" height="15"/>
     </resources>
 </document>

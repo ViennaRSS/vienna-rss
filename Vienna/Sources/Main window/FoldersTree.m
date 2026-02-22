@@ -358,28 +358,6 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 	return [array copy];
 }
 
-/* updateAlternateMenuTitle
- * Sets the appropriate title for the alternate item in the contextual menu
- * when user changes preferences for opening pages in external browser
- */
--(void)updateAlternateMenuTitle
-{
-	NSMenuItem * mainMenuItem = menuItemWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
-	if (mainMenuItem == nil) {
-		return;
-	}
-	NSString * menuTitle = mainMenuItem.title;
-	NSInteger index;
-	NSMenu * folderMenu = self.outlineView.menu;
-	if (folderMenu != nil) {
-		index = [folderMenu indexOfItemWithTarget:nil andAction:@selector(viewSourceHomePageInAlternateBrowser:)];
-		if (index >= 0) {
-			NSMenuItem * contextualItem = [folderMenu itemAtIndex:index];
-			contextualItem.title = menuTitle;
-		}
-	}
-}
-
 /* updateFolder
  * Redraws a folder node and optionally recurses up and redraws all our
  * parent nodes too.

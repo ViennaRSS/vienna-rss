@@ -131,7 +131,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic) BOOL syncOpenReader;
 
-@property (nonatomic) BOOL prefersOpenReaderNewSubscription;
+@property (nonatomic) BOOL preferOpenReaderWhenSubscribing;
 
 // server used for syncing
 @property (nonatomic, copy) NSString *syncServer;
@@ -143,6 +143,9 @@ NS_ASSUME_NONNULL_BEGIN
 // application ID and key needed by specific OpenReader services
 @property (nonatomic, copy) NSString *syncingAppId;
 @property (nonatomic, copy) NSString *syncingAppKey;
+
+// apply Tahoe menu images
+@property (nonatomic) BOOL menuEnableActionImages;
 
 @end
 

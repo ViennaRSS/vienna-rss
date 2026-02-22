@@ -87,8 +87,8 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="doOpenReaderOption:" target="2KB-Uw-ELh" id="W9G-0A-Zfg"/>
-                                    <binding destination="2KB-Uw-ELh" name="value" keyPath="self.openReaderOptionButton" id="IpB-pY-DlB"/>
+                                    <binding destination="HED-8f-4GH" name="enabled" keyPath="values.SyncGoogleReader" id="c5D-Pq-unH"/>
+                                    <binding destination="HED-8f-4GH" name="value" keyPath="values.GoogleNewSubscription" id="bNx-e8-hZV"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1d2-WD-CbX">
@@ -158,6 +158,7 @@ DQ
                     </connections>
                 </viewController>
                 <customObject id="l2l-94-OEr" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController representsSharedInstance="YES" id="HED-8f-4GH"/>
             </objects>
             <point key="canvasLocation" x="679" y="1125"/>
         </scene>

@@ -78,6 +78,7 @@
                                 </buttonCell>
                                 <connections>
                                     <action selector="changeSyncOpenReader:" target="Lfh-L2-KcO" id="mf2-zO-trH"/>
+                                    <binding destination="Lfh-L2-KcO" name="value" keyPath="self.syncEnabled" id="MFl-lb-T1C"/>
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1AL-bw-HAe">
@@ -100,6 +101,7 @@
                                 </popUpButtonCell>
                                 <connections>
                                     <action selector="changeSource:" target="Lfh-L2-KcO" id="73U-ou-jm8"/>
+                                    <binding destination="Lfh-L2-KcO" name="enabled" keyPath="self.syncEnabled" id="T8C-Yt-0bR"/>
                                 </connections>
                             </popUpButton>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ddx-Km-moq">
@@ -120,6 +122,9 @@
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
+                                <connections>
+                                    <binding destination="Lfh-L2-KcO" name="enabled" keyPath="self.syncEnabled" id="5Iu-ee-j55"/>
+                                </connections>
                             </textField>
                             <button toolTip="Visit the website" translatesAutoresizingMaskIntoConstraints="NO" id="V12-Ua-skO">
                                 <rect key="frame" x="321" y="111" width="21" height="27"/>
@@ -160,6 +165,9 @@
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
+                                <connections>
+                                    <binding destination="Lfh-L2-KcO" name="enabled" keyPath="self.syncEnabled" id="RrH-Er-DAt"/>
+                                </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Pal-Vr-UgU">
                                 <rect key="frame" x="36" y="20" width="66" height="16"/>
@@ -182,6 +190,9 @@
                                         <string>NSAllRomanInputSourcesLocaleIdentifier</string>
                                     </allowedInputSourceLocales>
                                 </secureTextFieldCell>
+                                <connections>
+                                    <binding destination="Lfh-L2-KcO" name="enabled" keyPath="self.syncEnabled" id="5OX-AG-uXY"/>
+                                </connections>
                             </secureTextField>
                         </subviews>
                         <constraints>
@@ -229,7 +240,6 @@
                         <outlet property="openReaderHost" destination="gKc-l8-p9m" id="V1U-W5-FX3"/>
                         <outlet property="openReaderSource" destination="iHl-tr-paa" id="VwD-B8-kHe"/>
                         <outlet property="password" destination="aul-rC-2NQ" id="l6b-tI-KO9"/>
-                        <outlet property="syncButton" destination="YuE-bx-yZN" id="Snx-hS-0Zn"/>
                         <outlet property="username" destination="vfL-zy-elO" id="4DO-Fn-CKh"/>
                     </connections>
                 </viewController>

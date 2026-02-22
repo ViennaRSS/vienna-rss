@@ -24,7 +24,6 @@
 #import "Preferences.h"
 #import "Constants.h"
 #import "DateFormatterExtension.h"
-#import "DisclosureView.h"
 #import "ArticleController.h"
 #import "StringExtensions.h"
 #import "HelperFunctions.h"
@@ -43,7 +42,8 @@
 // Shared defaults key
 NSString * const MAPref_ShowEnclosureBar = @"ShowEnclosureBar";
 
-static CGFloat const VNAMinimumArticleListViewWidth = 140.0;
+static CGFloat const VNAMinimumArticleListViewHeight = 160.0;
+static CGFloat const VNAMinimumArticleListViewWidth = 200.0;
 static CGFloat const VNAMinimumArticleTextViewWidth = 360.0;
 
 static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverContext;
@@ -659,37 +659,6 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 {
 	[articleText increaseTextSize];
 }
-
-/* updateAlternateMenuTitle
- * Sets the approprate title for the alternate item in the contextual menu
- * when user changes preference for opening pages in external browser
- */
-- (void)updateAlternateMenuTitle
-{
-    NSMenuItem *mainMenuItem;
-    NSMenuItem *contextualMenuItem;
-    NSInteger index;
-    NSMenu *articleListMenu = articleList.menu;
-    if (articleListMenu == nil) {
-        return;
-    }
-    mainMenuItem = menuItemWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
-    if (mainMenuItem != nil) {
-        index = [articleListMenu indexOfItemWithTarget:nil andAction:@selector(viewSourceHomePageInAlternateBrowser:)];
-        if (index >= 0) {
-            contextualMenuItem = [articleListMenu itemAtIndex:index];
-            contextualMenuItem.title = mainMenuItem.title;
-        }
-    }
-    mainMenuItem = menuItemWithAction(@selector(viewArticlePagesInAlternateBrowser:));
-    if (mainMenuItem != nil) {
-        index = [articleListMenu indexOfItemWithTarget:nil andAction:@selector(viewArticlePagesInAlternateBrowser:)];
-        if (index >= 0) {
-            contextualMenuItem = [articleListMenu itemAtIndex:index];
-            contextualMenuItem.title = mainMenuItem.title;
-        }
-    }
-} // updateAlternateMenuTitle
 
 - (BOOL)acceptsFirstResponder
 {
@@ -1584,14 +1553,22 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
     constrainMinCoordinate:(CGFloat)proposedMinimumPosition
                ofSubviewAt:(NSInteger)dividerIndex
 {
-    return proposedMinimumPosition + VNAMinimumArticleListViewWidth;
+    if (splitView.isVertical) {
+        return proposedMinimumPosition + VNAMinimumArticleListViewWidth;
+    } else {
+        return proposedMinimumPosition + VNAMinimumArticleListViewHeight;
+    }
 }
 
 - (CGFloat)splitView:(NSSplitView *)splitView
     constrainMaxCoordinate:(CGFloat)proposedMaximumPosition
                ofSubviewAt:(NSInteger)dividerIndex
 {
-    return proposedMaximumPosition - VNAMinimumArticleTextViewWidth;
+    if (splitView.isVertical) {
+        return proposedMaximumPosition - VNAMinimumArticleTextViewWidth;
+    } else {
+        return proposedMaximumPosition;
+    }
 }
 
 @end

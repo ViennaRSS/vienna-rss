@@ -42,7 +42,6 @@ extern NSNotificationName const MA_Notify_FolderNameChanged;
 extern NSNotificationName const MA_Notify_FolderSelectionChange;
 extern NSNotificationName const MA_Notify_FoldersUpdated;
 extern NSNotificationName const MA_Notify_OpenReaderAuthFailed;
-extern NSNotificationName const MA_Notify_OpenReaderNewSubscriptionChange; // Unused
 extern NSNotificationName const MA_Notify_GotAuthenticationForFolder;
 extern NSNotificationName const MA_Notify_LoadFullHTMLChange;
 extern NSNotificationName const MA_Notify_MinimumFontSizeChange;
@@ -97,7 +96,7 @@ extern NSString * const MAPref_ShouldSaveFeedSource;
 extern NSString * const MAPref_ShouldSaveFeedSourceBackup;
 extern NSString * const MAPref_SearchMethod;
 extern NSString * const MAPref_SyncOpenReader;
-extern NSString * const MAPref_OpenReaderNewSubscription;
+extern NSString * const MAPref_PreferOpenReaderWhenSubscribing;
 extern NSString * const MAPref_ConcurrentDownloads;
 extern NSString * const MAPref_SyncServer;
 extern NSString * const MAPref_SyncScheme;
@@ -111,6 +110,7 @@ extern NSString * const MAPref_ShowDetailsOnFeedCredentialsDialog;
 extern NSString * const MAPref_ShowEnclosureBar;
 extern NSString * const MAPref_FeedListSizeMode;
 extern NSString * const MAPref_ShowFeedsWithUnreadItemsInBold;
+extern NSString * const MAPref_MenuEnableActionImages;
 
 extern NSInteger const MA_Default_BackTrackQueueSize;
 extern float const MA_Default_Read_Interval;

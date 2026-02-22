@@ -551,7 +551,14 @@ extension MainWindowController: NSToolbarDelegate {
                 popUpButtonToolbarItem.menu = styleToolbarItemMenu
                 item = popUpButtonToolbarItem
             }
-            item.image = NSImage(resource: .styleTemplate)
+            if #available(macOS 11, *) {
+                item.image = NSImage(
+                    systemSymbolName: "paintbrush",
+                    accessibilityDescription: nil
+                )
+            } else {
+                item.image = NSImage(resource: .styleTemplate)
+            }
             item.label = NSLocalizedString(
                 "style.toolbarItem.label",
                 value: "Style",

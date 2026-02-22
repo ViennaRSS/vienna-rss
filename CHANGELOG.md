@@ -1,6 +1,53 @@
 Vienna ChangeLog File
 =====================
 
+Vienna 3.10.0
+--------------
+_released 2026-02-13_
+### 🚲 Changes
+- Add keywords for Spotlight search
+- Replace some toolbar icons with symbols having a higher resolution
+- Update translations
+### 🤷🏻 Bugfix
+- Fix enclosure detection in OPDS acquisition feeds
+### ⚙️ Internals improvements
+- Optimize asynchronous articles refresh
+- Improve handling of "Check for Updates" menu item
+- Remove a documentation file from bundle resources
+### 🛤️ Infrastructure updates
+- Build on macOS 26.3 / Xcode 26.2
+
+Vienna 3.10.0 Beta 7
+--------------------
+_released 2026-02-09_
+
+### 🚲 Changes
+- Add a command to reopen the last closed tab
+- Add a button to access notifications settings from Vienna's settings
+- Disable "Subscribe in Open Reader" option when syncing is not yet configured
+- Visual adaptations to macOS 26 (app icon, window corners)
+- Remove deprecated Pocket plugin
+- Update translations
+### 🤷🏻 Bugfix
+- Fix icons not being visible in table header on macOS 26
+- Fix text-only mode of toolbar not working on macOS 15+
+- Improve detection and repair of inconsistent counts of unread articles
+- Fix relative URLs for certain feeds
+### ⚙️ Internals improvement
+- Have article controller fetch articles asynchronously
+- Refactor feed discovery
+- Remove legacy address bar
+- Improve size limits for split views involving web view
+- Clean up imports and class forward declaration
+- Rename multiple variables/constants for consistency
+### 🛤️ Infrastructure updates
+- Update FMDB to version 2.7.12, Sparkle to version 3.8.0
+- Build on macOS 26.2 / Xcode 26.2
+- Update Github checkout action to version 6
+- Update SwiftLint settings
+### 📖 Documentation
+- Add documentation about usage of large language models (so-called "AI")
+
 Vienna 3.10.0 Beta 6
 --------------------
 _released 2025-09-05_

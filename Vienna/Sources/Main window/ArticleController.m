@@ -69,7 +69,6 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
     Article *articleToPreserve;
     NSString *guidOfArticleToSelect;
     BOOL firstUnreadArticleRequired;
-    dispatch_queue_t queue;
 }
 
 @synthesize mainArticleView, currentArrayOfArticles, folderArrayOfArticles, articleSortSpecifiers, backtrackArray;
@@ -164,8 +163,6 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
                        forKeyPath:MAPref_ShowFilterBar
                           options:NSKeyValueObservingOptionNew
                           context:VNAArticleControllerObserverContext];
-
-        queue = dispatch_queue_create("uk.co.opencommunity.vienna2.displayRefresh", DISPATCH_QUEUE_SERIAL);
     }
     return self;
 }
@@ -488,12 +485,24 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 {
     Folder *folder = [[Database sharedManager] folderFromID:currentFolderId];
     NSString *filterString = self.filterString;
-    dispatch_sync(queue, ^{
-        self.folderArrayOfArticles = [folder articlesWithFilter:filterString];
+    [folder setNonPersistedFlag:VNAFolderFlagUpdating];
+    [[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_FoldersUpdated object:@(folder.itemId)];
+    __block NSArray * articles;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSInteger requestedFolderId = self->currentFolderId;
+        articles = [folder articlesWithFilter:filterString];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [folder clearNonPersistedFlag:VNAFolderFlagUpdating];
+            [[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_FoldersUpdated object:@(folder.itemId)];
+            if (self->currentFolderId == requestedFolderId) {
+                self.folderArrayOfArticles = articles;
+                [self finishReloadArrayOfArticles];
+            }
+        });
     });
-    Article *article = self.selectedArticle;
 
-    // Make sure selectedArticle hasn't changed since reload started.
+    Article *article = self.selectedArticle;
+    // To verify later if selectedArticle has changed after reload started.
     if (articleToPreserve != nil && articleToPreserve != article) {
         if (article != nil && !article.isDeleted) {
             articleToPreserve = article;
@@ -501,6 +510,10 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
             articleToPreserve = nil;
         }
     }
+} // reloadArrayOfArticles
+
+-(void)finishReloadArrayOfArticles
+{
 
     [self->mainArticleView refreshFolder:VNARefreshReapplyFilter];
 
@@ -516,13 +529,13 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
     // we check to see if the selected article is the same
     // and if it has been updated
     Article *currentArticle = self.selectedArticle;
-    if (currentArticle == article &&
+    if (currentArticle == articleToPreserve &&
         [[Preferences standardPreferences] boolForKey:MAPref_CheckForUpdatedArticles]
         && currentArticle.isRevised)
     {
         [[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_ArticleViewChange object:nil];
     }
-} // reloadArrayOfArticles
+} // finishReloadArrayOfArticles
 
 /* refilterArrayOfArticles
  * Reapply the current filter to the article array.
@@ -557,7 +570,6 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 	if (guidOfArticleToPreserve != nil) {
 		[filteredArray addObject:articleToPreserve];
 	}
-	articleToPreserve = nil;
 	
 	return [filteredArray copy];
 }

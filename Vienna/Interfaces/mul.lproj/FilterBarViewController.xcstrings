@@ -875,6 +875,12 @@
             "value" : "Filter"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtre"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1533,6 +1539,12 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "Filter"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtrer par"
           }
         },
         "nl" : {
