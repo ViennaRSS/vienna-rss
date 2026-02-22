@@ -1,8 +1,24 @@
 Vienna ChangeLog File
 =====================
 
+Vienna 3.10.1
+-------------
+_released 2026-02-22_
+### 🚲 Changes
+- Provide a visual animation feedback when retrieving a folder's articles is slow
+- Update translations
+### 🤷🏻 Bugfixes
+- Prevent a crash when part of code references the database before it has finished loading
+- Remove unneeded position constraint on split-view position for horizontal layout
+- Fix the rest of the feeds not being fetched when a few feeds encountered network issues
+- Prevent article currently selected in a smart or group folder from being filtered out of the view during feed refreshes
+- Fix handling of menu-item titles regarding opening links in external browser or in Vienna's built-in browser
+- Fix issue with font selected by the user in Settings not being taken into account
+### ⚙️ Internals improvement
+- Change checks before launching a refresh of all feeds (network might take time to become available on wake after sleep)
+
 Vienna 3.10.0
---------------
+-------------
 _released 2026-02-13_
 ### 🚲 Changes
 - Add keywords for Spotlight search
