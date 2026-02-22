@@ -319,6 +319,9 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 	
 	// Hook up the key sequence properly now that all NIBs are loaded.
 	self.foldersTree.mainView.nextKeyView = ((NSView<BaseView> *)self.browser.primaryTab.view).mainView;
+
+    // Initial call needed to have NWPathMonitor completely set up
+    (void)VNANetworkIsReachable();
     
 	// Do safe initialisation.
 	[self performSelector:@selector(doSafeInitialisation)
@@ -2442,7 +2445,15 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
                                        fireImmediately:refreshImmediately
                                          dispatchQueue:dispatch_get_main_queue()
                                           eventHandler:^{
-                [self refreshAllSubscriptions];
+                if (VNANetworkIsReachable()) {
+                    [self refreshAllSubscriptions];
+                } else {
+                    // the time offset is for allowing network reactivation
+                    // after wakeup from sleep
+                    [self performSelector:@selector(refreshAllSubscriptions)
+                               withObject:nil
+                               afterDelay:20.0];
+                }
             }];
     }
 }

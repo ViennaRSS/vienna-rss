@@ -49,5 +49,6 @@ NSURL * _Nullable cleanedUpUrlFromString(NSString * _Nullable urlString);
 NSURL * _Nullable urlFromUserString(NSString *urlString);
 BOOL hasOSScriptsMenu(void);
 NSString * userAgent(void);
+BOOL VNANetworkIsReachable(void);
 
 NS_ASSUME_NONNULL_END
