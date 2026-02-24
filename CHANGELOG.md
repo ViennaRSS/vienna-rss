@@ -1,6 +1,12 @@
 Vienna ChangeLog File
 =====================
 
+Vienna 3.10.2
+-------------
+_released 2026-02-24_
+### 🤷🏻 Bugfix
+- Fix crash at application launch with certain configurations
+
 Vienna 3.10.1
 -------------
 _released 2026-02-22_
