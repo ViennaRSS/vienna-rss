@@ -221,7 +221,7 @@ NSString * userAgent(void) {
 // https://developer.apple.com/library/archive/samplecode/Reachability/Introduction/Intro.html
 BOOL VNANetworkIsReachable(void)
 {
-    if (@available(macOS 10.14, *)) {
+    if (@available(macOS 15, *)) {
         static VNANetworkMonitor *monitor = nil;
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
