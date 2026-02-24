@@ -29,10 +29,16 @@
                                         NSTableViewDataSource,
                                         NSTableViewDelegate>
 
+// This class is initialized in Interface Builder (-initWithCoder:).
+- (instancetype)initWithFrame:(NSRect)frameRect NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
 @property (weak, nonatomic) AppController *appController;
 @property (weak, nonatomic) ArticleController *articleController;
 
 // Public functions
+- (void)initTableView;
 -(void)saveTableSettings;
 
 @end

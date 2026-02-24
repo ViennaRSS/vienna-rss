@@ -19,58 +19,46 @@
 
 import Cocoa
 
+@objc(VNAMainWindowController)
 final class MainWindowController: NSWindowController {
 
-    @objc weak var articleController: ArticleController!
-
-    // MARK: Transitional outlets
-
-    @IBOutlet private(set) var mainWindowContentViewController: NSViewController!
-
-    @IBOutlet private(set) var splitView: NSSplitView!
-    @IBOutlet private(set) var outlineView: FolderView?
-    @IBOutlet private(set) var articleListView: ArticleListView?
-    @IBOutlet private(set) var unifiedDisplayView: UnifiedDisplayView?
+    @objc(sharedWindowController)
+    private(set) static var shared: MainWindowController!
 
     @objc private(set) var toolbarSearchField: NSSearchField?
-    @IBOutlet private(set) weak var placeholderDetailView: NSView!
-
-    @objc private(set) lazy var browser: (any Browser & NSViewController) = {
-        var controller = TabbedBrowserViewController() as (any Browser & NSViewController)
-        return controller
-    }()
 
     @IBOutlet private var subscribeToolbarItemMenu: NSMenu!
     @IBOutlet private var actionToolbarItemMenu: NSMenu!
     @IBOutlet private var filterToolbarItemMenu: NSMenu!
     @IBOutlet private var styleToolbarItemMenu: NSMenu!
 
+    @objc private(set) var foldersTree: FoldersTree!
+    @objc private(set) var browser: (any Browser & NSViewController)!
+    @objc weak var articleController: ArticleController!
+
     // MARK: Initialization
 
     override func windowDidLoad() {
         super.windowDidLoad()
 
-        // This view controller is needed to perform storyboard segues, until
-        // the window controller itself is instantiated by a storyboard.
-        contentViewController = mainWindowContentViewController
+        // AppKit has no mechanism to retrieve the initial window controller
+        // if it was instantiated in Interface Builder. However, as suggested
+        // by Apple at <https://developer.apple.com/forums/thread/72066>, for
+        // single-window apps it makes sense to use a shared instance, set by
+        // the window controller in windowDidLoad().
+        MainWindowController.shared = self
 
-        // workaround for autosave not working when name is set in Interface Builder
-        // cf. https://stackoverflow.com/q/16587058
-        splitView.autosaveName = "VNASplitView"
+        if let mainWindowViewController = contentViewController as? MainWindowViewController {
+            foldersTree = mainWindowViewController.foldersTree
+            browser = mainWindowViewController.browser
+            articleController = mainWindowViewController.articleController
+            statusBar = mainWindowViewController.statusBar
+            statusLabel = mainWindowViewController.statusLabel
+        }
 
         (self.browser as? any RSSSource)?.rssSubscriber = self
 
         statusBarState(disclosed: Preferences.standard.showStatusBar, animate: false)
-
-        splitView.addSubview(browser.view)
-        placeholderDetailView.removeFromSuperview()
-
-        self.articleController.articleListView = self.articleListView
-        self.articleController.unifiedListView = self.unifiedDisplayView
-        self.articleListView?.appController = NSApp.appController
-        self.unifiedDisplayView?.appController = NSApp.appController
-        self.articleListView?.articleController = self.articleController
-        self.unifiedDisplayView?.articleController = self.articleController
     }
 
     // MARK: Subtitle
@@ -138,8 +126,8 @@ final class MainWindowController: NSWindowController {
 
     // MARK: Status bar
 
-    @IBOutlet private var statusBar: DisclosureView!
-    @IBOutlet private var statusLabel: NSTextField!
+    private var statusBar: DisclosureView!
+    private var statusLabel: NSTextField!
 
     @objc var statusText: String? {
         get {
@@ -179,7 +167,7 @@ final class MainWindowController: NSWindowController {
         if let activeTab = self.browser.activeTab {
             return activeTab.tabUrl != nil
         } else {
-            return self.articleListView?.selectedArticle != nil
+            return self.articleController?.selectedArticle != nil
         }
     }
 
@@ -191,7 +179,7 @@ final class MainWindowController: NSWindowController {
             items.append(url)
             shareableItemsSubject = activeTab.title ?? NSLocalizedString("URL", comment: "URL")
         } else {
-            if let articles = articleListView?.markedArticleRange as? [Article] {
+            if let articles = articleController?.markedArticleRange as? [Article] {
                 let links = articles.compactMap { $0.link }
                 let urls = links.compactMap { URL(string: $0) }
                 items = urls

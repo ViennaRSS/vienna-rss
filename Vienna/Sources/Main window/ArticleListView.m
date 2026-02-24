@@ -51,7 +51,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 @interface ArticleListView ()
 
 @property (weak, nonatomic) IBOutlet NSStackView *contentStackView;
-@property (weak, nonatomic) IBOutlet EnclosureView *enclosureView;
+@property (nonatomic) IBOutlet EnclosureView *enclosureView;
 
 -(void)initTableView;
 -(BOOL)copyTableSelection:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard;
@@ -101,12 +101,9 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 
 @synthesize filterBarViewController = _filterBarViewController;
 
-/* initWithFrame
- * Initialise our view.
- */
--(instancetype)initWithFrame:(NSRect)frame
+- (nullable instancetype)initWithCoder:(NSCoder *)coder
 {
-    self= [super initWithFrame:frame];
+    self = [super initWithCoder:coder];
     if (self) {
         isChangingOrientation = NO;
 		isInTableInit = NO;
@@ -120,23 +117,6 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
     return self;
 }
 
-/* awakeFromNib
- * Do things that only make sense once the NIB is loaded.
- */
--(void)awakeFromNib
-{
-	// Register for notification
-	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-	[nc addObserver:self selector:@selector(handleArticleListFontChange:) name:MA_Notify_ArticleListFontChange object:nil];
-	[nc addObserver:self selector:@selector(handleReadingPaneChange:) name:MA_Notify_ReadingPaneChange object:nil];
-	[nc addObserver:self selector:@selector(handleLoadFullHTMLChange:) name:MA_Notify_LoadFullHTMLChange object:nil];
-	[nc addObserver:self selector:@selector(handleStyleChange:) name:MA_Notify_StyleChange object:nil];
-	[nc addObserver:self selector:@selector(handleRefreshArticle:) name:MA_Notify_ArticleViewChange object:nil];
-	[nc addObserver:self selector:@selector(handleArticleViewEnded:) name:MA_Notify_ArticleViewEnded object:nil];
-
-    [self initialiseArticleView];
-}
-
 /* initialiseArticleView
  * Do the things to initialise the article view from the database. This is the
  * only point during initialisation where the database is guaranteed to be
@@ -144,6 +124,32 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
  */
 -(void)initialiseArticleView
 {
+    NSNotificationCenter *notificationCenter = NSNotificationCenter.defaultCenter;
+    [notificationCenter addObserver:self
+                           selector:@selector(handleArticleListFontChange:)
+                               name:MA_Notify_ArticleListFontChange
+                             object:nil];
+    [notificationCenter addObserver:self
+                           selector:@selector(handleReadingPaneChange:)
+                               name:MA_Notify_ReadingPaneChange
+                             object:nil];
+    [notificationCenter addObserver:self
+                           selector:@selector(handleLoadFullHTMLChange:)
+                               name:MA_Notify_LoadFullHTMLChange
+                             object:nil];
+    [notificationCenter addObserver:self
+                           selector:@selector(handleStyleChange:)
+                               name:MA_Notify_StyleChange
+                             object:nil];
+    [notificationCenter addObserver:self
+                           selector:@selector(handleRefreshArticle:)
+                               name:MA_Notify_ArticleViewChange
+                             object:nil];
+    [notificationCenter addObserver:self
+                           selector:@selector(handleArticleViewEnded:)
+                               name:MA_Notify_ArticleViewEnded
+                             object:nil];
+
     WebKitArticleTab *articleTextController = [[WebKitArticleTab alloc] init];
     articleText = articleTextController;
     self.articleTextView = articleTextController.view;

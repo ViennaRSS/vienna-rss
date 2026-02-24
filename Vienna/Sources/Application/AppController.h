@@ -36,7 +36,7 @@
 
 @property (nonatomic) PluginManager *pluginManager;
 @property (nonatomic, weak) id<Browser> browser;
-@property (nonatomic) FoldersTree *foldersTree;
+@property (weak, nonatomic) FoldersTree *foldersTree;
 @property (readonly, nonatomic) NSMenu *searchFieldMenu;
 
 // Menu action items
