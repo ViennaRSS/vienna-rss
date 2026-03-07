@@ -259,6 +259,52 @@
             database.userVersion = (uint32_t)26;
             NSLog(@"Updated database schema to version 26.");
         }
+        case 27: {
+            // Fix default smart folders with missing search string.
+            FMResultSet *results =
+                [database executeQuery:@"SELECT folder_id, search_string "
+                                        "FROM smart_folders "
+                                        "WHERE (folder_id BETWEEN 1 AND 3) "
+                                        "AND (search_string IS NULL)"];
+            while ([results next]) {
+                int folderId = [results intForColumn:@"folder_id"];
+                Criteria *criteria = nil;
+                switch (folderId) {
+                case 1:
+                    // Flagged articles
+                    criteria =
+                        [[Criteria alloc] initWithField:MA_Field_Flagged
+                                           operatorType:VNACriteriaOperatorEqualTo
+                                                  value:@"Yes"];
+                    break;
+                case 2:
+                    // Unread articles
+                    criteria =
+                        [[Criteria alloc] initWithField:MA_Field_Read
+                                           operatorType:VNACriteriaOperatorEqualTo
+                                                  value:@"No"];
+                    break;
+                case 3:
+                    // Today's articles
+                    criteria =
+                        [[Criteria alloc] initWithField:MA_Field_LastUpdate
+                                           operatorType:VNACriteriaOperatorEqualTo
+                                                  value:@"today"];
+                    break;
+                default:
+                    continue;
+                }
+                CriteriaTree *criteriaTree = [[CriteriaTree alloc] init];
+                criteriaTree.criteriaTree = @[criteria];
+                [database executeUpdate:@"UPDATE smart_folders "
+                                         "SET search_string = ? "
+                                         "WHERE folder_id = ?",
+                                        criteriaTree.string,
+                                        @(folderId)];
+            }
+            database.userVersion = (uint32_t)27;
+            NSLog(@"Updated database schema to version 27.");
+        }
     }
 }
 
