@@ -474,8 +474,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	if ([self createFolderOnDatabase:folderName underParent:VNAFolderTypeRoot withType:VNAFolderTypeSmart] >= 0) {
 		CriteriaTree * criteriaTree = [[CriteriaTree alloc] init];
         criteriaTree.criteriaTree = [criteriaTree.criteriaTree arrayByAddingObject:(id<CriteriaElement>)criteria];
-		
-		__weak NSString * preparedCriteriaString = criteriaTree.string;
+        NSString *preparedCriteriaString = criteriaTree.string;
         [self.databaseQueue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"INSERT INTO smart_folders (folder_id, search_string) VALUES (?, ?)", @(db.lastInsertRowId), preparedCriteriaString];
         }];
@@ -2255,7 +2254,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 {
 	NSMutableArray * newArray = [NSMutableArray array];
 	NSString * filterClause = @"";
-	__weak NSString * queryString;
+	NSString * queryString;
 	Folder * folder = nil;
 	__block NSInteger unread_count = 0;
 
