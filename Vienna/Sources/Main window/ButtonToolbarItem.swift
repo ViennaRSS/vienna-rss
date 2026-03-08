@@ -24,56 +24,60 @@ import Cocoa
 @objc(VNAButtonToolbarItem)
 class ButtonToolbarItem: NSToolbarItem {
 
-    // image property
+    override init(itemIdentifier: NSToolbarItem.Identifier) {
+        super.init(itemIdentifier: itemIdentifier)
+
+        let button = NSButton()
+        button.bezelStyle = .toolbar
+        // Ensure that the toolbar item has the same width as the other toolbar
+        // items in macOS 10.15.
+        if #unavailable(macOS 11) {
+            let width = NSToolbarItem.defaultSize.width - 2.0
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.widthAnchor.constraint(equalToConstant: width).isActive = true
+        }
+        view = button
+
+        // The default menuFormRepresentation cannot be used, because it will
+        // reset the toolbar's display mode. However, the toolbar will validate
+        // and enable a custom menu item, provided it implements the action.
+        let menuItem = NSMenuItem(
+            title: "",
+            action: #selector(menuFormRepresentationClicked(_:)),
+            keyEquivalent: ""
+        )
+        menuItem.target = self
+        menuFormRepresentation = menuItem
+    }
+
+    override var label: String {
+        didSet {
+            menuFormRepresentation?.title = label
+        }
+    }
+
     override var image: NSImage? {
-        get {
-            if let button = view as? NSButton {
-                return button.image
-            } else {
-                return super.image
+        didSet {
+            if #available(macOS 26, *) {
+                menuFormRepresentation?.image = image
             }
+        }
+    }
+
+    var button: NSButton? {
+        get {
+            view as? NSButton
         }
         set {
-             if let button = view as? NSButton {
-                button.image = newValue
-            } else {
-                super.image = newValue
-            }
+            view = newValue
         }
     }
 
-    // Assign the item's target to the menu-form representation.
-    override var target: AnyObject? {
-        didSet {
-            if view is NSButton {
-                menuFormRepresentation?.target = target
-            }
-        }
-    }
-
-    // Assign the item's action to the menu-form representation.
-    override var action: Selector? {
-        didSet {
-            if view is NSButton {
-                menuFormRepresentation?.action = action
-            }
-        }
-    }
-
-    // Assign the item's enabled state to the menu-form representation.
-    override var isEnabled: Bool {
-        didSet {
-            if view is NSButton {
-                menuFormRepresentation?.isEnabled = isEnabled
-            }
-        }
-    }
-
-    // The default implementation of this method does nothing. Overriding this
-    // will allow any responder object to validate the toolbar item. This method
-    // is also invoked in text-only mode.
+    // The default implementation of this method does nothing for toolbar items
+    // with a custom view. Overriding this will allow any responder object to
+    // validate the toolbar item.
     override func validate() {
-        guard let action = action else {
+        guard let action else {
             isEnabled = false
             return
         }
@@ -86,4 +90,14 @@ class ButtonToolbarItem: NSToolbarItem {
         }
     }
 
+    // This method mimics a private method of NSToolbarItem that is used by
+    // default menuFormRepresentation objects. NSToolbarItem conforms to the
+    // NSMenuItemValidation protocol and will validate the menu item for this
+    // action, presumably referencing the isEnabled property.
+    @objc
+    private func menuFormRepresentationClicked(_ menuItem: NSMenuItem) {
+        if let action, menuItem == menuFormRepresentation {
+            NSApp.sendAction(action, to: target, from: self)
+        }
+    }
 }

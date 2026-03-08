@@ -1522,22 +1522,20 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)handleRefreshStatusChange:(NSNotification *)nc
 {
-	if (self.connecting) {
-		// Toggle the refresh button
-		NSToolbarItem *item = [self toolbarItemWithIdentifier:@"Refresh"];
+    VNAToggleButtonToolbarItem *item =
+        (VNAToggleButtonToolbarItem *)[self toolbarItemWithIdentifier:@"Refresh"];
+    if (self.connecting) {
+        // Toggle the refresh button
 		item.action = @selector(cancelAllRefreshesToolbar:);
-        NSButton *button = (NSButton *)item.view;
-        button.state = NSControlStateValueOn;
+        item.state = NSControlStateValueOn;
 	} else {
 		// Run the auto-expire now
 		Preferences * prefs = [Preferences standardPreferences];
 		[db purgeArticlesOlderThanTag:prefs.autoExpireDuration];
 
 		// Toggle the refresh button
-		NSToolbarItem *item = [self toolbarItemWithIdentifier:@"Refresh"];
 		item.action = @selector(refreshAllSubscriptions:);
-        NSButton *button = (NSButton *)item.view;
-        button.state = NSControlStateValueOff;
+        item.state = NSControlStateValueOff;
 
 		[self showUnreadCountOnApplicationIconAndWindowTitle];
 		

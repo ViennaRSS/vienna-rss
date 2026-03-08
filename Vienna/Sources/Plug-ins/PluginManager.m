@@ -270,14 +270,15 @@ static NSString * const VNAPluginsDirectoryName = @"Plugins";
         return nil;
     }
 
-    VNAPlugInToolbarItem *item = [[VNAPlugInToolbarItem alloc] initWithItemIdentifier:itemIdentifier];
+    VNARepresentingToolbarItem *item =
+        [[VNARepresentingToolbarItem alloc] initWithItemIdentifier:itemIdentifier];
+    item.representedObject = plugin;
     item.label = plugin.displayName;
     item.paletteLabel = item.label;
     item.image = plugin.toolbarItemImage;
     item.target = self;
     item.action = @selector(pluginInvocator:);
     item.toolTip = plugin.toolbarItemToolTip;
-    item.menuFormRepresentation.representedObject = plugin;
     return item;
 }
 
@@ -328,15 +329,15 @@ static NSString * const VNAPluginsDirectoryName = @"Plugins";
 -(IBAction)pluginInvocator:(id)sender
 {
     VNAActionPlugin *plugin;
-    if ([sender isKindOfClass:[VNAPlugInToolbarItemButton class]]) {
-        VNAPlugInToolbarItemButton *button = sender;
-        plugin = [self actionPluginWithIdentifier:button.toolbarItem.itemIdentifier];
+    if ([sender isKindOfClass:[VNARepresentingToolbarItem class]]) {
+        VNARepresentingToolbarItem *toolbarItem = sender;
+        plugin = toolbarItem.representedObject;
     } else {
 		NSMenuItem * menuItem = (NSMenuItem *)sender;
 		plugin = menuItem.representedObject;
 	}
 	
-	if (plugin) {
+    if (plugin && [plugin isKindOfClass:[VNAActionPlugin class]]) {
 		// This is a link plugin. There should be a URL field which we invoke and possibly
 		// placeholders to be filled from the current article or website.
 		if ([plugin isKindOfClass:[VNALinkPlugin class]]) {
