@@ -270,14 +270,15 @@ static NSString * const VNAPluginsDirectoryName = @"Plugins";
         return nil;
     }
 
-    VNAPlugInToolbarItem *item = [[VNAPlugInToolbarItem alloc] initWithItemIdentifier:itemIdentifier];
+    VNAPlugInToolbarItem *item =
+        [[VNAPlugInToolbarItem alloc] initWithItemIdentifier:itemIdentifier
+                                                      plugin:plugin];
     item.label = plugin.displayName;
     item.paletteLabel = item.label;
     item.image = plugin.toolbarItemImage;
     item.target = self;
     item.action = @selector(pluginInvocator:);
     item.toolTip = plugin.toolbarItemToolTip;
-    item.menuFormRepresentation.representedObject = plugin;
     return item;
 }
 
@@ -328,9 +329,9 @@ static NSString * const VNAPluginsDirectoryName = @"Plugins";
 -(IBAction)pluginInvocator:(id)sender
 {
     VNAActionPlugin *plugin;
-    if ([sender isKindOfClass:[VNAPlugInToolbarItemButton class]]) {
-        VNAPlugInToolbarItemButton *button = sender;
-        plugin = [self actionPluginWithIdentifier:button.toolbarItem.itemIdentifier];
+    if ([sender isKindOfClass:[VNAPlugInToolbarItem class]]) {
+        VNAPlugInToolbarItem *toolbarItem = sender;
+        plugin = toolbarItem.plugin;
     } else {
 		NSMenuItem * menuItem = (NSMenuItem *)sender;
 		plugin = menuItem.representedObject;

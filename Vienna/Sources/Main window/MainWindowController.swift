@@ -210,17 +210,16 @@ final class MainWindowController: NSWindowController {
         identifier: NSToolbarItem.Identifier
     ) -> NSToolbarItem {
         let item = SharingServiceToolbarItem(itemIdentifier: identifier, sharingService: service)
-        if #available(macOS 10.15, *) {
-            item.isBordered = true
-        }
         item.action = #selector(performSharingService(_:))
         return item
     }
 
     @IBAction private func invokeSharingServicePicker(_ sender: Any) {
-        // The sender is either the menu item in the main menu or the menu-item
-        // representation of the toolbar item in text-only mode.
-        if sender is NSMenuItem, let window, let contentView = window.contentView {
+        guard sender is NSMenuItem || sender is NSToolbarItem else {
+            return
+        }
+
+        if let window, let contentView = window.contentView {
             let picker = NSSharingServicePicker(items: shareableItems)
             picker.delegate = self
             // The menu item does not have a view to which the picker could be
@@ -233,13 +232,6 @@ final class MainWindowController: NSWindowController {
             let yCoordinate = layoutRect.maxY - 1
             let topEdgeRect = NSRect(x: xCoordinate, y: yCoordinate, width: 1, height: 1)
             picker.show(relativeTo: topEdgeRect, of: contentView, preferredEdge: .minY)
-        }
-
-        // The sender is a button if the user clicked on the toolbar item.
-        if let button = sender as? NSButton {
-            let picker = NSSharingServicePicker(items: shareableItems)
-            picker.delegate = self
-            picker.show(relativeTo: .zero, of: button, preferredEdge: .minY)
         }
     }
 
@@ -458,16 +450,8 @@ extension MainWindowController: NSToolbarDelegate {
         }
 
         if itemIdentifier == .subscribe {
-            let item: NSToolbarItem
-            if #available(macOS 10.15, *) {
-                let menuToolbarItem = NSMenuToolbarItem(itemIdentifier: itemIdentifier)
-                menuToolbarItem.menu = subscribeToolbarItemMenu
-                item = menuToolbarItem
-            } else {
-                let popUpButtonToolbarItem = PopUpButtonToolbarItem(itemIdentifier: itemIdentifier)
-                popUpButtonToolbarItem.menu = subscribeToolbarItemMenu
-                item = popUpButtonToolbarItem
-            }
+            let item = NSMenuToolbarItem(itemIdentifier: itemIdentifier)
+            item.menu = subscribeToolbarItemMenu
             item.image = NSImage(resource: .newFeedTemplate)
             item.label = NSLocalizedString(
                 "subscribe.toolbarItem.label",
@@ -487,16 +471,8 @@ extension MainWindowController: NSToolbarDelegate {
         }
 
         if itemIdentifier == .action {
-            let item: NSToolbarItem
-            if #available(macOS 10.15, *) {
-                let menuToolbarItem = NSMenuToolbarItem(itemIdentifier: itemIdentifier)
-                menuToolbarItem.menu = actionToolbarItemMenu
-                item = menuToolbarItem
-            } else {
-                let popUpButtonToolbarItem = PopUpButtonToolbarItem(itemIdentifier: itemIdentifier)
-                popUpButtonToolbarItem.menu = actionToolbarItemMenu
-                item = popUpButtonToolbarItem
-            }
+            let item = NSMenuToolbarItem(itemIdentifier: itemIdentifier)
+            item.menu = actionToolbarItemMenu
             item.image = NSImage(named: NSImage.actionTemplateName)
             item.label = NSLocalizedString(
                 "action.toolbarItem.label",
@@ -516,16 +492,8 @@ extension MainWindowController: NSToolbarDelegate {
         }
 
         if itemIdentifier == .filter {
-            let item: NSToolbarItem
-            if #available(macOS 10.15, *) {
-                let menuToolbarItem = NSMenuToolbarItem(itemIdentifier: itemIdentifier)
-                menuToolbarItem.menu = filterToolbarItemMenu
-                item = menuToolbarItem
-            } else {
-                let popUpButtonToolbarItem = PopUpButtonToolbarItem(itemIdentifier: itemIdentifier)
-                popUpButtonToolbarItem.menu = filterToolbarItemMenu
-                item = popUpButtonToolbarItem
-            }
+            let item = NSMenuToolbarItem(itemIdentifier: itemIdentifier)
+            item.menu = filterToolbarItemMenu
             item.image = NSImage(resource: .funnelFilterTemplate)
             item.label = NSLocalizedString(
                 "filter.toolbarItem.label",
@@ -541,16 +509,8 @@ extension MainWindowController: NSToolbarDelegate {
         }
 
         if itemIdentifier == .styles {
-            let item: NSToolbarItem
-            if #available(macOS 10.15, *) {
-                let menuToolbarItem = NSMenuToolbarItem(itemIdentifier: itemIdentifier)
-                menuToolbarItem.menu = styleToolbarItemMenu
-                item = menuToolbarItem
-            } else {
-                let popUpButtonToolbarItem = PopUpButtonToolbarItem(itemIdentifier: itemIdentifier)
-                popUpButtonToolbarItem.menu = styleToolbarItemMenu
-                item = popUpButtonToolbarItem
-            }
+            let item = NSMenuToolbarItem(itemIdentifier: itemIdentifier)
+            item.menu = styleToolbarItemMenu
             if #available(macOS 11, *) {
                 item.image = NSImage(
                     systemSymbolName: "paintbrush",

@@ -19,18 +19,27 @@
 
 import Cocoa
 
-class SharingServiceToolbarItem: ButtonToolbarItem {
+class SharingServiceToolbarItem: NSToolbarItem {
 
     let service: NSSharingService
 
-    init(itemIdentifier: NSToolbarItem.Identifier, sharingService service: NSSharingService) {
+    init(
+        itemIdentifier: NSToolbarItem.Identifier,
+        sharingService service: NSSharingService
+    ) {
         self.service = service
         super.init(itemIdentifier: itemIdentifier)
+
+        isBordered = true
+        if #unavailable(macOS 11) {
+            // In macOS 10.15, toolbar items should have a uniform size.
+            minSize = NSToolbarItem.defaultSize
+            maxSize = NSToolbarItem.defaultSize
+        }
     }
 
     @available(*, unavailable)
     override init(itemIdentifier: NSToolbarItem.Identifier) {
         fatalError("Use init(itemIdentifier:sharingService:)")
     }
-
 }
