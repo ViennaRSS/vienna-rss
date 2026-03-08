@@ -85,8 +85,14 @@ static NSNibName const VNASmartFolderNibName = @"SearchFolder";
 
         // Load the criteria into the fields.
         CriteriaTree *criteriaTree = [self.database searchStringForSmartFolder:folderId];
-
-        self.predicateEditor.objectValue = criteriaTree.predicate;
+        if (criteriaTree) {
+            self.predicateEditor.objectValue = criteriaTree.predicate;
+        } else {
+            // Ensure that at least a row with a "+" button is shown, to let the
+            // user configure the smart folder.
+            self.predicateEditor.objectValue =
+                [NSCompoundPredicate andPredicateWithSubpredicates:@[]];
+        }
 
         [window beginSheet:self.window completionHandler:nil];
     }
