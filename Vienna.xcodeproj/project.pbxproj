@@ -102,6 +102,7 @@
 		3AA9880E2F2159CD0035B027 /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 3AA9880D2F2159CD0035B027 /* AppIcon.icon */; };
 		3AB95743258DBC5A00C54E83 /* Browser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDF6FC5218A26B0002F77E9 /* Browser.swift */; };
 		3AC411A526BBFDFD004A8700 /* WebKitArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC411A426BBFDFD004A8700 /* WebKitArticleView.swift */; };
+		3AEED7272F476CDE00D67CD4 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEED7262F476CDE00D67CD4 /* NetworkMonitor.swift */; };
 		435026E6165DD8BE0018EDB7 /* ArticleRef.m in Sources */ = {isa = PBXBuildFile; fileRef = 435026E5165DD8BE0018EDB7 /* ArticleRef.m */; };
 		4350283E165DE7F60018EDB7 /* NSNotificationAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4350283D165DE7F60018EDB7 /* NSNotificationAdditions.m */; };
 		43502895165DE9E00018EDB7 /* ActivityLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 43502848165DE9DF0018EDB7 /* ActivityLog.m */; };
@@ -386,6 +387,7 @@
 		3AA9880F2F34F3E40035B027 /* LLM-USAGE-POLICY.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "LLM-USAGE-POLICY.md"; sourceTree = "<group>"; };
 		3AC411A426BBFDFD004A8700 /* WebKitArticleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebKitArticleView.swift; sourceTree = "<group>"; };
 		3ADBA70C23DDAFCA00156722 /* Notarize.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = Notarize.sh; sourceTree = "<group>"; };
+		3AEED7262F476CDE00D67CD4 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		3AF674562E2239EB00955D05 /* CreateDMG.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = CreateDMG.sh; sourceTree = "<group>"; };
 		430C4AE0166175C20079C9FC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		435026E5165DD8BE0018EDB7 /* ArticleRef.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleRef.m; sourceTree = "<group>"; };
@@ -1442,6 +1444,7 @@
 				AA60237F08C298FB002CFD06 /* HelperFunctions.m */,
 				AAFAF3FB088056D800DAFF04 /* Keychain.h */,
 				AAFAF3FC088056D800DAFF04 /* Keychain.m */,
+				3AEED7262F476CDE00D67CD4 /* NetworkMonitor.swift */,
 				2FE44CAC25B7995400554E82 /* NSApplication+AppController.swift */,
 				F6F12AFB25ABDDE3005B2DCE /* NSFileManager+Paths.h */,
 				F6F12AFC25ABDDE3005B2DCE /* NSFileManager+Paths.m */,
@@ -1915,6 +1918,7 @@
 				F6B059E02961D0A100F6E31B /* JSONFeed.swift in Sources */,
 				2FB5A9E929E4BCD800409BA5 /* CustomWKHoverUIDelegate.swift in Sources */,
 				F63833D81EF842EA00E07213 /* MainWindowController.swift in Sources */,
+				3AEED7272F476CDE00D67CD4 /* NetworkMonitor.swift in Sources */,
 				F41CA694218F56140072F734 /* NSWorkspace+OpenWithMenu.m in Sources */,
 				2FF61D3024F2ED1500A7E2B5 /* BrowserTab+Interface.swift in Sources */,
 				2F779111253B17C5004ED4EF /* BrowserContextMenuDelegate.swift in Sources */,
