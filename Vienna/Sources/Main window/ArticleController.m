@@ -969,6 +969,15 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 			[dbManager markArticleRead:folderId guid:theGuid isRead:readFlag];
 		}
 	}
+
+    // Refresh current view, which might involve some smart folder
+    for (Article * visibleArticle in currentArrayOfArticles) {
+        ArticleReference *reference = [ArticleReference makeReference:visibleArticle];
+        if ([refArray containsObject:reference]) {
+            visibleArticle.read = readFlag;
+        }
+    }
+    [mainArticleView refreshFolder:VNARefreshRedrawList];
 }
 
 /* addBacktrack
