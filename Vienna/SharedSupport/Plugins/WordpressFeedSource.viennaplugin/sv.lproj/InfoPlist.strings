@@ -1,0 +1,8 @@
+/* The name of feed source. */
+"FriendlyName" = "Wordpress.com";
+
+/* An instruction for the user. This will be shown above a text field. */
+"LinkName" = "Ange Wordpress användarnamn";
+
+/* The home page of the feed source. */
+"SiteHomePage" = "https://wordpress.com";

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Name</key>
+	<string>ShareToFediverse</string>
+	<key>Default</key>
+	<false/>
+	<key>Type</key>
+	<string>Script</string>
+	<key>Script</key>
+	<string>Vienna to Mastodon.scpt</string>
+	<key>FriendlyName</key>
+	<string>Mastodon</string>
+	<key>Tooltip</key>
+	<string>Share to the Fediverse via a Mastodon instance</string>
+	<key>ButtonImage</key>
+	<string>FediverseButton</string>
+	<key>MenuPath</key>
+	<string>Share via a Mastodon instance</string>
+</dict>
+</plist>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>FriendlyName</key>
+	<string>PChome 個人新聞台</string>
+	<key>LinkName</key>
+	<string>Enter PChome user name</string>
+	<key>LinkTemplate</key>
+	<string>https://mypaper.pchome.com.tw/%@/rss</string>
+	<key>Name</key>
+	<string>PChomeFeedSource</string>
+	<key>SiteHomePage</key>
+	<string>https://mypaper.pchome.com.tw</string>
+	<key>Type</key>
+	<string>FeedSource</string>
+</dict>
+</plist>

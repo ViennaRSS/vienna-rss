@@ -1,0 +1,113 @@
+			autorevision history
+
+1.21 @ 2017-09-30:
+  Try to make tarballs more reproducible.
+  Add an option to silence warnings.
+  Add a sed script output.
+  Auto generate the logo with update commit info.
+  Note if the tag (in git) is not annotated.
+  Extract info about OpenPGP keys used to sign tags/commits.
+
+1.20 @ 2017-01-03:
+  Better determinism in the order of the author file.
+  Better tests for `local` support.
+  Make sure the cache file is not polluted from other output types.
+
+1.19 @ 2016-12-20:
+  Only use the committer date for git.
+  Only use the `local` keyword where supported.
+
+1.18 @ 2016-11-22:
+  Fix some bashisms in the make file.
+  Get the short hash from git rather than assuming its length.
+
+1.17 @ 2016-11-18:
+  Fix out of repo operation.
+  Bring back the irc channel.
+  Add a script to sanity check out of repo operation.
+
+1.16 @ 2016-11-15:
+  Try to eliminate stray error output.
+  Allow the VCS_EXTRA symbol to be renamed.
+  Add an C# output.
+  Add an CMake output.
+
+1.15 @ 2016-08-08:
+  Add support for action stamps.
+  Add support for plain c/c++ source output.
+  Activate mq as needed for hg.
+  Add an .editorconfig file.
+
+1.14 @ 2016-02-22:
+  Fix PHP output.
+  Use constants array in PHP output.
+  Make sure that the cache file gets outputted where expected.
+  Add an example for use with waf.
+
+1.13 @ 2015-07-31:
+  Make the man page more reproducible.
+  Make sure VCS_WS_MODIFIED is not empty for svn.
+  Remove sql output until such time as it can be completed.
+  Add some missing example files.
+
+1.12 @ 2015-03-16
+  Use --xml for svn when we care about the output.
+  New site: https://autorevision.github.io/
+  Handle older svn detection more gracefully.
+
+1.11 @ 2015-02-20
+  Added scheme, clojure, rpm, and sql outputs.
+  Added hpp, matlab, and octave outputs.
+  Reorder types in help and asciidoc to be more alphabetical.
+  Try using md5sum when md5 is not available when making tarballs.
+  Fix a typo in the svn driver.
+
+1.10a @ 2014-10-24
+  Emergency bug fix.
+
+1.10 @ 2014-10-23
+  Cover the case of split repository heads.
+  Add initial Swift output support.
+
+1.9 @ 2014-05-23
+  Add a logo.
+  Only update the cache file when there are changes.
+  New dependency `cmp`.
+
+1.8 @ 2013-12-27
+  Added user-set symbol VC_EXTRA.
+  Added VCS_UUID as a unique repostory key.
+
+1.7 @ 2013-12-01
+  Autogenerate the AUTHORS file.
+  Do not change empty CACHEFILE to `./`.
+  Make sure the -U option works properly.
+
+1.6 @ 2013-08-28
+  Use autorevision in autorevision.
+  Ensure that the cache path is one that can be sourced.
+  Add an AUTHORS file.
+
+1.5 @ 2013-08-12
+  Add support for git-svn - gives back the Subversion revision, not the hash.
+  Add a -U to check for unversioned files in svn.
+
+1.4 @ 2013-01-18
+  Remove bashisms.
+  Add "python" and "perl" language synonyms.
+  Add m4.
+  Work around unreliable return value of git diff in 1.7.9.5.
+
+1.3 @ 2012-12-09
+  (La)TeX output support added.
+
+1.2 @ 2012-10-30
+  Bazaar extractor added.
+  autorevision can now usually be called safely from subdirectories.
+  Drop back to numeric VCS_WC_MODIFIED so the C processor can use it.
+
+1.1 @ 2012-10-28
+  Java and Java properties support added.
+
+1.0 @ 2012-10-25
+  Initial release.

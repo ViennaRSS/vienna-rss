@@ -1,0 +1,23 @@
+# Based upon https://github.com/github/gitignore
+
+# macOS
+.DS_Store
+.Trashes
+
+# Xcode
+build/
+Build/
+DerivedData/
+xcuserdata/
+*~.nib
+
+# SwiftPM
+.build/
+Package.resolved
+
+# Vienna
+Vienna/Localizations/
+Scripts/Resources/CS-ID.xcconfig
+
+# Jetbrains
+.idea

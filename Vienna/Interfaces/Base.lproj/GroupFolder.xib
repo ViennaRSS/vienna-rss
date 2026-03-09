@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16C68" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="NewGroupFolder">
+            <connections>
+                <outlet property="cancelButton" destination="22" id="28"/>
+                <outlet property="folderName" destination="20" id="27"/>
+                <outlet property="newGroupFolderWindow" destination="5" id="18"/>
+                <outlet property="saveButton" destination="21" id="29"/>
+                <outlet property="window" destination="5" id="30"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" tabbingMode="disallowed" id="5" userLabel="GroupFolder" customClass="NSPanel">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="502" y="622" width="380" height="138"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1058"/>
+            <value key="minSize" type="size" width="213" height="107"/>
+            <view key="contentView" id="6">
+                <rect key="frame" x="0.0" y="0.0" width="380" height="138"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" allowsCharacterPickerTouchBarItem="NO" preferredMaxLayoutWidth="340" translatesAutoresizingMaskIntoConstraints="NO" id="19">
+                        <rect key="frame" x="18" y="101" width="344" height="17"/>
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="New Group Folder" id="32">
+                            <font key="font" metaFont="systemBold"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="23">
+                        <rect key="frame" x="18" y="79" width="344" height="14"/>
+                        <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" alignment="left" title="Enter the group folder name:" id="36">
+                            <font key="font" metaFont="smallSystem"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="20">
+                        <rect key="frame" x="20" y="49" width="340" height="22"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" drawsBackground="YES" usesSingleLineMode="YES" id="33">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="22">
+                        <rect key="frame" x="214" y="13" width="82" height="32"/>
+                        <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="35">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                        </buttonCell>
+                        <connections>
+                            <action selector="doCancel:" target="-2" id="25"/>
+                            <outlet property="nextKeyView" destination="21" id="24"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" tag="100" translatesAutoresizingMaskIntoConstraints="NO" id="21">
+                        <rect key="frame" x="296" y="13" width="70" height="32"/>
+                        <buttonCell key="cell" type="push" title="Save" bezelStyle="rounded" alignment="center" borderStyle="border" tag="100" imageScaling="proportionallyDown" inset="2" id="34">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                        </buttonCell>
+                        <connections>
+                            <action selector="doSave:" target="-2" id="26"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="22" firstAttribute="top" secondItem="20" secondAttribute="bottom" constant="8" symbolic="YES" id="5ZB-8C-zAt"/>
+                    <constraint firstAttribute="trailing" secondItem="19" secondAttribute="trailing" constant="20" symbolic="YES" id="6qv-tK-kEQ"/>
+                    <constraint firstItem="23" firstAttribute="top" secondItem="19" secondAttribute="bottom" constant="8" symbolic="YES" id="7L4-eg-MFX"/>
+                    <constraint firstAttribute="trailing" secondItem="20" secondAttribute="trailing" constant="20" symbolic="YES" id="QCD-tF-sZW"/>
+                    <constraint firstItem="23" firstAttribute="leading" secondItem="6" secondAttribute="leading" constant="20" symbolic="YES" id="UIG-jo-qb4"/>
+                    <constraint firstItem="20" firstAttribute="top" secondItem="23" secondAttribute="bottom" constant="8" symbolic="YES" id="UYI-uo-eeq"/>
+                    <constraint firstItem="21" firstAttribute="baseline" secondItem="22" secondAttribute="baseline" id="UmD-y6-czZ"/>
+                    <constraint firstAttribute="trailing" secondItem="23" secondAttribute="trailing" constant="20" symbolic="YES" id="bvo-FH-PLz"/>
+                    <constraint firstItem="20" firstAttribute="leading" secondItem="6" secondAttribute="leading" constant="20" symbolic="YES" id="cbv-d2-S02"/>
+                    <constraint firstItem="19" firstAttribute="leading" secondItem="6" secondAttribute="leading" constant="20" symbolic="YES" id="evs-R8-I4D"/>
+                    <constraint firstAttribute="trailing" secondItem="21" secondAttribute="trailing" constant="20" symbolic="YES" id="hEE-PA-Awg"/>
+                    <constraint firstItem="19" firstAttribute="top" secondItem="6" secondAttribute="top" constant="20" symbolic="YES" id="kuj-2w-R1z"/>
+                    <constraint firstItem="21" firstAttribute="leading" secondItem="22" secondAttribute="trailing" constant="12" symbolic="YES" id="pw3-JK-Pmu"/>
+                    <constraint firstItem="22" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6" secondAttribute="leading" constant="20" symbolic="YES" id="wGp-Up-ijy"/>
+                    <constraint firstAttribute="bottom" secondItem="21" secondAttribute="bottom" constant="20" symbolic="YES" id="wzP-sW-rXw"/>
+                    <constraint firstItem="21" firstAttribute="top" secondItem="20" secondAttribute="bottom" constant="8" symbolic="YES" id="xcd-OU-PqC"/>
+                </constraints>
+            </view>
+            <point key="canvasLocation" x="140" y="161"/>
+        </window>
+    </objects>
+</document>

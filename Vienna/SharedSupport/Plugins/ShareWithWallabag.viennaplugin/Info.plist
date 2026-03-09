@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Name</key>
+	<string>ShareWithWallabag</string>
+	<key>Default</key>
+	<false/>
+	<key>Type</key>
+	<string>Link</string>
+	<key>FriendlyName</key>
+	<string>wallabag</string>
+	<key>Tooltip</key>
+	<string>Add the current article to wallabag.it</string>
+	<key>ButtonImage</key>
+	<string>WallabagButton</string>
+	<key>MenuPath</key>
+	<string>Share with wallabag.it</string>
+	<key>URL</key>
+	<string>https://app.wallabag.it/bookmarklet?url=$ArticleLink$</string>
+</dict>
+</plist>

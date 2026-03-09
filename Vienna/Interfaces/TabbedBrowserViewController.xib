@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.2"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="TabbedBrowserViewController" customModule="Vienna" customModuleProvider="target">
+            <connections>
+                <outlet property="tabBar" destination="NQ9-WY-Cbm" id="5Xp-PN-vrk"/>
+                <outlet property="tabView" destination="tnb-vE-K05" id="2Rj-AU-rjY"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="622" height="383"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <customView verticalHuggingPriority="300" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NQ9-WY-Cbm" customClass="MMTabBarView">
+                    <rect key="frame" x="0.0" y="355" width="622" height="28"/>
+                    <connections>
+                        <outlet property="delegate" destination="-2" id="N7U-Ul-9ts"/>
+                        <outlet property="partnerView" destination="tnb-vE-K05" id="jY2-p6-YWx"/>
+                        <outlet property="tabView" destination="tnb-vE-K05" id="vze-g7-tre"/>
+                    </connections>
+                </customView>
+                <tabView horizontalCompressionResistancePriority="751" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="tnb-vE-K05">
+                    <rect key="frame" x="0.0" y="0.0" width="622" height="355"/>
+                    <font key="font" metaFont="system"/>
+                    <connections>
+                        <outlet property="delegate" destination="NQ9-WY-Cbm" id="uzD-eS-JMk"/>
+                    </connections>
+                </tabView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="tnb-vE-K05" firstAttribute="top" secondItem="NQ9-WY-Cbm" secondAttribute="bottom" id="D9r-Eh-NO9"/>
+                <constraint firstItem="NQ9-WY-Cbm" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="N8S-uy-S4O"/>
+                <constraint firstItem="tnb-vE-K05" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="NiK-bN-uiv"/>
+                <constraint firstAttribute="trailing" secondItem="NQ9-WY-Cbm" secondAttribute="trailing" id="Qn4-O6-CN4"/>
+                <constraint firstItem="NQ9-WY-Cbm" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="im4-Wa-YbC"/>
+                <constraint firstAttribute="bottom" secondItem="tnb-vE-K05" secondAttribute="bottom" id="shx-LQ-GFs"/>
+                <constraint firstAttribute="trailing" secondItem="tnb-vE-K05" secondAttribute="trailing" id="tNZ-Qs-8Ep"/>
+            </constraints>
+            <point key="canvasLocation" x="210" y="209.5"/>
+        </customView>
+    </objects>
+</document>

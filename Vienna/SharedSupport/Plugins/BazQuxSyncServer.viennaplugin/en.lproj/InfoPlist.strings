@@ -1,0 +1,5 @@
+/* The name of sync server. */
+"FriendlyName" = "BazQux";
+
+/* An instruction for the user. This will be shown above the text fields. */
+"Hint" = "Enter the info you set in BazQux's 'Mobile login' settings";

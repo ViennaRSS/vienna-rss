@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Apple News</key>
+	<dict>
+		<key>URL</key>
+		<string>https://www.apple.com/newsroom/rss-feed.rss</string>
+	</dict>
+	<key>BBC World News</key>
+	<dict>
+		<key>URL</key>
+		<string>https://feeds.bbci.co.uk/news/world/rss.xml</string>
+	</dict>
+	<key>Six Colors: Apple, technology, and other stuff from Jason Snell and Friends</key>
+	<dict>
+		<key>URL</key>
+		<string>https://feedpress.me/sixcolors</string>
+	</dict>
+	<key>Astronomy Picture of the Day</key>
+	<dict>
+		<key>URL</key>
+		<string>https://apod.nasa.gov/apod.rss</string>
+	</dict>
+	<key>Amusing Planet</key>
+	<dict>
+		<key>URL</key>
+		<string>https://www.amusingplanet.com/feeds/posts/default?alt=rss</string>
+	</dict>
+	<key>Nomadic Matt</key>
+	<dict>
+		<key>URL</key>
+		<string>https://www.nomadicmatt.com/feed/</string>
+	</dict>
+	<key>Kottke</key>
+	<dict>
+		<key>URL</key>
+		<string>https://feeds.kottke.org/main</string>
+	</dict>
+	<key>Cool Hunting</key>
+	<dict>
+		<key>URL</key>
+		<string>https://coolhunting.com/feed/</string>
+	</dict>
+	<key>Xkcd</key>
+	<dict>
+		<key>URL</key>
+		<string>https://xkcd.com/rss.xml</string>
+	</dict>
+	<key>A Working Library</key>
+	<dict>
+		<key>URL</key>
+		<string>https://aworkinglibrary.com/feed/index.xml</string>
+	</dict>
+	<key>It&apos;s Nice That</key>
+	<dict>
+		<key>URL</key>
+		<string>https://feeds2.feedburner.com/itsnicethat/SlXC</string>
+	</dict>
+	<key>Ars Technica</key>
+	<dict>
+		<key>URL</key>
+		<string>https://feeds.arstechnica.com/arstechnica/index/</string>
+	</dict>
+	<key>Vienna Developer Blog</key>
+	<dict>
+		<key>URL</key>
+		<string>https://www.vienna-rss.com/feed.xml</string>
+	</dict>
+	<key>Vienna Support</key>
+	<dict>
+		<key>URL</key>
+		<string>https://github.com/ViennaRSS/vienna-rss/discussions.atom</string>
+	</dict>
+</dict>
+</plist>

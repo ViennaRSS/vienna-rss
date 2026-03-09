@@ -1,0 +1,34 @@
+# ClangFormat 16.0
+# https://clang.llvm.org/docs/ClangFormatStyleOptions.html
+
+AlignConsecutiveMacros:                         AcrossEmptyLinesAndComments
+AlignOperands:                                  DontAlign
+AlignTrailingComments:                          Leave
+AllowShortFunctionsOnASingleLine:               Empty
+AllowShortLoopsOnASingleLine:                   false
+BraceWrapping:
+  AfterFunction:                                true
+BreakBeforeBraces:                              Custom
+ColumnLimit:                                    0
+IncludeBlocks:                                  Preserve
+IncludeCategories:
+  - Regex:                                      '^<'
+    Priority:                                   1
+    SortPriority:                               0
+    CaseSensitive:                              false
+  - Regex:                                      '.*'
+    Priority:                                   2
+    SortPriority:                               0
+    CaseSensitive:                              false
+IncludeIsMainRegex:                             (\+?.*)?$
+IncludeIsMainSourceRegex:                       (\+?.*\.h)$
+IndentWidth:                                    4
+IndentWrappedFunctionNames:                     true
+InsertNewlineAtEOF:                             true
+KeepEmptyLinesAtTheStartOfBlocks:               false
+ObjCBlockIndentWidth:                           4
+ObjCSpaceAfterProperty:                         true
+SeparateDefinitionBlocks:                       Always
+SortIncludes:                                   CaseInsensitive
+SpaceAroundPointerQualifiers:                   Before
+SpacesInContainerLiterals:                      false

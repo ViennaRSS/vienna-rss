@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13122.19" systemVersion="16F73" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13122.19"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="View Controller" customClass="ExportAccessoryViewController" customModule="Vienna" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="5Ip-vg-DTq" id="CLl-b4-5Yc"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="5Ip-vg-DTq">
+            <rect key="frame" x="0.0" y="0.0" width="399" height="105"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <stackView orientation="vertical" alignment="leading" horizontalStackHuggingPriority="750" verticalStackHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dfe-em-I6F">
+                    <rect key="frame" x="20" y="20" width="359" height="65"/>
+                    <beginningViews>
+                        <button verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FlF-oZ-7c5">
+                            <rect key="frame" x="-1" y="48" width="362" height="18"/>
+                            <buttonCell key="cell" type="radio" title="Export all subscriptions" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="6rj-zb-zOa">
+                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <binding destination="-2" name="value" keyPath="exportAllFeedsRadioButtonState" id="JOv-3U-eZM"/>
+                            </connections>
+                        </button>
+                        <button verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nVN-JX-IXr">
+                            <rect key="frame" x="-1" y="24" width="362" height="18"/>
+                            <buttonCell key="cell" type="radio" title="Export selected subscriptions" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="KgE-bb-aJn">
+                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <binding destination="-2" name="value" keyPath="exportAllFeedsRadioButtonState" id="iIw-J6-HWL">
+                                    <dictionary key="options">
+                                        <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                    </dictionary>
+                                </binding>
+                            </connections>
+                        </button>
+                        <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ohs-sN-wc7">
+                            <rect key="frame" x="-2" y="-2" width="363" height="21"/>
+                            <buttonCell key="cell" type="check" title="Preserve group folders in exported file" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="IYg-Pm-bcI">
+                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <binding destination="-2" name="value" keyPath="preserveFoldersCheckboxButtonState" id="6J6-7J-CjO"/>
+                            </connections>
+                        </button>
+                    </beginningViews>
+                    <constraints>
+                        <constraint firstItem="ohs-sN-wc7" firstAttribute="leading" secondItem="dfe-em-I6F" secondAttribute="leading" constant="1" id="5ru-FF-4cy"/>
+                    </constraints>
+                    <visibilityPriorities>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                        <integer value="1000"/>
+                    </visibilityPriorities>
+                    <customSpacing>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                        <real value="3.4028234663852886e+38"/>
+                    </customSpacing>
+                </stackView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="dfe-em-I6F" firstAttribute="top" secondItem="5Ip-vg-DTq" secondAttribute="top" constant="20" symbolic="YES" id="3Cp-sa-OBV"/>
+                <constraint firstAttribute="bottom" secondItem="dfe-em-I6F" secondAttribute="bottom" constant="20" symbolic="YES" id="5g7-XD-pat"/>
+                <constraint firstAttribute="trailing" secondItem="dfe-em-I6F" secondAttribute="trailing" constant="20" symbolic="YES" id="Dbs-pa-gMX"/>
+                <constraint firstItem="dfe-em-I6F" firstAttribute="leading" secondItem="5Ip-vg-DTq" secondAttribute="leading" constant="20" symbolic="YES" id="Ejr-sT-WRH"/>
+            </constraints>
+            <point key="canvasLocation" x="198.5" y="84.5"/>
+        </customView>
+    </objects>
+</document>

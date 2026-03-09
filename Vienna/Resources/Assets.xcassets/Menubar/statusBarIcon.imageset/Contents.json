@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "statusBarIcon.pdf",
+      "idiom" : "mac"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

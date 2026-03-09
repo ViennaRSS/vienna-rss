@@ -1,0 +1,2 @@
+/* An instruction for the user. This will be shown above the text fields. */
+"Hint" = "Introduzca la información establecida en la configuración 'Mobile login' de BazQux";

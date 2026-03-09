@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Address</key>
+	<string>theoldreader.com</string>
+	<key>FriendlyName</key>
+	<string>The Old Reader</string>
+	<key>Hint</key>
+	<string>Enter username and password defined in Settings/General section of theoldreader.com</string>
+	<key>Name</key>
+	<string>TheOldReaderSyncServer</string>
+	<key>Type</key>
+	<string>SyncServer</string>
+</dict>
+</plist>

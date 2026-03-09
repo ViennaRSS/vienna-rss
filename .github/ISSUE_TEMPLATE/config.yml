@@ -1,0 +1,9 @@
+blank_issues_enabled: false
+
+contact_links:
+  - name: 🙏 Q&A for the community
+    url: https://github.com/ViennaRSS/vienna-rss/discussions/categories/q-a
+    about: Please ask and answer questions here.
+  - name: 💡 Project Discussion
+    url: https://github.com/ViennaRSS/vienna-rss/discussions/categories/ideas
+    about: Discuss suggestions and requests needing further discussion here.

@@ -1,0 +1,5 @@
+/* The name of feed source. */
+"FriendlyName" = "痞客邦部落格";
+
+/* An instruction for the user. This will be shown above a text field. */
+"LinkName" = "請輸入痞客邦部落格使用者名稱";

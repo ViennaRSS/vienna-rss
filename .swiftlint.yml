@@ -1,0 +1,91 @@
+# https://realm.github.io/SwiftLint/rule-directory.html
+
+included:
+  - Vienna/Sources
+  - Vienna Tests
+
+# Rules
+
+disabled_rules:
+  - closure_parameter_position
+  - cyclomatic_complexity
+  - file_length
+  - function_body_length
+  - line_length
+  - opening_brace
+  - todo
+  - trailing_comma
+
+opt_in_rules:
+  - attributes
+  - closure_end_indentation
+  - closure_spacing
+  - collection_alignment
+  - comment_spacing
+  - conditional_returns_on_newline
+  - contains_over_first_not_nil
+  - convenience_type
+  - empty_count
+  - empty_string
+  - fatal_error_message
+  - file_header
+  - file_name
+  - first_where
+  - identical_operands
+  - joined_default_parameter
+  - last_where
+  - legacy_multiple
+  - legacy_random
+  - let_var_whitespace
+  - literal_expression_end_indentation
+  - lower_acl_than_parent
+  - modifier_order
+  - multiline_parameters
+  - nimble_operator
+  - nslocalizedstring_key
+  - number_separator
+  - operator_usage_whitespace
+  - overridden_super_call
+  - override_in_extension
+  - pattern_matching_keywords
+  - prefixed_toplevel_constant
+  - private_action
+  - private_outlet
+  - prohibited_super_call
+  - quick_discouraged_call
+  - quick_discouraged_focused_test
+  - quick_discouraged_pending_test
+  - reduce_into
+  - redundant_nil_coalescing
+  - redundant_type_annotation
+  - required_enum_case
+  - single_test_class
+  - sorted_first_last
+  - static_operator
+  - switch_case_on_newline
+  - toggle_bool
+  - trailing_closure
+  - unavailable_function
+  - unneeded_parentheses_in_closure_argument
+  - untyped_error_in_catch
+  - vertical_parameter_alignment_on_call
+  - yoda_condition
+
+# Rule configurations
+
+file_header:
+  required_pattern: |
+    \/\/
+    \/\/  SWIFTLINT_CURRENT_FILENAME
+    \/\/  Vienna(\s?\w+)*
+    \/\/
+    \/\/  Copyright (\d{4}|\d{4}-\d{4}|,\s{1}\d{4}|,\s{1}\d{4}-\d{4})+(\s?\w+)*
+    \/\/
+
+file_name:
+  excluded:
+    - Constants.swift
+  suffix_pattern: (\+\w+|Extensions?)
+
+private_outlet:
+  allow_private_set: true
