@@ -78,4 +78,19 @@
 	return [NSString stringWithFormat:@"%@ in folder %ld", guid, (long)folderId];
 }
 
+/* isEqual
+ * Override the -isEqual function in order to
+ * have collections of class objects behave as
+ * expected on invocation of the -containsObject:
+ * method
+ */
+-(BOOL)isEqual:(id)object
+{
+    if (self == object) {
+        return YES;
+    }
+    ArticleReference *other = (ArticleReference *)object;
+    return folderId == other->folderId && [guid isEqualToString:other->guid];
+}
+
 @end
