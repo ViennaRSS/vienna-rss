@@ -28,32 +28,36 @@ extension CriteriaTree: PredicateConvertible {
 
     @objc
     convenience init?(predicate: NSPredicate) {
-        self.init()
-        guard let compound = predicate as? NSCompoundPredicate else {
+        guard
+            let predicate = predicate as? NSCompoundPredicate,
+            !predicate.subpredicates.isEmpty
+        else {
             return nil
         }
 
-        switch compound.compoundPredicateType {
+        self.init()
+
+        switch predicate.compoundPredicateType {
         case .and:
-            self.condition = .all
+            condition = .all
         case .or:
-            self.condition = .any
+            condition = .any
         case .not:
-            self.condition = .none
+            condition = .none
         default:
-            self.condition = .invalid
+            condition = .invalid
         }
 
         let subPredicates: [NSPredicate]
-        if compound.compoundPredicateType == .not && compound.subpredicates.count == 1,
-           let notOrCompound = compound.subpredicates[0] as? NSCompoundPredicate,
+        if predicate.compoundPredicateType == .not && predicate.subpredicates.count == 1,
+           let notOrCompound = predicate.subpredicates[0] as? NSCompoundPredicate,
            let notOrSubpredicates = notOrCompound.subpredicates as? [NSPredicate] {
             // Special case for "none" predicate, which is modeled by NSPredicateEditor as "not(or(...))"
             subPredicates = notOrSubpredicates
-        } else if let directSubPredicates = compound.subpredicates as? [NSPredicate] {
+        } else if let directSubPredicates = predicate.subpredicates as? [NSPredicate] {
             subPredicates = directSubPredicates
         } else {
-            NSLog("No subpredicates in compound predicate \(compound)")
+            NSLog("No subpredicates in compound predicate \(predicate)")
             return nil
         }
 
@@ -79,9 +83,9 @@ extension CriteriaTree: PredicateConvertible {
             }
 
             if let criteriaElement = criteriaElement {
-                self.criteriaTree.append(criteriaElement)
+                criteriaTree.append(criteriaElement)
             } else {
-                NSLog("Subpredicate \(subPredicate) of compound predicate \(compound) is corrupted, cannot be converted to CriteriaElement")
+                NSLog("Subpredicate \(subPredicate) of compound predicate \(predicate) is corrupted, cannot be converted to CriteriaElement")
             }
         }
     }
