@@ -910,28 +910,33 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     //panel = nil;
 }
 
-
 /* runAppleScript
  * Run an AppleScript script given a fully qualified path to the script.
  */
 -(void)runAppleScript:(NSString *)scriptName
 {
-	NSDictionary * errorDictionary;
-	
-	NSURL * scriptURL = [NSURL fileURLWithPath:scriptName];
-	NSAppleScript * appleScript = [[NSAppleScript alloc] initWithContentsOfURL:scriptURL error:&errorDictionary];
-	if (appleScript == nil) {
-		NSString * baseScriptName = scriptName.lastPathComponent.stringByDeletingPathExtension;
-		runOKAlertPanel([NSString stringWithFormat:NSLocalizedString(@"Error loading script '%@'", nil), baseScriptName],
-						[errorDictionary valueForKey:NSAppleScriptErrorMessage]);
-	} else {
-		NSAppleEventDescriptor * resultEvent = [appleScript executeAndReturnError:&errorDictionary];
-		if (resultEvent == nil) {
-			NSString * baseScriptName = scriptName.lastPathComponent.stringByDeletingPathExtension;
-			runOKAlertPanel([NSString stringWithFormat:NSLocalizedString(@"AppleScript Error in '%@' script", nil), baseScriptName],
-							[errorDictionary valueForKey:NSAppleScriptErrorMessage]);
-		}
-	}
+    NSString *baseScriptName = scriptName.lastPathComponent.stringByDeletingPathExtension;
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
+        NSDictionary *errorDictionary;
+        NSURL *scriptURL = [NSURL fileURLWithPath:scriptName];
+        NSAppleScript *appleScript = [[NSAppleScript alloc] initWithContentsOfURL:scriptURL error:&errorDictionary];
+        if (appleScript == nil) {
+            NSString *errorMessage = [errorDictionary valueForKey:NSAppleScriptErrorMessage];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                runOKAlertPanel([NSString stringWithFormat:NSLocalizedString(@"Error loading script '%@'", nil), baseScriptName],
+                                errorMessage);
+            });
+        } else {
+            NSAppleEventDescriptor *resultEvent = [appleScript executeAndReturnError:&errorDictionary];
+            if (resultEvent == nil) {
+                NSString *errorMessage = [errorDictionary valueForKey:NSAppleScriptErrorMessage];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    runOKAlertPanel([NSString stringWithFormat:NSLocalizedString(@"AppleScript Error in '%@' script", nil), baseScriptName],
+                                    errorMessage);
+                });
+            }
+        }
+    });
 }
 
 -(void)handleOpenReaderAuthFailed:(NSNotification *)nc
