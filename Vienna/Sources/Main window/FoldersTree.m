@@ -764,7 +764,12 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 		}
 	}
 	
-	TreeNode __unused * newNode = [[TreeNode alloc] init:node atIndex:childIndex folder:newFolder canHaveChildren:NO];
+    if (![self.rootNode nodeFromID:newFolder.itemId]) {
+        TreeNode * __unused newNode = [[TreeNode alloc] init:node
+                                                     atIndex:childIndex
+                                                      folder:newFolder
+                                             canHaveChildren:NO];
+    }
 	[self reloadFolderItem:node reloadChildren:YES];
 	[self selectFolder:newFolder.itemId];
 }
