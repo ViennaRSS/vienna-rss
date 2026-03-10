@@ -902,14 +902,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
         [undoManager setActionName:NSLocalizedString(@"Mark All Read", nil)];
     }
 
-    // We need to refresh view if current folder is Group, Smart or Search folder
-    Folder * currentFolder = [[Database sharedManager] folderFromID:currentFolderId];
-    if (currentFolder != nil && !currentFolder.isRSSFolder && !currentFolder.isOpenReaderFolder) {
-        articleToPreserve = self.selectedArticle;
-        [self reloadArrayOfArticles];
-    } else {
-        [mainArticleView refreshFolder:VNARefreshRedrawList];
-    }
+	[mainArticleView refreshFolder:VNARefreshRedrawList];
 }
 
 /* wrappedMarkAllFoldersReadInArray
@@ -931,12 +924,19 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 			[refArray addObjectsFromArray:[folder arrayOfUnreadArticlesRefs]];
 			[[OpenReader sharedManager] markAllReadInFolder:folder];
 		} else {
-		    // For smart folders, we only mark read articles which should be visible with current filters
+            // For smart folders, we only mark read articles which should be visible with current filter.
+            // We also need to be careful to mark articles read, both in their original folders and in current view
             NSString *filterString = self.filterString;
             NSArray * articleArray = [self applyFilter:[folder articlesWithFilter:filterString]];
             [self innerMarkReadByArray:articleArray readFlag:YES];
             for (id article in articleArray) {
                 [refArray addObject:[ArticleReference makeReference:(Article *)article]];
+            }
+            for (Article * visibleArticle in currentArrayOfArticles) {
+                ArticleReference *reference = [ArticleReference makeReference:visibleArticle];
+                if ([refArray containsObject:reference]) {
+                    visibleArticle.read = YES;
+                }
             }
 		}
 	}
@@ -969,6 +969,15 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 			[dbManager markArticleRead:folderId guid:theGuid isRead:readFlag];
 		}
 	}
+
+    // Refresh current view, which might involve some smart folder
+    for (Article * visibleArticle in currentArrayOfArticles) {
+        ArticleReference *reference = [ArticleReference makeReference:visibleArticle];
+        if ([refArray containsObject:reference]) {
+            visibleArticle.read = readFlag;
+        }
+    }
+    [mainArticleView refreshFolder:VNARefreshRedrawList];
 }
 
 /* addBacktrack

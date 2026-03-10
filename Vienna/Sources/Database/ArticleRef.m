@@ -22,6 +22,8 @@
 
 #import "Article.h"
 
+@import os.log;
+
 @implementation ArticleReference {
     NSString *guid;
     NSInteger folderId;
@@ -78,4 +80,25 @@
 	return [NSString stringWithFormat:@"%@ in folder %ld", guid, (long)folderId];
 }
 
+/* isEqual
+ * Override the -isEqual function in order to
+ * have collections of class objects behave as
+ * expected on invocation of the -containsObject:
+ * method
+ */
+-(BOOL)isEqual:(id)object
+{
+    if (self == object) {
+        return YES;
+    }
+    NSAssert([object class] == [ArticleReference class], @"isEqual called with non ArticleReference object");
+    ArticleReference *other = (ArticleReference *)object;
+    return folderId == other->folderId && [guid isEqualToString:other->guid];
+}
+
+-(NSUInteger)hash
+{
+    os_log_debug(OS_LOG_DEFAULT, "ArticleReference hash called by Vienna: please consider redesign which could improve performance");
+    return [[NSString stringWithFormat:@"%ld-%@",(long)folderId,guid] hash];
+}
 @end
