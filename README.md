@@ -12,7 +12,7 @@ Additionally or alternatively, you can also sync with a server supporting the [O
 Compatibility
 -------------
 
-Version 3.9.x requires a minimum of macOS 10.13 (High Sierra).  
+Vienna 3.9.x and 3.10.x require a minimum of macOS 10.13 (High Sierra).  
 Vienna 3.8.x requires a minimum of macOS 10.12 (Sierra).  
 Vienna 3.6.x and 3.7.x require a minimum of OS X 10.11 (El Capitan).  
 Vienna 3.2.x to 3.5.x require a minimum of OS X 10.9 (Mavericks).  
@@ -64,13 +64,13 @@ We need help keeping Vienna translations up to date into different languages. Yo
 
 Vienna supports a variety of different display styles for articles. These styles are provided on the Styles sub-menu off the View menu. A style is a combination of an HTML template that is used to control the placement of various parts of the article and a CSS stylesheet that controls the appearance of the article.
 
-You can write styles by referring to [this document](https://www.vienna-rss.com/extras/creating-custom-styles/). Have a look at existing styles in the __Styles__ folder.
+You can write styles by referring to [this document](https://www.vienna-rss.com/development/creating-styles). Have a look at existing styles in the __Styles__ folder.
 
 ### Writing plugins
 
 Vienna supports plugins which are installed in menus and/or on the toolbar and can run defined actions. These plugins are XML-based and can be created by editing a simple .plist-file without any knowledge of Cocoa programming, in as little as 15 minutes.
 
-You can write plugins by referring to [this document](https://www.vienna-rss.com/development/creating-plugins-for-vienna-2-5/). Have a look at existing plugins in the __Plugins__ folder.
+You can write plugins by referring to [this document](https://www.vienna-rss.com/development/creating-plugins). Have a look at existing plugins in the __Plugins__ folder.
 
 Licensing
 ---------
