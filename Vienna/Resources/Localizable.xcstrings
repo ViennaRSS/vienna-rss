@@ -16622,6 +16622,12 @@
             "state" : "translated",
             "value" : "Open artikelpagina in Vienna"
           }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öppna artikelsida i Vienna"
+          }
         }
       }
     },
@@ -17537,6 +17543,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Open startpagina van abonnement in Vienna"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öppna prenumerationhemsida i Vienna"
           }
         }
       }
