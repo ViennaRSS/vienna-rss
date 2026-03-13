@@ -25,7 +25,7 @@
 
 @implementation TreeNode {
     TreeNode *parentNode;
-    NSMutableArray *children;
+    NSMutableArray<TreeNode *> * _Nullable children;
     Folder *folder;
     NSInteger nodeId;
     BOOL canHaveChildren;
@@ -45,7 +45,6 @@
 		if (parent != nil) {
 			[parent addChild:self atIndex:insertIndex];
 		}
-		children = [NSMutableArray array];
 	}
 	return self;
 }
@@ -64,6 +63,9 @@
 -(void)addChild:(TreeNode *)child atIndex:(NSInteger)insertIndex
 {
 	NSAssert(canHaveChildren, @"Trying to add children to a node that cannot have children (canHaveChildren==NO)");
+    if (!children) {
+        children = [[NSMutableArray alloc] init];
+    }
 	NSUInteger count = children.count;
 	NSInteger sortMethod = [Preferences standardPreferences].foldersTreeSortMethod;
 
@@ -193,7 +195,11 @@
  */
 -(NSInteger)indexOfChild:(TreeNode *)node
 {
-	return [children indexOfObject:node];
+    if (!children) {
+        return NSNotFound;
+    } else {
+        return [children indexOfObject:node];
+    }
 }
 
 /* setParentNode
