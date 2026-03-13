@@ -23,6 +23,12 @@
 #import "Folder.h"
 #import "Vienna-Swift.h"
 
+@interface TreeNode ()
+
+@property (readwrite, nullable, nonatomic) TreeNode *parentNode;
+
+@end
+
 @implementation TreeNode {
     TreeNode *parentNode;
     NSMutableArray<TreeNode *> * _Nullable children;
@@ -242,28 +248,12 @@
 	return children[0];
 }
 
-/* setNodeId
- * Sets a node's unique Id.
- */
--(void)setNodeId:(NSInteger)n
-{
-	nodeId = n;
-}
-
 /* nodeId
  * Returns the node's ID
  */
 -(NSInteger)nodeId
 {
 	return nodeId;
-}
-
-/* setFolder
- * Sets the folder associated with this node.
- */
--(void)setFolder:(Folder *)newFolder
-{
-	folder = newFolder;
 }
 
 /* folder

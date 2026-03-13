@@ -32,7 +32,7 @@
 + (instancetype)new NS_UNAVAILABLE;
 
 // Accessor functions
-@property (nonatomic) TreeNode *parentNode;
+@property (readonly, nonatomic) TreeNode *parentNode;
 @property (nonatomic, readonly) TreeNode *nextSibling;
 @property (nonatomic, readonly) TreeNode *firstChild;
 -(void)insertChild:(TreeNode *)child atIndex:(NSInteger)insertIndex;
@@ -44,8 +44,8 @@
 -(TreeNode *)childByIndex:(NSInteger)index;
 -(NSInteger)indexOfChild:(TreeNode *)node;
 -(TreeNode *)nodeFromID:(NSInteger)n;
-@property (nonatomic) Folder *folder;
-@property (nonatomic) NSInteger nodeId;
+@property (readonly, nonatomic) Folder *folder;
+@property (readonly, nonatomic) NSInteger nodeId;
 @property (nonatomic, readonly) NSUInteger countOfChildren;
 -(NSComparisonResult)folderNameCompare:(TreeNode *)otherObject;
 
