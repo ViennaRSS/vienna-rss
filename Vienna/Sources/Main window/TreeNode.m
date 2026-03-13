@@ -30,17 +30,14 @@
 @end
 
 @implementation TreeNode {
-    TreeNode *parentNode;
     NSMutableArray<TreeNode *> * _Nullable children;
-    Folder *folder;
-    NSInteger nodeId;
 }
 
 - (instancetype)initRootNode
 {
     self = [super init];
     if (self) {
-        nodeId = VNAFolderTypeRoot;
+        _nodeId = VNAFolderTypeRoot;
     }
     return self;
 }
@@ -49,8 +46,8 @@
 {
     self = [super init];
     if (self) {
-        self->folder = folder;
-        nodeId = folder.itemId;
+        _folder = folder;
+        _nodeId = folder.itemId;
     }
     return self;
 }
@@ -209,27 +206,12 @@
     }
 }
 
-/* setParentNode
- * Sets a treenode's parent
- */
--(void)setParentNode:(TreeNode *)parent
-{
-	parentNode = parent;
-}
-
-/* parentNode
- * Returns our parent node.
- */
--(TreeNode *)parentNode
-{
-	return parentNode;
-}
-
 /* nextSibling
  * Returns the next child.
  */
 -(TreeNode *)nextSibling
 {
+	TreeNode *parentNode = self.parentNode;
 	NSInteger childIndex = [parentNode indexOfChild:self];
 	if (childIndex == NSNotFound || ++childIndex >= parentNode.countOfChildren) {
 		return nil;
@@ -248,22 +230,6 @@
 	return children[0];
 }
 
-/* nodeId
- * Returns the node's ID
- */
--(NSInteger)nodeId
-{
-	return nodeId;
-}
-
-/* folder
- * Returns the folder associated with the node
- */
--(Folder *)folder
-{
-	return folder;
-}
-
 /* nodeName
  * Returns the node's name which is basically the name of the folder
  * associated with the node. If no folder is associated with this node
@@ -271,6 +237,7 @@
  */
 -(NSString *)nodeName
 {
+	Folder *folder = self.folder;
 	if (folder != nil) {
 		if (folder.type == VNAFolderTypeOpenReader) {
 			return [VNAOpenReaderFolderPrefix stringByAppendingString:folder.name];
@@ -295,7 +262,7 @@
 -(NSString *)description
 {
 	return [NSString stringWithFormat:@"%@ (Parent=%@, # of children=%ld)",
-            folder.name, parentNode, (unsigned long)children.count];
+            self.folder.name, self.parentNode, (unsigned long)children.count];
 }
 
 @end
