@@ -28,19 +28,17 @@
     NSMutableArray<TreeNode *> * _Nullable children;
     Folder *folder;
     NSInteger nodeId;
-    BOOL canHaveChildren;
 }
 
 /* init
  * Initialises a treenode.
  */
--(instancetype)init:(TreeNode *)parent atIndex:(NSInteger)insertIndex folder:(Folder *)theFolder canHaveChildren:(BOOL)childflag
+-(instancetype)init:(TreeNode *)parent atIndex:(NSInteger)insertIndex folder:(Folder *)theFolder
 {
 	if ((self = [super init]) != nil) {
 		NSInteger folderId = (theFolder ? theFolder.itemId : VNAFolderTypeRoot);
 		folder = theFolder;
 		parentNode = parent;
-		canHaveChildren = childflag;
 		nodeId = folderId;
 		if (parent != nil) {
 			[parent addChild:self atIndex:insertIndex];
@@ -62,7 +60,8 @@
  */
 -(void)addChild:(TreeNode *)child atIndex:(NSInteger)insertIndex
 {
-	NSAssert(canHaveChildren, @"Trying to add children to a node that cannot have children (canHaveChildren==NO)");
+    NSAssert(self.nodeId == VNAFolderTypeRoot || self.folder.type == VNAFolderTypeGroup,
+             @"Trying to add children to a node that should not have children");
     if (!children) {
         children = [[NSMutableArray alloc] init];
     }
@@ -296,25 +295,6 @@
 -(NSUInteger)countOfChildren
 {
 	return children.count;
-}
-
-/* setCanHaveChildren
- * Sets the flag which specifies whether or not this node can have
- * children. This is not the same as actually adding children. The
- * outline view sets the expand symbol based on whether or not a
- * node item is ever expandable.
- */
--(void)setCanHaveChildren:(BOOL)childFlag
-{
-	canHaveChildren = childFlag;
-}
-
-/* canHaveChildren
- * Returns whether or not this node can have children.
- */
--(BOOL)canHaveChildren
-{
-	return canHaveChildren;
 }
 
 /* description

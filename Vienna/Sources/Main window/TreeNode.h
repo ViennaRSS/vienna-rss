@@ -28,8 +28,7 @@
 
 - (instancetype)init:(TreeNode *)parentNode
              atIndex:(NSInteger)insertIndex
-              folder:(Folder *)folder
-     canHaveChildren:(BOOL)childflag NS_DESIGNATED_INITIALIZER;
+              folder:(Folder *)folder NS_DESIGNATED_INITIALIZER;
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -50,7 +49,6 @@
 @property (nonatomic) Folder *folder;
 @property (nonatomic) NSInteger nodeId;
 @property (nonatomic, readonly) NSUInteger countOfChildren;
-@property (nonatomic) BOOL canHaveChildren;
 -(NSComparisonResult)folderNameCompare:(TreeNode *)otherObject;
 
 @end

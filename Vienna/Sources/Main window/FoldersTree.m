@@ -74,7 +74,7 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 		// Root node is never displayed since we always display from
 		// the second level down. It simply provides a convenient way
 		// of containing the other nodes.
-		_rootNode = [[TreeNode alloc] init:nil atIndex:0 folder:nil canHaveChildren:YES];
+		_rootNode = [[TreeNode alloc] init:nil atIndex:0 folder:nil];
 		_blockSelectionHandler = NO;
 	}
 
@@ -253,7 +253,7 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 			NSInteger count = listOfSubFolders.count;
 			TreeNode * subNode;
 
-			subNode = [[TreeNode alloc] init:node atIndex:-1 folder:folder canHaveChildren:(count > 0)];
+			subNode = [[TreeNode alloc] init:node atIndex:-1 folder:folder];
 			if (count) {
 				[self loadTree:listOfSubFolders rootNode:subNode];
 			}
@@ -293,7 +293,7 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 			NSUInteger count = listOfSubFolders.count;
 			TreeNode * subNode;
 			
-			subNode = [[TreeNode alloc] init:node atIndex:index folder:folder canHaveChildren:(count > 0)];
+			subNode = [[TreeNode alloc] init:node atIndex:index folder:folder];
 			if (count) {
 				if (![self loadTree:listOfSubFolders rootNode:subNode]) {
 					return NO;
@@ -749,9 +749,6 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 
 	NSInteger parentId = newFolder.parentId;
 	TreeNode * node = (parentId == VNAFolderTypeRoot) ? self.rootNode : [self.rootNode nodeFromID:parentId];
-	if (!node.canHaveChildren) {
-		[node setCanHaveChildren:YES];
-	}
 	
 	NSInteger childIndex = -1;
 	if ([Preferences standardPreferences].foldersTreeSortMethod == VNAFolderSortManual) {
@@ -767,8 +764,7 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
     if (![self.rootNode nodeFromID:newFolder.itemId]) {
         TreeNode * __unused newNode = [[TreeNode alloc] init:node
                                                      atIndex:childIndex
-                                                      folder:newFolder
-                                             canHaveChildren:NO];
+                                                      folder:newFolder];
     }
 	[self reloadFolderItem:node reloadChildren:YES];
 	[self selectFolder:newFolder.itemId];
@@ -968,9 +964,6 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 			} else {
 				continue;
 			}
-			if (!newParent.canHaveChildren) {
-				[newParent setCanHaveChildren:YES];
-			}
 		}
 
 		if (!autoSort) {
@@ -1129,7 +1122,7 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
     if (node == nil) {
         node = self.rootNode;
     }
-    return node.canHaveChildren && node.countOfChildren > 0;
+    return node.countOfChildren > 0;
 }
 
 /* validateDrop
