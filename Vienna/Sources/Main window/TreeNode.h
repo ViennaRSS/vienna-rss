@@ -22,8 +22,6 @@
 
 @class Folder;
 
-#define PROGRESS_INDICATOR_DIMENSION	16
-
 @interface TreeNode : NSObject
 
 - (instancetype)initRootNode NS_DESIGNATED_INITIALIZER;
