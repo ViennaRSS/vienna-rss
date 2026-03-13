@@ -74,7 +74,7 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 		// Root node is never displayed since we always display from
 		// the second level down. It simply provides a convenient way
 		// of containing the other nodes.
-		_rootNode = [[TreeNode alloc] init:nil atIndex:0 folder:nil];
+		_rootNode = [[TreeNode alloc] initRootNode];
 		_blockSelectionHandler = NO;
 	}
 
@@ -251,9 +251,8 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 			NSInteger itemId = folder.itemId;
 			NSArray * listOfSubFolders = [[[Database sharedManager] arrayOfFolders:itemId] sortedArrayUsingSelector:@selector(folderNameCompare:)];
 			NSInteger count = listOfSubFolders.count;
-			TreeNode * subNode;
-
-			subNode = [[TreeNode alloc] init:node atIndex:-1 folder:folder];
+			TreeNode *subNode = [[TreeNode alloc] initWithFolder:folder];
+			[node insertChild:subNode atIndex:-1];
 			if (count) {
 				[self loadTree:listOfSubFolders rootNode:subNode];
 			}
@@ -291,9 +290,8 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 			}
 			NSArray * listOfSubFolders = [[Database sharedManager] arrayOfFolders:nextChildId];
 			NSUInteger count = listOfSubFolders.count;
-			TreeNode * subNode;
-			
-			subNode = [[TreeNode alloc] init:node atIndex:index folder:folder];
+			TreeNode *subNode = [[TreeNode alloc] initWithFolder:folder];
+			[node insertChild:subNode atIndex:index];
 			if (count) {
 				if (![self loadTree:listOfSubFolders rootNode:subNode]) {
 					return NO;
@@ -762,9 +760,8 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 	}
 	
     if (![self.rootNode nodeFromID:newFolder.itemId]) {
-        TreeNode * __unused newNode = [[TreeNode alloc] init:node
-                                                     atIndex:childIndex
-                                                      folder:newFolder];
+        TreeNode *newNode = [[TreeNode alloc] initWithFolder:newFolder];
+        [node insertChild:newNode atIndex:childIndex];
     }
 	[self reloadFolderItem:node reloadChildren:YES];
 	[self selectFolder:newFolder.itemId];
@@ -993,7 +990,7 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 		}
 
 		[oldParent removeChild:node andChildren:NO];
-		[newParent addChild:node atIndex:newChildIndex];
+		[newParent insertChild:node atIndex:newChildIndex];
 
 		// Put at beginning of undoArray in order to undo moves in reverse order.
 		[undoArray insertObject:@(folderId) atIndex:0u];
