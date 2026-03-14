@@ -23,34 +23,36 @@
 #import "Folder.h"
 #import "Vienna-Swift.h"
 
+@interface TreeNode ()
+
+@property (readwrite, nullable, nonatomic) TreeNode *parentNode;
+
+@end
+
 @implementation TreeNode {
-    TreeNode *parentNode;
-    NSMutableArray *children;
-    Folder *folder;
-    NSInteger nodeId;
-    BOOL canHaveChildren;
+    NSMutableArray<TreeNode *> * _Nullable children;
 }
 
-/* init
- * Initialises a treenode.
- */
--(instancetype)init:(TreeNode *)parent atIndex:(NSInteger)insertIndex folder:(Folder *)theFolder canHaveChildren:(BOOL)childflag
+- (instancetype)initRootNode
 {
-	if ((self = [super init]) != nil) {
-		NSInteger folderId = (theFolder ? theFolder.itemId : VNAFolderTypeRoot);
-		folder = theFolder;
-		parentNode = parent;
-		canHaveChildren = childflag;
-		nodeId = folderId;
-		if (parent != nil) {
-			[parent addChild:self atIndex:insertIndex];
-		}
-		children = [NSMutableArray array];
-	}
-	return self;
+    self = [super init];
+    if (self) {
+        _nodeId = VNAFolderTypeRoot;
+    }
+    return self;
 }
 
-/* addChild
+- (instancetype)initWithFolder:(Folder *)folder
+{
+    self = [super init];
+    if (self) {
+        _folder = folder;
+        _nodeId = folder.itemId;
+    }
+    return self;
+}
+
+/* insertChild
  * Add the specified node to the our list of children. The position at which the new child
  * is added depends on the type of the folder associated with the node and thus this code
  * is tightly coupled with the folder view and database. Specifically:
@@ -61,9 +63,13 @@
  * This function does not fail. It is assumed that the child can always be inserted into
  * place one way or the other.
  */
--(void)addChild:(TreeNode *)child atIndex:(NSInteger)insertIndex
+-(void)insertChild:(TreeNode *)child atIndex:(NSInteger)insertIndex
 {
-	NSAssert(canHaveChildren, @"Trying to add children to a node that cannot have children (canHaveChildren==NO)");
+    NSAssert(self.nodeId == VNAFolderTypeRoot || self.folder.type == VNAFolderTypeGroup,
+             @"Trying to add children to a node that should not have children");
+    if (!children) {
+        children = [[NSMutableArray alloc] init];
+    }
 	NSUInteger count = children.count;
 	NSInteger sortMethod = [Preferences standardPreferences].foldersTreeSortMethod;
 
@@ -193,23 +199,11 @@
  */
 -(NSInteger)indexOfChild:(TreeNode *)node
 {
-	return [children indexOfObject:node];
-}
-
-/* setParentNode
- * Sets a treenode's parent
- */
--(void)setParentNode:(TreeNode *)parent
-{
-	parentNode = parent;
-}
-
-/* parentNode
- * Returns our parent node.
- */
--(TreeNode *)parentNode
-{
-	return parentNode;
+    if (!children) {
+        return NSNotFound;
+    } else {
+        return [children indexOfObject:node];
+    }
 }
 
 /* nextSibling
@@ -217,6 +211,7 @@
  */
 -(TreeNode *)nextSibling
 {
+	TreeNode *parentNode = self.parentNode;
 	NSInteger childIndex = [parentNode indexOfChild:self];
 	if (childIndex == NSNotFound || ++childIndex >= parentNode.countOfChildren) {
 		return nil;
@@ -235,38 +230,6 @@
 	return children[0];
 }
 
-/* setNodeId
- * Sets a node's unique Id.
- */
--(void)setNodeId:(NSInteger)n
-{
-	nodeId = n;
-}
-
-/* nodeId
- * Returns the node's ID
- */
--(NSInteger)nodeId
-{
-	return nodeId;
-}
-
-/* setFolder
- * Sets the folder associated with this node.
- */
--(void)setFolder:(Folder *)newFolder
-{
-	folder = newFolder;
-}
-
-/* folder
- * Returns the folder associated with the node
- */
--(Folder *)folder
-{
-	return folder;
-}
-
 /* nodeName
  * Returns the node's name which is basically the name of the folder
  * associated with the node. If no folder is associated with this node
@@ -274,6 +237,7 @@
  */
 -(NSString *)nodeName
 {
+	Folder *folder = self.folder;
 	if (folder != nil) {
 		if (folder.type == VNAFolderTypeOpenReader) {
 			return [VNAOpenReaderFolderPrefix stringByAppendingString:folder.name];
@@ -292,32 +256,13 @@
 	return children.count;
 }
 
-/* setCanHaveChildren
- * Sets the flag which specifies whether or not this node can have
- * children. This is not the same as actually adding children. The
- * outline view sets the expand symbol based on whether or not a
- * node item is ever expandable.
- */
--(void)setCanHaveChildren:(BOOL)childFlag
-{
-	canHaveChildren = childFlag;
-}
-
-/* canHaveChildren
- * Returns whether or not this node can have children.
- */
--(BOOL)canHaveChildren
-{
-	return canHaveChildren;
-}
-
 /* description
  * Returns a TreeNode description
  */
 -(NSString *)description
 {
 	return [NSString stringWithFormat:@"%@ (Parent=%@, # of children=%ld)",
-            folder.name, parentNode, (unsigned long)children.count];
+            self.folder.name, self.parentNode, (unsigned long)children.count];
 }
 
 @end

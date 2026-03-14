@@ -22,23 +22,20 @@
 
 @class Folder;
 
-#define PROGRESS_INDICATOR_DIMENSION	16
-
 @interface TreeNode : NSObject
 
-- (instancetype)init:(TreeNode *)parentNode
-             atIndex:(NSInteger)insertIndex
-              folder:(Folder *)folder
-     canHaveChildren:(BOOL)childflag NS_DESIGNATED_INITIALIZER;
+- (instancetype)initRootNode NS_DESIGNATED_INITIALIZER;
+
+- (instancetype)initWithFolder:(Folder *)folder NS_DESIGNATED_INITIALIZER;
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
 
 // Accessor functions
-@property (nonatomic) TreeNode *parentNode;
+@property (readonly, nonatomic) TreeNode *parentNode;
 @property (nonatomic, readonly) TreeNode *nextSibling;
 @property (nonatomic, readonly) TreeNode *firstChild;
--(void)addChild:(TreeNode *)child atIndex:(NSInteger)insertIndex;
+-(void)insertChild:(TreeNode *)child atIndex:(NSInteger)insertIndex;
 -(void)removeChildren;
 -(void)removeChild:(TreeNode *)child andChildren:(BOOL)removeChildrenFlag;
 -(void)sortChildren:(NSInteger)sortMethod;
@@ -47,10 +44,9 @@
 -(TreeNode *)childByIndex:(NSInteger)index;
 -(NSInteger)indexOfChild:(TreeNode *)node;
 -(TreeNode *)nodeFromID:(NSInteger)n;
-@property (nonatomic) Folder *folder;
-@property (nonatomic) NSInteger nodeId;
+@property (readonly, nonatomic) Folder *folder;
+@property (readonly, nonatomic) NSInteger nodeId;
 @property (nonatomic, readonly) NSUInteger countOfChildren;
-@property (nonatomic) BOOL canHaveChildren;
 -(NSComparisonResult)folderNameCompare:(TreeNode *)otherObject;
 
 @end
