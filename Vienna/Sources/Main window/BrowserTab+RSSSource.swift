@@ -80,7 +80,7 @@ extension BrowserTab: RSSSource {
             self?.webView.evaluateJavaScript(BrowserTab.extractHTMLSource) { result, error in
                 defer { finishHandler() }
                 if let html = result as? String, let data = html.data(using: .utf8), let baseUrl = self?.url, error == nil {
-                    let discoverer = FeedDiscoverer.init(data: data, baseURL: baseUrl)
+                    let discoverer = FeedDiscoverer(data: data, baseURL: baseUrl)
                     self?.rssUrls = discoverer.feedURLs().map(\.absoluteURL)
                 } else {
                     // error or conversion problem
