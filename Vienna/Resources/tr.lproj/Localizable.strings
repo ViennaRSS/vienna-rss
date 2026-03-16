@@ -8,46 +8,10 @@
 "%@ Info" = "%@ Bilgi";
 
 /* No comment provided by engineer. */
-"%d new articles retrieved" = "%d yeni makale alındı";
-
-/* Notification body */
-"%d new unread articles retrieved" = "%d yeni okunmayan makale alındı";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully exported" = "%d abonelikleri başarılı bir şekilde çıkarıldı";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully imported" = "%d abonelikleri başarılı bir şekilde dahil edildi";
-
-/* No comment provided by engineer. */
-"%d unread articles" = "%d okunmamış makale";
-
-/* No comment provided by engineer. */
-"%u articles" = "%u makale";
-
-/* No comment provided by engineer. */
-"%u unread" = "%u okunmayan";
-
-/* No comment provided by engineer. */
 "A folder with that name already exists" = "Bu isimde başka bir klasör var";
 
 /* No comment provided by engineer. */
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Yeni bir Vienna veritabanı \"%@\" konumunda oluşturulamıyor çünkü muhtemelen o klasör ya uzaktaki bir ağa dahil, zira Vienna'nın bu versiyonu ağ üzerindeki klasörler ile çalışacak şekilde tasarlanmamıştır. Bilgisayarınız üzerinde bulunan bir klasörü seçmeyi deneyin.";
-
-/* No comment provided by engineer. */
-"After 2 Days" = "2 Gün Sonra";
-
-/* No comment provided by engineer. */
-"After 2 Weeks" = "2 Hafta Sonra";
-
-/* No comment provided by engineer. */
-"After a Day" = "Bir Gün Sonra";
-
-/* No comment provided by engineer. */
-"After a Month" = "Bir Ay Sonra";
-
-/* No comment provided by engineer. */
-"After a Week" = "Bir Hafta Sonra";
 
 /* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "Bu besleme en son yenilendiğinde bir hata oluştu";
@@ -141,11 +105,17 @@
 /* No comment provided by engineer. */
 "Deleting folder \"%@\"…" = "\"%@\" klasörü siliniyor…";
 
+/* Title of a checkbox on an alert */
+"Do not show this warning again" = "Bu uyarıyı bir daha gösterme";
+
 /* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "Abonelikleri seçili OPML dosyasından yüklemek istediğinize emin misiniz?";
 
 /* test for a string */
 "does not contain" = "içermez";
+
+/* Title of a button on an alert */
+"Don’t Empty Trash" = "Çöp kutusunu boşaltma";
 
 /* No comment provided by engineer. */
 "Download" = "İndir";
@@ -167,6 +137,9 @@
 
 /* Title of a button on an alert */
 "Empty" = "Boş";
+
+/* Title of a button on an alert */
+"Empty Trash" = "Çöp kutusunu boşalt";
 
 /* Data field name (Y/N) visible in menu/smart folder definition */
 "Enclosure" = "Ek";
@@ -234,7 +207,7 @@
 /* No comment provided by engineer. */
 "HTTP code %d reported from server" = "%d HTTP kodu sunucudan alındı";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "If you quit Vienna now, all downloads will stop." = "Eğer şimdi Vienna'dan çıkarsanız, tüm indirmeler durdurulacak.";
 
 /* Title of a button on an alert */
@@ -333,7 +306,7 @@
 /* Title of a button on an alert */
 "OK" = "Tamam";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "One or more downloads are in progress" = "Bir ya da daha fazla dosya indiriliyor";
 
 /* Title of a popup menu item */
@@ -492,7 +465,7 @@
 /* No comment provided by engineer. */
 "The database file format has changed" = "Veritabanı dosya biçimi değişmiş";
 
-/* No comment provided by engineer. */
+/* Body of an alert */
 "The Default style will be used instead." = "Geçerli stil onun yerine kullanılacak.";
 
 /* No comment provided by engineer. */
@@ -501,11 +474,14 @@
 /* No comment provided by engineer. */
 "The style \"%@\" has been installed to your Styles folder and added to the Style menu." = "\"%@\" stili Stiller klasörünüze yüklendi ve Stil menüsüne eklendi.";
 
-/* No comment provided by engineer. */
+/* Title of an alert */
 "The style %@ appears to be missing or corrupted" = "%@ stilinde ya bir sorun var ya da stil bulunamadı";
 
 /* No comment provided by engineer. */
 "The subscription for \"%@\" requires a user name and password for access." = "\"%@\" için abonelik kullanıcı adı ve şifre gerektiriyor.";
+
+/* Message text of an alert */
+"There are deleted articles in the trash. Would you like to empty the trash before quitting?" = "Çöp kutusunda silinmiş makaleler bulunuyor. Çıkmadan önce onları silmek ister misiniz?";
 
 /* No comment provided by engineer. */
 "This article contains an enclosed file." = "Bu makale bir ek dosya içeriyor.";
@@ -521,9 +497,6 @@
 
 /* No comment provided by engineer. */
 "Trash" = "Çöp";
-
-/* No comment provided by engineer. */
-"Unread" = "Okunmamış";
 
 /* No comment provided by engineer. */
 "Unread Articles" = "Okunmamış Makaleler";

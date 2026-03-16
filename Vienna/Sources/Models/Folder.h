@@ -85,22 +85,22 @@ typedef NS_OPTIONS(NSUInteger, VNAFolderFlag) {
 @property (nonatomic, copy) NSString *lastUpdateString;
 @property (nonatomic, copy) NSString *username;
 @property (nonatomic, copy) NSString *password;
-@property (nonatomic, readonly, copy) NSArray<Article *> *articles;
+@property (readonly, nonatomic) NSArray<Article *> *articles;
 -(NSArray<Article *> *)articlesWithFilter:(NSString *)filterString;
 @property (nonatomic, readonly) NSInteger itemId;
 @property (nonatomic, copy) NSString *remoteId;
 @property (nonatomic) NSInteger parentId;
 @property (nonatomic) NSInteger nextSiblingId;
 @property (nonatomic) NSInteger firstChildId;
-@property (atomic, readonly) NSInteger countOfCachedArticles;
-@property (atomic) NSInteger unreadCount;
+@property (readonly, nonatomic) NSInteger countOfCachedArticles;
+@property (nonatomic) NSInteger unreadCount;
 @property (nonatomic) VNAFolderType type;
 @property (nonatomic, readonly) VNAFolderFlag nonPersistedFlags;
 @property (nonatomic, readonly) VNAFolderFlag flags;
 @property (nonatomic, copy) NSImage *image;
 @property (nonatomic, readonly) BOOL hasCachedImage;
 -(NSImage *)standardImage;
-@property (atomic) NSInteger childUnreadCount;
+@property (nonatomic) NSInteger childUnreadCount;
 -(void)clearCache;
 @property (nonatomic, getter=isGroupFolder, readonly) BOOL groupFolder;
 @property (nonatomic, getter=isSmartFolder, readonly) BOOL smartFolder;
@@ -124,5 +124,6 @@ typedef NS_OPTIONS(NSUInteger, VNAFolderFlag) {
 -(NSArray *)arrayOfUnreadArticlesRefs;
 -(NSComparisonResult)folderNameCompare:(Folder *)otherObject;
 -(NSComparisonResult)folderIDCompare:(Folder *)otherObject;
-@property (nonatomic, readonly, copy) NSString *feedSourceFilePath;
+@property (readonly, nonatomic) NSString *feedSourceFilePath;
+
 @end

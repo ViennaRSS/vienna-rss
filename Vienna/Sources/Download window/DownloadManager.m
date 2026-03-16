@@ -20,11 +20,15 @@
 
 #import "DownloadManager.h"
 
-#import "AppController+Notifications.h"
 #import "AppController.h"
+#import "AppController+Notifications.h"
 #import "Constants.h"
 #import "DownloadItem.h"
+#import "NSFileManager+Paths.h"
+#import "NSKeyedArchiver+Compatibility.h"
+#import "NSKeyedUnarchiver+Compatibility.h"
 #import "Preferences.h"
+#import "Vienna-Swift.h"
 
 @interface DownloadManager ()
 
@@ -105,22 +109,31 @@
 
 // Archive the downloads list to the preferences.
 - (void)archiveDownloadsList {
-    NSMutableArray *listArray = [[NSMutableArray alloc] initWithCapacity:self.downloads.count];
+    NSData *data = [NSKeyedArchiver vna_archivedDataWithRootObject:[self.downloads copy]
+                                             requiringSecureCoding:YES];
 
-    for (DownloadItem *item in self.downloads) {
-        [listArray addObject:[NSArchiver archivedDataWithRootObject:item]];
+    if (data) {
+        [Preferences.standardPreferences setObject:data
+                                            forKey:MAPref_DownloadItemList];
     }
-
-    [Preferences.standardPreferences setArray:listArray
-                                       forKey:MAPref_DownloadsList];
 }
 
 // Unarchive the downloads list from the preferences.
 - (void)unarchiveDownloadsList {
-    NSArray *listArray = [Preferences.standardPreferences arrayForKey:MAPref_DownloadsList];
-    if (listArray != nil) {
-        for (NSData *dataItem in listArray)
-            [self.downloads addObject:[NSUnarchiver unarchiveObjectWithData:dataItem]];
+    Preferences *preferences = Preferences.standardPreferences;
+    NSData *archive = [preferences objectForKey:MAPref_DownloadItemList];
+
+    if (!archive) {
+        return;
+    }
+
+    NSArray<DownloadItem *> *items = nil;
+    Class cls = [DownloadItem class];
+    items = [NSKeyedUnarchiver vna_unarchivedArrayOfObjectsOfClass:cls
+                                                          fromData:archive];
+
+    if (items) {
+        [self.downloads addObjectsFromArray:items];
     }
 }
 
@@ -177,15 +190,29 @@
 // downloaded by using the user's preferred download folder. If that folder is
 // absent then we default to downloading to the desktop instead.
 + (NSString *)fullDownloadPath:(NSString *)filename {
-    NSString *downloadPath = Preferences.standardPreferences.downloadFolder;
     NSFileManager *fileManager = NSFileManager.defaultManager;
+    NSURL *downloadFolderURL = fileManager.vna_downloadsDirectory;
+    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+    NSData *data = [userDefaults dataForKey:MAPref_DownloadsFolderBookmark];
+
+    if (data) {
+        NSError *error = nil;
+        VNASecurityScopedBookmark *bookmark = [[VNASecurityScopedBookmark alloc] initWithBookmarkData:data
+                                                                                                error:&error];
+
+        if (!error) {
+            downloadFolderURL = bookmark.resolvedURL;
+        }
+    }
+
+    NSString *downloadPath = downloadFolderURL.path;
     BOOL isDir = YES;
 
     if (![fileManager fileExistsAtPath:downloadPath isDirectory:&isDir] || !isDir) {
-        downloadPath = @"~/Desktop";
+        downloadPath = fileManager.vna_downloadsDirectory.path;
     }
 
-    return [downloadPath.stringByExpandingTildeInPath stringByAppendingPathComponent:filename];
+    return [downloadPath stringByAppendingPathComponent:filename];
 }
 
 // Looks up the specified file in the download list to determine if it is being

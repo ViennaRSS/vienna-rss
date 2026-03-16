@@ -20,7 +20,7 @@
 
 @import Cocoa;
 
-@interface GeneralPreferencesViewController : NSViewController {
+@interface GeneralPreferencesViewController : NSViewController <NSOpenSavePanelDelegate> {
     IBOutlet NSPopUpButton * checkFrequency;
     IBOutlet NSPopUpButton * linksHandler;
     IBOutlet NSPopUpButton * expireDuration;

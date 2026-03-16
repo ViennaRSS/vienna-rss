@@ -21,6 +21,7 @@
 
 #import "Constants.h"
 #import "Preferences.h"
+#import "Vienna-Swift.h"
 
 @implementation Database (Migration)
 

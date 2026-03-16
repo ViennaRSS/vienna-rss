@@ -21,15 +21,15 @@
 @import Cocoa;
 
 @interface AdvancedPreferencesViewController : NSViewController {
+    IBOutlet NSButton * previewNewBrowserButton;
     IBOutlet NSButton * useJavaScriptButton;
     IBOutlet NSPopUpButton * concurrentDownloads;
-    IBOutlet NSButton *useWebPluginsButton;
 }
 
 // Action functions
+-(IBAction)changeUseNewBrowser:(NSButton *)sender;
 -(IBAction)changeUseJavaScript:(id)sender;
 -(IBAction)changeConcurrentDownloads:(id)sender;
 -(IBAction)showAdvancedHelp:(id)sender;
-- (IBAction)changeUseWebPlugins:(NSButton *)sender;
 
 @end

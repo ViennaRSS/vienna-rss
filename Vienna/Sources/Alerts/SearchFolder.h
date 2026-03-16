@@ -49,7 +49,7 @@
 	BOOL onScreen;
 }
 
-@property(strong) NSArray * topObjects;
+@property NSArray * topObjects;
 
 // Action routines
 -(IBAction)doSave:(id)sender;

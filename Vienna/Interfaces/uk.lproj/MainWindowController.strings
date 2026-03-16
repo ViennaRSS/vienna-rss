@@ -46,9 +46,6 @@
 /* Class = "NSTextFieldCell"; title = "Filter by:"; ObjectID = "1377"; */
 "1377.title" = "Фільтр:";
 
-/* Class = "NSTextFieldCell"; title = "Current Filter"; ObjectID = "1404"; */
-"1404.title" = "Чинний фільтр";
-
 /* Class = "NSToolbarItem"; label = "Style"; ObjectID = "azL-oz-mJL"; */
 "azL-oz-mJL.label" = "Стиль";
 
@@ -114,15 +111,6 @@
 
 /* Class = "NSToolbarItem"; toolTip = "Refresh all your subscriptions"; ObjectID = "Nmd-zx-Dys"; */
 "Nmd-zx-Dys.toolTip" = "Оновити всі підписки";
-
-/* Class = "NSToolbarItem"; label = "Search Articles"; ObjectID = "OIA-vb-5jR"; */
-"OIA-vb-5jR.label" = "Шукати статті";
-
-/* Class = "NSToolbarItem"; paletteLabel = "Search Articles"; ObjectID = "OIA-vb-5jR"; */
-"OIA-vb-5jR.paletteLabel" = "Шукати статті";
-
-/* Class = "NSToolbarItem"; toolTip = "Search Articles"; ObjectID = "OIA-vb-5jR"; */
-"OIA-vb-5jR.toolTip" = "Шукати статті";
 
 /* Class = "NSMenuItem"; title = "New Smart Folder…"; ObjectID = "Pqr-dM-SQQ"; */
 "Pqr-dM-SQQ.title" = "Нова вибірка…";

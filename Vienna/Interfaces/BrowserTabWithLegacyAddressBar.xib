@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.2"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="BrowserTab" customModule="Vienna" customModuleProvider="target">
+            <connections>
+                <outlet property="addressBarContainer" destination="OdK-ur-PPi" id="Erc-1n-gBl"/>
+                <outlet property="addressField" destination="hfe-el-NfG" id="Sfl-fz-aCb"/>
+                <outlet property="backButton" destination="0rn-z0-yA2" id="1VR-2q-DKI"/>
+                <outlet property="cancelButtonWidth" destination="yiE-mL-DVV" id="wT4-Rq-NMn"/>
+                <outlet property="forwardButton" destination="aeH-Zd-eUj" id="gg6-8U-WAD"/>
+                <outlet property="reloadButton" destination="u6u-kW-eOW" id="Dtw-No-iAz"/>
+                <outlet property="reloadButtonWidth" destination="u7N-Cm-8cB" id="F6m-jO-H0P"/>
+                <outlet property="rssButtonWidth" destination="PoN-9V-QZr" id="yuO-tM-FGE"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="850" height="272"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="OdK-ur-PPi">
+                    <rect key="frame" x="0.0" y="241" width="850" height="31"/>
+                    <subviews>
+                        <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" horizontalHuggingPriority="255" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="755" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OeK-Vl-Vdl">
+                            <rect key="frame" x="5" y="5" width="840" height="21"/>
+                            <subviews>
+                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0rn-z0-yA2">
+                                    <rect key="frame" x="0.0" y="0.0" width="29" height="21"/>
+                                    <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="browserPreviousButton" imagePosition="only" alignment="center" inset="2" id="j5n-Oc-Vrp">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="systemBold" size="12"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="back:" target="-2" id="qNx-fN-S3N"/>
+                                    </connections>
+                                </button>
+                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aeH-Zd-eUj">
+                                    <rect key="frame" x="29" y="0.0" width="27" height="21"/>
+                                    <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="browserNextButton" imagePosition="only" alignment="center" inset="2" id="0sn-QN-I23">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                                        <font key="font" metaFont="systemBold" size="12"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="forward:" target="-2" id="w7v-U4-Rfp"/>
+                                    </connections>
+                                </button>
+                                <textField horizontalHuggingPriority="200" verticalHuggingPriority="750" horizontalCompressionResistancePriority="700" translatesAutoresizingMaskIntoConstraints="NO" id="hfe-el-NfG">
+                                    <rect key="frame" x="56" y="0.0" width="686" height="21"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="21" id="76y-gh-8oJ"/>
+                                    </constraints>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="border" drawsBackground="YES" id="jDD-sF-hKH">
+                                        <font key="font" usesAppearanceFont="YES"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                    <connections>
+                                        <action selector="loadPageFromAddressBar:" target="-2" id="kJy-ZN-1TI"/>
+                                    </connections>
+                                </textField>
+                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="m2a-jT-Jm2">
+                                    <rect key="frame" x="742" y="0.0" width="29" height="21"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="29" id="yiE-mL-DVV"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="CancelTemplate" imagePosition="only" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="iWi-GA-9Xl">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="cancel:" target="-2" id="co1-yJ-HHt"/>
+                                    </connections>
+                                </button>
+                                <button verticalHuggingPriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="u6u-kW-eOW">
+                                    <rect key="frame" x="771" y="0.0" width="29" height="21"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="29" id="u7N-Cm-8cB"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="recessed" bezelStyle="recessed" image="browserRefreshButton" imagePosition="only" alignment="center" inset="2" id="RBR-fu-w5E">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                                        <font key="font" metaFont="systemBold" size="12"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="reload:" target="-2" id="fgH-tf-FM6"/>
+                                    </connections>
+                                </button>
+                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KeR-ow-lja">
+                                    <rect key="frame" x="800" y="-1" width="40" height="22"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="40" id="PoN-9V-QZr"/>
+                                    </constraints>
+                                    <buttonCell key="cell" type="inline" bezelStyle="inline" image="browserRSSButton" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" inset="2" id="6e4-Mb-AuA">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="smallSystemBold"/>
+                                        <connections>
+                                            <action selector="subscribe:" target="-2" id="XdL-4d-wEL"/>
+                                        </connections>
+                                    </buttonCell>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="KeR-ow-lja" firstAttribute="height" secondItem="0rn-z0-yA2" secondAttribute="height" id="GT7-HR-H1Y"/>
+                                <constraint firstItem="hfe-el-NfG" firstAttribute="height" secondItem="0rn-z0-yA2" secondAttribute="height" id="QaY-4u-pTO"/>
+                                <constraint firstItem="u6u-kW-eOW" firstAttribute="height" secondItem="0rn-z0-yA2" secondAttribute="height" id="cyw-WC-oSV"/>
+                                <constraint firstItem="aeH-Zd-eUj" firstAttribute="height" secondItem="0rn-z0-yA2" secondAttribute="height" id="fkS-oa-yUe"/>
+                                <constraint firstItem="m2a-jT-Jm2" firstAttribute="height" secondItem="0rn-z0-yA2" secondAttribute="height" id="kYk-Og-15i"/>
+                            </constraints>
+                            <visibilityPriorities>
+                                <integer value="1000"/>
+                                <integer value="1000"/>
+                                <integer value="1000"/>
+                                <integer value="1000"/>
+                                <integer value="1000"/>
+                                <integer value="1000"/>
+                            </visibilityPriorities>
+                            <customSpacing>
+                                <real value="3.4028234663852886e+38"/>
+                                <real value="3.4028234663852886e+38"/>
+                                <real value="3.4028234663852886e+38"/>
+                                <real value="3.4028234663852886e+38"/>
+                                <real value="3.4028234663852886e+38"/>
+                                <real value="3.4028234663852886e+38"/>
+                            </customSpacing>
+                        </stackView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="OeK-Vl-Vdl" firstAttribute="top" secondItem="OdK-ur-PPi" secondAttribute="top" constant="5" id="JCE-Ao-Vhl"/>
+                        <constraint firstItem="OeK-Vl-Vdl" firstAttribute="leading" secondItem="OdK-ur-PPi" secondAttribute="leading" constant="5" id="X9W-5S-Mxh"/>
+                        <constraint firstAttribute="bottom" secondItem="OeK-Vl-Vdl" secondAttribute="bottom" constant="5" id="bJ5-s8-g8i"/>
+                        <constraint firstAttribute="trailing" secondItem="OeK-Vl-Vdl" secondAttribute="trailing" constant="5" id="wyE-Du-Aml"/>
+                    </constraints>
+                </customView>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="OdK-ur-PPi" secondAttribute="trailing" id="OMq-RX-NiE"/>
+                <constraint firstItem="OdK-ur-PPi" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="VJv-RR-rZ9"/>
+                <constraint firstItem="OdK-ur-PPi" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="rpN-TQ-U9y"/>
+            </constraints>
+            <point key="canvasLocation" x="107" y="154"/>
+        </customView>
+    </objects>
+    <resources>
+        <image name="CancelTemplate" width="12" height="12"/>
+        <image name="browserNextButton" width="27" height="21"/>
+        <image name="browserPreviousButton" width="29" height="21"/>
+        <image name="browserRSSButton" width="31" height="21"/>
+        <image name="browserRefreshButton" width="29" height="21"/>
+    </resources>
+</document>

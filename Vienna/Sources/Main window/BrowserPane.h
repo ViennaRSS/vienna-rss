@@ -24,6 +24,8 @@
 
 #import "BaseView.h"
 
+@protocol Tab;
+
 // This is defined somewhere but I can't find where.
 #define WebKitErrorPlugInWillHandleLoad	204
 
@@ -35,7 +37,9 @@
 @interface BrowserPaneButton : NSButton {}
 @end
 
-@interface BrowserPane : NSView<BaseView, WebFrameLoadDelegate, MMTabBarItem> {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Weverything"
+@interface BrowserPane : NSView <BaseView, WebFrameLoadDelegate, MMTabBarItem, Tab> {
 	IBOutlet NSButton * backButton;
 	IBOutlet NSButton * forwardButton;
 	IBOutlet NSButton * refreshButton;
@@ -45,12 +49,12 @@
 	IBOutlet NSImageView * lockIconImage;
 	NSString * pageFilename;
 	NSError * lastError;
-	BOOL isLocalFile;
-	BOOL isLoading;
+	BOOL loading;
 	BOOL hasRSSlink;
 }
+#pragma clang diagnostic pop
 
-@property (nonatomic, strong) IBOutlet TabbedWebView * webPane;
+@property (nonatomic) IBOutlet TabbedWebView * webPane;
 
 // Action functions
 -(IBAction)handleGoForward:(id)sender;
@@ -60,19 +64,28 @@
 -(IBAction)handleRSSPage:(id)sender;
 
 // Accessor functions
--(void)load;
+-(void)loadTab;
 @property (weak) NSTabViewItem *tab;
-@property (nonatomic) NSURL *url;
-@property (nonatomic, copy) NSString *viewTitle;
-@property (nonatomic, getter=isLoading, readonly) BOOL loading;
+@property (nonatomic, copy) NSURL *tabUrl;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
+@property (copy) NSString *title;
+#pragma clang diagnostic pop
+@property (nonatomic, readonly) BOOL loading;
 @property (nonatomic, readonly) BOOL canGoBack;
 @property (nonatomic, readonly) BOOL canGoForward;
 -(void)handleStopLoading:(id)sender;
 -(void)activateAddressBar;
+@property (readonly, nonatomic) NSString *textSelection;
+@property (readonly, nonatomic) NSString *html;
+
 
 //tabBarItem functions
-@property (assign) BOOL hasCloseButton;
-@property (assign) BOOL isProcessing;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
+@property (nonatomic) BOOL hasCloseButton;
+@property (nonatomic) BOOL isProcessing;
+#pragma clang diagnostic pop
 
 -(void)hoveredOverURL:(NSURL *)url;
 

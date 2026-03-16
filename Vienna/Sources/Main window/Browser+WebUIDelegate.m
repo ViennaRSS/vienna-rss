@@ -11,7 +11,7 @@
 #import "TabbedWebView.h"
 #import "AppController.h"
 
-@implementation Browser (WebUIDelegate)
+@implementation WebViewBrowser (WebUIDelegate)
 
 #pragma mark - WebUIDelegate
 
@@ -22,12 +22,12 @@
 - (void)webView:(WebView *)sender mouseDidMoveOverElement:(NSDictionary *)elementInformation
   modifierFlags:(NSUInteger)modifierFlags {
 
-    NSView *activeView = self.activeTab.view;
+    NSView *activeView = (NSView *)self.activeTab;
     if (!([activeView isKindOfClass:BrowserPane.class]
           && ((BrowserPane *)activeView).webView == sender)) {
         return;
     }
-    BrowserPane *bp = (BrowserPane *)self.activeTab.view;
+    BrowserPane *bp = (BrowserPane *)self.activeTab;
 
     NSURL *url = [elementInformation valueForKey:@"WebElementLinkURL"];
     [bp hoveredOverURL:url];
@@ -50,7 +50,7 @@
         // a script or a plugin requests a new window
         // open a new tab and return its main webview
     {
-        return [self newTab].webPane;
+        return [self createNewTab].webPane;
     }
 }
 
@@ -115,19 +115,19 @@
 -(NSArray *)webView:(WebView *)sender contextMenuItemsForElement:(NSDictionary *)element defaultMenuItems:(NSArray *)defaultMenuItems
 {
 
-    NSView *activeView = self.activeTab.view;
+    NSView *activeView = (NSView *)self.activeTab;
     if (!([activeView isKindOfClass:BrowserPane.class]
           && ((BrowserPane *)activeView).webView == sender)) {
         return @[];
     }
-    BrowserPane *bp = (BrowserPane *)self.activeTab.view;
+    BrowserPane *bp = (BrowserPane *)self.activeTab;
 
     NSURL * urlLink = [element valueForKey:WebElementLinkURLKey];
     if (urlLink != nil)
         return [APPCONTROLLER contextMenuItemsForElement:element defaultMenuItems:defaultMenuItems];
 
     WebFrame * frameKey = [element valueForKey:WebElementFrameKey];
-    if (frameKey != nil && !bp.url.fileURL)
+    if (frameKey != nil && !bp.tabUrl.fileURL)
         return [APPCONTROLLER contextMenuItemsForElement:element defaultMenuItems:defaultMenuItems];
 
     return defaultMenuItems;
@@ -137,10 +137,10 @@
  * closes the tab on a javascript request (only if it is in foreground though)
  */
 -(void)webViewClose:(WebView *)sender {
-	NSView *activeView = self.activeTab.view;
-	if ([activeView isKindOfClass:BrowserPane.class]
-		  && ((BrowserPane *)activeView).webView == sender) {
-		[self closeTab:self.activeTab];
+	NSView *activeView = (NSView *)self.activeTab;
+	if (([activeView isKindOfClass:BrowserPane.class]
+		  && ((BrowserPane *)activeView).webView == sender)) {
+		[self closeActiveTab];
 	}
 }
 

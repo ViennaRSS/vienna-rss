@@ -20,18 +20,30 @@
 
 @import Cocoa;
 
+@class FolderView;
+
+NS_ASSUME_NONNULL_BEGIN
+
+@protocol FolderViewDelegate <NSOutlineViewDelegate>
+
+- (BOOL)copyTableSelection:(NSArray *)items toPasteboard:(NSPasteboard *)pboard;
+- (BOOL)canDeleteFolderAtRow:(NSInteger)row;
+- (void)folderViewWillBecomeFirstResponder;
+- (void)folderView:(FolderView *)folderView menuWillAppear:(NSEvent *)theEvent;
+
+@end
+
 @interface FolderView : NSOutlineView <NSMenuItemValidation> {
 	NSString * backupString;
 }
 
+@property (weak, nullable) id <FolderViewDelegate> delegate;
+
 -(void)keyDown:(NSEvent *)theEvent;
 -(void)prvtResizeTheFieldEditor;
 
-@property (nonatomic) NSPredicate* filterPredicate;
+@property (nullable, nonatomic) NSPredicate* filterPredicate;
 
 @end
 
-@interface NSObject (FolderViewDataSource)
-	-(NSString *)outlineView:(FolderView *)outlineView tooltipForItem:(id)item;
-	-(void)outlineView:(FolderView *)outlineView menuWillAppear:(NSEvent *)theEvent;
-@end
+NS_ASSUME_NONNULL_END

@@ -22,21 +22,9 @@
 
 @class Folder;
 
-@interface FeedCredentials : NSWindowController
-{
-	IBOutlet NSWindow * credentialsWindow;
-	IBOutlet NSButton * cancelButton;
-	IBOutlet NSButton * okButton;
-	IBOutlet NSSecureTextField * password;
-	IBOutlet NSTextField * userName;
-	IBOutlet NSTextField * promptString;
-	Folder * folder;
-}
+@interface FeedCredentials : NSWindowController <NSTextFieldDelegate>
 
-@property(strong) NSArray * topObjects;
+- (void)requestCredentialsInWindow:(NSWindow *)window
+                         forFolder:(Folder *)folder;
 
-// Public functions
--(void)credentialsForFolder:(NSWindow *)window folder:(Folder *)folder;
--(IBAction)doCancelButton:(id)sender;
--(IBAction)doOKButton:(id)sender;
 @end

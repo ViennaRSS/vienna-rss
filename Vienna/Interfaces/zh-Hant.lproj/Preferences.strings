@@ -19,11 +19,11 @@
 /* Class = "NSMenuItem"; title = "Manually"; ObjectID = "7Za-ay-jlt"; */
 "7Za-ay-jlt.title" = "手動";
 
-/* Class = "NSButtonCell"; title = "Enable Internet plug-ins in the internal browser"; ObjectID = "9bX-Lt-AWz"; */
-"9bX-Lt-AWz.title" = "在內建瀏覽器中啟用外掛";
-
 /* Class = "NSTextFieldCell"; title = "Mark current article read:"; ObjectID = "adB-qE-xKg"; */
 "adB-qE-xKg.title" = "將目前的文章標記為已閱讀：";
+
+/* Class = "NSMenuItem"; title = "Manually"; ObjectID = "ANH-Pd-PJC"; Note = "Erase deleted articles: Manually"; */
+"ANH-Pd-PJC.title" = "手動地";
 
 /* Class = "NSMenuItem"; title = "Every 30 minutes"; ObjectID = "aWg-mD-YWn"; */
 "aWg-mD-YWn.title" = "每 30 分鐘";
@@ -34,11 +34,20 @@
 /* Class = "NSTextFieldCell"; title = "Login:"; ObjectID = "bwY-9N-h4N"; */
 "bwY-9N-h4N.title" = "帳號：";
 
+/* Class = "NSMenuItem"; title = "After one day"; ObjectID = "c4l-M5-qB1"; */
+"c4l-M5-qB1.title" = "一天後";
+
 /* Class = "NSButtonCell"; title = "Select…"; ObjectID = "cbn-xq-UFr"; */
 "cbn-xq-UFr.title" = "選取⋯";
 
+/* Class = "NSButtonCell"; title = "Preview new browser"; ObjectID = "DDY-fS-V5T"; */
+"DDY-fS-V5T.title" = "在 Web 瀏覽器中預覽";
+
 /* Class = "NSButtonCell"; title = "Show feeds icons in folder list"; ObjectID = "dkm-xW-4If"; */
 "dkm-xW-4If.title" = "在檔案夾列表中顯示檔案夾影像";
+
+/* Class = "NSMenuItem"; title = "After two weeks"; ObjectID = "Dw9-en-4Zu"; */
+"Dw9-en-4Zu.title" = "兩週後";
 
 /* Class = "NSButtonCell"; title = "Open new links in the background"; ObjectID = "erE-oh-cbw"; */
 "erE-oh-cbw.title" = "在背景中打開新連結";
@@ -46,32 +55,38 @@
 /* Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "FFP-H1-weF"; */
 "FFP-H1-weF.title" = "顯示於選單列";
 
+/* Class = "NSTextFieldCell"; title = "You may have to relaunch Vienna after changing this setting for it to take effect."; ObjectID = "fgw-cI-bAr"; */
+"fgw-cI-bAr.title" = "改完這些設定後可能要將 Vienna 重新啟動之後才會有效。";
+
 /* Class = "NSButtonCell"; title = "Open links in external browser"; ObjectID = "flH-2D-s6O"; */
 "flH-2D-s6O.title" = "在外部瀏覽器中打開連結";
+
+/* Class = "NSTextFieldCell"; title = "Vienna has a new browser built on top of WebKit. It is faster and more secure.\nAfter changing this setting, restart Vienna to test it. Feedback is very welcome!"; ObjectID = "Fv8-Xx-YR0"; */
+"Fv8-Xx-YR0.title" = "Vienna 內建有個以 WebKit 製成的瀏覽器。較快也較安全。此設定變更了之後需將 Vienna 重啟才能套用。若有任何意見皆非常歡迎！";
 
 /* Class = "NSTextFieldCell"; title = "The higher the number, the quicker your subscriptions will be downloaded."; ObjectID = "g3K-qh-M6y"; */
 "g3K-qh-M6y.title" = "數字越大代表訂閱項目越快被下載更新。";
 
-/* Class = "NSTabViewItem"; label = "General"; ObjectID = "GJ3-1q-004"; */
-"GJ3-1q-004.label" = "一般";
-
 /* Class = "NSTextField"; ibShadowedToolTip = "Address of a server supporting the Open Reader API"; ObjectID = "gKc-l8-p9m"; */
 "gKc-l8-p9m.ibShadowedToolTip" = "支援 Open Reader API 的伺服器位址";
+
+/* Class = "NSMenuItem"; title = "Ask when Vienna quits"; ObjectID = "gnv-f7-Z4Z"; Note = "Erase deleted articles: Ask when Vienna quits"; */
+"gnv-f7-Z4Z.title" = "在 Vienna 結束時詢問";
 
 /* Class = "NSMenuItem"; title = "Every 3 hours"; ObjectID = "GSh-ct-FMo"; */
 "GSh-ct-FMo.title" = "每 3 小時";
 
-/* Class = "NSMenuItem"; title = "Never"; ObjectID = "h9d-GD-q32"; */
-"h9d-GD-q32.title" = "永不";
+/* Class = "NSMenuItem"; title = "Manually"; ObjectID = "h9d-GD-q32"; */
+"h9d-GD-q32.title" = "手動地";
 
 /* Class = "NSButtonCell"; title = "Check for newer versions of Vienna on start up"; ObjectID = "haP-20-AwJ"; */
 "haP-20-AwJ.title" = "啟動時檢查是否有新版的 Vienna";
 
+/* Class = "NSTextFieldCell"; title = "Erase deleted articles:"; ObjectID = "HH2-sh-rEx"; */
+"HH2-sh-rEx.title" = "將刪除的文章清除：";
+
 /* Class = "NSTextFieldCell"; title = "When new unread articles are retrieved:"; ObjectID = "iCs-T5-L1c"; */
 "iCs-T5-L1c.title" = "取得未閱讀的新文章時：";
-
-/* Class = "NSTabViewItem"; label = "Advanced"; ObjectID = "iEw-AM-tMF"; */
-"iEw-AM-tMF.label" = "進階";
 
 /* Class = "NSPopUpButton"; ibShadowedToolTip = "Select a server supporting the Open Reader API"; ObjectID = "iHl-tr-paa"; */
 "iHl-tr-paa.ibShadowedToolTip" = "選擇支援 Open Reader API 的伺服器";
@@ -91,8 +106,8 @@
 /* Class = "NSMenuItem"; title = "Every hour"; ObjectID = "jvO-Ef-TTd"; */
 "jvO-Ef-TTd.title" = "每小時";
 
-/* Class = "NSButtonCell"; title = "Show the unread count on the application icon"; ObjectID = "jVU-m2-dsS"; */
-"jVU-m2-dsS.title" = "在應用程式圖像上顯示未閱讀數目";
+/* Class = "NSViewController"; title = "Syncing"; ObjectID = "Lfh-L2-KcO"; */
+"Lfh-L2-KcO.title" = "同步中";
 
 /* Class = "NSButtonCell"; title = "Check for new articles on start up"; ObjectID = "Ljf-Qd-6Ho"; */
 "Ljf-Qd-6Ho.title" = "啟動時檢查是否有新文章";
@@ -106,11 +121,17 @@
 /* Class = "NSButtonCell"; title = "Enable JavaScript in the internal browser"; ObjectID = "MnV-8D-Qyq"; */
 "MnV-8D-Qyq.title" = "在內建瀏覽器中啟用 JavaScript";
 
+/* Class = "NSViewController"; title = "Advanced"; ObjectID = "NjZ-bv-EoA"; */
+"NjZ-bv-EoA.title" = "進階";
+
 /* Class = "NSMenuItem"; title = "Other…"; ObjectID = "nSW-3T-Zoh"; */
 "nSW-3T-Zoh.title" = "其他⋯";
 
 /* Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "OD4-de-Vkx"; */
 "OD4-de-Vkx.title" = "密碼：";
+
+/* Class = "NSMenuItem"; title = "After one month"; ObjectID = "OIa-NQ-jQi"; */
+"OIa-NQ-jQi.title" = "一個月後";
 
 /* Class = "NSTextFieldCell"; title = "Check for new articles:"; ObjectID = "Oqg-6W-NAL"; */
 "Oqg-6W-NAL.title" = "檢查新文章：";
@@ -127,6 +148,15 @@
 /* Class = "NSMenuItem"; title = "Every 5 minutes"; ObjectID = "qYb-Sf-cEF"; */
 "qYb-Sf-cEF.title" = "每 5 分鐘";
 
+/* Class = "NSMenuItem"; title = "After two days"; ObjectID = "sJE-bd-4mK"; */
+"sJE-bd-4mK.title" = "兩天後";
+
+/* Class = "NSViewController"; title = "General"; ObjectID = "T2z-OK-VtO"; */
+"T2z-OK-VtO.title" = "一般";
+
+/* Class = "NSViewController"; title = "Appearance"; ObjectID = "U0J-a5-0Pj"; */
+"U0J-a5-0Pj.title" = "外觀";
+
 /* Class = "NSButtonCell"; title = "Search for latest beta versions"; ObjectID = "u92-Bh-Wrz"; */
 "u92-Bh-Wrz.title" = "檢查最新的 Bete 版本";
 
@@ -136,11 +166,11 @@
 /* Class = "NSButton"; ibShadowedToolTip = "Visit the website"; ObjectID = "V12-Ua-skO"; */
 "V12-Ua-skO.ibShadowedToolTip" = "瀏覽網站";
 
-/* Class = "NSTabViewItem"; label = "Appearance"; ObjectID = "WK4-g4-vJd"; */
-"WK4-g4-vJd.label" = "外觀";
+/* Class = "NSViewController"; title = "Updates"; ObjectID = "wyk-W1-xMh"; */
+"wyk-W1-xMh.title" = "更新";
 
-/* Class = "NSWindow"; title = "Preferences"; ObjectID = "X5g-th-bjd"; */
-"X5g-th-bjd.title" = "偏好設定";
+/* Class = "NSMenuItem"; title = "After one week"; ObjectID = "xfd-Vp-kJy"; */
+"xfd-Vp-kJy.title" = "一週後";
 
 /* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "YG6-9k-gKH"; */
 "YG6-9k-gKH.title" = "URL：";
@@ -154,6 +184,6 @@
 /* Class = "NSTextFieldCell"; title = "Save downloaded files to:"; ObjectID = "yLU-Xs-TGw"; */
 "yLU-Xs-TGw.title" = "將下載的文章儲存到：";
 
-/* Class = "NSTabViewItem"; label = "Syncing"; ObjectID = "zkN-he-3BT"; */
-"zkN-he-3BT.label" = "同步中";
+/* Class = "NSMenuItem"; title = "When Vienna quits"; ObjectID = "Z9k-7x-3gF"; Note = "Erase deleted articles: When Vienna quits"; */
+"Z9k-7x-3gF.title" = "在 Vienna 結束時";
 

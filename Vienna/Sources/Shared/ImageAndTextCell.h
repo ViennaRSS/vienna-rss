@@ -43,8 +43,8 @@
 -(void)setCount:(NSInteger)newCount;
 -(void)clearCount;
 -(void)setCountBackgroundColour:(NSColor *)newColour;
-@property (strong) NSImage *image;
-@property (nonatomic, strong) NSImage *auxiliaryImage;
+@property NSImage *image;
+@property (nonatomic) NSImage *auxiliaryImage;
 @property (nonatomic) NSInteger offset;
 -(void)drawCellImage:(NSRect *)cellFrame inView:(NSView *)controlView;
 - (void)setInProgress:(BOOL)newInProgress;

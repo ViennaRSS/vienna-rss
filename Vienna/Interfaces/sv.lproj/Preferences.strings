@@ -16,11 +16,11 @@
 /* Class = "NSMenuItem"; title = "Manually"; ObjectID = "7Za-ay-jlt"; */
 "7Za-ay-jlt.title" = "Manuellt";
 
-/* Class = "NSButtonCell"; title = "Enable Internet plug-ins in the internal browser"; ObjectID = "9bX-Lt-AWz"; */
-"9bX-Lt-AWz.title" = "Aktivera JavaScript i inbyggda webbläsaren";
-
 /* Class = "NSTextFieldCell"; title = "Mark current article read:"; ObjectID = "adB-qE-xKg"; */
 "adB-qE-xKg.title" = "Markera nuvarande artikel som läst:";
+
+/* Class = "NSMenuItem"; title = "Manually"; ObjectID = "ANH-Pd-PJC"; Note = "Erase deleted articles: Manually"; */
+"ANH-Pd-PJC.title" = "Manuellt";
 
 /* Class = "NSMenuItem"; title = "Every 30 minutes"; ObjectID = "aWg-mD-YWn"; */
 "aWg-mD-YWn.title" = "Var 30:e minut";
@@ -31,11 +31,17 @@
 /* Class = "NSTextFieldCell"; title = "Login:"; ObjectID = "bwY-9N-h4N"; */
 "bwY-9N-h4N.title" = "Namn:";
 
+/* Class = "NSMenuItem"; title = "After one day"; ObjectID = "c4l-M5-qB1"; */
+"c4l-M5-qB1.title" = "Efter en dag";
+
 /* Class = "NSButtonCell"; title = "Select…"; ObjectID = "cbn-xq-UFr"; */
 "cbn-xq-UFr.title" = "Välj…";
 
 /* Class = "NSButtonCell"; title = "Show feeds icons in folder list"; ObjectID = "dkm-xW-4If"; */
 "dkm-xW-4If.title" = "Visa ikoner i mapplistan";
+
+/* Class = "NSMenuItem"; title = "After two weeks"; ObjectID = "Dw9-en-4Zu"; */
+"Dw9-en-4Zu.title" = "Efter två veckor";
 
 /* Class = "NSButtonCell"; title = "Open new links in the background"; ObjectID = "erE-oh-cbw"; */
 "erE-oh-cbw.title" = "Öppna nya länkar i bakgrunden";
@@ -46,23 +52,23 @@
 /* Class = "NSButtonCell"; title = "Open links in external browser"; ObjectID = "flH-2D-s6O"; */
 "flH-2D-s6O.title" = "Öppna länkar i extern webbläsare";
 
-/* Class = "NSTabViewItem"; label = "General"; ObjectID = "GJ3-1q-004"; */
-"GJ3-1q-004.label" = "Generellt";
+/* Class = "NSMenuItem"; title = "Ask when Vienna quits"; ObjectID = "gnv-f7-Z4Z"; Note = "Erase deleted articles: Ask when Vienna quits"; */
+"gnv-f7-Z4Z.title" = "Fråga när Vienna avslutas";
 
 /* Class = "NSMenuItem"; title = "Every 3 hours"; ObjectID = "GSh-ct-FMo"; */
 "GSh-ct-FMo.title" = "Var 3:e timme";
 
-/* Class = "NSMenuItem"; title = "Never"; ObjectID = "h9d-GD-q32"; */
-"h9d-GD-q32.title" = "Aldrig";
+/* Class = "NSMenuItem"; title = "Manually"; ObjectID = "h9d-GD-q32"; */
+"h9d-GD-q32.title" = "Manuellt";
 
 /* Class = "NSButtonCell"; title = "Check for newer versions of Vienna on start up"; ObjectID = "haP-20-AwJ"; */
 "haP-20-AwJ.title" = "Leta efter uppdateringar av Vienna vid uppstart";
 
+/* Class = "NSTextFieldCell"; title = "Erase deleted articles:"; ObjectID = "HH2-sh-rEx"; */
+"HH2-sh-rEx.title" = "Radera borttagna artiklar:";
+
 /* Class = "NSTextFieldCell"; title = "When new unread articles are retrieved:"; ObjectID = "iCs-T5-L1c"; */
 "iCs-T5-L1c.title" = "När nya olästa artiklar är mottagna:";
-
-/* Class = "NSTabViewItem"; label = "Advanced"; ObjectID = "iEw-AM-tMF"; */
-"iEw-AM-tMF.label" = "Avancerat";
 
 /* Class = "NSTextFieldCell"; title = "Article list font:"; ObjectID = "ITA-U9-lhX"; */
 "ITA-U9-lhX.title" = "Artikellista:";
@@ -79,8 +85,8 @@
 /* Class = "NSMenuItem"; title = "Every hour"; ObjectID = "jvO-Ef-TTd"; */
 "jvO-Ef-TTd.title" = "Varje timme";
 
-/* Class = "NSButtonCell"; title = "Show the unread count on the application icon"; ObjectID = "jVU-m2-dsS"; */
-"jVU-m2-dsS.title" = "Visa antalet olästa artiklar på programikonen";
+/* Class = "NSViewController"; title = "Syncing"; ObjectID = "Lfh-L2-KcO"; */
+"Lfh-L2-KcO.title" = "Synkar";
 
 /* Class = "NSButtonCell"; title = "Check for new articles on start up"; ObjectID = "Ljf-Qd-6Ho"; */
 "Ljf-Qd-6Ho.title" = "Uppdatera artiklar vid uppstart";
@@ -94,14 +100,23 @@
 /* Class = "NSButtonCell"; title = "Enable JavaScript in the internal browser"; ObjectID = "MnV-8D-Qyq"; */
 "MnV-8D-Qyq.title" = "Aktivera JavaScript i inbyggda webbläsaren";
 
+/* Class = "NSViewController"; title = "Advanced"; ObjectID = "NjZ-bv-EoA"; */
+"NjZ-bv-EoA.title" = "Avancerat";
+
 /* Class = "NSMenuItem"; title = "Other…"; ObjectID = "nSW-3T-Zoh"; */
 "nSW-3T-Zoh.title" = "Annan…";
 
 /* Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "OD4-de-Vkx"; */
 "OD4-de-Vkx.title" = "Lösenord:";
 
+/* Class = "NSMenuItem"; title = "After one month"; ObjectID = "OIa-NQ-jQi"; */
+"OIa-NQ-jQi.title" = "Efter en månad";
+
 /* Class = "NSTextFieldCell"; title = "Check for new articles:"; ObjectID = "Oqg-6W-NAL"; */
 "Oqg-6W-NAL.title" = "Uppdatera artiklar:";
+
+/* Class = "NSTextFieldCell"; title = "Server:"; ObjectID = "OuH-3K-YPK"; */
+"OuH-3K-YPK.title" = "Server:";
 
 /* Class = "NSMenuItem"; title = "Every 2 hours"; ObjectID = "pLH-VU-z2d"; */
 "pLH-VU-z2d.title" = "Varannan timme";
@@ -112,6 +127,15 @@
 /* Class = "NSMenuItem"; title = "Every 5 minutes"; ObjectID = "qYb-Sf-cEF"; */
 "qYb-Sf-cEF.title" = "Var 5:e minut";
 
+/* Class = "NSMenuItem"; title = "After two days"; ObjectID = "sJE-bd-4mK"; */
+"sJE-bd-4mK.title" = "Efter två dagar";
+
+/* Class = "NSViewController"; title = "General"; ObjectID = "T2z-OK-VtO"; */
+"T2z-OK-VtO.title" = "Generellt";
+
+/* Class = "NSViewController"; title = "Appearance"; ObjectID = "U0J-a5-0Pj"; */
+"U0J-a5-0Pj.title" = "Utseende";
+
 /* Class = "NSButtonCell"; title = "Search for latest beta versions"; ObjectID = "u92-Bh-Wrz"; */
 "u92-Bh-Wrz.title" = "Sök efter senaste betaversioner";
 
@@ -121,11 +145,14 @@
 /* Class = "NSButton"; ibShadowedToolTip = "Visit the website"; ObjectID = "V12-Ua-skO"; */
 "V12-Ua-skO.ibShadowedToolTip" = "Besök webbplatsen";
 
-/* Class = "NSTabViewItem"; label = "Appearance"; ObjectID = "WK4-g4-vJd"; */
-"WK4-g4-vJd.label" = "Utseende";
+/* Class = "NSViewController"; title = "Updates"; ObjectID = "wyk-W1-xMh"; */
+"wyk-W1-xMh.title" = "Uppdateringar";
 
-/* Class = "NSWindow"; title = "Preferences"; ObjectID = "X5g-th-bjd"; */
-"X5g-th-bjd.title" = "Inställningar";
+/* Class = "NSMenuItem"; title = "After one week"; ObjectID = "xfd-Vp-kJy"; */
+"xfd-Vp-kJy.title" = "Efter en vecka";
+
+/* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "YG6-9k-gKH"; */
+"YG6-9k-gKH.title" = "URL:";
 
 /* Class = "NSMenuItem"; title = "Every 15 minutes"; ObjectID = "Ygu-Rj-E7a"; */
 "Ygu-Rj-E7a.title" = "Var 15:e minut";
@@ -136,6 +163,6 @@
 /* Class = "NSTextFieldCell"; title = "Save downloaded files to:"; ObjectID = "yLU-Xs-TGw"; */
 "yLU-Xs-TGw.title" = "Spara nedladdade filer i:";
 
-/* Class = "NSTabViewItem"; label = "Syncing"; ObjectID = "zkN-he-3BT"; */
-"zkN-he-3BT.label" = "Synkar";
+/* Class = "NSMenuItem"; title = "When Vienna quits"; ObjectID = "Z9k-7x-3gF"; Note = "Erase deleted articles: When Vienna quits"; */
+"Z9k-7x-3gF.title" = "När Vienna avslutas";
 

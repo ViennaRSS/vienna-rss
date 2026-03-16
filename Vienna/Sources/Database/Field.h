@@ -1,5 +1,5 @@
 //
-//  VField.h
+//  Field.h
 //  Vienna
 //
 //  Created by Steve on Mon Mar 22 2004.
@@ -20,32 +20,43 @@
 
 @import Foundation;
 
-// Enum of valid field types.
+/// Enum of valid field types.
+typedef NS_ENUM(NSUInteger, VNAFieldType) {
+    VNAFieldTypeInteger = 1,
+    VNAFieldTypeDate,
+    VNAFieldTypeString,
+    VNAFieldTypeFlag,
+    VNAFieldTypeFolder
+} NS_SWIFT_NAME(Field.FieldType);
 
-typedef NS_ENUM(NSUInteger, FieldType) {
-	MA_FieldType_Integer = 1,
-	MA_FieldType_Date,
-	MA_FieldType_String,
-	MA_FieldType_Flag,
-	MA_FieldType_Folder
-};
+@interface Field : NSObject <NSSecureCoding>
 
-@interface Field : NSObject <NSCoding> {
-	NSString * name;
-	NSString * displayName;
-	NSString * sqlField;
-	FieldType type;
-	NSInteger tag;
-	NSInteger width;
-	BOOL visible;
-}
+/// The field name is the unlocalised display name; useful for writing to data
+/// files where sysName isn't appropriate.
+@property (copy, nonatomic) NSString *name;
 
-// Accessors
-@property (nonatomic, copy) NSString *name;
-@property (nonatomic, copy) NSString *displayName;
-@property (nonatomic, copy) NSString *sqlField;
+/// This is the name that is intended to be displayed in the UI.
+@property (copy, nonatomic) NSString *displayName;
+
+/// The SQL column name of the field. This must correspond to the name used in
+/// the 'create table' statement when the table of which this field is part was
+/// originally created.
+@property (copy, nonatomic) NSString *sqlField;
+
+/// The tag is simply an unique integer that identifies the field in the same
+/// way that the field name is used. I suspect that at some point one of these
+/// two will be deprecated for simplicity.
 @property (nonatomic) NSInteger tag;
-@property (nonatomic) FieldType type;
+
+/// Sets the field type. This must be one of the valid values in the FieldType
+/// enum. The field type is used to govern how the field value is interpreted.
+@property (nonatomic) VNAFieldType type;
+
+/// The default width of the field in the article list view.
 @property (nonatomic) NSInteger width;
+
+/// Whether this field is intended to be visible in the article list view by
+/// default.
 @property (nonatomic) BOOL visible;
+
 @end

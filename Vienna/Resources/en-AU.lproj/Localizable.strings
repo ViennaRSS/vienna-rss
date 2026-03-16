@@ -1,0 +1,27 @@
+/* No comment provided by engineer. */
+"A new plugin has been installed. It is now available from the menu and you can add it to the toolbar." = "A new plug-in has been installed. It is now available from the menu and you can add it to the toolbar.";
+
+/* No comment provided by engineer. */
+"Are you sure you want to delete the messages in the Trash folder permanently?" = "Are you sure you want to delete the messages in the Bin folder permanently?";
+
+/* Title of a button on an alert */
+"Don’t Empty Trash" = "Don’t Empty Bin";
+
+/* Title of a button on an alert */
+"Empty Trash" = "Empty Bin";
+
+/* No comment provided by engineer. */
+"Plugin installed" = "Plug-in installed";
+
+/* No comment provided by engineer. */
+"The subscription for \"%@\" requires a user name and password for access." = "The subscription for “%@” requires a username and password for access.";
+
+/* Message text of an alert */
+"There are deleted articles in the trash. Would you like to empty the trash before quitting?" = "There are deleted articles in the bin. Would you like to empty the bin before quitting?";
+
+/* No comment provided by engineer. */
+"Trash" = "Bin";
+
+/* No comment provided by engineer. */
+"Vienna must upgrade its database to the latest version. This may take a minute or so. We apologize for the inconvenience." = "Vienna must upgrade its database to the latest version. This may take a minute or so. We apologise for the inconvenience.";
+

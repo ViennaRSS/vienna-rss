@@ -4,6 +4,9 @@
 /* No comment provided by engineer. */
 "(Untitled Feed)" = "(Icke namngiven ström)";
 
+/* Appended to application name in Open With menu */
+"%@ (default)" = "%@ (förval)";
+
 /* No comment provided by engineer. */
 "%@ Info" = "%@ info";
 
@@ -14,46 +17,13 @@
 "%@ received" = "%@ mottaget";
 
 /* No comment provided by engineer. */
-"%d new articles retrieved" = "%d nya artiklar mottagna";
-
-/* Notification body */
-"%d new unread articles retrieved" = "%d nya olästa artiklar mottagna";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully exported" = "%d prenumerationer exporterades felfritt";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully imported" = "%d prenumerationer importerades felfritt";
-
-/* No comment provided by engineer. */
-"%d unread articles" = "%d olästa artiklar";
-
-/* No comment provided by engineer. */
-"%u articles" = "%u artiklar";
-
-/* No comment provided by engineer. */
-"%u unread" = "%u olästa";
+"%@ unread" = "%@ olästa";
 
 /* No comment provided by engineer. */
 "A folder with that name already exists" = "En mapp med det namnet finns redan";
 
 /* No comment provided by engineer. */
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "En ny Vienna-databas kan ej skapas i '%@' för att mappen förmodligen finns på en nätverksdelning och den här versionen av Vienna stöder inte detta. Var vänlig och välj en mapp som finns på din lokala hårddisk.";
-
-/* No comment provided by engineer. */
-"After 2 Days" = "Efter 2 dagar";
-
-/* No comment provided by engineer. */
-"After 2 Weeks" = "Efter 2 veckor";
-
-/* No comment provided by engineer. */
-"After a Day" = "Efter en dag";
-
-/* No comment provided by engineer. */
-"After a Month" = "Efter en månad";
-
-/* No comment provided by engineer. */
-"After a Week" = "Efter en vecka";
 
 /* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "Ett fel uppstod när denna prenumeration uppdaterades senast";
@@ -162,11 +132,17 @@
 /* No comment provided by engineer. */
 "Descending" = "Fallande";
 
+/* Title of a checkbox on an alert */
+"Do not show this warning again" = "Visa inte denna varning igen";
+
 /* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "Vill du verkligen importera premnumerationerna från valda OPML fil?";
 
 /* test for a string */
 "does not contain" = "innehåller inte";
+
+/* Title of a button on an alert */
+"Don’t Empty Trash" = "Töm inte papperskorgen";
 
 /* No comment provided by engineer. */
 "Download" = "Ladda ner";
@@ -188,6 +164,9 @@
 
 /* Title of a button on an alert */
 "Empty" = "Töm";
+
+/* Title of a button on an alert */
+"Empty Trash" = "Töm papperskorgen";
 
 /* Data field name (Y/N) visible in menu/smart folder definition */
 "Enclosure" = "Bilaga";
@@ -229,6 +208,12 @@
 "File %@ failed to download" = "Filen med namn %@ misslyckades att laddas ner";
 
 /* No comment provided by engineer. */
+"filter by: %@" = "filtrera efter: %@";
+
+/* No comment provided by engineer. */
+"Filter by: %@" = "Filtrera efter: %@";
+
+/* No comment provided by engineer. */
 "Filter in %@" = "Sök i %@";
 
 /* No comment provided by engineer. */
@@ -256,18 +241,18 @@
 "Headlines" = "Rubriker";
 
 /* No comment provided by engineer. */
-"Hide Filter Bar" = "Göm filtera-fältet";
+"Hide Filter Bar" = "Göm filterfältet";
 
 /* Title of a menu item */
 "Hide Status Bar" = "Göm statusfältet";
 
 /* Title of a menu item */
-"Hide Toolbar" = "Dölj verktygsfält";
+"Hide Toolbar" = "Göm verktygsfältet";
 
 /* No comment provided by engineer. */
 "HTTP code %d reported from server" = "HTTP-kod %d rapporterad från server";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "If you quit Vienna now, all downloads will stop." = "Vill du avbryta alla nedladdningar och avsluta Vienna nu?";
 
 /* Title of a button on an alert */
@@ -372,7 +357,10 @@
 /* No comment provided by engineer. */
 "No new articles available" = "Inga nya artiklar tillgängliga";
 
-/* No comment provided by engineer. */
+/* Title of a button on an alert */
+"OK" = "OK";
+
+/* Message text of an alert */
 "One or more downloads are in progress" = "En eller flera nedladdningar pågår";
 
 /* Title of a popup menu item */
@@ -418,10 +406,16 @@
 "Open Subscription Home Page in External Browser" = "Öppna prenumerationhemsida i extern webbläsare";
 
 /* No comment provided by engineer. */
+"Open With" = "Öppna med";
+
+/* Name the application which should open a file */
+"Open with %@" = "Öppna med %@";
+
+/* No comment provided by engineer. */
 "Other" = "Annan";
 
 /* No comment provided by engineer. */
-"Plugin installed" = "Plugin installerat";
+"Plugin installed" = "Insticksfil installerat";
 
 /* No comment provided by engineer. */
 "Queue" = "Kö";
@@ -478,6 +472,9 @@
 /* No comment provided by engineer. */
 "Return to the previous page" = "Återgå till föregående sida";
 
+/* A formatted URL string with the javascript: URL scheme. */
+"Run script “%@”" = "Kör skriptet ”%@”";
+
 /* Placeholder title of a search field */
 "Search all articles" = "Sök genom alla artiklar";
 
@@ -489,8 +486,17 @@
 /* No comment provided by engineer. */
 "Search Results" = "Sökresultat";
 
+/* Label of a button on an open panel */
+"Select" = "Välj";
+
 /* Title of a popup menu item */
 "Select…" = "Markera…";
+
+/* A formatted URL string with the mailto: URL scheme. */
+"Send email to %@" = "Skicka mejl till %@";
+
+/* A formatted URL string with the mailto: URL scheme. */
+"Send email to %@ with subject “%@”" = "Skicka mejl till %1$@ med ämnet ”%2$@”";
 
 /* No comment provided by engineer. */
 "Send Link" = "Skicka länk";
@@ -499,7 +505,7 @@
 "Send Links" = "Skicka länkar";
 
 /* No comment provided by engineer. */
-"Show Filter Bar" = "Visa filtrera-fältet";
+"Show Filter Bar" = "Visa filterfältet";
 
 /* Title of a popup menu item */
 "Show in Finder" = "Visa i Finder";
@@ -511,7 +517,7 @@
 "Show Status Bar" = "Visa statusfältet";
 
 /* Title of a menu item */
-"Show Toolbar" = "Visa verktygsfält";
+"Show Toolbar" = "Visa verktygsfältet";
 
 /* No comment provided by engineer. */
 "Sorry but Vienna was unable to open the database" = "Ursäkta, men Vienna kan inte öppna databasen";
@@ -528,6 +534,9 @@
 /* Pseudo field name visible in menu/article list */
 "Summary" = "Sammanfattning";
 
+/* Data field name visible in smart folder definition */
+"Text" = "Text";
+
 /* No comment provided by engineer. */
 "The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna." = "Din nuvarande %@ stöds inte av den här versionen av Vienna. Radera eller byt namn på filen och starta om Vienna.";
 
@@ -537,7 +546,7 @@
 /* No comment provided by engineer. */
 "The database file format has changed" = "Databasens filformat har ändrats";
 
-/* No comment provided by engineer. */
+/* Body of an alert */
 "The Default style will be used instead." = "Standardstilen används istället.";
 
 /* No comment provided by engineer. */
@@ -546,11 +555,14 @@
 /* No comment provided by engineer. */
 "The style \"%@\" has been installed to your Styles folder and added to the Style menu." = "Stilen '%@' har installerats i din stilmapp och har lagts till i stilmenyn.";
 
-/* No comment provided by engineer. */
+/* Title of an alert */
 "The style %@ appears to be missing or corrupted" = "Stilen %@ verkar vara korrupt";
 
 /* No comment provided by engineer. */
 "The subscription for \"%@\" requires a user name and password for access." = "Prenumeration av '%@' kräven ett användarnamn och lösenord för åtkomst.";
+
+/* Message text of an alert */
+"There are deleted articles in the trash. Would you like to empty the trash before quitting?" = "Det finns raderade artiklar i papperskorgen. Vill du tömma papperskorgen innan du avslutar Vienna?";
 
 /* No comment provided by engineer. */
 "This article contains an enclosed file." = "Den här artikeln innehåller en bilaga.";
@@ -568,9 +580,6 @@
 "Trash" = "Raderade objekt";
 
 /* No comment provided by engineer. */
-"Unread" = "Olästa";
-
-/* No comment provided by engineer. */
 "Unread Articles" = "Olästa artiklar";
 
 /* No comment provided by engineer. */
@@ -578,6 +587,9 @@
 
 /* Title of a button on an alert */
 "Upgrade Database" = "Uppgradera databas";
+
+/* URL */
+"URL" = "URL";
 
 /* No comment provided by engineer. */
 "Vienna cannot open the file \"%@\" because it moved since you downloaded it." = "Vienna kan inte öppna filen \"%@\" eftersom den har flyttats sedan du laddade ner den.";

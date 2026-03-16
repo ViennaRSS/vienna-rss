@@ -1,6 +1,0 @@
-#ifndef Vienna_Prefix_pch
-#define Vienna_Prefix_pch
-
-#import "Vienna-Swift.h"
-
-#endif /* Vienna_Prefix_pch */

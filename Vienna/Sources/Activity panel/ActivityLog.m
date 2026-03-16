@@ -46,12 +46,14 @@
 }
 
 - (instancetype)init {
-    if (self = [super init]) {
+    self = [super init];
+
+    if (self) {
         self.log = [NSMutableArray new];
 
         [NSNotificationCenter.defaultCenter addObserver:self
                                                selector:@selector(handleWillDeleteFolder:)
-                                                   name:databaseWillDeleteFolderNotification
+                                                   name:VNADatabaseWillDeleteFolderNotification
                                                  object:nil];
     }
 
@@ -65,7 +67,7 @@
 #pragma mark Accessors
 
 - (NSArray *)allItems {
-    return self.log;
+    return [self.log copy];
 }
 
 - (ActivityItem *)itemByName:(NSString *)name {

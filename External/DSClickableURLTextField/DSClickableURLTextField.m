@@ -67,6 +67,7 @@
 	* October 22, 2021
 		Changes by Eitot:
 			• Replaced deprecated APIs.
+			• Fixed analyzer warning.
 */
 
 #import "DSClickableURLTextField.h"
@@ -240,8 +241,9 @@
 	NSURL *anURL = [self urlAtMouse:aEvent];
 	
 	if ( anURL != nil ) {
-		NSMenu *aMenu = [[NSMenu alloc] initWithTitle:@"Copy URL"];
-		NSMenuItem *anItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Copy URL", @"Copy URL") action:@selector(copyURL:) keyEquivalent:@""];
+		NSString *title = NSLocalizedString(@"Copy URL", @"Copy URL");
+		NSMenu *aMenu = [[NSMenu alloc] initWithTitle:title];
+		NSMenuItem *anItem = [[NSMenuItem alloc] initWithTitle:title action:@selector(copyURL:) keyEquivalent:@""];
 		anItem.target = self;
 		anItem.representedObject = anURL;
 		[aMenu addItem:anItem];

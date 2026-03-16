@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>en-us</string>
+	<string>en</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -21,11 +21,15 @@
 	<key>HPDBookAccessPath</key>
 	<string>Vienna.html</string>
 	<key>HPDBookIconPath</key>
-	<string>shared/images/Vienna-Logo.jpg</string>
+	<string>shared/images/Vienna-Logo.png</string>
 	<key>HPDBookIndexPath</key>
 	<string>Vienna.helpindex</string>
+	<key>HPDBookCSIndexPath</key>
+	<string>Vienna.cshelpindex</string>
 	<key>HPDBookTitle</key>
 	<string>Vienna Help</string>
+	<key>HPDBookKBProduct</key>
+	<string>Vienna</string>
 	<key>HPDBookType</key>
 	<string>3</string>
 </dict>

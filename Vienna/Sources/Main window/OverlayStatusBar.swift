@@ -31,9 +31,10 @@ final class OverlayStatusBar: NSView {
     // MARK: Subviews
 
     private var backgroundView: NSVisualEffectView = {
-        let backgroundView = NSVisualEffectView(frame: NSRect.zero)
+        let backgroundView = NSVisualEffectView(frame: .zero)
         backgroundView.wantsLayer = true
         backgroundView.blendingMode = .withinWindow
+        backgroundView.material = .menu
         backgroundView.alphaValue = 0
         backgroundView.layer?.cornerRadius = 3
 
@@ -41,18 +42,9 @@ final class OverlayStatusBar: NSView {
     }()
 
     private var addressField: NSTextField = {
-        let addressField: NSTextField
-        if #available(macOS 10.12, *) {
-            addressField = NSTextField(labelWithString: "")
-        } else {
-            addressField = NSTextField(frame: NSRect.zero)
-            addressField.isBezeled = false
-            addressField.isSelectable = false
-            addressField.drawsBackground = false
-            addressField.textColor = .labelColor
-        }
-
+        let addressField = NSTextField(labelWithString: "")
         addressField.font = .systemFont(ofSize: 12, weight: .medium)
+        addressField.textColor = .overlayStatusBarPrimaryLabelColor
         addressField.lineBreakMode = .byTruncatingMiddle
         addressField.allowsDefaultTighteningForTruncation = true
 
@@ -62,7 +54,7 @@ final class OverlayStatusBar: NSView {
     // MARK: Initialization
 
     init() {
-        super.init(frame: NSRect(x: 0, y: 0, width: 240, height: 26))
+        super.init(frame: NSRect(x: 0, y: 0, width: 4_800, height: 26))
 
         // Make sure that no other constraints are created.
         translatesAutoresizingMaskIntoConstraints = false
@@ -70,6 +62,7 @@ final class OverlayStatusBar: NSView {
         addressField.translatesAutoresizingMaskIntoConstraints = false
 
         // The text field should always be among the first views to shrink.
+        addressField.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         addressField.setContentCompressionResistancePriority(.fittingSizeCompression, for: .horizontal)
 
         addSubview(backgroundView)
@@ -83,8 +76,9 @@ final class OverlayStatusBar: NSView {
                                                                     metrics: nil, views: ["view": backgroundView])
 
         var addressFieldConstraints: [NSLayoutConstraint] = []
-        addressFieldConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-2-[label]-2-|",
-                                                                  metrics: nil, views: ["label": addressField])
+        addressFieldConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-1@250-[label]-3@250-|",
+                                                                  options: .alignAllCenterY, metrics: nil,
+                                                                  views: ["label": addressField])
         addressFieldConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-6-[label]-6-|",
                                                                   metrics: nil, views: ["label": addressField])
 
@@ -181,6 +175,30 @@ final class OverlayStatusBar: NSView {
 
     // MARK: Handling status updates
 
+    private lazy var formatter: URLFormatter = {
+        let urlFormatter = URLFormatter()
+
+        // Set the default attributes. This should match addressField.
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineBreakMode = .byTruncatingMiddle
+        paragraphStyle.allowsDefaultTighteningForTruncation = true
+        urlFormatter.defaultAttributes = [
+            .font: NSFont.systemFont(ofSize: 12, weight: .medium),
+            .paragraphStyle: paragraphStyle,
+            .foregroundColor: NSColor.overlayStatusBarPrimaryLabelColor
+        ]
+        urlFormatter.primaryAttributes = [
+            .font: NSFont.systemFont(ofSize: 12, weight: .medium),
+            .foregroundColor: NSColor.overlayStatusBarPrimaryLabelColor
+        ]
+        urlFormatter.secondaryAttributes = [
+            .font: NSFont.systemFont(ofSize: 12, weight: .regular),
+            .foregroundColor: NSColor.overlayStatusBarSecondaryLabelColor
+        ]
+
+        return urlFormatter
+    }()
+
     /// The label to show. Setting this property will show or hide the status
     /// bar. It will remain visible until the label is set to `nil`.
     @objc var label: String? {
@@ -188,7 +206,13 @@ final class OverlayStatusBar: NSView {
             // This closure is meant to be called very often. It should not
             // cause any expensive computations.
             if let label = label, !label.isEmpty {
-                if label != addressField.stringValue {
+                // URLs can have special formatting with an attributed string.
+                if let url = URL(string: label) {
+                    let attrString = formatter.attributedString(from: url)
+                    if attrString != addressField.attributedStringValue {
+                        addressField.attributedStringValue = attrString
+                    }
+                } else if label != addressField.stringValue {
                     addressField.stringValue = label
                 }
 
@@ -316,6 +340,34 @@ final class OverlayStatusBar: NSView {
             // Delete the constraint to make sure that a new one is created,
             // appropriate for the superview size (which may change).
             widthConstraint = nil
+        }
+    }
+
+}
+
+private extension NSColor {
+
+    class var overlayStatusBarPrimaryLabelColor: NSColor {
+        if #available(macOS 10.13, *) {
+            return NSColor(named: "OverlayStatusBarPrimaryTextColor")!
+        } else {
+            if NSWorkspace.shared.accessibilityDisplayShouldIncreaseContrast {
+                return .black.withAlphaComponent(0.85)
+            } else {
+                return .black.withAlphaComponent(0.70)
+            }
+        }
+    }
+
+    class var overlayStatusBarSecondaryLabelColor: NSColor {
+        if #available(macOS 10.13, *) {
+            return NSColor(named: "OverlayStatusBarSecondaryTextColor")!
+        } else {
+            if NSWorkspace.shared.accessibilityDisplayShouldIncreaseContrast {
+                return .black.withAlphaComponent(0.70)
+            } else {
+                return .black.withAlphaComponent(0.55)
+            }
         }
     }
 

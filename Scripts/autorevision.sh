@@ -3,11 +3,11 @@
 # Config
 export PATH=/sw/bin:/opt/local/bin:/usr/local/bin:/usr/local/git/bin:${PATH}
 BUILD_NUMBER="2821"
-intermediateHeaderOutput="${BUILT_PRODUCTS_DIR}/autorevision.h"
+intermediateHeaderOutput="/tmp/autorevision.h"
 finalHeaderOutput="${SRCROOT}/Vienna/Sources/autorevision.h"
-xcodeHeaderOutput="${OBJROOT}/autorevision.h"
+plistHeaderOutput="${OBJROOT}/autorevision.plist.h"
 cacheOutput="${OBJROOT}/autorevision.cache"
-tempCacheOutput="${OBJROOT}/autorevision.tmp"
+tempCacheOutput="/tmp/autorevision.tmp"
 
 # Check our paths
 if [ ! -d "${BUILT_PRODUCTS_DIR}" ]; then
@@ -23,9 +23,17 @@ if ! ./External/autorevision/autorevision -o "${cacheOutput}" -t sh; then
 fi
 
 
+# Output for Vienna/Sources/autorevision.h.
+# This header might be useful for including in code, (currently Vienna does not use it)
+# Be warned however that the VCS_NUM set will not reflect the reality, because of historical issues in Vienna
+./External/autorevision/autorevision -f -o "${cacheOutput}" -t h > "${intermediateHeaderOutput}"
+if [ ! -f "${finalHeaderOutput}" ] || ! cmp -s "${intermediateHeaderOutput}" "${finalHeaderOutput}"; then
+	mv "${intermediateHeaderOutput}" "${finalHeaderOutput}"
+fi
+
+
 # Source the initial autorevision output for filtering.
 . "${cacheOutput}"
-
 
 # Filter the output.
 
@@ -43,18 +51,9 @@ else
 	sed -e "s:${VCS_TAG}:${N_VCS_TAG}:" -e "s:${VCS_BRANCH}:${N_VCS_BRANCH}:" -e "s:${VCS_NUM}:${N_VCS_NUM}:" "${cacheOutput}" > "${tempCacheOutput}"
 fi
 
-
-# Output for src/autorevision.h.
-# This header is good for including in code, however it will not have
-# the right VCS_NUM set.
-./External/autorevision/autorevision -f -o "${cacheOutput}" -t h > "${intermediateHeaderOutput}"
-if [ ! -f "${finalHeaderOutput}" ] || ! cmp -s "${intermediateHeaderOutput}" "${finalHeaderOutput}"; then
-	cp -a "${intermediateHeaderOutput}" "${finalHeaderOutput}"
-fi
-
 # Output for info.plist prepossessing.
 # This is not suitable for including in code, only for info.plist
 # processing.
-./External/autorevision/autorevision -f -o "${tempCacheOutput}" -t xcode > "${xcodeHeaderOutput}"
+./External/autorevision/autorevision -f -o "${tempCacheOutput}" -t xcode > "${plistHeaderOutput}"
 
 exit ${?}

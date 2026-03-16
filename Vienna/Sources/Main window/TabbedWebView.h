@@ -35,8 +35,8 @@
 -(void)setOpenLinksInNewBrowser:(BOOL)flag;
 -(void)keyDown:(NSEvent *)theEvent;
 -(void)printDocument:(id)sender;
--(void)abortJavascriptAndPlugIns;
--(void)useUserPrefsForJavascriptAndPlugIns;
+-(void)abortJavascript;
+-(void)useUserPrefsForJavascript;
 -(void)forceJavascript;
 @property (nonatomic, getter=isFeedRedirect, readonly) BOOL feedRedirect;
 @property (nonatomic, getter=isDownload, readonly) BOOL download;

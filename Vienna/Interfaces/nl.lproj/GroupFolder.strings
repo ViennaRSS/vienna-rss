@@ -1,5 +1,5 @@
 /* Class = "NSTextFieldCell"; title = "New Group Folder"; ObjectID = "32"; */
-"32.title" = "Nieuwe groep-map";
+"32.title" = "Nieuwe groepsmap";
 
 /* Class = "NSButtonCell"; title = "Save"; ObjectID = "34"; */
 "34.title" = "Bewaar";
@@ -8,5 +8,5 @@
 "35.title" = "Annuleer";
 
 /* Class = "NSTextFieldCell"; title = "Enter the group folder name:"; ObjectID = "36"; */
-"36.title" = "Geef de naam van de groep-map:";
+"36.title" = "Geef de naam van de groepsmap:";
 

@@ -18,14 +18,14 @@
 //
 
 /// New articles notification method (managed as an array of binary flags)
-@objc
-enum VNANewArticlesNotification: Int {
+@objc(VNANewArticlesNotification)
+enum NewArticlesNotification: Int {
     case bounce = 2
 }
 
 /// Filtering options
-@objc
-enum VNAFilter: Int {
+@objc(VNAFilter)
+enum Filter: Int {
     case all = 0
     case unread = 1
     case lastRefresh = 2
@@ -36,31 +36,31 @@ enum VNAFilter: Int {
 }
 
 /// Refresh folder options
-@objc
-enum VNARefresh: Int {
+@objc(VNARefresh)
+enum Refresh: Int {
     case redrawList = 0
     case reapplyFilter = 1
     case sortAndRedraw = 3
 }
 
 /// Layout styles
-@objc
-enum VNALayout: Int {
+@objc(VNALayout)
+enum Layout: Int {
     case report = 1
     case condensed = 2
     case unified = 3
 }
 
 /// Folders tree sort method
-@objc
-enum VNAFolderSort: Int {
+@objc(VNAFolderSort)
+enum FolderSort: Int {
     case manual = 0
     case byName = 1
 }
 
 /// Empty trash option on quitting
-@objc
-enum VNAEmptyTrash: Int {
+@objc(VNAEmptyTrash)
+enum EmptyTrash: Int {
     case none = 0
     case withoutWarning = 1
     case withWarning = 2

@@ -18,6 +18,22 @@
 			<string>%d nieuwe artikelen opgehaald</string>
 		</dict>
 	</dict>
+	<key>%d new unread articles retrieved</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@articles@</string>
+		<key>articles</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>one</key>
+			<string>%d nieuw ongelezen artikel opgehaald</string>
+			<key>other</key>
+			<string>%d nieuwe ongelezen artikelen opgehaald</string>
+		</dict>
+	</dict>
 	<key>%d subscriptions successfully exported</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>

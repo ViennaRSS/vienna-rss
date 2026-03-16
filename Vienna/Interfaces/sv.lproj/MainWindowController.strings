@@ -10,6 +10,9 @@
 /* Class = "NSToolbarItem"; toolTip = "Delete all articles in the trash"; ObjectID = "4c1-NR-ofo"; */
 "4c1-NR-ofo.toolTip" = "Radera samtliga artiklar i papperskorgen";
 
+/* Class = "NSMenuItem"; title = "Last Refresh"; ObjectID = "5RA-iE-L8a"; */
+"5RA-iE-L8a.title" = "Senaste uppdatering";
+
 /* Class = "NSToolbarItem"; label = "Get Info"; ObjectID = "7iy-IN-8oG"; */
 "7iy-IN-8oG.label" = "Visa info";
 
@@ -31,6 +34,9 @@
 /* Class = "NSToolbarItem"; toolTip = "Email a link to the current article or website"; ObjectID = "10h-xf-C6T"; */
 "10h-xf-C6T.toolTip" = "Maila länken till nuvarande artikel eller hemsida";
 
+/* Class = "NSMenuItem"; title = "Unread or Flagged"; ObjectID = "771-UJ-rsF"; */
+"771-UJ-rsF.title" = "Oläst eller flaggat";
+
 /* Class = "NSSearchField"; ibShadowedToolTip = "Filter displayed articles by matching text"; ObjectID = "1304"; */
 "1304.ibShadowedToolTip" = "Filtrera visade artiklar med följande text";
 
@@ -38,16 +44,13 @@
 "1306.ibShadowedToolTip" = "Filtera artiklar";
 
 /* Class = "NSButton"; ibExternalAccessibilityDescription = "Close the filter bar"; ObjectID = "1313"; */
-"1313.ibExternalAccessibilityDescription" = "Stäng filtrera-fältet";
+"1313.ibExternalAccessibilityDescription" = "Stäng filterfältet";
 
 /* Class = "NSButton"; ibShadowedToolTip = "Close the filter bar"; ObjectID = "1313"; */
-"1313.ibShadowedToolTip" = "Stäng filtrera-fältet";
+"1313.ibShadowedToolTip" = "Stäng filterfältet";
 
 /* Class = "NSTextFieldCell"; title = "Filter by:"; ObjectID = "1377"; */
 "1377.title" = "Filtrera på:";
-
-/* Class = "NSTextFieldCell"; title = "Current Filter"; ObjectID = "1404"; */
-"1404.title" = "Nuvarande filter";
 
 /* Class = "NSToolbarItem"; label = "Style"; ObjectID = "azL-oz-mJL"; */
 "azL-oz-mJL.label" = "Stil";
@@ -58,6 +61,15 @@
 /* Class = "NSToolbarItem"; toolTip = "Display the list of available styles"; ObjectID = "azL-oz-mJL"; */
 "azL-oz-mJL.toolTip" = "Visa tillgängliga utseenden";
 
+/* Class = "NSMenuItem"; title = "Last Refresh"; ObjectID = "bhs-vZ-HCm"; */
+"bhs-vZ-HCm.title" = "Senaste uppdatering";
+
+/* Class = "NSMenuItem"; title = "Flagged"; ObjectID = "ci8-W6-ewN"; */
+"ci8-W6-ewN.title" = "Flaggat";
+
+/* Class = "NSMenuItem"; title = "All Articles"; ObjectID = "cJi-Kc-4fg"; */
+"cJi-Kc-4fg.title" = "Alla artiklar";
+
 /* Class = "NSToolbarItem"; label = "Add"; ObjectID = "CPA-Ha-aj1"; */
 "CPA-Ha-aj1.label" = "Lägg till";
 
@@ -66,6 +78,12 @@
 
 /* Class = "NSToolbarItem"; toolTip = "Subscribe to a feed or add a folder or smart folder."; ObjectID = "CPA-Ha-aj1"; */
 "CPA-Ha-aj1.toolTip" = "Prenumerera på ett flöde eller lägg till en mapp eller smart mapp.";
+
+/* Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "dId-uc-qfG"; */
+"dId-uc-qfG.title" = "Olästa artiklar";
+
+/* Class = "NSMenuItem"; title = "All Articles"; ObjectID = "FDh-ie-FnZ"; */
+"FDh-ie-FnZ.title" = "Alla artiklar";
 
 /* Class = "NSToolbarItem"; label = "Next Unread"; ObjectID = "fpY-CJ-hKU"; */
 "fpY-CJ-hKU.label" = "Nästa olästa";
@@ -85,8 +103,23 @@
 /* Class = "NSToolbarItem"; toolTip = "Back"; ObjectID = "gOG-UJ-Pin"; */
 "gOG-UJ-Pin.toolTip" = "Tillbaka";
 
+/* Class = "NSToolbarItem"; label = "All Read"; ObjectID = "Gyz-dq-ewv"; */
+"Gyz-dq-ewv.label" = "Alla lästa";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Mark All Items as Read"; ObjectID = "Gyz-dq-ewv"; */
+"Gyz-dq-ewv.paletteLabel" = "Markera samtliga objekt som lästa";
+
+/* Class = "NSToolbarItem"; toolTip = "Mark all items as read"; ObjectID = "Gyz-dq-ewv"; */
+"Gyz-dq-ewv.toolTip" = "Markera samtliga objekt som lästa";
+
 /* Class = "NSMenuItem"; title = "Refresh Selected Subscriptions"; ObjectID = "Hs0-hu-A2g"; */
 "Hs0-hu-A2g.title" = "Uppdatera markerade prenumerationer";
+
+/* Class = "NSToolbarItem"; label = "Filter"; ObjectID = "I8N-Dr-P6W"; */
+"I8N-Dr-P6W.label" = "Filter";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Filter"; ObjectID = "I8N-Dr-P6W"; */
+"I8N-Dr-P6W.paletteLabel" = "Filter";
 
 /* Class = "NSMenuItem"; title = "All Articles"; ObjectID = "JT2-Q7-gRj"; */
 "JT2-Q7-gRj.title" = "Alla artiklar";
@@ -94,11 +127,17 @@
 /* Class = "NSMenuItem"; title = "Rename…"; ObjectID = "l14-tu-w7l"; */
 "l14-tu-w7l.title" = "Döp om…";
 
+/* Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "lDl-nn-yvL"; */
+"lDl-nn-yvL.title" = "Olästa artiklar";
+
 /* Class = "NSSearchFieldCell"; placeholderString = "Search for folders"; ObjectID = "lhy-4c-asJ"; */
 "lhy-4c-asJ.placeholderString" = "Sök efter mappar";
 
 /* Class = "NSMenuItem"; title = "More Styles…"; ObjectID = "MaO-r1-tcm"; */
 "MaO-r1-tcm.title" = "Fler stilar…";
+
+/* Class = "NSMenuItem"; title = "Unread or Flagged"; ObjectID = "mbZ-oU-TDn"; */
+"mbZ-oU-TDn.title" = "Oläst eller flaggat";
 
 /* Class = "NSToolbarItem"; label = "Refresh"; ObjectID = "Nmd-zx-Dys"; */
 "Nmd-zx-Dys.label" = "Uppdatera";
@@ -109,20 +148,14 @@
 /* Class = "NSToolbarItem"; toolTip = "Refresh all your subscriptions"; ObjectID = "Nmd-zx-Dys"; */
 "Nmd-zx-Dys.toolTip" = "Uppdatera alla prenumerationer";
 
-/* Class = "NSToolbarItem"; label = "Search Articles"; ObjectID = "OIA-vb-5jR"; */
-"OIA-vb-5jR.label" = "Sök i artiklar";
-
-/* Class = "NSToolbarItem"; paletteLabel = "Search Articles"; ObjectID = "OIA-vb-5jR"; */
-"OIA-vb-5jR.paletteLabel" = "Sök i artiklar";
-
-/* Class = "NSToolbarItem"; toolTip = "Search Articles"; ObjectID = "OIA-vb-5jR"; */
-"OIA-vb-5jR.toolTip" = "Sök i artiklar";
-
 /* Class = "NSMenuItem"; title = "New Smart Folder…"; ObjectID = "Pqr-dM-SQQ"; */
 "Pqr-dM-SQQ.title" = "Ny smart mapp…";
 
 /* Class = "NSMenuItem"; title = "New Subscription…"; ObjectID = "psA-wp-PcZ"; */
 "psA-wp-PcZ.title" = "Ny prenumeration…";
+
+/* Class = "NSMenuItem"; title = "Today"; ObjectID = "pZm-V9-RVd"; */
+"pZm-V9-RVd.title" = "Idag";
 
 /* Class = "NSMenuItem"; title = "New Folder…"; ObjectID = "RaH-Yu-Ija"; */
 "RaH-Yu-Ija.title" = "Ny mapp…";
@@ -132,6 +165,9 @@
 
 /* Class = "NSMenuItem"; title = "Unread Articles"; ObjectID = "sDP-Ni-g3a"; */
 "sDP-Ni-g3a.title" = "Olästa artiklar";
+
+/* Class = "NSMenuItem"; title = "Today"; ObjectID = "Sne-Nd-bEA"; */
+"Sne-Nd-bEA.title" = "Idag";
 
 /* Class = "NSToolbarItem"; label = "Skip Folder"; ObjectID = "SoG-b2-O1S"; */
 "SoG-b2-O1S.label" = "Hoppa till nästa mapp";
@@ -151,8 +187,20 @@
 /* Class = "NSToolbarItem"; toolTip = "Additional actions for the selected folder"; ObjectID = "TSQ-UW-4gU"; */
 "TSQ-UW-4gU.toolTip" = "Ytterligare funktioner för markerad mapp";
 
+/* Class = "NSMenuItem"; title = "Unread or Flagged"; ObjectID = "ty7-ph-peE"; */
+"ty7-ph-peE.title" = "Oläst eller flaggat";
+
 /* Class = "NSMenuItem"; title = "Edit…"; ObjectID = "vOQ-xo-w8E"; */
 "vOQ-xo-w8E.title" = "Redigera…";
+
+/* Class = "NSMenuItem"; title = "Flagged"; ObjectID = "vqZ-zm-Blb"; */
+"vqZ-zm-Blb.title" = "Flaggat";
+
+/* Class = "NSTextFieldCell"; title = "Filter by:"; ObjectID = "VXV-Rv-wn5"; */
+"VXV-Rv-wn5.title" = "Filtrera efter:";
+
+/* Class = "NSMenuItem"; title = "Show Filter Bar"; ObjectID = "Wy3-T4-9eO"; */
+"Wy3-T4-9eO.title" = "Visa filterfältet";
 
 /* Class = "NSMenuItem"; title = "Mark All Articles as Read"; ObjectID = "xNW-zC-IMZ"; */
 "xNW-zC-IMZ.title" = "Markera alla artiklar som lästa";
@@ -165,6 +213,30 @@
 
 /* Class = "NSMenuItem"; title = "Get Info"; ObjectID = "Y0d-K7-46f"; */
 "Y0d-K7-46f.title" = "Visa info";
+
+/* Class = "NSToolbarItem"; label = "Delete"; ObjectID = "Y22-Ul-q6w"; */
+"Y22-Ul-q6w.label" = "Radera";
+
+/* Class = "NSToolbarItem"; paletteLabel = "Delete"; ObjectID = "Y22-Ul-q6w"; */
+"Y22-Ul-q6w.paletteLabel" = "Radera";
+
+/* Class = "NSToolbarItem"; toolTip = "Delete the current article"; ObjectID = "Y22-Ul-q6w"; */
+"Y22-Ul-q6w.toolTip" = "Radera den markerade artikeln";
+
+/* Class = "NSPopUpButton"; ibShadowedToolTip = "Filter articles"; ObjectID = "Ymd-v7-5ML"; */
+"Ymd-v7-5ML.ibShadowedToolTip" = "Filtrera artiklar";
+
+/* Class = "NSMenuItem"; title = "Last 48 Hours"; ObjectID = "yqJ-tO-HNW"; */
+"yqJ-tO-HNW.title" = "Senaste 48 timmarna";
+
+/* Class = "NSMenuItem"; title = "Last 48 Hours"; ObjectID = "yvh-qU-EAm"; */
+"yvh-qU-EAm.title" = "Senaste 48 timmarna";
+
+/* Class = "NSButton"; ibExternalAccessibilityDescription = "Close the filter bar"; ObjectID = "ZBo-PU-Lx7"; */
+"ZBo-PU-Lx7.ibExternalAccessibilityDescription" = "Stäng filterfältet";
+
+/* Class = "NSButton"; ibShadowedToolTip = "Close the filter bar"; ObjectID = "ZBo-PU-Lx7"; */
+"ZBo-PU-Lx7.ibShadowedToolTip" = "Stäng filterfältet";
 
 /* Class = "NSMenuItem"; title = "Open Subscription Home Page"; ObjectID = "Zu1-zW-uo2"; */
 "Zu1-zW-uo2.title" = "Källsida i webbläsare";

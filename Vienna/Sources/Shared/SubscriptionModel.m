@@ -9,6 +9,7 @@
 #import "SubscriptionModel.h"
 #import "RichXMLParser.h"
 #import "StringExtensions.h"
+#import "Vienna-Swift.h"
 
 @implementation SubscriptionModel
 
@@ -21,7 +22,7 @@
 * then OK. Otherwise if it looks like an HTML page, we scan for links in the
 * page text.
 *
-*  @param feedURLString A pointer to the URL to verify
+*  @param rssFeedURL A pointer to the URL to verify
 *
 *  @return A pointer to a verified URL
 */

@@ -4,6 +4,9 @@
 /* No comment provided by engineer. */
 "(Untitled Feed)" = "(未命名訂閱頻道)";
 
+/* Appended to application name in Open With menu */
+"%@ (default)" = "%@ (預設)";
+
 /* No comment provided by engineer. */
 "%@ Info" = "%@ 簡介";
 
@@ -14,25 +17,7 @@
 "%@ received" = "已接收 %@";
 
 /* No comment provided by engineer. */
-"%d new articles retrieved" = "已取得 %d 則新文章";
-
-/* Notification body */
-"%d new unread articles retrieved" = "已順利取得 %d 則未閱讀的新文章";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully exported" = "已順利匯出 %d 個訂閱頻道";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully imported" = "已順利匯入 %d 個訂閱頻道";
-
-/* No comment provided by engineer. */
-"%d unread articles" = "%d 則未閱讀的文章";
-
-/* No comment provided by engineer. */
-"%u articles" = "%u 則文章";
-
-/* No comment provided by engineer. */
-"%u unread" = "%u 則未閱讀";
+"%@ unread" = "%@ 篇未讀的";
 
 /* Title in popup submenu */
 "<None>" = "<无>";
@@ -45,21 +30,6 @@
 
 /* No comment provided by engineer. */
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "無法在“%@”建立新的 Vienna 資料庫，原因可能是這個檔案夾位在遠端網路分享空間中，而 Vienna 無法管理遠端的資料庫。請在您的本機電腦上，選擇其他的檔案夾。";
-
-/* No comment provided by engineer. */
-"After 2 Days" = "2 天後";
-
-/* No comment provided by engineer. */
-"After 2 Weeks" = "2 週後";
-
-/* No comment provided by engineer. */
-"After a Day" = "1 天後";
-
-/* No comment provided by engineer. */
-"After a Month" = "1 個月後";
-
-/* No comment provided by engineer. */
-"After a Week" = "1 週後";
 
 /* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "最後一次更新此訂閱頻道時，發生錯誤";
@@ -180,11 +150,17 @@
 /* No comment provided by engineer. */
 "Descending" = "倒排";
 
+/* Title of a checkbox on an alert */
+"Do not show this warning again" = "不要再顯示此警告";
+
 /* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "您是否確定要從指定的 OPML 檔案輸入訂閱頻道？";
 
 /* test for a string */
 "does not contain" = "不包含";
+
+/* Title of a button on an alert */
+"Don’t Empty Trash" = "不要清空垃圾桶";
 
 /* No comment provided by engineer. */
 "Download" = "下載";
@@ -206,6 +182,9 @@
 
 /* Title of a button on an alert */
 "Empty" = "清除";
+
+/* Title of a button on an alert */
+"Empty Trash" = "清空垃圾桶";
 
 /* Data field name (Y/N) visible in menu/smart folder definition */
 "Enclosure" = "隨附項目";
@@ -251,6 +230,12 @@
 
 /* Notification body */
 "File %@ failed to download" = "無法下載檔案 %@";
+
+/* No comment provided by engineer. */
+"filter by: %@" = "篩選條件：%@";
+
+/* No comment provided by engineer. */
+"Filter by: %@" = "篩選條件：%@";
 
 /* No comment provided by engineer. */
 "Filter in %@" = "在 %@ 中過濾";
@@ -300,7 +285,7 @@
 /* No comment provided by engineer. */
 "HTTP code %d reported from server" = "伺服器回報 HTTP 碼 %d";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "If you quit Vienna now, all downloads will stop." = "您是否要停止下載所有項目，並立即結束 Vienna？";
 
 /* Title of a button on an alert */
@@ -357,6 +342,9 @@
 /* No comment provided by engineer. */
 "Loading" = "載入中";
 
+/* Title of a button on an alert */
+"Locate…" = "找出...";
+
 /* No comment provided by engineer. */
 "Make sure the username and password needed to access the Open Reader server are correctly set in Vienna's preferences. Also check your network access." = "請確認用以存取 Open Reqder 伺服器的帳號與密碼是否有正確地設在 Vienna 的偏好設定中。\\n亦請檢查您的網路可用性。";
 
@@ -408,10 +396,13 @@
 /* No comment provided by engineer. */
 "No new articles available" = "沒有新文章";
 
+/* test for a folder (not operational as of Vienna 3.2) */
+"not under" = "不在裡面";
+
 /* Title of a button on an alert */
 "OK" = "好";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "One or more downloads are in progress" = "Vienna 目前正在下載一或多個項目";
 
 /* Title of a popup menu item */
@@ -439,6 +430,9 @@
 "Open Link in %@" = "在 %@ 中打開連結";
 
 /* No comment provided by engineer. */
+"Open Link in Background" = "在背景中開啟連結";
+
+/* No comment provided by engineer. */
 "Open Link in New Tab" = "在新標籤頁中打開連結";
 
 /* No comment provided by engineer. */
@@ -458,6 +452,12 @@
 
 /* Title of a menu item */
 "Open Subscription Home Page in External Browser" = "在外部瀏覽器中打開訂閱頻道首頁";
+
+/* No comment provided by engineer. */
+"Open With" = "開啟方式";
+
+/* Name the application which should open a file */
+"Open with %@" = "用 %@ 開啟";
 
 /* No comment provided by engineer. */
 "Other" = "其他";
@@ -483,6 +483,9 @@
 
 /* No comment provided by engineer. */
 "Recents" = "最近記錄";
+
+/* No comment provided by engineer. */
+"Redirection attempt treated as temporary for safety concern" = "基於安全考量，此次重導已被處理。";
 
 /* Title of a menu item */
 "Refresh All Subscriptions" = "重新整理所有訂閱頻道";
@@ -529,6 +532,9 @@
 /* No comment provided by engineer. */
 "RSS Icon not found!" = "找不到圖示。";
 
+/* A formatted URL string with the javascript: URL scheme. */
+"Run script “%@”" = "執行腳本 \"%@\"";
+
 /* Placeholder title of a search field */
 "Search all articles" = "搜尋所有文章";
 
@@ -546,8 +552,17 @@
 /* No comment provided by engineer. */
 "Search Results" = "搜尋結果";
 
+/* Label of a button on an open panel */
+"Select" = "選擇";
+
 /* Title of a popup menu item */
 "Select…" = "選取⋯";
+
+/* A formatted URL string with the mailto: URL scheme. */
+"Send email to %@" = "傳送電子郵件給 %@";
+
+/* A formatted URL string with the mailto: URL scheme. */
+"Send email to %@ with subject “%@”" = "傳送電子郵件給 %1$@​，標題為 \"%2$@\"";
 
 /* No comment provided by engineer. */
 "Send Link" = "寄送連結";
@@ -600,7 +615,7 @@
 /* No comment provided by engineer. */
 "The database file format has changed" = "資料庫檔案格式已變更";
 
-/* No comment provided by engineer. */
+/* Body of an alert */
 "The Default style will be used instead." = "將會改用預設的顯示樣式。";
 
 /* No comment provided by engineer. */
@@ -609,14 +624,20 @@
 /* No comment provided by engineer. */
 "The style \"%@\" has been installed to your Styles folder and added to the Style menu." = "“%@”樣式已順利安裝到您的“樣式”檔案夾，並已加入“樣式”選單。";
 
-/* No comment provided by engineer. */
+/* Title of an alert */
 "The style %@ appears to be missing or corrupted" = "%@ 樣式的檔案遺失或已損壞";
 
 /* No comment provided by engineer. */
 "The subscription for \"%@\" requires a user name and password for access." = "“%@”這個訂閱頻道需要您提供使用者名稱與密碼進行認證，才可加以存取。";
 
+/* Message text of an alert */
+"There are deleted articles in the trash. Would you like to empty the trash before quitting?" = "垃圾桶中有刪除的文章。您是否要在結束前清空垃圾桶？";
+
 /* No comment provided by engineer. */
 "This article contains an enclosed file." = "此文章隨附一個檔案。";
+
+/* Message text of a modal alert */
+"This folder cannot be chosen because you don’t have permission." = "因為你沒有權限，所以這個資料夾不能選。";
 
 /* No comment provided by engineer. */
 "This operation cannot be undone." = "此項操作無法還原。";
@@ -630,8 +651,8 @@
 /* No comment provided by engineer. */
 "Trash" = "垃圾桶";
 
-/* No comment provided by engineer. */
-"Unread" = "未閱讀";
+/* test for a folder (not operational as of Vienna 3.2) */
+"under" = "在裡面";
 
 /* No comment provided by engineer. */
 "Unread Articles" = "未讀文章";

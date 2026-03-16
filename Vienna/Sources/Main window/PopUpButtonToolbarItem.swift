@@ -20,15 +20,15 @@
 import Cocoa
 
 /// A toolbar item with a pop-up button as its view.
+@available(macOS, obsoleted: 10.15, message: "Use NSMenuToolbarItem instead")
+@objc(VNAPopUpButtonToolbarItem)
 class PopUpButtonToolbarItem: NSToolbarItem {
 
     override func awakeFromNib() {
         super.awakeFromNib()
 
         // The toolbar item's width is too wide on older systems.
-        if #available(macOS 11, *) {
-            // Do nothing
-        } else {
+        if #unavailable(macOS 11) {
             minSize = NSSize(width: 41, height: 25)
             maxSize = NSSize(width: 41, height: 28)
         }
@@ -37,24 +37,18 @@ class PopUpButtonToolbarItem: NSToolbarItem {
     // Assign the pop-up button's menu to the menu-form representation.
     override var view: NSView? {
         didSet {
-            if let popupButton = view as? NSPopUpButton {
-                menuFormRepresentation?.submenu = popupButton.menu
+            if let popUpButton = view as? NSPopUpButton {
+                menuFormRepresentation?.submenu = popUpButton.menu
 
                 // Unsetting target and action will ascertain that the menu is
                 // always enabled.
                 menuFormRepresentation?.target = nil
                 menuFormRepresentation?.action = nil
+
+                // Permanently enable the menu-form representation. The items
+                // of the submenu are validated separately by their target.
+                menuFormRepresentation?.isEnabled = true
             }
-        }
-    }
-
-    // Permanently enable the menu-form representation. The submenu's items are
-    // validated separately by their target.
-    override func validate() {
-        super.validate()
-
-        if view is NSPopUpButton {
-            menuFormRepresentation?.isEnabled = true
         }
     }
 

@@ -32,7 +32,14 @@
 #import "Folder.h"
 #import "Article.h"
 #import "Database.h"
-#import "Browser.h"
+#import "StringExtensions.h"
+#import "Vienna-Swift.h"
+
+@interface ViennaApp ()
+
+@property (readonly, nonatomic) BOOL readingPaneOnRight;
+
+@end
 
 @implementation ViennaApp
 
@@ -208,14 +215,18 @@
 	return nil;
 }
 
-/* applicationVersion
- * Return the applications version number.
- */
--(NSString *)applicationVersion
+- (NSString *)applicationVersion
 {
-	NSBundle * appBundle = [NSBundle mainBundle];
-	NSDictionary * fileAttributes = appBundle.infoDictionary;
-	return fileAttributes[@"CFBundleShortVersionString"];
+    NSDictionary *infoDictionary = NSBundle.mainBundle.infoDictionary;
+    NSString *versionString = infoDictionary[@"CFBundleShortVersionString"];
+    NSString *trimmedVersionString = versionString.vna_trimmed;
+    NSUInteger wordLength = [trimmedVersionString vna_indexOfCharacterInString:' '
+                                                                    afterIndex:0];
+    if (wordLength == NSNotFound) {
+        return trimmedVersionString;
+    } else {
+        return [trimmedVersionString substringToIndex:wordLength];
+    }
 }
 
 /* folders
@@ -248,55 +259,58 @@
  */
 -(NSString *)currentTextSelection
 {
-	NSView<BaseView> * theView = ((AppController*)self.delegate).browser.activeTabItemView;
-	WebView * webPane = nil;
+    id<Tab> activeBrowserTab = ((AppController*)self.delegate).browser.activeTab;
 
-	if ([theView isKindOfClass:[BrowserPane class]])
-		webPane = (WebView *)((BrowserPane *)theView).mainView;
+    if (activeBrowserTab) {
+        return activeBrowserTab.textSelection;
+    } else {
+        //TODO: find a way with less casts to get access to the selected string in ArticleListView and UnifiedDisplayView
+        NSView<BaseView> * theView = ((NSView<BaseView> *)((AppController*)self.delegate).browser.primaryTab.view);
+        WebView *webPane;
 
-	if ([theView isKindOfClass:[ArticleListView class]])
-		webPane = (WebView *)((ArticleListView *)theView).webView;
-	
-	if ([theView isKindOfClass:[UnifiedDisplayView class]])
-		webPane = (WebView *)((UnifiedDisplayView *)theView).webView;
-	
-	if (webPane != nil)
-	{
-		NSView * docView = webPane.mainFrame.frameView.documentView;
-		
-		if ([docView conformsToProtocol:@protocol(WebDocumentText)])
-			return [(id<WebDocumentText>)docView selectedString];
-	}
+        if ([theView isKindOfClass:[ArticleListView class]]) {
+            webPane = (WebView *)((ArticleListView *)theView).webView;
+        }
+
+        if ([theView isKindOfClass:[UnifiedDisplayView class]]) {
+            if ([((UnifiedDisplayView *)theView).webView isKindOfClass:WebView.class]) {
+                webPane = (WebView *)((UnifiedDisplayView *)theView).webView;
+            }
+            //TODO: we do not necessarily get a webview here. Rely on tab protocol in the future
+        }
+
+        if (webPane != nil)
+        {
+            NSView * docView = webPane.mainFrame.frameView.documentView;
+
+            if ([docView conformsToProtocol:@protocol(WebDocumentText)])
+                return [(id<WebDocumentText>)docView selectedString];
+        }
+    }
+
 	return @"";
 }
 
 -(NSString *)documentHTMLSource
 {
-	NSView<BaseView> * theView = ((AppController*)self.delegate).browser.activeTabItemView;
-	WebView * webPane = theView.webView;
-	
-	if (webPane != nil)
+	id<Tab> activeBrowserTab = ((AppController*)self.delegate).browser.activeTab;
+
+	if (activeBrowserTab != nil)
 	{
-		WebDataSource * dataSource = webPane.mainFrame.dataSource;
-		if (dataSource != nil)
-		{
-			id representation = dataSource.representation;
-			if ((representation != nil) && ([representation conformsToProtocol:@protocol(WebDocumentRepresentation)]) && ([(id<WebDocumentRepresentation>)representation canProvideDocumentSource]))
-				return [(id<WebDocumentRepresentation>)representation documentSource];
-		}
+        return activeBrowserTab.html;
 	}
 	return @"";
 }
 
 -(NSString *)documentTabURL
 {
-	NSView<BaseView> * theView = ((AppController*)self.delegate).browser.activeTabItemView;
-	if ([theView isKindOfClass:[BrowserPane class]])
-	{
-		return ((BrowserPane *)theView).url.absoluteString;
+    id<Tab> activeBrowserTab = ((AppController*)self.delegate).browser.activeTab;
+	if (activeBrowserTab) {
+		return activeBrowserTab.tabUrl.absoluteString;
 	}
-	else
+    else {
 		return @"";
+    }
 }
 
 /* currentArticle
@@ -333,7 +347,7 @@
 -(BOOL)readingPaneOnRight			{ return [Preferences standardPreferences].layout == VNALayoutCondensed; }
 -(NSInteger)filterMode					{ return [Preferences standardPreferences].filterMode; }
 -(BOOL)refreshOnStartup				{ return [Preferences standardPreferences].refreshOnStartup; }
--(BOOL)checkForNewOnStartup			{ return [Preferences standardPreferences].checkForNewOnStartup; }
+-(BOOL)checkForNewOnStartup			{ return APPCONTROLLER.sparkleController.updater.automaticallyChecksForUpdates; }
 -(BOOL)openLinksInVienna			{ return [Preferences standardPreferences].openLinksInVienna; }
 -(BOOL)openLinksInBackground		{ return [Preferences standardPreferences].openLinksInBackground; }
 -(NSInteger)minimumFontSize				{ return [Preferences standardPreferences].minimumFontSize; }
@@ -352,19 +366,18 @@
  */
 -(void)setAutoExpireDuration:(NSInteger)newDuration		{ [Preferences standardPreferences].autoExpireDuration = newDuration; }
 -(void)setMarkReadInterval:(float)newInterval		{ [Preferences standardPreferences].markReadInterval = newInterval; }
--(void)setReadingPaneOnRight:(BOOL)flag				{ ; }
 -(void)setRefreshOnStartup:(BOOL)flag				{ [Preferences standardPreferences].refreshOnStartup = flag; }
 -(void)setFilterMode:(NSInteger)newMode					{ [Preferences standardPreferences].filterMode = newMode; }
--(void)setCheckForNewOnStartup:(BOOL)flag			{ [Preferences standardPreferences].checkForNewOnStartup = flag; }
+-(void)setCheckForNewOnStartup:(BOOL)flag			{ APPCONTROLLER.sparkleController.updater.automaticallyChecksForUpdates = flag; }
 -(void)setOpenLinksInVienna:(BOOL)flag				{ [Preferences standardPreferences].openLinksInVienna = flag; }
 -(void)setOpenLinksInBackground:(BOOL)flag			{ [Preferences standardPreferences].openLinksInBackground = flag; }
 -(void)setMinimumFontSize:(NSInteger)newSize				{ [Preferences standardPreferences].minimumFontSize = newSize; }
 -(void)setEnableMinimumFontSize:(BOOL)flag			{ [Preferences standardPreferences].enableMinimumFontSize = flag; }
 -(void)setRefreshFrequency:(NSInteger)newFrequency		{ [Preferences standardPreferences].refreshFrequency = newFrequency; }
--(void)setDisplayStyle:(NSString *)newStyle			{ [Preferences standardPreferences].displayStyle = newStyle; }
--(void)setFolderListFont:(NSString *)newFontName	{ [Preferences standardPreferences].folderListFont = newFontName; }
+-(void)setDisplayStyle:(NSString *)newStyle			{ [Preferences standardPreferences].displayStyle = [newStyle copy]; }
+-(void)setFolderListFont:(NSString *)newFontName	{ [Preferences standardPreferences].folderListFont = [newFontName copy]; }
 -(void)setFolderListFontSize:(NSInteger)newFontSize		{ [Preferences standardPreferences].folderListFontSize = newFontSize; }
--(void)setArticleListFont:(NSString *)newFontName	{ [Preferences standardPreferences].articleListFont = newFontName; }
+-(void)setArticleListFont:(NSString *)newFontName	{ [Preferences standardPreferences].articleListFont = [newFontName copy]; }
 -(void)setArticleListFontSize:(NSInteger)newFontSize		{ [Preferences standardPreferences].articleListFontSize = newFontSize; }
 -(void)setStatusBarVisible:(BOOL)flag				{ [Preferences standardPreferences].showStatusBar = flag; }
 -(void)setFilterBarVisible:(BOOL)flag				{ [Preferences standardPreferences].showFilterBar = flag; }

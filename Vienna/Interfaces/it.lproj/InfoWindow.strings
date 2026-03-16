@@ -7,6 +7,9 @@
 /* Class = "NSTextFieldCell"; title = "User name:"; ObjectID = "111"; */
 "111.title" = "Nome utente:";
 
+/* Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "112"; */
+"112.title" = "Password:";
+
 /* Class = "NSButtonCell"; title = "Update Authentication"; ObjectID = "115"; */
 "115.title" = "Aggiorna Autenticazione";
 
@@ -33,4 +36,7 @@
 
 /* Class = "NSTextFieldCell"; title = "Feed URL"; ObjectID = "xPF-M9-oZG"; */
 "xPF-M9-oZG.title" = "URL Feed";
+
+/* Class = "NSButtonCell"; title = "Open Cached File…"; ObjectID = "xTj-hY-aTU"; */
+"xTj-hY-aTU.title" = "Apri file memorizzato nella cache …";
 

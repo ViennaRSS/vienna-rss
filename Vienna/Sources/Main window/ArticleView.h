@@ -22,18 +22,25 @@
 
 #import "TabbedWebView.h"
 
-@interface ArticleView : TabbedWebView {
-	NSString * htmlTemplate;
-	NSString * cssStylesheet;
-	NSString * jsScript;
-	NSString * currentHTML;
-}
+@class Article;
+
+@protocol ArticleContentView;
+@protocol ArticleViewDelegate;
+@protocol Tab;
+
+NS_ASSUME_NONNULL_BEGIN
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Weverything"
+@interface ArticleView: TabbedWebView <ArticleContentView, Tab>
+#pragma clang diagnostic pop
 
 // Public functions
-+(NSDictionary *)stylesMap;
-+(NSDictionary *)loadStylesMap;
--(void)clearHTML;
--(void)setHTML:(NSString *)htmlText;
--(NSString *)articleTextFromArray:(NSArray *)msgArray;
+-(void)setArticles:(NSArray<Article *> *)articles;
 -(void)keyDown:(NSEvent *)theEvent;
+
+@property (nonatomic) id<ArticleViewDelegate> listView;
+
 @end
+
+NS_ASSUME_NONNULL_END

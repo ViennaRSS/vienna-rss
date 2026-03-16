@@ -49,7 +49,7 @@
 /* Class = "NSMenuItem"; title = "Vienna Help"; ObjectID = "111"; */
 "111.title" = "Vienna 帮助";
 
-/* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129"; */
+/* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129"; Note = "Apple renamed \"Preferences\" to \"Settings\" in macOS 13. The menu item is renamed automatically at runtime. Please use the default term for the preferences window that was used until macOS 12."; */
 "129.title" = "首选项…";
 
 /* Class = "NSMenu"; title = "Services"; ObjectID = "130"; */

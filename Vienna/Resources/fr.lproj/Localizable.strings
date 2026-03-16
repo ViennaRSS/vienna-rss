@@ -16,29 +16,8 @@
 /* Number of bytes received, e.g. 1 MB received */
 "%@ received" = "%@ reçu";
 
-/* {existing authors}, {new author name} */
-"%@, %@" = "%1$@, %2$@";
-
 /* No comment provided by engineer. */
-"%d new articles retrieved" = "%d nouveaux articles récupérés";
-
-/* Notification body */
-"%d new unread articles retrieved" = "%d nouveaux articles non lus récupérés";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully exported" = "%d abonnements exportés avec succès";
-
-/* No comment provided by engineer. */
-"%d subscriptions successfully imported" = "%d abonnements importés avec succès";
-
-/* No comment provided by engineer. */
-"%d unread articles" = "%d articles non lus";
-
-/* No comment provided by engineer. */
-"%u articles" = "%u articles";
-
-/* No comment provided by engineer. */
-"%u unread" = "%u non lus";
+"%@ unread" = "%@ non lus";
 
 /* Title in popup submenu */
 "<None>" = "<Aucun>";
@@ -51,21 +30,6 @@
 
 /* No comment provided by engineer. */
 "A new Vienna database cannot be created at \"%@\" because the folder is probably located on a remote network share and this version of Vienna cannot manage remote databases. Please choose an alternative folder that is located on your local machine." = "Une nouvelle base de données Vienna ne peut être créée dans '%@' car ce dossier est probablement situé sur un réseau partagé, et cette version de Vienna ne gère pas les bases de données distantes. S'il vous plait, choisissez un dossier présent localement sur votre machine.";
-
-/* No comment provided by engineer. */
-"After 2 Days" = "Après 2 jours";
-
-/* No comment provided by engineer. */
-"After 2 Weeks" = "Après 2 semaines";
-
-/* No comment provided by engineer. */
-"After a Day" = "Après un jour";
-
-/* No comment provided by engineer. */
-"After a Month" = "Après un mois";
-
-/* No comment provided by engineer. */
-"After a Week" = "Après une semaine";
 
 /* No comment provided by engineer. */
 "An error occurred when this feed was last refreshed" = "Une erreur est apparue lors du rafraîchissement de ce flux";
@@ -186,11 +150,17 @@
 /* No comment provided by engineer. */
 "Descending" = "Décroissant";
 
+/* Title of a checkbox on an alert */
+"Do not show this warning again" = "Ne plus afficher cette alerte";
+
 /* No comment provided by engineer. */
 "Do you really want to import the subscriptions from the specified OPML file?" = "Souhaitez-vous vraiment importer des abonnements à partir du fichier OPML désigné ?";
 
 /* test for a string */
 "does not contain" = "ne contient pas";
+
+/* Title of a button on an alert */
+"Don’t Empty Trash" = "Ne pas vider la corbeille";
 
 /* No comment provided by engineer. */
 "Download" = "Télécharger";
@@ -212,6 +182,9 @@
 
 /* Title of a button on an alert */
 "Empty" = "Vider";
+
+/* Title of a button on an alert */
+"Empty Trash" = "Vider la corbeille";
 
 /* Data field name (Y/N) visible in menu/smart folder definition */
 "Enclosure" = "Fichier joint";
@@ -257,6 +230,12 @@
 
 /* Notification body */
 "File %@ failed to download" = "Echec de téléchargement du fichier %@";
+
+/* No comment provided by engineer. */
+"filter by: %@" = "filtrer par : %@";
+
+/* No comment provided by engineer. */
+"Filter by: %@" = "Filtrer par : %@";
 
 /* No comment provided by engineer. */
 "Filter in %@" = "Rechercher dans %@";
@@ -306,7 +285,7 @@
 /* No comment provided by engineer. */
 "HTTP code %d reported from server" = "Code HTTP %d renvoyé par le serveur";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "If you quit Vienna now, all downloads will stop." = "Si vous quittez Vienna maintenant, tous les téléchargements seront interrompus.";
 
 /* Title of a button on an alert */
@@ -423,7 +402,7 @@
 /* Title of a button on an alert */
 "OK" = "OK";
 
-/* No comment provided by engineer. */
+/* Message text of an alert */
 "One or more downloads are in progress" = "Un ou plusieurs téléchargements sont en cours";
 
 /* Title of a popup menu item */
@@ -449,6 +428,9 @@
 
 /* No comment provided by engineer. */
 "Open Link in %@" = "Ouvrir le lien dans %@";
+
+/* No comment provided by engineer. */
+"Open Link in Background" = "Ouvrir le lien en arrière plan";
 
 /* No comment provided by engineer. */
 "Open Link in New Tab" = "Ouvrir le lien dans un nouvel onglet";
@@ -550,6 +532,9 @@
 /* No comment provided by engineer. */
 "RSS Icon not found!" = "Icône RSS non trouvée !";
 
+/* A formatted URL string with the javascript: URL scheme. */
+"Run script “%@”" = "Lancer le script « %@ »";
+
 /* Placeholder title of a search field */
 "Search all articles" = "Chercher dans les articles";
 
@@ -567,8 +552,17 @@
 /* No comment provided by engineer. */
 "Search Results" = "Chercher dans les résultats";
 
+/* Label of a button on an open panel */
+"Select" = "Sélectionner";
+
 /* Title of a popup menu item */
 "Select…" = "Sélectionner…";
+
+/* A formatted URL string with the mailto: URL scheme. */
+"Send email to %@" = "Adresser un e-mail à %@";
+
+/* A formatted URL string with the mailto: URL scheme. */
+"Send email to %@ with subject “%@”" = "Envoyer à %1$@ un e-mail dont l’objet est « %2$@ »";
 
 /* No comment provided by engineer. */
 "Send Link" = "Envoyer le lien";
@@ -621,7 +615,7 @@
 /* No comment provided by engineer. */
 "The database file format has changed" = "Le format de la base de données a changé";
 
-/* No comment provided by engineer. */
+/* Body of an alert */
 "The Default style will be used instead." = "Le style par défaut sera utilisé à la place.";
 
 /* No comment provided by engineer. */
@@ -630,14 +624,20 @@
 /* No comment provided by engineer. */
 "The style \"%@\" has been installed to your Styles folder and added to the Style menu." = "Le style '%@' a été installé dans le dossier des Styles et ajouté au menu Style.";
 
-/* No comment provided by engineer. */
+/* Title of an alert */
 "The style %@ appears to be missing or corrupted" = "Le style %@ semble être corrompu";
 
 /* No comment provided by engineer. */
 "The subscription for \"%@\" requires a user name and password for access." = "L'abonnement à \"%@\" nécessite un nom d'utilisateur et un mot de passe.";
 
+/* Message text of an alert */
+"There are deleted articles in the trash. Would you like to empty the trash before quitting?" = "La corbeille contient des articles supprimés. Souhaitez-vous la vider avant de quitter ?";
+
 /* No comment provided by engineer. */
 "This article contains an enclosed file." = "Cet article contient un fichier incorporé.";
+
+/* Message text of a modal alert */
+"This folder cannot be chosen because you don’t have permission." = "Vous n'avez pas les autorisations nécessaires pour utiliser ce dossier.";
 
 /* No comment provided by engineer. */
 "This operation cannot be undone." = "Cette opération est irréversible.";
@@ -653,9 +653,6 @@
 
 /* test for a folder (not operational as of Vienna 3.2) */
 "under" = "est inclus dans";
-
-/* No comment provided by engineer. */
-"Unread" = "Non lus";
 
 /* No comment provided by engineer. */
 "Unread Articles" = "Articles non lus";

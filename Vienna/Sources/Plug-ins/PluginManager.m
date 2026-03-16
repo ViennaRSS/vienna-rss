@@ -19,14 +19,18 @@
 //
 
 #import "PluginManager.h"
-#import "HelperFunctions.h"
-#import "StringExtensions.h"
+
 #import "AppController.h"
-#import "Preferences.h"
 #import "Article.h"
 #import "BrowserPane.h"
+#import "HelperFunctions.h"
+#import "NSFileManager+Paths.h"
+#import "Preferences.h"
 #import "SearchMethod.h"
-#import "Browser.h"
+#import "StringExtensions.h"
+#import "Vienna-Swift.h"
+
+static NSString * const VNAPlugInsDirectoryName = @"Plugins";
 
 @implementation PluginManager
 
@@ -40,6 +44,16 @@
 		allPlugins = nil;
 	}
 	return self;
+}
+
++ (NSURL *)plugInsDirectoryURL
+{
+    NSFileManager *fileManager = NSFileManager.defaultManager;
+    NSURL *appSupportURL = fileManager.vna_applicationSupportDirectory;
+    NSString *pathComponent = VNAPlugInsDirectoryName;
+    NSURL *plugInsURL = [appSupportURL URLByAppendingPathComponent:pathComponent
+                                                       isDirectory:YES];
+    return plugInsURL;
 }
 
 /* resetPlugins
@@ -62,7 +76,7 @@
 	path = [[NSBundle mainBundle].sharedSupportPath stringByAppendingPathComponent:@"Plugins"];
 	loadMapFromPath(path, pluginPaths, YES, nil);
 
-	path = [Preferences standardPreferences].pluginsFolder;
+	path = PluginManager.plugInsDirectoryURL.path;
 	loadMapFromPath(path, pluginPaths, YES, nil);
 
 	for (pluginName in pluginPaths)
@@ -147,7 +161,7 @@
                     keyMod |= NSEventModifierFlagControl;
                 else
                 {
-                    if (!keyChar.blank)
+                    if (!keyChar.vna_isBlank)
                         NSLog(@"Warning: malformed MenuKey found in info.plist for plugin %@", pluginName);
                     keyChar = oneKey;
                 }
@@ -170,7 +184,7 @@
                                                                   selector:@selector(localizedCaseInsensitiveCompare:)];
     [plugins sortUsingDescriptors:@[descriptor]];
 
-    return plugins;
+    return [plugins copy];
 }
 
 /* searchMethods
@@ -187,7 +201,7 @@
 			[searchMethods addObject:method];
 		}
 	}
-	return searchMethods;
+	return [searchMethods copy];
 }	
 
 /* toolbarItems
@@ -205,7 +219,7 @@
 		if (![pluginType isEqualToString:@"SearchEngine"])
 			[toolbarKeys addObject:pluginName];
 	}
-	return toolbarKeys;
+	return [toolbarKeys copy];
 }
 
 /* defaultToolbarItems
@@ -222,7 +236,7 @@
 		if ([onePlugin[@"Default"] integerValue])
 			[newArray addObject:pluginName];
 	}
-	return newArray;
+	return [newArray copy];
 }
 
 /* toolbarItem
@@ -232,7 +246,7 @@
 {
     NSDictionary *pluginItem = allPlugins[itemIdentifier];
     if (pluginItem) {
-        PluginToolbarItem *item = [[PluginToolbarItem alloc] initWithItemIdentifier:itemIdentifier];
+        VNAPlugInToolbarItem *item = [[VNAPlugInToolbarItem alloc] initWithItemIdentifier:itemIdentifier];
 		NSString * friendlyName = pluginItem[@"FriendlyName"];
 		NSString * tooltip = pluginItem[@"Tooltip"];
         NSString *imagePath = [NSString stringWithFormat:@"%@/%@.tiff", pluginItem[@"Path"], pluginItem[@"ButtonImage"]];
@@ -261,13 +275,14 @@
  */
 -(BOOL)validateToolbarItem:(NSToolbarItem *)toolbarItem
 {
-    NSView<BaseView> * theView = APPCONTROLLER.browser.activeTabItemView;
-    Article * thisArticle = APPCONTROLLER.selectedArticle;
+    id<Tab> activeBrowserTab = APPCONTROLLER.browser.activeTab;
 
-    if ([theView isKindOfClass:[BrowserPane class]])
-        return ((theView.viewLink != nil) && NSApp.active);
-    else
+    if (activeBrowserTab)
+        return ((activeBrowserTab.tabUrl != nil) && NSApp.active);
+    else {
+        Article * thisArticle = APPCONTROLLER.selectedArticle;
         return (thisArticle != nil && NSApp.active);
+    }
 }
 
 /* validateMenuItem
@@ -275,13 +290,14 @@
  */
 -(BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
-    NSView<BaseView> * theView = APPCONTROLLER.browser.activeTabItemView;
-    Article * thisArticle = APPCONTROLLER.selectedArticle;
+    id<Tab> activeBrowserTab = APPCONTROLLER.browser.activeTab;
 
-    if ([theView isKindOfClass:[BrowserPane class]])
-        return ((theView.viewLink != nil) && NSApp.active);
-    else
+    if (activeBrowserTab)
+        return ((activeBrowserTab.tabUrl != nil) && NSApp.active);
+    else {
+        Article * thisArticle = APPCONTROLLER.selectedArticle;
         return (thisArticle != nil && NSApp.active);
+    }
 }
 
 /* pluginInvocator
@@ -291,8 +307,8 @@
 {
 	NSDictionary * pluginItem;
 
-    if ([sender isKindOfClass:[PluginToolbarItemButton class]]) {
-        PluginToolbarItemButton *button = sender;
+    if ([sender isKindOfClass:[VNAPlugInToolbarItemButton class]]) {
+        VNAPlugInToolbarItemButton *button = sender;
         pluginItem = allPlugins[button.toolbarItem.itemIdentifier];
     } else {
 		NSMenuItem * menuItem = (NSMenuItem *)sender;
@@ -310,15 +326,14 @@
 			NSMutableString * urlString  = [NSMutableString stringWithString:pluginItem[@"URL"]];
 			if (urlString == nil)
 				return;
-			
-			// Get the view that the user is currently looking at...
-			NSView<BaseView> * theView = APPCONTROLLER.browser.activeTabItemView;
-			
+
+            id<Tab> activeBrowserTab = APPCONTROLLER.browser.activeTab;
+
 			// ...and do the following in case the user is currently looking at a website.
-			if ([theView isKindOfClass:[BrowserPane class]])
+			if (activeBrowserTab)
 			{	
-				[urlString replaceString:@"$ArticleTitle$" withString:theView.viewTitle];
-				[urlString replaceString:@"$ArticleLink$" withString:[NSString stringByCleaningURLString:theView.viewLink]];
+				[urlString vna_replaceString:@"$ArticleTitle$" withString:activeBrowserTab.title];
+				[urlString vna_replaceString:@"$ArticleLink$" withString:[NSString vna_stringByCleaningURLString:activeBrowserTab.tabUrl.absoluteString]];
 			}
 			
 			// In case the user is currently looking at an article:
@@ -326,15 +341,15 @@
 			{
 				// We can only work on one article, so ignore selection range.
 				Article * currentMessage = APPCONTROLLER.selectedArticle;
-				[urlString replaceString:@"$ArticleTitle$" withString: currentMessage.title];
-                [urlString replaceString:@"$ArticleLink$" withString:[NSString stringByCleaningURLString:currentMessage.link]];
+				[urlString vna_replaceString:@"$ArticleTitle$" withString: currentMessage.title];
+                [urlString vna_replaceString:@"$ArticleLink$" withString:[NSString vna_stringByCleaningURLString:currentMessage.link]];
 			}
 						
 			if (urlString != nil)
 			{
 				NSURL * urlToLoad = cleanedUpUrlFromString(urlString);				
 				if (urlToLoad != nil)
-					[APPCONTROLLER.browser createAndLoadNewTab:urlToLoad inBackground:NO];
+					(void)[APPCONTROLLER.browser createNewTab:urlToLoad inBackground:NO load:true];
 			}
 			else
 			{

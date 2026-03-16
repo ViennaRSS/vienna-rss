@@ -16,11 +16,17 @@
 /* Class = "NSTextFieldCell"; title = "Login:"; ObjectID = "bwY-9N-h4N"; */
 "bwY-9N-h4N.title" = "Izena:";
 
+/* Class = "NSMenuItem"; title = "After one day"; ObjectID = "c4l-M5-qB1"; */
+"c4l-M5-qB1.title" = "Egun Baten Ostean";
+
 /* Class = "NSButtonCell"; title = "Select…"; ObjectID = "cbn-xq-UFr"; */
 "cbn-xq-UFr.title" = "Aukeratu…";
 
 /* Class = "NSButtonCell"; title = "Show feeds icons in folder list"; ObjectID = "dkm-xW-4If"; */
 "dkm-xW-4If.title" = "Erakutsi direktorioen irudiak direktorioen listan";
+
+/* Class = "NSMenuItem"; title = "After two weeks"; ObjectID = "Dw9-en-4Zu"; */
+"Dw9-en-4Zu.title" = "2 Asteren Ostean";
 
 /* Class = "NSButtonCell"; title = "Open new links in the background"; ObjectID = "erE-oh-cbw"; */
 "erE-oh-cbw.title" = "Ireki esteka berriak atzekaldean";
@@ -31,20 +37,14 @@
 /* Class = "NSButtonCell"; title = "Open links in external browser"; ObjectID = "flH-2D-s6O"; */
 "flH-2D-s6O.title" = "Ireki estekak kanpo nabegatzailean";
 
-/* Class = "NSTabViewItem"; label = "General"; ObjectID = "GJ3-1q-004"; */
-"GJ3-1q-004.label" = "Orokorra";
-
 /* Class = "NSMenuItem"; title = "Every 3 hours"; ObjectID = "GSh-ct-FMo"; */
 "GSh-ct-FMo.title" = "3 orduro";
 
-/* Class = "NSMenuItem"; title = "Never"; ObjectID = "h9d-GD-q32"; */
+/* Class = "NSMenuItem"; title = "Manually"; ObjectID = "h9d-GD-q32"; */
 "h9d-GD-q32.title" = "Inoiz";
 
 /* Class = "NSTextFieldCell"; title = "When new unread articles are retrieved:"; ObjectID = "iCs-T5-L1c"; */
 "iCs-T5-L1c.title" = "Artikulu berri irakurri gabeak jasotzerakoan";
-
-/* Class = "NSTabViewItem"; label = "Advanced"; ObjectID = "iEw-AM-tMF"; */
-"iEw-AM-tMF.label" = "Aurreratuta";
 
 /* Class = "NSTextFieldCell"; title = "Article list font:"; ObjectID = "ITA-U9-lhX"; */
 "ITA-U9-lhX.title" = "Artikuluentzako letra lista:";
@@ -61,9 +61,6 @@
 /* Class = "NSMenuItem"; title = "Every hour"; ObjectID = "jvO-Ef-TTd"; */
 "jvO-Ef-TTd.title" = "Orduro";
 
-/* Class = "NSButtonCell"; title = "Show the unread count on the application icon"; ObjectID = "jVU-m2-dsS"; */
-"jVU-m2-dsS.title" = "Erakutsi programaren ikonoan irakurri gabeko artikuluen kontadorea";
-
 /* Class = "NSTextFieldCell"; title = "Folder list font:"; ObjectID = "M8s-xu-lWh"; */
 "M8s-xu-lWh.title" = "Direktorioentzako letra lista:";
 
@@ -73,11 +70,17 @@
 /* Class = "NSButtonCell"; title = "Enable JavaScript in the internal browser"; ObjectID = "MnV-8D-Qyq"; */
 "MnV-8D-Qyq.title" = "Aktibatu JavaScript barne nabegatzailean";
 
+/* Class = "NSViewController"; title = "Advanced"; ObjectID = "NjZ-bv-EoA"; */
+"NjZ-bv-EoA.title" = "Aurreratuta";
+
 /* Class = "NSMenuItem"; title = "Other…"; ObjectID = "nSW-3T-Zoh"; */
 "nSW-3T-Zoh.title" = "Besteak…";
 
 /* Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "OD4-de-Vkx"; */
 "OD4-de-Vkx.title" = "Pasahitza:";
+
+/* Class = "NSMenuItem"; title = "After one month"; ObjectID = "OIa-NQ-jQi"; */
+"OIa-NQ-jQi.title" = "Hilabete Baten Ostean";
 
 /* Class = "NSTextFieldCell"; title = "Check for new articles:"; ObjectID = "Oqg-6W-NAL"; */
 "Oqg-6W-NAL.title" = "Begiratu artikulu berririk daude:";
@@ -91,11 +94,17 @@
 /* Class = "NSMenuItem"; title = "Every 5 minutes"; ObjectID = "qYb-Sf-cEF"; */
 "qYb-Sf-cEF.title" = "5 minuturo Begiratu artikulu berririk daude:";
 
-/* Class = "NSTabViewItem"; label = "Appearance"; ObjectID = "WK4-g4-vJd"; */
-"WK4-g4-vJd.label" = "Itxura";
+/* Class = "NSMenuItem"; title = "After two days"; ObjectID = "sJE-bd-4mK"; */
+"sJE-bd-4mK.title" = "2 Egunen Ostean";
 
-/* Class = "NSWindow"; title = "Preferences"; ObjectID = "X5g-th-bjd"; */
-"X5g-th-bjd.title" = "Ezaugarriak";
+/* Class = "NSViewController"; title = "General"; ObjectID = "T2z-OK-VtO"; */
+"T2z-OK-VtO.title" = "Orokorra";
+
+/* Class = "NSViewController"; title = "Appearance"; ObjectID = "U0J-a5-0Pj"; */
+"U0J-a5-0Pj.title" = "Itxura";
+
+/* Class = "NSMenuItem"; title = "After one week"; ObjectID = "xfd-Vp-kJy"; */
+"xfd-Vp-kJy.title" = "Aste Baten Ostean";
 
 /* Class = "NSMenuItem"; title = "Every 15 minutes"; ObjectID = "Ygu-Rj-E7a"; */
 "Ygu-Rj-E7a.title" = "15 minuturo";

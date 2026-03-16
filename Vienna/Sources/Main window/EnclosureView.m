@@ -19,6 +19,9 @@
 //
 
 #import "EnclosureView.h"
+
+@import UniformTypeIdentifiers;
+
 #import "DownloadManager.h"
 #import "DSClickableURLTextField.h"
 #import "NSWorkspace+OpenWithMenu.h"
@@ -74,15 +77,14 @@
 {
 
 	// Keep this for the download/open
-    enclosureURLString = cleanedUpUrlFromString(newFilename).absoluteString;
+    NSURL *enclosureUrl = cleanedUpUrlFromString(newFilename);
+    enclosureURLString = enclosureUrl.absoluteString;
 
-	NSString * basename = [NSURL URLWithString:enclosureURLString].lastPathComponent;
+	NSString * basename = enclosureUrl.lastPathComponent;
 	if (basename==nil)
 	{
 		return;
 	}
-	
-	NSString * ext = basename.pathExtension;
 
 	// Find the file's likely location in Finder and see if it is already there.
 	// We'll set the options in the pane based on whether the file is there or not.
@@ -96,16 +98,21 @@
 	}
 	else
 	{
-		NSString * appPath = [[NSWorkspace sharedWorkspace] defaultHandlerApplicationForFile:destPath];
+		NSString * appPath = [[NSWorkspace sharedWorkspace] vna_defaultHandlerApplicationForFile:destPath];
         NSString *displayName = [[[NSFileManager defaultManager] displayNameAtPath:appPath] stringByDeletingPathExtension];
         [downloadButton setTitle:[NSString stringWithFormat:NSLocalizedString(@"Open with %@", "Name the application which should open a file"), displayName]];
         [downloadButton sizeToFit];
         downloadButton.action = @selector(openFile:);
         [filenameLabel setStringValue:NSLocalizedString(@"Click the Open button to open this file.", nil)];
 	}
-	
-	NSImage * iconImage = [[NSWorkspace sharedWorkspace] iconForFileType:ext];
-	fileImage.image = iconImage;
+
+    NSString *extension = basename.pathExtension;
+    if (@available(macOS 11, *)) {
+        UTType *type = [UTType typeWithFilenameExtension:extension];
+        fileImage.image = [NSWorkspace.sharedWorkspace iconForContentType:type];
+    } else {
+        fileImage.image = [NSWorkspace.sharedWorkspace iconForFileType:extension];
+    }
 	NSDictionary *linkAttributes = @{
 									 NSLinkAttributeName: enclosureURLString,
 									 NSForegroundColorAttributeName: [NSColor colorWithCalibratedHue:240.0f/360.0f saturation:1.0f brightness:0.75f alpha:1.0f],
@@ -131,7 +138,8 @@
 	NSString * basename = [NSURL URLWithString:enclosureURLString].lastPathComponent;
 	NSString * destPath = [DownloadManager fullDownloadPath:basename];
 
-	[[NSWorkspace sharedWorkspace] openFile:destPath];
+    NSURL *url = [NSURL fileURLWithPath:destPath];
+    [NSWorkspace.sharedWorkspace openURL:url];
 }
 
 /* drawRect

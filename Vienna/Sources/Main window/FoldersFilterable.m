@@ -271,21 +271,21 @@
 
 @implementation NSOutlineView (MCStateSave)
 
-- (NSDictionary*)state {
+- (NSDictionary*)vna_state {
     return @{
-             @"Selection": self.selectionState,
-             @"Expansion": self.expansionState,
-             @"Scroll":    self.scrollState
+             @"Selection": self.vna_selectionState,
+             @"Expansion": self.vna_expansionState,
+             @"Scroll":    self.vna_scrollState
              };
 }
 
-- (void)setState:(NSDictionary*)state {
-    self.expansionState = state[@"Expansion"];
-    self.selectionState = state[@"Selection"];
-    self.scrollState    = state[@"Scroll"];
+- (void)vna_setState:(NSDictionary*)state {
+    self.vna_expansionState = state[@"Expansion"];
+    self.vna_selectionState = state[@"Selection"];
+    self.vna_scrollState    = state[@"Scroll"];
 }
 
-- (NSDictionary*)scrollState {
+- (NSDictionary*)vna_scrollState {
     NSClipView* clipView = (NSClipView*)self.superview;
     if (![clipView isKindOfClass:[NSClipView class]])
         return @{};
@@ -299,7 +299,7 @@
              };
 }
 
-- (void)setScrollState:(NSDictionary*)state {
+- (void)vna_setScrollState:(NSDictionary*)state {
     NSValue* rectValue = state[@"VisibleRect"];
     if (!rectValue)
         return;
@@ -307,7 +307,7 @@
     [self scrollPoint:rectValue.rectValue.origin];
 }
 
-- (NSSet*)selectionState {
+- (NSSet*)vna_selectionState {
     NSMutableSet* selectedItems = [NSMutableSet set];
     NSInteger     numberOfRows  = self.numberOfRows;
 
@@ -320,7 +320,7 @@
     return [selectedItems copy];
 }
 
-- (void)setSelectionState:(NSSet*)newSelection {
+- (void)vna_setSelectionState:(NSSet*)newSelection {
     NSMutableIndexSet* indexes = [NSMutableIndexSet indexSet];
 
     for (id wanted in newSelection) {
@@ -334,7 +334,7 @@
     [self selectRowIndexes:indexes byExtendingSelection:NO];
 }
 
-- (NSArray*)expansionState {
+- (NSArray*)vna_expansionState {
     NSMutableArray* expandedItems = [NSMutableArray array];
     NSInteger       numberOfRows  = self.numberOfRows;
 
@@ -349,7 +349,7 @@
     return [expandedItems copy];
 }
 
-- (void)setExpansionState:(NSArray*)newExpansion {
+- (void)vna_setExpansionState:(NSArray*)newExpansion {
     for (id wanted in newExpansion) {
         [self expandItem:wanted];
     }

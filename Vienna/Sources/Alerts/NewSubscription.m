@@ -89,12 +89,12 @@
 
     // Look on the pasteboard to see if there's an http:// url and, if so, prime the
     // URL field with it. A handy shortcut.
-    NSString *candidateURL = initialURL.trim;
+    NSString *candidateURL = initialURL.vna_trimmed;
     BOOL fromClipboard = NO;
     if (candidateURL == nil) {
         NSData *pboardData = [[NSPasteboard generalPasteboard] dataForType:NSPasteboardTypeString];
         if (pboardData != nil) {
-            NSString *pasteString = [[NSString alloc] initWithData:pboardData encoding:NSASCIIStringEncoding].trim;
+            NSString *pasteString = [[NSString alloc] initWithData:pboardData encoding:NSASCIIStringEncoding].vna_trimmed;
             NSString *lowerCasePasteString = pasteString.lowercaseString;
 
             if (lowerCasePasteString != nil &&
@@ -174,7 +174,7 @@
 -(IBAction)doSubscribe:(id)sender
 {
 	NSURL * rssFeedURL;
-	NSString * feedURLString = (feedURL.stringValue).trim;
+	NSString * feedURLString = (feedURL.stringValue).vna_trimmed;
 	// Replace feed:// with http:// if necessary
 	if ([feedURLString hasPrefix:@"feed://"])
 		feedURLString = [NSString stringWithFormat:@"http://%@", [feedURLString substringFromIndex:7]];
@@ -221,7 +221,7 @@
  */
 -(IBAction)doSave:(id)sender
 {
-	NSString * feedURLString = editFeedURL.stringValue.trim;
+	NSString * feedURLString = editFeedURL.stringValue.vna_trimmed;
 
 	// Save the new information to the database
     [[Database sharedManager] setFeedURL:feedURLString forFolder:editFolderId];
@@ -335,7 +335,7 @@
 -(void)enableSubscribeButton
 {
 	NSString * feedURLString = feedURL.stringValue;
-	subscribeButton.enabled = !feedURLString.blank;
+	subscribeButton.enabled = !feedURLString.vna_isBlank;
 }
 
 /* enableSaveButton
@@ -345,7 +345,7 @@
 -(void)enableSaveButton
 {
 	NSString * feedURLString = editFeedURL.stringValue;
-	saveButton.enabled = !feedURLString.blank;
+	saveButton.enabled = !feedURLString.vna_isBlank;
 }
 
 /* dealloc

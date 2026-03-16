@@ -22,7 +22,7 @@
 
 #import "AppController.h"
 #import "Constants.h"
-#import "KeyChain.h"
+#import "Keychain.h"
 #import "FolderImageCache.h"
 #import "StringExtensions.h"
 #import "Preferences.h"
@@ -36,9 +36,9 @@
 @property (nonatomic) BOOL isCached;
 @property (nonatomic) BOOL containsBodies;
 @property (nonatomic) BOOL hasPassword;
-@property (nonatomic, strong) NSCache * cachedArticles;
-@property (nonatomic, strong) NSMutableArray * cachedGuids;
-@property (nonatomic, strong) NSMutableDictionary * attributes;
+@property (nonatomic) NSCache * cachedArticles;
+@property (nonatomic) NSMutableArray * cachedGuids;
+@property (nonatomic) NSMutableDictionary * attributes;
 
 +(NSArray<NSImage *> *)_iconArray;
 
@@ -163,7 +163,7 @@ static NSArray * iconArray = nil;
             folderImage = Folder._iconArray[MA_SmartFolderIcon];
             break;
         case VNAFolderTypeRSS: {
-            NSString *homePageSiteRoot = self.homePage.host.convertStringToValidPath;
+            NSString *homePageSiteRoot = self.homePage.vna_host.vna_convertStringToValidPath;
             folderImage = [[FolderImageCache defaultCache] retrieveImage:homePageSiteRoot];
             if (folderImage == nil) {
                 folderImage = Folder._iconArray[MA_RSSFeedIcon];
@@ -171,7 +171,7 @@ static NSArray * iconArray = nil;
             break;
         }
         case VNAFolderTypeOpenReader: {
-            NSString *homePageSiteRoot = self.homePage.host.convertStringToValidPath;
+            NSString *homePageSiteRoot = self.homePage.vna_host.vna_convertStringToValidPath;
             folderImage = [[FolderImageCache defaultCache] retrieveImage:homePageSiteRoot];
             if (folderImage == nil) {
                 folderImage = Folder._iconArray[MA_GoogleReaderFolderIcon];
@@ -196,7 +196,7 @@ static NSArray * iconArray = nil;
     }
 	NSImage * imagePtr = nil;
 	if (self.feedURL) {
-		NSString * homePageSiteRoot = self.homePage.host.convertStringToValidPath;
+		NSString * homePageSiteRoot = self.homePage.vna_host.vna_convertStringToValidPath;
 		imagePtr = [[FolderImageCache defaultCache] retrieveImage:homePageSiteRoot];
 	}
 	return (imagePtr != nil);
@@ -217,12 +217,13 @@ static NSArray * iconArray = nil;
  * Used to set the image for a folder in the array. The image is cached for this session
  * and also written to the image folder if there is a valid one.
  */
--(void)setImage:(NSImage *)iconImage
+-(void)setImage:(NSImage *)image
 {
+    NSImage *iconImage = [image copy];
 	if (self.feedURL != nil && iconImage != nil)
 	{
 		NSString * homePageSiteRoot;
-		homePageSiteRoot = self.homePage.host.convertStringToValidPath;
+		homePageSiteRoot = self.homePage.vna_host.vna_convertStringToValidPath;
 		[[FolderImageCache defaultCache] addImage:iconImage forURL:homePageSiteRoot];
 	}
 }
@@ -232,7 +233,7 @@ static NSArray * iconArray = nil;
  */
 -(void)setFeedDescription:(NSString *)newFeedDescription
 {
-	[self.attributes setValue:SafeString(newFeedDescription) forKey:@"FeedDescription"];
+	[self.attributes setValue:SafeString([newFeedDescription copy]) forKey:@"FeedDescription"];
 }
 
 /* setHomePage
@@ -240,7 +241,7 @@ static NSArray * iconArray = nil;
  */
 -(void)setHomePage:(NSString *)newHomePage
 {
-	[self.attributes setValue:SafeString(newHomePage) forKey:@"HomePage"];
+	[self.attributes setValue:SafeString([newHomePage copy]) forKey:@"HomePage"];
 }
 
 /* username
@@ -256,7 +257,7 @@ static NSArray * iconArray = nil;
  */
 -(void)setUsername:(NSString *)newUsername
 {
-	[self.attributes setValue:newUsername forKey:@"Username"];
+	[self.attributes setValue:[newUsername copy] forKey:@"Username"];
 }
 
 /* password
@@ -267,7 +268,7 @@ static NSArray * iconArray = nil;
 	if (!self.hasPassword)
 	{
 		if (self.username != nil && self.feedURL != nil)
-			[self.attributes setValue:[KeyChain getPasswordFromKeychain:self.username url:self.feedURL] forKey:@"Password"];
+			[self.attributes setValue:[VNAKeychain getPasswordFromKeychain:self.username url:self.feedURL] forKey:@"Password"];
 		self.hasPassword = YES;
 	}
 	return [self.attributes valueForKey:@"Password"];
@@ -276,10 +277,11 @@ static NSArray * iconArray = nil;
 /* setPassword
  * Sets the password associated with this feed.
  */
--(void)setPassword:(NSString *)newPassword
+-(void)setPassword:(NSString *)password
 {
+	NSString *newPassword = [password copy];
 	if (self.username != nil && self.feedURL != nil)
-		[KeyChain setPasswordInKeychain:newPassword username:self.username url:self.feedURL];
+		[VNAKeychain setPasswordInKeychain:newPassword username:self.username url:self.feedURL];
 	[self.attributes setValue:newPassword forKey:@"Password"];
 	self.hasPassword = YES;
 }
@@ -299,7 +301,7 @@ static NSArray * iconArray = nil;
  */
 -(void)setLastUpdateString:(NSString *)newLastUpdateString
 {
-	[self.attributes setValue:newLastUpdateString forKey:@"LastUpdateString"];
+	[self.attributes setValue:[newLastUpdateString copy] forKey:@"LastUpdateString"];
 }
 
 /* feedURL
@@ -315,7 +317,7 @@ static NSArray * iconArray = nil;
  */
 -(void)setFeedURL:(NSString *)newURL
 {
-	[self.attributes setValue:newURL forKey:@"FeedURL"];
+	[self.attributes setValue:[newURL copy] forKey:@"FeedURL"];
 }
 
 /* remoteId
@@ -331,7 +333,7 @@ static NSArray * iconArray = nil;
  */
 -(void)setRemoteId:(NSString *)newId
 {
-	[self.attributes setValue:newId forKey:@"remoteId"];
+	[self.attributes setValue:[newId copy] forKey:@"remoteId"];
 }
 
 /* name
@@ -347,7 +349,7 @@ static NSArray * iconArray = nil;
  */
 -(void)setName:(NSString *)newName
 {
-	[self.attributes setValue:newName forKey:@"Name"];
+	[self.attributes setValue:[newName copy] forKey:@"Name"];
 }
 
 /* isGroupFolder

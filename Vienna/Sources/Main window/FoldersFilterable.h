@@ -23,8 +23,10 @@ __unsafe_unretained id <NSOutlineViewDataSource> _dataSource;
 @end
 
 @interface NSOutlineView (MCStateSave)
-@property (nonatomic) NSSet* selectionState;
-@property (nonatomic) NSArray* expansionState;
-@property (nonatomic) NSDictionary* scrollState;
-@property (nonatomic) NSDictionary* state;
+
+@property (setter=vna_setSelectionState:, nonatomic) NSSet *vna_selectionState;
+@property (setter=vna_setExpansionState:, nonatomic) NSArray *vna_expansionState;
+@property (setter=vna_setScrollState:, nonatomic) NSDictionary *vna_scrollState;
+@property (setter=vna_setState:, nonatomic) NSDictionary *vna_state;
+
 @end

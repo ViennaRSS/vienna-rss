@@ -12,38 +12,38 @@
 // by using NSURLProtocol’s class methods propertyForKey:inRequest: and setProperty:forKey:inRequest:
 @implementation NSMutableURLRequest (userDict)
 
--(id)userInfo
+-(id)vna_userInfo
 {
-    return [NSURLProtocol propertyForKey:NSStringFromSelector(@selector(userInfo)) inRequest:self];
+    return [NSURLProtocol propertyForKey:NSStringFromSelector(@selector(vna_userInfo)) inRequest:self];
 }
 
--(void)setUserInfo:(id)userDict
+-(void)vna_setUserInfo:(id)userDict
 {
-    [NSURLProtocol setProperty:userDict forKey:NSStringFromSelector(@selector(userInfo)) inRequest:self];
+    [NSURLProtocol setProperty:[userDict copy] forKey:NSStringFromSelector(@selector(vna_userInfo)) inRequest:self];
 }
 
--(void)setInUserInfo:(id)object forKey:(NSString *)key
+-(void)vna_setInUserInfo:(id)object forKey:(NSString *)key
 {
     NSMutableDictionary *workingDict =
-        [((NSDictionary *)[NSURLProtocol propertyForKey:NSStringFromSelector(@selector(userInfo)) inRequest:self]) mutableCopy];
+        [((NSDictionary *)[NSURLProtocol propertyForKey:NSStringFromSelector(@selector(vna_userInfo)) inRequest:self]) mutableCopy];
     if (workingDict == nil) {
         workingDict = [[NSMutableDictionary alloc] init];
     }
 
     [workingDict setObject:object forKeyedSubscript:key];
-    [NSURLProtocol setProperty:[NSDictionary dictionaryWithDictionary:workingDict] forKey:NSStringFromSelector(@selector(userInfo))
+    [NSURLProtocol setProperty:[NSDictionary dictionaryWithDictionary:workingDict] forKey:NSStringFromSelector(@selector(vna_userInfo))
                      inRequest:self];
 }
 
--(void)addInfoFromDictionary:(NSDictionary *)additionalDictionary
+-(void)vna_addInfoFromDictionary:(NSDictionary *)additionalDictionary
 {
-    NSDictionary *currentDict = [NSURLProtocol propertyForKey:NSStringFromSelector(@selector(userInfo)) inRequest:self];
+    NSDictionary *currentDict = [NSURLProtocol propertyForKey:NSStringFromSelector(@selector(vna_userInfo)) inRequest:self];
     if (currentDict == nil) {
-        [NSURLProtocol setProperty:additionalDictionary forKey:NSStringFromSelector(@selector(userInfo)) inRequest:self];
+        [NSURLProtocol setProperty:additionalDictionary forKey:NSStringFromSelector(@selector(vna_userInfo)) inRequest:self];
     } else {
         NSMutableDictionary *workingDict = [NSMutableDictionary dictionaryWithDictionary:currentDict];
         [workingDict addEntriesFromDictionary:additionalDictionary];
-        [NSURLProtocol setProperty:[NSDictionary dictionaryWithDictionary:workingDict] forKey:NSStringFromSelector(@selector(userInfo))
+        [NSURLProtocol setProperty:[NSDictionary dictionaryWithDictionary:workingDict] forKey:NSStringFromSelector(@selector(vna_userInfo))
                          inRequest:self];
     }
 }
@@ -53,7 +53,7 @@
 // create or extend HTTP body (for "application/x-www-form-urlencoded" content type)
 @implementation NSMutableURLRequest (MutablePostExtensions)
 
--(void)setPostValue:(NSString *)value forKey:(NSString *)key
+-(void)vna_setPostValue:(NSString *)value forKey:(NSString *)key
 {
     NSMutableData *data1;
     NSData *data2;

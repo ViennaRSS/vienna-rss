@@ -19,11 +19,11 @@
 /* Class = "NSMenuItem"; title = "Manually"; ObjectID = "7Za-ay-jlt"; */
 "7Za-ay-jlt.title" = "Вручную";
 
-/* Class = "NSButtonCell"; title = "Enable Internet plug-ins in the internal browser"; ObjectID = "9bX-Lt-AWz"; */
-"9bX-Lt-AWz.title" = "Разрешить плагины во внешнем браузере";
-
 /* Class = "NSTextFieldCell"; title = "Mark current article read:"; ObjectID = "adB-qE-xKg"; */
 "adB-qE-xKg.title" = "Пометить текущую статью как прочитанную:";
+
+/* Class = "NSMenuItem"; title = "Manually"; ObjectID = "ANH-Pd-PJC"; Note = "Erase deleted articles: Manually"; */
+"ANH-Pd-PJC.title" = "Вручную";
 
 /* Class = "NSMenuItem"; title = "Every 30 minutes"; ObjectID = "aWg-mD-YWn"; */
 "aWg-mD-YWn.title" = "Каждые 30 минут";
@@ -34,11 +34,20 @@
 /* Class = "NSTextFieldCell"; title = "Login:"; ObjectID = "bwY-9N-h4N"; */
 "bwY-9N-h4N.title" = "Логин:";
 
+/* Class = "NSMenuItem"; title = "After one day"; ObjectID = "c4l-M5-qB1"; */
+"c4l-M5-qB1.title" = "После одного дня";
+
 /* Class = "NSButtonCell"; title = "Select…"; ObjectID = "cbn-xq-UFr"; */
 "cbn-xq-UFr.title" = "Выбрать…";
 
+/* Class = "NSButtonCell"; title = "Preview new browser"; ObjectID = "DDY-fS-V5T"; */
+"DDY-fS-V5T.title" = "Просмотр нового браузера";
+
 /* Class = "NSButtonCell"; title = "Show feeds icons in folder list"; ObjectID = "dkm-xW-4If"; */
 "dkm-xW-4If.title" = "Показывать изображения папок в списке папок";
+
+/* Class = "NSMenuItem"; title = "After two weeks"; ObjectID = "Dw9-en-4Zu"; */
+"Dw9-en-4Zu.title" = "Через две недели";
 
 /* Class = "NSButtonCell"; title = "Open new links in the background"; ObjectID = "erE-oh-cbw"; */
 "erE-oh-cbw.title" = "Открывать ссылки в фоне";
@@ -46,32 +55,38 @@
 /* Class = "NSButtonCell"; title = "Show in menu bar"; ObjectID = "FFP-H1-weF"; */
 "FFP-H1-weF.title" = "Отображать меню";
 
+/* Class = "NSTextFieldCell"; title = "You may have to relaunch Vienna after changing this setting for it to take effect."; ObjectID = "fgw-cI-bAr"; */
+"fgw-cI-bAr.title" = "Для вступления в силу изменений данной настройки может потребоваться перезапуск программы.";
+
 /* Class = "NSButtonCell"; title = "Open links in external browser"; ObjectID = "flH-2D-s6O"; */
 "flH-2D-s6O.title" = "Открывать ссылки во внешнем браузере";
+
+/* Class = "NSTextFieldCell"; title = "Vienna has a new browser built on top of WebKit. It is faster and more secure.\nAfter changing this setting, restart Vienna to test it. Feedback is very welcome!"; ObjectID = "Fv8-Xx-YR0"; */
+"Fv8-Xx-YR0.title" = "В Vienna появился новый браузер построенный на WebKit. Он быстрее и безопаснее.\nПосле изменения данной настройки перезапустите Vienna, чтобы протестировать его. Мы будем рады вашим отзывам!";
 
 /* Class = "NSTextFieldCell"; title = "The higher the number, the quicker your subscriptions will be downloaded."; ObjectID = "g3K-qh-M6y"; */
 "g3K-qh-M6y.title" = "Чем выше номер, тем быстрее ваши подписки будут скачаны.";
 
-/* Class = "NSTabViewItem"; label = "General"; ObjectID = "GJ3-1q-004"; */
-"GJ3-1q-004.label" = "Общие";
-
 /* Class = "NSTextField"; ibShadowedToolTip = "Address of a server supporting the Open Reader API"; ObjectID = "gKc-l8-p9m"; */
 "gKc-l8-p9m.ibShadowedToolTip" = "Адрес сервера, поддерживающего Open Reader API";
+
+/* Class = "NSMenuItem"; title = "Ask when Vienna quits"; ObjectID = "gnv-f7-Z4Z"; Note = "Erase deleted articles: Ask when Vienna quits"; */
+"gnv-f7-Z4Z.title" = "Спрашивать при завершении работы Vienna";
 
 /* Class = "NSMenuItem"; title = "Every 3 hours"; ObjectID = "GSh-ct-FMo"; */
 "GSh-ct-FMo.title" = "Каждые 3 часов";
 
-/* Class = "NSMenuItem"; title = "Never"; ObjectID = "h9d-GD-q32"; */
-"h9d-GD-q32.title" = "Никогда";
+/* Class = "NSMenuItem"; title = "Manually"; ObjectID = "h9d-GD-q32"; */
+"h9d-GD-q32.title" = "Вручную";
 
 /* Class = "NSButtonCell"; title = "Check for newer versions of Vienna on start up"; ObjectID = "haP-20-AwJ"; */
 "haP-20-AwJ.title" = "Проверять наличие новых версий Vienna при запуске";
 
+/* Class = "NSTextFieldCell"; title = "Erase deleted articles:"; ObjectID = "HH2-sh-rEx"; */
+"HH2-sh-rEx.title" = "Очищать удаленные статьи:";
+
 /* Class = "NSTextFieldCell"; title = "When new unread articles are retrieved:"; ObjectID = "iCs-T5-L1c"; */
 "iCs-T5-L1c.title" = "При получении новых статей:";
-
-/* Class = "NSTabViewItem"; label = "Advanced"; ObjectID = "iEw-AM-tMF"; */
-"iEw-AM-tMF.label" = "Расширенные";
 
 /* Class = "NSPopUpButton"; ibShadowedToolTip = "Select a server supporting the Open Reader API"; ObjectID = "iHl-tr-paa"; */
 "iHl-tr-paa.ibShadowedToolTip" = "Выберите сервер поддерживающий Open Reader API";
@@ -91,8 +106,8 @@
 /* Class = "NSMenuItem"; title = "Every hour"; ObjectID = "jvO-Ef-TTd"; */
 "jvO-Ef-TTd.title" = "Ежечасно";
 
-/* Class = "NSButtonCell"; title = "Show the unread count on the application icon"; ObjectID = "jVU-m2-dsS"; */
-"jVU-m2-dsS.title" = "Отобразить их число в иконке приложения";
+/* Class = "NSViewController"; title = "Syncing"; ObjectID = "Lfh-L2-KcO"; */
+"Lfh-L2-KcO.title" = "Синхронизации";
 
 /* Class = "NSButtonCell"; title = "Check for new articles on start up"; ObjectID = "Ljf-Qd-6Ho"; */
 "Ljf-Qd-6Ho.title" = "Проверять наличие новых статей при запуске";
@@ -106,11 +121,17 @@
 /* Class = "NSButtonCell"; title = "Enable JavaScript in the internal browser"; ObjectID = "MnV-8D-Qyq"; */
 "MnV-8D-Qyq.title" = "Разрешить JavaScript во внешнем браузере";
 
+/* Class = "NSViewController"; title = "Advanced"; ObjectID = "NjZ-bv-EoA"; */
+"NjZ-bv-EoA.title" = "Расширенные";
+
 /* Class = "NSMenuItem"; title = "Other…"; ObjectID = "nSW-3T-Zoh"; */
 "nSW-3T-Zoh.title" = "Иное…";
 
 /* Class = "NSTextFieldCell"; title = "Password:"; ObjectID = "OD4-de-Vkx"; */
 "OD4-de-Vkx.title" = "Пароль:";
+
+/* Class = "NSMenuItem"; title = "After one month"; ObjectID = "OIa-NQ-jQi"; */
+"OIa-NQ-jQi.title" = "После одного месяца";
 
 /* Class = "NSTextFieldCell"; title = "Check for new articles:"; ObjectID = "Oqg-6W-NAL"; */
 "Oqg-6W-NAL.title" = "Проверять наличие статей:";
@@ -127,6 +148,15 @@
 /* Class = "NSMenuItem"; title = "Every 5 minutes"; ObjectID = "qYb-Sf-cEF"; */
 "qYb-Sf-cEF.title" = "Каждые 5 минут";
 
+/* Class = "NSMenuItem"; title = "After two days"; ObjectID = "sJE-bd-4mK"; */
+"sJE-bd-4mK.title" = "Через два дня";
+
+/* Class = "NSViewController"; title = "General"; ObjectID = "T2z-OK-VtO"; */
+"T2z-OK-VtO.title" = "Общие";
+
+/* Class = "NSViewController"; title = "Appearance"; ObjectID = "U0J-a5-0Pj"; */
+"U0J-a5-0Pj.title" = "Внешний вид";
+
 /* Class = "NSButtonCell"; title = "Search for latest beta versions"; ObjectID = "u92-Bh-Wrz"; */
 "u92-Bh-Wrz.title" = "Проверить наличие последней бета-версии";
 
@@ -136,11 +166,11 @@
 /* Class = "NSButton"; ibShadowedToolTip = "Visit the website"; ObjectID = "V12-Ua-skO"; */
 "V12-Ua-skO.ibShadowedToolTip" = "Посетить веб-сайт";
 
-/* Class = "NSTabViewItem"; label = "Appearance"; ObjectID = "WK4-g4-vJd"; */
-"WK4-g4-vJd.label" = "Внешний вид";
+/* Class = "NSViewController"; title = "Updates"; ObjectID = "wyk-W1-xMh"; */
+"wyk-W1-xMh.title" = "Обновления";
 
-/* Class = "NSWindow"; title = "Preferences"; ObjectID = "X5g-th-bjd"; */
-"X5g-th-bjd.title" = "Настройки";
+/* Class = "NSMenuItem"; title = "After one week"; ObjectID = "xfd-Vp-kJy"; */
+"xfd-Vp-kJy.title" = "После одной недели";
 
 /* Class = "NSTextFieldCell"; title = "URL:"; ObjectID = "YG6-9k-gKH"; */
 "YG6-9k-gKH.title" = "URL-адрес:";
@@ -154,6 +184,6 @@
 /* Class = "NSTextFieldCell"; title = "Save downloaded files to:"; ObjectID = "yLU-Xs-TGw"; */
 "yLU-Xs-TGw.title" = "Загружать файлы в:";
 
-/* Class = "NSTabViewItem"; label = "Syncing"; ObjectID = "zkN-he-3BT"; */
-"zkN-he-3BT.label" = "Синхронизации";
+/* Class = "NSMenuItem"; title = "When Vienna quits"; ObjectID = "Z9k-7x-3gF"; Note = "Erase deleted articles: When Vienna quits"; */
+"Z9k-7x-3gF.title" = "После завершения работы Vienna";
 

@@ -57,7 +57,7 @@
  */
 -(IBAction)doSave:(id)sender
 {
-	NSString * folderNameString = folderName.stringValue.trim;
+	NSString * folderNameString = folderName.stringValue.vna_trimmed;
 	
 	// Create the new folder in the database
 	NSInteger newFolderId = [[Database sharedManager] addFolder:parentId
@@ -99,7 +99,7 @@
 -(void)enableSaveButton
 {
 	NSString * folderNameString = folderName.stringValue;
-	saveButton.enabled = !folderNameString.blank;
+	saveButton.enabled = !folderNameString.vna_isBlank;
 }
 
 /* dealloc

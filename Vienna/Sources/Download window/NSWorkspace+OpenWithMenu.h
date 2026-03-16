@@ -32,8 +32,11 @@
 
 @interface NSWorkspace (Additions)
 
-- (NSArray *)handlerApplicationsForFile:(NSString *)filePath;
-- (NSString *)defaultHandlerApplicationForFile:(NSString *)filePath;
-- (NSMenu *)openWithMenuForFile:(NSString *)path target:(id)target action:(SEL)selector menu:(NSMenu *)menu;
+- (NSArray *)vna_handlerApplicationsForFile:(NSString *)filePath;
+- (NSString *)vna_defaultHandlerApplicationForFile:(NSString *)filePath;
+- (NSMenu *)vna_openWithMenuForFile:(NSString *)path
+                             target:(id)target
+                             action:(SEL)selector
+                               menu:(NSMenu *)menu;
 
 @end

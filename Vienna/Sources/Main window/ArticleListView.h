@@ -23,18 +23,19 @@
 
 #import "BaseView.h"
 #import "ArticleBaseView.h"
+#import "ArticleViewDelegate.h"
+#import "MessageListView.h"
 
 @class AppController;
 @class ArticleView;
-@class MessageListView;
-@class EnclosureView;
+@protocol ArticleContentView;
+@protocol Tab;
 
-@interface ArticleListView : NSView<BaseView, ArticleBaseView, NSTableViewDelegate, NSTableViewDataSource, WebUIDelegate, WebFrameLoadDelegate>
+@interface ArticleListView : NSView<BaseView, ArticleBaseView, ArticleViewDelegate, MessageListViewDelegate, NSTableViewDataSource, NSSplitViewDelegate>
 {
 	IBOutlet MessageListView * articleList;
-	IBOutlet ArticleView * articleText;
+	NSObject<ArticleContentView, Tab> *articleText;
 	IBOutlet NSSplitView * splitView2;
-	IBOutlet EnclosureView * enclosureView;
 
 	NSInteger tableLayout;
 	BOOL isAppInitialising;
@@ -56,20 +57,15 @@
 	NSMutableDictionary * unreadTopLineSelectionDict;
 
 	NSURL *	currentURL;
-	BOOL isCurrentPageFullHTML;
 	BOOL isLoadingHTMLArticle;
-	NSError * lastError;
 	NSProgressIndicator * progressIndicator;
 }
 
-@property (weak, nonatomic) AppController *controller;
-
 // Public functions
--(void)updateAlternateMenuTitle;
 -(void)updateVisibleColumns;
 -(void)saveTableSettings;
--(BOOL)canDeleteMessageAtRow:(NSInteger)row;
 -(void)loadArticleLink:(NSString *) articleLink;
-@property (nonatomic, readonly, copy) NSURL *url;
--(void)webViewLoadFinished:(NSNotification *)notification;
+- (void)webViewLoadFinished:(NSNotification *)notification;
+@property (readonly, nonatomic) NSURL *url;
+
 @end

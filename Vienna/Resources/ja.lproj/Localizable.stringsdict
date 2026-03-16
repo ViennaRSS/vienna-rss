@@ -16,6 +16,20 @@
 			<string>%d の新着記事があります</string>
 		</dict>
 	</dict>
+	<key>%d new unread articles retrieved</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@articles@</string>
+		<key>articles</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>d</string>
+			<key>other</key>
+			<string>%d の未読記事があります。</string>
+		</dict>
+	</dict>
 	<key>%d subscriptions successfully exported</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>

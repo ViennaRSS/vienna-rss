@@ -2,7 +2,7 @@
 //  AppController+Sparkle.swift
 //  Vienna
 //
-//  Copyright 2020
+//  Copyright 2020, 2021
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -20,9 +20,9 @@
 import Foundation
 import Sparkle
 
-extension AppController: SUUpdaterDelegate {
+extension AppController: SPUUpdaterDelegate {
 
-	public func feedURLString(for updater: SUUpdater) -> String? {
+	public func feedURLString(for updater: SPUUpdater) -> String? {
 		guard var urlString = Bundle.main.infoDictionary?["SUFeedURL"] as? String else {
 			return nil
 		}
@@ -40,10 +40,6 @@ extension AppController: SUUpdaterDelegate {
 		}
 
 		return urlString
-	}
-
-	public func updaterWillRelaunchApplication(_ updater: SUUpdater) {
-		Preferences.standard.handleUpdateRestart()
 	}
 
 }

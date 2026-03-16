@@ -39,9 +39,9 @@
 
 // General functions
 -(BOOL)parseRichXML:(NSData *)xmlData;
-@property (nonatomic, readonly, copy) NSString * title;
-@property (nonatomic, readonly, copy) NSString * description;
-@property (nonatomic, readonly, copy) NSString * link;
-@property (nonatomic, readonly, copy) NSDate * lastModified;
-@property (nonatomic, readonly, copy) NSArray * items;
+@property (readonly, nonatomic) NSString * title;
+@property (readonly, nonatomic) NSString * description;
+@property (readonly, nonatomic) NSString * link;
+@property (readonly, nonatomic) NSDate * lastModified;
+@property (readonly, nonatomic) NSArray * items;
 @end

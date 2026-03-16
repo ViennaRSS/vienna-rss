@@ -19,6 +19,7 @@
 //
 
 @import Cocoa;
+@import Sparkle;
 @import WebKit;
 
 #define APPCONTROLLER ((AppController *)[NSApp delegate])
@@ -29,8 +30,6 @@
 @class NewSubscription;
 @class NewGroupFolder;
 @class WebPreferences;
-@class Browser;
-@class EmptyTrashWarning;
 @class SearchPanel;
 @class DisclosureView;
 @class PluginManager;
@@ -41,6 +40,7 @@
 @class Article;
 @class UnifiedDisplayView;
 @class ArticleListView;
+@protocol Browser;
 
 @interface AppController : NSObject <NSApplicationDelegate>
 {
@@ -53,7 +53,6 @@
 	DownloadWindow * downloadWindow;
 	SmartFolder * smartFolder;
 	NewGroupFolder * groupFolder;
-	EmptyTrashWarning * emptyTrashWarning;
 	SearchPanel * searchPanel;
 	
 	Database * db;
@@ -67,14 +66,15 @@
     NewSubscription * _rssFeed;
 }
 
+@property (nonatomic) IBOutlet SPUStandardUpdaterController *sparkleController;
 @property (nonatomic) PluginManager *pluginManager;
-@property (nonatomic, weak) Browser *browser;
+@property (nonatomic, weak) id<Browser> browser;
 @property (nonatomic) ArticleController *articleController;
 @property (nonatomic, weak) UnifiedDisplayView *unifiedListView;
 @property (nonatomic, weak) ArticleListView *articleListView;
-@property (nonatomic, strong) NewSubscription *rssFeed;
+@property (nonatomic) NewSubscription *rssFeed;
 @property (nonatomic) FoldersTree *foldersTree;
-@property (readonly, copy, nonatomic) NSMenu *searchFieldMenu;
+@property (readonly, nonatomic) NSMenu *searchFieldMenu;
 
 // Menu action items
 -(IBAction)reindexDatabase:(id)sender;
@@ -119,7 +119,7 @@
 -(IBAction)showMainWindow:(id)sender;
 -(IBAction)previousTab:(id)sender;
 -(IBAction)nextTab:(id)sender;
--(IBAction)closeTab:(id)sender;
+-(IBAction)closeActiveTab:(id)sender;
 -(IBAction)closeAllTabs:(id)sender;
 -(IBAction)reloadPage:(id)sender;
 -(IBAction)stopReloadingPage:(id)sender;
@@ -137,8 +137,6 @@
 -(IBAction)unifiedLayout:(id)sender;
 -(IBAction)reportLayout:(id)sender;
 -(IBAction)condensedLayout:(id)sender;
--(IBAction)makeTextLarger:(id)sender;
--(IBAction)makeTextSmaller:(id)sender;
 -(IBAction)downloadEnclosure:(id)sender;
 -(IBAction)showHideFilterBar:(id)sender;
 -(IBAction)hideFilterBar:(id)sender;
@@ -158,20 +156,21 @@
 -(void)openURLInDefaultBrowser:(NSURL *)url;
 -(void)handleRSSLink:(NSString *)linkPath;
 -(void)selectFolder:(NSInteger)folderId;
+-(void)createSubscriptionInCurrentLocationForUrl:(NSURL *)url;
 -(void)createNewSubscription:(NSString *)urlString underFolder:(NSInteger)parentId afterChild:(NSInteger)predecessorId;
 -(void)markSelectedFoldersRead:(NSArray *)arrayOfFolders;
 -(void)doSafeInitialisation;
 -(void)clearUndoStack;
 @property (nonatomic, copy) NSString *filterString;
 @property (nonatomic, copy) NSString *searchString;
-@property (nonatomic, readonly, strong) Article *selectedArticle;
+@property (nonatomic, readonly) Article *selectedArticle;
 @property (nonatomic, readonly) NSInteger currentFolderId;
 @property (nonatomic, getter=isConnecting, readonly) BOOL connecting;
 -(void)runAppleScript:(NSString *)scriptName;
-@property (nonatomic, readonly, copy) NSArray *folders;
+@property (readonly, nonatomic) NSArray *folders;
 -(void)blogWithExternalEditor:(NSString *)externalEditorBundleIdentifier;
 -(void)updateStatusBarFilterButtonVisibility;
-@property (nonatomic, readonly, strong) NSLayoutManager *layoutManager;
+@property (nonatomic, readonly) NSLayoutManager *layoutManager;
 -(void)performWebSearch:(SearchMethod *)searchMethod;
 -(void)performAllArticlesSearch;
 -(void)performWebPageSearch;

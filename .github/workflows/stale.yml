@@ -1,0 +1,19 @@
+name: Mark stale issues and close
+on:
+  schedule:
+    - cron: '30 1 * * *'
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v5
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          stale-issue-message: 'This issue hasn''t been updated in a while so we''re going to mark it as `stale`. `stale` issues will automatically be closed after 60 days of inactivity. If this issue is still affecting you, please update us on how it affects you, and we''ll keep it open. We are sorry that we haven''t been able to prioritize it yet. Thank you for your contributions.'
+          days-before-stale: 366
+          days-before-close: 60
+          stale-issue-label: 'stale :hourglass_flowing_sand:'
+          exempt-issue-labels: 'critical :warning:,security :rotating_light:,in progress :building_construction:,help wanted :sos:'
+          exempt-all-issue-assignees: true
+          exempt-all-pr-milestones: true

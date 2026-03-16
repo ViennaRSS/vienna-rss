@@ -7,6 +7,9 @@
 /* Class = "NSMenuItem"; title = "Bring All to Front"; ObjectID = "5"; */
 "5.title" = "Alles op voorgrond";
 
+/* Class = "NSMenuItem"; title = "Show Enclosure Bar"; ObjectID = "5V8-N1-SQd"; */
+"5V8-N1-SQd.title" = "Toon bijlagebalk";
+
 /* Class = "NSMenuItem"; title = "Refresh All Subscriptions"; ObjectID = "6yn-y8-lF1"; */
 "6yn-y8-lF1.title" = "Werk alle abonnementen bij";
 
@@ -49,7 +52,7 @@
 /* Class = "NSMenuItem"; title = "Vienna Help"; ObjectID = "111"; */
 "111.title" = "Vienna Help";
 
-/* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129"; */
+/* Class = "NSMenuItem"; title = "Preferences…"; ObjectID = "129"; Note = "Apple renamed \"Preferences\" to \"Settings\" in macOS 13. The menu item is renamed automatically at runtime. Please use the default term for the preferences window that was used until macOS 12."; */
 "129.title" = "Voorkeuren…";
 
 /* Class = "NSMenu"; title = "Services"; ObjectID = "130"; */
@@ -236,13 +239,13 @@
 "1067.title" = "Open artikelpagina in externe browser";
 
 /* Class = "NSMenuItem"; title = "Send Link by Email"; ObjectID = "1073"; */
-"1073.title" = "Link per e-mail verzenden";
+"1073.title" = "Verstuur link via e-mail";
 
 /* Class = "NSMenuItem"; title = "Bigger Text"; ObjectID = "1084"; */
-"1084.title" = "Grotere tekst";
+"1084.title" = "Maak tekst groter";
 
 /* Class = "NSMenuItem"; title = "Smaller Text"; ObjectID = "1085"; */
-"1085.title" = "Kleinere tekst";
+"1085.title" = "Maak tekst kleiner";
 
 /* Class = "NSMenuItem"; title = "Open Web Location…"; ObjectID = "1101"; */
 "1101.title" = "Open weblocatie…";
@@ -362,7 +365,7 @@
 "1428.title" = "Bijwerken abonnementen van Open Reader";
 
 /* Class = "NSMenuItem"; title = "Reindex Database"; ObjectID = "1458"; */
-"1458.title" = "Herindexeer databank";
+"1458.title" = "Indexeer databank opnieuw";
 
 /* Class = "NSMenuItem"; title = "Text Replacement"; ObjectID = "bd7-qY-ofB"; */
 "bd7-qY-ofB.title" = "Tekstvervanging";
@@ -409,11 +412,17 @@
 /* Class = "NSMenuItem"; title = "Smart Quotes"; ObjectID = "kCi-pf-mkc"; */
 "kCi-pf-mkc.title" = "Slimme aanhalingstekens";
 
+/* Class = "NSMenuItem"; title = "Hide Enclosure Bar"; ObjectID = "Ke1-zq-KLc"; */
+"Ke1-zq-KLc.title" = "Verberg bijlagebalk";
+
 /* Class = "NSMenuItem"; title = "Spelling and Grammar"; ObjectID = "l8F-tb-7E0"; */
 "l8F-tb-7E0.title" = "Spelling en grammatica";
 
 /* Class = "NSMenuItem"; title = "Make Upper Case"; ObjectID = "MHF-D4-pRN"; */
 "MHF-D4-pRN.title" = "Zet om in hoofdletters";
+
+/* Class = "NSMenuItem"; title = "Actual Size"; ObjectID = "OiG-oc-aVj"; Note = "This string is also used in Safari"; */
+"OiG-oc-aVj.title" = "Werkelijke grootte";
 
 /* Class = "NSMenuItem"; title = "Mark Read"; ObjectID = "pKl-6f-Hlc"; */
 "pKl-6f-Hlc.title" = "Markeer als gelezen";
@@ -449,7 +458,7 @@
 "v3R-CV-0b9.title" = "Zet om in beginhoofdletters";
 
 /* Class = "NSMenuItem"; title = "Smart Links"; ObjectID = "w4Q-ne-FPI"; */
-"w4Q-ne-FPI.title" = "Slimme koppelingen";
+"w4Q-ne-FPI.title" = "Slimme links";
 
 /* Class = "NSMenuItem"; title = "Show Substitutions"; ObjectID = "wnc-vZ-fO4"; */
 "wnc-vZ-fO4.title" = "Toon vervangingen";

@@ -21,14 +21,9 @@
 #import "MessageListView.h"
 #import "AppController.h"
 
-@interface NSObject(MessageListViewDelegate)
-	-(BOOL)handleKeyDown:(unichar)keyChar withFlags:(NSUInteger)flags;
-	-(BOOL)copyTableSelection:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard;
-	-(BOOL)canDeleteMessageAtRow:(NSInteger)row;
-	-(IBAction)deleteMessage:(id)sender;
-@end
-
 @implementation MessageListView
+
+@dynamic delegate;
 
 /* keyDown
  * Here is where we handle special keys when the article list view
@@ -53,7 +48,7 @@
 	if (self.selectedRow >= 0)
 	{
 		NSIndexSet * selectedRowIndexes = self.selectedRowIndexes;
-        [(id)self.delegate copyTableSelection:selectedRowIndexes toPasteboard:NSPasteboard.generalPasteboard];
+		[self.delegate copyTableSelection:selectedRowIndexes toPasteboard:NSPasteboard.generalPasteboard];
 	}
 }
 
@@ -77,7 +72,7 @@
 	}
 	if (menuItem.action == @selector(delete:))
 	{
-        return [(id)self.delegate canDeleteMessageAtRow:self.selectedRow];
+        return [self.delegate canDeleteMessageAtRow:self.selectedRow];
 	}
 	if (menuItem.action == @selector(selectAll:))
 	{
@@ -92,7 +87,6 @@
     switch(context) {
         case NSDraggingContextWithinApplication:
             return NSDragOperationCopy|NSDragOperationGeneric;
-            break;
         default:
             return NSDragOperationCopy;
     }
