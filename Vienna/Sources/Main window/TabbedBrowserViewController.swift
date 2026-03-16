@@ -63,23 +63,29 @@ class TabbedBrowserViewController: NSViewController, RSSSource {
 
     var restoredTabs = false
 
-    var activeTab: Tab? {
-        tabView?.selectedTabViewItem?.viewController as? Tab
+    /// Stack to track recently closed tabs for cmd+shift+t functionality
+    private var recentlyClosedTabs: [(url: URL, title: String?)] = []
+
+    /// Check if there are any closed tabs available for reopening
+    var hasClosedTabs: Bool {
+        return !recentlyClosedTabs.isEmpty
+    }
+
+    var activeTab: (any Tab)? {
+        tabView?.selectedTabViewItem?.viewController as? any Tab
     }
 
     var browserTabCount: Int {
         tabView?.numberOfTabViewItems ?? 0
     }
 
-    weak var rssSubscriber: RSSSubscriber? {
+    weak var rssSubscriber: (any RSSSubscriber)? {
         didSet {
             for source in tabView?.tabViewItems ?? [] {
-                (source as? RSSSource)?.rssSubscriber = self.rssSubscriber
+                (source as? any RSSSource)?.rssSubscriber = self.rssSubscriber
             }
         }
     }
-
-    weak var contextMenuDelegate: BrowserContextMenuDelegate?
 
     override init(nibName nibNameOrNil: NSNib.Name?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -154,21 +160,23 @@ class TabbedBrowserViewController: NSViewController, RSSSource {
 }
 
 extension TabbedBrowserViewController: Browser {
-    func createNewTab(_ url: URL?, inBackground: Bool, load: Bool) -> Tab {
+    @discardableResult
+    func createNewTab(_ url: URL?, inBackground: Bool, load: Bool) -> any Tab {
         createNewTab(url, inBackground: inBackground, load: load, insertAt: nil)
     }
 
-    func createNewTab(_ request: URLRequest, config: WKWebViewConfiguration, inBackground: Bool, insertAt index: Int? = nil) -> Tab {
-        let newTab = BrowserTab(request, config: config)
-        return initNewTab(newTab, request.url, false, inBackground, insertAt: index)
+    @discardableResult
+    func createNewTabAfterSelected(_ url: URL?, inBackground: Bool, load: Bool) -> any Tab {
+        createNewTab(url, inBackground: inBackground, load: load, insertAt: getIndexAfterSelected())
     }
 
-    func createNewTab(_ url: URL? = nil, inBackground: Bool = false, load: Bool = false, insertAt index: Int? = nil) -> Tab {
+    @discardableResult
+    func createNewTab(_ url: URL? = nil, inBackground: Bool = false, load: Bool = false, insertAt index: Int? = nil) -> any Tab {
         let newTab = BrowserTab()
         return initNewTab(newTab, url, load, inBackground, insertAt: index)
     }
 
-    private func initNewTab(_ newTab: BrowserTab, _ url: URL?, _ load: Bool, _ inBackground: Bool, insertAt index: Int? = nil) -> Tab {
+    private func initNewTab(_ newTab: BrowserTab, _ url: URL?, _ load: Bool, _ inBackground: Bool, insertAt index: Int? = nil) -> any Tab {
         newTab.rssSubscriber = self.rssSubscriber
 
         let newTabViewItem = TitleChangingTabViewItem(viewController: newTab)
@@ -238,6 +246,18 @@ extension TabbedBrowserViewController: Browser {
             .forEach(closeTab)
     }
 
+    /// Reopens the most recently closed tab (cmd+shift+t functionality)
+    @discardableResult
+    func reopenLastClosedTab() -> Bool {
+        guard !recentlyClosedTabs.isEmpty else {
+            return false
+        }
+
+        let lastClosed = recentlyClosedTabs.removeLast()
+        createNewTab(lastClosed.url, inBackground: false, load: true)
+        return true
+    }
+
     func getTextSelection() -> String {
         // TODO: implement
         return ""
@@ -260,9 +280,21 @@ extension TabbedBrowserViewController: MMTabBarViewDelegate {
     }
 
     func tabView(_ aTabView: NSTabView, willClose tabViewItem: NSTabViewItem) {
-        guard let tab = tabViewItem.viewController as? Tab else {
+        guard let tab = tabViewItem.viewController as? any Tab else {
             return
         }
+
+        // Track closed tab for potential reopening (cmd+shift+t)
+        if let browserTab = tab as? BrowserTab,
+           let url = browserTab.tabUrl,
+           tabViewItem != primaryTab {
+            recentlyClosedTabs.append((url: url, title: browserTab.title))
+            // Limit the history to reasonable number (e.g., 20)
+            if recentlyClosedTabs.count > 20 {
+                recentlyClosedTabs.removeFirst()
+            }
+        }
+
         tab.closeTab()
     }
 
@@ -290,7 +322,7 @@ extension TabbedBrowserViewController: MMTabBarViewDelegate {
         tabViewItem != primaryTab
     }
 
-    func tabView(_ aTabView: NSTabView, validateDrop sender: NSDraggingInfo, proposedItem tabViewItem: NSTabViewItem, proposedIndex: UInt, in tabBarView: MMTabBarView) -> NSDragOperation {
+    func tabView(_ aTabView: NSTabView, validateDrop sender: any NSDraggingInfo, proposedItem tabViewItem: NSTabViewItem, proposedIndex: UInt, in tabBarView: MMTabBarView) -> NSDragOperation {
         proposedIndex != 0 ? [.every] : []
     }
 
@@ -299,7 +331,7 @@ extension TabbedBrowserViewController: MMTabBarViewDelegate {
     }
 
     func addNewTab(to aTabView: NSTabView) {
-        _ = self.createNewTab()
+        self.createNewTab()
     }
 
     func tabView(_ tabView: NSTabView, willSelect tabViewItem: NSTabViewItem?) {
@@ -310,11 +342,11 @@ extension TabbedBrowserViewController: MMTabBarViewDelegate {
     }
 
     func tabView(_ tabView: NSTabView, didSelect tabViewItem: NSTabViewItem?) {
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "MA_Notify_TabChanged"), object: tabViewItem?.view)
+        NotificationCenter.default.post(name: .tabChanged, object: tabViewItem?.view)
     }
 
     func tabViewDidChangeNumberOfTabViewItems(_ tabView: NSTabView) {
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "MA_Notify_TabCountChanged"), object: tabView)
+        NotificationCenter.default.post(name: .tabCountChanged, object: tabView)
     }
 }
 
@@ -323,57 +355,34 @@ extension TabbedBrowserViewController: MMTabBarViewDelegate {
 extension TabbedBrowserViewController: CustomWKUIDelegate {
     // TODO: implement functionality for alerts and maybe peek actions
 
-    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
-        let newTab = self.createNewTab(navigationAction.request, config: configuration, inBackground: false, insertAt: getIndexAfterSelected())
-        if let webView = webView as? CustomWKWebView {
-            // The listeners are removed from the old webview userContentController on creating the new one, restore them
-            webView.resetScriptListeners()
-        }
-        return (newTab as? BrowserTab)?.webView
-    }
+    private static var contextMenuCustomizer: any BrowserContextMenuDelegate = WebKitContextMenuCustomizer()
 
     func contextMenuItemsFor(purpose: WKWebViewContextMenuContext, existingMenuItems: [NSMenuItem]) -> [NSMenuItem] {
-        var menuItems = existingMenuItems
-        switch purpose {
-        case .page(url: _):
-            break
-        case .link(let url):
-            addLinkMenuCustomizations(&menuItems, url)
-        case .picture:
-            break
-        case .pictureLink(image: _, link: let link):
-            addLinkMenuCustomizations(&menuItems, link)
-        case .text:
-            break
-        }
-        return self.contextMenuDelegate?
-            .contextMenuItemsFor(purpose: purpose, existingMenuItems: menuItems) ?? menuItems
+        // specific customization of menuItems may be added here
+        // using the following commented out construct
+        //     var menuItems = existingMenuItems
+        //        ...
+        //     return TabbedBrowserViewController.contextMenuCustomizer.contextMenuItemsFor(purpose: purpose, existingMenuItems: menuItems)
+        return TabbedBrowserViewController.contextMenuCustomizer.contextMenuItemsFor(purpose: purpose, existingMenuItems: existingMenuItems)
     }
 
-    private func addLinkMenuCustomizations(_ menuItems: inout [NSMenuItem], _ url: (URL)) {
-        guard let index = menuItems.firstIndex(where: { $0.identifier == .WKMenuItemOpenLinkInNewWindow }) else {
+    @objc
+    func processMenuItem(_ menuItem: NSMenuItem) {
+        guard let url = menuItem.representedObject as? URL else {
             return
         }
-
-        menuItems[index].title = NSLocalizedString("Open Link in New Tab", comment: "")
-
-        let openInBackgroundTitle = NSLocalizedString("Open Link in Background", comment: "")
-        let openInBackgroundItem = NSMenuItem(title: openInBackgroundTitle, action: #selector(openLinkInBackground(menuItem:)), keyEquivalent: "")
-        openInBackgroundItem.identifier = .WKMenuItemOpenLinkInBackground
-        openInBackgroundItem.representedObject = url
-        menuItems.insert(openInBackgroundItem, at: menuItems.index(after: index))
-    }
-
-    @objc
-    func openLinkInBackground(menuItem: NSMenuItem) {
-        if let url = menuItem.representedObject as? URL {
-            _ = self.createNewTab(url, inBackground: true, load: true, insertAt: getIndexAfterSelected())
+        switch menuItem.identifier {
+        case NSUserInterfaceItemIdentifier.WKMenuItemOpenLinkInBackground:
+            self.createNewTabAfterSelected(url, inBackground: true, load: true)
+        case NSUserInterfaceItemIdentifier.WKMenuItemOpenLinkInNewWindow, NSUserInterfaceItemIdentifier.WKMenuItemOpenImageInNewWindow, NSUserInterfaceItemIdentifier.WKMenuItemOpenMediaInNewWindow:
+            self.createNewTabAfterSelected(url, inBackground: false, load: true)
+        case NSUserInterfaceItemIdentifier.WKMenuItemOpenLinkInSystemBrowser:
+            NSApp.appController.openURL(inDefaultBrowser: url)
+        case NSUserInterfaceItemIdentifier.WKMenuItemDownloadImage, NSUserInterfaceItemIdentifier.WKMenuItemDownloadMedia, NSUserInterfaceItemIdentifier.WKMenuItemDownloadLinkedFile:
+            DownloadManager.shared.downloadFile(fromURL: url.absoluteString)
+        default:
+            break
         }
-    }
-
-    @objc
-    func contextMenuItemAction(menuItem: NSMenuItem) {
-        self.contextMenuDelegate?.contextMenuItemAction(menuItem: menuItem)
     }
 
     private func getIndexAfterSelected() -> Int {

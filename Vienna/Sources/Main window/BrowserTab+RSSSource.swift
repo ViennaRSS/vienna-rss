@@ -21,10 +21,7 @@ import Foundation
 
 extension BrowserTab: RSSSource {
 
-    static let extractRssLinkScript = """
-        Array.from( document.querySelectorAll("link[type*='rss'], link[type*='atom']"),
-            function(link) {return new URL(link.getAttribute('href'), document.baseURI).href;} );
-    """
+    static let extractHTMLSource = "document.documentElement.outerHTML"
 
     var rssUrls: [URL] {
         get {
@@ -36,7 +33,7 @@ extension BrowserTab: RSSSource {
         }
     }
 
-    var rssSubscriber: RSSSubscriber? {
+    var rssSubscriber: (any RSSSubscriber)? {
         get {
             self.rssDelegate
         }
@@ -46,9 +43,9 @@ extension BrowserTab: RSSSource {
         }
     }
 
-    @IBAction private func subscribe(_ sender: NSObject? = nil) {
+    @IBAction private func subscribe(_ sender: Any) {
         if let rssSubscriber = self.rssSubscriber, !self.rssUrls.isEmpty {
-            if let sender = sender, sender as? NSView != nil || sender as? NSCell != nil {
+            if let sender = sender as? NSObject {
                 rssSubscriber.subscribeToRSS(self.rssUrls, uiElement: sender)
             } else {
                 rssSubscriber.subscribeToRSS(self.rssUrls)
@@ -56,9 +53,10 @@ extension BrowserTab: RSSSource {
         }
     }
 
+    @objc
     func viewDidLoadRss() {
-        refreshRSSState()
         registerNavigationEndHandler { [weak self] success in self?.handleNavigationEndRss(success: success) }
+        refreshRSSState()
     }
 
     func refreshRSSState() {
@@ -79,15 +77,15 @@ extension BrowserTab: RSSSource {
         // use javascript to detect RSS feed link
         // TODO: deal with multiple links
         waitForAsyncExecution(until: DispatchTime.now() + DispatchTimeInterval.milliseconds(200)) { [weak self] finishHandler in
-            self?.webView.evaluateJavaScript(BrowserTab.extractRssLinkScript) { result, error in
-                if error == nil, let result = result as? [String] {
-                    // RSS feed link(s) detected
-                    self?.rssUrls = result.compactMap { URL(string: $0 as String) }
+            self?.webView.evaluateJavaScript(BrowserTab.extractHTMLSource) { result, error in
+                defer { finishHandler() }
+                if let html = result as? String, let data = html.data(using: .utf8), let baseUrl = self?.url, error == nil {
+                    let discoverer = FeedDiscoverer(data: data, baseURL: baseUrl)
+                    self?.rssUrls = discoverer.feedURLs().map(\.absoluteURL)
                 } else {
-                    // error or no rss url available
+                    // error or conversion problem
                     self?.rssUrls = []
                 }
-                finishHandler()
             }
         }
     }

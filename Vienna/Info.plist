@@ -3,14 +3,10 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
+	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>viennaplugin</string>
-			</array>
 			<key>CFBundleTypeIconFile</key>
 			<string>PluginIcon</string>
 			<key>CFBundleTypeIconSystemGenerated</key>
@@ -25,14 +21,8 @@
 			<array>
 				<string>com.vienna-rss.plugin</string>
 			</array>
-			<key>LSTypeIsPackage</key>
-			<string>YES</string>
 		</dict>
 		<dict>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>viennastyle</string>
-			</array>
 			<key>CFBundleTypeIconFile</key>
 			<string>StyleIcon</string>
 			<key>CFBundleTypeIconSystemGenerated</key>
@@ -47,28 +37,34 @@
 			<array>
 				<string>com.vienna-rss.style</string>
 			</array>
-			<key>LSTypeIsPackage</key>
-			<string>YES</string>
 		</dict>
 		<dict>
-			<key>CFBundleTypeExtension</key>
-			<array>
-				<string>scpt</string>
-			</array>
 			<key>CFBundleTypeName</key>
-			<string>Script File</string>
-			<key>CFBundleTypeOSTypes</key>
-			<array>
-				<string>****</string>
-			</array>
+			<string>Open Scripting Architecture script</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
 			<key>LSHandlerRank</key>
 			<string>Default</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.apple.applescript.script</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>OPML document</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>org.opml.opml</string>
+			</array>
 		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
-	<string>Vienna</string>
+	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleHelpBookFolder</key>
 	<string>Vienna.help</string>
 	<key>CFBundleHelpBookName</key>
@@ -78,9 +74,9 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Vienna</string>
+	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundlePackageType</key>
-	<string>APPL</string>
+	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
 	<string>VCS_TAG :VCS_SHORT_HASH:</string>
 	<key>CFBundleSignature</key>
@@ -114,24 +110,26 @@
 	<key>CFBundleVersion</key>
 	<string>VCS_NUM</string>
 	<key>LSApplicationCategoryType</key>
-	<string>public.app-category.utilities</string>
+	<string>public.app-category.news</string>
 	<key>LSFileQuarantineEnabled</key>
 	<true/>
 	<key>LSMinimumSystemVersion</key>
 	<string>$(MACOSX_DEPLOYMENT_TARGET).0</string>
+	<key>MDItemKeywords</key>
+	<string>RSS, Atom, JSON Feed, Feed, News, Reader, OPML, OPDS, Podcasts</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
 	<key>NSAppleEventsUsageDescription</key>
-	<string></string>
+	<string>Vienna&apos;s blog editor plug-ins use Apple events to share article data. Script plug-ins and AppleScript files may use Apple events as well.</string>
 	<key>NSAppleScriptEnabled</key>
 	<string>YES</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>© 2004–2021 The Vienna RSS Project</string>
-	<key>NSMainNibFile</key>
-	<string>MainMenu</string>
+	<string>© 2004–2026 The Vienna RSS Project</string>
+	<key>NSMainStoryboardFile</key>
+	<string>Application</string>
 	<key>NSPrincipalClass</key>
 	<string>ViennaApp</string>
 	<key>NSSupportsAutomaticGraphicsSwitching</key>
@@ -142,8 +140,6 @@
 	<true/>
 	<key>SUEnableInstallerLauncherService</key>
 	<false/>
-	<key>SUPublicDSAKeyFile</key>
-	<string>SparkleDSAPublicKey.pem</string>
 	<key>SUPublicEDKey</key>
 	<string>nPwwT+poO5Kmi1NZkE5OveKB8lvQVY20N22E8jgxLCg=</string>
 	<key>UTExportedTypeDeclarations</key>
@@ -213,6 +209,11 @@
 				<key>public.filename-extension</key>
 				<array>
 					<string>opml</string>
+				</array>
+				<key>public.mime-type</key>
+				<array>
+					<string>application/xml</string>
+					<string>text/xml</string>
 				</array>
 			</dict>
 		</dict>

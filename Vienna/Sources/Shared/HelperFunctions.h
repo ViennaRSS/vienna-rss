@@ -18,8 +18,6 @@
 //
 
 @import Cocoa;
-@import SystemConfiguration;
-@import WebKit;
 
 #define kLeftArrow  0x7B
 #define kRightArrow 0x7C
@@ -43,14 +41,14 @@ void loadMapFromPath(NSString *path,
                      NSMutableDictionary *pathMappings,
                      BOOL foldersOnly,
                      NSArray * _Nullable validExtensions);
-BOOL isAccessible(NSString *urlString);
 void runOKAlertPanelPlain(NSString *titleString, NSString *bodyText);
 void runOKAlertPanel(NSString *titleString, NSString *bodyText, ...);
 void runOKAlertSheet(NSString *titleString, NSString *bodyText, ...);
-NSMenuItem * _Nullable menuItemWithAction(SEL theSelector);
 NSString * _Nullable getDefaultBrowser(void);
 NSURL * _Nullable cleanedUpUrlFromString(NSString * _Nullable urlString);
 NSURL * _Nullable urlFromUserString(NSString *urlString);
 BOOL hasOSScriptsMenu(void);
+NSString * userAgent(void);
+BOOL VNANetworkIsReachable(void);
 
 NS_ASSUME_NONNULL_END

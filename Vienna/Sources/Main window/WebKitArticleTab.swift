@@ -35,7 +35,7 @@ class WebKitArticleTab: BrowserTab, ArticleContentView {
         }
     }
 
-    var listView: ArticleViewDelegate?
+    var listView: (any ArticleViewDelegate)?
 
     var articles: [Article] {
         get {
@@ -60,7 +60,7 @@ class WebKitArticleTab: BrowserTab, ArticleContentView {
     @objc
     init() {
         self.articleWebView = WebKitArticleView(frame: CGRect.zero)
-        super.init()
+        super.init(articleWebView)
     }
 
     override func viewDidLoad() {
@@ -69,8 +69,8 @@ class WebKitArticleTab: BrowserTab, ArticleContentView {
         hideAddressBar(true)
     }
 
-    func printDocument(_ sender: Any) {
-        // TODO
+    override func viewDidLoadRss() {
+        // No need to search RSS feed in article tab
     }
 
     // MARK: gui
@@ -102,29 +102,36 @@ class WebKitArticleTab: BrowserTab, ArticleContentView {
 
     // MARK: Navigation delegate
 
-    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+    override func webView(
+        _ webView: WKWebView,
+        decidePolicyFor navigationAction: WKNavigationAction,
+        decisionHandler: @escaping (WKNavigationActionPolicy) -> Void
+    ) {
         // TODO: how do forms work in the article view?
         // i.e. navigationAction.navigationType == .formSubmitted or .formResubmitted
         // TODO: in the future, we might want to allow limited browsing in the primary tab
-        if navigationAction.navigationType == .linkActivated {
+        switch navigationAction.navigationType {
+        case .linkActivated:
             // prevent navigation to links opened through klick
             decisionHandler(.cancel)
             // open in new preferred browser instead, or the alternate one if the option key is pressed
             let openInPreferredBrower = !navigationAction.modifierFlags.contains(.option)
             // TODO: maybe we need to add an api that opens a clicked link in foreground to the AppController
             NSApp.appController.open(navigationAction.request.url, inPreferredBrowser: openInPreferredBrower)
-        } else {
+        case .backForward:
+            decisionHandler(.cancel)
+        default:
             decisionHandler(.allow)
         }
     }
 
     override func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         super.webView(webView, didFinish: navigation)
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "MA_Notify_ArticleViewEnded"), object: self)
+        NotificationCenter.default.post(name: .articleViewEnded, object: self)
     }
 
-    override func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+    override func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: any Error) {
         super.webView(webView, didFailProvisionalNavigation: navigation, withError: error)
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "MA_Notify_ArticleViewEnded"), object: self)
+        NotificationCenter.default.post(name: .articleViewEnded, object: self)
     }
 }

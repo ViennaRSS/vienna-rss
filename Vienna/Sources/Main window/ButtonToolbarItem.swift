@@ -79,7 +79,7 @@ class ButtonToolbarItem: NSToolbarItem {
         }
 
         switch NSApp.target(forAction: action, to: target, from: self) {
-        case let validator as NSToolbarItemValidation:
+        case let validator as any NSToolbarItemValidation:
             isEnabled = validator.validateToolbarItem(self)
         default:
             isEnabled = false

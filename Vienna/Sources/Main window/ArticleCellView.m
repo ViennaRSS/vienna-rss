@@ -9,16 +9,18 @@
 
 #import "AppController.h"
 #import "ArticleController.h"
-#import "ArticleView.h"
-#import "Preferences.h"
+#import "Constants.h"
 #import "Vienna-Swift.h"
 
 #define PROGRESS_INDICATOR_LEFT_MARGIN	8
 #define PROGRESS_INDICATOR_DIMENSION_REGULAR 24
 
-#define WebKitErrorPlugInWillHandleLoad    204
-
-@implementation ArticleCellView
+@implementation ArticleCellView {
+    BOOL inProgress;
+    NSInteger folderId;
+    NSUInteger articleRow;
+    NSTableView *__weak _listView;
+}
 
 @synthesize listView = _listView;
 @synthesize articleView;
@@ -30,18 +32,8 @@
 
 -(instancetype)initWithFrame:(NSRect)frameRect
 {
-	if((self = [super initWithFrame:frameRect]))
-	{
-		controller = APPCONTROLLER;
-        if (Preferences.standardPreferences.useNewBrowser) {
-            [self initializeWebKitArticleView:frameRect];
-        } else {
-            [self initializeWebViewArticleView:frameRect];
-        }
-
-        if ([(NSObject *)articleView isKindOfClass:ArticleView.class]) {
-            [(ArticleView *)articleView setOpenLinksInNewBrowser:YES];
-        }
+	if ((self = [super initWithFrame:frameRect])) {
+        [self initializeWebKitArticleView:frameRect];
 
 		[self setInProgress:NO];
 		progressIndicator = nil;
@@ -55,27 +47,6 @@
     articleView = myArticleView;
 }
 
--(void)initializeWebViewArticleView:(NSRect)frameRect {
-	ArticleView *webViewArticleView = [[ArticleView alloc] initWithFrame:frameRect];
-	articleView = webViewArticleView;
-	//TODO: do not get the primary tab from browser, but retrieve the articles tab directly
-	// Make the list view the frame load and UI delegate for the web view
-	webViewArticleView.UIDelegate = (NSView<WebUIDelegate> *)controller.browser.primaryTab.view;
-	webViewArticleView.frameLoadDelegate = (NSView<WebFrameLoadDelegate> *) controller.browser.primaryTab.view;
-	// Notify the list view when the article view has finished loading
-	SEL loadFinishedSelector = NSSelectorFromString(@"webViewLoadFinished:");
-	[[NSNotificationCenter defaultCenter] addObserver:controller.browser.primaryTab.view selector:loadFinishedSelector name:WebViewProgressFinishedNotification object:articleView];
-	[webViewArticleView.mainFrame.frameView setAllowsScrolling:NO];
-
-	[webViewArticleView setMaintainsBackForwardList:NO];
-}
-
--(void)dealloc
-{
-    //TODO: do not get the primary tab from browser, but retrieve the articles tab directly
-	[[NSNotificationCenter defaultCenter] removeObserver:controller.browser.primaryTab.view name:WebViewProgressFinishedNotification object:articleView];
-}
-
 #pragma mark -
 #pragma mark Drawing
 
@@ -84,8 +55,7 @@
 	[super drawRect:dirtyRect];
 	if([self.listView.selectedRowIndexes containsIndex:articleRow]) {
 		[[NSColor selectedControlColor] set];
-	}
-	else {
+	} else {
 		[[NSColor controlColor] set];
     }
 
@@ -94,10 +64,8 @@
 	[roundedRect fill];
 
 	//Progress indicator
-	if (self.inProgress)
-	{
-		if (!progressIndicator)
-		{
+	if (self.inProgress) {
+		if (!progressIndicator) {
 			// Allocate and initialize the spinning progress indicator.
 			NSRect progressRect = NSMakeRect(PROGRESS_INDICATOR_LEFT_MARGIN, NSHeight(self.bounds) - PROGRESS_INDICATOR_DIMENSION_REGULAR,
 												PROGRESS_INDICATOR_DIMENSION_REGULAR, PROGRESS_INDICATOR_DIMENSION_REGULAR);
@@ -109,14 +77,13 @@
 
 		// Add the progress indicator as a subview of the cell if
 		// it is not already one.
-		if (progressIndicator.superview != self)
+		if (progressIndicator.superview != self) {
 			[self addSubview:progressIndicator];
+		}
 
 		// Start the animation.
 		[progressIndicator startAnimation:self];
-	}
-	else
-	{
+	} else {
 		// Stop the animation and remove from the superview.
 		[progressIndicator stopAnimation:self];
 		[progressIndicator.superview setNeedsDisplayInRect:progressIndicator.frame];
@@ -167,7 +134,7 @@
     if ([webView isEqualTo:((WebKitArticleView *)self.articleView)]) {
         [self setInProgress:NO];
         NSUInteger row = self.articleRow;
-        NSArray *allArticles = self->controller.articleController.allArticles;
+        NSArray *allArticles = self.articleController.allArticles;
         if (row < (NSInteger)allArticles.count) {
             [self.listView reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:row] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
         }
@@ -179,25 +146,27 @@
     }
 }
 
+// TODO: Not sure this currently gets triggered.
+//       Kept as a precautionary measure.
 - (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error
 {
-    // Not really errors. Load is cancelled or a plugin is grabbing the URL and will handle it by itself.
-    if (!([error.domain isEqualToString:WebKitErrorDomain] &&
-          (error.code == NSURLErrorCancelled || error.code == WebKitErrorPlugInWillHandleLoad)))
-    {
-        if ([webView isEqualTo:((WebKitArticleView *)self.articleView)]) {
-            [self setInProgress:NO];
-            NSUInteger row = self.articleRow;
-            NSArray *allArticles = self->controller.articleController.allArticles;
-            if (row < (NSInteger)allArticles.count) {
-                [self.listView reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:row] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
-            }
-            WebKitArticleView *articleView = (WebKitArticleView *)(self.articleView);
-            [articleView deleteHtmlFile];
-        } else {
-            // TODO : what should we do ?
-            NSLog(@"Webview error %@ associated to webViews %@ and %@", error, ((WebKitArticleView *)self.articleView), webView);
+    // Cancellation is not really an error.
+    if (error.code == NSURLErrorCancelled) {
+        return;
+    }
+
+    if ([webView isEqualTo:((WebKitArticleView *)self.articleView)]) {
+        [self setInProgress:NO];
+        NSUInteger row = self.articleRow;
+        NSArray *allArticles = self.articleController.allArticles;
+        if (row < (NSInteger)allArticles.count) {
+            [self.listView reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:row] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
         }
+        WebKitArticleView *articleView = (WebKitArticleView *)(self.articleView);
+        [articleView deleteHtmlFile];
+    } else {
+        // TODO : what should we do ?
+        NSLog(@"Webview error %@ associated to webViews %@ and %@", error, ((WebKitArticleView *)self.articleView), webView);
     }
 }
 
@@ -205,8 +174,8 @@
 {
     if ([webView isEqualTo:((WebKitArticleView *)self.articleView)]) {
         NSUInteger row = [self.listView rowForView:self];
-        if (row == self.articleRow && row < self->controller.articleController.allArticles.count
-            && self.folderId == [self->controller.articleController.allArticles[row] folderId])
+        if (row == self.articleRow && row < self.articleController.allArticles.count
+            && self.folderId == [self.articleController.allArticles[row] folderId])
         {    //relevant cell
             [webView evaluateJavaScript:@"document.documentElement.offsetHeight"
                       completionHandler:^(id _Nullable result, NSError *_Nullable error) {
@@ -219,13 +188,13 @@
                           //set the new frame to the webview
                           webView.frame = newWebViewRect;
                           self.fittingHeight = fittingHeight;
-                          [[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_CellResize" object:self];
+                          [[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_CellResize object:self];
                           WebKitArticleView *articleView = (WebKitArticleView *)(self.articleView);
                           [articleView deleteHtmlFile];
                       }];
         } else { //non relevant cell
             [self setInProgress:NO];
-            if (row < self->controller.articleController.allArticles.count) {
+            if (row < self.articleController.allArticles.count) {
                 [self.listView reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:row] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
             }
             WebKitArticleView *articleView = (WebKitArticleView *)(self.articleView);

@@ -19,53 +19,27 @@
 //
 
 @import Cocoa;
-@import WebKit;
 
-#import "BaseView.h"
 #import "ArticleBaseView.h"
 #import "ArticleViewDelegate.h"
 #import "MessageListView.h"
 
 @class AppController;
-@class ArticleView;
-@protocol ArticleContentView;
-@protocol Tab;
+@class ArticleController;
 
-@interface ArticleListView : NSView<BaseView, ArticleBaseView, ArticleViewDelegate, MessageListViewDelegate, NSTableViewDataSource, NSSplitViewDelegate>
-{
-	IBOutlet MessageListView * articleList;
-	NSObject<ArticleContentView, Tab> *articleText;
-	IBOutlet NSSplitView * splitView2;
+@interface ArticleListView : NSView <ArticleBaseView,
+                                     ArticleViewDelegate,
+                                     MessageListViewDelegate,
+                                     NSMenuDelegate,
+                                     NSSplitViewDelegate,
+                                     NSTableViewDataSource>
 
-	NSInteger tableLayout;
-	BOOL isAppInitialising;
-	BOOL isChangingOrientation;
-	BOOL isInTableInit;
-	BOOL blockSelectionHandler;
-
-	NSTimer * markReadTimer;
-	NSFont * articleListFont;
-	NSFont * articleListUnreadFont;
-	NSMutableDictionary * reportCellDict;
-	NSMutableDictionary * unreadReportCellDict;
-	NSMutableDictionary * selectionDict;
-	NSMutableDictionary * topLineDict;
-	NSMutableDictionary * linkLineDict;
-	NSMutableDictionary * middleLineDict;
-	NSMutableDictionary * bottomLineDict;
-	NSMutableDictionary * unreadTopLineDict;
-	NSMutableDictionary * unreadTopLineSelectionDict;
-
-	NSURL *	currentURL;
-	BOOL isLoadingHTMLArticle;
-	NSProgressIndicator * progressIndicator;
-}
+@property (weak, nonatomic) AppController *appController;
+@property (weak, nonatomic) ArticleController *articleController;
 
 // Public functions
 -(void)updateVisibleColumns;
 -(void)saveTableSettings;
 -(void)loadArticleLink:(NSString *) articleLink;
-- (void)webViewLoadFinished:(NSNotification *)notification;
-@property (readonly, nonatomic) NSURL *url;
 
 @end

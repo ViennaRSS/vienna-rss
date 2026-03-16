@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>FriendlyName</key>
+	<string>Pixnet</string>
+	<key>LinkName</key>
+	<string>Enter Pixnet user name</string>
+	<key>LinkTemplate</key>
+	<string>https://feed.pixnet.net/blog/posts/atom/%@</string>
+	<key>Name</key>
+	<string>PixnetFeedSource</string>
+	<key>SiteHomePage</key>
+	<string>https://www.pixnet.net/blog</string>
+	<key>Type</key>
+	<string>FeedSource</string>
+</dict>
+</plist>

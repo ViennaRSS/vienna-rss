@@ -36,17 +36,30 @@
 // -(void)selectUserDefaultFont:(NSString *)name size:(int)size control:(NSPopUpButton *)control sizeControl:(NSComboBox *)sizeControl;
 // -(void)controlTextDidEndEditing:(NSNotification *)notification;
 -(void)refreshLinkHandler;
--(IBAction)handleLinkSelector:(id)sender;
 -(void)updateDownloadsPopUp:(NSString *)downloadFolderPath;
 
 @end
 
-@implementation GeneralPreferencesViewController
+@implementation GeneralPreferencesViewController {
+    IBOutlet NSPopUpButton *checkFrequency;
+    IBOutlet NSPopUpButton *linksHandler;
+    IBOutlet NSPopUpButton *expireDuration;
+    IBOutlet NSButton *checkOnStartUp;
+    IBOutlet NSButton *openLinksInBackground;
+    IBOutlet NSButton *openLinksInExternalBrowser;
+    IBOutlet NSButton *showAppInMenuBar;
+    IBOutlet NSPopUpButton *downloadFolder;
+    IBOutlet NSButtonCell *newArticlesNotificationBounceButton;
+    IBOutlet NSButtonCell *markReadAfterNext;
+    IBOutlet NSButtonCell *markReadAfterDelay;
+    IBOutlet NSButton *markUpdatedAsNew;
+    NSMutableDictionary *appToPathMap;
+}
 
 - (void)viewDidLoad {
     NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_CheckFrequencyChange" object:nil];
-    [nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_PreferenceChange" object:nil];
+    [nc addObserver:self selector:@selector(handleReloadPreferences:) name:MA_Notify_CheckFrequencyChange object:nil];
+    [nc addObserver:self selector:@selector(handleReloadPreferences:) name:MA_Notify_PreferenceChange object:nil];
     appToPathMap = [[NSMutableDictionary alloc] init];
 }
 
@@ -89,10 +102,24 @@
     NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
     NSData *data = [userDefaults dataForKey:MAPref_DownloadsFolderBookmark];
     if (data) {
-        NSError *error = nil;
-        VNASecurityScopedBookmark *bookmark = [[VNASecurityScopedBookmark alloc] initWithBookmarkData:data
-                                                                                                error:&error];
-        if (!error) {
+        BOOL bookmarkDataIsStale = NO;
+        NSError *bookmarkInitError;
+        VNASecurityScopedBookmark *bookmark =
+            [[VNASecurityScopedBookmark alloc] initWithBookmarkData:data
+                                                bookmarkDataIsStale:&bookmarkDataIsStale
+                                                              error:&bookmarkInitError];
+        if (!bookmarkInitError) {
+            if (bookmarkDataIsStale) {
+                NSError *bookmarkResolveError;
+                NSData *bookmarkData =
+                    [VNASecurityScopedBookmark bookmarkDataFromFileURL:bookmark.resolvedURL
+                                                                 error:&bookmarkResolveError];
+                if (!bookmarkResolveError) {
+                    [userDefaults setObject:bookmarkData
+                                     forKey:MAPref_DownloadsFolderBookmark];
+                }
+            }
+
             [self updateDownloadsPopUp:bookmark.resolvedURL.path];
         }
     }
@@ -125,11 +152,13 @@
  */
 -(void)refreshLinkHandler
 {
-    NSBundle * appBundle = [NSBundle mainBundle];
-    NSString * ourAppName = [[NSFileManager defaultManager] displayNameAtPath:appBundle.bundlePath];
+    NSFileManager *fileManager = NSFileManager.defaultManager;
+    NSBundle *appBundle = NSBundle.mainBundle;
+    NSString *ourAppName = [fileManager displayNameAtPath:appBundle.bundlePath];
     BOOL onTheList = NO;
-    NSURL *testURL = [NSURL URLWithString:@"feed://www.test.com"];
-    NSURL *registeredAppURL = [NSWorkspace.sharedWorkspace URLForApplicationToOpenURL:testURL];
+    NSURL * const testURL = [NSURL URLWithString:@"feed://www.test.com"];
+    NSWorkspace *workspace = NSWorkspace.sharedWorkspace;
+    NSURL *registeredAppURL = [workspace URLForApplicationToOpenURL:testURL];
     
     // Clear all existing items
     [linksHandler removeAllItems];
@@ -141,12 +170,12 @@
         onTheList = YES;
     }
     
-    NSString * regAppName = [[NSFileManager defaultManager] displayNameAtPath:registeredAppURL.path];
+    NSString *regAppName = [fileManager displayNameAtPath:registeredAppURL.path];
     // Maintain a table to map from the short name to the file URL for when
     // the user changes selection and we later need the file URL to register
     // the new selection.
     if (regAppName != nil) {
-        NSImage *image = [NSWorkspace.sharedWorkspace iconForFile:registeredAppURL.path];
+        NSImage *image = [workspace iconForFile:registeredAppURL.path];
         [linksHandler addItemWithTitle:regAppName image:image];
         [linksHandler.menu addItem:[NSMenuItem separatorItem]];
         [appToPathMap setValue:registeredAppURL forKey:regAppName];
@@ -154,34 +183,35 @@
 
     // Next, add the list of all registered link handlers under the /Applications folder
     // except for the registered application.
-    CFArrayRef cfArrayOfApps = LSCopyApplicationURLsForURL((__bridge CFURLRef)testURL, kLSRolesAll);
-    if (cfArrayOfApps != nil)
-    {
-        CFIndex count = CFArrayGetCount(cfArrayOfApps);
-        NSInteger index;
-        
-        for (index = 0; index < count; ++index)
-        {
-            NSURL * appURL = (NSURL *)CFArrayGetValueAtIndex(cfArrayOfApps, index);
-            if (appURL.fileURL && [appURL.path hasPrefix:@"/Applications/"])
-            {
-                NSString * appName = [[NSFileManager defaultManager] displayNameAtPath:appURL.path];
-                if ([appName isEqualToString:ourAppName])
-                    onTheList = YES;
-                if (appName != nil && ![appName isEqualToString:regAppName])
-                    [linksHandler addItemWithTitle:appName image:[[NSWorkspace sharedWorkspace] iconForFile:appURL.path]];
-                
-                [appToPathMap setValue:appURL forKey:appName];
-            }
+    NSArray *appURLs;
+    if (@available(macOS 12, *)) {
+        appURLs = [workspace URLsForApplicationsToOpenURL:testURL];
+    } else {
+        CFArrayRef cfArrayOfApps = LSCopyApplicationURLsForURL((__bridge CFURLRef)testURL, kLSRolesAll);
+        if (cfArrayOfApps != NULL) {
+            appURLs = (__bridge_transfer NSArray<NSURL *> *)cfArrayOfApps;
+        } else {
+            appURLs = @[];
         }
-        CFRelease(cfArrayOfApps);
+    }
+    for (NSURL *appURL in appURLs) {
+        if (appURL.fileURL && [appURL.path hasPrefix:@"/Applications/"]) {
+            NSString * appName = [fileManager displayNameAtPath:appURL.path];
+            if ([appName isEqualToString:ourAppName]) {
+                onTheList = YES;
+            }
+            if (appName != nil && ![appName isEqualToString:regAppName]) {
+                [linksHandler addItemWithTitle:appName image:[workspace iconForFile:appURL.path]];
+            }
+
+            [appToPathMap setValue:appURL forKey:appName];
+        }
     }
     
     // Were we on the list? If not, add ourselves
     // complete with our icon.
-    if (!onTheList)
-    {
-        [linksHandler addItemWithTitle:ourAppName image:[[NSWorkspace sharedWorkspace] iconForFile:appBundle.bundlePath]];
+    if (!onTheList) {
+        [linksHandler addItemWithTitle:ourAppName image:[workspace iconForFile:appBundle.bundlePath]];
         
         NSURL * fileURL = [[NSURL alloc] initFileURLWithPath:appBundle.bundlePath];
         [appToPathMap setValue:fileURL forKey:ourAppName];
@@ -190,7 +220,13 @@
     // Add a Select command so the user can manually pick a registered
     // application.
     [linksHandler.menu addItem:[NSMenuItem separatorItem]];
-    [linksHandler addItemWithTitle:NSLocalizedString(@"Select…", nil) tag:-1];
+    NSString *selectTitle = NSLocalizedString(@"Select…",
+                                              @"Title of a menu item");
+    NSMenuItem *selectMenuItem = [[NSMenuItem alloc] initWithTitle:selectTitle
+                                                            action:nil
+                                                     keyEquivalent:@""];
+    selectMenuItem.tag = -1;
+    [linksHandler.menu addItem:selectMenuItem];
     
     // Select the registered item
     [linksHandler selectItemAtIndex:0];
@@ -202,8 +238,9 @@
 -(IBAction)changeExpireDuration:(id)sender
 {
     NSMenuItem * selectedItem = expireDuration.selectedItem;
-    if (selectedItem != nil)
+    if (selectedItem != nil) {
         [Preferences standardPreferences].autoExpireDuration = selectedItem.tag;
+    }
 }
 
 /* changeOpenLinksInBackground
@@ -260,8 +297,8 @@
                       completionHandler:^(NSInteger returnCode) {
         if (returnCode == NSModalResponseOK) {
             NSError *error = nil;
-            NSData *data = [VNASecurityScopedBookmark bookmark:openPanel.URL
-                                                         error:&error];
+            NSData *data = [VNASecurityScopedBookmark bookmarkDataFromFileURL:openPanel.URL
+                                                                        error:&error];
             if (!error) {
                 NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
                 [userDefaults setObject:data forKey:MAPref_DownloadsFolderBookmark];
@@ -285,8 +322,7 @@
     
     downloadPathItem.title = [[NSFileManager defaultManager] displayNameAtPath:downloadFolderPath];
     downloadPathItem.image = pathImage;
-    downloadPathItem.state = NSControlStateValueOff;
-    
+
     [downloadFolder selectItemAtIndex:0];
 }
 
@@ -304,16 +340,19 @@
 -(IBAction)selectDefaultLinksHandler:(id)sender
 {
     NSMenuItem * selectedItem = linksHandler.selectedItem;
-    if (selectedItem != nil)
-    {
-        if (selectedItem.tag == -1)
-        {
-            [self handleLinkSelector:self];
+    if (selectedItem != nil) {
+        if (selectedItem.tag == -1) {
+            [self handleLinkSelector];
             return;
         }
-        [self setDefaultApplicationForFeedScheme:[appToPathMap valueForKey:selectedItem.title]];
+        typeof(self) __weak weakSelf = self;
+        [self setDefaultApplicationForFeedScheme:[appToPathMap valueForKey:selectedItem.title]
+                               completionHandler:^{
+            [weakSelf refreshLinkHandler];
+        }];
+    } else {
+        [self refreshLinkHandler];
     }
-    [self refreshLinkHandler];
 }
 
 /* handleLinkSelector
@@ -321,7 +360,7 @@
  * file browser in the Applications folder and use that to add a new application to the
  * list.
  */
--(IBAction)handleLinkSelector:(id)sender
+- (void)handleLinkSelector
 {
     NSOpenPanel * panel = [NSOpenPanel openPanel];
     NSWindow * prefPaneWindow = linksHandler.window;
@@ -332,17 +371,25 @@
     } else {
         panel.allowedFileTypes = @[NSFileTypeForHFSTypeCode('APPL')];
     }
+    panel.prompt = NSLocalizedString(@"Select", @"Label of a button on an open panel");
     [panel beginSheetModalForWindow:prefPaneWindow completionHandler:^(NSInteger returnCode) {
         [panel orderOut:self];
         [prefPaneWindow makeKeyAndOrderFront:self];
         
-        if (returnCode == NSModalResponseOK)
-            [self setDefaultApplicationForFeedScheme:panel.URL];
-        [self refreshLinkHandler];
+        if (returnCode == NSModalResponseOK) {
+            typeof(self) __weak weakSelf = self;
+            [self setDefaultApplicationForFeedScheme:panel.URL
+                                   completionHandler:^{
+                [weakSelf refreshLinkHandler];
+            }];
+        } else {
+            [self refreshLinkHandler];
+        }
     }];
 }
 
 - (void)setDefaultApplicationForFeedScheme:(NSURL *)applicationURL
+                         completionHandler:(void (^)(void))completionHandler
 {
     NSString *feedURLScheme = @"feed";
     if (@available(macOS 12, *)) {
@@ -363,12 +410,16 @@
             } else {
                 os_log_debug(VNA_LOG, "Handler for the feed URL scheme changed to %@", applicationURL.lastPathComponent);
             }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completionHandler();
+            });
         }];
     } else {
         CFStringRef scheme = (__bridge CFStringRef)feedURLScheme;
         NSBundle *bundle = [NSBundle bundleWithURL:applicationURL];
         CFStringRef bundleID = (__bridge CFStringRef)bundle.bundleIdentifier;
         LSSetDefaultHandlerForURLScheme(scheme, bundleID);
+        completionHandler();
     }
 }
 
@@ -389,12 +440,9 @@
 {
     Preferences * prefs = [Preferences standardPreferences];
     NSInteger currentNotificationValue = prefs.newArticlesNotification;
-    if ([sender state] == NSControlStateValueOn)
-    {
+    if ([sender state] == NSControlStateValueOn) {
         prefs.newArticlesNotification = currentNotificationValue | VNANewArticlesNotificationBounce;
-    }
-    else
-    {
+    } else {
         prefs.newArticlesNotification = currentNotificationValue & ~VNANewArticlesNotificationBounce;
     }
 }
@@ -406,6 +454,12 @@
 {
     float newReadInterval = ([sender selectedCell] == markReadAfterNext) ? 0 : MA_Default_Read_Interval;
     [Preferences standardPreferences].markReadInterval = newReadInterval;
+}
+
+- (IBAction)openNotificationSettings:(id)sender
+{
+    NSURL *settingsURL = VNAUserNotificationCenter.notificationSettingsURL;
+    [NSWorkspace.sharedWorkspace openURL:settingsURL];
 }
 
 /* dealloc

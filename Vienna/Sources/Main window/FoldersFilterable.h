@@ -9,11 +9,18 @@
 @import Cocoa;
 
 @interface FoldersFilterableDataSource : NSObject <NSOutlineViewDataSource> {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-interface-ivars"
 @protected
-__unsafe_unretained id <NSOutlineViewDataSource> _dataSource;
+    __unsafe_unretained id <NSOutlineViewDataSource> _dataSource;
+#pragma clang diagnostic pop
 }
 
-- (instancetype)initWithDataSource:(id<NSOutlineViewDataSource>)dataSource /*NS_DESIGNATED_INITIALIZER*/;
+- (instancetype)initWithDataSource:(id<NSOutlineViewDataSource>)dataSource
+    NS_DESIGNATED_INITIALIZER;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
 
 @end
 

@@ -68,17 +68,17 @@
 		Changes by Eitot:
 			• Replaced deprecated APIs.
 			• Fixed analyzer warning.
+	* June 26, 2022
+		Changes by Eitot:
+			• Removed obsolete APIs.
+	* May 13, 2023
+		Changes by Eitot:
+			• Moved ivar declarations from interface to implementation
 */
 
 #import <Cocoa/Cocoa.h>
 
-@interface DSClickableURLTextField : NSTextField {
-	NSTextStorage *URLStorage;
-	NSLayoutManager *URLManager;
-	NSTextContainer *URLContainer;
-	NSURL			*clickedURL;
-	BOOL			canCopyURLs;
-}
+@interface DSClickableURLTextField : NSTextField
 
 @property (nonatomic) BOOL canCopyURLs;
 

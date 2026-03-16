@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Suggest an idea for Vienna
+about: Suggest an idea for Vienna. We encourage you to open a discussion before.
 title: ''
 labels: 'feature request :bulb:'
 assignees: ''

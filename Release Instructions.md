@@ -22,9 +22,6 @@ should be exactly the name of your certificate as it is stored in Keychain.
 `PRIVATE_EDDSA_KEY_PATH`  
 should be the location of the private EdDSA (ed25519) key used by Sparkle 2, which for obvious security reasons should not be located in the source directory !
 
-`PRIVATE_KEY_PATH`  
-should be the location of the (legacy) private DSA key used by Sparkle, which for obvious security reasons should not be located in the source directory !
-
 If you want to go further in automation of package building, you will have to define three additional environment variables in the `CS-ID.xcconfig` file. These ones are used to automate the use of the `notarytool` command line tool as described in [this page of Apple's documentation](https://developer.apple.com/documentation/xcode/notarizing_macos_software_before_distribution/customizing_the_notarization_workflow).
 
 `APP_STORE_ID`  
@@ -41,7 +38,6 @@ For instance, the content of my `Scripts/Resources/CS-ID.xcconfig` file looks li
 
     CODE_SIGN_IDENTITY = Developer ID Application: Barijaona Ramaholimihaso
     PRIVATE_EDDSA_KEY_PATH = $(SRCROOT)/../secrets/vienna_private_eddsa_key.pem
-    PRIVATE_KEY_PATH = $(SRCROOT)/../secrets/vienna_private_key.pem
     APP_STORE_ID = barijaona@mac.com
     KEYCHAIN_PROFILE = AC_PASSWORD
     TEAM_ID = KUU2LM7U9K
@@ -67,8 +63,8 @@ Tags should be in one of the following formats:
 ## Steps before releasing Vienna: ##
 
  1.	Review all recent code changes and make sure you should not change `MACOSX_DEPLOYMENT_TARGET` in the project configuration in order to protect users whose machines do not match minimum macOS requirements from a counter-productive "upgrade".
- 2.	Make sure that the "CHANGES" file is up to date.
- 3.	Copy the most recent part of "CHANGES" in a new text document and process it with Markdown to get a new "notes.html".
+ 2.	Update the "CHANGELOG.md" file with a summary of the changes for this build. The most recent build should be at the top of this file. Interesting advices on writing a good changelog can be found [in this blog post](https://xavd.id/blog/post/effective-changelogs/).
+ 3.	Copy the most recent part of "CHANGELOG.md" in a new Markdown document to generate a new "notes.html" file. This file will be displayed by the autoupdate mechanism when the new version will be detected.
  4.	Commit anything unstaged (on `master` branch if you are releasing a beta or on `stable` branch if you are doing a normal release).
  5.	Make a new tag using `git tag -s` _tagname_, respecting the above mentioned convention (if you do not have a gpg key, you can use `git tag -a` instead).
 
@@ -132,4 +128,4 @@ There are two distinct ways to get the different files needed to publish an upda
 brew bump-cask-pr vienna --version=3.3.0
 ````
 
-Finally, consider posting an announcement of the new release on the CocoaForge Vienna forum at <http://forums.cocoaforge.com/viewforum.php?f=18> and/or <http://vienna-rss.com>.
+Finally, consider posting an announcement of the new release on <https://www.vienna-rss.com>.

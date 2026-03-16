@@ -1,0 +1,8 @@
+/* The name of the plug-in, such as the name of the website or app. */
+"FriendlyName" = "Hootsuite";
+
+/* The label for the plug-in in toolbar items and menu items. */
+"MenuPath" = "Dela med Hootsuite";
+
+/* The tool tip for the plug-in in toolbar items. */
+"Tooltip" = "Dela nuvarande artikel på Hootsuite";

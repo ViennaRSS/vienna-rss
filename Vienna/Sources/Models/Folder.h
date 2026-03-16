@@ -21,6 +21,7 @@
 @import Cocoa;
 
 @class Article;
+@class ArticleReference;
 
 /**
  Folder types
@@ -68,20 +69,21 @@ typedef NS_OPTIONS(NSUInteger, VNAFolderFlag) {
     VNAFolderFlagBuggySync       = 1 << 7
 };
 
-@interface Folder : NSObject <NSCacheDelegate> {
-	NSInteger unreadCount;
-	NSInteger childUnreadCount;
-    VNAFolderFlag nonPersistedFlags;
-    VNAFolderFlag flags;
-}
+@interface Folder : NSObject <NSCacheDelegate>
 
-// Initialisation functions
--(instancetype)initWithId:(NSInteger)itemId parentId:(NSInteger)parentId name:(NSString *)name type:(VNAFolderType)type /*NS_DESIGNATED_INITIALIZER*/;
+- (instancetype)initWithId:(NSInteger)itemId
+                  parentId:(NSInteger)parentId
+                      name:(NSString *)name
+                      type:(VNAFolderType)type NS_DESIGNATED_INITIALIZER;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *feedDescription;
 @property (nonatomic, copy) NSString *homePage;
 @property (nonatomic, copy) NSString *feedURL;
-@property (nonatomic, copy) NSDate *lastUpdate;
+@property (nonatomic) NSDate *lastUpdate;
 @property (nonatomic, copy) NSString *lastUpdateString;
 @property (nonatomic, copy) NSString *username;
 @property (nonatomic, copy) NSString *password;
@@ -97,8 +99,8 @@ typedef NS_OPTIONS(NSUInteger, VNAFolderFlag) {
 @property (nonatomic) VNAFolderType type;
 @property (nonatomic, readonly) VNAFolderFlag nonPersistedFlags;
 @property (nonatomic, readonly) VNAFolderFlag flags;
-@property (nonatomic, copy) NSImage *image;
-@property (nonatomic, readonly) BOOL hasCachedImage;
+@property (readonly, copy, nonatomic) NSImage *image;
+- (BOOL)setImageData:(NSData *)imageData;
 -(NSImage *)standardImage;
 @property (nonatomic) NSInteger childUnreadCount;
 -(void)clearCache;
@@ -106,6 +108,7 @@ typedef NS_OPTIONS(NSUInteger, VNAFolderFlag) {
 @property (nonatomic, getter=isSmartFolder, readonly) BOOL smartFolder;
 @property (nonatomic, getter=isRSSFolder, readonly) BOOL RSSFolder;
 @property (nonatomic, getter=isOpenReaderFolder, readonly) BOOL OpenReaderFolder;
+@property (nonatomic, getter=isSubscriptionFolder, readonly) BOOL subscriptionFolder;
 @property (nonatomic, readonly) BOOL loadsFullHTML;
 @property (nonatomic, getter=isUnsubscribed, readonly) BOOL unsubscribed;
 @property (nonatomic, getter=isUpdating, readonly) BOOL updating;
@@ -117,11 +120,12 @@ typedef NS_OPTIONS(NSUInteger, VNAFolderFlag) {
 -(void)clearNonPersistedFlag:(VNAFolderFlag)flagToClear;
 -(NSUInteger)indexOfArticle:(Article *)article;
 -(Article *)articleFromGuid:(NSString *)guid;
+-(NSInteger)retrieveKnownStatusForGuid:(NSString *)guid;
 -(BOOL)createArticle:(Article *)article guidHistory:(NSArray *)guidHistory;
 -(void)removeArticleFromCache:(NSString *)guid;
--(void)restoreArticleToCache:(Article *)article;
 -(void)markArticlesInCacheRead;
--(NSArray *)arrayOfUnreadArticlesRefs;
+-(void)resetArticleStatuses;
+-(NSArray<ArticleReference *> *)arrayOfUnreadArticlesRefs;
 -(NSComparisonResult)folderNameCompare:(Folder *)otherObject;
 -(NSComparisonResult)folderIDCompare:(Folder *)otherObject;
 @property (readonly, nonatomic) NSString *feedSourceFilePath;

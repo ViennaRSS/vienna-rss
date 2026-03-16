@@ -1,0 +1,5 @@
+/* The name of feed source. */
+"FriendlyName" = "PChome 個人新聞台";
+
+/* An instruction for the user. This will be shown above a text field. */
+"LinkName" = "Entrer le nom d'utilisateur PChome";

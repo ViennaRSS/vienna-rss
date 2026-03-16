@@ -47,15 +47,18 @@ static NSString * const VNAURLSchemeHTTPS = @"https";
         (__bridge NSString *)kSecAttrAuthenticationType: (__bridge NSString *)kSecAttrAuthenticationTypeDefault,
         (__bridge NSString *)kSecReturnData: @YES
     };
-    CFTypeRef result;
+    CFTypeRef result = NULL;
     OSStatus status = SecItemCopyMatching((__bridge CFDictionaryRef)query,
                                           &result);
     if (status != errSecSuccess) {
+        if (result) {
+            CFRelease(result);
+        }
         return @"";
     }
     // The result (CFTypeRef) is a CFDataRef here, because only kSecReturnData
     // was set to YES.
-    NSData *passwordData = (__bridge NSData *)result;
+    NSData *passwordData = (__bridge_transfer NSData *)result;
     NSString *password = [[NSString alloc] initWithData:passwordData
                                                encoding:NSUTF8StringEncoding];
     return password;
@@ -85,9 +88,7 @@ static NSString * const VNAURLSchemeHTTPS = @"https";
         (__bridge NSString *)kSecAttrProtocol: (__bridge NSString *)protocol,
         (__bridge NSString *)kSecAttrAuthenticationType: (__bridge NSString *)kSecAttrAuthenticationTypeDefault
     };
-    CFTypeRef result;
-    OSStatus status = SecItemCopyMatching((__bridge CFDictionaryRef)query,
-                                          &result);
+    OSStatus status = SecItemCopyMatching((__bridge CFDictionaryRef)query, NULL);
     NSData *passwordData = [password dataUsingEncoding:NSUTF8StringEncoding];
     if (status == errSecSuccess) {
         NSDictionary *attributes = @{
@@ -125,15 +126,18 @@ static NSString * const VNAURLSchemeHTTPS = @"https";
         (__bridge NSString *)kSecAttrAuthenticationType: (__bridge NSString *)kSecAttrAuthenticationTypeHTMLForm,
         (__bridge NSString *)kSecReturnData: @YES
     };
-    CFTypeRef result;
+    CFTypeRef result = NULL;
     OSStatus status = SecItemCopyMatching((__bridge CFDictionaryRef)query,
                                           &result);
     if (status != errSecSuccess) {
+        if (result) {
+            CFRelease(result);
+        }
         return @"";
     }
     // The result (CFTypeRef) is a CFDataRef here, because only kSecReturnData
     // was set to YES.
-    NSData *passwordData = (__bridge NSData *)result;
+    NSData *passwordData = (__bridge_transfer NSData *)result;
     NSString *password = [[NSString alloc] initWithData:passwordData
                                                encoding:NSUTF8StringEncoding];
     return password;
@@ -155,15 +159,18 @@ static NSString * const VNAURLSchemeHTTPS = @"https";
         (__bridge NSString *)kSecAttrAccount: username,
         (__bridge NSString *)kSecReturnData: @YES
     };
-    CFTypeRef result;
+    CFTypeRef result = NULL;
     OSStatus status = SecItemCopyMatching((__bridge CFDictionaryRef)query,
                                           &result);
     if (status != errSecSuccess) {
+        if (result) {
+            CFRelease(result);
+        }
         return @"";
     }
     // The result (CFTypeRef) is a CFDataRef here, because only kSecReturnData
     // was set to YES.
-    NSData *passwordData = (__bridge NSData *)result;
+    NSData *passwordData = (__bridge_transfer NSData *)result;
     NSString *password = [[NSString alloc] initWithData:passwordData
                                                encoding:NSUTF8StringEncoding];
     return password;

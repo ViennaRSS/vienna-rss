@@ -2,7 +2,7 @@
 //  PopUpButtonToolbarItem.swift
 //  Vienna
 //
-//  Copyright 2017
+//  Copyright 2017, 2025 Eitot
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -24,32 +24,66 @@ import Cocoa
 @objc(VNAPopUpButtonToolbarItem)
 class PopUpButtonToolbarItem: NSToolbarItem {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    private let popUpButton: NSPopUpButton
 
-        // The toolbar item's width is too wide on older systems.
-        if #unavailable(macOS 11) {
-            minSize = NSSize(width: 41, height: 25)
-            maxSize = NSSize(width: 41, height: 28)
+    private var popUpButtonCell: NSPopUpButtonCell! {
+        popUpButton.cell as? NSPopUpButtonCell
+    }
+
+    override init(itemIdentifier: NSToolbarItem.Identifier) {
+        let popUpButton = NSPopUpButton()
+        popUpButton.pullsDown = true
+        popUpButton.bezelStyle = .toolbar
+        self.popUpButton = popUpButton
+        super.init(itemIdentifier: itemIdentifier)
+        view = popUpButton
+        minSize = NSSize(width: 41, height: 25)
+        maxSize = NSSize(width: 41, height: 28)
+        autovalidates = false
+    }
+
+    var menu: NSMenu {
+        get {
+            popUpButton.menu!
+        }
+        set {
+            popUpButton.menu = newValue
+            // Pull-down pop-up buttons hide the first menu item.
+            popUpButton.menu?.items.first?.isHidden = false
+            setUpMenuFormRepresentation()
         }
     }
 
-    // Assign the pop-up button's menu to the menu-form representation.
-    override var view: NSView? {
+    override var label: String {
         didSet {
-            if let popUpButton = view as? NSPopUpButton {
-                menuFormRepresentation?.submenu = popUpButton.menu
-
-                // Unsetting target and action will ascertain that the menu is
-                // always enabled.
-                menuFormRepresentation?.target = nil
-                menuFormRepresentation?.action = nil
-
-                // Permanently enable the menu-form representation. The items
-                // of the submenu are validated separately by their target.
-                menuFormRepresentation?.isEnabled = true
-            }
+            // Setting the label after the view is set clears the submenu from
+            // the menu-form representation.
+            setUpMenuFormRepresentation()
         }
+    }
+
+    override var image: NSImage? {
+        get {
+            popUpButtonCell.menuItem?.image
+        }
+        set {
+            popUpButtonCell.usesItemFromMenu = false
+            let menuItem = NSMenuItem()
+            menuItem.title = ""
+            menuItem.image = newValue
+            popUpButtonCell.menuItem = menuItem
+        }
+    }
+
+    private func setUpMenuFormRepresentation() {
+        guard let menuFormRepresentation else {
+            return
+        }
+        // Assign the pop-up button's menu to the menu-form representation.
+        menuFormRepresentation.submenu = popUpButton.menu
+        // Permanently enable the menu-form representation. The items
+        // of the submenu are validated separately by their target.
+        menuFormRepresentation.isEnabled = true
     }
 
 }

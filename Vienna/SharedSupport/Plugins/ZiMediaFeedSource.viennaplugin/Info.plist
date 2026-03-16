@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>FriendlyName</key>
+	<string>ZiMedia</string>
+	<key>LinkName</key>
+	<string>Enter ZiMedia user name</string>
+	<key>LinkTemplate</key>
+	<string>https://zi.media/rss/authors/%@</string>
+	<key>Name</key>
+	<string>PixnetFeedSource</string>
+	<key>SiteHomePage</key>
+	<string>https://zi.media/</string>
+	<key>Type</key>
+	<string>FeedSource</string>
+</dict>
+</plist>

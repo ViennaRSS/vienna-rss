@@ -20,19 +20,9 @@
 
 @import Foundation;
 
-@class Database;
-@class FeedCredentials;
 @class Folder;
 
-@interface RefreshManager : NSObject <NSURLSessionTaskDelegate> {
-	NSUInteger countOfNewArticles;
-	NSMutableArray * authQueue;
-	FeedCredentials * credentialsController;
-	BOOL hasStarted;
-	NSString * statusMessageDuringRefresh;
-	NSOperationQueue *networkQueue;
-	dispatch_queue_t _queue;
-}
+@interface RefreshManager : NSObject <NSURLSessionTaskDelegate>
 
 @property (class, readonly, nonatomic) RefreshManager *sharedManager;
 
@@ -55,6 +45,6 @@ typedef NS_ENUM(int, RefreshTypes) {
 	MA_Refresh_NilType = -1,
 	MA_Refresh_Feed,
 	MA_Refresh_FavIcon,
-	MA_Refresh_GoogleFeed,
-	MA_ForceRefresh_Google_Feed
+	MA_Refresh_OpenReaderFeed,
+	MA_ForceRefresh_OpenReader_Feed
 };

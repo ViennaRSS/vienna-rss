@@ -23,11 +23,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSKeyedUnarchiver (Compatibility)
 
-+ (nullable id)vna_unarchivedObjectOfClass:(Class)cls
-                                  fromData:(NSData *)data
-    NS_SWIFT_NAME(unarchivedObject(ofClass:from:)) NS_SWIFT_NOTHROW
-    NS_DEPRECATED_MAC(10.12, 10.13);
-
 + (nullable id)vna_unarchivedArrayOfObjectsOfClass:(Class)cls
                                           fromData:(NSData *)data
     NS_SWIFT_NAME(unarchivedArrayOfObjects(ofClass:from:)) NS_SWIFT_NOTHROW

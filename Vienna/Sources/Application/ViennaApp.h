@@ -23,10 +23,11 @@
 @class Folder;
 @class Article;
 
+#import "FeedListConstants.h"
+
 @interface ViennaApp : NSApplication
 
 @property (nonatomic) IBOutlet NSMenu *articleMenu;
-@property (nonatomic) IBOutlet NSMenu *filterMenu;
 @property (nonatomic) IBOutlet NSMenu *styleMenu;
 
 // Refresh commands
@@ -43,6 +44,9 @@
 
 // New subscription
 -(id)handleNewSubscription:(NSScriptCommand *)cmd;
+
+// New tab
+-(id)handleNewTab:(NSScriptCommand *)cmd;
 
 // Compact database
 -(id)handleCompactDatabase:(NSScriptCommand *)cmd;
@@ -61,6 +65,7 @@
 @property (readonly, nonatomic) NSString *currentTextSelection;
 @property (readonly, nonatomic) NSString *documentHTMLSource;
 @property (readonly, nonatomic) NSString *documentTabURL;
+@property (readonly, nonatomic) NSString *documentTabTitle;
 
 // Change folder selection
 @property (nonatomic) Folder *currentFolder;
@@ -71,6 +76,7 @@
 // Preference properties
 @property (nonatomic) NSInteger autoExpireDuration;
 @property (nonatomic) float markReadInterval;
+@property (readonly, nonatomic) BOOL readingPaneOnRight;
 @property (nonatomic) BOOL refreshOnStartup;
 @property (nonatomic) BOOL checkForNewOnStartup;
 @property (nonatomic) BOOL openLinksInVienna;
@@ -79,11 +85,11 @@
 @property (nonatomic) BOOL enableMinimumFontSize;
 @property (nonatomic) NSInteger refreshFrequency;
 @property (nonatomic, copy) NSString *displayStyle;
-@property (nonatomic, copy) NSString *folderListFont;
-@property (nonatomic) NSInteger folderListFontSize;
-@property (nonatomic, copy) NSString *articleListFont;
+@property (nonatomic) VNAFeedListSizeMode feedListSizeMode;
+@property (nonatomic, copy) NSString *articleListFontName;
 @property (nonatomic) NSInteger articleListFontSize;
 @property (nonatomic) BOOL statusBarVisible;
 @property (nonatomic) BOOL filterBarVisible;
+
 @end
 

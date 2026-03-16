@@ -1,9 +1,9 @@
-# ClangFormat 14.0
+# ClangFormat 16.0
 # https://clang.llvm.org/docs/ClangFormatStyleOptions.html
 
 AlignConsecutiveMacros:                         AcrossEmptyLinesAndComments
 AlignOperands:                                  DontAlign
-AlignTrailingComments:                          false
+AlignTrailingComments:                          Leave
 AllowShortFunctionsOnASingleLine:               Empty
 AllowShortLoopsOnASingleLine:                   false
 BraceWrapping:
@@ -24,6 +24,7 @@ IncludeIsMainRegex:                             (\+?.*)?$
 IncludeIsMainSourceRegex:                       (\+?.*\.h)$
 IndentWidth:                                    4
 IndentWrappedFunctionNames:                     true
+InsertNewlineAtEOF:                             true
 KeepEmptyLinesAtTheStartOfBlocks:               false
 ObjCBlockIndentWidth:                           4
 ObjCSpaceAfterProperty:                         true

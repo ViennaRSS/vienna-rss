@@ -21,11 +21,6 @@
 @import Cocoa;
 
 @interface SearchPanel : NSWindowController
-{
-	IBOutlet NSWindow * searchPanelWindow;
-    IBOutlet NSSearchField * searchField;
-	IBOutlet NSTextField * searchLabel;
-}
 
 @property NSArray * topObjects;
 

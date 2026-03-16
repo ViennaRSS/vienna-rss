@@ -34,22 +34,18 @@
     BOOL hasError = NO;
     NSInteger countImported = 0;
     
-    if (data != nil)
-    {
+    if (data != nil) {
         NSError *error = nil;
         NSXMLDocument *opmlDocument = [[NSXMLDocument alloc] initWithData:data
                                                                   options:NSXMLNodeLoadExternalEntitiesNever
                                                                     error:&error];
-        if (error)
-        {
+        if (error) {
             NSAlert *alert = [NSAlert new];
             alert.messageText = NSLocalizedString(@"Import error", nil);
             alert.informativeText = NSLocalizedString(@"Cannot import the specified file. The file contents are not valid OPML XML format.", nil);
             [alert runModal];
             hasError = YES;
-        }
-        else
-        {
+        } else {
             NSArray *outlines = [opmlDocument nodesForXPath:@"opml/body/outline" error:nil];
             
             countImported = [self importSubscriptionGroup:outlines underParent:VNAFolderTypeRoot];
@@ -57,8 +53,7 @@
     }
     
     // Announce how many we successfully imported
-    if (!hasError)
-    {
+    if (!hasError) {
         NSAlert *alert = [NSAlert new];
         alert.alertStyle = NSAlertStyleInformational;
         alert.messageText = NSLocalizedString(@"Import Completed", nil);
@@ -75,8 +70,7 @@
 {
 	NSInteger countImported = 0;
 	
-	for (NSXMLElement *outlineElement in outlines)
-	{
+	for (NSXMLElement *outlineElement in outlines) {
         NSString *feedText = ([outlineElement attributeForName:@"text"].stringValue).vna_stringByEscapingExtendedCharacters;
         NSString *feedDescription = ([outlineElement attributeForName:@"description"].stringValue).vna_stringByEscapingExtendedCharacters;
         NSString *feedURL = ([outlineElement attributeForName:@"xmlUrl"].stringValue).vna_stringByEscapingExtendedCharacters;
@@ -85,8 +79,7 @@
         Database * dbManager = [Database sharedManager];
 
 		// Some OPML exports use 'title' instead of 'text'.
-		if (feedText == nil || feedText.length == 0u)
-		{
+		if (feedText == nil || feedText.length == 0u) {
             NSString * feedTitle = ([outlineElement attributeForName:@"title"].stringValue).vna_stringByEscapingExtendedCharacters;
             if (feedTitle != nil) {
 				feedText = feedTitle;
@@ -98,12 +91,10 @@
 		feedText = feedText.vna_stringByUnescapingExtendedCharacters;
 		feedDescription = feedDescription.vna_stringByUnescapingExtendedCharacters;
 		
-		if (feedURL == nil)
-		{
+		if (feedURL == nil) {
 			// This is a new group so try to create it. If there's an error then default to adding
 			// the sub-group items under the parent.
-			if (feedText != nil)
-			{
+			if (feedText != nil) {
 				NSInteger folderId = [dbManager addFolder:parentId afterChild:-1
                                          folderName:feedText type:VNAFolderTypeGroup
                                      canAppendIndex:NO];
@@ -112,16 +103,13 @@
                 }
 				countImported += [self importSubscriptionGroup:outlineElement.children underParent:folderId];
 			}
-		}
-		else if (feedText != nil)
-		{
+		} else if (feedText != nil) {
 			Folder * folder;
 			NSInteger folderId;
 
-			if ((folder = [dbManager folderFromFeedURL:feedURL]) != nil)
+			if ((folder = [dbManager folderFromFeedURL:feedURL]) != nil) {
 				folderId = folder.itemId;
-			else
-			{
+			} else {
 				folderId = [dbManager addRSSFolder:feedText underParent:parentId afterChild:-1 subscriptionURL:feedURL];
 				++countImported;
 			}

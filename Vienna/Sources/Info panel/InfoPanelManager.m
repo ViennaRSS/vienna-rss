@@ -20,11 +20,13 @@
 
 #import "InfoPanelManager.h"
 
-#import "AppController.h"
+#import "Constants.h"
 #import "Database.h"
 #import "InfoPanelController.h"
 
-@implementation InfoPanelManager
+@implementation InfoPanelManager {
+    NSMutableDictionary *controllerList;
+}
 
 /* infoWindowManager
  * Returns the shared instance of the InfoWindowManager
@@ -54,15 +56,14 @@
  */
 -(instancetype)init
 {
-	if ((self = [super init]) != nil)
-	{
+	if ((self = [super init]) != nil) {
 		controllerList = [[NSMutableDictionary alloc] initWithCapacity:10];
 		
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
 		[nc addObserver:self selector:@selector(handleFolderDeleted:) name:VNADatabaseDidDeleteFolderNotification object:nil];
-		[nc addObserver:self selector:@selector(handleFolderChange:) name:@"MA_Notify_FolderNameChanged" object:nil];
-		[nc addObserver:self selector:@selector(handleFolderChange:) name:@"MA_Notify_FoldersUpdated" object:nil];
-		[nc addObserver:self selector:@selector(handleFolderChange:) name:@"MA_Notify_LoadFullHTMLChange" object:nil];
+		[nc addObserver:self selector:@selector(handleFolderChange:) name:MA_Notify_FolderNameChanged object:nil];
+		[nc addObserver:self selector:@selector(handleFolderChange:) name:MA_Notify_FoldersUpdated object:nil];
+		[nc addObserver:self selector:@selector(handleFolderChange:) name:MA_Notify_LoadFullHTMLChange object:nil];
 	}
 	return self;
 }
@@ -85,8 +86,7 @@
 	InfoPanelController * infoWindow;
 	
 	infoWindow = controllerList[folderNumber];
-	if (infoWindow != nil)
-	{
+	if (infoWindow != nil) {
 		[infoWindow close];
 		[controllerList removeObjectForKey:folderNumber];
 	}
@@ -103,8 +103,9 @@
 	InfoPanelController * infoWindow;
 	
 	infoWindow = controllerList[folderNumber];
-	if (infoWindow != nil)
+	if (infoWindow != nil) {
 		[infoWindow updateFolder];
+	}
 }
 
 /**
@@ -119,8 +120,7 @@
 	InfoPanelController * infoWindow;
 
 	infoWindow = controllerList[folderNumber];
-	if (infoWindow == nil)
-	{
+	if (infoWindow == nil) {
 		infoWindow = [[InfoPanelController alloc] initWithFolder:folderId];
         block(infoWindow);
 		controllerList[folderNumber] = infoWindow;

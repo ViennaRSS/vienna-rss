@@ -21,14 +21,14 @@ import Cocoa
 
 protocol BrowserContextMenuDelegate: AnyObject {
     func contextMenuItemsFor(purpose: WKWebViewContextMenuContext, existingMenuItems: [NSMenuItem]) -> [NSMenuItem]
-    func contextMenuItemAction(menuItem: NSMenuItem)
+    func processMenuItem(_ menuItem: NSMenuItem)
 }
 
 enum WKWebViewContextMenuContext {
     case page(url: URL)
     case link(_ url: URL)
-    case picture(_ image: URL)
-    case pictureLink(image: URL, link: URL)
+    case media(_ media: URL)
+    case mediaLink(media: URL, link: URL)
     case text(_ text: String)
 }
 
@@ -38,6 +38,8 @@ extension NSUserInterfaceItemIdentifier {
     static let WKMenuItemDownloadImage = NSUserInterfaceItemIdentifier("WKMenuItemIdentifierDownloadImage")
     static let WKMenuItemDownloadLinkedFile = NSUserInterfaceItemIdentifier("WKMenuItemIdentifierDownloadLinkedFile")
     static let WKMenuItemDownloadMedia = NSUserInterfaceItemIdentifier("WKMenuItemIdentifierDownloadMedia")
+    static let WKMenuItemGoBack = NSUserInterfaceItemIdentifier("WKMenuItemIdentifierGoBack")
+    static let WKMenuItemGoForward = NSUserInterfaceItemIdentifier("WKMenuItemIdentifierGoForward")
     static let WKMenuItemOpenLinkInBackground = NSUserInterfaceItemIdentifier("WKMenuItemIdentifierOpenLinkInBackground")
     static let WKMenuItemOpenLinkInNewWindow = NSUserInterfaceItemIdentifier("WKMenuItemIdentifierOpenLinkInNewWindow")
     static let WKMenuItemOpenLink = NSUserInterfaceItemIdentifier("WKMenuItemIdentifierOpenLink")

@@ -17,7 +17,7 @@
 //  limitations under the License.
 //
 
-@import Foundation;
+@import WebKit;
 
 @interface WKWebViewConfiguration (Private)
 

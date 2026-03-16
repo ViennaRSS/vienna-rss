@@ -20,8 +20,8 @@
 
 @import Cocoa;
 
-#import "BaseView.h"
 #import "ArticleBaseView.h"
+#import "ArticleListConstants.h"
 
 @class Article;
 @class ArticleListView;
@@ -37,47 +37,30 @@
  * article view. Thus all control of the article view now passes through the article
  * controller.
  */
-@interface ArticleController : NSViewController
-{
-	NSView<ArticleBaseView, BaseView> * mainArticleView;
-	NSArray * currentArrayOfArticles;
-	NSArray * folderArrayOfArticles;
-	NSInteger currentFolderId;
-	NSDictionary * articleSortSpecifiers;
-	NSString * sortColumnIdentifier;
-	BackTrackArray * backtrackArray;
-	BOOL isBacktracking;
-	BOOL shouldPreserveSelectedArticle;
-	Article * articleToPreserve;
-	NSString * guidOfArticleToSelect;
-	BOOL firstUnreadArticleRequired;
-	dispatch_queue_t queue;
-	BOOL requireSelectArticleAfterReload;
-}
+@interface ArticleController : NSViewController <NSMenuItemValidation,
+                                                 NSToolbarItemValidation>
 
 @property (nonatomic) FoldersTree * foldersTree;
 @property (nonatomic) ArticleListView *articleListView;
 @property (nonatomic) UnifiedDisplayView *unifiedListView;
-@property (nonatomic) NSView<ArticleBaseView, BaseView> * mainArticleView;
+@property (nonatomic) NSView<ArticleBaseView> * mainArticleView;
 @property (nonatomic, copy) NSArray * currentArrayOfArticles;
 @property (nonatomic, copy) NSArray * folderArrayOfArticles;
 @property (nonatomic) NSDictionary * articleSortSpecifiers;
 @property (nonatomic) BackTrackArray * backtrackArray;
 
 // Public functions
--(NSView<ArticleBaseView, BaseView> *)mainArticleView;
+-(NSView<ArticleBaseView> *)mainArticleView;
 -(void)setLayout:(NSInteger)newLayout;
 @property (nonatomic, readonly) NSInteger currentFolderId;
 @property (nonatomic, readonly) Article *selectedArticle;
 @property (readonly, nonatomic) NSArray *markedArticleRange;
--(void)updateVisibleColumns;
 -(void)saveTableSettings;
 -(void)sortArticles;
 @property (readonly, nonatomic) NSArray *allArticles;
 -(void)displayFirstUnread;
 -(void)displayNextUnread;
 -(void)displayNextFolderWithUnread;
-@property (readonly, nonatomic) NSString *searchPlaceholderString;
 -(void)reloadArrayOfArticles;
 -(void)displayFolder:(NSInteger)newFolderId;
 -(void)refilterArrayOfArticles;
@@ -94,8 +77,26 @@
 -(void)markFlaggedByArray:(NSArray *)articleArray flagged:(BOOL)flagged;
 -(void)selectFolderAndArticle:(NSInteger)folderId guid:(NSString *)guid;
 -(void)addBacktrack:(NSString *)guid;
--(void)goForward;
--(void)goBack;
-@property (nonatomic, readonly) BOOL canGoForward;
-@property (nonatomic, readonly) BOOL canGoBack;
+
+- (IBAction)reportLayout:(id)sender;
+- (IBAction)condensedLayout:(id)sender;
+- (IBAction)unifiedLayout:(id)sender;
+
+- (IBAction)toggleColumnVisibility:(NSMenuItem *)sender;
+- (IBAction)changeSortColumn:(NSMenuItem *)sender;
+- (IBAction)changeSortDirection:(NSMenuItem *)sender;
+
+- (IBAction)goBack:(/*nullable*/ id)sender;
+- (IBAction)goForward:(/*nullable*/ id)sender;
+- (IBAction)toggleFlag:(/*nullable*/ id)sender;
+- (IBAction)markAsRead:(/*nullable*/ id)sender;
+- (IBAction)markAsUnread:(/*nullable*/ id)sender;
+- (IBAction)delete:(/*nullable*/ id)sender;
+- (IBAction)restore:(/*nullable*/ id)sender;
+- (IBAction)downloadEnclosure:(/*nullable*/ id)sender;
+
+// MARK: Filter bar
+
+@property (readonly, nonatomic) NSString *filterModeLabel;
+
 @end

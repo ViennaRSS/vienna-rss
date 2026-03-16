@@ -40,7 +40,12 @@
     NSURL *url = [NSURL fileURLWithPath:filePath];
     NSMutableArray *appPaths = [[NSMutableArray alloc] initWithCapacity:256];
     
-    NSArray *applications = (NSArray *)CFBridgingRelease(LSCopyApplicationURLsForURL((__bridge CFURLRef)url, kLSRolesAll));
+    NSArray *applications;
+    if (@available(macOS 12, *)) {
+        applications = [NSWorkspace.sharedWorkspace URLsForApplicationsToOpenURL:url];
+    } else {
+        applications = (__bridge_transfer NSArray *)LSCopyApplicationURLsForURL((__bridge CFURLRef)url, kLSRolesAll);
+    }
     if (applications == nil) {
         return @[];
     }
@@ -124,7 +129,7 @@
         [submenu addItem:[NSMenuItem separatorItem]];
     }
 
-    NSString *title = NSLocalizedString(@"Select…", @"Title of a popup menu item");
+    NSString *title = NSLocalizedString(@"Select…", @"Title of a menu item");
     NSMenuItem *selectItem = [submenu addItemWithTitle:title action:selector keyEquivalent:@""];
     [selectItem setTag:1];
     [selectItem setTarget:target];
@@ -162,7 +167,19 @@
         }
     }
     
-    [self openFile:filePath withApplication:appPath];
+    if (@available(macOS 10.15, *)) {
+        NSURL *appURL = [NSURL fileURLWithPath:appPath];
+        NSURL *fileURL = [NSURL fileURLWithPath:filePath];
+        if (!appURL || !fileURL) {
+            return;
+        }
+        [self openURLs:@[fileURL]
+  withApplicationAtURL:appURL
+         configuration:[NSWorkspaceOpenConfiguration configuration]
+     completionHandler:nil];
+    } else {
+        [self openFile:filePath withApplication:appPath];
+    }
 }
 
 @end

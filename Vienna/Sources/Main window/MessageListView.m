@@ -19,25 +19,34 @@
 //
 
 #import "MessageListView.h"
-#import "AppController.h"
+
+#import "NSResponder+EventHandler.h"
+#import "TableHeaderCell.h"
 
 @implementation MessageListView
 
 @dynamic delegate;
 
-/* keyDown
- * Here is where we handle special keys when the article list view
- * has the focus so we can do custom things.
- */
--(void)keyDown:(NSEvent *)theEvent
+- (void)setTableColumnHeaderImage:(NSImage *)image
+          forColumnWithIdentifier:(NSUserInterfaceItemIdentifier)identifier
 {
-	if (theEvent.characters.length == 1)
-	{
-		unichar keyChar = [theEvent.characters characterAtIndex:0];
-		if ([APPCONTROLLER handleKeyDown:keyChar withFlags:theEvent.modifierFlags])
-			return;
-	}
-	[super keyDown:theEvent];
+    NSTableColumn *tableColumn = [self tableColumnWithIdentifier:identifier];
+
+    if (@available(macOS 26, *)) {
+        tableColumn.headerCell = [[VNATableHeaderCell alloc] init];
+    }
+    tableColumn.headerCell.image = image;
+
+    NSImageCell *imageCell = [[NSImageCell alloc] init];
+    tableColumn.dataCell = imageCell;
+}
+
+-(void)keyDown:(NSEvent *)event
+{
+    if ([self vna_handleEvent:event]) {
+        return;
+    }
+    [super keyDown:event];
 }
 
 /* copy
@@ -45,19 +54,10 @@
  */
 -(IBAction)copy:(id)sender
 {
-	if (self.selectedRow >= 0)
-	{
+	if (self.selectedRow >= 0) {
 		NSIndexSet * selectedRowIndexes = self.selectedRowIndexes;
 		[self.delegate copyTableSelection:selectedRowIndexes toPasteboard:NSPasteboard.generalPasteboard];
 	}
-}
-
-/* delete
- * Handle the Delete action when the article list has focus.
- */
--(IBAction)delete:(id)sender
-{
-	[APPCONTROLLER deleteMessage:self];
 }
 
 /* validateMenuItem
@@ -66,16 +66,10 @@
  */
 -(BOOL)validateMenuItem:(NSMenuItem *)menuItem
 {
-	if (menuItem.action == @selector(copy:))
-	{
+	if (menuItem.action == @selector(copy:)) {
 		return self.selectedRow >= 0;
 	}
-	if (menuItem.action == @selector(delete:))
-	{
-        return [self.delegate canDeleteMessageAtRow:self.selectedRow];
-	}
-	if (menuItem.action == @selector(selectAll:))
-	{
+	if (menuItem.action == @selector(selectAll:)) {
 		return YES;
 	}
 	return NO;

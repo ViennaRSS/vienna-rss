@@ -22,31 +22,40 @@
 
 @import UniformTypeIdentifiers;
 
+#import "Constants.h"
 #import "DownloadManager.h"
 #import "DSClickableURLTextField.h"
 #import "NSWorkspace+OpenWithMenu.h"
 #import "HelperFunctions.h"
+#import "GeneratedAssetSymbols.h"
 
 @interface EnclosureView ()
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *stackViewTrailingConstraint;
 
 -(IBAction)openFile:(id)sender;
 
 @end
 
-@implementation EnclosureView
+@implementation EnclosureView {
+    IBOutlet NSImageView *fileImage;
+    IBOutlet NSTextField *filenameLabel;
+    IBOutlet DSClickableURLTextField *filenameField;
+    IBOutlet NSButton *downloadButton;
+    NSString *enclosureURLString;
+}
 
 /* initWithFrame
  * Initialise the standard enclosure view.
  */
 -(instancetype)initWithFrame:(NSRect)frameRect
 {
-	if ((self = [super initWithFrame:frameRect]) != nil)
-	{
+	if ((self = [super initWithFrame:frameRect]) != nil) {
 		enclosureURLString = nil;
 
 		// Register to be notified when a download completes.
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-		[nc addObserver:self selector:@selector(handleDownloadCompleted:) name:@"MA_Notify_DownloadCompleted" object:nil];
+		[nc addObserver:self selector:@selector(handleDownloadCompleted:) name:MA_Notify_DownloadCompleted object:nil];
 	}
 	return self;
 }
@@ -57,6 +66,16 @@
 -(void)awakeFromNib
 {
 	[filenameField setCanCopyURLs:YES];
+
+    if (@available(macOS 26, *)) {
+        // Constrain the download button to the trailing layout margin.
+        NSLayoutXAxisAnchor *marginAnchor = self.layoutMarginsGuide.trailingAnchor;
+        NSLayoutXAxisAnchor *downloadButtonAnchor = downloadButton.trailingAnchor;
+        [marginAnchor constraintEqualToAnchor:downloadButtonAnchor].active = YES;
+
+        // Disable the existing layout constraint to avoid conflicts.
+        self.stackViewTrailingConstraint.active = NO;
+    }
 }
 
 /* handleDownloadCompleted
@@ -65,8 +84,9 @@
  */
 -(void)handleDownloadCompleted:(NSNotification *)notification
 {
-	if (enclosureURLString != nil)
+	if (enclosureURLString != nil) {
 		[self setEnclosureFile:enclosureURLString];
+	}
 }
 
 /* setEnclosureFile
@@ -81,23 +101,19 @@
     enclosureURLString = enclosureUrl.absoluteString;
 
 	NSString * basename = enclosureUrl.lastPathComponent;
-	if (basename==nil)
-	{
+	if (basename==nil) {
 		return;
 	}
 
 	// Find the file's likely location in Finder and see if it is already there.
 	// We'll set the options in the pane based on whether the file is there or not.
 	NSString * destPath = [DownloadManager fullDownloadPath:basename];
-	if (![DownloadManager isFileDownloaded:destPath])
-	{
+	if (![DownloadManager isFileDownloaded:destPath]) {
 		[downloadButton setTitle:NSLocalizedString(@"Download", nil)];
 		[downloadButton sizeToFit];
 		downloadButton.action = @selector(downloadFile:);
 		[filenameLabel setStringValue:NSLocalizedString(@"This article contains an enclosed file.", nil)];
-	}
-	else
-	{
+	} else {
 		NSString * appPath = [[NSWorkspace sharedWorkspace] vna_defaultHandlerApplicationForFile:destPath];
         NSString *displayName = [[[NSFileManager defaultManager] displayNameAtPath:appPath] stringByDeletingPathExtension];
         [downloadButton setTitle:[NSString stringWithFormat:NSLocalizedString(@"Open with %@", "Name the application which should open a file"), displayName]];
@@ -109,15 +125,18 @@
     NSString *extension = basename.pathExtension;
     if (@available(macOS 11, *)) {
         UTType *type = [UTType typeWithFilenameExtension:extension];
-        fileImage.image = [NSWorkspace.sharedWorkspace iconForContentType:type];
+        if (type) {
+            fileImage.image = [NSWorkspace.sharedWorkspace iconForContentType:type];
+        } else {
+            fileImage.image = [NSWorkspace.sharedWorkspace iconForContentType:UTTypeItem];
+        }
     } else {
         fileImage.image = [NSWorkspace.sharedWorkspace iconForFileType:extension];
     }
 	NSDictionary *linkAttributes = @{
-									 NSLinkAttributeName: enclosureURLString,
-									 NSForegroundColorAttributeName: [NSColor colorWithCalibratedHue:240.0f/360.0f saturation:1.0f brightness:0.75f alpha:1.0f],
-									 NSUnderlineStyleAttributeName: @YES,
-									 };
+		NSLinkAttributeName: enclosureURLString,
+        NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),
+	};
 	NSAttributedString * link = [[NSAttributedString alloc] initWithString:basename attributes:linkAttributes];
 	filenameField.attributedStringValue = link;
 }
@@ -146,12 +165,8 @@
  * Paint the enclosure background.
  */
 - (void)drawRect:(NSRect)rect {
-    if (@available(macOS 10.13, *)) {
-        [[NSColor colorNamed:@"AttachmentView"] setFill];
-    } else {
-        [[NSColor colorWithSRGBRed:237 green:249 blue:255 alpha:1] setFill];
-    }
-	NSRectFill(rect);
+    [[NSColor colorNamed:ACColorNameAttachmentViewBackground] setFill];
+    NSRectFill(self.bounds);
 }
 
 /* dealloc

@@ -8,7 +8,7 @@ GITHUB_REPO="https://github.com/ViennaRSS/vienna-rss"
 GITHUB_RELEASE_URL="${GITHUB_REPO}/releases/tag/v%2F${N_VCS_TAG}"
 SOURCEFORGE_ASSETS_URL="https://downloads.sourceforge.net/project/vienna-rss/v_${N_VCS_TAG}"
 
-TGZ_FILENAME="Vienna${N_VCS_TAG}.tgz"
+DMG_FILENAME="Vienna${N_VCS_TAG}.dmg"
 dSYM_FILENAME="Vienna${N_VCS_TAG}.${VCS_SHORT_HASH}-dSYM"
 
 case "${N_VCS_TAG}" in
@@ -25,18 +25,13 @@ esac
 
 pushd "${VIENNA_UPLOADS_DIR}"
 
-# Make the dSYM Bundle
-tar -a -cf "${dSYM_FILENAME}.tgz" --exclude '.DS_Store' -C "$ARCHIVE_DSYMS_PATH" .
+mv "${PROJECT_DERIVED_FILE_DIR}/Vienna${N_VCS_TAG}.dmg" .
 
-# Zip up the app
-# Copy the app cleanly
-xcodebuild -exportNotarizedApp -archivePath "$ARCHIVE_PATH" -exportPath .
-xattr -c -r Vienna.app
-tar -a -cf "${TGZ_FILENAME}" --exclude '.DS_Store' Vienna.app
-rm -rf Vienna.app
+# Make the dSYM Bundle
+tar -c -f "${dSYM_FILENAME}.tgz" --format ustar --gzip --no-xattrs --exclude '.DS_Store' -C "$ARCHIVE_DSYMS_PATH" .
 
 # Output the sparkle change log
-SPARKLE_BIN=$(find "${HOME}/Library/Developer/Xcode/DerivedData" -regex "${HOME}/Library/Developer/Xcode/DerivedData/${PROJECT}-.*/SourcePackages/artifacts/Sparkle/bin")
+SPARKLE_BIN=$(find "${HOME}/Library/Developer/Xcode/DerivedData" -regex "${HOME}/Library/Developer/Xcode/DerivedData/${PROJECT}-.*/SourcePackages/artifacts/sparkle/Sparkle/bin")
 
 if [ ! -d "$SPARKLE_BIN" ]; then
 	printf 'Unable to locate Sparkle binaries in DerivedData. ' 1>&2
@@ -52,19 +47,7 @@ if [ ! -f "$PRIVATE_EDDSA_KEY_PATH" ]; then
 	printf 'Unable to load signing private key vienna_private_eddsa_key.pem. Set PRIVATE_EDDSA_KEY_PATH in Scripts/Resources/CS-ID.xcconfig\n' 1>&2
 	exit 1
 fi
-ED_SIGNATURE_AND_LENGTH="$(sign_update "$TGZ_FILENAME" -f "$PRIVATE_EDDSA_KEY_PATH")"
-
-# Generate DSA signature (deprecated; used for backwards compatibility). This
-# command outputs only a signature string, cf. the EdDSA signature string.
-if [ ! -f "$PRIVATE_KEY_PATH" ]; then
-	printf 'Unable to load signing private key vienna_private_key.pem. ' 1>&2
-	printf 'Set PRIVATE_KEY_PATH in Scripts/Resources/CS-ID.xcconfig\n' 1>&2
-	exit 1
-fi
-
-export PATH="$SPARKLE_BIN/old_dsa_scripts:$PATH"
-
-DSA_SIGNATURE="sparkle:dsaSignature=\"$(sign_update "$TGZ_FILENAME" "$PRIVATE_KEY_PATH")\""
+ED_SIGNATURE_AND_LENGTH="$(sign_update "$DMG_FILENAME" -f "$PRIVATE_EDDSA_KEY_PATH")"
 
 pubDate="$(LC_ALL=en_US.UTF8 TZ=GMT date -jf '%FT%TZ' "${VCS_DATE}" '+%a, %d %b %G %T %z')"
 
@@ -73,10 +56,10 @@ cat > "${VIENNA_CHANGELOG}" << EOF
 <rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
 	<channel>
 		<title>Vienna Changelog</title>
-		<link>http://www.vienna-rss.com/</link>
+		<link>https://www.vienna-rss.com/</link>
 		<description>Vienna Changelog</description>
 		<language>en-us</language>
-		<copyright>Copyright 2010-2020, Steve Palmer and contributors</copyright>
+		<copyright>Copyright 2010-2025, Steve Palmer and contributors</copyright>
 		<item>
 			<title>Vienna ${V_VCS_TAG} :${VCS_SHORT_HASH}:</title>
 			<pubDate>${pubDate}</pubDate>
@@ -84,8 +67,18 @@ cat > "${VIENNA_CHANGELOG}" << EOF
 			<sparkle:version>${N_VCS_NUM}</sparkle:version>
 			<sparkle:shortVersionString>${V_VCS_TAG} :${VCS_SHORT_HASH}:</sparkle:shortVersionString>
 			<sparkle:minimumSystemVersion>${MACOSX_DEPLOYMENT_TARGET}.0</sparkle:minimumSystemVersion>
-			<enclosure url="${SOURCEFORGE_ASSETS_URL}/${TGZ_FILENAME}" $ED_SIGNATURE_AND_LENGTH $DSA_SIGNATURE type="application/octet-stream" />
+			<enclosure url="${SOURCEFORGE_ASSETS_URL}/${DMG_FILENAME}" $ED_SIGNATURE_AND_LENGTH type="application/octet-stream" />
 			<sparkle:releaseNotesLink>https://www.vienna-rss.com/sparkle-files/noteson${N_VCS_TAG}.html</sparkle:releaseNotesLink>
+		</item>
+		<item>
+			<title>Vienna 3.8.8 :de36b0c7:</title>
+			<pubDate>Sun, 09 Jul 2023 16:33:59 +0000</pubDate>
+			<link>https://github.com/ViennaRSS/vienna-rss/releases/tag/v%2F3.8.8</link>
+			<sparkle:version>8052</sparkle:version>
+			<sparkle:shortVersionString>3.8.8 :de36b0c7:</sparkle:shortVersionString>
+			<sparkle:minimumSystemVersion>10.12.0</sparkle:minimumSystemVersion>
+			<enclosure url="https://downloads.sourceforge.net/project/vienna-rss/v_3.8.8/Vienna3.8.8.tgz" sparkle:edSignature="FtnUx6IQRQeu8ngmI7WGXyy+Xr6XeFkPLW6V3PjYoPjNaS/yGWqGbWN/okl1bjTOdBph++lr1G2iaYm8Kr55DA==" length="13059409" sparkle:dsaSignature="MC4CFQCvuFjsi/J1Sww++hm8v3VuxoieQwIVAJr0U3qeZd8e1TGAEJf14YK5ooqo" type="application/octet-stream" />
+			<sparkle:releaseNotesLink>https://www.vienna-rss.com/sparkle-files/noteson3.8.8.html</sparkle:releaseNotesLink>
 		</item>
 		<item>
 			<title>Vienna 3.7.5 :e811b5c2:</title>

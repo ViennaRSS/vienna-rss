@@ -49,5 +49,5 @@ extension RSSSubscriber {
 }
 
 protocol RSSSource: AnyObject {
-    var rssSubscriber: RSSSubscriber? { get set }
+    var rssSubscriber: (any RSSSubscriber)? { get set }
 }

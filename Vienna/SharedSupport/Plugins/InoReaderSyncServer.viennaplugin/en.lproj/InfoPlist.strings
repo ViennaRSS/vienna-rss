@@ -1,0 +1,5 @@
+/* The name of sync server. */
+"FriendlyName" = "InoReader";
+
+/* An instruction for the user. This will be shown above the text fields. */
+"Hint" = "Enter username and password associated to your InoReader account";

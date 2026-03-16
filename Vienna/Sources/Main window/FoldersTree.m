@@ -20,33 +20,33 @@
 
 #import "FoldersTree.h"
 
-#import "ImageAndTextCell.h"
 #import "AppController.h"
 #import "Constants.h"
 #import "Preferences.h"
 #import "HelperFunctions.h"
 #import "StringExtensions.h"
+#import "FeedListConstants.h"
 #import "FolderView.h"
+#import "FeedListCellView.h"
 #import "OpenReader.h"
 #import "Database.h"
 #import "TreeNode.h"
 #import "Folder.h"
 #import "Vienna-Swift.h"
 
-@interface FoldersTree ()
+NSString * const MAPref_FeedListSizeMode = @"FeedListSizeMode";
+NSString * const MAPref_ShowFeedsWithUnreadItemsInBold = @"ShowFeedsWithUnreadItemsInBold";
 
-@property (readonly, nonatomic) NSMenu *folderMenu;
+static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
+
+@interface FoldersTree ()
 
 @property (readonly, nonatomic) NSArray *archiveState;
 @property (nonatomic) TreeNode *rootNode;
-@property (nonatomic) NSFont *cellFont;
-@property (nonatomic) NSFont *boldCellFont;
-@property (nonatomic) NSImage *folderErrorImage;
 @property (nonatomic) BOOL blockSelectionHandler;
-@property (nonatomic) BOOL canRenameFolders;
-@property (nonatomic) BOOL useToolTips;
 
--(void)setFolderListFont;
+@property (nullable, weak) NSText *fieldEditor;
+
 -(void)unarchiveState:(NSArray *)stateArray;
 -(void)reloadDatabase:(NSArray *)stateArray;
 -(BOOL)loadTree:(NSArray *)listOfFolders rootNode:(TreeNode *)node;
@@ -58,28 +58,24 @@
 -(void)handleFolderUpdate:(NSNotification *)nc;
 -(void)handleFolderDeleted:(NSNotification *)nc;
 -(void)handleShowFolderImagesChange:(NSNotification *)nc;
--(void)handleFolderFontChange:(NSNotification *)nc;
 -(void)reloadFolderItem:(id)node reloadChildren:(BOOL)flag;
 -(void)expandToParent:(TreeNode *)node;
--(BOOL)moveFolders:(NSArray *)array withGoogleSync:(BOOL)sync;
--(void)enableFoldersRenaming:(id)sender;
--(void)enableFoldersRenamingAfterDelay;
+-(BOOL)moveFolders:(NSArray *)array withOpenReaderSync:(BOOL)sync;
 
 @end
 
 @implementation FoldersTree
 
-- (instancetype)init {
+- (instancetype)init
+{
     self = [super init];
 
 	if (self) {
 		// Root node is never displayed since we always display from
 		// the second level down. It simply provides a convenient way
 		// of containing the other nodes.
-		_rootNode = [[TreeNode alloc] init:nil atIndex:0 folder:nil canHaveChildren:YES];
+		_rootNode = [[TreeNode alloc] initRootNode];
 		_blockSelectionHandler = NO;
-		_canRenameFolders = NO;
-		_useToolTips = NO;
 	}
 
 	return self;
@@ -90,33 +86,15 @@
  */
 -(void)initialiseFoldersTree
 {
-	NSTableColumn * tableColumn;
-	ImageAndTextCell * imageAndTextCell;
-
-	// Our folders have images next to them.
-	tableColumn = [self.outlineView tableColumnWithIdentifier:@"folderColumns"];
-	imageAndTextCell = [[ImageAndTextCell alloc] init];
-	[imageAndTextCell setEditable:YES];
-	tableColumn.dataCell = imageAndTextCell;
-
-	// Folder image
-	self.folderErrorImage = [NSImage imageNamed:@"folderError"];
-    self.folderErrorImage.accessibilityDescription = NSLocalizedString(@"Error", nil);
-	
-	// Create and set whatever font we're using for the folders
-	[self setFolderListFont];
-
 	// Allow a second click in a node to edit the node
-	self.outlineView.action = @selector(handleSingleClick:);
 	self.outlineView.doubleAction = @selector(handleDoubleClick:);
 	self.outlineView.target = self;
 
 	// Initially size the outline view column to be the correct width
 	[self.outlineView sizeLastColumnToFit];
 
-	// Don't resize the column when items are expanded as this messes up
-	// the placement of the unread count button.
-	[self.outlineView setAutoresizesOutlineColumn:NO];
+    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+    [self updateCellSize:[userDefaults integerForKey:MAPref_FeedListSizeMode]];
 
 	// Register for dragging
 	[self.outlineView registerForDraggedTypes:@[VNAPasteboardTypeFolderList, VNAPasteboardTypeRSSSource, VNAPasteboardTypeWebURLsWithTitles, NSPasteboardTypeString]];
@@ -126,103 +104,49 @@
 	[self.outlineView scrollRowToVisible:self.outlineView.selectedRow];
 
     self.outlineView.accessibilityValueDescription = NSLocalizedString(@"Folders", nil);
-
-	// Want tooltips
-	self.useToolTips = YES;
-	
-	// Set the menu for the popup button
-	self.outlineView.menu = self.folderMenu;
 	
 	self.blockSelectionHandler = YES;
 	[self reloadDatabase:[[Preferences standardPreferences] arrayForKey:MAPref_FolderStates]];
 	self.blockSelectionHandler = NO;
-	
+
 	// Register for notifications
 	NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-	[nc addObserver:self selector:@selector(handleFolderUpdate:) name:@"MA_Notify_FoldersUpdated" object:nil];
-	[nc addObserver:self selector:@selector(handleFolderNameChange:) name:@"MA_Notify_FolderNameChanged" object:nil];
-	[nc addObserver:self selector:@selector(handleFolderAdded:) name:@"MA_Notify_FolderAdded" object:nil];
+	[nc addObserver:self selector:@selector(handleFolderUpdate:) name:MA_Notify_FoldersUpdated object:nil];
+	[nc addObserver:self selector:@selector(handleFolderNameChange:) name:MA_Notify_FolderNameChanged object:nil];
+	[nc addObserver:self selector:@selector(handleFolderAdded:) name:MA_Notify_FolderAdded object:nil];
 	[nc addObserver:self selector:@selector(handleFolderDeleted:) name:VNADatabaseDidDeleteFolderNotification object:nil];
-	[nc addObserver:self selector:@selector(handleFolderFontChange:) name:@"MA_Notify_FolderFontChange" object:nil];
-	[nc addObserver:self selector:@selector(handleShowFolderImagesChange:) name:@"MA_Notify_ShowFolderImages" object:nil];
-	[nc addObserver:self selector:@selector(handleAutoSortFoldersTreeChange:) name:@"MA_Notify_AutoSortFoldersTreeChange" object:nil];
-    [nc addObserver:self selector:@selector(handleOpenReaderFolderChange:) name:@"MA_Notify_OpenReaderFolderChange" object:nil];
+	[nc addObserver:self selector:@selector(handleShowFolderImagesChange:) name:MA_Notify_ShowFolderImages object:nil];
+	[nc addObserver:self selector:@selector(handleAutoSortFoldersTreeChange:) name:MA_Notify_AutoSortFoldersTreeChange object:nil];
+    [nc addObserver:self selector:@selector(handleOpenReaderFolderChange:) name:MA_Notify_OpenReaderFolderChange object:nil];
+
+    [userDefaults addObserver:self
+                   forKeyPath:MAPref_FeedListSizeMode
+                      options:0
+                      context:VNAFoldersTreeObserverContext];
+    [userDefaults addObserver:self
+                   forKeyPath:MAPref_ShowFeedsWithUnreadItemsInBold
+                      options:0
+                      context:VNAFoldersTreeObserverContext];
 }
 
--(NSMenu *)folderMenu
+- (void)dealloc
 {
-    NSMenu *folderMenu = [[NSMenu alloc] init];
+    [NSNotificationCenter.defaultCenter removeObserver:self];
 
-	[folderMenu addItemWithTitle:NSLocalizedString(@"Refresh Selected Subscriptions", @"Title of a menu item")
-						  action:@selector(refreshSelectedSubscriptions:)
-				   keyEquivalent:@""];
-    [folderMenu addItem:[NSMenuItem separatorItem]];
-	[folderMenu addItemWithTitle:NSLocalizedString(@"Edit…", @"Title of a menu item")
-						  action:@selector(editFolder:)
-				   keyEquivalent:@""];
-	[folderMenu addItemWithTitle:NSLocalizedString(@"Rename…", @"Title of a menu item")
-						  action:@selector(renameFolder:)
-				   keyEquivalent:@""];
-	[folderMenu addItemWithTitle:NSLocalizedString(@"Delete…", @"Title of a menu item")
-						  action:@selector(deleteFolder:)
-				   keyEquivalent:@""];
-    [folderMenu addItem:[NSMenuItem separatorItem]];
-	[folderMenu addItemWithTitle:NSLocalizedString(@"Mark All Articles as Read", @"Title of a menu item")
-						  action:@selector(markAllRead:)
-				   keyEquivalent:@""];
-    [folderMenu addItem:[NSMenuItem separatorItem]];
-	[folderMenu addItemWithTitle:NSLocalizedString(@"Open Subscription Home Page", @"Title of a menu item")
-						  action:@selector(viewSourceHomePage:)
-				   keyEquivalent:@""];
-    NSMenuItem *alternateItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Open Subscription Home Page in External Browser", @"Title of a menu item")
-														   action:@selector(viewSourceHomePageInAlternateBrowser:)
-													keyEquivalent:@""];
-    alternateItem.keyEquivalentModifierMask = NSEventModifierFlagOption;
-	alternateItem.alternate = YES;
-    [folderMenu addItem:alternateItem];
-	[folderMenu addItemWithTitle:NSLocalizedString(@"Get Info", @"Title of a menu item")
-						  action:@selector(getInfo:)
-				   keyEquivalent:@""];
-    [folderMenu addItem:[NSMenuItem separatorItem]];
-	[folderMenu addItemWithTitle:NSLocalizedString(@"Force Refresh Selected Subscriptions From Open Reader", @"Title of a menu item")
-						  action:@selector(forceRefreshSelectedSubscriptions:)
-				   keyEquivalent:@""];
-
-    return folderMenu;
+    NSUserDefaults *userDefaults;
+    [userDefaults removeObserver:self
+                      forKeyPath:MAPref_FeedListSizeMode
+                         context:VNAFoldersTreeObserverContext];
+    [userDefaults removeObserver:self
+                      forKeyPath:MAPref_ShowFeedsWithUnreadItemsInBold
+                         context:VNAFoldersTreeObserverContext];
 }
 
 -(void)handleOpenReaderFolderChange:(NSNotification *)nc
 {
     // No need to sync with OpenReader server because this is triggered when
     // folder layout has changed at server level. Making a sync call would be redundant.
-    [self moveFolders:nc.object withGoogleSync:NO];
-}
-
-/* handleFolderFontChange
- * Called when the user changes the folder font and/or size in the Preferences
- */
--(void)handleFolderFontChange:(NSNotification *)nc
-{
-	[self setFolderListFont];
-	[self.outlineView reloadData];
-}
-
-/* setFolderListFont
- * Creates or updates the fonts used by the article list. The folder
- * list isn't automatically refreshed afterward - call reloadData for that.
- */
--(void)setFolderListFont
-{
-	NSInteger height;
-
-
-	Preferences * prefs = [Preferences standardPreferences];
-	self.cellFont = [NSFont fontWithName:prefs.folderListFont size:prefs.folderListFontSize];
-	self.boldCellFont = [[NSFontManager sharedFontManager] convertWeight:YES ofFont:self.cellFont];
-
-	height = [APPCONTROLLER.layoutManager defaultLineHeightForFont:self.boldCellFont];
-	self.outlineView.rowHeight = height + 5;
-	self.outlineView.intercellSpacing = NSMakeSize(10, 2);
+    [self moveFolders:nc.object withOpenReaderSync:NO];
 }
 
 /* reloadDatabase
@@ -230,15 +154,19 @@
  */
 -(void)reloadDatabase:(NSArray *)stateArray
 {
-	[self.rootNode removeChildren];
-	if (![self loadTree:[[Database sharedManager] arrayOfFolders:VNAFolderTypeRoot] rootNode:self.rootNode])
-	{
-		[[Preferences standardPreferences] setFoldersTreeSortMethod:VNAFolderSortByName];
-		[self.rootNode removeChildren];
-		[self loadTree:[[Database sharedManager] arrayOfFolders:VNAFolderTypeRoot] rootNode:self.rootNode];
-	}
-	[self.outlineView reloadData];
-	[self unarchiveState:stateArray];
+    [self.rootNode removeChildren];
+    if (![self loadTree:[[Database sharedManager] arrayOfFolders:VNAFolderTypeRoot] rootNode:self.rootNode]) {
+        // recover from problems by switching back to alphabetical auto sort of folders…
+        Preferences *prefs = [Preferences standardPreferences];
+        NSInteger selectedSortMethod = prefs.foldersTreeSortMethod;
+        prefs.foldersTreeSortMethod = VNAFolderSortByName;
+        [self.rootNode removeChildren];
+        [self loadTree:[[Database sharedManager] arrayOfFolders:VNAFolderTypeRoot] rootNode:self.rootNode];
+        // then restore user choice regarding sort method
+        prefs.foldersTreeSortMethod = selectedSortMethod;
+    }
+    [self.outlineView reloadData];
+    [self unarchiveState:stateArray];
 }
 
 /* saveFolderSettings
@@ -259,14 +187,12 @@
 	NSInteger count = self.outlineView.numberOfRows;
 	NSInteger index;
 
-	for (index = 0; index < count; ++index)
-	{
+	for (index = 0; index < count; ++index) {
 		TreeNode * node = (TreeNode *)[self.outlineView itemAtRow:index];
 		BOOL isItemExpanded = [self.outlineView isItemExpanded:node];
 		BOOL isItemSelected = [self.outlineView isRowSelected:index];
 
-		if (isItemExpanded || isItemSelected)
-		{
+		if (isItemExpanded || isItemSelected) {
 			NSDictionary * newDict = [NSMutableDictionary dictionary];
 			[newDict setValue:@(node.nodeId) forKey:@"NodeID"];
 			[newDict setValue:@(isItemExpanded) forKey:@"ExpandedState"];
@@ -283,21 +209,18 @@
  */
 -(void)unarchiveState:(NSArray *)stateArray
 {
-	for (NSDictionary * dict in stateArray)
-	{
+	for (NSDictionary * dict in stateArray) {
 		NSInteger folderId = [[dict valueForKey:@"NodeID"] integerValue];
 		TreeNode * node = [self.rootNode nodeFromID:folderId];
-		if (node != nil)
-		{
+		if (node != nil) {
 			BOOL doExpandItem = [[dict valueForKey:@"ExpandedState"] boolValue];
 			BOOL doSelectItem = [[dict valueForKey:@"SelectedState"] boolValue];
-			if ([self.outlineView isExpandable:node] && doExpandItem)
+			if ([self.outlineView isExpandable:node] && doExpandItem) {
 				[self.outlineView expandItem:node];
-			if (doSelectItem)
-			{
+			}
+			if (doSelectItem) {
 				NSInteger row = [self.outlineView rowForItem:node];
-				if (row >= 0)
-				{
+				if (row >= 0) {
 					NSIndexSet * indexes = [NSIndexSet indexSetWithIndex:(NSUInteger)row];
 					[self.outlineView selectRowIndexes:indexes byExtendingSelection:YES];
 				}
@@ -313,52 +236,72 @@
 -(BOOL)loadTree:(NSArray *)listOfFolders rootNode:(TreeNode *)node
 {
 	Folder * folder;
-	if ([Preferences standardPreferences].foldersTreeSortMethod != VNAFolderSortManual)
-	{
-		for (folder in listOfFolders)
-		{
+	if ([Preferences standardPreferences].foldersTreeSortMethod != VNAFolderSortManual) {
+		// make sure chaining is coherent…
+		NSInteger siblingsCount = listOfFolders.count;
+		[[Database sharedManager] setFirstChild:((Folder *)listOfFolders[0]).itemId forFolder:node.nodeId];
+		for (NSInteger i=0 ; i < siblingsCount-1 ; i++) {
+			NSInteger current = ((Folder *)listOfFolders[i]).itemId;
+			NSInteger next = ((Folder *)listOfFolders[i+1]).itemId;
+			[[Database sharedManager] setNextSibling:next forFolder:current];
+		}
+		[[Database sharedManager] setNextSibling:0 forFolder:((Folder *)listOfFolders[siblingsCount-1]).itemId];
+		// …then attach the different nodes
+		for (folder in listOfFolders) {
 			NSInteger itemId = folder.itemId;
 			NSArray * listOfSubFolders = [[[Database sharedManager] arrayOfFolders:itemId] sortedArrayUsingSelector:@selector(folderNameCompare:)];
 			NSInteger count = listOfSubFolders.count;
-			TreeNode * subNode;
-
-			subNode = [[TreeNode alloc] init:node atIndex:-1 folder:folder canHaveChildren:(count > 0)];
-			if (count)
+			TreeNode *subNode = [[TreeNode alloc] initWithFolder:folder];
+			[node insertChild:subNode atIndex:-1];
+			if (count) {
 				[self loadTree:listOfSubFolders rootNode:subNode];
+			}
 
 		}
-	}
-	else
-	{
+	} else {
 		NSArray * listOfFolderIds = [listOfFolders valueForKey:@"itemId"];
 		NSUInteger index = 0;
 		NSInteger nextChildId = (node == self.rootNode) ? [Database sharedManager].firstFolderId : node.folder.firstChildId;
-		while (nextChildId > 0)
-		{
-			NSUInteger  listIndex = [listOfFolderIds indexOfObject:@(nextChildId)];
-			if (listIndex == NSNotFound)
-			{
-				NSLog(@"Cannot find child with id %ld for folder with id %ld", (long)nextChildId, (long)node.nodeId);
+		NSInteger predecessorId = 0;
+		while (nextChildId > 0) {
+			if ([self.rootNode nodeFromID:nextChildId]) { // already present in our tree ?
+				NSLog(@"Duplicate child with id %ld asked under folder with id %ld", (long)nextChildId, (long)node.nodeId);
 				return NO;
 			}
-			folder = listOfFolders[listIndex];
+			NSUInteger  listIndex = [listOfFolderIds indexOfObject:@(nextChildId)];
+			if (listIndex == NSNotFound) {
+				NSLog(@"Cannot find child with id %ld for folder with id %ld", (long)nextChildId, (long)node.nodeId);
+				folder = [[Database sharedManager] folderFromID:nextChildId];
+				if (!folder || folder.parentId != node.nodeId) {
+					return NO;
+				}
+				if (predecessorId == 0) {
+					if (![[Database sharedManager] setFirstChild:nextChildId forFolder:node.nodeId]) {
+						return NO;
+					}
+				} else {
+					if (![[Database sharedManager] setNextSibling:nextChildId forFolder:predecessorId]) {
+						return NO;
+					}
+				}
+				NSLog(@"Repositioned folder %@ as child of folder with id %ld", folder, (long)node.nodeId);
+			} else {
+				folder = listOfFolders[listIndex];
+			}
 			NSArray * listOfSubFolders = [[Database sharedManager] arrayOfFolders:nextChildId];
 			NSUInteger count = listOfSubFolders.count;
-			TreeNode * subNode;
-			
-			subNode = [[TreeNode alloc] init:node atIndex:index folder:folder canHaveChildren:(count > 0)];
-			if (count)
-			{
-				if (![self loadTree:listOfSubFolders rootNode:subNode])
-				{
+			TreeNode *subNode = [[TreeNode alloc] initWithFolder:folder];
+			[node insertChild:subNode atIndex:index];
+			if (count) {
+				if (![self loadTree:listOfSubFolders rootNode:subNode]) {
 					return NO;
 				}
 			}
+			predecessorId = nextChildId;
 			nextChildId = folder.nextSiblingId;
 			++index;
 		}
-		if (index < listOfFolders.count)
-		{
+		if (index < listOfFolders.count) {
 			NSLog(@"Missing children for folder with id %ld, %ld", (long)nextChildId, (long)node.nodeId);
 			return NO;
 		}
@@ -384,8 +327,7 @@
 		[array addObject:node.folder];
     }
 	node = node.firstChild;
-	while (node != nil)
-	{
+	while (node != nil) {
 		[array addObjectsFromArray:[self folders:node.nodeId]];
 		node = node.nextSibling;
 	}
@@ -401,40 +343,17 @@
 	NSMutableArray * array = [NSMutableArray array];
 	TreeNode * node;
 
-	if (!folderId)
+	if (!folderId) {
 		node = self.rootNode;
-	else
+	} else {
 		node = [self.rootNode nodeFromID:folderId];
+	}
 	node = node.firstChild;
-	while (node != nil)
-	{
+	while (node != nil) {
 		[array addObject:node.folder];
 		node = node.nextSibling;
 	}
 	return [array copy];
-}
-
-/* updateAlternateMenuTitle
- * Sets the appropriate title for the alternate item in the contextual menu
- * when user changes preferences for opening pages in external browser
- */
--(void)updateAlternateMenuTitle
-{
-	NSMenuItem * mainMenuItem = menuItemWithAction(@selector(viewSourceHomePageInAlternateBrowser:));
-	if (mainMenuItem == nil)
-		return;
-	NSString * menuTitle = mainMenuItem.title;
-	NSInteger index;
-	NSMenu * folderMenu = self.outlineView.menu;
-	if (folderMenu != nil)
-	{
-		index = [folderMenu indexOfItemWithTarget:nil andAction:@selector(viewSourceHomePageInAlternateBrowser:)];
-		if (index >= 0)
-		{
-			NSMenuItem * contextualItem = [folderMenu itemAtIndex:index];
-			contextualItem.title = menuTitle;
-		}
-	}
 }
 
 /* updateFolder
@@ -444,13 +363,10 @@
 -(void)updateFolder:(NSInteger)folderId recurseToParents:(BOOL)recurseToParents
 {
 	TreeNode * node = [self.rootNode nodeFromID:folderId];
-	if (node != nil)
-	{
-		[self.outlineView reloadItem:node reloadChildren:YES];
-		if (recurseToParents)
-		{
-			while (node.parentNode != self.rootNode)
-			{
+	if (node != nil) {
+		[self.outlineView reloadItem:node];
+		if (recurseToParents) {
+			while (node.parentNode != self.rootNode) {
 				node = node.parentNode;
 				[self.outlineView reloadItem:node];
 			}
@@ -463,11 +379,9 @@
  */
 -(BOOL)canDeleteFolderAtRow:(NSInteger)row
 {
-	if (row >= 0)
-	{
+	if (row >= 0) {
 		TreeNode * node = [self.outlineView itemAtRow:row];
-		if (node != nil)
-		{
+		if (node != nil) {
 			Folder * folder = [[Database sharedManager] folderFromID:node.nodeId];
 			return folder && folder.type != VNAFolderTypeSearch && folder.type != VNAFolderTypeTrash && ![Database sharedManager].readOnly && self.outlineView.window.visible;
 		}
@@ -482,19 +396,19 @@
 -(BOOL)selectFolder:(NSInteger)folderId
 {
 	TreeNode * node = [self.rootNode nodeFromID:folderId];
-	if (!node)
+	if (!node) {
 		return NO;
+	}
 
 	// Walk up to our parent
 	[self expandToParent:node];
 	NSInteger rowIndex = [self.outlineView rowForItem:node];
-	if (rowIndex >= 0)
-	{
+	if (rowIndex >= 0) {
 		self.blockSelectionHandler = YES;
 		[self.outlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:(NSUInteger)rowIndex] byExtendingSelection:NO];
 		[self.outlineView scrollRowToVisible:rowIndex];
 		
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderSelectionChange" object:node];
+		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_FolderSelectionChange object:node];
 		self.blockSelectionHandler = NO;
 		return YES;
 	}
@@ -507,8 +421,7 @@
  */
 -(void)expandToParent:(TreeNode *)node
 {
-	if (node.parentNode)
-	{
+	if (node.parentNode) {
 		[self expandToParent:node.parentNode];
 		[self.outlineView expandItem:node.parentNode];
 	}
@@ -522,33 +435,35 @@
 {
     // keep track of parent (or grandparent) of starting node
     TreeNode * parentOfStartingNode = startingNode;
-    while (parentOfStartingNode != nil && parentOfStartingNode.parentNode != self.rootNode)
-    {
+    while (parentOfStartingNode != nil && parentOfStartingNode.parentNode != self.rootNode) {
         parentOfStartingNode = parentOfStartingNode.parentNode;
     }
 	TreeNode * node = startingNode;
 
-	while (node != nil)
-	{
+	while (node != nil) {
 		TreeNode * nextNode = nil;
 		TreeNode * parentNode = node.parentNode;
-		if ((node.folder.childUnreadCount > 0) && [self.outlineView isItemExpanded:node])
+		if ((node.folder.childUnreadCount > 0) && [self.outlineView isItemExpanded:node]) {
 			nextNode = node.firstChild;
-		if (nextNode == nil)
+		}
+		if (nextNode == nil) {
 			nextNode = node.nextSibling;
-		while (nextNode == nil && parentNode != nil)
-		{
+		}
+		while (nextNode == nil && parentNode != nil) {
 			nextNode = parentNode.nextSibling;
 			parentNode = parentNode.parentNode;
 		}
-		if (nextNode == nil)
+		if (nextNode == nil) {
 			nextNode = self.rootNode.firstChild;
+		}
 
-		if ((nextNode.folder.childUnreadCount) && ![self.outlineView isItemExpanded:nextNode])
+		if ((nextNode.folder.childUnreadCount) && ![self.outlineView isItemExpanded:nextNode]) {
 			return nextNode.nodeId;
+		}
 		
-		if (nextNode.folder.unreadCount)
+		if (nextNode.folder.unreadCount) {
 			return nextNode.nodeId;
+		}
 
 		// If we've gone full circle and not found
 		// anything, we're out of unread articles
@@ -600,51 +515,75 @@
 	return folder ? ((folder.type == VNAFolderTypeGroup) ? folder.itemId : folder.parentId) : VNAFolderTypeRoot;
 }
 
-/* actualSelection
- * Return the ID of the selected folder in the folder list.
- */
--(NSInteger)actualSelection
+/// Returns the node identifier of the selected folder in the folder list.
+/// If the user has right-clicked a folder then that folder is returned.
+/// Otherwise, the last selected (i.e. highlighted) folder is returned.
+- (NSInteger)actualSelection
 {
-	TreeNode * node = [self.outlineView itemAtRow:self.outlineView.selectedRow];
+    NSInteger rowIndex = self.outlineView.clickedRow;
+
+    // A rowIndex of -1 means that no row has been clicked. In that case, fall
+    // back to the selected row. Note that a user might have selected multiple
+    // rows, but only the row that was added last to the selection is returned.
+    if (rowIndex == -1) {
+        rowIndex = self.outlineView.selectedRow;
+    }
+
+    TreeNode *node = [self.outlineView itemAtRow:rowIndex];
 	return node.nodeId;
 }
 
-/* countOfSelectedFolders
- * Return the total number of folders selected in the tree.
- */
--(NSInteger)countOfSelectedFolders
+/// Returns the total number of folders selected.
+- (NSInteger)countOfSelectedFolders
 {
-	return self.outlineView.numberOfSelectedRows;
+    return self.outlineView.numberOfSelectedRows;
 }
 
-/* selectedFolders
- * Returns an exclusive array of all selected folders. Exclusive means that if any folder is
- * a group folder, we don't automatically return a list of all folders within that group.
- */
--(NSArray *)selectedFolders
+/// Returns an array of all selected folders, without subfolders. If the user
+/// has clicked folders then those are returned, otherwise, selected (i.e.
+/// highlighted) folders are returned.
+- (NSArray *)selectedFolders
 {
-	NSIndexSet * rowIndexes = self.outlineView.selectedRowIndexes;
-	NSUInteger count = rowIndexes.count;
-	
-	// Make a mutable array
-	NSMutableArray * arrayOfSelectedFolders = [NSMutableArray arrayWithCapacity:count];
+    // Check first whether the user has selected a row by right-clicking. The
+    // tricky part is that the user can highlight multiple rows first and then
+    // either click on any one of the highlighted rows to make them all appear
+    // clicked (shown by a border around the selection) or click on a row that
+    // is not highlighted, in which case that row will not be highlighted, but
+    // still appear clicked.
+    //
+    // -clickedRow only ever returns the actual clicked row. In that case, the
+    // -selectedRowIndexes must be cross-checked to ascertain that the clicked
+    // row is part of the selection.
+    NSInteger clickedRow = self.outlineView.clickedRow;
+    NSIndexSet *selectedRows = self.outlineView.selectedRowIndexes;
 
-	if (count > 0)
-	{
-		NSUInteger index = rowIndexes.firstIndex;
-		while (index != NSNotFound)
-		{
-			TreeNode * node = [self.outlineView itemAtRow:index];
-			Folder * folder = node.folder;
-			if (folder != nil)
-			{
-				[arrayOfSelectedFolders addObject:folder];
-			}
-			index = [rowIndexes indexGreaterThanIndex:index];
-		}
-	}
-	
-	return [arrayOfSelectedFolders copy];
+    // A row index of -1 means that no row has been clicked.
+    if (clickedRow >= 0 && ![selectedRows containsIndex:clickedRow]) {
+        TreeNode *node = [self.outlineView itemAtRow:clickedRow];
+        Folder *folder = node.folder;
+        if (folder) {
+            return @[folder];
+        } else {
+            return @[];
+        }
+    }
+
+    NSUInteger count = selectedRows.count;
+    NSMutableArray *selectedFolders = [NSMutableArray arrayWithCapacity:count];
+
+    if (count > 0) {
+        NSUInteger index = selectedRows.firstIndex;
+        while (index != NSNotFound) {
+            TreeNode *node = [self.outlineView itemAtRow:index];
+            Folder *folder = node.folder;
+            if (folder) {
+                [selectedFolders addObject:folder];
+            }
+            index = [selectedRows indexGreaterThanIndex:index];
+        }
+    }
+
+    return [selectedFolders copy];
 }
 
 /* setManualSortOrderForNode
@@ -659,20 +598,16 @@
     Database *dbManager = [Database sharedManager];
 	
 	NSInteger count = node.countOfChildren;
-	if (count > 0)
-	{
-		
+	if (count > 0) {
         [dbManager setFirstChild:[node childByIndex:0].nodeId forFolder:folderId];
 		[self setManualSortOrderForNode:[node childByIndex:0]];
 		NSInteger index;
-		for (index = 1; index < count; ++index)
-		{
+		for (index = 1; index < count; ++index) {
 			[dbManager setNextSibling:[node childByIndex:index].nodeId forFolder:[node childByIndex:index - 1].nodeId];
 			[self setManualSortOrderForNode:[node childByIndex:index]];
 		}
 		[dbManager setNextSibling:0 forFolder:[node childByIndex:index - 1].nodeId];
-	}
-    else {
+	} else {
 		[dbManager setFirstChild:0 forFolder:folderId];
     }
 }
@@ -684,8 +619,7 @@
 {
 	NSInteger selectedFolderId = self.actualSelection;
 	
-	if ([Preferences standardPreferences].foldersTreeSortMethod == VNAFolderSortManual)
-	{
+	if ([Preferences standardPreferences].foldersTreeSortMethod == VNAFolderSortManual) {
         [self setManualSortOrderForNode:self.rootNode];
 	}
 	
@@ -705,38 +639,20 @@
 	[self.outlineView reloadData];
 }
 
-/* handleSingleClick
- * If the folder is already highlighted, then edit the folder name.
- */
--(void)handleSingleClick:(id)sender
-{
-	if (self.canRenameFolders)
-	{
-		NSInteger clickedRow = self.outlineView.clickedRow;
-		if (clickedRow >= 0)
-			[NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(renameFolderByTimer:) userInfo:[self.outlineView itemAtRow:clickedRow] repeats:NO];
-	}
-}
-
 /* handleDoubleClick
  * Handle the user double-clicking a node.
  */
 -(void)handleDoubleClick:(id)sender
 {
-	// Prevent the first click of the double click from triggering immediate folder name editing.
-	[self enableFoldersRenamingAfterDelay];
-	
-	TreeNode * node = [self.outlineView itemAtRow:self.outlineView.selectedRow];
+    TreeNode * node = [self.outlineView itemAtRow:self.outlineView.selectedRow];
 
-	if (node.folder.type == VNAFolderTypeRSS || node.folder.type == VNAFolderTypeOpenReader)
-	{
+	if (node.folder.type == VNAFolderTypeRSS || node.folder.type == VNAFolderTypeOpenReader) {
 		NSString * urlString = node.folder.homePage;
         if (urlString && !urlString.vna_isBlank) {
 			[APPCONTROLLER openURLFromString:urlString inPreferredBrowser:YES];
         }
-	}
-	else if (node.folder.type == VNAFolderTypeSmart) {
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_EditFolder" object:node];
+	} else if (node.folder.type == VNAFolderTypeSmart) {
+		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_EditFolder object:node];
 	}
 }
 
@@ -751,18 +667,15 @@
 	NSInteger folderId = ((NSNumber *)nc.object).integerValue;
 	TreeNode * thisNode = [self.rootNode nodeFromID:folderId];
 	TreeNode * nextNode;
-	
-	// Stop any in process progress indicators.
-	[thisNode stopAndReleaseProgressIndicator];
 
 	// First find the next node we'll select
-	if (thisNode.nextSibling != nil)
+	if (thisNode.nextSibling != nil) {
 		nextNode = thisNode.nextSibling;
-	else
-	{
+	} else {
 		nextNode = thisNode.parentNode;
-		if (nextNode.countOfChildren > 1)
+		if (nextNode.countOfChildren > 1) {
 			nextNode = [nextNode childByIndex:nextNode.countOfChildren - 2];
+		}
 	}
 
 	// Ask our parent to delete us
@@ -773,11 +686,10 @@
 	// Send the selection notification ourselves because if we're deleting at the end of
 	// the folder list, the selection won't actually change and outlineViewSelectionDidChange
 	// won't get tripped.
-	if (currentFolderId == folderId)
-	{
+	if (currentFolderId == folderId) {
 		self.blockSelectionHandler = YES;
 		[self selectFolder:nextNode.nodeId];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderSelectionChange" object:nextNode];
+		[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_FolderSelectionChange object:nextNode];
 		self.blockSelectionHandler = NO;
 	}
 }
@@ -794,15 +706,14 @@
 
 	BOOL moveSelection = (folderId == self.actualSelection);
 
-	if ([Preferences standardPreferences].foldersTreeSortMethod == VNAFolderSortByName)
+	if ([Preferences standardPreferences].foldersTreeSortMethod == VNAFolderSortByName) {
 		[parentNode sortChildren:VNAFolderSortByName];
+	}
 
 	[self reloadFolderItem:parentNode reloadChildren:YES];
-	if (moveSelection)
-	{
+	if (moveSelection) {
 		NSInteger row = [self.outlineView rowForItem:node];
-		if (row >= 0)
-		{
+		if (row >= 0) {
 			self.blockSelectionHandler = YES;
 			NSIndexSet * indexes = [NSIndexSet indexSetWithIndex:(NSUInteger)row];
 			[self.outlineView selectRowIndexes:indexes byExtendingSelection:NO];
@@ -819,10 +730,11 @@
 -(void)handleFolderUpdate:(NSNotification *)nc
 {
 	NSInteger folderId = ((NSNumber *)nc.object).integerValue;
-	if (folderId == 0)
+	if (folderId == 0) {
 		[self reloadFolderItem:self.rootNode reloadChildren:YES];
-	else
+	} else {
 		[self updateFolder:folderId recurseToParents:YES];
+	}
 }
 
 /* handleFolderAdded
@@ -835,22 +747,22 @@
 
 	NSInteger parentId = newFolder.parentId;
 	TreeNode * node = (parentId == VNAFolderTypeRoot) ? self.rootNode : [self.rootNode nodeFromID:parentId];
-	if (!node.canHaveChildren)
-		[node setCanHaveChildren:YES];
 	
 	NSInteger childIndex = -1;
-	if ([Preferences standardPreferences].foldersTreeSortMethod == VNAFolderSortManual)
-	{
+	if ([Preferences standardPreferences].foldersTreeSortMethod == VNAFolderSortManual) {
 		NSInteger nextSiblingId = newFolder.nextSiblingId;
-		if (nextSiblingId > 0)
-		{
+		if (nextSiblingId > 0) {
 			TreeNode * nextSibling = [node nodeFromID:nextSiblingId];
-			if (nextSibling != nil)
+			if (nextSibling != nil) {
 				childIndex = [node indexOfChild:nextSibling];
+			}
 		}
 	}
 	
-	TreeNode __unused * newNode = [[TreeNode alloc] init:node atIndex:childIndex folder:newFolder canHaveChildren:NO];
+    if (![self.rootNode nodeFromID:newFolder.itemId]) {
+        TreeNode *newNode = [[TreeNode alloc] initWithFolder:newFolder];
+        [node insertChild:newNode atIndex:childIndex];
+    }
 	[self reloadFolderItem:node reloadChildren:YES];
 	[self selectFolder:newFolder.itemId];
 }
@@ -860,176 +772,11 @@
  */
 -(void)reloadFolderItem:(id)node reloadChildren:(BOOL)flag
 {
-	if (node == self.rootNode)
-		[self.outlineView reloadData];
-	else
-		[self.outlineView reloadItem:node reloadChildren:YES];
-}
-
-/* menuWillAppear
- * Called when the popup menu is opened on the folder list. We move the
- * selection to whichever node is under the cursor so the context between
- * the menu items and the node is made clear.
- */
--(void)folderView:(FolderView *)olv menuWillAppear:(NSEvent *)theEvent
-{
-	NSInteger row = [olv rowAtPoint:[olv convertPoint:theEvent.locationInWindow fromView:nil]];
-	if (row >= 0)
-	{
-		// Select the row under the cursor if it isn't already selected
-		if (olv.numberOfSelectedRows <= 1)
-			[olv selectRowIndexes:[NSIndexSet indexSetWithIndex:(NSUInteger)row] byExtendingSelection:NO];
-	}
-}
-
-/* isItemExpandable
- * Tell the outline view if the specified item can be expanded. The answer is
- * yes if we have children, no otherwise.
- */
--(BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item
-{
-	TreeNode * node = (TreeNode *)item;
-	if (node == nil)
-		node = self.rootNode;
-	return node.canHaveChildren;
-}
-
-/* numberOfChildrenOfItem
- * Returns the number of children belonging to the specified item
- */
--(NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item
-{
-	TreeNode * node = (TreeNode *)item;
-	if (node == nil)
-		node = self.rootNode;
-	return node.countOfChildren;
-}
-
-/* child
- * Returns the child at the specified offset of the item
- */
--(id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item
-{
-	TreeNode * node = (TreeNode *)item;
-	if (node == nil)
-		node = self.rootNode;
-	return [node childByIndex:index];
-}
-
-/* outlineView:tooltipForCell:rect:tableColumn:item:mouseLocation: [delegate]
- * For items that have counts, we show a tooltip that aggregates the counts.
- */
-- (NSString *)outlineView:(NSOutlineView *)outlineView toolTipForCell:(NSCell *)cell rect:(NSRectPointer)rect tableColumn:(NSTableColumn *)tableColumn item:(id)item mouseLocation:(NSPoint)mouseLocation
-{
-	TreeNode * node = (TreeNode *)item;
-	if (self.useToolTips && node != nil)
-	{
-		if (node.folder.nonPersistedFlags & VNAFolderFlagError)
-			return NSLocalizedString(@"An error occurred when this feed was last refreshed", nil);
-		NSInteger unreadCount;
-		if (node.folder.childUnreadCount) {
-		    unreadCount = node.folder.childUnreadCount;
-		} else {
-		    unreadCount = node.folder.unreadCount;
-		}
-		if (unreadCount) {
-			return [NSString stringWithFormat:NSLocalizedString(@"%d unread articles", nil), (int)unreadCount];
-		}
-	}
-	return nil;
-}
-
-/* objectValueForTableColumn
- * Returns the actual string that is displayed in the cell. Folders that have child folders with unread
- * articles show the aggregate unread article count.
- */
--(id)outlineView:(NSOutlineView *)olv objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
-{
-	TreeNode * node = (TreeNode *)item;
-	if (node == nil)
-		node = self.rootNode;
-
-	static NSDictionary * info = nil;
-	if (info == nil)
-	{
-		NSMutableParagraphStyle * style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-		style.lineBreakMode = NSLineBreakByTruncatingTail;
-		style.tighteningFactorForTruncation = 0.0;
-		style.alignment = NSTextAlignmentLeft;
-		info = @{NSParagraphStyleAttributeName: style};
-	}
-
-	Folder * folder = node.folder;
-    NSMutableDictionary * myInfo = [NSMutableDictionary dictionaryWithDictionary:info];
-    if (folder.isUnsubscribed) {
-        myInfo[NSForegroundColorAttributeName] = NSColor.secondaryLabelColor;
+    if (node == self.rootNode) {
+        [self.outlineView reloadData];
     } else {
-		myInfo[NSForegroundColorAttributeName] = NSColor.labelColor;
+        [self.outlineView reloadItem:node reloadChildren:flag];
     }
-	// Set the font
-	if (folder.unreadCount ||  (folder.childUnreadCount && ![olv isItemExpanded:item]))
-		myInfo[NSFontAttributeName] = self.boldCellFont;
-	else
-		myInfo[NSFontAttributeName] = self.cellFont;
-	
-	return [[NSAttributedString alloc] initWithString:node.nodeName attributes:myInfo];
-}
-
-/* willDisplayCell
- * Hook before a cell is displayed to set the correct image for that cell. We use this to show the folder
- * in normal or bold face depending on whether or not the folder (or sub-folders) have unread articles. This
- * is also the place where we set the folder image.
- */
--(void)outlineView:(NSOutlineView *)olv willDisplayCell:(NSCell *)cell forTableColumn:(NSTableColumn *)tableColumn item:(id)item 
-{
-	if ([tableColumn.identifier isEqualToString:@"folderColumns"]) 
-	{
-		TreeNode * node = (TreeNode *)item;
-		Folder * folder = node.folder;
-		ImageAndTextCell * realCell = (ImageAndTextCell *)cell;
-
-		// Use the auxiliary position of the feed item to show
-		// the refresh icon if the feed is being refreshed, or an
-		// error icon if the feed failed to refresh last time.
-		if (folder.isUpdating)
-		{
-			[realCell setAuxiliaryImage:nil];
-			[realCell setInProgress:YES];
-		}
-		else if (folder.isError)
-		{
-			realCell.auxiliaryImage = self.folderErrorImage;
-			[realCell setInProgress:NO];
-		}
-		else
-		{
-			[realCell setAuxiliaryImage:nil];
-			[realCell setInProgress:NO];
-		}
-
-		if (folder.type == VNAFolderTypeSmart)  // Because if the search results contain unread articles we don't want the smart folder name to be bold.
-		{
-			[realCell clearCount];
-		}
-		else if (folder.unreadCount)
-		{
-			[realCell setCount:folder.unreadCount];
-		}
-		else if (folder.childUnreadCount && ![olv isItemExpanded:item])
-		{
-			[realCell setCount:folder.childUnreadCount];
-		}
-		else
-		{
-			[realCell clearCount];
-		}
-
-		// Only show folder images if the user prefers them.
-		Preferences * prefs = [Preferences standardPreferences];
-		realCell.image = (prefs.showFolderImages ? folder.image : [folder standardImage]);
-
-		[realCell setItem:item];
-	}
 }
 
 /* mainView
@@ -1040,20 +787,6 @@
 	return self.outlineView;
 }
 
-/* outlineViewSelectionDidChange
- * Called when the selection in the folder list has changed.
- */
--(void)outlineViewSelectionDidChange:(NSNotification *)notification
-{
-	[self enableFoldersRenamingAfterDelay];
-	
-	if (!self.blockSelectionHandler)
-	{
-		TreeNode * node = [self.outlineView itemAtRow:self.outlineView.selectedRow];
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FolderSelectionChange" object:node];
-	}
-}
-
 /* renameFolder
  * Begin in-place editing of the selected folder name.
  */
@@ -1062,39 +795,18 @@
 	TreeNode * node = [self.rootNode nodeFromID:folderId];
 	NSInteger rowIndex = [self.outlineView rowForItem:node];
 		
-	if (rowIndex != -1)
-	{
+	if (rowIndex != -1) {
+        if (self.fieldEditor && self.fieldEditor.delegate) {
+            NSTextField *textField = (NSTextField *)self.fieldEditor.delegate;
+            [textField abortEditing];
+        }
+
 		[self.outlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:(NSUInteger)rowIndex] byExtendingSelection:NO];
-		[self.outlineView editColumn:[self.outlineView columnWithIdentifier:@"folderColumns"] row:rowIndex withEvent:nil select:YES];
+		NSInteger columnIndex = [self.outlineView columnWithIdentifier:@"folderColumns"];
+        VNAFeedListCellView * cellView = [self.outlineView viewAtColumn:columnIndex row:rowIndex makeIfNecessary:NO];
+        cellView.textField.editable = YES;
+		[self.outlineView editColumn:columnIndex row:rowIndex withEvent:nil select:YES];
 	}
-}
-
-/* renameFolderByTimer
- * If no disabling events have occurred during the timer interval, rename the folder.
- */
--(void)renameFolderByTimer:(id)sender
-{
-	if (self.canRenameFolders)
-	{
-		[self renameFolder:((TreeNode *)[sender userInfo]).nodeId];
-	}
-}
-
-/* enableFoldersRenaming
- * Enable the renaming of folders.
- */
--(void)enableFoldersRenaming:(id)sender
-{
-	self.canRenameFolders = YES;
-}
-
-/* enableFoldersRenamingAfterDelay
- * Set a timer to enable renaming of folders.
- */
--(void)enableFoldersRenamingAfterDelay
-{
-	self.canRenameFolders = NO;
-	[NSTimer scheduledTimerWithTimeInterval:[NSEvent doubleClickInterval] target:self selector:@selector(enableFoldersRenaming:) userInfo:nil repeats:NO];
 }
 
 /* folderViewWillBecomeFirstResponder
@@ -1104,93 +816,6 @@
 -(void)folderViewWillBecomeFirstResponder
 {
 	[self.controller.browser switchToPrimaryTab];
-	[self enableFoldersRenamingAfterDelay];
-}
-
-/* shouldEditTableColumn [delegate]
- * The editing of folder names will be handled by single clicks.
- */
--(BOOL)outlineView:(NSOutlineView *)outlineView shouldEditTableColumn:(NSTableColumn *)tableColumn item:(id)item
-{
-	return NO;
-}
-
-/* setObjectValue [datasource]
- * Update the folder name when the user has finished editing it.
- */
--(void)outlineView:(NSOutlineView *)olv setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
-{
-	TreeNode * node = (TreeNode *)item;
-	NSString * newName = (NSString *)object;
-	Folder * folder = node.folder;
-	
-	// Remove the "☁️ " symbols on Open Reader feeds
-	if (folder.type == VNAFolderTypeOpenReader && [newName hasPrefix:@"☁️ "]) {
-		NSString *tmpName = [newName substringFromIndex:3];
-		newName = tmpName;
-	}
-	
-	if (![folder.name isEqualToString:newName])
-	{
-		Database * dbManager = [Database sharedManager];
-		if ([dbManager folderFromName:newName] != nil)
-			runOKAlertPanel(NSLocalizedString(@"Cannot rename folder", nil), NSLocalizedString(@"A folder with that name already exists", nil));
-		else
-        {
-            [dbManager setName:newName forFolder:folder.itemId];
-            if (folder.type == VNAFolderTypeOpenReader) {
-                [[OpenReader sharedManager] setFolderTitle:newName forFeed:folder.remoteId];
-            }
-        }
-	}
-}
-
-/* validateDrop
- * Called when something is being dragged over us. We respond with an NSDragOperation value indicating the
- * feedback for the user given where we are.
- */
--(NSDragOperation)outlineView:(NSOutlineView*)olv validateDrop:(id <NSDraggingInfo>)info proposedItem:(id)item proposedChildIndex:(NSInteger)index
-{
-	NSPasteboard * pb = [info draggingPasteboard]; 
-	NSString * type = [pb availableTypeFromArray:@[VNAPasteboardTypeFolderList, VNAPasteboardTypeRSSSource, VNAPasteboardTypeWebURLsWithTitles, NSPasteboardTypeString]];
-	NSDragOperation dragType = ([type isEqualToString:VNAPasteboardTypeFolderList]) ? NSDragOperationMove : NSDragOperationCopy;
-
-	TreeNode * node = (TreeNode *)item;
-	BOOL isOnDropTypeProposal = index == NSOutlineViewDropOnItemIndex;
-
-	// Can't drop anything onto the trash folder.
-    if (isOnDropTypeProposal && node != nil && node.folder.type == VNAFolderTypeTrash) {
-		return NSDragOperationNone;
-    }
-
-	// Can't drop anything onto the search folder.
-    if (isOnDropTypeProposal && node != nil && node.folder.type == VNAFolderTypeSearch) {
-		return NSDragOperationNone;
-    }
-	
-	// Can't drop anything on smart folders.
-    if (isOnDropTypeProposal && node != nil && node.folder.type == VNAFolderTypeSmart) {
-		return NSDragOperationNone;
-    }
-	
-	// Can always drop something on a group folder.
-    if (isOnDropTypeProposal && node != nil && node.folder.type == VNAFolderTypeGroup) {
-		return dragType;
-    }
-	
-	// For any other folder, can't drop anything ON them.
-    if (index == NSOutlineViewDropOnItemIndex) {
-		return NSDragOperationNone;
-    }
-	return NSDragOperationGeneric; 
-}
-
-/* writeItems [delegate]
- * Collect the selected folders ready for dragging.
- */
--(BOOL)outlineView:(NSOutlineView *)olv writeItems:(NSArray*)items toPasteboard:(NSPasteboard*)pboard
-{
-	return [self copyTableSelection:items toPasteboard:pboard];
 }
 
 /* copyTableSelection
@@ -1213,8 +838,7 @@
 
 	// Create an array of NSNumber objects containing the selected folder IDs.
 	NSInteger countOfItems = 0;
-	for (index = 0; index < count; ++index)
-	{
+	for (index = 0; index < count; ++index) {
 		TreeNode * node = items[index];
 		Folder * folder = node.folder;
 
@@ -1242,10 +866,8 @@
 			[stringDragData appendFormat:@"%@\n", feedURL];
 			
 			NSURL * safariURL = [NSURL URLWithString:feedURL];
-			if (safariURL != nil && !safariURL.fileURL)
-			{
-				if (![@"feed" isEqualToString:safariURL.scheme])
-				{
+			if (safariURL != nil && !safariURL.fileURL) {
+				if (![@"feed" isEqualToString:safariURL.scheme]) {
 					feedURL = [NSString stringWithFormat:@"feed:%@", safariURL.resourceSpecifier];
 				}
 				[arrayOfURLs addObject:feedURL];
@@ -1267,7 +889,7 @@
  */
 -(void)moveFoldersUndo:(id)anObject
 {
-	[self moveFolders:(NSArray *)anObject withGoogleSync:YES];
+	[self moveFolders:(NSArray *)anObject withOpenReaderSync:YES];
 }
 
 /* moveFolders
@@ -1276,7 +898,7 @@
  * the second number is the ID of the parent to which the folder should be moved,
  * the third number is the ID of the folder's new predecessor sibling.
  */
--(BOOL)moveFolders:(NSArray *)array withGoogleSync:(BOOL)sync
+-(BOOL)moveFolders:(NSArray *)array withOpenReaderSync:(BOOL)sync
 {
 	NSAssert(([array count] % 3) == 0, @"Incorrect number of items in array passed to moveFolders");
 	NSInteger count = array.count;
@@ -1291,48 +913,41 @@
 	Database * dbManager = [Database sharedManager];
 	BOOL autoSort = [Preferences standardPreferences].foldersTreeSortMethod != VNAFolderSortManual;
 
-	while (index < count)
-	{
+	while (index < count) {
 		NSInteger folderId = [array[index++] integerValue];
 		NSInteger newParentId = [array[index++] integerValue];
 		NSInteger newPredecessorId = [array[index++] integerValue];
 		Folder * folder = [dbManager folderFromID:folderId];
 		NSInteger oldParentId = folder.parentId;
-		
+
 		TreeNode * node = [self.rootNode nodeFromID:folderId];
 		TreeNode * oldParent = [self.rootNode nodeFromID:oldParentId];
 		NSInteger oldChildIndex = [oldParent indexOfChild:node];
 		NSInteger oldPredecessorId = (oldChildIndex > 0) ? [oldParent childByIndex:(oldChildIndex - 1)].nodeId : 0;
 		TreeNode * newParent = [self.rootNode nodeFromID:newParentId];
 		TreeNode * newPredecessor = [newParent nodeFromID:newPredecessorId];
-		if ((newPredecessor == nil) || (newPredecessor == newParent))
+		if ((newPredecessor == nil) || (newPredecessor == newParent)) {
 			newPredecessorId = 0;
-		NSInteger newChildIndex = (newPredecessorId > 0) ? ([newParent indexOfChild:newPredecessor] + 1) : 0;
-        
-		if (newParentId == oldParentId)
-		{
-			// With automatic sorting, moving under the same parent is impossible.
-            if (autoSort) {
-				continue;
-            }
-			// No need to move if destination is the same as origin.
-            if (newPredecessorId == oldPredecessorId) {
-				continue;
-            }
-			// Adjust the index for the removal of the old child.
-            if (newChildIndex > oldChildIndex) {
-                --newChildIndex;
-            }
-				
 		}
-		else
-		{
-			if (!newParent.canHaveChildren)
-				[newParent setCanHaveChildren:YES];
-			if ([dbManager setParent:newParentId forFolder:folderId])
-			{
-				if (sync && folder.type == VNAFolderTypeOpenReader)
-				{
+		NSInteger newChildIndex = (newPredecessorId > 0) ? ([newParent indexOfChild:newPredecessor] + 1) : 0;
+
+		if (newParentId == oldParentId) {
+			// With automatic sorting, moving under the same parent is impossible.
+			if (autoSort) {
+				continue;
+			}
+			// No need to move if destination is the same as origin.
+			if (newPredecessorId == oldPredecessorId) {
+				continue;
+			}
+			// Adjust the index for the removal of the old child.
+			if (newChildIndex > oldChildIndex) {
+				--newChildIndex;
+			}
+
+		} else {
+			if ([dbManager setParent:newParentId forFolder:folderId]) {
+				if (sync && folder.type == VNAFolderTypeOpenReader) {
 					OpenReader * myReader = [OpenReader sharedManager];
 					// remove old label
 					NSString * folderName = [dbManager folderFromID:oldParentId].name;
@@ -1340,88 +955,78 @@
 					// add new label
 					folderName = [dbManager folderFromID:newParentId].name;
 					if (folderName) {
-					    [myReader setFolderLabel:folderName forFeed:folder.remoteId set:TRUE];
+						[myReader setFolderLabel:folderName forFeed:folder.remoteId set:TRUE];
 					}
 				}
-			}
-			else
+			} else {
 				continue;
-		}
-		
-		if (!autoSort)
-		{
-			if (oldPredecessorId > 0)
-			{
-				if (![dbManager setNextSibling:folder.nextSiblingId forFolder:oldPredecessorId])
-					continue;
-			}
-			else
-			{
-				if (![dbManager setFirstChild:folder.nextSiblingId forFolder:oldParentId])
-					continue;
 			}
 		}
-		
+
+		if (!autoSort) {
+			if (oldPredecessorId > 0) {
+				if (![dbManager setNextSibling:folder.nextSiblingId forFolder:oldPredecessorId]) {
+					continue;
+				}
+			} else {
+				if (![dbManager setFirstChild:folder.nextSiblingId forFolder:oldParentId]) {
+					continue;
+				}
+			}
+			if (newPredecessorId > 0) {
+				if (![dbManager setNextSibling:[dbManager folderFromID:newPredecessorId].nextSiblingId
+									 forFolder:folderId]) {
+					continue;
+				}
+				[dbManager setNextSibling:folderId forFolder:newPredecessorId];
+			} else {
+				NSInteger oldFirstChildId = (newParent == self.rootNode) ? dbManager.firstFolderId
+																		 : newParent.folder.firstChildId;
+				if (![dbManager setNextSibling:oldFirstChildId forFolder:folderId]) {
+					continue;
+				}
+				[dbManager setFirstChild:folderId forFolder:newParentId];
+			}
+		}
+
 		[oldParent removeChild:node andChildren:NO];
-		[newParent addChild:node atIndex:newChildIndex];
-		
+		[newParent insertChild:node atIndex:newChildIndex];
+
 		// Put at beginning of undoArray in order to undo moves in reverse order.
 		[undoArray insertObject:@(folderId) atIndex:0u];
 		[undoArray insertObject:@(oldParentId) atIndex:1u];
 		[undoArray insertObject:@(oldPredecessorId) atIndex:2u];
-		
-		if (!autoSort)
-		{
-			if (newPredecessorId > 0)
-			{
-				if (![dbManager setNextSibling:[dbManager folderFromID:newPredecessorId].nextSiblingId
-                                     forFolder:folderId]) {
-					continue;
-                }
-				[dbManager setNextSibling:folderId forFolder:newPredecessorId];
-			}
-			else
-			{
-				NSInteger oldFirstChildId = (newParent == self.rootNode) ? dbManager.firstFolderId : newParent.folder.firstChildId;
-				if (![dbManager setNextSibling:oldFirstChildId forFolder:folderId])
-					continue;
-				[dbManager setFirstChild:folderId forFolder:newParentId];
-			}
-		}
 	}
-	
+
 	// If undo array is empty, then nothing has been moved.
-	if (undoArray.count == 0u)
-	{
+	if (undoArray.count == 0u) {
 		return NO;
 	}
-	
+
 	// Set up to undo this action
 	NSUndoManager * undoManager = NSApp.mainWindow.undoManager;
 	[undoManager registerUndoWithTarget:self selector:@selector(moveFoldersUndo:) object:undoArray];
 	[undoManager setActionName:NSLocalizedString(@"Move Folders", nil)];
-	
+
 	// Make the outline control reload its data
 	[self.outlineView reloadData];
 
 	// If any parent was a collapsed group, expand it now
-	for (index = 0; index < count; index += 2)
-	{
+	for (index = 0; index < count; index += 2) {
 		NSInteger newParentId = [array[++index] integerValue];
-		if (newParentId != VNAFolderTypeRoot)
-		{
+		if (newParentId != VNAFolderTypeRoot) {
 			TreeNode * parentNode = [self.rootNode nodeFromID:newParentId];
-			if (![self.outlineView isItemExpanded:parentNode] && [self.outlineView isExpandable:parentNode])
+			if (![self.outlineView isItemExpanded:parentNode] && [self.outlineView isExpandable:parentNode]) {
 				[self.outlineView expandItem:parentNode];
+			}
 		}
 	}
-	
+
 	// Properly set selection back to the original items. This has to be done after the
 	// refresh so that rowForItem returns the new positions.
 	NSMutableIndexSet * selIndexSet = [[NSMutableIndexSet alloc] init];
 	NSInteger selRowIndex = 9999;
-	for (index = 0; index < count; index += 2)
-	{
+	for (index = 0; index < count; index += 2) {
 		NSInteger folderId = [array[index++] integerValue];
 		NSInteger rowIndex = [self.outlineView rowForItem:[self.rootNode nodeFromID:folderId]];
 		selRowIndex = MIN(selRowIndex, rowIndex);
@@ -1430,149 +1035,7 @@
 	[self.outlineView scrollRowToVisible:selRowIndex];
 	[self.outlineView selectRowIndexes:selIndexSet byExtendingSelection:NO];
 	return YES;
-}
-
-/* acceptDrop
- * Accept a drop on or between nodes either from within the folder view or from outside.
- */
--(BOOL)outlineView:(NSOutlineView *)olv acceptDrop:(id <NSDraggingInfo>)info item:(id)targetItem childIndex:(NSInteger)child
-{ 
-	__block NSInteger childIndex = child;
-	NSPasteboard * pb = [info draggingPasteboard];
-	NSString * type = [pb availableTypeFromArray:@[VNAPasteboardTypeFolderList, VNAPasteboardTypeRSSSource, VNAPasteboardTypeWebURLsWithTitles, NSPasteboardTypeString]];
-	TreeNode * node = targetItem ? (TreeNode *)targetItem : self.rootNode;
-
-	NSInteger parentId = node.nodeId;
-	if (childIndex < 0)
-		childIndex = 0;
-
-	// Check the type
-	if ([type isEqualToString:NSPasteboardTypeString])
-	{
-		// This is possibly a URL that we'll handle as a potential feed subscription. It's
-		// not our call to make though.
-		NSInteger predecessorId = (childIndex > 0) ? [node childByIndex:(childIndex - 1)].nodeId : 0;
-		[APPCONTROLLER createNewSubscription:[pb stringForType:type] underFolder:parentId afterChild:predecessorId];
-		return YES;
-	}
-	if ([type isEqualToString:VNAPasteboardTypeFolderList])
-	{
-		Database * db = [Database sharedManager];
-		NSArray * arrayOfSources = [pb propertyListForType:type];
-		NSInteger count = arrayOfSources.count;
-		NSInteger index;
-		NSInteger predecessorId = (childIndex > 0) ? [node childByIndex:(childIndex - 1)].nodeId : 0;
-
-		// Create an NSArray of triples (folderId, newParentId, predecessorId) that will be passed to moveFolders
-		// to do the actual move.
-		NSMutableArray * array = [[NSMutableArray alloc] initWithCapacity:count * 3];
-		NSInteger trashFolderId = db.trashFolderId;
-		for (index = 0; index < count; ++index)
-		{
-			NSInteger folderId = [arrayOfSources[index] integerValue];
-			
-			// Don't allow the trash folder to move under a group folder, because the group folder could get deleted.
-			// Also, don't allow perverse moves.  We should probably do additional checking: not only whether the new parent
-			// is the folder itself but also whether the new parent is a subfolder.
-			if (((folderId == trashFolderId) && (node != self.rootNode)) || (folderId == parentId) || (folderId == predecessorId))
-				continue;
-			[array addObject:@(folderId)];
-			[array addObject:@(parentId)];
-			[array addObject:@(predecessorId)];
-			predecessorId = folderId;
-		}
-
-		// Do the move
-		BOOL result = [self moveFolders:array withGoogleSync:YES];
-		return result;
-	}
-	if ([type isEqualToString:VNAPasteboardTypeRSSSource])
-	{
-		Database * dbManager = [Database sharedManager];
-		NSArray * arrayOfSources = [pb propertyListForType:type];
-		NSInteger count = arrayOfSources.count;
-		NSInteger index;
-		
-		// This is an RSS drag using the protocol defined by Ranchero for NetNewsWire. See
-		// http://ranchero.com/netnewswire/rssclipboard.php for more details.
-		//
-		__block NSInteger folderToSelect = -1;
-		for (index = 0; index < count; ++index)
-		{
-			NSDictionary * sourceItem = arrayOfSources[index];
-			NSString * feedTitle = [sourceItem valueForKey:@"sourceName"];
-			NSString * feedHomePage = [sourceItem valueForKey:@"sourceHomeURL"];
-			NSString * feedURL = [sourceItem valueForKey:@"sourceRSSURL"];
-			NSString * feedDescription = [sourceItem valueForKey:@"sourceDescription"];
-
-			if ((feedURL != nil) && [dbManager folderFromFeedURL:feedURL] == nil)
-			{
-				NSInteger predecessorId = (childIndex > 0) ? [node childByIndex:(childIndex - 1)].nodeId : 0;
-				NSInteger folderId = [dbManager addRSSFolder:feedTitle underParent:parentId afterChild:predecessorId subscriptionURL:feedURL];
-                if (feedDescription != nil) {
-                    [dbManager setDescription:feedDescription forFolder:folderId];
-                }
-                if (feedHomePage != nil) {
-                    [dbManager setHomePage:feedHomePage forFolder:folderId];
-                }
-                if (folderId > 0) {
-					folderToSelect = folderId;
-                }
-				++childIndex;
-			}
-		}
-
-		// If parent was a group, expand it now
-		if (parentId != VNAFolderTypeRoot)
-			[self.outlineView expandItem:[self.rootNode nodeFromID:parentId]];
-		
-		// Select a new folder
-		if (folderToSelect > 0)
-			[self selectFolder:folderToSelect];
-		
-		return YES;
-	}
-	if ([type isEqualToString:@"WebURLsWithTitlesPboardType"])
-	{
-		Database * dbManager = [Database sharedManager];
-		NSArray * webURLsWithTitles = [pb propertyListForType:type];
-		NSArray * arrayOfURLs = webURLsWithTitles[0];
-		NSArray * arrayOfTitles = webURLsWithTitles[1];
-		NSInteger count = arrayOfURLs.count;
-		NSInteger index;
-		
-		__block NSInteger folderToSelect = -1;
-		for (index = 0; index < count; ++index)
-		{
-			NSString * feedTitle = arrayOfTitles[index];
-			NSString * feedURL = arrayOfURLs[index];
-			NSURL * draggedURL = [NSURL URLWithString:feedURL];
-			if ((draggedURL.scheme != nil) && [draggedURL.scheme isEqualToString:@"feed"])
-				feedURL = [NSString stringWithFormat:@"http:%@", draggedURL.resourceSpecifier];
-			
-			if ([dbManager folderFromFeedURL:feedURL] == nil)
-			{
-				NSInteger predecessorId = (childIndex > 0) ? [node childByIndex:(childIndex - 1)].nodeId : 0;
-				NSInteger newFolderId = [dbManager addRSSFolder:feedTitle underParent:parentId afterChild:predecessorId subscriptionURL:feedURL];
-                if (newFolderId > 0) {
-					folderToSelect = newFolderId;
-                }
-				++childIndex;
-			}
-		}
-		
-		// If parent was a group, expand it now
-		if (parentId != VNAFolderTypeRoot)
-			[self.outlineView expandItem:[self.rootNode nodeFromID:parentId]];
-		
-		// Select a new folder
-		if (folderToSelect > 0)
-			[self selectFolder:folderToSelect];
-		
-		return YES;
-	}
-	return NO; 
-}
+} // moveFolders
 
 /* setSearch
  * Set string to filter nodes by name, description, url
@@ -1582,6 +1045,7 @@
 
     if (tf.length == 0) {
         self.outlineView.filterPredicate = nil;
+        [self.outlineView showResetButton:NO];
         return;
     }
 
@@ -1592,14 +1056,485 @@
         return;
     }
 
+    [self.outlineView showResetButton:YES];
     self.outlineView.filterPredicate = predicate;
 }
 
-/* dealloc
- * Clean up and release resources.
- */
--(void)dealloc
+// MARK: Key-value observing
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary<NSKeyValueChangeKey,id> *)change
+                       context:(void *)context
 {
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
+    if (context != VNAFoldersTreeObserverContext) {
+        [super observeValueForKeyPath:keyPath
+                             ofObject:object
+                               change:change
+                              context:context];
+        return;
+    }
+
+    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+    if ([object isNotEqualTo:userDefaults]) {
+        return;
+    }
+
+    if ([keyPath isEqualToString:MAPref_FeedListSizeMode]) {
+        [self updateCellSize:[userDefaults integerForKey:MAPref_FeedListSizeMode]];
+    }
+    if ([keyPath isEqualToString:MAPref_ShowFeedsWithUnreadItemsInBold]) {
+        [self.outlineView reloadDataWhilePreservingSelection];
+    }
 }
+
+- (void)updateCellSize:(VNAFeedListSizeMode)size
+{
+    switch (size) {
+    case VNAFeedListSizeModeTiny:
+    case VNAFeedListSizeModeSmall:
+    case VNAFeedListSizeModeMedium:
+        self.outlineView.sizeMode = size;
+        break;
+    default:
+        self.outlineView.sizeMode = VNAFeedListSizeModeDefault;
+    }
+
+    self.outlineView.rowHeight = [self.outlineView rowHeightForSize:size];
+    NSRange rowsRange = NSMakeRange(0, self.outlineView.numberOfRows);
+    NSIndexSet *rowIndexes = [NSIndexSet indexSetWithIndexesInRange:rowsRange];
+    [self.outlineView noteHeightOfRowsWithIndexesChanged:rowIndexes];
+    [self.outlineView reloadDataWhilePreservingSelection];
+}
+
+// MARK: - NSOutlineViewDataSource
+
+/* isItemExpandable
+ * Tell the outline view if the specified item can be expanded. The answer is
+ * yes if we have children, no otherwise.
+ */
+-(BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item
+{
+    TreeNode * node = (TreeNode *)item;
+    if (node == nil) {
+        node = self.rootNode;
+    }
+    return node.countOfChildren > 0;
+}
+
+/* validateDrop
+ * Called when something is being dragged over us. We respond with an NSDragOperation value indicating the
+ * feedback for the user given where we are.
+ */
+- (NSDragOperation)outlineView:(NSOutlineView*)olv
+                  validateDrop:(id <NSDraggingInfo>)info
+                  proposedItem:(id)item
+            proposedChildIndex:(NSInteger)index
+{
+    NSPasteboard * pb = [info draggingPasteboard];
+    NSString * type = [pb availableTypeFromArray:@[VNAPasteboardTypeFolderList, VNAPasteboardTypeRSSSource, VNAPasteboardTypeWebURLsWithTitles, NSPasteboardTypeString]];
+    NSDragOperation dragType = ([type isEqualToString:VNAPasteboardTypeFolderList]) ? NSDragOperationMove : NSDragOperationCopy;
+
+    TreeNode * node = (TreeNode *)item;
+    BOOL isOnDropTypeProposal = index == NSOutlineViewDropOnItemIndex;
+
+    // Can't drop anything onto the trash folder.
+    if (isOnDropTypeProposal && node != nil && node.folder.type == VNAFolderTypeTrash) {
+        return NSDragOperationNone;
+    }
+
+    // Can't drop anything onto the search folder.
+    if (isOnDropTypeProposal && node != nil && node.folder.type == VNAFolderTypeSearch) {
+        return NSDragOperationNone;
+    }
+
+    // Can't drop anything on smart folders.
+    if (isOnDropTypeProposal && node != nil && node.folder.type == VNAFolderTypeSmart) {
+        return NSDragOperationNone;
+    }
+
+    // Can always drop something on a group folder.
+    if (isOnDropTypeProposal && node != nil && node.folder.type == VNAFolderTypeGroup) {
+        return dragType;
+    }
+
+    // For any other folder, can't drop anything ON them.
+    if (index == NSOutlineViewDropOnItemIndex) {
+        return NSDragOperationNone;
+    }
+    return NSDragOperationGeneric;
+}
+
+/* acceptDrop
+ * Accept a drop on or between nodes either from within the folder view or from outside.
+ */
+- (BOOL)outlineView:(NSOutlineView *)outlineView
+         acceptDrop:(id<NSDraggingInfo>)info
+               item:(id)item
+         childIndex:(NSInteger)index
+{
+    __block NSInteger childIndex = index;
+    NSPasteboard *pb = [info draggingPasteboard];
+    NSString *type = [pb availableTypeFromArray:@[VNAPasteboardTypeFolderList, VNAPasteboardTypeRSSSource, VNAPasteboardTypeWebURLsWithTitles, NSPasteboardTypeString]];
+    TreeNode *node = item ? (TreeNode *)item : self.rootNode;
+
+    NSInteger parentId = node.nodeId;
+    if (childIndex < 0) {
+        childIndex = 0;
+    }
+
+    // Check the type
+    if ([type isEqualToString:NSPasteboardTypeString]) {
+        // This is possibly a URL that we'll handle as a potential feed subscription. It's
+        // not our call to make though.
+        NSInteger predecessorId = (childIndex > 0) ? [node childByIndex:(childIndex - 1)].nodeId : 0;
+        [APPCONTROLLER createNewSubscription:[pb stringForType:type] underFolder:parentId afterChild:predecessorId];
+        return YES;
+    }
+    if ([type isEqualToString:VNAPasteboardTypeFolderList]) {
+        Database *db = [Database sharedManager];
+        NSArray *arrayOfSources = [pb propertyListForType:type];
+        NSInteger count = arrayOfSources.count;
+        NSInteger index;
+        NSInteger predecessorId = (childIndex > 0) ? [node childByIndex:(childIndex - 1)].nodeId : 0;
+
+        // Create an NSArray of triples (folderId, newParentId, predecessorId) that will be passed to moveFolders
+        // to do the actual move.
+        NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:count * 3];
+        NSInteger trashFolderId = db.trashFolderId;
+        for (index = 0; index < count; ++index) {
+            NSInteger folderId = [arrayOfSources[index] integerValue];
+
+            // Don't allow the trash folder to move under a group folder, because the group folder could get deleted.
+            // Also, don't allow perverse moves.  We should probably do additional checking: not only whether the new parent
+            // is the folder itself but also whether the new parent is a subfolder.
+            if (((folderId == trashFolderId) && (node != self.rootNode)) || (folderId == parentId) || (folderId == predecessorId)) {
+                continue;
+            }
+            [array addObject:@(folderId)];
+            [array addObject:@(parentId)];
+            [array addObject:@(predecessorId)];
+            predecessorId = folderId;
+        }
+
+        // Do the move
+        BOOL result = [self moveFolders:array withOpenReaderSync:YES];
+        return result;
+    }
+    if ([type isEqualToString:VNAPasteboardTypeRSSSource]) {
+        Database *dbManager = [Database sharedManager];
+        NSArray *arrayOfSources = [pb propertyListForType:type];
+        NSInteger count = arrayOfSources.count;
+        NSInteger index;
+
+        // This is an RSS drag using the protocol defined by Ranchero for NetNewsWire. See
+        // http://ranchero.com/netnewswire/rssclipboard.php for more details.
+        //
+        __block NSInteger folderToSelect = -1;
+        for (index = 0; index < count; ++index) {
+            NSDictionary *sourceItem = arrayOfSources[index];
+            NSString *feedTitle = [sourceItem valueForKey:@"sourceName"];
+            NSString *feedHomePage = [sourceItem valueForKey:@"sourceHomeURL"];
+            NSString *feedURL = [sourceItem valueForKey:@"sourceRSSURL"];
+            NSString *feedDescription = [sourceItem valueForKey:@"sourceDescription"];
+
+            if (feedURL && ![dbManager folderFromFeedURL:feedURL]) {
+                NSInteger predecessorId = (childIndex > 0) ? [node childByIndex:(childIndex - 1)].nodeId : 0;
+                NSInteger folderId = [dbManager addRSSFolder:feedTitle underParent:parentId afterChild:predecessorId subscriptionURL:feedURL];
+                if (feedDescription) {
+                    [dbManager setDescription:feedDescription forFolder:folderId];
+                }
+                if (feedHomePage) {
+                    [dbManager setHomePage:feedHomePage forFolder:folderId];
+                }
+                if (folderId > 0) {
+                    folderToSelect = folderId;
+                }
+                ++childIndex;
+            }
+        }
+
+        // If parent was a group, expand it now
+        if (parentId != VNAFolderTypeRoot) {
+            [self.outlineView expandItem:[self.rootNode nodeFromID:parentId]];
+        }
+
+        // Select a new folder
+        if (folderToSelect > 0) {
+            [self selectFolder:folderToSelect];
+        }
+
+        return YES;
+    }
+    if ([type isEqualToString:@"WebURLsWithTitlesPboardType"]) {
+        Database *dbManager = [Database sharedManager];
+        NSArray *webURLsWithTitles = [pb propertyListForType:type];
+        NSArray *arrayOfURLs = webURLsWithTitles[0];
+        NSArray *arrayOfTitles = webURLsWithTitles[1];
+        NSInteger count = arrayOfURLs.count;
+        NSInteger index;
+
+        __block NSInteger folderToSelect = -1;
+        for (index = 0; index < count; ++index) {
+            NSString *feedTitle = arrayOfTitles[index];
+            NSString *feedURL = arrayOfURLs[index];
+            NSURL *draggedURL = [NSURL URLWithString:feedURL];
+            if (draggedURL.scheme && [draggedURL.scheme isEqualToString:@"feed"]) {
+                feedURL = [NSString stringWithFormat:@"http:%@", draggedURL.resourceSpecifier];
+            }
+
+            if (![dbManager folderFromFeedURL:feedURL]) {
+                NSInteger predecessorId = (childIndex > 0) ? [node childByIndex:(childIndex - 1)].nodeId : 0;
+                NSInteger newFolderId = [dbManager addRSSFolder:feedTitle underParent:parentId afterChild:predecessorId subscriptionURL:feedURL];
+                if (newFolderId > 0) {
+                    folderToSelect = newFolderId;
+                }
+                ++childIndex;
+            }
+        }
+
+        // If parent was a group, expand it now
+        if (parentId != VNAFolderTypeRoot) {
+            [self.outlineView expandItem:[self.rootNode nodeFromID:parentId]];
+        }
+
+        // Select a new folder
+        if (folderToSelect > 0) {
+            [self selectFolder:folderToSelect];
+        }
+
+        return YES;
+    }
+    return NO;
+}
+
+/* numberOfChildrenOfItem
+ * Returns the number of children belonging to the specified item
+ */
+- (NSInteger)outlineView:(NSOutlineView *)outlineView
+    numberOfChildrenOfItem:(id)item
+{
+    TreeNode *node = (TreeNode *)item;
+    if (!node) {
+        node = self.rootNode;
+    }
+    return node.countOfChildren;
+}
+
+/* child
+ * Returns the child at the specified offset of the item
+ */
+- (id)outlineView:(NSOutlineView *)outlineView
+            child:(NSInteger)index
+           ofItem:(id)item
+{
+    TreeNode *node = (TreeNode *)item;
+    if (!node) {
+        node = self.rootNode;
+    }
+    return [node childByIndex:index];
+}
+
+// Collect the selected folders ready for dragging.
+- (BOOL)outlineView:(NSOutlineView *)outlineView
+         writeItems:(NSArray *)items
+       toPasteboard:(NSPasteboard *)pasteboard
+{
+    return [self copyTableSelection:items toPasteboard:pasteboard];
+}
+
+// MARK: - NSOutlineViewDelegate
+
+- (CGFloat)outlineView:(NSOutlineView *)outlineView heightOfRowByItem:(id)item
+{
+    VNAFeedListSizeMode size = self.outlineView.sizeMode;
+    return [self.outlineView rowHeightForSize:size];
+}
+
+- (NSView *)outlineView:(NSOutlineView *)outlineView
+     viewForTableColumn:(NSTableColumn *)tableColumn
+                   item:(id)item
+{
+    if ([tableColumn isNotEqualTo:outlineView.outlineTableColumn]) {
+        return nil;
+    }
+
+    VNAFeedListCellView *cellView = [outlineView makeViewWithIdentifier:VNAFeedListCellViewIdentifier owner:self];
+    TreeNode *node = (TreeNode *)item;
+    if (!node && node == self.rootNode) {
+        node = self.rootNode;
+    }
+    Folder *folder = node.folder;
+
+    // Only show folder images if the user prefers them.
+    Preferences *prefs = [Preferences standardPreferences];
+    cellView.imageView.image = (prefs.showFolderImages ? folder.image : [folder standardImage]);
+    cellView.textField.stringValue = node.nodeName;
+    cellView.textField.delegate = self;
+
+    cellView.sizeMode = self.outlineView.sizeMode;
+
+    // Use the auxiliary position of the feed item to show
+    // the refresh icon if the feed is being refreshed, or an
+    // error icon if the feed failed to refresh last time.
+    if (folder.isUpdating) {
+        cellView.inProgress = YES;
+    } else if (folder.isError) {
+        cellView.showError = YES;
+        cellView.inProgress = NO;
+    } else {
+        cellView.showError = NO;
+        cellView.inProgress = NO;
+    }
+
+    BOOL useEmphasis = [prefs boolForKey:MAPref_ShowFeedsWithUnreadItemsInBold];
+
+    switch (folder.type) {
+        case VNAFolderTypeSmart:
+        case VNAFolderTypeTrash:
+        case VNAFolderTypeSearch:
+            cellView.emphasized = NO;
+            cellView.canShowUnreadCount = NO;
+            break;
+        case VNAFolderTypeGroup:
+            cellView.emphasized = useEmphasis && folder.childUnreadCount > 0 && ![outlineView isItemExpanded:item];
+            cellView.canShowUnreadCount = ![outlineView isItemExpanded:item];
+            cellView.unreadCount = folder.childUnreadCount;
+            break;
+        default:
+            cellView.emphasized = useEmphasis && folder.unreadCount > 0;
+            cellView.canShowUnreadCount = YES;
+            cellView.unreadCount = folder.unreadCount;
+    }
+
+    cellView.inactive = folder.isUnsubscribed;
+
+    // The content tint color should only apply to the SF Symbol.
+    if (@available(macOS 11, *)) {
+        if (folder.type == VNAFolderTypeSmart) {
+            cellView.imageView.contentTintColor = NSColor.systemGrayColor;
+        } else {
+            cellView.imageView.contentTintColor = nil;
+        }
+    }
+
+    return cellView;
+}
+
+- (void)outlineViewItemDidCollapse:(NSNotification *)notification
+{
+    FolderView *folderView = notification.object;
+    TreeNode *node = notification.userInfo[@"NSObject"];
+
+    if (!folderView || !node || folderView.numberOfColumns != 1) {
+        return;
+    }
+
+    if (node.folder.type != VNAFolderTypeGroup) {
+        return;
+    }
+
+    NSInteger rowIndex = [folderView rowForItem:node];
+    VNAFeedListCellView *cellView = [folderView viewAtColumn:0
+                                                         row:rowIndex
+                                             makeIfNecessary:NO];
+    // This block allows the accessor to query whether implicit animations are
+    // allowed, in which case it can show animations.
+    [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
+        context.allowsImplicitAnimation = YES;
+        cellView.canShowUnreadCount = YES;
+    }];
+
+    Preferences *preferences = Preferences.standardPreferences;
+    BOOL useEmphasis = [preferences boolForKey:MAPref_ShowFeedsWithUnreadItemsInBold];
+    cellView.emphasized = useEmphasis && node.folder.childUnreadCount;
+}
+
+- (void)outlineViewItemDidExpand:(NSNotification *)notification
+{
+    FolderView *folderView = notification.object;
+    TreeNode *node = notification.userInfo[@"NSObject"];
+
+    if (!folderView || !node || folderView.numberOfColumns != 1) {
+        return;
+    }
+
+    if (node.folder.type != VNAFolderTypeGroup) {
+        return;
+    }
+
+    NSInteger rowIndex = [folderView rowForItem:node];
+    VNAFeedListCellView *cellView = [folderView viewAtColumn:0
+                                                         row:rowIndex
+                                             makeIfNecessary:NO];
+    // This block allows the accessor to query whether implicit animations are
+    // allowed for the current animation context (the default is nil).
+    [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
+        context.allowsImplicitAnimation = YES;
+        cellView.canShowUnreadCount = NO;
+    }];
+    cellView.emphasized = NO;
+}
+
+/* outlineViewSelectionDidChange
+ * Called when the selection in the folder list has changed.
+ */
+-(void)outlineViewSelectionDidChange:(NSNotification *)notification
+{
+    if (!self.blockSelectionHandler) {
+        TreeNode * node = [self.outlineView itemAtRow:self.outlineView.selectedRow];
+        [[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_FolderSelectionChange object:node];
+    }
+}
+
+// MARK: - NSTextFieldDelegate
+
+- (void)controlTextDidBeginEditing:(NSNotification *)obj
+{
+    self.fieldEditor = obj.userInfo[@"NSFieldEditor"];
+}
+
+// Called when the user finishes editing a folder name
+- (void)controlTextDidEndEditing:(NSNotification *)obj
+{
+    self.fieldEditor = nil;
+
+    NSText *fieldEditor = obj.userInfo[@"NSFieldEditor"];
+    NSString *newValue = [fieldEditor.string copy];
+    NSTextField *textField = (NSTextField *)obj.object;
+    textField.editable = NO;
+    NSInteger rowIndex = [self.outlineView rowForView:textField];
+    TreeNode *node = [self.outlineView itemAtRow:rowIndex];
+    Folder *folder = node.folder;
+
+    if ([newValue isEqualToString:folder.name]) {
+        return;
+    }
+
+    if (newValue.vna_isBlank) {
+        textField.stringValue = folder.name;
+        return;
+    }
+
+    // remove the prefix marking it is a cloud (Open Reader) feed
+    if (folder.type == VNAFolderTypeOpenReader && [newValue hasPrefix:VNAOpenReaderFolderPrefix]) {
+        NSString *tmpName = [newValue substringFromIndex:VNAOpenReaderFolderPrefix.length];
+        newValue = tmpName;
+    }
+
+    newValue = newValue.vna_trimmed;
+    Database *dbManager = [Database sharedManager];
+    if ([dbManager folderFromName:newValue] != nil) {
+        textField.stringValue = folder.name;
+        runOKAlertPanel(NSLocalizedString(@"Cannot rename folder", nil),
+                        NSLocalizedString(@"A folder with that name already exists", nil));
+        return;
+    }
+
+    [dbManager setName:newValue forFolder:folder.itemId];
+    if (folder.type == VNAFolderTypeOpenReader) {
+        [OpenReader.sharedManager setFolderTitle:newValue forFeed:folder.remoteId];
+    }
+}
+
 @end

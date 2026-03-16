@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. "${OBJROOT}/autorevision.cache"
+. "${PROJECT_DERIVED_FILE_DIR}/autorevision.cache"
 
 # Fail if not deployment
 if [ ! "${CONFIGURATION}" = "Deployment" ]; then

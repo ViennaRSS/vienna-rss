@@ -20,10 +20,12 @@
 
 @import Foundation;
 
-@class ArticleView;
-@class Article;
+#import "BaseView.h"
 
-@protocol ArticleBaseView
+@class Article;
+@class VNAFilterBarViewController;
+
+@protocol ArticleBaseView <BaseView>
     @property (readonly, nonatomic) BOOL selectFirstUnreadInFolder;
     @property (readonly, nonatomic) BOOL viewNextUnreadInFolder;
 	-(void)scrollDownDetailsOrNextUnread;
@@ -34,6 +36,7 @@
 	@property (readonly, nonatomic) NSArray *markedArticleRange;
 	-(void)saveTableSettings;
 	-(void)ensureSelectedArticle;
-	-(void)startLoadIndicator;
-	-(void)stopLoadIndicator;
+
+@property (readonly, nonatomic) VNAFilterBarViewController *filterBarViewController;
+
 @end

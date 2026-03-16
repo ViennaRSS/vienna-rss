@@ -1,0 +1,8 @@
+/* The name of the plug-in, such as the name of the website or app. */
+"FriendlyName" = "Pinboard";
+
+/* The label for the plug-in in toolbar items and menu items. */
+"MenuPath" = "Partager sur Pinboard";
+
+/* The tool tip for the plug-in in toolbar items. */
+"Tooltip" = "Partager l'article en cours sur Pinboard";

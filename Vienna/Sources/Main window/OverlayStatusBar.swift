@@ -44,7 +44,7 @@ final class OverlayStatusBar: NSView {
     private var addressField: NSTextField = {
         let addressField = NSTextField(labelWithString: "")
         addressField.font = .systemFont(ofSize: 12, weight: .medium)
-        addressField.textColor = .overlayStatusBarPrimaryLabelColor
+        addressField.textColor = NSColor(resource: .overlayStatusBarPrimaryText)
         addressField.lineBreakMode = .byTruncatingMiddle
         addressField.allowsDefaultTighteningForTruncation = true
 
@@ -70,7 +70,7 @@ final class OverlayStatusBar: NSView {
 
         // Set the constraints.
         var backgroundViewConstraints: [NSLayoutConstraint] = []
-        backgroundViewConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-3-[view]-3-|",
+        backgroundViewConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|-3@750-[view]-3-|",
                                                                     metrics: nil, views: ["view": backgroundView])
         backgroundViewConstraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|-3-[view]-3-|",
                                                                     metrics: nil, views: ["view": backgroundView])
@@ -185,15 +185,15 @@ final class OverlayStatusBar: NSView {
         urlFormatter.defaultAttributes = [
             .font: NSFont.systemFont(ofSize: 12, weight: .medium),
             .paragraphStyle: paragraphStyle,
-            .foregroundColor: NSColor.overlayStatusBarPrimaryLabelColor
+            .foregroundColor: NSColor(resource: .overlayStatusBarPrimaryText)
         ]
         urlFormatter.primaryAttributes = [
             .font: NSFont.systemFont(ofSize: 12, weight: .medium),
-            .foregroundColor: NSColor.overlayStatusBarPrimaryLabelColor
+            .foregroundColor: NSColor(resource: .overlayStatusBarPrimaryText)
         ]
         urlFormatter.secondaryAttributes = [
             .font: NSFont.systemFont(ofSize: 12, weight: .regular),
-            .foregroundColor: NSColor.overlayStatusBarSecondaryLabelColor
+            .foregroundColor: NSColor(resource: .overlayStatusBarSecondaryText)
         ]
 
         return urlFormatter
@@ -340,34 +340,6 @@ final class OverlayStatusBar: NSView {
             // Delete the constraint to make sure that a new one is created,
             // appropriate for the superview size (which may change).
             widthConstraint = nil
-        }
-    }
-
-}
-
-private extension NSColor {
-
-    class var overlayStatusBarPrimaryLabelColor: NSColor {
-        if #available(macOS 10.13, *) {
-            return NSColor(named: "OverlayStatusBarPrimaryTextColor")!
-        } else {
-            if NSWorkspace.shared.accessibilityDisplayShouldIncreaseContrast {
-                return .black.withAlphaComponent(0.85)
-            } else {
-                return .black.withAlphaComponent(0.70)
-            }
-        }
-    }
-
-    class var overlayStatusBarSecondaryLabelColor: NSColor {
-        if #available(macOS 10.13, *) {
-            return NSColor(named: "OverlayStatusBarSecondaryTextColor")!
-        } else {
-            if NSWorkspace.shared.accessibilityDisplayShouldIncreaseContrast {
-                return .black.withAlphaComponent(0.70)
-            } else {
-                return .black.withAlphaComponent(0.55)
-            }
         }
     }
 

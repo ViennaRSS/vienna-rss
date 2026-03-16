@@ -21,7 +21,11 @@
 #import "BackTrackArray.h"
 #import "ArticleRef.h"
 
-@implementation BackTrackArray
+@implementation BackTrackArray {
+    NSMutableArray *array;
+    NSUInteger maxItems;
+    NSInteger queueIndex;
+}
 
 /* initWithMaximum
  * Initialises a new BackTrackArray with the specified maximum number of
@@ -29,8 +33,7 @@
  */
 -(instancetype)initWithMaximum:(NSUInteger)theMax
 {
-	if ((self = [super init]) != nil)
-	{
+	if ((self = [super init]) != nil) {
 		maxItems = theMax;
 		queueIndex = -1;
 		array = [[NSMutableArray alloc] initWithCapacity:maxItems];
@@ -60,8 +63,7 @@
  */
 -(BOOL)previousItemAtQueue:(NSInteger *)folderId guidPointer:(NSString **)guidPointer
 {
-	if (queueIndex > 0)
-	{
+	if (queueIndex > 0) {
 		ArticleReference * item = array[--queueIndex];
 		*folderId = item.folderId;
 		*guidPointer = item.guid;
@@ -76,8 +78,7 @@
  */
 -(BOOL)nextItemAtQueue:(NSInteger *)folderId guidPointer:(NSString **)guidPointer
 {
-	if (queueIndex < (NSInteger)array.count - 1)
-	{
+	if (queueIndex < (NSInteger)array.count - 1) {
 		ArticleReference * item = array[++queueIndex];
 		*folderId = item.folderId;
 		*guidPointer = item.guid;
@@ -97,18 +98,18 @@
  */
 -(void)addToQueue:(NSInteger)folderId guid:(NSString *)guid
 {
-	while (queueIndex + 1 < (NSInteger)array.count)
+	while (queueIndex + 1 < (NSInteger)array.count) {
 		[array removeObjectAtIndex:queueIndex + 1];
-	if (array.count == maxItems)
-	{
+	}
+	if (array.count == maxItems) {
 		[array removeObjectAtIndex:0];
 		--queueIndex;
 	}
-	if (array.count > 0)
-	{
+	if (array.count > 0) {
 		ArticleReference * item = array[array.count - 1];
-		if ([item.guid isEqualToString:guid] && item.folderId == folderId)
+		if ([item.guid isEqualToString:guid] && item.folderId == folderId) {
 			return;
+		}
 	}
 	[array addObject:[ArticleReference makeReferenceFromGUID:guid inFolder:folderId]];
 	++queueIndex;

@@ -22,6 +22,8 @@ import XCTest
 
 class FeedDiscovererTests: XCTestCase {
 
+    static let numberOfValidFeeds = 12
+
     static let dummyURL: URL! = URL(string: "https://www.vienna-rss.com")
 
     var testData: Data!
@@ -54,7 +56,7 @@ class FeedDiscovererTests: XCTestCase {
         let discoverer = FeedDiscoverer(data: testData, baseURL: FeedDiscovererTests.dummyURL)
 
         XCTAssert(discoverer.documentHasFeeds())
-        XCTAssert(discoverer.feedURLs().count == 10)
+        XCTAssert(discoverer.feedURLs().count == FeedDiscovererTests.numberOfValidFeeds)
     }
 
 }

@@ -19,7 +19,9 @@
 
 #import "AppController.h"
 
-@interface AppController (Notifications) <NSUserNotificationCenterDelegate>
+#import "Vienna-Swift.h"
+
+@interface AppController (Notifications) <VNAUserNotificationCenterDelegate>
 
 // Notification keys
 extern NSString *const UserNotificationContextKey;

@@ -27,7 +27,10 @@
 
 @end
 
-@implementation AdvancedPreferencesViewController
+@implementation AdvancedPreferencesViewController {
+    IBOutlet NSButton *useJavaScriptButton;
+    IBOutlet NSPopUpButton *concurrentDownloads;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -63,16 +66,9 @@
 {
     Preferences * prefs = [Preferences standardPreferences];
 
-    previewNewBrowserButton.state = prefs.useNewBrowser ? NSControlStateValueOn : NSControlStateValueOff;
     useJavaScriptButton.state = prefs.useJavaScript ? NSControlStateValueOn : NSControlStateValueOff;
 
     [concurrentDownloads selectItemWithTitle:[NSString stringWithFormat:@"%lu",(unsigned long)prefs.concurrentDownloads]];
-}
-
-- (IBAction)changeUseNewBrowser:(NSButton *)sender {
-    BOOL useNewBrowser = sender.state == NSControlStateValueOn;
-    Preferences *preferences = Preferences.standardPreferences;
-    preferences.useNewBrowser = useNewBrowser;
 }
 
 /* changeUseJavaScript

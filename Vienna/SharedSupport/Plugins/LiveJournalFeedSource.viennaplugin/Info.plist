@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>FriendlyName</key>
+	<string>LiveJournal</string>
+	<key>LinkName</key>
+	<string>Enter LiveJournal user name</string>
+	<key>LinkTemplate</key>
+	<string>https://www.livejournal.com/users/%@/data/rss</string>
+	<key>Name</key>
+	<string>LiveJournalFeedSource</string>
+	<key>SiteHomePage</key>
+	<string>https://www.livejournal.com</string>
+	<key>Type</key>
+	<string>FeedSource</string>
+</dict>
+</plist>

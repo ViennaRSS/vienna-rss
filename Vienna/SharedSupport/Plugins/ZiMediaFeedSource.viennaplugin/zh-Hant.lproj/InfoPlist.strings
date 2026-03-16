@@ -1,0 +1,5 @@
+/* The name of feed source. */
+"FriendlyName" = "字媒體";
+
+/* An instruction for the user. This will be shown above a text field. */
+"LinkName" = "請輸入字媒體使用者名稱";

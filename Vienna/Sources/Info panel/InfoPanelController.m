@@ -20,6 +20,7 @@
 
 #import "InfoPanelController.h"
 
+#import "Constants.h"
 #import "Database.h"
 #import "DateFormatterExtension.h"
 #import "Folder.h"
@@ -91,22 +92,23 @@
 	Folder * folder = [[Database sharedManager] folderFromID:self.infoFolderId];
 	
 	// Set the window caption
-	NSString * caption = [NSString stringWithFormat:NSLocalizedString(@"%@ Info", nil), folder.name];
+	NSString * caption = [NSString stringWithFormat:NSLocalizedString(@"%@ Info", @"Title of the Get Info panel. The variable is the name of the feed."), folder.name];
 	self.window.title = caption;
 
 	// Set the header details
 	self.folderName.stringValue = folder.name;
 	self.folderImage.image = folder.image; 
-	if ([folder.lastUpdate isEqualToDate:[NSDate distantPast]])
+	if ([folder.lastUpdate isEqualToDate:[NSDate distantPast]]) {
 		[self.lastRefreshDate setStringValue:NSLocalizedString(@"Never", nil)];
-	else
-        self.lastRefreshDate.stringValue = [NSDateFormatter vna_relativeDateStringFromDate:folder.lastUpdate];
+	} else {
+		self.lastRefreshDate.stringValue = [NSDateFormatter vna_relativeDateStringFromDate:folder.lastUpdate];
+	}
 
 	// Fill out the panels
 	self.urlField.stringValue = folder.feedURL;
 	self.username.stringValue = folder.username;
 	self.password.stringValue = folder.password;
-	// for Google feeds, URL may not be changed and no authentication is supported
+	// for Open Reader feeds, URL may not be changed and no authentication is supported
 	if (folder.type == VNAFolderTypeOpenReader) {
 		//[urlField setSelectable:NO];
 		[self.urlField setEditable:NO];
@@ -139,8 +141,7 @@
 {
     if (self.isSubscribed.state == NSControlStateValueOn) {
         [[Database sharedManager] clearFlag:VNAFolderFlagUnsubscribed forFolder:self.infoFolderId];
-    }
-    else {
+    } else {
 		[[Database sharedManager] setFlag:VNAFolderFlagUnsubscribed forFolder:self.infoFolderId];
     }
 }
@@ -152,11 +153,10 @@
 {
     if (self.loadFullHTML.state == NSControlStateValueOn) {
         [[Database sharedManager] setFlag:VNAFolderFlagLoadFullHTML forFolder:self.infoFolderId];
-    }
-    else {
+    } else {
 		[[Database sharedManager] clearFlag:VNAFolderFlagLoadFullHTML forFolder:self.infoFolderId];
     }
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_LoadFullHTMLChange"
+	[[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_LoadFullHTMLChange
                                                         object:@(self.infoFolderId)];
 }
 
@@ -175,7 +175,7 @@
  */
 -(void)handleFolderNameTextDidChange:(NSNotification *)aNotification
 {
-    [[Database sharedManager] setName:self.folderName.stringValue forFolder:self.infoFolderId];
+    [[Database sharedManager] setName:self.folderName.stringValue.vna_trimmed forFolder:self.infoFolderId];
 }
 
 /* enableValidateButton
@@ -194,14 +194,15 @@
     NSURLComponents *urlComponents = [NSURLComponents componentsWithString:validatorURL];
 
     NSString *validatedURL = self.urlField.stringValue.vna_trimmed;
+    // Override the text field's URL with the validated one.
+    self.urlField.stringValue = validatedURL;
+
     NSCharacterSet *urlQuerySet = NSCharacterSet.URLQueryAllowedCharacterSet;
     NSString *encodedURL = [validatedURL stringByAddingPercentEncodingWithAllowedCharacters:urlQuerySet];
-
-    // Override the text field's URL with the encoded one.
-    self.urlField.stringValue = encodedURL;
-
+    // prevent any confusion between feed's URL query string and validator's URL query string
+    encodedURL = [encodedURL stringByReplacingOccurrencesOfString:@"&" withString:@"%26"];
     // Create the query using the encoded URL.
-    urlComponents.query = [NSString stringWithFormat:@"url=%@", encodedURL];
+    urlComponents.percentEncodedQuery = [NSString stringWithFormat:@"url=%@", encodedURL];
 
     if (self.delegate) {
         [self.delegate infoPanelControllerWillOpenURL:urlComponents.URL];

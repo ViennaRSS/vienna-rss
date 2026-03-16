@@ -57,8 +57,8 @@ class URLFormatterTests: XCTestCase {
     func testStringFromMailtoURL() throws {
         let formatter = URLFormatter()
         let urlTuples = [
-            (unformatted: "mailto:recipient@host", formatted: "Send email to recipient@host"),
-            (unformatted: "mailto:recipient@host?subject=Hello", formatted: "Send email to recipient@host with subject “Hello”")
+            (unformatted: "mailto:recipient@host", formatted: String(format: NSLocalizedString("Send email to %@", comment: "A formatted URL string with the mailto: URL scheme."), "recipient@host")),
+            (unformatted: "mailto:recipient@host?subject=Hello", formatted: String(format: NSLocalizedString("Send email to %@ with subject “%@”", comment: "A formatted URL string with the mailto: URL scheme."), "recipient@host", "Hello"))
         ]
 
         for tuple in urlTuples {

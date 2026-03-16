@@ -18,43 +18,51 @@
 //  limitations under the License.
 //
 
+#import "SyncingPreferencesViewController.h"
+
+#import "AppController.h"
+#import "Constants.h"
 #import "OpenReader.h"
 #import "Keychain.h"
+#import "PluginManager.h"
 #import "Preferences.h"
 #import "StringExtensions.h"
-#import "SyncingPreferencesViewController.h"
+#import "SyncServerPlugin.h"
 
 @interface SyncingPreferencesViewController ()
 
+// This property is also bound in Interface Builder (Cocoa bindings).
+@property (getter=isSyncEnabled, nonatomic) BOOL syncEnabled;
+
 @end
 
-@implementation SyncingPreferencesViewController
-static BOOL _credentialsChanged;
-
-static NSString *syncScheme;
-static NSString *serverAndPath;
-static NSURL *serverURL;
-static NSString *syncingUser;
-
-@synthesize syncButton;
+@implementation SyncingPreferencesViewController {
+    IBOutlet NSPopUpButton *openReaderSource; // List of known service providers
+    IBOutlet NSTextField *credentialsInfoText;
+    IBOutlet NSTextField *openReaderHost;
+    IBOutlet NSTextField *username;
+    IBOutlet NSSecureTextField *password;
+    BOOL _credentialsChanged;
+    NSString *syncScheme;
+    NSString *serverAndPath;
+    NSURL *serverURL;
+    NSString *syncingUser;
+    NSMenuItem *otherMenuItem;
+}
 
 - (void)viewWillAppear {
+    [super viewWillAppear];
+
     // Set up to be notified
     NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver:self selector:@selector(handleGoogleAuthFailed:) name:@"MA_Notify_GoogleAuthFailed" object:nil];
+    [nc addObserver:self selector:@selector(handleOpenReaderAuthFailed:) name:MA_Notify_OpenReaderAuthFailed object:nil];
     [nc addObserver:self selector:@selector(handleServerTextDidChange:) name:NSControlTextDidChangeNotification object:openReaderHost];
     [nc addObserver:self selector:@selector(handleUserTextDidChange:) name:NSControlTextDidChangeNotification object:username];
     [nc addObserver:self selector:@selector(handlePasswordTextDidChange:) name:NSControlTextDidChangeNotification object:password];
 
-    if([NSViewController instancesRespondToSelector:@selector(viewWillAppear)]) {
-        [super viewWillAppear];
-    }
-    // Do view setup here.
-    sourcesDict = nil;
-    
     // restore from Preferences and from keychain
     Preferences * prefs = [Preferences standardPreferences];
-    syncButton.state = prefs.syncGoogleReader ? NSControlStateValueOn : NSControlStateValueOff;
+    self.syncEnabled = prefs.syncOpenReader;
     syncingUser = prefs.syncingUser;
     if (!syncingUser) {
         syncingUser=@"";
@@ -69,60 +77,41 @@ static NSString *syncingUser;
     }
     serverURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@", syncScheme, serverAndPath]];
     NSString * thePassword = [VNAKeychain getGenericPasswordFromKeychain:syncingUser serviceName:@"Vienna sync"];
-    if (!thePassword)
+    if (!thePassword) {
         thePassword=@"";
+    }
     username.stringValue = syncingUser;
     openReaderHost.stringValue = serverAndPath;
     password.stringValue = thePassword;
     
-    if(!prefs.syncGoogleReader)
-    {
-        [openReaderSource setEnabled:NO];
-        [openReaderHost setEnabled:NO];
-        [username setEnabled:NO];
-        [password setEnabled:NO];
-    }
     _credentialsChanged = NO;
-    
-    // Load a list of supported servers from the KnownSyncServers property list. The list
-    // is a dictionary with display names which act as keys, host names and a help text
-    // regarding credentials to enter. This allows us to support additional service
-    // providers without having to write new code.
-    if (!sourcesDict)
-    {
-        NSBundle *thisBundle = [NSBundle bundleForClass:[self class]];
-        NSString * pathToPList = [thisBundle pathForResource:@"KnownSyncServers" ofType:@"plist"];
-        if (pathToPList != nil)
-        {
-            sourcesDict = [NSDictionary dictionaryWithContentsOfFile:pathToPList];
-            [openReaderSource removeAllItems];
-            if (sourcesDict)
-            {
-                [openReaderSource setEnabled:YES];
-                BOOL match = NO;
-                for (NSString * key in sourcesDict)
-                {
-                    [openReaderSource addItemWithTitle:key];
-                    NSDictionary * itemDict = [sourcesDict valueForKey:key];
-                    if ([serverAndPath isEqualToString:[itemDict valueForKey:@"Address"]])
-                    {
-                        [openReaderSource selectItemWithTitle:key];
-                        [self changeSource:nil];
-                        match = YES;
-                    }
-                }
-                if (!match)
-                {
-                    [openReaderSource selectItemWithTitle:NSLocalizedString(@"Other", nil)];
-                    [self changeSource:nil];
-                    openReaderHost.stringValue = serverURL.absoluteString;
-                }
-            }
+
+    [openReaderSource removeAllItems];
+    NSArray *plugins = [APPCONTROLLER.pluginManager pluginsOfType:[VNASyncServerPlugin class]];
+    BOOL match = NO;
+    for (VNASyncServerPlugin *plugin in plugins) {
+        NSMenuItem *menuItem = [[NSMenuItem alloc] initWithTitle:plugin.displayName
+                                                          action:NULL
+                                                   keyEquivalent:@""];
+        menuItem.representedObject = plugin;
+        [openReaderSource.menu addItem:menuItem];
+        if ([serverAndPath isEqualToString:plugin.hostName]) {
+            [openReaderSource selectItem:menuItem];
+            [self changeSource:nil];
+            match = YES;
         }
-        else
-            [openReaderSource setEnabled:NO];
     }
-    
+    [openReaderSource.menu addItem:[NSMenuItem separatorItem]];
+    otherMenuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Other",
+                                                                        @"Title of a menu item.")
+                                               action:NULL
+                                        keyEquivalent:@""];
+    [openReaderSource.menu addItem:otherMenuItem];
+    if (!match) {
+        [openReaderSource selectItem:otherMenuItem];
+        [self changeSource:nil];
+        openReaderHost.stringValue = serverURL.absoluteString;
+    }
 }
 
 #pragma mark - Vienna Prferences
@@ -135,8 +124,7 @@ static NSString *syncingUser;
     prefs.syncScheme = syncScheme;
     prefs.syncServer = serverAndPath;
     prefs.syncingUser = syncingUser;
-    if(syncButton.state == NSControlStateValueOn && _credentialsChanged)
-    {
+    if (self.isSyncEnabled && _credentialsChanged) {
         [[OpenReader sharedManager] resetAuthentication];
         [[OpenReader sharedManager] loadSubscriptions];
     }
@@ -149,38 +137,39 @@ static NSString *syncingUser;
     // enable/disable syncing
     BOOL sync = [sender state] == NSControlStateValueOn;
     Preferences *prefs = [Preferences standardPreferences];
-    prefs.syncGoogleReader = sync;
+    prefs.syncOpenReader = sync;
     if (sync) {
-        [openReaderSource setEnabled:YES];
-        [openReaderHost setEnabled:YES];
-        [username setEnabled:YES];
-        [password setEnabled:YES];
         _credentialsChanged = YES;
-    }
-    else {
-        [openReaderSource setEnabled:NO];
-        [openReaderHost setEnabled:NO];
-        [username setEnabled:NO];
-        [password setEnabled:NO];
+    } else {
         [[OpenReader sharedManager] clearAuthentication];
     };
 }
 
 -(IBAction)changeSource:(id)sender
 {
-    NSMenuItem * readerItem = openReaderSource.selectedItem;
-    NSString * key = readerItem.title;
-    NSDictionary * itemDict = [sourcesDict valueForKey:key];
-    NSString* hostName = [itemDict valueForKey:@"Address"];
-    if (!hostName)
-        hostName=@"";
-    NSString* hint = [itemDict valueForKey:@"Hint"];
-    if (!hint)
-        hint=@"";
+    NSMenuItem *readerItem = openReaderSource.selectedItem;
+    NSString *hostName;
+    NSString *hint;
+    if ([readerItem isEqual:otherMenuItem]) {
+        hostName = @"";
+        hint = NSLocalizedString(@"Enter the server's address (API URL) and your credentials. For FreshRSS servers, the API URL typically ends with \"/api/greader.php\", and the API password is defined in the \"Profile\" section of the website.",
+                                 @"An instruction for the user. This will be shown above the text fields.");
+    } else {
+        VNASyncServerPlugin *plugin = readerItem.representedObject;
+        hostName = plugin.hostName;
+        if (!hostName) {
+            hostName=@"";
+        }
+        hint = plugin.hintLabel;
+        if (!hint) {
+            hint=@"";
+        }
+    }
     openReaderHost.stringValue = hostName;
     credentialsInfoText.stringValue = hint;
-    if (sender != nil)	//user action
+    if (sender != nil) {	//user action
         [self handleServerTextDidChange:nil];
+    }
 }
 
 - (IBAction)visitWebsite:(id)sender
@@ -213,8 +202,7 @@ static NSString *syncingUser;
     if (!openReaderHost.stringValue.vna_isBlank && !username.stringValue.vna_isBlank && password.stringValue.vna_isBlank) {
         // can we get password via keychain ?
         NSString * thePass = [VNAKeychain getWebPasswordFromKeychain:username.stringValue url:[NSString stringWithFormat:@"%@://%@", syncScheme, serverURL.host]];
-        if (!thePass.vna_isBlank)
-        {
+        if (!thePass.vna_isBlank) {
             password.stringValue = thePass;
             [VNAKeychain setGenericPasswordInKeychain:thePass username:username.stringValue service:@"Vienna sync"];
         }
@@ -234,8 +222,7 @@ static NSString *syncingUser;
     if (!openReaderHost.stringValue.vna_isBlank && !username.stringValue.vna_isBlank && password.stringValue.vna_isBlank) {
         // can we get password via keychain ?
         NSString * thePass = [VNAKeychain getWebPasswordFromKeychain:username.stringValue url:[NSString stringWithFormat:@"%@://%@", syncScheme, serverURL.host]];
-        if (!thePass.vna_isBlank)
-        {
+        if (!thePass.vna_isBlank) {
             password.stringValue = thePass;
             [VNAKeychain setGenericPasswordInKeychain:password.stringValue username:username.stringValue service:@"Vienna sync"];
         }
@@ -254,10 +241,9 @@ static NSString *syncingUser;
     [VNAKeychain setGenericPasswordInKeychain:password.stringValue username:username.stringValue service:@"Vienna sync"];
 }
 
--(void)handleGoogleAuthFailed:(NSNotification *)nc
+-(void)handleOpenReaderAuthFailed:(NSNotification *)nc
 {    
-    if (self.view.window.visible)
-    {
+    if (self.view.window.visible) {
         NSAlert *alert = [NSAlert new];
         alert.messageText = NSLocalizedString(@"Open Reader Authentication Failed",nil);
         if (![nc.object isEqualToString:@""]) {
@@ -274,9 +260,6 @@ static NSString *syncingUser;
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    syncButton=nil;
-    sourcesDict=nil;
-    
 }
 
 @end

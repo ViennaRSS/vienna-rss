@@ -19,26 +19,20 @@
 //
 
 #import "ArticleBaseView.h"
-#import "BaseView.h"
-#import "MessageListView.h"
 
 @class AppController;
-@class ExtendedTableView;
+@class ArticleController;
 
-@interface UnifiedDisplayView : NSView <BaseView, ArticleBaseView, NSMenuItemValidation, MessageListViewDelegate, NSTableViewDataSource>
-{
-    IBOutlet ExtendedTableView *articleList;
+@interface UnifiedDisplayView : NSView <ArticleBaseView,
+                                        NSMenuDelegate,
+                                        NSMenuItemValidation,
+                                        NSTableViewDataSource,
+                                        NSTableViewDelegate>
 
-	NSTimer * markReadTimer;
-
-	NSMutableArray * rowHeightArray;
-	NSProgressIndicator * progressIndicator;
-}
-
-@property (weak, nonatomic) AppController *controller;
+@property (weak, nonatomic) AppController *appController;
+@property (weak, nonatomic) ArticleController *articleController;
 
 // Public functions
 -(void)saveTableSettings;
-- (void)webViewLoadFinished:(NSNotification *)notification;
 
 @end

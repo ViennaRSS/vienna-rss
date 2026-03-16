@@ -43,14 +43,13 @@
 -(NSString *)expandTagsOfArticle:(Article *)theArticle intoTemplate:(NSString *)theString withConditional:(BOOL)cond
 {
     NSMutableString * newString = [NSMutableString stringWithString:SafeString(theString)];
-    BOOL hasOneTag = NO;
     NSUInteger tagStartIndex = 0;
 
-    while ((tagStartIndex = [newString vna_indexOfCharacterInString:'$' afterIndex:tagStartIndex]) != NSNotFound)
-    {
+    while ((tagStartIndex = [newString vna_indexOfCharacterInString:'$' afterIndex:tagStartIndex]) != NSNotFound) {
         NSUInteger tagEndIndex = [newString vna_indexOfCharacterInString:'$' afterIndex:tagStartIndex + 1];
-        if (tagEndIndex == NSNotFound)
+        if (tagEndIndex == NSNotFound) {
             break;
+        }
 
         NSUInteger tagLength = (tagEndIndex - tagStartIndex) + 1;
         NSString * tagName = [newString substringWithRange:NSMakeRange(tagStartIndex + 1, tagLength - 2)];
@@ -68,20 +67,19 @@
         NSString * (*func)(id, SEL) = (void *)imp;
         replacementString = func(theArticle, selector);
 
-        if (replacementString == nil)
+        if (replacementString == nil) {
             [newString deleteCharactersInRange:NSMakeRange(tagStartIndex, tagLength)];
-        else
-        {
+        } else {
             [newString replaceCharactersInRange:NSMakeRange(tagStartIndex, tagLength) withString:replacementString];
-            hasOneTag = YES;
 
-            if (!replacementString.vna_isBlank)
+            if (!replacementString.vna_isBlank) {
                 cond = NO;
+            }
 
             tagStartIndex += replacementString.length;
         }
     }
-    return (cond && hasOneTag) ? @"" : newString;
+    return cond ? @"" : newString;
 }
 
 /* articleTextFromArray

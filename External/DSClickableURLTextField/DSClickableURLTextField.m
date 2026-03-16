@@ -73,7 +73,13 @@
 #import "DSClickableURLTextField.h"
 
 
-@implementation DSClickableURLTextField
+@implementation DSClickableURLTextField {
+	NSTextStorage *URLStorage;
+	NSLayoutManager *URLManager;
+	NSTextContainer *URLContainer;
+	NSURL			*clickedURL;
+	BOOL			canCopyURLs;
+}
 
 /* Set the text field to be non-editable and
 	non-selectable. */
@@ -256,14 +262,8 @@
 
 - (void)copyURL:(id)sender
 {
-	NSPasteboard *copyBoard = nil;
-	if (@available(macOS 10.13, *)) {
-		copyBoard = [NSPasteboard pasteboardWithName:NSPasteboardNameGeneral];
-		[copyBoard declareTypes:@[NSPasteboardTypeURL, NSPasteboardTypeString] owner:nil];
-	} else {
-		copyBoard = [NSPasteboard pasteboardWithName:NSGeneralPboard];
-		[copyBoard declareTypes:@[NSURLPboardType, NSPasteboardTypeString] owner:nil];
-	}
+	NSPasteboard *copyBoard = [NSPasteboard pasteboardWithName:NSPasteboardNameGeneral];
+	[copyBoard declareTypes:@[NSPasteboardTypeURL, NSPasteboardTypeString] owner:nil];
 	NSURL *copyURL = [sender representedObject];
 	
 	[copyURL writeToPasteboard:copyBoard];

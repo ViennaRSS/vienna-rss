@@ -53,7 +53,7 @@ protocol Tab {
 
     // MARK: other actions
 
-    func printPage()
+    func printDocument(_ sender: Any?)
     func activateAddressBar()
     func activateWebView()
 }

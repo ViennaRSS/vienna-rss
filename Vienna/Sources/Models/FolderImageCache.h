@@ -8,27 +8,18 @@
 
 @import Cocoa;
 
-@interface FolderImageCache : NSObject {
-    NSString * imagesCacheFolder;
-    NSMutableDictionary * folderImagesArray;
-    BOOL initializedFolderImagesArray;
-}
+NS_ASSUME_NONNULL_BEGIN
 
-// Indexes into folder image array
-typedef NS_ENUM(NSInteger, VNAFolderIconIndex) {
-    MA_FolderIcon = 0,
-    MA_SmartFolderIcon,
-    MA_RSSFolderIcon,
-    MA_RSSFeedIcon,
-    MA_TrashFolderIcon,
-    MA_SearchFolderIcon,
-    MA_GoogleReaderFolderIcon,
-    MA_Max_Icons
-};
+@interface FolderImageCache : NSObject
 
 @property (class, readonly, nonatomic) FolderImageCache *defaultCache;
 
--(void)addImage:(NSImage *)image forURL:(NSString *)baseURL;
--(NSImage *)retrieveImage:(NSString *)baseURL;
+/// Add the specified image data to the cache and save it to disk.
+- (BOOL)cacheImageData:(NSData *)imageData filename:(NSString *)filename;
+
+/// Retrieve the image for the specified URL from the cache.
+- (nullable NSImage *)retrieveImage:(NSString *)filename;
 
 @end
+
+NS_ASSUME_NONNULL_END

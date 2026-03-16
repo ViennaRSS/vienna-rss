@@ -20,13 +20,7 @@
 
 @import Cocoa;
 
-@interface NewGroupFolder : NSWindowController {
-	IBOutlet NSWindow * newGroupFolderWindow;
-	IBOutlet NSTextField * folderName;
-	IBOutlet NSButton * saveButton;
-	IBOutlet NSButton * cancelButton;
-	NSInteger parentId;
-}
+@interface NewGroupFolder : NSWindowController
 
 @property NSArray * topObjects;
 

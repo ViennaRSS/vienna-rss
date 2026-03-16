@@ -20,18 +20,18 @@
 
 @import Cocoa;
 
-#import "FolderView.h"
+#import "FolderViewDelegate.h"
 
 @class AppController;
+@class FolderView;
 
-@interface FoldersTree : NSObject <FolderViewDelegate, NSOutlineViewDataSource>
+@interface FoldersTree : NSObject <FolderViewDelegate, NSOutlineViewDataSource, NSTextFieldDelegate>
 
 @property (weak, nonatomic) AppController *controller;
 @property (weak, nonatomic) FolderView *outlineView;
 
 -(void)initialiseFoldersTree;
 -(void)saveFolderSettings;
--(void)updateAlternateMenuTitle;
 -(void)updateFolder:(NSInteger)folderId recurseToParents:(BOOL)recurseToParents;
 -(BOOL)selectFolder:(NSInteger)folderId;
 -(void)renameFolder:(NSInteger)folderId;

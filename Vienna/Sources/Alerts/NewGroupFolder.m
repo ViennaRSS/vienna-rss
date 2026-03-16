@@ -30,15 +30,20 @@
 
 @end
 
-@implementation NewGroupFolder
+@implementation NewGroupFolder {
+    IBOutlet NSWindow *newGroupFolderWindow;
+    IBOutlet NSTextField *folderName;
+    IBOutlet NSButton *saveButton;
+    IBOutlet NSButton *cancelButton;
+    NSInteger parentId;
+}
 
 /* newGroupFolder
  * Display the sheet to create a new group folder.
  */
 -(void)newGroupFolder:(NSWindow *)window underParent:(NSInteger)itemId
 {
-	if (!newGroupFolderWindow)
-	{
+	if (!newGroupFolderWindow) {
 		NSArray * objects;
 		[[NSBundle bundleForClass:[self class]] loadNibNamed:@"GroupFolder" owner:self topLevelObjects:&objects];
 		self.topObjects = objects;
@@ -70,8 +75,9 @@
 	[newGroupFolderWindow.sheetParent endSheet:newGroupFolderWindow];
 	[newGroupFolderWindow orderOut:self];
 	
-	if (newFolderId != -1)
+	if (newFolderId != -1) {
 		[APPCONTROLLER selectFolder:newFolderId];
+	}
 }
 
 /* doCancel

@@ -25,7 +25,6 @@
 #import "FeedCredentials.h"
 #import "ActivityItem.h"
 #import "ActivityLog.h"
-#import "RichXMLParser.h"
 #import "StringExtensions.h"
 #import "Preferences.h"
 #import "Constants.h"
@@ -37,6 +36,9 @@
 #import "TRVSURLSessionOperation.h"
 #import "URLRequestExtensions.h"
 #import "Vienna-Swift.h"
+#import "XMLFeed.h"
+#import "XMLFeedParser.h"
+#import "HelperFunctions.h"
 
 typedef NS_ENUM (NSInteger, Redirect301Status) {
     HTTP301Unknown = 0,
@@ -64,16 +66,18 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 -(void)pumpFolderIconRefresh:(Folder *)folder;
 -(void)refreshFeed:(Folder *)folder fromURL:(NSURL *)url withLog:(ActivityItem *)aItem shouldForceRefresh:(BOOL)force;
 -(NSString *)getRedirectURL:(NSData *)data;
--(void)syncFinishedForFolder:(Folder *)folder;
 
 @end
 
-@implementation RefreshManager
-
-+(void)initialize
-{
+@implementation RefreshManager {
+    NSUInteger countOfNewArticles;
+    NSMutableArray *authQueue;
+    FeedCredentials *credentialsController;
+    BOOL hasStarted;
+    NSString *statusMessageDuringRefresh;
+    NSOperationQueue *networkQueue;
+    dispatch_queue_t _queue;
 }
-
 
 /* init
  * Initialise the class.
@@ -87,30 +91,19 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         networkQueue = [[NSOperationQueue alloc] init];
         networkQueue.name = @"VNAHTTPSession queue";
         networkQueue.maxConcurrentOperationCount = [[Preferences standardPreferences] integerForKey:MAPref_ConcurrentDownloads];
-        NSString * osVersion;
-        NSOperatingSystemVersion version = [NSProcessInfo processInfo].operatingSystemVersion;
-        osVersion = [NSString stringWithFormat:@"%ld_%ld_%ld", version.majorVersion, version.minorVersion, version.patchVersion];
-        Preferences * prefs = [Preferences standardPreferences];
-        NSString *name = prefs.userAgentName;
-
-        NSString * userAgent = [NSString stringWithFormat:MA_DefaultUserAgentString, name, [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"], osVersion];
         NSURLSessionConfiguration * config = [NSURLSessionConfiguration defaultSessionConfiguration];
         config.timeoutIntervalForResource = 300;
-        config.URLCache = nil;
-        config.HTTPAdditionalHeaders = @{@"User-Agent": userAgent};
+        config.HTTPAdditionalHeaders = @{@"User-Agent": userAgent()};
         config.HTTPMaximumConnectionsPerHost = 6;
         config.HTTPShouldUsePipelining = YES;
         _urlSession = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:[NSOperationQueue mainQueue]];
 
         NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-        [nc addObserver:self selector:@selector(handleGotAuthenticationForFolder:) name:@"MA_Notify_GotAuthenticationForFolder" object:nil];
-        [nc addObserver:self selector:@selector(handleCancelAuthenticationForFolder:) name:@"MA_Notify_CancelAuthenticationForFolder"
+        [nc addObserver:self selector:@selector(handleGotAuthenticationForFolder:) name:MA_Notify_GotAuthenticationForFolder object:nil];
+        [nc addObserver:self selector:@selector(handleCancelAuthenticationForFolder:) name:MA_Notify_CancelAuthenticationForFolder
             object:nil];
         [nc addObserver:self selector:@selector(handleWillDeleteFolder:) name:VNADatabaseWillDeleteFolderNotification object:nil];
-        [nc addObserver:self selector:@selector(handleChangeConcurrentDownloads:) name:@"MA_Notify_CowncurrentDownloadsChange" object:nil];
-        // be notified on system wake up after sleep
-        [[NSWorkspace sharedWorkspace].notificationCenter addObserver:self selector:@selector(handleDidWake:)
-            name:@"NSWorkspaceDidWakeNotification" object:nil];
+        [nc addObserver:self selector:@selector(handleChangeConcurrentDownloads:) name:MA_Notify_ConcurrentDownloadsChange object:nil];
         _queue = dispatch_queue_create("uk.co.opencommunity.vienna2.refresh", NULL);
         _redirect301WaitQueue = [[NSMutableArray alloc] init];
         hasStarted = NO;
@@ -170,6 +163,10 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         self.redirect301Status = HTTP301Unknown;
         [self.unsafe301RedirectionTimer invalidate];
         self.unsafe301RedirectionTimer = nil;
+        NSWorkspace *workspace = NSWorkspace.sharedWorkspace;
+        [workspace.notificationCenter removeObserver:self
+                                                name:NSWorkspaceDidWakeNotification
+                                              object:nil];
     }
 }
 
@@ -210,8 +207,8 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         if (folder.type == VNAFolderTypeGroup) {
             [self forceRefreshSubscriptionForFolders:[[Database sharedManager] arrayOfFolders:folder.itemId]];
         } else if (folder.type == VNAFolderTypeOpenReader) {
-            if (![self isRefreshingFolder:folder ofType:MA_Refresh_GoogleFeed] &&
-                ![self isRefreshingFolder:folder ofType:MA_ForceRefresh_Google_Feed])
+            if (![self isRefreshingFolder:folder ofType:MA_Refresh_OpenReaderFeed] &&
+                ![self isRefreshingFolder:folder ofType:MA_ForceRefresh_OpenReader_Feed])
             {
                 [self pumpSubscriptionRefresh:folder shouldForceRefresh:YES];
             }
@@ -234,8 +231,8 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
                 [self pumpSubscriptionRefresh:folder shouldForceRefresh:NO];
             }
         } else if (folder.isOpenReaderFolder) {
-            if ((!folder.isUnsubscribed || ignoreSubStatus)  && ![self isRefreshingFolder:folder ofType:MA_Refresh_GoogleFeed] &&
-                ![self isRefreshingFolder:folder ofType:MA_ForceRefresh_Google_Feed])
+            if ((!folder.isUnsubscribed || ignoreSubStatus)  && ![self isRefreshingFolder:folder ofType:MA_Refresh_OpenReaderFeed] &&
+                ![self isRefreshingFolder:folder ofType:MA_ForceRefresh_OpenReader_Feed])
             {
                 // we depend of pieces of info gathered by loadSubscriptions
                 NSOperation * op = [NSBlockOperation blockOperationWithBlock:^(void) {
@@ -286,10 +283,9 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
  */
 -(void)refreshFavIconForFolder:(Folder *)folder
 {
-    // Do nothing if there's no homepage associated with the feed
-    // or if the feed already has a favicon.
+    // Do nothing if there's no homepage associated with the feed.
     if ((folder.type == VNAFolderTypeRSS || folder.type == VNAFolderTypeOpenReader) &&
-        (folder.homePage == nil || folder.homePage.vna_isBlank || folder.hasCachedImage))
+        (folder.homePage == nil || folder.homePage.vna_isBlank))
     {
         [[Database sharedManager] clearFlag:VNAFolderFlagCheckForImage forFolder:folder.itemId];
         return;
@@ -362,7 +358,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     } else {
         [folder clearNonPersistedFlag:VNAFolderFlagError];
     }
-    [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(folder.itemId)];
 }
 
 /* setFolderUpdatingFlag
@@ -376,7 +371,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     } else {
         [folder clearNonPersistedFlag:VNAFolderFlagUpdating];
     }
-    [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated" object:@(folder.itemId)];
 }
 
 /* pumpFolderIconRefresh
@@ -410,13 +404,9 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
                 if (((NSHTTPURLResponse *)response).statusCode == 404) {
                     [aItem appendDetail:NSLocalizedString(@"RSS Icon not found!", nil)];
                 } else if (((NSHTTPURLResponse *)response).statusCode == 200) {
-                    NSImage *iconImage = [[NSImage alloc] initWithData:data];
-                    if (iconImage != nil && iconImage.valid) {
-                        iconImage.size = NSMakeSize(16, 16);
-                        folder.image = iconImage;
-
+                    if ([folder setImageData:data] && folder.image.isValid) {
                         // Broadcast a notification since the folder image has now changed
-                        [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:@"MA_Notify_FoldersUpdated"
+                        [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:MA_Notify_FoldersUpdated
                                                                                                 object:@(folder.itemId)];
 
                         // Log additional details about this.
@@ -432,8 +422,8 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
                         [aItem appendDetail:NSLocalizedString(@"RSS Icon not found!", nil)];
                     }
                 } else {
-                    [aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server",
-                                                                                     nil), (int)((NSHTTPURLResponse *)response).statusCode]];
+                    [aItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %ld reported from server",
+                                                                                     nil), ((NSHTTPURLResponse *)response).statusCode]];
                 }
 
                 [[Database sharedManager] clearFlag:VNAFolderFlagCheckForImage forFolder:folder.itemId];
@@ -482,6 +472,8 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     // persistent so we set this directly on the folder rather than
     // through the database.
     [self setFolderUpdatingFlag:folder flag:YES];
+    [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:MA_Notify_FoldersUpdated
+                                                                            object:@(folder.itemId)];
 
     // Additional detail for the log
     if (folder.type == VNAFolderTypeOpenReader) {
@@ -511,7 +503,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         }
         [myRequest vna_setUserInfo:@{ @"folder": folder, @"log": aItem, @"type": @(MA_Refresh_Feed) }];
         [myRequest addValue:
-         @"application/rss+xml,application/rdf+xml,application/atom+xml,text/xml,application/xml,application/xhtml+xml;q=0.9,text/html;q=0.8,*/*;q=0.5"
+         @"application/rss+xml,application/rdf+xml,application/atom+xml,text/xml,application/xml,application/xhtml+xml,application/feed+json,application/json;q=0.9,text/html;q=0.8,*/*;q=0.5"
                       forHTTPHeaderField:@"Accept"];
         // if authentication infos are present, try basic authentication first
         if (![folder.username isEqualToString:@""]) {
@@ -535,7 +527,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         hasStarted = YES;
         countOfNewArticles = 0;
         [[OpenReader sharedManager] resetCountOfNewArticles];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_RefreshStatus object:nil];
     }
 } // refreshFeed
 
@@ -564,7 +556,9 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     [aItem appendDetail:[NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Error retrieving RSS feed:", nil),
                          error.localizedDescription ]];
     [aItem setStatus:NSLocalizedString(@"Error", nil)];
-    [self syncFinishedForFolder:folder];
+    [self setFolderUpdatingFlag:folder flag:NO];
+    NSNotificationCenter *nc = NSNotificationCenter.defaultCenter;
+    [nc vna_postNotificationOnMainThreadWithName:MA_Notify_FoldersUpdated object:@(folder.itemId)];
 } // folderRefreshFailed
 
 /* folderRefreshCompleted
@@ -601,15 +595,14 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 
         if (responseStatusCode == 304) {
             // No modification from last check
-
-            [dbManager setLastUpdate:[NSDate date] forFolder:folderId];
-
             [self setFolderErrorFlag:folder flag:NO];
             [connectorItem appendDetail:NSLocalizedString(@"Got HTTP status 304 - No news from last check", nil)];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [connectorItem setStatus:NSLocalizedString(@"No new articles available", nil)];
-                [self syncFinishedForFolder:folder];
             });
+            [self setFolderUpdatingFlag:folder flag:NO];
+            NSNotificationCenter *nc = NSNotificationCenter.defaultCenter;
+            [nc vna_postNotificationOnMainThreadWithName:MA_Notify_FoldersUpdated object:@(folder.itemId)];
             return;
         } else if (responseStatusCode == 410) {
             // We got HTTP 410 which means the feed has been intentionally removed so unsubscribe the feed.
@@ -622,12 +615,13 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
                      @"log": connectorItem,
                      @"url": url,
                      @"data": receivedData,
+                     @"mimeType": SafeString(response.MIMEType),
                      @"lastModifiedString": lastModifiedString,
                  }];
             }
         } else { //other HTTP response codes like 404, 403...
-            [connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %d reported from server", nil),
-                                         (int)responseStatusCode]];
+            [connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"HTTP code %ld reported from server", nil),
+                                         responseStatusCode]];
             [connectorItem appendDetail:[NSHTTPURLResponse localizedStringForStatusCode:responseStatusCode]];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [connectorItem setStatus:NSLocalizedString(@"Error", nil)];
@@ -635,11 +629,63 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
             [self setFolderErrorFlag:folder flag:YES];
         }
 
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self syncFinishedForFolder:folder];
-        });
+        [self setFolderUpdatingFlag:folder flag:NO];
+        NSNotificationCenter *nc = NSNotificationCenter.defaultCenter;
+        [nc vna_postNotificationOnMainThreadWithName:MA_Notify_FoldersUpdated object:@(folder.itemId)];
     });     //block for dispatch_async on _queue
 } // folderRefreshCompleted
+
+- (void)refreshImageForFolderIfNeeded:(Folder *)folder {
+    if ((folder.flags & VNAFolderFlagCheckForImage)) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self refreshFavIconForFolder:folder];
+        });
+    }
+}
+
+- (NSString *)getOrCalculateArticleGuid:(id<VNAFeedItem>)newsItem folderId:(NSInteger)folderId articles:(NSMutableArray *)articleArray articleGuidArray:(NSMutableArray *)articleGuidArray {
+    NSString * articleGuid = newsItem.guid;
+    
+    // This routine attempts to synthesize a GUID from an incomplete item that lacks an
+    // ID field. Generally we'll have three things to work from: a link, a title and a
+    // description. The link alone is not sufficiently unique and I've seen feeds where
+    // the description is also not unique. The title field generally does vary but we need
+    // to be careful since separate articles with different descriptions may have the same
+    // title. The solution is to use the link and title and build a GUID from those.
+    // We add the folderId at the beginning to ensure that items in different feeds do not share a guid.
+    if ([articleGuid isEqualToString:@""]) {
+        articleGuid = [NSString stringWithFormat:@"%ld-%@-%@", (long)folderId, newsItem.url, newsItem.title];
+    }
+    // This is a horrible hack for horrible feeds that contain more than one item with the same guid.
+    // Bad feeds! I'm talking to you, kerbalstuff.com
+    NSUInteger articleIndex = [articleGuidArray indexOfObject:articleGuid];
+    if (articleIndex != NSNotFound) {
+        // We rebuild complex guids which should eliminate most duplicates
+        Article * firstFoundArticle = articleArray[articleIndex];
+        if (newsItem.publicationDate == nil) {
+            // first, hack the initial article (which is probably the first loaded / most recent one)
+            NSString * firstFoundArticleNewGuid =
+            [NSString stringWithFormat:@"%ld-%@-%@", (long)folderId, firstFoundArticle.link, firstFoundArticle.title];
+            firstFoundArticle.guid = firstFoundArticleNewGuid;
+            articleGuidArray[articleIndex] = firstFoundArticleNewGuid;
+            // then hack the guid for the item being processed
+            articleGuid = [NSString stringWithFormat:@"%ld-%@-%@", (long)folderId, newsItem.url, newsItem.title];
+        } else {
+            // first, hack the initial article (which is probably the first loaded / most recent one)
+            NSString * firstFoundArticleNewGuid =
+            [NSString stringWithFormat:@"%ld-%@-%@-%@", (long)folderId,
+             [NSString stringWithFormat:@"%1.3f", firstFoundArticle.lastUpdate.timeIntervalSince1970], firstFoundArticle.link,
+             firstFoundArticle.title];
+            firstFoundArticle.guid = firstFoundArticleNewGuid;
+            articleGuidArray[articleIndex] = firstFoundArticleNewGuid;
+            // then hack the guid for the item being processed
+            articleGuid =
+            [NSString stringWithFormat:@"%ld-%@-%@-%@", (long)folderId,
+             [NSString stringWithFormat:@"%1.3f", newsItem.publicationDate.timeIntervalSince1970], newsItem.url, newsItem.title];
+        }
+    }
+    return articleGuid;
+}
 
 -(void)finalizeFolderRefresh:(NSDictionary *)parameters
 {
@@ -669,205 +715,174 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     }
 
     // Empty data feed is OK if we got HTTP 200
-    __block NSUInteger newArticlesFromFeed = 0;
-    RichXMLParser *newFeed = [[RichXMLParser alloc] init];
-    if (receivedData.length > 0) {
-        Preferences *standardPreferences = [Preferences standardPreferences];
-        if (standardPreferences.shouldSaveFeedSource) {
-            NSString * feedSourcePath = folder.feedSourceFilePath;
-
-            if ([standardPreferences boolForKey:MAPref_ShouldSaveFeedSourceBackup]) {
-                BOOL isDirectory = YES;
-                NSFileManager *defaultManager = [NSFileManager defaultManager];
-                if ([defaultManager fileExistsAtPath:feedSourcePath isDirectory:&isDirectory] && !isDirectory) {
-                    NSString * backupPath = [feedSourcePath stringByAppendingPathExtension:@"bak"];
-                    if (![defaultManager fileExistsAtPath:backupPath] || [defaultManager removeItemAtPath:backupPath error:NULL]) {  // Remove any old backup first
-                        [defaultManager moveItemAtPath:feedSourcePath toPath:backupPath error:NULL];
-                    }
-                }
-            }
-
-            [receivedData writeToFile:feedSourcePath options:NSAtomicWrite error:NULL];
-        }
-
-        // Create a new rich XML parser instance that will take care of
-        // parsing the XML data we just got.
-        if (newFeed == nil || ![newFeed parseRichXML:receivedData]) {
-            // Mark the feed as failed
-            [self setFolderErrorFlag:folder flag:YES];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [connectorItem setStatus:NSLocalizedString(@"Error parsing XML data in feed", nil)];
-            });
-            return;
-        }
-
-        // Log number of bytes we received
-        NSString * byteCount = [NSByteCountFormatter stringFromByteCount:receivedData.length
-                                                             countStyle:NSByteCountFormatterCountStyleFile];
-        [connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%@ received",
-                                                                                 @"Number of bytes received, e.g. 1 MB received"),
-                                     byteCount]];
-
-        if (newFeed.items.count == 0) {
-            // Mark the feed as empty
-            [self setFolderErrorFlag:folder flag:YES];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [connectorItem setStatus:NSLocalizedString(@"No articles in feed", nil)];
-            });
-            return;
-        }
-
-        // Extract the latest title and description
-        NSString * feedTitle = newFeed.title;
-        NSString * feedDescription = newFeed.description;
-        NSString * feedLink = newFeed.link;
-
-        // Synthesize feed link if it is missing
-        if (feedLink == nil || feedLink.vna_isBlank) {
-            feedLink = folder.feedURL.vna_baseURL;
-        }
-        if (feedLink != nil && ![feedLink hasPrefix:@"http:"] && ![feedLink hasPrefix:@"https:"]) {
-            feedLink = [NSURL URLWithString:feedLink relativeToURL:url].absoluteString;
-        }
-
-
-        // We'll be collecting articles into this array
-        NSMutableArray *articleArray = [NSMutableArray array];
-        NSMutableArray *articleGuidArray = [NSMutableArray array];
-
-        NSDate *itemAlternativeDate = newFeed.lastModified;
-        if (itemAlternativeDate == nil) {
-            itemAlternativeDate = [NSDate date];
-        }
-
-        // Parse off items.
-
-        for (FeedItem * newsItem in newFeed.items) {
-            NSDate * articleDate = newsItem.date;
-
-            NSString * articleGuid = newsItem.guid;
-
-            // This routine attempts to synthesize a GUID from an incomplete item that lacks an
-            // ID field. Generally we'll have three things to work from: a link, a title and a
-            // description. The link alone is not sufficiently unique and I've seen feeds where
-            // the description is also not unique. The title field generally does vary but we need
-            // to be careful since separate articles with different descriptions may have the same
-            // title. The solution is to use the link and title and build a GUID from those.
-            // We add the folderId at the beginning to ensure that items in different feeds do not share a guid.
-            if ([articleGuid isEqualToString:@""]) {
-                articleGuid = [NSString stringWithFormat:@"%ld-%@-%@", (long)folderId, newsItem.link, newsItem.title];
-            }
-            // This is a horrible hack for horrible feeds that contain more than one item with the same guid.
-            // Bad feeds! I'm talking to you, kerbalstuff.com
-            NSUInteger articleIndex = [articleGuidArray indexOfObject:articleGuid];
-            if (articleIndex != NSNotFound) {
-                // We rebuild complex guids which should eliminate most duplicates
-                Article * firstFoundArticle = articleArray[articleIndex];
-                if (articleDate == nil) {
-                    // first, hack the initial article (which is probably the first loaded / most recent one)
-                    NSString * firstFoundArticleNewGuid =
-                        [NSString stringWithFormat:@"%ld-%@-%@", (long)folderId, firstFoundArticle.link, firstFoundArticle.title];
-                    firstFoundArticle.guid = firstFoundArticleNewGuid;
-                    articleGuidArray[articleIndex] = firstFoundArticleNewGuid;
-                    // then hack the guid for the item being processed
-                    articleGuid = [NSString stringWithFormat:@"%ld-%@-%@", (long)folderId, newsItem.link, newsItem.title];
-                } else {
-                    // first, hack the initial article (which is probably the first loaded / most recent one)
-                    NSString * firstFoundArticleNewGuid =
-                        [NSString stringWithFormat:@"%ld-%@-%@-%@", (long)folderId,
-                         [NSString stringWithFormat:@"%1.3f", firstFoundArticle.date.timeIntervalSince1970], firstFoundArticle.link,
-                         firstFoundArticle.title];
-                    firstFoundArticle.guid = firstFoundArticleNewGuid;
-                    articleGuidArray[articleIndex] = firstFoundArticleNewGuid;
-                    // then hack the guid for the item being processed
-                    articleGuid =
-                        [NSString stringWithFormat:@"%ld-%@-%@-%@", (long)folderId,
-                         [NSString stringWithFormat:@"%1.3f", articleDate.timeIntervalSince1970], newsItem.link, newsItem.title];
-                }
-            }
-            [articleGuidArray addObject:articleGuid];
-
-            // set the article date if it is missing. We'll use the
-            // last modified date of the feed and set each article to be 1 second older than the
-            // previous one. So the array is effectively newest first.
-            if (articleDate == nil) {
-                articleDate = itemAlternativeDate;
-                itemAlternativeDate = [itemAlternativeDate dateByAddingTimeInterval:-1.0];
-            }
-
-            Article * article = [[Article alloc] initWithGuid:articleGuid];
-            article.folderId = folderId;
-            article.author = newsItem.author;
-            article.body = newsItem.feedItemDescription;
-            article.title = newsItem.title;
-            NSString * articleLink = newsItem.link;
-            if (![articleLink hasPrefix:@"http:"] && ![articleLink hasPrefix:@"https:"]) {
-                articleLink = [NSURL URLWithString:articleLink relativeToURL:url].absoluteString;
-            }
-            if (articleLink == nil) {
-                articleLink = feedLink;
-            }
-            article.link = articleLink;
-            article.date = articleDate;
-            NSString * enclosureLink = newsItem.enclosure;
-            if ([enclosureLink isNotEqualTo:@""] && ![enclosureLink hasPrefix:@"http:"] && ![enclosureLink hasPrefix:@"https:"]) {
-                enclosureLink = [NSURL URLWithString:enclosureLink relativeToURL:url].absoluteString;
-            }
-            article.enclosure = enclosureLink;
-            if ([enclosureLink isNotEqualTo:@""]) {
-                [article setHasEnclosure:YES];
-            }
-            [articleArray addObject:article];
-        }
-
-
-        // Here's where we add the articles to the database
-        if (articleArray.count > 0u) {
-            NSArray *guidHistory = [dbManager guidHistoryForFolderId:folderId];
-            for (Article * article in articleArray) {
-                if ([folder createArticle:article
-                              guidHistory:guidHistory] && (article.status == ArticleStatusNew))
-                {
-                    ++newArticlesFromFeed;
-                }
-            }
-        }
-
-
-        // A notify is only needed if we added any new articles.
-        if (feedTitle != nil  && !feedTitle.vna_isBlank && [folder.name hasPrefix:[Database untitledFeedFolderName]]) {
-            // If there's an existing feed with this title, make ours unique
-            // BUGBUG: This duplicates logic in database.m so consider moving it there.
-            NSString * oldFeedTitle = feedTitle;
-            NSString * newFeedTitle = feedTitle;
-            NSUInteger index = 1;
-
-            while (([dbManager folderFromName:newFeedTitle]) != nil) {
-                newFeedTitle = [NSString stringWithFormat:@"%@ (%lu)", oldFeedTitle, (unsigned long)index++];
-            }
-
-            connectorItem.name = newFeedTitle;
-            [dbManager setName:newFeedTitle forFolder:folderId];
-        }
-        if (feedDescription != nil) {
-            [dbManager setDescription:feedDescription forFolder:folderId];
-        }
-        if (feedLink != nil) {
-            [dbManager setHomePage:feedLink forFolder:folderId];
-        }
-
-        // Remember the last modified date
-        if (lastModifiedString != nil && lastModifiedString.length > 0) {
-            [dbManager setLastUpdateString:lastModifiedString forFolder:folderId];
-        }
-        // Set the last update date for this folder.
-        [dbManager setLastUpdate:[NSDate date] forFolder:folderId];
-
-
-        // Mark the feed as succeeded
-        [self setFolderErrorFlag:folder flag:NO];
-        [folder clearNonPersistedFlag:VNAFolderFlagBuggySync];
+    if (receivedData.length == 0) {
+        [self refreshImageForFolderIfNeeded:folder];
+        return;
     }
+
+    __block NSUInteger newArticlesFromFeed = 0;
+    Preferences *standardPreferences = [Preferences standardPreferences];
+    if (standardPreferences.shouldSaveFeedSource) {
+        NSString * feedSourcePath = folder.feedSourceFilePath;
+
+        if ([standardPreferences boolForKey:MAPref_ShouldSaveFeedSourceBackup]) {
+            BOOL isDirectory = YES;
+            NSFileManager *defaultManager = [NSFileManager defaultManager];
+            if ([defaultManager fileExistsAtPath:feedSourcePath isDirectory:&isDirectory] && !isDirectory) {
+                NSString * backupPath = [feedSourcePath stringByAppendingPathExtension:@"bak"];
+                if (![defaultManager fileExistsAtPath:backupPath] || [defaultManager removeItemAtPath:backupPath error:NULL]) {  // Remove any old backup first
+                    [defaultManager moveItemAtPath:feedSourcePath toPath:backupPath error:NULL];
+                }
+            }
+        }
+
+        [receivedData writeToFile:feedSourcePath options:NSDataWritingAtomic error:NULL];
+    }
+
+    id<VNAFeed> newFeed;
+    NSError *error;
+    NSString *mimeType = parameters[@"mimeType"];
+    if ([mimeType containsString:@"application/feed+json"] ||
+        [mimeType containsString:@"application/json"]) {
+        VNAJSONFeedParser *parser = [[VNAJSONFeedParser alloc] init];
+        newFeed = [parser feedWithJSONData:receivedData error:&error];
+    } else {
+        VNAXMLFeedParser *parser = [[VNAXMLFeedParser alloc] init];
+        newFeed = [parser feedWithXMLData:receivedData error:&error];
+    }
+    if (!newFeed) {
+        NSString *errorDebugDescription = error.userInfo[NSDebugDescriptionErrorKey];
+        if (errorDebugDescription) {
+            os_log_error(VNA_LOG, "%@", errorDebugDescription);
+        }
+        // Mark the feed as failed
+        [self setFolderErrorFlag:folder flag:YES];
+        [connectorItem appendDetail:error.localizedDescription];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [connectorItem setStatus:NSLocalizedString(@"Error parsing data in feed", nil)];
+        });
+        return;
+    }
+
+    // Log number of bytes we received
+    NSString * byteCount = [NSByteCountFormatter stringFromByteCount:receivedData.length
+                                                          countStyle:NSByteCountFormatterCountStyleFile];
+    [connectorItem appendDetail:[NSString stringWithFormat:NSLocalizedString(@"%@ received",
+                                                                             @"Number of bytes received, e.g. 1 MB received"),
+                                 byteCount]];
+
+    // Extract the latest title and description
+    NSString * feedTitle = newFeed.title;
+    NSString * feedDescription = newFeed.feedDescription;
+    NSString * feedLink = newFeed.homePageURL;
+
+    // Synthesize feed link if it is missing
+    if (feedLink == nil || feedLink.vna_isBlank) {
+        feedLink = folder.feedURL.vna_baseURL;
+    }
+    if (feedLink != nil && ![feedLink hasPrefix:@"http:"] && ![feedLink hasPrefix:@"https:"]) {
+        feedLink = [NSURL URLWithString:feedLink relativeToURL:url].absoluteString;
+    }
+
+    if (feedTitle != nil  && !feedTitle.vna_isBlank && [folder.name hasPrefix:[Database untitledFeedFolderName]]) {
+        // If there's an existing feed with this title, make ours unique
+        // BUGBUG: This duplicates logic in database.m so consider moving it there.
+        NSString * oldFeedTitle = feedTitle;
+        NSString * newFeedTitle = feedTitle;
+        NSUInteger index = 1;
+
+        while (([dbManager folderFromName:newFeedTitle]) != nil) {
+            newFeedTitle = [NSString stringWithFormat:@"%@ (%lu)", oldFeedTitle, (unsigned long)index++];
+        }
+
+        connectorItem.name = newFeedTitle;
+        [dbManager setName:newFeedTitle forFolder:folderId];
+    }
+    if (feedDescription != nil) {
+        [dbManager setDescription:feedDescription forFolder:folderId];
+    }
+    if (feedLink != nil) {
+        [dbManager setHomePage:feedLink forFolder:folderId];
+    }
+    // Remember the last modified date
+    if (lastModifiedString != nil && lastModifiedString.length > 0) {
+        [dbManager setLastUpdateString:lastModifiedString forFolder:folderId];
+    }
+
+    if (newFeed.items.count == 0) {
+        // Mark the feed as empty
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [connectorItem setStatus:NSLocalizedString(@"No articles in feed", nil)];
+        });
+        return;
+    }
+
+    // We'll be collecting articles into this array
+    NSMutableArray *articleArray = [NSMutableArray array];
+    NSMutableArray *articleGuidArray = [NSMutableArray array];
+
+    // Parse off items.
+
+    for (id<VNAFeedItem> newsItem in newFeed.items) {
+
+        NSString * articleGuid = [self getOrCalculateArticleGuid:newsItem folderId:folderId articles:articleArray articleGuidArray:articleGuidArray];
+        [articleGuidArray addObject:articleGuid];
+
+        Article * article = [[Article alloc] initWithGUID:articleGuid];
+        article.folderId = folderId;
+        article.author = newsItem.authors;
+        article.body = newsItem.content;
+        if (!newsItem.title || newsItem.title.vna_isBlank) {
+            NSString *newTitle = newsItem.content.vna_titleTextFromHTML.vna_stringByUnescapingExtendedCharacters;
+            if (newTitle.vna_isBlank) {
+                article.title = NSLocalizedString(@"(No title)", @"Fallback for feed items without a title");
+            } else {
+                article.title = newTitle;
+            }
+        } else {
+            article.title = newsItem.title;
+        }
+        NSString * articleLink = newsItem.url;
+        if (![articleLink hasPrefix:@"http:"] && ![articleLink hasPrefix:@"https:"]) {
+            articleLink = [NSURL URLWithString:articleLink relativeToURL:url].absoluteString;
+        }
+        if (articleLink == nil) {
+            articleLink = feedLink;
+        }
+        article.link = articleLink;
+        article.publicationDate = newsItem.publicationDate;
+        article.lastUpdate = newsItem.modificationDate;
+        NSString * enclosureLink = newsItem.enclosure;
+        if ([enclosureLink isNotEqualTo:@""] && ![enclosureLink hasPrefix:@"http:"] && ![enclosureLink hasPrefix:@"https:"]) {
+            enclosureLink = [NSURL URLWithString:enclosureLink relativeToURL:url].absoluteString;
+        }
+        article.enclosure = enclosureLink;
+        if ([enclosureLink isNotEqualTo:@""]) {
+            [article setHasEnclosure:YES];
+        }
+        [articleArray addObject:article];
+    }
+
+
+    // Here's where we add the articles to the database
+    if (articleArray.count > 0u) {
+        [folder resetArticleStatuses];
+        NSArray *guidHistory = [dbManager guidHistoryForFolderId:folderId];
+        for (Article * article in articleArray) {
+            if ([folder createArticle:article guidHistory:guidHistory])
+            {
+                ++newArticlesFromFeed;
+            }
+        }
+    }
+
+    if (newArticlesFromFeed > 0u) {
+        [dbManager setLastUpdate:[NSDate date] forFolder:folderId];
+    }
+
+    // Mark the feed as succeeded
+    [self setFolderErrorFlag:folder flag:NO];
+    [folder clearNonPersistedFlag:VNAFolderFlagBuggySync];
 
     // Send status to the activity log
     if (newArticlesFromFeed == 0) {
@@ -879,9 +894,8 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         dispatch_async(dispatch_get_main_queue(), ^{
             connectorItem.status = logText;
         });
-        [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:@"MA_Notify_ArticleListContentChange" object:@(folder.
-                                                                                                                                  itemId)];
     }
+    [[NSNotificationCenter defaultCenter] vna_postNotificationOnMainThreadWithName:MA_Notify_ArticleListContentChange object:@(folder.itemId)];
 
     // Done with this connection
 
@@ -889,11 +903,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     countOfNewArticles += newArticlesFromFeed;
 
     // If this folder also requires an image refresh, do that
-    if ((folder.flags & VNAFolderFlagCheckForImage)) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self refreshFavIconForFolder:folder];
-        });
-    }
+    [self refreshImageForFolderIfNeeded:folder];
 }
 
 /* getRedirectURL
@@ -981,11 +991,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     }
     return nil;
 } // getRedirectURL
-
--(void)syncFinishedForFolder:(Folder *)folder
-{
-    [self setFolderUpdatingFlag:folder flag:NO];
-}
 
 #pragma mark NSURLSession redirection delegate
 -(void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task willPerformHTTPRedirection:(NSHTTPURLResponse *)response newRequest:(
@@ -1077,6 +1082,11 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
                                                                     userInfo:nil
                                                                      repeats:NO];
     self.riskyIPAddress = [NSHost currentHost].address;
+    NSWorkspace *workspace = NSWorkspace.sharedWorkspace;
+    [workspace.notificationCenter addObserver:self
+                                     selector:@selector(handleDidWake:)
+                                         name:NSWorkspaceDidWakeNotification
+                                       object:nil];
     [self purge301WaitQueue];
 }
 
@@ -1125,7 +1135,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
  * Add the specified connection to the connections queue
  * that we manage.
  */
--(NSOperation *)addConnection:(NSMutableURLRequest *)urlRequest completionHandler:(void (^)(NSData *data, NSURLResponse *response,
+-(NSOperation *)addConnection:(NSURLRequest *)urlRequest completionHandler:(void (^)(NSData *data, NSURLResponse *response,
                                                                                             NSError *error))completionHandler
 {
     TRVSURLSessionOperation *op =
@@ -1184,8 +1194,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 {
     if (hasStarted && networkQueue.operationCount == 0) {
         NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-        [nc postNotificationName:@"MA_Notify_RefreshStatus" object:nil];
-        [nc postNotificationName:@"MA_Notify_ArticleListContentChange" object:nil];
+        [nc postNotificationName:MA_Notify_RefreshStatus object:nil];
         statusMessageDuringRefresh = NSLocalizedString(@"Refresh completed", nil);
         hasStarted = NO;
         os_log_info(VNA_LOG, "Finished refreshing");

@@ -20,15 +20,15 @@
 
 #import "DownloadManager.h"
 
-#import "AppController.h"
 #import "AppController+Notifications.h"
 #import "Constants.h"
 #import "DownloadItem.h"
 #import "NSFileManager+Paths.h"
-#import "NSKeyedArchiver+Compatibility.h"
 #import "NSKeyedUnarchiver+Compatibility.h"
 #import "Preferences.h"
 #import "Vienna-Swift.h"
+
+static NSString * const VNAUserNotificationFileDownloadThreadIdentifier = @"FileDownloadThreadIdentifier";
 
 @interface DownloadManager ()
 
@@ -109,8 +109,9 @@
 
 // Archive the downloads list to the preferences.
 - (void)archiveDownloadsList {
-    NSData *data = [NSKeyedArchiver vna_archivedDataWithRootObject:[self.downloads copy]
-                                             requiringSecureCoding:YES];
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[self.downloads copy]
+                                         requiringSecureCoding:YES
+                                                         error:NULL];;
 
     if (data) {
         [Preferences.standardPreferences setObject:data
@@ -145,9 +146,7 @@
 
 // Abort the specified item and remove it from the list
 - (void)cancelItem:(DownloadItem *)item {
-    if (item.download) {
-        [item.download cancel];
-    } else if (item.downloadTask) {
+    if (item.downloadTask) {
         [item.downloadTask cancel];
     }
     item.state = DownloadStateCancelled;
@@ -159,6 +158,11 @@
 // Downloads a file from the specified URL.
 - (void)downloadFileFromURL:(NSString *)url {
     NSString *filename = [NSURL URLWithString:url].lastPathComponent;
+    [self downloadFileFromURL:url withFilename:filename];
+}
+
+// Downloads a file from the specified URL to specified filename
+- (void)downloadFileFromURL:(NSString *)url withFilename:(NSString *)filename {
     NSString *destPath = [DownloadManager fullDownloadPath:filename];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]
                                              cachePolicy:NSURLRequestUseProtocolCachePolicy
@@ -170,7 +174,7 @@
     item.downloadTask = task;
     item.filename = destPath;
     item.fileURL = [NSURL fileURLWithPath:destPath];
-    [self.downloads addObject:item];
+    [self.downloads insertObject:item atIndex:0];
 
     [task resume];
 }
@@ -196,11 +200,24 @@
     NSData *data = [userDefaults dataForKey:MAPref_DownloadsFolderBookmark];
 
     if (data) {
-        NSError *error = nil;
-        VNASecurityScopedBookmark *bookmark = [[VNASecurityScopedBookmark alloc] initWithBookmarkData:data
-                                                                                                error:&error];
+        BOOL bookmarkDataIsStale = NO;
+        NSError *bookmarkInitError;
+        VNASecurityScopedBookmark *bookmark =
+            [[VNASecurityScopedBookmark alloc] initWithBookmarkData:data
+                                                bookmarkDataIsStale:&bookmarkDataIsStale
+                                                              error:&bookmarkInitError];
+        if (!bookmarkInitError) {
+            if (bookmarkDataIsStale) {
+                NSError *bookmarkResolveError;
+                NSData *bookmarkData =
+                    [VNASecurityScopedBookmark bookmarkDataFromFileURL:bookmark.resolvedURL
+                                                                 error:&bookmarkResolveError];
+                if (!bookmarkResolveError) {
+                    [userDefaults setObject:bookmarkData
+                                     forKey:MAPref_DownloadsFolderBookmark];
+                }
+            }
 
-        if (!error) {
             downloadFolderURL = bookmark.resolvedURL;
         }
     }
@@ -230,8 +247,9 @@
 
         if ([firstFile compare:secondFile
                        options:NSCaseInsensitiveSearch] == NSOrderedSame) {
-            if (item.state != DownloadStateCompleted)
+            if (item.state != DownloadStateCompleted) {
                 return NO;
+            }
 
             // File completed download but possibly moved or deleted after
             // download so check the file system.
@@ -246,39 +264,72 @@
 // Send a notification that the specified download item has changed.
 - (void)notifyDownloadItemChange:(DownloadItem *)item {
     NSNotificationCenter *nc = NSNotificationCenter.defaultCenter;
-    [nc postNotificationName:@"MA_Notify_DownloadsListChange" object:item];
+    [nc postNotificationName:MA_Notify_DownloadsListChange object:item];
 }
 
 // Delivers a user notification for the given download item.
-- (void)deliverNotificationForDownloadItem:(DownloadItem *)item {
-    if (item.state != DownloadStateCompleted &&
-        item.state != DownloadStateFailed) {
-        return;
-    }
+- (void)deliverUserNotificationForDownloadItem:(DownloadItem *)item
+{
+    VNAUserNotificationCenter *center = VNAUserNotificationCenter.current;
+    [center getNotificationSettingsWithCompletionHandler:^(VNAUserNotificationSettings *settings) {
+        VNAUserNotificationAuthorizationStatus status = settings.authorizationStatus;
+        if (status == VNAUserNotificationAuthorizationStatusDenied) {
+            return;
+        }
 
-    [self notifyDownloadItemChange:item];
-    [self archiveDownloadsList];
+        void (^deliverNotification)(void) = ^{
+            NSString *title;
+            NSString *body;
+            NSString *filename = item.filename.lastPathComponent;
+            NSDictionary<NSString *, id> *userInfo;
+            switch (item.state) {
+            case DownloadStateCompleted:
+                title = NSLocalizedString(@"Download completed", @"Notification title");
+                body = [NSString stringWithFormat:NSLocalizedString(@"File %@ downloaded",
+                                                                    @"Notification body"),
+                                                  filename];
+                userInfo = @{
+                    UserNotificationContextKey: UserNotificationContextFileDownloadCompleted,
+                    UserNotificationFilePathKey: item.fileURL.path
+                };
+                break;
+            case DownloadStateFailed:
+                title = NSLocalizedString(@"Download failed", @"Notification title");
+                body = [NSString stringWithFormat:NSLocalizedString(@"File %@ failed to download",
+                                                                    @"Notification body"),
+                                                  filename];
+                userInfo = @{
+                    UserNotificationContextKey: UserNotificationContextFileDownloadFailed,
+                    UserNotificationFilePathKey: item.fileURL.path
+                };
+                break;
+            default:
+                return;
+            }
+            VNAUserNotificationRequest *request =
+                [[VNAUserNotificationRequest alloc] initWithIdentifier:item.fileURL.absoluteString
+                                                                 title:title];
+            // Use a thread identifier to group all file download notifications
+            // (this can be disabled by the user in System Settings).
+            request.threadIdentifier = VNAUserNotificationFileDownloadThreadIdentifier;
+            request.body = body;
+            request.playSound = settings.isSoundEnabled;
+            request.userInfo = userInfo;
+            [center addNotificationRequest:request
+                     withCompletionHandler:nil];
+        };
 
-    NSString *fileName = item.filename.lastPathComponent;
-
-    NSUserNotification *notification = [NSUserNotification new];
-    notification.soundName = NSUserNotificationDefaultSoundName;
-
-    if (item.state == DownloadStateCompleted) {
-        notification.title = NSLocalizedString(@"Download completed", @"Notification title");
-        notification.informativeText = [NSString stringWithFormat:NSLocalizedString(@"File %@ downloaded", @"Notification body"), fileName];
-        notification.userInfo = @{UserNotificationContextKey: UserNotificationContextFileDownloadCompleted,
-                                  UserNotificationFilePathKey: fileName};
-
-        [NSNotificationCenter.defaultCenter postNotificationName:@"MA_Notify_DownloadCompleted" object:fileName];
-    } else if (item.state == DownloadStateFailed) {
-        notification.title = NSLocalizedString(@"Download failed", @"Notification title");
-        notification.informativeText = [NSString stringWithFormat:NSLocalizedString(@"File %@ failed to download", @"Notification body"), fileName];
-        notification.userInfo = @{UserNotificationContextKey: UserNotificationContextFileDownloadFailed,
-                                  UserNotificationFilePathKey: fileName};
-    }
-
-    [NSUserNotificationCenter.defaultUserNotificationCenter deliverNotification:notification];
+        if (status == VNAUserNotificationAuthorizationStatusProvisional ||
+            status == VNAUserNotificationAuthorizationStatusAuthorized) {
+            deliverNotification();
+        } else if (status == VNAUserNotificationAuthorizationStatusNotDetermined) {
+            [center requestAuthorizationWithCompletionHandler:^(BOOL granted) {
+                if (granted) {
+                    deliverNotification();
+                }
+            }];
+        }
+    }];
 }
 
 // MARK: - NSURLSessionDownloadDelegate
@@ -310,7 +361,11 @@
                                               toURL:item.fileURL
                                               error:nil];
         item.state = DownloadStateCompleted;
-        [self deliverNotificationForDownloadItem:item];
+        [self notifyDownloadItemChange:item];
+        [self archiveDownloadsList];
+        [NSNotificationCenter.defaultCenter postNotificationName:MA_Notify_DownloadCompleted
+                                                          object:item.filename.lastPathComponent];
+        [self deliverUserNotificationForDownloadItem:item];
     });
 }
 
@@ -326,155 +381,10 @@
     dispatch_sync(dispatch_get_main_queue(), ^{
         DownloadItem *item = [self itemForSessionTask:task];
         item.state = DownloadStateFailed;
-        [self deliverNotificationForDownloadItem:item];
+        [self notifyDownloadItemChange:item];
+        [self archiveDownloadsList];
+        [self deliverUserNotificationForDownloadItem:item];
     });
-}
-
-// MARK: - WebDownload (deprecated)
-
-- (DownloadItem *)itemForDownload:(NSURLDownload *)download {
-    NSInteger index = self.downloads.count - 1;
-    while (index >= 0) {
-        DownloadItem *item = self.downloads[index--];
-        if (item.download == download) {
-            return item;
-        }
-    }
-    return nil;
-}
-
-- (DownloadItem *)newDownloadItemForDownload:(NSURLDownload *)download {
-    DownloadItem *item = [[DownloadItem alloc] init];
-    item.download = download;
-    item.filename = download.request.URL.path;
-    return item;
-}
-
-// MARK: - WebDownloadDelegate (deprecated)
-
-- (void)downloadDidBegin:(NSURLDownload *)download {
-    DownloadItem *theItem = [self itemForDownload:download];
-    if (!theItem) {
-        theItem = [self newDownloadItemForDownload:download];
-        [self.downloads addObject:theItem];
-    }
-    theItem.state = DownloadStateStarted;
-
-    [self notifyDownloadItemChange:theItem];
-
-    // If there's no download window visible, display one now.
-    [APPCONTROLLER conditionalShowDownloadsWindow:self];
-}
-
-// A download has completed. Mark the associated DownloadItem as completed.
-- (void)downloadDidFinish:(NSURLDownload *)download {
-    DownloadItem *item = [self itemForDownload:download];
-    item.state = DownloadStateCompleted;
-    [self deliverNotificationForDownloadItem:item];
-}
-
-// A download failed with an error. Mark the associated DownloadItem as broken.
-- (void)download:(NSURLDownload *)download didFailWithError:(NSError *)error {
-    DownloadItem *item = [self itemForDownload:download];
-    item.state = DownloadStateFailed;
-    [self deliverNotificationForDownloadItem:item];
-}
-
-// The download received additional data of the specified size.
-- (void)download:(NSURLDownload *)download
-    didReceiveDataOfLength:(NSUInteger)length {
-    DownloadItem *theItem = [self itemForDownload:download];
-    theItem.size = theItem.size + length;
-
-    // TODO: How many bytes are we getting each second?
-
-    // TODO: And the elapsed time until we're done?
-
-    [self notifyDownloadItemChange:theItem];
-}
-
-// Called once after we have the initial response from the server. Get and save
-// the expected file size.
-- (void)download:(NSURLDownload *)download
-    didReceiveResponse:(NSURLResponse *)response {
-    DownloadItem *theItem = [self itemForDownload:download];
-    theItem.expectedSize = response.expectedContentLength;
-    [self notifyDownloadItemChange:theItem];
-}
-
-// The download is about to resume from the specified position.
-- (void)download:(NSURLDownload *)download
-    willResumeWithResponse:(NSURLResponse *)response
-                  fromByte:(long long)startingByte {
-    DownloadItem *theItem = [self itemForDownload:download];
-    theItem.size = startingByte;
-    [self notifyDownloadItemChange:theItem];
-}
-
-// Returns whether NSURLDownload should decode a download with a given MIME
-// type. We ask for MacBinary, BinHex and GZip files to be automatically
-// decoded. Any other type is left alone.
-- (BOOL)download:(NSURLDownload *)download
-    shouldDecodeSourceDataOfMIMEType:(NSString *)encodingType {
-    if ([encodingType isEqualToString:@"application/macbinary"] ||
-        [encodingType isEqualToString:@"application/mac-binhex40"]) {
-        return YES;
-    } else {
-        return NO;
-    }
-}
-
-// The delegate receives this message when download has determined a suggested
-// filename for the downloaded file. The suggested filename is specified in
-// filename and is either derived from the last path component of the URL and
-// the MIME type or if the download was encoded, from the encoding. Once the
-// delegate has decided a path, it should send setDestination:allowOverwrite:
-// to download.
-- (void)download:(NSURLDownload *)download
-    decideDestinationWithSuggestedFilename:(NSString *)filename {
-    NSString *destPath = [DownloadManager fullDownloadPath:filename];
-    DownloadItem *theItem = [self itemForDownload:download];
-
-    // If the URL download was started by WebView, then it may have bypassed the
-    // -downloadDidBegin: callback.
-    if (!theItem) {
-        theItem = [self newDownloadItemForDownload:download];
-        theItem.state = DownloadStateStarted;
-        [self.downloads addObject:theItem];
-        [self notifyDownloadItemChange:theItem];
-    }
-
-    // Hack for certain compression types that are converted to .txt extension
-    // when downloaded. SITX is the only one I know about.
-    if ([theItem.filename.pathExtension isEqualToString:@"sitx"] &&
-        [filename.pathExtension isEqualToString:@"txt"]) {
-        destPath = destPath.stringByDeletingPathExtension;
-    }
-
-    // Save the filename
-    [download setDestination:destPath allowOverwrite:NO];
-    theItem.filename = destPath;
-}
-
-// Sent when the destination file is created (possibly in a temporary folder)
-- (void)download:(NSURLDownload *)download
-    didCreateDestination:(NSString *)path {
-    DownloadItem *theItem = [self itemForDownload:download];
-
-    // If the URL download was started by WebView, then it may have bypassed the
-    // -downloadDidBegin: callback.
-    if (!theItem) {
-        theItem = [self newDownloadItemForDownload:download];
-        theItem.state = DownloadStateStarted;
-        [self.downloads addObject:theItem];
-        [self notifyDownloadItemChange:theItem];
-    }
-
-    [[NSFileManager defaultManager] moveItemAtPath:path
-                                            toPath:theItem.filename
-                                             error:nil];
-    [self deliverNotificationForDownloadItem:theItem];
-    theItem.state = DownloadStateCompleted;
 }
 
 @end

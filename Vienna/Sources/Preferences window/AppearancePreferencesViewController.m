@@ -19,6 +19,8 @@
 //
 
 #import "AppearancePreferencesViewController.h"
+
+#import "Constants.h"
 #import "Preferences.h"
 
 // List of minimum font sizes. I picked the ones that matched the same option in
@@ -28,23 +30,36 @@ static NSInteger const availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24
 
 
 @interface AppearancePreferencesViewController ()
+
+@property (nonatomic, weak) NSFontPanel *fontPanel;
+
 -(void)initializePreferences;
--(void)selectUserDefaultFont:(NSString *)name size:(NSInteger)size control:(NSTextField *)control;
 
 @end
 
-@implementation AppearancePreferencesViewController
+@implementation AppearancePreferencesViewController {
+    IBOutlet NSTextField *articleFontSample;
+    IBOutlet NSButton *articleFontSelectButton;
+    IBOutlet NSComboBox *minimumFontSizes;
+    IBOutlet NSButton *enableMinimumFontSize;
+    IBOutlet NSButton *showFolderImagesButton;
+}
 
 - (void)viewDidLoad {
     NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_FolderFontChange" object:nil];
-    [nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_ArticleListFontChange" object:nil];
-    [nc addObserver:self selector:@selector(handleReloadPreferences:) name:kMA_Notify_MinimumFontSizeChange object:nil];
-    [nc addObserver:self selector:@selector(handleReloadPreferences:) name:@"MA_Notify_PreferenceChange" object:nil];
+    [nc addObserver:self selector:@selector(handleReloadPreferences:) name:MA_Notify_ArticleListFontChange object:nil];
+    [nc addObserver:self selector:@selector(handleReloadPreferences:) name:MA_Notify_MinimumFontSizeChange object:nil];
+    [nc addObserver:self selector:@selector(handleReloadPreferences:) name:MA_Notify_PreferenceChange object:nil];
 }
 
 - (void)viewWillAppear {
     [self initializePreferences];
+}
+
+- (void)viewWillDisappear
+{
+    [super viewWillDisappear];
+    [self.fontPanel close];
 }
 
 #pragma mark - Vienna Preferences
@@ -65,9 +80,8 @@ static NSInteger const availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24
     Preferences * prefs = [Preferences standardPreferences];
     
     // Populate the drop downs with the font names and sizes
-    [self selectUserDefaultFont:prefs.articleListFont size:prefs.articleListFontSize control:articleFontSample];
-    [self selectUserDefaultFont:prefs.folderListFont size:prefs.folderListFontSize control:folderFontSample];
-    
+    [self displaySelectedFont:prefs.articleListFont inTextField:articleFontSample];
+
     // Show folder images option
     showFolderImagesButton.state = prefs.showFolderImages ? NSControlStateValueOn : NSControlStateValueOff;
     
@@ -77,8 +91,9 @@ static NSInteger const availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24
     
     NSUInteger i;
     [minimumFontSizes removeAllItems];
-    for (i = 0; i < countOfAvailableMinimumFontSizes; ++i)
+    for (i = 0; i < countOfAvailableMinimumFontSizes; ++i) {
         [minimumFontSizes addItemWithObjectValue:@(availableMinimumFontSizes[i])];
+    }
     minimumFontSizes.doubleValue = prefs.minimumFontSize;
 }
 
@@ -110,13 +125,13 @@ static NSInteger const availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24
     [Preferences standardPreferences].minimumFontSize = newMinimumFontSize;
 }
 
-/* selectUserDefaultFont
- * Display sample text in the specified font and size.
- */
--(void)selectUserDefaultFont:(NSString *)name size:(NSInteger)size control:(NSTextField *)control
+// Display sample text in the specified font and size.
+- (void)displaySelectedFont:(NSFont *)font inTextField:(NSTextField *)textField
 {
-    control.font = [NSFont fontWithName:name size:size];
-    control.stringValue = [NSString stringWithFormat:@"%@ %li", name, (long)size];
+    textField.font = font;
+    textField.stringValue = [NSString stringWithFormat:@"%@ %.0f",
+                                                       font.displayName,
+                                                       font.pointSize];
 }
 
 /* selectArticleFont
@@ -126,55 +141,21 @@ static NSInteger const availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24
 {
     Preferences * prefs = [Preferences standardPreferences];
     NSFontManager * fontManager = NSFontManager.sharedFontManager;
+    if (!self.fontPanel) {
+        NSFontPanel *fontPanel = [fontManager fontPanel:YES];
+        fontPanel.restorable = NO;
+        self.fontPanel = fontPanel;
+    }
+    [fontManager setSelectedFont:prefs.articleListFont isMultiple:NO];
+    // The NSFontChanging callbacks are sent to the first responder, which this
+    // view controller is not by default.
+    [self.view.window makeFirstResponder:self];
+    // If the view controller loses first-responder status, e.g. when the user
+    // selects or inserts text in the combo box, -changeFont: can still be sent
+    // to a predefined target. -validModesForFontPanel: is not affected by this,
+    // however.
     fontManager.target = self;
-    fontManager.action = @selector(changeArticleFont:);
-
-    NSFontPanel *fontPanel = [fontManager fontPanel:YES];
-    [fontPanel setPanelFont:[NSFont fontWithName:prefs.articleListFont size:prefs.articleListFontSize] isMultiple:NO];
-    [fontPanel orderFront:self];
-    fontPanel.enabled = YES;
-}
-
-/* selectFolderFont
- * Bring up the standard font selector for the folder font.
- */
--(IBAction)selectFolderFont:(id)sender
-{
-    Preferences * prefs = [Preferences standardPreferences];
-    NSFontManager * fontManager = NSFontManager.sharedFontManager;
-    fontManager.target = self;
-    fontManager.action = @selector(changeFolderFont:);
-    
-    NSFontPanel *fontPanel = [fontManager fontPanel:YES];
-    [fontPanel setPanelFont:[NSFont fontWithName:prefs.folderListFont size:prefs.folderListFontSize] isMultiple:NO];
-    [fontPanel orderFront:self];
-    fontPanel.enabled = YES;
-}
-
-/* changeArticleFont
- * Respond to changes to the article font.
- */
--(IBAction)changeArticleFont:(id)sender
-{
-    Preferences * prefs = [Preferences standardPreferences];
-    NSFont * font = [NSFont fontWithName:prefs.articleListFont size:prefs.articleListFontSize];
-    font = [sender convertFont:font];
-    prefs.articleListFont = font.fontName;
-    prefs.articleListFontSize = font.pointSize;
-    [self selectUserDefaultFont:prefs.articleListFont size:prefs.articleListFontSize control:articleFontSample];
-}
-
-/* changeFolderFont
- * Respond to changes to the folder font.
- */
--(IBAction)changeFolderFont:(id)sender
-{
-    Preferences * prefs = [Preferences standardPreferences];
-    NSFont * font = [NSFont fontWithName:prefs.folderListFont size:prefs.folderListFontSize];
-    font = [sender convertFont:font];
-    prefs.folderListFont = font.fontName;
-    prefs.folderListFontSize = font.pointSize;
-    [self selectUserDefaultFont:prefs.folderListFont size:prefs.folderListFontSize control:folderFontSample];
+    [fontManager orderFrontFontPanel:self];
 }
 
 /* dealloc
@@ -184,4 +165,24 @@ static NSInteger const availableMinimumFontSizes[] = { 9, 10, 11, 12, 14, 18, 24
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
+// MARK: - NSFontChanging
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Woverriding-method-mismatch"
+- (void)changeFont:(nullable NSFontManager *)sender
+#pragma clang diagnostic pop
+{
+    Preferences * prefs = [Preferences standardPreferences];
+    NSFont *font = prefs.articleListFont;
+    font = [sender convertFont:font];
+    prefs.articleListFont = font;
+    [self displaySelectedFont:font inTextField:articleFontSample];
+}
+
+- (NSFontPanelModeMask)validModesForFontPanel:(NSFontPanel *)fontPanel
+{
+    return (NSFontPanelModeMaskFace | NSFontPanelModeMaskSize | NSFontPanelModeMaskCollection);
+}
+
 @end

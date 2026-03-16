@@ -29,7 +29,7 @@ class PlugInToolbarItem: ButtonToolbarItem {
         super.init(itemIdentifier: itemIdentifier)
 
         let button = PlugInToolbarItemButton(frame: NSRect(x: 0, y: 0, width: 41, height: 25))
-        button.bezelStyle = .texturedRounded
+        button.bezelStyle = .toolbar
         button.toolbarItem = self
         view = button
     }

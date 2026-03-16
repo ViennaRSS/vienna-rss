@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Config
-. "${OBJROOT}/autorevision.cache"
+. "${PROJECT_DERIVED_FILE_DIR}/autorevision.cache"
 N_VCS_TAG="$(echo "${VCS_TAG}" | sed -e 's:^v/::')" # for urls/files
 V_VCS_TAG="$(echo "${N_VCS_TAG}" | sed -e 's:_beta: Beta :' -e 's:_rc: RC :')" # for display
 

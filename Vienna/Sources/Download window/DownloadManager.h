@@ -19,11 +19,10 @@
 //
 
 @import Cocoa;
-@import WebKit;
 
 @class DownloadItem;
 
-@interface DownloadManager : NSObject <NSURLSessionDownloadDelegate, WebDownloadDelegate>
+@interface DownloadManager : NSObject <NSURLSessionDownloadDelegate>
 
 @property (class, readonly, nonatomic) DownloadManager *sharedInstance NS_SWIFT_NAME(shared);
 
@@ -37,5 +36,6 @@
 - (void)cancelItem:(DownloadItem *)item;
 - (void)removeItem:(DownloadItem *)item;
 - (void)downloadFileFromURL:(NSString *)url;
+- (void)downloadFileFromURL:(NSString *)url withFilename:(NSString *)filename;
 
 @end

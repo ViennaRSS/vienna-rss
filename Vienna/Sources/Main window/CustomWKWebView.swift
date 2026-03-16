@@ -4,6 +4,18 @@
 //
 //  Copyright 2019
 //
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//  https://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
+//
 
 import Cocoa
 import WebKit
@@ -18,13 +30,13 @@ class CustomWKWebView: WKWebView {
     // store weakly here because contentController retains listener
     weak var contextMenuListener: CustomWKWebViewContextMenuListener?
 
-    weak var contextMenuProvider: CustomWKUIDelegate? {
+    weak var contextMenuProvider: (any CustomWKUIDelegate)? {
         didSet {
             self.uiDelegate = contextMenuProvider
         }
     }
 
-    @objc weak var hoverUiDelegate: CustomWKHoverUIDelegate? {
+    @objc weak var hoverUiDelegate: (any CustomWKHoverUIDelegate)? {
         didSet {
             resetHoverUiListener()
         }
@@ -36,10 +48,12 @@ class CustomWKWebView: WKWebView {
     var canScrollUp: Bool {
         evaluateScrollPossibilities().scrollUpPossible
     }
-    var textSelection: String {
+    @objc var textSelection: String {
         getTextSelection()
     }
 
+    private let usesMinimumFontSizeObservation: NSKeyValueObservation
+    private let minimumFontSizeObservation: NSKeyValueObservation
     private var useJavaScriptObservation: NSKeyValueObservation?
 
     override init(frame: CGRect = .zero, configuration: WKWebViewConfiguration = WKWebViewConfiguration()) {
@@ -48,15 +62,29 @@ class CustomWKWebView: WKWebView {
         let prefs = configuration.preferences
         prefs.javaScriptCanOpenWindowsAutomatically = true
 
-        if prefs.responds(to: #selector(setter: WKPreferences._fullScreenEnabled)) {
-            prefs._fullScreenEnabled = true
+        if #available(macOS 12.3, *) {
+            prefs.isElementFullscreenEnabled = true
+        } else if prefs.responds(to: #selector(setter: WKPreferences._isFullScreenEnabled)) {
+            prefs._isFullScreenEnabled = true
         }
 
-        #if DEBUG
-        if prefs.responds(to: #selector(setter: WKPreferences._developerExtrasEnabled)) {
-            prefs._developerExtrasEnabled = true
-        }
-        #endif
+        usesMinimumFontSizeObservation = Preferences.standard
+            .observe(\.enableMinimumFontSize, options: .initial) { preferences, _ in
+                guard !preferences.enableMinimumFontSize else {
+                    prefs.minimumFontSize = CGFloat(preferences.minimumFontSize)
+                    return
+                }
+                prefs.minimumFontSize = 0.0
+            }
+
+        minimumFontSizeObservation = Preferences.standard
+            .observe(\.minimumFontSize, options: .initial) { preferences, _ in
+                guard preferences.enableMinimumFontSize else {
+                    prefs.minimumFontSize = 0.0
+                    return
+                }
+                prefs.minimumFontSize = CGFloat(preferences.minimumFontSize)
+            }
 
         useJavaScriptObservation = Preferences.standard.observe(\.useJavaScript, options: [.initial, .new]) { _, change  in
             guard let newValue = change.newValue else {
@@ -83,10 +111,10 @@ class CustomWKWebView: WKWebView {
         contentController.addUserScript(linkHoverScript)
 
         // configuration
-        // for useragent, we mimic the installed version of Safari and add our own identifier
+        // for useragent, we mimic the installed version of Safari, with some parts hardcoded cf.
+        // https://commits.webkit.org/210255@main#diff-6b380f6aad66e056453550b8479034403c064a5a763d8bf0d0b202be06fa2691R40
         let shortSafariVersion = Bundle(path: "/Applications/Safari.app")?.infoDictionary?["CFBundleShortVersionString"] as? String
-        let viennaVersion = (NSApp as? ViennaApp)?.applicationVersion
-        configuration.applicationNameForUserAgent = "Version/\(shortSafariVersion ?? "9.1") Safari/605 Vienna/\(viennaVersion ?? "3.5+")"
+        configuration.applicationNameForUserAgent = "Version/\(shortSafariVersion ?? "9.1") Safari/605.1.15"
         configuration.allowsAirPlayForMediaPlayback = true
         configuration.mediaTypesRequiringUserActionForPlayback = WKAudiovisualMediaTypes.all
 
@@ -97,6 +125,9 @@ class CustomWKWebView: WKWebView {
         self.allowsMagnification = true
         self.allowsBackForwardNavigationGestures = true
         self.allowsLinkPreview = true
+        if #available(macOS 13.3, *) {
+            isInspectable = true
+        }
     }
 
     @available(*, unavailable)
@@ -126,6 +157,7 @@ class CustomWKWebView: WKWebView {
         }
     }
 
+    @available(macOS, deprecated: 11, message: "Use find(_:configuration:completionHandler:)")
     func search(_ text: String = "", upward: Bool = false) {
         self.evaluateJavaScript("window.find(textToFind='\(text)', matchCase=false, searchUpward=\(upward ? "true" : "false"), wrapAround=true)", completionHandler: nil)
     }
@@ -187,7 +219,7 @@ class CustomWKWebView: WKWebView {
 
     // MARK: Text zoom
 
-    // swiftlint:disable private_action
+    // swiftlint:disable:next private_action
     @IBAction func makeTextStandardSize(_ sender: Any?) {
         guard responds(to: #selector(getter: _supportsTextZoom)),
               responds(to: #selector(setter: _textZoomFactor)),
@@ -223,24 +255,59 @@ class CustomWKWebView: WKWebView {
         return Float(_textZoomFactor) > 0.5
     }
 
-    // swiftlint:disable private_action
+    // swiftlint:disable:next private_action
     @IBAction func makeTextLarger(_ sender: Any?) {
-        guard canMakeTextLarger
-        else {
+        guard canMakeTextLarger else {
             return
         }
 
         _textZoomFactor += 0.1
     }
 
-    // swiftlint:disable private_action
+    // swiftlint:disable:next private_action
     @IBAction func makeTextSmaller(_ sender: Any?) {
-        guard canMakeTextSmaller
-        else {
+        guard canMakeTextSmaller else {
             return
         }
 
         _textZoomFactor -= 0.1
+    }
+
+    // MARK: Printing
+
+    // WKWebView's own implementation does nothing.
+    override func printView(_ sender: Any?) {
+        guard let window else {
+            return
+        }
+
+        let printOperation: NSPrintOperation
+        if #available(macOS 11, *) {
+            printOperation = self.printOperation(with: .shared)
+        } else if responds(to: #selector(_printOperation(with:))) {
+            printOperation = _printOperation(with: .shared)
+        } else {
+            return
+        }
+
+        // The default margins are too wide. This value is similar to Safari.
+        let printInfo = printOperation.printInfo
+        let margin = 18.0
+        printInfo.topMargin = margin
+        printInfo.leftMargin = margin
+        printInfo.rightMargin = margin
+        printInfo.bottomMargin = margin
+
+        // These printing options are missing from the standard print panel.
+        let options: NSPrintPanel.Options = [.showsPaperSize, .showsOrientation, .showsScaling]
+        printOperation.printPanel.options.insert(options)
+
+        // The view's frame has to be defined, otherwise program execution is
+        // halted here. See: https://stackoverflow.com/a/69839912/6423906
+        printOperation.view?.frame = bounds
+
+        printOperation.canSpawnSeparateThread = true
+        printOperation.runModal(for: window, delegate: nil, didRun: nil, contextInfo: nil)
     }
 }
 
@@ -268,25 +335,26 @@ extension CustomWKWebView {
 
     static let contextMenuScriptSource = """
     document.addEventListener('contextmenu', function(e) {
-        //TODO: this works only starting with webkit version used in Safari 12
-        var elements = document.elementsFromPoint(e.clientX, e.clientY);
-        var link;
-        var img;
-        for(var element in elements) { //search first link and first image
-            var htmlElement = elements[element];
-            var tagName = htmlElement.tagName;
-            if (tagName === 'A' && link == undefined) {
-                link = htmlElement;
-                var url = new URL(link.getAttribute('href'), document.baseURI).href;
-                window.webkit.messageHandlers.\(clickListenerName).postMessage('link: ' + url);
-            } else if (tagName === 'IMG' && img == undefined) {
-                img = htmlElement;
+        var htmlElement = document.elementFromPoint(e.clientX, e.clientY);
+        var link = htmlElement.closest("a");
+        if (link) {
+            var url = new URL(link.getAttribute('href'), document.baseURI).href;
+            window.webkit.messageHandlers.\(clickListenerName).postMessage('link: ' + url);
+        }
+        var mediasource = htmlElement.currentSrc;
+        if (mediasource) {
+            var url = new URL(mediasource, document.baseURI).href;
+            window.webkit.messageHandlers.\(clickListenerName).postMessage('media: ' + url);
+        } else {
+            var img = htmlElement.closest("img");
+            if (img) {
                 var url = new URL(img.getAttribute('src'), document.baseURI).href;
-                window.webkit.messageHandlers.\(clickListenerName).postMessage('img: ' + url);
-            }
-            var userselection = window.getSelection();
-            if (userselection.rangeCount > 0) {
-                window.webkit.messageHandlers.\(clickListenerName).postMessage('text: ' + userselection.getRangeAt(0).toString())
+                window.webkit.messageHandlers.\(clickListenerName).postMessage('media: ' + url);
+            } else {
+                var userselection = window.getSelection();
+                if (userselection.rangeCount > 0) {
+                    window.webkit.messageHandlers.\(clickListenerName).postMessage('text: ' + userselection.getRangeAt(0).toString())
+                }
             }
         }
     })
@@ -309,10 +377,10 @@ extension CustomWKWebView {
 
     override func willOpenMenu(_ menu: NSMenu, with event: NSEvent) {
 
+        super.willOpenMenu(menu, with: event)
         if contextMenuProvider != nil {
             customize(contextMenu: menu)
         }
-        super.willOpenMenu(menu, with: event)
     }
 
     private func customize(contextMenu menu: NSMenu) {
@@ -323,20 +391,20 @@ extension CustomWKWebView {
         }
 
         let clickedOnLink = menu.items.contains { $0.identifier == .WKMenuItemOpenLinkInNewWindow }
-        let clickedOnImage = menu.items.contains { $0.identifier == .WKMenuItemOpenMediaInNewWindow || $0.identifier == .WKMenuItemOpenImageInNewWindow }
-        let clickedOnText = menu.items.contains { $0.identifier == .WKMenuItemCopy }
+        let clickedOnMedia = menu.items.contains { $0.identifier == .WKMenuItemOpenMediaInNewWindow || $0.identifier == .WKMenuItemOpenImageInNewWindow }
+        let clickedOnCopyableItem = menu.items.contains { $0.identifier == .WKMenuItemCopy }
 
         let context: WKWebViewContextMenuContext
 
-        if clickedOnLink && clickedOnImage {
-            context = .pictureLink(
-                image: contextMenuListener.lastRightClickedImgSrc ?? URL.blank,
+        if clickedOnLink && clickedOnMedia {
+            context = .mediaLink(
+                media: contextMenuListener.lastRightClickedMediaSrc ?? URL.blank,
                 link: contextMenuListener.lastRightClickedLink ?? URL.blank)
         } else if clickedOnLink {
             context = .link(contextMenuListener.lastRightClickedLink ?? URL.blank)
-        } else if clickedOnImage {
-            context = .picture(contextMenuListener.lastRightClickedImgSrc ?? URL.blank)
-        } else if clickedOnText {
+        } else if clickedOnMedia {
+            context = .media(contextMenuListener.lastRightClickedMediaSrc ?? URL.blank)
+        } else if clickedOnCopyableItem {
             context = .text(contextMenuListener.lastSelectedText ?? "")
         } else {
             context = .page(url: self.url ?? URL.blank)
@@ -345,16 +413,16 @@ extension CustomWKWebView {
         menu.items = contextMenuProvider.contextMenuItemsFor(purpose: context, existingMenuItems: menu.items)
 
         contextMenuListener.lastRightClickedLink = nil
-        contextMenuListener.lastRightClickedImgSrc = nil
+        contextMenuListener.lastRightClickedMediaSrc = nil
         contextMenuListener.lastSelectedText = nil
     }
 }
 
 class CustomWKWebViewHoverListener: NSObject, WKScriptMessageHandler {
 
-    weak var hoverDelegate: CustomWKHoverUIDelegate?
+    weak var hoverDelegate: (any CustomWKHoverUIDelegate)?
 
-    init(hoverDelegate: CustomWKHoverUIDelegate) {
+    init(hoverDelegate: any CustomWKHoverUIDelegate) {
         self.hoverDelegate = hoverDelegate
     }
 
@@ -375,15 +443,15 @@ class CustomWKWebViewHoverListener: NSObject, WKScriptMessageHandler {
 class CustomWKWebViewContextMenuListener: NSObject, WKScriptMessageHandler {
 
     var lastRightClickedLink: URL?
-    var lastRightClickedImgSrc: URL?
+    var lastRightClickedMediaSrc: URL?
     var lastSelectedText: String?
 
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if let urlString = message.body as? String {
             if urlString.starts(with: "link: "), let url = URL(string: urlString.replacingOccurrences(of: "link: ", with: "", options: .anchored)) {
                 self.lastRightClickedLink = url
-            } else if urlString.starts(with: "img: "), let url = URL(string: urlString.replacingOccurrences(of: "img: ", with: "", options: .anchored)) {
-                self.lastRightClickedImgSrc = url
+            } else if urlString.starts(with: "media: "), let url = URL(string: urlString.replacingOccurrences(of: "media: ", with: "", options: .anchored)) {
+                self.lastRightClickedMediaSrc = url
             } else if urlString.starts(with: "text: ") {
                 lastSelectedText = urlString.replacingOccurrences(of: "text: ", with: "", options: .anchored)
             }

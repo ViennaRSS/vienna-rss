@@ -23,10 +23,6 @@
 @class Article;
 
 @interface ArticleReference : NSObject
-{
-	NSString * guid;
-	NSInteger folderId;
-}
 
 // Public functions
 +(ArticleReference *)makeReference:(Article *)anArticle;

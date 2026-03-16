@@ -22,9 +22,7 @@
 
 @class InfoPanelController;
 
-@interface InfoPanelManager : NSObject {
-	NSMutableDictionary * controllerList;
-}
+@interface InfoPanelManager : NSObject
 
 @property (class, readonly, nonatomic) InfoPanelManager *infoWindowManager;
 

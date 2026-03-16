@@ -20,15 +20,14 @@
 
 #import "ViennaApp.h"
 
+@import Sparkle;
+
 #import "AppController.h"
 #import "Preferences.h"
 #import "Import.h"
 #import "Export.h"
 #import "RefreshManager.h"
 #import "Constants.h"
-#import "BrowserPane.h"
-#import "ArticleListView.h"
-#import "UnifiedDisplayView.h"
 #import "Folder.h"
 #import "Article.h"
 #import "Database.h"
@@ -37,7 +36,12 @@
 
 @interface ViennaApp ()
 
-@property (readonly, nonatomic) BOOL readingPaneOnRight;
+@property (nonatomic) IBOutlet SPUStandardUpdaterController *sparkleUpdaterController;
+
+// MARK: Obsolete
+
+@property (nonatomic) NSString *folderListFont;
+@property (nonatomic) NSInteger folderListFontSize;
 
 @end
 
@@ -62,35 +66,29 @@
 	NSMutableArray * newArgArray = [NSMutableArray array];
 	BOOL hasError = NO;
 
-	if ([argObject isKindOfClass:[Folder class]])
+	if ([argObject isKindOfClass:[Folder class]]) {
 		[newArgArray addObject:argObject];
-
-	else if ([argObject isKindOfClass:[NSArray class]])
-	{
+	} else if ([argObject isKindOfClass:[NSArray class]]) {
 		NSArray * argArray = (NSArray *)argObject;
 		NSInteger index;
 
-		for (index = 0; index < argArray.count; ++index)
-		{
+		for (index = 0; index < argArray.count; ++index) {
 			id argItem = argArray[index];
-			if ([argItem isKindOfClass:[Folder class]])
-			{
+			if ([argItem isKindOfClass:[Folder class]]) {
 				[newArgArray addObject:argItem];
 				continue;
 			}
-			if ([argItem isKindOfClass:[NSScriptObjectSpecifier class]])
-			{
+			if ([argItem isKindOfClass:[NSScriptObjectSpecifier class]]) {
 				id evaluatedItem = [argItem objectsByEvaluatingSpecifier];
-				if ([evaluatedItem isKindOfClass:[Folder class]])
-				{
+				if ([evaluatedItem isKindOfClass:[Folder class]]) {
 					[newArgArray addObject:evaluatedItem];
 					continue;
 				}
-				if ([evaluatedItem isKindOfClass:[NSArray class]])
-				{
+				if ([evaluatedItem isKindOfClass:[NSArray class]]) {
 					NSArray * newArray = [self evaluatedArrayOfFolders:evaluatedItem withCommand:cmd];
-					if (newArray == nil)
+					if (newArray == nil) {
 						return nil;
+					}
 
 					[newArgArray addObjectsFromArray:newArray];
 					continue;
@@ -100,8 +98,9 @@
 			break;
 		}
 	}
-	if (!hasError)
+	if (!hasError) {
 		return [newArgArray copy];
+	}
 
 	// At least one of the arguments didn't evaluate to a Folder object
 	cmd.scriptErrorNumber = errASIllegalFormalParameter;
@@ -116,8 +115,9 @@
 {
 	NSDictionary * args = cmd.evaluatedArguments;
 	NSArray * argArray = [self evaluatedArrayOfFolders:args[@"Folder"] withCommand:cmd];
-	if (argArray != nil)
+	if (argArray != nil) {
 		[[RefreshManager sharedManager] refreshSubscriptions:argArray ignoringSubscriptionStatus:YES];
+	}
 
 	return nil;
 }
@@ -129,8 +129,9 @@
 {
 	NSDictionary * args = cmd.evaluatedArguments;
 	NSArray * argArray = [self evaluatedArrayOfFolders:args[@"Folder"] withCommand:cmd];
-	if (argArray != nil)
+	if (argArray != nil) {
 		[(AppController*)self.delegate markSelectedFoldersRead:argArray];
+	}
 
 	return nil;
 }
@@ -184,8 +185,9 @@
 	NSArray * argArray = argObject ? [self evaluatedArrayOfFolders:argObject withCommand:cmd] : [[Database sharedManager] arrayOfFolders:VNAFolderTypeRoot];
 
 	NSInteger countExported = 0;
-	if (argArray != nil)
+	if (argArray != nil) {
 		countExported = [Export exportToFile:args[@"FileName"] from:argArray inFoldersTree:((AppController*)self.delegate).foldersTree withGroups:YES];
+	}
 	return @(countExported);
 }
 
@@ -201,6 +203,18 @@
 	NSInteger parentId = folder ? ((folder.type == VNAFolderTypeGroup) ? folder.itemId : folder.parentId) : VNAFolderTypeRoot;
 
 	[(AppController*)self.delegate createNewSubscription:args[@"URL"] underFolder:parentId afterChild:-1];
+	return nil;
+}
+
+/* handleNewTab
+ * Open a new tab with the specified URL
+ */
+-(id)handleNewTab:(NSScriptCommand *)cmd
+{
+	NSDictionary * args = cmd.evaluatedArguments;
+	NSURL * urlToLoad = cleanedUpUrlFromString(args[@"URL"]);
+
+	[((AppController*)self.delegate).browser createNewTab:urlToLoad inBackground:NO load:YES];
 	return nil;
 }
 
@@ -259,44 +273,15 @@
  */
 -(NSString *)currentTextSelection
 {
-    id<Tab> activeBrowserTab = ((AppController*)self.delegate).browser.activeTab;
-
-    if (activeBrowserTab) {
-        return activeBrowserTab.textSelection;
-    } else {
-        //TODO: find a way with less casts to get access to the selected string in ArticleListView and UnifiedDisplayView
-        NSView<BaseView> * theView = ((NSView<BaseView> *)((AppController*)self.delegate).browser.primaryTab.view);
-        WebView *webPane;
-
-        if ([theView isKindOfClass:[ArticleListView class]]) {
-            webPane = (WebView *)((ArticleListView *)theView).webView;
-        }
-
-        if ([theView isKindOfClass:[UnifiedDisplayView class]]) {
-            if ([((UnifiedDisplayView *)theView).webView isKindOfClass:WebView.class]) {
-                webPane = (WebView *)((UnifiedDisplayView *)theView).webView;
-            }
-            //TODO: we do not necessarily get a webview here. Rely on tab protocol in the future
-        }
-
-        if (webPane != nil)
-        {
-            NSView * docView = webPane.mainFrame.frameView.documentView;
-
-            if ([docView conformsToProtocol:@protocol(WebDocumentText)])
-                return [(id<WebDocumentText>)docView selectedString];
-        }
-    }
-
-	return @"";
+    AppController *appController = ((AppController *)self.delegate);
+    return appController.currentTextSelection;
 }
 
 -(NSString *)documentHTMLSource
 {
 	id<Tab> activeBrowserTab = ((AppController*)self.delegate).browser.activeTab;
 
-	if (activeBrowserTab != nil)
-	{
+	if (activeBrowserTab != nil) {
         return activeBrowserTab.html;
 	}
 	return @"";
@@ -307,8 +292,17 @@
     id<Tab> activeBrowserTab = ((AppController*)self.delegate).browser.activeTab;
 	if (activeBrowserTab) {
 		return activeBrowserTab.tabUrl.absoluteString;
-	}
-    else {
+	} else {
+		return @"";
+    }
+}
+
+-(NSString *)documentTabTitle
+{
+    id<Tab> activeBrowserTab = ((AppController*)self.delegate).browser.activeTab;
+	if (activeBrowserTab) {
+		return activeBrowserTab.title;
+	} else {
 		return @"";
     }
 }
@@ -334,7 +328,7 @@
  */
 -(void)setCurrentFolder:(Folder *)newCurrentFolder
 {
-	AppController * controller = APPCONTROLLER;
+	AppController * controller = (AppController*)self.delegate;
 	NSInteger folderId = newCurrentFolder.itemId;
 	[controller selectFolder:folderId];
 }
@@ -347,17 +341,13 @@
 -(BOOL)readingPaneOnRight			{ return [Preferences standardPreferences].layout == VNALayoutCondensed; }
 -(NSInteger)filterMode					{ return [Preferences standardPreferences].filterMode; }
 -(BOOL)refreshOnStartup				{ return [Preferences standardPreferences].refreshOnStartup; }
--(BOOL)checkForNewOnStartup			{ return APPCONTROLLER.sparkleController.updater.automaticallyChecksForUpdates; }
+-(BOOL)checkForNewOnStartup			{ return self.sparkleUpdaterController.updater.automaticallyChecksForUpdates; }
 -(BOOL)openLinksInVienna			{ return [Preferences standardPreferences].openLinksInVienna; }
 -(BOOL)openLinksInBackground		{ return [Preferences standardPreferences].openLinksInBackground; }
 -(NSInteger)minimumFontSize				{ return [Preferences standardPreferences].minimumFontSize; }
 -(BOOL)enableMinimumFontSize		{ return [Preferences standardPreferences].enableMinimumFontSize; }
 -(NSInteger)refreshFrequency				{ return [Preferences standardPreferences].refreshFrequency; }
 -(NSString *)displayStyle			{ return [Preferences standardPreferences].displayStyle; }
--(NSString *)folderListFont			{ return [Preferences standardPreferences].folderListFont; }
--(NSInteger)folderListFontSize			{ return [Preferences standardPreferences].folderListFontSize; }
--(NSString *)articleListFont		{ return [Preferences standardPreferences].articleListFont; }
--(NSInteger)articleListFontSize			{ return [Preferences standardPreferences].articleListFontSize; }
 -(BOOL)statusBarVisible				{ return [Preferences standardPreferences].showStatusBar; }
 -(BOOL)filterBarVisible				{ return [Preferences standardPreferences].showFilterBar; }
 
@@ -368,17 +358,91 @@
 -(void)setMarkReadInterval:(float)newInterval		{ [Preferences standardPreferences].markReadInterval = newInterval; }
 -(void)setRefreshOnStartup:(BOOL)flag				{ [Preferences standardPreferences].refreshOnStartup = flag; }
 -(void)setFilterMode:(NSInteger)newMode					{ [Preferences standardPreferences].filterMode = newMode; }
--(void)setCheckForNewOnStartup:(BOOL)flag			{ APPCONTROLLER.sparkleController.updater.automaticallyChecksForUpdates = flag; }
+-(void)setCheckForNewOnStartup:(BOOL)flag			{ self.sparkleUpdaterController.updater.automaticallyChecksForUpdates = flag; }
 -(void)setOpenLinksInVienna:(BOOL)flag				{ [Preferences standardPreferences].openLinksInVienna = flag; }
 -(void)setOpenLinksInBackground:(BOOL)flag			{ [Preferences standardPreferences].openLinksInBackground = flag; }
 -(void)setMinimumFontSize:(NSInteger)newSize				{ [Preferences standardPreferences].minimumFontSize = newSize; }
 -(void)setEnableMinimumFontSize:(BOOL)flag			{ [Preferences standardPreferences].enableMinimumFontSize = flag; }
 -(void)setRefreshFrequency:(NSInteger)newFrequency		{ [Preferences standardPreferences].refreshFrequency = newFrequency; }
 -(void)setDisplayStyle:(NSString *)newStyle			{ [Preferences standardPreferences].displayStyle = [newStyle copy]; }
--(void)setFolderListFont:(NSString *)newFontName	{ [Preferences standardPreferences].folderListFont = [newFontName copy]; }
--(void)setFolderListFontSize:(NSInteger)newFontSize		{ [Preferences standardPreferences].folderListFontSize = newFontSize; }
--(void)setArticleListFont:(NSString *)newFontName	{ [Preferences standardPreferences].articleListFont = [newFontName copy]; }
--(void)setArticleListFontSize:(NSInteger)newFontSize		{ [Preferences standardPreferences].articleListFontSize = newFontSize; }
 -(void)setStatusBarVisible:(BOOL)flag				{ [Preferences standardPreferences].showStatusBar = flag; }
 -(void)setFilterBarVisible:(BOOL)flag				{ [Preferences standardPreferences].showFilterBar = flag; }
+
+- (VNAFeedListSizeMode)feedListSizeMode
+{
+    NSUserDefaults *defaults = NSUserDefaults.standardUserDefaults;
+    NSInteger sizeMode = [defaults integerForKey:MAPref_FeedListSizeMode];
+    switch (sizeMode) {
+    case VNAFeedListSizeModeTiny:
+    case VNAFeedListSizeModeSmall:
+    case VNAFeedListSizeModeMedium:
+        return sizeMode;
+    default:
+        return VNAFeedListSizeModeDefault;
+    }
+}
+
+- (void)setFeedListSizeMode:(VNAFeedListSizeMode)feedListSizeMode
+{
+    switch (feedListSizeMode) {
+    case VNAFeedListSizeModeTiny:
+    case VNAFeedListSizeModeSmall:
+    case VNAFeedListSizeModeMedium:
+        break;
+    default:
+        return;
+    }
+    NSUserDefaults *defaults = NSUserDefaults.standardUserDefaults;
+    [defaults setInteger:feedListSizeMode forKey:MAPref_FeedListSizeMode];
+}
+
+- (NSString *)articleListFontName
+{
+    return Preferences.standardPreferences.articleListFont.fontName;
+}
+
+- (void)setArticleListFontName:(NSString *)articleListFontName
+{
+    NSFont *font = Preferences.standardPreferences.articleListFont;
+    font = [NSFontManager.sharedFontManager convertFont:font
+                                                 toFace:articleListFontName];
+    Preferences.standardPreferences.articleListFont = font;
+}
+
+- (NSInteger)articleListFontSize
+{
+    return Preferences.standardPreferences.articleListFont.pointSize;
+}
+
+- (void)setArticleListFontSize:(NSInteger)articleListFontSize
+{
+    NSFont *font = Preferences.standardPreferences.articleListFont;
+    font = [NSFontManager.sharedFontManager convertFont:font
+                                                 toSize:articleListFontSize];
+    Preferences.standardPreferences.articleListFont = font;
+}
+
+// MARK: Obsolete accessors
+// The following accessors are defined for compatibility with scripting.
+
+- (NSString *)folderListFont
+{
+    return @"";
+}
+
+- (void)setFolderListFont:(__unused NSString *)folderListFont
+{
+    // Not implemented
+}
+
+- (NSInteger)folderListFontSize
+{
+    return -1;
+}
+
+- (void)setFolderListFontSize:(__unused NSInteger)folderListFontSize
+{
+    // Not implemented
+}
+
 @end

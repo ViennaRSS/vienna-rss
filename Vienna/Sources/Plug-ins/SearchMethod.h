@@ -20,28 +20,32 @@
 
 @import Foundation;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface SearchMethod : NSObject <NSSecureCoding>
 
-/// Used to init fron a plugin's info.dict. This class is designed to be capable
-/// of doing different things with searches according to the plugin definition.
-/// At the moment, however, we only ever do a normal web search.
-- (instancetype)initWithDictionary:(NSDictionary *)dict;
+- (instancetype)initWithDisplayName:(NSString *)displayName
+                        queryString:(NSString *)queryString NS_DESIGNATED_INITIALIZER;
 
-/// Class method that returns the standard SearchMethod "Search all Articles".
-+ (SearchMethod *)allArticlesSearchMethod;
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
 
-/// Class method that Returns a SearchMethod that only works when the active
-/// view is a web pane.
-+ (SearchMethod *)currentWebPageSearchMethod;
+/// The standard SearchMethod "Search all Articles".
+@property (class, readonly, nonatomic) SearchMethod *allArticlesSearchMethod;
 
-/// Class method that returns all built-in SearchMethods.
-+ (NSArray *)builtInSearchMethods;
+/// SearchMethod that only works when the active view is a web pane.
+@property (class, readonly, nonatomic) SearchMethod *currentWebPageSearchMethod;
+
+/// The standard SearchMethod "Search For Folders".
+@property (class, readonly, nonatomic) SearchMethod *searchForFoldersMethod;
 
 @property (copy, nonatomic) NSString *displayName;
 @property (copy, nonatomic) NSString *queryString;
 @property (nonatomic) SEL handler;
 
 /// Returns the URL that needs to be accessed to send the query.
-- (NSURL *)queryURLforSearchString:(NSString *)searchString;
+- (nullable NSURL *)queryURLforSearchString:(NSString *)searchString;
 
 @end
+
+NS_ASSUME_NONNULL_END

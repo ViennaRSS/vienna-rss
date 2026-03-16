@@ -18,62 +18,42 @@
 //  limitations under the License.
 //
 
-
 #import "Article.h"
+
 #import "Database.h"
-#import "DateFormatterExtension.h"
-#import "StringExtensions.h"
-#import "HelperFunctions.h"
 #import "Folder.h"
+#import "StringExtensions.h"
 
 // The names here are internal field names, not for localisation.
-NSString * MA_Field_GUID = @"GUID";
-NSString * MA_Field_Subject = @"Subject";
-NSString * MA_Field_Author = @"Author";
-NSString * MA_Field_Link = @"Link";
-NSString * MA_Field_Date = @"Date";
-NSString * MA_Field_Comments = @"Comments";
-NSString * MA_Field_Read = @"Read";
-NSString * MA_Field_Flagged = @"Flagged";
-NSString * MA_Field_Deleted = @"Deleted";
-NSString * MA_Field_Text = @"Text";
-NSString * MA_Field_Folder = @"Folder";
-NSString * MA_Field_Parent = @"Parent";
-NSString * MA_Field_Headlines = @"Headlines";
-NSString * MA_Field_Summary = @"Summary";
-NSString * MA_Field_CreatedDate = @"CreatedDate";
-NSString * MA_Field_Enclosure = @"Enclosure";
-NSString * MA_Field_EnclosureDownloaded = @"EnclosureDownloaded";
-NSString * MA_Field_HasEnclosure = @"HasEnclosure";
+NSString * const MA_Field_GUID = @"GUID";
+NSString * const MA_Field_Subject = @"Subject";
+NSString * const MA_Field_Author = @"Author";
+NSString * const MA_Field_Link = @"Link";
+NSString * const MA_Field_LastUpdate = @"Date";
+NSString * const MA_Field_Read = @"Read";
+NSString * const MA_Field_Flagged = @"Flagged";
+NSString * const MA_Field_Deleted = @"Deleted";
+NSString * const MA_Field_Text = @"Text";
+NSString * const MA_Field_Folder = @"Folder";
+NSString * const MA_Field_Parent = @"Parent";
+NSString * const MA_Field_Headlines = @"Headlines";
+NSString * const MA_Field_Summary = @"Summary";
+NSString * const MA_Field_PublicationDate = @"PublicationDate";
+NSString * const MA_Field_Enclosure = @"Enclosure";
+NSString * const MA_Field_EnclosureDownloaded = @"EnclosureDownloaded";
+NSString * const MA_Field_HasEnclosure = @"HasEnclosure";
 
-@implementation Article
+@implementation Article {
+    NSMutableDictionary *articleData;
+}
 
-- (instancetype)init
+- (instancetype)initWithGUID:(NSString *)guid
 {
     self = [super init];
     if (self) {
+        _guid = [guid copy];
+        _folderId = -1;
         articleData = [[NSMutableDictionary alloc] init];
-        commentsArray = [[NSMutableArray alloc] init];
-        readFlag = NO;
-        revisedFlag = NO;
-        markedFlag = NO;
-        deletedFlag = NO;
-        hasEnclosureFlag = NO;
-        enclosureDownloadedFlag = NO;
-        status = ArticleStatusEmpty;
-        self.folderId = -1;
-        self.parentId = 0;
-    }
-    return self;
-}
-
-/* initWithGuid
- */
--(instancetype)initWithGuid:(NSString *)theGuid
-{
-    if ((self = [self init]) != nil)
-    {
-        self.guid = theGuid;
     }
     return self;
 }
@@ -102,17 +82,17 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
 /* setDate
  * Sets the date when the article was published.
  */
--(void)setDate:(NSDate *)newDate
+-(void)setLastUpdate:(NSDate *)lastUpdate
 {
-    articleData[MA_Field_Date] = [newDate copy];
+    articleData[MA_Field_LastUpdate] = lastUpdate;
 }
 
-/* setCreatedDate
- * Sets the date when the article was first created in the database.
+/*
+ * Sets the date when the article was first published or added to the database.
  */
--(void)setCreatedDate:(NSDate *)newCreatedDate
+- (void)setPublicationDate:(NSDate *)publicationDate
 {
-    articleData[MA_Field_CreatedDate] = [newCreatedDate copy];
+    articleData[MA_Field_PublicationDate] = publicationDate;
 }
 
 /* setBody
@@ -128,52 +108,11 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
 -(void)setEnclosure:(NSString *)enclosure
 {
     NSString *newEnclosure = [enclosure copy];
-    if (newEnclosure)
+    if (newEnclosure) {
         articleData[MA_Field_Enclosure] = newEnclosure;
-    else
+    } else {
         [articleData removeObjectForKey:MA_Field_Enclosure];
-}
-
-/* markEnclosureDownloaded
- */
--(void)markEnclosureDownloaded:(BOOL)flag
-{
-    enclosureDownloadedFlag = flag;
-}
-
-/* setHasEnclosure
- */
--(void)setHasEnclosure:(BOOL)flag
-{
-    hasEnclosureFlag = flag;
-}
-
-/* markRead
- */
--(void)markRead:(BOOL)flag
-{
-    readFlag = flag;
-}
-
-/* markRevised
- */
--(void)markRevised:(BOOL)flag
-{
-    revisedFlag = flag;
-}
-
-/* markFlagged
- */
--(void)markFlagged:(BOOL)flag
-{
-    markedFlag = flag;
-}
-
-/* markDeleted
- */
--(void)markDeleted:(BOOL)flag
-{
-    deletedFlag = flag;
+    }
 }
 
 /* accessInstanceVariablesDirectly
@@ -189,70 +128,47 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
  */
 -(id)valueForKeyPath:(NSString *)keyPath
 {
-    if ([keyPath hasPrefix:@"articleData."])
-    {
+    if ([keyPath hasPrefix:@"articleData."]) {
         NSString * key = [keyPath substringFromIndex:(@"articleData.").length];
-        if ([key isEqualToString:MA_Field_Date])
-        {
-            return self.date;
-        }
-        else if ([key isEqualToString:MA_Field_Author])
-        {
+        if ([key isEqualToString:MA_Field_LastUpdate]) {
+            return self.lastUpdate;
+        } else if ([key isEqualToString:MA_Field_PublicationDate]) {
+            return self.publicationDate;
+        } else if ([key isEqualToString:MA_Field_Author]) {
             return self.author;
-        }
-        else if ([key isEqualToString:MA_Field_Subject])
-        {
+        } else if ([key isEqualToString:MA_Field_Subject]) {
             return self.title;
-        }
-        else if ([key isEqualToString:MA_Field_Link])
-        {
+        } else if ([key isEqualToString:MA_Field_Link]) {
             return self.link;
-        }
-        else if ([key isEqualToString:MA_Field_Summary])
-        {
+        } else if ([key isEqualToString:MA_Field_Summary]) {
             return self.summary;
-        }
-        else
-        {
+        } else {
             return [super valueForKeyPath:keyPath];
         }
-    }
-    else
-    {
+    } else {
         return [super valueForKeyPath:keyPath];
     }
 }
 
 /* Accessor functions
  */
--(BOOL)isRead					{ return readFlag; }
--(BOOL)isRevised				{ return revisedFlag; }
--(BOOL)isFlagged				{ return markedFlag; }
--(BOOL)isDeleted				{ return deletedFlag; }
--(BOOL)hasComments				{ return commentsArray.count > 0; }
--(BOOL)hasEnclosure				{ return hasEnclosureFlag; }
--(BOOL)enclosureDownloaded		{ return enclosureDownloadedFlag; }
--(NSInteger)status				{ return status; }
--(NSInteger)folderId			{ return [articleData[MA_Field_Folder] integerValue]; }
 -(NSString *)author				{ return articleData[MA_Field_Author]; }
 -(NSString *)link				{ return articleData[MA_Field_Link]; }
--(NSString *)guid				{ return articleData[MA_Field_GUID]; }
--(NSInteger)parentId			{ return [articleData[MA_Field_Parent] integerValue]; }
 -(NSString *)title				{ return articleData[MA_Field_Subject]; }
 -(NSString *)summary
 {
     NSString * summary = articleData[MA_Field_Summary];
-    if (summary == nil)
-    {
+    if (summary == nil) {
         summary = [articleData[MA_Field_Text] vna_summaryTextFromHTML];
-        if (summary == nil)
+        if (summary == nil) {
             summary = @"";
+        }
         articleData[MA_Field_Summary] = summary;
     }
     return summary;
 }
--(NSDate *)date					{ return articleData[MA_Field_Date]; }
--(NSDate *)createdDate			{ return articleData[MA_Field_CreatedDate]; }
+-(NSDate *)lastUpdate			{ return articleData[MA_Field_LastUpdate]; }
+-(NSDate *)publicationDate		{ return articleData[MA_Field_PublicationDate]; }
 -(NSString *)body				{ return articleData[MA_Field_Text]; }
 -(NSString *)enclosure			{ return articleData[MA_Field_Enclosure]; }
 
@@ -261,34 +177,6 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
 -(Folder *)containingFolder
 {
     return [[Database sharedManager] folderFromID:self.folderId];
-}
-
-/* setFolderId
- */
--(void)setFolderId:(NSInteger)newFolderId
-{
-    articleData[MA_Field_Folder] = @(newFolderId);
-}
-
-/* setGuid
- */
--(void)setGuid:(NSString *)newGuid
-{
-    articleData[MA_Field_GUID] = [newGuid copy];
-}
-
-/* setParentId
- */
--(void)setParentId:(NSInteger)newParentId
-{
-    articleData[MA_Field_Parent] = @(newParentId);
-}
-
-/* setStatus
- */
--(void)setStatus:(NSInteger)newStatus
-{
-    status = newStatus;
 }
 
 /* description
@@ -306,8 +194,7 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
 {
     Folder * folder = [[Database sharedManager] folderFromID:self.folderId];
     NSUInteger index = [folder indexOfArticle:self];
-    if (index != NSNotFound)
-    {
+    if (index != NSNotFound) {
         NSScriptObjectSpecifier * containerRef = folder.objectSpecifier;
         return [[NSIndexSpecifier allocWithZone:nil] initWithContainerClassDescription:(NSScriptClassDescription *)[Folder classDescription]
                                                                              containerSpecifier:containerRef
@@ -315,98 +202,6 @@ NSString * MA_Field_HasEnclosure = @"HasEnclosure";
                                                                                           index:index];
     }
     return nil;
-}
-
-/* tagArticleLink
- * Returns the article link as a safe string.
- */
--(NSString *)tagArticleLink
-{
-    return cleanedUpUrlFromString(self.link).absoluteString;
-}
-
-/* tagArticleTitle
- * Returns the article title.
- */
--(NSString *)tagArticleTitle
-{
-    NSMutableString * articleTitle = [NSMutableString stringWithString:SafeString([self title])];
-    [articleTitle vna_replaceString:@"$Article" withString:@"$_%$%_Article"];
-    [articleTitle vna_replaceString:@"$Feed" withString:@"$_%$%_Feed"];
-    return [NSString vna_stringByConvertingHTMLEntities:articleTitle];
-}
-
-/* tagArticleBody
- * Returns the article body.
- */
--(NSString *)tagArticleBody
-{
-    NSMutableString * articleBody = [NSMutableString stringWithString:SafeString(self.body)];
-    [articleBody vna_replaceString:@"$Article" withString:@"$_%$%_Article"];
-    [articleBody vna_replaceString:@"$Feed" withString:@"$_%$%_Feed"];
-    [articleBody vna_fixupRelativeImgTags:self.link];
-    [articleBody vna_fixupRelativeIframeTags:self.link];
-    [articleBody vna_fixupRelativeAnchorTags:self.link];
-    return articleBody;
-}
-
-/* tagArticleAuthor
- * Returns the article author as a safe string.
- */
--(NSString *)tagArticleAuthor
-{
-    return SafeString([self author]);
-}
-
-/* tagArticleDate
- * Returns the article date.
- */
--(NSString *)tagArticleDate
-{
-    return [NSDateFormatter vna_relativeDateStringFromDate:self.date];
-}
-
-/* tagArticleEnclosureLink
- * Returns the article enclosure link.
- */
--(NSString *)tagArticleEnclosureLink
-{
-    return cleanedUpUrlFromString(self.enclosure).absoluteString;
-}
-
-/* tagArticleEnclosureFilename
- * Returns the article enclosure file name.
- */
--(NSString *)tagArticleEnclosureFilename
-{
-    return [self.enclosure.lastPathComponent stringByRemovingPercentEncoding];
-}
-
-/* tagFeedTitle
- * Returns the article's feed title.
- */
--(NSString *)tagFeedTitle
-{
-    Folder * folder = [[Database sharedManager] folderFromID:self.folderId];
-    return [NSString vna_stringByConvertingHTMLEntities:SafeString([folder name])];
-}
-
-/* tagFeedLink
- * Returns the article's feed URL.
- */
--(NSString *)tagFeedLink
-{
-    Folder * folder = [[Database sharedManager] folderFromID:self.folderId];
-    return cleanedUpUrlFromString(folder.homePage).absoluteString;
-}
-
-/* tagFeedDescription
- * Returns the article's feed description.
- */
--(NSString *)tagFeedDescription
-{
-    Folder * folder = [[Database sharedManager] folderFromID:self.folderId];
-    return folder.feedDescription;
 }
 
 @end

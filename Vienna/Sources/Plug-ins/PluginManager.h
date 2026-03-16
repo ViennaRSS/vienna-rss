@@ -21,13 +21,14 @@
 @import Cocoa;
 
 @class SearchMethod;
+@class VNAPlugin;
 
-@interface PluginManager : NSObject <NSMenuItemValidation, NSToolbarItemValidation> {
-	NSMutableDictionary * allPlugins;
-}
+extern NSString * const VNAPluginBundleExtension;
+
+@interface PluginManager : NSObject <NSMenuItemValidation, NSToolbarItemValidation>
 
 -(void)resetPlugins;
-@property (class, readonly, nonatomic) NSURL *plugInsDirectoryURL;
+@property (class, readonly, nonatomic) NSURL *pluginsDirectoryURL;
 @property (readonly, nonatomic) NSUInteger numberOfPlugins;
 @property (readonly, nonatomic) NSArray<SearchMethod *> *searchMethods;
 @property (readonly, nonatomic) NSArray<NSString *> *toolbarItems;
@@ -35,4 +36,7 @@
 -(NSArray *)defaultToolbarItems;
 -(void)loadPlugin:(NSString *)pluginPath;
 -(NSToolbarItem *)toolbarItemForIdentifier:(NSString *)itemIdentifier;
+
+- (NSArray<VNAPlugin *> *)pluginsOfType:(Class)pluginType;
+
 @end

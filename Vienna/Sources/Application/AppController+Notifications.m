@@ -35,9 +35,10 @@ NSString *const UserNotificationContextFileDownloadFailed = @"User Notification 
 
 // MARK: Delegate methods
 
-- (void)userNotificationCenter:(NSUserNotificationCenter *)center
-       didActivateNotification:(NSUserNotification *)notification {
-    NSDictionary<NSString *, NSString *> *userInfo = notification.userInfo;
+- (void)userNotificationCenter:(VNAUserNotificationCenter *)center
+            didReceiveResponse:(VNAUserNotificationResponse *)response
+{
+    NSDictionary<NSString *, NSString *> *userInfo = response.userInfo;
     if ([userInfo[UserNotificationContextKey] isEqual:UserNotificationContextFetchCompleted]) {
         [self openWindowAndShowUnreadArticles];
     } else if ([userInfo[UserNotificationContextKey] isEqual:UserNotificationContextFileDownloadCompleted]) {
@@ -52,12 +53,21 @@ NSString *const UserNotificationContextFileDownloadFailed = @"User Notification 
  any unread articles after the fetch.
  */
 - (void)openWindowAndShowUnreadArticles {
-    [NSApp activateIgnoringOtherApps:YES];
+    if (@available(macOS 14, *)) {
+        [NSApp activate];
+    } else {
+        [NSApp activateIgnoringOtherApps:YES];
+    }
     [self showMainWindow:self];
 
-    Folder *unreadArticles = [db folderFromName:NSLocalizedString(@"Unread Articles", nil)];
-    if (unreadArticles) {
-        [self selectFolder:unreadArticles.itemId];
+    Criteria *unreadCriteria =
+        [[Criteria alloc] initWithField:MA_Field_Read
+                           operatorType:VNACriteriaOperatorEqualTo
+                                  value:@"No"];
+    NSString *predicateFormat = unreadCriteria.predicate.predicateFormat;
+    Folder *smartFolder = [db folderForPredicateFormat:predicateFormat];
+    if (smartFolder) {
+        [self selectFolder:smartFolder.itemId];
     }
 }
 
@@ -66,7 +76,7 @@ NSString *const UserNotificationContextFileDownloadFailed = @"User Notification 
  */
 - (void)showFileInFinderAtPath:(NSString *)filePath {
     [[NSWorkspace sharedWorkspace] selectFile:filePath
-                     inFileViewerRootedAtPath:@""];
+                     inFileViewerRootedAtPath:[filePath stringByDeletingLastPathComponent]];
 }
 
 @end

@@ -136,7 +136,7 @@ static NSUserInterfaceItemIdentifier const VNADisclosureButtonIdentifier = @"Dis
     [self.credentialsWindow.sheetParent endSheet:self.credentialsWindow];
     [self.credentialsWindow orderOut:self];
 
-    [NSNotificationCenter.defaultCenter postNotificationName:@"MA_Notify_GotAuthenticationForFolder"
+    [NSNotificationCenter.defaultCenter postNotificationName:MA_Notify_GotAuthenticationForFolder
                                                       object:self.folder];
 }
 
@@ -145,7 +145,7 @@ static NSUserInterfaceItemIdentifier const VNADisclosureButtonIdentifier = @"Dis
     [self.credentialsWindow.sheetParent endSheet:self.credentialsWindow];
     [self.credentialsWindow orderOut:self];
 
-    [NSNotificationCenter.defaultCenter postNotificationName:@"MA_Notify_CancelAuthenticationForFolder"
+    [NSNotificationCenter.defaultCenter postNotificationName:MA_Notify_CancelAuthenticationForFolder
                                                       object:self.folder];
 }
 

@@ -20,14 +20,14 @@
 
 @import Foundation;
 
-@interface BackTrackArray : NSObject {
-	NSMutableArray * array;
-	NSUInteger  maxItems;
-	NSInteger queueIndex;
-}
+@interface BackTrackArray : NSObject
+
+- (instancetype)initWithMaximum:(NSUInteger)maximum NS_DESIGNATED_INITIALIZER;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
 
 // Accessor functions
--(instancetype)initWithMaximum:(NSUInteger)theMax /*NS_DESIGNATED_INITIALIZER*/;
 @property (nonatomic, getter=isAtStartOfQueue, readonly) BOOL atStartOfQueue;
 @property (nonatomic, getter=isAtEndOfQueue, readonly) BOOL atEndOfQueue;
 -(void)addToQueue:(NSInteger)folderId guid:(NSString *)guid;

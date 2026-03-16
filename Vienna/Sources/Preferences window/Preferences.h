@@ -24,49 +24,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Preferences : NSObject {
-	NSUserDefaults *userPrefs;
-	float markReadInterval;
-	NSInteger minimumFontSize;
-	NSInteger refreshFrequency;
-	NSInteger autoExpireDuration;
-	NSInteger filterMode;
-	NSInteger layout;
-	NSInteger newArticlesNotification;
-	NSInteger foldersTreeSortMethod;
-	BOOL refreshOnStartup;
-	BOOL alwaysAcceptBetas;
-	BOOL enableMinimumFontSize;
-	BOOL openLinksInVienna;
-	BOOL openLinksInBackground;
-	BOOL hasPrefs;
-	BOOL showFolderImages;
-	BOOL useJavaScript;
-    BOOL useNewBrowser;
-	BOOL showAppInStatusBar;
-	BOOL showStatusBar;
-	BOOL showFilterBar;
-	BOOL shouldSaveFeedSource;
-    BOOL syncGoogleReader;
-    BOOL prefersGoogleNewSubscription;
-    BOOL markUpdatedAsNew;
-	NSString * displayStyle;
-	CGFloat textSizeMultiplier;
-	NSString * defaultDatabase;
-	NSString * feedSourcesFolder;
-	NSFont * folderFont;
-	NSFont * articleFont;
-	NSArray * articleSortDescriptors;
-	SearchMethod * searchMethod;
-	NSUInteger concurrentDownloads;
-	NSString * syncServer;
-    NSString * syncScheme;
-	NSString * syncingUser;
-}
-
-// String constants for NSNotificationCenter
-extern NSString * const kMA_Notify_MinimumFontSizeChange;
-extern NSString * const kMA_Notify_UseJavaScriptChange;
+@interface Preferences : NSObject
 
 @property (class, readonly, nonatomic) Preferences *standardPreferences;
 
@@ -135,13 +93,8 @@ extern NSString * const kMA_Notify_UseJavaScriptChange;
 -(void)setDisplayStyle:(NSString *)newStyle withNotification:(BOOL)flag;
 @property (nonatomic) CGFloat textSizeMultiplier;
 
-// Folder list font
-@property (nonatomic, copy) NSString *folderListFont;
-@property (nonatomic) NSInteger folderListFontSize;
-
 // Article list font
-@property (nonatomic, copy) NSString *articleListFont;
-@property (nonatomic) NSInteger articleListFontSize;
+@property (nonatomic) NSFont *articleListFont;
 
 // Article list sort descriptors
 @property (null_resettable, nonatomic, copy) NSArray *articleSortDescriptors;
@@ -174,15 +127,11 @@ extern NSString * const kMA_Notify_UseJavaScriptChange;
 // User Agent Name
 @property (nonatomic) NSString *userAgentName;
 
-#pragma mark Browser choice
-
-@property (nonatomic) BOOL useNewBrowser;
-
 #pragma mark Open Reader syncing
 
-@property (nonatomic) BOOL syncGoogleReader;
+@property (nonatomic) BOOL syncOpenReader;
 
-@property (nonatomic) BOOL prefersGoogleNewSubscription;
+@property (nonatomic) BOOL preferOpenReaderWhenSubscribing;
 
 // server used for syncing
 @property (nonatomic, copy) NSString *syncServer;
@@ -194,6 +143,9 @@ extern NSString * const kMA_Notify_UseJavaScriptChange;
 // application ID and key needed by specific OpenReader services
 @property (nonatomic, copy) NSString *syncingAppId;
 @property (nonatomic, copy) NSString *syncingAppKey;
+
+// apply Tahoe menu images
+@property (nonatomic) BOOL menuEnableActionImages;
 
 @end
 

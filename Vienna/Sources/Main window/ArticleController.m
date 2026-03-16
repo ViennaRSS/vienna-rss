@@ -23,6 +23,7 @@
 @import os.log;
 
 #import "AppController.h"
+#import "Field.h"
 #import "Preferences.h"
 #import "Constants.h"
 #import "Database.h"
@@ -35,20 +36,41 @@
 #import "Folder.h"
 #import "BackTrackArray.h"
 #import "StringExtensions.h"
+#import "FilterBarViewController.h"
 #import "Vienna-Swift.h"
 
 #define VNA_LOG os_log_create("--", "ArticleController")
 
+static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserverContext;
+
 @interface ArticleController ()
 
--(NSArray *)applyFilter:(NSArray *)unfilteredArray;
+@property (weak, nonatomic) VNAFilterBarViewController *filterBarViewController;
+
+@property (readwrite, copy, nonatomic) NSString *filterModeLabel;
+@property (copy, nonatomic) NSString *filterString;
+
+-(NSArray<Article *> *)applyFilter:(NSArray<Article *> *)unfilteredArray;
 -(void)setSortColumnIdentifier:(NSString *)str;
 -(void)innerMarkReadByArray:(NSArray *)articleArray readFlag:(BOOL)readFlag;
 -(void)innerMarkFlaggedByArray:(NSArray *)articleArray flagged:(BOOL)flagged;
 
 @end
 
-@implementation ArticleController
+@implementation ArticleController {
+    NSView<ArticleBaseView> *mainArticleView;
+    NSArray *currentArrayOfArticles;
+    NSArray *folderArrayOfArticles;
+    NSInteger currentFolderId;
+    NSDictionary *articleSortSpecifiers;
+    NSString *sortColumnIdentifier;
+    BackTrackArray *backtrackArray;
+    BOOL isBacktracking;
+    Article *articleToPreserve;
+    NSString *guidOfArticleToSelect;
+    BOOL firstUnreadArticleRequired;
+}
+
 @synthesize mainArticleView, currentArrayOfArticles, folderArrayOfArticles, articleSortSpecifiers, backtrackArray;
 
 /* init
@@ -56,13 +78,13 @@
  */
 -(instancetype)init
 {
-    if ((self = [super init]) != nil)
-	{
+    if ((self = [super init]) != nil) {
 		isBacktracking = NO;
 		currentFolderId = -1;
 		articleToPreserve = nil;
 		guidOfArticleToSelect = nil;
 		firstUnreadArticleRequired = NO;
+        _filterModeLabel = @"";
 
 		// Set default values to generate article sort descriptors
 		articleSortSpecifiers = @{
@@ -78,12 +100,12 @@
 										  @"key": @"isFlagged",
 										  @"selector": NSStringFromSelector(@selector(compare:))
 										  },
-								  MA_Field_Comments: @{
-										  @"key": @"hasComments",
+								  MA_Field_LastUpdate: @{
+										  @"key": [@"articleData." stringByAppendingString:MA_Field_LastUpdate],
 										  @"selector": NSStringFromSelector(@selector(compare:))
 										  },
-								  MA_Field_Date: @{
-										  @"key": [@"articleData." stringByAppendingString:MA_Field_Date],
+								  MA_Field_PublicationDate: @{
+										  @"key": [@"articleData." stringByAppendingString:MA_Field_PublicationDate],
 										  @"selector": NSStringFromSelector(@selector(compare:))
 										  },
 								  MA_Field_Author: @{
@@ -125,16 +147,22 @@
 		
 		// Register for notifications
 		NSNotificationCenter * nc = [NSNotificationCenter defaultCenter];
-		[nc addObserver:self selector:@selector(handleArticleListContentChange:) name:@"MA_Notify_ArticleListContentChange" object:nil];
-        [nc addObserver:self selector:@selector(handleArticleListStateChange:) name:@"MA_Notify_ArticleListStateChange" object:nil];
+		[nc addObserver:self selector:@selector(handleArticleListContentChange:) name:MA_Notify_ArticleListContentChange object:nil];
+        [nc addObserver:self selector:@selector(handleArticleListStateChange:) name:MA_Notify_ArticleListStateChange object:nil];
+        [nc addObserver:self
+               selector:@selector(folderNameChanged:)
+                   name:MA_Notify_FolderNameChanged
+                 object:nil];
 
-        [NSUserDefaults.standardUserDefaults addObserver:self
-                                              forKeyPath:MAPref_FilterMode
-                                                 options:0
-                                                 context:nil];
-
-        queue = dispatch_queue_create("uk.co.opencommunity.vienna2.displayRefresh", DISPATCH_QUEUE_SERIAL);
-        requireSelectArticleAfterReload = NO;
+        NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+        [userDefaults addObserver:self
+                       forKeyPath:MAPref_FilterMode
+                          options:NSKeyValueObservingOptionNew
+                          context:VNAArticleControllerObserverContext];
+        [userDefaults addObserver:self
+                       forKeyPath:MAPref_ShowFilterBar
+                          options:NSKeyValueObservingOptionNew
+                          context:VNAArticleControllerObserverContext];
     }
     return self;
 }
@@ -150,26 +178,42 @@
 {
 	Article * currentSelectedArticle = self.selectedArticle;
 
-	switch (newLayout)
-	{
+	switch (newLayout) {
 		case VNALayoutReport:
 		case VNALayoutCondensed:
 			self.mainArticleView = self.articleListView;
+			self.filterBarViewController = self.articleListView.filterBarViewController;
 			break;
 
 		case VNALayoutUnified:
 			self.mainArticleView = self.unifiedListView;
+			self.filterBarViewController = self.unifiedListView.filterBarViewController;
 			break;
 	}
 
+    [self setFilterBarState:Preferences.standardPreferences.showFilterBar
+              withAnimation:NO];
+
 	[self loadView];
 	[Preferences standardPreferences].layout = newLayout;
-	if (currentSelectedArticle != nil)
-	{
+	if (currentSelectedArticle != nil) {
 		[self selectFolderAndArticle:currentFolderId guid:currentSelectedArticle.guid];
 		[self ensureSelectedArticle];
 	}
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleViewChange" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_ArticleViewChange object:nil];
+
+    self.foldersTree.mainView.nextKeyView = self.mainArticleView;
+    if (self.selectedArticle == nil) {
+        [self.view.window makeFirstResponder:self.foldersTree.mainView];
+    } else {
+        [self.view.window makeFirstResponder:self.mainArticleView];
+    }
+
+    // TODO: Refactor
+    NSTabViewItem *primaryTab = [[NSTabViewItem alloc] initWithIdentifier:@"Articles"];
+    primaryTab.label = NSLocalizedString(@"Articles", nil);
+    primaryTab.viewController = self;
+    APPCONTROLLER.browser.primaryTab = primaryTab;
 }
 
 /* currentFolderId
@@ -198,16 +242,6 @@
 	[mainArticleView saveTableSettings];
 }
 
-/* updateVisibleColumns
- * For relevant layouts, adapt table settings
- */
--(void)updateVisibleColumns
-{
-    if (mainArticleView ==  self.articleListView) {
-        [self.articleListView updateVisibleColumns];
-    }
-}
-
 /* selectedArticle
  * Returns the currently selected article from the article list.
  */
@@ -231,18 +265,6 @@
 -(void)ensureSelectedArticle
 {
     [mainArticleView ensureSelectedArticle];
-}
-
-/* searchPlaceholderString
- * Return the search field placeholder.
- */
--(NSString *)searchPlaceholderString
-{
-	if (currentFolderId == -1)
-		return @"";
-
-	Folder * folder = [[Database sharedManager] folderFromID:currentFolderId];
-	return [NSString stringWithFormat:NSLocalizedString(@"Filter in %@", nil), folder.name];
 }
 
 /* sortColumnIdentifier
@@ -269,20 +291,21 @@
 	Preferences * prefs = [Preferences standardPreferences];
 	NSMutableArray * descriptors = [NSMutableArray arrayWithArray:prefs.articleSortDescriptors];
 	
-	if ([sortColumnIdentifier isEqualToString:columnName])
+	if ([sortColumnIdentifier isEqualToString:columnName]) {
 		descriptors[0] = [descriptors[0] reversedSortDescriptor];
-	else
-	{
+	} else {
 		[self setSortColumnIdentifier:columnName];
 		[prefs setObject:sortColumnIdentifier forKey:MAPref_SortColumn];
 		NSSortDescriptor * sortDescriptor;
 		NSDictionary * specifier = [articleSortSpecifiers valueForKey:sortColumnIdentifier];
 		NSUInteger index = [[descriptors valueForKey:@"key"] indexOfObject:[specifier valueForKey:@"key"]];
 
-		if (index == NSNotFound)
-			sortDescriptor = [[NSSortDescriptor alloc] initWithKey:[specifier valueForKey:@"key"] ascending:YES selector:NSSelectorFromString([specifier valueForKey:@"selector"])];
-		else
-		{
+		if (index == NSNotFound) {
+			// Dates should be sorted initially in descending order
+			// MIGHT DO : Add a key to articleSortSpecifiers for a default sort order
+			BOOL ascending = [columnName isEqualToString:MA_Field_PublicationDate] || [columnName isEqualToString:MA_Field_LastUpdate] ? NO : YES;
+			sortDescriptor = [[NSSortDescriptor alloc] initWithKey:[specifier valueForKey:@"key"] ascending:ascending selector:NSSelectorFromString([specifier valueForKey:@"selector"])];
+		} else {
 			sortDescriptor = descriptors[index];
 			[descriptors removeObjectAtIndex:index];
 		}
@@ -315,8 +338,7 @@
 	NSSortDescriptor * sortDescriptor = descriptors[0];
 	
 	BOOL existingAscending = sortDescriptor.ascending;
-	if ( newAscending != existingAscending )
-	{
+	if ( newAscending != existingAscending ) {
 		descriptors[0] = sortDescriptor.reversedSortDescriptor;
 		prefs.articleSortDescriptors = descriptors;
 		[mainArticleView refreshFolder:VNARefreshSortAndRedraw];
@@ -351,23 +373,18 @@
 {
 	// mark current article read
 	Article * currentArticle = self.selectedArticle;
-	if (currentArticle != nil && !currentArticle.read)
-	{
+	if (currentArticle != nil && !currentArticle.isRead) {
 		[self markReadByArray:@[currentArticle] readFlag:YES];
 	}
 
 	// If there are any unread articles then select the first one in the
 	// first folder.
-	if ([Database sharedManager].countOfUnread > 0)
-	{
+	if ([Database sharedManager].countOfUnread > 0) {
 		// Get the first folder with unread articles.
 		NSInteger firstFolderWithUnread = self.foldersTree.firstFolderWithUnread;
-		if (firstFolderWithUnread == currentFolderId)
-		{
+		if (firstFolderWithUnread == currentFolderId) {
             [self->mainArticleView selectFirstUnreadInFolder];
-		}
-		else
-		{
+		} else {
 			// Seed in order to select the first unread article.
 			firstUnreadArticleRequired = YES;
 			// Select the folder in the tree view.
@@ -384,28 +401,21 @@
 {
 	// mark current article read
 	Article * currentArticle = self.selectedArticle;
-	if (currentArticle != nil && !currentArticle.read)
-	{
+	if (currentArticle != nil && !currentArticle.isRead) {
 		[self markReadByArray:@[currentArticle] readFlag:YES];
 	}
 
 	// If there are any unread articles then select the nexst one
-	if ([Database sharedManager].countOfUnread > 0)
-	{
+	if ([Database sharedManager].countOfUnread > 0) {
 		// Search other articles in the same folder, starting from current position
-        if (!mainArticleView.viewNextUnreadInFolder)
-		{
+        if (!mainArticleView.viewNextUnreadInFolder) {
 			// If nothing found and smart folder, search if we have other fresh articles from same folder
 			Folder * currentFolder = [[Database sharedManager] folderFromID:currentFolderId];
-			if (currentFolder.type == VNAFolderTypeSmart || currentFolder.type == VNAFolderTypeTrash || currentFolder.type == VNAFolderTypeSearch)
-			{
-                if (!mainArticleView.selectFirstUnreadInFolder)
-				{
+			if (currentFolder.type == VNAFolderTypeSmart || currentFolder.type == VNAFolderTypeTrash || currentFolder.type == VNAFolderTypeSearch) {
+                if (!mainArticleView.selectFirstUnreadInFolder) {
 					[self displayNextFolderWithUnread];
 				}
-			}
-			else
-			{
+			} else {
 				[self displayNextFolderWithUnread];
 			}
 		}
@@ -419,8 +429,7 @@
 -(void)displayNextFolderWithUnread
 {
 	NSInteger nextFolderWithUnread = [self.foldersTree nextFolderWithUnread:currentFolderId];
-	if (nextFolderWithUnread != -1)
-	{
+	if (nextFolderWithUnread != -1) {
 		// Seed in order to select the first unread article.
 		firstUnreadArticleRequired = YES;
 		[self.foldersTree selectFolder:nextFolderWithUnread];
@@ -434,20 +443,19 @@
  */
 -(void)displayFolder:(NSInteger)newFolderId
 {
-	if (currentFolderId != newFolderId && newFolderId != 0)
-	{
-		// Clear all of the articles in the current folder.
-		// This will reset the scroller position and deselect all.
+    // We don't filter when we switch folders.
+    self.filterString = @"";
+
+	if (currentFolderId != newFolderId && newFolderId != 0) {
+		// Deselect all in current folder.
 		// Otherwise, the new folder might attempt to preserve selection.
 		// This can happen with smart folders, which have the same articles as other folders.
-		self.currentArrayOfArticles = @[];
-		self.folderArrayOfArticles = @[];
-		[mainArticleView refreshFolder:VNARefreshRedrawList];
+		[mainArticleView scrollToArticle:nil];
 
 		currentFolderId = newFolderId;
 		[self reloadArrayOfArticles];
 	}
-
+    [self setFilterBarPlaceholderStringForFolderID:newFolderId];
 }
 
 /* selectFolderAndArticle
@@ -456,14 +464,11 @@
 -(void)selectFolderAndArticle:(NSInteger)folderId guid:(NSString *)guid
 {
 	// If we're in the right folder, select the article
-	if (folderId == currentFolderId)
-	{
+	if (folderId == currentFolderId) {
 		if (guid != nil) {
 			[mainArticleView scrollToArticle:guid];
 		}
-	}
-	else
-	{
+	} else {
 		// We seed guidOfArticleToSelect so that
 		// after notification of folder selection change has been processed,
 		// it will select the requisite article on our behalf.
@@ -479,18 +484,36 @@
 -(void)reloadArrayOfArticles
 {
     Folder *folder = [[Database sharedManager] folderFromID:currentFolderId];
-    NSString *filterString = APPCONTROLLER.filterString;
-    dispatch_sync(queue, ^{
-        self.folderArrayOfArticles = [folder articlesWithFilter:filterString];
+    NSString *filterString = self.filterString;
+    [folder setNonPersistedFlag:VNAFolderFlagUpdating];
+    [[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_FoldersUpdated object:@(folder.itemId)];
+    __block NSArray * articles;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSInteger requestedFolderId = self->currentFolderId;
+        articles = [folder articlesWithFilter:filterString];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [folder clearNonPersistedFlag:VNAFolderFlagUpdating];
+            [[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_FoldersUpdated object:@(folder.itemId)];
+            if (self->currentFolderId == requestedFolderId) {
+                self.folderArrayOfArticles = articles;
+                [self finishReloadArrayOfArticles];
+            }
+        });
     });
-    Article *article = self.selectedArticle;
 
-    if (self->shouldPreserveSelectedArticle) {
-        if (article != nil && !article.deleted) {
-            self->articleToPreserve = article;
+    Article *article = self.selectedArticle;
+    // To verify later if selectedArticle has changed after reload started.
+    if (articleToPreserve != nil && articleToPreserve != article) {
+        if (article != nil && !article.isDeleted) {
+            articleToPreserve = article;
+        } else {
+            articleToPreserve = nil;
         }
-        self->shouldPreserveSelectedArticle = NO;
     }
+} // reloadArrayOfArticles
+
+-(void)finishReloadArrayOfArticles
+{
 
     [self->mainArticleView refreshFolder:VNARefreshReapplyFilter];
 
@@ -502,22 +525,17 @@
         self->firstUnreadArticleRequired = NO;
     }
 
-    if (self->requireSelectArticleAfterReload) {
-        [self ensureSelectedArticle];
-        self->requireSelectArticleAfterReload = NO;
-    }
-
     // To avoid upsetting the current displayed article after a refresh,
     // we check to see if the selected article is the same
     // and if it has been updated
     Article *currentArticle = self.selectedArticle;
-    if (currentArticle == article &&
+    if (currentArticle == articleToPreserve &&
         [[Preferences standardPreferences] boolForKey:MAPref_CheckForUpdatedArticles]
-        && currentArticle.revised && !currentArticle.read)
+        && currentArticle.isRevised)
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_ArticleViewChange" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:MA_Notify_ArticleViewChange object:nil];
     }
-} // reloadArrayOfArticles
+} // finishReloadArrayOfArticles
 
 /* refilterArrayOfArticles
  * Reapply the current filter to the article array.
@@ -531,33 +549,27 @@
  * Apply the active filter to unfilteredArray and return the filtered array.
  * This is done here rather than in the folder management code for simplicity.
  */
--(NSArray *)applyFilter:(NSArray *)unfilteredArray
+-(NSArray<Article *> *)applyFilter:(NSArray<Article *> *)unfilteredArray
 {
 	NSMutableArray * filteredArray = [NSMutableArray arrayWithArray:unfilteredArray];
 	
 	NSString * guidOfArticleToPreserve = articleToPreserve.guid;
 	
 	NSInteger filterMode = [Preferences standardPreferences].filterMode;
-	for (NSInteger index = filteredArray.count - 1; index >= 0; --index)
-	{
+	for (NSInteger index = filteredArray.count - 1; index >= 0; --index) {
 		Article * article = filteredArray[index];
-		if (guidOfArticleToPreserve != nil 
+		if (guidOfArticleToPreserve != nil
 			&& article.folderId == articleToPreserve.folderId 
-			&& [article.guid isEqualToString:guidOfArticleToPreserve])
-		{
+			&& [article.guid isEqualToString:guidOfArticleToPreserve]) {
 			guidOfArticleToPreserve = nil;
-		}
-        else if ([self filterArticle:article usingMode:filterMode] == false)
-		{
+		} else if ([self filterArticle:article usingMode:filterMode] == false) {
 			[filteredArray removeObjectAtIndex:index];
         }
 	}
 	
-	if (guidOfArticleToPreserve != nil)
-	{
+	if (guidOfArticleToPreserve != nil) {
 		[filteredArray addObject:articleToPreserve];
 	}
-	articleToPreserve = nil;
 	
 	return [filteredArray copy];
 }
@@ -588,7 +600,11 @@
 	NSUndoManager * undoManager = NSApp.mainWindow.undoManager;
 	SEL markDeletedUndoAction = deleteFlag ? @selector(markDeletedUndo:) : @selector(markUndeletedUndo:);
 	[undoManager registerUndoWithTarget:self selector:markDeletedUndoAction object:articleArray];
-	[undoManager setActionName:NSLocalizedString(@"Delete", nil)];
+    [undoManager setActionName:NSLocalizedStringWithDefaultValue(@"delete.undoAction",
+                                                                 nil,
+                                                                 NSBundle.mainBundle,
+                                                                 @"Delete",
+                                                                 @"Name of an undo/redo action in the menu bar's Edit menu.")];
 	
 	// We will make a new copy of currentArrayOfArticles and folderArrayOfArticles with the selected articles removed.
 	NSMutableArray * currentArrayCopy = [NSMutableArray arrayWithArray:currentArrayOfArticles];
@@ -603,26 +619,22 @@
         [self innerMarkFlaggedByArray:articleArray flagged:NO];
 		
 		Article * firstArticle = articleArray.firstObject;
-		if (firstArticle != nil) // Should always be true
-		{
+		// Should always be true
+		if (firstArticle != nil) {
 			// We want to select the next non-deleted article
 			NSUInteger articleIndex = [currentArrayOfArticles indexOfObject:firstArticle];
-			if (articleIndex != NSNotFound)
-			{
+			if (articleIndex != NSNotFound) {
 				NSUInteger count = currentArrayOfArticles.count;
-				for (NSUInteger i = articleIndex + 1; i < count; ++i)
-				{
+				for (NSUInteger i = articleIndex + 1; i < count; ++i) {
                     Article * nextArticle = currentArrayOfArticles[i];
-					if (![articleArray containsObject:nextArticle])
-					{
+					if (![articleArray containsObject:nextArticle]) {
 						guidToSelect = nextArticle.guid;
 						break;
 					}
 				}
 				
 				// Otherwise, we want to select the previous article.
-				if (guidToSelect == nil && articleIndex > 0)
-				{
+				if (guidToSelect == nil && articleIndex > 0) {
                     Article * nextArticle = currentArrayOfArticles[articleIndex - 1];
 					guidToSelect = nextArticle.guid;
 				}
@@ -635,42 +647,33 @@
 
 	// Iterate over every selected article in the table and set the deleted
 	// flag on the article while simultaneously removing it from our copies
-	for (Article * theArticle in articleArray)
-	{
+	for (Article * theArticle in articleArray) {
 		[[Database sharedManager] markArticleDeleted:theArticle isDeleted:deleteFlag];
-		if (![currentArrayOfArticles containsObject:theArticle])
+		if (![currentArrayOfArticles containsObject:theArticle]) {
 			needReload = YES;
-		else if (deleteFlag && (currentFolderId != [Database sharedManager].trashFolderId))
-		{
+		} else if (deleteFlag && (currentFolderId != [Database sharedManager].trashFolderId)) {
 			[currentArrayCopy removeObject:theArticle];
 			[folderArrayCopy removeObject:theArticle];
-		}
-		else if (!deleteFlag && (currentFolderId == [Database sharedManager].trashFolderId))
-		{
+		} else if (!deleteFlag && (currentFolderId == [Database sharedManager].trashFolderId)) {
 			[currentArrayCopy removeObject:theArticle];
 			[folderArrayCopy removeObject:theArticle];
-		}
-		else
+		} else {
 			needReload = YES;
+		}
 	}
 
 	self.currentArrayOfArticles = currentArrayCopy;
 	self.folderArrayOfArticles = folderArrayCopy;
-	if (needReload)
+	if (needReload) {
 		[self reloadArrayOfArticles];
-	else
-	{
+	} else {
 		[mainArticleView refreshFolder:VNARefreshRedrawList];
-		if (currentArrayOfArticles.count > 0u)
-		{
-			if (guidToSelect != nil)
-			{
+		if (currentArrayOfArticles.count > 0u) {
+			if (guidToSelect != nil) {
 				[mainArticleView scrollToArticle:guidToSelect];
 			}
 			[mainArticleView ensureSelectedArticle];
-		}
-		else
-		{
+		} else {
 			[NSApp.mainWindow makeFirstResponder:self.foldersTree.mainView];
 		}
 	}
@@ -689,26 +692,22 @@
 	
 	NSString * guidToSelect = nil;
 	Article * firstArticle = articleArray.firstObject;
-	if (firstArticle != nil) // Should always be true
-	{
+	// Should always be true
+	if (firstArticle != nil) {
 		// We want to select the next non-deleted article
 		NSUInteger articleIndex = [currentArrayOfArticles indexOfObject:firstArticle];
-		if (articleIndex != NSNotFound)
-		{
+		if (articleIndex != NSNotFound) {
 			NSUInteger count = currentArrayOfArticles.count;
-			for (NSUInteger i = articleIndex + 1; i < count; ++i)
-			{
+			for (NSUInteger i = articleIndex + 1; i < count; ++i) {
                 Article * nextArticle = currentArrayOfArticles[i];
-				if (![articleArray containsObject:nextArticle])
-				{
+				if (![articleArray containsObject:nextArticle]) {
 					guidToSelect = nextArticle.guid;
 					break;
 				}
 			}
 			
 			// Otherwise, we want to select the previous article.
-			if (guidToSelect == nil && articleIndex > 0)
-			{
+			if (guidToSelect == nil && articleIndex > 0) {
                 Article * nextArticle = currentArrayOfArticles[articleIndex - 1];
 				guidToSelect = nextArticle.guid;
 			}
@@ -720,10 +719,8 @@
 
 	// Iterate over every selected article in the table and remove it from
 	// the database.
-	for (Article * theArticle in articleArray)	
-	{
-		if ([[Database sharedManager] deleteArticle:theArticle])
-		{
+	for (Article * theArticle in articleArray) {
+		if ([[Database sharedManager] deleteArticle:theArticle]) {
 			[currentArrayCopy removeObject:theArticle];
 			[folderArrayCopy removeObject:theArticle];
 		}
@@ -734,13 +731,23 @@
 
 	// Ensure there's a valid selection
     if (currentArrayOfArticles.count > 0u) {
-		if (guidToSelect != nil)
-		{
+		if (guidToSelect != nil) {
 			[mainArticleView scrollToArticle:guidToSelect];
 		}
 		[mainArticleView ensureSelectedArticle];
     } else {
 		[NSApp.mainWindow makeFirstResponder:self.foldersTree.mainView];
+    }
+}
+
+- (void)changeFiltering:(NSMenuItem *)sender
+{
+    NSInteger tag = sender.tag;
+    Preferences.standardPreferences.filterMode = tag;
+    if (tag == VNAFilterModeNone) {
+        self.filterModeLabel = @"";
+    } else {
+        self.filterModeLabel = sender.title;
     }
 }
 
@@ -780,8 +787,7 @@
  */
 -(void)innerMarkFlaggedByArray:(NSArray *)articleArray flagged:(BOOL)flagged
 {
-	for (Article * theArticle in articleArray)
-	{
+	for (Article * theArticle in articleArray) {
 		Folder *myFolder = [[Database sharedManager] folderFromID:theArticle.folderId];
 		if (myFolder.type == VNAFolderTypeOpenReader) {
 			[[OpenReader sharedManager] markStarred:theArticle starredFlag:flagged];
@@ -789,7 +795,7 @@
 		[[Database sharedManager] markArticleFlagged:theArticle.folderId
                                                 guid:theArticle.guid
                                            isFlagged:flagged];
-        [theArticle markFlagged:flagged];
+        theArticle.flagged = flagged;
 	}
 }
 
@@ -818,7 +824,11 @@
 	NSUndoManager * undoManager = NSApp.mainWindow.undoManager;	
 	SEL markReadUndoAction = readFlag ? @selector(markUnreadUndo:) : @selector(markReadUndo:);
 	[undoManager registerUndoWithTarget:self selector:markReadUndoAction object:articleArray];
-	[undoManager setActionName:NSLocalizedString(@"Mark Read", nil)];
+	[undoManager setActionName:NSLocalizedStringWithDefaultValue(@"markRead.undoAction",
+																 nil,
+																 NSBundle.mainBundle,
+																 @"Mark Read",
+																 @"Name of an undo/redo action in the menu bar's Edit menu.")];
 
     [self innerMarkReadByArray:articleArray readFlag:readFlag];
 
@@ -830,29 +840,16 @@
  */
 -(void)innerMarkReadByArray:(NSArray *)articleArray readFlag:(BOOL)readFlag
 {
-	NSInteger lastFolderId = -1;
-	
-	for (Article * theArticle in articleArray)
-	{
+	for (Article * theArticle in articleArray) {
 		NSInteger folderId = theArticle.folderId;
-		if (theArticle.read != readFlag)
-		{
+		if (theArticle.isRead != readFlag) {
 			if ([[Database sharedManager] folderFromID:folderId].type == VNAFolderTypeOpenReader) {
 				[[OpenReader sharedManager] markRead:theArticle readFlag:readFlag];
 			} else {
 				[[Database sharedManager] markArticleRead:folderId guid:theArticle.guid isRead:readFlag];
-				[theArticle markRead:readFlag];
-				if (folderId != lastFolderId && lastFolderId != -1) {
-					[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated"
-																		object:@(lastFolderId)];
-				}
-				lastFolderId = folderId;
+				theArticle.read = readFlag;
 			}
 		}
-	}
-	if (lastFolderId != -1) {
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated"
-															object:@(lastFolderId)];
 	}
 }
 
@@ -862,10 +859,8 @@
 -(void)innerMarkReadByRefsArray:(NSArray *)articleArray readFlag:(BOOL)readFlag
 {
 	Database * db = [Database sharedManager];
-	NSInteger lastFolderId = -1;
 
-	for (ArticleReference * articleRef in articleArray)
-	{
+	for (ArticleReference * articleRef in articleArray) {
 		NSInteger folderId = articleRef.folderId;
 		Folder * folder = [db folderFromID:folderId];
 		if (folder.type == VNAFolderTypeOpenReader){
@@ -875,16 +870,7 @@
 			}
 		} else {
 			[db markArticleRead:folderId guid:articleRef.guid isRead:readFlag];
-			if (folderId != lastFolderId && lastFolderId != -1) {
-				[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated"
-																	object:@(lastFolderId)];
-			}
-			lastFolderId = folderId;
 		}
-	}
-	if (lastFolderId != -1) {
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated"
-															object:@(lastFolderId)];
 	}
 }
 
@@ -909,23 +895,13 @@
  */
 -(void)markAllFoldersReadByArray:(NSArray *)folderArray
 {
-	NSArray * refArray = [self wrappedMarkAllFoldersReadInArray:folderArray];
-	if (refArray != nil && refArray.count > 0)
-	{
-		NSUndoManager * undoManager = NSApp.mainWindow.undoManager;
-		[undoManager registerUndoWithTarget:self selector:@selector(markAllReadUndo:) object:refArray];
-		[undoManager setActionName:NSLocalizedString(@"Mark All Read", nil)];
-	}
-	
-	// Smart and Search folders are not included in folderArray when you mark all subscriptions read,
-	// so we need to mark articles read if they're the current folder.
-	Folder * currentFolder = [[Database sharedManager] folderFromID:currentFolderId];
-	if (currentFolder != nil && ![folderArray containsObject:currentFolder])
-	{
-		for (Article * theArticle in folderArrayOfArticles)
-			[theArticle markRead:YES];
-	}
-	
+    NSArray * refArray = [self wrappedMarkAllFoldersReadInArray:folderArray];
+    if (refArray != nil && refArray.count > 0) {
+        NSUndoManager * undoManager = NSApp.mainWindow.undoManager;
+        [undoManager registerUndoWithTarget:self selector:@selector(markAllReadUndo:) object:refArray];
+        [undoManager setActionName:NSLocalizedString(@"Mark All Read", nil)];
+    }
+
 	[mainArticleView refreshFolder:VNARefreshRedrawList];
 }
 
@@ -933,37 +909,35 @@
  * Given an array of folders, mark all the articles in those folders as read and
  * return a reference array listing all the articles that were actually marked.
  */
--(NSArray *)wrappedMarkAllFoldersReadInArray:(NSArray *)folderArray
+-(NSArray<ArticleReference *> *)wrappedMarkAllFoldersReadInArray:(NSArray *)folderArray
 {
 	NSMutableArray * refArray = [NSMutableArray array];
 	
-	for (Folder * folder in folderArray)
-	{
+	for (Folder * folder in folderArray) {
 		NSInteger folderId = folder.itemId;
-		if (folder.type == VNAFolderTypeGroup)
-		{
+		if (folder.type == VNAFolderTypeGroup) {
 			[refArray addObjectsFromArray:[self wrappedMarkAllFoldersReadInArray:[[Database sharedManager] arrayOfFolders:folderId]]];
-		}
-		else if (folder.type == VNAFolderTypeRSS)
-		{
+		} else if (folder.type == VNAFolderTypeRSS) {
 			[refArray addObjectsFromArray:[folder arrayOfUnreadArticlesRefs]];
 			[[Database sharedManager] markFolderRead:folderId];
-		}
-		else if (folder.type == VNAFolderTypeOpenReader)
-		{
-			NSArray * articleArray = [folder arrayOfUnreadArticlesRefs];
-			[refArray addObjectsFromArray:articleArray];
+		} else if (folder.type == VNAFolderTypeOpenReader) {
+			[refArray addObjectsFromArray:[folder arrayOfUnreadArticlesRefs]];
 			[[OpenReader sharedManager] markAllReadInFolder:folder];
-		}
-		else
-		{
-			// For smart folders, we only mark all read the current folder to
-			// simplify things.
-			if (folderId == currentFolderId)
-			{
-				[refArray addObjectsFromArray:currentArrayOfArticles];
-				[self innerMarkReadByArray:currentArrayOfArticles readFlag:YES];
-			}
+		} else {
+            // For smart folders, we only mark read articles which should be visible with current filter.
+            // We also need to be careful to mark articles read, both in their original folders and in current view
+            NSString *filterString = self.filterString;
+            NSArray * articleArray = [self applyFilter:[folder articlesWithFilter:filterString]];
+            [self innerMarkReadByArray:articleArray readFlag:YES];
+            for (id article in articleArray) {
+                [refArray addObject:[ArticleReference makeReference:(Article *)article]];
+            }
+            for (Article * visibleArticle in currentArrayOfArticles) {
+                ArticleReference *reference = [ArticleReference makeReference:visibleArticle];
+                if ([refArray containsObject:reference]) {
+                    visibleArticle.read = YES;
+                }
+            }
 		}
 	}
 	return [refArray copy];
@@ -975,8 +949,6 @@
 -(void)markAllReadByReferencesArray:(NSArray *)refArray readFlag:(BOOL)readFlag
 {
 	Database * dbManager = [Database sharedManager];
-	__block NSInteger lastFolderId = -1;
-	__block BOOL needRefilter = NO;
 	
 	// Set up to undo or redo this action
 	NSUndoManager * undoManager = NSApp.mainWindow.undoManager;
@@ -984,8 +956,7 @@
 	[undoManager registerUndoWithTarget:self selector:markAllReadUndoAction object:refArray];
 	[undoManager setActionName:NSLocalizedString(@"Mark All Read", nil)];
 	
-	for (ArticleReference *ref in refArray)
-	{
+	for (ArticleReference *ref in refArray) {
 		NSInteger folderId = ref.folderId;
 		NSString * theGuid = ref.guid;
 		Folder * folder = [dbManager folderFromID:folderId];
@@ -996,29 +967,17 @@
 			}
         } else {
 			[dbManager markArticleRead:folderId guid:theGuid isRead:readFlag];
-			if (folderId != lastFolderId && lastFolderId != -1) {
-				[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated"
-																	object:@(lastFolderId)];
-			}
-			lastFolderId = folderId;
 		}
+	}
 
-		if (folderId == currentFolderId) {
-			needRefilter = YES;
-		}
-	}
-	
-	if (lastFolderId != -1) {
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"MA_Notify_FoldersUpdated"
-															object:@(lastFolderId)];
-	}
-	if (lastFolderId != -1 && [dbManager folderFromID:currentFolderId].type != VNAFolderTypeRSS
-		&& [dbManager folderFromID:currentFolderId].type != VNAFolderTypeOpenReader) {
-		[self reloadArrayOfArticles];
-	}
-	else if (needRefilter) {
-		[mainArticleView refreshFolder:VNARefreshReapplyFilter];
-	}
+    // Refresh current view, which might involve some smart folder
+    for (Article * visibleArticle in currentArrayOfArticles) {
+        ArticleReference *reference = [ArticleReference makeReference:visibleArticle];
+        if ([refArray containsObject:reference]) {
+            visibleArticle.read = readFlag;
+        }
+    }
+    [mainArticleView refreshFolder:VNARefreshRedrawList];
 }
 
 /* addBacktrack
@@ -1027,20 +986,20 @@
  */
 -(void)addBacktrack:(NSString *)guid
 {
-	if (!isBacktracking)
+	if (!isBacktracking) {
 		[backtrackArray addToQueue:currentFolderId guid:guid];
+	}
 }
 
 /* goForward
  * Move forward through the backtrack queue.
  */
--(void)goForward
+- (IBAction)goForward:(nullable id)sender
 {
 	NSInteger folderId;
 	NSString * guid;
 	
-	if ([backtrackArray nextItemAtQueue:&folderId guidPointer:&guid])
-	{
+	if ([backtrackArray nextItemAtQueue:&folderId guidPointer:&guid]) {
 		isBacktracking = YES;
 		[self selectFolderAndArticle:folderId guid:guid];
 		isBacktracking = NO;
@@ -1050,13 +1009,12 @@
 /* goBack
  * Move backward through the backtrack queue.
  */
--(void)goBack
+- (IBAction)goBack:(nullable id)sender
 {
 	NSInteger folderId;
 	NSString * guid;
 	
-	if ([backtrackArray previousItemAtQueue:&folderId guidPointer:&guid])
-	{
+	if ([backtrackArray previousItemAtQueue:&folderId guidPointer:&guid]) {
 		isBacktracking = YES;
 		[self selectFolderAndArticle:folderId guid:guid];
 		isBacktracking = NO;
@@ -1079,6 +1037,168 @@
 	return !backtrackArray.atStartOfQueue;
 }
 
+/* toggleColumnVisibility
+ * Toggle whether or not a specified column is visible.
+ */
+- (IBAction)toggleColumnVisibility:(NSMenuItem *)sender
+{
+    if ([sender.representedObject isKindOfClass:[Field class]]) {
+        Field *field = sender.representedObject;
+        field.visible = !field.isVisible;
+        [self.articleListView updateVisibleColumns];
+        [self.articleListView saveTableSettings];
+    }
+}
+
+/* changeSortColumn
+ * Handle the user picking a sort column item from the Sort By submenu
+ */
+- (IBAction)changeSortColumn:(NSMenuItem *)sender
+{
+    if ([sender.representedObject isKindOfClass:[Field class]]) {
+        Field *field = sender.representedObject;
+        [self sortByIdentifier:field.name];
+    }
+}
+
+/* doSortDirection
+ * Handle the user picking ascending or descending from the Sort By submenu
+ */
+- (IBAction)changeSortDirection:(NSMenuItem *)sender
+{
+    if ([sender.representedObject isKindOfClass:[NSNumber class]]) {
+        NSNumber *sortAscending = sender.representedObject;
+        [self sortAscending:sortAscending.boolValue];
+    }
+}
+
+/* reportLayout
+ * Switch to report layout
+ */
+- (IBAction)reportLayout:(id)sender
+{
+    [self setLayout:VNALayoutReport];
+    [self.mainArticleView refreshFolder:VNARefreshRedrawList];
+}
+
+/* condensedLayout
+ * Switch to condensed layout
+ */
+- (IBAction)condensedLayout:(id)sender
+{
+    [self setLayout:VNALayoutCondensed];
+    [self.mainArticleView refreshFolder:VNARefreshRedrawList];
+}
+
+/* unifiedLayout
+ * Switch to unified layout.
+ */
+- (IBAction)unifiedLayout:(id)sender
+{
+    [self setLayout:VNALayoutUnified];
+    [self.mainArticleView refreshFolder:VNARefreshRedrawList];
+}
+
+/* markAsRead
+ * Mark read the selected articles
+ */
+- (IBAction)markAsRead:(nullable id)sender
+{
+    Article *article = self.selectedArticle;
+    if (article && !Database.sharedManager.readOnly) {
+        [self markReadByArray:self.markedArticleRange readFlag:YES];
+    }
+}
+
+/* markAsUnread
+ * Mark unread the selected articles
+ */
+- (IBAction)markAsUnread:(nullable id)sender
+{
+    Article *article = self.selectedArticle;
+    if (article && !Database.sharedManager.readOnly) {
+        [self markReadByArray:self.markedArticleRange readFlag:NO];
+    }
+}
+
+/* toggleFlag
+ * Toggle the flagged/unflagged state of the selected article
+ */
+- (IBAction)toggleFlag:(nullable id)sender
+{
+    Article *article = self.selectedArticle;
+    if (article && !Database.sharedManager.readOnly) {
+        [self markFlaggedByArray:self.markedArticleRange
+                         flagged:!article.isFlagged];
+    }
+}
+
+/* downloadEnclosure
+ * Downloads the enclosures of the currently selected articles
+ */
+- (IBAction)downloadEnclosure:(nullable id)sender
+{
+    for (Article *article in self.markedArticleRange) {
+        if (article.hasEnclosure) {
+            [DownloadManager.sharedInstance downloadFileFromURL:article.enclosure];
+        }
+    }
+}
+
+/* delete
+ * Delete the current article. If we're in the Trash folder, this represents a permanent
+ * delete. Otherwise we just move the article to the trash folder.
+ */
+- (IBAction)delete:(nullable id)sender
+{
+    Database *database = Database.sharedManager;
+    if (!self.selectedArticle || database.readOnly) {
+        return;
+    }
+    Folder *folder = [database folderFromID:self.currentFolderId];
+    if (folder.type != VNAFolderTypeTrash) {
+        [self markDeletedByArray:self.markedArticleRange deleteFlag:YES];
+    } else {
+        NSAlert *alert = [[NSAlert alloc] init];
+        alert.messageText = NSLocalizedString(@"Are you sure you want to permanently delete the selected articles?", nil);
+        alert.informativeText = NSLocalizedString(@"This operation cannot be undone.", nil);
+        [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"delete.button",
+                                                                    nil,
+                                                                    NSBundle.mainBundle,
+                                                                    @"Delete",
+                                                                    @"Title of a button on an alert")];
+        [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"cancel.button",
+                                                                    nil,
+                                                                    NSBundle.mainBundle,
+                                                                    @"Cancel",
+                                                                    @"Title of a button on an alert")];
+        [alert beginSheetModalForWindow:self.view.window
+                      completionHandler:^(NSModalResponse returnCode) {
+            if (returnCode == NSAlertFirstButtonReturn) {
+                [self deleteArticlesByArray:self.markedArticleRange];
+
+                // Blow away the undo stack here since undo actions may refer to
+                // articles that have been deleted. This is a bit of a cop-out but
+                // it's the easiest approach for now.
+                [self.view.window.undoManager removeAllActions];
+            }
+        }];
+    }
+}
+
+/* restore
+ * Restore a message in the Trash folder back to where it came from.
+ */
+- (IBAction)restore:(nullable id)sender
+{
+    Database *database = Database.sharedManager;
+    Folder *folder = [database folderFromID:self.currentFolderId];
+    if (folder.type == VNAFolderTypeTrash && self.selectedArticle && !database.readOnly) {
+        [self markDeletedByArray:self.markedArticleRange deleteFlag:NO];
+        [self.view.window.undoManager removeAllActions];
+    }
+}
+
 /* handleArticleListStateChange
 * Called if a folder content has changed
 * but we don't need to add new articles
@@ -1099,46 +1219,192 @@
  */
 -(void)handleArticleListContentChange:(NSNotification *)note
 {
-	// With automatic refresh and automatic mark read,
-	// the article you're current reading can disappear.
-	// For example, if you're reading in the Unread Articles smart folder.
-	// So make sure we keep this article around.
-    if ([Preferences standardPreferences].refreshFrequency > 0
-        && [Preferences standardPreferences].markReadInterval > 0.0)
-	{
-		shouldPreserveSelectedArticle = YES;
-	}
-    [self reloadArrayOfArticles];
+    NSInteger folderId = ((NSNumber *)note.object).integerValue;
+    Folder * currentFolder = [[Database sharedManager] folderFromID:currentFolderId];
+    if ((folderId == currentFolderId) || (currentFolder.type != VNAFolderTypeRSS && currentFolder.type != VNAFolderTypeOpenReader)) {
+        // With automatic refresh and automatic mark read,
+        // the article you're current reading can disappear.
+        // For example, if you're reading in the Unread Articles smart folder.
+        // So make sure we keep this article around.
+        articleToPreserve = self.selectedArticle;
+        [self reloadArrayOfArticles];
+    }
+}
+
+- (void)folderNameChanged:(NSNotification *)notification
+{
+    NSNumber *folderID = notification.object;
+    [self setFilterBarPlaceholderStringForFolderID:folderID.integerValue];
 }
 
 // MARK: Filter article
 
+- (NSString *)filterString
+{
+    return self.filterBarViewController.filterString;
+}
+
+- (void)setFilterString:(NSString *)filterString
+{
+    self.filterBarViewController.filterString = filterString;
+}
+
+- (void)setFilterBarPlaceholderStringForFolderID:(NSInteger)folderID
+{
+    NSInteger currentFolderID = self.currentFolderId;
+    if (folderID != currentFolderID) {
+        return;
+    }
+
+    NSString *placeholderString = @"";
+    if (currentFolderID >= 0) {
+        Folder *folder = [Database.sharedManager folderFromID:currentFolderID];
+        placeholderString = [NSString stringWithFormat:NSLocalizedString(@"Filter in %@", nil),
+                                                       folder.name];
+    }
+    self.filterBarViewController.placeholderFilterString = placeholderString;
+}
+
+/* toggleFilterBar
+ * Toggle the filter bar on/off.
+ */
+- (IBAction)toggleFilterBar:(id)sender
+{
+    BOOL isVisible = self.filterBarViewController.isVisible;
+    [self setFilterBarState:!isVisible withAnimation:YES];
+    Preferences.standardPreferences.showFilterBar = !isVisible;
+}
+
+- (IBAction)hideFilterBar:(id)sender
+{
+    [self setFilterBarState:NO withAnimation:YES];
+    Preferences.standardPreferences.showFilterBar = NO;
+}
+
+- (void)searchUsingFilterField:(NSSearchField *)searchField
+{
+    self.filterString = searchField ? searchField.stringValue : @"";
+    [self.mainArticleView performFindPanelAction:NSFindPanelActionNext];
+}
+
+/* setFilterBarState
+ * Show or hide the filter bar. The withAnimation flag specifies whether or not we do the
+ * animated show/hide. It should be set to NO for actions that are not user initiated as
+ * otherwise the background rendering of the control can cause complications.
+ */
+- (void)setFilterBarState:(BOOL)showFilterBar withAnimation:(BOOL)doAnimate
+{
+    VNAFilterBarViewController *filterBarViewController = self.filterBarViewController;
+    BOOL isFilterVisible = filterBarViewController.isVisible;
+    if (showFilterBar && !isFilterVisible) {
+        filterBarViewController.filterMode = Preferences.standardPreferences.filterMode;
+        filterBarViewController.visible = YES;
+
+        // Hook up the Tab ordering so Tab from the search field goes to the
+        // article view.
+        self.foldersTree.mainView.nextKeyView = filterBarViewController.view;
+        filterBarViewController.nextKeyView = self.mainArticleView;
+
+        // Set focus only if this was user initiated
+        if (doAnimate) {
+            [filterBarViewController beginInteraction];
+        }
+    } else if (!showFilterBar && isFilterVisible) {
+        filterBarViewController.visible = NO;
+
+        // Fix up the tab ordering
+        self.foldersTree.mainView.nextKeyView = self.mainArticleView;
+
+        if (doAnimate) {
+            // Clear the filter, otherwise we end up with no way remove it!
+            [self searchUsingFilterField:nil];
+
+            // If the focus was originally on the filter bar then we should
+            // move it to the message list
+            if ([self.view.window.firstResponder isEqual:self.view.window]) {
+                [self.view.window makeFirstResponder:self.mainArticleView];
+            }
+        }
+    }
+}
+
 - (BOOL)filterArticle:(Article *)article usingMode:(NSInteger)filterMode {
     switch (filterMode) {
-        case VNAFilterUnread:
-            return !article.read;
-        case VNAFilterLastRefresh: {
-            NSDate *date = article.createdDate;
-            Preferences *prefs = [Preferences standardPreferences];
-            NSComparisonResult result = [date compare:[prefs objectForKey:MAPref_LastRefreshDate]];
-            return result != NSOrderedAscending;
+        case VNAFilterModeUnread:
+            return !article.isRead;
+        case VNAFilterModeLastRefresh: {
+            return article.status == ArticleStatusNew || article.status == ArticleStatusUpdated;
         }
-        case VNAFilterToday:
-            return [NSCalendar.currentCalendar isDateInToday:article.date];
-        case VNAFilterTime48h: {
+        case VNAFilterModeToday:
+            return [NSCalendar.currentCalendar isDateInToday:article.lastUpdate];
+        case VNAFilterModeTime48h: {
             NSDate *twoDaysAgo = [NSCalendar.currentCalendar dateByAddingUnit:NSCalendarUnitDay
                                                                         value:-2
                                                                        toDate:[NSDate date]
                                                                       options:0];
-            return [article.date compare:twoDaysAgo] != NSOrderedAscending;
+            return [article.lastUpdate compare:twoDaysAgo] != NSOrderedAscending;
         }
-        case VNAFilterFlagged:
-            return article.flagged;
-        case VNAFilterUnreadOrFlagged:
-            return (!article.read || article.flagged);
+        case VNAFilterModeFlagged:
+            return article.isFlagged;
+        case VNAFilterModeUnreadOrFlagged:
+            return (!article.isRead || article.isFlagged);
         default:
             return true;
     }
+}
+
+// MARK: Event handling
+
+- (BOOL)vna_canHandleEvent:(NSEvent *)event
+{
+    if (event.type == NSEventTypeKeyDown && event.characters.length == 1) {
+        unichar keyChar = [event.characters characterAtIndex:0];
+        if (keyChar == 'f' || keyChar == 'F' ||
+            keyChar == 'm' || keyChar == 'M' ||
+            keyChar == 'r' || keyChar == 'R' ||
+            keyChar == 'u' || keyChar == 'U' ||
+            keyChar == '<' || keyChar == ',' ||
+            keyChar == '>' || keyChar == '.') {
+            return YES;
+        }
+    }
+    return [super vna_canHandleEvent:event];
+}
+
+- (BOOL)vna_handleEvent:(NSEvent *)event
+{
+    if (event.type != NSEventTypeKeyDown && event.characters.length != 1) {
+        return [super vna_handleEvent:event];
+    }
+    unichar keyChar = [event.characters characterAtIndex:0];
+    if (keyChar == 'f' || keyChar == 'F') {
+        VNAFilterBarViewController *filterBarViewController = self.filterBarViewController;
+        if (filterBarViewController.isVisible) {
+            [filterBarViewController beginInteraction];
+        } else {
+            [self setFilterBarState:YES withAnimation:YES];
+            Preferences.standardPreferences.showFilterBar = YES;
+        }
+        return YES;
+    } else if (keyChar == 'm' || keyChar == 'M') {
+        [self toggleFlag:nil];
+        return YES;
+    } else if (keyChar == 'r' || keyChar == 'R' ||
+               keyChar == 'u' || keyChar == 'U') {
+        Article *article = self.selectedArticle;
+        if (article && !Database.sharedManager.readOnly) {
+            [self markReadByArray:self.markedArticleRange
+                         readFlag:!article.isRead];
+        }
+        return YES;
+    } else if (keyChar == '<' || keyChar == ',') {
+        [self goBack:nil];
+        return YES;
+    } else if (keyChar == '>' || keyChar == '.') {
+        [self goForward:nil];
+        return YES;
+    }
+    return [super vna_handleEvent:event];
 }
 
 // MARK: Key-value observation
@@ -1146,19 +1412,140 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object
                         change:(NSDictionary<NSKeyValueChangeKey,id> *)change
-                       context:(void *)context {
+                       context:(void *)context
+{
+    if (context != VNAArticleControllerObserverContext) {
+        [super observeValueForKeyPath:keyPath
+                             ofObject:object
+                               change:change
+                              context:context];
+        return;
+    }
+
     if ([keyPath isEqualToString:MAPref_FilterMode]) {
+        NSNumber *filter = change[NSKeyValueChangeNewKey];
+        self.filterBarViewController.filterMode = filter.integerValue;
         // Update the list of articles when the user changes the filter.
         @synchronized(mainArticleView) {
             [mainArticleView refreshFolder:VNARefreshReapplyFilter];
         }
+    } else if ([keyPath isEqualToString:MAPref_ShowFilterBar]) {
+        NSNumber *showFilterBar = change[NSKeyValueChangeNewKey];
+        [self setFilterBarState:showFilterBar.boolValue withAnimation:YES];
     }
+}
+
+// MARK: NSMenuItemValidation
+
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem
+{
+    SEL action = menuItem.action;
+    if (action == @selector(toggleColumnVisibility:)) {
+        Field *field = menuItem.representedObject;
+        menuItem.state = field.isVisible ? NSControlStateValueOn : NSControlStateValueOff;
+        return [mainArticleView isEqual:self.articleListView];
+    } else if (action == @selector(changeSortColumn:)) {
+        Field *field = menuItem.representedObject;
+        if ([field.name isEqualToString:self.sortColumnIdentifier]) {
+            menuItem.state = NSControlStateValueOn;
+        } else {
+            menuItem.state = NSControlStateValueOff;
+        }
+        return YES;
+    } else if (action == @selector(changeSortDirection:)) {
+        NSNumber *sortAscending = menuItem.representedObject;
+        if (sortAscending.boolValue == self.sortIsAscending) {
+            menuItem.state = NSControlStateValueOn;
+        } else {
+            menuItem.state = NSControlStateValueOff;
+        }
+        return YES;
+    } else if (action == @selector(reportLayout:)) {
+        VNALayout layout = Preferences.standardPreferences.layout;
+        menuItem.state = (layout == VNALayoutReport) ? NSControlStateValueOn : NSControlStateValueOff;
+        return YES;
+    } else if (action == @selector(condensedLayout:)) {
+        VNALayout layout = Preferences.standardPreferences.layout;
+        menuItem.state = (layout == VNALayoutCondensed) ? NSControlStateValueOn : NSControlStateValueOff;
+        return YES;
+    } else if (action == @selector(unifiedLayout:)) {
+        VNALayout layout = Preferences.standardPreferences.layout;
+        menuItem.state = (layout == VNALayoutUnified) ? NSControlStateValueOn : NSControlStateValueOff;
+        return YES;
+    } else if (action == @selector(changeFiltering:)) {
+        VNAFilterMode filterMode = Preferences.standardPreferences.filterMode;
+        menuItem.state = (menuItem.tag == filterMode) ? NSControlStateValueOn : NSControlStateValueOff;
+        return YES;
+    } else if (action == @selector(toggleFilterBar:)) {
+        if (self.filterBarViewController.isVisible) {
+            menuItem.title = NSLocalizedString(@"Hide Filter Bar", nil);
+        } else {
+            menuItem.title = NSLocalizedString(@"Show Filter Bar", nil);
+        }
+        return YES;
+    } else if (action == @selector(goBack:)) {
+        return self.canGoBack;
+    } else if (action == @selector(goForward:)) {
+        return self.canGoForward;
+    } else if (action == @selector(toggleFlag:)) {
+        Article *selectedArticle = self.selectedArticle;
+        if (selectedArticle) {
+            if (selectedArticle.isFlagged) {
+                menuItem.title = NSLocalizedString(@"Mark Unflagged", nil);
+            } else {
+                menuItem.title = NSLocalizedString(@"Mark Flagged", nil);
+            }
+            return !Database.sharedManager.readOnly;
+        }
+        return NO;
+    } else if (action == @selector(markAsRead:)) {
+        return self.selectedArticle && !Database.sharedManager.readOnly;
+    } else if (action == @selector(markAsUnread:)) {
+        return self.selectedArticle && !Database.sharedManager.readOnly;
+    } else if (action == @selector(delete:)) {
+        Database *database = Database.sharedManager;
+        Folder *folder = [database folderFromID:self.foldersTree.actualSelection];
+        return folder.type != VNAFolderTypeOpenReader && self.selectedArticle && !database.readOnly;
+    } else if (action == @selector(restore:)) {
+        Database *database = Database.sharedManager;
+        Folder *folder = [database folderFromID:self.foldersTree.actualSelection];
+        return folder.type == VNAFolderTypeTrash && self.selectedArticle && !database.readOnly;
+    } else if (action == @selector(downloadEnclosure:)) {
+        if (self.markedArticleRange.count > 1) {
+            menuItem.title = NSLocalizedString(@"Download Enclosures", @"Title of a menu item");
+        } else {
+            menuItem.title = NSLocalizedString(@"Download Enclosure", @"Title of a menu item");
+        }
+        return self.selectedArticle.hasEnclosure;
+    }
+    os_log_debug(VNA_LOG, "Unhandled menu-item validation for menu item %@", menuItem);
+    return NO;
+}
+
+// MARK: - NSToolbarItemValidation
+
+- (BOOL)validateToolbarItem:(NSToolbarItem *)item
+{
+    SEL action = item.action;
+    if (action == @selector(goBack:)) {
+        return self.canGoBack;
+    } else if (item.action == @selector(delete:)) {
+        Database *database = Database.sharedManager;
+        Folder *folder = [database folderFromID:self.foldersTree.actualSelection];
+        return folder.type != VNAFolderTypeOpenReader && self.selectedArticle && !database.readOnly;
+    }
+    return NO;
 }
 
 - (void)dealloc {
     [NSNotificationCenter.defaultCenter removeObserver:self];
-    [NSUserDefaults.standardUserDefaults removeObserver:self
-                                             forKeyPath:MAPref_FilterMode];
+    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+    [userDefaults removeObserver:self
+                      forKeyPath:MAPref_FilterMode
+                         context:VNAArticleControllerObserverContext];
+    [userDefaults removeObserver:self
+                      forKeyPath:MAPref_ShowFilterBar
+                         context:VNAArticleControllerObserverContext];
 }
 
 @end

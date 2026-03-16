@@ -19,37 +19,43 @@
 //
 
 @import Foundation;
-@import FMDB;
 
 @class Folder;
 @class Field;
-@class CriteriaTree;
 @class Article;
+@class ArticleReference;
+@class CriteriaTree;
 
-@interface Database : NSObject
+typedef NS_OPTIONS(NSInteger, VNAQueryScope) {
+    VNAQueryScopeInclusive = 1,
+    VNAQueryScopeSubFolders = 2
+} NS_SWIFT_NAME(QueryScope);
 
 extern NSNotificationName const VNADatabaseWillDeleteFolderNotification;
 extern NSNotificationName const VNADatabaseDidDeleteFolderNotification;
 
-@property(nonatomic) Folder * trashFolder;
-@property(nonatomic) Folder * searchFolder;
-@property(nonatomic) FMDatabaseQueue * databaseQueue;
-@property (copy, nonatomic) NSString *searchString;
+@interface Database : NSObject
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
 
 @property (class, readonly, nonatomic) Database *sharedManager NS_SWIFT_NAME(shared);
 
+@property(nonatomic) Folder * trashFolder;
+@property(nonatomic) Folder * searchFolder;
+@property (copy, nonatomic) NSString *searchString;
+
 // General database functions
-- (instancetype)initWithDatabaseAtPath:(NSString *)dbPath /*NS_DESIGNATED_INITIALIZER*/;
--(void)syncLastUpdate;
 -(void)compactDatabase;
 -(void)reindexDatabase;
+-(void)optimizeDatabase;
 @property (nonatomic, readonly) NSInteger countOfUnread;
 @property (nonatomic, readonly) NSInteger databaseVersion;
 @property (nonatomic, readonly) BOOL readOnly;
 -(void)close;
 
 // Fields functions
--(void)addField:(NSString *)name type:(NSInteger)type tag:(NSInteger)tag sqlField:(NSString *)sqlField visible:(BOOL)visible width:(NSInteger)width;
+-(void)addField:(NSString *)name type:(NSInteger)type sqlField:(NSString *)sqlField visible:(BOOL)visible width:(NSInteger)width;
 -(NSArray *)arrayOfFields;
 -(Field *)fieldByName:(NSString *)name;
 
@@ -60,9 +66,34 @@ extern NSNotificationName const VNADatabaseDidDeleteFolderNotification;
 -(NSArray *)arrayOfAllFolders;
 -(NSArray *)arrayOfFolders:(NSInteger)parentId;
 -(Folder *)folderFromID:(NSInteger)wantedId;
+/*!
+ *  folderFromFeedURL
+ *
+ *  @param wantedFeedURL The feed URL the folder is wanted for
+ *
+ *  @return An RSSFolder that is subscribed to the specified feed URL.
+ */
 -(Folder *)folderFromFeedURL:(NSString *)wantedFeedURL;
+/*!
+ *  folderFromRemoteId
+ *
+ *  @param wantedRemoteId The remote identifier the folder is wanted for
+ *
+ *  @return An OpenReaderFolder that corresponds
+ */
 -(Folder *)folderFromRemoteId:(NSString *)wantedRemoteId;
 -(Folder *)folderFromName:(NSString *)wantedName;
+/*!
+ * folderForPredicateFormat
+ * Returns a smart folder for the predicate format string.
+ * This function is reliable only with simple one-term predicates
+ *
+ * @param predicateFormat An NSPredicate format string
+ *
+ * @return A Folder of type `VNAFolderTypeSmart` or `nil`
+ */
+- (Folder *)folderForPredicateFormat:(NSString *)predicateFormat;
+-(NSString *)sqlScopeForFolder:(Folder *)folder flags:(VNAQueryScope)scopeFlags field:(NSString *)field;
 -(NSInteger)addFolder:(NSInteger)parentId afterChild:(NSInteger)predecessorId folderName:(NSString *)name type:(NSInteger)type canAppendIndex:(BOOL)canAppendIndex;
 -(BOOL)deleteFolder:(NSInteger)folderId;
 -(BOOL)setName:(NSString *)newName forFolder:(NSInteger)folderId;
@@ -94,18 +125,16 @@ extern NSNotificationName const VNADatabaseDidDeleteFolderNotification;
         subscriptionURL:(NSString *)url remoteId:(NSString *)remoteId;
 
 // Smart folder functions
--(void)initSmartfoldersDict;
 -(NSInteger)addSmartFolder:(NSString *)folderName underParent:(NSInteger)parentId withQuery:(CriteriaTree *)criteriaTree;
 -(void)updateSearchFolder:(NSInteger)folderId withFolder:(NSString *)folderName withQuery:(CriteriaTree *)criteriaTree;
 -(CriteriaTree *)searchStringForSmartFolder:(NSInteger)folderId;
--(NSString *)criteriaToSQL:(CriteriaTree *)criteriaTree;
 
 // Article functions
 -(BOOL)addArticle:(Article *)article toFolder:(NSInteger)folderID;
 -(BOOL)updateArticle:(Article *)existingArticle ofFolder:(NSInteger)folderID withArticle:(Article *)article;
 -(BOOL)deleteArticle:(Article *)article;
--(NSArray *)arrayOfUnreadArticlesRefs:(NSInteger)folderId;
--(NSArray *)arrayOfArticles:(NSInteger)folderId filterString:(NSString *)filterString;
+-(NSArray<ArticleReference *> *)arrayOfUnreadArticlesRefs:(NSInteger)folderId;
+-(NSArray<Article *> *)arrayOfArticles:(NSInteger)folderId filterString:(NSString *)filterString;
 -(void)markArticleRead:(NSInteger)folderId guid:(NSString *)guid isRead:(BOOL)isRead;
 -(void)markArticleFlagged:(NSInteger)folderId guid:(NSString *)guid isFlagged:(BOOL)isFlagged;
 -(void)markArticleDeleted:(Article *)article isDeleted:(BOOL)isDeleted;

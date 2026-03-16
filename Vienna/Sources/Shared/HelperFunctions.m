@@ -19,6 +19,14 @@
 
 #import "HelperFunctions.h"
 
+@import Darwin;
+@import SystemConfiguration;
+@import WebKit;
+
+#import "Constants.h"
+#import "Preferences.h"
+#import "Vienna-Swift.h"
+
 // Determines whether the system-wide script menu is present. This is usually
 // not enabled by default and must be enabled in Script Editor's preferences.
 // This requires the com.apple.security.temporary-exception.shared-preference.*
@@ -60,26 +68,6 @@ NSString * getDefaultBrowser(void)
     return defaultBrowserURL.lastPathComponent.stringByDeletingPathExtension;
 }
 
-/* menuWithAction
- * Returns the first NSMenuItem that matches the one that implements the corresponding
- * action in the application main menu. Returns nil if no match is found.
- */
-NSMenuItem * menuItemWithAction(SEL theSelector)
-{
-	NSArray * arrayOfMenus = NSApp.mainMenu.itemArray;
-	NSInteger count = arrayOfMenus.count;
-	NSInteger index;
-
-	for (index = 0; index < count; ++index)
-	{
-		NSMenu * subMenu = [arrayOfMenus[index] submenu];
-		NSInteger itemIndex = [subMenu indexOfItemWithTarget:NSApp.delegate andAction:theSelector];
-		if (itemIndex >= 0)
-			return [subMenu itemAtIndex:itemIndex];
-	}
-	return nil;
-}
-
 /* cleanedUpUrlFromString
  * Uses WebKit to clean up user-entered URLs that might contain umlauts, diacritics and other
  * IDNA related stuff in the domain, or whatever may hide in filenames and arguments.
@@ -117,20 +105,27 @@ NSURL *_Nullable urlFromUserString(NSString *_Nonnull urlString)
         urlComponents.percentEncodedPath = path;
         url = urlComponents.URL;
     } else {
-        // Use WebKit to clean up user-entered URLs that might contain umlauts,
-        // diacritics and other IDNA related stuff in the domain, or whatever
-        // may hide in filenames and arguments.
-        NSPasteboard *pasteboard = [NSPasteboard pasteboardWithUniqueName];
-        [pasteboard declareTypes:@[NSPasteboardTypeString] owner:nil];
-        @try {
-            if ([pasteboard setString:urlString
-                              forType:NSPasteboardTypeString]) {
-                url = [WebView URLFromPasteboard:pasteboard];
+        if (@available(macOS 13, *)) {
+            url = nil;
+        } else {
+            // On macOS < 13, NSURLComponents is less capable. When it fails, we
+            // use WebKit to clean up user-entered URLs that might contain umlauts,
+            // diacritics and other IDNA related stuff in the domain, or whatever
+            // may hide in filenames and arguments.
+            NSPasteboard *pasteboard = [NSPasteboard pasteboardWithUniqueName];
+            [pasteboard declareTypes:@[NSPasteboardTypeString] owner:nil];
+            @try {
+                if ([pasteboard setString:urlString forType:NSPasteboardTypeString]) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+                    url = [WebView URLFromPasteboard:pasteboard];
+#pragma clang diagnostic pop
+                }
+            } @catch (NSException *exception) {
+                NSLog(@"Failed to convert URL for string %@", urlString);
             }
-        } @catch (NSException *exception) {
-            NSLog(@"Failed to convert URL for string %@", urlString);
+            [pasteboard releaseGlobally];
         }
-        [pasteboard releaseGlobally];
     }
     return url;
 }
@@ -144,50 +139,24 @@ void loadMapFromPath(NSString * path, NSMutableDictionary * pathMappings, BOOL f
 {
 	NSFileManager * fileManager = [NSFileManager defaultManager];
 	NSArray * arrayOfFiles = [fileManager contentsOfDirectoryAtPath:path error:nil];
-	if (arrayOfFiles != nil)
-	{
-		if (validExtensions)
+	if (arrayOfFiles != nil) {
+		if (validExtensions) {
 			arrayOfFiles = [arrayOfFiles pathsMatchingExtensions:validExtensions];
+		}
 		
-		for (NSString * fileName in arrayOfFiles)
-		{
+		for (NSString * fileName in arrayOfFiles) {
 			NSString * fullPath = [path stringByAppendingPathComponent:fileName];
 			BOOL isDirectory;
 			
-			if ([fileManager fileExistsAtPath:fullPath isDirectory:&isDirectory] && (isDirectory == foldersOnly))
-			{
-				if ([fileName isEqualToString:@".DS_Store"])
+			if ([fileManager fileExistsAtPath:fullPath isDirectory:&isDirectory] && (isDirectory == foldersOnly)) {
+				if ([fileName isEqualToString:@".DS_Store"]) {
 					continue;
+				}
 
 				[pathMappings setValue:fullPath forKey:fileName.stringByDeletingPathExtension];
 			}
 		}
 	}
-}
-
-/* isAccessible
- * Returns whether the specified URL is immediately accessible.
- */
-BOOL isAccessible(NSString * urlString)
-{
-	SCNetworkReachabilityRef   target;
-	SCNetworkReachabilityFlags flags = 0;
-	Boolean                   ok;
-	
-	NSURL * url = [NSURL URLWithString:urlString];
-
-	target = SCNetworkReachabilityCreateWithName(NULL, url.host.UTF8String);
-    if (target!= nil)
-    {
-        ok = SCNetworkReachabilityGetFlags(target, &flags);
-        CFRelease(target);
-
-        if (!ok)
-            return NO;
-        return (flags & kSCNetworkReachabilityFlagsReachable) && !(flags & kSCNetworkReachabilityFlagsConnectionRequired);
-    }
-    else
-        return NO;
 }
 
 void runOKAlertPanelPlain(NSString * titleString, NSString * bodyText) {
@@ -234,3 +203,51 @@ void runOKAlertSheet(NSString * titleString, NSString * bodyText, ...)
     
 	va_end(arguments);
 }
+
+/* Returns a fully-formed HTTP user agent of the reader.
+ */
+NSString * userAgent(void) {
+    NSString *osVersion;
+    NSOperatingSystemVersion version = [NSProcessInfo processInfo].operatingSystemVersion;
+    osVersion = [NSString stringWithFormat:@"%ld_%ld_%ld", version.majorVersion, version.minorVersion, version.patchVersion];
+    Preferences *prefs = [Preferences standardPreferences];
+    NSString *name = prefs.userAgentName;
+    return [NSString stringWithFormat:MA_DefaultUserAgentString, name, [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"], osVersion];
+}
+
+// This function reused parts of Vienna's isAccessible() function, removed by
+// commit 4ddf93d. Inspiration was also taken from Apple's Reachability sample
+// code, last accessed on 16 February 2026 at:
+// https://developer.apple.com/library/archive/samplecode/Reachability/Introduction/Intro.html
+BOOL VNANetworkIsReachable(void)
+{
+    if (@available(macOS 15, *)) {
+        static VNANetworkMonitor *monitor = nil;
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            monitor = [[VNANetworkMonitor alloc] init];
+        });
+        return monitor.isReachable;
+    } else {
+        struct sockaddr address;
+        memset(&address, 0, sizeof(address));
+        address.sa_len = sizeof(address);
+        address.sa_family = AF_INET;
+        SCNetworkReachabilityRef reachabilityRef =
+            SCNetworkReachabilityCreateWithAddress(kCFAllocatorDefault, &address);
+        if (!reachabilityRef) {
+            // Return NO if a reachability reference could not created, since the
+            // network status has not been determined.
+            return NO;
+        }
+        SCNetworkReachabilityFlags flags = 0;
+        Boolean isValid = SCNetworkReachabilityGetFlags(reachabilityRef, &flags);
+        CFRelease(reachabilityRef);
+        if (!isValid) {
+            // Return NO if network status could not be determined.
+            return NO;
+        }
+        return (flags & kSCNetworkReachabilityFlagsReachable);
+    }
+}
+
