@@ -1,6 +1,22 @@
 Vienna ChangeLog File
 =====================
 
+Vienna 3.10.3
+-------------
+_released 2026-03-16_
+### 🚲 Changes
+- Support discovery of JSON Feeds in browser tab
+- Update translations
+### 🤷🏻 Bugfixes
+- Fix smart folders which could contain initially contain invalid search string
+- Maintain articles displayed after marking articles in a smart folder all read / all unread
+- Reflect changes after undoing "Mark all read" / "Mark all unread"
+### ⚙️ Internals improvement
+- Make tree node code simpler and more robust
+- Fix Xcode warning on risks of app lock when running AppleScript
+### 📖 Documentation
+- Update links in README and add version 3.10
+
 Vienna 3.10.2
 -------------
 _released 2026-02-24_
