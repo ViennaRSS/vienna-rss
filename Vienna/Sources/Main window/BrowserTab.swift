@@ -253,6 +253,14 @@ extension BrowserTab: Tab {
         self.webView.scrollPageUp(sender)
     }
 
+    override func scrollLineDown(_ sender: Any?) {
+        self.webView.scrollLineDown(sender)
+    }
+
+    override func scrollLineUp(_ sender: Any?) {
+        self.webView.scrollLineUp(sender)
+    }
+
     func searchFor(_ searchString: String, action: NSFindPanelAction) {
         if #available(macOS 11, *) {
             let configuration = WKFindConfiguration()
