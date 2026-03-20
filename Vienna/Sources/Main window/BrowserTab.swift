@@ -35,8 +35,6 @@ class BrowserTab: NSViewController {
     @IBOutlet private(set) weak var reloadButton: NSButton!
     @IBOutlet private(set) weak var progressBar: LoadingIndicator?
 
-    var webViewTopConstraint: NSLayoutConstraint!
-
     @IBOutlet private(set) weak var cancelButtonWidth: NSLayoutConstraint!
     @IBOutlet private(set) weak var reloadButtonWidth: NSLayoutConstraint!
     @IBOutlet private(set) weak var rssButtonWidth: NSLayoutConstraint!
@@ -154,7 +152,7 @@ class BrowserTab: NSViewController {
         webView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(webView, positioned: .below, relativeTo: addressBarContainer)
         self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[webView]|", options: [], metrics: nil, views: ["webView": webView]))
-        webViewTopConstraint = NSLayoutConstraint(item: self.view, attribute: .top, relatedBy: .equal, toItem: webView, attribute: .top, multiplier: -1, constant: 0)
+        let webViewTopConstraint = NSLayoutConstraint(item: self.view, attribute: .top, relatedBy: .equal, toItem: webView, attribute: .top, multiplier: -1, constant: 0)
         let webViewBottomConstraint = NSLayoutConstraint(item: webView, attribute: .bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1, constant: 0)
         self.view.addConstraints([webViewTopConstraint, webViewBottomConstraint])
 
