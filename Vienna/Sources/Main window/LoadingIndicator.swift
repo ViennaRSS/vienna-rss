@@ -41,33 +41,13 @@ class LoadingIndicator: NSView {
         self.wantsLayer = true
         self.layer?.addSublayer(animationLayer)
         self.layerContentsRedrawPolicy = .duringViewResize
-        if #available(macOS 10.14, *) {
-            animationLayer.strokeColor = NSColor.controlAccentColor.cgColor
-        } else {
-            animationLayer.strokeColor = NSColor(for: NSColor.currentControlTint).cgColor
-        }
+        animationLayer.strokeColor = NSColor.controlAccentColor.cgColor
         animationLayer.lineWidth = 2.0
         animationLayer.strokeEnd = 0.0
         animationLayer.actions = ["strokeEnd": NSNull()]
 
-        if #available(macOS 10.14, *) {
-            observer = NSApp.observe(\.effectiveAppearance) { [weak self] _, _ in
-                self?.animationLayer.strokeColor = NSColor.controlAccentColor.cgColor
-            }
-        } else {
-            let center = NotificationCenter.default
-            let name = NSColor.currentControlTintDidChangeNotification
-            observer = center.addObserver(forName: name, object: NSApp, queue: .main) { [weak self] _ in
-                self?.animationLayer.strokeColor = NSColor(for: NSColor.currentControlTint).cgColor
-            }
-        }
-    }
-
-    deinit {
-        if #unavailable(macOS 10.14), let observer = observer {
-            let center = NotificationCenter.default
-            let name = NSColor.currentControlTintDidChangeNotification
-            center.removeObserver(observer, name: name, object: NSApp)
+        observer = NSApp.observe(\.effectiveAppearance) { [weak self] _, _ in
+            self?.animationLayer.strokeColor = NSColor.controlAccentColor.cgColor
         }
     }
 

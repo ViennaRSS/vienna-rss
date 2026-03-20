@@ -30,31 +30,17 @@
 // Determines whether the system-wide script menu is present. This is usually
 // not enabled by default and must be enabled in Script Editor's preferences.
 // This requires the com.apple.security.temporary-exception.shared-preference.*
-// codesigning entitlement with the appropriate keys.
+// codesigning entitlement with the appropriate key.
 BOOL hasOSScriptsMenu(void)
 {
-    NSUserDefaults *userDefaults;
-    if (@available(macOS 10.14, *)) {
-        // If the following lines are removed, remember to also remove the
-        // above-mentioned entitlement for "com.apple.scriptmenu".
-        NSString *bundleID = @"com.apple.scriptmenu";
-        userDefaults = [[NSUserDefaults alloc] initWithSuiteName:bundleID];
-        // -boolForKey returns NO if the key is not present. The same applies
-        // if NSUserDefaults could not be initialized.
-        return [userDefaults boolForKey:@"ScriptMenuEnabled"];
-    } else {
-        // If the following lines are removed, remember to also remove the
-        // above-mentioned entitlement for "com.apple.systemuiserver".
-        NSString *bundleID = @"com.apple.systemuiserver";
-        userDefaults = [[NSUserDefaults alloc] initWithSuiteName:bundleID];
-        NSArray *menuExtras = [userDefaults arrayForKey:@"menuExtras"];
-        for (NSUInteger index = 0; index < menuExtras.count; ++index) {
-            if ([menuExtras[index] hasSuffix:@"Script Menu.menu"]) {
-                return YES;
-            }
-        }
-        return NO;
-    }
+    // If the following lines are removed, remember to also remove the
+    // above-mentioned entitlement for "com.apple.scriptmenu".
+    NSString *bundleID = @"com.apple.scriptmenu";
+    NSUserDefaults *userDefaults =
+        [[NSUserDefaults alloc] initWithSuiteName:bundleID];
+    // -boolForKey returns NO if the key is not present. The same applies
+    // if NSUserDefaults could not be initialized.
+    return [userDefaults boolForKey:@"ScriptMenuEnabled"];
 }
 
 /* getDefaultBrowser

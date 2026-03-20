@@ -694,31 +694,22 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		[self.mainWindow orderFront:self];
     }
 	
-    if (@available(macOS 10.15, *)) {
-        NSWorkspaceOpenConfiguration *configuration = [NSWorkspaceOpenConfiguration configuration];
-        configuration.activates = !openLinksInBackground;
-        for (NSURL *url in urlArray) {
-            if (!url) {
-                continue;
-            }
-            [NSWorkspace.sharedWorkspace openURL:url
-                                   configuration:configuration
-                               completionHandler:^(__unused NSRunningApplication * _Nullable app,
-                                                   NSError * _Nullable error) {
-                if (error) {
-                    os_log_error(VNA_LOG,
-                                 "Could not open URL %@ in external browser. Reason: %{public}@",
-                                 url.path, error.localizedDescription);
-                }
-            }];
+    NSWorkspaceOpenConfiguration *configuration = [NSWorkspaceOpenConfiguration configuration];
+    configuration.activates = !openLinksInBackground;
+    for (NSURL *url in urlArray) {
+        if (!url) {
+            continue;
         }
-    } else {
-        NSWorkspaceLaunchOptions lOptions = openLinksInBackground ? (NSWorkspaceLaunchWithoutActivation | NSWorkspaceLaunchDefault) : NSWorkspaceLaunchDefault;
-        [NSWorkspace.sharedWorkspace openURLs:urlArray
-                      withAppBundleIdentifier:nil
-                                      options:lOptions
-               additionalEventParamDescriptor:nil
-                            launchIdentifiers:nil];
+        [NSWorkspace.sharedWorkspace openURL:url
+                               configuration:configuration
+                           completionHandler:^(NSRunningApplication * _Nullable app,
+                                               NSError * _Nullable error) {
+            if (error) {
+                os_log_error(VNA_LOG,
+                             "Could not open URL %@ in external browser. Reason: %{public}@",
+                             url.path, error.localizedDescription);
+            }
+        }];
     }
 }
 
@@ -2546,26 +2537,19 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	// Is our target application running? If not, we'll launch it.
     if ([NSRunningApplication runningApplicationsWithBundleIdentifier:externalEditorBundleIdentifier].count == 0) {
         NSWorkspace *workspace = NSWorkspace.sharedWorkspace;
-        if (@available(macOS 10.15, *)) {
-            NSURL *appURL = [workspace URLForApplicationWithBundleIdentifier:externalEditorBundleIdentifier];
-            NSWorkspaceOpenConfiguration *configuration = [NSWorkspaceOpenConfiguration configuration];
-            configuration.activates = NO;
-            [NSWorkspace.sharedWorkspace openApplicationAtURL:appURL
-                                                configuration:configuration
-                                            completionHandler:^(__unused NSRunningApplication * _Nullable app,
-                                                                NSError * _Nullable error) {
-                if (error) {
-                    os_log_error(VNA_LOG,
-                                 "Could not open app with identifier %{public}@. Reason: %{public}@",
-                                 appURL.path, error.localizedDescription);
-                }
-            }];
-        } else {
-            [workspace launchAppWithBundleIdentifier:externalEditorBundleIdentifier
-                                             options:NSWorkspaceLaunchWithoutActivation
-                      additionalEventParamDescriptor:NULL
-                                    launchIdentifier:nil];
-        }
+        NSURL *appURL = [workspace URLForApplicationWithBundleIdentifier:externalEditorBundleIdentifier];
+        NSWorkspaceOpenConfiguration *configuration = [NSWorkspaceOpenConfiguration configuration];
+        configuration.activates = NO;
+        [NSWorkspace.sharedWorkspace openApplicationAtURL:appURL
+                                            configuration:configuration
+                                        completionHandler:^(NSRunningApplication * _Nullable app,
+                                                            NSError * _Nullable error) {
+            if (error) {
+                os_log_error(VNA_LOG,
+                             "Could not open app with identifier %{public}@. Reason: %{public}@",
+                             appURL.path, error.localizedDescription);
+            }
+        }];
     }
 	
 	// If the active tab is a web view, blog the URL
