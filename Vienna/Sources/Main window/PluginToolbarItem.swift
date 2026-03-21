@@ -1,5 +1,5 @@
 //
-//  PlugInToolbarItem.swift
+//  PluginToolbarItem.swift
 //  Vienna
 //
 //  Copyright 2017
@@ -19,19 +19,26 @@
 
 import Cocoa
 
-/// A toolbar item with a button as its view.
-///
-/// - Note: This item should only be initialized programmatically.
-@objc(VNAPlugInToolbarItem)
-class PlugInToolbarItem: ButtonToolbarItem {
+@objc(VNAPluginToolbarItem)
+class PluginToolbarItem: NSToolbarItem {
 
-    override init(itemIdentifier: NSToolbarItem.Identifier) {
+    @objc let plugin: ActionPlugin
+
+    @objc
+    init(itemIdentifier: NSToolbarItem.Identifier, plugin: ActionPlugin) {
+        self.plugin = plugin
         super.init(itemIdentifier: itemIdentifier)
 
-        let button = PlugInToolbarItemButton(frame: NSRect(x: 0, y: 0, width: 41, height: 25))
-        button.bezelStyle = .toolbar
-        button.toolbarItem = self
-        view = button
+        isBordered = true
+        if #unavailable(macOS 11) {
+            // In macOS 10.15, toolbar items should have a uniform size.
+            minSize = NSToolbarItem.defaultSize
+            maxSize = NSToolbarItem.defaultSize
+        }
     }
 
+    @available(*, unavailable)
+    override init(itemIdentifier: NSToolbarItem.Identifier) {
+        fatalError("Use init(itemIdentifier:plugin:)")
+    }
 }

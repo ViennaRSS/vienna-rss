@@ -1,3 +1,4 @@
+#import "ActionPlugin.h"
 #import "AppController.h"
 #import "Article.h"
 #import "ArticleController.h"
