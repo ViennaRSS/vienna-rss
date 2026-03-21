@@ -167,19 +167,15 @@
         }
     }
     
-    if (@available(macOS 10.15, *)) {
-        NSURL *appURL = [NSURL fileURLWithPath:appPath];
-        NSURL *fileURL = [NSURL fileURLWithPath:filePath];
-        if (!appURL || !fileURL) {
-            return;
-        }
-        [self openURLs:@[fileURL]
-  withApplicationAtURL:appURL
-         configuration:[NSWorkspaceOpenConfiguration configuration]
-     completionHandler:nil];
-    } else {
-        [self openFile:filePath withApplication:appPath];
+    NSURL *appURL = [NSURL fileURLWithPath:appPath];
+    NSURL *fileURL = [NSURL fileURLWithPath:filePath];
+    if (!appURL || !fileURL) {
+        return;
     }
+    [self openURLs:@[fileURL]
+    withApplicationAtURL:appURL
+           configuration:[NSWorkspaceOpenConfiguration configuration]
+       completionHandler:nil];
 }
 
 @end

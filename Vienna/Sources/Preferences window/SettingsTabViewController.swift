@@ -49,7 +49,7 @@ class SettingsTabViewController: NSTabViewController {
             return
         }
 
-        // macOS 10.13 to 10.15
+        // macOS 10.15
         switch tabViewItem.identifier as? String {
         case "general":
             tabViewItem.image = NSImage(named: NSImage.preferencesGeneralName)

@@ -71,16 +71,6 @@ class UserNotificationCenter: NSObject {
     func getNotificationSettings(
         completionHandler: @escaping (_ settings: UserNotificationSettings) -> Void
     ) {
-        guard #available(macOS 10.14, *) else {
-            // NSNotificationCenter has no mechanism to query authorization.
-            let notificationSettings = UserNotificationSettings(
-                authorizationStatus: .authorized,
-                soundEnabled: true
-            )
-            completionHandler(notificationSettings)
-            return
-        }
-
         UNUserNotificationCenter.current().getNotificationSettings { authorizationSettings in
             let authorizationStatus: AuthorizationStatus
             switch authorizationSettings.authorizationStatus {
@@ -117,12 +107,6 @@ class UserNotificationCenter: NSObject {
     ///     provisional notifications and badges are requested.
     @objc(requestAuthorizationWithCompletionHandler:)
     func requestAuthorization(completionHandler: @escaping (_ granted: Bool) -> Void) {
-        guard #available(macOS 10.14, *) else {
-            // NSNotificationCenter has no mechanism to request authorization.
-            completionHandler(true)
-            return
-        }
-
         let center = UNUserNotificationCenter.current()
         // Provisional notifications and badges should always be requested.
         // Although Vienna uses NSDockTile to set the badge count instead of
@@ -151,12 +135,6 @@ class UserNotificationCenter: NSObject {
         _ request: UserNotificationRequest,
         withCompletionHandler completionHandler: ((_ error: (any Error)?) -> Void)? = nil
     ) {
-        guard #available(macOS 10.14, *) else {
-            let center = NSUserNotificationCenter.default
-            center.add(request, withCompletionHandler: completionHandler)
-            return
-        }
-
         let content = UNMutableNotificationContent()
         content.title = request.title
         if let subtitle = request.subtitle {
@@ -184,11 +162,6 @@ class UserNotificationCenter: NSObject {
     func getDeliveredNotifications(
         completionHandler: @escaping (_ notifications: [UserNotificationResponse]) -> Void
     ) {
-        guard #available(macOS 10.14, *) else {
-            let center = NSUserNotificationCenter.default
-            center.getDeliveredNotifications(completionHandler: completionHandler)
-            return
-        }
         let center = UNUserNotificationCenter.current()
         center.getDeliveredNotifications { notifications in
             let notifications = notifications.map { notification in
@@ -205,11 +178,6 @@ class UserNotificationCenter: NSObject {
 
     @objc
     func removeDeliveredNotifications(withIdentifiers identifiers: [String]) {
-        guard #available(macOS 10.14, *) else {
-            let center = NSUserNotificationCenter.default
-            center.removeDeliveredNotifications(withIdentifiers: identifiers)
-            return
-        }
         let center = UNUserNotificationCenter.current()
         center.removeDeliveredNotifications(withIdentifiers: identifiers)
     }
@@ -218,11 +186,7 @@ class UserNotificationCenter: NSObject {
 
     @objc weak var delegate: (any UserNotificationCenterDelegate)? {
         didSet {
-            if #available(macOS 10.14, *) {
-                UNUserNotificationCenter.current().delegate = self
-            } else {
-                NSUserNotificationCenter.default.delegate = self
-            }
+            UNUserNotificationCenter.current().delegate = self
         }
     }
 
@@ -230,7 +194,6 @@ class UserNotificationCenter: NSObject {
 
 // MARK: - UNUserNotificationCenterDelegate
 
-@available(macOS 10.14, *)
 extension UserNotificationCenter: UNUserNotificationCenterDelegate {
 
     // Sent when the user responded to a notification.
@@ -255,89 +218,6 @@ extension UserNotificationCenter: UNUserNotificationCenterDelegate {
             userInfo: userInfo
         )
         delegate.userNotificationCenter(self, didReceive: response)
-    }
-
-}
-
-// MARK: - NSUserNotificationCenterDelegate (deprecated)
-
-@available(macOS, deprecated: 10.14)
-extension UserNotificationCenter: NSUserNotificationCenterDelegate {
-
-    // Sent when the user responded to a notification.
-    func userNotificationCenter(
-        _ center: NSUserNotificationCenter,
-        didActivate notification: NSUserNotification
-    ) {
-        guard let delegate else {
-            return
-        }
-        guard let identifier = notification.identifier else {
-            os_log(
-                "User notification center did activate unhandled notification: %@",
-                log: .userNotificationCenter,
-                type: .debug,
-                notification
-            )
-            return
-        }
-        let response = UserNotificationResponse(
-            identifier: identifier,
-            userInfo: notification.userInfo
-        )
-        delegate.userNotificationCenter(self, didReceive: response)
-    }
-
-}
-
-// MARK: - NSUserNotificationCenter (deprecated)
-
-@available(macOS, deprecated: 10.14)
-extension NSUserNotificationCenter {
-
-    fileprivate func add(
-        _ request: UserNotificationRequest,
-        withCompletionHandler completionHandler: ((_ error: (any Error)?) -> Void)? = nil
-    ) {
-        defer {
-            completionHandler?(nil)
-        }
-        // Remove any previous notification with the same identifier to trigger
-        // the presentation on delivery.
-        if let notification = deliveredNotifications.first(where: { $0.identifier == request.identifier }) {
-            removeDeliveredNotification(notification)
-        }
-        let notification = NSUserNotification()
-        notification.identifier = request.identifier
-        notification.userInfo = request.userInfo as? [String: Any]
-        notification.title = request.title
-        notification.subtitle = request.subtitle
-        notification.informativeText = request.body
-        notification.soundName = request.playSound ? NSUserNotificationDefaultSoundName : nil
-        deliver(notification)
-    }
-
-    fileprivate func getDeliveredNotifications(
-        completionHandler: @escaping (_ notifications: [UserNotificationResponse]) -> Void
-    ) {
-        let notifications = deliveredNotifications.compactMap { notification in
-            guard let identifier = notification.identifier else {
-                return nil as UserNotificationResponse?
-            }
-            return UserNotificationResponse(
-                identifier: identifier,
-                userInfo: notification.userInfo
-            )
-        }
-        completionHandler(notifications)
-    }
-
-    fileprivate func removeDeliveredNotifications(withIdentifiers identifiers: [String]) {
-        for notification in deliveredNotifications {
-            if let identifier = notification.identifier, identifiers.contains(identifier) {
-                removeDeliveredNotification(notification)
-            }
-        }
     }
 
 }
