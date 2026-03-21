@@ -17,7 +17,7 @@
 //  limitations under the License.
 //
 
-import CommonCrypto
+import CryptoKit
 import Foundation
 import WebKit
 
@@ -114,20 +114,14 @@ class WebKitArticleConverter: ArticleConverter {
     }
 
     func uniqueId(for articleText: String) -> String {
-        if let data = articleText.data(using: String.Encoding.utf8) {
-            var digest = [UInt8](repeating: 0, count: Int(CC_MD5_DIGEST_LENGTH))
-
-            // CC_MD5 performs digest calculation and places the result in the caller-supplied buffer for digest (md)
-            // Calls the given closure with a pointer to the underlying unsafe bytes of the data’s contiguous storage.
-            _ = data.withUnsafeBytes {
-                CC_MD5($0.baseAddress, UInt32(data.count), &digest)
-            }
-
-            let md5String = digest
-                .map { byte in String(format: "%02x", UInt8(byte)) }
-                .reduce(into: "") { result, newValue in result += newValue }
-            return md5String
+        guard let data = articleText.data(using: .utf8) else {
+            return ""
         }
-        return ""
+
+        let digest = Insecure.MD5.hash(data: data)
+        let md5String = digest.reduce(into: "") { result, element in
+            result += String(format: "%02x", element)
+        }
+        return md5String
     }
 }
