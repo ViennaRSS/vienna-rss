@@ -161,7 +161,7 @@
 		F61901882E0F16B000A7A200 /* FilterBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F61901852E0F16B000A7A200 /* FilterBarViewController.m */; };
 		F619018B2E0F1D5400A7A200 /* FilterBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F619018A2E0F1D5400A7A200 /* FilterBarViewController.xib */; };
 		F61CEA661F039E57009C878E /* ButtonToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61CEA651F039E56009C878E /* ButtonToolbarItem.swift */; };
-		F61CEA681F03F277009C878E /* PlugInToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61CEA671F03F277009C878E /* PlugInToolbarItem.swift */; };
+		F61CEA681F03F277009C878E /* PluginToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F61CEA671F03F277009C878E /* PluginToolbarItem.swift */; };
 		F6209C5A23D3FFA700D5537D /* Vienna.sdef in Resources */ = {isa = PBXBuildFile; fileRef = F6209C5923D3FFA700D5537D /* Vienna.sdef */; };
 		F62581451E29B90B0035E43C /* SearchPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = F62581441E29B90A0035E43C /* SearchPanel.xib */; };
 		F626F5F424A76B9100D3AAD8 /* Preferences.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F626F5F624A76B9100D3AAD8 /* Preferences.storyboard */; };
@@ -501,7 +501,7 @@
 		F61901892E0F1D5400A7A200 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FilterBarViewController.xib; sourceTree = "<group>"; };
 		F619018C2E0F1D5400A7A200 /* mul */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = mul; path = mul.lproj/FilterBarViewController.xcstrings; sourceTree = "<group>"; };
 		F61CEA651F039E56009C878E /* ButtonToolbarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ButtonToolbarItem.swift; sourceTree = "<group>"; };
-		F61CEA671F03F277009C878E /* PlugInToolbarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PlugInToolbarItem.swift; sourceTree = "<group>"; };
+		F61CEA671F03F277009C878E /* PluginToolbarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PluginToolbarItem.swift; sourceTree = "<group>"; };
 		F6209C5923D3FFA700D5537D /* Vienna.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; lineEnding = 0; path = Vienna.sdef; sourceTree = "<group>"; usesTabs = 1; };
 		F6232EF72B4B402F00D01D2A /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Predicates.strings; sourceTree = "<group>"; };
 		F62581441E29B90A0035E43C /* SearchPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchPanel.xib; sourceTree = "<group>"; };
@@ -1089,7 +1089,7 @@
 			children = (
 				F66BF2BD2F6E85E900496980 /* ToolbarItem.swift */,
 				F61CEA651F039E56009C878E /* ButtonToolbarItem.swift */,
-				F61CEA671F03F277009C878E /* PlugInToolbarItem.swift */,
+				F61CEA671F03F277009C878E /* PluginToolbarItem.swift */,
 				F62E324D284E0CAF0046EA1F /* SharingServiceToolbarItem.swift */,
 			);
 			name = Toolbar;
@@ -2014,7 +2014,7 @@
 				3A171C00210B551B00B80FBB /* TRVSURLSessionOperation.m in Sources */,
 				F6373A231F1D53B500ED3B09 /* MainWindow.swift in Sources */,
 				435028B9165DE9E00018EDB7 /* ViennaApp.m in Sources */,
-				F61CEA681F03F277009C878E /* PlugInToolbarItem.swift in Sources */,
+				F61CEA681F03F277009C878E /* PluginToolbarItem.swift in Sources */,
 				3A7BD0DD1989AC7700E9444B /* VNAVerticallyCenteredTextFieldCell.m in Sources */,
 				2F2280352271B041005D1023 /* ArticleContentView.swift in Sources */,
 				F6B7F9CF2E22E7BE005ADB06 /* DownloadViewController.m in Sources */,

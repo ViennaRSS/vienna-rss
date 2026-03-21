@@ -270,8 +270,8 @@ static NSString * const VNAPluginsDirectoryName = @"Plugins";
         return nil;
     }
 
-    VNAPlugInToolbarItem *item =
-        [[VNAPlugInToolbarItem alloc] initWithItemIdentifier:itemIdentifier
+    VNAPluginToolbarItem *item =
+        [[VNAPluginToolbarItem alloc] initWithItemIdentifier:itemIdentifier
                                                       plugin:plugin];
     item.label = plugin.displayName;
     item.paletteLabel = item.label;
@@ -329,8 +329,8 @@ static NSString * const VNAPluginsDirectoryName = @"Plugins";
 -(IBAction)pluginInvocator:(id)sender
 {
     VNAActionPlugin *plugin;
-    if ([sender isKindOfClass:[VNAPlugInToolbarItem class]]) {
-        VNAPlugInToolbarItem *toolbarItem = sender;
+    if ([sender isKindOfClass:[VNAPluginToolbarItem class]]) {
+        VNAPluginToolbarItem *toolbarItem = sender;
         plugin = toolbarItem.plugin;
     } else {
 		NSMenuItem * menuItem = (NSMenuItem *)sender;

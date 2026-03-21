@@ -1,5 +1,5 @@
 //
-//  PlugInToolbarItem.swift
+//  PluginToolbarItem.swift
 //  Vienna
 //
 //  Copyright 2017
@@ -19,8 +19,8 @@
 
 import Cocoa
 
-@objc(VNAPlugInToolbarItem)
-class PlugInToolbarItem: NSToolbarItem {
+@objc(VNAPluginToolbarItem)
+class PluginToolbarItem: NSToolbarItem {
 
     @objc let plugin: ActionPlugin
 
