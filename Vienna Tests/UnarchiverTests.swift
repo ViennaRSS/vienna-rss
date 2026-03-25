@@ -26,20 +26,11 @@ class UnarchiverTests: XCTestCase {
         item.filename = "Test"
         item.size = 100
 
-        // NSKeyedArchiver without secure coding (deprecated; macOS 10.12 only)
-        var data = NSKeyedArchiver.archivedData(withRootObject: item)
-        XCTAssertNotNil(NSKeyedUnarchiver.unarchiveObject(with: data) as? DownloadItem)
-        XCTAssertNotNil(try NSKeyedUnarchiver.unarchivedObject(ofClass: DownloadItem.self, from: data))
-        XCTAssertNoThrow(try NSKeyedUnarchiver.unarchivedObject(ofClass: DownloadItem.self, from: data))
-
-        // NSKeyedArchiver with secure coding (macOS 10.13+)
-        data = try NSKeyedArchiver.archivedData(withRootObject: item, requiringSecureCoding: false)
-        XCTAssertNotNil(NSKeyedUnarchiver.unarchiveObject(with: data) as? DownloadItem)
+        var data = try NSKeyedArchiver.archivedData(withRootObject: item, requiringSecureCoding: false)
         XCTAssertNotNil(try NSKeyedUnarchiver.unarchivedObject(ofClass: DownloadItem.self, from: data))
         XCTAssertNoThrow(try NSKeyedUnarchiver.unarchivedObject(ofClass: DownloadItem.self, from: data))
 
         data = try NSKeyedArchiver.archivedData(withRootObject: item, requiringSecureCoding: true)
-        XCTAssertNotNil(NSKeyedUnarchiver.unarchiveObject(with: data) as? DownloadItem)
         XCTAssertNotNil(try NSKeyedUnarchiver.unarchivedObject(ofClass: DownloadItem.self, from: data))
         XCTAssertNoThrow(try NSKeyedUnarchiver.unarchivedObject(ofClass: DownloadItem.self, from: data))
     }
@@ -52,20 +43,11 @@ class UnarchiverTests: XCTestCase {
         field.type = .string
         field.isVisible = true
 
-        // NSKeyedArchiver without secure coding (deprecated; macOS 10.12 only)
-        var data = NSKeyedArchiver.archivedData(withRootObject: field)
-        XCTAssertNotNil(NSKeyedUnarchiver.unarchiveObject(with: data) as? Field)
-        XCTAssertNotNil(try NSKeyedUnarchiver.unarchivedObject(ofClass: Field.self, from: data))
-        XCTAssertNoThrow(try NSKeyedUnarchiver.unarchivedObject(ofClass: Field.self, from: data))
-
-        // NSKeyedArchiver with secure coding (macOS 10.13+)
-        data = try NSKeyedArchiver.archivedData(withRootObject: field, requiringSecureCoding: false)
-        XCTAssertNotNil(NSKeyedUnarchiver.unarchiveObject(with: data) as? Field)
+        var data = try NSKeyedArchiver.archivedData(withRootObject: field, requiringSecureCoding: false)
         XCTAssertNotNil(try NSKeyedUnarchiver.unarchivedObject(ofClass: Field.self, from: data))
         XCTAssertNoThrow(try NSKeyedUnarchiver.unarchivedObject(ofClass: Field.self, from: data))
 
         data = try NSKeyedArchiver.archivedData(withRootObject: field, requiringSecureCoding: true)
-        XCTAssertNotNil(NSKeyedUnarchiver.unarchiveObject(with: data) as? Field)
         XCTAssertNotNil(try NSKeyedUnarchiver.unarchivedObject(ofClass: Field.self, from: data))
         XCTAssertNoThrow(try NSKeyedUnarchiver.unarchivedObject(ofClass: Field.self, from: data))
     }
@@ -73,15 +55,7 @@ class UnarchiverTests: XCTestCase {
     func testUnarchivingSearchMethod() throws {
         let method = try XCTUnwrap(SearchMethod.allArticles)
 
-        // NSKeyedArchiver without secure coding (deprecated; macOS 10.12 only)
-        var data = NSKeyedArchiver.archivedData(withRootObject: method)
-        XCTAssertNotNil(NSKeyedUnarchiver.unarchiveObject(with: data) as? SearchMethod)
-        XCTAssertNotNil(try NSKeyedUnarchiver.unarchivedObject(ofClass: SearchMethod.self, from: data))
-        XCTAssertNoThrow(try NSKeyedUnarchiver.unarchivedObject(ofClass: SearchMethod.self, from: data))
-
-        // NSKeyedArchiver with secure coding (macOS 10.13+)
-        data = try NSKeyedArchiver.archivedData(withRootObject: method, requiringSecureCoding: false)
-        XCTAssertNotNil(NSKeyedUnarchiver.unarchiveObject(with: data) as? SearchMethod)
+        var data = try NSKeyedArchiver.archivedData(withRootObject: method, requiringSecureCoding: false)
         XCTAssertNotNil(try NSKeyedUnarchiver.unarchivedObject(ofClass: SearchMethod.self, from: data))
         XCTAssertNoThrow(try NSKeyedUnarchiver.unarchivedObject(ofClass: SearchMethod.self, from: data))
 
@@ -90,7 +64,6 @@ class UnarchiverTests: XCTestCase {
         XCTAssertNotNil(unarchiver.decodeObject(of: SearchMethod.self, forKey: NSKeyedArchiveRootObjectKey))
 
         data = try NSKeyedArchiver.archivedData(withRootObject: method, requiringSecureCoding: true)
-        XCTAssertNotNil(NSKeyedUnarchiver.unarchiveObject(with: data) as? SearchMethod)
         XCTAssertNotNil(try NSKeyedUnarchiver.unarchivedObject(ofClass: SearchMethod.self, from: data))
         XCTAssertNoThrow(try NSKeyedUnarchiver.unarchivedObject(ofClass: SearchMethod.self, from: data))
 

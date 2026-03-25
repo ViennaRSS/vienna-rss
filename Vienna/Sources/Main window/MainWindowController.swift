@@ -210,9 +210,7 @@ final class MainWindowController: NSWindowController {
         identifier: NSToolbarItem.Identifier
     ) -> NSToolbarItem {
         let item = SharingServiceToolbarItem(itemIdentifier: identifier, sharingService: service)
-        if #available(macOS 10.15, *) {
-            item.isBordered = true
-        }
+        item.isBordered = true
         item.action = #selector(performSharingService(_:))
         return item
     }
@@ -458,16 +456,8 @@ extension MainWindowController: NSToolbarDelegate {
         }
 
         if itemIdentifier == .subscribe {
-            let item: NSToolbarItem
-            if #available(macOS 10.15, *) {
-                let menuToolbarItem = NSMenuToolbarItem(itemIdentifier: itemIdentifier)
-                menuToolbarItem.menu = subscribeToolbarItemMenu
-                item = menuToolbarItem
-            } else {
-                let popUpButtonToolbarItem = PopUpButtonToolbarItem(itemIdentifier: itemIdentifier)
-                popUpButtonToolbarItem.menu = subscribeToolbarItemMenu
-                item = popUpButtonToolbarItem
-            }
+            let item = NSMenuToolbarItem(itemIdentifier: itemIdentifier)
+            item.menu = subscribeToolbarItemMenu
             item.image = NSImage(resource: .newFeedTemplate)
             item.label = NSLocalizedString(
                 "subscribe.toolbarItem.label",
@@ -487,16 +477,8 @@ extension MainWindowController: NSToolbarDelegate {
         }
 
         if itemIdentifier == .action {
-            let item: NSToolbarItem
-            if #available(macOS 10.15, *) {
-                let menuToolbarItem = NSMenuToolbarItem(itemIdentifier: itemIdentifier)
-                menuToolbarItem.menu = actionToolbarItemMenu
-                item = menuToolbarItem
-            } else {
-                let popUpButtonToolbarItem = PopUpButtonToolbarItem(itemIdentifier: itemIdentifier)
-                popUpButtonToolbarItem.menu = actionToolbarItemMenu
-                item = popUpButtonToolbarItem
-            }
+            let item = NSMenuToolbarItem(itemIdentifier: itemIdentifier)
+            item.menu = actionToolbarItemMenu
             item.image = NSImage(named: NSImage.actionTemplateName)
             item.label = NSLocalizedString(
                 "action.toolbarItem.label",
@@ -516,16 +498,8 @@ extension MainWindowController: NSToolbarDelegate {
         }
 
         if itemIdentifier == .filter {
-            let item: NSToolbarItem
-            if #available(macOS 10.15, *) {
-                let menuToolbarItem = NSMenuToolbarItem(itemIdentifier: itemIdentifier)
-                menuToolbarItem.menu = filterToolbarItemMenu
-                item = menuToolbarItem
-            } else {
-                let popUpButtonToolbarItem = PopUpButtonToolbarItem(itemIdentifier: itemIdentifier)
-                popUpButtonToolbarItem.menu = filterToolbarItemMenu
-                item = popUpButtonToolbarItem
-            }
+            let item = NSMenuToolbarItem(itemIdentifier: itemIdentifier)
+            item.menu = filterToolbarItemMenu
             item.image = NSImage(resource: .funnelFilterTemplate)
             item.label = NSLocalizedString(
                 "filter.toolbarItem.label",
@@ -541,16 +515,8 @@ extension MainWindowController: NSToolbarDelegate {
         }
 
         if itemIdentifier == .styles {
-            let item: NSToolbarItem
-            if #available(macOS 10.15, *) {
-                let menuToolbarItem = NSMenuToolbarItem(itemIdentifier: itemIdentifier)
-                menuToolbarItem.menu = styleToolbarItemMenu
-                item = menuToolbarItem
-            } else {
-                let popUpButtonToolbarItem = PopUpButtonToolbarItem(itemIdentifier: itemIdentifier)
-                popUpButtonToolbarItem.menu = styleToolbarItemMenu
-                item = popUpButtonToolbarItem
-            }
+            let item = NSMenuToolbarItem(itemIdentifier: itemIdentifier)
+            item.menu = styleToolbarItemMenu
             if #available(macOS 11, *) {
                 item.image = NSImage(
                     systemSymbolName: "paintbrush",
