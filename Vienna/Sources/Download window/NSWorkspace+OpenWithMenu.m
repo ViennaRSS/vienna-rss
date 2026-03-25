@@ -151,7 +151,7 @@
             oPanel.allowedContentTypes = @[UTTypeApplicationBundle];
         } else {
             oPanel.allowedFileTypes = @[(__bridge NSString *)kUTTypeApplicationBundle];
-        };
+        }
 
         // Set Applications folder as default directory
         NSArray *applicationFolderPaths = [[NSFileManager defaultManager] URLsForDirectory:NSApplicationDirectory inDomains:NSLocalDomainMask];

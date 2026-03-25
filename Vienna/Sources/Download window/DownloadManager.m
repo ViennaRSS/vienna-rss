@@ -111,7 +111,7 @@ static NSString * const VNAUserNotificationFileDownloadThreadIdentifier = @"File
 - (void)archiveDownloadsList {
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:[self.downloads copy]
                                          requiringSecureCoding:YES
-                                                         error:NULL];;
+                                                         error:NULL];
 
     if (data) {
         [Preferences.standardPreferences setObject:data
