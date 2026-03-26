@@ -278,12 +278,12 @@
     NSClipView* clipView = (NSClipView*)self.superview;
     if (![clipView isKindOfClass:[NSClipView class]]) {
         return @{};
-    };
+    }
 
     NSScrollView* scrollView = (NSScrollView*)clipView.superview;
     if (![scrollView isKindOfClass:[NSScrollView class]]) {
         return @{};
-    };
+    }
 
     return @{
              @"VisibleRect": [NSValue valueWithRect:scrollView.documentVisibleRect]

@@ -2280,7 +2280,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 			filterClause = @"AND (title LIKE '%' || ? || '%' OR text LIKE '%' || ? || '%')";
 		}
 		queryString = [NSString stringWithFormat:@"%@ %@", queryString, filterClause];
-	};
+	}
 
 	// Time to run the query
     FMDatabaseQueue *queue = self.databaseQueue;

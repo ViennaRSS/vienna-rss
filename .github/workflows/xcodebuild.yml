@@ -20,8 +20,8 @@ jobs:
             xcode: Xcode 16.4
             developer-dir: /Applications/Xcode_16.4.app/Contents/Developer
           - os: macos-26
-            xcode: Xcode 26.2
-            developer-dir: /Applications/Xcode_26.2.app/Contents/Developer
+            xcode: Xcode 26.4
+            developer-dir: /Applications/Xcode_26.4.app/Contents/Developer
     name: Test with ${{ matrix.xcode }}
     runs-on: ${{ matrix.os }}
     env:

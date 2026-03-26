@@ -142,7 +142,7 @@
         _credentialsChanged = YES;
     } else {
         [[OpenReader sharedManager] clearAuthentication];
-    };
+    }
 }
 
 -(IBAction)changeSource:(id)sender
