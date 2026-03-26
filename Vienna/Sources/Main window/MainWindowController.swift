@@ -458,6 +458,12 @@ extension MainWindowController: NSToolbarDelegate {
         if itemIdentifier == .share {
             let item = ButtonToolbarItem(itemIdentifier: itemIdentifier)
             item.action = #selector(invokeSharingServicePicker(_:))
+            if let button = item.button {
+                // The share sheet should also appear when the user presses down
+                // the left mouse button, not when the user releases the button.
+                // This is the behavior of the share button elsewhere in macOS.
+                button.sendAction(on: .leftMouseDown)
+            }
             item.image = NSImage(named: NSImage.shareTemplateName)
             item.label = NSLocalizedString(
                 "share.toolbarItem.label",
