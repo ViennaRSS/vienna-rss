@@ -218,23 +218,32 @@ final class MainWindowController: NSWindowController {
     @IBAction private func invokeSharingServicePicker(_ sender: Any) {
         // The sender is either the menu item in the main menu, the menu-form
         // representation of the toolbar item in label-only mode or the toolbar
-        // item itself.
+        // item itself when its isBordered property is enabled.
         if sender is NSMenuItem || sender is NSToolbarItem,
             let window,
             let contentView = window.contentView
         {
+            let layoutRect = window.contentLayoutRect
+            // The menu or toolbar item does not have a view to which the picker
+            // could be attached. The window's content view is used instead, but
+            // a location is still needed.
+            let xCoordinate: CGFloat
+            // If the action was sent from within the window (e.g. label-only
+            // mode), an approximate horizontal location can be retrieved from
+            // the current NSEvent, otherwise the midpoint of the window content
+            // layout rect is used.
+            if let event = NSApp.currentEvent, event.window == window {
+                xCoordinate = event.locationInWindow.x
+            } else {
+                xCoordinate = layoutRect.midX - 1
+            }
+            // Subtract 1 point from the Y coordinate and make the rect 1 point
+            // in size, so that it fits within the coordinates of the view.
+            let origin = NSPoint(x: xCoordinate, y: layoutRect.maxY - 1)
+            let topEdge = NSRect(origin: origin, size: NSSize(width: 1, height: 1))
             let picker = NSSharingServicePicker(items: shareableItems)
             picker.delegate = self
-            // The menu item does not have a view to which the picker could be
-            // attached. The window's content view is used instead. The picker
-            // should attach to the top middle point of the content view.
-            let layoutRect = window.contentLayoutRect
-            // Subtract 1 point from the coordinates and make the rect 1 point in
-            // size, so that it fits within the coordinates of the view.
-            let xCoordinate = layoutRect.midX - 1
-            let yCoordinate = layoutRect.maxY - 1
-            let topEdgeRect = NSRect(x: xCoordinate, y: yCoordinate, width: 1, height: 1)
-            picker.show(relativeTo: topEdgeRect, of: contentView, preferredEdge: .minY)
+            picker.show(relativeTo: topEdge, of: contentView, preferredEdge: .minY)
             return
         }
 
