@@ -1535,8 +1535,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		// Toggle the refresh button
 		NSToolbarItem *item = [self toolbarItemWithIdentifier:@"Refresh"];
 		item.action = @selector(cancelAllRefreshesToolbar:);
-        NSButton *button = (NSButton *)item.view;
-        button.state = NSControlStateValueOn;
+        item.image = [NSImage imageNamed:ACImageNameCancelTemplate];
 	} else {
 		// Run the auto-expire now
 		Preferences * prefs = [Preferences standardPreferences];
@@ -1545,8 +1544,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 		// Toggle the refresh button
 		NSToolbarItem *item = [self toolbarItemWithIdentifier:@"Refresh"];
 		item.action = @selector(refreshAllSubscriptions:);
-        NSButton *button = (NSButton *)item.view;
-        button.state = NSControlStateValueOff;
+        item.image = [NSImage imageNamed:ACImageNameSyncTemplate];
 
 		[self showUnreadCountOnApplicationIconAndWindowTitle];
 		
