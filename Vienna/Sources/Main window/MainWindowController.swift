@@ -209,35 +209,51 @@ final class MainWindowController: NSWindowController {
         forSharingService service: NSSharingService,
         identifier: NSToolbarItem.Identifier
     ) -> NSToolbarItem {
-        let item = SharingServiceToolbarItem(itemIdentifier: identifier, sharingService: service)
-        item.isBordered = true
+        let item = RepresentingToolbarItem(itemIdentifier: identifier)
+        item.representedObject = service
         item.action = #selector(performSharingService(_:))
         return item
     }
 
     @IBAction private func invokeSharingServicePicker(_ sender: Any) {
-        // The sender is either the menu item in the main menu or the menu-item
-        // representation of the toolbar item in text-only mode.
-        if sender is NSMenuItem, let window, let contentView = window.contentView {
+        // The sender is either the menu item in the main menu, the menu-form
+        // representation of the toolbar item in label-only mode or the toolbar
+        // item itself when its isBordered property is enabled.
+        if sender is NSMenuItem || sender is NSToolbarItem,
+            let window,
+            let contentView = window.contentView
+        {
+            let layoutRect = window.contentLayoutRect
+            // The menu or toolbar item does not have a view to which the picker
+            // could be attached. The window's content view is used instead, but
+            // a location is still needed.
+            let xCoordinate: CGFloat
+            // If the action was sent from within the window (e.g. label-only
+            // mode), an approximate horizontal location can be retrieved from
+            // the current NSEvent, otherwise the midpoint of the window content
+            // layout rect is used.
+            if let event = NSApp.currentEvent, event.window == window {
+                xCoordinate = event.locationInWindow.x
+            } else {
+                xCoordinate = layoutRect.midX - 1
+            }
+            // Subtract 1 point from the Y coordinate and make the rect 1 point
+            // in size, so that it fits within the coordinates of the view.
+            let origin = NSPoint(x: xCoordinate, y: layoutRect.maxY - 1)
+            let topEdge = NSRect(origin: origin, size: NSSize(width: 1, height: 1))
             let picker = NSSharingServicePicker(items: shareableItems)
             picker.delegate = self
-            // The menu item does not have a view to which the picker could be
-            // attached. The window's content view is used instead. The picker
-            // should attach to the top middle point of the content view.
-            let layoutRect = window.contentLayoutRect
-            // Subtract 1 point from the coordinates and make the rect 1 point in
-            // size, so that it fits within the coordinates of the view.
-            let xCoordinate = layoutRect.midX - 1
-            let yCoordinate = layoutRect.maxY - 1
-            let topEdgeRect = NSRect(x: xCoordinate, y: yCoordinate, width: 1, height: 1)
-            picker.show(relativeTo: topEdgeRect, of: contentView, preferredEdge: .minY)
+            picker.show(relativeTo: topEdge, of: contentView, preferredEdge: .minY)
+            return
         }
 
-        // The sender is a button if the user clicked on the toolbar item.
+        // The sender is a button if the user clicked on the toolbar item in
+        // icon-and-label mode or icon-only mode.
         if let button = sender as? NSButton {
             let picker = NSSharingServicePicker(items: shareableItems)
             picker.delegate = self
             picker.show(relativeTo: .zero, of: button, preferredEdge: .minY)
+            return
         }
     }
 
@@ -256,7 +272,7 @@ final class MainWindowController: NSWindowController {
             }
         }
 
-        if let sharingService = (sender as? SharingServiceToolbarItem)?.service {
+        if let sharingService = (sender as? RepresentingToolbarItem)?.representedObject as? NSSharingService {
             sharingService.delegate = self
             sharingService.perform(withItems: shareableItems)
         }
@@ -413,6 +429,59 @@ extension MainWindowController: NSToolbarDelegate {
             toolbarSearchField?.sendsWholeSearchString = true
             toolbarSearchField?.cell?.sendsActionOnEndEditing = false
 
+            return item
+        }
+
+        if itemIdentifier == .refresh {
+            let item = ToggleButtonToolbarItem(itemIdentifier: itemIdentifier)
+            item.action = #selector(AppController.refreshAllSubscriptions(_:))
+            if #available(macOS 15, *) {
+                item.image = NSImage(
+                    systemSymbolName: "arrow.trianglehead.clockwise.rotate.90",
+                    accessibilityDescription: nil
+                )!
+                // stopProgressTemplateName is available for macOS 10.13 too,
+                // but on macOS 11+ it is backed by an SF Symbol, whereas on
+                // macOS 10.13 it is a bitmap image. Due to a bug in NSButton,
+                // both image and alternateImage must have the same NSImageRep,
+                // otherwise the images are not aligned correctly.
+                item.alternateImage = NSImage(named: NSImage.stopProgressTemplateName)
+            } else {
+                item.image = NSImage(resource: .syncTemplate)
+                item.alternateImage = NSImage(resource: .cancelTemplate)
+            }
+            item.label = NSLocalizedString(
+                "refresh.toolbarItem.label",
+                value: "Refresh",
+                comment: "Toolbar item label")
+            item.paletteLabel = NSLocalizedString(
+                "refresh.toolbarItem.paletteLabel",
+                value: "Refresh",
+                comment: "Toolbar item palette label")
+            item.toolTip = NSLocalizedString(
+                "Refresh all your subscriptions",
+                comment: "Toolbar item tooltip")
+            return item
+        }
+
+        if itemIdentifier == .share {
+            let item = ButtonToolbarItem(itemIdentifier: itemIdentifier)
+            item.action = #selector(invokeSharingServicePicker(_:))
+            if let button = item.button {
+                // The share sheet should also appear when the user presses down
+                // the left mouse button, not when the user releases the button.
+                // This is the behavior of the share button elsewhere in macOS.
+                button.sendAction(on: .leftMouseDown)
+            }
+            item.image = NSImage(named: NSImage.shareTemplateName)
+            item.label = NSLocalizedString(
+                "share.toolbarItem.label",
+                value: "Share",
+                comment: "Toolbar item label")
+            item.paletteLabel = NSLocalizedString(
+                "share.toolbarItem.paletteLabel",
+                value: "Share",
+                comment: "Toolbar item palette label")
             return item
         }
 

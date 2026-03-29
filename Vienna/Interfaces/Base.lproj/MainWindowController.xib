@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="24127" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="24765" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24127"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24765"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -214,123 +214,41 @@
                     <constraint firstAttribute="trailing" secondItem="993" secondAttribute="trailing" id="x4Z-s7-D3P"/>
                 </constraints>
             </view>
-            <toolbar key="toolbar" implicitIdentifier="9BE5691C-FD10-407B-A43E-74580FF42F4B" explicitIdentifier="MA_Toolbar" showsBaselineSeparator="NO" displayMode="iconOnly" sizeMode="regular" id="Vtx-1j-Pbt" customClass="VNAToolbar">
+            <toolbar key="toolbar" implicitIdentifier="9BE5691C-FD10-407B-A43E-74580FF42F4B" explicitIdentifier="MA_Toolbar" showsBaselineSeparator="NO" displayMode="iconOnly" sizeMode="regular" id="Vtx-1j-Pbt">
                 <allowedToolbarItems>
-                    <toolbarItem implicitItemIdentifier="0E560FB8-D8D4-477F-87CE-D3451015D08F" explicitItemIdentifier="PreviousButton" label="Back" paletteLabel="Back" toolTip="Back" image="PreviousItemTemplate" sizingBehavior="auto" id="gOG-UJ-Pin" customClass="VNAButtonToolbarItem">
-                        <button key="view" verticalHuggingPriority="750" id="tUv-uw-U24">
-                            <rect key="frame" x="2" y="14" width="30" height="23"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="PreviousItemTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="waE-VF-jGb">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                        </button>
+                    <toolbarItem implicitItemIdentifier="0E560FB8-D8D4-477F-87CE-D3451015D08F" explicitItemIdentifier="PreviousButton" label="Back" paletteLabel="Back" toolTip="Back" image="PreviousItemTemplate" bordered="YES" sizingBehavior="auto" id="gOG-UJ-Pin" customClass="VNAToolbarItem">
                         <connections>
                             <action selector="goBack:" target="-1" id="vfV-Zh-Djc"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="B455B425-67E7-44CA-8DDA-7188C9BBFDF7" explicitItemIdentifier="NextButton" label="Next Unread" paletteLabel="Next Unread" toolTip="Next Unread" image="NextItemTemplate" sizingBehavior="auto" id="fpY-CJ-hKU" customClass="VNAButtonToolbarItem">
-                        <button key="view" verticalHuggingPriority="750" id="DGs-HX-KGa">
-                            <rect key="frame" x="22" y="14" width="30" height="23"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NextItemTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="UUm-Eq-K34">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                        </button>
+                    <toolbarItem implicitItemIdentifier="B455B425-67E7-44CA-8DDA-7188C9BBFDF7" explicitItemIdentifier="NextButton" label="Next Unread" paletteLabel="Next Unread" toolTip="Next Unread" image="NextItemTemplate" bordered="YES" sizingBehavior="auto" id="fpY-CJ-hKU" customClass="VNAToolbarItem">
                         <connections>
                             <action selector="viewNextUnread:" target="-1" id="bxj-nt-KuQ"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="A62CF72C-0A55-43F3-9737-DAD4E0E93C95" explicitItemIdentifier="SkipFolder" label="Skip Folder" paletteLabel="Skip Folder" toolTip="Skip Folder" image="NextFolderTemplate" sizingBehavior="auto" id="SoG-b2-O1S" customClass="VNAButtonToolbarItem">
-                        <button key="view" verticalHuggingPriority="750" id="Xbk-bR-TPc">
-                            <rect key="frame" x="18" y="14" width="31" height="23"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NextFolderTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="0ub-7J-fFz">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                        </button>
+                    <toolbarItem implicitItemIdentifier="A62CF72C-0A55-43F3-9737-DAD4E0E93C95" explicitItemIdentifier="SkipFolder" label="Skip Folder" paletteLabel="Skip Folder" toolTip="Skip Folder" image="NextFolderTemplate" bordered="YES" sizingBehavior="auto" id="SoG-b2-O1S" customClass="VNAToolbarItem">
                         <connections>
                             <action selector="skipFolder:" target="-1" id="9Qr-v5-cZv"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="1329F46E-D435-463A-9269-8FA4B1670A89" explicitItemIdentifier="MarkAllItemsAsRead" label="All Read" paletteLabel="Mark All Items as Read" toolTip="Mark all items as read" image="MarkReadTemplate" sizingBehavior="auto" id="Gyz-dq-ewv" customClass="VNAButtonToolbarItem">
-                        <button key="view" verticalHuggingPriority="750" id="21u-wz-hAI">
-                            <rect key="frame" x="48" y="14" width="31" height="23"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="MarkReadTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="uJ6-m6-sxk">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                        </button>
+                    <toolbarItem implicitItemIdentifier="1329F46E-D435-463A-9269-8FA4B1670A89" explicitItemIdentifier="MarkAllItemsAsRead" label="All Read" paletteLabel="Mark All Items as Read" toolTip="Mark all items as read" image="MarkReadTemplate" bordered="YES" sizingBehavior="auto" id="Gyz-dq-ewv" customClass="VNAToolbarItem">
                         <connections>
                             <action selector="markAllRead:" target="-1" id="Am6-Sz-pet"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="145A8A8B-193F-46E7-87FD-FE2B915C1B08" explicitItemIdentifier="Refresh" label="Refresh" paletteLabel="Refresh" toolTip="Refresh all your subscriptions" image="arrow.trianglehead.clockwise.rotate.90" catalog="system" sizingBehavior="auto" id="Nmd-zx-Dys" customClass="VNAButtonToolbarItem">
-                        <button key="view" verticalHuggingPriority="750" id="PJJ-4H-4dE">
-                            <rect key="frame" x="10" y="14" width="28" height="23"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="arrow.trianglehead.clockwise.rotate.90" catalog="system" imagePosition="only" alignment="center" alternateImage="NSStopProgressTemplate" lineBreakMode="truncatingTail" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="F19-ww-YfI">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeContents="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                        </button>
-                        <connections>
-                            <action selector="refreshAllSubscriptions:" target="-1" id="SRS-ST-tVf"/>
-                        </connections>
-                    </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="A9627EDC-4246-4CE6-B9A2-B1C43C372E58" explicitItemIdentifier="DeleteArticle" label="Delete" paletteLabel="Delete" toolTip="Delete the current article" image="DeleteTemplate" sizingBehavior="auto" id="Y22-Ul-q6w" customClass="VNAButtonToolbarItem">
-                        <button key="view" verticalHuggingPriority="750" id="mYu-BR-T3p">
-                            <rect key="frame" x="6" y="14" width="30" height="23"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="DeleteTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="uAr-TV-Qaw">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                        </button>
+                    <toolbarItem implicitItemIdentifier="A9627EDC-4246-4CE6-B9A2-B1C43C372E58" explicitItemIdentifier="DeleteArticle" label="Delete" paletteLabel="Delete" toolTip="Delete the current article" image="DeleteTemplate" bordered="YES" sizingBehavior="auto" id="Y22-Ul-q6w" customClass="VNAToolbarItem">
                         <connections>
                             <action selector="delete:" target="-1" id="K93-nE-1KC"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="1B4A5BDF-4844-487B-A764-D611A54922F0" explicitItemIdentifier="EmptyTrash" label="Empty Trash" paletteLabel="Empty Trash" toolTip="Delete all articles in the trash" image="EmptyTrashTemplate" sizingBehavior="auto" id="4c1-NR-ofo" customClass="VNAButtonToolbarItem">
-                        <button key="view" verticalHuggingPriority="750" id="b4P-2h-b0r">
-                            <rect key="frame" x="21" y="14" width="31" height="23"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="EmptyTrashTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kxj-5W-a2Z">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                        </button>
+                    <toolbarItem implicitItemIdentifier="1B4A5BDF-4844-487B-A764-D611A54922F0" explicitItemIdentifier="EmptyTrash" label="Empty Trash" paletteLabel="Empty Trash" toolTip="Delete all articles in the trash" image="EmptyTrashTemplate" bordered="YES" sizingBehavior="auto" id="4c1-NR-ofo" customClass="VNAToolbarItem">
                         <connections>
                             <action selector="emptyTrash:" target="-1" id="LGn-HP-E1Z"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="3645E290-4147-4201-8018-6E3A685BE640" explicitItemIdentifier="GetInfo" label="Get Info" paletteLabel="Get Info" toolTip="See information about the selected subscription" image="GetInfoTemplate" sizingBehavior="auto" id="7iy-IN-8oG" customClass="VNAButtonToolbarItem">
-                        <button key="view" verticalHuggingPriority="750" id="dU4-uo-rcp">
-                            <rect key="frame" x="10" y="14" width="30" height="23"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="GetInfoTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1Lf-O5-dn9">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                        </button>
+                    <toolbarItem implicitItemIdentifier="3645E290-4147-4201-8018-6E3A685BE640" explicitItemIdentifier="GetInfo" label="Get Info" paletteLabel="Get Info" toolTip="See information about the selected subscription" image="GetInfoTemplate" bordered="YES" sizingBehavior="auto" id="7iy-IN-8oG" customClass="VNAToolbarItem">
                         <connections>
                             <action selector="getInfo:" target="-1" id="Xvh-S3-PIS"/>
-                        </connections>
-                    </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="2194A0A2-BEF2-4411-AE86-F573CC3E7FFB" explicitItemIdentifier="Share" label="Share" paletteLabel="Share" image="NSShareTemplate" sizingBehavior="auto" id="YVR-Ym-Do7" customClass="VNAButtonToolbarItem">
-                        <button key="view" verticalHuggingPriority="750" id="XcR-k5-Au0">
-                            <rect key="frame" x="6" y="14" width="27" height="23"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSShareTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="rk1-Vu-d16">
-                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                <font key="font" metaFont="system"/>
-                            </buttonCell>
-                        </button>
-                        <connections>
-                            <action selector="invokeSharingServicePicker:" target="-1" id="uUn-Rf-hIQ"/>
                         </connections>
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="oqq-lf-hKd"/>
@@ -338,7 +256,6 @@
                 </allowedToolbarItems>
                 <defaultToolbarItems>
                     <toolbarItem reference="SoG-b2-O1S"/>
-                    <toolbarItem reference="Nmd-zx-Dys"/>
                     <toolbarItem reference="VNl-qM-XKj"/>
                 </defaultToolbarItems>
                 <connections>
@@ -789,12 +706,9 @@
         <image name="GetInfoTemplate" width="28" height="28"/>
         <image name="MarkReadTemplate" width="19" height="14"/>
         <image name="NSActionTemplate" width="20" height="20"/>
-        <image name="NSShareTemplate" width="19" height="23"/>
-        <image name="NSStopProgressTemplate" width="17" height="16"/>
         <image name="NextFolderTemplate" width="19" height="12"/>
         <image name="NextItemTemplate" width="18" height="12"/>
         <image name="PreviousItemTemplate" width="18" height="12"/>
-        <image name="arrow.trianglehead.clockwise.rotate.90" catalog="system" width="16" height="15"/>
         <image name="exclamationmark.triangle.fill" catalog="system" width="17" height="15"/>
     </resources>
 </document>

@@ -1,8 +1,8 @@
 //
-//  PlugInToolbarItem.swift
+//  ToggleButtonToolbarItem.swift
 //  Vienna
 //
-//  Copyright 2017
+//  Copyright 2026 Eitot
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -19,19 +19,33 @@
 
 import Cocoa
 
-/// A toolbar item with a button as its view.
-///
-/// - Note: This item should only be initialized programmatically.
-@objc(VNAPlugInToolbarItem)
-class PlugInToolbarItem: ButtonToolbarItem {
+@objc(VNAToggleButtonToolbarItem)
+class ToggleButtonToolbarItem: ButtonToolbarItem {
 
     override init(itemIdentifier: NSToolbarItem.Identifier) {
         super.init(itemIdentifier: itemIdentifier)
 
-        let button = PlugInToolbarItemButton(frame: NSRect(x: 0, y: 0, width: 41, height: 25))
-        button.bezelStyle = .toolbar
-        button.toolbarItem = self
-        view = button
+        if let buttonCell = button?.cell as? NSButtonCell {
+            // This displays the alternateImage when changing the button state.
+            buttonCell.showsStateBy = .contentsCellMask
+        }
     }
 
+    @objc var state: NSControl.StateValue {
+        get {
+            button?.state ?? .off
+        }
+        set {
+            button?.state = newValue
+        }
+    }
+
+    var alternateImage: NSImage? {
+        get {
+            button?.alternateImage
+        }
+        set {
+            button?.alternateImage = newValue
+        }
+    }
 }
