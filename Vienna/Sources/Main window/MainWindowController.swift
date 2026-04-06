@@ -90,7 +90,7 @@ final class MainWindowController: NSWindowController {
     private func updateSubtitle() {
         // Unread counter
         var countString = String()
-        if unreadCount > 0 {
+        if unreadCount > 0 && UserDefaults.standard.bool(forKey: MAPref_ShowUnreadCounts) {
             let number = NSNumber(value: unreadCount)
             let formattedNumber = NumberFormatter.localizedString(from: number, number: .decimal)
             countString = String(format: NSLocalizedString("%@ unread", comment: ""), formattedNumber)
@@ -378,6 +378,9 @@ extension MainWindowController: NSWindowDelegate {
                 if change.newValue is String {
                     self?.statusLabel.stringValue = manager.statusMessage
                 }
+            },
+            UserDefaults.standard.observe(\.ShowUnreadCounts) { [weak self] _, _ in
+                self?.updateSubtitle()
             }
         ]
     }
@@ -738,6 +741,16 @@ extension MainWindowController: RSSSubscriber {
         // TODO : if there are multiple feeds, we should put up an UI inviting the user to pick one, as also mentioned in SubscriptionModel.m verifiedFeedURLFromURL method
         // TODO : allow user to select a folder instead of assuming current location (see #1163)
         NSApp.appController.createSubscriptionInCurrentLocation(for: urls[0])
+    }
+}
+
+// MARK: - UserDefaults
+
+extension UserDefaults {
+
+    // swiftlint:disable:next identifier_name
+    @objc fileprivate dynamic var ShowUnreadCounts: Bool {
+        return bool(forKey: MAPref_ShowUnreadCounts)
     }
 }
 

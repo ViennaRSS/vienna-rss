@@ -4128,6 +4128,18 @@
         }
       }
     },
+    "LdO-1H-O0m.title" : {
+      "comment" : "Class = \"NSButtonCell\"; title = \"Show unread counts in the main window, menu bar and Dock\"; ObjectID = \"LdO-1H-O0m\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Show unread counts in the main window, menu bar and Dock"
+          }
+        }
+      }
+    },
     "Lfh-L2-KcO.title" : {
       "comment" : "Class = \"NSViewController\"; title = \"Syncing\"; ObjectID = \"Lfh-L2-KcO\";",
       "extractionState" : "extracted_with_value",

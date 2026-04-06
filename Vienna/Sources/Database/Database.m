@@ -1056,7 +1056,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 
 	// Delete all articles in this folder then delete ourselves.
 	folder = [self folderFromID:folderId];
-	_countOfUnread -= folder.unreadCount;
+	self.countOfUnread -= folder.unreadCount;
     if (folder.type == VNAFolderTypeSmart) {
         [queue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"DELETE FROM smart_folders WHERE folder_id=?", @(folderId)];
@@ -1976,7 +1976,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 		NSAssert(self.databaseQueue, @"Database not assigned for this item");
 		
 		// Keep running count of total unread articles
-		_countOfUnread = 0;
+		__block NSInteger countOfUnread = 0;
         
         FMDatabaseQueue *queue = self.databaseQueue;
         
@@ -2013,7 +2013,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
                 folder.lastUpdate = lastUpdate;
                 [folder setFlag:flags];
                 if (unreadCount > 0) {
-                    self->_countOfUnread += unreadCount;
+                    countOfUnread += unreadCount;
                 }
                 self.foldersDict[@(newItemId)] = folder;
                 
@@ -2050,6 +2050,9 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 			}
 			[results close];
 		}];
+
+        _countOfUnread = countOfUnread;
+
 		// Fix the childUnreadCount for every parent
 		for (Folder * folder in [self.foldersDict objectEnumerator]) {
 			if (folder.unreadCount > 0 && folder.parentId != VNAFolderTypeRoot) {
@@ -2508,7 +2511,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
  */
 -(void)setFolderUnreadCount:(Folder *)folder adjustment:(NSUInteger)adjustment
 {
-	_countOfUnread += adjustment;
+	self.countOfUnread += adjustment;
 	NSInteger newCount = folder.unreadCount + adjustment;
 	folder.unreadCount = newCount;
     FMDatabaseQueue *queue = self.databaseQueue;
@@ -2667,7 +2670,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 	self.trashFolder = nil;
 	self.searchFolder = nil;
 	self.initializedfoldersDict = NO;
-	_countOfUnread = 0;
+	self.countOfUnread = 0;
     [self.databaseQueue close];
 }
 
