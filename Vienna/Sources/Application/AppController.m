@@ -2038,6 +2038,9 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
                                                                     NSBundle.mainBundle,
                                                                     @"Delete",
                                                                     @"Title of a button on an alert")];
+        if (@available(macOS 11, *)) {
+            alert.buttons.lastObject.hasDestructiveAction = YES;
+        }
         [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"cancel.button",
                                                                     nil,
                                                                     NSBundle.mainBundle,
