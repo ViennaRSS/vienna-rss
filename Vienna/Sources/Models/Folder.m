@@ -446,8 +446,13 @@
  */
 -(Article *)articleFromGuid:(NSString *)guid
 {
-    [self ensureCache];
-    return [self.cachedArticles objectForKey:guid];
+    Article * article = [self.cachedArticles objectForKey:guid];
+    if (article == nil) { // we need to recreate cache
+        self.isCached = NO;
+        [self ensureCache];
+        article = [self.cachedArticles objectForKey:guid];
+    }
+    return article;
 }
 
 /* retrieveKnownStatusForGuid
