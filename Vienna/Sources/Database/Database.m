@@ -39,15 +39,14 @@
 @interface Database ()
 
 @property (nonatomic) BOOL initializedfoldersDict;
-@property (nonatomic) NSMutableArray *fieldsOrdered;
-@property (nonatomic) NSMutableDictionary *fieldsByName;
+@property (readwrite, nonatomic) NSArray<Field *> *fields;
+@property (nonatomic) NSDictionary<NSString *, Field *> *fieldsByName;
 @property (nonatomic) NSMutableDictionary *foldersDict;
 @property (nonatomic) FMDatabaseQueue *databaseQueue;
 @property (nonatomic) NSMutableDictionary<NSNumber *, CriteriaTree *> *smartfoldersDict;
 @property (readwrite, nonatomic) BOOL readOnly;
 @property (readwrite, nonatomic) NSInteger countOfUnread;
 
-- (void)initaliseFields;
 - (NSString *)relocateLockedDatabase:(NSString *)path;
 - (CriteriaTree *)criteriaForFolder:(NSInteger)folderId;
 - (NSArray *)arrayOfSubFolders:(Folder *)folder;
@@ -66,14 +65,7 @@ static NSInteger const VNACurrentDatabaseVersion = 27;
 NSNotificationName const VNADatabaseWillDeleteFolderNotification = @"Database Will Delete Folder";
 NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did Delete Folder";
 
-/*!
- *  initialise the Database object with a specific path
- *
- *  @param dbPath the path to the database we want to initialise
- *
- *  @return an initialised Database object
- */
-- (instancetype)initWithDatabaseAtPath:(NSString *)dbPath
+- (instancetype)init
 {
     self = [super init];
     if (self) {
@@ -83,50 +75,46 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
         _searchFolder = nil;
         _searchString = @"";
         _foldersDict = [[NSMutableDictionary alloc] init];
-        [self initaliseFields];
-        _databaseQueue = [FMDatabaseQueue databaseQueueWithPath:dbPath];
-        // If we did not succeed getting read/write+create status,
-        // then we need to prompt the user for a different location.
-        if (_databaseQueue == nil) {
-        	dbPath = [self relocateLockedDatabase:dbPath];
-        	if (dbPath != nil) {
-        		_databaseQueue = [FMDatabaseQueue databaseQueueWithPath:dbPath];
-        	}
-        }
-        if (![self initialiseDatabase]) {
-			self = nil;
-		}
     }
     return self;
 }
 
-
-/* sharedManager
- * Returns the single instance of the database manager.
- */
-+ (instancetype)sharedManager {
-    static id sharedMyManager = nil;
++ (Database *)sharedManager
+{
+    static Database *sharedManager;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        sharedMyManager = [[Database alloc] initWithDatabaseAtPath:[Database databasePath]];
+        sharedManager = [[Database alloc] init];
     });
-    
-    return sharedMyManager;
+    return sharedManager;
 }
 
+- (BOOL)loadDatabaseStore
+{
+    NSString *path = [Database databasePath];
+    if (!path) {
+        return NO;
+    }
 
-/*!
- *  Initialise the Vienna database. Create the initial database if
- *  necessary, otherwise migrate to the correct version if it is out of date
- *
- *  @return YES if the database is at the correct version and good to go
- */
-- (BOOL)initialiseDatabase {
+    FMDatabaseQueue *databaseQueue = [[FMDatabaseQueue alloc] initWithPath:path];
+    // If we did not succeed getting read/write+create status,
+    // then we need to prompt the user for a different location.
+    if (!databaseQueue) {
+        NSString *relocatedPath = [self relocateLockedDatabase:path];
+        if (relocatedPath) {
+            databaseQueue = [[FMDatabaseQueue alloc] initWithPath:relocatedPath];
+            if (!databaseQueue) {
+                return NO;
+            }
+        }
+    }
+    self.databaseQueue = databaseQueue;
+
     __block BOOL success = NO;
-    [self.databaseQueue inDatabase:^(FMDatabase *db) {
-                            success = [db executeStatements:@"PRAGMA quick_check;"];
+    [databaseQueue inDatabase:^(FMDatabase *db) {
+        success = [db executeStatements:@"PRAGMA quick_check;"];
     }];
-    if (self.databaseQueue && !success) {
+    if (!success) {
         NSAlert * alert = [NSAlert new];
         alert.alertStyle = NSAlertStyleCritical;
         alert.messageText = NSLocalizedString(@"Vienna's database seems to be corrupted. Would you like to quit Vienna or continue anyway?",
@@ -135,7 +123,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
             [NSString stringWithFormat:NSLocalizedString(
                  @"Vienna may not work as expected if the database is corrupted. We recommend you quit Vienna and either restore the database (%@) from a backup or attempt a sqlite3 recovery.",
                  @"Informative text of an alert"),
-             self.databaseQueue.path.lastPathComponent];
+             databaseQueue.path.lastPathComponent];
         [alert addButtonWithTitle:NSLocalizedStringWithDefaultValue(@"quitVienna.button",
                                                                     nil,
                                                                     NSBundle.mainBundle,
@@ -175,7 +163,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 
         [self backupDatabase];
 
-        [self.databaseQueue inDatabase:^(FMDatabase *db) {
+        [databaseQueue inDatabase:^(FMDatabase *db) {
             // Migrate the database to the newest version
             // TODO: move this into transaction so we can rollback on failure
             [Database migrateDatabase:db fromVersion:databaseVersion];
@@ -193,7 +181,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
         NSAlert *alert = [NSAlert new];
         alert.alertStyle = NSAlertStyleCritical;
         alert.messageText = NSLocalizedString(@"The database file format has changed", nil);
-        alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna.", nil), self.databaseQueue.path];
+        alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"The database (%@) file format is not supported by this version of Vienna. Delete or rename the file and restart Vienna.", nil), databaseQueue.path];
         [alert runModal];
         return NO;
     } else if (databaseVersion == 0) {
@@ -328,73 +316,6 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
     return YES;
 }
 
-/*!
- *  Initialise the mappings between the names of
- *  the database fields and the model fields
- */
--(void)initaliseFields {
-    self.fieldsByName = [[NSMutableDictionary alloc] init];
-    self.fieldsOrdered = [[NSMutableArray alloc] init];
-    
-    [self addField:MA_Field_Read type:VNAFieldTypeFlag sqlField:@"read_flag" visible:YES width:17];
-    [self addField:MA_Field_Flagged type:VNAFieldTypeFlag sqlField:@"marked_flag" visible:YES width:17];
-    [self addField:MA_Field_HasEnclosure type:VNAFieldTypeFlag sqlField:@"hasenclosure_flag" visible:YES width:17];
-    [self addField:MA_Field_Deleted type:VNAFieldTypeFlag sqlField:@"deleted_flag" visible:NO width:15];
-    [self addField:MA_Field_GUID type:VNAFieldTypeInteger sqlField:@"message_id" visible:NO width:72];
-    [self addField:MA_Field_Subject type:VNAFieldTypeString sqlField:@"title" visible:YES width:472];
-    [self addField:MA_Field_Folder type:VNAFieldTypeFolder sqlField:@"folder_id" visible:NO width:130];
-    [self addField:MA_Field_LastUpdate type:VNAFieldTypeDate sqlField:@"date" visible:YES width:152];
-    [self addField:MA_Field_PublicationDate type:VNAFieldTypeDate sqlField:@"createddate" visible:NO width:152];
-    [self addField:MA_Field_Parent type:VNAFieldTypeInteger sqlField:@"parent_id" visible:NO width:72];
-    [self addField:MA_Field_Author type:VNAFieldTypeString sqlField:@"sender" visible:YES width:138];
-    [self addField:MA_Field_Link type:VNAFieldTypeString sqlField:@"link" visible:NO width:138];
-    [self addField:MA_Field_Text type:VNAFieldTypeString sqlField:@"text" visible:NO width:152];
-    [self addField:MA_Field_Summary type:VNAFieldTypeString sqlField:@"summary" visible:NO width:152];
-    [self addField:MA_Field_Headlines type:VNAFieldTypeString sqlField:@"" visible:NO width:100];
-    [self addField:MA_Field_Enclosure type:VNAFieldTypeString sqlField:@"enclosure" visible:NO width:100];
-    [self addField:MA_Field_EnclosureDownloaded type:VNAFieldTypeFlag sqlField:@"enclosuredownloaded_flag" visible:NO width:100];
-
-	//set user friendly and localizable names for some fields
-	[self fieldByName:MA_Field_Read].displayName = NSLocalizedString(@"Read", @"Data field name visible in menu/smart folder definition");
-	[self fieldByName:MA_Field_Flagged].displayName = NSLocalizedString(@"Flagged", @"Data field name visible in menu/smart folder definition");
-	[self fieldByName:MA_Field_HasEnclosure].displayName = NSLocalizedString(@"Enclosure", @"Data field name (Y/N) visible in menu/smart folder definition");
-	[self fieldByName:MA_Field_Enclosure].displayName = NSLocalizedString(@"Enclosure URL", @"Data field name (URL) visible in menu/article list");
-	[self fieldByName:MA_Field_Deleted].displayName = NSLocalizedString(@"Deleted", @"Data field name visible in smart folder definition");
-	[self fieldByName:MA_Field_Subject].displayName = NSLocalizedString(@"Subject", @"Data field name visible in menu/article list/smart folder definition");
-	[self fieldByName:MA_Field_Folder].displayName = NSLocalizedString(@"Folder", @"Data field name visible in menu/article list/smart folder definition");
-	[self fieldByName:MA_Field_LastUpdate].displayName = NSLocalizedString(@"Last Update", @"Data field name visible in menu/article list/smart folder definition");
-	[self fieldByName:MA_Field_PublicationDate].displayName = NSLocalizedString(@"Date Published", @"Data field name visible in menu/article list/smart folder definition");
-	[self fieldByName:MA_Field_Author].displayName = NSLocalizedString(@"Author", @"Data field name visible in menu/article list/smart folder definition");
-	[self fieldByName:MA_Field_Text].displayName = NSLocalizedString(@"Text", @"Data field name visible in smart folder definition");
-	[self fieldByName:MA_Field_Summary].displayName = NSLocalizedString(@"Summary", @"Pseudo field name visible in menu/article list");
-	[self fieldByName:MA_Field_Headlines].displayName = NSLocalizedString(@"Headlines", @"Pseudo field name visible in article list");
-	[self fieldByName:MA_Field_Link].displayName = NSLocalizedString(@"Link", @"Data field name visible in menu/article list");
-
-    // Disable visibility customization for some fields
-    [self fieldByName:MA_Field_Text].customizationOptions &= ~VNAFieldCustomizationVisibility;
-    [self fieldByName:MA_Field_GUID].customizationOptions &= ~VNAFieldCustomizationVisibility;
-    [self fieldByName:MA_Field_Deleted].customizationOptions &= ~VNAFieldCustomizationVisibility;
-    [self fieldByName:MA_Field_Parent].customizationOptions &= ~VNAFieldCustomizationVisibility;
-    [self fieldByName:MA_Field_Headlines].customizationOptions &= ~VNAFieldCustomizationVisibility;
-    [self fieldByName:MA_Field_EnclosureDownloaded].customizationOptions &= ~VNAFieldCustomizationVisibility;
-
-    // Disable resizing for some fields
-    [self fieldByName:MA_Field_Read].customizationOptions &= ~VNAFieldCustomizationResizing;
-    [self fieldByName:MA_Field_Flagged].customizationOptions &= ~VNAFieldCustomizationResizing;
-    [self fieldByName:MA_Field_HasEnclosure].customizationOptions &= ~VNAFieldCustomizationResizing;
-
-    // Disable sorting for some fields
-    [self fieldByName:MA_Field_Parent].customizationOptions &= ~VNAFieldCustomizationSorting;
-    [self fieldByName:MA_Field_GUID].customizationOptions &= ~VNAFieldCustomizationSorting;
-    [self fieldByName:MA_Field_Deleted].customizationOptions &= ~VNAFieldCustomizationSorting;
-    [self fieldByName:MA_Field_Headlines].customizationOptions &= ~VNAFieldCustomizationSorting;
-    [self fieldByName:MA_Field_Summary].customizationOptions &= ~VNAFieldCustomizationSorting;
-    [self fieldByName:MA_Field_Link].customizationOptions &= ~VNAFieldCustomizationSorting;
-    [self fieldByName:MA_Field_Text].customizationOptions &= ~VNAFieldCustomizationSorting;
-    [self fieldByName:MA_Field_EnclosureDownloaded].customizationOptions &= ~VNAFieldCustomizationSorting;
-    [self fieldByName:MA_Field_Enclosure].customizationOptions &= ~VNAFieldCustomizationSorting;
-}
-
 /* relocateLockedDatabase
  * Tell the user that the database could not be created at the path specified by path
  * and prompt for an alternative location. Opens and returns the new location if we were successful.
@@ -490,29 +411,160 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
     return _countOfUnread;
 }
 
-/* addField
- * Add the specified field to our fields array.
- */
--(void)addField:(NSString *)name type:(NSInteger)type sqlField:(NSString *)sqlField visible:(BOOL)visible width:(NSInteger)width
+- (NSArray<Field *> *)fields
 {
-	Field * field = [Field new];
-	if (field != nil) {
-		field.name = name;
-		field.type = type;
-		field.visible = visible;
-		field.width = width;
-		field.sqlField = sqlField;
-		[self.fieldsOrdered addObject:field];
-		[self.fieldsByName setValue:field forKey:name];
-	}
+    if (_fields) {
+        return _fields;
+    }
+
+    _fields = @[
+        [[Field alloc] initWithName:MA_Field_Read
+                               type:VNAFieldTypeFlag
+                           sqlField:@"read_flag"
+                        displayName:NSLocalizedString(@"Read",
+                                                      @"Data field name visible in menu/smart folder definition")
+                            visible:YES
+                              width:17
+               customizationOptions:(VNAFieldCustomizationVisibility | VNAFieldCustomizationSorting)],
+        [[Field alloc] initWithName:MA_Field_Flagged
+                               type:VNAFieldTypeFlag
+                           sqlField:@"marked_flag"
+                        displayName:NSLocalizedString(@"Flagged",
+                                                      @"Data field name visible in menu/smart folder definition")
+                            visible:YES
+                              width:17
+               customizationOptions:(VNAFieldCustomizationVisibility | VNAFieldCustomizationSorting)],
+        [[Field alloc] initWithName:MA_Field_HasEnclosure
+                               type:VNAFieldTypeFlag
+                           sqlField:@"hasenclosure_flag"
+                        displayName:NSLocalizedString(@"Enclosure",
+                                                      @"Data field name (Y/N) visible in menu/smart folder definition")
+                            visible:YES
+                              width:17
+               customizationOptions:(VNAFieldCustomizationVisibility | VNAFieldCustomizationSorting)],
+        [[Field alloc] initWithName:MA_Field_Deleted
+                               type:VNAFieldTypeFlag
+                           sqlField:@"deleted_flag"
+                        displayName:NSLocalizedString(@"Deleted",
+                                                      @"Data field name visible in smart folder definition")
+                            visible:NO
+                              width:15
+               customizationOptions:VNAFieldCustomizationResizing],
+        [[Field alloc] initWithName:MA_Field_GUID
+                               type:VNAFieldTypeInteger
+                           sqlField:@"message_id"],
+        [[Field alloc] initWithName:MA_Field_Subject
+                               type:VNAFieldTypeString
+                           sqlField:@"title"
+                        displayName:NSLocalizedString(@"Subject",
+                                                      @"Data field name visible in menu/article list/smart folder definition")
+                            visible:YES
+                              width:472
+               customizationOptions:VNAFieldCustomizationAll],
+        [[Field alloc] initWithName:MA_Field_Folder
+                               type:VNAFieldTypeFolder
+                           sqlField:@"folder_id"
+                        displayName:NSLocalizedString(@"Folder",
+                                                      @"Data field name visible in menu/article list/smart folder definition")
+                            visible:NO
+                              width:130
+               customizationOptions:VNAFieldCustomizationAll],
+        [[Field alloc] initWithName:MA_Field_LastUpdate
+                               type:VNAFieldTypeDate
+                           sqlField:@"date"
+                        displayName:NSLocalizedString(@"Last Update",
+                                                      @"Data field name visible in menu/article list/smart folder definition")
+                            visible:YES
+                              width:152
+               customizationOptions:VNAFieldCustomizationAll],
+        [[Field alloc] initWithName:MA_Field_PublicationDate
+                               type:VNAFieldTypeDate
+                           sqlField:@"createddate"
+                        displayName:NSLocalizedString(@"Date Published",
+                                                      @"Data field name visible in menu/article list/smart folder definition")
+                            visible:NO
+                              width:152
+               customizationOptions:VNAFieldCustomizationAll],
+        [[Field alloc] initWithName:MA_Field_Parent
+                               type:VNAFieldTypeInteger
+                           sqlField:@"parent_id"],
+        [[Field alloc] initWithName:MA_Field_Author
+                               type:VNAFieldTypeString
+                           sqlField:@"sender"
+                        displayName:NSLocalizedString(@"Author",
+                                                      @"Data field name visible in menu/article list/smart folder definition")
+                            visible:YES
+                              width:138
+               customizationOptions:VNAFieldCustomizationAll],
+        [[Field alloc] initWithName:MA_Field_Link
+                               type:VNAFieldTypeString
+                           sqlField:@"link"
+                        displayName:NSLocalizedString(@"Link",
+                                                      @"Data field name visible in menu/article list")
+                            visible:NO
+                              width:138
+               customizationOptions:(VNAFieldCustomizationVisibility | VNAFieldCustomizationResizing)],
+        [[Field alloc] initWithName:MA_Field_Text
+                               type:VNAFieldTypeString
+                           sqlField:@"text"
+                        displayName:NSLocalizedString(@"Text",
+                                                      @"Data field name visible in smart folder definition")
+                            visible:NO
+                              width:152
+               customizationOptions:VNAFieldCustomizationResizing],
+        [[Field alloc] initWithName:MA_Field_Summary
+                               type:VNAFieldTypeString
+                           sqlField:@"summary"
+                        displayName:NSLocalizedString(@"Summary",
+                                                      @"Pseudo field name visible in menu/article list")
+                            visible:NO
+                              width:152
+               customizationOptions:(VNAFieldCustomizationVisibility | VNAFieldCustomizationResizing)],
+        [[Field alloc] initWithName:MA_Field_Headlines
+                               type:VNAFieldTypeString
+                           sqlField:@""
+                        displayName:NSLocalizedString(@"Headlines",
+                                                      @"Pseudo field name visible in article list")
+                            visible:NO
+                              width:100
+               customizationOptions:VNAFieldCustomizationResizing],
+        [[Field alloc] initWithName:MA_Field_Enclosure
+                               type:VNAFieldTypeString
+                           sqlField:@"enclosure"
+                        displayName:NSLocalizedString(@"Enclosure URL",
+                                                      @"Data field name (URL) visible in menu/article list")
+                            visible:NO
+                              width:100
+               customizationOptions:(VNAFieldCustomizationVisibility | VNAFieldCustomizationResizing)],
+        [[Field alloc] initWithName:MA_Field_EnclosureDownloaded
+                               type:VNAFieldTypeFlag
+                           sqlField:@"enclosuredownloaded_flag"],
+    ];
+    return _fields;
 }
 
-/* arrayOfFields
- * Return the array of fields.
- */
--(NSArray *)arrayOfFields
+- (NSDictionary<NSString *, Field *> *)fieldsByName
 {
-	return self.fieldsOrdered;
+    if (_fieldsByName) {
+        return _fieldsByName;
+    }
+
+    NSArray *fields = self.fields;
+    NSMutableArray *names = [NSMutableArray array];
+    [fields enumerateObjectsUsingBlock:^(Field *field,
+                                         NSUInteger index,
+                                         BOOL *stop) {
+        @try {
+            [names addObject:field.name];
+        } @catch (NSException *exception) {
+            os_log_fault(VNA_LOG,
+                         "%{public}s %{public}@",
+                         __PRETTY_FUNCTION__, exception.description);
+            NSLog(@"Unexpected nil value: %@", exception);
+        }
+    }];
+    _fieldsByName = [[NSDictionary alloc] initWithObjects:fields forKeys:names];
+    return _fieldsByName;
 }
 
 /* fieldByTitle
