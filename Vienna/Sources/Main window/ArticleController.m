@@ -649,6 +649,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 	// flag on the article while simultaneously removing it from our copies
 	for (Article * theArticle in articleArray) {
 		[[Database sharedManager] markArticleDeleted:theArticle isDeleted:deleteFlag];
+        theArticle.deleted = deleteFlag;
 		if (![currentArrayOfArticles containsObject:theArticle]) {
 			needReload = YES;
 		} else if (deleteFlag && (currentFolderId != [Database sharedManager].trashFolderId)) {
@@ -721,7 +722,8 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 	// the database.
 	for (Article * theArticle in articleArray) {
 		if ([[Database sharedManager] deleteArticle:theArticle]) {
-			[currentArrayCopy removeObject:theArticle];
+            theArticle.deleted = YES;
+            [currentArrayCopy removeObject:theArticle];
 			[folderArrayCopy removeObject:theArticle];
 		}
 	}
@@ -863,13 +865,14 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 	for (ArticleReference * articleRef in articleArray) {
 		NSInteger folderId = articleRef.folderId;
 		Folder * folder = [db folderFromID:folderId];
+        Article * article = [folder articleFromGuid:articleRef.guid];
 		if (folder.type == VNAFolderTypeOpenReader){
-			Article * article = [folder articleFromGuid:articleRef.guid];
 			if (article != nil) {
                 [[OpenReader sharedManager] markRead:article readFlag:readFlag];
 			}
 		} else {
 			[db markArticleRead:folderId guid:articleRef.guid isRead:readFlag];
+            article.read = readFlag;
 		}
 	}
 }
@@ -960,13 +963,14 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 		NSInteger folderId = ref.folderId;
 		NSString * theGuid = ref.guid;
 		Folder * folder = [dbManager folderFromID:folderId];
+        Article * article = [folder articleFromGuid:theGuid];
         if (folder.type == VNAFolderTypeOpenReader) {
-        	Article * article = [folder articleFromGuid:theGuid];
         	if (article != nil) {
 			    [[OpenReader sharedManager] markRead:article readFlag:readFlag];
 			}
         } else {
 			[dbManager markArticleRead:folderId guid:theGuid isRead:readFlag];
+            article.read = readFlag;
 		}
 	}
 
