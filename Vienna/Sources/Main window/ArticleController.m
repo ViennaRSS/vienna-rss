@@ -648,7 +648,7 @@ static void *VNAArticleControllerObserverContext = &VNAArticleControllerObserver
 	// Iterate over every selected article in the table and set the deleted
 	// flag on the article while simultaneously removing it from our copies
 	for (Article * theArticle in articleArray) {
-		[[Database sharedManager] markArticleDeleted:theArticle isDeleted:deleteFlag];
+        [[Database sharedManager] markArticleDeleted:theArticle.folderId guid:theArticle.guid isDeleted:deleteFlag];
         theArticle.deleted = deleteFlag;
 		if (![currentArrayOfArticles containsObject:theArticle]) {
 			needReload = YES;

@@ -152,7 +152,7 @@ extern NSNotificationName const VNADatabaseDidDeleteFolderNotification;
 -(NSArray<Article *> *)arrayOfArticles:(NSInteger)folderId filterString:(NSString *)filterString;
 -(void)markArticleRead:(NSInteger)folderId guid:(NSString *)guid isRead:(BOOL)isRead;
 -(void)markArticleFlagged:(NSInteger)folderId guid:(NSString *)guid isFlagged:(BOOL)isFlagged;
--(void)markArticleDeleted:(Article *)article isDeleted:(BOOL)isDeleted;
+-(void)markArticleDeleted:(NSInteger)folderId guid:(NSString *)guid isDeleted:(BOOL)isDeleted;
 -(void)markUnreadArticlesFromFolder:(Folder *)folder guidArray:(NSArray *)guidArray;
 -(void)markStarredArticlesFromFolder:(Folder *)folder guidArray:(NSArray *)guidArray;
 @property (nonatomic, getter=isTrashEmpty, readonly) BOOL trashEmpty;
