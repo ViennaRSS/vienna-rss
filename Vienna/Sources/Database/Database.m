@@ -2497,15 +2497,13 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
 /* markArticleDeleted
  * Marks an article as deleted. Deleted articles should have been marked read first.
  */
--(void)markArticleDeleted:(Article *)article isDeleted:(BOOL)isDeleted
+-(void)markArticleDeleted:(NSInteger)folderId guid:(NSString *)guid isDeleted:(BOOL)isDeleted
 {
-	NSInteger folderId = article.folderId;
-	NSString * guid = article.guid;
-	Folder * folder = [self folderFromID:folderId];
-	if (folder !=nil) {
-        if (isDeleted && !article.isRead) {
-			[self markArticleRead:folderId guid:guid isRead:YES];
-		}
+    Folder * folder = [self folderFromID:folderId];
+    if (folder !=nil) {
+        if (isDeleted) {
+            [self markArticleRead:folderId guid:guid isRead:YES];
+        }
         FMDatabaseQueue *queue = self.databaseQueue;
         [queue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"UPDATE messages SET deleted_flag=? WHERE folder_id=? AND message_id=?",
@@ -2513,8 +2511,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
              @(folderId),
              guid];
         }];
-        article.deleted = isDeleted;
-	}
+    }
 }
 
 /* isTrashEmpty
