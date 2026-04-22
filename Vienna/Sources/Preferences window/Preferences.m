@@ -243,6 +243,7 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
     defaultValues[MAPref_ShowDetailsOnFeedCredentialsDialog] = boolNo;
     defaultValues[MAPref_ShowEnclosureBar] = boolYes;
     defaultValues[MAPref_MenuEnableActionImages] = boolNo;
+    defaultValues[MAPref_ShowUnreadCounts] = @YES;
 
     // Archives
     defaultValues[MAPref_ArticleListFont] = [NSKeyedArchiver archivedDataWithRootObject:defaultFont

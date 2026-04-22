@@ -127,18 +127,25 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
                    forKeyPath:MAPref_ShowFeedsWithUnreadItemsInBold
                       options:0
                       context:VNAFoldersTreeObserverContext];
+    [userDefaults addObserver:self
+                   forKeyPath:MAPref_ShowUnreadCounts
+                      options:0
+                      context:VNAFoldersTreeObserverContext];
 }
 
 - (void)dealloc
 {
     [NSNotificationCenter.defaultCenter removeObserver:self];
 
-    NSUserDefaults *userDefaults;
+    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
     [userDefaults removeObserver:self
                       forKeyPath:MAPref_FeedListSizeMode
                          context:VNAFoldersTreeObserverContext];
     [userDefaults removeObserver:self
                       forKeyPath:MAPref_ShowFeedsWithUnreadItemsInBold
+                         context:VNAFoldersTreeObserverContext];
+    [userDefaults removeObserver:self
+                      forKeyPath:MAPref_ShowUnreadCounts
                          context:VNAFoldersTreeObserverContext];
 }
 
@@ -1082,9 +1089,15 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 
     if ([keyPath isEqualToString:MAPref_FeedListSizeMode]) {
         [self updateCellSize:[userDefaults integerForKey:MAPref_FeedListSizeMode]];
+        return;
     }
     if ([keyPath isEqualToString:MAPref_ShowFeedsWithUnreadItemsInBold]) {
         [self.outlineView reloadDataWhilePreservingSelection];
+        return;
+    }
+    if ([keyPath isEqualToString:MAPref_ShowUnreadCounts]) {
+        [self.outlineView reloadDataWhilePreservingSelection];
+        return;
     }
 }
 
@@ -1388,7 +1401,7 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
     }
 
     BOOL useEmphasis = [prefs boolForKey:MAPref_ShowFeedsWithUnreadItemsInBold];
-
+    BOOL showUnreadCounts = [prefs boolForKey:MAPref_ShowUnreadCounts];
     switch (folder.type) {
         case VNAFolderTypeSmart:
         case VNAFolderTypeTrash:
@@ -1398,12 +1411,12 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
             break;
         case VNAFolderTypeGroup:
             cellView.emphasized = useEmphasis && folder.childUnreadCount > 0 && ![outlineView isItemExpanded:item];
-            cellView.canShowUnreadCount = ![outlineView isItemExpanded:item];
+            cellView.canShowUnreadCount = showUnreadCounts ? ![outlineView isItemExpanded:item] : NO;
             cellView.unreadCount = folder.childUnreadCount;
             break;
         default:
             cellView.emphasized = useEmphasis && folder.unreadCount > 0;
-            cellView.canShowUnreadCount = YES;
+            cellView.canShowUnreadCount = showUnreadCounts;
             cellView.unreadCount = folder.unreadCount;
     }
 

@@ -108,7 +108,6 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 
     NSMutableDictionary *scriptPathMappings;
     NSStatusItem *appStatusItem;
-    NSInteger lastCountOfUnread;
     NSMenuItem *scriptsMenuItem;
     BOOL didCompleteInitialisation;
     NSString *searchString;
@@ -121,7 +120,6 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
 {
 	if ((self = [super init]) != nil) {
 		scriptPathMappings = [[NSMutableDictionary alloc] init];
-		lastCountOfUnread = 0;
 		appStatusItem = nil;
 		scriptsMenuItem = nil;
 		didCompleteInitialisation = NO;
@@ -281,6 +279,12 @@ static void *VNAAppControllerObserverContext = &VNAAppControllerObserverContext;
                          forKeyPath:NSStringFromSelector(@selector(numberOfPlugins))
                             options:0
                             context:VNAAppControllerObserverContext];
+
+    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+    [userDefaults addObserver:self
+                   forKeyPath:MAPref_ShowUnreadCounts
+                      options:0
+                      context:VNAAppControllerObserverContext];
 
 	// Load the styles into the main menu.
     [self populateStyleMenu];
@@ -1024,7 +1028,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         return;
     }
 
-    if ([keyPath isEqualToString:NSStringFromSelector(@selector(numberOfPlugins))]) {
+    if ([object isEqual:self.pluginManager]) {
         NSMenu *menu = ((ViennaApp *)NSApp).articleMenu;
 
         // Remove any previously added plug-in menu items.
@@ -1042,6 +1046,13 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 
         // Repopulate the menu.
         [self populatePluginsMenu];
+        return;
+    }
+
+    if ([object isEqual:NSUserDefaults.standardUserDefaults]) {
+        if ([keyPath isEqualToString:MAPref_ShowUnreadCounts]) {
+            [self showUnreadCountOnApplicationIconAndWindowTitle];
+        }
     }
 }
 
@@ -1157,10 +1168,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 - (void)showUnreadCountOnApplicationIconAndWindowTitle {
     @synchronized(NSApp.dockTile) {
         NSInteger currentCountOfUnread = db.countOfUnread;
-        if (currentCountOfUnread == lastCountOfUnread) {
-            return;
-        }
-        lastCountOfUnread = currentCountOfUnread;
 
         // Always update the app status icon first
         [self setAppStatusBarIcon];
@@ -1170,8 +1177,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
             NSApp.dockTile.badgeLabel = nil;
             self.mainWindowController.unreadCount = 0;
         } else {
-            NSString *countdown = [NSString stringWithFormat:@"%li", (long)currentCountOfUnread];
-            NSApp.dockTile.badgeLabel = countdown;
+            if ([NSUserDefaults.standardUserDefaults boolForKey:MAPref_ShowUnreadCounts]) {
+                NSApp.dockTile.badgeLabel = [NSString stringWithFormat:@"%li", currentCountOfUnread];
+            } else {
+                NSApp.dockTile.badgeLabel = nil;
+            }
             self.mainWindowController.unreadCount = currentCountOfUnread;
         }
     }
@@ -1330,21 +1340,34 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(void)setAppStatusBarIcon
 {
-	if (appStatusItem != nil) {
-		if (lastCountOfUnread == 0) {
-            NSImage *statusBarImage = [NSImage imageNamed:ACImageNameStatusBarIcon];
-            statusBarImage.template = YES;
+    if (!appStatusItem) {
+        return;
+    }
+
+    NSInteger unreadCount = db.countOfUnread;
+    if (unreadCount == 0) {
+        NSImage *statusBarImage = [NSImage imageNamed:ACImageNameStatusBarIcon];
+        statusBarImage.template = YES;
+        [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
+            context.allowsImplicitAnimation = YES;
             appStatusItem.button.image = statusBarImage;
             appStatusItem.button.title = @"";
             appStatusItem.button.imagePosition = NSImageOnly;
-		} else {
-            NSImage *statusBarImage = [NSImage imageNamed:ACImageNameStatusBarIconUnread];
-            statusBarImage.template = YES;
+        }];
+    } else {
+        NSImage *statusBarImage = [NSImage imageNamed:ACImageNameStatusBarIconUnread];
+        statusBarImage.template = YES;
+        [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
+            context.allowsImplicitAnimation = YES;
             appStatusItem.button.image = statusBarImage;
-			appStatusItem.button.title = [NSString stringWithFormat:@"%ld", (long)lastCountOfUnread];
+            if ([NSUserDefaults.standardUserDefaults boolForKey:MAPref_ShowUnreadCounts]) {
+                appStatusItem.button.title = [NSString stringWithFormat:@"%ld", unreadCount];
+            } else {
+                appStatusItem.button.title = @"";
+            }
             appStatusItem.button.imagePosition = NSImageLeading;
-		}
-	}
+        }];
+    }
 }
 
 /* handleRSSLink
@@ -2921,6 +2944,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     [self.pluginManager removeObserver:self
                             forKeyPath:NSStringFromSelector(@selector(numberOfPlugins))
                                context:VNAAppControllerObserverContext];
+
+    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+    [userDefaults removeObserver:self
+                      forKeyPath:MAPref_ShowUnreadCounts
+                         context:VNAAppControllerObserverContext];
 
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }

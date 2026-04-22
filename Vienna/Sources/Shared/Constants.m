@@ -108,6 +108,7 @@ NSString * const MAPref_SyncingAppKey = @"SyncingAppKey";
 NSString * const MAPref_AlwaysAcceptBetas = @"AlwayAcceptBetas";
 NSString * const MAPref_UserAgentName = @"UserAgentName";
 NSString * const MAPref_MenuEnableActionImages = @"NSMenuEnableActionImages";
+NSString * const MAPref_ShowUnreadCounts = @"ShowUnreadCounts";
 
 NSInteger const MA_Default_BackTrackQueueSize = 20;
 NSInteger const MA_Default_MinimumFontSize = 9;
