@@ -32,14 +32,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)tagArticleTitle;
 - (NSString *)tagArticleAuthor;
 - (NSString *)tagArticleBody;
-- (NSString *)tagArticleDate;
-- (NSString *)tagArticlePublicationDate;
-- (NSString *)tagArticleLink;
-- (NSString *)tagArticleEnclosureLink;
-- (NSString *)tagArticleEnclosureFilename;
+- (nullable NSString *)tagArticleDate;
+- (nullable NSString *)tagArticlePublicationDate;
+- (nullable NSString *)tagArticleLink;
+- (nullable NSString *)tagArticleEnclosureLink;
+- (nullable NSString *)tagArticleEnclosureFilename;
 - (NSString *)tagFeedTitle;
 - (NSString *)tagFeedDescription;
-- (NSString *)tagFeedLink;
+- (nullable NSString *)tagFeedLink;
 
 @end
 
