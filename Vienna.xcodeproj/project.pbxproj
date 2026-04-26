@@ -156,6 +156,7 @@
 		B8B9D6D323685C7400EAE65C /* XMLFeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B9D6D223685C7400EAE65C /* XMLFeedItem.swift */; };
 		F41CA694218F56140072F734 /* NSWorkspace+OpenWithMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F41CA692218F56130072F734 /* NSWorkspace+OpenWithMenu.m */; };
 		F6094E331F10107800677D3B /* ExportAccessoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6094E311F10107800677D3B /* ExportAccessoryViewController.swift */; };
+		F610867F2F9E234A000CEBE0 /* StringExtensionsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F610867E2F9E234A000CEBE0 /* StringExtensionsTests.m */; };
 		F615824323834D6500D2BD41 /* FeedDiscoverer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F615824223834D6500D2BD41 /* FeedDiscoverer.swift */; };
 		F6164C591E32A6660086261C /* DisclosureView.m in Sources */ = {isa = PBXBuildFile; fileRef = F6164C581E32A6660086261C /* DisclosureView.m */; };
 		F61901882E0F16B000A7A200 /* FilterBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F61901852E0F16B000A7A200 /* FilterBarViewController.m */; };
@@ -495,6 +496,7 @@
 		F41CA692218F56130072F734 /* NSWorkspace+OpenWithMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSWorkspace+OpenWithMenu.m"; sourceTree = "<group>"; };
 		F41CA693218F56140072F734 /* NSWorkspace+OpenWithMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSWorkspace+OpenWithMenu.h"; sourceTree = "<group>"; };
 		F6094E311F10107800677D3B /* ExportAccessoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportAccessoryViewController.swift; sourceTree = "<group>"; };
+		F610867E2F9E234A000CEBE0 /* StringExtensionsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StringExtensionsTests.m; sourceTree = "<group>"; };
 		F615824223834D6500D2BD41 /* FeedDiscoverer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDiscoverer.swift; sourceTree = "<group>"; };
 		F6164C571E32A6660086261C /* DisclosureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisclosureView.h; sourceTree = "<group>"; };
 		F6164C581E32A6660086261C /* DisclosureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisclosureView.m; sourceTree = "<group>"; };
@@ -721,6 +723,7 @@
 				F6A179D226B82BE3008DDA42 /* NSFileManagerExtensionTests.swift */,
 				F6DC8875295B85E9006E4D66 /* PluginManagerTests.swift */,
 				F6E01A062C652DEE0082E07B /* RSSFeedTests.swift */,
+				F610867E2F9E234A000CEBE0 /* StringExtensionsTests.m */,
 				F68FE3A5270F6DC700C89D16 /* UnarchiverTests.swift */,
 				F633157726EE3D06008A3673 /* URLFormatterTests.swift */,
 				0377BDEB1D3A009B00960555 /* Vienna Tests-Bridging-Header.h */,
@@ -1865,6 +1868,7 @@
 				2F437B6325CF423A00AD1B57 /* ExportTests.swift in Sources */,
 				3A8D9AE325A9DA4B0016F30F /* ArticleTests.swift in Sources */,
 				2F437B3C25CF336400AD1B57 /* SubscriptionModelTests.swift in Sources */,
+				F610867F2F9E234A000CEBE0 /* StringExtensionsTests.m in Sources */,
 				F6A179D326B82BE3008DDA42 /* NSFileManagerExtensionTests.swift in Sources */,
 				F6AC41AC25A4FAF6007DED7B /* FeedDiscovererTests.swift in Sources */,
 				4D36B44B1D37F91E009736C1 /* ArticleTests.m in Sources */,

@@ -45,8 +45,8 @@
     NSMutableString * newString = [NSMutableString stringWithString:SafeString(theString)];
     NSUInteger tagStartIndex = 0;
 
-    while ((tagStartIndex = [newString vna_indexOfCharacterInString:'$' afterIndex:tagStartIndex]) != NSNotFound) {
-        NSUInteger tagEndIndex = [newString vna_indexOfCharacterInString:'$' afterIndex:tagStartIndex + 1];
+    while ((tagStartIndex = [newString vna_indexOfCharacter:'$' fromIndex:tagStartIndex]) != NSNotFound) {
+        NSUInteger tagEndIndex = [newString vna_indexOfCharacter:'$' fromIndex:tagStartIndex + 1];
         if (tagEndIndex == NSNotFound) {
             break;
         }
