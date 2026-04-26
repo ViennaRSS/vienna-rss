@@ -107,7 +107,7 @@ extern NSNotificationName const VNADatabaseDidDeleteFolderNotification;
 -(BOOL)markFolderRead:(NSInteger)folderId;
 -(void)clearFlag:(NSUInteger)flag forFolder:(NSInteger)folderId;
 -(void)setFlag:(NSUInteger)flag forFolder:(NSInteger)folderId;
--(void)setFolderUnreadCount:(Folder *)folder adjustment:(NSUInteger)adjustment;
+-(void)setFolderUnreadCount:(Folder *)folder adjustment:(NSInteger)adjustment;
 -(void)setLastUpdate:(NSDate *)lastUpdate forFolder:(NSInteger)folderId;
 -(void)setLastUpdateString:(NSString *)lastUpdateString forFolder:(NSInteger)folderId;
 -(BOOL)setParent:(NSInteger)newParentID forFolder:(NSInteger)folderId;

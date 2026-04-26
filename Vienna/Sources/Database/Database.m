@@ -2454,7 +2454,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
  * Adjusts the unread count on the specified folder by the given delta. The same delta is
  * also applied to the childUnreadCount of all ancestor folders.
  */
--(void)setFolderUnreadCount:(Folder *)folder adjustment:(NSUInteger)adjustment
+-(void)setFolderUnreadCount:(Folder *)folder adjustment:(NSInteger)adjustment
 {
 	_countOfUnread += adjustment;
 	NSInteger newCount = folder.unreadCount + adjustment;
