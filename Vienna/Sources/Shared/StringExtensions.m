@@ -404,16 +404,16 @@
 	NSUInteger entityStart;
 	NSUInteger entityEnd;
 	
-	entityStart = [processedString vna_indexOfCharacterInString:'&' afterIndex:0];
+	entityStart = [processedString vna_indexOfCharacter:'&' fromIndex:0];
 	while (entityStart != NSNotFound) {
-		entityEnd = [processedString vna_indexOfCharacterInString:';' afterIndex:entityStart + 1];
+		entityEnd = [processedString vna_indexOfCharacter:';' fromIndex:entityStart + 1];
 		if (entityEnd != NSNotFound) {
 			NSRange entityRange = NSMakeRange(entityStart, (entityEnd - entityStart) + 1);
 			NSRange innerEntityRange = NSMakeRange(entityRange.location + 1, entityRange.length - 2);
 			NSString * entityString = [processedString substringWithRange:innerEntityRange];
 			[processedString replaceCharactersInRange:entityRange withString:[NSString vna_mapEntityToString:entityString]];
 		}
-		entityStart = [processedString vna_indexOfCharacterInString:'&' afterIndex:entityStart + 1];
+		entityStart = [processedString vna_indexOfCharacter:'&' fromIndex:entityStart + 1];
 	}
 	
 	NSString * returnString = processedString.vna_trimmed;
@@ -553,20 +553,16 @@
 	return mappedString ? mappedString : [NSString stringWithFormat:@"&%@;", entityString];
 }
 
-/* indexOfCharacterInString
+/* indexOfCharacter
  * Returns the index of the first occurrence of the specified character at or after
  * the starting index. If no occurrence is found, returns NSNotFound.
  */
--(NSUInteger)vna_indexOfCharacterInString:(char)ch afterIndex:(NSUInteger)startIndex
+- (NSUInteger)vna_indexOfCharacter:(unichar)character
+                         fromIndex:(NSUInteger)index
 {
-	NSUInteger length = self.length;
-	NSUInteger index;
-
-	if (startIndex < length - 1) {
-		for (index = startIndex; index < length; ++index) {
-			if ([self characterAtIndex:index] == ch) {
-				return index;
-			}
+	for (NSUInteger length = self.length; index < length; ++index) {
+		if ([self characterAtIndex:index] == character) {
+			return index;
 		}
 	}
 	return NSNotFound;
@@ -577,7 +573,7 @@
  */
 -(BOOL)vna_hasCharacter:(char)ch
 {
-	return [self vna_indexOfCharacterInString:ch afterIndex:0] != NSNotFound;
+	return [self vna_indexOfCharacter:ch fromIndex:0] != NSNotFound;
 }
 
 /* trim
