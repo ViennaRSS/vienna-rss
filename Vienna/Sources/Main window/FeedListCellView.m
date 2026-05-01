@@ -60,9 +60,9 @@ static CGFloat const VNAFontSizeMedium = 15.0;
 
 // MARK: Initialization
 
-- (instancetype)init
+- (nullable instancetype)initWithCoder:(NSCoder *)coder
 {
-    self = [super init];
+    self = [super initWithCoder:coder];
     if (self) {
         _emphasized = NO;
         _inactive = NO;

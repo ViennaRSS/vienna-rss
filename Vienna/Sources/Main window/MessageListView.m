@@ -27,6 +27,12 @@
 
 @dynamic delegate;
 
+- (nullable instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    return self;
+}
+
 - (void)setTableColumnHeaderImage:(NSImage *)image
           forColumnWithIdentifier:(NSUserInterfaceItemIdentifier)identifier
 {
