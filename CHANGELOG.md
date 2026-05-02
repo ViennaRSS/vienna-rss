@@ -1,6 +1,33 @@
 Vienna ChangeLog File
 =====================
 
+Vienna 3.11.0 Beta 1
+--------------------
+_released 2026-05-02_  
+___! Requires macOS 10.15 or higher !___
+### 🚲 Changes
+- Add setting to hide unread counts in the main window, menu bar and Dock
+- Highlight in red the "Delete" buttons on some alerts triggered by the "Delete" button which have destructive actions
+### 🤷🏻 Bugfixes
+- Make share toolbar item respond to mouse down instead of mouse up
+- Improve share sheet positioning for text-only mode
+### ⚙️ Internals improvement
+- Raise deployment target to macOS 10.15
+- Streamline initial database setup by moving most of its code outside of initialiser
+- Move most of content and view hierarchy of main window into a Main storyboard; adapt related view controllers
+- Simplify implementation of toolbar items
+- Replace deprecated CommonCrypto with CryptoKit
+- Cleanup obsolete code
+### 🛤️ Infrastructure updates
+- Update project and GitHub infrastructure to Xcode 26.4
+- Adapt tests (archiving/unarchiving, string extensions)
+
+Vienna 3.10.5
+-------------
+_released 2026-05-02_
+### ⚙️ Internals improvement
+- Fix a runtime warning about database query results being left open
+
 Vienna 3.10.4
 -------------
 _released 2026-05-02_
@@ -9,6 +36,9 @@ _released 2026-05-02_
 - Fix refresh toolbar icon image alignment on older macOS versions
 ### ⚙️ Internals improvement
 - Resolve Xcode runtime warnings about undefined behaviors
+- Make AppleScript run with more adequate quality of service
+### 🛤️ Infrastructure updates
+- Build on macOS 26.4 / Xcode 26.4
 
 Vienna 3.10.3
 -------------

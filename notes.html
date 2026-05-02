@@ -1,22 +1,49 @@
-<!DOCTYPE html><head><meta charset="utf-8"/></head><h2>Vienna 3.10.3</h2>
-<p><em>released 2026-03-16</em></p>
+<!DOCTYPE html><head><meta charset="utf-8"/></head><h2>Vienna 3.11.0 Beta 1</h2>
+<p><em>released 2026-05-02</em><br />
+<em><strong>! Requires macOS 10.15 or higher !</strong></em></p>
 <h3>🚲 Changes</h3>
 <ul>
-<li>Support discovery of JSON Feeds in browser tab</li>
-<li>Update translations</li>
+<li>Add setting to hide unread counts in the main window, menu bar and Dock</li>
+<li>Highlight in red the “Delete” buttons on some alerts triggered by the “Delete” button which have destructive actions</li>
 </ul>
 <h3>🤷🏻 Bugfixes</h3>
 <ul>
-<li>Fix smart folders which could contain initially contain invalid search string</li>
-<li>Maintain articles displayed after marking articles in a smart folder all read / all unread</li>
-<li>Reflect changes after undoing “Mark all read” / “Mark all unread”</li>
+<li>Make share toolbar item respond to mouse down instead of mouse up</li>
+<li>Improve share sheet positioning for text-only mode</li>
 </ul>
 <h3>⚙️ Internals improvement</h3>
 <ul>
-<li>Make tree node code simpler and more robust</li>
-<li>Fix Xcode warning on risks of app lock when running AppleScript</li>
+<li>Raise deployment target to macOS 10.15</li>
+<li>Streamline initial database setup by moving most of its code outside of initialiser</li>
+<li>Move most of content and view hierarchy of main window into a Main storyboard; adapt related view controllers</li>
+<li>Simplify implementation of toolbar items</li>
+<li>Replace deprecated CommonCrypto with CryptoKit</li>
+<li>Cleanup obsolete code</li>
 </ul>
-<h3>📖 Documentation</h3>
+<h3>🛤️ Infrastructure updates</h3>
 <ul>
-<li>Update links in README and add version 3.10</li>
+<li>Update project and GitHub infrastructure to Xcode 26.4</li>
+<li>Adapt tests (archiving/unarchiving, string extensions)</li>
+</ul>
+<h2>Vienna 3.10.5</h2>
+<p><em>released 2026-05-02</em></p>
+<h3>⚙️ Internals improvement</h3>
+<ul>
+<li>Fix a runtime warning about database query results being left open</li>
+</ul>
+<h2>Vienna 3.10.4</h2>
+<p><em>released 2026-05-02</em></p>
+<h3>🤷🏻 Bugfixes</h3>
+<ul>
+<li>Fix articles not being marked read as expected when “Mark current article read after a short delay” is enabled, especially with big feeds</li>
+<li>Fix refresh toolbar icon image alignment on older macOS versions</li>
+</ul>
+<h3>⚙️ Internals improvement</h3>
+<ul>
+<li>Resolve Xcode runtime warnings about undefined behaviors</li>
+<li>Make AppleScript run with more adequate quality of service</li>
+</ul>
+<h3>🛤️ Infrastructure updates</h3>
+<ul>
+<li>Build on macOS 26.4 / Xcode 26.4</li>
 </ul>
