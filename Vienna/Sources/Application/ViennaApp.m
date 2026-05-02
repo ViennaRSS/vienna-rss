@@ -234,8 +234,8 @@
     NSDictionary *infoDictionary = NSBundle.mainBundle.infoDictionary;
     NSString *versionString = infoDictionary[@"CFBundleShortVersionString"];
     NSString *trimmedVersionString = versionString.vna_trimmed;
-    NSUInteger wordLength = [trimmedVersionString vna_indexOfCharacterInString:' '
-                                                                    afterIndex:0];
+    NSUInteger wordLength = [trimmedVersionString vna_indexOfCharacter:' '
+                                                             fromIndex:0];
     if (wordLength == NSNotFound) {
         return trimmedVersionString;
     } else {

@@ -51,27 +51,27 @@
     return articleBody;
 }
 
-- (NSString *)tagArticleDate
+- (nullable NSString *)tagArticleDate
 {
     return [NSDateFormatter vna_relativeDateStringFromDate:self.lastUpdate];
 }
 
-- (NSString *)tagArticlePublicationDate
+- (nullable NSString *)tagArticlePublicationDate
 {
     return [NSDateFormatter vna_relativeDateStringFromDate:self.publicationDate];
 }
 
-- (NSString *)tagArticleLink
+- (nullable NSString *)tagArticleLink
 {
     return cleanedUpUrlFromString(self.link).absoluteString;
 }
 
-- (NSString *)tagArticleEnclosureLink
+- (nullable NSString *)tagArticleEnclosureLink
 {
     return cleanedUpUrlFromString(self.enclosure).absoluteString;
 }
 
-- (NSString *)tagArticleEnclosureFilename
+- (nullable NSString *)tagArticleEnclosureFilename
 {
     return self.enclosure.lastPathComponent.stringByRemovingPercentEncoding;
 }
@@ -88,7 +88,7 @@
     return folder.feedDescription;
 }
 
-- (NSString *)tagFeedLink
+- (nullable NSString *)tagFeedLink
 {
     Folder *folder = [Database.sharedManager folderFromID:self.folderId];
     return cleanedUpUrlFromString(folder.homePage).absoluteString;

@@ -44,7 +44,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly, nonatomic) NSString *vna_firstNonBlankLine;
 @property (readonly, nonatomic) NSString *vna_summaryTextFromHTML;
 @property (readonly, nonatomic) NSString *vna_titleTextFromHTML;
-- (NSUInteger)vna_indexOfCharacterInString:(char)ch afterIndex:(NSUInteger)startIndex;
+- (NSUInteger)vna_indexOfCharacter:(unichar)character
+                         fromIndex:(NSUInteger)index;
 @property (readonly, nonatomic) NSString *vna_stringByEscapingExtendedCharacters;
 @property (readonly, nonatomic) NSString *vna_stringByUnescapingExtendedCharacters;
 - (BOOL)vna_hasCharacter:(char)ch;
