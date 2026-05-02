@@ -1,6 +1,12 @@
 Vienna ChangeLog File
 =====================
 
+Vienna 3.10.5
+-------------
+_released 2026-05-02_
+### ⚙️ Internals improvement
+- Fix a runtime warning about database query results being left open
+
 Vienna 3.10.4
 -------------
 _released 2026-05-02_
@@ -9,6 +15,9 @@ _released 2026-05-02_
 - Fix refresh toolbar icon image alignment on older macOS versions
 ### ⚙️ Internals improvement
 - Resolve Xcode runtime warnings about undefined behaviors
+- Make AppleScript run with more adequate quality of service
+### 🛤️ Infrastructure updates
+- Build on macOS 26.4 / Xcode 26.4
 
 Vienna 3.10.3
 -------------
