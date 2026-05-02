@@ -916,7 +916,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 -(void)runAppleScript:(NSString *)scriptName
 {
     NSString *baseScriptName = scriptName.lastPathComponent.stringByDeletingPathExtension;
-    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0), ^{
         NSDictionary *errorDictionary;
         NSURL *scriptURL = [NSURL fileURLWithPath:scriptName];
         NSAppleScript *appleScript = [[NSAppleScript alloc] initWithContentsOfURL:scriptURL error:&errorDictionary];
