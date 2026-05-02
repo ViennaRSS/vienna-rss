@@ -2444,13 +2444,14 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
             FMResultSet *results = [db executeQuery:@"SELECT read_flag FROM messages WHERE folder_id=? AND message_id=?",
                                                     @(folderId), guid];
             if ([results next]) {
-                BOOL status = [results stringForColumn:@"read_flag"].integerValue;
+                BOOL status = [results boolForColumn:@"read_flag"];
                 if (status != isRead) {
                     success = [db executeUpdate:@"UPDATE messages SET read_flag=? WHERE folder_id=? AND message_id=?",
                                                 @(isRead), @(folderId), guid];
                 } else {
                     success = NO;
                 }
+                [results close];
             } else {
                 success = NO;
             }
