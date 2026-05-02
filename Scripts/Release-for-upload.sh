@@ -71,6 +71,16 @@ cat > "${VIENNA_CHANGELOG}" << EOF
 			<sparkle:releaseNotesLink>https://www.vienna-rss.com/sparkle-files/noteson${N_VCS_TAG}.html</sparkle:releaseNotesLink>
 		</item>
 		<item>
+			<title>Vienna 3.10.5 :4c2b65d9:</title>
+			<pubDate>Sat, 02 May 2026 18:19:12 +0000</pubDate>
+			<link>https://github.com/ViennaRSS/vienna-rss/releases/tag/v%2F3.10.5</link>
+			<sparkle:version>9174</sparkle:version>
+			<sparkle:shortVersionString>3.10.5 :4c2b65d9:</sparkle:shortVersionString>
+			<sparkle:minimumSystemVersion>10.13.0</sparkle:minimumSystemVersion>
+			<enclosure url="https://downloads.sourceforge.net/project/vienna-rss/v_3.10.5/Vienna3.10.5.dmg" sparkle:edSignature="E9dL84nthtnjw6CbiuU1SHWoVXqEqj+efwB+L9uzBf+luJ7DKAYhxEO9Vime4loXDZ3l9ziW2XS3Z+Oxo1ZbAQ==" length="9192058" type="application/octet-stream" />
+			<sparkle:releaseNotesLink>https://www.vienna-rss.com/sparkle-files/noteson3.10.5.html</sparkle:releaseNotesLink>
+		</item>
+		<item>
 			<title>Vienna 3.8.8 :de36b0c7:</title>
 			<pubDate>Sun, 09 Jul 2023 16:33:59 +0000</pubDate>
 			<link>https://github.com/ViennaRSS/vienna-rss/releases/tag/v%2F3.8.8</link>
