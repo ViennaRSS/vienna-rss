@@ -1,22 +1,11 @@
-<!DOCTYPE html><head><meta charset="utf-8"/></head><h2>Vienna 3.10.3</h2>
-<p><em>released 2026-03-16</em></p>
-<h3>🚲 Changes</h3>
-<ul>
-<li>Support discovery of JSON Feeds in browser tab</li>
-<li>Update translations</li>
-</ul>
+<!DOCTYPE html><head><meta charset="utf-8"/></head><h2>Vienna 3.10.4</h2>
+<p><em>released 2026-05-02</em></p>
 <h3>🤷🏻 Bugfixes</h3>
 <ul>
-<li>Fix smart folders which could contain initially contain invalid search string</li>
-<li>Maintain articles displayed after marking articles in a smart folder all read / all unread</li>
-<li>Reflect changes after undoing “Mark all read” / “Mark all unread”</li>
+<li>Fix articles not being marked read as expected when “Mark current article read after a short delay” is enabled, especially with big feeds</li>
+<li>Fix refresh toolbar icon image alignment on older macOS versions</li>
 </ul>
 <h3>⚙️ Internals improvement</h3>
 <ul>
-<li>Make tree node code simpler and more robust</li>
-<li>Fix Xcode warning on risks of app lock when running AppleScript</li>
-</ul>
-<h3>📖 Documentation</h3>
-<ul>
-<li>Update links in README and add version 3.10</li>
+<li>Resolve Xcode runtime warnings about undefined behaviors</li>
 </ul>
