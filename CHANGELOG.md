@@ -1,6 +1,15 @@
 Vienna ChangeLog File
 =====================
 
+Vienna 3.10.4
+-------------
+_released 2026-05-02_
+### 🤷🏻 Bugfixes
+- Fix articles not being marked read as expected when "Mark current article read after a short delay" is enabled, especially with big feeds
+- Fix refresh toolbar icon image alignment on older macOS versions
+### ⚙️ Internals improvement
+- Resolve Xcode runtime warnings about undefined behaviors
+
 Vienna 3.10.3
 -------------
 _released 2026-03-16_
