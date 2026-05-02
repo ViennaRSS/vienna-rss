@@ -438,16 +438,26 @@
  */
 -(NSUInteger)indexOfArticle:(Article *)article
 {
-    [self ensureCache];
-    return [self.cachedGuids indexOfObject:article.guid];
+    NSUInteger index = [self.cachedGuids indexOfObject:article.guid];
+    if (index == NSNotFound){ // we might need to reconstruct the cache
+        self.isCached = NO;
+        [self ensureCache];
+        index = [self.cachedGuids indexOfObject:article.guid];
+    }
+    return index;
 }
 
 /* articleFromGuid
  */
 -(Article *)articleFromGuid:(NSString *)guid
 {
-    [self ensureCache];
-    return [self.cachedArticles objectForKey:guid];
+    Article * article = [self.cachedArticles objectForKey:guid];
+    if (article == nil) { // we need to recreate cache
+        self.isCached = NO;
+        [self ensureCache];
+        article = [self.cachedArticles objectForKey:guid];
+    }
+    return article;
 }
 
 /* retrieveKnownStatusForGuid
@@ -473,22 +483,32 @@
  */
 -(BOOL)createArticle:(Article *)article guidHistory:(NSArray *)guidHistory
 {
-    // Prime the article cache
-    [self ensureCache];
-
-    @synchronized(self) {
-    // Unread count adjustment factor
-    NSInteger adjustment = 0;
-
     NSString * articleGuid = article.guid;
     // Does this article already exist?
     // We're going to ignore here the problem of feeds re-using guids, which is very naughty! Bad feed!
-    Article * existingArticle = [self.cachedArticles objectForKey:articleGuid];
-
-    if (existingArticle == nil) {
-        if ([guidHistory containsObject:articleGuid]) {
-            return NO; // Article has been deleted and removed from database, so ignore
+    Article * existingArticle;
+    if ([guidHistory containsObject:articleGuid]) {    
+        if ([[Preferences standardPreferences] boolForKey:MAPref_CheckForUpdatedArticles]) {
+            // rebuild the cache to be sure
+            self.isCached = NO;
+            [self ensureCache];
+            existingArticle = [self.cachedArticles objectForKey:articleGuid];
+            if (existingArticle == nil) {
+                return NO; // Article was present, but has been deleted and removed from database, so ignore
+            }
         } else {
+            return NO;
+        }
+    } else {
+        existingArticle = nil;
+    }
+
+    @synchronized(self) {
+
+        // Unread count adjustment factor
+        NSInteger adjustment = 0;
+
+        if (existingArticle == nil) {
             // add the article as new
             BOOL success = [[Database sharedManager] addArticle:article toFolder:self.itemId];
             if (success) {
@@ -496,41 +516,40 @@
                 latestFetchCount++;
                 // add to the cache
                 NSString * guid = article.guid;
-	            [self.cachedArticles setObject:article forKey:guid];
-	            [self.cachedGuids addObject:guid];
+                [self.cachedArticles setObject:article forKey:guid];
+                [self.cachedGuids addObject:guid];
                 if(!article.isRead) {
                     adjustment = 1;
                 }
             } else {
                 return NO;
             }
-        }
-    } else if (existingArticle.isDeleted) {
-        return NO;
-    } else if (![[Preferences standardPreferences] boolForKey:MAPref_CheckForUpdatedArticles]) {
-        return NO;
-    } else {
-        BOOL success = [[Database sharedManager] updateArticle:existingArticle ofFolder:self.itemId withArticle:article];
-        if (success) {
-            article.status = ArticleStatusUpdated;
-            latestFetchCount++;
-            // Update folder unread count if necessary
-            if (existingArticle.isRead) {
-                adjustment = 1;
-                existingArticle.read = NO;
+        } else if (existingArticle.isDeleted) {
+            return NO;
+        } else {
+            // we have to verify if we need to update the existing article
+            BOOL success = [[Database sharedManager] updateArticle:existingArticle ofFolder:self.itemId withArticle:article];
+            if (success) {
+                article.status = ArticleStatusUpdated;
+                latestFetchCount++;
+                // Update folder unread count if necessary
+                if (existingArticle.isRead) {
+                    adjustment = 1;
+                    existingArticle.read = NO;
+                }
+            } else {
+                return NO;
             }
+        }
+
+        // Fix unread count on parent folders and Database manager
+        if (adjustment != 0) {
+            [[Database sharedManager] setFolderUnreadCount:self adjustment:adjustment];
+            return YES;
         } else {
             return NO;
         }
-    }
 
-    // Fix unread count on parent folders and Database manager
-    if (adjustment != 0) {
-		[[Database sharedManager] setFolderUnreadCount:self adjustment:adjustment];
-		return YES;
-    } else {
-        return NO;
-    }
     } // synchronized
 }
 

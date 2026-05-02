@@ -1824,11 +1824,8 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
                 [self setFolderUnreadCount:folder adjustment:-1];
             }
             if (folder.countOfCachedArticles > 0) {
-				// If we're in a smart folder, the cached article may be different.
-				Article * cachedArticle = [folder articleFromGuid:guid];
-				cachedArticle.deleted = YES;
-				[folder removeArticleFromCache:guid];
-			}
+                [folder removeArticleFromCache:guid];
+            }
             return YES;
         }
 	}
@@ -2383,25 +2380,31 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
  */
 -(void)markArticleRead:(NSInteger)folderId guid:(NSString *)guid isRead:(BOOL)isRead
 {
-	Folder * folder = [self folderFromID:folderId];
-	if (folder != nil) {
-		Article * article = [folder articleFromGuid:guid];
-		if (article != nil && isRead != article.isRead) {
-			// Mark an individual article read
-            FMDatabaseQueue *queue = self.databaseQueue;
-            __block BOOL success;
-            [queue inDatabase:^(FMDatabase *db) {
-                success = [db executeUpdate:@"UPDATE messages SET read_flag=? WHERE folder_id=? AND message_id=?",
-                           @(isRead), @(folderId), guid];
-            }];
-			if (success) {
-				NSInteger adjustment = (isRead ? -1 : 1);
-
-				article.read = isRead;
-				[self setFolderUnreadCount:folder adjustment:adjustment];
-			}
-		}
-	}
+    Folder *folder = [self folderFromID:folderId];
+    if (folder != nil) {
+        // Mark an individual article read
+        FMDatabaseQueue *queue = self.databaseQueue;
+        __block BOOL success;
+        [queue inDatabase:^(FMDatabase *db) {
+            FMResultSet *results = [db executeQuery:@"SELECT read_flag FROM messages WHERE folder_id=? AND message_id=?",
+                                                    @(folderId), guid];
+            if ([results next]) {
+                BOOL status = [results stringForColumn:@"read_flag"].integerValue;
+                if (status != isRead) {
+                    success = [db executeUpdate:@"UPDATE messages SET read_flag=? WHERE folder_id=? AND message_id=?",
+                                                @(isRead), @(folderId), guid];
+                } else {
+                    success = NO;
+                }
+            } else {
+                success = NO;
+            }
+        }];
+        if (success) {
+            NSInteger adjustment = (isRead ? -1 : 1);
+            [self setFolderUnreadCount:folder adjustment:adjustment];
+        }
+    }
 }
 
 /* markUnreadArticlesFromFolder
@@ -2478,39 +2481,29 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
  */
 -(void)markArticleFlagged:(NSInteger)folderId guid:(NSString *)guid isFlagged:(BOOL)isFlagged
 {
-	Folder * folder = [self folderFromID:folderId];
-	if (folder != nil) {
-		Article * article = [folder articleFromGuid:guid];
-		if (article != nil && isFlagged != article.isFlagged) {
-            FMDatabaseQueue *queue = self.databaseQueue;
-            __block BOOL success;
-            [queue inDatabase:^(FMDatabase *db) {
-                success = [db executeUpdate:@"UPDATE messages SET marked_flag=? WHERE folder_id=? AND message_id=?",
-                 @(isFlagged),
-                 @(folderId),
-                 guid];
-            }];
-
-			if (success) {
-				// Mark an individual article flagged
-                article.flagged = isFlagged;
-			}
-		}
-	}
+    Folder * folder = [self folderFromID:folderId];
+    if (folder != nil) {
+        FMDatabaseQueue *queue = self.databaseQueue;
+        __block BOOL success;
+        [queue inDatabase:^(FMDatabase *db) {
+            success = [db executeUpdate:@"UPDATE messages SET marked_flag=? WHERE folder_id=? AND message_id=?",
+                                        @(isFlagged),
+                                        @(folderId),
+                                        guid];
+        }];
+    }
 }
 
 /* markArticleDeleted
  * Marks an article as deleted. Deleted articles should have been marked read first.
  */
--(void)markArticleDeleted:(Article *)article isDeleted:(BOOL)isDeleted
+-(void)markArticleDeleted:(NSInteger)folderId guid:(NSString *)guid isDeleted:(BOOL)isDeleted
 {
-	NSInteger folderId = article.folderId;
-	NSString * guid = article.guid;
-	Folder * folder = [self folderFromID:folderId];
-	if (folder !=nil) {
-        if (isDeleted && !article.isRead) {
-			[self markArticleRead:folderId guid:guid isRead:YES];
-		}
+    Folder * folder = [self folderFromID:folderId];
+    if (folder !=nil) {
+        if (isDeleted) {
+            [self markArticleRead:folderId guid:guid isRead:YES];
+        }
         FMDatabaseQueue *queue = self.databaseQueue;
         [queue inDatabase:^(FMDatabase *db) {
             [db executeUpdate:@"UPDATE messages SET deleted_flag=? WHERE folder_id=? AND message_id=?",
@@ -2518,16 +2511,7 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
              @(folderId),
              guid];
         }];
-        article.deleted = isDeleted;
-        //TODO this should all move to the folder implementation, to make this less of a god object.
-        // Or even better: when marking an article as deleted it triggers the deletion from its folder itself, and that in turn triggers the db update.
-        // The same also applies to deleteArticle and probably many other parts of this class.
-        if (folder.countOfCachedArticles > 0) {
-            // If we're in a smart folder, the cached article may be different.
-            Article * cachedArticle = [folder articleFromGuid:guid];
-            cachedArticle.deleted = isDeleted;
-        }
-	}
+    }
 }
 
 /* isTrashEmpty
