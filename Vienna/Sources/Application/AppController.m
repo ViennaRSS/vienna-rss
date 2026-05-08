@@ -1696,15 +1696,41 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
  */
 -(BOOL)handleKeyDown:(NSEvent *)event
 {
-    if (event.type != NSEventTypeKeyDown && event.characters.length != 1) {
+    if (event.type != NSEventTypeKeyDown || event.characters.length != 1) {
         return NO;
     }
-    unichar keyChar = [event.characters characterAtIndex:0];
-    NSEventModifierFlags flags = event.modifierFlags;
+	unichar keyChar = [event.characters characterAtIndex:0];
+	NSEventModifierFlags flags = event.modifierFlags;
+    NSEventModifierFlags relevantFlags = flags & NSEventModifierFlagDeviceIndependentFlagsMask;
+
+    if (relevantFlags == NSEventModifierFlagControl &&
+        (keyChar == 0x05 ||
+         [[event.charactersIgnoringModifiers lowercaseString] isEqualToString:@"e"])) {
+        id<Tab> activeBrowserTab = self.browser.activeTab;
+        if (activeBrowserTab == nil) {
+            // We are in the article view.
+            [self.mainWindow makeFirstResponder:((NSView<BaseView> *)self.browser.primaryTab.view).mainView];
+            [self.articleController.mainArticleView scrollLineDownDetails];
+            return YES;
+        }
+    }
+
+    if (relevantFlags == NSEventModifierFlagControl &&
+        (keyChar == 0x19 ||
+         [[event.charactersIgnoringModifiers lowercaseString] isEqualToString:@"y"])) {
+        id<Tab> activeBrowserTab = self.browser.activeTab;
+        if (activeBrowserTab == nil) {
+            // We are in the article view.
+            [self.mainWindow makeFirstResponder:((NSView<BaseView> *)self.browser.primaryTab.view).mainView];
+            [self.articleController.mainArticleView scrollLineUpDetails];
+            return YES;
+        }
+    }
+
 	switch (keyChar) {
 		case NSLeftArrowFunctionKey:
             if (flags & (NSEventModifierFlagCommand | NSEventModifierFlagOption)) {
-				return NO;
+					return NO;
 			} else {
 				if (self.mainWindow.firstResponder == ((NSView<BaseView> *)self.browser.primaryTab.view).mainView) {
 					[self.mainWindow makeFirstResponder:self.foldersTree.mainView];
