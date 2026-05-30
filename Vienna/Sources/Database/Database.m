@@ -2396,10 +2396,10 @@ NSNotificationName const VNADatabaseDidDeleteFolderNotification = @"Database Did
                 } else {
                     success = NO;
                 }
-                [results close];
             } else {
                 success = NO;
             }
+            [results close];
         }];
         if (success) {
             NSInteger adjustment = (isRead ? -1 : 1);
