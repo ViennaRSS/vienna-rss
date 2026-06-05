@@ -71,14 +71,14 @@ cat > "${VIENNA_CHANGELOG}" << EOF
 			<sparkle:releaseNotesLink>https://www.vienna-rss.com/sparkle-files/noteson${N_VCS_TAG}.html</sparkle:releaseNotesLink>
 		</item>
 		<item>
-			<title>Vienna 3.10.5 :4c2b65d9:</title>
-			<pubDate>Sat, 02 May 2026 18:19:12 +0000</pubDate>
-			<link>https://github.com/ViennaRSS/vienna-rss/releases/tag/v%2F3.10.5</link>
-			<sparkle:version>9174</sparkle:version>
-			<sparkle:shortVersionString>3.10.5 :4c2b65d9:</sparkle:shortVersionString>
+			<title>Vienna 3.10.6 :284aab65:</title>
+			<pubDate>Sat, 30 May 2026 10:53:34 +0000</pubDate>
+			<link>https://github.com/ViennaRSS/vienna-rss/releases/tag/v%2F3.10.6</link>
+			<sparkle:version>9176</sparkle:version>
+			<sparkle:shortVersionString>3.10.6 :284aab65:</sparkle:shortVersionString>
 			<sparkle:minimumSystemVersion>10.13.0</sparkle:minimumSystemVersion>
-			<enclosure url="https://downloads.sourceforge.net/project/vienna-rss/v_3.10.5/Vienna3.10.5.dmg" sparkle:edSignature="E9dL84nthtnjw6CbiuU1SHWoVXqEqj+efwB+L9uzBf+luJ7DKAYhxEO9Vime4loXDZ3l9ziW2XS3Z+Oxo1ZbAQ==" length="9192058" type="application/octet-stream" />
-			<sparkle:releaseNotesLink>https://www.vienna-rss.com/sparkle-files/noteson3.10.5.html</sparkle:releaseNotesLink>
+			<enclosure url="https://downloads.sourceforge.net/project/vienna-rss/v_3.10.6/Vienna3.10.6.dmg" sparkle:edSignature="W0y1QJ41UPn16GJtwYR4EVjj5vUjfKhQyQ2yJZCniencynAUHCaOaEROnFWNYgBN16Aa8MVkynFDkRPoFqXEDw==" length="9192468" type="application/octet-stream" />
+			<sparkle:releaseNotesLink>https://www.vienna-rss.com/sparkle-files/noteson3.10.6.html</sparkle:releaseNotesLink>
 		</item>
 		<item>
 			<title>Vienna 3.8.8 :de36b0c7:</title>
