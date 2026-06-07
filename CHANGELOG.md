@@ -1,6 +1,14 @@
 Vienna ChangeLog File
 =====================
 
+Vienna 3.10.6
+-------------
+_released 2026-05-30_
+### 🤷🏻 Bugfix
+- Fix memory release in Database's -markArticleRead:guid:isRead:
+### 🛤️ Infrastructure updates
+- Build on macOS 26.5 / Xcode 26.5
+
 Vienna 3.11.0 Beta 1
 --------------------
 _released 2026-05-02_  
