@@ -62,7 +62,7 @@ Tags should be in one of the following formats:
 
 ## Steps before releasing Vienna: ##
 
- 1.	Review all recent code changes and make sure you should not change `MACOSX_DEPLOYMENT_TARGET` in the project configuration in order to protect users whose machines do not match minimum macOS requirements from a counter-productive "upgrade".
+ 1.	Review all recent code changes and make sure you should not change `MACOSX_DEPLOYMENT_TARGET` in the project configuration. This is to prevent users whose machines do not match the minimum macOS requirement from getting a non productive "upgrade".
  2.	Update the "CHANGELOG.md" file with a summary of the changes for this build. The most recent build should be at the top of this file. Interesting advices on writing a good changelog can be found [in this blog post](https://xavd.id/blog/post/effective-changelogs/).
  3.	Copy the most recent part of "CHANGELOG.md" in a new Markdown document to generate a new "notes.html" file. This file will be displayed by the autoupdate mechanism when the new version will be detected.
  4.	Commit anything unstaged (on `master` branch if you are releasing a beta or on `stable` branch if you are doing a normal release).
@@ -101,31 +101,37 @@ There are two distinct ways to get the different files needed to publish an upda
 
 ### On Github:
 
-   1. Go to Vienna's releases page on Github : <https://github.com/ViennaRSS/vienna-rss/releases>
-   2. Choose "Draft a new release", type the tag name (`v/3.3.0_beta4`), a description ("Vienna 3.3.0 Beta 4").
-   3. Upload the `Vienna3.3.0_beta4.tgz` file (if you use drag and drop, make sure to drop it on the "<i>Attach binaries by dropping them here or selecting them</i>" area and not on the text area).
-   4. Upload also the compressed dSYM file (whose nome should be something similar to `Vienna3.3.0_beta4.5b272a6-dSYM.tgz`)
-   5. For beta and release candidates, check the "This is a prerelease" box.
-   6. Click the "Publish" button.
-   7. Verify the uploaded app: download it, uncompress it and check that it runs OK.
+   3. Go to Vienna's releases page on Github : <https://github.com/ViennaRSS/vienna-rss/releases>
+   4. Choose "Draft a new release", type the tag name (`v/3.3.0_beta4`), a description ("Vienna 3.3.0 Beta 4").
+   5. Upload the `Vienna3.3.0_beta4.tgz` file (if you use drag and drop, make sure to drop it on the "<i>Attach binaries by dropping them here or selecting them</i>" area and not on the text area).
+   6. Upload also the compressed dSYM file (whose nome should be something similar to `Vienna3.3.0_beta4.5b272a6-dSYM.tgz`)
+   7. For beta and release candidates, check the "This is a prerelease" box.
+   8. Click the "Publish" button.
+   9. Verify the uploaded app: download it, uncompress it and check that it runs OK.
 
 ### On Sourceforge.net:
 
-   12. Check that the SourceForge Downloads page for Vienna at <https://sourceforge.net/projects/vienna-rss/files/> got the new files.
-   13. For stable releases only : from the Sourceforge site, choose the ℹ️ button ("View details") of "Vienna3.3.0.tgz" (be careful to select the binary and not the code source file or the dSYM file!) and set the file as default download for Mac OS X. Don't do this for beta releases!
+   10. Check that the SourceForge Downloads page for Vienna at <https://sourceforge.net/projects/vienna-rss/files/> got the new files.
+   11. For stable releases only : from the Sourceforge site, choose the ℹ️ button ("View details") of "Vienna3.3.0.tgz" (be careful to select the binary and not the code source file or the dSYM file!) and set the file as default download for Mac OS X. Don't do this for beta releases!
 
 ### On viennarss.github.io
 
-   14. Upload `changelog_beta.xml` (or `changelog_rc.xml` or `changelog.xml` accordingly) and the `noteson3.3.0_beta4.html` file in the sparkle_files directory
-   15. If you upload a release candidate, change `changelog_beta.xml` to be a copy of the new `changelog_rc.xml` ; and if you upload a release, change `changelog_rc.xml` to be a copy of the new `changelog.xml`
-   16. Run the previous version of Vienna, and make sure that the Sparkle update mechanism works correctly to display and download the latest version. After updating, check again to make sure Sparkle is showing that you have the latest version.
+   12. Upload `changelog_beta.xml` (or `changelog_rc.xml` or `changelog.xml` accordingly) and the `noteson3.3.0_beta4.html` file in the sparkle_files directory
+   13. If you upload a release candidate, change `changelog_beta.xml` to be a copy of the new `changelog_rc.xml` ; and if you upload a release, change `changelog_rc.xml` to be a copy of the new `changelog.xml`
+   14. Run the previous version of Vienna, and make sure that the Sparkle update mechanism works correctly to display and download the latest version. After updating, check again to make sure Sparkle is showing that you have the latest version.
 
 ### On Brew Cask
 
-17. __Optional and for stable releases only :__ submit the version to Homebrew Casks with a command similar to this one:
-
-````bash
-brew bump-cask-pr vienna --version=3.3.0
-````
+15. For stable releases only: check that https://formulae.brew.sh/cask/vienna points to the latest version.
 
 Finally, consider posting an announcement of the new release on <https://www.vienna-rss.com>.
+
+## Steps to sync `master` and `stable` branches
+
+If you released from the `stable` branch:
+- switch to the `master` branch and verify if you should cherry-pick to it or port some of the recent  fixes to `stable`..
+- to make sure that Sparkle will identify beta versions built from `master` as more recent than normal versions built from `stable`, we have to make build numbers from `master` higher than the current ones from `stable`. This is done by merging `stable` into `master`: 
+    ````
+    git merge -X ours stable
+    `````
+
