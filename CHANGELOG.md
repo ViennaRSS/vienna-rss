@@ -1,6 +1,12 @@
 Vienna ChangeLog File
 =====================
 
+Vienna 3.11.0 Beta 2
+--------------------
+_released 2026-06-07_
+### 🤷🏻 Bugfix
+- Fix build number in beta versions. Re-release a 3.11.0 version including 3.10.6 fix and built on macOS 26.5 / Xcode 26.5
+
 Vienna 3.10.6
 -------------
 _released 2026-05-30_
