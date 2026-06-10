@@ -24,7 +24,7 @@ protocol Tab {
 
     var tabUrl: URL? { get set }
     var title: String? { get }
-    var textSelection: String { get }
+    var selectedText: String { get }
     var html: String { get }
     var isLoading: Bool { get }
 

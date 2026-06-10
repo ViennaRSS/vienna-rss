@@ -48,7 +48,7 @@ class CustomWKWebView: WKWebView {
     var canScrollUp: Bool {
         evaluateScrollPossibilities().scrollUpPossible
     }
-    @objc var textSelection: String {
+    @objc var selectedText: String {
         getTextSelection()
     }
 
