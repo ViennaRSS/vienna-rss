@@ -12,6 +12,8 @@ Additionally or alternatively, you can also sync with a server supporting the [O
 Compatibility
 -------------
 
+Vienna 3.11.x will require a minimum of macOS 10.15 (Catalina).
+
 Vienna 3.9.x and 3.10.x require a minimum of macOS 10.13 (High Sierra).  
 Vienna 3.8.x requires a minimum of macOS 10.12 (Sierra).  
 Vienna 3.6.x and 3.7.x require a minimum of OS X 10.11 (El Capitan).  
