@@ -589,8 +589,22 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
                 responseStatusCode = 404;
             }
         } else {
-            responseStatusCode = ((NSHTTPURLResponse *)response).statusCode;
-            lastModifiedString = SafeString([((NSHTTPURLResponse *)response).allHeaderFields valueForKey:@"Last-Modified"]);
+            NSHTTPURLResponse *httpURLResponse = (NSHTTPURLResponse *)response;
+            responseStatusCode = httpURLResponse.statusCode;
+
+            // Store the "Last-Modified" HTTP header field if present, but only
+            // if the response does not contain the "no-store" directive in the
+            // "Cache-Control" HTTP header field.
+            // See: RFC 9111, s 5.2.2.5
+            NSString *cacheControlHeaderField =
+                [httpURLResponse valueForHTTPHeaderField:@"Cache-Control"];
+            NSRange noStoreDirectiveRange =
+                [cacheControlHeaderField rangeOfString:@"no-store"
+                                               options:NSCaseInsensitiveSearch];
+            if (noStoreDirectiveRange.length == 0) {
+                lastModifiedString =
+                    [httpURLResponse valueForHTTPHeaderField:@"Last-Modified"];
+            }
         }
 
         if (responseStatusCode == 304) {
@@ -616,7 +630,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
                      @"url": url,
                      @"data": receivedData,
                      @"mimeType": SafeString(response.MIMEType),
-                     @"lastModifiedString": lastModifiedString,
+                     @"lastModifiedString": SafeString(lastModifiedString),
                  }];
             }
         } else { //other HTTP response codes like 404, 403...
@@ -804,10 +818,9 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     if (feedLink != nil) {
         [dbManager setHomePage:feedLink forFolder:folderId];
     }
-    // Remember the last modified date
-    if (lastModifiedString != nil && lastModifiedString.length > 0) {
-        [dbManager setLastUpdateString:lastModifiedString forFolder:folderId];
-    }
+    // lastModifiedString may be empty, but it should be recorded anyway to
+    // overwrite a previous value.
+    [dbManager setLastUpdateString:lastModifiedString forFolder:folderId];
 
     if (newFeed.items.count == 0) {
         // Mark the feed as empty
