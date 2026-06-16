@@ -42,9 +42,7 @@
 
 // Refresh types
 typedef NS_ENUM(int, RefreshTypes) {
-	MA_Refresh_NilType = -1,
 	MA_Refresh_Feed,
 	MA_Refresh_FavIcon,
 	MA_Refresh_OpenReaderFeed,
-	MA_ForceRefresh_OpenReader_Feed
 };
