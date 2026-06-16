@@ -204,10 +204,12 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     statusMessageDuringRefresh = NSLocalizedString(@"Forcing Refresh subscriptions…", nil);
 
     for (Folder * folder in foldersArray) {
-        if (folder.type == VNAFolderTypeGroup) {
+        VNAFolderType folderType = folder.type;
+        if (folderType == VNAFolderTypeGroup) {
             [self forceRefreshSubscriptionForFolders:[[Database sharedManager] arrayOfFolders:folder.itemId]];
-        } else if (folder.type == VNAFolderTypeOpenReader) {
-            if (![self isRefreshingFolder:folder ofType:MA_Refresh_OpenReaderFeed] &&
+        } else if (folderType == VNAFolderTypeRSS || folderType == VNAFolderTypeOpenReader) {
+            if (![self isRefreshingFolder:folder ofType:MA_Refresh_Feed] &&
+                ![self isRefreshingFolder:folder ofType:MA_Refresh_OpenReaderFeed] &&
                 ![self isRefreshingFolder:folder ofType:MA_ForceRefresh_OpenReader_Feed])
             {
                 [self pumpSubscriptionRefresh:folder shouldForceRefresh:YES];
@@ -497,9 +499,13 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     if (folder.type == VNAFolderTypeRSS) {
         myRequest = [NSMutableURLRequest requestWithURL:url];
         NSString * theLastUpdateString = folder.lastUpdateString;
-        if (![theLastUpdateString isEqualToString:@""]) {
+        if (![theLastUpdateString isEqualToString:@""] && !force) {
             [myRequest setValue:theLastUpdateString forHTTPHeaderField:@"If-Modified-Since"];
             [myRequest setValue:@"feed" forHTTPHeaderField:@"A-IM"];
+        } else if (force) {
+            // Override the cache policy of the NSURLSession instance to ensure
+            // that cached data is ignored.
+            myRequest.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
         }
         [myRequest vna_setUserInfo:@{ @"folder": folder, @"log": aItem, @"type": @(MA_Refresh_Feed) }];
         [myRequest addValue:
