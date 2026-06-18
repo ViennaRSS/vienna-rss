@@ -52,6 +52,7 @@
 -(IBAction)printDocument:(id)sender;
 -(IBAction)newSmartFolder:(id)sender;
 -(IBAction)newSubscription:(id)sender;
+-(IBAction)newSubscriptionFromMenuBar:(id)sender;
 -(IBAction)newGroupFolder:(id)sender;
 -(IBAction)editFolder:(id)sender;
 -(IBAction)openHomePage:(id)sender;
