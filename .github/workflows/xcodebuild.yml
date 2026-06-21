@@ -35,9 +35,11 @@ jobs:
         fetch-depth: 0
     - name: Build Vienna
       run: |
+        set -o pipefail
         xcodebuild -version
-        xcodebuild build-for-testing -project Vienna.xcodeproj -scheme Vienna -configuration Development | xcpretty && exit ${PIPESTATUS[0]}
+        xcodebuild build-for-testing -project Vienna.xcodeproj -scheme Vienna -configuration Development | xcbeautify --renderer github-actions
     - name: Run unit tests
       run: |
+        set -o pipefail
         xcodebuild -version
-        xcodebuild test -project Vienna.xcodeproj -scheme Vienna -configuration Development | xcpretty && exit ${PIPESTATUS[0]}
+        xcodebuild test -project Vienna.xcodeproj -scheme Vienna -configuration Development | xcbeautify --renderer github-actions
