@@ -42,4 +42,4 @@ jobs:
       run: |
         set -o pipefail
         xcodebuild -version
-        xcodebuild test -project Vienna.xcodeproj -scheme Vienna -configuration Development | xcbeautify --renderer github-actions
+        xcodebuild test-without-building -project Vienna.xcodeproj -scheme Vienna -configuration Development | xcbeautify --renderer github-actions
