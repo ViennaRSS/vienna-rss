@@ -1,0 +1,32 @@
+{
+  "pins" : [
+    {
+      "identity" : "fmdb",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ccgus/fmdb",
+      "state" : {
+        "revision" : "1227a3fa2b9916bfd75fe380eb45cd210e69e251",
+        "version" : "2.7.12"
+      }
+    },
+    {
+      "identity" : "mmtabbarview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ViennaRSS/MMTabBarView",
+      "state" : {
+        "branch" : "v/1.5.4",
+        "revision" : "3ad4bb0feb4a51d447591be132a25df153d5afc0"
+      }
+    },
+    {
+      "identity" : "sparkle",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sparkle-project/Sparkle",
+      "state" : {
+        "revision" : "d46d456107feacc80711b21847b82b07bd9fb46e",
+        "version" : "2.9.3"
+      }
+    }
+  ],
+  "version" : 2
+}
