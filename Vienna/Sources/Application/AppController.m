@@ -1249,11 +1249,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
     id<Tab> activeBrowserTab = self.browser.activeTab;
     if (activeBrowserTab) {
-        return activeBrowserTab.textSelection;
+        return activeBrowserTab.selectedText;
     } else {
-        id target = [NSApp targetForAction:@selector(textSelection)];
+        id target = [NSApp targetForAction:@selector(selectedText)];
         if (target) {
-            return [target textSelection];
+            return [target selectedText];
         }
     }
     return @"";
