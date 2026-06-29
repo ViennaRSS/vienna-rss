@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="24506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="kcT-7Q-VSK">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="24765" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="kcT-7Q-VSK">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24765"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -145,7 +145,7 @@ CA
                                                 <action selector="refreshSelectedSubscriptions:" target="Ady-hI-5gd" id="Dc1-Tn-u3l"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Force Refresh Selected Subscriptions From Open Reader" id="1425">
+                                        <menuItem title="Force Refresh Selected Subscriptions" id="1425">
                                             <connections>
                                                 <action selector="forceRefreshSelectedSubscriptions:" target="Ady-hI-5gd" id="uTz-IA-FY8"/>
                                             </connections>
@@ -982,7 +982,7 @@ CA
                             </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="ig3-ao-8RK"/>
-                        <menuItem title="Force Refresh Selected Subscriptions From Open Reader" id="iqm-sr-F8U">
+                        <menuItem title="Force Refresh Selected Subscriptions" id="iqm-sr-F8U">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
                                 <action selector="forceRefreshSelectedSubscriptions:" target="raK-bg-5Pk" id="hJm-Nf-jsT"/>
@@ -1525,7 +1525,7 @@ CA
                             </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="Ujv-wN-Fmi"/>
-                        <menuItem title="Force Refresh Selected Subscriptions From Open Reader" id="9os-ks-jzh">
+                        <menuItem title="Force Refresh Selected Subscriptions" id="9os-ks-jzh">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
                                 <action selector="forceRefreshSelectedSubscriptions:" target="qsb-EY-cZA" id="APM-tB-ZbU"/>

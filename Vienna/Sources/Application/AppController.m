@@ -2660,7 +2660,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 	if (theAction == @selector(forceRefreshSelectedSubscriptions:)) {
 		Folder * folder = [db folderFromID:self.foldersTree.actualSelection];
-		*validateFlag = folder.type == VNAFolderTypeOpenReader && isMainWindowVisible;
+		VNAFolderType folderType = folder.type;
+		*validateFlag = (folderType == VNAFolderTypeRSS || folderType == VNAFolderTypeOpenReader) && isMainWindowVisible;
 		return YES;
 	}
 	if (theAction == @selector(viewArticlesTab:)) {

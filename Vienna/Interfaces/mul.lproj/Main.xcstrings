@@ -1610,96 +1610,96 @@
       }
     },
     "9os-ks-jzh.title" : {
-      "comment" : "Class = \"NSMenuItem\"; title = \"Force Refresh Selected Subscriptions From Open Reader\"; ObjectID = \"9os-ks-jzh\";",
+      "comment" : "Class = \"NSMenuItem\"; title = \"Force Refresh Selected Subscriptions\"; ObjectID = \"9os-ks-jzh\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "da" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Gennemtving opdatering af valgte abonnementer fra Open Reader"
           }
         },
         "de" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Erzwinge das Aktualisieren der ausgewählten Abonnements von Open Reader"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Force Refresh Selected Subscriptions From Open Reader"
+            "value" : "Force Refresh Selected Subscriptions"
           }
         },
         "es" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Forzar actualizar suscripciones seleccionadas desde Open Reader"
           }
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Forcer la mise à jour des abonnements sélectionnés à partir d'Open Reader"
           }
         },
         "gl" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Forzar a actualización das subscricións seleccionadas dende Open Reader"
           }
         },
         "it" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Forza l'aggiornamento delle iscrizioni selezionate da Open Reader"
           }
         },
         "lt" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Priverstinai atnaujinti pasirinktas prenumeratas iš Open Reader"
           }
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Werk geselecteerde abonnementen van Open Reader geforceerd bij"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Forçar Atualização das Assinaturas Selecionadas do Open Reader"
           }
         },
         "pt-PT" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Forçar uma actualização das assinaturas seleccionadas no Open Reader"
           }
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Принудительно обновить выбранные подписки из Open Reader"
           }
         },
         "sv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Tvinga uppdatering för valda prenumerationer från Open Reader"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "从 Open Reader 中强制刷新选中的订阅项"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "從 Open Reader 中強制重新整理選擇的訂閱項目"
           }
         }
@@ -16127,96 +16127,96 @@
       }
     },
     "1425.title" : {
-      "comment" : "Class = \"NSMenuItem\"; title = \"Force Refresh Selected Subscriptions From Open Reader\"; ObjectID = \"1425\";",
+      "comment" : "Class = \"NSMenuItem\"; title = \"Force Refresh Selected Subscriptions\"; ObjectID = \"1425\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "da" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Gennemtving opdatering af valgte abonnementer fra Open Reader"
           }
         },
         "de" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Erzwinge das Aktualisieren der ausgewählten Abonnements von Open Reader"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Force Refresh Selected Subscriptions From Open Reader"
+            "value" : "Force Refresh Selected Subscriptions"
           }
         },
         "es" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Forzar actualizar suscripciones seleccionadas desde Open Reader"
           }
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Forcer mise à jour des abonnements sélectionnés à partir de Open Reader"
           }
         },
         "gl" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Forzar a actualización das subscricións seleccionadas dende Open Reader"
           }
         },
         "it" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Forza l'aggiornamento degli abbonamenti selezionati da Open Reader"
           }
         },
         "lt" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Priverstinai atnaujinti pasirinktas prenumeratas iš Open Reader"
           }
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Werk abonnementen van Open Reader geforceerd bij"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Forçar Atualização das Assinaturas Selecionadas do Open Reader"
           }
         },
         "pt-PT" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Forçar uma actualização das assinaturas seleccionadas no Open Reader"
           }
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Принудительно обновить выбранные подписки из Open Reader"
           }
         },
         "sv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Tvinga uppdatering för valda prenumerationer från Open Reader"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "从 Open Reader 中强制刷新选中的订阅项"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "從 Open Reader 中強制重新整理選擇的訂閱項目"
           }
         }
@@ -19319,96 +19319,96 @@
       }
     },
     "iqm-sr-F8U.title" : {
-      "comment" : "Class = \"NSMenuItem\"; title = \"Force Refresh Selected Subscriptions From Open Reader\"; ObjectID = \"iqm-sr-F8U\";",
+      "comment" : "Class = \"NSMenuItem\"; title = \"Force Refresh Selected Subscriptions\"; ObjectID = \"iqm-sr-F8U\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "da" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Gennemtving opdatering af valgte abonnementer fra Open Reader"
           }
         },
         "de" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Erzwinge das Aktualisieren der ausgewählten Abonnements von Open Reader"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Force Refresh Selected Subscriptions From Open Reader"
+            "value" : "Force Refresh Selected Subscriptions"
           }
         },
         "es" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Forzar actualizar suscripciones seleccionadas desde Open Reader"
           }
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Forcer la mise à jour des abonnements sélectionnés à partir d'Open Reader"
           }
         },
         "gl" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Forzar a actualización das subscricións seleccionadas dende Open Reader"
           }
         },
         "it" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Forza l'aggiornamento delle iscrizioni selezionate da Open Reader"
           }
         },
         "lt" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Priverstinai atnaujinti pasirinktas prenumeratas iš Open Reader"
           }
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Werk geselecteerde abonnementen van Open Reader geforceerd bij"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Forçar Atualização das Assinaturas Selecionadas do Open Reader"
           }
         },
         "pt-PT" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Forçar uma actualização das assinaturas seleccionadas no Open Reader"
           }
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Принудительно обновить выбранные подписки из Open Reader"
           }
         },
         "sv" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Tvinga uppdatering för valda prenumerationer från Open Reader"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "从 Open Reader 中强制刷新选中的订阅项"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "從 Open Reader 中強制重新整理選擇的訂閱項目"
           }
         }

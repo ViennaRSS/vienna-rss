@@ -204,11 +204,12 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     statusMessageDuringRefresh = NSLocalizedString(@"Forcing Refresh subscriptions…", nil);
 
     for (Folder * folder in foldersArray) {
-        if (folder.type == VNAFolderTypeGroup) {
+        VNAFolderType folderType = folder.type;
+        if (folderType == VNAFolderTypeGroup) {
             [self forceRefreshSubscriptionForFolders:[[Database sharedManager] arrayOfFolders:folder.itemId]];
-        } else if (folder.type == VNAFolderTypeOpenReader) {
-            if (![self isRefreshingFolder:folder ofType:MA_Refresh_OpenReaderFeed] &&
-                ![self isRefreshingFolder:folder ofType:MA_ForceRefresh_OpenReader_Feed])
+        } else if (folderType == VNAFolderTypeRSS || folderType == VNAFolderTypeOpenReader) {
+            if (![self isRefreshingFolder:folder ofType:MA_Refresh_Feed] &&
+                ![self isRefreshingFolder:folder ofType:MA_Refresh_OpenReaderFeed])
             {
                 [self pumpSubscriptionRefresh:folder shouldForceRefresh:YES];
             }
@@ -231,8 +232,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
                 [self pumpSubscriptionRefresh:folder shouldForceRefresh:NO];
             }
         } else if (folder.isOpenReaderFolder) {
-            if ((!folder.isUnsubscribed || ignoreSubStatus)  && ![self isRefreshingFolder:folder ofType:MA_Refresh_OpenReaderFeed] &&
-                ![self isRefreshingFolder:folder ofType:MA_ForceRefresh_OpenReader_Feed])
+            if ((!folder.isUnsubscribed || ignoreSubStatus)  && ![self isRefreshingFolder:folder ofType:MA_Refresh_OpenReaderFeed])
             {
                 // we depend of pieces of info gathered by loadSubscriptions
                 NSOperation * op = [NSBlockOperation blockOperationWithBlock:^(void) {
@@ -497,9 +497,13 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     if (folder.type == VNAFolderTypeRSS) {
         myRequest = [NSMutableURLRequest requestWithURL:url];
         NSString * theLastUpdateString = folder.lastUpdateString;
-        if (![theLastUpdateString isEqualToString:@""]) {
+        if (![theLastUpdateString isEqualToString:@""] && !force) {
             [myRequest setValue:theLastUpdateString forHTTPHeaderField:@"If-Modified-Since"];
             [myRequest setValue:@"feed" forHTTPHeaderField:@"A-IM"];
+        } else if (force) {
+            // Override the cache policy of the NSURLSession instance to ensure
+            // that cached data is ignored.
+            myRequest.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
         }
         [myRequest vna_setUserInfo:@{ @"folder": folder, @"log": aItem, @"type": @(MA_Refresh_Feed) }];
         [myRequest addValue:
@@ -589,8 +593,22 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
                 responseStatusCode = 404;
             }
         } else {
-            responseStatusCode = ((NSHTTPURLResponse *)response).statusCode;
-            lastModifiedString = SafeString([((NSHTTPURLResponse *)response).allHeaderFields valueForKey:@"Last-Modified"]);
+            NSHTTPURLResponse *httpURLResponse = (NSHTTPURLResponse *)response;
+            responseStatusCode = httpURLResponse.statusCode;
+
+            // Store the "Last-Modified" HTTP header field if present, but only
+            // if the response does not contain the "no-store" directive in the
+            // "Cache-Control" HTTP header field.
+            // See: RFC 9111, s 5.2.2.5
+            NSString *cacheControlHeaderField =
+                [httpURLResponse valueForHTTPHeaderField:@"Cache-Control"];
+            NSRange noStoreDirectiveRange =
+                [cacheControlHeaderField rangeOfString:@"no-store"
+                                               options:NSCaseInsensitiveSearch];
+            if (noStoreDirectiveRange.length == 0) {
+                lastModifiedString =
+                    [httpURLResponse valueForHTTPHeaderField:@"Last-Modified"];
+            }
         }
 
         if (responseStatusCode == 304) {
@@ -616,7 +634,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
                      @"url": url,
                      @"data": receivedData,
                      @"mimeType": SafeString(response.MIMEType),
-                     @"lastModifiedString": lastModifiedString,
+                     @"lastModifiedString": SafeString(lastModifiedString),
                  }];
             }
         } else { //other HTTP response codes like 404, 403...
@@ -804,10 +822,9 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     if (feedLink != nil) {
         [dbManager setHomePage:feedLink forFolder:folderId];
     }
-    // Remember the last modified date
-    if (lastModifiedString != nil && lastModifiedString.length > 0) {
-        [dbManager setLastUpdateString:lastModifiedString forFolder:folderId];
-    }
+    // lastModifiedString may be empty, but it should be recorded anyway to
+    // overwrite a previous value.
+    [dbManager setLastUpdateString:lastModifiedString forFolder:folderId];
 
     if (newFeed.items.count == 0) {
         // Mark the feed as empty
