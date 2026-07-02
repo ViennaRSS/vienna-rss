@@ -617,10 +617,11 @@
         NSArray * myArray = [[Database sharedManager] minimalCacheForFolder:self.itemId];
         for (Article * myArticle in myArray) {
             NSString * guid = myArticle.guid;
-            myArticle.status = [self retrieveKnownStatusForGuid:guid];
-            [self.cachedArticles setObject:myArticle forKey:guid];
-            if (![self.cachedGuids containsObject:guid]) {
-                [self.cachedGuids addObject:guid];
+            if (![self.cachedArticles objectForKey:guid]) {
+                [self.cachedArticles setObject:myArticle forKey:guid];
+                if (![self.cachedGuids containsObject:guid]) {
+                    [self.cachedGuids addObject:guid];
+                }
             }
         }
         self.isCached = YES;
