@@ -70,7 +70,6 @@
 		_containsBodies = NO;
 		_hasPassword = NO;
 		_cachedArticles = [NSCache new];
-		_cachedArticles.delegate = self;
 		_cachedGuids = [NSMutableArray array];
 		_attributes = [NSMutableDictionary dictionary];
 		self.name = newName;
@@ -618,10 +617,11 @@
         NSArray * myArray = [[Database sharedManager] minimalCacheForFolder:self.itemId];
         for (Article * myArticle in myArray) {
             NSString * guid = myArticle.guid;
-            myArticle.status = [self retrieveKnownStatusForGuid:guid];
-            [self.cachedArticles setObject:myArticle forKey:guid];
-            if (![self.cachedGuids containsObject:guid]) {
-                [self.cachedGuids addObject:guid];
+            if (![self.cachedArticles objectForKey:guid]) {
+                [self.cachedArticles setObject:myArticle forKey:guid];
+                if (![self.cachedGuids containsObject:guid]) {
+                    [self.cachedGuids addObject:guid];
+                }
             }
         }
         self.isCached = YES;
@@ -849,13 +849,4 @@
 	return [NSString stringWithFormat:@"Folder id %li (%@)", (long)self.itemId, self.name];
 }
 
-#pragma mark NSCacheDelegate
--(void)cache:(NSCache *)cache willEvictObject:(id)obj
-{
-    @synchronized(self) {
-        Article * theArticle = ((Article *)obj);
-        NSString * guid = theArticle.guid;
-        [self.cachedGuids removeObject:guid];
-    }
-}
 @end

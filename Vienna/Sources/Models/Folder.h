@@ -69,7 +69,7 @@ typedef NS_OPTIONS(NSUInteger, VNAFolderFlag) {
     VNAFolderFlagBuggySync       = 1 << 7
 };
 
-@interface Folder : NSObject <NSCacheDelegate>
+@interface Folder : NSObject
 
 - (instancetype)initWithId:(NSInteger)itemId
                   parentId:(NSInteger)parentId
