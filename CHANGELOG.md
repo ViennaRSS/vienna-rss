@@ -1,6 +1,18 @@
 Vienna ChangeLog File
 =====================
 
+Vienna 3.10.7
+-------------
+_released 2026-07-04_
+### 🚲 Change
+- Highlight in red the "Delete" buttons on some alerts triggered by the "Delete" button which have destructive actions
+### 🤷🏻 Bugfixes
+- Fix feed refreshes slowness when "Mark updated articles as new" is enabled
+- Improve treatment of HTTP status code 304: do not send "If-Modified-Since" header to server if it sent us beforehand a "no-store" directive
+### 🛤️ Infrastructure updates
+- Build on macOS 26.5.2 / Xcode 26.6
+- Checkout package versions to FMDB 2.7.12, MMTabBarView 1.5.4, Sparkle 2.9.3
+
 Vienna 3.11.0 Beta 2
 --------------------
 _released 2026-06-07_
