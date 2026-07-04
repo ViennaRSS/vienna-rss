@@ -1,6 +1,17 @@
 Vienna ChangeLog File
 =====================
 
+Vienna 3.11.0 Beta 3
+--------------------
+_released 2026-07-04_
+### 🚲 Change
+- Extend force refresh action to regular feeds
+### ⚙️ Internals improvement
+- Work around a property name (textSelection) collision with AppKit
+### 🛤️ Infrastructure updates
+- Update GitHub Actions (up to Xcode 26.6)
+- Add .gitattributes file to identify .h files as Objective-C instead of C
+
 Vienna 3.10.7
 -------------
 _released 2026-07-04_
