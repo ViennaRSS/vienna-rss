@@ -1615,14 +1615,14 @@
       "localizations" : {
         "da" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Gennemtving opdatering af valgte abonnementer fra Open Reader"
+            "state" : "translated",
+            "value" : "Gennemtving opdatering af valgte abonnementer"
           }
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Erzwinge das Aktualisieren der ausgewählten Abonnements von Open Reader"
+            "state" : "translated",
+            "value" : "Aktualisierung der ausgewählten Abonnements erzwingen"
           }
         },
         "en" : {
@@ -1639,8 +1639,8 @@
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Forcer la mise à jour des abonnements sélectionnés à partir d'Open Reader"
+            "state" : "translated",
+            "value" : "Forcer la mise à jour des abonnements sélectionnés"
           }
         },
         "gl" : {
@@ -1663,8 +1663,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Werk geselecteerde abonnementen van Open Reader geforceerd bij"
+            "state" : "translated",
+            "value" : "Werk geselecteerde abonnementen geforceerd bij"
           }
         },
         "pt-BR" : {
@@ -16132,14 +16132,14 @@
       "localizations" : {
         "da" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Gennemtving opdatering af valgte abonnementer fra Open Reader"
+            "state" : "translated",
+            "value" : "Gennemtving opdatering af valgte abonnementer"
           }
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Erzwinge das Aktualisieren der ausgewählten Abonnements von Open Reader"
+            "state" : "translated",
+            "value" : "Aktualisierung der ausgewählten Abonnements erzwingen"
           }
         },
         "en" : {
@@ -16156,8 +16156,8 @@
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Forcer mise à jour des abonnements sélectionnés à partir de Open Reader"
+            "state" : "translated",
+            "value" : "Forcer la mise à jour des abonnements sélectionnés"
           }
         },
         "gl" : {
@@ -16180,8 +16180,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Werk abonnementen van Open Reader geforceerd bij"
+            "state" : "translated",
+            "value" : "Werk geselecteerde abonnementen geforceerd bij"
           }
         },
         "pt-BR" : {
@@ -19324,14 +19324,14 @@
       "localizations" : {
         "da" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Gennemtving opdatering af valgte abonnementer fra Open Reader"
+            "state" : "translated",
+            "value" : "Gennemtving opdatering af valgte abonnementer"
           }
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Erzwinge das Aktualisieren der ausgewählten Abonnements von Open Reader"
+            "state" : "translated",
+            "value" : "Aktualisierung der ausgewählten Abonnements erzwingen"
           }
         },
         "en" : {
@@ -19348,8 +19348,8 @@
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Forcer la mise à jour des abonnements sélectionnés à partir d'Open Reader"
+            "state" : "translated",
+            "value" : "Forcer la mise à jour des abonnements sélectionnés"
           }
         },
         "gl" : {
@@ -19372,8 +19372,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Werk geselecteerde abonnementen van Open Reader geforceerd bij"
+            "state" : "translated",
+            "value" : "Werk geselecteerde abonnementen geforceerd bij"
           }
         },
         "pt-BR" : {
