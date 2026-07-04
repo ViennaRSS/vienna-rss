@@ -597,13 +597,13 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
             // "Cache-Control" HTTP header field.
             // See: RFC 9111, s 5.2.2.5
             NSString *cacheControlHeaderField =
-                [httpURLResponse valueForHTTPHeaderField:@"Cache-Control"];
+                httpURLResponse.allHeaderFields[@"Cache-Control"];
             NSRange noStoreDirectiveRange =
                 [cacheControlHeaderField rangeOfString:@"no-store"
                                                options:NSCaseInsensitiveSearch];
             if (noStoreDirectiveRange.length == 0) {
                 lastModifiedString =
-                    [httpURLResponse valueForHTTPHeaderField:@"Last-Modified"];
+                    httpURLResponse.allHeaderFields[@"Last-Modified"];
             }
         }
 
