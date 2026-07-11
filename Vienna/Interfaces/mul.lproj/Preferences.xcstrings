@@ -4132,10 +4132,40 @@
       "comment" : "Class = \"NSButtonCell\"; title = \"Show unread counts in the main window, menu bar and Dock\"; ObjectID = \"LdO-1H-O0m\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vis ulæst antal i hovedvinduet, menulinjen og Docken"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anzahlen ungelesener Artikel im Hauptfenster, in der Menüleiste und im Dock anzeigen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "Show unread counts in the main window, menu bar and Dock"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher le nombre d'articles non lus dans la fenêtre principale, la barre de menu et le Dock"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toon aantallen ongelezen artikelen in het hoofdvenster, de menubalk en het Dock"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visa antal olästa i huvudfönstret, menyraden och i Dock"
           }
         }
       }
