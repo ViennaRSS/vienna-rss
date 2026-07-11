@@ -2436,6 +2436,7 @@
 					"-Wunused-macros",
 					"-Xclang",
 					"-analyzer-tidy-checker=readability-braces-around-statements,readability-misleading-indentation",
+					"-Werror=unguarded-availability",
 				);
 			};
 			name = Development;
@@ -2481,6 +2482,7 @@
 					"-Wunused-macros",
 					"-Xclang",
 					"-analyzer-tidy-checker=readability-braces-around-statements,readability-misleading-indentation",
+					"-Werror=unguarded-availability",
 				);
 			};
 			name = Deployment;
