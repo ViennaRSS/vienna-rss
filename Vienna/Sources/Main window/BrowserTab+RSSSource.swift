@@ -77,14 +77,18 @@ extension BrowserTab: RSSSource {
         // use javascript to detect RSS feed link
         // TODO: deal with multiple links
         waitForAsyncExecution(until: DispatchTime.now() + DispatchTimeInterval.milliseconds(200)) { [weak self] finishHandler in
-            self?.webView.evaluateJavaScript(BrowserTab.extractHTMLSource) { result, error in
+            guard let self = self else {
+                finishHandler()
+                return
+            }
+            self.webView.evaluateJavaScript(BrowserTab.extractHTMLSource) { result, error in
                 defer { finishHandler() }
-                if let html = result as? String, let data = html.data(using: .utf8), let baseUrl = self?.url, error == nil {
+                if let html = result as? String, let data = html.data(using: .utf8), let baseUrl = self.url, error == nil {
                     let discoverer = FeedDiscoverer(data: data, baseURL: baseUrl)
-                    self?.rssUrls = discoverer.feedURLs().map(\.absoluteURL)
+                    self.rssUrls = discoverer.feedURLs().map(\.absoluteURL)
                 } else {
                     // error or conversion problem
-                    self?.rssUrls = []
+                    self.rssUrls = []
                 }
             }
         }
