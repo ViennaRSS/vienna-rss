@@ -81,7 +81,13 @@ extension BrowserTab: RSSSource {
                 finishHandler()
                 return
             }
+            var didFinish = false
             self.webView.evaluateJavaScript(BrowserTab.extractHTMLSource) { result, error in
+                guard !didFinish else {
+                    self.rssUrls = []
+                    return
+                }
+                didFinish = true
                 defer { finishHandler() }
                 if let html = result as? String, let data = html.data(using: .utf8), let baseUrl = self.url, error == nil {
                     let discoverer = FeedDiscoverer(data: data, baseURL: baseUrl)
@@ -89,6 +95,14 @@ extension BrowserTab: RSSSource {
                 } else {
                     // error or conversion problem
                     self.rssUrls = []
+                }
+            }
+            // Timeout fallback
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200)) {
+                if !didFinish {
+                    didFinish = true
+                    self.rssUrls = []
+                    finishHandler()
                 }
             }
         }
