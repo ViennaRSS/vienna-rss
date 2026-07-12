@@ -55,8 +55,8 @@ extension BrowserTab: RSSSource {
 
     @objc
     func viewDidLoadRss() {
-        registerNavigationEndHandler { [weak self] success in self?.handleNavigationEndRss(success: success) }
         refreshRSSState()
+        registerNavigationEndHandler { [weak self] success in self?.handleNavigationEndRss(success: success) }
     }
 
     func refreshRSSState() {
