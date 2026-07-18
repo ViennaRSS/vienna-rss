@@ -92,29 +92,12 @@ extension BrowserTab {
     }
 
     func updateAddressBarButtons() {
-
-        cancelButtonWidth?.constant = loading ? 30 : 0
-        reloadButtonWidth?.constant = loading ? 0 : 30
-
-        if showRssButton {
-            // show rss button
-            rssButtonWidth?.constant = 40
-        } else {
-            // hide rss button
-            rssButtonWidth?.constant = 0
-        }
+        cancelButton.isHidden = !loading
+        reloadButton.isHidden = loading
+        rssButton.isHidden = !showRssButton
 
         addressBarContainer?.needsLayout = true
-
-        if viewVisible {
-            NSAnimationContext.runAnimationGroup({_ in
-                NSAnimationContext.current.duration = 0.2
-                NSAnimationContext.current.allowsImplicitAnimation = true
-                self.addressBarContainer?.layoutSubtreeIfNeeded()
-            }, completionHandler: nil)
-        } else {
-            self.addressBarContainer?.layoutSubtreeIfNeeded()
-        }
+        addressBarContainer?.layoutSubtreeIfNeeded()
     }
 
     func hideAddressBar(_ hide: Bool, animated: Bool = false) {
