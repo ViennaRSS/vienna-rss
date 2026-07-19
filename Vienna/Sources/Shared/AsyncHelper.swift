@@ -22,7 +22,8 @@ import Foundation
 /// Gives an asynchronous call the ability to run like synchronously called. Calling the finishHandler signals that the execution has finished.
 /// - Parameters:
 ///   - waitingQueue: The queue that waits for the execution to finish
-///   - executingQueue: the queue where the execution shall happen. Must not be the same as queue!
+///   - executingQueue: the queue where the execution shall happen. Must not be the same as waitingQueue!
+///   - delay: delay before starting the execution block!
 ///   - deadline: when to stop waiting for the task to finish execution
 ///   - task: the code that shall be executed. ATTENTION: must call the finishHandler at some point!
 func waitForAsyncExecution(on waitingQueue: DispatchQueue = DispatchQueue.global(qos: .userInitiated), executingQueue: DispatchQueue = DispatchQueue.main, after delay: DispatchTime? = nil, until deadline: DispatchTime? = nil, _ task: @escaping (_ finishHandler: @escaping () -> Void) -> Void ) {
