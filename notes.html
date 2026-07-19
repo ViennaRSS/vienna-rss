@@ -1,31 +1,16 @@
-<!DOCTYPE html><head><meta charset="utf-8"/></head><h2>Vienna 3.11.0 Beta 3</h2>
-<p><em>released 2026-07-04</em></p>
+<!DOCTYPE html><head><meta charset="utf-8"/></head><h2>Vienna 3.11.0 Beta 4</h2>
+<p><em>released 2026-07-19</em></p>
 <h3>🚲 Change</h3>
 <ul>
-<li>Extend force refresh action to regular feeds</li>
+<li>Update translations</li>
 </ul>
-<h3>⚙️ Internals improvement</h3>
+<h2>Vienna 3.10.8</h2>
+<p><em>released 2026-07-19</em></p>
+<h3>🤷🏻 Bugfix</h3>
 <ul>
-<li>Work around a property name (textSelection) collision with AppKit</li>
+<li>Fix a crash on macOS 10.13 and 10.4 (publication of Vienna 3.10.7 had to be removed because of this bug)</li>
 </ul>
-<h3>🛤️ Infrastructure updates</h3>
+<h3>🛤️ Infrastructure update</h3>
 <ul>
-<li>Update GitHub Actions (up to Xcode 26.6)</li>
-<li>Add .gitattributes file to identify .h files as Objective-C instead of C</li>
-</ul>
-<h2>Vienna 3.10.7</h2>
-<p><em>released 2026-07-04</em></p>
-<h3>🚲 Change</h3>
-<ul>
-<li>Highlight in red the “Delete” buttons on some alerts triggered by the “Delete” button which have destructive actions</li>
-</ul>
-<h3>🤷🏻 Bugfixes</h3>
-<ul>
-<li>Fix feed refreshes slowness when “Mark updated articles as new” is enabled</li>
-<li>Improve treatment of HTTP status code 304: do not send “If-Modified-Since” header to server if it sent us beforehand a “no-store” directive</li>
-</ul>
-<h3>🛤️ Infrastructure updates</h3>
-<ul>
-<li>Build on macOS 26.5.2 / Xcode 26.6</li>
-<li>Checkout package versions to FMDB 2.7.12, MMTabBarView 1.5.4, Sparkle 2.9.3</li>
+<li>Make any unguarded request to an unavailable feature prevent build</li>
 </ul>

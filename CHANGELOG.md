@@ -1,5 +1,10 @@
 Vienna ChangeLog File
 =====================
+Vienna 3.11.0 Beta 4
+--------------------
+_released 2026-07-19_
+### 🚲 Change
+- Update translations
 
 Vienna 3.10.8
 -------------
