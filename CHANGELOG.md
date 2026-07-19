@@ -1,6 +1,14 @@
 Vienna ChangeLog File
 =====================
 
+Vienna 3.10.8
+-------------
+_released 2026-07-19_
+### 🤷🏻 Bugfix
+- Fix a crash on macOS 10.13 and 10.4 (publication of Vienna 3.10.7 had to be removed because of this bug)
+### 🛤️ Infrastructure update
+- Make any unguarded request to an unavailable feature prevent build
+
 Vienna 3.10.7
 -------------
 _released 2026-07-04_
