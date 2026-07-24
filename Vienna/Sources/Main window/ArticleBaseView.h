@@ -28,6 +28,8 @@
 @protocol ArticleBaseView <BaseView>
     @property (readonly, nonatomic) BOOL selectFirstUnreadInFolder;
     @property (readonly, nonatomic) BOOL viewNextUnreadInFolder;
+    -(void)scrollLineDownDetails;
+    -(void)scrollLineUpDetails;
 	-(void)scrollDownDetailsOrNextUnread;
 	-(void)scrollUpDetailsOrGoBack;
 	-(void)scrollToArticle:(NSString *)guid;

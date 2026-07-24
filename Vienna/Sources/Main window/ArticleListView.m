@@ -855,7 +855,17 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
         ArticleController * articleController = self.articleController;
         [articleController markReadByArray:self.markedArticleRange readFlag:YES];
         [articleController displayNextUnread];
-    }
+	}
+}
+
+-(void)scrollLineDownDetails
+{
+    [(NSView *)articleText scrollLineDown:nil];
+}
+
+-(void)scrollLineUpDetails
+{
+    [(NSView *)articleText scrollLineUp:nil];
 }
 
 -(void)scrollUpDetailsOrGoBack
