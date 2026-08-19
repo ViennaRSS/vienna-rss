@@ -391,6 +391,16 @@ static void *VNAUnifiedDisplayViewObserverContext = &VNAUnifiedDisplayViewObserv
     }
 }
 
+- (void)scrollLineDownDetails
+{
+    [articleList scrollLineDown:nil];
+}
+
+- (void)scrollLineUpDetails
+{
+    [articleList scrollLineUp:nil];
+}
+
 - (void)scrollUpDetailsOrGoBack
 {
     NSScrollView *scrollView = [articleList enclosingScrollView];
