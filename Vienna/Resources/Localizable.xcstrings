@@ -3701,7 +3701,27 @@
       }
     },
     "Add Subscription…" : {
-      "comment" : "Title of a menu item in Dock"
+      "comment" : "Title of a menu item in menu bar icon",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abonnement hinzufügen …"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter un abonnement…"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voeg abonnement toe…"
+          }
+        }
+      }
     },
     "Add to Safari Reading List" : {
       "comment" : "Toolbar item palette label",
