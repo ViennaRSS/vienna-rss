@@ -16,12 +16,12 @@ jobs:
     strategy:
       matrix:
         include:
-          - os: macos-15
-            xcode: Xcode 16.4
-            developer-dir: /Applications/Xcode_16.4.app/Contents/Developer
           - os: macos-26
             xcode: Xcode 26.6
             developer-dir: /Applications/Xcode_26.6.app/Contents/Developer
+          - os: xcode-27
+            xcode: Xcode 27.0
+            developer-dir: /Applications/Xcode_27.0.app/Contents/Developer
     name: Test with ${{ matrix.xcode }}
     runs-on: ${{ matrix.os }}
     env:
