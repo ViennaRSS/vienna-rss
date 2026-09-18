@@ -2,7 +2,8 @@
 
 ## Writing code
 
-We currently build Vienna with Xcode 26 and the macOS 26 SDK.
+Development of Vienna can be made either with Xcode 26 (on macOS 26) or Xcode 27 (on macOS 27).  
+However, release builds are done on Xcode 26 with the macOS 26 SDK, as the macOS 27 SDK is not stated by Apple as being able to run on systems prior to macOS 12.
 
 Most of Vienna is made with Objective-C, but some newer code is being created in Swift. We welcome both Objective-C and Swift contributions.
 
