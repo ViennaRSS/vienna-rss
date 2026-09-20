@@ -3700,29 +3700,6 @@
         }
       }
     },
-    "Add Subscription…" : {
-      "comment" : "Title of a menu item in menu bar icon",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Abonnement hinzufügen …"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ajouter un abonnement…"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Voeg abonnement toe…"
-          }
-        }
-      }
-    },
     "Add to Safari Reading List" : {
       "comment" : "Toolbar item palette label",
       "localizations" : {
@@ -15680,6 +15657,137 @@
             "value" : "已取得新文章"
           }
         }
+      }
+    },
+    "New Subscription…" : {
+      "comment" : "Title of a menu item in menu bar icon",
+      "localizations" : {
+          "cs" : {
+              "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Nové odebírání…"
+              }
+          },
+          "da" : {
+              "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Nyt abonnement…"
+              }
+          },
+          "de" : {
+              "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Neues Abonnement …"
+              }
+          },
+          "en" : {
+              "stringUnit" : {
+                  "state" : "new",
+                  "value" : "New Subscription…"
+              }
+          },
+          "es" : {
+              "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Nueva suscripción…"
+              }
+          },
+          "eu" : {
+              "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Harpidetza Berria…"
+              }
+          },
+          "fr" : {
+              "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Nouvel abonnement…"
+              }
+          },
+          "gl" : {
+              "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Nova subscricións…"
+              }
+          },
+          "it" : {
+              "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Nuova iscrizione…"
+              }
+          },
+          "ja" : {
+              "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "新規購読…"
+              }
+          },
+          "ko" : {
+              "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "새 구독…"
+              }
+          },
+          "lt" : {
+              "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Nauja prenumerata…"
+              }
+          },
+          "nl" : {
+              "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Nieuw abonnement…"
+              }
+          },
+          "pt-BR" : {
+              "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Nova Assinatura…"
+              }
+          },
+          "pt-PT" : {
+              "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Nova assinatura…"
+              }
+          },
+          "ru" : {
+              "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Новая подписка…"
+              }
+          },
+          "sv" : {
+              "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Ny prenumeration…"
+              }
+          },
+          "tr" : {
+              "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Yeni Abonelik…"
+              }
+          },
+          "uk" : {
+              "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Нова підписка…"
+              }
+          },
+          "zh-Hans" : {
+              "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "新的订阅…"
+              }
+          },
+          "zh-Hant" : {
+              "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "新增訂閱頻道⋯"
+              }
+          }
       }
     },
     "New Tab" : {

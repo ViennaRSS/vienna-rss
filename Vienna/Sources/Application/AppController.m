@@ -1303,7 +1303,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
                                  action:@selector(openVienna:)
                           keyEquivalent:@""];
         [statusBarMenu addItem:[NSMenuItem separatorItem]];
-		[statusBarMenu addItemWithTitle:NSLocalizedString(@"Add Subscription…", @"Title of a menu item in menu bar icon")
+		[statusBarMenu addItemWithTitle:NSLocalizedString(@"New Subscription…", @"Title of a menu item in menu bar icon")
 								 action:@selector(newSubscription:)
 						  keyEquivalent:@""];
 		[statusBarMenu addItem:[NSMenuItem separatorItem]];
