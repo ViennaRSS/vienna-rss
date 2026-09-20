@@ -1,63 +1,133 @@
-/* custom properties */
 :root {
-    --background-color: #fafafa;
-    --text-color: #000;
-    --link: #3366CC;
-    --greyed: #C0C0C0;
+	--background-color: #fafafa;
+	--text-color: #000;
+	--link: #3366CC;
+	--greyed: #C0C0C0;
+	--line-color: #2B2B73;
+	--main-font-family: "Lucida Grande", Helvetica, sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
-    :root {
-        --background-color: #000;
-        --text-color: #d7d7d7;
-        --link: #1d79cd;
-        --greyed: #303030;
-    }
+	:root {
+		--background-color: #000;
+		--text-color: #d7d7d7;
+		--link: #1d79cd;
+		--greyed: #303030;
+	}
 }
 
 body {
-    background-color: var(--background-color);
+	background-color: var(--background-color);
 }
 
 a {
 	color: var(--link);
 	text-decoration: none;
 }
+
 .title {
-	font-family: "Lucida Grande", Arial, Helvetica, sans-serif;
+	font-family: var(--main-font-family);
 	font-weight: 700;
-	font-size: 18pt;
+	font-size: 2em;
 	color: var(--text-color);
+	text-align: center;
 }
-.header {
-	font-family: "Lucida Grande", Arial, Helvetica, sans-serif;
-	font-weight: 700;
-	font-size: 12pt;
+
+img.center {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+h1 {
+	font-family: var(--main-font-family);
+	font-size: 1em;
 	color: var(--text-color);
+	margin: 0;
+	line-height: 1.2em;
 }
+
+h1::before {
+	content: url(../shared/images/Small-Vienna-Logo.png);
+	margin-right: 8px;
+	position: relative;
+}
+
 li {
-	font-family: "Lucida Grande", Arial, Helvetica, sans-serif;
+	font-family: var(--main-font-family);
 	font-weight: 100;
 	font-size: 9pt;
 	color: var(--text-color);
 }
+
 h2 {
-	font-family: "Lucida Grande", Arial, Helvetica, sans-serif;
-	font-weight: 400;
+	font-family: var(--main-font-family);
 	font-size: 10pt;
 	color: var(--text-color);
 }
+
+p + h2 {
+	margin-block-start: 1.66em;
+}
+
 p {
-	font-family: "Lucida Grande", Arial, Helvetica, sans-serif;
+	font-family: var(--main-font-family);
 	font-weight: 100;
 	font-size: 9pt;
 	color: var(--text-color);
 }
+
+table {
+	border-collapse: collapse;
+}
+
 tr {
-	font-family: "Lucida Grande", Arial, Helvetica, sans-serif;
+	font-family: var(--main-font-family);
 	font-size: 9pt;
 	color: var(--text-color);
 }
-.greyed {
-    background-color: var(--greyed);
+
+th {
+	text-align: left;
+}
+
+th,
+td {
+	padding: 8px 11px;
+}
+
+thead th {
+	background-color: var(--greyed);
+}
+
+tbody th {
+	padding: 11px;
+}
+
+tbody td {
+	padding: 6px 11px;
+}
+
+table.shortcuts {
+	width: 662px;
+}
+
+table.shortcuts th:first-child {
+	width: 200px;
+}
+
+table.title-page {
+	width: 100%;
+}
+
+.rss-box {
+	background-color: rgb(255, 102, 0);
+	border: 1px groove rgb(221, 68, 0);
+	color: #fff;
+	display: inline-block;
+	font-size: 0.95em;
+	font-weight: bold;
+	letter-spacing: 1px;
+	padding: 0px 2px;
+	text-shadow: 1px 1px 0px #000;
 }
