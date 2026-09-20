@@ -6,13 +6,13 @@
 
 Vienna is a robust, native macOS application designed for advanced content consumption and aggregation. It provides a customizable reading environment for multiple incoming RSS, Atom, and JSON feeds. Its core function acts as a content management system that goes beyond simple feed reading by providing features like predefined filters, content search, Smart Folders, and a largely configurable reading experience.
 
+### Usage Profile:
+Vienna is designed for **power users** — such as developers, researchers, content curators, or deeply engaged readers — who manage many diverse sources of information and require organizational tools beyond basic feed viewing. For them, a comprehensive set of keyboard shortcuts facilitates rapid browsing and streamlined reading.
+
 ### Key Concepts:
 *   **Federation:** Supports connecting directly to external sites or using the OpenReader API, an adaptation of the now deceased Google Reader API.
 *   **Readability Focus:** The application prioritizes user experience by providing distinct viewing modes—a list view for quick scanning, and a reader mode that cleans up raw web content.
 *   **Extensible Data Layer:** Core functionality is built around structured data models (`Folder`, `Article`) persisted in SQLite. It uses background notification centers to ensure UI components react immediately to data changes without requiring polling.
-
-### Usage Profile:
-Vienna is designed for **power users** — such as developers, researchers, content curators, or deeply engaged readers — who manage many diverse sources of information and require organizational tools beyond basic feed viewing. For them, a comprehensive set of keyboard shortcuts facilitates rapid browsing and streamlined reading.
 
 ---
 ## 🛠 Technology Stack
@@ -59,7 +59,8 @@ For viewing articles expected by the user, the data flow summary is as follows:
 The application follows a typical macOS app structure, including:
 
 ```
-Vienna.xcodeproj           # Xcode project configuration, schemes, targets
+.                          # Project root directory 
+├── Vienna.xcodeproj       # Xcode project configuration, schemes, targets
 ├── Documentation          # Technical docs and guidelines
 ├── Vienna                 # Main application target
 │   ├── Sources            # Core Objective-C/Swift source files
