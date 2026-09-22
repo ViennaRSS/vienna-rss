@@ -356,6 +356,26 @@ static NSString * const VNAUserNotificationFileDownloadThreadIdentifier = @"File
     didFinishDownloadingToURL:(NSURL *)location {
     dispatch_sync(dispatch_get_main_queue(), ^{
         DownloadItem *item = [self itemForSessionTask:downloadTask];
+
+        // Detect any collision with an existing file
+        NSString *destinationName = item.filename;
+        if ([[NSFileManager defaultManager] fileExistsAtPath:destinationName]) {
+            NSString *baseName = destinationName;
+            NSString *extension = [baseName pathExtension];
+            if  (![extension isEqualToString:@""]) {
+                baseName = [baseName substringWithRange:NSMakeRange(0, baseName.length - extension.length -1)];
+                extension = [NSString stringWithFormat:@".%@", extension];
+            }
+
+            NSUInteger counter = 2;
+            while ([[NSFileManager defaultManager] fileExistsAtPath:destinationName]) {
+                destinationName = [NSString stringWithFormat:@"%@-%lu%@", baseName, (unsigned long)counter, extension];
+                counter++;
+            }
+
+            item.filename = destinationName;
+        }
+
         [NSFileManager.defaultManager moveItemAtURL:location
                                               toURL:item.fileURL
                                               error:nil];
