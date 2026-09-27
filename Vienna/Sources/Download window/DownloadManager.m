@@ -173,7 +173,6 @@ static NSString * const VNAUserNotificationFileDownloadThreadIdentifier = @"File
     item.state = DownloadStateInit;
     item.downloadTask = task;
     item.filename = destPath;
-    item.fileURL = [NSURL fileURLWithPath:destPath];
     [self.downloads insertObject:item atIndex:0];
 
     [task resume];
@@ -290,7 +289,7 @@ static NSString * const VNAUserNotificationFileDownloadThreadIdentifier = @"File
                                                   filename];
                 userInfo = @{
                     UserNotificationContextKey: UserNotificationContextFileDownloadCompleted,
-                    UserNotificationFilePathKey: item.fileURL.path
+                    UserNotificationFilePathKey: item.filename
                 };
                 break;
             case DownloadStateFailed:
@@ -300,7 +299,7 @@ static NSString * const VNAUserNotificationFileDownloadThreadIdentifier = @"File
                                                   filename];
                 userInfo = @{
                     UserNotificationContextKey: UserNotificationContextFileDownloadFailed,
-                    UserNotificationFilePathKey: item.fileURL.path
+                    UserNotificationFilePathKey: item.filename
                 };
                 break;
             default:

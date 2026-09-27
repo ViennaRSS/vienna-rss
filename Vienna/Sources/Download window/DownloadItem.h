@@ -37,6 +37,6 @@ typedef NS_ENUM(NSInteger, DownloadState) {
 @property (readonly, nonatomic) NSImage *image;
 
 @property (nonatomic) NSURLSessionDownloadTask *downloadTask;
-@property (nonatomic) NSURL *fileURL;
+@property (readonly, nonatomic) NSURL *fileURL;
 
 @end
