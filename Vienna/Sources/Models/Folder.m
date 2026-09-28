@@ -170,7 +170,11 @@
             folderImage = [FolderImageCache.defaultCache retrieveImage:homePageSiteRoot];
             folderImage.size = NSMakeSize(16.0, 16.0);
             if (!folderImage || !folderImage.isValid) {
-                folderImage = [NSImage imageNamed:ACImageNameRSSFeed];
+                if (@available(macOS 11.0, *)) {
+                    folderImage = [NSImage imageNamed:ACImageNameRssSquare];
+                } else {
+                    folderImage = [NSImage imageNamed:ACImageNameRSSFeed];
+                }
             }
             break;
         }
@@ -194,7 +198,11 @@
     switch (self.type) {
         case VNAFolderTypeRSS:
         case VNAFolderTypeOpenReader:
-            return [NSImage imageNamed:ACImageNameRSSFeed];
+            if (@available(macOS 11.0, *)) {
+                return [NSImage imageNamed:ACImageNameRssSquare];
+            } else {
+                return [NSImage imageNamed:ACImageNameRSSFeed];
+            }
         default:
             return self.image;
     }
