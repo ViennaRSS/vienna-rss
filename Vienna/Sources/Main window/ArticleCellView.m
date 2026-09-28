@@ -95,10 +95,25 @@
 
 }
 
+// MARK: NSResponder
+
 - (BOOL)acceptsFirstResponder
 {
 	return NO;
 }
+
+// The web view will not respond to short mouse-down events for link clicks
+// while embedded in a table view. By making the article view first responder
+// before passing the mouse-down event, the link can be clicked.
+- (void)mouseDown:(NSEvent *)event
+{
+    if ([articleView isKindOfClass:[NSResponder class]]) {
+        [self.window makeFirstResponder:(NSResponder *)articleView];
+    }
+   [super mouseDown:event];
+}
+
+// MARK: Actions
 
 /* makeTextStandardSize
  * Make webview text size smaller
