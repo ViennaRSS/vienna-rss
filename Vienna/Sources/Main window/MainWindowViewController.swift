@@ -23,8 +23,8 @@ import Cocoa
 final class MainWindowViewController: NSViewController {
 
     @IBOutlet private var splitView: NSSplitView!
-    private(set) var foldersTree: FoldersTree!
-    private(set) var browser: (any Browser & NSViewController)!
+    private(set) var foldersTree: FoldersTree?
+    private(set) var browser: (any Browser & NSViewController)?
     private(set) var articleController = ArticleController()
     @IBOutlet private(set) var articleListView: ArticleListView!
     @IBOutlet private(set) var unifiedDisplayView: UnifiedDisplayView!

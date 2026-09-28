@@ -32,9 +32,9 @@ final class MainWindowController: NSWindowController {
     @IBOutlet private var filterToolbarItemMenu: NSMenu!
     @IBOutlet private var styleToolbarItemMenu: NSMenu!
 
-    @objc private(set) var foldersTree: FoldersTree!
-    @objc private(set) var browser: (any Browser & NSViewController)!
-    @objc weak var articleController: ArticleController!
+    @objc private(set) var foldersTree: FoldersTree?
+    @objc private(set) var browser: (any Browser & NSViewController)?
+    @objc weak var articleController: ArticleController?
 
     // MARK: Initialization
 
@@ -164,10 +164,10 @@ final class MainWindowController: NSWindowController {
     // MARK: Sharing services
 
     private var hasShareableItems: Bool {
-        if let activeTab = self.browser.activeTab {
+        if let activeTab = browser?.activeTab {
             return activeTab.tabUrl != nil
         } else {
-            return self.articleController?.selectedArticle != nil
+            return articleController?.selectedArticle != nil
         }
     }
 
@@ -175,7 +175,7 @@ final class MainWindowController: NSWindowController {
 
     private var shareableItems: [any NSPasteboardWriting] {
         var items = [any NSPasteboardWriting]()
-        if let activeTab = browser.activeTab, let url = activeTab.tabUrl {
+        if let activeTab = browser?.activeTab, let url = activeTab.tabUrl {
             items.append(url as NSURL)
             let title = activeTab.title ?? NSLocalizedString("URL", comment: "URL")
             items.append(title as NSString)
@@ -278,15 +278,17 @@ final class MainWindowController: NSWindowController {
     // MARK: Responder chain
 
     override func supplementalTarget(forAction action: Selector, sender: Any?) -> Any? {
-        if self.browser.activeTab == nil && articleController.responds(to: action) {
+        if let browser, let articleController,
+            browser.activeTab == nil && articleController.responds(to: action)
+        {
             return articleController
         }
         return super.supplementalTarget(forAction: action, sender: sender)
     }
 
     override func supplementalHandler(for event: NSEvent) -> NSResponder? {
-        if self.articleController.canHandle(event) {
-            return self.articleController
+        if let articleController, articleController.canHandle(event) {
+            return articleController
         }
         return self
     }
@@ -314,6 +316,9 @@ final class MainWindowController: NSWindowController {
 extension MainWindowController: NSMenuItemValidation {
 
     func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+        guard isWindowLoaded else {
+            return false
+        }
         switch menuItem.action {
         case #selector(performSharingService(_:)), #selector(invokeSharingServicePicker(_:)):
             return hasShareableItems
@@ -334,6 +339,9 @@ extension MainWindowController: NSMenuItemValidation {
 extension MainWindowController: NSToolbarItemValidation {
 
     func validateToolbarItem(_ item: NSToolbarItem) -> Bool {
+        guard isWindowLoaded else {
+            return false
+        }
         switch item.action {
         case #selector(invokeSharingServicePicker(_:)), #selector(performSharingService(_:)):
             return hasShareableItems
@@ -363,9 +371,6 @@ extension MainWindowController: NSWindowDelegate {
         }
 
         observationTokens = [
-            articleController.observe(\.filterModeLabel, options: .initial) { [weak self] controller, _ in
-                self?.currentFilter = controller.filterModeLabel
-            },
             OpenReader.shared.observe(\.statusMessage, options: [.initial, .new]) { [weak self] manager, change in
                 if change.newValue is String {
                     self?.statusLabel.stringValue = manager.statusMessage
@@ -380,6 +385,12 @@ extension MainWindowController: NSWindowDelegate {
                 self?.updateSubtitle()
             }
         ]
+        if let articleController {
+            let observationToken = articleController.observe(\.filterModeLabel, options: .initial) { [weak self] controller, _ in
+                self?.currentFilter = controller.filterModeLabel
+            }
+            observationTokens.append(observationToken)
+        }
     }
 
 }
