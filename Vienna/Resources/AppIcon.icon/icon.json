@@ -1,16 +1,16 @@
 {
+  "color-space-for-untagged-svg-colors" : "display-p3",
   "fill" : "system-light",
   "groups" : [
     {
       "layers" : [
         {
-          "image-name" : "icon_512x512@2x-flat.svg",
-          "name" : "icon_512x512@2x-flat",
+          "image-name" : "Symbol.svg",
           "position" : {
-            "scale" : 1.25,
+            "scale" : 1,
             "translation-in-points" : [
-              16,
-              0
+              35,
+              -10
             ]
           }
         }
