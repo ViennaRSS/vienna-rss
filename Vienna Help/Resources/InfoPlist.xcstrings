@@ -5,6 +5,18 @@
       "comment" : "This title will be shown in the Help Viewer app.",
       "extractionState" : "manual",
       "localizations" : {
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vienna hjælp"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vienna-Hilfe"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -29,10 +41,22 @@
             "value" : "Aiuto di Vienna"
           }
         },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vienna Help"
+          }
+        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vienna hjälp"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vienna 輔助說明"
           }
         }
       }

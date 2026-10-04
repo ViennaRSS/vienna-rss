@@ -644,7 +644,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Uppdatera authentisering"
+            "value" : "Uppdatera autentisering"
           }
         },
         "tr" : {
@@ -1157,12 +1157,6 @@
             "value" : "Загрузить полные HTML-статьи"
           }
         },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Use Web Page for Articles"
-          }
-        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1544,7 +1538,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Authentisering"
+            "value" : "Autentisering"
           }
         },
         "tr" : {

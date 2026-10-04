@@ -1631,34 +1631,10 @@
             "value" : "Force Refresh Selected Subscriptions"
           }
         },
-        "es" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Forzar actualizar suscripciones seleccionadas desde Open Reader"
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Forcer la mise à jour des abonnements sélectionnés"
-          }
-        },
-        "gl" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Forzar a actualización das subscricións seleccionadas dende Open Reader"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Forza l'aggiornamento delle iscrizioni selezionate da Open Reader"
-          }
-        },
-        "lt" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Priverstinai atnaujinti pasirinktas prenumeratas iš Open Reader"
           }
         },
         "nl" : {
@@ -1667,40 +1643,10 @@
             "value" : "Werk geselecteerde abonnementen geforceerd bij"
           }
         },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Forçar Atualização das Assinaturas Selecionadas do Open Reader"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Forçar uma actualização das assinaturas seleccionadas no Open Reader"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Принудительно обновить выбранные подписки из Open Reader"
-          }
-        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tvinga uppdatering av valda prenumerationer"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "从 Open Reader 中强制刷新选中的订阅项"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "從 Open Reader 中強制重新整理選擇的訂閱項目"
           }
         }
       }
@@ -16148,34 +16094,10 @@
             "value" : "Force Refresh Selected Subscriptions"
           }
         },
-        "es" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Forzar actualizar suscripciones seleccionadas desde Open Reader"
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Forcer la mise à jour des abonnements sélectionnés"
-          }
-        },
-        "gl" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Forzar a actualización das subscricións seleccionadas dende Open Reader"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Forza l'aggiornamento degli abbonamenti selezionati da Open Reader"
-          }
-        },
-        "lt" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Priverstinai atnaujinti pasirinktas prenumeratas iš Open Reader"
           }
         },
         "nl" : {
@@ -16184,40 +16106,10 @@
             "value" : "Werk geselecteerde abonnementen geforceerd bij"
           }
         },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Forçar Atualização das Assinaturas Selecionadas do Open Reader"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Forçar uma actualização das assinaturas seleccionadas no Open Reader"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Принудительно обновить выбранные подписки из Open Reader"
-          }
-        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tvinga uppdatering av valda prenumerationer"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "从 Open Reader 中强制刷新选中的订阅项"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "從 Open Reader 中強制重新整理選擇的訂閱項目"
           }
         }
       }
@@ -19340,34 +19232,10 @@
             "value" : "Force Refresh Selected Subscriptions"
           }
         },
-        "es" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Forzar actualizar suscripciones seleccionadas desde Open Reader"
-          }
-        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Forcer la mise à jour des abonnements sélectionnés"
-          }
-        },
-        "gl" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Forzar a actualización das subscricións seleccionadas dende Open Reader"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Forza l'aggiornamento delle iscrizioni selezionate da Open Reader"
-          }
-        },
-        "lt" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Priverstinai atnaujinti pasirinktas prenumeratas iš Open Reader"
           }
         },
         "nl" : {
@@ -19376,40 +19244,10 @@
             "value" : "Werk geselecteerde abonnementen geforceerd bij"
           }
         },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Forçar Atualização das Assinaturas Selecionadas do Open Reader"
-          }
-        },
-        "pt-PT" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Forçar uma actualização das assinaturas seleccionadas no Open Reader"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Принудительно обновить выбранные подписки из Open Reader"
-          }
-        },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tvinga uppdatering av valda prenumerationer"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "从 Open Reader 中强制刷新选中的订阅项"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "從 Open Reader 中強制重新整理選擇的訂閱項目"
           }
         }
       }
