@@ -28,7 +28,10 @@
 #import "Preferences.h"
 #import "Vienna-Swift.h"
 
+#include <sys/xattr.h>
+
 static NSString * const VNAUserNotificationFileDownloadThreadIdentifier = @"FileDownloadThreadIdentifier";
+static const char *whereFromAttributeName = "com.apple.metadata:kMDItemWhereFroms";
 
 @interface DownloadManager ()
 
@@ -379,6 +382,19 @@ static NSString * const VNAUserNotificationFileDownloadThreadIdentifier = @"File
         [NSFileManager.defaultManager moveItemAtURL:location
                                               toURL:item.fileURL
                                               error:nil];
+
+        // write metadata describing where the file was obtained from
+        NSString *origin = downloadTask.originalRequest.URL.absoluteString;
+        NSArray *origins = @[origin];
+        NSData *value = [NSPropertyListSerialization dataWithPropertyList:origins
+                                                                   format:NSPropertyListBinaryFormat_v1_0
+                                                                  options:0
+                                                                    error:nil];
+        size_t size = value.length;
+        int options = XATTR_NOFOLLOW | 0; // create or replace the attribute, do not follow symbolic links
+        setxattr(destinationName.fileSystemRepresentation, whereFromAttributeName, value.bytes, size, 0, options);
+
+        // notify
         item.state = DownloadStateCompleted;
         [self notifyDownloadItemChange:item];
         [self archiveDownloadsList];
