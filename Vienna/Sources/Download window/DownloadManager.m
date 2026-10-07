@@ -234,34 +234,54 @@ static const char *whereFromAttributeName = "com.apple.metadata:kMDItemWhereFrom
     return [downloadPath stringByAppendingPathComponent:filename];
 }
 
-// Looks up the specified file in the download list to determine if it is being
-// downloaded. If not, then it looks up the file in the workspace.
-+ (BOOL)isFileDownloaded:(NSString *)filename {
-    DownloadManager *downloadManager = DownloadManager.sharedInstance;
-    NSInteger count = downloadManager.downloadsList.count;
-    NSInteger index;
+// Looks up the specified URL in the workspace to determine if it has been downloaded
++ (nullable NSString *)fullpathForDownloadedURL:(NSString *)urlString {
+    NSString *shortname = [NSURL URLWithString:urlString].lastPathComponent;
+    NSString *expectedPath = [DownloadManager fullDownloadPath:shortname];
+    NSString *directoryPath = [expectedPath substringWithRange:NSMakeRange(0, expectedPath.length - shortname.length)];
+    NSString *extension = [expectedPath pathExtension];
+    if  (![extension isEqualToString:@""]) {
+        shortname = [shortname substringWithRange:NSMakeRange(0, shortname.length - extension.length -1)];
+        extension = [NSString stringWithFormat:@".%@", extension];
+    }
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *files = [fileManager contentsOfDirectoryAtPath:directoryPath error:nil];
 
-    NSString *firstFile = filename.stringByStandardizingPath;
-
-    for (index = 0; index < count; ++index) {
-        DownloadItem *item = downloadManager.downloadsList[index];
-        NSString *secondFile = filename.stringByStandardizingPath;
-
-        if ([firstFile compare:secondFile
-                       options:NSCaseInsensitiveSearch] == NSOrderedSame) {
-            if (item.state != DownloadStateCompleted) {
-                return NO;
+    NSString * name = nil;
+    for (NSString *file in files) {
+        if ([file hasPrefix:shortname] && [file hasSuffix:extension]) {
+            NSString *fullpath = [directoryPath stringByAppendingString:file];
+            if ([[DownloadManager originFromMetadata:fullpath] isEqualToString:urlString]) {
+                name = fullpath;
+                continue;
             }
-
-            // File completed download but possibly moved or deleted after
-            // download so check the file system.
-            return [[NSFileManager defaultManager] fileExistsAtPath:secondFile];
         }
     }
-    return NO;
+    return name;
 }
 
 // MARK: Private methods
+
++ (nullable NSString *)originFromMetadata:(NSString *)filePath
+{
+    // Retrieve the metadata length
+    size_t size = getxattr(filePath.fileSystemRepresentation, whereFromAttributeName, NULL, 0, 0, 0);
+    if (size > 0) {
+        void *buffer = malloc(size);
+        // retrieve the metadata
+        ssize_t read = getxattr(filePath.fileSystemRepresentation, whereFromAttributeName, buffer, size, 0, 0);
+        if (read < 0) {
+            free(buffer);
+            return nil;
+        }
+        NSData *data = [NSData dataWithBytesNoCopy:buffer length:size freeWhenDone:YES];
+        id plist = [NSPropertyListSerialization propertyListWithData:data options:NSPropertyListImmutable format:NULL error:nil];
+        if ([plist isKindOfClass:[NSArray class]] && [(NSArray *)plist count] > 0 && [((NSArray *)plist)[0] isKindOfClass:[NSString class]]) {
+            return ((NSArray *)plist)[0];
+        }
+    }
+    return nil;
+}
 
 // Send a notification that the specified download item has changed.
 - (void)notifyDownloadItemChange:(DownloadItem *)item {
