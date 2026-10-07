@@ -29,7 +29,7 @@
 @property (readonly, nonatomic) NSArray<DownloadItem *> *downloadsList;
 @property (readonly, nonatomic) BOOL hasActiveDownloads;
 
-+ (BOOL)isFileDownloaded:(NSString *)filename;
++ (nullable NSString *)fullpathForDownloadedURL:(NSString *_Nonnull)urlString;
 + (NSString *)fullDownloadPath:(NSString *)filename;
 
 - (void)clearList;
