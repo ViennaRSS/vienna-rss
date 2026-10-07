@@ -238,6 +238,10 @@ static const char *whereFromAttributeName = "com.apple.metadata:kMDItemWhereFrom
 + (nullable NSString *)fullpathForDownloadedURL:(NSString *)urlString {
     NSString *shortname = [NSURL URLWithString:urlString].lastPathComponent;
     NSString *expectedPath = [DownloadManager fullDownloadPath:shortname];
+    if ([[DownloadManager originFromMetadata:expectedPath] isEqualToString:urlString]) {
+        return expectedPath;
+    }
+
     NSString *directoryPath = [expectedPath substringWithRange:NSMakeRange(0, expectedPath.length - shortname.length)];
     NSString *extension = [expectedPath pathExtension];
     if  (![extension isEqualToString:@""]) {
