@@ -28,7 +28,10 @@
 #import "Preferences.h"
 #import "Vienna-Swift.h"
 
+#include <sys/xattr.h>
+
 static NSString * const VNAUserNotificationFileDownloadThreadIdentifier = @"FileDownloadThreadIdentifier";
+static const char *whereFromAttributeName = "com.apple.metadata:kMDItemWhereFroms";
 
 @interface DownloadManager ()
 
@@ -157,12 +160,18 @@ static NSString * const VNAUserNotificationFileDownloadThreadIdentifier = @"File
 
 // Downloads a file from the specified URL.
 - (void)downloadFileFromURL:(NSString *)url {
+    if (!url) {
+        return;
+    }
     NSString *filename = [NSURL URLWithString:url].lastPathComponent;
     [self downloadFileFromURL:url withFilename:filename];
 }
 
 // Downloads a file from the specified URL to specified filename
 - (void)downloadFileFromURL:(NSString *)url withFilename:(NSString *)filename {
+    if (!url || !filename) {
+        return;
+    }
     NSString *destPath = [DownloadManager fullDownloadPath:filename];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]
                                              cachePolicy:NSURLRequestUseProtocolCachePolicy
@@ -173,7 +182,6 @@ static NSString * const VNAUserNotificationFileDownloadThreadIdentifier = @"File
     item.state = DownloadStateInit;
     item.downloadTask = task;
     item.filename = destPath;
-    item.fileURL = [NSURL fileURLWithPath:destPath];
     [self.downloads insertObject:item atIndex:0];
 
     [task resume];
@@ -232,34 +240,58 @@ static NSString * const VNAUserNotificationFileDownloadThreadIdentifier = @"File
     return [downloadPath stringByAppendingPathComponent:filename];
 }
 
-// Looks up the specified file in the download list to determine if it is being
-// downloaded. If not, then it looks up the file in the workspace.
-+ (BOOL)isFileDownloaded:(NSString *)filename {
-    DownloadManager *downloadManager = DownloadManager.sharedInstance;
-    NSInteger count = downloadManager.downloadsList.count;
-    NSInteger index;
+// Looks up the specified URL in the workspace to determine if it has been downloaded
++ (nullable NSString *)fullpathForDownloadedURL:(NSString *)urlString {
+    NSString *shortname = [NSURL URLWithString:urlString].lastPathComponent;
+    NSString *expectedPath = [DownloadManager fullDownloadPath:shortname];
+    if ([[DownloadManager originFromMetadata:expectedPath] isEqualToString:urlString]) {
+        return expectedPath;
+    }
 
-    NSString *firstFile = filename.stringByStandardizingPath;
+    NSString *directoryPath = [expectedPath substringWithRange:NSMakeRange(0, expectedPath.length - shortname.length)];
+    NSString *extension = [expectedPath pathExtension];
+    if  (![extension isEqualToString:@""]) {
+        shortname = [shortname substringWithRange:NSMakeRange(0, shortname.length - extension.length -1)];
+        extension = [NSString stringWithFormat:@".%@", extension];
+    }
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *files = [fileManager contentsOfDirectoryAtPath:directoryPath error:nil];
 
-    for (index = 0; index < count; ++index) {
-        DownloadItem *item = downloadManager.downloadsList[index];
-        NSString *secondFile = filename.stringByStandardizingPath;
-
-        if ([firstFile compare:secondFile
-                       options:NSCaseInsensitiveSearch] == NSOrderedSame) {
-            if (item.state != DownloadStateCompleted) {
-                return NO;
+    NSString * name = nil;
+    for (NSString *file in files) {
+        if ([file hasPrefix:shortname] && [file hasSuffix:extension]) {
+            NSString *fullpath = [directoryPath stringByAppendingString:file];
+            if ([[DownloadManager originFromMetadata:fullpath] isEqualToString:urlString]) {
+                name = fullpath;
+                continue;
             }
-
-            // File completed download but possibly moved or deleted after
-            // download so check the file system.
-            return [[NSFileManager defaultManager] fileExistsAtPath:secondFile];
         }
     }
-    return NO;
+    return name;
 }
 
 // MARK: Private methods
+
++ (nullable NSString *)originFromMetadata:(NSString *)filePath
+{
+    // Retrieve the metadata length
+    size_t size = getxattr(filePath.fileSystemRepresentation, whereFromAttributeName, NULL, 0, 0, 0);
+    if (size > 0) {
+        void *buffer = malloc(size);
+        // retrieve the metadata
+        ssize_t read = getxattr(filePath.fileSystemRepresentation, whereFromAttributeName, buffer, size, 0, 0);
+        if (read < 0) {
+            free(buffer);
+            return nil;
+        }
+        NSData *data = [NSData dataWithBytesNoCopy:buffer length:size freeWhenDone:YES];
+        id plist = [NSPropertyListSerialization propertyListWithData:data options:NSPropertyListImmutable format:NULL error:nil];
+        if ([plist isKindOfClass:[NSArray class]] && [(NSArray *)plist count] > 0 && [((NSArray *)plist)[0] isKindOfClass:[NSString class]]) {
+            return ((NSArray *)plist)[0];
+        }
+    }
+    return nil;
+}
 
 // Send a notification that the specified download item has changed.
 - (void)notifyDownloadItemChange:(DownloadItem *)item {
@@ -290,7 +322,7 @@ static NSString * const VNAUserNotificationFileDownloadThreadIdentifier = @"File
                                                   filename];
                 userInfo = @{
                     UserNotificationContextKey: UserNotificationContextFileDownloadCompleted,
-                    UserNotificationFilePathKey: item.fileURL.path
+                    UserNotificationFilePathKey: item.filename
                 };
                 break;
             case DownloadStateFailed:
@@ -300,7 +332,7 @@ static NSString * const VNAUserNotificationFileDownloadThreadIdentifier = @"File
                                                   filename];
                 userInfo = @{
                     UserNotificationContextKey: UserNotificationContextFileDownloadFailed,
-                    UserNotificationFilePathKey: item.fileURL.path
+                    UserNotificationFilePathKey: item.filename
                 };
                 break;
             default:
@@ -357,9 +389,42 @@ static NSString * const VNAUserNotificationFileDownloadThreadIdentifier = @"File
     didFinishDownloadingToURL:(NSURL *)location {
     dispatch_sync(dispatch_get_main_queue(), ^{
         DownloadItem *item = [self itemForSessionTask:downloadTask];
+
+        // Detect any collision with an existing file
+        NSString *destinationName = item.filename;
+        if ([[NSFileManager defaultManager] fileExistsAtPath:destinationName]) {
+            NSString *baseName = destinationName;
+            NSString *extension = [baseName pathExtension];
+            if  (![extension isEqualToString:@""]) {
+                baseName = [baseName substringWithRange:NSMakeRange(0, baseName.length - extension.length -1)];
+                extension = [NSString stringWithFormat:@".%@", extension];
+            }
+
+            NSUInteger counter = 2;
+            while ([[NSFileManager defaultManager] fileExistsAtPath:destinationName]) {
+                destinationName = [NSString stringWithFormat:@"%@-%lu%@", baseName, (unsigned long)counter, extension];
+                counter++;
+            }
+
+            item.filename = destinationName;
+        }
+
         [NSFileManager.defaultManager moveItemAtURL:location
                                               toURL:item.fileURL
                                               error:nil];
+
+        // write metadata describing where the file was obtained from
+        NSString *origin = downloadTask.originalRequest.URL.absoluteString;
+        NSArray *origins = @[origin];
+        NSData *value = [NSPropertyListSerialization dataWithPropertyList:origins
+                                                                   format:NSPropertyListBinaryFormat_v1_0
+                                                                  options:0
+                                                                    error:nil];
+        size_t size = value.length;
+        int options = XATTR_NOFOLLOW | 0; // create or replace the attribute, do not follow symbolic links
+        setxattr(destinationName.fileSystemRepresentation, whereFromAttributeName, value.bytes, size, 0, options);
+
+        // notify
         item.state = DownloadStateCompleted;
         [self notifyDownloadItemChange:item];
         [self archiveDownloadsList];

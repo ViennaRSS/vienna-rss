@@ -105,8 +105,8 @@
 
 	// Find the file's likely location in Finder and see if it is already there.
 	// We'll set the options in the pane based on whether the file is there or not.
-	NSString * destPath = [DownloadManager fullDownloadPath:basename];
-	if (![DownloadManager isFileDownloaded:destPath]) {
+	NSString * destPath = [DownloadManager fullpathForDownloadedURL:enclosureURLString];
+	if (destPath == nil) {
 		[downloadButton setTitle:NSLocalizedString(@"Download", nil)];
 		[downloadButton sizeToFit];
 		downloadButton.action = @selector(downloadFile:);
@@ -152,8 +152,7 @@
  */
 -(IBAction)openFile:(id)sender
 {
-	NSString * basename = [NSURL URLWithString:enclosureURLString].lastPathComponent;
-	NSString * destPath = [DownloadManager fullDownloadPath:basename];
+    NSString * destPath = [DownloadManager fullpathForDownloadedURL:enclosureURLString];
 
     NSURL *url = [NSURL fileURLWithPath:destPath];
     [NSWorkspace.sharedWorkspace openURL:url];
