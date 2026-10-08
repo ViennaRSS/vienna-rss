@@ -160,12 +160,18 @@ static const char *whereFromAttributeName = "com.apple.metadata:kMDItemWhereFrom
 
 // Downloads a file from the specified URL.
 - (void)downloadFileFromURL:(NSString *)url {
+    if (!url) {
+        return;
+    }
     NSString *filename = [NSURL URLWithString:url].lastPathComponent;
     [self downloadFileFromURL:url withFilename:filename];
 }
 
 // Downloads a file from the specified URL to specified filename
 - (void)downloadFileFromURL:(NSString *)url withFilename:(NSString *)filename {
+    if (!url || !filename) {
+        return;
+    }
     NSString *destPath = [DownloadManager fullDownloadPath:filename];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]
                                              cachePolicy:NSURLRequestUseProtocolCachePolicy
