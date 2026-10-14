@@ -24,18 +24,21 @@
 
 @interface DownloadManager : NSObject <NSURLSessionDownloadDelegate>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @property (class, readonly, nonatomic) DownloadManager *sharedInstance NS_SWIFT_NAME(shared);
 
 @property (readonly, nonatomic) NSArray<DownloadItem *> *downloadsList;
 @property (readonly, nonatomic) BOOL hasActiveDownloads;
 
-+ (BOOL)isFileDownloaded:(NSString *)filename;
++ (nullable NSString *)fullpathForDownloadedURL:(NSString *_Nonnull)urlString;
 + (NSString *)fullDownloadPath:(NSString *)filename;
 
 - (void)clearList;
 - (void)cancelItem:(DownloadItem *)item;
 - (void)removeItem:(DownloadItem *)item;
-- (void)downloadFileFromURL:(NSString *)url;
-- (void)downloadFileFromURL:(NSString *)url withFilename:(NSString *)filename;
+- (void)downloadFileFromURL:(NSString * _Nullable)url;
+- (void)downloadFileFromURL:(NSString * _Nullable)url withFilename:(NSString * _Nullable)filename;
 
+NS_ASSUME_NONNULL_END
 @end
