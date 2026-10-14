@@ -20,7 +20,7 @@
 
 @import Cocoa;
 
-@interface SearchPanel : NSWindowController
+@interface SearchPanel : NSWindowController <NSSearchFieldDelegate>
 
 @property NSArray * topObjects;
 

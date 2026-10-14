@@ -72,4 +72,21 @@
 	[searchPanelWindow.sheetParent endSheet:searchPanelWindow];
 	[searchPanelWindow orderOut:self];
 }
+
+// MARK: NSSearchFieldDelegate
+
+- (BOOL)control:(NSControl *)control
+               textView:(NSTextView *)textView
+    doCommandBySelector:(SEL)commandSelector
+{
+    // cancelOperation: is sent when the escape key is pressed. By default, the
+    // search field will not send its action if the search string is empty (and
+    // the cancel button is therefore not active).
+    if (commandSelector == @selector(cancelOperation:) && control.stringValue.length == 0) {
+        return [NSApp sendAction:control.action to:control.target from:control];
+    } else {
+        return NO;
+    }
+}
+
 @end

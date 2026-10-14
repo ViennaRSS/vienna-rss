@@ -1747,8 +1747,13 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			
 		case 'h':
 		case 'H':
-			[self setFocusToSearchField:self];
-			return YES;
+			if (flags & NSEventModifierFlagCommand) {
+				// keep Apple's default behavior for Hide Vienna / Hide other apps
+				return NO;
+			} else {
+				[self setFocusToSearchField:self];
+				return YES;
+			}
 			
 		case 'k':
 		case 'K':

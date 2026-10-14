@@ -45,6 +45,7 @@
                         </searchFieldCell>
                         <connections>
                             <action selector="searchStringChanged:" target="-2" id="19"/>
+                            <outlet property="delegate" destination="-2" id="ynI-aI-kvK"/>
                         </connections>
                     </searchField>
                 </subviews>
