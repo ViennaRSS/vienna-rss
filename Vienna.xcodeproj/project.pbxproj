@@ -190,6 +190,7 @@
 		F68FE3A6270F6DC700C89D16 /* UnarchiverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68FE3A5270F6DC700C89D16 /* UnarchiverTests.swift */; };
 		F69140E41E71B94200D51BFF /* AppController+Notifications.m in Sources */ = {isa = PBXBuildFile; fileRef = F69140E31E71B94200D51BFF /* AppController+Notifications.m */; };
 		F692559A2572A32900D387D8 /* MMTabBarView in Frameworks */ = {isa = PBXBuildFile; productRef = F69255992572A32900D387D8 /* MMTabBarView */; };
+		F695363A3083CEBA00EF1B9E /* SettingsWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69536393083CEBA00EF1B9E /* SettingsWindow.swift */; };
 		F696D23E2561F9FC003DF0C0 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = F696D23D2561F9FC003DF0C0 /* Sparkle */; };
 		F69743E92ADAC497006C5BBC /* UserNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69743E82ADAC497006C5BBC /* UserNotificationCenter.swift */; };
 		F69743EB2ADAC49D006C5BBC /* UserNotificationCenterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F69743EA2ADAC49D006C5BBC /* UserNotificationCenterDelegate.swift */; };
@@ -552,6 +553,7 @@
 		F68FE3A5270F6DC700C89D16 /* UnarchiverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnarchiverTests.swift; sourceTree = "<group>"; };
 		F69140E21E71B94200D51BFF /* AppController+Notifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppController+Notifications.h"; sourceTree = "<group>"; };
 		F69140E31E71B94200D51BFF /* AppController+Notifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppController+Notifications.m"; sourceTree = "<group>"; };
+		F69536393083CEBA00EF1B9E /* SettingsWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindow.swift; sourceTree = "<group>"; };
 		F695E9E1283CF02D00320578 /* FeedListConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeedListConstants.h; sourceTree = "<group>"; };
 		F695E9E2283D0C8100320578 /* FolderViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FolderViewDelegate.h; sourceTree = "<group>"; };
 		F69743E82ADAC497006C5BBC /* UserNotificationCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNotificationCenter.swift; sourceTree = "<group>"; };
@@ -1278,6 +1280,7 @@
 			children = (
 				AA9FE2EB08BC133600A9E977 /* Preferences.h */,
 				AA9FE2EC08BC133600A9E977 /* Preferences.m */,
+				F69536393083CEBA00EF1B9E /* SettingsWindow.swift */,
 				F6AFC16C2CAFCD2E00106E80 /* SettingsTabViewController.swift */,
 				0349813C1A206FD900014F29 /* GeneralPreferencesViewController.h */,
 				0349813D1A206FD900014F29 /* GeneralPreferencesViewController.m */,
@@ -1899,6 +1902,7 @@
 				AA36CD7C06100692001E33A4 /* Field.m in Sources */,
 				F6B059E22961D0A800F6E31B /* JSONFeedItem.swift in Sources */,
 				F68DEBF82A35091600421FAB /* DispatchTimer.swift in Sources */,
+				F695363A3083CEBA00EF1B9E /* SettingsWindow.swift in Sources */,
 				F6C9DA70271BB3BB00FC3027 /* RSSFeed.m in Sources */,
 				F6C136642D0759D6009E42F8 /* HTMLParserDelegate.swift in Sources */,
 				0349813E1A206FD900014F29 /* GeneralPreferencesViewController.m in Sources */,
