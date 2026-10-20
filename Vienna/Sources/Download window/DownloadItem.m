@@ -60,6 +60,11 @@ static NSString * const VNACodingKeySize = @"size";
     return [_image copy];
 }
 
+- (NSURL *)fileURL
+{
+    return [NSURL fileURLWithPath:self.filename];
+}
+
 // MARK: - NSSecureCoding
 
 + (BOOL)supportsSecureCoding
