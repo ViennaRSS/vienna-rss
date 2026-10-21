@@ -275,7 +275,7 @@ static const char *whereFromAttributeName = "com.apple.metadata:kMDItemWhereFrom
 + (nullable NSString *)originFromMetadata:(NSString *)filePath
 {
     // Retrieve the metadata length
-    size_t size = getxattr(filePath.fileSystemRepresentation, whereFromAttributeName, NULL, 0, 0, 0);
+    ssize_t size = getxattr(filePath.fileSystemRepresentation, whereFromAttributeName, NULL, 0, 0, 0);
     if (size > 0) {
         void *buffer = malloc(size);
         // retrieve the metadata
