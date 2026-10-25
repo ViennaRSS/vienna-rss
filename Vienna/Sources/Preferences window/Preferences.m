@@ -208,7 +208,7 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
 	NSFileManager *fileManager = NSFileManager.defaultManager;
 	NSString *appSupportPath = fileManager.vna_applicationSupportDirectory.path;
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:[@"articleData." stringByAppendingString:MA_Field_LastUpdate]
-                                                                   ascending:YES];
+                                                                   ascending:NO];
 
 	defaultValues[MAPref_DefaultDatabase] = [appSupportPath stringByAppendingPathComponent:MA_Database_Name];
 	defaultValues[MAPref_CheckForUpdatedArticles] = boolNo;
