@@ -1,5 +1,29 @@
 Vienna ChangeLog File
 =====================
+Vienna 3.11.0 Beta 6
+--------------------
+_released 2026-10-25_
+### 🚲 Changes
+- Improve handling of multiple enclosures with identical names being downloaded into the same folder
+- Include the origin URL in dowloaded files metadata
+- Set default article order to reverse chronological
+- Tweak the app icon for clearer shape and P3 color space support
+- Replace RSS feed image with a custom SF Symbol
+- Update translations
+### 🤷🏻 Bugfixes
+- Fix link clicks on unified display view
+- Resolve Command-H occasionally opening the search field instead of hiding Vienna
+- Let Escape dismiss the Search field sheet when Search is invoked while toolbar is hidden
+- Turn off title type-select in articles lists
+- Apply stricter checks for toolbar validation
+- Disable 'Hide/Show Toolbar' for Settings window
+- Use the same "New subscription…" title in the menubar icon and Dock menu
+### 🛤️ Infrastructure update
+- Enable development on macOS 27 and Xcode 27. However, for compatibility with macOS 10.15 and macOS 11, releases are still built on macOS 26.6.2 / Xcode 26.6
+### 📖 Documentation
+- Convert help files to HTML5
+- Clarify developer documentation on on-disk layout
+
 Vienna 3.11.0 Beta 5
 --------------------
 _released 2026-09-10_

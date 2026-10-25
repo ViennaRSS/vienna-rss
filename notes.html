@@ -1,22 +1,30 @@
-<!DOCTYPE html><head><meta charset="utf-8"/></head><h2>Vienna 3.11.0 Beta 5</h2>
-<p><em>released 2026-09-10</em></p>
+<!DOCTYPE html><head><meta charset="utf-8"/></head><h2>Vienna 3.11.0 Beta 6</h2>
+<p><em>released 2026-10-25</em></p>
 <h3>🚲 Changes</h3>
 <ul>
-<li>Add “New subscription…” items to the menubar icon and the Dock menu</li>
-<li>Support standard keyboard shortcuts (Control-Tab and Control-Shift-Tab) for tab navigation; Option-Cmd-← and Optin-Command-→ remain supported</li>
-<li>Export article summaries along with their associated URLs in sharing services</li>
+<li>Improve handling of multiple enclosures with identical names being downloaded into the same folder</li>
+<li>Include the origin URL in dowloaded files metadata</li>
+<li>Set default article order to reverse chronological</li>
+<li>Tweak the app icon for clearer shape and P3 color space support</li>
+<li>Replace RSS feed image with a custom SF Symbol</li>
 <li>Update translations</li>
 </ul>
-<h3>🛤️ Infrastructure updates</h3>
+<h3>🤷🏻 Bugfixes</h3>
 <ul>
-<li>Build on macOS 26.6.2 / Xcode 26.6</li>
-<li>Update Sparkle to 2.9.6</li>
+<li>Fix link clicks on unified display view</li>
+<li>Resolve Command-H occasionally opening the search field instead of hiding Vienna</li>
+<li>Let Escape dismiss the Search field sheet when Search is invoked while toolbar is hidden</li>
+<li>Turn off title type-select in articles lists</li>
+<li>Apply stricter checks for toolbar validation</li>
+<li>Disable ‘Hide/Show Toolbar’ for Settings window</li>
+<li>Use the same “New subscription…” title in the menubar icon and Dock menu</li>
 </ul>
-<h4>⚙️ Internals improvement</h4>
+<h3>🛤️ Infrastructure update</h3>
 <ul>
-<li>Replace deprecated drag-and-drop methods and update supported pasteboard types</li>
+<li>Enable development on macOS 27 and Xcode 27. However, for compatibility with macOS 10.15 and macOS 11, releases are still built on macOS 26.6.2 / Xcode 26.6</li>
 </ul>
 <h3>📖 Documentation</h3>
 <ul>
-<li>Add technical documentation and reorganize most documents into a dedicated Documentation folder</li>
+<li>Convert help files to HTML5</li>
+<li>Clarify developer documentation on on-disk layout</li>
 </ul>
