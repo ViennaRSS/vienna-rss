@@ -96,6 +96,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
     NSMutableDictionary *unreadTopLineDict;
 
     BOOL isLoadingHTMLArticle;
+    NSInteger scrolloff;
 }
 
 @synthesize filterBarViewController = _filterBarViewController;
@@ -112,6 +113,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 		isLoadingHTMLArticle = NO;
         _layoutManager = [NSLayoutManager new];
         _filterBarViewController = [VNAFilterBarViewController instantiateFromNib];
+        scrolloff = 3;
     }
     return self;
 }
@@ -355,7 +357,13 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
     if (articleList.selectedRow == -1) {
         [self makeRowSelectedAndVisible:0];
     } else {
-        [articleList scrollRowToVisible:articleList.selectedRow];
+        NSInteger visibleRow = articleList.selectedRow;
+        NSInteger extraScroll = self.scrolloff;
+        if (visibleRow + extraScroll > 0 && visibleRow + extraScroll < articleList.numberOfRows) {
+            visibleRow += extraScroll;
+        }
+
+        [articleList scrollRowToVisible:visibleRow];
     }
 }
 
