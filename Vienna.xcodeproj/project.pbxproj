@@ -1011,9 +1011,9 @@
 			isa = PBXGroup;
 			children = (
 				3AA9880D2F2159CD0035B027 /* AppIcon.icon */,
-				F63DA1741F1CF04F007CBED4 /* Lists */,
 				F63DA1721F1CEFC3007CBED4 /* Strings */,
 				03F33D951DF2A2F900B04FAF /* Assets.xcassets */,
+				AACAEA3D0954E71100ACD502 /* DemoFeeds.plist */,
 				F6209C5923D3FFA700D5537D /* Vienna.sdef */,
 			);
 			path = Resources;
@@ -1027,14 +1027,6 @@
 				F685D24A292460210097C0D3 /* Predicates.strings */,
 			);
 			name = Strings;
-			sourceTree = "<group>";
-		};
-		F63DA1741F1CF04F007CBED4 /* Lists */ = {
-			isa = PBXGroup;
-			children = (
-				AACAEA3D0954E71100ACD502 /* DemoFeeds.plist */,
-			);
-			name = Lists;
 			sourceTree = "<group>";
 		};
 		F63DA1751F1CF182007CBED4 /* SharedSupport */ = {
