@@ -12,7 +12,7 @@
 		<key>URL</key>
 		<string>https://feeds.bbci.co.uk/news/world/rss.xml</string>
 	</dict>
-	<key>Six Colors: Apple, technology, and other stuff from Jason Snell and Friends</key>
+	<key>Six Colors</key>
 	<dict>
 		<key>URL</key>
 		<string>https://feedpress.me/sixcolors</string>
@@ -20,12 +20,12 @@
 	<key>Astronomy Picture of the Day</key>
 	<dict>
 		<key>URL</key>
-		<string>https://apod.nasa.gov/apod.rss</string>
+		<string>https://science.nasa.gov/feed/apod-basic/</string>
 	</dict>
 	<key>Amusing Planet</key>
 	<dict>
 		<key>URL</key>
-		<string>https://www.amusingplanet.com/feeds/posts/default?alt=rss</string>
+		<string>https://feeds.feedburner.com/amusingplanet</string>
 	</dict>
 	<key>Nomadic Matt</key>
 	<dict>
