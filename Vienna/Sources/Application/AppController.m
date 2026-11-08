@@ -2121,12 +2121,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 			continue;
 		}
 		if (folder.type != VNAFolderTypeTrash) {
-			// Create a status string
-            NSString * deleteStatusMsg = [NSString stringWithFormat:NSLocalizedString(@"Deleting folder \"%@\"…", nil), folder.name];
-            // TODO: Use KVO
-            self.mainWindowController.statusText = deleteStatusMsg;
-
-			// Now call the database to delete the folder.
 			[db deleteFolder:folder.itemId];
             
 			if (folder.type == VNAFolderTypeOpenReader) {
@@ -2137,7 +2131,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	}
 	
 	// Unread count may have changed
-    self.mainWindowController.statusText = nil;
 	[self showUnreadCountOnApplicationIconAndWindowTitle];
 }
 

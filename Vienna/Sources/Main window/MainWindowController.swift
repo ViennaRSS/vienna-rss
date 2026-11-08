@@ -129,15 +129,6 @@ final class MainWindowController: NSWindowController {
     private var statusBar: DisclosureView!
     private var statusLabel: NSTextField!
 
-    @objc var statusText: String? {
-        get {
-            return statusLabel.stringValue
-        }
-        set {
-            statusLabel.stringValue = newValue ?? ""
-        }
-    }
-
     private func statusBarState(disclosed: Bool, animate: Bool = true) {
         if statusBar.isDisclosed && !disclosed {
             statusBar.collapse(animate)
