@@ -28,8 +28,6 @@ final class MainWindowViewController: NSViewController {
     private(set) var articleController = ArticleController()
     @IBOutlet private(set) var articleListView: ArticleListView!
     @IBOutlet private(set) var unifiedDisplayView: UnifiedDisplayView!
-    @IBOutlet private(set) var statusBar: DisclosureView!
-    @IBOutlet private(set) var statusLabel: NSTextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
