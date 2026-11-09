@@ -23538,6 +23538,18 @@
         }
       }
     },
+    "w8q-cb-oaS.title" : {
+      "comment" : "Class = \"NSMenuItem\"; title = \"Export as PDF…\"; ObjectID = \"w8q-cb-oaS\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Export as PDF…"
+          }
+        }
+      }
+    },
     "wnc-vZ-fO4.title" : {
       "comment" : "Class = \"NSMenuItem\"; title = \"Show Substitutions\"; ObjectID = \"wnc-vZ-fO4\";",
       "extractionState" : "extracted_with_value",

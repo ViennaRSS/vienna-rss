@@ -309,19 +309,14 @@ class CustomWKWebView: WKWebView {
 
     // MARK: Printing
 
-    // WKWebView's own implementation does nothing.
-    override func printView(_ sender: Any?) {
-        guard let window else {
-            return
-        }
-
+    private func defaultPrintOperation() -> NSPrintOperation? {
         let printOperation: NSPrintOperation
         if #available(macOS 11, *) {
-            printOperation = self.printOperation(with: .shared)
+            printOperation = super.printOperation(with: .shared)
         } else if responds(to: #selector(_printOperation(with:))) {
             printOperation = _printOperation(with: .shared)
         } else {
-            return
+            return nil
         }
 
         // jobTitle is also used as the filename of the PDF when choosing "Open
@@ -336,15 +331,41 @@ class CustomWKWebView: WKWebView {
         printInfo.rightMargin = margin
         printInfo.bottomMargin = margin
 
-        // These printing options are missing from the standard print panel.
-        let options: NSPrintPanel.Options = [.showsPaperSize, .showsOrientation, .showsScaling]
-        printOperation.printPanel.options.insert(options)
-
         // The view's frame has to be defined, otherwise program execution is
         // halted here. See: https://stackoverflow.com/a/69839912/6423906
         printOperation.view?.frame = bounds
 
-        printOperation.canSpawnSeparateThread = true
+        return printOperation
+    }
+
+    // WKWebView's own implementation does nothing.
+    override func printView(_ sender: Any?) {
+        guard let window, let printOperation = defaultPrintOperation() else {
+            return
+        }
+
+        printOperation.printPanel.options.insert([
+            .showsPaperSize,
+            .showsOrientation,
+            .showsScaling,
+        ])
+
+        printOperation.runModal(for: window, delegate: nil, didRun: nil, contextInfo: nil)
+    }
+
+    func exportAsPDF(_ sender: Any?) {
+        guard let window, let printOperation = defaultPrintOperation() else {
+            return
+        }
+
+        printOperation.printInfo.jobDisposition = .save
+        printOperation.pdfPanel.options = [.showsPaperSize, .showsOrientation]
+
+        // Contrary to the documentation, the print operation will show a print
+        // panel after the PDF panel closes and will also show a progress panel.
+        printOperation.showsPrintPanel = false
+        printOperation.showsProgressPanel = false
+
         printOperation.runModal(for: window, delegate: nil, didRun: nil, contextInfo: nil)
     }
 }

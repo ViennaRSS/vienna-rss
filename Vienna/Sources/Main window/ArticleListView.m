@@ -686,6 +686,11 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
     [articleText printDocument:sender];
 }
 
+- (void)exportWebViewAsPDF:(id)sender
+{
+    [articleText exportWebViewAsPDF:sender];
+}
+
 /* handleArticleListFontChange
  * Called when the user changes the article list font and/or size in the Preferences
  */

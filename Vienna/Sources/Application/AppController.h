@@ -50,6 +50,7 @@
 -(IBAction)viewArticlesTab:(id)sender;
 -(IBAction)viewNextUnread:(id)sender;
 -(IBAction)printDocument:(id)sender;
+- (IBAction)exportWebViewAsPDF:(id)sender;
 -(IBAction)newSmartFolder:(id)sender;
 -(IBAction)newSubscription:(id)sender;
 -(IBAction)newGroupFolder:(id)sender;
