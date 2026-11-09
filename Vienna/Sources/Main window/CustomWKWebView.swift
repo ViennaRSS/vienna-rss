@@ -324,6 +324,10 @@ class CustomWKWebView: WKWebView {
             return
         }
 
+        // jobTitle is also used as the filename of the PDF when choosing "Open
+        // in Preview" or "Save to Web Receipts" in the PDF menu.
+        printOperation.jobTitle = title
+
         // The default margins are too wide. This value is similar to Safari.
         let printInfo = printOperation.printInfo
         let margin = 18.0
