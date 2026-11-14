@@ -23760,6 +23760,19 @@
         }
       }
     },
+    "wio-yS-nqH.title" : {
+      "comment" : "Class = \"NSTextFieldCell\"; title = \"Status message\"; ObjectID = \"wio-yS-nqH\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Status message"
+          }
+        }
+      },
+      "shouldTranslate" : false
+    },
     "wnc-vZ-fO4.title" : {
       "comment" : "Class = \"NSMenuItem\"; title = \"Show Substitutions\"; ObjectID = \"wnc-vZ-fO4\";",
       "extractionState" : "extracted_with_value",

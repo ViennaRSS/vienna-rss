@@ -1433,6 +1433,7 @@ CA
                                         </outlineView>
                                     </subviews>
                                     <nil key="backgroundColor"/>
+                                    <edgeInsets key="contentInsets" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                                 </clipView>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="KFp-vR-Mda"/>
@@ -1457,6 +1458,8 @@ CA
                     </view>
                     <connections>
                         <outlet property="outlineView" destination="Kk7-ax-B3r" id="JW8-ab-r4h"/>
+                        <outlet property="refreshStatusLabel" destination="ROa-zf-HSt" id="7lu-PR-C9S"/>
+                        <outlet property="refreshStatusView" destination="zCZ-gJ-yVK" id="PJ1-Qr-cMa"/>
                         <outlet property="scrollView" destination="8uX-2t-Ik7" id="P2m-A0-FH8"/>
                         <outlet property="searchResetButtonView" destination="ZRe-FS-qxT" id="pQ3-tS-rfD"/>
                     </connections>
@@ -1524,7 +1527,7 @@ CA
                         </menuItem>
                     </items>
                 </menu>
-                <visualEffectView blendingMode="behindWindow" material="sidebar" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="ZRe-FS-qxT">
+                <visualEffectView hidden="YES" blendingMode="behindWindow" material="sidebar" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="ZRe-FS-qxT">
                     <rect key="frame" x="0.0" y="0.0" width="288" height="32"/>
                     <subviews>
                         <button wantsLayer="YES" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="pAl-AW-rM9">
@@ -1550,6 +1553,30 @@ CA
                         <constraint firstItem="pAl-AW-rM9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ZRe-FS-qxT" secondAttribute="leading" constant="9" id="PBh-CQ-jvM"/>
                         <constraint firstItem="5Fz-yB-GwX" firstAttribute="leading" secondItem="ZRe-FS-qxT" secondAttribute="leading" id="rwU-U9-4ly"/>
                         <constraint firstItem="pAl-AW-rM9" firstAttribute="centerX" secondItem="ZRe-FS-qxT" secondAttribute="centerX" id="thU-7y-6Z9"/>
+                    </constraints>
+                </visualEffectView>
+                <visualEffectView hidden="YES" blendingMode="behindWindow" material="sidebar" state="followsWindowActiveState" translatesAutoresizingMaskIntoConstraints="NO" id="zCZ-gJ-yVK">
+                    <rect key="frame" x="0.0" y="0.0" width="288" height="34"/>
+                    <subviews>
+                        <box verticalHuggingPriority="750" boxType="separator" id="ERn-FA-hA7">
+                            <rect key="frame" x="0.0" y="31" width="288" height="5"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        </box>
+                        <textField wantsLayer="YES" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="ROa-zf-HSt" userLabel="Status Message">
+                            <rect key="frame" x="98" y="10" width="92" height="14"/>
+                            <textFieldCell key="cell" controlSize="small" alignment="center" title="Status message" id="wio-yS-nqH">
+                                <font key="font" metaFont="smallSystem"/>
+                                <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                            </textFieldCell>
+                        </textField>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="ROa-zf-HSt" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="zCZ-gJ-yVK" secondAttribute="leading" constant="10" id="6ee-Vf-adX"/>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ROa-zf-HSt" secondAttribute="trailing" constant="10" id="9GP-9c-J7b"/>
+                        <constraint firstAttribute="bottom" secondItem="ROa-zf-HSt" secondAttribute="bottom" priority="750" constant="10" id="EJt-Ob-PEL"/>
+                        <constraint firstItem="ROa-zf-HSt" firstAttribute="centerX" secondItem="zCZ-gJ-yVK" secondAttribute="centerX" priority="750" id="OLR-pK-wH2"/>
+                        <constraint firstItem="ROa-zf-HSt" firstAttribute="top" secondItem="zCZ-gJ-yVK" secondAttribute="top" constant="10" id="T6w-sN-vBp"/>
                     </constraints>
                 </visualEffectView>
             </objects>
