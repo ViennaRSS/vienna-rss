@@ -95,6 +95,13 @@
     [htmlText appendString:@"<base href=\""];
     [htmlText appendString:[NSString vna_stringByCleaningURLString:msgArray[0].link]];
     [htmlText appendString:@"\">"];
+    if (msgArray.count == 1) {
+        NSString *title = msgArray.firstObject.title;
+        if (title) {
+            NSString *encodedTitle = [NSString vna_stringByConvertingHTMLEntities:title];
+            [htmlText appendFormat:@"<title>%@</title>", encodedTitle];
+        }
+    }
     if (self.cssStylesheet != nil && self.cssStylesheet.length != 0) {
         [htmlText appendString:@"<link rel=\"stylesheet\" type=\"text/css\" href=\""];
         [htmlText appendString:self.cssStylesheet];

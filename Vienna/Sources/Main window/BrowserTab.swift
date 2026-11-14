@@ -323,6 +323,10 @@ extension BrowserTab: Tab {
         webView.printView(sender)
     }
 
+    func exportWebViewAsPDF(_ sender: Any?) {
+        webView.exportAsPDF(sender)
+    }
+
     func activateAddressBar() {
         self.view.window?.makeFirstResponder(addressField)
     }

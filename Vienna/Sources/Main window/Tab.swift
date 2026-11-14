@@ -54,6 +54,7 @@ protocol Tab {
     // MARK: other actions
 
     func printDocument(_ sender: Any?)
+    func exportWebViewAsPDF(_ sender: Any?)
     func activateAddressBar()
     func activateWebView()
 }

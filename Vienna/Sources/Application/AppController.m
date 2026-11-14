@@ -1220,6 +1220,14 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     }
 }
 
+- (IBAction)exportWebViewAsPDF:(id)sender
+{
+    id<Tab> activeBrowserTab = self.browser.activeTab;
+    if (activeBrowserTab) {
+        [activeBrowserTab exportWebViewAsPDF:sender];
+    }
+}
+
 /* folders
  * Return the array of folders.
  */
@@ -2721,7 +2729,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	if ([self validateCommonToolbarAndMenuItems:theAction validateFlag:&flag]) {
 		return flag;
 	}
-	if (theAction == @selector(printDocument:)) {
+    if (theAction == @selector(printDocument:) || theAction == @selector(exportWebViewAsPDF:)) {
 		if (!isMainWindowVisible) {
 			return NO;
 		}
