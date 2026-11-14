@@ -43,6 +43,7 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 @interface FoldersTree ()
 
 @property (weak, nonatomic) IBOutlet FolderView *outlineView;
+@property (weak, nonatomic) IBOutlet NSScrollView *scrollView;
 
 @property (readonly, nonatomic) NSArray *archiveState;
 @property (nonatomic) TreeNode *rootNode;
@@ -64,6 +65,8 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 -(void)reloadFolderItem:(id)node reloadChildren:(BOOL)flag;
 -(void)expandToParent:(TreeNode *)node;
 -(BOOL)moveFolders:(NSArray *)array withOpenReaderSync:(BOOL)sync;
+
+@property (nonatomic) IBOutlet NSView *searchResetButtonView;
 
 @end
 
@@ -1045,7 +1048,7 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 
     if (tf.length == 0) {
         self.outlineView.filterPredicate = nil;
-        [self.outlineView showResetButton:NO];
+        [self showResetButton:NO];
         return;
     }
 
@@ -1056,8 +1059,36 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
         return;
     }
 
-    [self.outlineView showResetButton:YES];
+    [self showResetButton:YES];
     self.outlineView.filterPredicate = predicate;
+}
+
+- (void)showResetButton:(BOOL)flag
+{
+    NSView *floatingView = self.searchResetButtonView;
+    NSScrollView *scrollView = self.scrollView;
+    NSClipView *contentView = scrollView.contentView;
+    if (flag) {
+        [scrollView addFloatingSubview:floatingView
+                               forAxis:NSEventGestureAxisVertical];
+        CGFloat height = floatingView.frame.size.height;
+        NSEdgeInsets insets = NSEdgeInsetsMake(height, 0.0, 0.0, 0.0);
+        contentView.automaticallyAdjustsContentInsets = NO;
+        contentView.contentInsets = insets;
+        scrollView.scrollerInsets = insets;
+        NSView *superView = floatingView.superview;
+        NSArray<NSLayoutConstraint *> *constraints = @[
+            [floatingView.topAnchor constraintEqualToAnchor:superView.topAnchor],
+            [floatingView.leadingAnchor constraintEqualToAnchor:superView.leadingAnchor],
+            [floatingView.trailingAnchor constraintEqualToAnchor:superView.trailingAnchor]
+        ];
+        [NSLayoutConstraint activateConstraints:constraints];
+    } else {
+        [floatingView removeFromSuperview];
+        scrollView.scrollerInsets = NSEdgeInsetsZero;
+        contentView.contentInsets = NSEdgeInsetsZero;
+        contentView.automaticallyAdjustsContentInsets = YES;
+    }
 }
 
 // MARK: Key-value observing

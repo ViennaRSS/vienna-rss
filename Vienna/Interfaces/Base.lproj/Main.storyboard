@@ -1428,7 +1428,6 @@ CA
                                             <connections>
                                                 <outlet property="dataSource" destination="C0H-AQ-FJ5" id="rDN-vH-slc"/>
                                                 <outlet property="delegate" destination="C0H-AQ-FJ5" id="3zo-al-PgU"/>
-                                                <outlet property="floatingResetButtonView" destination="ZRe-FS-qxT" id="JRl-LG-ntZ"/>
                                                 <outlet property="menu" destination="uhR-6M-OgB" id="4rs-9J-nb7"/>
                                             </connections>
                                         </outlineView>
@@ -1458,6 +1457,8 @@ CA
                     </view>
                     <connections>
                         <outlet property="outlineView" destination="Kk7-ax-B3r" id="JW8-ab-r4h"/>
+                        <outlet property="scrollView" destination="8uX-2t-Ik7" id="P2m-A0-FH8"/>
+                        <outlet property="searchResetButtonView" destination="ZRe-FS-qxT" id="pQ3-tS-rfD"/>
                     </connections>
                 </viewController>
                 <customObject id="qsb-EY-cZA" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
