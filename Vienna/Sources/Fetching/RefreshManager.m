@@ -39,6 +39,7 @@
 #import "XMLFeed.h"
 #import "XMLFeedParser.h"
 #import "HelperFunctions.h"
+#import <notify_keys.h>
 
 typedef NS_ENUM (NSInteger, Redirect301Status) {
     HTTP301Unknown = 0,
@@ -53,7 +54,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 
 @property (readwrite, copy) NSString * statusMessage;
 @property (nonatomic) NSTimer * unsafe301RedirectionTimer;
-@property (copy) NSString * riskyIPAddress;
 @property (nonatomic) Redirect301Status redirect301Status;
 @property (nonatomic) NSMutableArray * redirect301WaitQueue;
 @property (nonatomic, readonly) NSURLSession * urlSession;
@@ -80,7 +80,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
 }
 
 /* init
- * Initialise the class.
+ * Initialise the instance.
  */
 -(instancetype)init
 {
@@ -107,9 +107,26 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
         _queue = dispatch_queue_create("uk.co.opencommunity.vienna2.refresh", NULL);
         _redirect301WaitQueue = [[NSMutableArray alloc] init];
         hasStarted = NO;
+        // to reexamine safety of 301 redirects if there is network change
+        CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), //center
+                                        (__bridge const void *)(self), // observer
+                                        onNotifyCallback, // callback
+                                        CFSTR(kNotifySCNetworkChange), // event name
+                                        NULL, // object
+                                        CFNotificationSuspensionBehaviorDeliverImmediately);
     }
     return self;
 } // init
+
+static void onNotifyCallback(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo)
+{
+    RefreshManager *self = (__bridge RefreshManager *)observer;
+    const char *cfstr_c = CFStringGetCStringPtr(name, kCFStringEncodingUTF8);
+    if (cfstr_c && strcmp(cfstr_c, kNotifySCNetworkChange) == 0) {
+        // changed network, we don't know if 301 redirects are safe
+        [self reset301Status:self.unsafe301RedirectionTimer];
+    }
+}
 
 /* sharedManager
  * Returns the single instance of the refresh manager.
@@ -152,23 +169,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     }
 }
 
-
--(void)handleDidWake:(NSNotification *)nc
-{
-    NSString * currentAddress = [NSHost currentHost].address;
-    if (![currentAddress isEqualToString:self.riskyIPAddress]) {
-        // we might have moved to a new network
-        // so, at the next occurence we should test if we can safely handle
-        // 301 redirects
-        self.redirect301Status = HTTP301Unknown;
-        [self.unsafe301RedirectionTimer invalidate];
-        self.unsafe301RedirectionTimer = nil;
-        NSWorkspace *workspace = NSWorkspace.sharedWorkspace;
-        [workspace.notificationCenter removeObserver:self
-                                                name:NSWorkspaceDidWakeNotification
-                                              object:nil];
-    }
-}
 
 /* handleGotAuthenticationForFolder [delegate]
  * Called when somewhere just provided us the needed authentication for the specified
@@ -1098,12 +1098,6 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
                                                                     selector:@selector(reset301Status:)
                                                                     userInfo:nil
                                                                      repeats:NO];
-    self.riskyIPAddress = [NSHost currentHost].address;
-    NSWorkspace *workspace = NSWorkspace.sharedWorkspace;
-    [workspace.notificationCenter addObserver:self
-                                     selector:@selector(handleDidWake:)
-                                         name:NSWorkspaceDidWakeNotification
-                                       object:nil];
     [self purge301WaitQueue];
 }
 
@@ -1264,6 +1258,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    CFNotificationCenterRemoveEveryObserver(CFNotificationCenterGetDarwinNotifyCenter(), (__bridge const void *)(self));
     [_urlSession invalidateAndCancel];
 }
 @end
