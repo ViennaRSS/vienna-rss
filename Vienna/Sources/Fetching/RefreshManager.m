@@ -1206,7 +1206,7 @@ static void onNotifyCallback(CFNotificationCenterRef center, void *observer, CFS
     if (hasStarted && networkQueue.operationCount == 0) {
         NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
         [nc postNotificationName:MA_Notify_RefreshStatus object:nil];
-        statusMessageDuringRefresh = NSLocalizedString(@"Refresh completed", nil);
+        statusMessageDuringRefresh = @"";
         hasStarted = NO;
         os_log_info(VNA_LOG, "Finished refreshing");
     } else {
