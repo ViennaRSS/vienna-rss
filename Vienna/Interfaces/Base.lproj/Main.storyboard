@@ -1436,7 +1436,7 @@ CA
                                     <edgeInsets key="contentInsets" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                                 </clipView>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="KFp-vR-Mda"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="190" id="KFp-vR-Mda"/>
                                     <constraint firstAttribute="height" constant="603" placeholder="YES" id="OkJ-QY-5KH"/>
                                 </constraints>
                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="u6a-gc-Hse">
