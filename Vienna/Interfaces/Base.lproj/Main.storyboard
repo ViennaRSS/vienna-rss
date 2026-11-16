@@ -1085,48 +1085,24 @@ CA
         <!--Main Window View Controller-->
         <scene sceneID="nU5-P7-JT1">
             <objects>
-                <viewController id="Lnj-Xr-xyt" customClass="VNAMainWindowViewController" sceneMemberID="viewController">
-                    <view key="view" wantsLayer="YES" id="2">
+                <splitViewController id="Lnj-Xr-xyt" customClass="VNAMainWindowViewController" sceneMemberID="viewController">
+                    <splitViewItems>
+                        <splitViewItem canCollapse="YES" holdingPriority="260" behavior="sidebar" id="cmv-Sp-SwA"/>
+                        <splitViewItem holdingPriority="255" behavior="contentList" id="H6T-qr-tgt"/>
+                    </splitViewItems>
+                    <splitView key="splitView" autosaveName="" dividerStyle="thin" vertical="YES" id="993">
                         <rect key="frame" x="0.0" y="0.0" width="942" height="625"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <splitView autosaveName="" dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="993">
-                                <rect key="frame" x="0.0" y="0.0" width="942" height="625"/>
-                                <subviews>
-                                    <containerView fixedFrame="YES" id="rs4-Xg-Ho0">
-                                        <rect key="frame" x="0.0" y="0.0" width="288" height="625"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <connections>
-                                            <segue destination="C0H-AQ-FJ5" kind="embed" id="pKu-f5-RD8"/>
-                                        </connections>
-                                    </containerView>
-                                    <containerView fixedFrame="YES" id="gP0-fy-wka">
-                                        <rect key="frame" x="289" y="0.0" width="653" height="625"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <connections>
-                                            <segue destination="Ej7-dL-hvm" kind="embed" id="9aQ-Iy-a7l"/>
-                                        </connections>
-                                    </containerView>
-                                </subviews>
-                                <holdingPriorities>
-                                    <real value="251"/>
-                                    <real value="250"/>
-                                </holdingPriorities>
-                            </splitView>
-                        </subviews>
-                        <constraints>
-                            <constraint firstItem="993" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="PHO-d8-qak"/>
-                            <constraint firstAttribute="bottom" secondItem="993" secondAttribute="bottom" id="RG4-2b-ToH"/>
-                            <constraint firstItem="993" firstAttribute="top" secondItem="2" secondAttribute="top" id="dyB-H2-9DB"/>
-                            <constraint firstAttribute="trailing" secondItem="993" secondAttribute="trailing" id="x4Z-s7-D3P"/>
-                        </constraints>
-                    </view>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </splitView>
                     <connections>
                         <outlet property="articleListView" destination="971" id="5Rl-oX-hZF"/>
-                        <outlet property="splitView" destination="993" id="fju-O0-6u8"/>
+                        <outlet property="content" destination="H6T-qr-tgt" id="Vkp-RT-DYF"/>
+                        <outlet property="sidebar" destination="cmv-Sp-SwA" id="uWf-ao-bbK"/>
                         <outlet property="unifiedDisplayView" destination="1148" id="H4N-ly-UbU"/>
+                        <segue destination="C0H-AQ-FJ5" kind="relationship" relationship="splitItems" id="Evx-ed-7uD"/>
+                        <segue destination="Ej7-dL-hvm" kind="relationship" relationship="splitItems" id="hr5-f1-51L"/>
                     </connections>
-                </viewController>
+                </splitViewController>
                 <customObject id="raK-bg-5Pk" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <customView placeholderIntrinsicWidth="701" placeholderIntrinsicHeight="629" id="971" customClass="ArticleListView">
                     <rect key="frame" x="0.0" y="0.0" width="701" height="629"/>
@@ -1436,7 +1412,6 @@ CA
                                     <edgeInsets key="contentInsets" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                                 </clipView>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="190" id="KFp-vR-Mda"/>
                                     <constraint firstAttribute="height" constant="603" placeholder="YES" id="OkJ-QY-5KH"/>
                                 </constraints>
                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="u6a-gc-Hse">
