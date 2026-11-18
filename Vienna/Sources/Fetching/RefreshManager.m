@@ -87,7 +87,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     if ((self = [super init]) != nil) {
         countOfNewArticles = 0;
         authQueue = [[NSMutableArray alloc] init];
-        statusMessageDuringRefresh = nil;
+        statusMessageDuringRefresh = @"";
         networkQueue = [[NSOperationQueue alloc] init];
         networkQueue.name = @"VNAHTTPSession queue";
         networkQueue.maxConcurrentOperationCount = [[Preferences standardPreferences] integerForKey:MAPref_ConcurrentDownloads];
