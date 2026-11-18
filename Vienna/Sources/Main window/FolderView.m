@@ -33,12 +33,6 @@ VNAFeedListRowHeight const VNAFeedListRowHeightTiny = 20.0;
 VNAFeedListRowHeight const VNAFeedListRowHeightSmall = 24.0;
 VNAFeedListRowHeight const VNAFeedListRowHeightMedium = 28.0;
 
-@interface FolderView ()
-
-@property (nonatomic) IBOutlet NSView *floatingResetButtonView;
-
-@end
-
 @implementation FolderView {
     NSPredicate *_filterPredicate;
     FoldersFilterableDataSourceImpl *_filterDataSource;
@@ -186,34 +180,6 @@ VNAFeedListRowHeight const VNAFeedListRowHeightMedium = 28.0;
     NSIndexSet *rowIndexes = [NSIndexSet indexSetWithIndex:rowIndex];
     NSIndexSet *columnIndexes = [NSIndexSet indexSetWithIndexesInRange:range];
     [self reloadDataForRowIndexes:rowIndexes columnIndexes:columnIndexes];
-}
-
-- (void)showResetButton:(BOOL)flag
-{
-    NSView *floatingView = self.floatingResetButtonView;
-    NSScrollView *scrollView = self.enclosingScrollView;
-    NSClipView *contentView = scrollView.contentView;
-    if (flag) {
-        [scrollView addFloatingSubview:floatingView
-                               forAxis:NSEventGestureAxisVertical];
-        CGFloat height = floatingView.frame.size.height;
-        NSEdgeInsets insets = NSEdgeInsetsMake(height, 0.0, 0.0, 0.0);
-        contentView.automaticallyAdjustsContentInsets = NO;
-        contentView.contentInsets = insets;
-        scrollView.scrollerInsets = insets;
-        NSView *superView = floatingView.superview;
-        NSArray<NSLayoutConstraint *> *constraints = @[
-            [floatingView.topAnchor constraintEqualToAnchor:superView.topAnchor],
-            [floatingView.leadingAnchor constraintEqualToAnchor:superView.leadingAnchor],
-            [floatingView.trailingAnchor constraintEqualToAnchor:superView.trailingAnchor]
-        ];
-        [NSLayoutConstraint activateConstraints:constraints];
-    } else {
-        [floatingView removeFromSuperview];
-        scrollView.scrollerInsets = NSEdgeInsetsZero;
-        contentView.contentInsets = NSEdgeInsetsZero;
-        contentView.automaticallyAdjustsContentInsets = YES;
-    }
 }
 
 // MARK: Actions

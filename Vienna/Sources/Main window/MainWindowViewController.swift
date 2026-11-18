@@ -20,16 +20,19 @@
 import Cocoa
 
 @objc(VNAMainWindowViewController)
-final class MainWindowViewController: NSViewController {
+final class MainWindowViewController: NSSplitViewController {
 
-    @IBOutlet private var splitView: NSSplitView!
+    // These were eyeballed from Apple's apps.
+    private static let sidebarMinimumThickness = 190.0
+    private static let sidebarMaximumThickness = 500.0
+
+    @IBOutlet private var sidebar: NSSplitViewItem!
+    @IBOutlet private var content: NSSplitViewItem!
     private(set) var foldersTree: FoldersTree?
     private(set) var browser: (any Browser & NSViewController)?
     private(set) var articleController = ArticleController()
     @IBOutlet private(set) var articleListView: ArticleListView!
     @IBOutlet private(set) var unifiedDisplayView: UnifiedDisplayView!
-    @IBOutlet private(set) var statusBar: DisclosureView!
-    @IBOutlet private(set) var statusLabel: NSTextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +41,9 @@ final class MainWindowViewController: NSViewController {
         // cf. https://stackoverflow.com/q/16587058
         splitView.autosaveName = "VNASplitView"
 
+        foldersTree = sidebar.viewController as? FoldersTree
+        browser = content.viewController as? (any Browser & NSViewController)
+
         articleController.articleListView = articleListView
         articleController.unifiedListView = unifiedDisplayView
         articleListView.appController = NSApp.appController
@@ -45,24 +51,19 @@ final class MainWindowViewController: NSViewController {
         articleListView.articleController = articleController
         unifiedDisplayView.articleController = articleController
 
+        // The default minimum thickness is too narrow for the status bar. The
+        // split-view item does not have a maximum thickness by default.
+        sidebar.minimumThickness = Self.sidebarMinimumThickness
+        sidebar.maximumThickness = Self.sidebarMaximumThickness
+
+        // TODO: Consider adding sidebar collapsing support
+        // Interface Builder resets the value to true, requiring this override.
+        sidebar.canCollapse = false
+
         // awakeFromNib() is unreliable, because it may be called twice during
         // Storyboard instantiation. Until these classes are embedded in their
         // own view controllers, we have to initiate post-init setup here.
         articleListView.initialiseArticleView()
         unifiedDisplayView.initTableView()
     }
-
-    // MARK: NSSeguePerforming
-
-    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        super.prepare(for: segue, sender: sender)
-
-        let destinationController = segue.destinationController
-        if let foldersTree = destinationController as? FoldersTree {
-            self.foldersTree = foldersTree
-        } else if let browser = destinationController as? TabbedBrowserViewController {
-            self.browser = browser
-        }
-    }
-
 }

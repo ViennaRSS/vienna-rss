@@ -52,13 +52,9 @@ final class MainWindowController: NSWindowController {
             foldersTree = mainWindowViewController.foldersTree
             browser = mainWindowViewController.browser
             articleController = mainWindowViewController.articleController
-            statusBar = mainWindowViewController.statusBar
-            statusLabel = mainWindowViewController.statusLabel
         }
 
         (self.browser as? any RSSSource)?.rssSubscriber = self
-
-        statusBarState(disclosed: Preferences.standard.showStatusBar, animate: false)
     }
 
     // MARK: Subtitle
@@ -122,43 +118,6 @@ final class MainWindowController: NSWindowController {
             }
         }
 
-    }
-
-    // MARK: Status bar
-
-    private var statusBar: DisclosureView!
-    private var statusLabel: NSTextField!
-
-    @objc var statusText: String? {
-        get {
-            return statusLabel.stringValue
-        }
-        set {
-            statusLabel.stringValue = newValue ?? ""
-        }
-    }
-
-    private func statusBarState(disclosed: Bool, animate: Bool = true) {
-        if statusBar.isDisclosed && !disclosed {
-            statusBar.collapse(animate)
-            Preferences.standard.showStatusBar = false
-
-            // If the animation is interrupted, don't hide the content border.
-            if !statusBar.isDisclosed {
-                window?.setContentBorderThickness(0, for: .minY)
-            }
-        } else if !statusBar.isDisclosed && disclosed {
-            let height = statusBar.disclosedView.frame.size.height
-            window?.setContentBorderThickness(height, for: .minY)
-            statusBar.disclose(animate)
-            Preferences.standard.showStatusBar = true
-        }
-    }
-
-    // MARK: Actions
-
-    @IBAction private func toggleStatusBar(_ sender: AnyObject) {
-        statusBarState(disclosed: !statusBar.isDisclosed)
     }
 
     // MARK: Sharing services
@@ -322,13 +281,6 @@ extension MainWindowController: NSMenuItemValidation {
         switch menuItem.action {
         case #selector(performSharingService(_:)), #selector(invokeSharingServicePicker(_:)):
             return hasShareableItems
-        case #selector(toggleStatusBar(_:)):
-            if statusBar.isDisclosed {
-                menuItem.title = NSLocalizedString("Hide Status Bar", comment: "Title of a menu item")
-            } else {
-                menuItem.title = NSLocalizedString("Show Status Bar", comment: "Title of a menu item")
-            }
-            return true
         default:
             return responds(to: menuItem.action)
         }
@@ -356,14 +308,6 @@ extension MainWindowController: NSToolbarItemValidation {
 
 extension MainWindowController: NSWindowDelegate {
 
-    func windowDidBecomeMain(_ notification: Notification) {
-        statusLabel.textColor = .windowFrameTextColor
-    }
-
-    func windowDidResignMain(_ notification: Notification) {
-        statusLabel.textColor = .disabledControlTextColor
-    }
-
     func windowDidChangeOcclusionState(_ notification: Notification) {
         guard let window, window.occlusionState.contains(.visible) else {
             observationTokens.removeAll()
@@ -371,16 +315,6 @@ extension MainWindowController: NSWindowDelegate {
         }
 
         observationTokens = [
-            OpenReader.shared.observe(\.statusMessage, options: [.initial, .new]) { [weak self] manager, change in
-                if change.newValue is String {
-                    self?.statusLabel.stringValue = manager.statusMessage
-                }
-            },
-            RefreshManager.shared.observe(\.statusMessage, options: [.initial, .new]) { [weak self] manager, change in
-                if change.newValue is String {
-                    self?.statusLabel.stringValue = manager.statusMessage
-                }
-            },
             UserDefaults.standard.observe(\.ShowUnreadCounts) { [weak self] _, _ in
                 self?.updateSubtitle()
             }
