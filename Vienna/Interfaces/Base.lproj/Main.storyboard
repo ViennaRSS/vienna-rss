@@ -1188,7 +1188,7 @@ CA
                                         <autoresizingMask key="autoresizingMask"/>
                                     </tableHeaderView>
                                 </scrollView>
-                                <stackView orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="250" fixedFrame="YES" id="rHW-hk-9Of">
+                                <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="250" fixedFrame="YES" detachesHiddenViews="YES" id="rHW-hk-9Of">
                                     <rect key="frame" x="0.0" y="318" width="701" height="311"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </stackView>
