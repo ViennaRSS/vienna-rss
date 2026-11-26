@@ -818,8 +818,7 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 
 - (void)showEnclosureView
 {
-    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
-    if ([userDefaults boolForKey:MAPref_ShowEnclosureBar]) {
+    if (Preferences.standardPreferences.showEnclosureBar) {
         self.enclosureView.hidden = NO;
     }
 }
