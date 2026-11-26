@@ -107,7 +107,7 @@ class BrowserTab: NSViewController {
             }
             self?.url = newValue
         }
-        statusBarObservation = Preferences.standard.observe(\.showStatusBar, options: [.initial, .new]) { [weak self] _, change in
+        statusBarObservation = UserDefaults.standard.observe(\.ShowStatusBar, options: [.initial, .new]) { [weak self] _, change in
             guard let newValue = change.newValue else {
                 return
             }
@@ -410,5 +410,15 @@ extension BrowserTab: WKNavigationDelegate {
 
     func registerNavigationEndHandler(_ navigationEndHandler: @escaping (_ success: Bool) -> Void) {
         self.navigationEndHandler.append(navigationEndHandler)
+    }
+}
+
+// MARK: - UserDefaults
+
+extension UserDefaults {
+
+    // swiftlint:disable:next identifier_name
+    @objc fileprivate dynamic var ShowStatusBar: Bool {
+        bool(forKey: MAPref_ShowStatusBar)
     }
 }

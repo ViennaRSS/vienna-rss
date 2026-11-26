@@ -29,6 +29,7 @@
 #import "FolderView.h"
 #import "FeedListCellView.h"
 #import "OpenReader.h"
+#import "RefreshManager.h"
 #import "Database.h"
 #import "TreeNode.h"
 #import "Folder.h"
@@ -40,9 +41,15 @@ NSString * const MAPref_ShowFeedsWithUnreadItemsInBold = @"ShowFeedsWithUnreadIt
 
 static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 
+static NSString * const VNAStatusMessageKeyPath = @"statusMessage";
+static NSString * const VNAViewFrameKeyPath = @"frame";
+
+static NSTimeInterval const VNARefreshStatusDelay = 0.4;
+
 @interface FoldersTree ()
 
 @property (weak, nonatomic) IBOutlet FolderView *outlineView;
+@property (weak, nonatomic) IBOutlet NSScrollView *scrollView;
 
 @property (readonly, nonatomic) NSArray *archiveState;
 @property (nonatomic) TreeNode *rootNode;
@@ -65,6 +72,12 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 -(void)expandToParent:(TreeNode *)node;
 -(BOOL)moveFolders:(NSArray *)array withOpenReaderSync:(BOOL)sync;
 
+@property (nonatomic) IBOutlet NSView *searchResetButtonView;
+
+@property (nonatomic) IBOutlet NSView *refreshStatusView;
+@property (nonatomic) IBOutlet NSTextField *refreshStatusLabel;
+@property (nullable, nonatomic) NSTimer *refreshStatusDelayTimer;
+
 @end
 
 @implementation FoldersTree
@@ -80,6 +93,48 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 		_blockSelectionHandler = NO;
 	}
 	return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+
+    [self setUpFloatingSubviews];
+}
+
+- (void)setUpFloatingSubviews
+{
+    NSScrollView *scrollView = self.scrollView;
+    NSView *resetButtonView = self.searchResetButtonView;
+    [scrollView addFloatingSubview:resetButtonView
+                           forAxis:NSEventGestureAxisVertical];
+    NSView *refreshStatusView = self.refreshStatusView;
+    [scrollView addFloatingSubview:refreshStatusView
+                           forAxis:NSEventGestureAxisVertical];
+    // Disable translatesAutoresizingMaskIntoConstraints explicitly, because
+    // Interface Builder sometimes re-enables this property and causes issues
+    // with Auto Layout.
+    resetButtonView.translatesAutoresizingMaskIntoConstraints = NO;
+    refreshStatusView.translatesAutoresizingMaskIntoConstraints = NO;
+    // Floating views are not necessarily added to the scroll view, therefore
+    // the constraints are added against the super view instead.
+    NSView *resetButtonSuperView = resetButtonView.superview;
+    NSView *refreshStatusSuperView = refreshStatusView.superview;
+    NSArray<NSLayoutConstraint *> *constraints = @[
+        [resetButtonView.topAnchor
+            constraintEqualToAnchor:resetButtonSuperView.topAnchor],
+        [resetButtonView.leadingAnchor
+            constraintEqualToAnchor:resetButtonSuperView.leadingAnchor],
+        [resetButtonView.trailingAnchor
+            constraintEqualToAnchor:resetButtonSuperView.trailingAnchor],
+        [refreshStatusView.bottomAnchor
+            constraintEqualToAnchor:refreshStatusSuperView.bottomAnchor],
+        [refreshStatusView.leadingAnchor
+            constraintEqualToAnchor:refreshStatusSuperView.leadingAnchor],
+        [refreshStatusView.trailingAnchor
+            constraintEqualToAnchor:refreshStatusSuperView.trailingAnchor],
+    ];
+    [NSLayoutConstraint activateConstraints:constraints];
 }
 
 /* initialiseFoldersTree
@@ -120,6 +175,19 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 	[nc addObserver:self selector:@selector(handleAutoSortFoldersTreeChange:) name:MA_Notify_AutoSortFoldersTreeChange object:nil];
     [nc addObserver:self selector:@selector(handleOpenReaderFolderChange:) name:MA_Notify_OpenReaderFolderChange object:nil];
 
+    [OpenReader.sharedManager addObserver:self
+                               forKeyPath:VNAStatusMessageKeyPath
+                                  options:NSKeyValueObservingOptionNew
+                                  context:VNAFoldersTreeObserverContext];
+    [RefreshManager.sharedManager addObserver:self
+                                   forKeyPath:VNAStatusMessageKeyPath
+                                      options:NSKeyValueObservingOptionNew
+                                      context:VNAFoldersTreeObserverContext];
+    [self.refreshStatusView addObserver:self
+                             forKeyPath:VNAViewFrameKeyPath
+                                options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld)
+                                context:VNAFoldersTreeObserverContext];
+
     [userDefaults addObserver:self
                    forKeyPath:MAPref_FeedListSizeMode
                       options:0
@@ -137,6 +205,16 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 - (void)dealloc
 {
     [NSNotificationCenter.defaultCenter removeObserver:self];
+
+    [OpenReader.sharedManager removeObserver:self
+                                  forKeyPath:VNAStatusMessageKeyPath
+                                     context:VNAFoldersTreeObserverContext];
+    [RefreshManager.sharedManager removeObserver:self
+                                      forKeyPath:VNAStatusMessageKeyPath
+                                         context:VNAFoldersTreeObserverContext];
+    [self.refreshStatusView removeObserver:self
+                                forKeyPath:VNAViewFrameKeyPath
+                                   context:VNAFoldersTreeObserverContext];
 
     NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
     [userDefaults removeObserver:self
@@ -1045,7 +1123,7 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 
     if (tf.length == 0) {
         self.outlineView.filterPredicate = nil;
-        [self.outlineView showResetButton:NO];
+        [self showResetButton:NO];
         return;
     }
 
@@ -1056,22 +1134,103 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
         return;
     }
 
-    [self.outlineView showResetButton:YES];
+    [self showResetButton:YES];
     self.outlineView.filterPredicate = predicate;
+}
+
+- (void)showResetButton:(BOOL)flag
+{
+    self.searchResetButtonView.hidden = !flag;
+    [self updateScrollViewInsets];
+}
+
+- (void)updateScrollViewInsets
+{
+    NSScrollView *scrollView = self.scrollView;
+    NSClipView *contentView = scrollView.contentView;
+    NSView *resetButtonView = self.searchResetButtonView;
+    NSView *refreshStatusView = self.refreshStatusView;
+    BOOL isResetButtonViewHidden = resetButtonView.isHidden;
+    BOOL isRefreshStatusViewHidden = refreshStatusView.isHidden;
+    if (!isResetButtonViewHidden || !isRefreshStatusViewHidden) {
+        contentView.automaticallyAdjustsContentInsets = NO;
+    } else {
+        contentView.automaticallyAdjustsContentInsets = YES;
+    }
+    CGFloat topInset =
+        isResetButtonViewHidden ? 0.0
+                                : NSHeight(resetButtonView.frame);
+    CGFloat bottomInset =
+        isRefreshStatusViewHidden ? 0.0
+                                  : NSHeight(refreshStatusView.frame);
+    NSEdgeInsets insets = NSEdgeInsetsMake(topInset, 0.0, bottomInset, 0.0);
+    contentView.contentInsets = insets;
+    scrollView.scrollerInsets = insets;
+}
+
+- (void)updateRefreshStatusWithMessage:(NSString *)statusMessage
+{
+    self.refreshStatusLabel.stringValue = statusMessage;
+    NSTimer *refreshStatusDelayTimer = self.refreshStatusDelayTimer;
+    NSView *refreshStatusView = self.refreshStatusView;
+    if (statusMessage.length > 0) {
+        if (!refreshStatusDelayTimer && refreshStatusView.isHidden) {
+            self.refreshStatusDelayTimer =
+                [NSTimer scheduledTimerWithTimeInterval:VNARefreshStatusDelay
+                                                repeats:NO
+                                                  block:^(NSTimer *timer) {
+                    self.refreshStatusDelayTimer = nil;
+                    refreshStatusView.hidden = NO;
+                    [self updateScrollViewInsets];
+                }];
+        }
+    } else {
+        if (refreshStatusDelayTimer) {
+            [refreshStatusDelayTimer invalidate];
+            self.refreshStatusDelayTimer = nil;
+        }
+        if (!refreshStatusView.isHidden) {
+            refreshStatusView.hidden = YES;
+            [self updateScrollViewInsets];
+        }
+    }
 }
 
 // MARK: Key-value observing
 
-- (void)observeValueForKeyPath:(NSString *)keyPath
-                      ofObject:(id)object
-                        change:(NSDictionary<NSKeyValueChangeKey,id> *)change
-                       context:(void *)context
+- (void)observeValueForKeyPath:(nullable NSString *)keyPath
+                      ofObject:(nullable id)object
+                        change:(nullable NSDictionary<NSKeyValueChangeKey, id> *)change
+                       context:(nullable void *)context
 {
     if (context != VNAFoldersTreeObserverContext) {
         [super observeValueForKeyPath:keyPath
                              ofObject:object
                                change:change
                               context:context];
+        return;
+    }
+
+    if ([keyPath isEqualToString:VNAStatusMessageKeyPath]) {
+        NSString *statusMessage = change[NSKeyValueChangeNewKey];
+        // A precaution, in case the change dictionary is nil or returns NSNull.
+        if ([statusMessage isKindOfClass:[NSString class]]) {
+            [self updateRefreshStatusWithMessage:statusMessage];
+        }
+        return;
+    }
+
+    if ([keyPath isEqualToString:VNAViewFrameKeyPath]) {
+        if (self.refreshStatusView.isHidden) {
+            return;
+        }
+        NSValue *newValue = change[NSKeyValueChangeNewKey];
+        NSValue *oldValue = change[NSKeyValueChangeOldKey];
+        CGFloat newHeight = NSHeight(newValue.rectValue);
+        CGFloat oldHeight = NSHeight(oldValue.rectValue);
+        if (newHeight != oldHeight) {
+            [self updateScrollViewInsets];
+        }
         return;
     }
 

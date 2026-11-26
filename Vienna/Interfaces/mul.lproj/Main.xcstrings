@@ -1,6 +1,114 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "2bY-XT-5eF.title" : {
+      "comment" : "Class = \"NSMenuItem\"; title = \"Show Status Bar\"; ObjectID = \"2bY-XT-5eF\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zobrazit stavový řádek"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vis statusbaren"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Statusleiste einblenden"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Show Status Bar"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar barra de estado"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher la barre de statut"
+          }
+        },
+        "gl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Amosar barra de estado"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra Barra di stato"
+          }
+        },
+        "lt" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rodyti būsenos juostą"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toon statusbalk"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar Barra de Status"
+          }
+        },
+        "pt-PT" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar a barra de estado"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Показать строку статуса"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visa statusfältet"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Durum Çubuğunu Göster"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Показати стрічку статусу"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "显示状态栏"
+          }
+        }
+      }
+    },
     "2S3-dG-ZPg.title" : {
       "comment" : "Class = \"NSMenuItem\"; title = \"More Styles…\"; ObjectID = \"2S3-dG-ZPg\";",
       "extractionState" : "extracted_with_value",
@@ -15029,7 +15137,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nascondi barra di stato"
+            "value" : "Nascondi Barra di stato"
           }
         },
         "lt" : {
@@ -23651,6 +23759,19 @@
           }
         }
       }
+    },
+    "wio-yS-nqH.title" : {
+      "comment" : "Class = \"NSTextFieldCell\"; title = \"Status message\"; ObjectID = \"wio-yS-nqH\";",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Status message"
+          }
+        }
+      },
+      "shouldTranslate" : false
     },
     "wnc-vZ-fO4.title" : {
       "comment" : "Class = \"NSMenuItem\"; title = \"Show Substitutions\"; ObjectID = \"wnc-vZ-fO4\";",

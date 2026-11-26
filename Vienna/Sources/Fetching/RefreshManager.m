@@ -87,7 +87,7 @@ typedef NS_ENUM (NSInteger, Redirect301Status) {
     if ((self = [super init]) != nil) {
         countOfNewArticles = 0;
         authQueue = [[NSMutableArray alloc] init];
-        statusMessageDuringRefresh = nil;
+        statusMessageDuringRefresh = @"";
         networkQueue = [[NSOperationQueue alloc] init];
         networkQueue.name = @"VNAHTTPSession queue";
         networkQueue.maxConcurrentOperationCount = [[Preferences standardPreferences] integerForKey:MAPref_ConcurrentDownloads];
@@ -1206,7 +1206,7 @@ static void onNotifyCallback(CFNotificationCenterRef center, void *observer, CFS
     if (hasStarted && networkQueue.operationCount == 0) {
         NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
         [nc postNotificationName:MA_Notify_RefreshStatus object:nil];
-        statusMessageDuringRefresh = NSLocalizedString(@"Refresh completed", nil);
+        statusMessageDuringRefresh = @"";
         hasStarted = NO;
         os_log_info(VNA_LOG, "Finished refreshing");
     } else {
