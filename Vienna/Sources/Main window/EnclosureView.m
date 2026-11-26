@@ -33,6 +33,8 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *stackViewTrailingConstraint;
 
+@property (nonatomic) NSParagraphStyle *paragraphStyle;
+
 -(IBAction)openFile:(id)sender;
 
 @end
@@ -74,6 +76,17 @@
         // Disable the existing layout constraint to avoid conflicts.
         self.stackViewTrailingConstraint.active = NO;
     }
+}
+
+- (NSParagraphStyle *)paragraphStyle
+{
+    if (!_paragraphStyle) {
+        NSMutableParagraphStyle *paragraphStyle =
+            [NSParagraphStyle.defaultParagraphStyle mutableCopy];
+        paragraphStyle.lineBreakMode = NSLineBreakByTruncatingMiddle;
+        _paragraphStyle = paragraphStyle;
+    }
+    return _paragraphStyle;
 }
 
 /* handleDownloadCompleted
@@ -133,6 +146,7 @@
     }
 	NSDictionary *linkAttributes = @{
 		NSLinkAttributeName: enclosureURLString,
+        NSParagraphStyleAttributeName: self.paragraphStyle,
         NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),
 	};
 	NSAttributedString * link = [[NSAttributedString alloc] initWithString:basename attributes:linkAttributes];
