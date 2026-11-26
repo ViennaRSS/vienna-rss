@@ -1166,7 +1166,7 @@ CA
                                         <rect key="frame" x="0.0" y="0.0" width="701" height="308"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
-                                            <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" autosaveColumns="NO" typeSelect="NO" rowHeight="15" headerView="1386" id="977" customClass="MessageListView">
+                                            <tableView focusRingType="none" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="sequential" alternatingRowBackgroundColors="YES" autosaveColumns="NO" typeSelect="NO" rowHeight="15" headerView="1386" id="977" customClass="MessageListView">
                                                 <rect key="frame" x="0.0" y="0.0" width="701" height="285"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <size key="intercellSpacing" width="3" height="2"/>

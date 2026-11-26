@@ -242,9 +242,6 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 	
 	// Get the default list of visible columns
 	[self updateVisibleColumns];
-	
-	// In condensed mode, the summary field takes up the whole space.
-	articleList.columnAutoresizingStyle = NSTableViewUniformColumnAutoresizingStyle;
 
 	NSMenu *articleListMenu = [[NSMenu alloc] init];
 
@@ -433,8 +430,11 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 
 			BOOL isResizable = field.customizationOptions & VNAFieldCustomizationResizing;
 			column.resizingMask = (isResizable ? NSTableColumnUserResizingMask : NSTableColumnNoResizing);
-			// the headline column is auto-resizable
-			column.resizingMask = column.resizingMask | ([column.identifier isEqualToString:MA_Field_Headlines] ? NSTableColumnAutoresizingMask : 0);
+			// The headline column is the only resizable column in the vertical
+			// layout, therefore it can be resized automatically.
+            if ([column.identifier isEqualToString:MA_Field_Headlines]) {
+                column.resizingMask = NSTableColumnAutoresizingMask;
+            }
 
 			// Set the header attributes.
 			NSTableHeaderCell * headerCell = column.headerCell;
@@ -486,6 +486,8 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 	// Initialise the sort direction
 	[self showSortDirection];	
 	
+    [articleList sizeLastColumnToFit];
+
 	// Put the selection back
 	[articleList selectRowIndexes:selArray byExtendingSelection:NO];
 	
