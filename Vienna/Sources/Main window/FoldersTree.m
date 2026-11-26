@@ -44,6 +44,8 @@ static void *VNAFoldersTreeObserverContext = &VNAFoldersTreeObserverContext;
 static NSString * const VNAStatusMessageKeyPath = @"statusMessage";
 static NSString * const VNAViewFrameKeyPath = @"frame";
 
+static NSTimeInterval const VNARefreshStatusDelay = 0.4;
+
 @interface FoldersTree ()
 
 @property (weak, nonatomic) IBOutlet FolderView *outlineView;
@@ -74,6 +76,7 @@ static NSString * const VNAViewFrameKeyPath = @"frame";
 
 @property (nonatomic) IBOutlet NSView *refreshStatusView;
 @property (nonatomic) IBOutlet NSTextField *refreshStatusLabel;
+@property (nullable, nonatomic) NSTimer *refreshStatusDelayTimer;
 
 @end
 
@@ -1165,12 +1168,40 @@ static NSString * const VNAViewFrameKeyPath = @"frame";
     scrollView.scrollerInsets = insets;
 }
 
+- (void)updateRefreshStatusWithMessage:(NSString *)statusMessage
+{
+    self.refreshStatusLabel.stringValue = statusMessage;
+    NSTimer *refreshStatusDelayTimer = self.refreshStatusDelayTimer;
+    NSView *refreshStatusView = self.refreshStatusView;
+    if (statusMessage.length > 0) {
+        if (!refreshStatusDelayTimer && refreshStatusView.isHidden) {
+            self.refreshStatusDelayTimer =
+                [NSTimer scheduledTimerWithTimeInterval:VNARefreshStatusDelay
+                                                repeats:NO
+                                                  block:^(NSTimer *timer) {
+                    self.refreshStatusDelayTimer = nil;
+                    refreshStatusView.hidden = NO;
+                    [self updateScrollViewInsets];
+                }];
+        }
+    } else {
+        if (refreshStatusDelayTimer) {
+            [refreshStatusDelayTimer invalidate];
+            self.refreshStatusDelayTimer = nil;
+        }
+        if (!refreshStatusView.isHidden) {
+            refreshStatusView.hidden = YES;
+            [self updateScrollViewInsets];
+        }
+    }
+}
+
 // MARK: Key-value observing
 
-- (void)observeValueForKeyPath:(NSString *)keyPath
-                      ofObject:(id)object
-                        change:(NSDictionary<NSKeyValueChangeKey,id> *)change
-                       context:(void *)context
+- (void)observeValueForKeyPath:(nullable NSString *)keyPath
+                      ofObject:(nullable id)object
+                        change:(nullable NSDictionary<NSKeyValueChangeKey, id> *)change
+                       context:(nullable void *)context
 {
     if (context != VNAFoldersTreeObserverContext) {
         [super observeValueForKeyPath:keyPath
@@ -1182,9 +1213,10 @@ static NSString * const VNAViewFrameKeyPath = @"frame";
 
     if ([keyPath isEqualToString:VNAStatusMessageKeyPath]) {
         NSString *statusMessage = change[NSKeyValueChangeNewKey];
-        self.refreshStatusLabel.stringValue = statusMessage;
-        self.refreshStatusView.hidden = statusMessage.vna_isBlank;
-        [self updateScrollViewInsets];
+        // A precaution, in case the change dictionary is nil or returns NSNull.
+        if ([statusMessage isKindOfClass:[NSString class]]) {
+            [self updateRefreshStatusWithMessage:statusMessage];
+        }
         return;
     }
 
