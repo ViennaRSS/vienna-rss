@@ -29,15 +29,14 @@ class BrowserTab: NSViewController {
     var webView: CustomWKWebView
 
     @IBOutlet private(set) weak var addressBarContainer: NSView!
+    @IBOutlet private weak var addressBarStackView: NSStackView!
     @IBOutlet private(set) weak var addressField: NSTextField!
     @IBOutlet private(set) weak var backButton: NSButton!
     @IBOutlet private(set) weak var forwardButton: NSButton!
+    @IBOutlet private(set) weak var rssButton: NSButton!
+    @IBOutlet private(set) weak var cancelButton: NSButton!
     @IBOutlet private(set) weak var reloadButton: NSButton!
     @IBOutlet private(set) weak var progressBar: LoadingIndicator?
-
-    @IBOutlet private(set) weak var cancelButtonWidth: NSLayoutConstraint!
-    @IBOutlet private(set) weak var reloadButtonWidth: NSLayoutConstraint!
-    @IBOutlet private(set) weak var rssButtonWidth: NSLayoutConstraint!
 
     var url: URL? {
         didSet {
@@ -65,8 +64,6 @@ class BrowserTab: NSViewController {
     var rssFeedUrls: [URL] = []
 
     var showRssButton = false
-
-    var viewVisible = false
 
     private var titleObservation: NSKeyValueObservation?
     private var loadingObservation: NSKeyValueObservation?
@@ -156,6 +153,14 @@ class BrowserTab: NSViewController {
         let webViewBottomConstraint = NSLayoutConstraint(item: webView, attribute: .bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1, constant: 0)
         self.view.addConstraints([webViewTopConstraint, webViewBottomConstraint])
 
+        if #available(macOS 26, *) {
+            // The address field has a border outside of its bounds, which makes
+            // the spacing between the buttons and the address field.
+            let spacing = addressBarStackView.spacing + 1.0
+            addressBarStackView.setCustomSpacing(spacing, after: forwardButton)
+            addressBarStackView.setCustomSpacing(spacing, after: addressField)
+        }
+
         // title needs to be adjusted once view is loaded
 
         // reload button / cancel button layout is not determined yet
@@ -170,8 +175,6 @@ class BrowserTab: NSViewController {
 
         self.viewDidLoadHoverLinkUI()
 
-        updateWebViewInsets()
-
         // set up address bar handling
         addressField.delegate = self
 
@@ -179,10 +182,15 @@ class BrowserTab: NSViewController {
         webView.navigationDelegate = self
     }
 
+    override func viewWillLayout() {
+        super.viewWillLayout()
+
+        updateWebViewInsets()
+    }
+
     override func viewWillAppear() {
         super.viewWillAppear()
         addressBarContainer.layoutSubtreeIfNeeded()
-        self.viewVisible = true
     }
 
     override func viewDidAppear() {
@@ -191,12 +199,6 @@ class BrowserTab: NSViewController {
             activateWebView()
         }
     }
-
-    override func viewDidDisappear() {
-        super.viewDidDisappear()
-        self.viewVisible = false
-    }
-
 }
 
 // MARK: Tab functionality
