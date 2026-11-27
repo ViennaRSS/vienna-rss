@@ -111,6 +111,9 @@ NS_ASSUME_NONNULL_BEGIN
 // Show or hide the filter bar
 @property (nonatomic) BOOL showFilterBar;
 
+// Show or hide the enclosure bar
+@property (nonatomic) BOOL showEnclosureBar;
+
 // Should we save the raw feed source XML?
 @property (readonly, nonatomic) NSString *feedSourcesFolder;
 @property (nonatomic) BOOL shouldSaveFeedSource;

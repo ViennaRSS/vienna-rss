@@ -151,9 +151,12 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 
     WebKitArticleTab *articleTextController = [[WebKitArticleTab alloc] init];
     articleText = articleTextController;
-    self.articleTextView = articleTextController.view;
+    NSView *articleTextView = articleTextController.view;
+    self.articleTextView = articleTextView;
 
-    [self.contentStackView addView:self.articleTextView inGravity:NSStackViewGravityTop];
+    NSStackView *contentStackView = self.contentStackView;
+    [contentStackView addArrangedSubview:articleTextView];
+    [contentStackView addArrangedSubview:self.enclosureView];
 
 	Preferences * prefs = [Preferences standardPreferences];
 
@@ -813,26 +816,16 @@ static void *VNAArticleListViewObserverContext = &VNAArticleListViewObserverCont
 	return NO;
 }
 
-// Display the enclosure view below the article list view.
-- (void)showEnclosureView {
-    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
-    if (![userDefaults boolForKey:MAPref_ShowEnclosureBar]) {
-        return;
-    }
-
-    if (![self.contentStackView.views containsObject:self.enclosureView]) {
-        self.articleTextView.translatesAutoresizingMaskIntoConstraints = NO;
-        [self.contentStackView addView:self.enclosureView
-                            inGravity:NSStackViewGravityTop];
+- (void)showEnclosureView
+{
+    if (Preferences.standardPreferences.showEnclosureBar) {
+        self.enclosureView.hidden = NO;
     }
 }
 
-// Hide the enclosure view if it is present.
-- (void)hideEnclosureView {
-    if ([self.contentStackView.views containsObject:self.enclosureView]) {
-        self.articleTextView.translatesAutoresizingMaskIntoConstraints = NO;
-        [self.contentStackView removeView:self.enclosureView];
-    }
+- (void)hideEnclosureView
+{
+    self.enclosureView.hidden = YES;
 }
 
 /* selectFirstUnreadInFolder

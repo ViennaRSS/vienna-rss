@@ -241,7 +241,7 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
 	defaultValues[MAPref_ShouldSaveFeedSource] = boolYes;
 	defaultValues[MAPref_ShouldSaveFeedSourceBackup] = boolNo;
     defaultValues[MAPref_ShowDetailsOnFeedCredentialsDialog] = boolNo;
-    defaultValues[MAPref_ShowEnclosureBar] = boolYes;
+    defaultValues[MAPref_ShowEnclosureBar] = @YES;
     defaultValues[MAPref_MenuEnableActionImages] = boolNo;
     defaultValues[MAPref_ShowUnreadCounts] = @YES;
 
@@ -1010,6 +1010,16 @@ static NSString * const MA_FeedSourcesFolder_Name = @"Sources";
 -(void)setShowFilterBar:(BOOL)showFilterBar
 {
     [self setBool:showFilterBar forKey:MAPref_ShowFilterBar];
+}
+
+- (BOOL)showEnclosureBar
+{
+    return [self boolForKey:MAPref_ShowEnclosureBar];
+}
+
+- (void)setShowEnclosureBar:(BOOL)showEnclosureBar
+{
+    [self setBool:showEnclosureBar forKey:MAPref_ShowEnclosureBar];
 }
 
 /* menuEnableActionImages
