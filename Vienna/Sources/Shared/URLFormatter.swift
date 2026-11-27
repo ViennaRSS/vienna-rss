@@ -78,26 +78,30 @@ final class URLFormatter: Formatter {
 
     override func string(for obj: Any?) -> String? {
         guard let url = obj as? URL else {
-            return nil
+            return obj as? String
         }
 
         if let supportedScheme = Scheme(rawValue: url.scheme?.lowercased() ?? "unsupported") {
             return string(for: supportedScheme, url: url)
         } else {
-            return nil
+            return url.absoluteString
         }
     }
 
     override func attributedString(for obj: Any, withDefaultAttributes attrs: [NSAttributedString.Key: Any]? = nil) -> NSAttributedString? {
         guard let url = obj as? URL else {
-            return nil
+            if let string = obj as? String {
+                return NSAttributedString(string: string)
+            } else {
+                return nil
+            }
         }
 
         if let supportedScheme = Scheme(rawValue: url.scheme?.lowercased() ?? "unsupported") {
             let attributes = attrs ?? defaultAttributes
             return attributedString(for: supportedScheme, url: url, withDefaultAttributes: attributes)
         } else {
-            return nil
+            return NSAttributedString(string: url.absoluteString)
         }
     }
 

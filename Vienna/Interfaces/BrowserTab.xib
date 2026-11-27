@@ -64,6 +64,7 @@
                                     </textFieldCell>
                                     <connections>
                                         <action selector="loadPageFromAddressBar:" target="-2" id="kJy-ZN-1TI"/>
+                                        <outlet property="formatter" destination="C3e-jW-bze" id="ZlM-xw-Jgo"/>
                                     </connections>
                                 </textField>
                                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DXZ-Cm-yVX">
@@ -143,6 +144,7 @@
             </constraints>
             <point key="canvasLocation" x="106.5" y="154"/>
         </customView>
+        <customFormatter id="C3e-jW-bze" customClass="VNAURLFormatter"/>
     </objects>
     <resources>
         <image name="NSGoBackTemplate" width="12" height="17"/>
